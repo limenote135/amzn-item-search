@@ -1,6 +1,9 @@
+import 'package:ama_search/controllers/search_settings_controller.dart';
+import 'package:ama_search/models/fulfillment_channel.dart';
 import 'package:ama_search/models/item.dart';
 import 'package:ama_search/models/item_condition.dart';
 import 'package:ama_search/models/item_price.dart';
+import 'package:ama_search/models/used_sub_condition.dart';
 import 'package:ama_search/styles/font.dart';
 import 'package:ama_search/util/util.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +33,13 @@ class _PriceAndProfit extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final detail = _getPriceDetail(item);
+    final settings = useProvider(searchSettingsControllerProvider.state);
+
+    final detail = _getPriceDetail(
+      item,
+      subCond: settings.usedSubCondition,
+      priorFba: settings.priorFba,
+    );
     final smallSize = smallFontSize(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +65,7 @@ class _PriceAndProfit extends HookWidget {
               text: calcProfit(
                 detail.price,
                 item.prices.feeInfo,
-                useFba: true, // TODO: FBA を使うか選択
+                useFba: settings.useFba,
               ),
               style: strongTextStyle,
             ),
@@ -68,13 +77,41 @@ class _PriceAndProfit extends HookWidget {
     );
   }
 
-  PriceDetail _getPriceDetail(AsinData item) {
+  PriceDetail _getPriceDetail(AsinData item,
+      {@required UsedSubCondition subCond, @required bool priorFba}) {
     final prices = _getConditionPrices(item);
 
     if (prices.isEmpty) {
       return const PriceDetail(price: 0, shipping: 0);
     }
-    return prices.first;
+    switch (condition) {
+      case ItemCondition.newItem:
+        if (priorFba) {
+          return prices.firstWhere(
+            (e) => e.channel == FulfillmentChannel.amazon,
+            orElse: () => prices.first,
+          );
+        }
+        return prices.first;
+      case ItemCondition.usedItem:
+        final conditionPrices = subCond == UsedSubCondition.all
+            ? prices
+            : prices
+                .where((e) => e.subCondition == subCond.toItemSubCondition());
+
+        if (conditionPrices.isEmpty) {
+          return const PriceDetail(price: 0, shipping: 0);
+        }
+
+        if (priorFba) {
+          return conditionPrices.firstWhere(
+            (e) => e.channel == FulfillmentChannel.amazon,
+            orElse: () => conditionPrices.first,
+          );
+        }
+        return conditionPrices.first;
+    }
+    throw Exception("Invalid item condition: $condition");
   }
 
   List<PriceDetail> _getConditionPrices(AsinData item) {
