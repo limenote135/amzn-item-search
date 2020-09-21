@@ -13,7 +13,7 @@ class GetMatchingProductForIdResponse {
       return GetMatchingProductForIdResponse._(jan: jan, items: []);
     }
 
-    final list = <Item>[];
+    final list = <AsinData>[];
 
     for (final product in products) {
       final title = product.findAllElements("ns2:Title").firstOrDefault()?.text;
@@ -46,7 +46,7 @@ class GetMatchingProductForIdResponse {
       }
 
       // TODO: 確認
-      list.add(Item(
+      list.add(AsinData(
         jan: jan ?? " - ",
         asin: asin ?? " - ",
         title: title ?? " - ",
@@ -65,7 +65,7 @@ class GetMatchingProductForIdResponse {
   });
 
   final String jan;
-  final List<Item> items;
+  final List<AsinData> items;
 }
 
 class GetLowestOfferListingsForASINResponse {
