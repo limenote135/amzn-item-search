@@ -1,0 +1,69 @@
+import 'package:ama_search/pages/search/search_page/search_page.dart';
+import 'package:ama_search/pages/settings/settings_page/settings_page.dart';
+import 'package:ama_search/pages/stocks/stocks_page/stocks_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/all.dart';
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'アマサーチ',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        // This makes the visual density adapt to the platform that you run
+        // the app on. For desktop platforms, the controls will be smaller and
+        // closer together (more dense) than on mobile platforms.
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: const HomePage(),
+    );
+  }
+}
+
+final _currentPageProvider = StateProvider((_) => 0);
+
+class HomePage extends HookWidget {
+  const HomePage({Key key}) : super(key: key);
+
+  static const _pages = [
+    SearchPage(),
+    StocksPage(),
+    SettingsPage(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final currentPage = useProvider(_currentPageProvider);
+    return Scaffold(
+      body: IndexedStack(
+        index: currentPage.state,
+        children: _pages,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.find_in_page),
+            title: Text("検索"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            title: Text("仕入れ"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            title: Text("設定"),
+          ),
+        ],
+        currentIndex: currentPage.state,
+        onTap: (value) {
+          if (currentPage.state != value) {
+            currentPage.state = value;
+          }
+        },
+      ),
+    );
+  }
+}
