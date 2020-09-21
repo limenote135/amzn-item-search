@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'dart:convert';
 
-import 'package:ama_search/models/search_condition.dart';
+import 'package:ama_search/models/item_condition.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -47,7 +47,7 @@ class MwsRepository {
 
   // コンディションや FBA か否か、配送までの期間、評価などによってグルーピングされた出品の、各最安値を取得
   Future<GetLowestOfferListingsForASINResponse> getLowestOfferListingsForASIN(
-      List<String> asin, SearchCondition cond) async {
+      List<String> asin, ItemCondition cond) async {
     final params = SplayTreeMap<String, String>();
 
     for (var i = 0; i < asin.length; i++) {

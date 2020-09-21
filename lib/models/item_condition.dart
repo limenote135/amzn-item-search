@@ -1,14 +1,14 @@
-enum SearchCondition {
+enum ItemCondition {
   newItem,
   usedItem,
 }
 
-extension SearchConditionExtention on SearchCondition {
+extension SearchConditionExtention on ItemCondition {
   String toMwsParam() {
     switch (this) {
-      case SearchCondition.newItem:
+      case ItemCondition.newItem:
         return "New";
-      case SearchCondition.usedItem:
+      case ItemCondition.usedItem:
         return "Used";
     }
     throw Exception("Invalid SearchCondition: $this");
@@ -16,9 +16,9 @@ extension SearchConditionExtention on SearchCondition {
 
   String toDisplayString() {
     switch (this) {
-      case SearchCondition.newItem:
+      case ItemCondition.newItem:
         return "新品";
-      case SearchCondition.usedItem:
+      case ItemCondition.usedItem:
         return "中古";
     }
     throw Exception("Invalid SearchCondition: $this");

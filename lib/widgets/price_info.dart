@@ -1,6 +1,6 @@
 import 'package:ama_search/models/item.dart';
+import 'package:ama_search/models/item_condition.dart';
 import 'package:ama_search/models/item_price.dart';
-import 'package:ama_search/models/search_condition.dart';
 import 'package:ama_search/styles/font.dart';
 import 'package:ama_search/util/util.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +15,8 @@ class PriceInfo extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const [
-        Expanded(child: _PriceAndProfit(SearchCondition.newItem)),
-        Expanded(child: _PriceAndProfit(SearchCondition.usedItem)),
+        Expanded(child: _PriceAndProfit(ItemCondition.newItem)),
+        Expanded(child: _PriceAndProfit(ItemCondition.usedItem)),
       ],
     );
   }
@@ -25,7 +25,7 @@ class PriceInfo extends StatelessWidget {
 class _PriceAndProfit extends HookWidget {
   const _PriceAndProfit(this.condition, {Key key}) : super(key: key);
 
-  final SearchCondition condition;
+  final ItemCondition condition;
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +79,9 @@ class _PriceAndProfit extends HookWidget {
 
   List<PriceDetail> _getConditionPrices(AsinData item) {
     switch (condition) {
-      case SearchCondition.newItem:
+      case ItemCondition.newItem:
         return item.prices.newPrice.prices;
-      case SearchCondition.usedItem:
+      case ItemCondition.usedItem:
         return item.prices.usedPrice.prices;
     }
     throw Exception("Invalid SearchCondition: $condition");
