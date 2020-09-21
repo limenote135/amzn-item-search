@@ -1,7 +1,11 @@
+import 'package:ama_search/controllers/item_list_controller.dart';
+import 'package:ama_search/pages/search/search_page/item_tile.dart';
+import 'package:ama_search/pages/search/search_page/providers.dart';
 import 'package:ama_search/widgets/theme_divider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key key}) : super(key: key);
@@ -67,7 +71,8 @@ class _AppBarTitle extends HookWidget {
           decoration: const InputDecoration(hintText: "JANコード"),
           onSubmitted: (value) {
             if (value != "") {
-              // TODO: 検索処理を開始する
+              // TODO: JAN 以外の対応
+              context.read(itemListControllerProvider).add(value);
               textEditingController.clear();
             }
           },
@@ -82,17 +87,20 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final items = useProvider(itemListControllerProvider.state);
+
     return ListView(
       children: [
         ...ListTile.divideTiles(
           context: context,
-          tiles: const [
-            ListTile(
-              title: Text("hoge"),
-            ),
-            ListTile(
-              title: Text("hoge"),
-            )
+          tiles: [
+            for (final item in items)
+              ProviderScope(
+                overrides: [
+                  currentItemFutureProvider.overrideWithValue(item),
+                ],
+                child: const ItemTile(),
+              )
           ],
         ).toList(),
         const ThemeDivider(),
