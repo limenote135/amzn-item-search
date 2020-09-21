@@ -111,7 +111,7 @@ class _TileBody extends HookWidget {
       children: [
         Text(
           item.title,
-          style: smallSize,
+          style: captionSize(context),
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
         ),
@@ -146,6 +146,11 @@ class _TileBody extends HookWidget {
                 style: smallSize,
               ),
             )
+          ],
+        ),
+        Row(
+          children: [
+            Text("セット数: ${item.quantity} 個", style: smallSize),
           ],
         ),
         Text(
