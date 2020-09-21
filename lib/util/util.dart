@@ -1,5 +1,8 @@
 import 'package:ama_search/models/fee_info.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+final numberFormatter = NumberFormat("#,##0");
 
 String calcProfit(int price, FeeInfo fee, {@required bool useFba}) {
   if (fee == null) {
@@ -12,12 +15,12 @@ String calcProfit(int price, FeeInfo fee, {@required bool useFba}) {
   final referralFee = (price * fee.referralFeeRate).round();
   final selfShip = price - referralFee - fee.variableClosingFee;
   if (!useFba) {
-    return "$selfShip";
+    return numberFormatter.format(selfShip);
   }
 
   if (fee.fbaFee == -1) {
-    return "$selfShip-α";
+    return "${numberFormatter.format(selfShip)}-α";
   } else {
-    return "${selfShip - fee.fbaFee}";
+    return numberFormatter.format(selfShip - fee.fbaFee);
   }
 }
