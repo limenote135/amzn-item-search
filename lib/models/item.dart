@@ -7,6 +7,12 @@ import 'package:hooks_riverpod/all.dart';
 
 part 'item.freezed.dart';
 
+final currentItemFutureProvider = ScopedProvider<FutureProvider<Item>>(null);
+
+final currentAsinDataProvider = ScopedProvider<AsinData>(null);
+
+final currentItemProvider = ScopedProvider<Item>(null);
+
 final itemFutureProvider =
     FutureProvider.family<Item, String>((ref, code) async {
   final mws = ref.read(mwsRepositoryProvider);
