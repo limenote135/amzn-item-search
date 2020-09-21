@@ -1,5 +1,8 @@
+import 'package:ama_search/models/fulfillment_channel.dart';
 import 'package:ama_search/models/item.dart';
+import 'package:ama_search/models/item_condition.dart';
 import 'package:ama_search/models/item_price.dart';
+import 'package:ama_search/models/item_sub_condition.dart';
 import 'package:flutter/material.dart';
 import 'package:xml/xml.dart';
 
@@ -112,11 +115,11 @@ class GetLowestOfferListingsForASINResponse {
         lowestShipping = shipping;
       }
       prices.add(PriceDetail(
-        itemCondition: cond,
-        subCondition: subCond,
+        itemCondition: toItemCondition(cond),
+        subCondition: toItemSubCondition(subCond),
         price: price,
         shipping: shipping,
-        channel: channel,
+        channel: toFulfillmentChannel(channel),
         //point:   // TODO:
       ));
     }

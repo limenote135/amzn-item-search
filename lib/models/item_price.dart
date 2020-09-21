@@ -1,4 +1,5 @@
 import 'package:ama_search/models/fulfillment_channel.dart';
+import 'package:ama_search/models/item_sub_condition.dart';
 import 'package:ama_search/repository/mws.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -45,9 +46,10 @@ final itemPricesFutureProvider =
     newPrice: newPriceInfo,
     usedPrice: usedPriceInfo,
     feeInfo: FeeInfo(
-        referralFeeRate: feeInfo.referralFeeRate,
-        variableClosingFee: feeInfo.variableClosingFee,
-        fbaFee: feeInfo.fbaFees),
+      referralFeeRate: feeInfo.referralFeeRate,
+      variableClosingFee: feeInfo.variableClosingFee,
+      fbaFee: feeInfo.fbaFees,
+    ),
   );
 
   ref.maintainState = true;
@@ -66,9 +68,9 @@ abstract class ItemPrices with _$ItemPrices {
 @freezed
 abstract class PriceDetail with _$PriceDetail {
   const factory PriceDetail({
-    @Default("") String itemCondition,
-    @Default("") String subCondition,
-    @Default("") String channel,
+    @Default(ItemCondition.newItem) ItemCondition itemCondition,
+    @Default(ItemSubCondition.newItem) ItemSubCondition subCondition,
+    @Default(FulfillmentChannel.merchant) FulfillmentChannel channel,
     @Default(0) int price,
     @Default(0) int shipping,
     @Default(0) int point,

@@ -24,3 +24,14 @@ extension SearchConditionExtention on ItemCondition {
     throw Exception("Invalid SearchCondition: $this");
   }
 }
+
+ItemCondition toItemCondition(String condition) {
+  switch (condition) {
+    case "New":
+      return ItemCondition.newItem;
+    case "Used":
+      return ItemCondition.usedItem;
+    default:
+      throw Exception("Unknown item condition: $condition");
+  }
+}
