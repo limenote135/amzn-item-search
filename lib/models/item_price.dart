@@ -1,10 +1,11 @@
+import 'package:ama_search/models/fulfillment_channel.dart';
 import 'package:ama_search/repository/mws.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/all.dart';
 
 import 'fee_info.dart';
-import 'search_condition.dart';
+import 'item_condition.dart';
 
 part 'item_price.freezed.dart';
 
@@ -13,9 +14,9 @@ final itemPricesFutureProvider =
   final mws = ref.read(mwsRepositoryProvider);
 
   final newPricesF =
-      mws.getLowestOfferListingsForASIN([asin], SearchCondition.newItem);
+      mws.getLowestOfferListingsForASIN([asin], ItemCondition.newItem);
   final usedPricesF =
-      mws.getLowestOfferListingsForASIN([asin], SearchCondition.usedItem);
+      mws.getLowestOfferListingsForASIN([asin], ItemCondition.usedItem);
   final feeInfoF =
       mws.getMyFeesEstimate(asin, 1000, useFba: true).then((value) async {
     if (value.fbaFees == -1 || value.fbaFees == null) {
