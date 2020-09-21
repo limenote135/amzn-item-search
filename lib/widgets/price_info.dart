@@ -38,12 +38,12 @@ class _PriceAndProfit extends HookWidget {
         Text.rich(
           TextSpan(text: "${condition.toDisplayString()}最安: ", children: [
             TextSpan(
-              text: "${detail.price}",
+              text: numberFormatter.format(detail.price),
               style: strongTextStyle,
             ),
             const TextSpan(text: " 円(送 "),
             TextSpan(
-              text: "${detail.shipping}",
+              text: numberFormatter.format(detail.shipping),
               style: strongTextStyle,
             ),
             const TextSpan(text: " 円)"),
