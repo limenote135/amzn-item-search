@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_hooks: ^0.14.0
   hooks_riverpod: ^0.11.0
   state_notifier: ^0.6.0
@@ -31,6 +33,7 @@ dependencies:
   xml: ^4.5.1
   crypto: ^2.1.5
   uuid: ^2.2.2
+  intl: ^0.16.1
   extended_image: ^1.1.1
 
 
