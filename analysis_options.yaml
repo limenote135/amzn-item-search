@@ -1,0 +1,23 @@
+# https://pub.dev/packages/pedantic_mono
+include: package:pedantic_mono/analysis_options.yaml
+analyzer:
+#  enable-experiment:
+#    - non-nullable
+  exclude:
+    - lib/*_original.dart
+    - lib/generated_*.dart
+    - lib/main_global_object_key.dart
+    - lib/**/*.g.dart
+    - lib/**/*.freezed.dart
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+  errors:
+    # Causes false positives (https://github.com/dart-lang/sdk/issues/41571
+    top_level_function_literal_block: ignore
+
+linter:
+  rules:
+    type_annotate_public_apis: false
+    flutter_style_todos: false
+    prefer_single_quotes: false
