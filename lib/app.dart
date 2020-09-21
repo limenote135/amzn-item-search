@@ -3,12 +3,21 @@ import 'package:ama_search/pages/settings/settings_page/settings_page.dart';
 import 'package:ama_search/pages/stocks/stocks_page/stocks_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/all.dart';
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: const [
+        Locale("ja", "JP"),
+      ],
       title: 'アマサーチ',
       theme: ThemeData(
         primarySwatch: Colors.blue,
