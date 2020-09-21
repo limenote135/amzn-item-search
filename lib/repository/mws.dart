@@ -10,6 +10,8 @@ import 'package:uuid/uuid.dart';
 import 'common.dart';
 import 'mws_response.dart';
 
+final mwsRepositoryProvider = Provider((ref) => MwsRepository(ref.read));
+
 class MwsRepository {
   MwsRepository(this._read);
 

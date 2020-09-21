@@ -1,9 +1,41 @@
 import 'dart:typed_data';
 
 import 'package:ama_search/models/item_price.dart';
+import 'package:ama_search/repository/mws.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hooks_riverpod/all.dart';
 
 part 'item.freezed.dart';
+
+final itemFutureProvider =
+    FutureProvider.family<Item, String>((ref, code) async {
+  final mws = ref.read(mwsRepositoryProvider);
+  final resp = await mws.getMatchingProductForID(code);
+
+  if (resp.items.isEmpty) {
+    return Item(
+        searchDate: DateTime.now().toUtc().toIso8601String(),
+        jan: code,
+        asins: []);
+  }
+
+  final item = resp.items.first;
+  final asin = item.asin;
+
+  final prices = await ref.read(itemPricesFutureProvider(asin).future);
+
+  final ret = [
+    item.copyWith(
+      prices: prices,
+    ),
+    ...resp.items.skip(1),
+  ];
+  return Item(
+    searchDate: DateTime.now().toUtc().toIso8601String(),
+    jan: code,
+    asins: ret,
+  );
+});
 
 @freezed
 abstract class Item with _$Item {
