@@ -1,6 +1,7 @@
 import 'package:ama_search/models/item.dart';
 import 'package:ama_search/pages/search/search_page/providers.dart';
 import 'package:ama_search/styles/font.dart';
+import 'package:ama_search/util/util.dart';
 import 'package:ama_search/widgets/item_image.dart';
 import 'package:ama_search/widgets/price_info.dart';
 import 'package:flutter/material.dart';
@@ -131,7 +132,7 @@ class _TileBody extends HookWidget {
                   text: "順位: ",
                   children: [
                     TextSpan(
-                      text: "${item.rank}",
+                      text: numberFormatter.format(item.rank),
                       style: strongTextStyle,
                     ),
                     const TextSpan(
@@ -144,7 +145,7 @@ class _TileBody extends HookWidget {
             ),
             Expanded(
               child: Text(
-                "参考: ${item.listPrice} 円",
+                "参考: ${numberFormatter.format(item.listPrice)} 円",
                 style: smallSize,
               ),
             )
