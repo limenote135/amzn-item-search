@@ -13,4 +13,14 @@ extension SearchConditionExtention on SearchCondition {
     }
     throw Exception("Invalid SearchCondition: $this");
   }
+
+  String toDisplayString() {
+    switch (this) {
+      case SearchCondition.newItem:
+        return "新品";
+      case SearchCondition.usedItem:
+        return "中古";
+    }
+    throw Exception("Invalid SearchCondition: $this");
+  }
 }
