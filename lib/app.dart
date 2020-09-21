@@ -36,33 +36,54 @@ class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final currentPage = useProvider(_currentPageProvider);
-    return Scaffold(
-      body: IndexedStack(
-        index: currentPage.state,
-        children: _pages,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.find_in_page),
-            title: Text("検索"),
+    return WillPopScope(
+      onWillPop: () async {
+        return showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("終了確認"),
+            content: const Text("終了しますか？"),
+            actions: [
+              FlatButton(
+                child: const Text("Cancel"),
+                onPressed: () => Navigator.pop(context, false),
+              ),
+              FlatButton(
+                child: const Text("OK"),
+                onPressed: () => Navigator.pop(context, true),
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            title: Text("仕入れ"),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            title: Text("設定"),
-          ),
-        ],
-        currentIndex: currentPage.state,
-        onTap: (value) {
-          if (currentPage.state != value) {
-            currentPage.state = value;
-          }
-        },
+        );
+      },
+      child: Scaffold(
+        body: IndexedStack(
+          index: currentPage.state,
+          children: _pages,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.find_in_page),
+              title: Text("検索"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              title: Text("仕入れ"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              title: Text("設定"),
+            ),
+          ],
+          currentIndex: currentPage.state,
+          onTap: (value) {
+            if (currentPage.state != value) {
+              currentPage.state = value;
+            }
+          },
+        ),
       ),
     );
   }
