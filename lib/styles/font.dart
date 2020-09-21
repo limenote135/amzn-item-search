@@ -8,3 +8,6 @@ const strongTextStyle = TextStyle(
 
 TextStyle smallFontSize(BuildContext context) =>
     Theme.of(context).textTheme.overline;
+
+TextStyle captionSize(BuildContext context) =>
+    Theme.of(context).textTheme.caption;
