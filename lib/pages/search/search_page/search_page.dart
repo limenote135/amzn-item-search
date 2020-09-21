@@ -1,6 +1,7 @@
 import 'package:ama_search/controllers/item_list_controller.dart';
 import 'package:ama_search/models/item.dart';
 import 'package:ama_search/pages/search/search_page/item_tile.dart';
+import 'package:ama_search/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:ama_search/widgets/theme_divider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +36,7 @@ class SearchPage extends StatelessWidget {
               icon: const Icon(Icons.settings),
               tooltip: "検索設定",
               onPressed: () {
-                // TODO: go to search settings page
-                print("go to search settings page");
+                Navigator.of(context).pushNamed(SearchSettingsPage.routeName);
               },
             ),
           )
