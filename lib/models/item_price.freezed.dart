@@ -215,9 +215,9 @@ class _$PriceDetailTearOff {
 
 // ignore: unused_element
   _PriceInfo call(
-      {String itemCondition = '',
-      String subCondition = '',
-      String channel = '',
+      {ItemCondition itemCondition = ItemCondition.newItem,
+      ItemSubCondition subCondition = ItemSubCondition.newItem,
+      FulfillmentChannel channel = FulfillmentChannel.merchant,
       int price = 0,
       int shipping = 0,
       int point = 0}) {
@@ -238,9 +238,9 @@ const $PriceDetail = _$PriceDetailTearOff();
 
 /// @nodoc
 mixin _$PriceDetail {
-  String get itemCondition;
-  String get subCondition;
-  String get channel;
+  ItemCondition get itemCondition;
+  ItemSubCondition get subCondition;
+  FulfillmentChannel get channel;
   int get price;
   int get shipping;
   int get point;
@@ -254,9 +254,9 @@ abstract class $PriceDetailCopyWith<$Res> {
           PriceDetail value, $Res Function(PriceDetail) then) =
       _$PriceDetailCopyWithImpl<$Res>;
   $Res call(
-      {String itemCondition,
-      String subCondition,
-      String channel,
+      {ItemCondition itemCondition,
+      ItemSubCondition subCondition,
+      FulfillmentChannel channel,
       int price,
       int shipping,
       int point});
@@ -282,11 +282,12 @@ class _$PriceDetailCopyWithImpl<$Res> implements $PriceDetailCopyWith<$Res> {
     return _then(_value.copyWith(
       itemCondition: itemCondition == freezed
           ? _value.itemCondition
-          : itemCondition as String,
+          : itemCondition as ItemCondition,
       subCondition: subCondition == freezed
           ? _value.subCondition
-          : subCondition as String,
-      channel: channel == freezed ? _value.channel : channel as String,
+          : subCondition as ItemSubCondition,
+      channel:
+          channel == freezed ? _value.channel : channel as FulfillmentChannel,
       price: price == freezed ? _value.price : price as int,
       shipping: shipping == freezed ? _value.shipping : shipping as int,
       point: point == freezed ? _value.point : point as int,
@@ -301,9 +302,9 @@ abstract class _$PriceInfoCopyWith<$Res> implements $PriceDetailCopyWith<$Res> {
       __$PriceInfoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String itemCondition,
-      String subCondition,
-      String channel,
+      {ItemCondition itemCondition,
+      ItemSubCondition subCondition,
+      FulfillmentChannel channel,
       int price,
       int shipping,
       int point});
@@ -330,11 +331,12 @@ class __$PriceInfoCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
     return _then(_PriceInfo(
       itemCondition: itemCondition == freezed
           ? _value.itemCondition
-          : itemCondition as String,
+          : itemCondition as ItemCondition,
       subCondition: subCondition == freezed
           ? _value.subCondition
-          : subCondition as String,
-      channel: channel == freezed ? _value.channel : channel as String,
+          : subCondition as ItemSubCondition,
+      channel:
+          channel == freezed ? _value.channel : channel as FulfillmentChannel,
       price: price == freezed ? _value.price : price as int,
       shipping: shipping == freezed ? _value.shipping : shipping as int,
       point: point == freezed ? _value.point : point as int,
@@ -345,9 +347,9 @@ class __$PriceInfoCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
 /// @nodoc
 class _$_PriceInfo implements _PriceInfo {
   const _$_PriceInfo(
-      {this.itemCondition = '',
-      this.subCondition = '',
-      this.channel = '',
+      {this.itemCondition = ItemCondition.newItem,
+      this.subCondition = ItemSubCondition.newItem,
+      this.channel = FulfillmentChannel.merchant,
       this.price = 0,
       this.shipping = 0,
       this.point = 0})
@@ -358,15 +360,15 @@ class _$_PriceInfo implements _PriceInfo {
         assert(shipping != null),
         assert(point != null);
 
-  @JsonKey(defaultValue: '')
+  @JsonKey(defaultValue: ItemCondition.newItem)
   @override
-  final String itemCondition;
-  @JsonKey(defaultValue: '')
+  final ItemCondition itemCondition;
+  @JsonKey(defaultValue: ItemSubCondition.newItem)
   @override
-  final String subCondition;
-  @JsonKey(defaultValue: '')
+  final ItemSubCondition subCondition;
+  @JsonKey(defaultValue: FulfillmentChannel.merchant)
   @override
-  final String channel;
+  final FulfillmentChannel channel;
   @JsonKey(defaultValue: 0)
   @override
   final int price;
@@ -421,19 +423,19 @@ class _$_PriceInfo implements _PriceInfo {
 
 abstract class _PriceInfo implements PriceDetail {
   const factory _PriceInfo(
-      {String itemCondition,
-      String subCondition,
-      String channel,
+      {ItemCondition itemCondition,
+      ItemSubCondition subCondition,
+      FulfillmentChannel channel,
       int price,
       int shipping,
       int point}) = _$_PriceInfo;
 
   @override
-  String get itemCondition;
+  ItemCondition get itemCondition;
   @override
-  String get subCondition;
+  ItemSubCondition get subCondition;
   @override
-  String get channel;
+  FulfillmentChannel get channel;
   @override
   int get price;
   @override
