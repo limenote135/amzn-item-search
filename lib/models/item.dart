@@ -8,6 +8,15 @@ part 'item.freezed.dart';
 @freezed
 abstract class Item with _$Item {
   const factory Item({
+    @required String searchDate,
+    @required String jan,
+    @Default(<AsinData>[]) List<AsinData> asins,
+  }) = _Item;
+}
+
+@freezed
+abstract class AsinData with _$AsinData {
+  const factory AsinData({
     @required String jan,
     @required String asin,
     @required int listPrice, // 参考価格
@@ -15,8 +24,7 @@ abstract class Item with _$Item {
     @required String title,
     @required int rank,
     @required String quantity,
-    ItemPrice newPrice,
-    ItemPrice usedPrice,
+    ItemPrices prices,
     Uint8List imageData,
-  }) = _Item;
+  }) = _AsinData;
 }
