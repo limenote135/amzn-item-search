@@ -39,7 +39,7 @@ class FeeTile extends HookWidget {
       onExpansionChanged: (value) {
         unfocus();
       },
-      title: TextListTile(
+      title: TextLine(
         leading: const Text("手数料"),
         main: Text("${numberFormatter.format(totalFee)} 円"),
       ),
