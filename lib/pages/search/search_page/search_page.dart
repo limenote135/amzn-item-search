@@ -2,6 +2,7 @@ import 'package:ama_search/controllers/item_list_controller.dart';
 import 'package:ama_search/models/item.dart';
 import 'package:ama_search/pages/search/search_page/item_tile.dart';
 import 'package:ama_search/pages/search/search_settings_page/search_settings_page.dart';
+import 'package:ama_search/util/util.dart';
 import 'package:ama_search/widgets/theme_divider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class SearchPage extends StatelessWidget {
             icon: const Icon(Icons.camera_alt),
             tooltip: "バーコード読み取り",
             onPressed: () {
+              unfocus();
               // TODO: goto camera page
               print("go to camera page");
             },
