@@ -1,10 +1,10 @@
-import 'package:ama_search/controllers/item_list_controller.dart';
-import 'package:ama_search/models/item.dart';
-import 'package:ama_search/pages/search/camera_page/camera_page.dart';
-import 'package:ama_search/pages/search/search_page/item_tile.dart';
-import 'package:ama_search/pages/search/search_settings_page/search_settings_page.dart';
-import 'package:ama_search/util/util.dart';
-import 'package:ama_search/widgets/theme_divider.dart';
+import 'package:amasearch/controllers/item_list_controller.dart';
+import 'package:amasearch/models/item.dart';
+import 'package:amasearch/pages/search/camera_page/camera_page.dart';
+import 'package:amasearch/pages/search/search_page/item_tile.dart';
+import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
+import 'package:amasearch/util/util.dart';
+import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

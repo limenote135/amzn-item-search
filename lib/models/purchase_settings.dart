@@ -1,4 +1,4 @@
-import 'package:ama_search/models/purchase_item_condition.dart';
+import 'package:amasearch/models/purchase_item_condition.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
