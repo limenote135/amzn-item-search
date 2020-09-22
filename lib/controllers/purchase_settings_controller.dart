@@ -1,5 +1,5 @@
-import 'package:ama_search/models/purchase_item_condition.dart';
-import 'package:ama_search/models/purchase_settings.dart';
+import 'package:amasearch/models/purchase_item_condition.dart';
+import 'package:amasearch/models/purchase_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/all.dart';
 

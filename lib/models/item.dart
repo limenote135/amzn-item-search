@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:ama_search/models/item_price.dart';
-import 'package:ama_search/repository/mws.dart';
+import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/repository/mws.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/all.dart';
 

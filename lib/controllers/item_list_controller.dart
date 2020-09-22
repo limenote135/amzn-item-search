@@ -1,4 +1,4 @@
-import 'package:ama_search/models/item.dart';
+import 'package:amasearch/models/item.dart';
 import 'package:hooks_riverpod/all.dart';
 
 final itemListControllerProvider =

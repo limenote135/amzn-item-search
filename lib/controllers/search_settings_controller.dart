@@ -1,6 +1,6 @@
-import 'package:ama_search/models/search_settings.dart';
-import 'package:ama_search/models/search_type.dart';
-import 'package:ama_search/models/used_sub_condition.dart';
+import 'package:amasearch/models/search_settings.dart';
+import 'package:amasearch/models/search_type.dart';
+import 'package:amasearch/models/used_sub_condition.dart';
 import 'package:hooks_riverpod/all.dart';
 import 'package:state_notifier/state_notifier.dart';
 

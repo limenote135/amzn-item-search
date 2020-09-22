@@ -1,8 +1,8 @@
-import 'package:ama_search/models/fulfillment_channel.dart';
-import 'package:ama_search/models/item.dart';
-import 'package:ama_search/models/item_condition.dart';
-import 'package:ama_search/models/item_price.dart';
-import 'package:ama_search/models/item_sub_condition.dart';
+import 'package:amasearch/models/fulfillment_channel.dart';
+import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/item_condition.dart';
+import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/item_sub_condition.dart';
 import 'package:flutter/material.dart';
 import 'package:xml/xml.dart';
 
