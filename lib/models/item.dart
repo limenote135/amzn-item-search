@@ -11,6 +11,8 @@ final currentItemFutureProvider = ScopedProvider<FutureProvider<Item>>(null);
 
 final currentAsinDataProvider = ScopedProvider<AsinData>(null);
 
+final currentAsinCountProvider = ScopedProvider<int>(null);
+
 final currentItemProvider = ScopedProvider<Item>(null);
 
 final itemFutureProvider =
