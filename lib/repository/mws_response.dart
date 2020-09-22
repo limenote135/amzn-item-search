@@ -36,14 +36,14 @@ class GetMatchingProductForIdResponse {
       var rank = 0;
       try {
         rank = int.parse(rankEl);
-      } catch (ex) {
+      } on Exception catch (_) {
         //TODO: ハンドリング
       }
 
       var price = 0;
       try {
         price = double.parse(listPrice).floor();
-      } catch (ex) {
+      } on Exception catch (_) {
         // BadNumberFormatException は無視
         // TODO: それ以外は？
       }
@@ -95,7 +95,7 @@ class GetLowestOfferListingsForASINResponse {
       final priceEl = landedPrice.single.findAllElements("Amount").single.text;
       try {
         price = double.parse(priceEl).floor();
-      } catch (ex) {
+      } on Exception catch (_) {
         // BadNumberFormatException は無視
         // TODO: それ以外は？
       }
@@ -106,7 +106,7 @@ class GetLowestOfferListingsForASINResponse {
           shippingPrice.single.findAllElements("Amount").single.text;
       try {
         shipping = double.parse(shipPriceEl).floor();
-      } catch (ex) {
+      } on Exception catch (_) {
         //TODO: エラーハンドリング
       }
 
@@ -155,7 +155,7 @@ class GetMyFeesEstimateResponse {
     final feeText = totalFee.single.findAllElements("Amount").single.text;
     try {
       feePrice = double.parse(feeText).floor();
-    } catch (ex) {
+    } on Exception catch (_) {
       // TODO: エラーハンドリング
     }
 
@@ -179,7 +179,7 @@ class GetMyFeesEstimateResponse {
       int num;
       try {
         num = double.parse(amountText).floor();
-      } catch (ex) {
+      } on Exception catch (_) {
         //TODO:
       }
       switch (type) {
