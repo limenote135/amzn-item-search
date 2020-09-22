@@ -28,7 +28,7 @@ class InputPurchaseAmoutTile extends HookWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text("${amount}"),
+            child: Text("$amount"),
           ),
           IconButton(
             icon: const Icon(Icons.add_circle_outline),
