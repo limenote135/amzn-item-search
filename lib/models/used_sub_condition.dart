@@ -9,6 +9,22 @@ enum UsedSubCondition {
 }
 
 extension UsedSubConditionExtention on UsedSubCondition {
+  String toDisplayString() {
+    switch (this) {
+      case UsedSubCondition.mint:
+        return "ほぼ新品";
+      case UsedSubCondition.veryGood:
+        return "非常に良い";
+      case UsedSubCondition.good:
+        return "良い";
+      case UsedSubCondition.acceptable:
+        return "可";
+      case UsedSubCondition.all:
+        return "すべて";
+    }
+    throw Exception("Invalid UsedSubCondition: $this");
+  }
+
   ItemSubCondition toItemSubCondition() {
     switch (this) {
       case UsedSubCondition.mint:
