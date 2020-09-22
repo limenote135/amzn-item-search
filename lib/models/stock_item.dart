@@ -3,8 +3,11 @@ import 'package:amasearch/models/item_condition.dart';
 import 'package:amasearch/models/item_sub_condition.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hooks_riverpod/all.dart';
 
 part 'stock_item.freezed.dart';
+
+final currentStockItemProvider = ScopedProvider<StockItem>(null);
 
 @freezed
 abstract class StockItem with _$StockItem {
