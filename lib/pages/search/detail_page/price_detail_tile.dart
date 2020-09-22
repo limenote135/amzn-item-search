@@ -4,8 +4,8 @@ import 'package:ama_search/models/item.dart';
 import 'package:ama_search/models/item_condition.dart';
 import 'package:ama_search/models/used_sub_condition.dart';
 import 'package:ama_search/pages/search/common/util.dart';
-import 'package:ama_search/pages/search/detail_page/text_line_tile.dart';
 import 'package:ama_search/util/util.dart';
+import 'package:ama_search/widgets/text_line_tile.dart';
 import 'package:ama_search/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -28,7 +28,7 @@ class PriceDetailTile extends HookWidget {
       priorFba: setting.priorFba,
     );
 
-    final sellFeeRate = (item.prices.feeInfo.referralFeeRate * 100).toInt();
+    final sellFeeRate = (item.prices.feeInfo.referralFeeRate * 100).round();
     final sellFee =
         (detail.price * item.prices.feeInfo.referralFeeRate).round();
 

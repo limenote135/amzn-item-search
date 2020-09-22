@@ -1,6 +1,7 @@
 import 'package:ama_search/controllers/purchase_settings_controller.dart';
 import 'package:ama_search/models/fee_info.dart';
 import 'package:ama_search/models/item.dart';
+import 'package:ama_search/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -52,7 +53,7 @@ class ProfitTile extends HookWidget {
     @required FeeInfo feeInfo,
     @required bool useFba,
   }) {
-    final fee = (sellPrice * feeInfo.referralFeeRate).toInt() +
+    final fee = (sellPrice * feeInfo.referralFeeRate).round() +
         feeInfo.variableClosingFee +
         (useFba ? feeInfo.fbaFee : 0);
 
@@ -63,7 +64,9 @@ class ProfitTile extends HookWidget {
   }
 
   String _getProfitText(int profit, int amount) {
-    return "$profit 円 * $amount 個 = ${profit * amount} 円";
+    final formattedProfit = numberFormatter.format(profit);
+    final formattedTotal = numberFormatter.format(profit * amount);
+    return "$formattedProfit 円 * $amount 個 = $formattedTotal 円";
   }
 
   int _getProfitRate(int profit, int sellPrice) {
