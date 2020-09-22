@@ -1,5 +1,9 @@
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
+import 'package:amasearch/controllers/stock_item_controller.dart';
+import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/purchase_item_condition.dart';
+import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/search/purchase_page/fee_tile.dart';
 import 'package:amasearch/pages/search/purchase_page/input_prices_tile.dart';
 import 'package:amasearch/pages/search/purchase_page/input_purchase_amount_tile.dart';
@@ -95,14 +99,52 @@ class _Body extends HookWidget {
             child: const Text("仕入れる"),
             onPressed: () {
               if (formKey.currentState.validate()) {
-                // TODO: 仕入れ処理
-                print("purchase");
+                final data = context.read(base.state);
+
+                final stock = StockItem(
+                  purchasePrice: data.purchasePrice,
+                  sellPrice: data.sellPrice,
+                  useFba: data.useFba,
+                  profitPerItem: _calcProfit(
+                      sellPrice: data.sellPrice,
+                      purchasePrice: data.purchasePrice,
+                      feeInfo: item.prices.feeInfo,
+                      useFba: data.useFba),
+                  amount: data.amount,
+                  condition: data.condition.toItemCondition(),
+                  subCondition: data.condition.toItemSubCondition(),
+                  sku: data.sku,
+                  memo: data.memo,
+                  item: item,
+                  purchaseDate: DateTime.now().toUtc().toIso8601String(),
+                );
+
+                context.read(stockItemListControllerProvider).add(stock);
+
+                Navigator.of(context)
+                    .popUntil((route) => route.settings.name == "/");
               }
             },
           )
         ],
       ),
     );
+  }
+
+  // TODO: 重複なのでなんとかしたい
+  int _calcProfit({
+    @required int sellPrice,
+    @required int purchasePrice,
+    @required FeeInfo feeInfo,
+    @required bool useFba,
+  }) {
+    final fee = (sellPrice * feeInfo.referralFeeRate).round() +
+        feeInfo.variableClosingFee +
+        (useFba ? feeInfo.fbaFee : 0);
+
+    final profit = sellPrice - purchasePrice - fee;
+
+    return profit;
   }
 }
 
