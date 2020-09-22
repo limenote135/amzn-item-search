@@ -1,5 +1,5 @@
-import 'package:ama_search/models/search_type.dart';
-import 'package:ama_search/models/used_sub_condition.dart';
+import 'package:amasearch/models/search_type.dart';
+import 'package:amasearch/models/used_sub_condition.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'search_settings.freezed.dart';

@@ -1,4 +1,4 @@
-import 'package:ama_search/models/item_sub_condition.dart';
+import 'package:amasearch/models/item_sub_condition.dart';
 
 enum UsedSubCondition {
   all,

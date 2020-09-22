@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ama_search.iml" filepath="$PROJECT_DIR$/ama_search.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/ama_search_android.iml" filepath="$PROJECT_DIR$/android/ama_search_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amasearch.iml" filepath="$PROJECT_DIR$/amasearch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/amasearch_android.iml" filepath="$PROJECT_DIR$/android/amasearch_android.iml" />
     </modules>
   </component>
 </project>

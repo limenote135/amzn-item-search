@@ -1,6 +1,6 @@
-import 'package:ama_search/models/fulfillment_channel.dart';
-import 'package:ama_search/models/item_sub_condition.dart';
-import 'package:ama_search/repository/mws.dart';
+import 'package:amasearch/models/fulfillment_channel.dart';
+import 'package:amasearch/models/item_sub_condition.dart';
+import 'package:amasearch/repository/mws.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/all.dart';

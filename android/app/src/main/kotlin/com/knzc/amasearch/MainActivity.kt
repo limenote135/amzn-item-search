@@ -1,4 +1,4 @@
-package com.knzc.ama_search
+package com.knzc.amasearch
 
 import io.flutter.embedding.android.FlutterActivity
 

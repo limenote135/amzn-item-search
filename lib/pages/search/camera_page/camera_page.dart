@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:ai_barcode/ai_barcode.dart';
-import 'package:ama_search/controllers/item_list_controller.dart';
+import 'package:amasearch/controllers/item_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';

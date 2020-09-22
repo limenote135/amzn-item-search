@@ -1,4 +1,4 @@
-import 'package:ama_search/models/fee_info.dart';
+import 'package:amasearch/models/fee_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

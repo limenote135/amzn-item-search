@@ -1,10 +1,10 @@
-import 'package:ama_search/models/item.dart';
-import 'package:ama_search/pages/search/detail_page/detail_page.dart';
-import 'package:ama_search/pages/search/search_page/price_info.dart';
-import 'package:ama_search/pages/search/search_page/providers.dart';
-import 'package:ama_search/styles/font.dart';
-import 'package:ama_search/util/util.dart';
-import 'package:ama_search/widgets/item_image.dart';
+import 'package:amasearch/models/item.dart';
+import 'package:amasearch/pages/search/detail_page/detail_page.dart';
+import 'package:amasearch/pages/search/search_page/price_info.dart';
+import 'package:amasearch/pages/search/search_page/providers.dart';
+import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/util.dart';
+import 'package:amasearch/widgets/item_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
