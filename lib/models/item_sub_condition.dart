@@ -6,8 +6,26 @@ enum ItemSubCondition {
   acceptable,
 }
 
+extension ItemSubConditionExtention on ItemSubCondition {
+  String toDisplayShortString() {
+    switch (this) {
+      case ItemSubCondition.newItem:
+        return "新品";
+      case ItemSubCondition.mint:
+        return "ほぼ新";
+      case ItemSubCondition.veryGood:
+        return "非良";
+      case ItemSubCondition.good:
+        return "良い";
+      case ItemSubCondition.acceptable:
+        return "可";
+    }
+    throw Exception("Invalid UsedSubCondition: $this");
+  }
+}
+
 ItemSubCondition toItemSubCondition(String condition) {
-  switch(condition) {
+  switch (condition) {
     case "New":
       return ItemSubCondition.newItem;
     case "Mint":

@@ -1,9 +1,10 @@
 import 'package:ama_search/models/item.dart';
+import 'package:ama_search/pages/search/detail_page/detail_page.dart';
+import 'package:ama_search/pages/search/search_page/price_info.dart';
 import 'package:ama_search/pages/search/search_page/providers.dart';
 import 'package:ama_search/styles/font.dart';
 import 'package:ama_search/util/util.dart';
 import 'package:ama_search/widgets/item_image.dart';
-import 'package:ama_search/widgets/price_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -52,6 +53,19 @@ class _ItemTileImpl extends HookWidget {
     final item = useProvider(currentItemProvider);
     final firstItem = item.asins.first;
     return InkWell(
+      onTap: () {
+        // TODO: 複数ある場合の対応
+        Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (context) => ProviderScope(
+                overrides: [
+                  currentAsinDataProvider.overrideWithValue(firstItem),
+                ],
+                child: const DetailPage(),
+              ),
+            ));
+      },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
