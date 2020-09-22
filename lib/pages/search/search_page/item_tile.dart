@@ -54,6 +54,7 @@ class _ItemTileImpl extends HookWidget {
     final firstItem = item.asins.first;
     return InkWell(
       onTap: () {
+        unfocus();
         // TODO: 複数ある場合の対応
         Navigator.push(
             context,
