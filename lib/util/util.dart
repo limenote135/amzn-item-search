@@ -4,6 +4,10 @@ import 'package:intl/intl.dart';
 
 final numberFormatter = NumberFormat("#,##0");
 
+void unfocus() {
+  FocusManager.instance.primaryFocus?.unfocus();
+}
+
 String calcProfit(int price, FeeInfo fee, {@required bool useFba}) {
   if (fee == null) {
     return " - ";

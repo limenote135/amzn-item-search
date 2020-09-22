@@ -4,6 +4,7 @@ import 'package:ama_search/pages/search/purchase_page/input_prices_tile.dart';
 import 'package:ama_search/pages/search/purchase_page/input_purchase_amount_tile.dart';
 import 'package:ama_search/pages/search/purchase_page/item_condition_tile.dart';
 import 'package:ama_search/pages/search/purchase_page/profit_tile.dart';
+import 'package:ama_search/util/util.dart';
 import 'package:ama_search/widgets/item_image.dart';
 import 'package:ama_search/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class _Body extends HookWidget {
             value: useFba,
             title: const Text("FBA を利用する"),
             onChanged: (value) {
+              unfocus();
               context.read(base).update(useFba: value);
             },
           ),
