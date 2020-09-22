@@ -1,3 +1,4 @@
+import 'package:ama_search/pages/search/camera_page/camera_page.dart';
 import 'package:ama_search/pages/search/search_page/search_page.dart';
 import 'package:ama_search/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:ama_search/pages/settings/settings_page/settings_page.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
       home: const HomePage(),
       routes: {
         SearchSettingsPage.routeName: (context) => const SearchSettingsPage(),
+        CameraPage.routeName: (context) => CameraPage(),
       },
     );
   }
