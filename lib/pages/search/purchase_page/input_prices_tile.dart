@@ -54,7 +54,7 @@ class InputPricesTile extends HookWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextFormField(
                 autovalidate: true,
-                initialValue: "${sellPrice}", // TODO: 適切な初期値
+                initialValue: "$sellPrice", // TODO: 適切な初期値
                 keyboardType: const TextInputType.numberWithOptions(
                     signed: false, decimal: false),
                 decoration:
