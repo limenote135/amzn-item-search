@@ -10,4 +10,11 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
   void add(StockItem item) {
     state = [item, ...state];
   }
+
+  void remove(List<StockItem> targets) {
+    if(targets.isEmpty) {
+      return;
+    }
+    state = state.where((element) => !targets.contains(element)).toList();
+  }
 }
