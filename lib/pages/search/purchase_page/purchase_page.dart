@@ -1,5 +1,6 @@
 import 'package:ama_search/controllers/purchase_settings_controller.dart';
 import 'package:ama_search/models/item.dart';
+import 'package:ama_search/pages/search/purchase_page/fee_tile.dart';
 import 'package:ama_search/pages/search/purchase_page/input_prices_tile.dart';
 import 'package:ama_search/pages/search/purchase_page/input_purchase_amount_tile.dart';
 import 'package:ama_search/pages/search/purchase_page/item_condition_tile.dart';
@@ -60,6 +61,7 @@ class _Body extends HookWidget {
           ),
           const InputPurchaseAmoutTile(),
           const ProfitTile(),
+          const FeeTile(),
           const ThemeDivider(),
           const ItemConditionTile(),
           ListTile(
