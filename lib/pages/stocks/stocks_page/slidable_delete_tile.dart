@@ -1,5 +1,5 @@
-import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -22,26 +22,11 @@ class SlidableDeleteTile extends HookWidget {
           color: Colors.red,
           icon: Icons.delete,
           onTap: () async {
-            final ok = await showDialog<bool>(
+            await itemDeleteHandler(
               context: context,
-              builder: (context) => AlertDialog(
-                title: const Text("アイテムの削除"),
-                content: const Text("在庫リストからアイテムを削除します"),
-                actions: [
-                  FlatButton(
-                    child: const Text("Cancel"),
-                    onPressed: () => Navigator.of(context).pop(false),
-                  ),
-                  FlatButton(
-                    child: const Text("OK"),
-                    onPressed: () => Navigator.of(context).pop(true),
-                  )
-                ],
-              ),
+              items: [item],
+              content: "在庫リストからアイテムを削除します",
             );
-            if (ok) {
-              context.read(stockItemListControllerProvider).remove([item]);
-            }
           },
         ),
       ],

@@ -1,6 +1,8 @@
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
+import 'package:amasearch/pages/stocks/detail_page/detail_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/item_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -51,10 +53,16 @@ class StocksPage extends HookWidget {
       actions: [
         IconButton(
           icon: const Icon(Icons.delete),
-          onPressed: () {
-            // TODO: 確認ダイアログ
-            context.read(stockItemListControllerProvider).remove(selected);
-            context.read(selectedStockItemsControllerProvider).removeAll();
+          onPressed: () async {
+            final deleted = await itemDeleteHandler(
+              context: context,
+              items: selected,
+              content: "${selected.length} 件のアイテムを在庫リストから削除します",
+            );
+            if (deleted) {
+              context.read(stockItemListControllerProvider).remove(selected);
+              context.read(selectedStockItemsControllerProvider).removeAll();
+            }
           },
         )
       ],
@@ -108,6 +116,18 @@ class _InkWell extends HookWidget {
         final count = context.read(_selectedItemCount);
         if (count > 0) {
           context.read(selectedStockItemsControllerProvider).toggleItem(item);
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (context) => ProviderScope(
+                overrides: [
+                  currentStockItemProvider.overrideWithValue(item),
+                ],
+                child: const DetailPage(),
+              ),
+            ),
+          );
         }
       },
       onLongPress: () =>
