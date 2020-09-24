@@ -26,7 +26,6 @@ class ItemTile extends HookWidget {
       overrides: [
         currentStockItemProvider.overrideWithValue(item),
         currentAsinDataProvider.overrideWithValue(item.item),
-        currentAsinCountProvider.overrideWithValue(1),
       ],
       child: Container(
         color: isSelected ? Colors.black26 : Colors.white,
