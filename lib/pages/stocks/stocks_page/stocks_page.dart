@@ -1,22 +1,63 @@
+import 'package:amasearch/controllers/selected_stock_items_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/stocks/stocks_page/item_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/all.dart';
 
-class StocksPage extends StatelessWidget {
+import 'slidable_delete_tile.dart';
+
+final _selectedItemCount = Provider((ref) {
+  final items = ref.watch(selectedStockItemsControllerProvider.state);
+  return items.length;
+});
+
+class StocksPage extends HookWidget {
   const StocksPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("仕入れ済み在庫"),
-      ),
+      appBar: _appBarSelector(context),
       body: const _Body(),
+    );
+  }
+
+  AppBar _appBarSelector(BuildContext context) {
+    final selectedItems =
+        useProvider(selectedStockItemsControllerProvider.state);
+
+    return selectedItems.isEmpty
+        ? _getNormalAppBar()
+        : _getItemSelectAppBar(context, selectedItems);
+  }
+
+  AppBar _getNormalAppBar() {
+    return AppBar(
+      title: const Text("仕入れ済み在庫"),
+    );
+  }
+
+  AppBar _getItemSelectAppBar(BuildContext context, List<StockItem> selected) {
+    return AppBar(
+      title: Text("${selected.length} 件選択"),
+      leading: IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () =>
+            context.read(selectedStockItemsControllerProvider).removeAll(),
+      ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.delete),
+          onPressed: () {
+            // TODO: 確認ダイアログ
+            context.read(stockItemListControllerProvider).remove(selected);
+            context.read(selectedStockItemsControllerProvider).removeAll();
+          },
+        )
+      ],
     );
   }
 }
@@ -27,6 +68,8 @@ class _Body extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final items = useProvider(stockItemListControllerProvider.state);
+    final selectedItems =
+        useProvider(selectedStockItemsControllerProvider.state);
 
     return ListView(
       children: [
@@ -38,7 +81,11 @@ class _Body extends HookWidget {
                 overrides: [
                   currentStockItemProvider.overrideWithValue(item),
                 ],
-                child: const SlidableDeleteTile(child: ItemTile()),
+                child: _InkWell(
+                  child: selectedItems.isNotEmpty
+                      ? const ItemTile()
+                      : const SlidableDeleteTile(child: ItemTile()),
+                ),
               )
           ],
         ).toList(),
@@ -48,46 +95,23 @@ class _Body extends HookWidget {
   }
 }
 
-class SlidableDeleteTile extends HookWidget {
-  const SlidableDeleteTile({Key key, @required this.child}) : super(key: key);
+class _InkWell extends HookWidget {
+  const _InkWell({Key key, this.child}) : super(key: key);
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentStockItemProvider);
-    return Slidable(
-      actionPane: const SlidableDrawerActionPane(),
-      actionExtentRatio: 0.25,
-      secondaryActions: [
-        IconSlideAction(
-          caption: "削除",
-          color: Colors.red,
-          icon: Icons.delete,
-          onTap: () async {
-            final ok = await showDialog<bool>(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: const Text("アイテムの削除"),
-                content: const Text("在庫リストからアイテムを削除します"),
-                actions: [
-                  FlatButton(
-                    child: const Text("Cancel"),
-                    onPressed: () => Navigator.of(context).pop(false),
-                  ),
-                  FlatButton(
-                    child: const Text("OK"),
-                    onPressed: () => Navigator.of(context).pop(true),
-                  )
-                ],
-              ),
-            );
-            if (ok) {
-              context.read(stockItemListControllerProvider).remove([item]);
-            }
-          },
-        ),
-      ],
+    return InkWell(
+      onTap: () {
+        final count = context.read(_selectedItemCount);
+        if (count > 0) {
+          context.read(selectedStockItemsControllerProvider).toggleItem(item);
+        }
+      },
+      onLongPress: () =>
+          context.read(selectedStockItemsControllerProvider).toggleItem(item),
       child: child,
     );
   }

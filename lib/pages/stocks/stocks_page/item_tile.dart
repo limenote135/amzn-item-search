@@ -1,3 +1,4 @@
+import 'package:amasearch/controllers/selected_stock_items_controller.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_condition.dart';
 import 'package:amasearch/models/item_sub_condition.dart';
@@ -9,24 +10,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
 
+final _isSelectedProvider = Provider.family<bool, StockItem>((ref, item) {
+  final selectedItems = ref.watch(selectedStockItemsControllerProvider.state);
+  return selectedItems.contains(item);
+});
+
 class ItemTile extends HookWidget {
   const ItemTile({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentStockItemProvider);
+    final isSelected = useProvider(_isSelectedProvider(item));
     return ProviderScope(
       overrides: [
         currentStockItemProvider.overrideWithValue(item),
         currentAsinDataProvider.overrideWithValue(item.item),
         currentAsinCountProvider.overrideWithValue(1),
       ],
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          TileImage(),
-          Expanded(child: _TileBody()),
-        ],
+      child: Container(
+        color: isSelected ? Colors.black26 : Colors.white,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            TileImage(),
+            Expanded(child: _TileBody()),
+          ],
+        ),
       ),
     );
   }
