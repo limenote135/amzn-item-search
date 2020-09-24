@@ -22,6 +22,22 @@ extension ItemSubConditionExtention on ItemSubCondition {
     }
     throw Exception("Invalid UsedSubCondition: $this");
   }
+
+  String toDisplayString() {
+    switch (this) {
+      case ItemSubCondition.newItem:
+        return "新品";
+      case ItemSubCondition.mint:
+        return "ほぼ新品";
+      case ItemSubCondition.veryGood:
+        return "非常に良い";
+      case ItemSubCondition.good:
+        return "良い";
+      case ItemSubCondition.acceptable:
+        return "可";
+    }
+    throw Exception("Invalid UsedSubCondition: $this");
+  }
 }
 
 ItemSubCondition toItemSubCondition(String condition) {
