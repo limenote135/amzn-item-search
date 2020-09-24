@@ -24,14 +24,16 @@ class GetMatchingProductForIdResponse {
       final image = product.findAllElements("ns2:URL").firstOrDefault()?.text;
       final quantity =
           product.findAllElements("ns2:PackageQuantity").firstOrDefault()?.text;
-      final rankEl = product.findAllElements("Rank").firstOrDefault()?.text;
+      final rankEl =
+          product.findAllElements("Rank").firstOrDefault()?.text ?? "0";
 
       final listPrice = product
-          .findAllElements("ns2:ListPrice")
-          .firstOrDefault()
-          ?.findAllElements("ns2:Amount")
-          ?.firstOrDefault()
-          ?.text;
+              .findAllElements("ns2:ListPrice")
+              .firstOrDefault()
+              ?.findAllElements("ns2:Amount")
+              ?.firstOrDefault()
+              ?.text ??
+          "0";
 
       var rank = 0;
       try {
