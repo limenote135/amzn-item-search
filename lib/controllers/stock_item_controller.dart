@@ -11,8 +11,14 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     state = [item, ...state];
   }
 
+  void update(StockItem item) {
+    state = [
+      for (final i in state) i.purchaseDate == item.purchaseDate ? item : i
+    ];
+  }
+
   void remove(List<StockItem> targets) {
-    if(targets.isEmpty) {
+    if (targets.isEmpty) {
       return;
     }
     state = state.where((element) => !targets.contains(element)).toList();
