@@ -76,7 +76,7 @@ class _Body extends HookWidget {
               textAlign: TextAlign.start,
               onSaved: (newValue) {
                 if (newValue != sku) {
-                  context.read(base).update(sku: sku);
+                  context.read(base).update(sku: newValue);
                 }
               },
             ),
