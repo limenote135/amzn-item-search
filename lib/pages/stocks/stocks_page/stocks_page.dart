@@ -5,6 +5,7 @@ import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/detail_page/detail_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/item_tile.dart';
 import 'package:amasearch/util/csv.dart';
+import 'package:amasearch/util/with_underline.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -127,26 +128,21 @@ class _Body extends HookWidget {
     final selectedItems =
         useProvider(selectedStockItemsControllerProvider.state);
 
-    return ListView(
-      children: [
-        ...ListTile.divideTiles(
-          context: context,
-          tiles: [
-            for (final item in items)
-              ProviderScope(
-                overrides: [
-                  currentStockItemProvider.overrideWithValue(item),
-                ],
-                child: _InkWell(
-                  child: selectedItems.isNotEmpty
-                      ? const ItemTile()
-                      : const SlidableDeleteTile(child: ItemTile()),
-                ),
-              )
-          ],
-        ).toList(),
-        const ThemeDivider(),
-      ],
+    final tile = _InkWell(
+      child: selectedItems.isNotEmpty
+          ? const ItemTile()
+          : const SlidableDeleteTile(child: ItemTile()),
+    );
+
+    return ListView.separated(
+      separatorBuilder: (context, index) => const ThemeDivider(),
+      itemCount: items.length,
+      itemBuilder: (context, index) => ProviderScope(
+        overrides: [
+          currentStockItemProvider.overrideWithValue(items[index]),
+        ],
+        child: index != items.length - 1 ? tile : WithUnderLine(tile),
+      ),
     );
   }
 }
