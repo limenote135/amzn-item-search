@@ -4,7 +4,7 @@ import 'package:amasearch/models/item_condition.dart';
 import 'package:amasearch/models/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/styles/font.dart';
-import 'package:amasearch/util/util.dart';
+import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -125,7 +125,7 @@ class _TileBody extends HookWidget {
                 child: Text("状態: ${_conditionText(item)}", style: smallSize)),
           ],
         ),
-        Text("仕入れ日: ${DateTime.parse(item.purchaseDate).toLocal()}",
+        Text("仕入れ日: ${DateTime.parse(item.purchaseDate).toLocal().format()}",
             style: smallSize)
       ],
     );

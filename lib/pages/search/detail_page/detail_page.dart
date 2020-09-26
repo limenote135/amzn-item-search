@@ -3,7 +3,7 @@ import 'package:amasearch/models/item_condition.dart';
 import 'package:amasearch/pages/search/detail_page/price_detail_tile.dart';
 import 'package:amasearch/pages/search/detail_page/seller_list_tile.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
-import 'package:amasearch/util/util.dart';
+import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/search_buttons.dart';
