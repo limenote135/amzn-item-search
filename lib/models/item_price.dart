@@ -1,12 +1,12 @@
-import 'package:amasearch/models/fulfillment_channel.dart';
-import 'package:amasearch/models/item_sub_condition.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/all.dart';
 
+import 'enums/fulfillment_channel.dart';
+import 'enums/item_condition.dart';
+import 'enums/item_sub_condition.dart';
 import 'fee_info.dart';
-import 'item_condition.dart';
 
 part 'item_price.freezed.dart';
 
@@ -80,7 +80,7 @@ abstract class PriceDetail with _$PriceDetail {
 @freezed
 abstract class ItemPrice with _$ItemPrice {
   const factory ItemPrice({
-    @Default(0) int lowestPrice, // 最安値
+    @Default(0) int lowestPrice, // 最安値 // TODO: 使ってないような？
     @Default(0) int shipping, // 送料
     @Default(<PriceDetail>[]) List<PriceDetail> prices,
   }) = _ItemPrice;

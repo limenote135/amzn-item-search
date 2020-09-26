@@ -1,6 +1,6 @@
 import 'package:amasearch/controllers/search_settings_controller.dart';
+import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/models/item_condition.dart';
 import 'package:amasearch/pages/search/common/util.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';

@@ -1,6 +1,7 @@
-import 'package:amasearch/models/search_type.dart';
-import 'package:amasearch/models/used_sub_condition.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'enums/search_type.dart';
+import 'enums/used_sub_condition.dart';
 
 part 'search_settings.freezed.dart';
 
