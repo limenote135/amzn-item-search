@@ -13,7 +13,7 @@ PriceDetail getPriceDetail({
 }) {
   final prices = _getConditionPrices(item: item, condition: condition);
 
-  if (prices.isEmpty) {
+  if (prices == null) {
     return const PriceDetail(price: 0, shipping: 0);
   }
   switch (condition) {
@@ -51,9 +51,9 @@ List<PriceDetail> _getConditionPrices({
 }) {
   switch (condition) {
     case ItemCondition.newItem:
-      return item.prices.newPrice.prices;
+      return item.prices.newPrices;
     case ItemCondition.usedItem:
-      return item.prices.usedPrice.prices;
+      return item.prices.usedPrices;
   }
   throw Exception("Invalid SearchCondition: $condition");
 }
