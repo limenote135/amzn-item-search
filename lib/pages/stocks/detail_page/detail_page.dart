@@ -4,7 +4,7 @@ import 'package:amasearch/models/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/edit_page/edit_page.dart';
-import 'package:amasearch/util/util.dart';
+import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/search_buttons.dart';

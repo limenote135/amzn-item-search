@@ -4,7 +4,7 @@ import 'package:amasearch/models/item_condition.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/item_sub_condition.dart';
 import 'package:amasearch/styles/font.dart';
-import 'package:amasearch/util/util.dart';
+import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
