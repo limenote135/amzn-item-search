@@ -4,6 +4,7 @@ import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_condition.dart';
 import 'package:amasearch/models/used_sub_condition.dart';
 import 'package:amasearch/pages/search/common/util.dart';
+import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/text_line_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';

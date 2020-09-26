@@ -1,8 +1,7 @@
 import 'package:amasearch/models/fee_info.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-final numberFormatter = NumberFormat("#,##0");
+import 'formatter.dart';
 
 void unfocus() {
   FocusManager.instance.primaryFocus?.unfocus();
