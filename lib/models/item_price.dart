@@ -1,6 +1,8 @@
+import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/all.dart';
 
 import 'enums/fulfillment_channel.dart';
@@ -9,6 +11,7 @@ import 'enums/item_sub_condition.dart';
 import 'fee_info.dart';
 
 part 'item_price.freezed.dart';
+part 'item_price.g.dart';
 
 final itemPricesFutureProvider =
     FutureProvider.autoDispose.family<ItemPrices, String>((ref, asin) async {
@@ -58,30 +61,37 @@ final itemPricesFutureProvider =
 
 @freezed
 abstract class ItemPrices with _$ItemPrices {
+  @HiveType(typeId: dbItemPricesTypeId)
   const factory ItemPrices({
-    @required ItemPrice newPrice,
-    @required ItemPrice usedPrice,
-    @required FeeInfo feeInfo,
+    @HiveField(0) @required ItemPrice newPrice,
+    @HiveField(1) @required ItemPrice usedPrice,
+    @HiveField(2) @required FeeInfo feeInfo,
   }) = _ItemPrices;
 }
 
 @freezed
 abstract class PriceDetail with _$PriceDetail {
+  @HiveType(typeId: dbPriceDetailTypeId)
   const factory PriceDetail({
-    @Default(ItemCondition.newItem) ItemCondition itemCondition,
-    @Default(ItemSubCondition.newItem) ItemSubCondition subCondition,
-    @Default(FulfillmentChannel.merchant) FulfillmentChannel channel,
-    @Default(0) int price,
-    @Default(0) int shipping,
-    @Default(0) int point,
-  }) = _PriceInfo;
+    @HiveField(0) @Default(ItemCondition.newItem) ItemCondition itemCondition,
+    @HiveField(1)
+    @Default(ItemSubCondition.newItem)
+        ItemSubCondition subCondition,
+    @HiveField(2)
+    @Default(FulfillmentChannel.merchant)
+        FulfillmentChannel channel,
+    @HiveField(3) @Default(0) int price,
+    @HiveField(4) @Default(0) int shipping,
+    @HiveField(5) @Default(0) int point,
+  }) = _PriceDetail;
 }
 
 @freezed
 abstract class ItemPrice with _$ItemPrice {
+  @HiveType(typeId: dbItemPriceTypeId)
   const factory ItemPrice({
-    @Default(0) int lowestPrice, // 最安値 // TODO: 使ってないような？
-    @Default(0) int shipping, // 送料
-    @Default(<PriceDetail>[]) List<PriceDetail> prices,
+    @HiveField(0) @Default(0) int lowestPrice, // 最安値 // TODO: 使ってないような？
+    @HiveField(1) @Default(0) int shipping, // 送料
+    @HiveField(2) @Default(<PriceDetail>[]) List<PriceDetail> prices,
   }) = _ItemPrice;
 }

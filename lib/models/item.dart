@@ -1,11 +1,14 @@
 import 'dart:typed_data';
 
+import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/all.dart';
 
 part 'item.freezed.dart';
+part 'item.g.dart';
 
 final currentItemFutureProvider = ScopedProvider<FutureProvider<Item>>(null);
 
@@ -49,24 +52,26 @@ final itemFutureProvider =
 
 @freezed
 abstract class Item with _$Item {
+  @HiveType(typeId: dbItemTypeId)
   const factory Item({
-    @required String searchDate,
-    @required String jan,
-    @Default(<AsinData>[]) List<AsinData> asins,
+    @HiveField(0) @required String searchDate,
+    @HiveField(1) @required String jan,
+    @HiveField(2) @Default(<AsinData>[]) List<AsinData> asins,
   }) = _Item;
 }
 
 @freezed
 abstract class AsinData with _$AsinData {
+  @HiveType(typeId: dbAsinDataTypeId)
   const factory AsinData({
-    @required String jan,
-    @required String asin,
-    @required int listPrice, // 参考価格
-    @required String imageUrl,
-    @required String title,
-    @required int rank,
-    @required String quantity,
-    ItemPrices prices,
-    Uint8List imageData,
+    @HiveField(0) @required String jan,
+    @HiveField(1) @required String asin,
+    @HiveField(2) @required int listPrice, // 参考価格
+    @HiveField(3) @required String imageUrl,
+    @HiveField(4) @required String title,
+    @HiveField(5) @required int rank,
+    @HiveField(6) @required String quantity,
+    @HiveField(7) ItemPrices prices,
+    @HiveField(8) Uint8List imageData,
   }) = _AsinData;
 }

@@ -15,9 +15,9 @@ class _$ItemPricesTearOff {
 
 // ignore: unused_element
   _ItemPrices call(
-      {@required ItemPrice newPrice,
-      @required ItemPrice usedPrice,
-      @required FeeInfo feeInfo}) {
+      {@required @HiveField(0) ItemPrice newPrice,
+      @required @HiveField(1) ItemPrice usedPrice,
+      @required @HiveField(2) FeeInfo feeInfo}) {
     return _ItemPrices(
       newPrice: newPrice,
       usedPrice: usedPrice,
@@ -32,8 +32,11 @@ const $ItemPrices = _$ItemPricesTearOff();
 
 /// @nodoc
 mixin _$ItemPrices {
+  @HiveField(0)
   ItemPrice get newPrice;
+  @HiveField(1)
   ItemPrice get usedPrice;
+  @HiveField(2)
   FeeInfo get feeInfo;
 
   $ItemPricesCopyWith<ItemPrices> get copyWith;
@@ -44,7 +47,10 @@ abstract class $ItemPricesCopyWith<$Res> {
   factory $ItemPricesCopyWith(
           ItemPrices value, $Res Function(ItemPrices) then) =
       _$ItemPricesCopyWithImpl<$Res>;
-  $Res call({ItemPrice newPrice, ItemPrice usedPrice, FeeInfo feeInfo});
+  $Res call(
+      {@HiveField(0) ItemPrice newPrice,
+      @HiveField(1) ItemPrice usedPrice,
+      @HiveField(2) FeeInfo feeInfo});
 
   $ItemPriceCopyWith<$Res> get newPrice;
   $ItemPriceCopyWith<$Res> get usedPrice;
@@ -110,7 +116,10 @@ abstract class _$ItemPricesCopyWith<$Res> implements $ItemPricesCopyWith<$Res> {
           _ItemPrices value, $Res Function(_ItemPrices) then) =
       __$ItemPricesCopyWithImpl<$Res>;
   @override
-  $Res call({ItemPrice newPrice, ItemPrice usedPrice, FeeInfo feeInfo});
+  $Res call(
+      {@HiveField(0) ItemPrice newPrice,
+      @HiveField(1) ItemPrice usedPrice,
+      @HiveField(2) FeeInfo feeInfo});
 
   @override
   $ItemPriceCopyWith<$Res> get newPrice;
@@ -145,21 +154,26 @@ class __$ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
   }
 }
 
+@HiveType(typeId: dbItemPricesTypeId)
+
 /// @nodoc
 class _$_ItemPrices implements _ItemPrices {
   const _$_ItemPrices(
-      {@required this.newPrice,
-      @required this.usedPrice,
-      @required this.feeInfo})
+      {@required @HiveField(0) this.newPrice,
+      @required @HiveField(1) this.usedPrice,
+      @required @HiveField(2) this.feeInfo})
       : assert(newPrice != null),
         assert(usedPrice != null),
         assert(feeInfo != null);
 
   @override
+  @HiveField(0)
   final ItemPrice newPrice;
   @override
+  @HiveField(1)
   final ItemPrice usedPrice;
   @override
+  @HiveField(2)
   final FeeInfo feeInfo;
 
   @override
@@ -195,15 +209,18 @@ class _$_ItemPrices implements _ItemPrices {
 
 abstract class _ItemPrices implements ItemPrices {
   const factory _ItemPrices(
-      {@required ItemPrice newPrice,
-      @required ItemPrice usedPrice,
-      @required FeeInfo feeInfo}) = _$_ItemPrices;
+      {@required @HiveField(0) ItemPrice newPrice,
+      @required @HiveField(1) ItemPrice usedPrice,
+      @required @HiveField(2) FeeInfo feeInfo}) = _$_ItemPrices;
 
   @override
+  @HiveField(0)
   ItemPrice get newPrice;
   @override
+  @HiveField(1)
   ItemPrice get usedPrice;
   @override
+  @HiveField(2)
   FeeInfo get feeInfo;
   @override
   _$ItemPricesCopyWith<_ItemPrices> get copyWith;
@@ -214,14 +231,14 @@ class _$PriceDetailTearOff {
   const _$PriceDetailTearOff();
 
 // ignore: unused_element
-  _PriceInfo call(
-      {ItemCondition itemCondition = ItemCondition.newItem,
-      ItemSubCondition subCondition = ItemSubCondition.newItem,
-      FulfillmentChannel channel = FulfillmentChannel.merchant,
-      int price = 0,
-      int shipping = 0,
-      int point = 0}) {
-    return _PriceInfo(
+  _PriceDetail call(
+      {@HiveField(0) ItemCondition itemCondition = ItemCondition.newItem,
+      @HiveField(1) ItemSubCondition subCondition = ItemSubCondition.newItem,
+      @HiveField(2) FulfillmentChannel channel = FulfillmentChannel.merchant,
+      @HiveField(3) int price = 0,
+      @HiveField(4) int shipping = 0,
+      @HiveField(5) int point = 0}) {
+    return _PriceDetail(
       itemCondition: itemCondition,
       subCondition: subCondition,
       channel: channel,
@@ -238,11 +255,17 @@ const $PriceDetail = _$PriceDetailTearOff();
 
 /// @nodoc
 mixin _$PriceDetail {
+  @HiveField(0)
   ItemCondition get itemCondition;
+  @HiveField(1)
   ItemSubCondition get subCondition;
+  @HiveField(2)
   FulfillmentChannel get channel;
+  @HiveField(3)
   int get price;
+  @HiveField(4)
   int get shipping;
+  @HiveField(5)
   int get point;
 
   $PriceDetailCopyWith<PriceDetail> get copyWith;
@@ -254,12 +277,12 @@ abstract class $PriceDetailCopyWith<$Res> {
           PriceDetail value, $Res Function(PriceDetail) then) =
       _$PriceDetailCopyWithImpl<$Res>;
   $Res call(
-      {ItemCondition itemCondition,
-      ItemSubCondition subCondition,
-      FulfillmentChannel channel,
-      int price,
-      int shipping,
-      int point});
+      {@HiveField(0) ItemCondition itemCondition,
+      @HiveField(1) ItemSubCondition subCondition,
+      @HiveField(2) FulfillmentChannel channel,
+      @HiveField(3) int price,
+      @HiveField(4) int shipping,
+      @HiveField(5) int point});
 }
 
 /// @nodoc
@@ -296,28 +319,30 @@ class _$PriceDetailCopyWithImpl<$Res> implements $PriceDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PriceInfoCopyWith<$Res> implements $PriceDetailCopyWith<$Res> {
-  factory _$PriceInfoCopyWith(
-          _PriceInfo value, $Res Function(_PriceInfo) then) =
-      __$PriceInfoCopyWithImpl<$Res>;
+abstract class _$PriceDetailCopyWith<$Res>
+    implements $PriceDetailCopyWith<$Res> {
+  factory _$PriceDetailCopyWith(
+          _PriceDetail value, $Res Function(_PriceDetail) then) =
+      __$PriceDetailCopyWithImpl<$Res>;
   @override
   $Res call(
-      {ItemCondition itemCondition,
-      ItemSubCondition subCondition,
-      FulfillmentChannel channel,
-      int price,
-      int shipping,
-      int point});
+      {@HiveField(0) ItemCondition itemCondition,
+      @HiveField(1) ItemSubCondition subCondition,
+      @HiveField(2) FulfillmentChannel channel,
+      @HiveField(3) int price,
+      @HiveField(4) int shipping,
+      @HiveField(5) int point});
 }
 
 /// @nodoc
-class __$PriceInfoCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
-    implements _$PriceInfoCopyWith<$Res> {
-  __$PriceInfoCopyWithImpl(_PriceInfo _value, $Res Function(_PriceInfo) _then)
-      : super(_value, (v) => _then(v as _PriceInfo));
+class __$PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
+    implements _$PriceDetailCopyWith<$Res> {
+  __$PriceDetailCopyWithImpl(
+      _PriceDetail _value, $Res Function(_PriceDetail) _then)
+      : super(_value, (v) => _then(v as _PriceDetail));
 
   @override
-  _PriceInfo get _value => super._value as _PriceInfo;
+  _PriceDetail get _value => super._value as _PriceDetail;
 
   @override
   $Res call({
@@ -328,7 +353,7 @@ class __$PriceInfoCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
     Object shipping = freezed,
     Object point = freezed,
   }) {
-    return _then(_PriceInfo(
+    return _then(_PriceDetail(
       itemCondition: itemCondition == freezed
           ? _value.itemCondition
           : itemCondition as ItemCondition,
@@ -344,15 +369,17 @@ class __$PriceInfoCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
   }
 }
 
+@HiveType(typeId: dbPriceDetailTypeId)
+
 /// @nodoc
-class _$_PriceInfo implements _PriceInfo {
-  const _$_PriceInfo(
-      {this.itemCondition = ItemCondition.newItem,
-      this.subCondition = ItemSubCondition.newItem,
-      this.channel = FulfillmentChannel.merchant,
-      this.price = 0,
-      this.shipping = 0,
-      this.point = 0})
+class _$_PriceDetail implements _PriceDetail {
+  const _$_PriceDetail(
+      {@HiveField(0) this.itemCondition = ItemCondition.newItem,
+      @HiveField(1) this.subCondition = ItemSubCondition.newItem,
+      @HiveField(2) this.channel = FulfillmentChannel.merchant,
+      @HiveField(3) this.price = 0,
+      @HiveField(4) this.shipping = 0,
+      @HiveField(5) this.point = 0})
       : assert(itemCondition != null),
         assert(subCondition != null),
         assert(channel != null),
@@ -362,21 +389,27 @@ class _$_PriceInfo implements _PriceInfo {
 
   @JsonKey(defaultValue: ItemCondition.newItem)
   @override
+  @HiveField(0)
   final ItemCondition itemCondition;
   @JsonKey(defaultValue: ItemSubCondition.newItem)
   @override
+  @HiveField(1)
   final ItemSubCondition subCondition;
   @JsonKey(defaultValue: FulfillmentChannel.merchant)
   @override
+  @HiveField(2)
   final FulfillmentChannel channel;
   @JsonKey(defaultValue: 0)
   @override
+  @HiveField(3)
   final int price;
   @JsonKey(defaultValue: 0)
   @override
+  @HiveField(4)
   final int shipping;
   @JsonKey(defaultValue: 0)
   @override
+  @HiveField(5)
   final int point;
 
   @override
@@ -387,7 +420,7 @@ class _$_PriceInfo implements _PriceInfo {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PriceInfo &&
+        (other is _PriceDetail &&
             (identical(other.itemCondition, itemCondition) ||
                 const DeepCollectionEquality()
                     .equals(other.itemCondition, itemCondition)) &&
@@ -417,33 +450,39 @@ class _$_PriceInfo implements _PriceInfo {
       const DeepCollectionEquality().hash(point);
 
   @override
-  _$PriceInfoCopyWith<_PriceInfo> get copyWith =>
-      __$PriceInfoCopyWithImpl<_PriceInfo>(this, _$identity);
+  _$PriceDetailCopyWith<_PriceDetail> get copyWith =>
+      __$PriceDetailCopyWithImpl<_PriceDetail>(this, _$identity);
 }
 
-abstract class _PriceInfo implements PriceDetail {
-  const factory _PriceInfo(
-      {ItemCondition itemCondition,
-      ItemSubCondition subCondition,
-      FulfillmentChannel channel,
-      int price,
-      int shipping,
-      int point}) = _$_PriceInfo;
+abstract class _PriceDetail implements PriceDetail {
+  const factory _PriceDetail(
+      {@HiveField(0) ItemCondition itemCondition,
+      @HiveField(1) ItemSubCondition subCondition,
+      @HiveField(2) FulfillmentChannel channel,
+      @HiveField(3) int price,
+      @HiveField(4) int shipping,
+      @HiveField(5) int point}) = _$_PriceDetail;
 
   @override
+  @HiveField(0)
   ItemCondition get itemCondition;
   @override
+  @HiveField(1)
   ItemSubCondition get subCondition;
   @override
+  @HiveField(2)
   FulfillmentChannel get channel;
   @override
+  @HiveField(3)
   int get price;
   @override
+  @HiveField(4)
   int get shipping;
   @override
+  @HiveField(5)
   int get point;
   @override
-  _$PriceInfoCopyWith<_PriceInfo> get copyWith;
+  _$PriceDetailCopyWith<_PriceDetail> get copyWith;
 }
 
 /// @nodoc
@@ -452,9 +491,9 @@ class _$ItemPriceTearOff {
 
 // ignore: unused_element
   _ItemPrice call(
-      {int lowestPrice = 0,
-      int shipping = 0,
-      List<PriceDetail> prices = const <PriceDetail>[]}) {
+      {@HiveField(0) int lowestPrice = 0,
+      @HiveField(1) int shipping = 0,
+      @HiveField(2) List<PriceDetail> prices = const <PriceDetail>[]}) {
     return _ItemPrice(
       lowestPrice: lowestPrice,
       shipping: shipping,
@@ -469,8 +508,11 @@ const $ItemPrice = _$ItemPriceTearOff();
 
 /// @nodoc
 mixin _$ItemPrice {
-  int get lowestPrice; // 最安値
+  @HiveField(0)
+  int get lowestPrice; // 最安値 // TODO: 使ってないような？
+  @HiveField(1)
   int get shipping; // 送料
+  @HiveField(2)
   List<PriceDetail> get prices;
 
   $ItemPriceCopyWith<ItemPrice> get copyWith;
@@ -480,7 +522,10 @@ mixin _$ItemPrice {
 abstract class $ItemPriceCopyWith<$Res> {
   factory $ItemPriceCopyWith(ItemPrice value, $Res Function(ItemPrice) then) =
       _$ItemPriceCopyWithImpl<$Res>;
-  $Res call({int lowestPrice, int shipping, List<PriceDetail> prices});
+  $Res call(
+      {@HiveField(0) int lowestPrice,
+      @HiveField(1) int shipping,
+      @HiveField(2) List<PriceDetail> prices});
 }
 
 /// @nodoc
@@ -512,7 +557,10 @@ abstract class _$ItemPriceCopyWith<$Res> implements $ItemPriceCopyWith<$Res> {
           _ItemPrice value, $Res Function(_ItemPrice) then) =
       __$ItemPriceCopyWithImpl<$Res>;
   @override
-  $Res call({int lowestPrice, int shipping, List<PriceDetail> prices});
+  $Res call(
+      {@HiveField(0) int lowestPrice,
+      @HiveField(1) int shipping,
+      @HiveField(2) List<PriceDetail> prices});
 }
 
 /// @nodoc
@@ -539,24 +587,29 @@ class __$ItemPriceCopyWithImpl<$Res> extends _$ItemPriceCopyWithImpl<$Res>
   }
 }
 
+@HiveType(typeId: dbItemPriceTypeId)
+
 /// @nodoc
 class _$_ItemPrice implements _ItemPrice {
   const _$_ItemPrice(
-      {this.lowestPrice = 0,
-      this.shipping = 0,
-      this.prices = const <PriceDetail>[]})
+      {@HiveField(0) this.lowestPrice = 0,
+      @HiveField(1) this.shipping = 0,
+      @HiveField(2) this.prices = const <PriceDetail>[]})
       : assert(lowestPrice != null),
         assert(shipping != null),
         assert(prices != null);
 
   @JsonKey(defaultValue: 0)
   @override
+  @HiveField(0)
   final int lowestPrice;
   @JsonKey(defaultValue: 0)
-  @override // 最安値
+  @override // 最安値 // TODO: 使ってないような？
+  @HiveField(1)
   final int shipping;
   @JsonKey(defaultValue: const <PriceDetail>[])
   @override // 送料
+  @HiveField(2)
   final List<PriceDetail> prices;
 
   @override
@@ -592,13 +645,18 @@ class _$_ItemPrice implements _ItemPrice {
 
 abstract class _ItemPrice implements ItemPrice {
   const factory _ItemPrice(
-      {int lowestPrice, int shipping, List<PriceDetail> prices}) = _$_ItemPrice;
+      {@HiveField(0) int lowestPrice,
+      @HiveField(1) int shipping,
+      @HiveField(2) List<PriceDetail> prices}) = _$_ItemPrice;
 
   @override
+  @HiveField(0)
   int get lowestPrice;
-  @override // 最安値
+  @override // 最安値 // TODO: 使ってないような？
+  @HiveField(1)
   int get shipping;
   @override // 送料
+  @HiveField(2)
   List<PriceDetail> get prices;
   @override
   _$ItemPriceCopyWith<_ItemPrice> get copyWith;

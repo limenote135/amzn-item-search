@@ -1,8 +1,19 @@
+import 'package:amasearch/models/constants.dart';
+import 'package:hive/hive.dart';
+
+part 'item_sub_condition.g.dart';
+
+@HiveType(typeId: itemSubConditionTypeId)
 enum ItemSubCondition {
+  @HiveField(0)
   newItem,
+  @HiveField(1)
   mint,
+  @HiveField(2)
   veryGood,
+  @HiveField(3)
   good,
+  @HiveField(4)
   acceptable,
 }
 
