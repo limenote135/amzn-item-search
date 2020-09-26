@@ -15,9 +15,9 @@ class _$ItemTearOff {
 
 // ignore: unused_element
   _Item call(
-      {@required String searchDate,
-      @required String jan,
-      List<AsinData> asins = const <AsinData>[]}) {
+      {@required @HiveField(0) String searchDate,
+      @required @HiveField(1) String jan,
+      @HiveField(2) List<AsinData> asins = const <AsinData>[]}) {
     return _Item(
       searchDate: searchDate,
       jan: jan,
@@ -32,8 +32,11 @@ const $Item = _$ItemTearOff();
 
 /// @nodoc
 mixin _$Item {
+  @HiveField(0)
   String get searchDate;
+  @HiveField(1)
   String get jan;
+  @HiveField(2)
   List<AsinData> get asins;
 
   $ItemCopyWith<Item> get copyWith;
@@ -43,7 +46,10 @@ mixin _$Item {
 abstract class $ItemCopyWith<$Res> {
   factory $ItemCopyWith(Item value, $Res Function(Item) then) =
       _$ItemCopyWithImpl<$Res>;
-  $Res call({String searchDate, String jan, List<AsinData> asins});
+  $Res call(
+      {@HiveField(0) String searchDate,
+      @HiveField(1) String jan,
+      @HiveField(2) List<AsinData> asins});
 }
 
 /// @nodoc
@@ -74,7 +80,10 @@ abstract class _$ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
   factory _$ItemCopyWith(_Item value, $Res Function(_Item) then) =
       __$ItemCopyWithImpl<$Res>;
   @override
-  $Res call({String searchDate, String jan, List<AsinData> asins});
+  $Res call(
+      {@HiveField(0) String searchDate,
+      @HiveField(1) String jan,
+      @HiveField(2) List<AsinData> asins});
 }
 
 /// @nodoc
@@ -101,22 +110,27 @@ class __$ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res>
   }
 }
 
+@HiveType(typeId: dbItemTypeId)
+
 /// @nodoc
 class _$_Item implements _Item {
   const _$_Item(
-      {@required this.searchDate,
-      @required this.jan,
-      this.asins = const <AsinData>[]})
+      {@required @HiveField(0) this.searchDate,
+      @required @HiveField(1) this.jan,
+      @HiveField(2) this.asins = const <AsinData>[]})
       : assert(searchDate != null),
         assert(jan != null),
         assert(asins != null);
 
   @override
+  @HiveField(0)
   final String searchDate;
   @override
+  @HiveField(1)
   final String jan;
   @JsonKey(defaultValue: const <AsinData>[])
   @override
+  @HiveField(2)
   final List<AsinData> asins;
 
   @override
@@ -151,15 +165,18 @@ class _$_Item implements _Item {
 
 abstract class _Item implements Item {
   const factory _Item(
-      {@required String searchDate,
-      @required String jan,
-      List<AsinData> asins}) = _$_Item;
+      {@required @HiveField(0) String searchDate,
+      @required @HiveField(1) String jan,
+      @HiveField(2) List<AsinData> asins}) = _$_Item;
 
   @override
+  @HiveField(0)
   String get searchDate;
   @override
+  @HiveField(1)
   String get jan;
   @override
+  @HiveField(2)
   List<AsinData> get asins;
   @override
   _$ItemCopyWith<_Item> get copyWith;
@@ -171,15 +188,15 @@ class _$AsinDataTearOff {
 
 // ignore: unused_element
   _AsinData call(
-      {@required String jan,
-      @required String asin,
-      @required int listPrice,
-      @required String imageUrl,
-      @required String title,
-      @required int rank,
-      @required String quantity,
-      ItemPrices prices,
-      Uint8List imageData}) {
+      {@required @HiveField(0) String jan,
+      @required @HiveField(1) String asin,
+      @required @HiveField(2) int listPrice,
+      @required @HiveField(3) String imageUrl,
+      @required @HiveField(4) String title,
+      @required @HiveField(5) int rank,
+      @required @HiveField(6) String quantity,
+      @HiveField(7) ItemPrices prices,
+      @HiveField(8) Uint8List imageData}) {
     return _AsinData(
       jan: jan,
       asin: asin,
@@ -200,14 +217,23 @@ const $AsinData = _$AsinDataTearOff();
 
 /// @nodoc
 mixin _$AsinData {
+  @HiveField(0)
   String get jan;
+  @HiveField(1)
   String get asin;
+  @HiveField(2)
   int get listPrice; // 参考価格
+  @HiveField(3)
   String get imageUrl;
+  @HiveField(4)
   String get title;
+  @HiveField(5)
   int get rank;
+  @HiveField(6)
   String get quantity;
+  @HiveField(7)
   ItemPrices get prices;
+  @HiveField(8)
   Uint8List get imageData;
 
   $AsinDataCopyWith<AsinData> get copyWith;
@@ -218,15 +244,15 @@ abstract class $AsinDataCopyWith<$Res> {
   factory $AsinDataCopyWith(AsinData value, $Res Function(AsinData) then) =
       _$AsinDataCopyWithImpl<$Res>;
   $Res call(
-      {String jan,
-      String asin,
-      int listPrice,
-      String imageUrl,
-      String title,
-      int rank,
-      String quantity,
-      ItemPrices prices,
-      Uint8List imageData});
+      {@HiveField(0) String jan,
+      @HiveField(1) String asin,
+      @HiveField(2) int listPrice,
+      @HiveField(3) String imageUrl,
+      @HiveField(4) String title,
+      @HiveField(5) int rank,
+      @HiveField(6) String quantity,
+      @HiveField(7) ItemPrices prices,
+      @HiveField(8) Uint8List imageData});
 
   $ItemPricesCopyWith<$Res> get prices;
 }
@@ -282,15 +308,15 @@ abstract class _$AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
       __$AsinDataCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String jan,
-      String asin,
-      int listPrice,
-      String imageUrl,
-      String title,
-      int rank,
-      String quantity,
-      ItemPrices prices,
-      Uint8List imageData});
+      {@HiveField(0) String jan,
+      @HiveField(1) String asin,
+      @HiveField(2) int listPrice,
+      @HiveField(3) String imageUrl,
+      @HiveField(4) String title,
+      @HiveField(5) int rank,
+      @HiveField(6) String quantity,
+      @HiveField(7) ItemPrices prices,
+      @HiveField(8) Uint8List imageData});
 
   @override
   $ItemPricesCopyWith<$Res> get prices;
@@ -332,18 +358,20 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
   }
 }
 
+@HiveType(typeId: dbAsinDataTypeId)
+
 /// @nodoc
 class _$_AsinData implements _AsinData {
   const _$_AsinData(
-      {@required this.jan,
-      @required this.asin,
-      @required this.listPrice,
-      @required this.imageUrl,
-      @required this.title,
-      @required this.rank,
-      @required this.quantity,
-      this.prices,
-      this.imageData})
+      {@required @HiveField(0) this.jan,
+      @required @HiveField(1) this.asin,
+      @required @HiveField(2) this.listPrice,
+      @required @HiveField(3) this.imageUrl,
+      @required @HiveField(4) this.title,
+      @required @HiveField(5) this.rank,
+      @required @HiveField(6) this.quantity,
+      @HiveField(7) this.prices,
+      @HiveField(8) this.imageData})
       : assert(jan != null),
         assert(asin != null),
         assert(listPrice != null),
@@ -353,22 +381,31 @@ class _$_AsinData implements _AsinData {
         assert(quantity != null);
 
   @override
+  @HiveField(0)
   final String jan;
   @override
+  @HiveField(1)
   final String asin;
   @override
+  @HiveField(2)
   final int listPrice;
   @override // 参考価格
+  @HiveField(3)
   final String imageUrl;
   @override
+  @HiveField(4)
   final String title;
   @override
+  @HiveField(5)
   final int rank;
   @override
+  @HiveField(6)
   final String quantity;
   @override
+  @HiveField(7)
   final ItemPrices prices;
   @override
+  @HiveField(8)
   final Uint8List imageData;
 
   @override
@@ -424,33 +461,42 @@ class _$_AsinData implements _AsinData {
 
 abstract class _AsinData implements AsinData {
   const factory _AsinData(
-      {@required String jan,
-      @required String asin,
-      @required int listPrice,
-      @required String imageUrl,
-      @required String title,
-      @required int rank,
-      @required String quantity,
-      ItemPrices prices,
-      Uint8List imageData}) = _$_AsinData;
+      {@required @HiveField(0) String jan,
+      @required @HiveField(1) String asin,
+      @required @HiveField(2) int listPrice,
+      @required @HiveField(3) String imageUrl,
+      @required @HiveField(4) String title,
+      @required @HiveField(5) int rank,
+      @required @HiveField(6) String quantity,
+      @HiveField(7) ItemPrices prices,
+      @HiveField(8) Uint8List imageData}) = _$_AsinData;
 
   @override
+  @HiveField(0)
   String get jan;
   @override
+  @HiveField(1)
   String get asin;
   @override
+  @HiveField(2)
   int get listPrice;
   @override // 参考価格
+  @HiveField(3)
   String get imageUrl;
   @override
+  @HiveField(4)
   String get title;
   @override
+  @HiveField(5)
   int get rank;
   @override
+  @HiveField(6)
   String get quantity;
   @override
+  @HiveField(7)
   ItemPrices get prices;
   @override
+  @HiveField(8)
   Uint8List get imageData;
   @override
   _$AsinDataCopyWith<_AsinData> get copyWith;

@@ -1,4 +1,5 @@
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/util/hive_provider.dart';
 import 'package:hooks_riverpod/all.dart';
 
 final itemListControllerProvider =
@@ -6,12 +7,27 @@ final itemListControllerProvider =
 
 class ItemListController extends StateNotifier<List<FutureProvider<Item>>> {
   ItemListController(this._read, {List<FutureProvider<Item>> state})
-      : super(state ?? []);
+      : super(state ?? []) {
+    _fetchAll();
+  }
 
   final Reader _read;
+
+  void _fetchAll() {
+    final box = _read(searchItemBoxProvider);
+    state = box.values
+        .map((e) => FutureProvider((_) => Future.value(e)))
+        .toList()
+        .reversed
+        .toList();
+  }
 
   void add(String jan) {
     final future = itemFutureProvider(jan);
     state = [future, ...state];
+  }
+
+  void saveData(Item data) {
+    final box = _read(searchItemBoxProvider)..put(data.searchDate, data);
   }
 }

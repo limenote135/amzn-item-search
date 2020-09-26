@@ -1,0 +1,136 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'item_price.dart';
+
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class ItemPricesAdapter extends TypeAdapter<_$_ItemPrices> {
+  @override
+  final int typeId = 3;
+
+  @override
+  _$_ItemPrices read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_ItemPrices(
+      newPrice: fields[0] as ItemPrice,
+      usedPrice: fields[1] as ItemPrice,
+      feeInfo: fields[2] as FeeInfo,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_ItemPrices obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.newPrice)
+      ..writeByte(1)
+      ..write(obj.usedPrice)
+      ..writeByte(2)
+      ..write(obj.feeInfo);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ItemPricesAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
+  @override
+  final int typeId = 5;
+
+  @override
+  _$_PriceDetail read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_PriceDetail(
+      itemCondition: fields[0] as ItemCondition,
+      subCondition: fields[1] as ItemSubCondition,
+      channel: fields[2] as FulfillmentChannel,
+      price: fields[3] as int,
+      shipping: fields[4] as int,
+      point: fields[5] as int,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_PriceDetail obj) {
+    writer
+      ..writeByte(6)
+      ..writeByte(0)
+      ..write(obj.itemCondition)
+      ..writeByte(1)
+      ..write(obj.subCondition)
+      ..writeByte(2)
+      ..write(obj.channel)
+      ..writeByte(3)
+      ..write(obj.price)
+      ..writeByte(4)
+      ..write(obj.shipping)
+      ..writeByte(5)
+      ..write(obj.point);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PriceDetailAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ItemPriceAdapter extends TypeAdapter<_$_ItemPrice> {
+  @override
+  final int typeId = 4;
+
+  @override
+  _$_ItemPrice read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_ItemPrice(
+      lowestPrice: fields[0] as int,
+      shipping: fields[1] as int,
+      prices: (fields[2] as List)?.cast<PriceDetail>(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_ItemPrice obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.lowestPrice)
+      ..writeByte(1)
+      ..write(obj.shipping)
+      ..writeByte(2)
+      ..write(obj.prices);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ItemPriceAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
