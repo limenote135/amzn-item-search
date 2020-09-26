@@ -6,7 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 Future<bool> itemDeleteHandler({
   @required BuildContext context,
-  @required List<StockItem> items,
+  List<StockItem> items,
+  bool deleteAll = false,
   @required String content,
 }) async {
   final ok = await showDialog<bool>(
@@ -27,7 +28,11 @@ Future<bool> itemDeleteHandler({
     ),
   );
   if (ok) {
-    context.read(stockItemListControllerProvider).remove(items);
+    if (deleteAll) {
+      context.read(stockItemListControllerProvider).removeAll();
+    } else {
+      context.read(stockItemListControllerProvider).remove(items);
+    }
   }
   return ok;
 }
