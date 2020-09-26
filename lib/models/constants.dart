@@ -4,9 +4,8 @@ const stockItemBoxName = "stockItems";
 const itemTypeId = 1;
 const asinDataTypeId = 2;
 const itemPricesTypeId = 3;
-const itemPriceTypeId = 4;
-const priceDetailTypeId = 5;
-const feeInfoTypeId = 6;
+const priceDetailTypeId = 4;
+const feeInfoTypeId = 5;
 
 const stockItemTypeId = 20;
 

@@ -33,21 +33,9 @@ final itemPricesFutureProvider =
   final usedPrice = await usedPricesF;
   final feeInfo = await feeInfoF;
 
-  final newPriceInfo = ItemPrice(
-    lowestPrice: newPrice.lowestPrice,
-    shipping: newPrice.shipping,
-    prices: newPrice.prices,
-  );
-
-  final usedPriceInfo = ItemPrice(
-    lowestPrice: usedPrice.lowestPrice,
-    shipping: usedPrice.shipping,
-    prices: usedPrice.prices,
-  );
-
   final ret = ItemPrices(
-    newPrice: newPriceInfo,
-    usedPrice: usedPriceInfo,
+    newPrices: newPrice.prices,
+    usedPrices: usedPrice.prices,
     feeInfo: FeeInfo(
       referralFeeRate: feeInfo.referralFeeRate,
       variableClosingFee: feeInfo.variableClosingFee,
@@ -63,8 +51,8 @@ final itemPricesFutureProvider =
 abstract class ItemPrices with _$ItemPrices {
   @HiveType(typeId: itemPricesTypeId)
   const factory ItemPrices({
-    @HiveField(0) @required ItemPrice newPrice,
-    @HiveField(1) @required ItemPrice usedPrice,
+    @HiveField(0) @Default(<PriceDetail>[]) List<PriceDetail> newPrices,
+    @HiveField(1) @Default(<PriceDetail>[]) List<PriceDetail> usedPrices,
     @HiveField(2) @required FeeInfo feeInfo,
   }) = _ItemPrices;
 }
@@ -84,14 +72,4 @@ abstract class PriceDetail with _$PriceDetail {
     @HiveField(4) @Default(0) int shipping,
     @HiveField(5) @Default(0) int point,
   }) = _PriceDetail;
-}
-
-@freezed
-abstract class ItemPrice with _$ItemPrice {
-  @HiveType(typeId: itemPriceTypeId)
-  const factory ItemPrice({
-    @HiveField(0) @Default(0) int lowestPrice, // 最安値 // TODO: 使ってないような？
-    @HiveField(1) @Default(0) int shipping, // 送料
-    @HiveField(2) @Default(<PriceDetail>[]) List<PriceDetail> prices,
-  }) = _ItemPrice;
 }
