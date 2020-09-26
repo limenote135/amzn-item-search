@@ -1,11 +1,14 @@
 const searchItemBoxName = "searchItems";
+const stockItemBoxName = "stockItems";
 
-const dbItemTypeId = 1;
-const dbAsinDataTypeId = 2;
-const dbItemPricesTypeId = 3;
-const dbItemPriceTypeId = 4;
-const dbPriceDetailTypeId = 5;
-const dbFeeInfoTypeId = 6;
+const itemTypeId = 1;
+const asinDataTypeId = 2;
+const itemPricesTypeId = 3;
+const itemPriceTypeId = 4;
+const priceDetailTypeId = 5;
+const feeInfoTypeId = 6;
+
+const stockItemTypeId = 20;
 
 const fulfillmentChannelTypeId = 100;
 const itemConditionTypeId = 101;

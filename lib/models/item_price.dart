@@ -61,7 +61,7 @@ final itemPricesFutureProvider =
 
 @freezed
 abstract class ItemPrices with _$ItemPrices {
-  @HiveType(typeId: dbItemPricesTypeId)
+  @HiveType(typeId: itemPricesTypeId)
   const factory ItemPrices({
     @HiveField(0) @required ItemPrice newPrice,
     @HiveField(1) @required ItemPrice usedPrice,
@@ -71,7 +71,7 @@ abstract class ItemPrices with _$ItemPrices {
 
 @freezed
 abstract class PriceDetail with _$PriceDetail {
-  @HiveType(typeId: dbPriceDetailTypeId)
+  @HiveType(typeId: priceDetailTypeId)
   const factory PriceDetail({
     @HiveField(0) @Default(ItemCondition.newItem) ItemCondition itemCondition,
     @HiveField(1)
@@ -88,7 +88,7 @@ abstract class PriceDetail with _$PriceDetail {
 
 @freezed
 abstract class ItemPrice with _$ItemPrice {
-  @HiveType(typeId: dbItemPriceTypeId)
+  @HiveType(typeId: itemPriceTypeId)
   const factory ItemPrice({
     @HiveField(0) @Default(0) int lowestPrice, // 最安値 // TODO: 使ってないような？
     @HiveField(1) @Default(0) int shipping, // 送料

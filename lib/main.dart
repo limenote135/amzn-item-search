@@ -7,6 +7,7 @@ import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/stock_item.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
     ..registerAdapter(ItemPriceAdapter())
     ..registerAdapter(PriceDetailAdapter())
     ..registerAdapter(FeeInfoAdapter())
+    ..registerAdapter(StockItemAdapter())
     ..registerAdapter(FulfillmentChannelAdapter())
     ..registerAdapter(ItemConditionAdapter())
     ..registerAdapter(ItemSubConditionAdapter())
@@ -32,6 +34,7 @@ Future<void> main() async {
 
   // await deleteBoxes();
   await Hive.openBox<Item>(searchItemBoxName);
+  await Hive.openBox<StockItem>(stockItemBoxName);
 
   // TODO:
   Intl.defaultLocale = 'ja_JP';
@@ -40,4 +43,5 @@ Future<void> main() async {
 
 Future<void> deleteBoxes() async {
   await Hive.deleteBoxFromDisk(searchItemBoxName);
+  await Hive.deleteBoxFromDisk(stockItemBoxName);
 }

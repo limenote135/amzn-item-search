@@ -110,7 +110,7 @@ class __$ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: dbItemTypeId)
+@HiveType(typeId: itemTypeId)
 
 /// @nodoc
 class _$_Item implements _Item {
@@ -358,7 +358,7 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: dbAsinDataTypeId)
+@HiveType(typeId: asinDataTypeId)
 
 /// @nodoc
 class _$_AsinData implements _AsinData {

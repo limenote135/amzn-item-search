@@ -52,7 +52,7 @@ final itemFutureProvider =
 
 @freezed
 abstract class Item with _$Item {
-  @HiveType(typeId: dbItemTypeId)
+  @HiveType(typeId: itemTypeId)
   const factory Item({
     @HiveField(0) @required String searchDate,
     @HiveField(1) @required String jan,
@@ -62,7 +62,7 @@ abstract class Item with _$Item {
 
 @freezed
 abstract class AsinData with _$AsinData {
-  @HiveType(typeId: dbAsinDataTypeId)
+  @HiveType(typeId: asinDataTypeId)
   const factory AsinData({
     @HiveField(0) @required String jan,
     @HiveField(1) @required String asin,
