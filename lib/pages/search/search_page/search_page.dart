@@ -4,6 +4,7 @@ import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/search_page/item_tile.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:amasearch/util/with_underline.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,22 +92,17 @@ class _Body extends HookWidget {
   Widget build(BuildContext context) {
     final items = useProvider(itemListControllerProvider.state);
 
-    return ListView(
-      children: [
-        ...ListTile.divideTiles(
-          context: context,
-          tiles: [
-            for (final item in items)
-              ProviderScope(
-                overrides: [
-                  currentItemFutureProvider.overrideWithValue(item),
-                ],
-                child: const ItemTile(),
-              )
-          ],
-        ).toList(),
-        const ThemeDivider(),
-      ],
+    return ListView.separated(
+      separatorBuilder: (context, index) => const ThemeDivider(),
+      itemCount: items.length,
+      itemBuilder: (context, index) => ProviderScope(
+        overrides: [
+          currentItemFutureProvider.overrideWithValue(items[index]),
+        ],
+        child: index != items.length - 1
+            ? const ItemTile()
+            : const WithUnderLine(ItemTile()),
+      ),
     );
   }
 }
