@@ -22,7 +22,6 @@ Future<void> main() async {
     ..registerAdapter(ItemAdapter())
     ..registerAdapter(AsinDataAdapter())
     ..registerAdapter(ItemPricesAdapter())
-    ..registerAdapter(ItemPriceAdapter())
     ..registerAdapter(PriceDetailAdapter())
     ..registerAdapter(FeeInfoAdapter())
     ..registerAdapter(StockItemAdapter())
