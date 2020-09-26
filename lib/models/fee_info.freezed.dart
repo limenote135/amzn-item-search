@@ -116,7 +116,7 @@ class __$FeeInfoCopyWithImpl<$Res> extends _$FeeInfoCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: dbFeeInfoTypeId)
+@HiveType(typeId: feeInfoTypeId)
 
 /// @nodoc
 class _$_FeeInfo implements _FeeInfo {
