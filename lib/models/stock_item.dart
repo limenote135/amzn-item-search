@@ -1,11 +1,12 @@
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/models/item_condition.dart';
-import 'package:amasearch/models/item_sub_condition.dart';
-import 'package:amasearch/models/purchase_item_condition.dart';
 import 'package:amasearch/models/purchase_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/all.dart';
+
+import 'enums/item_condition.dart';
+import 'enums/item_sub_condition.dart';
+import 'enums/purchase_item_condition.dart';
 
 part 'stock_item.freezed.dart';
 

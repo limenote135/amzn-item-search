@@ -1,6 +1,7 @@
-import 'package:amasearch/models/purchase_item_condition.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'enums/purchase_item_condition.dart';
 
 part 'purchase_settings.freezed.dart';
 

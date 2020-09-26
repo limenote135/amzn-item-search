@@ -1,7 +1,7 @@
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
+import 'package:amasearch/models/enums/item_condition.dart';
+import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/models/item_condition.dart';
-import 'package:amasearch/models/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
