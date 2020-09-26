@@ -1,5 +1,5 @@
-import 'package:amasearch/models/item_condition.dart';
-import 'package:amasearch/models/item_sub_condition.dart';
+import 'item_condition.dart';
+import 'item_sub_condition.dart';
 
 enum PurchaseItemCondition {
   newItem,

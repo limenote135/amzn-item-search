@@ -1,5 +1,5 @@
+import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/models/item_condition.dart';
 import 'package:amasearch/pages/search/detail_page/price_detail_tile.dart';
 import 'package:amasearch/pages/search/detail_page/seller_list_tile.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
