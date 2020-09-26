@@ -1,5 +1,13 @@
+import 'package:amasearch/models/constants.dart';
+import 'package:hive/hive.dart';
+
+part 'item_condition.g.dart';
+
+@HiveType(typeId: itemConditionTypeId)
 enum ItemCondition {
+  @HiveField(0)
   newItem,
+  @HiveField(1)
   usedItem,
 }
 

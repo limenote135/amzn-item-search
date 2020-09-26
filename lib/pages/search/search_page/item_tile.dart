@@ -1,3 +1,4 @@
+import 'package:amasearch/controllers/item_list_controller.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
@@ -13,7 +14,12 @@ class ItemTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final itemFuture = useProvider(currentItemFutureProvider);
-    return useProvider(itemFuture).when(
+    return useProvider(itemFuture).whenData((value) {
+      //TODO: 不要な書き込みが多い
+      print("save: ${value.jan}");
+      context.read(itemListControllerProvider).saveData(value);
+      return value;
+    }).when(
       loading: () => const ListTile(
         title: Center(child: CircularProgressIndicator()),
       ),

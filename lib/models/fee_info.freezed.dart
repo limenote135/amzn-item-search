@@ -15,9 +15,9 @@ class _$FeeInfoTearOff {
 
 // ignore: unused_element
   _FeeInfo call(
-      {@required double referralFeeRate,
-      @required int variableClosingFee,
-      @required int fbaFee}) {
+      {@required @HiveField(0) double referralFeeRate,
+      @required @HiveField(1) int variableClosingFee,
+      @required @HiveField(2) int fbaFee}) {
     return _FeeInfo(
       referralFeeRate: referralFeeRate,
       variableClosingFee: variableClosingFee,
@@ -32,8 +32,11 @@ const $FeeInfo = _$FeeInfoTearOff();
 
 /// @nodoc
 mixin _$FeeInfo {
+  @HiveField(0)
   double get referralFeeRate;
+  @HiveField(1)
   int get variableClosingFee;
+  @HiveField(2)
   int get fbaFee;
 
   $FeeInfoCopyWith<FeeInfo> get copyWith;
@@ -43,7 +46,10 @@ mixin _$FeeInfo {
 abstract class $FeeInfoCopyWith<$Res> {
   factory $FeeInfoCopyWith(FeeInfo value, $Res Function(FeeInfo) then) =
       _$FeeInfoCopyWithImpl<$Res>;
-  $Res call({double referralFeeRate, int variableClosingFee, int fbaFee});
+  $Res call(
+      {@HiveField(0) double referralFeeRate,
+      @HiveField(1) int variableClosingFee,
+      @HiveField(2) int fbaFee});
 }
 
 /// @nodoc
@@ -77,7 +83,10 @@ abstract class _$FeeInfoCopyWith<$Res> implements $FeeInfoCopyWith<$Res> {
   factory _$FeeInfoCopyWith(_FeeInfo value, $Res Function(_FeeInfo) then) =
       __$FeeInfoCopyWithImpl<$Res>;
   @override
-  $Res call({double referralFeeRate, int variableClosingFee, int fbaFee});
+  $Res call(
+      {@HiveField(0) double referralFeeRate,
+      @HiveField(1) int variableClosingFee,
+      @HiveField(2) int fbaFee});
 }
 
 /// @nodoc
@@ -107,21 +116,26 @@ class __$FeeInfoCopyWithImpl<$Res> extends _$FeeInfoCopyWithImpl<$Res>
   }
 }
 
+@HiveType(typeId: dbFeeInfoTypeId)
+
 /// @nodoc
 class _$_FeeInfo implements _FeeInfo {
   const _$_FeeInfo(
-      {@required this.referralFeeRate,
-      @required this.variableClosingFee,
-      @required this.fbaFee})
+      {@required @HiveField(0) this.referralFeeRate,
+      @required @HiveField(1) this.variableClosingFee,
+      @required @HiveField(2) this.fbaFee})
       : assert(referralFeeRate != null),
         assert(variableClosingFee != null),
         assert(fbaFee != null);
 
   @override
+  @HiveField(0)
   final double referralFeeRate;
   @override
+  @HiveField(1)
   final int variableClosingFee;
   @override
+  @HiveField(2)
   final int fbaFee;
 
   @override
@@ -157,15 +171,18 @@ class _$_FeeInfo implements _FeeInfo {
 
 abstract class _FeeInfo implements FeeInfo {
   const factory _FeeInfo(
-      {@required double referralFeeRate,
-      @required int variableClosingFee,
-      @required int fbaFee}) = _$_FeeInfo;
+      {@required @HiveField(0) double referralFeeRate,
+      @required @HiveField(1) int variableClosingFee,
+      @required @HiveField(2) int fbaFee}) = _$_FeeInfo;
 
   @override
+  @HiveField(0)
   double get referralFeeRate;
   @override
+  @HiveField(1)
   int get variableClosingFee;
   @override
+  @HiveField(2)
   int get fbaFee;
   @override
   _$FeeInfoCopyWith<_FeeInfo> get copyWith;
