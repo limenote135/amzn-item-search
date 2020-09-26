@@ -154,7 +154,7 @@ class __$ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: dbItemPricesTypeId)
+@HiveType(typeId: itemPricesTypeId)
 
 /// @nodoc
 class _$_ItemPrices implements _ItemPrices {
@@ -369,7 +369,7 @@ class __$PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: dbPriceDetailTypeId)
+@HiveType(typeId: priceDetailTypeId)
 
 /// @nodoc
 class _$_PriceDetail implements _PriceDetail {
@@ -587,7 +587,7 @@ class __$ItemPriceCopyWithImpl<$Res> extends _$ItemPriceCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: dbItemPriceTypeId)
+@HiveType(typeId: itemPriceTypeId)
 
 /// @nodoc
 class _$_ItemPrice implements _ItemPrice {

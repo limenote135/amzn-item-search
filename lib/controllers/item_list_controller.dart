@@ -28,6 +28,8 @@ class ItemListController extends StateNotifier<List<FutureProvider<Item>>> {
   }
 
   void saveData(Item data) {
-    final box = _read(searchItemBoxProvider)..put(data.searchDate, data);
+    final box = _read(searchItemBoxProvider);
+    // ignore: cascade_invocations
+    box.put(data.searchDate, data);
   }
 }

@@ -39,6 +39,7 @@ class StocksPage extends HookWidget {
   AppBar _getNormalAppBar() {
     return AppBar(
       title: const Text("仕入れ済み在庫"),
+      //TODO: 共有と CSV 作成
     );
   }
 

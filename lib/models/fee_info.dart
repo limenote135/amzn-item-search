@@ -7,7 +7,7 @@ part 'fee_info.g.dart';
 
 @freezed
 abstract class FeeInfo with _$FeeInfo {
-  @HiveType(typeId: dbFeeInfoTypeId)
+  @HiveType(typeId: feeInfoTypeId)
   const factory FeeInfo({
     @HiveField(0) @required double referralFeeRate,
     @HiveField(1) @required int variableClosingFee,
