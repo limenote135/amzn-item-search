@@ -42,4 +42,10 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     final keys = targets.map((e) => e.purchaseDate);
     box.deleteAll(keys);
   }
+
+  void removeAll() {
+    final box = _read(stockItemBoxProvider);
+    state = [];
+    box.clear();
+  }
 }

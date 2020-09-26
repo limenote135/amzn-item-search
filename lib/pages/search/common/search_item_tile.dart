@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/common/price_info.dart';
 import 'package:amasearch/styles/font.dart';
@@ -11,15 +13,18 @@ final currentSearchDateProvider = ScopedProvider<String>(null);
 final isEllipsisProvider = ScopedProvider<bool>((_) => false);
 
 class SearchItemTile extends StatelessWidget {
-  const SearchItemTile({Key key}) : super(key: key);
+  const SearchItemTile({Key key, this.onComplete}) : super(key: key);
+  final void Function(Future<ByteData> bytes) onComplete;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
-        TileImage(),
-        Expanded(
+      children: [
+        TileImage(
+          onComplete: onComplete,
+        ),
+        const Expanded(
           child: _ItemTileBody(),
         )
       ],
