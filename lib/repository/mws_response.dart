@@ -82,8 +82,6 @@ class GetLowestOfferListingsForASINResponse {
       return GetLowestOfferListingsForASINResponse._();
     }
 
-    var lowestPrice = 0;
-    var lowestShipping = 0;
     final prices = <PriceDetail>[];
     for (var i = 0; i < offers.length; i++) {
       final offer = offers[i];
@@ -111,11 +109,6 @@ class GetLowestOfferListingsForASINResponse {
       } on Exception catch (_) {
         //TODO: エラーハンドリング
       }
-
-      if (i == 0) {
-        lowestPrice = price;
-        lowestShipping = shipping;
-      }
       prices.add(PriceDetail(
         itemCondition: toItemCondition(cond),
         subCondition: toItemSubCondition(subCond),
@@ -127,20 +120,14 @@ class GetLowestOfferListingsForASINResponse {
     }
 
     return GetLowestOfferListingsForASINResponse._(
-      lowestPrice: lowestPrice,
-      shipping: lowestShipping,
       prices: prices,
     );
   }
 
   GetLowestOfferListingsForASINResponse._({
-    this.lowestPrice = 0,
-    this.shipping = 0,
     this.prices = const [],
   });
 
-  final int lowestPrice;
-  final int shipping;
   final List<PriceDetail> prices;
 }
 

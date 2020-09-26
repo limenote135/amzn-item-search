@@ -17,8 +17,8 @@ class ItemPricesAdapter extends TypeAdapter<_$_ItemPrices> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_ItemPrices(
-      newPrice: fields[0] as ItemPrice,
-      usedPrice: fields[1] as ItemPrice,
+      newPrices: (fields[0] as List)?.cast<PriceDetail>(),
+      usedPrices: (fields[1] as List)?.cast<PriceDetail>(),
       feeInfo: fields[2] as FeeInfo,
     );
   }
@@ -28,9 +28,9 @@ class ItemPricesAdapter extends TypeAdapter<_$_ItemPrices> {
     writer
       ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.newPrice)
+      ..write(obj.newPrices)
       ..writeByte(1)
-      ..write(obj.usedPrice)
+      ..write(obj.usedPrices)
       ..writeByte(2)
       ..write(obj.feeInfo);
   }
@@ -48,7 +48,7 @@ class ItemPricesAdapter extends TypeAdapter<_$_ItemPrices> {
 
 class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
   @override
-  final int typeId = 5;
+  final int typeId = 4;
 
   @override
   _$_PriceDetail read(BinaryReader reader) {
@@ -91,46 +91,6 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is PriceDetailAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
-class ItemPriceAdapter extends TypeAdapter<_$_ItemPrice> {
-  @override
-  final int typeId = 4;
-
-  @override
-  _$_ItemPrice read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return _$_ItemPrice(
-      lowestPrice: fields[0] as int,
-      shipping: fields[1] as int,
-      prices: (fields[2] as List)?.cast<PriceDetail>(),
-    );
-  }
-
-  @override
-  void write(BinaryWriter writer, _$_ItemPrice obj) {
-    writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.lowestPrice)
-      ..writeByte(1)
-      ..write(obj.shipping)
-      ..writeByte(2)
-      ..write(obj.prices);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ItemPriceAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
