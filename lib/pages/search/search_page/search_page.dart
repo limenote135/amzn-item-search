@@ -2,6 +2,7 @@ import 'package:amasearch/controllers/item_list_controller.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/search_page/item_tile.dart';
+import 'package:amasearch/pages/search/search_page/search_settings.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/util/with_underline.dart';
@@ -92,17 +93,24 @@ class _Body extends HookWidget {
   Widget build(BuildContext context) {
     final items = useProvider(itemListControllerProvider.state);
 
-    return ListView.separated(
-      separatorBuilder: (context, index) => const ThemeDivider(),
-      itemCount: items.length,
-      itemBuilder: (context, index) => ProviderScope(
-        overrides: [
-          currentItemFutureProvider.overrideWithValue(items[index]),
-        ],
-        child: index != items.length - 1
-            ? const ItemTile()
-            : const WithUnderLine(ItemTile()),
-      ),
+    return Column(
+      children: [
+        const WithUnderLine(SearchSetting()),
+        Expanded(
+          child: ListView.separated(
+            separatorBuilder: (context, index) => const ThemeDivider(),
+            itemCount: items.length,
+            itemBuilder: (context, index) => ProviderScope(
+              overrides: [
+                currentItemFutureProvider.overrideWithValue(items[index]),
+              ],
+              child: index != items.length - 1
+                  ? const ItemTile()
+                  : const WithUnderLine(ItemTile()),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
