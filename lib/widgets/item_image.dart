@@ -9,7 +9,7 @@ class ItemImage extends StatelessWidget {
       : super(key: key);
   final String url;
   final Uint8List data;
-  final void Function(Future<ByteData> bytes) onComplete;
+  final void Function(ByteData bytes) onComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,9 @@ class ItemImage extends StatelessWidget {
           }
 
           if (state.extendedImageInfo != null) {
-            onComplete?.call(state.extendedImageInfo.image
-                .toByteData(format: ImageByteFormat.png));
+            state.extendedImageInfo.image
+                .toByteData(format: ImageByteFormat.png)
+                .then((value) => onComplete?.call(value));
           }
           return state.completedWidget;
         },

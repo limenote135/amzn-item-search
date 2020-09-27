@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/pages/common/purchase_settings/image_tile.dart';
 import 'package:amasearch/util/util.dart';
@@ -13,9 +15,11 @@ import 'item_condition_tile.dart';
 import 'profit_tile.dart';
 
 class PurchaseSettingsForm extends HookWidget {
-  const PurchaseSettingsForm({Key key, this.action}) : super(key: key);
+  const PurchaseSettingsForm({Key key, this.action, this.onComplete})
+      : super(key: key);
 
   final Widget action;
+  final void Function(ByteData bytes) onComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,9 @@ class PurchaseSettingsForm extends HookWidget {
       },
       child: ListView(
         children: [
-          const ImageTile(),
+          ImageTile(
+            onComplete: onComplete,
+          ),
           const ThemeDivider(),
           const InputPricesTile(),
           SwitchListTile(

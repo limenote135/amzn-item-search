@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:amasearch/controllers/item_controller.dart';
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/repository/mws.dart';
@@ -10,7 +11,8 @@ import 'package:hooks_riverpod/all.dart';
 part 'item.freezed.dart';
 part 'item.g.dart';
 
-final currentItemFutureProvider = ScopedProvider<FutureProvider<Item>>(null);
+final currentItemFutureProvider =
+    ScopedProvider<FutureProvider<StateNotifierProvider<ItemController>>>(null);
 
 final currentAsinDataProvider = ScopedProvider<AsinData>(null);
 
@@ -18,18 +20,23 @@ final currentAsinListProvider = ScopedProvider<List<AsinData>>(null);
 
 final currentAsinCountProvider = ScopedProvider<int>((_) => 1);
 
-final currentItemProvider = ScopedProvider<Item>(null);
+final currentItemControllerProvider =
+    ScopedProvider<StateNotifierProvider<ItemController>>(null);
 
 final itemFutureProvider =
-    FutureProvider.family<Item, String>((ref, code) async {
+    FutureProvider.family<StateNotifierProvider<ItemController>, String>(
+        (ref, code) async {
   final mws = ref.read(mwsRepositoryProvider);
   final resp = await mws.getMatchingProductForID(code);
 
   if (resp.items.isEmpty) {
-    return Item(
+    return itemControllerProvider(
+      Item(
         searchDate: DateTime.now().toUtc().toIso8601String(),
         jan: code,
-        asins: []);
+        asins: [],
+      ),
+    );
   }
 
   final item = resp.items.first;
@@ -43,10 +50,12 @@ final itemFutureProvider =
     ),
     ...resp.items.skip(1),
   ];
-  return Item(
-    searchDate: DateTime.now().toUtc().toIso8601String(),
-    jan: code,
-    asins: ret,
+  return itemControllerProvider(
+    Item(
+      searchDate: DateTime.now().toUtc().toIso8601String(),
+      jan: code,
+      asins: ret,
+    ),
   );
 });
 

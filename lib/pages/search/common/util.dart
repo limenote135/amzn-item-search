@@ -13,7 +13,7 @@ PriceDetail getPriceDetail({
 }) {
   final prices = _getConditionPrices(item: item, condition: condition);
 
-  if (prices == null) {
+  if (prices == null || prices.isEmpty) {
     return const PriceDetail(price: 0, shipping: 0);
   }
   switch (condition) {
