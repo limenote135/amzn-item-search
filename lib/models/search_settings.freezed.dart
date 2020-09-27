@@ -15,10 +15,10 @@ class _$SearchSettingsTearOff {
 
 // ignore: unused_element
   _SearchSettings call(
-      {SearchType type = SearchType.jan,
-      UsedSubCondition usedSubCondition = UsedSubCondition.all,
-      bool useFba = false,
-      bool priorFba = false}) {
+      {@HiveField(0) SearchType type = SearchType.jan,
+      @HiveField(1) UsedSubCondition usedSubCondition = UsedSubCondition.all,
+      @HiveField(2) bool useFba = false,
+      @HiveField(3) bool priorFba = false}) {
     return _SearchSettings(
       type: type,
       usedSubCondition: usedSubCondition,
@@ -34,9 +34,13 @@ const $SearchSettings = _$SearchSettingsTearOff();
 
 /// @nodoc
 mixin _$SearchSettings {
+  @HiveField(0)
   SearchType get type;
+  @HiveField(1)
   UsedSubCondition get usedSubCondition;
+  @HiveField(2)
   bool get useFba;
+  @HiveField(3)
   bool get priorFba;
 
   $SearchSettingsCopyWith<SearchSettings> get copyWith;
@@ -48,10 +52,10 @@ abstract class $SearchSettingsCopyWith<$Res> {
           SearchSettings value, $Res Function(SearchSettings) then) =
       _$SearchSettingsCopyWithImpl<$Res>;
   $Res call(
-      {SearchType type,
-      UsedSubCondition usedSubCondition,
-      bool useFba,
-      bool priorFba});
+      {@HiveField(0) SearchType type,
+      @HiveField(1) UsedSubCondition usedSubCondition,
+      @HiveField(2) bool useFba,
+      @HiveField(3) bool priorFba});
 }
 
 /// @nodoc
@@ -89,10 +93,10 @@ abstract class _$SearchSettingsCopyWith<$Res>
       __$SearchSettingsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {SearchType type,
-      UsedSubCondition usedSubCondition,
-      bool useFba,
-      bool priorFba});
+      {@HiveField(0) SearchType type,
+      @HiveField(1) UsedSubCondition usedSubCondition,
+      @HiveField(2) bool useFba,
+      @HiveField(3) bool priorFba});
 }
 
 /// @nodoc
@@ -124,13 +128,15 @@ class __$SearchSettingsCopyWithImpl<$Res>
   }
 }
 
+@HiveType(typeId: searchSettingsTypeId)
+
 /// @nodoc
 class _$_SearchSettings implements _SearchSettings {
   const _$_SearchSettings(
-      {this.type = SearchType.jan,
-      this.usedSubCondition = UsedSubCondition.all,
-      this.useFba = false,
-      this.priorFba = false})
+      {@HiveField(0) this.type = SearchType.jan,
+      @HiveField(1) this.usedSubCondition = UsedSubCondition.all,
+      @HiveField(2) this.useFba = false,
+      @HiveField(3) this.priorFba = false})
       : assert(type != null),
         assert(usedSubCondition != null),
         assert(useFba != null),
@@ -138,15 +144,19 @@ class _$_SearchSettings implements _SearchSettings {
 
   @JsonKey(defaultValue: SearchType.jan)
   @override
+  @HiveField(0)
   final SearchType type;
   @JsonKey(defaultValue: UsedSubCondition.all)
   @override
+  @HiveField(1)
   final UsedSubCondition usedSubCondition;
   @JsonKey(defaultValue: false)
   @override
+  @HiveField(2)
   final bool useFba;
   @JsonKey(defaultValue: false)
   @override
+  @HiveField(3)
   final bool priorFba;
 
   @override
@@ -185,18 +195,22 @@ class _$_SearchSettings implements _SearchSettings {
 
 abstract class _SearchSettings implements SearchSettings {
   const factory _SearchSettings(
-      {SearchType type,
-      UsedSubCondition usedSubCondition,
-      bool useFba,
-      bool priorFba}) = _$_SearchSettings;
+      {@HiveField(0) SearchType type,
+      @HiveField(1) UsedSubCondition usedSubCondition,
+      @HiveField(2) bool useFba,
+      @HiveField(3) bool priorFba}) = _$_SearchSettings;
 
   @override
+  @HiveField(0)
   SearchType get type;
   @override
+  @HiveField(1)
   UsedSubCondition get usedSubCondition;
   @override
+  @HiveField(2)
   bool get useFba;
   @override
+  @HiveField(3)
   bool get priorFba;
   @override
   _$SearchSettingsCopyWith<_SearchSettings> get copyWith;
