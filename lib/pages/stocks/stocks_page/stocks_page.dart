@@ -4,6 +4,7 @@ import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/detail_page/detail_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/item_tile.dart';
+import 'package:amasearch/pages/stocks/stocks_page/total_profit.dart';
 import 'package:amasearch/util/csv.dart';
 import 'package:amasearch/util/with_underline.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -134,15 +135,22 @@ class _Body extends HookWidget {
           : const SlidableDeleteTile(child: ItemTile()),
     );
 
-    return ListView.separated(
-      separatorBuilder: (context, index) => const ThemeDivider(),
-      itemCount: items.length,
-      itemBuilder: (context, index) => ProviderScope(
-        overrides: [
-          currentStockItemProvider.overrideWithValue(items[index]),
-        ],
-        child: index != items.length - 1 ? tile : WithUnderLine(tile),
-      ),
+    return Column(
+      children: [
+        const WithUnderLine(TotalProfit()),
+        Expanded(
+          child: ListView.separated(
+            separatorBuilder: (context, index) => const ThemeDivider(),
+            itemCount: items.length,
+            itemBuilder: (context, index) => ProviderScope(
+              overrides: [
+                currentStockItemProvider.overrideWithValue(items[index]),
+              ],
+              child: index != items.length - 1 ? tile : WithUnderLine(tile),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
