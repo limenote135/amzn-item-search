@@ -1,4 +1,5 @@
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
+import 'package:amasearch/models/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,6 +14,11 @@ class InputPricesTile extends HookWidget {
         useProvider(base.state.select((value) => value.purchasePrice));
     final sellPrice =
         useProvider(base.state.select((value) => value.sellPrice));
+
+    final item = useProvider(currentAsinDataProvider);
+    // 仮で初期値を新品最安値にする
+    final prices = item.prices.newPrices ?? [];
+    final lowestPrice = prices.isNotEmpty ? prices.first.price : 0;
 
     return ListTile(
       title: Row(
@@ -52,7 +58,7 @@ class InputPricesTile extends HookWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextFormField(
                 autovalidate: true,
-                initialValue: "$sellPrice", // TODO: 適切な初期値
+                initialValue: "${sellPrice != 0 ? sellPrice : lowestPrice}",
                 keyboardType: const TextInputType.numberWithOptions(
                     signed: false, decimal: false),
                 decoration:
