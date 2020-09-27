@@ -14,7 +14,7 @@ final isEllipsisProvider = ScopedProvider<bool>((_) => false);
 
 class SearchItemTile extends StatelessWidget {
   const SearchItemTile({Key key, this.onComplete}) : super(key: key);
-  final void Function(Future<ByteData> bytes) onComplete;
+  final void Function(ByteData bytes) onComplete;
 
   @override
   Widget build(BuildContext context) {

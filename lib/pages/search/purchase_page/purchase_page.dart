@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
@@ -18,13 +20,16 @@ class PurchasePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("仕入れ設定"),
       ),
-      body: const _Body(),
+      body: _Body(),
     );
   }
 }
 
+// TODO: statefulWidget にする？
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  _Body({Key key}) : super(key: key);
+
+  Uint8List imageData;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +42,12 @@ class _Body extends HookWidget {
         currentPurchaseSettingsControllerProvider.overrideWithValue(base),
       ],
       child: PurchaseSettingsForm(
+        onComplete: (bytes) {
+          if (item.imageData == null) {
+            // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
+            imageData = bytes.buffer.asUint8List();
+          }
+        },
         action: RaisedButton(
           child: const Text("仕入れる"),
           onPressed: () {
@@ -57,7 +68,9 @@ class _Body extends HookWidget {
                 subCondition: data.condition.toItemSubCondition(),
                 sku: data.sku,
                 memo: data.memo,
-                item: item,
+                item: item.imageData != null
+                    ? item
+                    : item.copyWith(imageData: imageData),
                 purchaseDate: DateTime.now().toUtc().toIso8601String(),
               );
 

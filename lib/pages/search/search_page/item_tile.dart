@@ -1,4 +1,3 @@
-import 'package:amasearch/controllers/item_list_controller.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
@@ -16,8 +15,7 @@ class ItemTile extends HookWidget {
     final itemFuture = useProvider(currentItemFutureProvider);
     return useProvider(itemFuture).whenData((value) {
       //TODO: 不要な書き込みが多い
-      print("save: ${value.jan}");
-      context.read(itemListControllerProvider).saveData(value);
+      context.read(value).save();
       return value;
     }).when(
       loading: () => const ListTile(
@@ -30,17 +28,18 @@ class ItemTile extends HookWidget {
         ),
       ),
       data: (value) {
-        if (value.asins.isEmpty) {
+        final data = useProvider(value.state);
+        if (data.asins.isEmpty) {
           return Center(
             child: SizedBox(
               height: 30,
-              child: Text("${value.jan}: 見つかりませんでした"),
+              child: Text("${data.jan}: 見つかりませんでした"),
             ),
           );
         }
         return ProviderScope(
           overrides: [
-            currentItemProvider.overrideWithValue(value),
+            currentItemControllerProvider.overrideWithValue(value),
           ],
           child: const _ItemTileImpl(),
         );
@@ -54,7 +53,8 @@ class _ItemTileImpl extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final item = useProvider(currentItemProvider);
+    final controller = useProvider(currentItemControllerProvider);
+    final item = useProvider(controller.state);
     final firstItem = item.asins.first;
     return InkWell(
       onTap: () {
@@ -91,7 +91,13 @@ class _ItemTileImpl extends HookWidget {
           currentSearchDateProvider.overrideWithValue(item.searchDate),
           isEllipsisProvider.overrideWithValue(true),
         ],
-        child: const SearchItemTile(),
+        child: SearchItemTile(
+          onComplete: (bytes) {
+            context
+                .read(controller)
+                .setImageBinary(firstItem.asin, bytes.buffer.asUint8List());
+          },
+        ),
       ),
     );
   }
