@@ -1,16 +1,22 @@
+import 'package:amasearch/models/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 
 import 'enums/search_type.dart';
 import 'enums/used_sub_condition.dart';
 
 part 'search_settings.freezed.dart';
+part 'search_settings.g.dart';
 
 @freezed
 abstract class SearchSettings with _$SearchSettings {
+  @HiveType(typeId: searchSettingsTypeId)
   const factory SearchSettings({
-    @Default(SearchType.jan) SearchType type,
-    @Default(UsedSubCondition.all) UsedSubCondition usedSubCondition,
-    @Default(false) bool useFba,
-    @Default(false) bool priorFba,
+    @HiveField(0) @Default(SearchType.jan) SearchType type,
+    @HiveField(1)
+    @Default(UsedSubCondition.all)
+        UsedSubCondition usedSubCondition,
+    @HiveField(2) @Default(false) bool useFba,
+    @HiveField(3) @Default(false) bool priorFba,
   }) = _SearchSettings;
 }
