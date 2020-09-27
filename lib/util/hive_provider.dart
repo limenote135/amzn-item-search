@@ -9,3 +9,5 @@ final searchItemBoxProvider =
 
 final stockItemBoxProvider =
     Provider((_) => Hive.box<StockItem>(stockItemBoxName));
+
+final settingsBoxProvider = Provider((_) => Hive.box<dynamic>(settingsBoxName));

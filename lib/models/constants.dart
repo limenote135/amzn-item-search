@@ -1,5 +1,9 @@
 const searchItemBoxName = "searchItems";
 const stockItemBoxName = "stockItems";
+const settingsBoxName = "settings";
+
+const generalSettingsKeyName = "settings";
+const searchSettingsKeyName = "searchSettings";
 
 const itemTypeId = 1;
 const asinDataTypeId = 2;
@@ -8,6 +12,8 @@ const priceDetailTypeId = 4;
 const feeInfoTypeId = 5;
 
 const stockItemTypeId = 20;
+
+const searchSettingsTypeId = 40;
 
 const fulfillmentChannelTypeId = 100;
 const itemConditionTypeId = 101;
