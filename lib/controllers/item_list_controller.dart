@@ -20,6 +20,7 @@ class ItemListController extends StateNotifier<
 
   void _fetchAll() {
     final box = _read(searchItemBoxProvider);
+    // TODO: オンデマンドで読み込むべき？
     state = box.values
         .map((e) =>
             FutureProvider((_) => Future.value(itemControllerProvider(e))))
