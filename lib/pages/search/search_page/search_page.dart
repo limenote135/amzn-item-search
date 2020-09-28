@@ -1,4 +1,6 @@
 import 'package:amasearch/controllers/item_list_controller.dart';
+import 'package:amasearch/controllers/search_settings_controller.dart';
+import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/search_page/item_tile.dart';
@@ -60,6 +62,8 @@ class _AppBarTitle extends HookWidget {
     final textEditingController =
         useTextEditingController(text: "4987241127030"); // 4987241120888
 
+    final settings = useProvider(searchSettingsControllerProvider.state);
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -72,17 +76,49 @@ class _AppBarTitle extends HookWidget {
           controller: textEditingController,
           keyboardType: TextInputType.number,
           // TODO: 設定によって変える
-          decoration: const InputDecoration(hintText: "JANコード"),
+          decoration: _createHintText(settings.type),
           onSubmitted: (value) {
             if (value != "") {
-              // TODO: JAN 以外の対応
-              context.read(itemListControllerProvider).add(value);
+              _addItem(context, settings.type, value);
               textEditingController.clear();
             }
           },
         ),
       ),
     );
+  }
+
+  InputDecoration _createHintText(SearchType type) {
+    switch (type) {
+      case SearchType.jan:
+        return const InputDecoration(hintText: "JANコード");
+      case SearchType.bookoff:
+        return const InputDecoration(hintText: "BookOff");
+      case SearchType.geo:
+        return const InputDecoration(hintText: "Geo");
+      case SearchType.tsutaya:
+        return const InputDecoration(hintText: "TSUTAYA");
+    }
+    throw Exception("Unknown SearchType: $type");
+  }
+
+  void _addItem(BuildContext context, SearchType type, String code) {
+    switch (type) {
+      case SearchType.jan:
+        context.read(itemListControllerProvider).add(code);
+        return;
+      case SearchType.bookoff:
+        context.read(itemListControllerProvider).addBookoff(code);
+        return;
+      case SearchType.geo:
+        // TODO: Handle this case.
+        break;
+      case SearchType.tsutaya:
+        // TODO: Handle this case.
+        break;
+    }
+    // default
+    context.read(itemListControllerProvider).add(code);
   }
 }
 
