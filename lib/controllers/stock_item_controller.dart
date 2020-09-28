@@ -14,6 +14,7 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
   final Reader _read;
 
   void _fetchAll() {
+    // TODO: オンデマンドで読み込むべき？
     final box = _read(stockItemBoxProvider);
     state = box.values.toList().reversed.toList();
   }
