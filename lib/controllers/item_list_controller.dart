@@ -1,4 +1,5 @@
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/repository/bookoff.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:hooks_riverpod/all.dart';
 
@@ -29,6 +30,11 @@ class ItemListController extends StateNotifier<
 
   void add(String jan) {
     final future = itemFutureProvider(jan);
+    state = [future, ...state];
+  }
+
+  void addBookoff(String jan) {
+    final future = bookoffItemFutureProvider(jan);
     state = [future, ...state];
   }
 }
