@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+// TODO: purchase_settings/input_prices_tile と重複
 class InputPricesTile extends HookWidget {
   const InputPricesTile({Key key}) : super(key: key);
 
@@ -33,16 +34,12 @@ class InputPricesTile extends HookWidget {
                     const InputDecoration(labelText: "仕入れ値", suffixText: "円"),
                 textAlign: TextAlign.end,
                 validator: (value) {
-                  try {
-                    int.parse(value);
-                    return null;
-                  } on Exception catch (_) {
-                    return "不正な値です";
-                  }
+                  final val = int.tryParse(value);
+                  return val != null ? null : "不正な値です";
                 },
                 onSaved: (newValue) {
-                  final price = int.parse(newValue);
-                  if (purchasePrice != price) {
+                  final price = int.tryParse(newValue);
+                  if (price != null && purchasePrice != price) {
                     context.read(base).update(purchasePrice: price);
                   }
                 },
@@ -61,16 +58,12 @@ class InputPricesTile extends HookWidget {
                     const InputDecoration(labelText: "販売価格", suffixText: "円"),
                 textAlign: TextAlign.end,
                 validator: (value) {
-                  try {
-                    int.parse(value);
-                    return null;
-                  } on Exception catch (_) {
-                    return "不正な値です";
-                  }
+                  final val = int.tryParse(value);
+                  return val != null ? null : "不正な値です";
                 },
                 onSaved: (newValue) {
-                  final price = int.parse(newValue);
-                  if (sellPrice != price) {
+                  final price = int.tryParse(newValue);
+                  if (price != null && sellPrice != price) {
                     context.read(base).update(sellPrice: price);
                   }
                 },

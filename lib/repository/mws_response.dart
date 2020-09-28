@@ -35,20 +35,9 @@ class GetMatchingProductForIdResponse {
               ?.text ??
           "0";
 
-      var rank = 0;
-      try {
-        rank = int.parse(rankEl);
-      } on Exception catch (_) {
-        //TODO: ハンドリング
-      }
+      final rank = int.tryParse(rankEl) ?? 0;
 
-      var price = 0;
-      try {
-        price = double.parse(listPrice).floor();
-      } on Exception catch (_) {
-        // BadNumberFormatException は無視
-        // TODO: それ以外は？
-      }
+      final price = int.tryParse(listPrice)?.floor() ?? 0;
 
       // TODO: 確認
       list.add(AsinData(
@@ -90,25 +79,15 @@ class GetLowestOfferListingsForASINResponse {
       final subCond = offer.findAllElements("ItemSubcondition").single.text;
       final channel = offer.findAllElements("FulfillmentChannel").single.text;
 
-      var price = 0;
       final landedPrice = offer.findAllElements("LandedPrice");
       final priceEl = landedPrice.single.findAllElements("Amount").single.text;
-      try {
-        price = double.parse(priceEl).floor();
-      } on Exception catch (_) {
-        // BadNumberFormatException は無視
-        // TODO: それ以外は？
-      }
+      final price = double.tryParse(priceEl)?.floor() ?? 0;
 
-      var shipping = 0;
       final shippingPrice = offer.findAllElements("Shipping");
       final shipPriceEl =
           shippingPrice.single.findAllElements("Amount").single.text;
-      try {
-        shipping = double.parse(shipPriceEl).floor();
-      } on Exception catch (_) {
-        //TODO: エラーハンドリング
-      }
+      final shipping = double.tryParse(shipPriceEl)?.floor() ?? 0;
+
       prices.add(PriceDetail(
         itemCondition: toItemCondition(cond),
         subCondition: toItemSubCondition(subCond),
@@ -140,13 +119,8 @@ class GetMyFeesEstimateResponse {
       return GetMyFeesEstimateResponse._();
     }
 
-    var feePrice = 0;
     final feeText = totalFee.single.findAllElements("Amount").single.text;
-    try {
-      feePrice = double.parse(feeText).floor();
-    } on Exception catch (_) {
-      // TODO: エラーハンドリング
-    }
+    var feePrice = double.tryParse(feeText)?.floor() ?? 0;
 
     var referralFee = -1;
     var feeRate = 0.0;
@@ -165,12 +139,8 @@ class GetMyFeesEstimateResponse {
           .single
           .text;
 
-      int num;
-      try {
-        num = double.parse(amountText).floor();
-      } on Exception catch (_) {
-        //TODO:
-      }
+      final num = double.tryParse(amountText)?.floor() ?? 0;
+
       switch (type) {
         case "ReferralFee":
           referralFee = num;
