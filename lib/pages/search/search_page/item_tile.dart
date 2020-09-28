@@ -2,6 +2,7 @@ import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
+import 'package:amasearch/pages/search/search_page/slidable_tile.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -41,7 +42,7 @@ class ItemTile extends HookWidget {
           overrides: [
             currentItemControllerProvider.overrideWithValue(value),
           ],
-          child: const _ItemTileImpl(),
+          child: const SlidableTile(child: _ItemTileImpl()),
         );
       },
     );
