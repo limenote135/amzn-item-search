@@ -1,5 +1,6 @@
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/item_price.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,9 +17,8 @@ class InputPricesTile extends HookWidget {
         useProvider(base.state.select((value) => value.sellPrice));
 
     final item = useProvider(currentAsinDataProvider);
-    // 仮で初期値を新品最安値にする
-    final prices = item.prices.newPrices ?? [];
-    final lowestPrice = prices.isNotEmpty ? prices.first.price : 0;
+    // 仮で初期値を新品最安値、無ければ中古最安値にする
+    final lowestPrice = _calcLowestPrice(item.prices);
 
     return ListTile(
       title: Row(
@@ -76,5 +76,15 @@ class InputPricesTile extends HookWidget {
         ],
       ),
     );
+  }
+
+  int _calcLowestPrice(ItemPrices prices) {
+    if (prices.newPrices != null && prices.newPrices.isNotEmpty) {
+      return prices.newPrices.first.price;
+    }
+    if (prices.usedPrices != null && prices.usedPrices.isNotEmpty) {
+      return prices.usedPrices.first.price;
+    }
+    return 0;
   }
 }
