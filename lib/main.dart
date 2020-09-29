@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
@@ -9,15 +11,39 @@ import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/all.dart';
 import 'package:intl/intl.dart';
 
 import 'app.dart';
 
+// Toggle this for testing Crashlytics in your app locally.
+const _kTestingCrashlytics = false;
+
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  if (_kTestingCrashlytics) {
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  } else {
+    await FirebaseCrashlytics.instance
+        .setCrashlyticsCollectionEnabled(!kDebugMode);
+  }
+
+  // Pass all uncaught errors to Crashlytics.
+  final Function originalOnError = FlutterError.onError;
+  FlutterError.onError = (FlutterErrorDetails errorDetails) async {
+    await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+    // Forward to original handler.
+    originalOnError(errorDetails);
+  };
+
   await Hive.initFlutter();
   Hive
     ..registerAdapter(ItemAdapter())
@@ -34,13 +60,21 @@ Future<void> main() async {
     ..registerAdapter(UsedSubConditionAdapter());
 
   // await deleteBoxes();
-  await Hive.openBox<Item>(searchItemBoxName);
-  await Hive.openBox<StockItem>(stockItemBoxName);
-  await Hive.openBox<dynamic>(settingsBoxName);
+
+  await Future.wait([
+    Hive.openBox<Item>(searchItemBoxName),
+    Hive.openBox<StockItem>(stockItemBoxName),
+    Hive.openBox<dynamic>(settingsBoxName),
+  ]);
 
   // TODO:
   Intl.defaultLocale = 'ja_JP';
-  runApp(ProviderScope(child: MyApp()));
+
+  runZonedGuarded(() {
+    runApp(ProviderScope(child: MyApp()));
+  }, (error, stackTrace) {
+    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+  });
 }
 
 Future<void> deleteBoxes() async {
