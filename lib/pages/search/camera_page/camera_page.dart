@@ -48,7 +48,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
               context.read(itemListControllerProvider).addGeo(result);
               break;
             case SearchType.tsutaya:
-              // TODO: Handle this case.
+              context.read(itemListControllerProvider).addTsutaya(result);
               break;
           }
           setState(() {

@@ -113,11 +113,10 @@ class _AppBarTitle extends HookWidget {
         context.read(itemListControllerProvider).addGeo(code);
         return;
       case SearchType.tsutaya:
-        // TODO: Handle this case.
-        break;
+        context.read(itemListControllerProvider).addTsutaya(code);
+        return;
     }
-    // default
-    context.read(itemListControllerProvider).add(code);
+    throw Exception("Unknown type: $type");
   }
 }
 
