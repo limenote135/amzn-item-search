@@ -75,7 +75,6 @@ class _AppBarTitle extends HookWidget {
           style: const TextStyle(fontSize: 18),
           controller: textEditingController,
           keyboardType: TextInputType.number,
-          // TODO: 設定によって変える
           decoration: _createHintText(settings.type),
           onSubmitted: (value) {
             if (value != "") {
@@ -111,8 +110,8 @@ class _AppBarTitle extends HookWidget {
         context.read(itemListControllerProvider).addBookoff(code);
         return;
       case SearchType.geo:
-        // TODO: Handle this case.
-        break;
+        context.read(itemListControllerProvider).addGeo(code);
+        return;
       case SearchType.tsutaya:
         // TODO: Handle this case.
         break;
