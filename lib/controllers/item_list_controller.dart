@@ -1,5 +1,6 @@
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/repository/bookoff.dart';
+import 'package:amasearch/repository/geo.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:hooks_riverpod/all.dart';
 
@@ -34,8 +35,13 @@ class ItemListController extends StateNotifier<
     state = [future, ...state];
   }
 
-  void addBookoff(String jan) {
-    final future = bookoffItemFutureProvider(jan);
+  void addBookoff(String code) {
+    final future = bookoffItemFutureProvider(code);
+    state = [future, ...state];
+  }
+
+  void addGeo(String code) {
+    final future = geoItemFutureProvider(code);
     state = [future, ...state];
   }
 }
