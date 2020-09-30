@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:ai_barcode/ai_barcode.dart';
 import 'package:amasearch/controllers/item_list_controller.dart';
+import 'package:amasearch/controllers/search_settings_controller.dart';
+import 'package:amasearch/models/enums/search_type.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -34,7 +36,21 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
             content: Text(result),
           ));
 
-          context.read(itemListControllerProvider).add(result);
+          final settings = context.read(searchSettingsControllerProvider.state);
+          switch (settings.type) {
+            case SearchType.jan:
+              context.read(itemListControllerProvider).add(result);
+              break;
+            case SearchType.bookoff:
+              context.read(itemListControllerProvider).addBookoff(result);
+              break;
+            case SearchType.geo:
+              // TODO: Handle this case.
+              break;
+            case SearchType.tsutaya:
+              // TODO: Handle this case.
+              break;
+          }
           setState(() {
             _lastRead = result;
           });
