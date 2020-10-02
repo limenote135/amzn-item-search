@@ -90,15 +90,15 @@ class HomePage extends HookWidget {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.find_in_page),
-              title: Text("検索"),
+              label: "検索",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
-              title: Text("仕入れ"),
+              label: "仕入れ",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
-              title: Text("設定"),
+              label: "設定",
             ),
           ],
           currentIndex: currentPage.state,

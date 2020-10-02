@@ -28,7 +28,7 @@ class InputPricesTile extends HookWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextFormField(
-                autovalidate: true,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 initialValue: purchasePrice > 0 ? "$purchasePrice" : "",
                 // TODO: これでいいか確認
                 keyboardType: const TextInputType.numberWithOptions(
@@ -53,7 +53,7 @@ class InputPricesTile extends HookWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextFormField(
-                autovalidate: true,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 initialValue: "${sellPrice != 0 ? sellPrice : lowestPrice}",
                 keyboardType: const TextInputType.numberWithOptions(
                     signed: false, decimal: false),
