@@ -22,7 +22,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 0,
+        titleSpacing: 8,
         title: const _AppBarTitle(),
         actions: [
           AnimatedTheme(
