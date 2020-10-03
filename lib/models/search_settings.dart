@@ -18,5 +18,7 @@ abstract class SearchSettings with _$SearchSettings {
         UsedSubCondition usedSubCondition,
     @HiveField(2) @Default(false) bool useFba,
     @HiveField(3) @Default(false) bool priorFba,
+    // TODO: .g.dart でデフォルト値を設定している
+    @HiveField(4) @Default(true) bool continuousCameraRead,
   }) = _SearchSettings;
 }

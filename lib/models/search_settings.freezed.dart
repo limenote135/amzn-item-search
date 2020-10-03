@@ -18,12 +18,14 @@ class _$SearchSettingsTearOff {
       {@HiveField(0) SearchType type = SearchType.jan,
       @HiveField(1) UsedSubCondition usedSubCondition = UsedSubCondition.all,
       @HiveField(2) bool useFba = false,
-      @HiveField(3) bool priorFba = false}) {
+      @HiveField(3) bool priorFba = false,
+      @HiveField(4) bool continuousCameraRead = true}) {
     return _SearchSettings(
       type: type,
       usedSubCondition: usedSubCondition,
       useFba: useFba,
       priorFba: priorFba,
+      continuousCameraRead: continuousCameraRead,
     );
   }
 }
@@ -41,7 +43,9 @@ mixin _$SearchSettings {
   @HiveField(2)
   bool get useFba;
   @HiveField(3)
-  bool get priorFba;
+  bool get priorFba; // TODO: .g.dart でデフォルト値を設定している
+  @HiveField(4)
+  bool get continuousCameraRead;
 
   $SearchSettingsCopyWith<SearchSettings> get copyWith;
 }
@@ -55,7 +59,8 @@ abstract class $SearchSettingsCopyWith<$Res> {
       {@HiveField(0) SearchType type,
       @HiveField(1) UsedSubCondition usedSubCondition,
       @HiveField(2) bool useFba,
-      @HiveField(3) bool priorFba});
+      @HiveField(3) bool priorFba,
+      @HiveField(4) bool continuousCameraRead});
 }
 
 /// @nodoc
@@ -73,6 +78,7 @@ class _$SearchSettingsCopyWithImpl<$Res>
     Object usedSubCondition = freezed,
     Object useFba = freezed,
     Object priorFba = freezed,
+    Object continuousCameraRead = freezed,
   }) {
     return _then(_value.copyWith(
       type: type == freezed ? _value.type : type as SearchType,
@@ -81,6 +87,9 @@ class _$SearchSettingsCopyWithImpl<$Res>
           : usedSubCondition as UsedSubCondition,
       useFba: useFba == freezed ? _value.useFba : useFba as bool,
       priorFba: priorFba == freezed ? _value.priorFba : priorFba as bool,
+      continuousCameraRead: continuousCameraRead == freezed
+          ? _value.continuousCameraRead
+          : continuousCameraRead as bool,
     ));
   }
 }
@@ -96,7 +105,8 @@ abstract class _$SearchSettingsCopyWith<$Res>
       {@HiveField(0) SearchType type,
       @HiveField(1) UsedSubCondition usedSubCondition,
       @HiveField(2) bool useFba,
-      @HiveField(3) bool priorFba});
+      @HiveField(3) bool priorFba,
+      @HiveField(4) bool continuousCameraRead});
 }
 
 /// @nodoc
@@ -116,6 +126,7 @@ class __$SearchSettingsCopyWithImpl<$Res>
     Object usedSubCondition = freezed,
     Object useFba = freezed,
     Object priorFba = freezed,
+    Object continuousCameraRead = freezed,
   }) {
     return _then(_SearchSettings(
       type: type == freezed ? _value.type : type as SearchType,
@@ -124,6 +135,9 @@ class __$SearchSettingsCopyWithImpl<$Res>
           : usedSubCondition as UsedSubCondition,
       useFba: useFba == freezed ? _value.useFba : useFba as bool,
       priorFba: priorFba == freezed ? _value.priorFba : priorFba as bool,
+      continuousCameraRead: continuousCameraRead == freezed
+          ? _value.continuousCameraRead
+          : continuousCameraRead as bool,
     ));
   }
 }
@@ -136,11 +150,13 @@ class _$_SearchSettings implements _SearchSettings {
       {@HiveField(0) this.type = SearchType.jan,
       @HiveField(1) this.usedSubCondition = UsedSubCondition.all,
       @HiveField(2) this.useFba = false,
-      @HiveField(3) this.priorFba = false})
+      @HiveField(3) this.priorFba = false,
+      @HiveField(4) this.continuousCameraRead = true})
       : assert(type != null),
         assert(usedSubCondition != null),
         assert(useFba != null),
-        assert(priorFba != null);
+        assert(priorFba != null),
+        assert(continuousCameraRead != null);
 
   @JsonKey(defaultValue: SearchType.jan)
   @override
@@ -158,10 +174,14 @@ class _$_SearchSettings implements _SearchSettings {
   @override
   @HiveField(3)
   final bool priorFba;
+  @JsonKey(defaultValue: true)
+  @override // TODO: .g.dart でデフォルト値を設定している
+  @HiveField(4)
+  final bool continuousCameraRead;
 
   @override
   String toString() {
-    return 'SearchSettings(type: $type, usedSubCondition: $usedSubCondition, useFba: $useFba, priorFba: $priorFba)';
+    return 'SearchSettings(type: $type, usedSubCondition: $usedSubCondition, useFba: $useFba, priorFba: $priorFba, continuousCameraRead: $continuousCameraRead)';
   }
 
   @override
@@ -177,7 +197,10 @@ class _$_SearchSettings implements _SearchSettings {
                 const DeepCollectionEquality().equals(other.useFba, useFba)) &&
             (identical(other.priorFba, priorFba) ||
                 const DeepCollectionEquality()
-                    .equals(other.priorFba, priorFba)));
+                    .equals(other.priorFba, priorFba)) &&
+            (identical(other.continuousCameraRead, continuousCameraRead) ||
+                const DeepCollectionEquality()
+                    .equals(other.continuousCameraRead, continuousCameraRead)));
   }
 
   @override
@@ -186,7 +209,8 @@ class _$_SearchSettings implements _SearchSettings {
       const DeepCollectionEquality().hash(type) ^
       const DeepCollectionEquality().hash(usedSubCondition) ^
       const DeepCollectionEquality().hash(useFba) ^
-      const DeepCollectionEquality().hash(priorFba);
+      const DeepCollectionEquality().hash(priorFba) ^
+      const DeepCollectionEquality().hash(continuousCameraRead);
 
   @override
   _$SearchSettingsCopyWith<_SearchSettings> get copyWith =>
@@ -198,7 +222,8 @@ abstract class _SearchSettings implements SearchSettings {
       {@HiveField(0) SearchType type,
       @HiveField(1) UsedSubCondition usedSubCondition,
       @HiveField(2) bool useFba,
-      @HiveField(3) bool priorFba}) = _$_SearchSettings;
+      @HiveField(3) bool priorFba,
+      @HiveField(4) bool continuousCameraRead}) = _$_SearchSettings;
 
   @override
   @HiveField(0)
@@ -212,6 +237,9 @@ abstract class _SearchSettings implements SearchSettings {
   @override
   @HiveField(3)
   bool get priorFba;
+  @override // TODO: .g.dart でデフォルト値を設定している
+  @HiveField(4)
+  bool get continuousCameraRead;
   @override
   _$SearchSettingsCopyWith<_SearchSettings> get copyWith;
 }
