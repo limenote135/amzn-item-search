@@ -8,6 +8,7 @@ import 'package:amasearch/pages/search/search_page/search_settings.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/util/with_underline.dart';
+import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,18 +24,6 @@ class SearchPage extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 0,
         title: const _AppBarTitle(),
-        leading: AnimatedTheme(
-          data: ThemeData.light(),
-          child: IconButton(
-            padding: const EdgeInsets.all(0),
-            icon: const Icon(Icons.camera_alt),
-            tooltip: "バーコード読み取り",
-            onPressed: () {
-              unfocus();
-              Navigator.of(context).pushNamed(CameraPage.routeName);
-            },
-          ),
-        ),
         actions: [
           AnimatedTheme(
             data: ThemeData.light(),
@@ -49,6 +38,16 @@ class SearchPage extends StatelessWidget {
         ],
       ),
       body: const _Body(),
+      floatingActionButton: FloatingActionButton(
+        child: AnimatedTheme(
+          data: ThemeData.light(),
+          child: const Icon(Icons.camera_alt),
+        ),
+        onPressed: () {
+          unfocus();
+          Navigator.of(context).pushNamed(CameraPage.routeName);
+        },
+      ),
     );
   }
 }
@@ -133,15 +132,19 @@ class _Body extends HookWidget {
         Expanded(
           child: ListView.separated(
             separatorBuilder: (context, index) => const ThemeDivider(),
-            itemCount: items.length,
-            itemBuilder: (context, index) => ProviderScope(
-              overrides: [
-                currentItemFutureProvider.overrideWithValue(items[index]),
-              ],
-              child: index != items.length - 1
-                  ? const ItemTile()
-                  : const WithUnderLine(ItemTile()),
-            ),
+            itemCount: items.length + 1,
+            itemBuilder: (context, index) {
+              if (index == items.length) {
+                // FloatingActionButton 用のマージン
+                return floatingActionMargin;
+              }
+              return ProviderScope(
+                overrides: [
+                  currentItemFutureProvider.overrideWithValue(items[index]),
+                ],
+                child: const ItemTile(),
+              );
+            },
           ),
         ),
       ],
