@@ -51,6 +51,11 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
               context.read(itemListControllerProvider).addTsutaya(result);
               break;
           }
+
+          if (!settings.continuousCameraRead) {
+            Navigator.of(context).popUntil(ModalRoute.withName("/"));
+          }
+
           setState(() {
             _lastRead = result;
           });
@@ -179,6 +184,10 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     final size = window.physicalSize;
     final screenWidth = size.width / window.devicePixelRatio;
     final screenHeight = size.height / window.devicePixelRatio;
+    final continuousRead = context
+        .read(searchSettingsControllerProvider.state)
+        .continuousCameraRead;
+
     return Scaffold(
       key: _scaffoldKey,
       body: Stack(
@@ -193,20 +202,41 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
             ),
           ),
           SafeArea(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                const BackButton(
-                  color: Colors.white,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const BackButton(
+                      color: Colors.white,
+                    ),
+                    MaterialButton(
+                      onPressed: () {
+                        _toggleFlash();
+                        setState(() {}); // TODO:
+                      },
+                      child:
+                          Text("${_isFlashOpen() ? "Flash On" : "Flash Off"}"),
+                      textColor: Colors.white,
+                    ),
+                  ],
                 ),
-                MaterialButton(
-                  onPressed: () {
-                    _toggleFlash();
-                    setState(() {}); // TODO:
-                  },
-                  child: Text("${_isFlashOpen() ? "Flash On" : "Flash Off"}"),
-                  textColor: Colors.white,
-                ),
+                Row(
+                  children: [
+                    const Spacer(),
+                    MaterialButton(
+                      onPressed: () {
+                        setState(() {
+                          context
+                              .read(searchSettingsControllerProvider)
+                              .update(continuousCameraRead: !continuousRead);
+                        });
+                      },
+                      child: Text("${continuousRead ? "連続読取 On" : "連続読取 Off"}"),
+                      textColor: Colors.white,
+                    ),
+                  ],
+                )
               ],
             ),
           )

@@ -30,6 +30,7 @@ class SearchSettingsController extends StateNotifier<SearchSettings> {
     UsedSubCondition usedSubCondition,
     bool useFba,
     bool priorFba,
+    bool continuousCameraRead,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -37,6 +38,7 @@ class SearchSettingsController extends StateNotifier<SearchSettings> {
       usedSubCondition: usedSubCondition ?? state.usedSubCondition,
       useFba: useFba ?? state.useFba,
       priorFba: priorFba ?? state.priorFba,
+      continuousCameraRead: continuousCameraRead ?? state.continuousCameraRead,
     );
     box.put(searchSettingsKeyName, state);
   }

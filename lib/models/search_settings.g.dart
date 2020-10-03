@@ -21,13 +21,14 @@ class SearchSettingsAdapter extends TypeAdapter<_$_SearchSettings> {
       usedSubCondition: fields[1] as UsedSubCondition,
       useFba: fields[2] as bool,
       priorFba: fields[3] as bool,
+      continuousCameraRead: fields[4] as bool ?? true, // TODO: デフォルト値
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SearchSettings obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.type)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class SearchSettingsAdapter extends TypeAdapter<_$_SearchSettings> {
       ..writeByte(2)
       ..write(obj.useFba)
       ..writeByte(3)
-      ..write(obj.priorFba);
+      ..write(obj.priorFba)
+      ..writeByte(4)
+      ..write(obj.continuousCameraRead);
   }
 
   @override
