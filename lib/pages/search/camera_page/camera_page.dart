@@ -7,6 +7,7 @@ import 'package:amasearch/models/enums/search_type.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:vibration/vibration.dart';
 
 class CameraPage extends StatefulWidget {
   static const routeName = "/camera";
@@ -32,6 +33,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         _scaffoldKey.currentState.removeCurrentSnackBar();
 
         if (_lastRead != result) {
+          Vibration.vibrate(duration: 50, amplitude: 128);
           _scaffoldKey.currentState.showSnackBar(SnackBar(
             content: Text(result),
           ));
