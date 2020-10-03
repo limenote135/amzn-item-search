@@ -56,7 +56,7 @@ class SearchButtons extends HookWidget {
             RaisedButton(
               child: const Text("Keezon"),
               onPressed: () async {
-                final url = "https://keezon.net/item/index?ASIN=$asin/";
+                final url = "https://keezon.net/item/index?ASIN=$asin";
                 if (await canLaunch(url)) {
                   await launch(url, forceWebView: true, enableJavaScript: true);
                 } else {
