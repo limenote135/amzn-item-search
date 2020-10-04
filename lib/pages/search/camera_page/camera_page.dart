@@ -19,6 +19,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   ScannerController _scannerController;
   bool _isCameraGranted = false;
   var _lastRead = "";
+  var _lastReadTime = DateTime.now();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -30,10 +31,9 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       scannerResult: (result) {
         print("Read result: $result");
 
-        _scaffoldKey.currentState.removeCurrentSnackBar();
-
         if (_lastRead != result) {
           Vibration.vibrate(duration: 50, amplitude: 128);
+          _scaffoldKey.currentState.removeCurrentSnackBar();
           _scaffoldKey.currentState.showSnackBar(SnackBar(
             content: Text(result),
           ));
@@ -61,10 +61,15 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
           setState(() {
             _lastRead = result;
           });
-        } else {
+        } else if (DateTime.now().difference(_lastReadTime) >
+            const Duration(seconds: 1)) {
+          _scaffoldKey.currentState.removeCurrentSnackBar();
           _scaffoldKey.currentState.showSnackBar(SnackBar(
             content: Text("$result は読み込み済みです"),
           ));
+          setState(() {
+            _lastReadTime = DateTime.now();
+          });
         }
         _startCameraPreview();
       },
