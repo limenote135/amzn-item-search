@@ -9,6 +9,7 @@ import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/search_buttons.dart';
 import 'package:amasearch/widgets/text_line_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
 
@@ -59,13 +60,33 @@ class _Body extends HookWidget {
             ),
             title: Text(item.title),
           ),
-          TextListTile(
-            leading: const Text("JAN"),
-            main: Text(item.jan),
+          InkWell(
+            child: TextListTile(
+              leading: const Text("JAN"),
+              main: Text(item.jan),
+            ),
+            onLongPress: () {
+              Clipboard.setData(ClipboardData(text: item.jan)).then((_) {
+                Scaffold.of(context).removeCurrentSnackBar();
+                Scaffold.of(context).showSnackBar(const SnackBar(
+                  content: Text("JAN コードをコピーしました"),
+                ));
+              });
+            },
           ),
-          TextListTile(
-            leading: const Text("ASIN"),
-            main: Text(item.asin),
+          InkWell(
+            child: TextListTile(
+              leading: const Text("ASIN"),
+              main: Text(item.asin),
+            ),
+            onLongPress: () {
+              Clipboard.setData(ClipboardData(text: item.asin)).then((_) {
+                Scaffold.of(context).removeCurrentSnackBar();
+                Scaffold.of(context).showSnackBar(const SnackBar(
+                  content: Text("ASIN をコピーしました"),
+                ));
+              });
+            },
           ),
           TextListTile(
             leading: const Text("順位"),
