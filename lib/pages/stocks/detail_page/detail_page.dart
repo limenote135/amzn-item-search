@@ -4,6 +4,7 @@ import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/edit_page/edit_page.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/item_image.dart';
@@ -11,6 +12,7 @@ import 'package:amasearch/widgets/search_buttons.dart';
 import 'package:amasearch/widgets/text_line_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
 
@@ -94,6 +96,7 @@ class _Body extends HookWidget {
           ),
           title: Text(item.item.title),
         ),
+        const _ItemInfoTile(),
         const ThemeDivider(),
         TextListTile(
           leading: const Text("販売価格"),
@@ -189,5 +192,59 @@ class _Body extends HookWidget {
         : "$condition($subCond)";
     final fba = item.useFba ? "FBA 利用" : "自己発送";
     return "$condText $fba";
+  }
+}
+
+class _ItemInfoTile extends HookWidget {
+  const _ItemInfoTile({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final item = useProvider(currentStockItemProvider);
+    final smallSize = smallFontSize(context);
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("JAN コード", style: smallSize),
+              InkWell(
+                child: ListTile(title: Text(item.item.jan)),
+                onLongPress: () {
+                  Clipboard.setData(ClipboardData(text: item.item.jan))
+                      .then((_) {
+                    Scaffold.of(context).removeCurrentSnackBar();
+                    Scaffold.of(context).showSnackBar(const SnackBar(
+                      content: Text("JAN コードをコピーしました"),
+                    ));
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("ASIN", style: smallSize),
+              InkWell(
+                child: ListTile(title: Text(item.item.asin)),
+                onLongPress: () {
+                  Clipboard.setData(ClipboardData(text: item.item.asin))
+                      .then((_) {
+                    Scaffold.of(context).removeCurrentSnackBar();
+                    Scaffold.of(context).showSnackBar(const SnackBar(
+                      content: Text("ASIN をコピーしました"),
+                    ));
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
