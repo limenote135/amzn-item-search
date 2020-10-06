@@ -15,6 +15,8 @@ const stockItemTypeId = 20;
 
 const searchSettingsTypeId = 40;
 
+const generalSettingsTypeId = 50;
+
 const fulfillmentChannelTypeId = 100;
 const itemConditionTypeId = 101;
 const itemSubConditionTypeId = 102;
