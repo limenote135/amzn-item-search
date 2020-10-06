@@ -191,9 +191,9 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     final size = window.physicalSize;
     final screenWidth = size.width / window.devicePixelRatio;
     final screenHeight = size.height / window.devicePixelRatio;
-    final continuousRead = context
-        .read(searchSettingsControllerProvider.state)
-        .continuousCameraRead;
+    final settings = context.read(searchSettingsControllerProvider.state);
+    final continuousRead = settings.continuousCameraRead;
+    final type = settings.type;
 
     return Scaffold(
       key: _scaffoldKey,
@@ -243,6 +243,23 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       textColor: Colors.white,
                     ),
                   ],
+                ),
+                Row(
+                  children: [
+                    const Spacer(),
+                    MaterialButton(
+                      child: Text("タイプ: ${type.toDisplayString()}"),
+                      textColor: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          final next = _getNext(type);
+                          context.read(searchSettingsControllerProvider).update(
+                            type: next,
+                          );
+                        });
+                      },
+                    ),
+                  ],
                 )
               ],
             ),
@@ -250,5 +267,19 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         ],
       ),
     );
+  }
+
+  SearchType _getNext(SearchType current) {
+    switch (current) {
+      case SearchType.jan:
+        return SearchType.bookoff;
+      case SearchType.bookoff:
+        return SearchType.geo;
+      case SearchType.geo:
+        return SearchType.tsutaya;
+      case SearchType.tsutaya:
+        return SearchType.jan;
+    }
+    throw Exception("Unknown SearchType: ${current.toDisplayString()}");
   }
 }
