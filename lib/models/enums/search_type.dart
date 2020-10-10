@@ -13,6 +13,8 @@ enum SearchType {
   geo,
   @HiveField(3)
   tsutaya,
+  @HiveField(3)
+  freeWord,
 }
 
 extension SearchTypeExtension on SearchType {
@@ -26,6 +28,8 @@ extension SearchTypeExtension on SearchType {
         return "GEO";
       case SearchType.tsutaya:
         return "TSUTAYA";
+      case SearchType.freeWord:
+        return "フリーワード";
     }
     throw Exception("Unknown SearchType: $this");
   }

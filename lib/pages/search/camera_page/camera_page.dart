@@ -52,6 +52,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
             case SearchType.tsutaya:
               context.read(itemListControllerProvider).addTsutaya(result);
               break;
+            case SearchType.freeWord:
+              break;
           }
 
           if (!settings.continuousCameraRead) {
@@ -278,6 +280,9 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       case SearchType.geo:
         return SearchType.tsutaya;
       case SearchType.tsutaya:
+        return SearchType.jan;
+      case SearchType.freeWord:
+        // freeWord は無視する
         return SearchType.jan;
     }
     throw Exception("Unknown SearchType: ${current.toDisplayString()}");
