@@ -26,13 +26,18 @@ final bookoffItemFutureProvider =
   return ref.watch(itemFutureProvider(resp.first.jan).future);
 });
 
+const _bookoffCodeLength = 10;
+
 class BookoffRepository {
   BookoffRepository(this._read);
 
   final Reader _read;
   static const _baseURL = "http://www.bookoffonline.co.jp/bolapi/api/goods/";
 
-  Future<List<BookoffResponse>> get(String code) async {
+  Future<List<BookoffResponse>> get(String value) async {
+    final code = value.length > _bookoffCodeLength
+        ? value.substring(0, _bookoffCodeLength)
+        : value;
     try {
       final url = "$_baseURL$code";
       final result = await _read(dioProvider).get<String>(url);
