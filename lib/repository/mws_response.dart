@@ -60,6 +60,57 @@ class GetMatchingProductForIdResponse {
     return GetMatchingProductForIdResponse._(jan: jan, items: list);
   }
 
+  factory GetMatchingProductForIdResponse.fromListMatchingProducts(
+      String word, String raw) {
+    final doc = XmlDocument.parse(raw);
+    final products = doc.findAllElements("Product");
+    if (products.isEmpty) {
+      return GetMatchingProductForIdResponse._(jan: word, items: []);
+    }
+
+    final list = <AsinData>[];
+    for (final product in products) {
+      final title = product.findAllElements("ns2:Title").firstOrDefault()?.text;
+      final asin = product.findAllElements("ASIN").firstOrDefault()?.text;
+      final image = product.findAllElements("ns2:URL").firstOrDefault()?.text;
+      final quantity =
+          product.findAllElements("ns2:PackageQuantity").firstOrDefault()?.text;
+      final rankEl =
+          product.findAllElements("Rank").firstOrDefault()?.text ?? "0";
+
+      final listPrice = product
+              .findAllElements("ns2:ListPrice")
+              .firstOrDefault()
+              ?.findAllElements("ns2:Amount")
+              ?.firstOrDefault()
+              ?.text ??
+          "0";
+
+      final rank = int.tryParse(rankEl) ?? 0;
+
+      final price = int.tryParse(listPrice)?.floor() ?? 0;
+
+      // TODO: 確認
+      list.add(AsinData(
+        jan: " - ",
+        asin: asin ?? " - ",
+        title: title ?? " - ",
+        imageUrl: image ?? " - ",
+        rank: rank,
+        quantity: quantity ?? " - ",
+        listPrice: price,
+      ));
+    }
+
+    list.sort((a, b) {
+      if (a.rank == 0 || b.rank == 0) {
+        return b.rank - a.rank;
+      }
+      return a.rank - b.rank;
+    });
+    return GetMatchingProductForIdResponse._(jan: " - ", items: list);
+  }
+
   GetMatchingProductForIdResponse._({
     @required this.jan,
     @required this.items,
@@ -90,9 +141,10 @@ class GetLowestOfferListingsForASINResponse {
       final priceEl = landedPrice.single.findAllElements("Amount").single.text;
       final price = double.tryParse(priceEl)?.floor() ?? 0;
 
-      final shippingPrice = offer.findAllElements("Shipping");
+      final shippingPrice = offer.findAllElements("Shipping").firstOrDefault();
       final shipPriceEl =
-          shippingPrice.single.findAllElements("Amount").single.text;
+          shippingPrice?.findAllElements("Amount")?.firstOrDefault()?.text ??
+              "";
       final shipping = double.tryParse(shipPriceEl)?.floor() ?? 0;
 
       prices.add(PriceDetail(
