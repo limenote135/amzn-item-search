@@ -22,13 +22,19 @@ final geoItemFutureProvider =
   return ref.watch(itemFutureProvider(resp.jan).future);
 });
 
+const _geoCodeLength = 7;
+
 class GeoRepository {
   GeoRepository(this._read);
 
   final Reader _read;
   static const _baseURL = "https://bo.sedolist.info/sedoroid/geo/?CODE=";
 
-  Future<GeoResponse> get(String code) async {
+  Future<GeoResponse> get(String value) async {
+    final code = value.length > _geoCodeLength
+        ? value.substring(1, 1 + _geoCodeLength)
+        : value;
+
     final url = "$_baseURL$code";
     final result = await _read(dioProvider).get<String>(url);
 
