@@ -36,6 +36,11 @@ class ItemListController extends StateNotifier<
     state = [future, ...state];
   }
 
+  void addFreeWord(String word) {
+    final future = freeWordItemFutureProvider(word);
+    state = [future, ...state];
+  }
+
   void addBookoff(String code) {
     final future = bookoffItemFutureProvider(code);
     state = [future, ...state];

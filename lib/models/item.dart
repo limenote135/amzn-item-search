@@ -59,6 +59,42 @@ final itemFutureProvider =
   );
 });
 
+final freeWordItemFutureProvider =
+    FutureProvider.family<StateNotifierProvider<ItemController>, String>(
+        (ref, word) async {
+  final mws = ref.read(mwsRepositoryProvider);
+  final resp = await mws.listMatchingProducts(word);
+
+  if (resp.items.isEmpty) {
+    return itemControllerProvider(
+      Item(
+        searchDate: DateTime.now().toUtc().toIso8601String(),
+        jan: " - ", // TODO: word を指定するべき？
+        asins: [],
+      ),
+    );
+  }
+
+  final item = resp.items.first;
+  final asin = item.asin;
+
+  final prices = await ref.read(itemPricesFutureProvider(asin).future);
+
+  final ret = [
+    item.copyWith(
+      prices: prices,
+    ),
+    ...resp.items.skip(1),
+  ];
+  return itemControllerProvider(
+    Item(
+      searchDate: DateTime.now().toUtc().toIso8601String(),
+      jan: " - ", // TODO: word を指定するべき？
+      asins: ret,
+    ),
+  );
+});
+
 @freezed
 abstract class Item with _$Item {
   @HiveType(typeId: itemTypeId)

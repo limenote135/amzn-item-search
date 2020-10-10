@@ -82,6 +82,20 @@ class MwsRepository {
     return GetMyFeesEstimateResponse(resp, price);
   }
 
+  Future<GetMatchingProductForIdResponse> listMatchingProducts(
+    String query,
+  ) async {
+    final params = SplayTreeMap<String, String>();
+
+    params["MarketplaceId"] = _mwsMarketPlaceId;
+    params["Query"] = query;
+    const path = "/Products/2011-10-01";
+    final resp = await _doRequest(path, "ListMatchingProducts", params);
+
+    return GetMatchingProductForIdResponse.fromListMatchingProducts(
+        query, resp);
+  }
+
   Future<String> _doRequest(
       String path, String action, SplayTreeMap<String, String> params) async {
     params["Action"] = action;
