@@ -30,6 +30,11 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     int targetProfitValue,
     String skuFormat,
     List<CustomButtonDetail> customButtons,
+    bool enableReadAloud,
+    int patternIndex,
+    List<ReadAloudPattern> patterns,
+    double readAloudVolume,
+    double readAloudSpeed,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -38,6 +43,11 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       targetProfitValue: targetProfitValue ?? state.targetProfitValue,
       skuFormat: skuFormat ?? state.skuFormat,
       customButtons: customButtons ?? state.customButtons,
+      enableReadAloud: enableReadAloud ?? state.enableReadAloud,
+      patternIndex: patternIndex ?? state.patternIndex,
+      readAloudPatterns: patterns ?? state.readAloudPatterns,
+      readAloudVolume: readAloudVolume ?? state.readAloudVolume,
+      readAloudSpeed: readAloudSpeed ?? state.readAloudSpeed,
     );
     box.put(generalSettingsKeyName, state);
   }
