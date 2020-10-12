@@ -1,5 +1,6 @@
 import 'package:amasearch/controllers/item_controller.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/item_interceptor.dart';
 import 'package:amasearch/repository/common.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,7 +19,7 @@ final geoJanFutureProvider =
   if (resp.jan == "") {
     return code;
   }
-  return resp.jan;
+  return resp.code;
 });
 
 final geoItemFutureProvider =
@@ -26,7 +27,7 @@ final geoItemFutureProvider =
         (ref, code) async {
   final jan = await ref.read(geoJanFutureProvider(code).future);
 
-  return ref.watch(itemFutureProvider(jan).future);
+  return ref.watch(itemFutureProvider(InterceptorParams(code: jan)).future);
 });
 
 const _geoCodeLength = 7;

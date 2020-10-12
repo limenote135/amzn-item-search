@@ -71,7 +71,8 @@ class _TileImpl extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final jan = useProvider(_currentJanProvider);
-    final temp = useProvider(itemFutureProvider(jan));
+    // 読み上げる必要がないので、itemFutureProvider ではなく itemFutureProviderImpl にする
+    final temp = useProvider(itemFutureProviderImpl(jan));
     final color =
         isDark(context) ? Theme.of(context).backgroundColor : Colors.white;
     return temp.when(
