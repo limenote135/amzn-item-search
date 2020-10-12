@@ -1,4 +1,5 @@
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -46,11 +47,6 @@ class __PatternEditFormState extends State<_PatternEditForm> {
 
   final TextEditingController _textEditingController;
 
-  final _rankVariable = "{rank}";
-  final _titleVariable = "{title}";
-  final _usedProfitVariable = "{usedProfit}";
-  final _newProfitVariable = "{newProfit}";
-
   @override
   void initState() {
     super.initState();
@@ -91,13 +87,13 @@ class __PatternEditFormState extends State<_PatternEditForm> {
           children: [
             RaisedButton(
               onPressed: () {
-                _addText(_rankVariable);
+                _addText(rankVariable);
               },
               child: const Text("商品順位"),
             ),
             RaisedButton(
               onPressed: () {
-                _addText(_titleVariable);
+                _addText(titleVariable);
               },
               child: const Text("商品名"),
             ),
@@ -108,13 +104,13 @@ class __PatternEditFormState extends State<_PatternEditForm> {
           children: [
             RaisedButton(
               onPressed: () {
-                _addText(_newProfitVariable);
+                _addText(newProfitVariable);
               },
               child: const Text("新品粗利益"),
             ),
             RaisedButton(
               onPressed: () {
-                _addText(_usedProfitVariable);
+                _addText(usedProfitVariable);
               },
               child: const Text("中古粗利益"),
             ),
@@ -151,10 +147,10 @@ class __PatternEditFormState extends State<_PatternEditForm> {
 
   String _createPreviewText(String base) {
     return base
-        .replaceAll(_rankVariable, "12345")
-        .replaceAll(_titleVariable, "商品タイトル")
-        .replaceAll(_usedProfitVariable, "1234")
-        .replaceAll(_newProfitVariable, "5678");
+        .replaceAll(rankVariable, "12345")
+        .replaceAll(titleVariable, "商品タイトル")
+        .replaceAll(usedProfitVariable, "1234")
+        .replaceAll(newProfitVariable, "5678");
   }
 
   void _addText(String text) {
