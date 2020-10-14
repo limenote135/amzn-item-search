@@ -16,11 +16,11 @@ class MwsRepository {
   MwsRepository(this._read);
 
   static const _mwsHost = "mws.amazonservices.jp";
-  static const _mwsAccessKey = "AKIAIS47UKN65MUBMVCA";
-  static const _mwsAuthToken = "amzn.mws.e8a73282-02b0-00e7-8046-cbcab7309987";
+  static const _mwsAccessKey = "AKIAIYTBMRJMTHOLYIBQ";
+  static const _mwsAuthToken = "authToken";
   static const _mwsMarketPlaceId = "A1VC38T7YXB528";
-  static const _mwsSecretKey = "c2BAmSt6OMNQUpoI+Ua39IaDoBFB5p5P4kOdrQj4";
-  static const _mwsSellerId = "A34OSITVW4HVEN";
+  static const _mwsSecretKey = "7KoH64GCjlaGbws68LCnZloYgOo0PAT4liTpY5OK";
+  static const _mwsSellerId = "A35GS7WUCDVERP";
   static final Uuid _uuid = Uuid();
 
   final Reader _read;
