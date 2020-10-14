@@ -20,12 +20,8 @@ class SearchButtons extends HookWidget {
               child: const Text("Amazon"),
               onPressed: () async {
                 final url = "https://www.amazon.co.jp/gp/product/$asin/";
-                //TODO: canLaunch する必要があるか？
-                if (await canLaunch(url)) {
-                  await launch(url, forceWebView: true, enableJavaScript: true);
-                } else {
-                  throw Exception('Could not launch $url');
-                }
+                //TODO: 何故か Pixel 3a(Android 11) で canLaunch が false になるので一時的に削除
+                await launch(url, forceWebView: true, enableJavaScript: true);
               },
             ),
             RaisedButton(
@@ -86,11 +82,8 @@ class SearchButtons extends HookWidget {
               onPressed: () async {
                 final url =
                     "https://www.amazon.co.jp/gp/offer-listing/$asin/ref=olp_f_new?f_new=true";
-                if (await canLaunch(url)) {
-                  await launch(url, forceWebView: true, enableJavaScript: true);
-                } else {
-                  throw Exception('Could not launch $url');
-                }
+                //TODO: 何故か Pixel 3a(Android 11) で canLaunch が false になるので一時的に削除
+                await launch(url, forceWebView: true, enableJavaScript: true);
               },
             ),
             RaisedButton(
@@ -98,11 +91,8 @@ class SearchButtons extends HookWidget {
               onPressed: () async {
                 final url =
                     "https://www.amazon.co.jp/gp/offer-listing/$asin/ref=olp_f_used?f_usedAcceptable=true&f_usedGood=true&f_used=true&f_usedLikeNew=true&f_usedVeryGood=true";
-                if (await canLaunch(url)) {
-                  await launch(url, forceWebView: true, enableJavaScript: true);
-                } else {
-                  throw Exception('Could not launch $url');
-                }
+                //TODO: 何故か Pixel 3a(Android 11) で canLaunch が false になるので一時的に削除
+                await launch(url, forceWebView: true, enableJavaScript: true);
               },
             ),
           ],
