@@ -50,6 +50,13 @@ class GetMatchingProductForIdResponse {
         listPrice: price,
       ));
     }
+
+    list.sort((a, b) {
+      if (a.rank == 0 || b.rank == 0) {
+        return b.rank - a.rank;
+      }
+      return a.rank - b.rank;
+    });
     return GetMatchingProductForIdResponse._(jan: jan, items: list);
   }
 
