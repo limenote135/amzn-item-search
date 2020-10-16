@@ -21,6 +21,8 @@ class SearchTypeAdapter extends TypeAdapter<SearchType> {
         return SearchType.geo;
       case 3:
         return SearchType.tsutaya;
+      case 4:
+        return SearchType.freeWord;
       default:
         return null;
     }
@@ -40,6 +42,9 @@ class SearchTypeAdapter extends TypeAdapter<SearchType> {
         break;
       case SearchType.tsutaya:
         writer.writeByte(3);
+        break;
+      case SearchType.freeWord:
+        writer.writeByte(4);
         break;
     }
   }

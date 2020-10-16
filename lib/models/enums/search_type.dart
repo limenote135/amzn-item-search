@@ -13,7 +13,7 @@ enum SearchType {
   geo,
   @HiveField(3)
   tsutaya,
-  @HiveField(3)
+  @HiveField(4)
   freeWord,
 }
 
