@@ -14,7 +14,7 @@ class _$GeoResponseTearOff {
   const _$GeoResponseTearOff();
 
 // ignore: unused_element
-  _GeoResponse call({@required String code, String jan = ''}) {
+  _GeoResponse call({@required String code, String jan = ""}) {
     return _GeoResponse(
       code: code,
       jan: jan,
@@ -96,13 +96,13 @@ class __$GeoResponseCopyWithImpl<$Res> extends _$GeoResponseCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_GeoResponse implements _GeoResponse {
-  const _$_GeoResponse({@required this.code, this.jan = ''})
+  const _$_GeoResponse({@required this.code, this.jan = ""})
       : assert(code != null),
         assert(jan != null);
 
   @override
   final String code;
-  @JsonKey(defaultValue: '')
+  @JsonKey(defaultValue: "")
   @override
   final String jan;
 

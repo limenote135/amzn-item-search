@@ -21,8 +21,8 @@ class _$PurchaseSettingsTearOff {
       bool useFba = true,
       int amount = 1,
       PurchaseItemCondition condition = PurchaseItemCondition.newItem,
-      String sku = '',
-      String memo = ''}) {
+      String sku = "",
+      String memo = ""}) {
     return _PurchaseSettings(
       formKey: formKey,
       purchasePrice: purchasePrice,
@@ -175,8 +175,8 @@ class _$_PurchaseSettings implements _PurchaseSettings {
       this.useFba = true,
       this.amount = 1,
       this.condition = PurchaseItemCondition.newItem,
-      this.sku = '',
-      this.memo = ''})
+      this.sku = "",
+      this.memo = ""})
       : assert(formKey != null),
         assert(purchasePrice != null),
         assert(sellPrice != null),
@@ -203,10 +203,10 @@ class _$_PurchaseSettings implements _PurchaseSettings {
   @JsonKey(defaultValue: PurchaseItemCondition.newItem)
   @override
   final PurchaseItemCondition condition;
-  @JsonKey(defaultValue: '')
+  @JsonKey(defaultValue: "")
   @override
   final String sku;
-  @JsonKey(defaultValue: '')
+  @JsonKey(defaultValue: "")
   @override
   final String memo;
 

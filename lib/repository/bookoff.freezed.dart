@@ -18,10 +18,10 @@ class _$BookoffResponseTearOff {
 
 // ignore: unused_element
   _BookoffResponse call(
-      {@JsonKey(name: 'INSTORECODE') String instoreCode,
-      @JsonKey(name: 'GOODS_NAME1') String title,
-      @JsonKey(name: 'GOODS_NAME2') String subtitle,
-      @JsonKey(name: 'JAN') String jan}) {
+      {@JsonKey(name: "INSTORECODE") String instoreCode,
+      @JsonKey(name: "GOODS_NAME1") String title,
+      @JsonKey(name: "GOODS_NAME2") String subtitle,
+      @JsonKey(name: "JAN") String jan}) {
     return _BookoffResponse(
       instoreCode: instoreCode,
       title: title,
@@ -42,13 +42,13 @@ const $BookoffResponse = _$BookoffResponseTearOff();
 
 /// @nodoc
 mixin _$BookoffResponse {
-  @JsonKey(name: 'INSTORECODE')
+  @JsonKey(name: "INSTORECODE")
   String get instoreCode;
-  @JsonKey(name: 'GOODS_NAME1')
+  @JsonKey(name: "GOODS_NAME1")
   String get title;
-  @JsonKey(name: 'GOODS_NAME2')
+  @JsonKey(name: "GOODS_NAME2")
   String get subtitle;
-  @JsonKey(name: 'JAN')
+  @JsonKey(name: "JAN")
   String get jan;
 
   Map<String, dynamic> toJson();
@@ -61,10 +61,10 @@ abstract class $BookoffResponseCopyWith<$Res> {
           BookoffResponse value, $Res Function(BookoffResponse) then) =
       _$BookoffResponseCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'INSTORECODE') String instoreCode,
-      @JsonKey(name: 'GOODS_NAME1') String title,
-      @JsonKey(name: 'GOODS_NAME2') String subtitle,
-      @JsonKey(name: 'JAN') String jan});
+      {@JsonKey(name: "INSTORECODE") String instoreCode,
+      @JsonKey(name: "GOODS_NAME1") String title,
+      @JsonKey(name: "GOODS_NAME2") String subtitle,
+      @JsonKey(name: "JAN") String jan});
 }
 
 /// @nodoc
@@ -101,10 +101,10 @@ abstract class _$BookoffResponseCopyWith<$Res>
       __$BookoffResponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'INSTORECODE') String instoreCode,
-      @JsonKey(name: 'GOODS_NAME1') String title,
-      @JsonKey(name: 'GOODS_NAME2') String subtitle,
-      @JsonKey(name: 'JAN') String jan});
+      {@JsonKey(name: "INSTORECODE") String instoreCode,
+      @JsonKey(name: "GOODS_NAME1") String title,
+      @JsonKey(name: "GOODS_NAME2") String subtitle,
+      @JsonKey(name: "JAN") String jan});
 }
 
 /// @nodoc
@@ -140,25 +140,25 @@ class __$BookoffResponseCopyWithImpl<$Res>
 /// @nodoc
 class _$_BookoffResponse implements _BookoffResponse {
   const _$_BookoffResponse(
-      {@JsonKey(name: 'INSTORECODE') this.instoreCode,
-      @JsonKey(name: 'GOODS_NAME1') this.title,
-      @JsonKey(name: 'GOODS_NAME2') this.subtitle,
-      @JsonKey(name: 'JAN') this.jan});
+      {@JsonKey(name: "INSTORECODE") this.instoreCode,
+      @JsonKey(name: "GOODS_NAME1") this.title,
+      @JsonKey(name: "GOODS_NAME2") this.subtitle,
+      @JsonKey(name: "JAN") this.jan});
 
   factory _$_BookoffResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_BookoffResponseFromJson(json);
 
   @override
-  @JsonKey(name: 'INSTORECODE')
+  @JsonKey(name: "INSTORECODE")
   final String instoreCode;
   @override
-  @JsonKey(name: 'GOODS_NAME1')
+  @JsonKey(name: "GOODS_NAME1")
   final String title;
   @override
-  @JsonKey(name: 'GOODS_NAME2')
+  @JsonKey(name: "GOODS_NAME2")
   final String subtitle;
   @override
-  @JsonKey(name: 'JAN')
+  @JsonKey(name: "JAN")
   final String jan;
 
   @override
@@ -202,25 +202,25 @@ class _$_BookoffResponse implements _BookoffResponse {
 
 abstract class _BookoffResponse implements BookoffResponse {
   const factory _BookoffResponse(
-      {@JsonKey(name: 'INSTORECODE') String instoreCode,
-      @JsonKey(name: 'GOODS_NAME1') String title,
-      @JsonKey(name: 'GOODS_NAME2') String subtitle,
-      @JsonKey(name: 'JAN') String jan}) = _$_BookoffResponse;
+      {@JsonKey(name: "INSTORECODE") String instoreCode,
+      @JsonKey(name: "GOODS_NAME1") String title,
+      @JsonKey(name: "GOODS_NAME2") String subtitle,
+      @JsonKey(name: "JAN") String jan}) = _$_BookoffResponse;
 
   factory _BookoffResponse.fromJson(Map<String, dynamic> json) =
       _$_BookoffResponse.fromJson;
 
   @override
-  @JsonKey(name: 'INSTORECODE')
+  @JsonKey(name: "INSTORECODE")
   String get instoreCode;
   @override
-  @JsonKey(name: 'GOODS_NAME1')
+  @JsonKey(name: "GOODS_NAME1")
   String get title;
   @override
-  @JsonKey(name: 'GOODS_NAME2')
+  @JsonKey(name: "GOODS_NAME2")
   String get subtitle;
   @override
-  @JsonKey(name: 'JAN')
+  @JsonKey(name: "JAN")
   String get jan;
   @override
   _$BookoffResponseCopyWith<_BookoffResponse> get copyWith;
