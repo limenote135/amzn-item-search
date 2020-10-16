@@ -88,7 +88,7 @@ class MwsRepository {
     final params = SplayTreeMap<String, String>();
 
     params["MarketplaceId"] = _mwsMarketPlaceId;
-    params["Query"] = query;
+    params["Query"] = Uri.encodeQueryComponent(query);
     const path = "/Products/2011-10-01";
     final resp = await _doRequest(path, "ListMatchingProducts", params);
 
