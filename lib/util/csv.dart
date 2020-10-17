@@ -5,6 +5,7 @@ import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:csv/csv.dart';
+import 'package:euc/jis.dart';
 import 'package:path_provider/path_provider.dart';
 
 class StockItemCsv {
@@ -44,7 +45,8 @@ class StockItemCsv {
         ]
     ];
     final csvData = const ListToCsvConverter().convert(data);
-    file.writeAsStringSync(csvData);
+    final converted = ShiftJIS().encode(csvData);
+    file.writeAsBytesSync(converted);
     return file;
   }
 
