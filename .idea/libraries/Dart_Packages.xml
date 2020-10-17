@@ -208,7 +208,7 @@
         <entry key="extended_image">
           <value>
             <list>
-              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/extended_image-1.2.0/lib" />
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/extended_image-1.3.0/lib" />
             </list>
           </value>
         </entry>
@@ -243,7 +243,7 @@
         <entry key="firebase">
           <value>
             <list>
-              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase-7.3.1/lib" />
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase-7.3.2/lib" />
             </list>
           </value>
         </entry>
@@ -544,7 +544,7 @@
         <entry key="path_provider">
           <value>
             <list>
-              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/path_provider-1.6.18/lib" />
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/path_provider-1.6.21/lib" />
             </list>
           </value>
         </entry>
@@ -684,7 +684,7 @@
         <entry key="share">
           <value>
             <list>
-              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/share-0.6.5+2/lib" />
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/share-0.6.5+3/lib" />
             </list>
           </value>
         </entry>
@@ -796,7 +796,7 @@
         <entry key="url_launcher">
           <value>
             <list>
-              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/url_launcher-5.7.2/lib" />
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/url_launcher-5.7.5/lib" />
             </list>
           </value>
         </entry>
@@ -937,12 +937,12 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/dartx-0.5.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/dio-3.0.10/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/euc-1.0.5+7/lib" />
-      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/extended_image-1.2.0/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/extended_image-1.3.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/extended_image_library-0.3.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/fake_async-1.2.0-nullsafety.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/ffi-0.1.3/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/file-5.2.1/lib" />
-      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase-7.3.1/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase-7.3.2/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_analytics-6.0.2/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_analytics_platform_interface-1.0.3/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_analytics_web-0.1.1/lib" />
@@ -981,7 +981,7 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/node_io-1.1.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/package_config-1.9.3/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/path-1.8.0-nullsafety.1/lib" />
-      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/path_provider-1.6.18/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/path_provider-1.6.21/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+4/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/path_provider_platform_interface-1.0.3/lib" />
@@ -1001,7 +1001,7 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/qr_flutter-3.2.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/quiver-2.1.3/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/riverpod-0.11.2/lib" />
-      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/share-0.6.5+2/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/share-0.6.5+3/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/shelf-0.7.9/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/shelf_web_socket-0.2.3/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/source_gen-0.9.7+1/lib" />
@@ -1016,7 +1016,7 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/time-1.3.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/timing-0.1.1+2/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/typed_data-1.3.0-nullsafety.3/lib" />
-      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/url_launcher-5.7.2/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/url_launcher-5.7.5/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/url_launcher_linux-0.0.1+1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/url_launcher_macos-0.0.1+8/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/url_launcher_platform_interface-1.0.8/lib" />
