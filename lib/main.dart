@@ -15,6 +15,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -27,6 +28,30 @@ const _kTestingCrashlytics = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Future.wait([
+    initStartupOption(),
+    initFirebase(),
+    initHive(),
+  ]);
+
+  // TODO:
+  Intl.defaultLocale = 'ja_JP';
+
+  runZonedGuarded(() {
+    runApp(ProviderScope(child: MyApp()));
+  }, (error, stackTrace) {
+    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+  });
+}
+
+Future<void> initStartupOption() async {
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp, //縦固定
+  ]);
+}
+
+Future<void> initFirebase() async {
   await Firebase.initializeApp();
 
   if (_kTestingCrashlytics) {
@@ -43,7 +68,9 @@ Future<void> main() async {
     // Forward to original handler.
     originalOnError(errorDetails);
   };
+}
 
+Future<void> initHive() async {
   await Hive.initFlutter();
   Hive
     ..registerAdapter(ItemAdapter())
@@ -66,15 +93,6 @@ Future<void> main() async {
     Hive.openBox<StockItem>(stockItemBoxName),
     Hive.openBox<dynamic>(settingsBoxName),
   ]);
-
-  // TODO:
-  Intl.defaultLocale = 'ja_JP';
-
-  runZonedGuarded(() {
-    runApp(ProviderScope(child: MyApp()));
-  }, (error, stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
-  });
 }
 
 Future<void> deleteBoxes() async {
