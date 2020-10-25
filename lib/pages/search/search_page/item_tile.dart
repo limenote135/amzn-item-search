@@ -42,15 +42,15 @@ class ItemTile extends HookWidget {
           overrides: [
             currentItemControllerProvider.overrideWithValue(value),
           ],
-          child: const SlidableTile(child: _ItemTileImpl()),
+          child: const SlidableTile(child: ItemTileImpl()),
         );
       },
     );
   }
 }
 
-class _ItemTileImpl extends HookWidget {
-  const _ItemTileImpl({Key key}) : super(key: key);
+class ItemTileImpl extends HookWidget {
+  const ItemTileImpl({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
