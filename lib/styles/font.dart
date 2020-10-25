@@ -11,3 +11,6 @@ TextStyle smallFontSize(BuildContext context) =>
 
 TextStyle captionSize(BuildContext context) =>
     Theme.of(context).textTheme.caption;
+
+TextStyle captionSizeBlackText(BuildContext context) =>
+    Theme.of(context).textTheme.caption.apply(color: Colors.black);
