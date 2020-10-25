@@ -3,6 +3,7 @@ import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
+import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/search_page/item_tile.dart';
 import 'package:amasearch/pages/search/search_page/search_settings.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
@@ -43,6 +44,7 @@ class SearchPage extends StatelessWidget {
           data: ThemeData.light(),
           child: const Icon(Icons.camera_alt),
         ),
+        heroTag: onStartCameraHeroTag,
         onPressed: () {
           unfocus();
           Navigator.of(context).pushNamed(CameraPage.routeName);
