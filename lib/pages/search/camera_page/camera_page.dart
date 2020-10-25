@@ -9,6 +9,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vibration/vibration.dart';
 
+import 'item_tile.dart';
+
 class CameraPage extends StatefulWidget {
   static const routeName = "/camera";
   @override
@@ -256,13 +258,21 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                         setState(() {
                           final next = _getNext(type);
                           context.read(searchSettingsControllerProvider).update(
-                            type: next,
-                          );
+                                type: next,
+                              );
                         });
                       },
                     ),
                   ],
-                )
+                ),
+                const Spacer(),
+                ProviderScope(
+                  overrides: [
+                    currentJanCodeProvider.overrideWithValue(_lastRead),
+                  ],
+                  child: const ItemTile(),
+                ),
+                const SizedBox(height: 50),
               ],
             ),
           )
