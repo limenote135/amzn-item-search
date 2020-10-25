@@ -37,7 +37,7 @@ class GetMatchingProductForIdResponse {
 
       final rank = int.tryParse(rankEl) ?? 0;
 
-      final price = int.tryParse(listPrice)?.floor() ?? 0;
+      final price = double.tryParse(listPrice)?.floor() ?? 0;
 
       // TODO: 確認
       list.add(AsinData(
