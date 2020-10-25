@@ -1,6 +1,8 @@
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
+import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/pages/search/common/util.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
@@ -59,6 +61,7 @@ class _PriceAndProfit extends HookWidget {
           ]),
           style: smallSize,
         ),
+        Text("状態: ${_conditionText(detail)}", style: smallSize),
         Text.rich(
           TextSpan(text: "粗利益: ", children: [
             TextSpan(
@@ -75,5 +78,12 @@ class _PriceAndProfit extends HookWidget {
         ),
       ],
     );
+  }
+
+  String _conditionText(PriceDetail detail) {
+    if (detail.price == 0) {
+      return " - ";
+    }
+    return detail.subCondition.toDisplayShortString();
   }
 }
