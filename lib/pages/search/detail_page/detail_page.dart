@@ -55,7 +55,8 @@ class DetailPage extends HookWidget {
             ),
             heroTag: onStartCameraHeroTag,
             onPressed: () {
-              Navigator.of(context).popAndPushNamed(CameraPage.routeName);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  CameraPage.routeName, ModalRoute.withName("/"));
             },
           ),
         ],
