@@ -1,7 +1,7 @@
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
-import 'package:amasearch/models/enums/used_sub_condition.dart';
+import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/common/util.dart';
 import 'package:amasearch/util/formatter.dart';
@@ -39,7 +39,7 @@ class PriceDetailTile extends HookWidget {
           TextLine(
             leading: Text(_createTitle(
               type: type,
-              subCond: setting.usedSubCondition, //TODO:表示している商品の状態を出すべき？
+              subCond: detail.subCondition, //TODO:表示している商品の状態を出すべき？
               channel: detail.channel,
             )),
             main: Text("${numberFormatter.format(detail.price)} 円"),
@@ -87,14 +87,14 @@ class PriceDetailTile extends HookWidget {
 
   String _createTitle({
     @required ItemCondition type,
-    @required UsedSubCondition subCond,
+    @required ItemSubCondition subCond,
     @required FulfillmentChannel channel,
   }) {
     final isFba = channel == FulfillmentChannel.amazon;
     if (type == ItemCondition.newItem) {
       return "新品最安値 ${isFba ? "(FBA)" : ""}";
     } else {
-      return "中古最安値 (${subCond.toDisplayString()}${isFba ? " FBA" : ""})";
+      return "中古最安値 (${subCond.toDisplayShortString()}${isFba ? " FBA" : ""})";
     }
   }
 }
