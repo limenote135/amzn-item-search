@@ -32,27 +32,27 @@ class ItemListController extends StateNotifier<
   }
 
   void add(String jan) {
-    final future = itemFutureProvider(jan);
+    final future = itemFutureProvider(jan.trim());
     state = [future, ...state];
   }
 
   void addFreeWord(String word) {
-    final future = freeWordItemFutureProvider(word);
+    final future = freeWordItemFutureProvider(word.trim());
     state = [future, ...state];
   }
 
   void addBookoff(String code) {
-    final future = bookoffItemFutureProvider(code);
+    final future = bookoffItemFutureProvider(code.trim());
     state = [future, ...state];
   }
 
   void addGeo(String code) {
-    final future = geoItemFutureProvider(code);
+    final future = geoItemFutureProvider(code.trim());
     state = [future, ...state];
   }
 
   void addTsutaya(String code) {
-    final future = tsutayaItemFutureProvider(code);
+    final future = tsutayaItemFutureProvider(code.trim());
     state = [future, ...state];
   }
 }
