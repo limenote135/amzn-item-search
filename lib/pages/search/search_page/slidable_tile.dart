@@ -1,4 +1,5 @@
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/pages/search/common/item_delete_handler.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -13,7 +14,8 @@ class SlidableTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final provider = useProvider(currentItemControllerProvider);
-    final item = useProvider(provider.state.select((e) => e.asins.first));
+    final firstItem = useProvider(provider.state.select((e) => e.asins.first));
+    final items = useProvider(provider.state);
 
     return Slidable(
       actionPane: const SlidableDrawerActionPane(),
@@ -29,11 +31,25 @@ class SlidableTile extends HookWidget {
               MaterialPageRoute<void>(
                 builder: (context) => ProviderScope(
                   overrides: [
-                    currentAsinDataProvider.overrideWithValue(item),
+                    currentAsinDataProvider.overrideWithValue(firstItem),
                   ],
                   child: const PurchasePage(),
                 ),
               ),
+            );
+          },
+        ),
+      ],
+      secondaryActions: [
+        IconSlideAction(
+          caption: "削除",
+          color: Colors.red,
+          icon: Icons.delete,
+          onTap: () async {
+            await itemDeleteHandler(
+              context: context,
+              items: [items],
+              content: "在庫リストからアイテムを削除します",
             );
           },
         ),

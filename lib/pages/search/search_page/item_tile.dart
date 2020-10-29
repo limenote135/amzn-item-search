@@ -2,6 +2,7 @@ import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
+import 'package:amasearch/pages/search/search_page/slidable_delete_tile.dart';
 import 'package:amasearch/pages/search/search_page/slidable_tile.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +32,17 @@ class ItemTile extends HookWidget {
       data: (value) {
         final data = useProvider(value.state);
         if (data.asins.isEmpty) {
-          return Center(
-            child: SizedBox(
-              height: 30,
-              child: Text("${data.jan}: 見つかりませんでした"),
+          return ProviderScope(
+            overrides: [
+              currentItemControllerProvider.overrideWithValue(value),
+            ],
+            child: SlidableDeleteTile(
+              child: Center(
+                child: SizedBox(
+                  height: 30,
+                  child: Text("${data.jan}: 見つかりませんでした"),
+                ),
+              ),
             ),
           );
         }

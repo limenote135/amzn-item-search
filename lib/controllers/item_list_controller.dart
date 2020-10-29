@@ -31,6 +31,28 @@ class ItemListController extends StateNotifier<
         .toList();
   }
 
+  void removeAll() {
+    final box = _read(searchItemBoxProvider);
+    state = [];
+    box.clear();
+  }
+
+  void remove(List<Item> targets) {
+    if (targets.isEmpty) {
+      return;
+    }
+    final box = _read(searchItemBoxProvider);
+    final keys = targets.map((e) => e.searchDate);
+    box.deleteAll(keys);
+
+    state = box.values
+        .map((e) =>
+            FutureProvider((_) => Future.value(itemControllerProvider(e))))
+        .toList()
+        .reversed
+        .toList();
+  }
+
   void add(String jan) {
     final future = itemFutureProvider(jan.trim());
     state = [future, ...state];
