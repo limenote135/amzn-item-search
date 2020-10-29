@@ -4,6 +4,7 @@ import 'package:amasearch/pages/search/search_settings_page/search_settings_page
 import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -37,7 +38,10 @@ class MyApp extends StatelessWidget {
           color: Colors.black,
         ),
       ),
-      home: const HomePage(),
+      home: Stack(children: [
+        const HomePage(),
+        Updater(),
+      ]),
       routes: {
         SearchSettingsPage.routeName: (context) => const SearchSettingsPage(),
         CameraPage.routeName: (context) => CameraPage(),
