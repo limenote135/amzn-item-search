@@ -1,7 +1,9 @@
+import 'package:amasearch/controllers/item_list_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/search_settings.dart';
+import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -35,35 +37,59 @@ class _Body extends HookWidget {
         _currentSettingsProvider.overrideWithValue(settings),
       ],
       child: ListView(
-        children: ListTile.divideTiles(
-          context: context,
-          tiles: [
-            const _CodeType(),
-            const _UsedSubCondition(),
-            SwitchListTile(
-              value: settings.useFba,
-              title: const Text("FBA 利用"),
-              onChanged: (value) {
-                if (value != settings.useFba) {
-                  context
-                      .read(searchSettingsControllerProvider)
-                      .update(useFba: value);
-                }
-              },
-            ),
-            SwitchListTile(
-              value: settings.priorFba,
-              title: const Text("FBA 出品を優先表示"),
-              onChanged: (value) {
-                if (value != settings.priorFba) {
-                  context
-                      .read(searchSettingsControllerProvider)
-                      .update(priorFba: value);
-                }
-              },
-            ),
-          ],
-        ).toList(),
+        children: [
+          const _CodeType(),
+          const _UsedSubCondition(),
+          SwitchListTile(
+            value: settings.useFba,
+            title: const Text("FBA 利用"),
+            onChanged: (value) {
+              if (value != settings.useFba) {
+                context
+                    .read(searchSettingsControllerProvider)
+                    .update(useFba: value);
+              }
+            },
+          ),
+          SwitchListTile(
+            value: settings.priorFba,
+            title: const Text("FBA 出品を優先表示"),
+            onChanged: (value) {
+              if (value != settings.priorFba) {
+                context
+                    .read(searchSettingsControllerProvider)
+                    .update(priorFba: value);
+              }
+            },
+          ),
+          const ThemeDivider(),
+          ListTile(
+            title: const Text("検索履歴をすべて削除"),
+            onTap: () async {
+              final ok = await showDialog<bool>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text("検索履歴の削除"),
+                  content: const Text("検索履歴からすべてのアイテムを削除します"),
+                  actions: [
+                    FlatButton(
+                      child: const Text("Cancel"),
+                      onPressed: () => Navigator.pop(context, false),
+                    ),
+                    FlatButton(
+                      child: const Text("OK"),
+                      onPressed: () => Navigator.pop(context, true),
+                    ),
+                  ],
+                ),
+              );
+              if (ok) {
+                context.read(itemListControllerProvider).removeAll();
+              }
+            },
+          ),
+          const ThemeDivider(),
+        ],
       ),
     );
   }
