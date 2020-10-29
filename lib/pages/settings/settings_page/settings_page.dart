@@ -30,7 +30,8 @@ class _Body extends StatelessWidget {
             showAboutDialog(
               context: context,
               applicationName: packageInfo.appName,
-              applicationVersion: packageInfo.version,
+              applicationVersion:
+                  "${packageInfo.version} (build ${packageInfo.buildNumber})",
               applicationLegalese: "Copyright けんず",
             );
           },
