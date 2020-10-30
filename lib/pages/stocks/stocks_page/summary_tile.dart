@@ -1,0 +1,39 @@
+import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/util/formatter.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final dateItemsProvider = ScopedProvider<List<StockItem>>(null);
+
+class SummaryTile extends HookWidget {
+  const SummaryTile({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final items = useProvider(dateItemsProvider);
+    final day = DateTime.parse(items.first.purchaseDate).toLocal().dayFormat();
+
+    var itemCount = 0;
+    var profitValue = 0;
+    for (final item in items) {
+      itemCount += item.amount;
+      profitValue += item.profitPerItem * item.amount;
+    }
+    return Column(
+      children: [
+        Text(day),
+        Row(
+          children: [
+            Expanded(
+              child: Text("商品数: $itemCount 個", textAlign: TextAlign.center),
+            ),
+            Expanded(
+              child: Text("粗利益: $profitValue 円", textAlign: TextAlign.center),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+}
