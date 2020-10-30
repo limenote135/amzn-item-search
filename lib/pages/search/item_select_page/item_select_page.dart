@@ -1,5 +1,8 @@
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/pages/search/camera_page/camera_page.dart';
+import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/item_select_page/item_tile.dart';
+import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -15,6 +18,17 @@ class ItemSelectPage extends StatelessWidget {
         title: const Text("商品選択"),
       ),
       body: const _Body(),
+      floatingActionButton: FloatingActionButton(
+        child: AnimatedTheme(
+          data: ThemeData.light(),
+          child: const Icon(Icons.camera_alt),
+        ),
+        heroTag: onStartCameraHeroTag,
+        onPressed: () {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              CameraPage.routeName, ModalRoute.withName("/"));
+        },
+      ),
     );
   }
 }
@@ -40,6 +54,7 @@ class _Body extends HookWidget {
           ],
         ).toList(),
         const ThemeDivider(),
+        floatingActionMargin,
       ],
     );
   }
