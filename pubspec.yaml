@@ -44,11 +44,11 @@ dependencies:
   hive_flutter: ^0.3.1
   path_provider: ^1.6.22
   csv: ^4.0.3
-  share: ^0.6.5+3
-  firebase_core: ^0.5.0+1
-  firebase_analytics: ^6.0.2
-  firebase_crashlytics: ^0.2.1+1
-  firebase_remote_config: ^0.4.0+2
+  share: ^0.6.5+4
+  firebase_core: ^0.5.1
+  firebase_analytics: ^6.1.0
+  firebase_crashlytics: ^0.2.2
+  firebase_remote_config: ^0.4.1
   vibration: ^1.7.1
   euc: ^1.0.5+7
   flutter_web_browser: ^0.13.0
@@ -64,7 +64,7 @@ dev_dependencies:
     sdk: flutter
   pedantic:
   pedantic_mono: ^1.10.0+3
-  build_runner: ^1.10.3
+  build_runner: ^1.10.4
   freezed: ^0.12.2
   hive_generator: ^0.8.1
 
