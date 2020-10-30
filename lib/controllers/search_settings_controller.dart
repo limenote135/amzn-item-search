@@ -19,10 +19,11 @@ class SearchSettingsController extends StateNotifier<SearchSettings> {
   void _loadSettings() {
     final box = _read(settingsBoxProvider);
     final settings = box.get(searchSettingsKeyName) as SearchSettings;
-    if (settings == null) {
-      return;
+    if (settings != null) {
+      state = settings;
     }
-    state = settings;
+    // デフォルト値が設定されている可能性があるので、一度保存する
+    box.put(searchSettingsKeyName, state);
   }
 
   void update({
