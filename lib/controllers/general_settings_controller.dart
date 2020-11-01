@@ -23,10 +23,17 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     box.put(generalSettingsKeyName, state);
   }
 
-  void update({bool isDarkMode}) {
+  void update({
+    bool isDarkMode,
+    // 目標利益率設定
+    bool enableTargetProfit,
+    int targetProfitValue,
+  }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
       isDarkMode: isDarkMode ?? state.isDarkMode,
+      enableTargetProfit: enableTargetProfit ?? state.enableTargetProfit,
+      targetProfitValue: targetProfitValue ?? state.targetProfitValue,
     );
     box.put(generalSettingsKeyName, state);
   }
