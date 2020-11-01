@@ -1,6 +1,7 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -40,6 +41,21 @@ class _Body extends HookWidget {
             context
                 .read(analyticsControllerProvider)
                 .setUserProp(darkModePropName, value.toString());
+          },
+        ),
+        ListTile(
+          title: const Text("目標利益率設定"),
+          subtitle: settings.enableTargetProfit == false
+              ? const Text("無効")
+              : Text("${settings.targetProfitValue} %"),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  settings:
+                      const RouteSettings(name: TargetProfitPage.routeName),
+                  builder: (context) => const TargetProfitPage(),
+                ));
           },
         ),
         const ThemeDivider(),

@@ -1,6 +1,8 @@
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
+import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/pages/search/common/util.dart';
@@ -36,6 +38,11 @@ class _PriceAndProfit extends HookWidget {
     final item = useProvider(currentAsinDataProvider);
     final settings = useProvider(searchSettingsControllerProvider.state);
 
+    final showTargetPrice = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.enableTargetProfit));
+    final targetPriceRate = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.targetProfitValue));
+
     final detail = getPriceDetail(
       item: item,
       condition: condition,
@@ -43,6 +50,7 @@ class _PriceAndProfit extends HookWidget {
       priorFba: settings.priorFba,
     );
     final smallSize = smallFontSize(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -76,6 +84,22 @@ class _PriceAndProfit extends HookWidget {
           ]),
           style: smallSize,
         ),
+        if (showTargetPrice)
+          Text.rich(
+            TextSpan(text: "目標額: ", children: [
+              TextSpan(
+                text: numberFormatter.format(_calcTargetPrice(
+                  detail.price,
+                  item.prices.feeInfo,
+                  targetPriceRate,
+                  settings.useFba,
+                )),
+                style: strongTextStyle,
+              ),
+              const TextSpan(text: "円"),
+            ]),
+            style: smallSize,
+          ),
       ],
     );
   }
@@ -85,5 +109,13 @@ class _PriceAndProfit extends HookWidget {
       return " - ";
     }
     return detail.subCondition.toDisplayShortString();
+  }
+
+  int _calcTargetPrice(
+      int sellPrice, FeeInfo feeInfo, int targetRate, bool useFba) {
+    final price = sellPrice * (1 - feeInfo.referralFeeRate - targetRate / 100);
+    final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
+
+    return (price - feeInfo.variableClosingFee - fbaFee).round();
   }
 }

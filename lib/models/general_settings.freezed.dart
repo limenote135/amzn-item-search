@@ -14,9 +14,14 @@ class _$GeneralSettingsTearOff {
   const _$GeneralSettingsTearOff();
 
 // ignore: unused_element
-  _GeneralSettings call({@HiveField(0) bool isDarkMode = false}) {
+  _GeneralSettings call(
+      {@HiveField(0) bool isDarkMode = false,
+      @HiveField(1) bool enableTargetProfit = false,
+      @HiveField(2) int targetProfitValue = 10}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
+      enableTargetProfit: enableTargetProfit,
+      targetProfitValue: targetProfitValue,
     );
   }
 }
@@ -28,7 +33,11 @@ const $GeneralSettings = _$GeneralSettingsTearOff();
 /// @nodoc
 mixin _$GeneralSettings {
   @HiveField(0)
-  bool get isDarkMode;
+  bool get isDarkMode; // 目標利益率設定
+  @HiveField(1)
+  bool get enableTargetProfit;
+  @HiveField(2)
+  int get targetProfitValue;
 
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith;
 }
@@ -38,7 +47,10 @@ abstract class $GeneralSettingsCopyWith<$Res> {
   factory $GeneralSettingsCopyWith(
           GeneralSettings value, $Res Function(GeneralSettings) then) =
       _$GeneralSettingsCopyWithImpl<$Res>;
-  $Res call({@HiveField(0) bool isDarkMode});
+  $Res call(
+      {@HiveField(0) bool isDarkMode,
+      @HiveField(1) bool enableTargetProfit,
+      @HiveField(2) int targetProfitValue});
 }
 
 /// @nodoc
@@ -53,10 +65,18 @@ class _$GeneralSettingsCopyWithImpl<$Res>
   @override
   $Res call({
     Object isDarkMode = freezed,
+    Object enableTargetProfit = freezed,
+    Object targetProfitValue = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode:
           isDarkMode == freezed ? _value.isDarkMode : isDarkMode as bool,
+      enableTargetProfit: enableTargetProfit == freezed
+          ? _value.enableTargetProfit
+          : enableTargetProfit as bool,
+      targetProfitValue: targetProfitValue == freezed
+          ? _value.targetProfitValue
+          : targetProfitValue as int,
     ));
   }
 }
@@ -68,7 +88,10 @@ abstract class _$GeneralSettingsCopyWith<$Res>
           _GeneralSettings value, $Res Function(_GeneralSettings) then) =
       __$GeneralSettingsCopyWithImpl<$Res>;
   @override
-  $Res call({@HiveField(0) bool isDarkMode});
+  $Res call(
+      {@HiveField(0) bool isDarkMode,
+      @HiveField(1) bool enableTargetProfit,
+      @HiveField(2) int targetProfitValue});
 }
 
 /// @nodoc
@@ -85,10 +108,18 @@ class __$GeneralSettingsCopyWithImpl<$Res>
   @override
   $Res call({
     Object isDarkMode = freezed,
+    Object enableTargetProfit = freezed,
+    Object targetProfitValue = freezed,
   }) {
     return _then(_GeneralSettings(
       isDarkMode:
           isDarkMode == freezed ? _value.isDarkMode : isDarkMode as bool,
+      enableTargetProfit: enableTargetProfit == freezed
+          ? _value.enableTargetProfit
+          : enableTargetProfit as bool,
+      targetProfitValue: targetProfitValue == freezed
+          ? _value.targetProfitValue
+          : targetProfitValue as int,
     ));
   }
 }
@@ -97,17 +128,30 @@ class __$GeneralSettingsCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_GeneralSettings implements _GeneralSettings {
-  const _$_GeneralSettings({@HiveField(0) this.isDarkMode = false})
-      : assert(isDarkMode != null);
+  const _$_GeneralSettings(
+      {@HiveField(0) this.isDarkMode = false,
+      @HiveField(1) this.enableTargetProfit = false,
+      @HiveField(2) this.targetProfitValue = 10})
+      : assert(isDarkMode != null),
+        assert(enableTargetProfit != null),
+        assert(targetProfitValue != null);
 
   @JsonKey(defaultValue: false)
   @override
   @HiveField(0)
   final bool isDarkMode;
+  @JsonKey(defaultValue: false)
+  @override // 目標利益率設定
+  @HiveField(1)
+  final bool enableTargetProfit;
+  @JsonKey(defaultValue: 10)
+  @override
+  @HiveField(2)
+  final int targetProfitValue;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue)';
   }
 
   @override
@@ -116,12 +160,21 @@ class _$_GeneralSettings implements _GeneralSettings {
         (other is _GeneralSettings &&
             (identical(other.isDarkMode, isDarkMode) ||
                 const DeepCollectionEquality()
-                    .equals(other.isDarkMode, isDarkMode)));
+                    .equals(other.isDarkMode, isDarkMode)) &&
+            (identical(other.enableTargetProfit, enableTargetProfit) ||
+                const DeepCollectionEquality()
+                    .equals(other.enableTargetProfit, enableTargetProfit)) &&
+            (identical(other.targetProfitValue, targetProfitValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.targetProfitValue, targetProfitValue)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(isDarkMode);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(isDarkMode) ^
+      const DeepCollectionEquality().hash(enableTargetProfit) ^
+      const DeepCollectionEquality().hash(targetProfitValue);
 
   @override
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
@@ -129,12 +182,20 @@ class _$_GeneralSettings implements _GeneralSettings {
 }
 
 abstract class _GeneralSettings implements GeneralSettings {
-  const factory _GeneralSettings({@HiveField(0) bool isDarkMode}) =
-      _$_GeneralSettings;
+  const factory _GeneralSettings(
+      {@HiveField(0) bool isDarkMode,
+      @HiveField(1) bool enableTargetProfit,
+      @HiveField(2) int targetProfitValue}) = _$_GeneralSettings;
 
   @override
   @HiveField(0)
   bool get isDarkMode;
+  @override // 目標利益率設定
+  @HiveField(1)
+  bool get enableTargetProfit;
+  @override
+  @HiveField(2)
+  int get targetProfitValue;
   @override
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith;
 }
