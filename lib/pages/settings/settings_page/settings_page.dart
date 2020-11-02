@@ -1,3 +1,5 @@
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +37,9 @@ class _Body extends HookWidget {
             context
                 .read(generalSettingsControllerProvider)
                 .update(isDarkMode: value);
+            context
+                .read(analyticsControllerProvider)
+                .setUserProp(darkModePropName, value.toString());
           },
         ),
         const ThemeDivider(),
