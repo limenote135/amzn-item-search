@@ -10,6 +10,7 @@ import 'package:hooks_riverpod/all.dart';
 
 class ItemSelectPage extends StatelessWidget {
   const ItemSelectPage({Key key}) : super(key: key);
+  static const routeName = "/search/item_select";
 
   @override
   Widget build(BuildContext context) {

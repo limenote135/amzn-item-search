@@ -4,6 +4,7 @@ import 'package:package_info/package_info.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key key}) : super(key: key);
+  static const routeName = "/settings";
 
   @override
   Widget build(BuildContext context) {

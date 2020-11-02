@@ -29,6 +29,7 @@ enum _StockPageActions {
 
 class StocksPage extends HookWidget {
   const StocksPage({Key key}) : super(key: key);
+  static const routeName = "/stocks";
 
   @override
   Widget build(BuildContext context) {
@@ -231,6 +232,7 @@ class _InkWell extends HookWidget {
           Navigator.push(
             context,
             MaterialPageRoute<void>(
+              settings: const RouteSettings(name: DetailPage.routeName),
               builder: (context) => ProviderScope(
                 overrides: [
                   currentStockItemProvider.overrideWithValue(item),
