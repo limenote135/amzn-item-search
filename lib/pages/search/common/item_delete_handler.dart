@@ -1,3 +1,5 @@
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/item_list_controller.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,6 +34,10 @@ Future<bool> itemDeleteHandler({
       context.read(itemListControllerProvider).removeAll();
     } else {
       context.read(itemListControllerProvider).remove(items);
+      //TODO: 複数削除できるので、削除する個数を指定したい
+      await context
+          .read(analyticsControllerProvider)
+          .logSingleEvent(deleteSearchHistoryEventName);
     }
   }
   return ok;
