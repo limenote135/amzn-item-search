@@ -3,6 +3,7 @@ import 'package:amasearch/pages/search/search_page/search_page.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
+import 'package:amasearch/repository/analytics.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +11,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/all.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final observer = useProvider(analyticsObserverProvider);
     return MaterialApp(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
@@ -46,6 +48,9 @@ class MyApp extends StatelessWidget {
         SearchSettingsPage.routeName: (context) => const SearchSettingsPage(),
         CameraPage.routeName: (context) => CameraPage(),
       },
+      navigatorObservers: [
+        observer,
+      ],
     );
   }
 }
@@ -60,10 +65,16 @@ class HomePage extends HookWidget {
     StocksPage(),
     SettingsPage(),
   ];
+  static const _names = [
+    SearchPage.routeName,
+    StocksPage.routeName,
+    SettingsPage.routeName,
+  ];
 
   @override
   Widget build(BuildContext context) {
     final currentPage = useProvider(_currentPageProvider);
+    final observer = useProvider(analyticsObserverProvider);
     return WillPopScope(
       onWillPop: () async {
         return showDialog(
@@ -109,6 +120,7 @@ class HomePage extends HookWidget {
           onTap: (value) {
             if (currentPage.state != value) {
               currentPage.state = value;
+              observer.analytics.setCurrentScreen(screenName: _names[value]);
             }
           },
         ),

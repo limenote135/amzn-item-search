@@ -13,6 +13,7 @@ import 'package:hooks_riverpod/all.dart';
 
 class PurchasePage extends StatelessWidget {
   const PurchasePage({Key key}) : super(key: key);
+  static const routeName = "/search/purchase";
 
   @override
   Widget build(BuildContext context) {

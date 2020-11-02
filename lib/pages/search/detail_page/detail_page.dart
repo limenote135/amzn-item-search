@@ -17,7 +17,7 @@ import 'package:hooks_riverpod/all.dart';
 
 class DetailPage extends HookWidget {
   const DetailPage({Key key}) : super(key: key);
-  static const routeName = "/detail";
+  static const routeName = "/search/detail";
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +38,7 @@ class DetailPage extends HookWidget {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute<void>(
+                settings: const RouteSettings(name: PurchasePage.routeName),
                 builder: (context) => ProviderScope(
                   overrides: [
                     currentAsinDataProvider.overrideWithValue(item),
