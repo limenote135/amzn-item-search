@@ -12,6 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EditPage extends StatelessWidget {
   const EditPage({Key key}) : super(key: key);
+  static const routeName = "/stocks/edit";
 
   @override
   Widget build(BuildContext context) {
