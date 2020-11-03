@@ -5,6 +5,7 @@ import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -22,13 +23,14 @@ class ItemTile extends HookWidget {
   Widget build(BuildContext context) {
     final item = useProvider(currentStockItemProvider);
     final isSelected = useProvider(_isSelectedProvider(item));
+
     return ProviderScope(
       overrides: [
         currentStockItemProvider.overrideWithValue(item),
         currentAsinDataProvider.overrideWithValue(item.item),
       ],
       child: Container(
-        color: isSelected ? Colors.black26 : Colors.white,
+        color: _getSelectedColor(context, isSelected),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
@@ -38,6 +40,13 @@ class ItemTile extends HookWidget {
         ),
       ),
     );
+  }
+
+  Color _getSelectedColor(BuildContext context, bool isSelected) {
+    if (isSelected) {
+      return isDark(context) ? Colors.white24 : Colors.black26;
+    }
+    return Theme.of(context).canvasColor;
   }
 }
 
