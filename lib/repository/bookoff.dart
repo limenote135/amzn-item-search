@@ -13,17 +13,23 @@ part 'bookoff.g.dart';
 
 final bookoffProvider = Provider((ref) => BookoffRepository(ref.read));
 
+final bookoffJanFutureProvider =
+    FutureProvider.autoDispose.family<String, String>((ref, code) async {
+  final bookoff = ref.read(bookoffProvider);
+  final resp = await bookoff.get(code);
+  ref.maintainState = true;
+  if (resp.isEmpty) {
+    return code;
+  }
+  return resp.first.jan;
+});
+
 final bookoffItemFutureProvider =
     FutureProvider.family<StateNotifierProvider<ItemController>, String>(
         (ref, code) async {
-  final bookoff = ref.read(bookoffProvider);
-  final resp = await bookoff.get(code);
+  final jan = await ref.read(bookoffJanFutureProvider(code).future);
 
-  if (resp.isEmpty) {
-    return ref.watch(itemFutureProvider("$code").future);
-  }
-
-  return ref.watch(itemFutureProvider(resp.first.jan).future);
+  return ref.watch(itemFutureProvider(jan).future);
 });
 
 const _bookoffCodeLength = 10;
