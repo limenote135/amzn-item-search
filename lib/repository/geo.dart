@@ -10,16 +10,23 @@ const _noItemText = "NG";
 
 final _geoProvider = Provider((ref) => GeoRepository(ref.read));
 
+final geoJanFutureProvider =
+    FutureProvider.autoDispose.family<String, String>((ref, code) async {
+  final geo = ref.read(_geoProvider);
+  final resp = await geo.get(code);
+  ref.maintainState = true;
+  if (resp.jan == "") {
+    return code;
+  }
+  return resp.jan;
+});
+
 final geoItemFutureProvider =
     FutureProvider.family<StateNotifierProvider<ItemController>, String>(
         (ref, code) async {
-  final geo = ref.read(_geoProvider);
-  final resp = await geo.get(code);
+  final jan = await ref.read(geoJanFutureProvider(code).future);
 
-  if (resp.jan == "") {
-    return ref.watch(itemFutureProvider("$code").future);
-  }
-  return ref.watch(itemFutureProvider(resp.jan).future);
+  return ref.watch(itemFutureProvider(jan).future);
 });
 
 const _geoCodeLength = 7;
