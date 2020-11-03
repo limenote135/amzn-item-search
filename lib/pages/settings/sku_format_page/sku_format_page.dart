@@ -1,3 +1,5 @@
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/item.dart';
@@ -170,6 +172,9 @@ class __PatternEditFormState extends State<_PatternEditForm> {
             context
                 .read(generalSettingsControllerProvider)
                 .update(skuFormat: _textEditingController.text);
+            context
+                .read(analyticsControllerProvider)
+                .setUserProp(skuFormatPropName, _textEditingController.text);
             Navigator.pop(context);
           },
         ),
