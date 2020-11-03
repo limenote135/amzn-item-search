@@ -1,13 +1,17 @@
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/detail_page/detail_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/item_tile.dart';
+import 'package:amasearch/pages/stocks/stocks_page/summary_tile.dart';
 import 'package:amasearch/pages/stocks/stocks_page/total_profit.dart';
 import 'package:amasearch/util/csv.dart';
-import 'package:amasearch/util/with_underline.dart';
+import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
+import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -27,6 +31,7 @@ enum _StockPageActions {
 
 class StocksPage extends HookWidget {
   const StocksPage({Key key}) : super(key: key);
+  static const routeName = "/stocks";
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +113,9 @@ class StocksPage extends HookWidget {
       case _StockPageActions.share:
         final file = await StockItemCsv.create("StockList", itemList);
         await Share.shareFiles([file.absolute.path], subject: "仕入れ済み商品一覧");
+        await context
+            .read(analyticsControllerProvider)
+            .logSingleEvent(shareEventName);
         break;
       case _StockPageActions.clear:
         await itemDeleteHandler(
@@ -142,16 +150,73 @@ class _Body extends HookWidget {
           child: ListView.separated(
             separatorBuilder: (context, index) => const ThemeDivider(),
             itemCount: items.length,
-            itemBuilder: (context, index) => ProviderScope(
-              overrides: [
-                currentStockItemProvider.overrideWithValue(items[index]),
-              ],
-              child: index != items.length - 1 ? tile : WithUnderLine(tile),
-            ),
+            itemBuilder: (context, index) {
+              final tileImpl = ProviderScope(
+                overrides: [
+                  currentStockItemProvider.overrideWithValue(items[index]),
+                ],
+                child: index != items.length - 1 ? tile : WithUnderLine(tile),
+              );
+
+              final summary = _getSummary(items, index);
+              if (summary != null) {
+                return Column(
+                  children: [
+                    summary,
+                    const ThemeDivider(),
+                    tileImpl,
+                  ],
+                );
+              }
+
+              return tileImpl;
+            },
           ),
         ),
       ],
     );
+  }
+
+  Widget _getSummary(List<StockItem> items, int index) {
+    final current =
+        DateTime.parse(items[index].purchaseDate).toLocal().dayFormat();
+    if (index == 0) {
+      final lastIndex = _getLastIndex(items, 0, current);
+      return ProviderScope(
+        overrides: [
+          dateItemsProvider
+              .overrideWithValue(items.getRange(0, lastIndex).toList())
+        ],
+        child: const SummaryTile(),
+      );
+    }
+
+    final above =
+        DateTime.parse(items[index - 1].purchaseDate).toLocal().dayFormat();
+
+    if (above != current) {
+      final lastIndex = _getLastIndex(items, index, current);
+      return ProviderScope(
+        overrides: [
+          dateItemsProvider
+              .overrideWithValue(items.getRange(index, lastIndex).toList())
+        ],
+        child: const SummaryTile(),
+      );
+    }
+
+    return null;
+  }
+
+  int _getLastIndex(List<StockItem> items, int startIndex, String day) {
+    for (var i = startIndex + 1; i < items.length; i++) {
+      final nextDay =
+          DateTime.parse(items[i].purchaseDate).toLocal().dayFormat();
+      if (day != nextDay) {
+        return i;
+      }
+    }
+    return items.length;
   }
 }
 
@@ -172,6 +237,7 @@ class _InkWell extends HookWidget {
           Navigator.push(
             context,
             MaterialPageRoute<void>(
+              settings: const RouteSettings(name: DetailPage.routeName),
               builder: (context) => ProviderScope(
                 overrides: [
                   currentStockItemProvider.overrideWithValue(item),

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
@@ -13,6 +14,7 @@ import 'package:hooks_riverpod/all.dart';
 
 class PurchasePage extends StatelessWidget {
   const PurchasePage({Key key}) : super(key: key);
+  static const routeName = "/search/purchase";
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +77,7 @@ class _Body extends HookWidget {
               );
 
               context.read(stockItemListControllerProvider).add(stock);
+              context.read(analyticsControllerProvider).logPurchaseEvent(stock);
 
               Navigator.of(context)
                   .popUntil((route) => route.settings.name == "/");

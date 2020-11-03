@@ -20,10 +20,10 @@ class TotalProfit extends HookWidget {
     return Row(
       children: [
         Expanded(
-          child: Text("商品数合計: $itemCount 個", textAlign: TextAlign.center),
+          child: Text("総商品数: $itemCount 個", textAlign: TextAlign.center),
         ),
         Expanded(
-          child: Text("粗利益合計: $profitValue 円", textAlign: TextAlign.center),
+          child: Text("総粗利益: $profitValue 円", textAlign: TextAlign.center),
         ),
       ],
     );
