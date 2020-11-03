@@ -20,19 +20,22 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       isDarkMode: fields[0] as bool,
       enableTargetProfit: fields[1] as bool,
       targetProfitValue: fields[2] as int,
+      skuFormat: fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_GeneralSettings obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
       ..write(obj.enableTargetProfit)
       ..writeByte(2)
-      ..write(obj.targetProfitValue);
+      ..write(obj.targetProfitValue)
+      ..writeByte(3)
+      ..write(obj.skuFormat);
   }
 
   @override
