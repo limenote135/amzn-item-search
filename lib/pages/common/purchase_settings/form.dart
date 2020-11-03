@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/pages/common/purchase_settings/image_tile.dart';
+import 'package:amasearch/pages/common/purchase_settings/target_price_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -60,6 +61,7 @@ class PurchaseSettingsForm extends HookWidget {
           const InputPurchaseAmoutTile(),
           const ProfitTile(),
           const FeeTile(),
+          const TargetPriceTile(),
           const ThemeDivider(),
           const ItemConditionTile(),
           ListTile(
