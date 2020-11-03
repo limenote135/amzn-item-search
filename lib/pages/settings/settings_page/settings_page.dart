@@ -1,6 +1,7 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,18 @@ class _Body extends HookWidget {
                   settings:
                       const RouteSettings(name: TargetProfitPage.routeName),
                   builder: (context) => const TargetProfitPage(),
+                ));
+          },
+        ),
+        ListTile(
+          title: const Text("SKU フォーマット"),
+          subtitle: Text("${settings.skuFormat}"),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  settings: const RouteSettings(name: SkuFormatPage.routeName),
+                  builder: (context) => const SkuFormatPage(),
                 ));
           },
         ),
