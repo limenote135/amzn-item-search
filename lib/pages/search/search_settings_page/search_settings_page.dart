@@ -1,3 +1,5 @@
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/item_list_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
@@ -85,6 +87,9 @@ class _Body extends HookWidget {
               );
               if (ok) {
                 context.read(itemListControllerProvider).removeAll();
+                await context
+                    .read(analyticsControllerProvider)
+                    .logSingleEvent(deleteAllSearchHistoryEventName);
               }
             },
           ),

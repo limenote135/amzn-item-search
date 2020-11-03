@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:ai_barcode/ai_barcode.dart';
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/item_list_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
@@ -238,9 +240,12 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                     MaterialButton(
                       onPressed: () {
                         setState(() {
+                          final newVal = !continuousRead;
                           context
                               .read(searchSettingsControllerProvider)
-                              .update(continuousCameraRead: !continuousRead);
+                              .update(continuousCameraRead: newVal);
+                          context.read(analyticsControllerProvider).setUserProp(
+                              continuousReadPropName, newVal.toString());
                         });
                       },
                       child: Text("${continuousRead ? "連続読取 On" : "連続読取 Off"}"),

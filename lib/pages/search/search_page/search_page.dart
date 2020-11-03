@@ -8,9 +8,9 @@ import 'package:amasearch/pages/search/search_page/item_tile.dart';
 import 'package:amasearch/pages/search/search_page/search_settings.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:amasearch/util/util.dart';
-import 'package:amasearch/util/with_underline.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
+import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -18,6 +18,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key key}) : super(key: key);
+  static const routeName = "/";
 
   @override
   Widget build(BuildContext context) {

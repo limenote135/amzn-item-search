@@ -18,6 +18,7 @@ import 'package:hooks_riverpod/all.dart';
 
 class DetailPage extends HookWidget {
   const DetailPage({Key key}) : super(key: key);
+  static const routeName = "/stocks/detail";
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +50,7 @@ class DetailPage extends HookWidget {
           Navigator.push<void>(
             context,
             MaterialPageRoute(
+              settings: const RouteSettings(name: EditPage.routeName),
               builder: (context) {
                 final ctrl = initPurchaseSettingsControllerProvider(
                     item.toPurchaseSettings());

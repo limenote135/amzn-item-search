@@ -1,3 +1,5 @@
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/repository/bookoff.dart';
 import 'package:amasearch/repository/geo.dart';
@@ -54,26 +56,31 @@ class ItemListController extends StateNotifier<
   }
 
   void add(String jan) {
+    _read(analyticsControllerProvider).logSearchEvent(searchEventJan);
     final future = itemFutureProvider(jan.trim());
     state = [future, ...state];
   }
 
   void addFreeWord(String word) {
+    _read(analyticsControllerProvider).logSearchEvent(searchEventWord);
     final future = freeWordItemFutureProvider(word.trim());
     state = [future, ...state];
   }
 
   void addBookoff(String code) {
+    _read(analyticsControllerProvider).logSearchEvent(searchEventBookoff);
     final future = bookoffItemFutureProvider(code.trim());
     state = [future, ...state];
   }
 
   void addGeo(String code) {
+    _read(analyticsControllerProvider).logSearchEvent(searchEventGeo);
     final future = geoItemFutureProvider(code.trim());
     state = [future, ...state];
   }
 
   void addTsutaya(String code) {
+    _read(analyticsControllerProvider).logSearchEvent(searchEventTsutaya);
     final future = tsutayaItemFutureProvider(code.trim());
     state = [future, ...state];
   }
