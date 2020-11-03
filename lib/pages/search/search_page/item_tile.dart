@@ -72,6 +72,7 @@ class ItemTileImpl extends HookWidget {
           Navigator.push(
               context,
               MaterialPageRoute<void>(
+                settings: const RouteSettings(name: DetailPage.routeName),
                 builder: (context) => ProviderScope(
                   overrides: [
                     currentAsinDataProvider.overrideWithValue(firstItem),
@@ -83,6 +84,7 @@ class ItemTileImpl extends HookWidget {
           Navigator.push(
             context,
             MaterialPageRoute<void>(
+              settings: const RouteSettings(name: ItemSelectPage.routeName),
               builder: (context) => ProviderScope(
                 overrides: [
                   currentAsinListProvider.overrideWithValue(item.asins),

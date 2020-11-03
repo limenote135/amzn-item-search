@@ -2,8 +2,8 @@ import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
+import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/pages/search/detail_page/price_detail_tile.dart';
-import 'package:amasearch/pages/search/detail_page/seller_list_tile.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
@@ -17,7 +17,7 @@ import 'package:hooks_riverpod/all.dart';
 
 class DetailPage extends HookWidget {
   const DetailPage({Key key}) : super(key: key);
-  static const routeName = "/detail";
+  static const routeName = "/search/detail";
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +38,7 @@ class DetailPage extends HookWidget {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute<void>(
+                settings: const RouteSettings(name: PurchasePage.routeName),
                 builder: (context) => ProviderScope(
                   overrides: [
                     currentAsinDataProvider.overrideWithValue(item),

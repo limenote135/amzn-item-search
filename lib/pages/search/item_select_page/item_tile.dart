@@ -53,6 +53,7 @@ class _InkWell extends HookWidget {
         Navigator.push(
           context,
           MaterialPageRoute<void>(
+            settings: const RouteSettings(name: DetailPage.routeName),
             builder: (context) => ProviderScope(
               overrides: [
                 currentAsinDataProvider.overrideWithValue(item),

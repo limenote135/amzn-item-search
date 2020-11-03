@@ -1,3 +1,4 @@
+import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/search_page/search_page.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
@@ -10,9 +11,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/all.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final observer = useProvider(analyticsObserverProvider);
     return MaterialApp(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
@@ -46,6 +48,9 @@ class MyApp extends StatelessWidget {
         SearchSettingsPage.routeName: (context) => const SearchSettingsPage(),
         CameraPage.routeName: (context) => CameraPage(),
       },
+      navigatorObservers: [
+        observer,
+      ],
     );
   }
 }
@@ -60,10 +65,16 @@ class HomePage extends HookWidget {
     StocksPage(),
     SettingsPage(),
   ];
+  static const _names = [
+    SearchPage.routeName,
+    StocksPage.routeName,
+    SettingsPage.routeName,
+  ];
 
   @override
   Widget build(BuildContext context) {
     final currentPage = useProvider(_currentPageProvider);
+    final observer = useProvider(analyticsObserverProvider);
     return WillPopScope(
       onWillPop: () async {
         return showDialog(
@@ -109,6 +120,7 @@ class HomePage extends HookWidget {
           onTap: (value) {
             if (currentPage.state != value) {
               currentPage.state = value;
+              observer.analytics.setCurrentScreen(screenName: _names[value]);
             }
           },
         ),
