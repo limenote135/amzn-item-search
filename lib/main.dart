@@ -7,6 +7,7 @@ import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
+import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_settings.dart';
@@ -79,6 +80,7 @@ Future<void> initHive() async {
     ..registerAdapter(PriceDetailAdapter())
     ..registerAdapter(FeeInfoAdapter())
     ..registerAdapter(StockItemAdapter())
+    ..registerAdapter(GeneralSettingsAdapter())
     ..registerAdapter(SearchSettingsAdapter())
     ..registerAdapter(FulfillmentChannelAdapter())
     ..registerAdapter(ItemConditionAdapter())

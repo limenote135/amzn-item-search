@@ -28,7 +28,7 @@ class SearchPage extends StatelessWidget {
         title: const _AppBarTitle(),
         actions: [
           AnimatedTheme(
-            data: ThemeData.light(),
+            data: isDark(context) ? ThemeData.dark() : ThemeData.light(),
             child: IconButton(
               icon: const Icon(Icons.settings),
               tooltip: "検索設定",
@@ -67,9 +67,9 @@ class _AppBarTitle extends HookWidget {
     final settings = useProvider(searchSettingsControllerProvider.state);
 
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+      decoration: BoxDecoration(
+        color: isDark(context) ? null : Colors.white,
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
