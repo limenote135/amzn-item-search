@@ -1,3 +1,5 @@
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_dialog.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +37,14 @@ class _Body extends HookWidget {
             context
                 .read(generalSettingsControllerProvider)
                 .update(enableTargetProfit: value);
+            if (value) {
+              context.read(analyticsControllerProvider).setUserProp(
+                  targetProfitPropName, "${settings.targetProfitValue}");
+            } else {
+              context
+                  .read(analyticsControllerProvider)
+                  .setUserProp(targetProfitPropName, "$value");
+            }
           },
         ),
         ListTile(
@@ -54,6 +64,11 @@ class _Body extends HookWidget {
               context
                   .read(generalSettingsControllerProvider)
                   .update(targetProfitValue: ret);
+              if (settings.enableTargetProfit) {
+                await context
+                    .read(analyticsControllerProvider)
+                    .setUserProp(targetProfitPropName, "$ret");
+              }
             }
           },
         )
