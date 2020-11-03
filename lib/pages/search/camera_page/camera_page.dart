@@ -24,6 +24,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   bool _isCameraGranted = false;
   var _lastRead = "";
   var _lastReadTime = DateTime.now();
+  var _lastType = SearchType.jan;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -66,6 +67,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
 
           setState(() {
             _lastRead = result;
+            _lastType = settings.type;
           });
         } else if (DateTime.now().difference(_lastReadTime) >
             const Duration(seconds: 1)) {
@@ -273,7 +275,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                 const Spacer(),
                 ProviderScope(
                   overrides: [
-                    currentJanCodeProvider.overrideWithValue(_lastRead),
+                    currentCodeProvider.overrideWithValue(_lastRead),
+                    currentCodeTypeProvider.overrideWithValue(_lastType),
                   ],
                   child: const ItemTile(),
                 ),
