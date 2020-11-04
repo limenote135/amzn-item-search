@@ -2,7 +2,6 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
-import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/pages/search/common/util.dart';
@@ -88,11 +87,11 @@ class _PriceAndProfit extends HookWidget {
           Text.rich(
             TextSpan(text: "目標額: ", children: [
               TextSpan(
-                text: numberFormatter.format(_calcTargetPrice(
-                  detail.price,
-                  item.prices.feeInfo,
-                  targetPriceRate,
-                  settings.useFba,
+                text: numberFormatter.format(calcTargetPrice(
+                  sellPrice: detail.price,
+                  feeInfo: item.prices.feeInfo,
+                  targetRate: targetPriceRate,
+                  useFba: settings.useFba,
                 )),
                 style: strongTextStyle,
               ),
@@ -109,13 +108,5 @@ class _PriceAndProfit extends HookWidget {
       return " - ";
     }
     return detail.subCondition.toDisplayShortString();
-  }
-
-  int _calcTargetPrice(
-      int sellPrice, FeeInfo feeInfo, int targetRate, bool useFba) {
-    final price = sellPrice * (1 - feeInfo.referralFeeRate - targetRate / 100);
-    final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
-
-    return (price - feeInfo.variableClosingFee - fbaFee).round();
   }
 }
