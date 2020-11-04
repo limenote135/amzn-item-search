@@ -37,3 +37,16 @@ bool isPremiumPrice(AsinData item) {
   }
   return false;
 }
+
+// 販売価格から目標の利益率を達成する仕入れ額を計算
+int calcTargetPrice({
+  @required int sellPrice,
+  @required FeeInfo feeInfo,
+  @required int targetRate,
+  @required bool useFba,
+}) {
+  final price = sellPrice * (1 - feeInfo.referralFeeRate - targetRate / 100);
+  final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
+
+  return (price - feeInfo.variableClosingFee - fbaFee).round();
+}
