@@ -59,7 +59,9 @@ class _TileBody extends HookWidget {
     final detail = useProvider(currentAsinDataProvider);
     final smallSize = smallFontSize(context);
 
-    final profitRate = (item.profitPerItem / item.sellPrice * 100).round();
+    final profitRate = item.sellPrice > 0
+        ? (item.profitPerItem / item.sellPrice * 100).round()
+        : 0;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
