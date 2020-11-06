@@ -78,8 +78,12 @@ class _Body extends HookWidget {
   Widget build(BuildContext context) {
     final item = useProvider(currentStockItemProvider);
 
-    final profitRate = (item.profitPerItem / item.sellPrice * 100).round();
-    final roi = (item.profitPerItem / item.purchasePrice * 100).round();
+    final profitRate = item.sellPrice > 0
+        ? (item.profitPerItem / item.sellPrice * 100).round()
+        : 0;
+    final roi = item.purchasePrice > 0
+        ? (item.profitPerItem / item.purchasePrice * 100).round()
+        : 0;
 
     final referralFeeRate =
         (item.item.prices.feeInfo.referralFeeRate * 100).toInt();
