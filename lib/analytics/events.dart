@@ -5,6 +5,7 @@ const searchEventName = "search";
 const shareEventName = "share";
 const deleteSearchHistoryEventName = "deleteSearchHistory";
 const deleteAllSearchHistoryEventName = "deleteAllSearchHistory";
+const directPurchaseEventName = "directPurchase";
 
 const searchEventJan = "searchJan";
 const searchEventWord = "searchWord";
