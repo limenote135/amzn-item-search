@@ -49,6 +49,7 @@ dependencies:
   firebase_analytics: ^6.1.0
   firebase_crashlytics: ^0.2.2
   firebase_remote_config: ^0.4.1
+  firebase_performance: ^0.4.2
   vibration: ^1.7.1
   euc: ^1.0.5+7
   flutter_web_browser: ^0.13.0
