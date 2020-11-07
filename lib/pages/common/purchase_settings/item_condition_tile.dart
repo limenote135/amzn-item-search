@@ -1,5 +1,8 @@
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
+import 'package:amasearch/models/item.dart';
+import 'package:amasearch/util/sku_replacer.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -10,9 +13,14 @@ class ItemConditionTile extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final item = useProvider(currentAsinDataProvider);
     final base = useProvider(currentPurchaseSettingsControllerProvider);
+    final settings = useProvider(base.state);
     final itemCondition =
         useProvider(base.state.select((value) => value.condition));
+
+    final skuFormat = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.skuFormat));
 
     return ListTile(
       title: Row(
@@ -46,7 +54,15 @@ class ItemConditionTile extends HookWidget {
             onChanged: (value) {
               unfocus();
               if (itemCondition != value) {
-                context.read(base).update(condition: value);
+                final generatedSku = replaceSku(
+                  format: skuFormat,
+                  item: item,
+                  settings: settings,
+                );
+                context.read(base).update(
+                      condition: value,
+                      sku: generatedSku,
+                    );
               }
             },
           ),
