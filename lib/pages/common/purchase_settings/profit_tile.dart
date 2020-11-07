@@ -1,7 +1,5 @@
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
-import 'package:amasearch/models/item.dart';
 import 'package:amasearch/util/formatter.dart';
-import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -11,22 +9,14 @@ class ProfitTile extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final item = useProvider(currentAsinDataProvider);
     final base = useProvider(currentPurchaseSettingsControllerProvider);
 
     final amount = useProvider(base.state.select((value) => value.amount));
-    final useFba = useProvider(base.state.select((value) => value.useFba));
     final sellPrice =
         useProvider(base.state.select((value) => value.sellPrice));
     final purchasePrice =
         useProvider(base.state.select((value) => value.purchasePrice));
-
-    final profit = calcProfit(
-      sellPrice: sellPrice,
-      purchasePrice: purchasePrice,
-      fee: item.prices.feeInfo,
-      useFba: useFba,
-    );
+    final profit = useProvider(base.state.select((value) => value.profit));
 
     return ListTile(
       title: Row(
