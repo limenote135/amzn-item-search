@@ -1,7 +1,7 @@
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
-import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -21,10 +21,10 @@ class ProfitTile extends HookWidget {
     final purchasePrice =
         useProvider(base.state.select((value) => value.purchasePrice));
 
-    final profit = _calcProfit(
+    final profit = calcProfit(
       sellPrice: sellPrice,
       purchasePrice: purchasePrice,
-      feeInfo: item.prices.feeInfo,
+      fee: item.prices.feeInfo,
       useFba: useFba,
     );
 
@@ -45,22 +45,6 @@ class ProfitTile extends HookWidget {
         ],
       ),
     );
-  }
-
-  int _calcProfit({
-    @required int sellPrice,
-    @required int purchasePrice,
-    @required FeeInfo feeInfo,
-    @required bool useFba,
-  }) {
-    final fee = (sellPrice * feeInfo.referralFeeRate).round() +
-        feeInfo.variableClosingFee +
-        (useFba ? feeInfo.fbaFee : 0);
-
-    final profit = sellPrice - purchasePrice - fee;
-
-    print("fee $fee, profit $profit");
-    return profit;
   }
 
   String _getProfitText(int profit, int amount) {
