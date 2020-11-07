@@ -230,7 +230,7 @@ mixin _$AsinData {
   @HiveField(5)
   int get rank;
   @HiveField(6)
-  String get quantity;
+  String get quantity; // セット数
   @HiveField(7)
   ItemPrices get prices;
   @HiveField(8)
@@ -401,7 +401,7 @@ class _$_AsinData implements _AsinData {
   @override
   @HiveField(6)
   final String quantity;
-  @override
+  @override // セット数
   @HiveField(7)
   final ItemPrices prices;
   @override
@@ -492,7 +492,7 @@ abstract class _AsinData implements AsinData {
   @override
   @HiveField(6)
   String get quantity;
-  @override
+  @override // セット数
   @HiveField(7)
   ItemPrices get prices;
   @override
