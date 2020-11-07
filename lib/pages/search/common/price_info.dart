@@ -72,7 +72,7 @@ class _PriceAndProfit extends HookWidget {
         Text.rich(
           TextSpan(text: "粗利益: ", children: [
             TextSpan(
-              text: calcProfit(
+              text: calcProfitText(
                 detail.price,
                 item.prices.feeInfo,
                 useFba: settings.useFba,
