@@ -27,6 +27,7 @@ class PurchaseSettingsController extends StateNotifier<PurchaseSettings> {
     int amount,
     PurchaseItemCondition condition,
     int profit,
+    bool enableAutogenSku,
     String sku,
     String memo,
   }) {
@@ -37,6 +38,7 @@ class PurchaseSettingsController extends StateNotifier<PurchaseSettings> {
       amount: amount ?? state.amount,
       condition: condition ?? state.condition,
       profit: profit ?? state.profit,
+      enableAutogenSku: enableAutogenSku ?? state.enableAutogenSku,
       sku: sku ?? state.sku,
       memo: memo ?? state.memo,
     );
