@@ -1,3 +1,4 @@
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
@@ -33,6 +34,18 @@ class PriceDetailTile extends HookWidget {
     final sellFee =
         (detail.price * item.prices.feeInfo.referralFeeRate).round();
 
+    final showTargetPrice = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.enableTargetProfit));
+    final targetPriceRate = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.targetProfitValue));
+
+    final targetPrice = calcTargetPrice(
+      sellPrice: detail.price,
+      feeInfo: item.prices.feeInfo,
+      targetRate: targetPriceRate,
+      useFba: setting.useFba,
+    );
+
     return ExpansionTile(
       title: Column(
         children: [
@@ -56,6 +69,11 @@ class PriceDetailTile extends HookWidget {
               useFba: setting.useFba,
             )} 円"),
           ),
+          if (showTargetPrice)
+            TextLine(
+              leading: const Text("目標利益率達成額"),
+              main: Text("$targetPrice 円"),
+            ),
         ],
       ),
       children: [
