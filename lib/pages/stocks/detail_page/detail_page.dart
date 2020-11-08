@@ -156,6 +156,10 @@ class _Body extends HookWidget {
           leading: const Text("SKU"),
           main: Text(item.sku),
         ),
+        TextListTile(
+          leading: const Text("仕入れ先"),
+          main: Text(item.retailer),
+        ),
         ListTile(
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

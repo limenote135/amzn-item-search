@@ -73,6 +73,7 @@ class _Body extends HookWidget {
                     ? item
                     : item.copyWith(imageData: image.value),
                 purchaseDate: DateTime.now().toUtc().toIso8601String(),
+                retailer: data.retailer,
               );
 
               context.read(stockItemListControllerProvider).add(stock);
