@@ -28,6 +28,7 @@ class AnalyticsController {
       "sellPrice": stock.sellPrice,
       "profit": stock.profitPerItem,
       "condition": stock.subCondition.toDisplayString(),
+      "retailer": stock.retailer,
     });
   }
 
