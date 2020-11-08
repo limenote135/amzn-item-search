@@ -39,4 +39,25 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     );
     box.put(generalSettingsKeyName, state);
   }
+
+  void addRetailer(String retailer) {
+    final box = _read(settingsBoxProvider);
+    final retailers = <String>[...state.retailers]..add(retailer);
+    state = state.copyWith(
+      retailers: retailers,
+    );
+    box.put(generalSettingsKeyName, state);
+  }
+
+  void removeRetailer(int index) {
+    final box = _read(settingsBoxProvider);
+    final retailers = <String>[
+      for (var i = 0; i < state.retailers.length; i++)
+        if (i != index) state.retailers[i]
+    ];
+    state = state.copyWith(
+      retailers: retailers,
+    );
+    box.put(generalSettingsKeyName, state);
+  }
 }
