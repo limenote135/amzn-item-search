@@ -22,22 +22,21 @@ class PurchasePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("仕入れ設定"),
       ),
-      body: _Body(),
+      body: const _Body(),
     );
   }
 }
 
-// TODO: statefulWidget にする？
 class _Body extends HookWidget {
-  _Body({Key key}) : super(key: key);
-
-  Uint8List imageData;
+  const _Body({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
     final base = purchaseSettingsControllerProvider(item.asin);
     final formKey = useProvider(base.state.select((value) => value.formKey));
+
+    final image = useState<Uint8List>(null);
 
     return ProviderScope(
       overrides: [
@@ -47,7 +46,7 @@ class _Body extends HookWidget {
         onComplete: (bytes) {
           if (item.imageData == null) {
             // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
-            imageData = bytes.buffer.asUint8List();
+            image.value = bytes.buffer.asUint8List();
           }
         },
         action: RaisedButton(
@@ -72,7 +71,7 @@ class _Body extends HookWidget {
                 memo: data.memo,
                 item: item.imageData != null
                     ? item
-                    : item.copyWith(imageData: imageData),
+                    : item.copyWith(imageData: image.value),
                 purchaseDate: DateTime.now().toUtc().toIso8601String(),
               );
 
