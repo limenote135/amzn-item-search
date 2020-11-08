@@ -59,6 +59,7 @@ class _Body extends HookWidget {
                       condition: data.condition.toItemCondition(),
                       subCondition: data.condition.toItemSubCondition(),
                       sku: data.sku,
+                      retailer: data.retailer,
                       memo: data.memo,
                     ),
                   );
