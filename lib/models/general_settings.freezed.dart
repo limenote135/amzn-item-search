@@ -19,12 +19,14 @@ class _$GeneralSettingsTearOff {
       @HiveField(1) bool enableTargetProfit = false,
       @HiveField(2) int targetProfitValue = 10,
       @HiveField(3) String skuFormat =
-          "<yyyy><mm><dd>-<asin>-<cond>-<purchasePrice>-<quantity>"}) {
+          "<yyyy><mm><dd>-<asin>-<cond>-<purchasePrice>-<quantity>",
+      @HiveField(4) List<String> retailers = const <String>[]}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
       targetProfitValue: targetProfitValue,
       skuFormat: skuFormat,
+      retailers: retailers,
     );
   }
 }
@@ -42,7 +44,9 @@ mixin _$GeneralSettings {
   @HiveField(2)
   int get targetProfitValue; // SKU 設定
   @HiveField(3)
-  String get skuFormat;
+  String get skuFormat; // 仕入れ先設定
+  @HiveField(4)
+  List<String> get retailers;
 
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith;
 }
@@ -56,7 +60,8 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       {@HiveField(0) bool isDarkMode,
       @HiveField(1) bool enableTargetProfit,
       @HiveField(2) int targetProfitValue,
-      @HiveField(3) String skuFormat});
+      @HiveField(3) String skuFormat,
+      @HiveField(4) List<String> retailers});
 }
 
 /// @nodoc
@@ -74,6 +79,7 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object enableTargetProfit = freezed,
     Object targetProfitValue = freezed,
     Object skuFormat = freezed,
+    Object retailers = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode:
@@ -85,6 +91,8 @@ class _$GeneralSettingsCopyWithImpl<$Res>
           ? _value.targetProfitValue
           : targetProfitValue as int,
       skuFormat: skuFormat == freezed ? _value.skuFormat : skuFormat as String,
+      retailers:
+          retailers == freezed ? _value.retailers : retailers as List<String>,
     ));
   }
 }
@@ -100,7 +108,8 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       {@HiveField(0) bool isDarkMode,
       @HiveField(1) bool enableTargetProfit,
       @HiveField(2) int targetProfitValue,
-      @HiveField(3) String skuFormat});
+      @HiveField(3) String skuFormat,
+      @HiveField(4) List<String> retailers});
 }
 
 /// @nodoc
@@ -120,6 +129,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
     Object enableTargetProfit = freezed,
     Object targetProfitValue = freezed,
     Object skuFormat = freezed,
+    Object retailers = freezed,
   }) {
     return _then(_GeneralSettings(
       isDarkMode:
@@ -131,6 +141,8 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           ? _value.targetProfitValue
           : targetProfitValue as int,
       skuFormat: skuFormat == freezed ? _value.skuFormat : skuFormat as String,
+      retailers:
+          retailers == freezed ? _value.retailers : retailers as List<String>,
     ));
   }
 }
@@ -144,11 +156,13 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(1) this.enableTargetProfit = false,
       @HiveField(2) this.targetProfitValue = 10,
       @HiveField(3) this.skuFormat =
-          "<yyyy><mm><dd>-<asin>-<cond>-<purchasePrice>-<quantity>"})
+          "<yyyy><mm><dd>-<asin>-<cond>-<purchasePrice>-<quantity>",
+      @HiveField(4) this.retailers = const <String>[]})
       : assert(isDarkMode != null),
         assert(enableTargetProfit != null),
         assert(targetProfitValue != null),
-        assert(skuFormat != null);
+        assert(skuFormat != null),
+        assert(retailers != null);
 
   @JsonKey(defaultValue: false)
   @override
@@ -167,10 +181,14 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override // SKU 設定
   @HiveField(3)
   final String skuFormat;
+  @JsonKey(defaultValue: const <String>[])
+  @override // 仕入れ先設定
+  @HiveField(4)
+  final List<String> retailers;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers)';
   }
 
   @override
@@ -188,7 +206,10 @@ class _$_GeneralSettings implements _GeneralSettings {
                     .equals(other.targetProfitValue, targetProfitValue)) &&
             (identical(other.skuFormat, skuFormat) ||
                 const DeepCollectionEquality()
-                    .equals(other.skuFormat, skuFormat)));
+                    .equals(other.skuFormat, skuFormat)) &&
+            (identical(other.retailers, retailers) ||
+                const DeepCollectionEquality()
+                    .equals(other.retailers, retailers)));
   }
 
   @override
@@ -197,7 +218,8 @@ class _$_GeneralSettings implements _GeneralSettings {
       const DeepCollectionEquality().hash(isDarkMode) ^
       const DeepCollectionEquality().hash(enableTargetProfit) ^
       const DeepCollectionEquality().hash(targetProfitValue) ^
-      const DeepCollectionEquality().hash(skuFormat);
+      const DeepCollectionEquality().hash(skuFormat) ^
+      const DeepCollectionEquality().hash(retailers);
 
   @override
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
@@ -209,7 +231,8 @@ abstract class _GeneralSettings implements GeneralSettings {
       {@HiveField(0) bool isDarkMode,
       @HiveField(1) bool enableTargetProfit,
       @HiveField(2) int targetProfitValue,
-      @HiveField(3) String skuFormat}) = _$_GeneralSettings;
+      @HiveField(3) String skuFormat,
+      @HiveField(4) List<String> retailers}) = _$_GeneralSettings;
 
   @override
   @HiveField(0)
@@ -223,6 +246,9 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override // SKU 設定
   @HiveField(3)
   String get skuFormat;
+  @override // 仕入れ先設定
+  @HiveField(4)
+  List<String> get retailers;
   @override
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith;
 }
