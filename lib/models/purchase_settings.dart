@@ -17,6 +17,7 @@ abstract class PurchaseSettings with _$PurchaseSettings {
     @Default(0) int profit,
     @Default(true) bool enableAutogenSku,
     @Default("") String sku,
+    @Default("") String retailer,
     @Default("") String memo,
   }) = _PurchaseSettings;
 }

@@ -4,6 +4,7 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/common/purchase_settings/image_tile.dart';
+import 'package:amasearch/pages/common/purchase_settings/retailer_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/sku_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/target_price_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
@@ -44,7 +45,8 @@ class PurchaseSettingsForm extends HookWidget {
       key: settings.formKey,
       onChanged: () {
         final form = Form.of(primaryFocus.context); //TODO: これでよいのか？
-        if (form.validate()) {
+        // 仕入れ先をプルダウンで選択した際に、primaryFocus.context が選択ダイアログになるため null になりうる？
+        if (form?.validate() ?? false) {
           form.save();
         }
       },
@@ -86,6 +88,7 @@ class PurchaseSettingsForm extends HookWidget {
           const FeeTile(),
           const TargetPriceTile(),
           const ItemConditionTile(),
+          const RetailerTile(),
           const ThemeDivider(),
           const SkuTile(),
           const ThemeDivider(),

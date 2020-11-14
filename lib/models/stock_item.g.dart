@@ -28,13 +28,14 @@ class StockItemAdapter extends TypeAdapter<_$_StockItem> {
       sku: fields[8] as String,
       memo: fields[9] as String,
       item: fields[10] as AsinData,
+      retailer: fields[11] as String ?? "", // TODO: デフォルト値
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_StockItem obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.purchaseDate)
       ..writeByte(1)
@@ -56,7 +57,9 @@ class StockItemAdapter extends TypeAdapter<_$_StockItem> {
       ..writeByte(9)
       ..write(obj.memo)
       ..writeByte(10)
-      ..write(obj.item);
+      ..write(obj.item)
+      ..writeByte(11)
+      ..write(obj.retailer);
   }
 
   @override
