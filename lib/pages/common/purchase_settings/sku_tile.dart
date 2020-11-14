@@ -18,7 +18,6 @@ class SkuTile extends HookWidget {
     final skuFormat = useProvider(generalSettingsControllerProvider.state
         .select((value) => value.skuFormat));
 
-    print(settings.sku);
     return Column(
       children: [
         CheckboxListTile(
@@ -42,7 +41,12 @@ class SkuTile extends HookWidget {
         ),
         ListTile(
           title: settings.enableAutogenSku
-              ? _autogenSkuText(context, settings.sku)
+              ? _autogenSkuText(
+                  context,
+                  settings.sku != ""
+                      ? settings.sku
+                      : replaceSku(
+                          format: skuFormat, item: item, settings: settings))
               : _manualSkuWidget(context, settings.sku),
         ),
       ],
