@@ -14,6 +14,8 @@ abstract class PurchaseSettings with _$PurchaseSettings {
     @Default(true) bool useFba,
     @Default(1) int amount,
     @Default(PurchaseItemCondition.newItem) PurchaseItemCondition condition,
+    @Default(0) int profit,
+    @Default(true) bool enableAutogenSku,
     @Default("") String sku,
     @Default("") String memo,
   }) = _PurchaseSettings;

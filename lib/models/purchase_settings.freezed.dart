@@ -21,6 +21,8 @@ class _$PurchaseSettingsTearOff {
       bool useFba = true,
       int amount = 1,
       PurchaseItemCondition condition = PurchaseItemCondition.newItem,
+      int profit = 0,
+      bool enableAutogenSku = true,
       String sku = "",
       String memo = ""}) {
     return _PurchaseSettings(
@@ -30,6 +32,8 @@ class _$PurchaseSettingsTearOff {
       useFba: useFba,
       amount: amount,
       condition: condition,
+      profit: profit,
+      enableAutogenSku: enableAutogenSku,
       sku: sku,
       memo: memo,
     );
@@ -48,6 +52,8 @@ mixin _$PurchaseSettings {
   bool get useFba;
   int get amount;
   PurchaseItemCondition get condition;
+  int get profit;
+  bool get enableAutogenSku;
   String get sku;
   String get memo;
 
@@ -66,6 +72,8 @@ abstract class $PurchaseSettingsCopyWith<$Res> {
       bool useFba,
       int amount,
       PurchaseItemCondition condition,
+      int profit,
+      bool enableAutogenSku,
       String sku,
       String memo});
 }
@@ -87,6 +95,8 @@ class _$PurchaseSettingsCopyWithImpl<$Res>
     Object useFba = freezed,
     Object amount = freezed,
     Object condition = freezed,
+    Object profit = freezed,
+    Object enableAutogenSku = freezed,
     Object sku = freezed,
     Object memo = freezed,
   }) {
@@ -102,6 +112,10 @@ class _$PurchaseSettingsCopyWithImpl<$Res>
       condition: condition == freezed
           ? _value.condition
           : condition as PurchaseItemCondition,
+      profit: profit == freezed ? _value.profit : profit as int,
+      enableAutogenSku: enableAutogenSku == freezed
+          ? _value.enableAutogenSku
+          : enableAutogenSku as bool,
       sku: sku == freezed ? _value.sku : sku as String,
       memo: memo == freezed ? _value.memo : memo as String,
     ));
@@ -122,6 +136,8 @@ abstract class _$PurchaseSettingsCopyWith<$Res>
       bool useFba,
       int amount,
       PurchaseItemCondition condition,
+      int profit,
+      bool enableAutogenSku,
       String sku,
       String memo});
 }
@@ -145,6 +161,8 @@ class __$PurchaseSettingsCopyWithImpl<$Res>
     Object useFba = freezed,
     Object amount = freezed,
     Object condition = freezed,
+    Object profit = freezed,
+    Object enableAutogenSku = freezed,
     Object sku = freezed,
     Object memo = freezed,
   }) {
@@ -160,6 +178,10 @@ class __$PurchaseSettingsCopyWithImpl<$Res>
       condition: condition == freezed
           ? _value.condition
           : condition as PurchaseItemCondition,
+      profit: profit == freezed ? _value.profit : profit as int,
+      enableAutogenSku: enableAutogenSku == freezed
+          ? _value.enableAutogenSku
+          : enableAutogenSku as bool,
       sku: sku == freezed ? _value.sku : sku as String,
       memo: memo == freezed ? _value.memo : memo as String,
     ));
@@ -175,6 +197,8 @@ class _$_PurchaseSettings implements _PurchaseSettings {
       this.useFba = true,
       this.amount = 1,
       this.condition = PurchaseItemCondition.newItem,
+      this.profit = 0,
+      this.enableAutogenSku = true,
       this.sku = "",
       this.memo = ""})
       : assert(formKey != null),
@@ -183,6 +207,8 @@ class _$_PurchaseSettings implements _PurchaseSettings {
         assert(useFba != null),
         assert(amount != null),
         assert(condition != null),
+        assert(profit != null),
+        assert(enableAutogenSku != null),
         assert(sku != null),
         assert(memo != null);
 
@@ -203,6 +229,12 @@ class _$_PurchaseSettings implements _PurchaseSettings {
   @JsonKey(defaultValue: PurchaseItemCondition.newItem)
   @override
   final PurchaseItemCondition condition;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int profit;
+  @JsonKey(defaultValue: true)
+  @override
+  final bool enableAutogenSku;
   @JsonKey(defaultValue: "")
   @override
   final String sku;
@@ -212,7 +244,7 @@ class _$_PurchaseSettings implements _PurchaseSettings {
 
   @override
   String toString() {
-    return 'PurchaseSettings(formKey: $formKey, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, amount: $amount, condition: $condition, sku: $sku, memo: $memo)';
+    return 'PurchaseSettings(formKey: $formKey, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, amount: $amount, condition: $condition, profit: $profit, enableAutogenSku: $enableAutogenSku, sku: $sku, memo: $memo)';
   }
 
   @override
@@ -235,6 +267,11 @@ class _$_PurchaseSettings implements _PurchaseSettings {
             (identical(other.condition, condition) ||
                 const DeepCollectionEquality()
                     .equals(other.condition, condition)) &&
+            (identical(other.profit, profit) ||
+                const DeepCollectionEquality().equals(other.profit, profit)) &&
+            (identical(other.enableAutogenSku, enableAutogenSku) ||
+                const DeepCollectionEquality()
+                    .equals(other.enableAutogenSku, enableAutogenSku)) &&
             (identical(other.sku, sku) ||
                 const DeepCollectionEquality().equals(other.sku, sku)) &&
             (identical(other.memo, memo) ||
@@ -250,6 +287,8 @@ class _$_PurchaseSettings implements _PurchaseSettings {
       const DeepCollectionEquality().hash(useFba) ^
       const DeepCollectionEquality().hash(amount) ^
       const DeepCollectionEquality().hash(condition) ^
+      const DeepCollectionEquality().hash(profit) ^
+      const DeepCollectionEquality().hash(enableAutogenSku) ^
       const DeepCollectionEquality().hash(sku) ^
       const DeepCollectionEquality().hash(memo);
 
@@ -266,6 +305,8 @@ abstract class _PurchaseSettings implements PurchaseSettings {
       bool useFba,
       int amount,
       PurchaseItemCondition condition,
+      int profit,
+      bool enableAutogenSku,
       String sku,
       String memo}) = _$_PurchaseSettings;
 
@@ -281,6 +322,10 @@ abstract class _PurchaseSettings implements PurchaseSettings {
   int get amount;
   @override
   PurchaseItemCondition get condition;
+  @override
+  int get profit;
+  @override
+  bool get enableAutogenSku;
   @override
   String get sku;
   @override
