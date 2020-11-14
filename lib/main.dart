@@ -15,6 +15,7 @@ import 'package:amasearch/models/stock_item.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,6 +29,7 @@ import 'app.dart';
 // Toggle this for testing Crashlytics in your app locally.
 const _kTestingCrashlytics = false;
 const _kTestingAnalytics = false;
+const _kTestingPerformance = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,17 +59,14 @@ Future<void> initStartupOption() async {
 Future<void> initFirebase() async {
   await Firebase.initializeApp();
 
-  if (_kTestingCrashlytics) {
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  } else {
-    await FirebaseCrashlytics.instance
-        .setCrashlyticsCollectionEnabled(!kDebugMode);
-  }
-
-  if (_kTestingAnalytics) {
-    await FirebaseAnalytics().setAnalyticsCollectionEnabled(true);
-  } else {
-    await FirebaseAnalytics().setAnalyticsCollectionEnabled(!kDebugMode);
+  if (kDebugMode) {
+    await Future.wait([
+      FirebaseCrashlytics.instance
+          .setCrashlyticsCollectionEnabled(_kTestingCrashlytics),
+      FirebaseAnalytics().setAnalyticsCollectionEnabled(_kTestingAnalytics),
+      FirebasePerformance.instance
+          .setPerformanceCollectionEnabled(_kTestingPerformance),
+    ]);
   }
 
   // Pass all uncaught errors to Crashlytics.
