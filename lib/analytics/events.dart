@@ -19,4 +19,4 @@ const pushSearchButtonDeltaName = "Delta";
 const pushSearchButtonKeezonName = "Keezon";
 const pushSearchButtonSellerCentralName = "SellerCentral";
 const pushSearchButtonAmazonNewListName = "AmazonNewList";
-const pushSearchButtonAmazonUsedListName = "AmazonusedList";
+const pushSearchButtonAmazonUsedListName = "AmazonUsedList";
