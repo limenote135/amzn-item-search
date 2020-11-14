@@ -17,5 +17,7 @@ abstract class GeneralSettings with _$GeneralSettings {
     @HiveField(3)
     @Default("<yyyy><mm><dd>-<asin>-<cond>-<purchasePrice>-<quantity>")
         String skuFormat,
+    // 仕入れ先設定
+    @HiveField(4) @Default(<String>[]) List<String> retailers,
   }) = _GeneralSettings;
 }

@@ -24,6 +24,7 @@ class _$PurchaseSettingsTearOff {
       int profit = 0,
       bool enableAutogenSku = true,
       String sku = "",
+      String retailer = "",
       String memo = ""}) {
     return _PurchaseSettings(
       formKey: formKey,
@@ -35,6 +36,7 @@ class _$PurchaseSettingsTearOff {
       profit: profit,
       enableAutogenSku: enableAutogenSku,
       sku: sku,
+      retailer: retailer,
       memo: memo,
     );
   }
@@ -55,6 +57,7 @@ mixin _$PurchaseSettings {
   int get profit;
   bool get enableAutogenSku;
   String get sku;
+  String get retailer;
   String get memo;
 
   $PurchaseSettingsCopyWith<PurchaseSettings> get copyWith;
@@ -75,6 +78,7 @@ abstract class $PurchaseSettingsCopyWith<$Res> {
       int profit,
       bool enableAutogenSku,
       String sku,
+      String retailer,
       String memo});
 }
 
@@ -98,6 +102,7 @@ class _$PurchaseSettingsCopyWithImpl<$Res>
     Object profit = freezed,
     Object enableAutogenSku = freezed,
     Object sku = freezed,
+    Object retailer = freezed,
     Object memo = freezed,
   }) {
     return _then(_value.copyWith(
@@ -117,6 +122,7 @@ class _$PurchaseSettingsCopyWithImpl<$Res>
           ? _value.enableAutogenSku
           : enableAutogenSku as bool,
       sku: sku == freezed ? _value.sku : sku as String,
+      retailer: retailer == freezed ? _value.retailer : retailer as String,
       memo: memo == freezed ? _value.memo : memo as String,
     ));
   }
@@ -139,6 +145,7 @@ abstract class _$PurchaseSettingsCopyWith<$Res>
       int profit,
       bool enableAutogenSku,
       String sku,
+      String retailer,
       String memo});
 }
 
@@ -164,6 +171,7 @@ class __$PurchaseSettingsCopyWithImpl<$Res>
     Object profit = freezed,
     Object enableAutogenSku = freezed,
     Object sku = freezed,
+    Object retailer = freezed,
     Object memo = freezed,
   }) {
     return _then(_PurchaseSettings(
@@ -183,6 +191,7 @@ class __$PurchaseSettingsCopyWithImpl<$Res>
           ? _value.enableAutogenSku
           : enableAutogenSku as bool,
       sku: sku == freezed ? _value.sku : sku as String,
+      retailer: retailer == freezed ? _value.retailer : retailer as String,
       memo: memo == freezed ? _value.memo : memo as String,
     ));
   }
@@ -200,6 +209,7 @@ class _$_PurchaseSettings implements _PurchaseSettings {
       this.profit = 0,
       this.enableAutogenSku = true,
       this.sku = "",
+      this.retailer = "",
       this.memo = ""})
       : assert(formKey != null),
         assert(purchasePrice != null),
@@ -210,6 +220,7 @@ class _$_PurchaseSettings implements _PurchaseSettings {
         assert(profit != null),
         assert(enableAutogenSku != null),
         assert(sku != null),
+        assert(retailer != null),
         assert(memo != null);
 
   @override
@@ -240,11 +251,14 @@ class _$_PurchaseSettings implements _PurchaseSettings {
   final String sku;
   @JsonKey(defaultValue: "")
   @override
+  final String retailer;
+  @JsonKey(defaultValue: "")
+  @override
   final String memo;
 
   @override
   String toString() {
-    return 'PurchaseSettings(formKey: $formKey, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, amount: $amount, condition: $condition, profit: $profit, enableAutogenSku: $enableAutogenSku, sku: $sku, memo: $memo)';
+    return 'PurchaseSettings(formKey: $formKey, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, amount: $amount, condition: $condition, profit: $profit, enableAutogenSku: $enableAutogenSku, sku: $sku, retailer: $retailer, memo: $memo)';
   }
 
   @override
@@ -274,6 +288,9 @@ class _$_PurchaseSettings implements _PurchaseSettings {
                     .equals(other.enableAutogenSku, enableAutogenSku)) &&
             (identical(other.sku, sku) ||
                 const DeepCollectionEquality().equals(other.sku, sku)) &&
+            (identical(other.retailer, retailer) ||
+                const DeepCollectionEquality()
+                    .equals(other.retailer, retailer)) &&
             (identical(other.memo, memo) ||
                 const DeepCollectionEquality().equals(other.memo, memo)));
   }
@@ -290,6 +307,7 @@ class _$_PurchaseSettings implements _PurchaseSettings {
       const DeepCollectionEquality().hash(profit) ^
       const DeepCollectionEquality().hash(enableAutogenSku) ^
       const DeepCollectionEquality().hash(sku) ^
+      const DeepCollectionEquality().hash(retailer) ^
       const DeepCollectionEquality().hash(memo);
 
   @override
@@ -308,6 +326,7 @@ abstract class _PurchaseSettings implements PurchaseSettings {
       int profit,
       bool enableAutogenSku,
       String sku,
+      String retailer,
       String memo}) = _$_PurchaseSettings;
 
   @override
@@ -328,6 +347,8 @@ abstract class _PurchaseSettings implements PurchaseSettings {
   bool get enableAutogenSku;
   @override
   String get sku;
+  @override
+  String get retailer;
   @override
   String get memo;
   @override

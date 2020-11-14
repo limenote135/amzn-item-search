@@ -1,7 +1,7 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/pages/settings/target_profit_page/target_profit_dialog.dart';
+import 'package:amasearch/widgets/input_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -58,7 +58,13 @@ class _Body extends HookWidget {
           onTap: () async {
             final ret = await showDialog<int>(
               context: context,
-              builder: (context) => const TargetProfitDialog(),
+              builder: (context) => InputDialog<int>(
+                title: const Text("目標利益率"),
+                validate: (value) {
+                  final n = int.tryParse(value);
+                  return n != null && n > 0 ? n : null;
+                },
+              ),
             );
             if (ret != null) {
               context
