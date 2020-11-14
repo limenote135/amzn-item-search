@@ -29,6 +29,7 @@ class PurchaseSettingsController extends StateNotifier<PurchaseSettings> {
     int profit,
     bool enableAutogenSku,
     String sku,
+    String retailer,
     String memo,
   }) {
     state = state.copyWith(
@@ -40,6 +41,7 @@ class PurchaseSettingsController extends StateNotifier<PurchaseSettings> {
       profit: profit ?? state.profit,
       enableAutogenSku: enableAutogenSku ?? state.enableAutogenSku,
       sku: sku ?? state.sku,
+      retailer: retailer ?? state.retailer,
       memo: memo ?? state.memo,
     );
   }

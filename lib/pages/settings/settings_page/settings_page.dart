@@ -1,6 +1,7 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
 import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -68,6 +69,17 @@ class _Body extends HookWidget {
                 MaterialPageRoute<void>(
                   settings: const RouteSettings(name: SkuFormatPage.routeName),
                   builder: (context) => const SkuFormatPage(),
+                ));
+          },
+        ),
+        ListTile(
+          title: const Text("仕入れ先設定"),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  settings: const RouteSettings(name: RetailersPage.routeName),
+                  builder: (context) => const RetailersPage(),
                 ));
           },
         ),

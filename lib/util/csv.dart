@@ -26,6 +26,7 @@ class StockItemCsv {
         "コンディション",
         "発送方法",
         "SKU",
+        "仕入れ先",
         "コメント",
         "仕入れ日",
       ],
@@ -42,6 +43,7 @@ class StockItemCsv {
           _createConditionText(item),
           item.useFba ? "FBA" : "自己発送",
           item.sku,
+          item.retailer,
           item.memo,
           _createPurchaseDateText(item),
         ]

@@ -21,13 +21,14 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       enableTargetProfit: fields[1] as bool,
       targetProfitValue: fields[2] as int,
       skuFormat: fields[3] as String,
+      retailers: (fields[4] as List)?.cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_GeneralSettings obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       ..writeByte(2)
       ..write(obj.targetProfitValue)
       ..writeByte(3)
-      ..write(obj.skuFormat);
+      ..write(obj.skuFormat)
+      ..writeByte(4)
+      ..write(obj.retailers);
   }
 
   @override
