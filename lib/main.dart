@@ -12,6 +12,7 @@ import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -26,6 +27,7 @@ import 'app.dart';
 
 // Toggle this for testing Crashlytics in your app locally.
 const _kTestingCrashlytics = false;
+const _kTestingAnalytics = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +62,12 @@ Future<void> initFirebase() async {
   } else {
     await FirebaseCrashlytics.instance
         .setCrashlyticsCollectionEnabled(!kDebugMode);
+  }
+
+  if (_kTestingAnalytics) {
+    await FirebaseAnalytics().setAnalyticsCollectionEnabled(true);
+  } else {
+    await FirebaseAnalytics().setAnalyticsCollectionEnabled(!kDebugMode);
   }
 
   // Pass all uncaught errors to Crashlytics.
