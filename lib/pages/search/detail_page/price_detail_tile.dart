@@ -63,7 +63,7 @@ class PriceDetailTile extends HookWidget {
           ),
           TextLine(
             leading: const Text("粗利益"),
-            main: Text("${calcProfit(
+            main: Text("${calcProfitText(
               detail.price,
               item.prices.feeInfo,
               useFba: setting.useFba,

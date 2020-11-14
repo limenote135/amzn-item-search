@@ -60,6 +60,7 @@ extension StockItemExtension on StockItem {
       amount: amount,
       condition: cond,
       sku: sku,
+      enableAutogenSku: false, // StockPage で編集する際に呼ばれるので false に
       memo: memo,
     );
   }
