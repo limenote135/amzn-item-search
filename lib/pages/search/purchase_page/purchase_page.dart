@@ -4,10 +4,10 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
-import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/form.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -22,22 +22,21 @@ class PurchasePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("仕入れ設定"),
       ),
-      body: _Body(),
+      body: const _Body(),
     );
   }
 }
 
-// TODO: statefulWidget にする？
 class _Body extends HookWidget {
-  _Body({Key key}) : super(key: key);
-
-  Uint8List imageData;
+  const _Body({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
     final base = purchaseSettingsControllerProvider(item.asin);
     final formKey = useProvider(base.state.select((value) => value.formKey));
+
+    final image = useState<Uint8List>(null);
 
     return ProviderScope(
       overrides: [
@@ -47,7 +46,7 @@ class _Body extends HookWidget {
         onComplete: (bytes) {
           if (item.imageData == null) {
             // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
-            imageData = bytes.buffer.asUint8List();
+            image.value = bytes.buffer.asUint8List();
           }
         },
         action: RaisedButton(
@@ -60,10 +59,10 @@ class _Body extends HookWidget {
                 purchasePrice: data.purchasePrice,
                 sellPrice: data.sellPrice,
                 useFba: data.useFba,
-                profitPerItem: _calcProfit(
+                profitPerItem: calcProfit(
                     sellPrice: data.sellPrice,
                     purchasePrice: data.purchasePrice,
-                    feeInfo: item.prices.feeInfo,
+                    fee: item.prices.feeInfo,
                     useFba: data.useFba),
                 amount: data.amount,
                 condition: data.condition.toItemCondition(),
@@ -72,8 +71,9 @@ class _Body extends HookWidget {
                 memo: data.memo,
                 item: item.imageData != null
                     ? item
-                    : item.copyWith(imageData: imageData),
+                    : item.copyWith(imageData: image.value),
                 purchaseDate: DateTime.now().toUtc().toIso8601String(),
+                retailer: data.retailer,
               );
 
               context.read(stockItemListControllerProvider).add(stock);
@@ -86,21 +86,5 @@ class _Body extends HookWidget {
         ),
       ),
     );
-  }
-
-  // TODO: 重複なのでなんとかしたい
-  int _calcProfit({
-    @required int sellPrice,
-    @required int purchasePrice,
-    @required FeeInfo feeInfo,
-    @required bool useFba,
-  }) {
-    final fee = (sellPrice * feeInfo.referralFeeRate).round() +
-        feeInfo.variableClosingFee +
-        (useFba ? feeInfo.fbaFee : 0);
-
-    final profit = sellPrice - purchasePrice - fee;
-
-    return profit;
   }
 }

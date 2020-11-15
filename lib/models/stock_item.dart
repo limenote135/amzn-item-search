@@ -30,6 +30,7 @@ abstract class StockItem with _$StockItem {
     @HiveField(8) @required String sku,
     @HiveField(9) @required String memo,
     @HiveField(10) @required AsinData item,
+    @HiveField(11) @required String retailer,
   }) = _StockItem;
 }
 
@@ -60,6 +61,8 @@ extension StockItemExtension on StockItem {
       amount: amount,
       condition: cond,
       sku: sku,
+      enableAutogenSku: false, // StockPage で編集する際に呼ばれるので false に
+      retailer: retailer,
       memo: memo,
     );
   }

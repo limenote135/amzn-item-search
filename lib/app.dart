@@ -1,9 +1,11 @@
 import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/search_page/search_page.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
+import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,8 @@ class MyApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final observer = useProvider(analyticsObserverProvider);
+    final isDarkMode = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.isDarkMode));
     return MaterialApp(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
@@ -30,16 +34,7 @@ class MyApp extends HookWidget {
         );
       },
       title: 'amzn-item-search',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        dividerTheme: const DividerThemeData(
-          color: Colors.black,
-        ),
-      ),
+      theme: isDarkMode ? darkTheme : lightTheme,
       home: Stack(children: [
         const HomePage(),
         Updater(),
