@@ -23,7 +23,7 @@ class RetailerTile extends HookWidget {
               decoration: const InputDecoration(labelText: "仕入れ先"),
               textAlign: TextAlign.start,
               onSaved: (newValue) {
-                print(newValue);
+                context.read(base).update(retailer: newValue);
               },
             ),
           ),
