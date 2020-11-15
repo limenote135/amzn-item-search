@@ -64,15 +64,16 @@ class SkuTile extends HookWidget {
   }
 
   Widget _manualSkuWidget(BuildContext context, String text) {
+    final base = useProvider(currentPurchaseSettingsControllerProvider);
     return TextFormField(
       initialValue: text,
       keyboardType: TextInputType.url,
       decoration: const InputDecoration(labelText: "SKU"),
       textAlign: TextAlign.start,
       onSaved: (newValue) {
-        // if (newValue != settings.sku) {
-        //   //context.read(base).update(sku: newValue);
-        // }
+        if (newValue != text) {
+          context.read(base).update(sku: newValue);
+        }
       },
     );
   }
