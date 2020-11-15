@@ -67,18 +67,6 @@ android {
     }
     buildTypes {
         release {
-            file(rootProject.file('key.properties')).with { propFile ->
-                if (propFile.canRead()) {
-                    // because we can read the keystore
-                    // we are building locally // so sign locally // otherwise build an unsigned apk for later signing by the CI/CD provider  signingConfig signingConfigs.release
-                }
-            }
-
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    output.outputFileName = "app-release.apk"
-                }
-            }
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.release
@@ -92,8 +80,8 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.firebase:firebase-analytics:17.5.0'
-    implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
+    implementation 'com.google.firebase:firebase-analytics:18.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 }
 
