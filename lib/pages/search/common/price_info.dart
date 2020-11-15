@@ -1,3 +1,4 @@
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
@@ -36,6 +37,11 @@ class _PriceAndProfit extends HookWidget {
     final item = useProvider(currentAsinDataProvider);
     final settings = useProvider(searchSettingsControllerProvider.state);
 
+    final showTargetPrice = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.enableTargetProfit));
+    final targetPriceRate = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.targetProfitValue));
+
     final detail = getPriceDetail(
       item: item,
       condition: condition,
@@ -43,6 +49,7 @@ class _PriceAndProfit extends HookWidget {
       priorFba: settings.priorFba,
     );
     final smallSize = smallFontSize(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -65,7 +72,7 @@ class _PriceAndProfit extends HookWidget {
         Text.rich(
           TextSpan(text: "粗利益: ", children: [
             TextSpan(
-              text: calcProfit(
+              text: calcProfitText(
                 detail.price,
                 item.prices.feeInfo,
                 useFba: settings.useFba,
@@ -76,6 +83,22 @@ class _PriceAndProfit extends HookWidget {
           ]),
           style: smallSize,
         ),
+        if (showTargetPrice)
+          Text.rich(
+            TextSpan(text: "目標額: ", children: [
+              TextSpan(
+                text: numberFormatter.format(calcTargetPrice(
+                  sellPrice: detail.price,
+                  feeInfo: item.prices.feeInfo,
+                  targetRate: targetPriceRate,
+                  useFba: settings.useFba,
+                )),
+                style: strongTextStyle,
+              ),
+              const TextSpan(text: "円"),
+            ]),
+            style: smallSize,
+          ),
       ],
     );
   }

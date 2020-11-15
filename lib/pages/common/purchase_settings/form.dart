@@ -1,8 +1,15 @@
 import 'dart:typed_data';
 
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
+import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/common/purchase_settings/image_tile.dart';
+import 'package:amasearch/pages/common/purchase_settings/retailer_tile.dart';
+import 'package:amasearch/pages/common/purchase_settings/sku_tile.dart';
+import 'package:amasearch/pages/common/purchase_settings/target_price_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
+import 'package:amasearch/util/price_util.dart';
+import 'package:amasearch/util/sku_replacer.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
@@ -25,17 +32,21 @@ class PurchaseSettingsForm extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final item = useProvider(currentAsinDataProvider);
     final base = useProvider(currentPurchaseSettingsControllerProvider);
-    final formKey = useProvider(base.state.select((value) => value.formKey));
-    final useFba = useProvider(base.state.select((value) => value.useFba));
-    final sku = useProvider(base.state.select((value) => value.sku));
+    final settings = useProvider(base.state);
+
+    final skuFormat = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.skuFormat));
+
     final memo = useProvider(base.state.select((value) => value.memo));
 
     return Form(
-      key: formKey,
+      key: settings.formKey,
       onChanged: () {
         final form = Form.of(primaryFocus.context); //TODO: これでよいのか？
-        if (form.validate()) {
+        // 仕入れ先をプルダウンで選択した際に、primaryFocus.context が選択ダイアログになるため null になりうる？
+        if (form?.validate() ?? false) {
           form.save();
         }
       },
@@ -50,31 +61,37 @@ class PurchaseSettingsForm extends HookWidget {
           const ThemeDivider(),
           const InputPricesTile(),
           SwitchListTile(
-            value: useFba,
+            value: settings.useFba,
             title: const Text("FBA を利用する"),
             onChanged: (value) {
               unfocus();
-              context.read(base).update(useFba: value);
+              final profit = calcProfit(
+                  sellPrice: settings.sellPrice,
+                  purchasePrice: settings.purchasePrice,
+                  fee: item.prices.feeInfo,
+                  useFba: value);
+              final generatedSku = replaceSku(
+                format: skuFormat,
+                item: item,
+                settings: settings,
+                profit: profit,
+              );
+              context.read(base).update(
+                    useFba: value,
+                    profit: profit,
+                    sku: generatedSku,
+                  );
             },
           ),
           const InputPurchaseAmoutTile(),
           const ProfitTile(),
           const FeeTile(),
-          const ThemeDivider(),
+          const TargetPriceTile(),
           const ItemConditionTile(),
-          ListTile(
-            title: TextFormField(
-              initialValue: sku, // TODO: 初期値検討
-              keyboardType: TextInputType.url,
-              decoration: const InputDecoration(labelText: "SKU"),
-              textAlign: TextAlign.start,
-              onSaved: (newValue) {
-                if (newValue != sku) {
-                  context.read(base).update(sku: newValue);
-                }
-              },
-            ),
-          ),
+          const RetailerTile(),
+          const ThemeDivider(),
+          const SkuTile(),
+          const ThemeDivider(),
           ListTile(
             title: TextFormField(
               maxLines: null,

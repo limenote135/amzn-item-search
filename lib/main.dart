@@ -7,12 +7,15 @@ import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
+import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +28,8 @@ import 'app.dart';
 
 // Toggle this for testing Crashlytics in your app locally.
 const _kTestingCrashlytics = false;
+const _kTestingAnalytics = false;
+const _kTestingPerformance = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,11 +59,14 @@ Future<void> initStartupOption() async {
 Future<void> initFirebase() async {
   await Firebase.initializeApp();
 
-  if (_kTestingCrashlytics) {
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  } else {
-    await FirebaseCrashlytics.instance
-        .setCrashlyticsCollectionEnabled(!kDebugMode);
+  if (kDebugMode) {
+    await Future.wait([
+      FirebaseCrashlytics.instance
+          .setCrashlyticsCollectionEnabled(_kTestingCrashlytics),
+      FirebaseAnalytics().setAnalyticsCollectionEnabled(_kTestingAnalytics),
+      FirebasePerformance.instance
+          .setPerformanceCollectionEnabled(_kTestingPerformance),
+    ]);
   }
 
   // Pass all uncaught errors to Crashlytics.
@@ -79,6 +87,8 @@ Future<void> initHive() async {
     ..registerAdapter(PriceDetailAdapter())
     ..registerAdapter(FeeInfoAdapter())
     ..registerAdapter(StockItemAdapter())
+    ..registerAdapter(GeneralSettingsAdapter())
+    ..registerAdapter(ReadAloudPatternAdapter())
     ..registerAdapter(SearchSettingsAdapter())
     ..registerAdapter(FulfillmentChannelAdapter())
     ..registerAdapter(ItemConditionAdapter())

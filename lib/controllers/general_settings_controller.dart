@@ -1,0 +1,63 @@
+import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/general_settings.dart';
+import 'package:amasearch/util/hive_provider.dart';
+import 'package:hooks_riverpod/all.dart';
+
+final generalSettingsControllerProvider =
+    StateNotifierProvider((ref) => GeneralSettingsController(ref.read));
+
+class GeneralSettingsController extends StateNotifier<GeneralSettings> {
+  GeneralSettingsController(this._read) : super(const GeneralSettings()) {
+    _loadSettings();
+  }
+
+  final Reader _read;
+
+  void _loadSettings() {
+    final box = _read(settingsBoxProvider);
+    final settings = box.get(generalSettingsKeyName) as GeneralSettings;
+    if (settings != null) {
+      state = settings;
+    }
+    // 新規追加された項目が、ロード時にデフォルト値になっている可能性があるので一度保存する
+    box.put(generalSettingsKeyName, state);
+  }
+
+  void update({
+    bool isDarkMode,
+    // 目標利益率設定
+    bool enableTargetProfit,
+    int targetProfitValue,
+    String skuFormat,
+  }) {
+    final box = _read(settingsBoxProvider);
+    state = state.copyWith(
+      isDarkMode: isDarkMode ?? state.isDarkMode,
+      enableTargetProfit: enableTargetProfit ?? state.enableTargetProfit,
+      targetProfitValue: targetProfitValue ?? state.targetProfitValue,
+      skuFormat: skuFormat ?? state.skuFormat,
+    );
+    box.put(generalSettingsKeyName, state);
+  }
+
+  void addRetailer(String retailer) {
+    final box = _read(settingsBoxProvider);
+    final retailers = <String>[...state.retailers]..add(retailer);
+    state = state.copyWith(
+      retailers: retailers,
+    );
+    box.put(generalSettingsKeyName, state);
+  }
+
+  void removeRetailer(int index) {
+    final box = _read(settingsBoxProvider);
+    final retailers = <String>[
+      for (var i = 0; i < state.retailers.length; i++)
+        if (i != index) state.retailers[i]
+    ];
+    state = state.copyWith(
+      retailers: retailers,
+    );
+    box.put(generalSettingsKeyName, state);
+  }
+}

@@ -1,6 +1,9 @@
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/util/price_util.dart';
+import 'package:amasearch/util/sku_replacer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,10 +14,9 @@ class InputPricesTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final base = useProvider(currentPurchaseSettingsControllerProvider);
-    final purchasePrice =
-        useProvider(base.state.select((value) => value.purchasePrice));
-    final sellPrice =
-        useProvider(base.state.select((value) => value.sellPrice));
+    final settings = useProvider(base.state);
+    final skuFormat = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.skuFormat));
 
     final item = useProvider(currentAsinDataProvider);
     // 仮で初期値を新品最安値、無ければ中古最安値にする
@@ -29,7 +31,9 @@ class InputPricesTile extends HookWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                initialValue: purchasePrice > 0 ? "$purchasePrice" : "",
+                initialValue: settings.purchasePrice > 0
+                    ? "${settings.purchasePrice}"
+                    : "",
                 // TODO: これでいいか確認
                 keyboardType: const TextInputType.numberWithOptions(
                     signed: false, decimal: false),
@@ -42,8 +46,24 @@ class InputPricesTile extends HookWidget {
                 },
                 onSaved: (newValue) {
                   final price = int.tryParse(newValue);
-                  if (price != null && purchasePrice != price) {
-                    context.read(base).update(purchasePrice: price);
+                  if (price != null && settings.purchasePrice != price) {
+                    final profit = calcProfit(
+                        sellPrice: settings.sellPrice,
+                        purchasePrice: price,
+                        fee: item.prices.feeInfo,
+                        useFba: settings.useFba);
+                    final generatedSku = replaceSku(
+                      format: skuFormat,
+                      item: item,
+                      settings: settings,
+                      purchase: price,
+                      profit: profit,
+                    );
+                    context.read(base).update(
+                          purchasePrice: price,
+                          profit: profit,
+                          sku: generatedSku,
+                        );
                   }
                 },
               ),
@@ -54,7 +74,9 @@ class InputPricesTile extends HookWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                initialValue: "${sellPrice != 0 ? sellPrice : lowestPrice}",
+                initialValue: settings.sellPrice != 0
+                    ? "${settings.sellPrice}"
+                    : "$lowestPrice",
                 keyboardType: const TextInputType.numberWithOptions(
                     signed: false, decimal: false),
                 decoration:
@@ -66,8 +88,24 @@ class InputPricesTile extends HookWidget {
                 },
                 onSaved: (newValue) {
                   final price = int.tryParse(newValue);
-                  if (price != null && sellPrice != price) {
-                    context.read(base).update(sellPrice: price);
+                  if (price != null && settings.sellPrice != price) {
+                    final profit = calcProfit(
+                        sellPrice: price,
+                        purchasePrice: settings.purchasePrice,
+                        fee: item.prices.feeInfo,
+                        useFba: settings.useFba);
+                    final generatedSku = replaceSku(
+                      format: skuFormat,
+                      item: item,
+                      settings: settings,
+                      sell: price,
+                      profit: profit,
+                    );
+                    context.read(base).update(
+                          sellPrice: price,
+                          profit: profit,
+                          sku: generatedSku,
+                        );
                   }
                 },
               ),
