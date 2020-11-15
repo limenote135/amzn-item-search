@@ -4,6 +4,7 @@ import 'package:amasearch/pages/search/search_page/item_tile.dart';
 import 'package:amasearch/repository/bookoff.dart';
 import 'package:amasearch/repository/geo.dart';
 import 'package:amasearch/repository/tsutaya.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -69,14 +70,16 @@ class _TileImpl extends HookWidget {
   Widget build(BuildContext context) {
     final jan = useProvider(_currentJanProvider);
     final temp = useProvider(itemFutureProvider(jan));
+    final color =
+        isDark(context) ? Theme.of(context).backgroundColor : Colors.white;
     return temp.when(
-      loading: () => const ListTile(
-        tileColor: Colors.white,
-        title: Center(child: CircularProgressIndicator()),
+      loading: () => ListTile(
+        tileColor: color,
+        title: const Center(child: CircularProgressIndicator()),
       ),
       error: (error, stackTrace) => ListTile(
         title: Container(
-          color: Colors.white,
+          color: color,
           height: 30,
           child: Text("$error"),
         ),
@@ -86,7 +89,7 @@ class _TileImpl extends HookWidget {
         if (data.asins.isEmpty) {
           return Center(
             child: Container(
-              color: Colors.white,
+              color: color,
               height: 30,
               child: Text("${data.jan}: 見つかりませんでした"),
             ),
@@ -98,7 +101,7 @@ class _TileImpl extends HookWidget {
             currentItemControllerProvider.overrideWithValue(value),
           ],
           child: Container(
-            color: Colors.white,
+            color: color,
             child: const ItemTileImpl(),
           ),
         );
