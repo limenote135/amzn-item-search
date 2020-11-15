@@ -1,3 +1,5 @@
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/common/item_delete_handler.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
@@ -26,6 +28,9 @@ class SlidableTile extends HookWidget {
           color: Colors.blue,
           icon: Icons.add_shopping_cart,
           onTap: () {
+            context
+                .read(analyticsControllerProvider)
+                .logSingleEvent(directPurchaseEventName);
             Navigator.push(
               context,
               MaterialPageRoute<void>(

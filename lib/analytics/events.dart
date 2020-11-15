@@ -5,6 +5,7 @@ const searchEventName = "search";
 const shareEventName = "share";
 const deleteSearchHistoryEventName = "deleteSearchHistory";
 const deleteAllSearchHistoryEventName = "deleteAllSearchHistory";
+const directPurchaseEventName = "directPurchase";
 
 const searchEventJan = "searchJan";
 const searchEventWord = "searchWord";
@@ -18,4 +19,4 @@ const pushSearchButtonDeltaName = "Delta";
 const pushSearchButtonKeezonName = "Keezon";
 const pushSearchButtonSellerCentralName = "SellerCentral";
 const pushSearchButtonAmazonNewListName = "AmazonNewList";
-const pushSearchButtonAmazonUsedListName = "AmazonusedList";
+const pushSearchButtonAmazonUsedListName = "AmazonUsedList";
