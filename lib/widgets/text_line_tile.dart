@@ -31,10 +31,13 @@ class TextLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        leading,
-        const Spacer(),
-        main,
+        Padding(
+          padding: const EdgeInsets.only(right: 8),
+          child: leading,
+        ),
+        Flexible(child: main),
       ],
     );
   }
