@@ -55,9 +55,22 @@ class ItemListController extends StateNotifier<
         .toList();
   }
 
-  void add(String jan) {
+  void add(String raw) {
+    var jan = raw.trim();
+    if (jan.length == 12) {
+      // UPC-A は12桁なので、UPC として検索するか、先頭に0を足して13桁にして JAN として計算する必要がある
+      // ここでは後者の方法にする
+      jan = "0$jan";
+    }
+    if (jan.length > 13) {
+      if (jan.startsWith("45") || jan.startsWith("49")) {
+        jan = jan.substring(0, 13);
+      } else {
+        jan = jan.substring(jan.length - 13, jan.length);
+      }
+    }
     _read(analyticsControllerProvider).logSearchEvent(searchEventJan);
-    final future = itemFutureProvider(jan.trim());
+    final future = itemFutureProvider(jan);
     state = [future, ...state];
   }
 
