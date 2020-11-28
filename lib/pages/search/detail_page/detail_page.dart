@@ -2,6 +2,7 @@ import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
+import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/pages/search/detail_page/price_detail_tile.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
@@ -22,6 +23,7 @@ class DetailPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
+    final fromRoute = useProvider(fromRouteProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text("商品詳細"),
@@ -56,8 +58,13 @@ class DetailPage extends HookWidget {
             ),
             heroTag: onStartCameraHeroTag,
             onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  CameraPage.routeName, ModalRoute.withName("/"));
+              if (fromRoute == CameraPage.routeName) {
+                Navigator.of(context)
+                    .popUntil(ModalRoute.withName(CameraPage.routeName));
+              } else {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    CameraPage.routeName, ModalRoute.withName("/"));
+              }
             },
           ),
         ],
