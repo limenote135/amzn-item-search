@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.4.0+9999
+version: 0.4.1+9999
 
 environment:
   sdk: ">=2.9.0 <3.0.0"
@@ -25,7 +25,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_hooks: ^0.14.1
+  flutter_hooks: ^0.15.0
   hooks_riverpod: ^0.12.1
   state_notifier: ^0.6.0
   freezed_annotation: ^0.12.0
@@ -45,12 +45,12 @@ dependencies:
   path_provider: ^1.6.24
   csv: ^4.1.0
   share: ^0.6.5+4
-  firebase_core: ^0.5.2
+  firebase_core: ^0.5.2+1
   firebase_analytics: ^6.2.0
-  firebase_crashlytics: ^0.2.3
+  firebase_crashlytics: ^0.2.3+1
   firebase_remote_config: ^0.4.2
   firebase_performance: ^0.4.2
-  vibration: ^1.7.2
+  vibration: ^1.7.3
   euc: ^1.0.5+7
   flutter_web_browser: ^0.13.0
   package_info: ^0.4.3+2
@@ -66,8 +66,8 @@ dev_dependencies:
     sdk: flutter
   pedantic:
   pedantic_mono: ^1.10.0+3
-  build_runner: ^1.10.4
-  freezed: ^0.12.2
+  build_runner: ^1.10.6
+  freezed: ^0.12.3
   hive_generator: ^0.8.2
 
 # For information on the generic Dart part of this file, see the
