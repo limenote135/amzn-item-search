@@ -1,5 +1,6 @@
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,7 @@ class _InkWell extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
+    final fromRoute = useProvider(fromRouteProvider);
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -57,6 +59,7 @@ class _InkWell extends HookWidget {
             builder: (context) => ProviderScope(
               overrides: [
                 currentAsinDataProvider.overrideWithValue(item),
+                fromRouteProvider.overrideWithValue(fromRoute),
               ],
               child: const DetailPage(),
             ),
