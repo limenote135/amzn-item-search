@@ -1,6 +1,7 @@
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
+import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/item_select_page/item_tile.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -8,12 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
 
-class ItemSelectPage extends StatelessWidget {
+class ItemSelectPage extends HookWidget {
   const ItemSelectPage({Key key}) : super(key: key);
   static const routeName = "/search/item_select";
 
   @override
   Widget build(BuildContext context) {
+    final fromRoute = useProvider(fromRouteProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text("商品選択"),
@@ -26,8 +28,13 @@ class ItemSelectPage extends StatelessWidget {
         ),
         heroTag: onStartCameraHeroTag,
         onPressed: () {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              CameraPage.routeName, ModalRoute.withName("/"));
+          if (fromRoute == CameraPage.routeName) {
+            Navigator.of(context)
+                .popUntil(ModalRoute.withName(CameraPage.routeName));
+          } else {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                CameraPage.routeName, ModalRoute.withName("/"));
+          }
         },
       ),
     );
