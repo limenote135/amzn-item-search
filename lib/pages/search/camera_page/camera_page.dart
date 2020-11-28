@@ -38,8 +38,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
 
         if (_lastRead != result) {
           Vibration.vibrate(duration: 50, amplitude: 128);
-          _scaffoldKey.currentState.removeCurrentSnackBar();
-          _scaffoldKey.currentState.showSnackBar(SnackBar(
+          _scaffoldKey.currentState?.removeCurrentSnackBar();
+          _scaffoldKey.currentState?.showSnackBar(SnackBar(
             content: Text(result),
           ));
 
@@ -71,8 +71,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
           });
         } else if (DateTime.now().difference(_lastReadTime) >
             const Duration(seconds: 1)) {
-          _scaffoldKey.currentState.removeCurrentSnackBar();
-          _scaffoldKey.currentState.showSnackBar(SnackBar(
+          _scaffoldKey.currentState?.removeCurrentSnackBar();
+          _scaffoldKey.currentState?.showSnackBar(SnackBar(
             content: Text("$result は読み込み済みです"),
           ));
           setState(() {
@@ -158,7 +158,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     if (!_isCameraGranted) {
       return;
     }
-    if (Theme.of(context).platform == TargetPlatform.iOS) {
+    // context が null になる不具合がある？
+    if (context != null && Theme.of(context).platform == TargetPlatform.iOS) {
       Future.delayed(const Duration(seconds: 1), () {
         _scannerController
           ..startCamera()

@@ -1,4 +1,5 @@
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
@@ -65,6 +66,7 @@ class ItemTileImpl extends HookWidget {
     final controller = useProvider(currentItemControllerProvider);
     final item = useProvider(controller.state);
     final firstItem = item.asins.first;
+    final fromRoute = useProvider(fromRouteProvider);
     return InkWell(
       onTap: () {
         unfocus();
@@ -76,6 +78,7 @@ class ItemTileImpl extends HookWidget {
                 builder: (context) => ProviderScope(
                   overrides: [
                     currentAsinDataProvider.overrideWithValue(firstItem),
+                    fromRouteProvider.overrideWithValue(fromRoute),
                   ],
                   child: const DetailPage(),
                 ),
@@ -88,6 +91,7 @@ class ItemTileImpl extends HookWidget {
               builder: (context) => ProviderScope(
                 overrides: [
                   currentAsinListProvider.overrideWithValue(item.asins),
+                  fromRouteProvider.overrideWithValue(fromRoute),
                 ],
                 child: const ItemSelectPage(),
               ),
