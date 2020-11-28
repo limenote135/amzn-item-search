@@ -1,5 +1,7 @@
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/pages/search/camera_page/camera_page.dart';
+import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/search_page/item_tile.dart';
 import 'package:amasearch/repository/bookoff.dart';
 import 'package:amasearch/repository/geo.dart';
@@ -99,6 +101,7 @@ class _TileImpl extends HookWidget {
         return ProviderScope(
           overrides: [
             currentItemControllerProvider.overrideWithValue(value),
+            fromRouteProvider.overrideWithValue(CameraPage.routeName),
           ],
           child: Container(
             color: color,
