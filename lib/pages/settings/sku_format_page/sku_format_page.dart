@@ -2,7 +2,9 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
+import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/purchase_settings.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/sku_replacer.dart';
@@ -19,6 +21,13 @@ const _newSampleItem = AsinData(
   title: "商品名",
   rank: 0,
   quantity: "1",
+  prices: ItemPrices(
+    feeInfo: FeeInfo(
+      fbaFee: 30,
+      variableClosingFee: 0,
+      referralFeeRate: 15,
+    ),
+  ),
 );
 
 var _samplePurchaseSettings = PurchaseSettings(
@@ -28,6 +37,7 @@ var _samplePurchaseSettings = PurchaseSettings(
   condition: PurchaseItemCondition.newItem,
   profit: 50,
   amount: 2,
+  useFba: true,
 );
 
 class SkuFormatPage extends StatelessWidget {
@@ -105,6 +115,7 @@ class __PatternEditFormState extends State<_PatternEditForm> {
                 format: _textEditingController.text,
                 item: _newSampleItem,
                 settings: _samplePurchaseSettings,
+                purchase: 200,
               )),
             ],
           ),
@@ -142,6 +153,10 @@ class __PatternEditFormState extends State<_PatternEditForm> {
               child: const Text("状態"),
               onPressed: () => _addText(condVar),
             ),
+            RaisedButton(
+              child: const Text("購入数"),
+              onPressed: () => _addText(quantityVar),
+            ),
           ],
         ),
         Row(
@@ -160,8 +175,8 @@ class __PatternEditFormState extends State<_PatternEditForm> {
               onPressed: () => _addText(profitVar),
             ),
             RaisedButton(
-              child: const Text("購入数"),
-              onPressed: () => _addText(quantityVar),
+              child: const Text("損益分岐"),
+              onPressed: () => _addText(breakEvenVar),
             ),
           ],
         ),
