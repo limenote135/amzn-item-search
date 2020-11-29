@@ -13,6 +13,7 @@ const purchaseVar = "<purchasePrice>";
 const sellVar = "<sellPrice>";
 const profitVar = "<profit>";
 const quantityVar = "<quantity>";
+const breakEvenVar = "<breakEven>";
 
 String replaceSku({
   @required String format,
@@ -35,7 +36,14 @@ String replaceSku({
       .replaceAll(purchaseVar, (purchase ?? settings.purchasePrice).toString())
       .replaceAll(sellVar, (sell ?? settings.sellPrice).toString())
       .replaceAll(profitVar, (profit ?? settings.profit).toString())
-      .replaceAll(quantityVar, (quantity ?? settings.amount).toString());
+      .replaceAll(quantityVar, (quantity ?? settings.amount).toString())
+      .replaceAll(
+          breakEvenVar,
+          _calcBreakEven(
+            purchase: purchase,
+            settings: settings,
+            item: item,
+          ).toString());
 }
 
 String _conditionText(PurchaseItemCondition cond) {
@@ -52,4 +60,16 @@ String _conditionText(PurchaseItemCondition cond) {
       return "UAC";
   }
   throw Exception("Invalid Condition: $cond");
+}
+
+int _calcBreakEven({
+  @required int purchase,
+  @required PurchaseSettings settings,
+  @required AsinData item,
+}) {
+  final fbaFee = settings.useFba ? item.prices.feeInfo.fbaFee : 0;
+  final purchasePrice = purchase ?? settings.purchasePrice;
+  final temp = purchasePrice + fbaFee + item.prices.feeInfo.variableClosingFee;
+  final breakEven = temp / (1 - item.prices.feeInfo.referralFeeRate);
+  return breakEven.round();
 }
