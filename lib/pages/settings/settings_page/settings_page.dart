@@ -1,6 +1,7 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.dart';
 import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
 import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
@@ -80,6 +81,18 @@ class _Body extends HookWidget {
                 MaterialPageRoute<void>(
                   settings: const RouteSettings(name: RetailersPage.routeName),
                   builder: (context) => const RetailersPage(),
+                ));
+          },
+        ),
+        ListTile(
+          title: const Text("カスタムボタン設定"),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  settings:
+                      const RouteSettings(name: CustomButtonPage.routeName),
+                  builder: (context) => const CustomButtonPage(),
                 ));
           },
         ),
