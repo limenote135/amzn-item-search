@@ -54,6 +54,15 @@ abstract class GeneralSettings with _$GeneralSettings {
     @HiveField(9)
     @nullable
         double readAloudSpeed,
+    @HiveField(10)
+    @Default([
+      CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
+      CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
+      CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
+      CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
+      CustomButtonDetail(enable: false, title: "ボタン5", pattern: ""),
+    ])
+        List<CustomButtonDetail> customButtons,
   }) = _GeneralSettings;
 }
 
@@ -64,4 +73,14 @@ abstract class ReadAloudPattern with _$ReadAloudPattern {
     @HiveField(0) @required String title,
     @HiveField(1) @required String pattern,
   }) = _ReadAloudPattern;
+}
+
+@freezed
+abstract class CustomButtonDetail with _$CustomButtonDetail {
+  @HiveType(typeId: customButtonDetailTypeId)
+  const factory CustomButtonDetail({
+    @HiveField(0) @required bool enable,
+    @HiveField(1) @required String title,
+    @HiveField(2) @required String pattern,
+  }) = _CustomButtonDetail;
 }
