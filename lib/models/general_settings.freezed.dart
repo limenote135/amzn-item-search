@@ -28,7 +28,14 @@ class _$GeneralSettingsTearOff {
         const ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3)
       ],
       @HiveField(8) double readAloudVolume = 1.0,
-      @HiveField(9) @nullable double readAloudSpeed}) {
+      @HiveField(9) @nullable double readAloudSpeed,
+      @HiveField(10) List<CustomButtonDetail> customButtons = const [
+        const CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
+        const CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
+        const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
+        const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
+        const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
+      ]}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
@@ -40,6 +47,7 @@ class _$GeneralSettingsTearOff {
       readAloudPatterns: readAloudPatterns,
       readAloudVolume: readAloudVolume,
       readAloudSpeed: readAloudSpeed,
+      customButtons: customButtons,
     );
   }
 }
@@ -71,6 +79,8 @@ mixin _$GeneralSettings {
   @HiveField(9)
   @nullable
   double get readAloudSpeed;
+  @HiveField(10)
+  List<CustomButtonDetail> get customButtons;
 
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith;
 }
@@ -90,7 +100,8 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(6) int patternIndex,
       @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
       @HiveField(8) double readAloudVolume,
-      @HiveField(9) @nullable double readAloudSpeed});
+      @HiveField(9) @nullable double readAloudSpeed,
+      @HiveField(10) List<CustomButtonDetail> customButtons});
 }
 
 /// @nodoc
@@ -114,6 +125,7 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object readAloudPatterns = freezed,
     Object readAloudVolume = freezed,
     Object readAloudSpeed = freezed,
+    Object customButtons = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode:
@@ -141,6 +153,9 @@ class _$GeneralSettingsCopyWithImpl<$Res>
       readAloudSpeed: readAloudSpeed == freezed
           ? _value.readAloudSpeed
           : readAloudSpeed as double,
+      customButtons: customButtons == freezed
+          ? _value.customButtons
+          : customButtons as List<CustomButtonDetail>,
     ));
   }
 }
@@ -162,7 +177,8 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       @HiveField(6) int patternIndex,
       @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
       @HiveField(8) double readAloudVolume,
-      @HiveField(9) @nullable double readAloudSpeed});
+      @HiveField(9) @nullable double readAloudSpeed,
+      @HiveField(10) List<CustomButtonDetail> customButtons});
 }
 
 /// @nodoc
@@ -188,6 +204,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
     Object readAloudPatterns = freezed,
     Object readAloudVolume = freezed,
     Object readAloudSpeed = freezed,
+    Object customButtons = freezed,
   }) {
     return _then(_GeneralSettings(
       isDarkMode:
@@ -215,6 +232,9 @@ class __$GeneralSettingsCopyWithImpl<$Res>
       readAloudSpeed: readAloudSpeed == freezed
           ? _value.readAloudSpeed
           : readAloudSpeed as double,
+      customButtons: customButtons == freezed
+          ? _value.customButtons
+          : customButtons as List<CustomButtonDetail>,
     ));
   }
 }
@@ -237,7 +257,14 @@ class _$_GeneralSettings implements _GeneralSettings {
         const ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3)
       ],
       @HiveField(8) this.readAloudVolume = 1.0,
-      @HiveField(9) @nullable this.readAloudSpeed})
+      @HiveField(9) @nullable this.readAloudSpeed,
+      @HiveField(10) this.customButtons = const [
+        const CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
+        const CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
+        const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
+        const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
+        const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
+      ]})
       : assert(isDarkMode != null),
         assert(enableTargetProfit != null),
         assert(targetProfitValue != null),
@@ -246,7 +273,8 @@ class _$_GeneralSettings implements _GeneralSettings {
         assert(enableReadAloud != null),
         assert(patternIndex != null),
         assert(readAloudPatterns != null),
-        assert(readAloudVolume != null);
+        assert(readAloudVolume != null),
+        assert(customButtons != null);
 
   @JsonKey(defaultValue: false)
   @override
@@ -292,10 +320,20 @@ class _$_GeneralSettings implements _GeneralSettings {
   @HiveField(9)
   @nullable
   final double readAloudSpeed;
+  @JsonKey(defaultValue: const [
+    const CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
+    const CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
+    const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
+    const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
+    const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
+  ])
+  @override
+  @HiveField(10)
+  final List<CustomButtonDetail> customButtons;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons)';
   }
 
   @override
@@ -331,7 +369,10 @@ class _$_GeneralSettings implements _GeneralSettings {
                     .equals(other.readAloudVolume, readAloudVolume)) &&
             (identical(other.readAloudSpeed, readAloudSpeed) ||
                 const DeepCollectionEquality()
-                    .equals(other.readAloudSpeed, readAloudSpeed)));
+                    .equals(other.readAloudSpeed, readAloudSpeed)) &&
+            (identical(other.customButtons, customButtons) ||
+                const DeepCollectionEquality()
+                    .equals(other.customButtons, customButtons)));
   }
 
   @override
@@ -346,7 +387,8 @@ class _$_GeneralSettings implements _GeneralSettings {
       const DeepCollectionEquality().hash(patternIndex) ^
       const DeepCollectionEquality().hash(readAloudPatterns) ^
       const DeepCollectionEquality().hash(readAloudVolume) ^
-      const DeepCollectionEquality().hash(readAloudSpeed);
+      const DeepCollectionEquality().hash(readAloudSpeed) ^
+      const DeepCollectionEquality().hash(customButtons);
 
   @override
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
@@ -355,16 +397,18 @@ class _$_GeneralSettings implements _GeneralSettings {
 
 abstract class _GeneralSettings implements GeneralSettings {
   const factory _GeneralSettings(
-      {@HiveField(0) bool isDarkMode,
-      @HiveField(1) bool enableTargetProfit,
-      @HiveField(2) int targetProfitValue,
-      @HiveField(3) String skuFormat,
-      @HiveField(4) List<String> retailers,
-      @HiveField(5) bool enableReadAloud,
-      @HiveField(6) int patternIndex,
-      @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
-      @HiveField(8) double readAloudVolume,
-      @HiveField(9) @nullable double readAloudSpeed}) = _$_GeneralSettings;
+          {@HiveField(0) bool isDarkMode,
+          @HiveField(1) bool enableTargetProfit,
+          @HiveField(2) int targetProfitValue,
+          @HiveField(3) String skuFormat,
+          @HiveField(4) List<String> retailers,
+          @HiveField(5) bool enableReadAloud,
+          @HiveField(6) int patternIndex,
+          @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
+          @HiveField(8) double readAloudVolume,
+          @HiveField(9) @nullable double readAloudSpeed,
+          @HiveField(10) List<CustomButtonDetail> customButtons}) =
+      _$_GeneralSettings;
 
   @override
   @HiveField(0)
@@ -397,6 +441,9 @@ abstract class _GeneralSettings implements GeneralSettings {
   @HiveField(9)
   @nullable
   double get readAloudSpeed;
+  @override
+  @HiveField(10)
+  List<CustomButtonDetail> get customButtons;
   @override
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith;
 }
@@ -548,4 +595,179 @@ abstract class _ReadAloudPattern implements ReadAloudPattern {
   String get pattern;
   @override
   _$ReadAloudPatternCopyWith<_ReadAloudPattern> get copyWith;
+}
+
+/// @nodoc
+class _$CustomButtonDetailTearOff {
+  const _$CustomButtonDetailTearOff();
+
+// ignore: unused_element
+  _CustomButtonDetail call(
+      {@required @HiveField(0) bool enable,
+      @required @HiveField(1) String title,
+      @required @HiveField(2) String pattern}) {
+    return _CustomButtonDetail(
+      enable: enable,
+      title: title,
+      pattern: pattern,
+    );
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $CustomButtonDetail = _$CustomButtonDetailTearOff();
+
+/// @nodoc
+mixin _$CustomButtonDetail {
+  @HiveField(0)
+  bool get enable;
+  @HiveField(1)
+  String get title;
+  @HiveField(2)
+  String get pattern;
+
+  $CustomButtonDetailCopyWith<CustomButtonDetail> get copyWith;
+}
+
+/// @nodoc
+abstract class $CustomButtonDetailCopyWith<$Res> {
+  factory $CustomButtonDetailCopyWith(
+          CustomButtonDetail value, $Res Function(CustomButtonDetail) then) =
+      _$CustomButtonDetailCopyWithImpl<$Res>;
+  $Res call(
+      {@HiveField(0) bool enable,
+      @HiveField(1) String title,
+      @HiveField(2) String pattern});
+}
+
+/// @nodoc
+class _$CustomButtonDetailCopyWithImpl<$Res>
+    implements $CustomButtonDetailCopyWith<$Res> {
+  _$CustomButtonDetailCopyWithImpl(this._value, this._then);
+
+  final CustomButtonDetail _value;
+  // ignore: unused_field
+  final $Res Function(CustomButtonDetail) _then;
+
+  @override
+  $Res call({
+    Object enable = freezed,
+    Object title = freezed,
+    Object pattern = freezed,
+  }) {
+    return _then(_value.copyWith(
+      enable: enable == freezed ? _value.enable : enable as bool,
+      title: title == freezed ? _value.title : title as String,
+      pattern: pattern == freezed ? _value.pattern : pattern as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$CustomButtonDetailCopyWith<$Res>
+    implements $CustomButtonDetailCopyWith<$Res> {
+  factory _$CustomButtonDetailCopyWith(
+          _CustomButtonDetail value, $Res Function(_CustomButtonDetail) then) =
+      __$CustomButtonDetailCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@HiveField(0) bool enable,
+      @HiveField(1) String title,
+      @HiveField(2) String pattern});
+}
+
+/// @nodoc
+class __$CustomButtonDetailCopyWithImpl<$Res>
+    extends _$CustomButtonDetailCopyWithImpl<$Res>
+    implements _$CustomButtonDetailCopyWith<$Res> {
+  __$CustomButtonDetailCopyWithImpl(
+      _CustomButtonDetail _value, $Res Function(_CustomButtonDetail) _then)
+      : super(_value, (v) => _then(v as _CustomButtonDetail));
+
+  @override
+  _CustomButtonDetail get _value => super._value as _CustomButtonDetail;
+
+  @override
+  $Res call({
+    Object enable = freezed,
+    Object title = freezed,
+    Object pattern = freezed,
+  }) {
+    return _then(_CustomButtonDetail(
+      enable: enable == freezed ? _value.enable : enable as bool,
+      title: title == freezed ? _value.title : title as String,
+      pattern: pattern == freezed ? _value.pattern : pattern as String,
+    ));
+  }
+}
+
+@HiveType(typeId: customButtonDetailTypeId)
+
+/// @nodoc
+class _$_CustomButtonDetail implements _CustomButtonDetail {
+  const _$_CustomButtonDetail(
+      {@required @HiveField(0) this.enable,
+      @required @HiveField(1) this.title,
+      @required @HiveField(2) this.pattern})
+      : assert(enable != null),
+        assert(title != null),
+        assert(pattern != null);
+
+  @override
+  @HiveField(0)
+  final bool enable;
+  @override
+  @HiveField(1)
+  final String title;
+  @override
+  @HiveField(2)
+  final String pattern;
+
+  @override
+  String toString() {
+    return 'CustomButtonDetail(enable: $enable, title: $title, pattern: $pattern)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _CustomButtonDetail &&
+            (identical(other.enable, enable) ||
+                const DeepCollectionEquality().equals(other.enable, enable)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
+            (identical(other.pattern, pattern) ||
+                const DeepCollectionEquality().equals(other.pattern, pattern)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(enable) ^
+      const DeepCollectionEquality().hash(title) ^
+      const DeepCollectionEquality().hash(pattern);
+
+  @override
+  _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith =>
+      __$CustomButtonDetailCopyWithImpl<_CustomButtonDetail>(this, _$identity);
+}
+
+abstract class _CustomButtonDetail implements CustomButtonDetail {
+  const factory _CustomButtonDetail(
+      {@required @HiveField(0) bool enable,
+      @required @HiveField(1) String title,
+      @required @HiveField(2) String pattern}) = _$_CustomButtonDetail;
+
+  @override
+  @HiveField(0)
+  bool get enable;
+  @override
+  @HiveField(1)
+  String get title;
+  @override
+  @HiveField(2)
+  String get pattern;
+  @override
+  _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith;
 }

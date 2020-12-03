@@ -27,13 +27,21 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       readAloudPatterns: (fields[7] as List)?.cast<ReadAloudPattern>(),
       readAloudVolume: fields[8] as double,
       readAloudSpeed: fields[9] as double,
+      customButtons: (fields[10] as List)?.cast<CustomButtonDetail>() ??
+          [
+            CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
+            CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
+            CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
+            CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
+            CustomButtonDetail(enable: false, title: "ボタン5", pattern: ""),
+          ],
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_GeneralSettings obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
@@ -53,7 +61,9 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       ..writeByte(8)
       ..write(obj.readAloudVolume)
       ..writeByte(9)
-      ..write(obj.readAloudSpeed);
+      ..write(obj.readAloudSpeed)
+      ..writeByte(10)
+      ..write(obj.customButtons);
   }
 
   @override
@@ -100,6 +110,46 @@ class ReadAloudPatternAdapter extends TypeAdapter<_$_ReadAloudPattern> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is ReadAloudPatternAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class CustomButtonDetailAdapter extends TypeAdapter<_$_CustomButtonDetail> {
+  @override
+  final int typeId = 52;
+
+  @override
+  _$_CustomButtonDetail read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_CustomButtonDetail(
+      enable: fields[0] as bool,
+      title: fields[1] as String,
+      pattern: fields[2] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_CustomButtonDetail obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.enable)
+      ..writeByte(1)
+      ..write(obj.title)
+      ..writeByte(2)
+      ..write(obj.pattern);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CustomButtonDetailAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
