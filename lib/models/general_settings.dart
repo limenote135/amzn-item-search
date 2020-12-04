@@ -5,6 +5,8 @@ import 'package:hive/hive.dart';
 part 'general_settings.freezed.dart';
 part 'general_settings.g.dart';
 
+const _defaultSkuFormat =
+    "{yyyy}{mm}{dd}-{asin}-{cond}-{purchasePrice}-{quantity}";
 const _readAloudPattern1 = "{title}、新品利益{newProfit}円、"
     "中古利益{usedProfit}円、順位{rank}位です。";
 const _readAloudPattern2 = "{title}、新品利益{newProfit}円、順位{rank}位です。";
@@ -26,7 +28,7 @@ abstract class GeneralSettings with _$GeneralSettings {
         int targetProfitValue,
     // SKU 設定
     @HiveField(3)
-    @Default("<yyyy><mm><dd>-<asin>-<cond>-<purchasePrice>-<quantity>")
+    @Default(_defaultSkuFormat)
         String skuFormat,
     // 仕入れ先設定
     @HiveField(4)
