@@ -1,3 +1,5 @@
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/settings/read_aloud_page/pattern_settings_page.dart';
 import 'package:amasearch/pages/settings/read_aloud_page/slider_tile.dart';
@@ -39,6 +41,15 @@ class _Body extends HookWidget {
             context
                 .read(generalSettingsControllerProvider)
                 .update(enableReadAloud: value);
+            if (value) {
+              context.read(analyticsControllerProvider).setUserProp(
+                  readAloudPropName,
+                  settings.readAloudPatterns[settings.patternIndex].pattern);
+            } else {
+              context
+                  .read(analyticsControllerProvider)
+                  .setUserProp(readAloudPropName, "");
+            }
           },
         ),
         const ThemeDivider(),
@@ -79,6 +90,12 @@ class _Body extends HookWidget {
                   context
                       .read(generalSettingsControllerProvider)
                       .update(patterns: updatedPattern);
+
+                  if (settings.enableReadAloud && i == settings.patternIndex) {
+                    context.read(analyticsControllerProvider).setUserProp(
+                        readAloudPropName,
+                        settings.readAloudPatterns[i].pattern);
+                  }
                 });
               },
             ),
@@ -86,6 +103,11 @@ class _Body extends HookWidget {
               context
                   .read(generalSettingsControllerProvider)
                   .update(patternIndex: i);
+
+              if (settings.enableReadAloud) {
+                context.read(analyticsControllerProvider).setUserProp(
+                    readAloudPropName, settings.readAloudPatterns[i].pattern);
+              }
             },
           ),
         const ThemeDivider(),
