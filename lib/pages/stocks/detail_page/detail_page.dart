@@ -172,7 +172,7 @@ class _Body extends HookWidget {
         const ThemeDivider(),
         ProviderScope(
           overrides: [
-            currentAsinProvider.overrideWithValue(item.item.asin),
+            currentItemProvider.overrideWithValue(item.item),
           ],
           child: const SearchButtons(),
         ),
