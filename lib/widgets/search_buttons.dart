@@ -106,6 +106,9 @@ class SearchButtons extends HookWidget {
                 if (!url.startsWith("http")) {
                   return;
                 }
+                await context
+                    .read(analyticsControllerProvider)
+                    .logPushSearchButtonEvent(button.pattern);
                 await FlutterWebBrowser.openWebPage(url: url);
               },
             ),
