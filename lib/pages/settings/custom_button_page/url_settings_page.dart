@@ -1,5 +1,4 @@
 import 'package:amasearch/models/general_settings.dart';
-import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +73,6 @@ class __UrlEditFormState extends State<_UrlEditForm> {
 
   @override
   Widget build(BuildContext context) {
-    final smallSize = smallFontSize(context);
     return Column(
       children: [
         ListTile(
