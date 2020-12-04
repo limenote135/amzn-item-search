@@ -3,17 +3,17 @@ import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/purchase_settings.dart';
 import 'package:flutter/material.dart';
 
-const yearVar = "<yyyy>";
-const monthVar = "<mm>";
-const dayVar = "<dd>";
-const asinVar = "<asin>";
-const janVar = "<jan>";
-const condVar = "<cond>";
-const purchaseVar = "<purchasePrice>";
-const sellVar = "<sellPrice>";
-const profitVar = "<profit>";
-const quantityVar = "<quantity>";
-const breakEvenVar = "<breakEven>";
+const yearVar = "{yyyy}";
+const monthVar = "{mm}";
+const dayVar = "{dd}";
+const asinVar = "{asin}";
+const janVar = "{jan}";
+const condVar = "{cond}";
+const purchaseVar = "{purchasePrice}";
+const sellVar = "{sellPrice}";
+const profitVar = "{profit}";
+const quantityVar = "{quantity}";
+const breakEvenVar = "{breakEven}";
 
 String replaceSku({
   @required String format,
