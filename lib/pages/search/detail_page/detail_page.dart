@@ -127,7 +127,7 @@ class _Body extends HookWidget {
           const SellerListTile(),
           ProviderScope(
             overrides: [
-              currentAsinProvider.overrideWithValue(item.asin),
+              currentItemProvider.overrideWithValue(item),
             ],
             child: const SearchButtons(),
           ),
