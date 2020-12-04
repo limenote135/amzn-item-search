@@ -138,8 +138,10 @@ class __PatternEditFormState extends State<_PatternEditForm> {
             ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Wrap(
+          alignment: WrapAlignment.spaceEvenly,
+          spacing: 8,
+          direction: Axis.horizontal,
           children: [
             RaisedButton(
               child: const Text("ASIN"),
@@ -157,11 +159,6 @@ class __PatternEditFormState extends State<_PatternEditForm> {
               child: const Text("購入数"),
               onPressed: () => _addText(quantityVar),
             ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
             RaisedButton(
               child: const Text("仕入れ値"),
               onPressed: () => _addText(purchaseVar),
