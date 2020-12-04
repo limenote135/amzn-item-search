@@ -18,8 +18,7 @@ class _$GeneralSettingsTearOff {
       {@HiveField(0) bool isDarkMode = false,
       @HiveField(1) bool enableTargetProfit = false,
       @HiveField(2) int targetProfitValue = 10,
-      @HiveField(3) String skuFormat =
-          "<yyyy><mm><dd>-<asin>-<cond>-<purchasePrice>-<quantity>",
+      @HiveField(3) String skuFormat = _defaultSkuFormat,
       @HiveField(4) List<String> retailers = const <String>[],
       @HiveField(5) bool enableReadAloud = false,
       @HiveField(6) int patternIndex = 0,
@@ -228,8 +227,7 @@ class _$_GeneralSettings implements _GeneralSettings {
       {@HiveField(0) this.isDarkMode = false,
       @HiveField(1) this.enableTargetProfit = false,
       @HiveField(2) this.targetProfitValue = 10,
-      @HiveField(3) this.skuFormat =
-          "<yyyy><mm><dd>-<asin>-<cond>-<purchasePrice>-<quantity>",
+      @HiveField(3) this.skuFormat = _defaultSkuFormat,
       @HiveField(4) this.retailers = const <String>[],
       @HiveField(5) this.enableReadAloud = false,
       @HiveField(6) this.patternIndex = 0,
@@ -262,8 +260,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(2)
   final int targetProfitValue;
-  @JsonKey(
-      defaultValue: "<yyyy><mm><dd>-<asin>-<cond>-<purchasePrice>-<quantity>")
+  @JsonKey(defaultValue: _defaultSkuFormat)
   @override // SKU 設定
   @HiveField(3)
   final String skuFormat;
