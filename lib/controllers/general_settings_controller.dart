@@ -29,6 +29,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     bool enableTargetProfit,
     int targetProfitValue,
     String skuFormat,
+    List<CustomButtonDetail> customButtons,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -36,6 +37,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       enableTargetProfit: enableTargetProfit ?? state.enableTargetProfit,
       targetProfitValue: targetProfitValue ?? state.targetProfitValue,
       skuFormat: skuFormat ?? state.skuFormat,
+      customButtons: customButtons ?? state.customButtons,
     );
     box.put(generalSettingsKeyName, state);
   }
