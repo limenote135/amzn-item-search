@@ -5,6 +5,7 @@ import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.d
 import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
 import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
+import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_page.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -93,6 +94,21 @@ class _Body extends HookWidget {
                   settings:
                       const RouteSettings(name: CustomButtonPage.routeName),
                   builder: (context) => const CustomButtonPage(),
+                ));
+          },
+        ),
+        ListTile(
+          title: const Text("読み上げ設定"),
+          subtitle: settings.enableReadAloud == false
+              ? const Text("無効")
+              : Text(settings.readAloudPatterns[settings.patternIndex].title),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  settings: const RouteSettings(
+                      name: ReadAloudSettingsPage.routeName),
+                  builder: (context) => const ReadAloudSettingsPage(),
                 ));
           },
         ),

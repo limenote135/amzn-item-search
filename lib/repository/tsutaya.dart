@@ -1,5 +1,6 @@
 import 'package:amasearch/controllers/item_controller.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/item_interceptor.dart';
 import 'package:hooks_riverpod/all.dart';
 
 const _tsutayaCodeLength = 16;
@@ -15,5 +16,5 @@ final tsutayaItemFutureProvider =
     FutureProvider.family<StateNotifierProvider<ItemController>, String>(
         (ref, code) async {
   final jan = getTsutayaJanCode(code);
-  return ref.watch(itemFutureProvider(jan).future);
+  return ref.watch(itemFutureProvider(InterceptorParams(code: jan)).future);
 });
