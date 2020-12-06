@@ -8,6 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+final currentFbaFeeProvider = ScopedProvider((_) => 0);
+
+const _bigSizeFbaFee = 589;
+const _moreBigSizeFbaFee = 3061;
+
 class TileImage extends HookWidget {
   const TileImage({Key key, this.onComplete}) : super(key: key);
 
@@ -17,6 +22,7 @@ class TileImage extends HookWidget {
   Widget build(BuildContext context) {
     final asinData = useProvider(currentAsinDataProvider);
     final asinCount = useProvider(currentAsinCountProvider);
+    final fbaFee = useProvider(currentFbaFeeProvider);
 
     final captionSize = captionSizeBlackText(context);
     return ConstrainedBox(
@@ -34,6 +40,15 @@ class TileImage extends HookWidget {
               alignment: Alignment.center,
               color: Colors.red[400],
               child: Text("プレ値", style: captionSize),
+            ),
+          if (fbaFee >= _bigSizeFbaFee)
+            Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              color: Colors.lightGreen[200],
+              child: fbaFee >= _moreBigSizeFbaFee
+                  ? Text("特大型", style: captionSize)
+                  : Text("大型", style: captionSize),
             ),
           if (asinCount > 1)
             Container(
