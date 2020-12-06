@@ -6,6 +6,7 @@ import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
 import 'package:amasearch/pages/search/search_page/slidable_delete_tile.dart';
 import 'package:amasearch/pages/search/search_page/slidable_tile.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -67,6 +68,7 @@ class ItemTileImpl extends HookWidget {
     final item = useProvider(controller.state);
     final firstItem = item.asins.first;
     final fromRoute = useProvider(fromRouteProvider);
+    final fbaFee = firstItem.prices?.feeInfo?.fbaFee ?? 0;
     return InkWell(
       onTap: () {
         unfocus();
@@ -105,6 +107,7 @@ class ItemTileImpl extends HookWidget {
           currentAsinCountProvider.overrideWithValue(item.asins.length),
           currentSearchDateProvider.overrideWithValue(item.searchDate),
           isEllipsisProvider.overrideWithValue(true),
+          currentFbaFeeProvider.overrideWithValue(fbaFee),
         ],
         child: SearchItemTile(
           onComplete: (bytes) {
