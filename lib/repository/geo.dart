@@ -19,7 +19,7 @@ final geoJanFutureProvider =
   if (resp.jan == "") {
     return code;
   }
-  return resp.code;
+  return resp.jan;
 });
 
 final geoItemFutureProvider =
