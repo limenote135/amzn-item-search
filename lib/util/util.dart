@@ -8,3 +8,6 @@ bool isDark(BuildContext context) {
   return Theme.of(context).brightness == Brightness.dark;
 }
 
+String urlEncode(String str) {
+  return Uri.encodeQueryComponent(str).replaceAll("+", "%20");
+}

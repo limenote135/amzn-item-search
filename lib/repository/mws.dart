@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:amasearch/models/enums/item_condition.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -88,7 +89,7 @@ class MwsRepository {
     final params = SplayTreeMap<String, String>();
 
     params["MarketplaceId"] = _mwsMarketPlaceId;
-    params["Query"] = Uri.encodeQueryComponent(query);
+    params["Query"] = query;
     const path = "/Products/2011-10-01";
     final resp = await _doRequest(path, "ListMatchingProducts", params);
 
@@ -113,9 +114,9 @@ class MwsRepository {
 
     var body = "";
     params.forEach((key, value) {
-      body += "$key=${Uri.encodeQueryComponent(value)}&";
+      body += "$key=${urlEncode(value)}&";
     });
-    body += "Signature=${Uri.encodeQueryComponent(signature)}";
+    body += "Signature=${urlEncode(signature)}";
 
     final dio = _read(dioProvider);
     final url = Uri(scheme: "https", host: _mwsHost, path: path);
@@ -130,7 +131,7 @@ class MwsRepository {
       String path, SplayTreeMap<String, String> params) {
     var query = "";
     params.forEach((key, value) {
-      query += "$key=${Uri.encodeQueryComponent(value)}&";
+      query += "$key=${urlEncode(value)}&";
     });
     query = query.substring(0, query.isEmpty ? 0 : query.length - 1);
     return "POST\n$_mwsHost\n$path\n$query";
