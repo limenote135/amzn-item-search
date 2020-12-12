@@ -14,21 +14,21 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
 
 const _newSampleItem = AsinData(
-  jan: "450000000000000",
-  asin: "ASIN",
-  listPrice: 0,
-  imageUrl: "",
-  title: "商品名",
-  rank: 0,
-  quantity: "1",
-  prices: ItemPrices(
-    feeInfo: FeeInfo(
-      fbaFee: 30,
-      variableClosingFee: 0,
-      referralFeeRate: 15,
+    jan: "450000000000000",
+    asin: "ASIN",
+    listPrice: 0,
+    imageUrl: "",
+    title: "商品名",
+    rank: 0,
+    quantity: "1",
+    prices: ItemPrices(
+      feeInfo: FeeInfo(
+        fbaFee: 30,
+        variableClosingFee: 0,
+        referralFeeRate: 15,
+      ),
     ),
-  ),
-);
+    category: "カテゴリー");
 
 var _samplePurchaseSettings = PurchaseSettings(
   formKey: GlobalKey<FormState>(),
