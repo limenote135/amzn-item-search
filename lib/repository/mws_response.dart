@@ -3,6 +3,7 @@ import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/repository/mws_category.dart';
 import 'package:flutter/material.dart';
 import 'package:xml/xml.dart';
 
@@ -35,6 +36,12 @@ class GetMatchingProductForIdResponse {
               ?.text ??
           "0";
 
+      final categoryStr =
+          product.findAllElements("ns2:ProductGroup").firstOrDefault()?.text;
+      final category = categoryMap.containsKey(categoryStr)
+          ? categoryMap[categoryStr]
+          : categoryStr;
+
       final rank = int.tryParse(rankEl) ?? 0;
 
       final price = double.tryParse(listPrice)?.floor() ?? 0;
@@ -48,6 +55,7 @@ class GetMatchingProductForIdResponse {
         rank: rank,
         quantity: quantity ?? " - ",
         listPrice: price,
+        category: category,
       ));
     }
 
@@ -86,6 +94,12 @@ class GetMatchingProductForIdResponse {
               ?.text ??
           "0";
 
+      final categoryStr =
+          product.findAllElements("ns2:ProductGroup").firstOrDefault()?.text;
+      final category = categoryMap.containsKey(categoryStr)
+          ? categoryMap[categoryStr]
+          : categoryStr;
+
       final rank = int.tryParse(rankEl) ?? 0;
 
       final price = int.tryParse(listPrice)?.floor() ?? 0;
@@ -99,6 +113,7 @@ class GetMatchingProductForIdResponse {
         rank: rank,
         quantity: quantity ?? " - ",
         listPrice: price,
+        category: category,
       ));
     }
 

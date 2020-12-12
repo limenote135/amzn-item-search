@@ -196,7 +196,8 @@ class _$AsinDataTearOff {
       @required @HiveField(5) int rank,
       @required @HiveField(6) String quantity,
       @HiveField(7) ItemPrices prices,
-      @HiveField(8) Uint8List imageData}) {
+      @HiveField(8) Uint8List imageData,
+      @required @HiveField(9) String category}) {
     return _AsinData(
       jan: jan,
       asin: asin,
@@ -207,6 +208,7 @@ class _$AsinDataTearOff {
       quantity: quantity,
       prices: prices,
       imageData: imageData,
+      category: category,
     );
   }
 }
@@ -235,6 +237,8 @@ mixin _$AsinData {
   ItemPrices get prices;
   @HiveField(8)
   Uint8List get imageData;
+  @HiveField(9)
+  String get category;
 
   $AsinDataCopyWith<AsinData> get copyWith;
 }
@@ -252,7 +256,8 @@ abstract class $AsinDataCopyWith<$Res> {
       @HiveField(5) int rank,
       @HiveField(6) String quantity,
       @HiveField(7) ItemPrices prices,
-      @HiveField(8) Uint8List imageData});
+      @HiveField(8) Uint8List imageData,
+      @HiveField(9) String category});
 
   $ItemPricesCopyWith<$Res> get prices;
 }
@@ -276,6 +281,7 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
     Object quantity = freezed,
     Object prices = freezed,
     Object imageData = freezed,
+    Object category = freezed,
   }) {
     return _then(_value.copyWith(
       jan: jan == freezed ? _value.jan : jan as String,
@@ -288,6 +294,7 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
       prices: prices == freezed ? _value.prices : prices as ItemPrices,
       imageData:
           imageData == freezed ? _value.imageData : imageData as Uint8List,
+      category: category == freezed ? _value.category : category as String,
     ));
   }
 
@@ -316,7 +323,8 @@ abstract class _$AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
       @HiveField(5) int rank,
       @HiveField(6) String quantity,
       @HiveField(7) ItemPrices prices,
-      @HiveField(8) Uint8List imageData});
+      @HiveField(8) Uint8List imageData,
+      @HiveField(9) String category});
 
   @override
   $ItemPricesCopyWith<$Res> get prices;
@@ -342,6 +350,7 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
     Object quantity = freezed,
     Object prices = freezed,
     Object imageData = freezed,
+    Object category = freezed,
   }) {
     return _then(_AsinData(
       jan: jan == freezed ? _value.jan : jan as String,
@@ -354,6 +363,7 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
       prices: prices == freezed ? _value.prices : prices as ItemPrices,
       imageData:
           imageData == freezed ? _value.imageData : imageData as Uint8List,
+      category: category == freezed ? _value.category : category as String,
     ));
   }
 }
@@ -371,14 +381,16 @@ class _$_AsinData implements _AsinData {
       @required @HiveField(5) this.rank,
       @required @HiveField(6) this.quantity,
       @HiveField(7) this.prices,
-      @HiveField(8) this.imageData})
+      @HiveField(8) this.imageData,
+      @required @HiveField(9) this.category})
       : assert(jan != null),
         assert(asin != null),
         assert(listPrice != null),
         assert(imageUrl != null),
         assert(title != null),
         assert(rank != null),
-        assert(quantity != null);
+        assert(quantity != null),
+        assert(category != null);
 
   @override
   @HiveField(0)
@@ -407,10 +419,13 @@ class _$_AsinData implements _AsinData {
   @override
   @HiveField(8)
   final Uint8List imageData;
+  @override
+  @HiveField(9)
+  final String category;
 
   @override
   String toString() {
-    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData)';
+    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category)';
   }
 
   @override
@@ -438,7 +453,10 @@ class _$_AsinData implements _AsinData {
                 const DeepCollectionEquality().equals(other.prices, prices)) &&
             (identical(other.imageData, imageData) ||
                 const DeepCollectionEquality()
-                    .equals(other.imageData, imageData)));
+                    .equals(other.imageData, imageData)) &&
+            (identical(other.category, category) ||
+                const DeepCollectionEquality()
+                    .equals(other.category, category)));
   }
 
   @override
@@ -452,7 +470,8 @@ class _$_AsinData implements _AsinData {
       const DeepCollectionEquality().hash(rank) ^
       const DeepCollectionEquality().hash(quantity) ^
       const DeepCollectionEquality().hash(prices) ^
-      const DeepCollectionEquality().hash(imageData);
+      const DeepCollectionEquality().hash(imageData) ^
+      const DeepCollectionEquality().hash(category);
 
   @override
   _$AsinDataCopyWith<_AsinData> get copyWith =>
@@ -469,7 +488,8 @@ abstract class _AsinData implements AsinData {
       @required @HiveField(5) int rank,
       @required @HiveField(6) String quantity,
       @HiveField(7) ItemPrices prices,
-      @HiveField(8) Uint8List imageData}) = _$_AsinData;
+      @HiveField(8) Uint8List imageData,
+      @required @HiveField(9) String category}) = _$_AsinData;
 
   @override
   @HiveField(0)
@@ -498,6 +518,9 @@ abstract class _AsinData implements AsinData {
   @override
   @HiveField(8)
   Uint8List get imageData;
+  @override
+  @HiveField(9)
+  String get category;
   @override
   _$AsinDataCopyWith<_AsinData> get copyWith;
 }
