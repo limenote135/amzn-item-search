@@ -87,6 +87,12 @@ class _ItemTileBody extends HookWidget {
         ),
         Row(
           children: [
+            Expanded(child: Text(item.category, style: smallSize)),
+            Expanded(child: Text("セット数: ${item.quantity} 個", style: smallSize)),
+          ],
+        ),
+        Row(
+          children: [
             Expanded(
               child: Text.rich(
                 TextSpan(
@@ -110,11 +116,6 @@ class _ItemTileBody extends HookWidget {
                 style: smallSize,
               ),
             )
-          ],
-        ),
-        Row(
-          children: [
-            Text("セット数: ${item.quantity} 個", style: smallSize),
           ],
         ),
         const PriceInfo(),
