@@ -66,13 +66,14 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       quantity: fields[6] as String,
       prices: fields[7] as ItemPrices,
       imageData: fields[8] as Uint8List,
+      category: fields[9] as String ?? "",
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_AsinData obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.jan)
       ..writeByte(1)
@@ -90,7 +91,9 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       ..writeByte(7)
       ..write(obj.prices)
       ..writeByte(8)
-      ..write(obj.imageData);
+      ..write(obj.imageData)
+      ..writeByte(9)
+      ..write(obj.category);
   }
 
   @override

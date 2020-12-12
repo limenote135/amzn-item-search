@@ -143,5 +143,6 @@ abstract class AsinData with _$AsinData {
     @HiveField(6) @required String quantity, // セット数
     @HiveField(7) ItemPrices prices,
     @HiveField(8) Uint8List imageData,
+    @HiveField(9) @required String category,
   }) = _AsinData;
 }
