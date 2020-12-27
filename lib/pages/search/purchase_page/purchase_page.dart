@@ -16,6 +16,18 @@ class PurchasePage extends StatelessWidget {
   const PurchasePage({Key key}) : super(key: key);
   static const routeName = "/search/purchase";
 
+  static Route<void> route(AsinData item) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => ProviderScope(
+        overrides: [
+          currentAsinDataProvider.overrideWithValue(item),
+        ],
+        child: const PurchasePage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

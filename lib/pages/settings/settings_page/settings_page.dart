@@ -2,10 +2,10 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.dart';
+import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_page.dart';
 import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
 import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
-import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_page.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -54,12 +54,9 @@ class _Body extends HookWidget {
               : Text("${settings.targetProfitValue} %"),
           onTap: () {
             Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  settings:
-                      const RouteSettings(name: TargetProfitPage.routeName),
-                  builder: (context) => const TargetProfitPage(),
-                ));
+              context,
+              TargetProfitPage.route(),
+            );
           },
         ),
         ListTile(
@@ -67,34 +64,27 @@ class _Body extends HookWidget {
           subtitle: Text("${settings.skuFormat}"),
           onTap: () {
             Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  settings: const RouteSettings(name: SkuFormatPage.routeName),
-                  builder: (context) => const SkuFormatPage(),
-                ));
+              context,
+              SkuFormatPage.route(),
+            );
           },
         ),
         ListTile(
           title: const Text("仕入れ先設定"),
           onTap: () {
             Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  settings: const RouteSettings(name: RetailersPage.routeName),
-                  builder: (context) => const RetailersPage(),
-                ));
+              context,
+              RetailersPage.route(),
+            );
           },
         ),
         ListTile(
           title: const Text("カスタムボタン設定"),
           onTap: () {
             Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  settings:
-                      const RouteSettings(name: CustomButtonPage.routeName),
-                  builder: (context) => const CustomButtonPage(),
-                ));
+              context,
+              CustomButtonPage.route(),
+            );
           },
         ),
         ListTile(
@@ -104,12 +94,9 @@ class _Body extends HookWidget {
               : Text(settings.readAloudPatterns[settings.patternIndex].title),
           onTap: () {
             Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  settings: const RouteSettings(
-                      name: ReadAloudSettingsPage.routeName),
-                  builder: (context) => const ReadAloudSettingsPage(),
-                ));
+              context,
+              ReadAloudSettingsPage.route(),
+            );
           },
         ),
         const ThemeDivider(),

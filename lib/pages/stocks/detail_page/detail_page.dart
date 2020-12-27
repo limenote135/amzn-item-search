@@ -20,6 +20,18 @@ class DetailPage extends HookWidget {
   const DetailPage({Key key}) : super(key: key);
   static const routeName = "/stocks/detail";
 
+  static Route<void> route(StockItem item) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => ProviderScope(
+        overrides: [
+          currentStockItemProvider.overrideWithValue(item),
+        ],
+        child: const DetailPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentStockItemProvider);
@@ -47,23 +59,11 @@ class DetailPage extends HookWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.edit),
         onPressed: () {
+          final ctrl =
+              initPurchaseSettingsControllerProvider(item.toPurchaseSettings());
           Navigator.push<void>(
             context,
-            MaterialPageRoute(
-              settings: const RouteSettings(name: EditPage.routeName),
-              builder: (context) {
-                final ctrl = initPurchaseSettingsControllerProvider(
-                    item.toPurchaseSettings());
-                return ProviderScope(
-                  overrides: [
-                    currentStockItemProvider.overrideWithValue(item),
-                    currentPurchaseSettingsControllerProvider
-                        .overrideWithValue(ctrl),
-                  ],
-                  child: const EditPage(),
-                );
-              },
-            ),
+            EditPage.route(item, ctrl),
           );
         },
       ),
