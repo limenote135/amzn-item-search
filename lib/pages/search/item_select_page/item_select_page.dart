@@ -13,6 +13,19 @@ class ItemSelectPage extends HookWidget {
   const ItemSelectPage({Key key}) : super(key: key);
   static const routeName = "/search/item_select";
 
+  static Route<void> route(List<AsinData> asins, String fromRoute) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => ProviderScope(
+        overrides: [
+          currentAsinListProvider.overrideWithValue(asins),
+          fromRouteProvider.overrideWithValue(fromRoute),
+        ],
+        child: const ItemSelectPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final fromRoute = useProvider(fromRouteProvider);

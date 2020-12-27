@@ -16,6 +16,18 @@ class UrlSettingsPage extends StatelessWidget {
   const UrlSettingsPage({Key key}) : super(key: key);
   static const String routeName = "/settings/custom_button/url";
 
+  static Route<CustomButtonDetail> route(CustomButtonDetail button) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => ProviderScope(
+        overrides: [
+          currentButtonProvider.overrideWithValue(button),
+        ],
+        child: const UrlSettingsPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

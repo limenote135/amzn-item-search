@@ -1,5 +1,4 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/models/general_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,6 +8,13 @@ import 'url_settings_page.dart';
 class CustomButtonPage extends StatelessWidget {
   const CustomButtonPage({Key key}) : super(key: key);
   static const String routeName = "/settings/custom_button";
+
+  static Route<void> route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const CustomButtonPage(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +56,7 @@ class _Body extends HookWidget {
           onTap: () async {
             final button = await Navigator.push(
               context,
-              MaterialPageRoute<CustomButtonDetail>(
-                builder: (context) => ProviderScope(
-                  overrides: [
-                    currentButtonProvider
-                        .overrideWithValue(settings.customButtons[index]),
-                  ],
-                  child: const UrlSettingsPage(),
-                ),
-              ),
+              UrlSettingsPage.route(settings.customButtons[index]),
             );
 
             if (button == null) {
