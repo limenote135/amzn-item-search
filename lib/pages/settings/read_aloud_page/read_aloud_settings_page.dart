@@ -14,6 +14,13 @@ class ReadAloudSettingsPage extends StatelessWidget {
   const ReadAloudSettingsPage({Key key}) : super(key: key);
   static const String routeName = "/settings/read_aloud";
 
+  static Route<void> route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const ReadAloudSettingsPage(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,16 +70,10 @@ class _Body extends HookWidget {
               icon: const Icon(Icons.settings),
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute<String>(
-                      builder: (context) => ProviderScope(
-                        overrides: [
-                          currentPatternProvider.overrideWithValue(
-                              settings.readAloudPatterns[i].pattern)
-                        ],
-                        child: const PatternSettingsPage(),
-                      ),
-                    )).then((value) {
+                  context,
+                  PatternSettingsPage.route(
+                      settings.readAloudPatterns[i].pattern),
+                ).then((value) {
                   if (value == null) {
                     return;
                   }

@@ -74,30 +74,13 @@ class ItemTileImpl extends HookWidget {
         unfocus();
         if (item.asins.length == 1) {
           Navigator.push(
-              context,
-              MaterialPageRoute<void>(
-                settings: const RouteSettings(name: DetailPage.routeName),
-                builder: (context) => ProviderScope(
-                  overrides: [
-                    currentAsinDataProvider.overrideWithValue(firstItem),
-                    fromRouteProvider.overrideWithValue(fromRoute),
-                  ],
-                  child: const DetailPage(),
-                ),
-              ));
+            context,
+            DetailPage.route(firstItem, fromRoute),
+          );
         } else {
           Navigator.push(
             context,
-            MaterialPageRoute<void>(
-              settings: const RouteSettings(name: ItemSelectPage.routeName),
-              builder: (context) => ProviderScope(
-                overrides: [
-                  currentAsinListProvider.overrideWithValue(item.asins),
-                  fromRouteProvider.overrideWithValue(fromRoute),
-                ],
-                child: const ItemSelectPage(),
-              ),
-            ),
+            ItemSelectPage.route(item.asins, fromRoute),
           );
         }
       },
