@@ -44,6 +44,13 @@ class SkuFormatPage extends StatelessWidget {
   const SkuFormatPage({Key key}) : super(key: key);
   static const String routeName = "/settings/sku";
 
+  static Route<void> route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const SkuFormatPage(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

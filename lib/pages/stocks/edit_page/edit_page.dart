@@ -14,6 +14,20 @@ class EditPage extends StatelessWidget {
   const EditPage({Key key}) : super(key: key);
   static const routeName = "/stocks/edit";
 
+  static Route<void> route(StockItem item,
+      AutoDisposeStateNotifierProvider<PurchaseSettingsController> ctrl) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => ProviderScope(
+        overrides: [
+          currentStockItemProvider.overrideWithValue(item),
+          currentPurchaseSettingsControllerProvider.overrideWithValue(ctrl),
+        ],
+        child: const EditPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
