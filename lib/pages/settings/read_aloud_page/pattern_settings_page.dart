@@ -12,6 +12,18 @@ class PatternSettingsPage extends StatelessWidget {
   const PatternSettingsPage({Key key}) : super(key: key);
   static const String routeName = "/settings/read_aloud/pattern";
 
+  static Route<String> route(String pattern) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => ProviderScope(
+        overrides: [
+          currentPatternProvider.overrideWithValue(pattern),
+        ],
+        child: const PatternSettingsPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

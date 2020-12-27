@@ -9,6 +9,13 @@ class RetailersPage extends StatelessWidget {
   const RetailersPage({Key key}) : super(key: key);
   static const String routeName = "/settings/retailer";
 
+  static Route<void> route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const RetailersPage(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

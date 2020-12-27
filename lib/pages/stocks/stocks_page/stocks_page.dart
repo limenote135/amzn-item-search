@@ -236,15 +236,7 @@ class _InkWell extends HookWidget {
         } else {
           Navigator.push(
             context,
-            MaterialPageRoute<void>(
-              settings: const RouteSettings(name: DetailPage.routeName),
-              builder: (context) => ProviderScope(
-                overrides: [
-                  currentStockItemProvider.overrideWithValue(item),
-                ],
-                child: const DetailPage(),
-              ),
-            ),
+            DetailPage.route(item),
           );
         }
       },
