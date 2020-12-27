@@ -10,6 +10,13 @@ class TargetProfitPage extends StatelessWidget {
   const TargetProfitPage({Key key}) : super(key: key);
   static const String routeName = "/settings/targetProfit";
 
+  static Route<void> route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const TargetProfitPage(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

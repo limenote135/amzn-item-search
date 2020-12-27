@@ -20,6 +20,19 @@ class DetailPage extends HookWidget {
   const DetailPage({Key key}) : super(key: key);
   static const routeName = "/search/detail";
 
+  static Route<void> route(AsinData item, String fromRoute) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => ProviderScope(
+        overrides: [
+          currentAsinDataProvider.overrideWithValue(item),
+          fromRouteProvider.overrideWithValue(fromRoute),
+        ],
+        child: const DetailPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
@@ -39,15 +52,7 @@ class DetailPage extends HookWidget {
             ),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute<void>(
-                settings: const RouteSettings(name: PurchasePage.routeName),
-                builder: (context) => ProviderScope(
-                  overrides: [
-                    currentAsinDataProvider.overrideWithValue(item),
-                  ],
-                  child: const PurchasePage(),
-                ),
-              ),
+              PurchasePage.route(item),
             ),
           ),
           const Spacer(),

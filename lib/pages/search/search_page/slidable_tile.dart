@@ -33,15 +33,7 @@ class SlidableTile extends HookWidget {
                 .logSingleEvent(directPurchaseEventName);
             Navigator.push(
               context,
-              MaterialPageRoute<void>(
-                settings: const RouteSettings(name: PurchasePage.routeName),
-                builder: (context) => ProviderScope(
-                  overrides: [
-                    currentAsinDataProvider.overrideWithValue(firstItem),
-                  ],
-                  child: const PurchasePage(),
-                ),
-              ),
+              PurchasePage.route(firstItem),
             );
           },
         ),
