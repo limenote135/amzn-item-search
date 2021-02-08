@@ -41,6 +41,9 @@ class InputPricesTile extends HookWidget {
                     const InputDecoration(labelText: "仕入れ値", suffixText: "円"),
                 textAlign: TextAlign.end,
                 validator: (value) {
+                  if (value == "") {
+                    return null;
+                  }
                   final val = int.tryParse(value);
                   return val != null ? null : "不正な値です";
                 },
