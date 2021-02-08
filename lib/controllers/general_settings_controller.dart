@@ -1,4 +1,5 @@
 import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -35,6 +36,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     List<ReadAloudPattern> patterns,
     double readAloudVolume,
     double readAloudSpeed,
+    List<CsvColumn> csvOrder,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -48,6 +50,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       readAloudPatterns: patterns ?? state.readAloudPatterns,
       readAloudVolume: readAloudVolume ?? state.readAloudVolume,
       readAloudSpeed: readAloudSpeed ?? state.readAloudSpeed,
+      csvOrder: csvOrder ?? state.csvOrder,
     );
     box.put(generalSettingsKeyName, state);
   }
