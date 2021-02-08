@@ -65,6 +65,7 @@ class _Body extends HookWidget {
           child: const Text("仕入れる"),
           onPressed: () {
             if (formKey.currentState.validate()) {
+              formKey.currentState.save();
               final data = context.read(base.state);
 
               final stock = StockItem(
