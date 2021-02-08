@@ -37,9 +37,9 @@ final itemPricesFutureProvider =
     newPrices: newPrice.prices,
     usedPrices: usedPrice.prices,
     feeInfo: FeeInfo(
-      referralFeeRate: feeInfo.referralFeeRate,
-      variableClosingFee: feeInfo.variableClosingFee,
-      fbaFee: feeInfo.fbaFees,
+      referralFeeRate: feeInfo.referralFeeRate ?? 0,
+      variableClosingFee: feeInfo.variableClosingFee ?? 0,
+      fbaFee: feeInfo.fbaFees ?? 0,
     ),
   );
 
