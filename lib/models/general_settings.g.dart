@@ -35,13 +35,30 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
             CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
             CustomButtonDetail(enable: false, title: "ボタン5", pattern: ""),
           ],
+      csvOrder: (fields[11] as List)?.cast<CsvColumn>() ??
+          [
+            CsvColumn.asin,
+            CsvColumn.jan,
+            CsvColumn.title,
+            CsvColumn.sellPrice,
+            CsvColumn.purchasePrice,
+            CsvColumn.profit,
+            CsvColumn.listingPrice,
+            CsvColumn.quantity,
+            CsvColumn.condition,
+            CsvColumn.shipment,
+            CsvColumn.sku,
+            CsvColumn.retailer,
+            CsvColumn.comment,
+            CsvColumn.purchaseDate
+          ],
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_GeneralSettings obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
@@ -63,7 +80,9 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       ..writeByte(9)
       ..write(obj.readAloudSpeed)
       ..writeByte(10)
-      ..write(obj.customButtons);
+      ..write(obj.customButtons)
+      ..writeByte(11)
+      ..write(obj.csvOrder);
   }
 
   @override

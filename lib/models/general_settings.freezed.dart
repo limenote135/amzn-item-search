@@ -35,6 +35,22 @@ class _$GeneralSettingsTearOff {
         const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
         const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
         const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
+      ],
+      @HiveField(11) List<CsvColumn> csvOrder = const [
+        CsvColumn.asin,
+        CsvColumn.jan,
+        CsvColumn.title,
+        CsvColumn.sellPrice,
+        CsvColumn.purchasePrice,
+        CsvColumn.profit,
+        CsvColumn.listingPrice,
+        CsvColumn.quantity,
+        CsvColumn.condition,
+        CsvColumn.shipment,
+        CsvColumn.sku,
+        CsvColumn.retailer,
+        CsvColumn.comment,
+        CsvColumn.purchaseDate
       ]}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
@@ -48,6 +64,7 @@ class _$GeneralSettingsTearOff {
       readAloudVolume: readAloudVolume,
       readAloudSpeed: readAloudSpeed,
       customButtons: customButtons,
+      csvOrder: csvOrder,
     );
   }
 }
@@ -81,6 +98,8 @@ mixin _$GeneralSettings {
   double get readAloudSpeed;
   @HiveField(10)
   List<CustomButtonDetail> get customButtons;
+  @HiveField(11)
+  List<CsvColumn> get csvOrder;
 
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith;
 }
@@ -101,7 +120,8 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
       @HiveField(8) double readAloudVolume,
       @HiveField(9) @nullable double readAloudSpeed,
-      @HiveField(10) List<CustomButtonDetail> customButtons});
+      @HiveField(10) List<CustomButtonDetail> customButtons,
+      @HiveField(11) List<CsvColumn> csvOrder});
 }
 
 /// @nodoc
@@ -126,6 +146,7 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object readAloudVolume = freezed,
     Object readAloudSpeed = freezed,
     Object customButtons = freezed,
+    Object csvOrder = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode:
@@ -156,6 +177,8 @@ class _$GeneralSettingsCopyWithImpl<$Res>
       customButtons: customButtons == freezed
           ? _value.customButtons
           : customButtons as List<CustomButtonDetail>,
+      csvOrder:
+          csvOrder == freezed ? _value.csvOrder : csvOrder as List<CsvColumn>,
     ));
   }
 }
@@ -178,7 +201,8 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
       @HiveField(8) double readAloudVolume,
       @HiveField(9) @nullable double readAloudSpeed,
-      @HiveField(10) List<CustomButtonDetail> customButtons});
+      @HiveField(10) List<CustomButtonDetail> customButtons,
+      @HiveField(11) List<CsvColumn> csvOrder});
 }
 
 /// @nodoc
@@ -205,6 +229,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
     Object readAloudVolume = freezed,
     Object readAloudSpeed = freezed,
     Object customButtons = freezed,
+    Object csvOrder = freezed,
   }) {
     return _then(_GeneralSettings(
       isDarkMode:
@@ -235,6 +260,8 @@ class __$GeneralSettingsCopyWithImpl<$Res>
       customButtons: customButtons == freezed
           ? _value.customButtons
           : customButtons as List<CustomButtonDetail>,
+      csvOrder:
+          csvOrder == freezed ? _value.csvOrder : csvOrder as List<CsvColumn>,
     ));
   }
 }
@@ -264,6 +291,22 @@ class _$_GeneralSettings implements _GeneralSettings {
         const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
         const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
         const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
+      ],
+      @HiveField(11) this.csvOrder = const [
+        CsvColumn.asin,
+        CsvColumn.jan,
+        CsvColumn.title,
+        CsvColumn.sellPrice,
+        CsvColumn.purchasePrice,
+        CsvColumn.profit,
+        CsvColumn.listingPrice,
+        CsvColumn.quantity,
+        CsvColumn.condition,
+        CsvColumn.shipment,
+        CsvColumn.sku,
+        CsvColumn.retailer,
+        CsvColumn.comment,
+        CsvColumn.purchaseDate
       ]})
       : assert(isDarkMode != null),
         assert(enableTargetProfit != null),
@@ -274,7 +317,8 @@ class _$_GeneralSettings implements _GeneralSettings {
         assert(patternIndex != null),
         assert(readAloudPatterns != null),
         assert(readAloudVolume != null),
-        assert(customButtons != null);
+        assert(customButtons != null),
+        assert(csvOrder != null);
 
   @JsonKey(defaultValue: false)
   @override
@@ -330,10 +374,29 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(10)
   final List<CustomButtonDetail> customButtons;
+  @JsonKey(defaultValue: const [
+    CsvColumn.asin,
+    CsvColumn.jan,
+    CsvColumn.title,
+    CsvColumn.sellPrice,
+    CsvColumn.purchasePrice,
+    CsvColumn.profit,
+    CsvColumn.listingPrice,
+    CsvColumn.quantity,
+    CsvColumn.condition,
+    CsvColumn.shipment,
+    CsvColumn.sku,
+    CsvColumn.retailer,
+    CsvColumn.comment,
+    CsvColumn.purchaseDate
+  ])
+  @override
+  @HiveField(11)
+  final List<CsvColumn> csvOrder;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder)';
   }
 
   @override
@@ -372,7 +435,10 @@ class _$_GeneralSettings implements _GeneralSettings {
                     .equals(other.readAloudSpeed, readAloudSpeed)) &&
             (identical(other.customButtons, customButtons) ||
                 const DeepCollectionEquality()
-                    .equals(other.customButtons, customButtons)));
+                    .equals(other.customButtons, customButtons)) &&
+            (identical(other.csvOrder, csvOrder) ||
+                const DeepCollectionEquality()
+                    .equals(other.csvOrder, csvOrder)));
   }
 
   @override
@@ -388,7 +454,8 @@ class _$_GeneralSettings implements _GeneralSettings {
       const DeepCollectionEquality().hash(readAloudPatterns) ^
       const DeepCollectionEquality().hash(readAloudVolume) ^
       const DeepCollectionEquality().hash(readAloudSpeed) ^
-      const DeepCollectionEquality().hash(customButtons);
+      const DeepCollectionEquality().hash(customButtons) ^
+      const DeepCollectionEquality().hash(csvOrder);
 
   @override
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
@@ -397,18 +464,18 @@ class _$_GeneralSettings implements _GeneralSettings {
 
 abstract class _GeneralSettings implements GeneralSettings {
   const factory _GeneralSettings(
-          {@HiveField(0) bool isDarkMode,
-          @HiveField(1) bool enableTargetProfit,
-          @HiveField(2) int targetProfitValue,
-          @HiveField(3) String skuFormat,
-          @HiveField(4) List<String> retailers,
-          @HiveField(5) bool enableReadAloud,
-          @HiveField(6) int patternIndex,
-          @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
-          @HiveField(8) double readAloudVolume,
-          @HiveField(9) @nullable double readAloudSpeed,
-          @HiveField(10) List<CustomButtonDetail> customButtons}) =
-      _$_GeneralSettings;
+      {@HiveField(0) bool isDarkMode,
+      @HiveField(1) bool enableTargetProfit,
+      @HiveField(2) int targetProfitValue,
+      @HiveField(3) String skuFormat,
+      @HiveField(4) List<String> retailers,
+      @HiveField(5) bool enableReadAloud,
+      @HiveField(6) int patternIndex,
+      @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
+      @HiveField(8) double readAloudVolume,
+      @HiveField(9) @nullable double readAloudSpeed,
+      @HiveField(10) List<CustomButtonDetail> customButtons,
+      @HiveField(11) List<CsvColumn> csvOrder}) = _$_GeneralSettings;
 
   @override
   @HiveField(0)
@@ -444,6 +511,9 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(10)
   List<CustomButtonDetail> get customButtons;
+  @override
+  @HiveField(11)
+  List<CsvColumn> get csvOrder;
   @override
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith;
 }
