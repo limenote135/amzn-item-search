@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
@@ -90,6 +91,7 @@ Future<void> initHive() async {
     ..registerAdapter(GeneralSettingsAdapter())
     ..registerAdapter(ReadAloudPatternAdapter())
     ..registerAdapter(CustomButtonDetailAdapter())
+    ..registerAdapter(CsvColumnAdapter())
     ..registerAdapter(SearchSettingsAdapter())
     ..registerAdapter(FulfillmentChannelAdapter())
     ..registerAdapter(ItemConditionAdapter())
@@ -107,7 +109,7 @@ Future<void> initHive() async {
 }
 
 Future<void> deleteBoxes() async {
-  await Hive.deleteBoxFromDisk(searchItemBoxName);
-  await Hive.deleteBoxFromDisk(stockItemBoxName);
+  // await Hive.deleteBoxFromDisk(searchItemBoxName);
+  // await Hive.deleteBoxFromDisk(stockItemBoxName);
   await Hive.deleteBoxFromDisk(settingsBoxName);
 }

@@ -1,4 +1,5 @@
 import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -63,6 +64,24 @@ abstract class GeneralSettings with _$GeneralSettings {
       CustomButtonDetail(enable: false, title: "ボタン5", pattern: ""),
     ])
         List<CustomButtonDetail> customButtons,
+    @HiveField(11)
+    @Default([
+      CsvColumn.asin,
+      CsvColumn.jan,
+      CsvColumn.title,
+      CsvColumn.sellPrice,
+      CsvColumn.purchasePrice,
+      CsvColumn.profit,
+      CsvColumn.listingPrice,
+      CsvColumn.quantity,
+      CsvColumn.condition,
+      CsvColumn.shipment,
+      CsvColumn.sku,
+      CsvColumn.retailer,
+      CsvColumn.comment,
+      CsvColumn.purchaseDate
+    ])
+        List<CsvColumn> csvOrder,
   }) = _GeneralSettings;
 }
 
