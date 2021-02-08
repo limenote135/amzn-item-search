@@ -1,5 +1,6 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/stock_item.dart';
@@ -108,10 +109,12 @@ class StocksPage extends HookWidget {
   Future<void> handleAction(
       BuildContext context, _StockPageActions value) async {
     final itemList = context.read(stockItemListControllerProvider.state);
+    final settings = context.read(generalSettingsControllerProvider.state);
 
     switch (value) {
       case _StockPageActions.share:
-        final file = await StockItemCsv.create("StockList", itemList);
+        final file =
+            await StockItemCsv.create("StockList", itemList, settings.csvOrder);
         await Share.shareFiles([file.absolute.path], subject: "仕入れ済み商品一覧");
         await context
             .read(analyticsControllerProvider)

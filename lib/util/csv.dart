@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
@@ -9,49 +10,74 @@ import 'package:euc/jis.dart';
 import 'package:path_provider/path_provider.dart';
 
 class StockItemCsv {
-  static Future<File> create(String filename, List<StockItem> items) async {
+  static Future<File> create(
+      String filename, List<StockItem> items, List<CsvColumn> order) async {
     final tempDir = await getTemporaryDirectory();
     final csvDirPath = tempDir.absolute.path;
     final file = File("$csvDirPath/$filename.csv");
     final data = <List<Object>>[
-      [
-        "ASIN",
-        "JAN",
-        "商品名",
-        "販売予定価格",
-        "仕入れ価格",
-        "見込み利益",
-        "参考価格",
-        "仕入れ個数",
-        "コンディション",
-        "発送方法",
-        "SKU",
-        "仕入れ先",
-        "コメント",
-        "仕入れ日",
-      ],
-      for (final item in items)
-        [
-          item.item.asin,
-          item.item.jan,
-          item.item.title,
-          item.sellPrice,
-          item.purchasePrice,
-          item.profitPerItem,
-          item.item.listPrice,
-          item.amount,
-          _createConditionText(item),
-          item.useFba ? "FBA" : "自己発送",
-          item.sku,
-          item.retailer,
-          item.memo,
-          _createPurchaseDateText(item),
-        ]
+      _createHeader(order),
+      for (final item in items) _createData(item, order)
     ];
     final csvData = const ListToCsvConverter().convert(data);
     final converted = ShiftJIS().encode(csvData);
     file.writeAsBytesSync(converted);
     return file;
+  }
+
+  static List<String> _createHeader(List<CsvColumn> order) {
+    return <String>[for (final o in order) o.toDisplayString()];
+  }
+
+  static List<Object> _createData(StockItem item, List<CsvColumn> order) {
+    final ret = <Object>[];
+    for (final o in order) {
+      switch (o) {
+        case CsvColumn.asin:
+          ret.add(item.item.asin);
+          break;
+        case CsvColumn.jan:
+          ret.add(item.item.jan);
+          break;
+        case CsvColumn.title:
+          ret.add(item.item.title);
+          break;
+        case CsvColumn.sellPrice:
+          ret.add(item.sellPrice);
+          break;
+        case CsvColumn.purchasePrice:
+          ret.add(item.purchasePrice);
+          break;
+        case CsvColumn.profit:
+          ret.add(item.profitPerItem);
+          break;
+        case CsvColumn.listingPrice:
+          ret.add(item.item.listPrice);
+          break;
+        case CsvColumn.quantity:
+          ret.add(item.amount);
+          break;
+        case CsvColumn.condition:
+          ret.add(_createConditionText(item));
+          break;
+        case CsvColumn.shipment:
+          ret.add(item.useFba ? "FBA" : "自己発送");
+          break;
+        case CsvColumn.sku:
+          ret.add(item.sku);
+          break;
+        case CsvColumn.retailer:
+          ret.add(item.retailer);
+          break;
+        case CsvColumn.comment:
+          ret.add(item.memo);
+          break;
+        case CsvColumn.purchaseDate:
+          ret.add(_createPurchaseDateText(item));
+          break;
+      }
+    }
+    return ret;
   }
 
   static String _createConditionText(StockItem item) {
