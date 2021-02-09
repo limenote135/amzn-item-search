@@ -160,6 +160,10 @@ class _Body extends HookWidget {
           leading: const Text("仕入れ先"),
           main: Text(item.retailer),
         ),
+        TextListTile(
+          leading: const Text("仕入れ日"),
+          main: Text(DateTime.parse(item.purchaseDate).toLocal().dayFormat()),
+        ),
         ListTile(
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

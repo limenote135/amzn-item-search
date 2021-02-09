@@ -62,6 +62,7 @@ class _Body extends HookWidget {
               final data = context.read(base.state);
               context.read(stockItemListControllerProvider).update(
                     item.copyWith(
+                      purchaseDate: data.purchaseDate,
                       purchasePrice: data.purchasePrice,
                       sellPrice: data.sellPrice,
                       useFba: data.useFba,

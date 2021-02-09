@@ -18,7 +18,11 @@ final initPurchaseSettingsControllerProvider = StateNotifierProvider.autoDispose
 
 class PurchaseSettingsController extends StateNotifier<PurchaseSettings> {
   PurchaseSettingsController({PurchaseSettings init})
-      : super(init ?? PurchaseSettings(formKey: GlobalKey<FormState>()));
+      : super(init ??
+            PurchaseSettings(
+              formKey: GlobalKey<FormState>(),
+              purchaseDate: DateTime.now().toUtc().toIso8601String(),
+            ));
 
   void update({
     int purchasePrice,
@@ -31,6 +35,7 @@ class PurchaseSettingsController extends StateNotifier<PurchaseSettings> {
     String sku,
     String retailer,
     String memo,
+    DateTime purchaseDate,
   }) {
     state = state.copyWith(
       purchasePrice: purchasePrice ?? state.purchasePrice,
@@ -43,6 +48,8 @@ class PurchaseSettingsController extends StateNotifier<PurchaseSettings> {
       sku: sku ?? state.sku,
       retailer: retailer ?? state.retailer,
       memo: memo ?? state.memo,
+      purchaseDate:
+          purchaseDate?.toUtc()?.toIso8601String() ?? state.purchaseDate,
     );
   }
 }

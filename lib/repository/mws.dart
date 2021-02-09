@@ -3,10 +3,10 @@ import 'dart:convert';
 
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:amasearch/util/uuid.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
 import 'common.dart';
 import 'mws_response.dart';
@@ -22,7 +22,6 @@ class MwsRepository {
   static const _mwsMarketPlaceId = "A1VC38T7YXB528";
   static const _mwsSecretKey = "7KoH64GCjlaGbws68LCnZloYgOo0PAT4liTpY5OK";
   static const _mwsSellerId = "A35GS7WUCDVERP";
-  static final Uuid _uuid = Uuid();
 
   final Reader _read;
 
@@ -67,6 +66,7 @@ class MwsRepository {
   Future<GetMyFeesEstimateResponse> getMyFeesEstimate(String asin, int price,
       {bool useFba = true}) async {
     final params = SplayTreeMap<String, String>();
+    final uuid = _read(uuidProvider);
 
     const base = "FeesEstimateRequestList.FeesEstimateRequest.1";
 
@@ -74,7 +74,7 @@ class MwsRepository {
     params["$base.IdType"] = "ASIN";
     params["$base.IdValue"] = asin;
     params["$base.IsAmazonFulfilled"] = "$useFba";
-    params["$base.Identifier"] = _uuid.v4();
+    params["$base.Identifier"] = uuid.v4();
     params["$base.PriceToEstimateFees.ListingPrice.Amount"] = "$price";
     params["$base.PriceToEstimateFees.ListingPrice.CurrencyCode"] = "JPY";
 
