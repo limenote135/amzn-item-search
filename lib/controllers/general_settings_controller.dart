@@ -2,7 +2,7 @@ import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/util/hive_provider.dart';
-import 'package:hooks_riverpod/all.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final generalSettingsControllerProvider =
     StateNotifierProvider((ref) => GeneralSettingsController(ref.read));
