@@ -38,6 +38,7 @@ var _samplePurchaseSettings = PurchaseSettings(
   profit: 50,
   amount: 2,
   useFba: true,
+  purchaseDate: DateTime.now().toUtc().toIso8601String(),
 );
 
 class SkuFormatPage extends StatelessWidget {
