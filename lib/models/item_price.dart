@@ -3,7 +3,7 @@ import 'package:amasearch/repository/mws.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:hooks_riverpod/all.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'enums/fulfillment_channel.dart';
 import 'enums/item_condition.dart';

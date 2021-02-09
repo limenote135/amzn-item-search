@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:collection/collection.dart';
-import 'package:hooks_riverpod/all.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final itemControllerProvider =
     StateNotifierProvider.family<ItemController, Item>(
