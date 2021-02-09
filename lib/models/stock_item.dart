@@ -65,6 +65,7 @@ extension StockItemExtension on StockItem {
       enableAutogenSku: false, // StockPage で編集する際に呼ばれるので false に
       retailer: retailer,
       memo: memo,
+      purchaseDate: purchaseDate,
     );
   }
 }
