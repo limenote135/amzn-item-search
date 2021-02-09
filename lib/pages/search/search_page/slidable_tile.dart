@@ -6,7 +6,7 @@ import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:hooks_riverpod/all.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SlidableTile extends HookWidget {
   const SlidableTile({Key key, @required this.child}) : super(key: key);
