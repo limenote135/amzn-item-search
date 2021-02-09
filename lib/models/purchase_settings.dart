@@ -19,5 +19,6 @@ abstract class PurchaseSettings with _$PurchaseSettings {
     @Default("") String sku,
     @Default("") String retailer,
     @Default("") String memo,
+    @required String purchaseDate,
   }) = _PurchaseSettings;
 }

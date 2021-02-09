@@ -89,7 +89,7 @@ class _Body extends HookWidget {
                 item: item.imageData != null
                     ? item
                     : item.copyWith(imageData: imageData),
-                purchaseDate: DateTime.now().toUtc().toIso8601String(),
+                purchaseDate: data.purchaseDate,
                 retailer: data.retailer,
               );
 
