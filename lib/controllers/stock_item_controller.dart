@@ -1,5 +1,6 @@
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/hive_provider.dart';
+import 'package:amasearch/util/uuid.dart';
 import 'package:hooks_riverpod/all.dart';
 
 final stockItemListControllerProvider =
@@ -11,26 +12,45 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     _fetchAll();
   }
 
+  static int _sortFunc(StockItem x, StockItem y) {
+    return y.purchaseDate.compareTo(x.purchaseDate);
+  }
+
   final Reader _read;
 
   void _fetchAll() {
     // TODO: オンデマンドで読み込むべき？
     final box = _read(stockItemBoxProvider);
-    state = box.values.toList().reversed.toList();
+    final uuid = _read(uuidProvider);
+    final data = box.values.toList()..sort(_sortFunc);
+    state = data;
+
+    // キーを購入日から UUID に変更するためのマイグレーション
+    if (data.any((element) => element.id == "")) {
+      final newData = <String, StockItem>{};
+      final newState = List<StockItem>(data.length);
+      for (var i = 0; i < data.length; i++) {
+        final id = data[i].id != "" ? data[i].id : uuid.v4();
+        final storeData = data[i].id != "" ? data[i] : data[i].copyWith(id: id);
+        newData[id] = storeData;
+        newState[i] = storeData;
+      }
+      state = newState;
+      box.clear().then((_) => box.putAll(newData));
+    }
   }
 
   void add(StockItem item) {
     final box = _read(stockItemBoxProvider);
     state = [item, ...state];
-    box.put(item.purchaseDate, item);
+    box.put(item.id, item);
   }
 
   void update(StockItem item) {
     final box = _read(stockItemBoxProvider);
-    state = [
-      for (final i in state) i.purchaseDate == item.purchaseDate ? item : i
-    ];
-    box.put(item.purchaseDate, item);
+    state = [for (final i in state) i.id == item.id ? item : i]
+      ..sort(_sortFunc);
+    box.put(item.id, item);
   }
 
   void remove(List<StockItem> targets) {
@@ -40,7 +60,7 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     state = state.where((element) => !targets.contains(element)).toList();
 
     final box = _read(stockItemBoxProvider);
-    final keys = targets.map((e) => e.purchaseDate);
+    final keys = targets.map((e) => e.id);
     box.deleteAll(keys);
   }
 

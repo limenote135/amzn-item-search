@@ -31,6 +31,7 @@ abstract class StockItem with _$StockItem {
     @HiveField(9) @required String memo,
     @HiveField(10) @required AsinData item,
     @HiveField(11) @required String retailer,
+    @HiveField(12) @required String id, // 主キー
   }) = _StockItem;
 }
 
