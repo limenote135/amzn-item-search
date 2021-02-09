@@ -8,6 +8,7 @@ import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/form.dart';
 import 'package:amasearch/util/price_util.dart';
+import 'package:amasearch/util/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -50,6 +51,7 @@ class _Body extends HookWidget {
     final item = useProvider(currentAsinDataProvider);
     final base = purchaseSettingsControllerProvider(item.asin);
     final formKey = useProvider(base.state.select((value) => value.formKey));
+    final uuid = context.read(uuidProvider);
 
     return ProviderScope(
       overrides: [
@@ -70,6 +72,7 @@ class _Body extends HookWidget {
               final data = context.read(base.state);
 
               final stock = StockItem(
+                id: uuid.v4(),
                 purchasePrice: data.purchasePrice,
                 sellPrice: data.sellPrice,
                 useFba: data.useFba,
@@ -86,7 +89,7 @@ class _Body extends HookWidget {
                 item: item.imageData != null
                     ? item
                     : item.copyWith(imageData: imageData),
-                purchaseDate: DateTime.now().toUtc().toIso8601String(),
+                purchaseDate: data.purchaseDate,
                 retailer: data.retailer,
               );
 

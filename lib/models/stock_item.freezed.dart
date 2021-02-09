@@ -26,7 +26,8 @@ class _$StockItemTearOff {
       @required @HiveField(8) String sku,
       @required @HiveField(9) String memo,
       @required @HiveField(10) AsinData item,
-      @required @HiveField(11) String retailer}) {
+      @required @HiveField(11) String retailer,
+      @required @HiveField(12) String id}) {
     return _StockItem(
       purchaseDate: purchaseDate,
       purchasePrice: purchasePrice,
@@ -40,6 +41,7 @@ class _$StockItemTearOff {
       memo: memo,
       item: item,
       retailer: retailer,
+      id: id,
     );
   }
 }
@@ -74,6 +76,8 @@ mixin _$StockItem {
   AsinData get item;
   @HiveField(11)
   String get retailer;
+  @HiveField(12)
+  String get id;
 
   $StockItemCopyWith<StockItem> get copyWith;
 }
@@ -94,7 +98,8 @@ abstract class $StockItemCopyWith<$Res> {
       @HiveField(8) String sku,
       @HiveField(9) String memo,
       @HiveField(10) AsinData item,
-      @HiveField(11) String retailer});
+      @HiveField(11) String retailer,
+      @HiveField(12) String id});
 
   $AsinDataCopyWith<$Res> get item;
 }
@@ -121,6 +126,7 @@ class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
     Object memo = freezed,
     Object item = freezed,
     Object retailer = freezed,
+    Object id = freezed,
   }) {
     return _then(_value.copyWith(
       purchaseDate: purchaseDate == freezed
@@ -144,6 +150,7 @@ class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
       memo: memo == freezed ? _value.memo : memo as String,
       item: item == freezed ? _value.item : item as AsinData,
       retailer: retailer == freezed ? _value.retailer : retailer as String,
+      id: id == freezed ? _value.id : id as String,
     ));
   }
 
@@ -176,7 +183,8 @@ abstract class _$StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
       @HiveField(8) String sku,
       @HiveField(9) String memo,
       @HiveField(10) AsinData item,
-      @HiveField(11) String retailer});
+      @HiveField(11) String retailer,
+      @HiveField(12) String id});
 
   @override
   $AsinDataCopyWith<$Res> get item;
@@ -205,6 +213,7 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
     Object memo = freezed,
     Object item = freezed,
     Object retailer = freezed,
+    Object id = freezed,
   }) {
     return _then(_StockItem(
       purchaseDate: purchaseDate == freezed
@@ -228,6 +237,7 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
       memo: memo == freezed ? _value.memo : memo as String,
       item: item == freezed ? _value.item : item as AsinData,
       retailer: retailer == freezed ? _value.retailer : retailer as String,
+      id: id == freezed ? _value.id : id as String,
     ));
   }
 }
@@ -248,7 +258,8 @@ class _$_StockItem implements _StockItem {
       @required @HiveField(8) this.sku,
       @required @HiveField(9) this.memo,
       @required @HiveField(10) this.item,
-      @required @HiveField(11) this.retailer})
+      @required @HiveField(11) this.retailer,
+      @required @HiveField(12) this.id})
       : assert(purchaseDate != null),
         assert(purchasePrice != null),
         assert(sellPrice != null),
@@ -260,7 +271,8 @@ class _$_StockItem implements _StockItem {
         assert(sku != null),
         assert(memo != null),
         assert(item != null),
-        assert(retailer != null);
+        assert(retailer != null),
+        assert(id != null);
 
   @override
   @HiveField(0)
@@ -298,10 +310,13 @@ class _$_StockItem implements _StockItem {
   @override
   @HiveField(11)
   final String retailer;
+  @override
+  @HiveField(12)
+  final String id;
 
   @override
   String toString() {
-    return 'StockItem(purchaseDate: $purchaseDate, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, profitPerItem: $profitPerItem, amount: $amount, condition: $condition, subCondition: $subCondition, sku: $sku, memo: $memo, item: $item, retailer: $retailer)';
+    return 'StockItem(purchaseDate: $purchaseDate, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, profitPerItem: $profitPerItem, amount: $amount, condition: $condition, subCondition: $subCondition, sku: $sku, memo: $memo, item: $item, retailer: $retailer, id: $id)';
   }
 
   @override
@@ -338,7 +353,9 @@ class _$_StockItem implements _StockItem {
                 const DeepCollectionEquality().equals(other.item, item)) &&
             (identical(other.retailer, retailer) ||
                 const DeepCollectionEquality()
-                    .equals(other.retailer, retailer)));
+                    .equals(other.retailer, retailer)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
   }
 
   @override
@@ -355,7 +372,8 @@ class _$_StockItem implements _StockItem {
       const DeepCollectionEquality().hash(sku) ^
       const DeepCollectionEquality().hash(memo) ^
       const DeepCollectionEquality().hash(item) ^
-      const DeepCollectionEquality().hash(retailer);
+      const DeepCollectionEquality().hash(retailer) ^
+      const DeepCollectionEquality().hash(id);
 
   @override
   _$StockItemCopyWith<_StockItem> get copyWith =>
@@ -375,7 +393,8 @@ abstract class _StockItem implements StockItem {
       @required @HiveField(8) String sku,
       @required @HiveField(9) String memo,
       @required @HiveField(10) AsinData item,
-      @required @HiveField(11) String retailer}) = _$_StockItem;
+      @required @HiveField(11) String retailer,
+      @required @HiveField(12) String id}) = _$_StockItem;
 
   @override
   @HiveField(0)
@@ -413,6 +432,9 @@ abstract class _StockItem implements StockItem {
   @override
   @HiveField(11)
   String get retailer;
+  @override
+  @HiveField(12)
+  String get id;
   @override
   _$StockItemCopyWith<_StockItem> get copyWith;
 }

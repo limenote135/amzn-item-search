@@ -25,7 +25,8 @@ class _$PurchaseSettingsTearOff {
       bool enableAutogenSku = true,
       String sku = "",
       String retailer = "",
-      String memo = ""}) {
+      String memo = "",
+      @required String purchaseDate}) {
     return _PurchaseSettings(
       formKey: formKey,
       purchasePrice: purchasePrice,
@@ -38,6 +39,7 @@ class _$PurchaseSettingsTearOff {
       sku: sku,
       retailer: retailer,
       memo: memo,
+      purchaseDate: purchaseDate,
     );
   }
 }
@@ -59,6 +61,7 @@ mixin _$PurchaseSettings {
   String get sku;
   String get retailer;
   String get memo;
+  String get purchaseDate;
 
   $PurchaseSettingsCopyWith<PurchaseSettings> get copyWith;
 }
@@ -79,7 +82,8 @@ abstract class $PurchaseSettingsCopyWith<$Res> {
       bool enableAutogenSku,
       String sku,
       String retailer,
-      String memo});
+      String memo,
+      String purchaseDate});
 }
 
 /// @nodoc
@@ -104,6 +108,7 @@ class _$PurchaseSettingsCopyWithImpl<$Res>
     Object sku = freezed,
     Object retailer = freezed,
     Object memo = freezed,
+    Object purchaseDate = freezed,
   }) {
     return _then(_value.copyWith(
       formKey:
@@ -124,6 +129,9 @@ class _$PurchaseSettingsCopyWithImpl<$Res>
       sku: sku == freezed ? _value.sku : sku as String,
       retailer: retailer == freezed ? _value.retailer : retailer as String,
       memo: memo == freezed ? _value.memo : memo as String,
+      purchaseDate: purchaseDate == freezed
+          ? _value.purchaseDate
+          : purchaseDate as String,
     ));
   }
 }
@@ -146,7 +154,8 @@ abstract class _$PurchaseSettingsCopyWith<$Res>
       bool enableAutogenSku,
       String sku,
       String retailer,
-      String memo});
+      String memo,
+      String purchaseDate});
 }
 
 /// @nodoc
@@ -173,6 +182,7 @@ class __$PurchaseSettingsCopyWithImpl<$Res>
     Object sku = freezed,
     Object retailer = freezed,
     Object memo = freezed,
+    Object purchaseDate = freezed,
   }) {
     return _then(_PurchaseSettings(
       formKey:
@@ -193,6 +203,9 @@ class __$PurchaseSettingsCopyWithImpl<$Res>
       sku: sku == freezed ? _value.sku : sku as String,
       retailer: retailer == freezed ? _value.retailer : retailer as String,
       memo: memo == freezed ? _value.memo : memo as String,
+      purchaseDate: purchaseDate == freezed
+          ? _value.purchaseDate
+          : purchaseDate as String,
     ));
   }
 }
@@ -210,7 +223,8 @@ class _$_PurchaseSettings implements _PurchaseSettings {
       this.enableAutogenSku = true,
       this.sku = "",
       this.retailer = "",
-      this.memo = ""})
+      this.memo = "",
+      @required this.purchaseDate})
       : assert(formKey != null),
         assert(purchasePrice != null),
         assert(sellPrice != null),
@@ -221,7 +235,8 @@ class _$_PurchaseSettings implements _PurchaseSettings {
         assert(enableAutogenSku != null),
         assert(sku != null),
         assert(retailer != null),
-        assert(memo != null);
+        assert(memo != null),
+        assert(purchaseDate != null);
 
   @override
   final GlobalKey<FormState> formKey;
@@ -255,10 +270,12 @@ class _$_PurchaseSettings implements _PurchaseSettings {
   @JsonKey(defaultValue: "")
   @override
   final String memo;
+  @override
+  final String purchaseDate;
 
   @override
   String toString() {
-    return 'PurchaseSettings(formKey: $formKey, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, amount: $amount, condition: $condition, profit: $profit, enableAutogenSku: $enableAutogenSku, sku: $sku, retailer: $retailer, memo: $memo)';
+    return 'PurchaseSettings(formKey: $formKey, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, amount: $amount, condition: $condition, profit: $profit, enableAutogenSku: $enableAutogenSku, sku: $sku, retailer: $retailer, memo: $memo, purchaseDate: $purchaseDate)';
   }
 
   @override
@@ -292,7 +309,10 @@ class _$_PurchaseSettings implements _PurchaseSettings {
                 const DeepCollectionEquality()
                     .equals(other.retailer, retailer)) &&
             (identical(other.memo, memo) ||
-                const DeepCollectionEquality().equals(other.memo, memo)));
+                const DeepCollectionEquality().equals(other.memo, memo)) &&
+            (identical(other.purchaseDate, purchaseDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.purchaseDate, purchaseDate)));
   }
 
   @override
@@ -308,7 +328,8 @@ class _$_PurchaseSettings implements _PurchaseSettings {
       const DeepCollectionEquality().hash(enableAutogenSku) ^
       const DeepCollectionEquality().hash(sku) ^
       const DeepCollectionEquality().hash(retailer) ^
-      const DeepCollectionEquality().hash(memo);
+      const DeepCollectionEquality().hash(memo) ^
+      const DeepCollectionEquality().hash(purchaseDate);
 
   @override
   _$PurchaseSettingsCopyWith<_PurchaseSettings> get copyWith =>
@@ -327,7 +348,8 @@ abstract class _PurchaseSettings implements PurchaseSettings {
       bool enableAutogenSku,
       String sku,
       String retailer,
-      String memo}) = _$_PurchaseSettings;
+      String memo,
+      @required String purchaseDate}) = _$_PurchaseSettings;
 
   @override
   GlobalKey<FormState> get formKey;
@@ -351,6 +373,8 @@ abstract class _PurchaseSettings implements PurchaseSettings {
   String get retailer;
   @override
   String get memo;
+  @override
+  String get purchaseDate;
   @override
   _$PurchaseSettingsCopyWith<_PurchaseSettings> get copyWith;
 }

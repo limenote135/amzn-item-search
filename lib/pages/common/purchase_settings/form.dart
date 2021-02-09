@@ -8,6 +8,7 @@ import 'package:amasearch/pages/common/purchase_settings/retailer_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/sku_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/target_price_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
+import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/sku_replacer.dart';
 import 'package:amasearch/util/util.dart';
@@ -40,6 +41,9 @@ class PurchaseSettingsForm extends HookWidget {
         .select((value) => value.skuFormat));
 
     final memo = useProvider(base.state.select((value) => value.memo));
+
+    final purchaseDate =
+        useProvider(base.state.select((value) => value.purchaseDate));
 
     return Form(
       key: settings.formKey,
@@ -89,6 +93,31 @@ class PurchaseSettingsForm extends HookWidget {
           const TargetPriceTile(),
           const ItemConditionTile(),
           const RetailerTile(),
+          ListTile(
+            title: Row(
+              children: [
+                const Text("仕入れ日"),
+                const Spacer(),
+                Text(DateTime.parse(purchaseDate).toLocal().dayFormat()),
+              ],
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.date_range),
+              onPressed: () async {
+                print("pushed");
+                final selectedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(DateTime.now().year - 10),
+                  lastDate: DateTime(DateTime.now().year + 10),
+                );
+                if (selectedDate != null) {
+                  print(selectedDate);
+                  context.read(base).update(purchaseDate: selectedDate);
+                }
+              },
+            ),
+          ),
           const ThemeDivider(),
           const SkuTile(),
           const ThemeDivider(),
