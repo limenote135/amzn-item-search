@@ -6,7 +6,7 @@ import 'package:amasearch/repository/bookoff.dart';
 import 'package:amasearch/repository/geo.dart';
 import 'package:amasearch/repository/tsutaya.dart';
 import 'package:amasearch/util/hive_provider.dart';
-import 'package:hooks_riverpod/all.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'item_controller.dart';
 

@@ -9,7 +9,7 @@ import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:hooks_riverpod/all.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'item_interceptor.dart';
 
