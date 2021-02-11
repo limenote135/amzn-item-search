@@ -130,10 +130,6 @@ class _CodeType extends HookWidget {
                 child: Text("TSUTAYA"),
                 value: SearchType.tsutaya,
               ),
-              DropdownMenuItem(
-                child: Text("フリーワード"),
-                value: SearchType.freeWord,
-              ),
             ],
             onChanged: (value) {
               if (value != settings.type) {

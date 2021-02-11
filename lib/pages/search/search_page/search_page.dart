@@ -76,9 +76,7 @@ class _AppBarTitle extends HookWidget {
         child: TextField(
           style: const TextStyle(fontSize: 18),
           controller: textEditingController,
-          keyboardType: settings.type != SearchType.freeWord
-              ? TextInputType.number
-              : null,
+          keyboardType: TextInputType.number,
           decoration: _createHintText(settings.type),
           onSubmitted: (value) {
             if (value != "") {
@@ -102,7 +100,8 @@ class _AppBarTitle extends HookWidget {
       case SearchType.tsutaya:
         return const InputDecoration(hintText: "TSUTAYA");
       case SearchType.freeWord:
-        return const InputDecoration(hintText: "フリーワード");
+        // deprecated
+        break;
     }
     throw Exception("Unknown SearchType: $type");
   }
@@ -122,8 +121,8 @@ class _AppBarTitle extends HookWidget {
         context.read(itemListControllerProvider).addTsutaya(code);
         return;
       case SearchType.freeWord:
-        context.read(itemListControllerProvider).addFreeWord(code);
-        return;
+        // deprecated
+        break;
     }
     throw Exception("Unknown type: $type");
   }
