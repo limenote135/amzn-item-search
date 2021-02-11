@@ -6,10 +6,12 @@ class InputDialog<T> extends HookWidget {
     Key key,
     @required this.title,
     @required this.validate,
+    this.keyboardType,
   }) : super(key: key);
 
   final Widget title;
   final T Function(String value) validate;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class InputDialog<T> extends HookWidget {
       title: title,
       content: TextField(
         autofocus: true,
+        keyboardType: keyboardType,
         onChanged: (value) {
           final validated = validate(value);
           if (val != null) {

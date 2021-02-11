@@ -42,6 +42,8 @@ class _PriceAndProfit extends HookWidget {
         .select((value) => value.enableTargetProfit));
     final targetPriceRate = useProvider(generalSettingsControllerProvider.state
         .select((value) => value.targetProfitValue));
+    final minProfit = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.minProfit));
 
     final detail = getPriceDetail(
       item: item,
@@ -92,6 +94,7 @@ class _PriceAndProfit extends HookWidget {
                   sellPrice: detail.price,
                   feeInfo: item.prices.feeInfo,
                   targetRate: targetPriceRate,
+                  minProfit: minProfit,
                   useFba: settings.useFba,
                 )),
                 style: strongTextStyle,
