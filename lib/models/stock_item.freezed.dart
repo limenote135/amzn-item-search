@@ -79,6 +79,7 @@ mixin _$StockItem {
   @HiveField(12)
   String get id;
 
+  @JsonKey(ignore: true)
   $StockItemCopyWith<StockItem> get copyWith;
 }
 
@@ -375,6 +376,7 @@ class _$_StockItem implements _StockItem {
       const DeepCollectionEquality().hash(retailer) ^
       const DeepCollectionEquality().hash(id);
 
+  @JsonKey(ignore: true)
   @override
   _$StockItemCopyWith<_StockItem> get copyWith =>
       __$StockItemCopyWithImpl<_StockItem>(this, _$identity);
@@ -436,5 +438,6 @@ abstract class _StockItem implements StockItem {
   @HiveField(12)
   String get id;
   @override
+  @JsonKey(ignore: true)
   _$StockItemCopyWith<_StockItem> get copyWith;
 }

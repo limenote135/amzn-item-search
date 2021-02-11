@@ -47,6 +47,7 @@ mixin _$SearchSettings {
   @HiveField(4)
   bool get continuousCameraRead;
 
+  @JsonKey(ignore: true)
   $SearchSettingsCopyWith<SearchSettings> get copyWith;
 }
 
@@ -212,6 +213,7 @@ class _$_SearchSettings implements _SearchSettings {
       const DeepCollectionEquality().hash(priorFba) ^
       const DeepCollectionEquality().hash(continuousCameraRead);
 
+  @JsonKey(ignore: true)
   @override
   _$SearchSettingsCopyWith<_SearchSettings> get copyWith =>
       __$SearchSettingsCopyWithImpl<_SearchSettings>(this, _$identity);
@@ -241,5 +243,6 @@ abstract class _SearchSettings implements SearchSettings {
   @HiveField(4)
   bool get continuousCameraRead;
   @override
+  @JsonKey(ignore: true)
   _$SearchSettingsCopyWith<_SearchSettings> get copyWith;
 }

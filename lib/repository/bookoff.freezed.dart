@@ -52,6 +52,7 @@ mixin _$BookoffResponse {
   String get jan;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $BookoffResponseCopyWith<BookoffResponse> get copyWith;
 }
 
@@ -190,6 +191,7 @@ class _$_BookoffResponse implements _BookoffResponse {
       const DeepCollectionEquality().hash(subtitle) ^
       const DeepCollectionEquality().hash(jan);
 
+  @JsonKey(ignore: true)
   @override
   _$BookoffResponseCopyWith<_BookoffResponse> get copyWith =>
       __$BookoffResponseCopyWithImpl<_BookoffResponse>(this, _$identity);
@@ -223,5 +225,6 @@ abstract class _BookoffResponse implements BookoffResponse {
   @JsonKey(name: "JAN")
   String get jan;
   @override
+  @JsonKey(ignore: true)
   _$BookoffResponseCopyWith<_BookoffResponse> get copyWith;
 }
