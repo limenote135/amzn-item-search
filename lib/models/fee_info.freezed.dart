@@ -39,6 +39,7 @@ mixin _$FeeInfo {
   @HiveField(2)
   int get fbaFee;
 
+  @JsonKey(ignore: true)
   $FeeInfoCopyWith<FeeInfo> get copyWith;
 }
 
@@ -164,6 +165,7 @@ class _$_FeeInfo implements _FeeInfo {
       const DeepCollectionEquality().hash(variableClosingFee) ^
       const DeepCollectionEquality().hash(fbaFee);
 
+  @JsonKey(ignore: true)
   @override
   _$FeeInfoCopyWith<_FeeInfo> get copyWith =>
       __$FeeInfoCopyWithImpl<_FeeInfo>(this, _$identity);
@@ -185,5 +187,6 @@ abstract class _FeeInfo implements FeeInfo {
   @HiveField(2)
   int get fbaFee;
   @override
+  @JsonKey(ignore: true)
   _$FeeInfoCopyWith<_FeeInfo> get copyWith;
 }
