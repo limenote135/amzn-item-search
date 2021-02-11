@@ -75,12 +75,6 @@ class ItemListController extends StateNotifier<
     state = [future, ...state];
   }
 
-  void addFreeWord(String word) {
-    _read(analyticsControllerProvider).logSearchEvent(searchEventWord);
-    final future = freeWordItemFutureProvider(word.trim());
-    state = [future, ...state];
-  }
-
   void addBookoff(String code) {
     _read(analyticsControllerProvider).logSearchEvent(searchEventBookoff);
     final future = bookoffItemFutureProvider(code.trim());

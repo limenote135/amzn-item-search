@@ -59,7 +59,8 @@ class ItemTile extends HookWidget {
       case SearchType.tsutaya:
         return Future.value(getTsutayaJanCode(code));
       case SearchType.freeWord:
-        return Future.value(code);
+        // deprecated
+        break;
     }
     throw Exception("Invalid SearchType: $type");
   }
