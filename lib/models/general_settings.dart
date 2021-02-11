@@ -82,6 +82,9 @@ abstract class GeneralSettings with _$GeneralSettings {
       CsvColumn.purchaseDate
     ])
         List<CsvColumn> csvOrder,
+    @HiveField(12)
+    @Default(0)
+        int minProfit,
   }) = _GeneralSettings;
 }
 

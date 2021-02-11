@@ -61,9 +61,12 @@ int calcTargetPrice({
   @required int sellPrice,
   @required FeeInfo feeInfo,
   @required int targetRate,
+  @required int minProfit,
   @required bool useFba,
 }) {
-  final price = sellPrice * (1 - feeInfo.referralFeeRate - targetRate / 100);
+  final rawProfit = sellPrice * (targetRate / 100);
+  final min = minProfit > rawProfit ? minProfit : rawProfit;
+  final price = sellPrice * (1 - feeInfo.referralFeeRate) - min;
   final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
 
   return (price - feeInfo.variableClosingFee - fbaFee).round();
