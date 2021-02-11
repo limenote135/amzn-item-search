@@ -1,11 +1,11 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/pages/search/camera_page/camera_page.dart';
-import 'package:amasearch/pages/search/search_page/search_page.dart';
-import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
+import 'package:amasearch/pages/search/code/camera_page/camera_page.dart';
+import 'package:amasearch/pages/search/code/search_page/search_page.dart';
+import 'package:amasearch/pages/search/code/search_settings_page/search_settings_page.dart';
+import 'package:amasearch/pages/search/word/word_search_page/word_search_page.dart';
 import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
-import 'package:amasearch/pages/word_search/word_search_page/word_search_page.dart';
 import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/updater_widget.dart';

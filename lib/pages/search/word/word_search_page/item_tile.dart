@@ -1,11 +1,12 @@
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/pages/search/code/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
-import 'package:amasearch/pages/search/detail_page/detail_page.dart';
-import 'package:amasearch/pages/word_search/word_search_page/word_search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'word_search_page.dart';
 
 class ItemTile extends HookWidget {
   const ItemTile({Key key}) : super(key: key);
