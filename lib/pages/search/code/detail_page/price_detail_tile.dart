@@ -38,11 +38,14 @@ class PriceDetailTile extends HookWidget {
         .select((value) => value.enableTargetProfit));
     final targetPriceRate = useProvider(generalSettingsControllerProvider.state
         .select((value) => value.targetProfitValue));
+    final minProfit = useProvider(generalSettingsControllerProvider.state
+        .select((value) => value.minProfit));
 
     final targetPrice = calcTargetPrice(
       sellPrice: detail.price,
       feeInfo: item.prices.feeInfo,
       targetRate: targetPriceRate,
+      minProfit: minProfit,
       useFba: setting.useFba,
     );
 
@@ -71,7 +74,7 @@ class PriceDetailTile extends HookWidget {
           ),
           if (showTargetPrice)
             TextLine(
-              leading: const Text("目標利益率達成額"),
+              leading: const Text("目標利益達成額"),
               main: Text("$targetPrice 円"),
             ),
         ],

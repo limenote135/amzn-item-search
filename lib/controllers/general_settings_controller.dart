@@ -29,6 +29,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     // 目標利益率設定
     bool enableTargetProfit,
     int targetProfitValue,
+    int minProfit,
     String skuFormat,
     List<CustomButtonDetail> customButtons,
     bool enableReadAloud,
@@ -43,6 +44,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       isDarkMode: isDarkMode ?? state.isDarkMode,
       enableTargetProfit: enableTargetProfit ?? state.enableTargetProfit,
       targetProfitValue: targetProfitValue ?? state.targetProfitValue,
+      minProfit: minProfit ?? state.minProfit,
       skuFormat: skuFormat ?? state.skuFormat,
       customButtons: customButtons ?? state.customButtons,
       enableReadAloud: enableReadAloud ?? state.enableReadAloud,

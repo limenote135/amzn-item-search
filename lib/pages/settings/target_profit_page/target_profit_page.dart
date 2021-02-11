@@ -67,9 +67,10 @@ class _Body extends HookWidget {
               context: context,
               builder: (context) => InputDialog<int>(
                 title: const Text("目標利益率"),
+                keyboardType: TextInputType.number,
                 validate: (value) {
                   final n = int.tryParse(value);
-                  return n != null && n > 0 ? n : null;
+                  return n != null && n >= 0 ? n : null;
                 },
               ),
             );
@@ -78,13 +79,44 @@ class _Body extends HookWidget {
                   .read(generalSettingsControllerProvider)
                   .update(targetProfitValue: ret);
               if (settings.enableTargetProfit) {
-                await context
-                    .read(analyticsControllerProvider)
-                    .setUserProp(targetProfitPropName, "$ret");
+                await context.read(analyticsControllerProvider).setUserProp(
+                    targetProfitPropName, "$ret(min:${settings.minProfit})");
               }
             }
           },
-        )
+        ),
+        ListTile(
+          title: Row(
+            children: [
+              const Text("最低利益額"),
+              const Spacer(),
+              Text("${settings.minProfit} 円"),
+            ],
+          ),
+          onTap: () async {
+            final ret = await showDialog<int>(
+              context: context,
+              builder: (context) => InputDialog<int>(
+                title: const Text("最低利益額"),
+                keyboardType: TextInputType.number,
+                validate: (value) {
+                  final n = int.tryParse(value);
+                  return n != null && n >= 0 ? n : null;
+                },
+              ),
+            );
+            if (ret != null) {
+              context
+                  .read(generalSettingsControllerProvider)
+                  .update(minProfit: ret);
+              if (settings.enableTargetProfit) {
+                await context.read(analyticsControllerProvider).setUserProp(
+                    targetProfitPropName,
+                    "${settings.targetProfitValue}(min:$ret)");
+              }
+            }
+          },
+        ),
       ],
     );
   }
