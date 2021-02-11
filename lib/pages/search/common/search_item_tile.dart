@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/pages/search/common/price_info.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
@@ -9,6 +8,8 @@ import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'price_info.dart';
 
 final currentSearchDateProvider = ScopedProvider<String>(null);
 final isEllipsisProvider = ScopedProvider<bool>((_) => false);
