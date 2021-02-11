@@ -63,6 +63,7 @@ mixin _$PurchaseSettings {
   String get memo;
   String get purchaseDate;
 
+  @JsonKey(ignore: true)
   $PurchaseSettingsCopyWith<PurchaseSettings> get copyWith;
 }
 
@@ -331,6 +332,7 @@ class _$_PurchaseSettings implements _PurchaseSettings {
       const DeepCollectionEquality().hash(memo) ^
       const DeepCollectionEquality().hash(purchaseDate);
 
+  @JsonKey(ignore: true)
   @override
   _$PurchaseSettingsCopyWith<_PurchaseSettings> get copyWith =>
       __$PurchaseSettingsCopyWithImpl<_PurchaseSettings>(this, _$identity);
@@ -376,5 +378,6 @@ abstract class _PurchaseSettings implements PurchaseSettings {
   @override
   String get purchaseDate;
   @override
+  @JsonKey(ignore: true)
   _$PurchaseSettingsCopyWith<_PurchaseSettings> get copyWith;
 }
