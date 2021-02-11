@@ -5,6 +5,7 @@ import 'package:amasearch/pages/search/search_page/search_page.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
+import 'package:amasearch/pages/word_search/word_search_page/word_search_page.dart';
 import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
@@ -57,11 +58,13 @@ class HomePage extends HookWidget {
 
   static const _pages = [
     SearchPage(),
+    WordSearchPage(),
     StocksPage(),
     SettingsPage(),
   ];
   static const _names = [
     SearchPage.routeName,
+    WordSearchPage.routeName,
     StocksPage.routeName,
     SettingsPage.routeName,
   ];
@@ -99,8 +102,12 @@ class HomePage extends HookWidget {
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: "コード検索",
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.find_in_page),
-              label: "検索",
+              label: "ワード検索",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
