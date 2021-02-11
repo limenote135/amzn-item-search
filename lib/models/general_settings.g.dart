@@ -52,13 +52,14 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
             CsvColumn.comment,
             CsvColumn.purchaseDate
           ],
+      minProfit: fields[12] as int ?? 0,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_GeneralSettings obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
@@ -82,7 +83,9 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       ..writeByte(10)
       ..write(obj.customButtons)
       ..writeByte(11)
-      ..write(obj.csvOrder);
+      ..write(obj.csvOrder)
+      ..writeByte(12)
+      ..write(obj.minProfit);
   }
 
   @override
