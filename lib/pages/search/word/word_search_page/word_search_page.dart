@@ -37,7 +37,6 @@ class _Body extends HookWidget {
           padding: const EdgeInsets.all(8),
           child: TextField(
             controller: controller,
-            autofocus: true,
             decoration: InputDecoration(
               hintText: "単語を入力してください",
               suffixIcon: IconButton(
