@@ -101,6 +101,7 @@ mixin _$GeneralSettings {
   @HiveField(11)
   List<CsvColumn> get csvOrder;
 
+  @JsonKey(ignore: true)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith;
 }
 
@@ -457,6 +458,7 @@ class _$_GeneralSettings implements _GeneralSettings {
       const DeepCollectionEquality().hash(customButtons) ^
       const DeepCollectionEquality().hash(csvOrder);
 
+  @JsonKey(ignore: true)
   @override
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
       __$GeneralSettingsCopyWithImpl<_GeneralSettings>(this, _$identity);
@@ -515,6 +517,7 @@ abstract class _GeneralSettings implements GeneralSettings {
   @HiveField(11)
   List<CsvColumn> get csvOrder;
   @override
+  @JsonKey(ignore: true)
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith;
 }
 
@@ -544,6 +547,7 @@ mixin _$ReadAloudPattern {
   @HiveField(1)
   String get pattern;
 
+  @JsonKey(ignore: true)
   $ReadAloudPatternCopyWith<ReadAloudPattern> get copyWith;
 }
 
@@ -647,6 +651,7 @@ class _$_ReadAloudPattern implements _ReadAloudPattern {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(pattern);
 
+  @JsonKey(ignore: true)
   @override
   _$ReadAloudPatternCopyWith<_ReadAloudPattern> get copyWith =>
       __$ReadAloudPatternCopyWithImpl<_ReadAloudPattern>(this, _$identity);
@@ -664,6 +669,7 @@ abstract class _ReadAloudPattern implements ReadAloudPattern {
   @HiveField(1)
   String get pattern;
   @override
+  @JsonKey(ignore: true)
   _$ReadAloudPatternCopyWith<_ReadAloudPattern> get copyWith;
 }
 
@@ -697,6 +703,7 @@ mixin _$CustomButtonDetail {
   @HiveField(2)
   String get pattern;
 
+  @JsonKey(ignore: true)
   $CustomButtonDetailCopyWith<CustomButtonDetail> get copyWith;
 }
 
@@ -818,6 +825,7 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(pattern);
 
+  @JsonKey(ignore: true)
   @override
   _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith =>
       __$CustomButtonDetailCopyWithImpl<_CustomButtonDetail>(this, _$identity);
@@ -839,5 +847,6 @@ abstract class _CustomButtonDetail implements CustomButtonDetail {
   @HiveField(2)
   String get pattern;
   @override
+  @JsonKey(ignore: true)
   _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith;
 }

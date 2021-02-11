@@ -39,6 +39,7 @@ mixin _$ItemPrices {
   @HiveField(2)
   FeeInfo get feeInfo;
 
+  @JsonKey(ignore: true)
   $ItemPricesCopyWith<ItemPrices> get copyWith;
 }
 
@@ -184,6 +185,7 @@ class _$_ItemPrices implements _ItemPrices {
       const DeepCollectionEquality().hash(usedPrices) ^
       const DeepCollectionEquality().hash(feeInfo);
 
+  @JsonKey(ignore: true)
   @override
   _$ItemPricesCopyWith<_ItemPrices> get copyWith =>
       __$ItemPricesCopyWithImpl<_ItemPrices>(this, _$identity);
@@ -205,6 +207,7 @@ abstract class _ItemPrices implements ItemPrices {
   @HiveField(2)
   FeeInfo get feeInfo;
   @override
+  @JsonKey(ignore: true)
   _$ItemPricesCopyWith<_ItemPrices> get copyWith;
 }
 
@@ -250,6 +253,7 @@ mixin _$PriceDetail {
   @HiveField(5)
   int get point;
 
+  @JsonKey(ignore: true)
   $PriceDetailCopyWith<PriceDetail> get copyWith;
 }
 
@@ -431,6 +435,7 @@ class _$_PriceDetail implements _PriceDetail {
       const DeepCollectionEquality().hash(shipping) ^
       const DeepCollectionEquality().hash(point);
 
+  @JsonKey(ignore: true)
   @override
   _$PriceDetailCopyWith<_PriceDetail> get copyWith =>
       __$PriceDetailCopyWithImpl<_PriceDetail>(this, _$identity);
@@ -464,5 +469,6 @@ abstract class _PriceDetail implements PriceDetail {
   @HiveField(5)
   int get point;
   @override
+  @JsonKey(ignore: true)
   _$PriceDetailCopyWith<_PriceDetail> get copyWith;
 }

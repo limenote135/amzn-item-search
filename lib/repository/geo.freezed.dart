@@ -31,6 +31,7 @@ mixin _$GeoResponse {
   String get code;
   String get jan;
 
+  @JsonKey(ignore: true)
   $GeoResponseCopyWith<GeoResponse> get copyWith;
 }
 
@@ -127,6 +128,7 @@ class _$_GeoResponse implements _GeoResponse {
       const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(jan);
 
+  @JsonKey(ignore: true)
   @override
   _$GeoResponseCopyWith<_GeoResponse> get copyWith =>
       __$GeoResponseCopyWithImpl<_GeoResponse>(this, _$identity);
@@ -141,5 +143,6 @@ abstract class _GeoResponse implements GeoResponse {
   @override
   String get jan;
   @override
+  @JsonKey(ignore: true)
   _$GeoResponseCopyWith<_GeoResponse> get copyWith;
 }
