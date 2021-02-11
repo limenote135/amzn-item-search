@@ -14,7 +14,7 @@ enum SearchType {
   @HiveField(3)
   tsutaya,
   @HiveField(4)
-  freeWord,
+  freeWord, // deprecated
 }
 
 extension SearchTypeExtension on SearchType {
@@ -29,7 +29,8 @@ extension SearchTypeExtension on SearchType {
       case SearchType.tsutaya:
         return "TSUTAYA";
       case SearchType.freeWord:
-        return "フリーワード";
+        // deprecated
+        break;
     }
     throw Exception("Unknown SearchType: $this");
   }
