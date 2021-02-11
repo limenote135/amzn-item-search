@@ -39,6 +39,7 @@ mixin _$Item {
   @HiveField(2)
   List<AsinData> get asins;
 
+  @JsonKey(ignore: true)
   $ItemCopyWith<Item> get copyWith;
 }
 
@@ -158,6 +159,7 @@ class _$_Item implements _Item {
       const DeepCollectionEquality().hash(jan) ^
       const DeepCollectionEquality().hash(asins);
 
+  @JsonKey(ignore: true)
   @override
   _$ItemCopyWith<_Item> get copyWith =>
       __$ItemCopyWithImpl<_Item>(this, _$identity);
@@ -179,6 +181,7 @@ abstract class _Item implements Item {
   @HiveField(2)
   List<AsinData> get asins;
   @override
+  @JsonKey(ignore: true)
   _$ItemCopyWith<_Item> get copyWith;
 }
 
@@ -240,6 +243,7 @@ mixin _$AsinData {
   @HiveField(9)
   String get category;
 
+  @JsonKey(ignore: true)
   $AsinDataCopyWith<AsinData> get copyWith;
 }
 
@@ -473,6 +477,7 @@ class _$_AsinData implements _AsinData {
       const DeepCollectionEquality().hash(imageData) ^
       const DeepCollectionEquality().hash(category);
 
+  @JsonKey(ignore: true)
   @override
   _$AsinDataCopyWith<_AsinData> get copyWith =>
       __$AsinDataCopyWithImpl<_AsinData>(this, _$identity);
@@ -522,5 +527,6 @@ abstract class _AsinData implements AsinData {
   @HiveField(9)
   String get category;
   @override
+  @JsonKey(ignore: true)
   _$AsinDataCopyWith<_AsinData> get copyWith;
 }
