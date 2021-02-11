@@ -25,6 +25,7 @@ class VersionChecker {
     } on FetchThrottledException catch (exception) {
       // Fetch throttled.
       print(exception);
+      // ignore: avoid_catches_without_on_clauses
     } catch (exception) {
       print('Unable to fetch remote config. Cached or default values will be '
           'used');
