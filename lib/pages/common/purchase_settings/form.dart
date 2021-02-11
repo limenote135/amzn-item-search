@@ -11,7 +11,6 @@ import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/sku_replacer.dart';
-import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +67,6 @@ class PurchaseSettingsForm extends HookWidget {
             value: settings.useFba,
             title: const Text("FBA を利用する"),
             onChanged: (value) {
-              unfocus();
               final profit = calcProfit(
                   sellPrice: settings.sellPrice,
                   purchasePrice: settings.purchasePrice,
