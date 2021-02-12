@@ -2,7 +2,6 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/util/sku_replacer.dart';
-import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -26,7 +25,6 @@ class InputPurchaseAmoutTile extends HookWidget {
           IconButton(
             icon: const Icon(Icons.remove_circle_outline),
             onPressed: () {
-              unfocus();
               if (settings.amount > 1) {
                 final generatedSku = replaceSku(
                   format: skuFormat,
@@ -48,7 +46,6 @@ class InputPurchaseAmoutTile extends HookWidget {
           IconButton(
             icon: const Icon(Icons.add_circle_outline),
             onPressed: () {
-              unfocus();
               final generatedSku = replaceSku(
                 format: skuFormat,
                 item: item,
