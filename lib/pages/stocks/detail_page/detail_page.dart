@@ -6,6 +6,7 @@ import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/edit_page/edit_page.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/search_buttons.dart';
@@ -92,6 +93,10 @@ class _Body extends HookWidget {
     final categoryFee = item.item.prices.feeInfo.variableClosingFee;
     final fbaFee = item.useFba ? item.item.prices.feeInfo.fbaFee : 0;
     final totalFeePerItem = referralFee + categoryFee + fbaFee;
+    final breakEven = calcBreakEven(
+        purchase: item.purchasePrice,
+        useFba: item.useFba,
+        feeInfo: item.item.prices.feeInfo);
 
     return ListView(
       children: [
@@ -151,6 +156,10 @@ class _Body extends HookWidget {
               main: Text("$fbaFee 円"),
             ),
           ],
+        ),
+        TextListTile(
+          leading: const Text("損益分岐額"),
+          main: Text("$breakEven 円"),
         ),
         TextListTile(
           leading: const Text("SKU"),
