@@ -5,6 +5,7 @@ import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,13 @@ class _TileBody extends HookWidget {
     final profitRate = item.sellPrice > 0
         ? (item.profitPerItem / item.sellPrice * 100).round()
         : 0;
+
+    final breakEven = calcBreakEven(
+      purchase: item.purchasePrice,
+      useFba: item.useFba,
+      feeInfo: detail.prices.feeInfo,
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -131,13 +139,22 @@ class _TileBody extends HookWidget {
         ),
         Row(
           children: [
-            Expanded(child: Text("個数: ${item.amount} 個", style: smallSize)),
+            Expanded(child: Text("損益分岐: $breakEven円", style: smallSize)),
             Expanded(
                 child: Text("状態: ${_conditionText(item)}", style: smallSize)),
           ],
         ),
-        Text("仕入れ日: ${DateTime.parse(item.purchaseDate).toLocal().format()}",
-            style: smallSize)
+        Row(
+          children: [
+            Expanded(child: Text("個数: ${item.amount} 個", style: smallSize)),
+            Expanded(
+              child: Text(
+                  "仕入れ日: "
+                  "${DateTime.parse(item.purchaseDate).toLocal().format()}",
+                  style: smallSize),
+            ),
+          ],
+        )
       ],
     );
   }
