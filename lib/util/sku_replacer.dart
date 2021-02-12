@@ -1,6 +1,7 @@
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/purchase_settings.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
 
 const yearVar = "{yyyy}";
@@ -67,9 +68,10 @@ int _calcBreakEven({
   @required PurchaseSettings settings,
   @required AsinData item,
 }) {
-  final fbaFee = settings.useFba ? item.prices.feeInfo.fbaFee : 0;
   final purchasePrice = purchase ?? settings.purchasePrice;
-  final temp = purchasePrice + fbaFee + item.prices.feeInfo.variableClosingFee;
-  final breakEven = temp / (1 - item.prices.feeInfo.referralFeeRate);
-  return breakEven.round();
+  return calcBreakEven(
+    purchase: purchasePrice,
+    useFba: settings.useFba,
+    feeInfo: item.prices.feeInfo,
+  );
 }
