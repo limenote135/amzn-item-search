@@ -71,3 +71,14 @@ int calcTargetPrice({
 
   return (price - feeInfo.variableClosingFee - fbaFee).round();
 }
+
+int calcBreakEven({
+  @required int purchase,
+  @required bool useFba,
+  @required FeeInfo feeInfo,
+}) {
+  final fbaFee = useFba ? feeInfo.fbaFee : 0;
+  final temp = purchase + fbaFee + feeInfo.variableClosingFee;
+  final breakEven = temp / (1 - feeInfo.referralFeeRate);
+  return breakEven.round();
+}
