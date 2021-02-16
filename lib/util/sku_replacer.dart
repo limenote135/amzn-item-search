@@ -1,6 +1,5 @@
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/models/purchase_settings.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
 
@@ -19,12 +18,12 @@ const breakEvenVar = "{breakEven}";
 String replaceSku({
   @required String format,
   @required AsinData item,
-  @required PurchaseSettings settings,
-  int purchase,
-  int sell,
-  PurchaseItemCondition cond,
-  int profit,
-  int quantity,
+  @required int purchase,
+  @required int sell,
+  @required PurchaseItemCondition cond,
+  @required int profit,
+  @required int quantity,
+  @required bool useFba,
 }) {
   final date = DateTime.now().toLocal();
   return format
@@ -33,17 +32,17 @@ String replaceSku({
       .replaceAll(dayVar, date.day.toString().padLeft(2, "0"))
       .replaceAll(asinVar, item.asin)
       .replaceAll(janVar, item.jan)
-      .replaceAll(condVar, _conditionText(cond ?? settings.condition))
-      .replaceAll(purchaseVar, (purchase ?? settings.purchasePrice).toString())
-      .replaceAll(sellVar, (sell ?? settings.sellPrice).toString())
-      .replaceAll(profitVar, (profit ?? settings.profit).toString())
-      .replaceAll(quantityVar, (quantity ?? settings.amount).toString())
+      .replaceAll(condVar, _conditionText(cond))
+      .replaceAll(purchaseVar, (purchase).toString())
+      .replaceAll(sellVar, (sell).toString())
+      .replaceAll(profitVar, (profit).toString())
+      .replaceAll(quantityVar, (quantity).toString())
       .replaceAll(
           breakEvenVar,
-          _calcBreakEven(
+          calcBreakEven(
             purchase: purchase,
-            settings: settings,
-            item: item,
+            useFba: useFba,
+            feeInfo: item.prices.feeInfo,
           ).toString());
 }
 
@@ -61,17 +60,4 @@ String _conditionText(PurchaseItemCondition cond) {
       return "UAC";
   }
   throw Exception("Invalid Condition: $cond");
-}
-
-int _calcBreakEven({
-  @required int purchase,
-  @required PurchaseSettings settings,
-  @required AsinData item,
-}) {
-  final purchasePrice = purchase ?? settings.purchasePrice;
-  return calcBreakEven(
-    purchase: purchasePrice,
-    useFba: settings.useFba,
-    feeInfo: item.prices.feeInfo,
-  );
 }
