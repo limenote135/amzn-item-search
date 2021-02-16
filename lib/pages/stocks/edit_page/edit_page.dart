@@ -1,4 +1,3 @@
-import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/item.dart';
@@ -15,14 +14,12 @@ class EditPage extends StatelessWidget {
   const EditPage({Key key}) : super(key: key);
   static const routeName = "/stocks/edit";
 
-  static Route<void> route(StockItem item,
-      AutoDisposeStateNotifierProvider<PurchaseSettingsController> ctrl) {
+  static Route<void> route(StockItem item) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (context) => ProviderScope(
         overrides: [
           currentStockItemProvider.overrideWithValue(item),
-          currentPurchaseSettingsControllerProvider.overrideWithValue(ctrl),
         ],
         child: const EditPage(),
       ),
@@ -46,12 +43,10 @@ class _Body extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentStockItemProvider);
-    final base = useProvider(currentPurchaseSettingsControllerProvider);
 
     return ProviderScope(
       overrides: [
         currentAsinDataProvider.overrideWithValue(item.item),
-        currentPurchaseSettingsControllerProvider.overrideWithValue(base),
       ],
       child: PurchaseSettingsForm(
         action: ReactiveFormConsumer(

@@ -1,6 +1,5 @@
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/models/purchase_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
@@ -8,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'enums/item_condition.dart';
 import 'enums/item_sub_condition.dart';
-import 'enums/purchase_item_condition.dart';
 
 part 'stock_item.freezed.dart';
 part 'stock_item.g.dart';
@@ -33,39 +31,4 @@ abstract class StockItem with _$StockItem {
     @HiveField(11) @required String retailer,
     @HiveField(12) @required String id, // 主キー
   }) = _StockItem;
-}
-
-extension StockItemExtension on StockItem {
-  PurchaseSettings toPurchaseSettings() {
-    var cond = PurchaseItemCondition.newItem;
-    switch (subCondition) {
-      case ItemSubCondition.newItem:
-        break;
-      case ItemSubCondition.mint:
-        cond = PurchaseItemCondition.usedMint;
-        break;
-      case ItemSubCondition.veryGood:
-        cond = PurchaseItemCondition.usedVeryGood;
-        break;
-      case ItemSubCondition.good:
-        cond = PurchaseItemCondition.usedGood;
-        break;
-      case ItemSubCondition.acceptable:
-        cond = PurchaseItemCondition.usedAcceptable;
-        break;
-    }
-    return PurchaseSettings(
-      formKey: GlobalKey<FormState>(),
-      purchasePrice: purchasePrice,
-      sellPrice: sellPrice,
-      useFba: useFba,
-      amount: amount,
-      condition: cond,
-      sku: sku,
-      enableAutogenSku: false, // StockPage で編集する際に呼ばれるので false に
-      retailer: retailer,
-      memo: memo,
-      purchaseDate: purchaseDate,
-    );
-  }
 }
