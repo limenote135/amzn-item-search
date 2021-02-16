@@ -17,7 +17,7 @@ String calcProfitText(int price, FeeInfo fee, {@required bool useFba}) {
       calcProfit(sellPrice: price, purchasePrice: 0, fee: fee, useFba: useFba);
 
   if (fee.fbaFee == -1) {
-    return "${numberFormatter.format(profit)}-α";
+    return "${numberFormatter.format(profit)} - α";
   } else {
     return numberFormatter.format(profit);
   }
@@ -77,7 +77,7 @@ int calcBreakEven({
   @required bool useFba,
   @required FeeInfo feeInfo,
 }) {
-  final fbaFee = useFba ? feeInfo.fbaFee : 0;
+  final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
   final temp = purchase + fbaFee + feeInfo.variableClosingFee;
   final breakEven = temp / (1 - feeInfo.referralFeeRate);
   return breakEven.round();
