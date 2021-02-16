@@ -1,4 +1,3 @@
-import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
@@ -60,11 +59,9 @@ class DetailPage extends HookWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.edit),
         onPressed: () {
-          final ctrl =
-              initPurchaseSettingsControllerProvider(item.toPurchaseSettings());
           Navigator.push<void>(
             context,
-            EditPage.route(item, ctrl),
+            EditPage.route(item),
           );
         },
       ),
