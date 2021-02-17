@@ -46,7 +46,7 @@ class _Body extends HookWidget {
 
     return ProviderScope(
       overrides: [
-        currentAsinDataProvider.overrideWithValue(item.item),
+        currentAsinDataProvider.overrideWithValue(item.item), // 不要になってるかも？
       ],
       child: PurchaseSettingsForm(
         action: ReactiveFormConsumer(
@@ -73,21 +73,20 @@ class _Body extends HookWidget {
       fee: item.item.prices.feeInfo,
       useFba: useFba,
     );
-    context.read(stockItemListControllerProvider).update(
-          item.copyWith(
-            purchasePrice: purchase,
-            sellPrice: sell,
-            useFba: useFba,
-            profitPerItem: profit,
-            amount: getInt(form, quantityField),
-            condition: getCondition(form).toItemCondition(),
-            subCondition: getCondition(form).toItemSubCondition(),
-            sku: getString(form, skuField),
-            retailer: getString(form, retailerField),
-            memo: getString(form, memoField),
-            purchaseDate: getString(form, purchaseDateField),
-          ),
-        );
+    final newItem = item.copyWith(
+      purchasePrice: purchase,
+      sellPrice: sell,
+      useFba: useFba,
+      profitPerItem: profit,
+      amount: getInt(form, quantityField),
+      condition: getCondition(form).toItemCondition(),
+      subCondition: getCondition(form).toItemSubCondition(),
+      sku: getString(form, skuField),
+      retailer: getString(form, retailerField),
+      memo: getString(form, memoField),
+      purchaseDate: getString(form, purchaseDateField),
+    );
+    context.read(stockItemListControllerProvider).update(newItem);
     Navigator.of(context).popUntil((route) => route.settings.name == "/");
   }
 }
