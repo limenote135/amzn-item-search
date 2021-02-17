@@ -60,3 +60,8 @@ PurchaseItemCondition getCondition(AbstractControl<dynamic> form) {
   final f = form as FormGroup;
   return f.control(conditionField).value as PurchaseItemCondition;
 }
+
+DateTime getPurchaseDate(AbstractControl<dynamic> form) {
+  final f = form as FormGroup;
+  return f.control(purchaseDateField).value as DateTime;
+}
