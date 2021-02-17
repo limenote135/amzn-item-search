@@ -5,7 +5,6 @@ import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
-import 'package:amasearch/models/purchase_settings.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/sku_replacer.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -29,17 +28,6 @@ const _newSampleItem = AsinData(
       ),
     ),
     category: "カテゴリー");
-
-var _samplePurchaseSettings = PurchaseSettings(
-  formKey: GlobalKey<FormState>(),
-  purchasePrice: 100,
-  sellPrice: 250,
-  condition: PurchaseItemCondition.newItem,
-  profit: 50,
-  amount: 2,
-  useFba: true,
-  purchaseDate: DateTime.now().toUtc().toIso8601String(),
-);
 
 class SkuFormatPage extends StatelessWidget {
   const SkuFormatPage({Key key}) : super(key: key);
@@ -122,8 +110,12 @@ class __PatternEditFormState extends State<_PatternEditForm> {
               Text(replaceSku(
                 format: _textEditingController.text,
                 item: _newSampleItem,
-                settings: _samplePurchaseSettings,
                 purchase: 200,
+                sell: 300,
+                cond: PurchaseItemCondition.newItem,
+                profit: 5,
+                quantity: 2,
+                useFba: true,
               )),
             ],
           ),

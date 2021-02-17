@@ -1,4 +1,3 @@
-import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
@@ -60,11 +59,9 @@ class DetailPage extends HookWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.edit),
         onPressed: () {
-          final ctrl =
-              initPurchaseSettingsControllerProvider(item.toPurchaseSettings());
           Navigator.push<void>(
             context,
-            EditPage.route(item, ctrl),
+            EditPage.route(item),
           );
         },
       ),
@@ -91,7 +88,9 @@ class _Body extends HookWidget {
     final referralFee =
         (item.sellPrice * item.item.prices.feeInfo.referralFeeRate).round();
     final categoryFee = item.item.prices.feeInfo.variableClosingFee;
-    final fbaFee = item.useFba ? item.item.prices.feeInfo.fbaFee : 0;
+    final isUnknownFbaFee = item.item.prices.feeInfo.fbaFee == -1;
+    final fbaFee =
+        item.useFba && !isUnknownFbaFee ? item.item.prices.feeInfo.fbaFee : 0;
     final totalFeePerItem = referralFee + categoryFee + fbaFee;
     final breakEven = calcBreakEven(
         purchase: item.purchasePrice,
@@ -139,7 +138,8 @@ class _Body extends HookWidget {
         ExpansionTile(
           title: TextLine(
             leading: const Text("手数料"),
-            main: Text(_getFeeText(totalFeePerItem, item.amount)),
+            main: Text(
+                _getFeeText(totalFeePerItem, item.amount, isUnknownFbaFee)),
           ),
           children: [
             const ThemeDivider(),
@@ -153,7 +153,7 @@ class _Body extends HookWidget {
             ),
             TextListTile(
               leading: const Text("FBA手数料"),
-              main: Text("$fbaFee 円"),
+              main: Text(isUnknownFbaFee ? "(不明) 円" : "$fbaFee 円"),
             ),
           ],
         ),
@@ -194,10 +194,14 @@ class _Body extends HookWidget {
     );
   }
 
-  String _getFeeText(int fee, int amount) {
+  String _getFeeText(int fee, int amount, bool isUnknownFbaFee) {
     final feePerItem = numberFormatter.format(fee);
     final total = numberFormatter.format(fee * amount);
-    return "$feePerItem 円 * $amount 個 = $total 円";
+    if (isUnknownFbaFee) {
+      return "$feePerItem 円 * $amount 個 = $total 円 + α";
+    } else {
+      return "$feePerItem 円 * $amount 個 = $total 円";
+    }
   }
 
   String _getProfitText(StockItem item) {

@@ -1,17 +1,20 @@
 import 'dart:typed_data';
 
 import 'package:amasearch/analytics/analytics.dart';
-import 'package:amasearch/controllers/purchase_settings_controller.dart';
+import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/form.dart';
+import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class PurchasePage extends StatelessWidget {
   const PurchasePage({Key key}) : super(key: key);
@@ -49,13 +52,24 @@ class _Body extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final base = purchaseSettingsControllerProvider(item.asin);
-    final formKey = useProvider(base.state.select((value) => value.formKey));
     final uuid = context.read(uuidProvider);
+
+    // 仮で初期値を新品最安値、無ければ中古最安値にする
+    final lowestPrice = _calcLowestPrice(item.prices);
+    final useFba = useProvider(searchSettingsControllerProvider.state).useFba;
+
+    final stock = StockItem(
+      purchaseDate: DateTime.now().toIso8601String(),
+      sellPrice: lowestPrice,
+      useFba: useFba,
+      autogenSku: true,
+      item: item,
+      id: uuid.v4(),
+    );
 
     return ProviderScope(
       overrides: [
-        currentPurchaseSettingsControllerProvider.overrideWithValue(base),
+        currentStockItemProvider.overrideWithValue(stock),
       ],
       child: PurchaseSettingsForm(
         onComplete: (bytes) {
@@ -64,44 +78,61 @@ class _Body extends HookWidget {
             imageData = bytes.buffer.asUint8List();
           }
         },
-        action: RaisedButton(
-          child: const Text("仕入れる"),
-          onPressed: () {
-            if (formKey.currentState.validate()) {
-              formKey.currentState.save();
-              final data = context.read(base.state);
-
-              final stock = StockItem(
-                id: uuid.v4(),
-                purchasePrice: data.purchasePrice,
-                sellPrice: data.sellPrice,
-                useFba: data.useFba,
-                profitPerItem: calcProfit(
-                    sellPrice: data.sellPrice,
-                    purchasePrice: data.purchasePrice,
-                    fee: item.prices.feeInfo,
-                    useFba: data.useFba),
-                amount: data.amount,
-                condition: data.condition.toItemCondition(),
-                subCondition: data.condition.toItemSubCondition(),
-                sku: data.sku,
-                memo: data.memo,
-                item: item.imageData != null
-                    ? item
-                    : item.copyWith(imageData: imageData),
-                purchaseDate: data.purchaseDate,
-                retailer: data.retailer,
-              );
-
-              context.read(stockItemListControllerProvider).add(stock);
-              context.read(analyticsControllerProvider).logPurchaseEvent(stock);
-
-              Navigator.of(context)
-                  .popUntil((route) => route.settings.name == "/");
-            }
+        action: ReactiveFormConsumer(
+          builder: (context, form, child) {
+            return RaisedButton(
+              child: const Text("仕入れる"),
+              onPressed: form.invalid
+                  ? null
+                  : () => _onSubmit(context, form, uuid.v4(), item),
+            );
           },
         ),
       ),
     );
+  }
+
+  void _onSubmit(
+      BuildContext context, FormGroup form, String id, AsinData item) {
+    final purchase = getInt(form, purchasePriceField);
+    final sell = getInt(form, sellPriceField);
+    final useFba = getBool(form, useFbaField);
+
+    final profit = calcProfit(
+      sellPrice: sell,
+      purchasePrice: purchase,
+      fee: item.prices.feeInfo,
+      useFba: useFba,
+    );
+
+    final stock = StockItem(
+      id: id,
+      purchasePrice: getInt(form, purchasePriceField),
+      sellPrice: getInt(form, sellPriceField),
+      useFba: getBool(form, useFbaField),
+      profitPerItem: profit,
+      amount: getInt(form, quantityField),
+      condition: getCondition(form).toItemCondition(),
+      subCondition: getCondition(form).toItemSubCondition(),
+      sku: getString(form, skuField),
+      memo: getString(form, memoField),
+      item: item.imageData != null ? item : item.copyWith(imageData: imageData),
+      purchaseDate: getString(form, purchaseDateField),
+      retailer: getString(form, retailerField),
+    );
+    context.read(stockItemListControllerProvider).add(stock);
+    context.read(analyticsControllerProvider).logPurchaseEvent(stock);
+
+    Navigator.of(context).popUntil((route) => route.settings.name == "/");
+  }
+
+  int _calcLowestPrice(ItemPrices prices) {
+    if (prices.newPrices != null && prices.newPrices.isNotEmpty) {
+      return prices.newPrices.first.price;
+    }
+    if (prices.usedPrices != null && prices.usedPrices.isNotEmpty) {
+      return prices.usedPrices.first.price;
+    }
+    return -1;
   }
 }

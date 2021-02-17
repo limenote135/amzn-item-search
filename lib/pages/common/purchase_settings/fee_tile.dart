@@ -1,12 +1,13 @@
-import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/text_line_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class FeeTile extends HookWidget {
   const FeeTile({Key key}) : super(key: key);
@@ -14,12 +15,11 @@ class FeeTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final base = useProvider(currentPurchaseSettingsControllerProvider);
-    final useFba = useProvider(base.state.select((value) => value.useFba));
-    final sellPrice =
-        useProvider(base.state.select((value) => value.sellPrice));
-    final purchasePrice =
-        useProvider(base.state.select((value) => value.purchasePrice));
+
+    final form = ReactiveForm.of(context);
+    final useFba = getBool(form, useFbaField);
+    final sellPrice = getInt(form, sellPriceField);
+    final purchasePrice = getInt(form, purchasePriceField);
 
     final totalFee = _calcTotalFee(
       sellPrice: sellPrice,
@@ -33,12 +33,14 @@ class FeeTile extends HookWidget {
     final sellFee =
         _calcSellFee(sellPrice, item.prices.feeInfo.referralFeeRate);
     final categoryFee = item.prices.feeInfo.variableClosingFee;
-    final fbaFee = useFba ? item.prices.feeInfo.fbaFee : 0;
+
+    final fbaFeeText =
+        _fbaFeeText(useFba: useFba, feeInfo: item.prices.feeInfo);
 
     return ExpansionTile(
       title: TextLine(
         leading: const Text("手数料"),
-        main: Text("${numberFormatter.format(totalFee)} 円"),
+        main: Text("$totalFee 円"),
       ),
       children: [
         const ThemeDivider(),
@@ -54,8 +56,7 @@ class FeeTile extends HookWidget {
                 main: Text("${numberFormatter.format(categoryFee)} 円"),
               ),
               TextLine(
-                  leading: const Text("FBA手数料"),
-                  main: Text("${numberFormatter.format(fbaFee)} 円")),
+                  leading: const Text("FBA手数料"), main: Text("$fbaFeeText 円")),
             ],
           ),
         )
@@ -63,19 +64,35 @@ class FeeTile extends HookWidget {
     );
   }
 
+  String _fbaFeeText({@required bool useFba, @required FeeInfo feeInfo}) {
+    if (!useFba) {
+      return "0";
+    } else if (feeInfo.fbaFee == -1) {
+      return "(不明)";
+    } else {
+      return "${numberFormatter.format(feeInfo.fbaFee)}";
+    }
+  }
+
   int _calcSellFee(int sellPrice, double feeRate) {
     return (sellPrice * feeRate).round();
   }
 
-  int _calcTotalFee({
+  String _calcTotalFee({
     @required int sellPrice,
     @required int purchasePrice,
     @required FeeInfo feeInfo,
     @required bool useFba,
   }) {
     final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
-    final fbaFee = useFba ? feeInfo.fbaFee : 0;
+    final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
+    final totalFee = sellFee + feeInfo.variableClosingFee + fbaFee;
+    final str = numberFormatter.format(totalFee);
 
-    return sellFee + feeInfo.variableClosingFee + fbaFee;
+    if (useFba && feeInfo.fbaFee == -1) {
+      return "$str + α";
+    } else {
+      return "$str";
+    }
   }
 }
