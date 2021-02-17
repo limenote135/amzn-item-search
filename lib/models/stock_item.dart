@@ -18,17 +18,20 @@ abstract class StockItem with _$StockItem {
   @HiveType(typeId: stockItemTypeId)
   const factory StockItem({
     @HiveField(0) @required String purchaseDate,
-    @HiveField(1) @required int purchasePrice,
-    @HiveField(2) @required int sellPrice,
-    @HiveField(3) @required bool useFba,
-    @HiveField(4) @required int profitPerItem,
-    @HiveField(5) @required int amount,
-    @HiveField(6) @required ItemCondition condition,
-    @HiveField(7) @required ItemSubCondition subCondition,
-    @HiveField(8) @required String sku,
-    @HiveField(9) @required String memo,
+    @HiveField(1) @Default(0) int purchasePrice,
+    @HiveField(2) @Default(0) int sellPrice,
+    @HiveField(3) @Default(true) bool useFba,
+    @HiveField(4) @Default(0) int profitPerItem,
+    @HiveField(5) @Default(1) int amount,
+    @HiveField(6) @Default(ItemCondition.newItem) ItemCondition condition,
+    @HiveField(7)
+    @Default(ItemSubCondition.newItem)
+        ItemSubCondition subCondition,
+    @HiveField(8) @Default("") String sku,
+    @HiveField(9) @Default("") String memo,
     @HiveField(10) @required AsinData item,
-    @HiveField(11) @required String retailer,
+    @HiveField(11) @Default("") String retailer,
     @HiveField(12) @required String id, // 主キー
+    @Default(false) bool autogenSku,
   }) = _StockItem;
 }
