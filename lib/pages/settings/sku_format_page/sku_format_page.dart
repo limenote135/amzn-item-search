@@ -116,6 +116,7 @@ class __PatternEditFormState extends State<_PatternEditForm> {
                 profit: 5,
                 quantity: 2,
                 useFba: true,
+                date: DateTime.now(),
               )),
             ],
           ),
