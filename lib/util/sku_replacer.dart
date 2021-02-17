@@ -24,8 +24,8 @@ String replaceSku({
   @required int profit,
   @required int quantity,
   @required bool useFba,
+  @required DateTime date,
 }) {
-  final date = DateTime.now().toLocal();
   return format
       .replaceAll(yearVar, date.year.toString())
       .replaceAll(monthVar, date.month.toString().padLeft(2, "0"))
