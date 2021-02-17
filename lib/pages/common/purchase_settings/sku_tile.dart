@@ -52,6 +52,7 @@ class SkuTile extends HookWidget {
     final cond = getCondition(form);
     final quantity = getInt(form, quantityField);
     final useFba = getBool(form, useFbaField);
+    final purchaseDate = getPurchaseDate(form);
 
     final profit = calcProfit(
       sellPrice: sell,
@@ -69,6 +70,7 @@ class SkuTile extends HookWidget {
       profit: profit,
       quantity: quantity,
       useFba: useFba,
+      date: purchaseDate,
     );
   }
 }
