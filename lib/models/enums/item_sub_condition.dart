@@ -1,4 +1,5 @@
 import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:hive/hive.dart';
 
 part 'item_sub_condition.g.dart';
@@ -46,6 +47,22 @@ extension ItemSubConditionExtention on ItemSubCondition {
         return "良い";
       case ItemSubCondition.acceptable:
         return "可";
+    }
+    throw Exception("Invalid UsedSubCondition: $this");
+  }
+
+  PurchaseItemCondition toItemPurchaseCondition() {
+    switch (this) {
+      case ItemSubCondition.newItem:
+        return PurchaseItemCondition.newItem;
+      case ItemSubCondition.mint:
+        return PurchaseItemCondition.usedMint;
+      case ItemSubCondition.veryGood:
+        return PurchaseItemCondition.usedVeryGood;
+      case ItemSubCondition.good:
+        return PurchaseItemCondition.usedGood;
+      case ItemSubCondition.acceptable:
+        return PurchaseItemCondition.usedAcceptable;
     }
     throw Exception("Invalid UsedSubCondition: $this");
   }

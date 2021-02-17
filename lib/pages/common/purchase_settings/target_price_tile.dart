@@ -1,10 +1,11 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class TargetPriceTile extends HookWidget {
   const TargetPriceTile({Key key}) : super(key: key);
@@ -12,10 +13,10 @@ class TargetPriceTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final base = useProvider(currentPurchaseSettingsControllerProvider);
-    final useFba = useProvider(base.state.select((value) => value.useFba));
-    final purchasePrice =
-        useProvider(base.state.select((value) => value.purchasePrice));
+
+    final form = ReactiveForm.of(context);
+    final useFba = getBool(form, useFbaField);
+    final purchasePrice = getInt(form, purchasePriceField);
 
     final showTargetRate = useProvider(generalSettingsControllerProvider.state
         .select((value) => value.enableTargetProfit));
@@ -34,6 +35,7 @@ class TargetPriceTile extends HookWidget {
     if (!showTargetRate) {
       return Container();
     }
+
     return ListTile(
       title: Row(
         children: [
@@ -50,7 +52,7 @@ class TargetPriceTile extends HookWidget {
       int minProfit, bool useFba) {
     // 販売価格 = 購入価格 + カテゴリ手数料 + FBA 手数料 + 利益
     // 利益 = max(販売価格 * 利益率, 最低利益額)
-    final fbaFee = useFba ? feeInfo.fbaFee : 0;
+    final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
     final price = purchasePrice + feeInfo.variableClosingFee + fbaFee;
 
     // 利益 = 販売価格 * 利益率の場合の販売価格を計算
