@@ -1,9 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/form.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
@@ -52,22 +54,40 @@ class _Body extends HookWidget {
     final item = useProvider(currentAsinDataProvider);
     final uuid = context.read(uuidProvider);
 
-    return PurchaseSettingsForm(
-      onComplete: (bytes) {
-        if (item.imageData == null) {
-          // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
-          imageData = bytes.buffer.asUint8List();
-        }
-      },
-      action: ReactiveFormConsumer(
-        builder: (context, form, child) {
-          return RaisedButton(
-            child: const Text("仕入れる"),
-            onPressed: form.invalid
-                ? null
-                : () => _onSubmit(context, form, uuid.v4(), item),
-          );
+    // 仮で初期値を新品最安値、無ければ中古最安値にする
+    final lowestPrice = _calcLowestPrice(item.prices);
+    final useFba = useProvider(searchSettingsControllerProvider.state).useFba;
+
+    final stock = StockItem(
+      purchaseDate: DateTime.now().toIso8601String(),
+      sellPrice: lowestPrice,
+      useFba: useFba,
+      autogenSku: true,
+      item: item,
+      id: uuid.v4(),
+    );
+
+    return ProviderScope(
+      overrides: [
+        currentStockItemProvider.overrideWithValue(stock),
+      ],
+      child: PurchaseSettingsForm(
+        onComplete: (bytes) {
+          if (item.imageData == null) {
+            // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
+            imageData = bytes.buffer.asUint8List();
+          }
         },
+        action: ReactiveFormConsumer(
+          builder: (context, form, child) {
+            return RaisedButton(
+              child: const Text("仕入れる"),
+              onPressed: form.invalid
+                  ? null
+                  : () => _onSubmit(context, form, uuid.v4(), item),
+            );
+          },
+        ),
       ),
     );
   }
@@ -104,5 +124,15 @@ class _Body extends HookWidget {
     context.read(analyticsControllerProvider).logPurchaseEvent(stock);
 
     Navigator.of(context).popUntil((route) => route.settings.name == "/");
+  }
+
+  int _calcLowestPrice(ItemPrices prices) {
+    if (prices.newPrices != null && prices.newPrices.isNotEmpty) {
+      return prices.newPrices.first.price;
+    }
+    if (prices.usedPrices != null && prices.usedPrices.isNotEmpty) {
+      return prices.usedPrices.first.price;
+    }
+    return -1;
   }
 }
