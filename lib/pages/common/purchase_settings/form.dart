@@ -1,27 +1,51 @@
 import 'dart:typed_data';
 
-import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/controllers/purchase_settings_controller.dart';
-import 'package:amasearch/models/item.dart';
-import 'package:amasearch/pages/common/purchase_settings/image_tile.dart';
-import 'package:amasearch/pages/common/purchase_settings/retailer_tile.dart';
-import 'package:amasearch/pages/common/purchase_settings/sku_tile.dart';
-import 'package:amasearch/pages/common/purchase_settings/target_price_tile.dart';
+import 'package:amasearch/models/enums/item_sub_condition.dart';
+import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
-import 'package:amasearch/util/formatter.dart';
-import 'package:amasearch/util/price_util.dart';
-import 'package:amasearch/util/sku_replacer.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:reactive_forms_widgets/reactive_forms_widgets.dart';
 
+import 'custom_validator.dart';
 import 'fee_tile.dart';
+import 'image_tile.dart';
 import 'input_prices_tile.dart';
-import 'input_purchase_amount_tile.dart';
 import 'item_condition_tile.dart';
 import 'profit_tile.dart';
+import 'purchase_date_tile.dart';
+import 'retailer_tile.dart';
+import 'sku_tile.dart';
+import 'target_price_tile.dart';
+import 'values.dart';
+
+final formValueProvider =
+    StateProvider.family<FormGroup, StockItem>((ref, item) {
+  return fb.group(<String, dynamic>{
+    purchasePriceField: [
+      item.purchasePrice == 0 ? "" : "${item.purchasePrice}",
+      positiveNumberOrEmpty,
+    ],
+    sellPriceField: [
+      item.sellPrice,
+      Validators.required,
+      Validators.number,
+      Validators.min(0),
+    ],
+    useFbaField: item.useFba,
+    quantityField: item.amount,
+    conditionField: item.subCondition.toItemPurchaseCondition(),
+    autogenSkuField: item.autogenSku,
+    skuField: item.sku,
+    retailerField: item.retailer,
+    memoField: item.memo,
+    purchaseDateField: DateTime.parse(item.purchaseDate),
+  });
+});
 
 class PurchaseSettingsForm extends HookWidget {
   const PurchaseSettingsForm({Key key, this.action, this.onComplete})
@@ -32,27 +56,10 @@ class PurchaseSettingsForm extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final item = useProvider(currentAsinDataProvider);
-    final base = useProvider(currentPurchaseSettingsControllerProvider);
-    final settings = useProvider(base.state);
-
-    final skuFormat = useProvider(generalSettingsControllerProvider.state
-        .select((value) => value.skuFormat));
-
-    final memo = useProvider(base.state.select((value) => value.memo));
-
-    final purchaseDate =
-        useProvider(base.state.select((value) => value.purchaseDate));
-
-    return Form(
-      key: settings.formKey,
-      onChanged: () {
-        final form = Form.of(primaryFocus.context); //TODO: これでよいのか？
-        // 仕入れ先をプルダウンで選択した際に、primaryFocus.context が選択ダイアログになるため null になりうる？
-        if (form?.validate() ?? false) {
-          form.save();
-        }
-      },
+    final item = useProvider(currentStockItemProvider);
+    final form = useProvider(formValueProvider(item));
+    return ReactiveForm(
+      formGroup: form.state,
       child: ListView(
         children: [
           WithUnderLine(
@@ -63,74 +70,41 @@ class PurchaseSettingsForm extends HookWidget {
           const SellerListTile(),
           const ThemeDivider(),
           const InputPricesTile(),
-          SwitchListTile(
-            value: settings.useFba,
-            title: const Text("FBA を利用する"),
-            onChanged: (value) {
-              final profit = calcProfit(
-                  sellPrice: settings.sellPrice,
-                  purchasePrice: settings.purchasePrice,
-                  fee: item.prices.feeInfo,
-                  useFba: value);
-              final generatedSku = replaceSku(
-                format: skuFormat,
-                item: item,
-                settings: settings,
-                profit: profit,
-              );
-              context.read(base).update(
-                    useFba: value,
-                    profit: profit,
-                    sku: generatedSku,
-                  );
-            },
-          ),
-          const InputPurchaseAmoutTile(),
-          const ProfitTile(),
-          const FeeTile(),
-          const TargetPriceTile(),
           const ItemConditionTile(),
-          const RetailerTile(),
+          ReactiveSwitchListTile(
+            formControlName: useFbaField,
+            title: const Text("FBA を利用"),
+          ),
           ListTile(
             title: Row(
               children: [
-                const Text("仕入れ日"),
-                const Spacer(),
-                Text(DateTime.parse(purchaseDate).toLocal().dayFormat()),
+                const Expanded(child: Text("個数")),
+                Flexible(
+                  child: ReactiveTouchSpin<int>(
+                    formControlName: quantityField,
+                    textStyle: const TextStyle(fontSize: 18),
+                    min: 1,
+                    max: 99,
+                    step: 1,
+                  ),
+                ),
               ],
             ),
-            trailing: IconButton(
-              icon: const Icon(Icons.date_range),
-              onPressed: () async {
-                print("pushed");
-                final selectedDate = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(DateTime.now().year - 10),
-                  lastDate: DateTime(DateTime.now().year + 10),
-                );
-                if (selectedDate != null) {
-                  print(selectedDate);
-                  context.read(base).update(purchaseDate: selectedDate);
-                }
-              },
-            ),
           ),
+          const ProfitTile(),
+          const FeeTile(),
+          const TargetPriceTile(),
+          const RetailerTile(),
+          const PurchaseDateTile(),
           const ThemeDivider(),
           const SkuTile(),
-          const ThemeDivider(),
           ListTile(
-            title: TextFormField(
+            title: ReactiveTextField(
+              formControlName: memoField,
               maxLines: null,
-              initialValue: memo, // TODO: 初期値検討
               keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(labelText: "メモ"),
               textAlign: TextAlign.start,
-              onSaved: (newValue) {
-                if (newValue != memo) {
-                  context.read(base).update(memo: newValue);
-                }
-              },
+              decoration: const InputDecoration(labelText: "メモ"),
             ),
           ),
           if (action != null) action,

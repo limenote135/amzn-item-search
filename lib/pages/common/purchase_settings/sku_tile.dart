@@ -1,10 +1,12 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/controllers/purchase_settings_controller.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/pages/common/purchase_settings/values.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/sku_replacer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class SkuTile extends HookWidget {
   const SkuTile({Key key}) : super(key: key);
@@ -12,69 +14,61 @@ class SkuTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final base = useProvider(currentPurchaseSettingsControllerProvider);
-    final settings = useProvider(base.state);
-
     final skuFormat = useProvider(generalSettingsControllerProvider.state
         .select((value) => value.skuFormat));
-
     return Column(
       children: [
-        CheckboxListTile(
-          value: settings.enableAutogenSku,
-          title: const Text("SKU を自動生成"),
+        ReactiveCheckboxListTile(
+          formControlName: autogenSkuField,
           controlAffinity: ListTileControlAffinity.leading,
-          onChanged: (value) {
-            if (value) {
-              final generatedSku =
-                  replaceSku(format: skuFormat, item: item, settings: settings);
-              context.read(base).update(
-                    enableAutogenSku: value,
-                    sku: settings.sku != generatedSku
-                        ? generatedSku
-                        : settings.sku,
-                  );
-            } else {
-              context.read(base).update(enableAutogenSku: value);
-            }
-          },
+          title: const Text("SKU を自動生成"),
         ),
         ListTile(
-          title: settings.enableAutogenSku
-              ? _autogenSkuText(
-                  context,
-                  settings.sku != ""
-                      ? settings.sku
-                      : replaceSku(
-                          format: skuFormat, item: item, settings: settings))
-              : _manualSkuWidget(context, settings.sku),
-        ),
+          title: ReactiveValueListenableBuilder<bool>(
+            formControlName: autogenSkuField,
+            builder: (context, control, child) {
+              if (control.value) {
+                final form = ReactiveForm.of(context) as FormGroup;
+                form.control(skuField).value =
+                    _generateSku(skuFormat, item, form);
+              }
+              return ReactiveTextField(
+                readOnly: control.value,
+                formControlName: skuField,
+                keyboardType: TextInputType.url,
+                decoration: const InputDecoration(labelText: "SKU"),
+                textAlign: TextAlign.start,
+              );
+            },
+          ),
+        )
       ],
     );
   }
 
-  Widget _autogenSkuText(BuildContext context, String text) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("SKU", style: Theme.of(context).textTheme.caption),
-        Text(text),
-      ],
-    );
-  }
+  String _generateSku(String format, AsinData item, FormGroup form) {
+    final purchase = getInt(form, purchasePriceField);
+    final sell = getInt(form, sellPriceField);
+    final cond = getCondition(form);
+    final quantity = getInt(form, quantityField);
+    final useFba = getBool(form, useFbaField);
 
-  Widget _manualSkuWidget(BuildContext context, String text) {
-    final base = useProvider(currentPurchaseSettingsControllerProvider);
-    return TextFormField(
-      initialValue: text,
-      keyboardType: TextInputType.url,
-      decoration: const InputDecoration(labelText: "SKU"),
-      textAlign: TextAlign.start,
-      onSaved: (newValue) {
-        if (newValue != text) {
-          context.read(base).update(sku: newValue);
-        }
-      },
+    final profit = calcProfit(
+      sellPrice: sell,
+      purchasePrice: purchase,
+      fee: item.prices.feeInfo,
+      useFba: useFba,
+    );
+
+    return replaceSku(
+      format: format,
+      item: item,
+      purchase: purchase,
+      sell: sell,
+      cond: cond,
+      profit: profit,
+      quantity: quantity,
+      useFba: useFba,
     );
   }
 }

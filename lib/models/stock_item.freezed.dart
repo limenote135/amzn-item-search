@@ -16,18 +16,19 @@ class _$StockItemTearOff {
 // ignore: unused_element
   _StockItem call(
       {@required @HiveField(0) String purchaseDate,
-      @required @HiveField(1) int purchasePrice,
-      @required @HiveField(2) int sellPrice,
-      @required @HiveField(3) bool useFba,
-      @required @HiveField(4) int profitPerItem,
-      @required @HiveField(5) int amount,
-      @required @HiveField(6) ItemCondition condition,
-      @required @HiveField(7) ItemSubCondition subCondition,
-      @required @HiveField(8) String sku,
-      @required @HiveField(9) String memo,
+      @HiveField(1) int purchasePrice = 0,
+      @HiveField(2) int sellPrice = 0,
+      @HiveField(3) bool useFba = true,
+      @HiveField(4) int profitPerItem = 0,
+      @HiveField(5) int amount = 1,
+      @HiveField(6) ItemCondition condition = ItemCondition.newItem,
+      @HiveField(7) ItemSubCondition subCondition = ItemSubCondition.newItem,
+      @HiveField(8) String sku = "",
+      @HiveField(9) String memo = "",
       @required @HiveField(10) AsinData item,
-      @required @HiveField(11) String retailer,
-      @required @HiveField(12) String id}) {
+      @HiveField(11) String retailer = "",
+      @required @HiveField(12) String id,
+      bool autogenSku = false}) {
     return _StockItem(
       purchaseDate: purchaseDate,
       purchasePrice: purchasePrice,
@@ -42,6 +43,7 @@ class _$StockItemTearOff {
       item: item,
       retailer: retailer,
       id: id,
+      autogenSku: autogenSku,
     );
   }
 }
@@ -77,7 +79,8 @@ mixin _$StockItem {
   @HiveField(11)
   String get retailer;
   @HiveField(12)
-  String get id;
+  String get id; // 主キー
+  bool get autogenSku;
 
   @JsonKey(ignore: true)
   $StockItemCopyWith<StockItem> get copyWith;
@@ -100,7 +103,8 @@ abstract class $StockItemCopyWith<$Res> {
       @HiveField(9) String memo,
       @HiveField(10) AsinData item,
       @HiveField(11) String retailer,
-      @HiveField(12) String id});
+      @HiveField(12) String id,
+      bool autogenSku});
 
   $AsinDataCopyWith<$Res> get item;
 }
@@ -128,6 +132,7 @@ class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
     Object item = freezed,
     Object retailer = freezed,
     Object id = freezed,
+    Object autogenSku = freezed,
   }) {
     return _then(_value.copyWith(
       purchaseDate: purchaseDate == freezed
@@ -152,6 +157,8 @@ class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
       item: item == freezed ? _value.item : item as AsinData,
       retailer: retailer == freezed ? _value.retailer : retailer as String,
       id: id == freezed ? _value.id : id as String,
+      autogenSku:
+          autogenSku == freezed ? _value.autogenSku : autogenSku as bool,
     ));
   }
 
@@ -185,7 +192,8 @@ abstract class _$StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
       @HiveField(9) String memo,
       @HiveField(10) AsinData item,
       @HiveField(11) String retailer,
-      @HiveField(12) String id});
+      @HiveField(12) String id,
+      bool autogenSku});
 
   @override
   $AsinDataCopyWith<$Res> get item;
@@ -215,6 +223,7 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
     Object item = freezed,
     Object retailer = freezed,
     Object id = freezed,
+    Object autogenSku = freezed,
   }) {
     return _then(_StockItem(
       purchaseDate: purchaseDate == freezed
@@ -239,6 +248,8 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
       item: item == freezed ? _value.item : item as AsinData,
       retailer: retailer == freezed ? _value.retailer : retailer as String,
       id: id == freezed ? _value.id : id as String,
+      autogenSku:
+          autogenSku == freezed ? _value.autogenSku : autogenSku as bool,
     ));
   }
 }
@@ -249,18 +260,19 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
 class _$_StockItem implements _StockItem {
   const _$_StockItem(
       {@required @HiveField(0) this.purchaseDate,
-      @required @HiveField(1) this.purchasePrice,
-      @required @HiveField(2) this.sellPrice,
-      @required @HiveField(3) this.useFba,
-      @required @HiveField(4) this.profitPerItem,
-      @required @HiveField(5) this.amount,
-      @required @HiveField(6) this.condition,
-      @required @HiveField(7) this.subCondition,
-      @required @HiveField(8) this.sku,
-      @required @HiveField(9) this.memo,
+      @HiveField(1) this.purchasePrice = 0,
+      @HiveField(2) this.sellPrice = 0,
+      @HiveField(3) this.useFba = true,
+      @HiveField(4) this.profitPerItem = 0,
+      @HiveField(5) this.amount = 1,
+      @HiveField(6) this.condition = ItemCondition.newItem,
+      @HiveField(7) this.subCondition = ItemSubCondition.newItem,
+      @HiveField(8) this.sku = "",
+      @HiveField(9) this.memo = "",
       @required @HiveField(10) this.item,
-      @required @HiveField(11) this.retailer,
-      @required @HiveField(12) this.id})
+      @HiveField(11) this.retailer = "",
+      @required @HiveField(12) this.id,
+      this.autogenSku = false})
       : assert(purchaseDate != null),
         assert(purchasePrice != null),
         assert(sellPrice != null),
@@ -273,51 +285,65 @@ class _$_StockItem implements _StockItem {
         assert(memo != null),
         assert(item != null),
         assert(retailer != null),
-        assert(id != null);
+        assert(id != null),
+        assert(autogenSku != null);
 
   @override
   @HiveField(0)
   final String purchaseDate;
+  @JsonKey(defaultValue: 0)
   @override
   @HiveField(1)
   final int purchasePrice;
+  @JsonKey(defaultValue: 0)
   @override
   @HiveField(2)
   final int sellPrice;
+  @JsonKey(defaultValue: true)
   @override
   @HiveField(3)
   final bool useFba;
+  @JsonKey(defaultValue: 0)
   @override
   @HiveField(4)
   final int profitPerItem;
+  @JsonKey(defaultValue: 1)
   @override
   @HiveField(5)
   final int amount;
+  @JsonKey(defaultValue: ItemCondition.newItem)
   @override
   @HiveField(6)
   final ItemCondition condition;
+  @JsonKey(defaultValue: ItemSubCondition.newItem)
   @override
   @HiveField(7)
   final ItemSubCondition subCondition;
+  @JsonKey(defaultValue: "")
   @override
   @HiveField(8)
   final String sku;
+  @JsonKey(defaultValue: "")
   @override
   @HiveField(9)
   final String memo;
   @override
   @HiveField(10)
   final AsinData item;
+  @JsonKey(defaultValue: "")
   @override
   @HiveField(11)
   final String retailer;
   @override
   @HiveField(12)
   final String id;
+  @JsonKey(defaultValue: false)
+  @override // 主キー
+  final bool autogenSku;
 
   @override
   String toString() {
-    return 'StockItem(purchaseDate: $purchaseDate, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, profitPerItem: $profitPerItem, amount: $amount, condition: $condition, subCondition: $subCondition, sku: $sku, memo: $memo, item: $item, retailer: $retailer, id: $id)';
+    return 'StockItem(purchaseDate: $purchaseDate, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, profitPerItem: $profitPerItem, amount: $amount, condition: $condition, subCondition: $subCondition, sku: $sku, memo: $memo, item: $item, retailer: $retailer, id: $id, autogenSku: $autogenSku)';
   }
 
   @override
@@ -356,7 +382,10 @@ class _$_StockItem implements _StockItem {
                 const DeepCollectionEquality()
                     .equals(other.retailer, retailer)) &&
             (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)));
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.autogenSku, autogenSku) ||
+                const DeepCollectionEquality()
+                    .equals(other.autogenSku, autogenSku)));
   }
 
   @override
@@ -374,7 +403,8 @@ class _$_StockItem implements _StockItem {
       const DeepCollectionEquality().hash(memo) ^
       const DeepCollectionEquality().hash(item) ^
       const DeepCollectionEquality().hash(retailer) ^
-      const DeepCollectionEquality().hash(id);
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(autogenSku);
 
   @JsonKey(ignore: true)
   @override
@@ -385,18 +415,19 @@ class _$_StockItem implements _StockItem {
 abstract class _StockItem implements StockItem {
   const factory _StockItem(
       {@required @HiveField(0) String purchaseDate,
-      @required @HiveField(1) int purchasePrice,
-      @required @HiveField(2) int sellPrice,
-      @required @HiveField(3) bool useFba,
-      @required @HiveField(4) int profitPerItem,
-      @required @HiveField(5) int amount,
-      @required @HiveField(6) ItemCondition condition,
-      @required @HiveField(7) ItemSubCondition subCondition,
-      @required @HiveField(8) String sku,
-      @required @HiveField(9) String memo,
+      @HiveField(1) int purchasePrice,
+      @HiveField(2) int sellPrice,
+      @HiveField(3) bool useFba,
+      @HiveField(4) int profitPerItem,
+      @HiveField(5) int amount,
+      @HiveField(6) ItemCondition condition,
+      @HiveField(7) ItemSubCondition subCondition,
+      @HiveField(8) String sku,
+      @HiveField(9) String memo,
       @required @HiveField(10) AsinData item,
-      @required @HiveField(11) String retailer,
-      @required @HiveField(12) String id}) = _$_StockItem;
+      @HiveField(11) String retailer,
+      @required @HiveField(12) String id,
+      bool autogenSku}) = _$_StockItem;
 
   @override
   @HiveField(0)
@@ -437,6 +468,8 @@ abstract class _StockItem implements StockItem {
   @override
   @HiveField(12)
   String get id;
+  @override // 主キー
+  bool get autogenSku;
   @override
   @JsonKey(ignore: true)
   _$StockItemCopyWith<_StockItem> get copyWith;
