@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:amasearch/controllers/item_controller.dart';
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/models/item_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -30,7 +29,7 @@ final bookoffItemFutureProvider =
         (ref, code) async {
   final jan = await ref.read(bookoffJanFutureProvider(code).future);
 
-  return ref.watch(itemFutureProvider(InterceptorParams(code: jan)).future);
+  return ref.watch(itemFutureProvider(jan).future);
 });
 
 const _bookoffCodeLength = 10;
