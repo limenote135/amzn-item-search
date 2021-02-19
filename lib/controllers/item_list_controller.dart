@@ -1,7 +1,6 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/models/item_interceptor.dart';
 import 'package:amasearch/repository/bookoff.dart';
 import 'package:amasearch/repository/geo.dart';
 import 'package:amasearch/repository/tsutaya.dart';
@@ -11,16 +10,17 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'item_controller.dart';
 
 final itemListControllerProvider =
-    StateNotifierProvider((ref) => ItemListController(ref.read));
+    StateNotifierProvider((ref) => ItemListController(ref.read, ref.container));
 
 class ItemListController extends StateNotifier<
     List<FutureProvider<StateNotifierProvider<ItemController>>>> {
-  ItemListController(this._read,
+  ItemListController(this._read, this._container,
       {List<FutureProvider<StateNotifierProvider<ItemController>>> state})
       : super(state ?? []) {
     _fetchAll();
   }
 
+  final ProviderContainer _container;
   final Reader _read;
 
   void _fetchAll() {
@@ -71,25 +71,33 @@ class ItemListController extends StateNotifier<
       }
     }
     _read(analyticsControllerProvider).logSearchEvent(searchEventJan);
-    final future = itemFutureProvider(InterceptorParams(code: jan));
+    // 同じ JAN を読んだ際に、Amazon データはキャッシュして音声読み上げは再度行うためにリフレッシュする
+    _container.refresh(itemFutureProvider(jan));
+    final future = itemFutureProvider(jan);
     state = [future, ...state];
   }
 
   void addBookoff(String code) {
     _read(analyticsControllerProvider).logSearchEvent(searchEventBookoff);
-    final future = bookoffItemFutureProvider(code.trim());
+    final code2 = code.trim();
+    _container.refresh(bookoffItemFutureProvider(code2));
+    final future = bookoffItemFutureProvider(code2);
     state = [future, ...state];
   }
 
   void addGeo(String code) {
     _read(analyticsControllerProvider).logSearchEvent(searchEventGeo);
-    final future = geoItemFutureProvider(code.trim());
+    final code2 = code.trim();
+    _container.refresh(geoItemFutureProvider(code2));
+    final future = geoItemFutureProvider(code2);
     state = [future, ...state];
   }
 
   void addTsutaya(String code) {
     _read(analyticsControllerProvider).logSearchEvent(searchEventTsutaya);
-    final future = tsutayaItemFutureProvider(code.trim());
+    final code2 = code.trim();
+    _container.refresh(tsutayaItemFutureProvider(code2));
+    final future = tsutayaItemFutureProvider(code2);
     state = [future, ...state];
   }
 }
