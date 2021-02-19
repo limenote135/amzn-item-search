@@ -15,5 +15,6 @@ final tsutayaItemFutureProvider =
     FutureProvider.family<StateNotifierProvider<ItemController>, String>(
         (ref, code) async {
   final jan = getTsutayaJanCode(code);
+  await ref.container.refresh(itemFutureProvider(jan));
   return ref.watch(itemFutureProvider(jan).future);
 });

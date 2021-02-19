@@ -29,6 +29,7 @@ final bookoffItemFutureProvider =
         (ref, code) async {
   final jan = await ref.read(bookoffJanFutureProvider(code).future);
 
+  await ref.container.refresh(itemFutureProvider(jan));
   return ref.watch(itemFutureProvider(jan).future);
 });
 

@@ -79,19 +79,25 @@ class ItemListController extends StateNotifier<
 
   void addBookoff(String code) {
     _read(analyticsControllerProvider).logSearchEvent(searchEventBookoff);
-    final future = bookoffItemFutureProvider(code.trim());
+    final code2 = code.trim();
+    _container.refresh(bookoffItemFutureProvider(code2));
+    final future = bookoffItemFutureProvider(code2);
     state = [future, ...state];
   }
 
   void addGeo(String code) {
     _read(analyticsControllerProvider).logSearchEvent(searchEventGeo);
-    final future = geoItemFutureProvider(code.trim());
+    final code2 = code.trim();
+    _container.refresh(geoItemFutureProvider(code2));
+    final future = geoItemFutureProvider(code2);
     state = [future, ...state];
   }
 
   void addTsutaya(String code) {
     _read(analyticsControllerProvider).logSearchEvent(searchEventTsutaya);
-    final future = tsutayaItemFutureProvider(code.trim());
+    final code2 = code.trim();
+    _container.refresh(tsutayaItemFutureProvider(code2));
+    final future = tsutayaItemFutureProvider(code2);
     state = [future, ...state];
   }
 }
