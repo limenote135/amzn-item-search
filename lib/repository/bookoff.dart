@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:amasearch/controllers/item_controller.dart';
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/models/item_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -30,7 +29,8 @@ final bookoffItemFutureProvider =
         (ref, code) async {
   final jan = await ref.read(bookoffJanFutureProvider(code).future);
 
-  return ref.watch(itemFutureProvider(InterceptorParams(code: jan)).future);
+  await ref.container.refresh(itemFutureProvider(jan));
+  return ref.watch(itemFutureProvider(jan).future);
 });
 
 const _bookoffCodeLength = 10;
@@ -66,7 +66,8 @@ class BookoffRepository {
 [
 	{
 		"AGE_LIMIT": "00",
-		"AUTHORNAME": "[{ジャックワース}](著者),[{ニコラス・Ｅ．ルーベン}](著者),[{坂本希久子}](訳者),[{神田昌典}](その他)",
+		"AUTHORNAME": "[{ジャックワース}](著者),[{ニコラス・Ｅ．ルーベン}](著者),
+		[{坂本希久子}](訳者),[{神田昌典}](その他)",
 		"BUY_PRICE": -1,
 		"DISCLOSE_DT": "200001010000",
 		"GENRE3CODE": "12090222",

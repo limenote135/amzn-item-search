@@ -11,8 +11,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'item_interceptor.dart';
-
 part 'item.freezed.dart';
 part 'item.g.dart';
 
@@ -28,12 +26,12 @@ final currentAsinCountProvider = ScopedProvider<int>((_) => 1);
 final currentItemControllerProvider =
     ScopedProvider<StateNotifierProvider<ItemController>>(null);
 
-final itemFutureProvider = FutureProvider.family<
-    StateNotifierProvider<ItemController>,
-    InterceptorParams>((ref, param) async {
+final itemFutureProvider =
+    FutureProvider.family<StateNotifierProvider<ItemController>, String>(
+        (ref, code) async {
   final settings = ref.read(generalSettingsControllerProvider.state);
   final tts = ref.read(ttsProvider);
-  final result = await ref.watch(itemFutureProviderImpl(param.code).future);
+  final result = await ref.watch(itemFutureProviderImpl(code).future);
 
   if (settings.enableReadAloud) {
     final data = ref.read(result.state);
