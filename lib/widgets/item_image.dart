@@ -15,22 +15,25 @@ class ItemImage extends StatelessWidget {
   Widget build(BuildContext context) {
     if (data == null) {
       print("image from internet");
-      return ExtendedImage.network(
-        url,
-        cache: true,
-        fit: BoxFit.scaleDown,
-        loadStateChanged: (state) {
-          if (state.extendedImageLoadState != LoadState.completed) {
-            return null;
-          }
+      return SizedBox(
+        width: 75,
+        child: ExtendedImage.network(
+          url,
+          cache: true,
+          fit: BoxFit.scaleDown,
+          loadStateChanged: (state) {
+            if (state.extendedImageLoadState != LoadState.completed) {
+              return null;
+            }
 
-          if (state.extendedImageInfo != null) {
-            state.extendedImageInfo.image
-                .toByteData(format: ImageByteFormat.png)
-                .then((value) => onComplete?.call(value));
-          }
-          return state.completedWidget;
-        },
+            if (state.extendedImageInfo != null) {
+              state.extendedImageInfo.image
+                  .toByteData(format: ImageByteFormat.png)
+                  .then((value) => onComplete?.call(value));
+            }
+            return state.completedWidget;
+          },
+        ),
       );
     }
     print("image from binary");
