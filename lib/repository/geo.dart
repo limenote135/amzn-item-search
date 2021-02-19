@@ -26,6 +26,7 @@ final geoItemFutureProvider =
         (ref, code) async {
   final jan = await ref.read(geoJanFutureProvider(code).future);
 
+  await ref.container.refresh(itemFutureProvider(jan));
   return ref.watch(itemFutureProvider(jan).future);
 });
 
