@@ -10,7 +10,6 @@ import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart' as base;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -139,8 +138,9 @@ class _Unfocus extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return base.Listener(
-      onPointerDown: (_) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
         unfocus();
       },
       child: child,
