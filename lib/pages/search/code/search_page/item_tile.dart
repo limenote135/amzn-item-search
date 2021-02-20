@@ -3,6 +3,7 @@ import 'package:amasearch/pages/search/code/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/code/item_select_page/item_select_page.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -71,6 +72,7 @@ class ItemTileImpl extends HookWidget {
     final fbaFee = firstItem.prices?.feeInfo?.fbaFee ?? 0;
     return InkWell(
       onTap: () {
+        unfocus();
         if (item.asins.length == 1) {
           Navigator.push(
             context,

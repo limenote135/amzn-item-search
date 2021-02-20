@@ -6,6 +6,7 @@ import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart' as base;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -60,56 +61,73 @@ class PurchaseSettingsForm extends HookWidget {
     final form = useProvider(formValueProvider(item));
     return ReactiveForm(
       formGroup: form.state,
-      child: ListView(
-        children: [
-          WithUnderLine(
-            ImageTile(
-              onComplete: onComplete,
+      child: _Unfocus(
+        child: ListView(
+          children: [
+            WithUnderLine(
+              ImageTile(
+                onComplete: onComplete,
+              ),
             ),
-          ),
-          const SellerListTile(),
-          const ThemeDivider(),
-          const InputPricesTile(),
-          const ItemConditionTile(),
-          ReactiveSwitchListTile(
-            formControlName: useFbaField,
-            title: const Text("FBA を利用"),
-          ),
-          ListTile(
-            title: Row(
-              children: [
-                const Expanded(child: Text("個数")),
-                Flexible(
-                  child: ReactiveTouchSpin<int>(
-                    formControlName: quantityField,
-                    textStyle: const TextStyle(fontSize: 18),
-                    min: 1,
-                    max: 99,
-                    step: 1,
+            const SellerListTile(),
+            const ThemeDivider(),
+            const InputPricesTile(),
+            const ItemConditionTile(),
+            ReactiveSwitchListTile(
+              formControlName: useFbaField,
+              title: const Text("FBA を利用"),
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  const Expanded(child: Text("個数")),
+                  Flexible(
+                    child: ReactiveTouchSpin<int>(
+                      formControlName: quantityField,
+                      textStyle: const TextStyle(fontSize: 18),
+                      min: 1,
+                      max: 99,
+                      step: 1,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const ProfitTile(),
-          const FeeTile(),
-          const TargetPriceTile(),
-          const RetailerTile(),
-          const PurchaseDateTile(),
-          const ThemeDivider(),
-          const SkuTile(),
-          ListTile(
-            title: ReactiveTextField(
-              formControlName: memoField,
-              maxLines: null,
-              keyboardType: TextInputType.multiline,
-              textAlign: TextAlign.start,
-              decoration: const InputDecoration(labelText: "メモ"),
+            const ProfitTile(),
+            const FeeTile(),
+            const TargetPriceTile(),
+            const RetailerTile(),
+            const PurchaseDateTile(),
+            const ThemeDivider(),
+            const SkuTile(),
+            ListTile(
+              title: ReactiveTextField(
+                formControlName: memoField,
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
+                textAlign: TextAlign.start,
+                decoration: const InputDecoration(labelText: "メモ"),
+              ),
             ),
-          ),
-          if (action != null) action,
-        ],
+            if (action != null) action,
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class _Unfocus extends StatelessWidget {
+  const _Unfocus({Key key, this.child}) : super(key: key);
+
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return base.Listener(
+      onPointerDown: (event) {
+        ReactiveForm.of(context).unfocus();
+      },
+      child: child,
     );
   }
 }
