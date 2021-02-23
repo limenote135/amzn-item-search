@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/item_controller.dart';
+import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/repository/mws.dart';
@@ -39,8 +40,13 @@ final itemFutureProvider =
       tts.speak("見つかりませんでした。");
     } else {
       final template = settings.readAloudPatterns[settings.patternIndex];
-      tts.speak(
-          createSpeakText(template: template.pattern, item: data.asins.first));
+      final search = ref.read(searchSettingsControllerProvider.state);
+      tts.speak(createSpeakText(
+        template: template.pattern,
+        item: data.asins.first,
+        priorFba: search.priorFba,
+        usedSubCondition: search.usedSubCondition,
+      ));
     }
   }
   return result;
