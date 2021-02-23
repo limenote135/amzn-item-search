@@ -11,13 +11,17 @@ class SearchSetting extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final setting = useProvider(searchSettingsControllerProvider.state);
+    var condText = setting.usedSubCondition.toDisplayString();
+    if (setting.usedSubCondition != UsedSubCondition.all) {
+      condText += "以上";
+    }
     return ListTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Center(child: Text("検索設定")),
           Text("タイプ: ${setting.type.toDisplayString()}"),
-          Text("中古コンディション: ${setting.usedSubCondition.toDisplayString()}"),
+          Text("中古コンディション: $condText"),
           Text("FBA利用: ${setting.useFba ? "する" : "しない"}"),
           Text("FBA優先表示: ${setting.priorFba ? "する" : "しない"}"),
         ],

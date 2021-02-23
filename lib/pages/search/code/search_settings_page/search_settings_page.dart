@@ -164,19 +164,19 @@ class _UsedSubCondition extends HookWidget {
                 value: UsedSubCondition.all,
               ),
               DropdownMenuItem(
-                child: Text("ほぼ新品"),
+                child: Text("ほぼ新品以上"),
                 value: UsedSubCondition.mint,
               ),
               DropdownMenuItem(
-                child: Text("非常に良い"),
+                child: Text("非常に良い以上"),
                 value: UsedSubCondition.veryGood,
               ),
               DropdownMenuItem(
-                child: Text("良い"),
+                child: Text("良い以上"),
                 value: UsedSubCondition.good,
               ),
               DropdownMenuItem(
-                child: Text("可"),
+                child: Text("可以上"),
                 value: UsedSubCondition.acceptable,
               ),
             ],

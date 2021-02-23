@@ -51,4 +51,37 @@ extension UsedSubConditionExtention on UsedSubCondition {
     }
     throw Exception("Invalid UsedSubCondition: $this");
   }
+
+  // lessEq は自身が引数で与えられたコンディションと等しいか、より悪いかどうかを返します。
+  // this is less than target
+  // this が検索設定、 target が表示するかどうかの商品を想定
+  bool lessEq(ItemSubCondition target) {
+    if (target == ItemSubCondition.newItem) {
+      throw Exception("InvalidArgument: newItem");
+    }
+
+    switch (this) {
+      case UsedSubCondition.all:
+        return true;
+      case UsedSubCondition.mint:
+        return target == ItemSubCondition.mint;
+      case UsedSubCondition.veryGood:
+        if (target == ItemSubCondition.mint ||
+            target == ItemSubCondition.veryGood) {
+          return true;
+        }
+        return false;
+      case UsedSubCondition.good:
+        if (target == ItemSubCondition.mint ||
+            target == ItemSubCondition.veryGood ||
+            target == ItemSubCondition.good) {
+          return true;
+        }
+        return false;
+      case UsedSubCondition.acceptable:
+        // 自身が acceptable の時は target は acceptable 以上
+        return true;
+    }
+    throw Exception("Invalid argument: $target");
+  }
 }
