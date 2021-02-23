@@ -8,10 +8,10 @@ part 'general_settings.g.dart';
 
 const _defaultSkuFormat =
     "{yyyy}{mm}{dd}-{asin}-{cond}-{purchasePrice}-{quantity}";
-const _readAloudPattern1 = "{title}、新品利益{newProfit}円、"
-    "中古利益{usedProfit}円、順位{rank}位です。";
-const _readAloudPattern2 = "{title}、新品利益{newProfit}円、順位{rank}位です。";
-const _readAloudPattern3 = "{title}、中古利益{usedProfit}円、順位{rank}位です。";
+const _readAloudPattern1 = "{title}、新品利益{newProfit}、"
+    "中古利益{usedProfit}、順位{rank}です。";
+const _readAloudPattern2 = "{title}、新品利益{newProfit}、順位{rank}です。";
+const _readAloudPattern3 = "{title}、中古利益{usedProfit}、順位{rank}です。";
 
 @freezed
 abstract class GeneralSettings with _$GeneralSettings {

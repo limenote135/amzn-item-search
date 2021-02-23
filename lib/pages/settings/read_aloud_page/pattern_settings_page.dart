@@ -1,3 +1,9 @@
+import 'package:amasearch/models/enums/item_condition.dart';
+import 'package:amasearch/models/enums/item_sub_condition.dart';
+import 'package:amasearch/models/enums/used_sub_condition.dart';
+import 'package:amasearch/models/fee_info.dart';
+import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
@@ -52,6 +58,37 @@ class _PatternEditForm extends StatefulWidget {
   @override
   __PatternEditFormState createState() => __PatternEditFormState(pattern);
 }
+
+const _sampleItem = AsinData(
+  jan: "",
+  asin: "",
+  listPrice: 0,
+  imageUrl: "",
+  quantity: "",
+  category: "",
+  title: "商品タイトル",
+  rank: 12345,
+  prices: ItemPrices(
+    feeInfo: FeeInfo(
+      fbaFee: 0,
+      referralFeeRate: 0,
+      variableClosingFee: 0,
+    ),
+    newPrices: <PriceDetail>[
+      PriceDetail(
+        itemCondition: ItemCondition.newItem,
+        price: 5678,
+      ),
+    ],
+    usedPrices: <PriceDetail>[
+      PriceDetail(
+        itemCondition: ItemCondition.usedItem,
+        subCondition: ItemSubCondition.veryGood,
+        price: 1234,
+      ),
+    ],
+  ),
+);
 
 class __PatternEditFormState extends State<_PatternEditForm> {
   __PatternEditFormState(String pattern)
@@ -158,11 +195,12 @@ class __PatternEditFormState extends State<_PatternEditForm> {
   }
 
   String _createPreviewText(String base) {
-    return base
-        .replaceAll(rankVariable, "12345")
-        .replaceAll(titleVariable, "商品タイトル")
-        .replaceAll(usedProfitVariable, "1234")
-        .replaceAll(newProfitVariable, "5678");
+    return createSpeakText(
+      template: base,
+      item: _sampleItem,
+      priorFba: false,
+      usedSubCondition: UsedSubCondition.all,
+    );
   }
 
   void _addText(String text) {
