@@ -1,7 +1,7 @@
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
-import 'package:amasearch/pages/search/code/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
+import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
