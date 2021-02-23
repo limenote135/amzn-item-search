@@ -28,7 +28,7 @@ PriceDetail getPriceDetail({
     case ItemCondition.usedItem:
       final conditionPrices = subCond == UsedSubCondition.all
           ? prices
-          : prices.where((e) => e.subCondition == subCond.toItemSubCondition());
+          : prices.where((e) => subCond.lessEq(e.subCondition));
 
       if (conditionPrices.isEmpty) {
         return const PriceDetail(price: 0, shipping: 0);
