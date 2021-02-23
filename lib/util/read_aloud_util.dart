@@ -61,8 +61,8 @@ String _filterPrice({
     }
   } else {
     // 中古でコンディション指定の場合
-    final subItems = prices.where(
-        (element) => element.subCondition == usedSubCond.toItemSubCondition());
+    final subItems =
+        prices.where((element) => usedSubCond.lessEq(element.subCondition));
     if (subItems.isEmpty) {
       return "${usedSubCond.toDisplayString()}の出品はありません。";
     }
