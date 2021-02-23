@@ -1,5 +1,5 @@
 import 'package:amasearch/models/item.dart';
-import 'package:amasearch/pages/search/code/camera_page/camera_page.dart';
+import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
