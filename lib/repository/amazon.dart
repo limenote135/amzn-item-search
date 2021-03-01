@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/repository/common.dart';
@@ -31,8 +32,11 @@ class AmazonRepository {
   static const _amazonSellerId = "AN1VRQENFRJN5";
   static const _marketPlaceJp = "A1VC38T7YXB528";
 
-  static const _userAgent =
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36";
+  static final _random = Random();
+  static String get _userAgent {
+    final rand = _random.nextInt(9) + 80;
+    return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.$rand Safari/537.36";
+  }
 
   static const _offerUrlBase =
       "https://www.amazon.co.jp/gp/aod/ajax/ref=dp_aod_ALL_mbc";
