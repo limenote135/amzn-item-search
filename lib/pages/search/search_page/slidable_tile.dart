@@ -3,6 +3,7 @@ import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/common/item_delete_handler.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -28,6 +29,7 @@ class SlidableTile extends HookWidget {
           color: Colors.blue,
           icon: Icons.add_shopping_cart,
           onTap: () {
+            unfocus();
             context
                 .read(analyticsControllerProvider)
                 .logSingleEvent(directPurchaseEventName);
@@ -44,6 +46,7 @@ class SlidableTile extends HookWidget {
           color: Colors.red,
           icon: Icons.delete,
           onTap: () async {
+            unfocus();
             await itemDeleteHandler(
               context: context,
               items: [items],
