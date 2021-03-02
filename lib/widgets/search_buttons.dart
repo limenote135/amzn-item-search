@@ -84,14 +84,17 @@ class SearchButtons extends HookWidget {
                 "https://www.amazon.co.jp/gp/offer-listing/${item.asin}/";
             await context
                 .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonAmazonUsedListName);
+                .logPushSearchButtonEvent(pushSearchButtonAmazonListName);
             await FlutterWebBrowser.openWebPage(url: url);
           },
         ),
         RaisedButton(
           child: const Text("新品一覧"),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            await context
+                .read(analyticsControllerProvider)
+                .logPushSearchButtonEvent(pushSearchButtonAmazonNewOffersName);
+            await Navigator.push(
               context,
               OfferListingPage.route(
                 OfferListingsParams(
@@ -104,8 +107,11 @@ class SearchButtons extends HookWidget {
         ),
         RaisedButton(
           child: const Text("中古一覧"),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            await context
+                .read(analyticsControllerProvider)
+                .logPushSearchButtonEvent(pushSearchButtonAmazonUsedOffersName);
+            await Navigator.push(
               context,
               OfferListingPage.route(
                 OfferListingsParams(
