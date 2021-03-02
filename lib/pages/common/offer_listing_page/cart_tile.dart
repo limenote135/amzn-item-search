@@ -33,54 +33,62 @@ class CartTile extends HookWidget {
             ),
           );
         }
-        return StrongContainer(
-          ListTile(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("カート情報"),
-                Row(
+        return Column(
+          children: [
+            const Align(
+              child: Text("注：送料は含まれません"),
+              alignment: Alignment.centerLeft,
+            ),
+            StrongContainer(
+              ListTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Column(
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              style: bigSize,
-                              children: [
-                                TextSpan(
-                                  text: numberFormatter.format(value.price),
-                                  style: strongTextStyle,
+                    const Text("カート情報"),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Column(
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  style: bigSize,
+                                  children: [
+                                    TextSpan(
+                                      text: numberFormatter.format(value.price),
+                                      style: strongTextStyle,
+                                    ),
+                                    const TextSpan(
+                                        text: "円", style: blackTextStyle),
+                                  ],
                                 ),
-                                const TextSpan(
-                                    text: "円", style: blackTextStyle),
-                              ],
-                            ),
-                          ),
-                          ProviderScope(
-                            overrides: [
-                              currentSellerIdProvider
-                                  .overrideWithValue(value.sellerId),
+                              ),
+                              ProviderScope(
+                                overrides: [
+                                  currentSellerIdProvider
+                                      .overrideWithValue(value.sellerId),
+                                ],
+                                child: const StockText(),
+                              ),
                             ],
-                            child: const StockText(),
                           ),
-                        ],
-                      ),
+                        ),
+                        Expanded(
+                          child: ProviderScope(
+                            overrides: [
+                              currentOfferItemProvider.overrideWithValue(value),
+                            ],
+                            child: const OfferChips(),
+                          ),
+                        )
+                      ],
                     ),
-                    Expanded(
-                      child: ProviderScope(
-                        overrides: [
-                          currentOfferItemProvider.overrideWithValue(value),
-                        ],
-                        child: const OfferChips(),
-                      ),
-                    )
                   ],
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         );
       },
     );
