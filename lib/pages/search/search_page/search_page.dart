@@ -75,6 +75,7 @@ class _AppBarTitle extends HookWidget {
       config: KeyboardActionsConfig(
         keyboardActionsPlatform: KeyboardActionsPlatform.IOS,
         nextFocus: false,
+        keyboardBarColor: isDark(context) ? Colors.black87 : Colors.grey[200],
         actions: [
           KeyboardActionsItem(
             focusNode: focusNode,
