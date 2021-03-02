@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 import 'item_tile.dart';
 import 'search_settings.dart';
@@ -65,26 +66,57 @@ class _AppBarTitle extends HookWidget {
     final textEditingController =
         useTextEditingController(text: "4987241127030"); // 4987241120888
 
+    final focusNode = useFocusNode();
+
     final settings = useProvider(searchSettingsControllerProvider.state);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: isDark(context) ? null : Colors.white,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+    return KeyboardActions(
+      disableScroll: true,
+      config: KeyboardActionsConfig(
+        keyboardActionsPlatform: KeyboardActionsPlatform.IOS,
+        nextFocus: false,
+        actions: [
+          KeyboardActionsItem(
+            focusNode: focusNode,
+            toolbarButtons: [
+              (node) {
+                return RaisedButton.icon(
+                  icon: const Icon(Icons.search),
+                  label: const Text("検索"),
+                  onPressed: () {
+                    node.unfocus();
+                    final value = textEditingController.text;
+                    if (value != "") {
+                      _addItem(context, settings.type, value);
+                      textEditingController.clear();
+                    }
+                  },
+                );
+              },
+            ],
+          ),
+        ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: TextField(
-          style: const TextStyle(fontSize: 18),
-          controller: textEditingController,
-          keyboardType: TextInputType.number,
-          decoration: _createHintText(settings.type),
-          onSubmitted: (value) {
-            if (value != "") {
-              _addItem(context, settings.type, value);
-              textEditingController.clear();
-            }
-          },
+      child: Container(
+        decoration: BoxDecoration(
+          color: isDark(context) ? null : Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: TextField(
+            focusNode: focusNode,
+            style: const TextStyle(fontSize: 18),
+            controller: textEditingController,
+            keyboardType: TextInputType.number,
+            decoration: _createHintText(settings.type),
+            onSubmitted: (value) {
+              if (value != "") {
+                _addItem(context, settings.type, value);
+                textEditingController.clear();
+              }
+            },
+          ),
         ),
       ),
     );
