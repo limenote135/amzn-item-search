@@ -32,13 +32,15 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       csvOrder: (fields[11] as List?)?.cast<CsvColumn>() ?? _defaultCsvOrder,
       minProfit: fields[12] as int? ?? 0,
       getStocks: fields[13] as bool? ?? false,
+      enableAlert: fields[14] as bool? ?? true,
+      alerts: (fields[15] as List?)?.cast<AlertConditionSet>() ?? _defaultAlert,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_GeneralSettings obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
@@ -66,7 +68,11 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       ..writeByte(12)
       ..write(obj.minProfit)
       ..writeByte(13)
-      ..write(obj.getStocks);
+      ..write(obj.getStocks)
+      ..writeByte(14)
+      ..write(obj.enableAlert)
+      ..writeByte(15)
+      ..write(obj.alerts);
   }
 
   @override
@@ -153,6 +159,46 @@ class CustomButtonDetailAdapter extends TypeAdapter<_$_CustomButtonDetail> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is CustomButtonDetailAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class AlertConditionSetAdapter extends TypeAdapter<_$_AlertConditionSet> {
+  @override
+  final int typeId = 55;
+
+  @override
+  _$_AlertConditionSet read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_AlertConditionSet(
+      id: fields[0] as String,
+      title: fields[1] as String,
+      conditions: (fields[2] as List).cast<AlertCondition>(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_AlertConditionSet obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.title)
+      ..writeByte(2)
+      ..write(obj.conditions);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AlertConditionSetAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
