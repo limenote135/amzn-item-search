@@ -1,4 +1,6 @@
+import 'package:amasearch/models/alert_condition.dart';
 import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/enums/alert_type.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
@@ -72,6 +74,17 @@ const _defaultCsvOrder = [
   CsvColumn.purchaseDate,
 ];
 
+const _defaultAlert = [
+  AlertConditionSet(
+    id: "default",
+    title: "プレ値",
+    conditions: [
+      AlertCondition(type: AlertType.premium),
+      AlertCondition(type: AlertType.premium),
+    ],
+  ),
+];
+
 @freezed
 class GeneralSettings with _$GeneralSettings {
   @HiveType(typeId: generalSettingsTypeId)
@@ -98,6 +111,8 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(11) @Default(_defaultCsvOrder) List<CsvColumn> csvOrder,
     @HiveField(12) @Default(0) int minProfit,
     @HiveField(13) @Default(false) bool getStocks,
+    @HiveField(14) @Default(true) bool enableAlert,
+    @HiveField(15) @Default(_defaultAlert) List<AlertConditionSet> alerts,
   }) = _GeneralSettings;
 }
 
@@ -118,4 +133,14 @@ class CustomButtonDetail with _$CustomButtonDetail {
     @HiveField(1) required String title,
     @HiveField(2) required String pattern,
   }) = _CustomButtonDetail;
+}
+
+@freezed
+class AlertConditionSet with _$AlertConditionSet {
+  @HiveType(typeId: alertConditionSetTypeId)
+  const factory AlertConditionSet({
+    @HiveField(0) required String id,
+    @HiveField(1) required String title,
+    @HiveField(2) @Default(<AlertCondition>[]) List<AlertCondition> conditions,
+  }) = _AlertConditionSet;
 }

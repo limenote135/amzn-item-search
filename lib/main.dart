@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:amasearch/models/alert_condition.dart';
 import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/enums/alert_type.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
@@ -98,6 +100,9 @@ Future<void> initHive() async {
     ..registerAdapter(ReadAloudPatternAdapter())
     ..registerAdapter(CustomButtonDetailAdapter())
     ..registerAdapter(CsvColumnAdapter())
+    ..registerAdapter(AlertTypeAdapter())
+    ..registerAdapter(AlertConditionAdapter())
+    ..registerAdapter(AlertConditionSetAdapter())
     ..registerAdapter(SearchSettingsAdapter())
     ..registerAdapter(FulfillmentChannelAdapter())
     ..registerAdapter(ItemConditionAdapter())
