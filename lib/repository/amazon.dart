@@ -73,28 +73,32 @@ class AmazonRepository {
       "pageno": params.page + 1,
     };
     final dio = _read(dioProvider);
-    final resp = await dio.get<String>(
-      _offerUrlBase,
-      queryParameters: query,
-      options: Options(headers: <String, String>{
-        HttpHeaders.userAgentHeader: _userAgent,
-      }),
-      cancelToken: cancelToken,
-    );
-    if (resp.statusCode != 200) {
-      throw Exception("エラー${resp.statusCode}");
-    }
-    if (resp.data == "") {
-      throw Exception("エラー");
-    }
-    final parseParam = _ParseOfferListingsParam(
-      asin: params.asin,
-      page: params.page,
-      body: resp.data,
-    );
-    final offers = await compute(_parseOfferListings, parseParam);
+    try {
+      final resp = await dio.get<String>(
+        _offerUrlBase,
+        queryParameters: query,
+        options: Options(headers: <String, String>{
+          HttpHeaders.userAgentHeader: _userAgent,
+        }),
+        cancelToken: cancelToken,
+      );
+      if (resp.statusCode != 200) {
+        throw Exception("エラー${resp.statusCode}");
+      }
+      if (resp.data == "") {
+        throw Exception("エラー");
+      }
+      final parseParam = _ParseOfferListingsParam(
+        asin: params.asin,
+        page: params.page,
+        body: resp.data,
+      );
+      final offers = await compute(_parseOfferListings, parseParam);
 
-    return offers;
+      return offers;
+    } on DioError catch(e) {
+      throw Exception("エラー${e.type}");
+    }
   }
 
   static OfferListings _parseOfferListings(_ParseOfferListingsParam param) {
@@ -223,24 +227,28 @@ class AmazonRepository {
       "marketplaceID": _marketPlaceJp,
     };
 
-    final resp = await dio.get<String>(
-      url,
-      queryParameters: query,
-      options: Options(headers: <String, String>{
-        HttpHeaders.userAgentHeader: _userAgent,
-      }),
-      cancelToken: cancelToken,
-    );
-    if (resp.statusCode != 200) {
-      throw Exception("エラー${resp.statusCode}");
-    }
-    if (resp.data == "") {
-      throw Exception("エラー");
-    }
-    final stocks = await compute(_parseStock, resp.data);
-    // final stocks = _parseStock(resp.data);
+    try {
+      final resp = await dio.get<String>(
+        url,
+        queryParameters: query,
+        options: Options(headers: <String, String>{
+          HttpHeaders.userAgentHeader: _userAgent,
+        }),
+        cancelToken: cancelToken,
+      );
+      if (resp.statusCode != 200) {
+        throw Exception("エラー${resp.statusCode}");
+      }
+      if (resp.data == "") {
+        throw Exception("エラー");
+      }
+      final stocks = await compute(_parseStock, resp.data);
+      // final stocks = _parseStock(resp.data);
 
-    return stocks;
+      return stocks;
+    } on DioError catch(e) {
+      throw Exception("エラー${e.type}");
+    }
   }
 
   static int _parseStock(String body) {
