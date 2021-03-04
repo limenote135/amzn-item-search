@@ -1,3 +1,4 @@
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/offer_stocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -11,6 +12,10 @@ class StockText extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settings = useProvider(generalSettingsControllerProvider.state);
+    if(!settings.getStocks) {
+      return Container();
+    }
     final sellerId = useProvider(currentSellerIdProvider);
     final asin = useProvider(currentAsinProvider);
     final param = OfferStocksParam(asin: asin, sellerId: sellerId);
