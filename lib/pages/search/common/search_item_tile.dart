@@ -5,6 +5,7 @@ import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
+import 'package:amasearch/widgets/strong_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -32,27 +33,7 @@ class SearchItemTile extends HookWidget {
         )
       ],
     );
-    return isPremiumPrice(item) ? _StrongContainer(tile) : tile;
-  }
-}
-
-class _StrongContainer extends StatelessWidget {
-  const _StrongContainer(this.child, {Key key}) : super(key: key);
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    final newTextTheme = Theme.of(context).textTheme.apply(
-          bodyColor: Colors.black,
-          displayColor: Colors.black,
-        );
-    return Container(
-      color: Colors.red[100],
-      child: Theme(
-        data: Theme.of(context).copyWith(textTheme: newTextTheme),
-        child: child,
-      ),
-    );
+    return isPremiumPrice(item) ? StrongContainer(tile) : tile;
   }
 }
 
