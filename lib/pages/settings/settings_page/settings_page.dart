@@ -109,6 +109,19 @@ class _Body extends HookWidget {
             );
           },
         ),
+        SwitchListTile(
+          title: const Text("出品一覧で在庫を取得(β)"),
+          subtitle: const Text("出品一覧画面が重くなります。"),
+          value: settings.getStocks,
+          onChanged: (value) {
+            context
+                .read(generalSettingsControllerProvider)
+                .update(getStocks: value);
+            context
+                .read(analyticsControllerProvider)
+                .setUserProp(getStocksPropName, value.toString());
+          },
+        ),
         const ThemeDivider(),
         ListTile(
           title: const Text("このアプリについて"),

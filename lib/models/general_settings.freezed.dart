@@ -52,7 +52,8 @@ class _$GeneralSettingsTearOff {
         CsvColumn.comment,
         CsvColumn.purchaseDate
       ],
-      @HiveField(12) int minProfit = 0}) {
+      @HiveField(12) int minProfit = 0,
+      @HiveField(13) bool getStocks = false}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
@@ -67,6 +68,7 @@ class _$GeneralSettingsTearOff {
       customButtons: customButtons,
       csvOrder: csvOrder,
       minProfit: minProfit,
+      getStocks: getStocks,
     );
   }
 }
@@ -104,6 +106,8 @@ mixin _$GeneralSettings {
   List<CsvColumn> get csvOrder;
   @HiveField(12)
   int get minProfit;
+  @HiveField(13)
+  bool get getStocks;
 
   @JsonKey(ignore: true)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith;
@@ -127,7 +131,8 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(9) @nullable double readAloudSpeed,
       @HiveField(10) List<CustomButtonDetail> customButtons,
       @HiveField(11) List<CsvColumn> csvOrder,
-      @HiveField(12) int minProfit});
+      @HiveField(12) int minProfit,
+      @HiveField(13) bool getStocks});
 }
 
 /// @nodoc
@@ -154,6 +159,7 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object customButtons = freezed,
     Object csvOrder = freezed,
     Object minProfit = freezed,
+    Object getStocks = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode:
@@ -187,6 +193,7 @@ class _$GeneralSettingsCopyWithImpl<$Res>
       csvOrder:
           csvOrder == freezed ? _value.csvOrder : csvOrder as List<CsvColumn>,
       minProfit: minProfit == freezed ? _value.minProfit : minProfit as int,
+      getStocks: getStocks == freezed ? _value.getStocks : getStocks as bool,
     ));
   }
 }
@@ -211,7 +218,8 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       @HiveField(9) @nullable double readAloudSpeed,
       @HiveField(10) List<CustomButtonDetail> customButtons,
       @HiveField(11) List<CsvColumn> csvOrder,
-      @HiveField(12) int minProfit});
+      @HiveField(12) int minProfit,
+      @HiveField(13) bool getStocks});
 }
 
 /// @nodoc
@@ -240,6 +248,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
     Object customButtons = freezed,
     Object csvOrder = freezed,
     Object minProfit = freezed,
+    Object getStocks = freezed,
   }) {
     return _then(_GeneralSettings(
       isDarkMode:
@@ -273,6 +282,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
       csvOrder:
           csvOrder == freezed ? _value.csvOrder : csvOrder as List<CsvColumn>,
       minProfit: minProfit == freezed ? _value.minProfit : minProfit as int,
+      getStocks: getStocks == freezed ? _value.getStocks : getStocks as bool,
     ));
   }
 }
@@ -319,7 +329,8 @@ class _$_GeneralSettings implements _GeneralSettings {
         CsvColumn.comment,
         CsvColumn.purchaseDate
       ],
-      @HiveField(12) this.minProfit = 0})
+      @HiveField(12) this.minProfit = 0,
+      @HiveField(13) this.getStocks = false})
       : assert(isDarkMode != null),
         assert(enableTargetProfit != null),
         assert(targetProfitValue != null),
@@ -331,7 +342,8 @@ class _$_GeneralSettings implements _GeneralSettings {
         assert(readAloudVolume != null),
         assert(customButtons != null),
         assert(csvOrder != null),
-        assert(minProfit != null);
+        assert(minProfit != null),
+        assert(getStocks != null);
 
   @JsonKey(defaultValue: false)
   @override
@@ -410,10 +422,14 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(12)
   final int minProfit;
+  @JsonKey(defaultValue: false)
+  @override
+  @HiveField(13)
+  final bool getStocks;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks)';
   }
 
   @override
@@ -458,7 +474,10 @@ class _$_GeneralSettings implements _GeneralSettings {
                     .equals(other.csvOrder, csvOrder)) &&
             (identical(other.minProfit, minProfit) ||
                 const DeepCollectionEquality()
-                    .equals(other.minProfit, minProfit)));
+                    .equals(other.minProfit, minProfit)) &&
+            (identical(other.getStocks, getStocks) ||
+                const DeepCollectionEquality()
+                    .equals(other.getStocks, getStocks)));
   }
 
   @override
@@ -476,7 +495,8 @@ class _$_GeneralSettings implements _GeneralSettings {
       const DeepCollectionEquality().hash(readAloudSpeed) ^
       const DeepCollectionEquality().hash(customButtons) ^
       const DeepCollectionEquality().hash(csvOrder) ^
-      const DeepCollectionEquality().hash(minProfit);
+      const DeepCollectionEquality().hash(minProfit) ^
+      const DeepCollectionEquality().hash(getStocks);
 
   @JsonKey(ignore: true)
   @override
@@ -498,7 +518,8 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(9) @nullable double readAloudSpeed,
       @HiveField(10) List<CustomButtonDetail> customButtons,
       @HiveField(11) List<CsvColumn> csvOrder,
-      @HiveField(12) int minProfit}) = _$_GeneralSettings;
+      @HiveField(12) int minProfit,
+      @HiveField(13) bool getStocks}) = _$_GeneralSettings;
 
   @override
   @HiveField(0)
@@ -540,6 +561,9 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(12)
   int get minProfit;
+  @override
+  @HiveField(13)
+  bool get getStocks;
   @override
   @JsonKey(ignore: true)
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith;

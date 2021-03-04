@@ -2,6 +2,8 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/offer_listings.dart';
+import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -76,25 +78,51 @@ class SearchButtons extends HookWidget {
           },
         ),
         RaisedButton(
-          child: const Text("新品一覧"),
+          child: const Text("出品一覧"),
           onPressed: () async {
             final url =
-                "https://www.amazon.co.jp/gp/offer-listing/${item.asin}/ref=olp_f_new?f_new=true";
+                "https://www.amazon.co.jp/gp/offer-listing/${item.asin}/";
             await context
                 .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonAmazonNewListName);
+                .logPushSearchButtonEvent(pushSearchButtonAmazonListName);
             await FlutterWebBrowser.openWebPage(url: url);
+          },
+        ),
+        RaisedButton(
+          child: const Text("新品一覧"),
+          onPressed: () async {
+            await context
+                .read(analyticsControllerProvider)
+                .logPushSearchButtonEvent(pushSearchButtonAmazonNewOffersName);
+            await Navigator.push(
+              context,
+              OfferListingPage.route(
+                OfferListingsParams(
+                  asin: item.asin,
+                  newItem: true,
+                ),
+              ),
+            );
           },
         ),
         RaisedButton(
           child: const Text("中古一覧"),
           onPressed: () async {
-            final url =
-                "https://www.amazon.co.jp/gp/offer-listing/${item.asin}/ref=olp_f_used?f_usedAcceptable=true&f_usedGood=true&f_used=true&f_usedLikeNew=true&f_usedVeryGood=true";
             await context
                 .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonAmazonUsedListName);
-            await FlutterWebBrowser.openWebPage(url: url);
+                .logPushSearchButtonEvent(pushSearchButtonAmazonUsedOffersName);
+            await Navigator.push(
+              context,
+              OfferListingPage.route(
+                OfferListingsParams(
+                  asin: item.asin,
+                  usedLikeNew: true,
+                  usedVeryGood: true,
+                  usedGood: true,
+                  usedAcceptable: true,
+                ),
+              ),
+            );
           },
         ),
         for (final button in buttons)
