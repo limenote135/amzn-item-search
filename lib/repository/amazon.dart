@@ -34,7 +34,7 @@ class AmazonRepository {
 
   static final _random = Random();
   static String get _userAgent {
-    final rand = _random.nextInt(9) + 80;
+    final rand = _random.nextInt(100) + 45;
     return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.$rand Safari/537.36";
   }
 
