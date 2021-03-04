@@ -85,6 +85,9 @@ abstract class GeneralSettings with _$GeneralSettings {
     @HiveField(12)
     @Default(0)
         int minProfit,
+    @HiveField(13)
+    @Default(false)
+        bool getStocks,
   }) = _GeneralSettings;
 }
 
