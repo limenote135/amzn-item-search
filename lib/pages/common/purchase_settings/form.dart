@@ -101,7 +101,7 @@ class PurchaseSettingsForm extends HookWidget {
             const ThemeDivider(),
             const SkuTile(),
             ListTile(
-              title: ReactiveTextField(
+              title: ReactiveTextField<dynamic>(
                 formControlName: memoField,
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
