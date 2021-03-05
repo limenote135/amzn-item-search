@@ -53,7 +53,6 @@ abstract class GeneralSettings with _$GeneralSettings {
     @Default(1.0)
         double readAloudVolume,
     @HiveField(9)
-    @nullable
         double readAloudSpeed,
     @HiveField(10)
     @Default([

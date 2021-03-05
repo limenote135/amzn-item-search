@@ -16,7 +16,7 @@ class InputPricesTile extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: ReactiveTextField(
+              child: ReactiveTextField<dynamic>(
                 formControlName: purchasePriceField,
                 keyboardType: const TextInputType.numberWithOptions(
                     signed: false, decimal: false),
@@ -32,7 +32,7 @@ class InputPricesTile extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: ReactiveTextField(
+              child: ReactiveTextField<dynamic>(
                 formControlName: sellPriceField,
                 keyboardType: const TextInputType.numberWithOptions(
                     signed: false, decimal: false),

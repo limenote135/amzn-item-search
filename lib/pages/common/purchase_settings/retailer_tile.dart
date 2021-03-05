@@ -14,7 +14,7 @@ class RetailerTile extends StatelessWidget {
       title: Row(
         children: [
           Expanded(
-            child: ReactiveTextField(
+            child: ReactiveTextField<dynamic>(
               formControlName: retailerField,
               decoration: const InputDecoration(labelText: "仕入れ先"),
               textAlign: TextAlign.start,

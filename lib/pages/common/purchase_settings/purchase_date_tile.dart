@@ -12,7 +12,7 @@ class PurchaseDateTile extends StatelessWidget {
         children: [
           const Expanded(child: Text("仕入れ日")),
           Flexible(
-            child: ReactiveTextField(
+            child: ReactiveTextField<dynamic>(
               formControlName: purchaseDateField,
               readOnly: true,
               decoration: InputDecoration(

@@ -32,7 +32,7 @@ class SkuTile extends HookWidget {
                 form.control(skuField).value =
                     _generateSku(skuFormat, item, form);
               }
-              return ReactiveTextField(
+              return ReactiveTextField<dynamic>(
                 readOnly: control.value,
                 formControlName: skuField,
                 keyboardType: TextInputType.url,
