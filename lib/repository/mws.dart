@@ -1,149 +1,65 @@
-import 'dart:collection';
 import 'dart:convert';
 
-import 'package:amasearch/models/enums/item_condition.dart';
-import 'package:amasearch/util/util.dart';
-import 'package:amasearch/util/uuid.dart';
-import 'package:crypto/crypto.dart';
-import 'package:dio/dio.dart';
+import 'package:amasearch/models/mws.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'common.dart';
-import 'mws_response.dart';
 
 final mwsRepositoryProvider = Provider((ref) => MwsRepository(ref.read));
 
 class MwsRepository {
   MwsRepository(this._read);
 
-  static const _mwsHost = "mws.amazonservices.jp";
-  static const _mwsAccessKey = "AKIAIYTBMRJMTHOLYIBQ";
-  static const _mwsAuthToken = "authToken";
   static const _mwsMarketPlaceId = "A1VC38T7YXB528";
-  static const _mwsSecretKey = "7KoH64GCjlaGbws68LCnZloYgOo0PAT4liTpY5OK";
-  static const _mwsSellerId = "A35GS7WUCDVERP";
+
+  static const _url = kReleaseMode
+      ? "https://amasearch-stg.an.r.appspot.com"
+      : "http://192.168.2.201:8080";
 
   final Reader _read;
 
-  // JAN コードから商品の情報や ASIN を得られる。価格情報等は取れない
-  Future<GetMatchingProductForIdResponse> getMatchingProductForID(String code,
+  Future<GetProductByIdResponse> getProductById(String code,
       {String idType = "JAN"}) async {
-    final params = SplayTreeMap<String, String>();
+    final params = <String, String>{
+      "code": code,
+      "type": idType,
+      "marketplace": _mwsMarketPlaceId,
+    };
 
-    params["IdList.Id.1"] = code;
-    params["IdType"] = idType;
-    params["MarketplaceId"] = _mwsMarketPlaceId;
-    const path = "/Products/2011-10-01";
-    final resp = await _doRequest(path, "GetMatchingProductForId", params);
-    return GetMatchingProductForIdResponse(code, resp);
+    final resp = await _doRequest("$_url/v1beta1/mws/product",
+        data: json.encode(params));
+    return GetProductByIdResponse.fromJson(resp);
   }
 
-  // 新品、中古の最安値、カート情報が取れる
-  // 1時間あたり200リクエスト
-  // 中古はコンディションごとには取れない
-  Future<String> getLowestPricedOffersForASIN(List<String> asin) {
-    return Future.value("");
-  }
-
-  // コンディションや FBA か否か、配送までの期間、評価などによってグルーピングされた出品の、各最安値を取得
-  Future<GetLowestOfferListingsForASINResponse> getLowestOfferListingsForASIN(
-      List<String> asin, ItemCondition cond) async {
-    final params = SplayTreeMap<String, String>();
-
-    for (var i = 0; i < asin.length; i++) {
-      final key = "ASINList.ASIN.${i + 1}";
-      params[key] = asin[i];
-    }
-    params["ItemCondition"] = cond.toMwsParam();
-    params["MarketplaceId"] = _mwsMarketPlaceId;
-    params["ExcludeMe"] = "false";
-    const path = "/Products/2011-10-01";
+  Future<GetProductPricesResponse> getProductPrices(String code) async {
+    final params = <String, String>{
+      "code": code,
+    };
     final resp =
-        await _doRequest(path, "GetLowestOfferListingsForASIN", params);
-    return GetLowestOfferListingsForASINResponse(resp);
+        await _doRequest("$_url/v1beta1/mws/prices", data: json.encode(params));
+    return GetProductPricesResponse.fromJson(resp);
   }
 
-  Future<GetMyFeesEstimateResponse> getMyFeesEstimate(String asin, int price,
-      {bool useFba = true}) async {
-    final params = SplayTreeMap<String, String>();
-    final uuid = _read(uuidProvider);
-
-    const base = "FeesEstimateRequestList.FeesEstimateRequest.1";
-
-    params["$base.MarketplaceId"] = _mwsMarketPlaceId;
-    params["$base.IdType"] = "ASIN";
-    params["$base.IdValue"] = asin;
-    params["$base.IsAmazonFulfilled"] = "$useFba";
-    params["$base.Identifier"] = uuid.v4();
-    params["$base.PriceToEstimateFees.ListingPrice.Amount"] = "$price";
-    params["$base.PriceToEstimateFees.ListingPrice.CurrencyCode"] = "JPY";
-
-    const path = "/Products/2011-10-01";
-    final resp = await _doRequest(path, "GetMyFeesEstimate", params);
-    return GetMyFeesEstimateResponse(resp, price);
-  }
-
-  Future<GetMatchingProductForIdResponse> listMatchingProducts(
+  Future<ListMatchingProductResponse> listMatchingProducts(
     String query,
   ) async {
-    final params = SplayTreeMap<String, String>();
+    final params = <String, String>{
+      "query": query,
+      "category": "All",
+      "marketplace": _mwsMarketPlaceId,
+    };
 
-    params["MarketplaceId"] = _mwsMarketPlaceId;
-    params["Query"] = query;
-    const path = "/Products/2011-10-01";
-    final resp = await _doRequest(path, "ListMatchingProducts", params);
+    final resp =
+        await _doRequest("$_url/v1beta1/mws/search", data: json.encode(params));
 
-    return GetMatchingProductForIdResponse.fromListMatchingProducts(
-        query, resp);
+    return ListMatchingProductResponse.fromJson(resp);
   }
 
-  Future<String> _doRequest(
-      String path, String action, SplayTreeMap<String, String> params) async {
-    params["Action"] = action;
-    params["SellerId"] = _mwsSellerId;
-    params["MWSAuthToken"] = _mwsAuthToken;
-    params["AWSAccessKeyId"] = _mwsAccessKey;
-    params["SignatureMethod"] = "HmacSHA256";
-    params["SignatureVersion"] = "2";
-    params["Version"] = "2011-10-01";
-    params["Timestamp"] =
-        "${DateTime.now().toUtc().toIso8601String().split(".")[0]}Z";
-
-    final query = _generateQueryString(path, params);
-    final signature = _signatureString(query, _mwsSecretKey);
-
-    var body = "";
-    params.forEach((key, value) {
-      body += "$key=${urlEncode(value)}&";
-    });
-    body += "Signature=${urlEncode(signature)}";
-
+  Future<Map<String, dynamic>> _doRequest(String url, {String data}) async {
     final dio = _read(dioProvider);
-    final url = Uri(scheme: "https", host: _mwsHost, path: path);
-    final resp = await dio.post<String>(url.toString(),
-        options: Options(
-            contentType: "application/x-www-form-urlencoded; charset=utf-8"),
-        data: body);
-    return resp.data;
-  }
 
-  static String _generateQueryString(
-      String path, SplayTreeMap<String, String> params) {
-    var query = "";
-    params.forEach((key, value) {
-      query += "$key=${urlEncode(value)}&";
-    });
-    query = query.substring(0, query.isEmpty ? 0 : query.length - 1);
-    return "POST\n$_mwsHost\n$path\n$query";
-  }
-
-  static String _signatureString(String query, String secretKey) {
-    final key = utf8.encode(secretKey);
-    final data = utf8.encode(query);
-
-    final hmacSha256 = Hmac(sha256, key);
-    final digest = hmacSha256.convert(data);
-    final base64Str = base64.encode(digest.bytes);
-    return base64Str;
+    final resp = await dio.post<String>(url, data: data);
+    return json.decode(resp.data) as Map<String, dynamic>;
   }
 }

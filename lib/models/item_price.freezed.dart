@@ -8,6 +8,9 @@ part of 'item_price.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+ItemPrices _$ItemPricesFromJson(Map<String, dynamic> json) {
+  return _ItemPrices.fromJson(json);
+}
 
 /// @nodoc
 class _$ItemPricesTearOff {
@@ -15,14 +18,27 @@ class _$ItemPricesTearOff {
 
 // ignore: unused_element
   _ItemPrices call(
-      {@HiveField(0) List<PriceDetail> newPrices = const <PriceDetail>[],
-      @HiveField(1) List<PriceDetail> usedPrices = const <PriceDetail>[],
-      @required @HiveField(2) FeeInfo feeInfo}) {
+      {@required
+      @HiveField(0)
+      @JsonKey(name: "new_offers")
+          List<PriceDetail> newPrices,
+      @required
+      @HiveField(1)
+      @JsonKey(name: "used_offers")
+          List<PriceDetail> usedPrices,
+      @required
+      @HiveField(2)
+          FeeInfo feeInfo}) {
     return _ItemPrices(
       newPrices: newPrices,
       usedPrices: usedPrices,
       feeInfo: feeInfo,
     );
+  }
+
+// ignore: unused_element
+  ItemPrices fromJson(Map<String, Object> json) {
+    return ItemPrices.fromJson(json);
   }
 }
 
@@ -33,12 +49,15 @@ const $ItemPrices = _$ItemPricesTearOff();
 /// @nodoc
 mixin _$ItemPrices {
   @HiveField(0)
+  @JsonKey(name: "new_offers")
   List<PriceDetail> get newPrices;
   @HiveField(1)
+  @JsonKey(name: "used_offers")
   List<PriceDetail> get usedPrices;
   @HiveField(2)
   FeeInfo get feeInfo;
 
+  Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
   $ItemPricesCopyWith<ItemPrices> get copyWith;
 }
@@ -49,8 +68,8 @@ abstract class $ItemPricesCopyWith<$Res> {
           ItemPrices value, $Res Function(ItemPrices) then) =
       _$ItemPricesCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(0) List<PriceDetail> newPrices,
-      @HiveField(1) List<PriceDetail> usedPrices,
+      {@HiveField(0) @JsonKey(name: "new_offers") List<PriceDetail> newPrices,
+      @HiveField(1) @JsonKey(name: "used_offers") List<PriceDetail> usedPrices,
       @HiveField(2) FeeInfo feeInfo});
 
   $FeeInfoCopyWith<$Res> get feeInfo;
@@ -99,8 +118,8 @@ abstract class _$ItemPricesCopyWith<$Res> implements $ItemPricesCopyWith<$Res> {
       __$ItemPricesCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(0) List<PriceDetail> newPrices,
-      @HiveField(1) List<PriceDetail> usedPrices,
+      {@HiveField(0) @JsonKey(name: "new_offers") List<PriceDetail> newPrices,
+      @HiveField(1) @JsonKey(name: "used_offers") List<PriceDetail> usedPrices,
       @HiveField(2) FeeInfo feeInfo});
 
   @override
@@ -135,33 +154,47 @@ class __$ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: itemPricesTypeId)
 
 /// @nodoc
-class _$_ItemPrices implements _ItemPrices {
+class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
   const _$_ItemPrices(
-      {@HiveField(0) this.newPrices = const <PriceDetail>[],
-      @HiveField(1) this.usedPrices = const <PriceDetail>[],
+      {@required @HiveField(0) @JsonKey(name: "new_offers") this.newPrices,
+      @required @HiveField(1) @JsonKey(name: "used_offers") this.usedPrices,
       @required @HiveField(2) this.feeInfo})
       : assert(newPrices != null),
         assert(usedPrices != null),
         assert(feeInfo != null);
 
-  @JsonKey(defaultValue: const <PriceDetail>[])
+  factory _$_ItemPrices.fromJson(Map<String, dynamic> json) =>
+      _$_$_ItemPricesFromJson(json);
+
   @override
   @HiveField(0)
+  @JsonKey(name: "new_offers")
   final List<PriceDetail> newPrices;
-  @JsonKey(defaultValue: const <PriceDetail>[])
   @override
   @HiveField(1)
+  @JsonKey(name: "used_offers")
   final List<PriceDetail> usedPrices;
   @override
   @HiveField(2)
   final FeeInfo feeInfo;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ItemPrices(newPrices: $newPrices, usedPrices: $usedPrices, feeInfo: $feeInfo)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ItemPrices'))
+      ..add(DiagnosticsProperty('newPrices', newPrices))
+      ..add(DiagnosticsProperty('usedPrices', usedPrices))
+      ..add(DiagnosticsProperty('feeInfo', feeInfo));
   }
 
   @override
@@ -189,19 +222,37 @@ class _$_ItemPrices implements _ItemPrices {
   @override
   _$ItemPricesCopyWith<_ItemPrices> get copyWith =>
       __$ItemPricesCopyWithImpl<_ItemPrices>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ItemPricesToJson(this);
+  }
 }
 
 abstract class _ItemPrices implements ItemPrices {
   const factory _ItemPrices(
-      {@HiveField(0) List<PriceDetail> newPrices,
-      @HiveField(1) List<PriceDetail> usedPrices,
-      @required @HiveField(2) FeeInfo feeInfo}) = _$_ItemPrices;
+      {@required
+      @HiveField(0)
+      @JsonKey(name: "new_offers")
+          List<PriceDetail> newPrices,
+      @required
+      @HiveField(1)
+      @JsonKey(name: "used_offers")
+          List<PriceDetail> usedPrices,
+      @required
+      @HiveField(2)
+          FeeInfo feeInfo}) = _$_ItemPrices;
+
+  factory _ItemPrices.fromJson(Map<String, dynamic> json) =
+      _$_ItemPrices.fromJson;
 
   @override
   @HiveField(0)
+  @JsonKey(name: "new_offers")
   List<PriceDetail> get newPrices;
   @override
   @HiveField(1)
+  @JsonKey(name: "used_offers")
   List<PriceDetail> get usedPrices;
   @override
   @HiveField(2)
@@ -211,18 +262,32 @@ abstract class _ItemPrices implements ItemPrices {
   _$ItemPricesCopyWith<_ItemPrices> get copyWith;
 }
 
+PriceDetail _$PriceDetailFromJson(Map<String, dynamic> json) {
+  return _PriceDetail.fromJson(json);
+}
+
 /// @nodoc
 class _$PriceDetailTearOff {
   const _$PriceDetailTearOff();
 
 // ignore: unused_element
   _PriceDetail call(
-      {@HiveField(0) ItemCondition itemCondition = ItemCondition.newItem,
-      @HiveField(1) ItemSubCondition subCondition = ItemSubCondition.newItem,
-      @HiveField(2) FulfillmentChannel channel = FulfillmentChannel.merchant,
-      @HiveField(3) int price = 0,
-      @HiveField(4) int shipping = 0,
-      @HiveField(5) int point = 0}) {
+      {@HiveField(0)
+      @JsonKey(name: "condition")
+      @ItemConditionConverter()
+          ItemCondition itemCondition = ItemCondition.newItem,
+      @HiveField(1)
+      @ItemSubConditionConverter()
+          ItemSubCondition subCondition = ItemSubCondition.newItem,
+      @HiveField(2)
+      @FulfillmentChannelConverter()
+          FulfillmentChannel channel = FulfillmentChannel.merchant,
+      @HiveField(3)
+          int price = 0,
+      @HiveField(4)
+          int shipping = 0,
+      @HiveField(5)
+          int point = 0}) {
     return _PriceDetail(
       itemCondition: itemCondition,
       subCondition: subCondition,
@@ -231,6 +296,11 @@ class _$PriceDetailTearOff {
       shipping: shipping,
       point: point,
     );
+  }
+
+// ignore: unused_element
+  PriceDetail fromJson(Map<String, Object> json) {
+    return PriceDetail.fromJson(json);
   }
 }
 
@@ -241,10 +311,14 @@ const $PriceDetail = _$PriceDetailTearOff();
 /// @nodoc
 mixin _$PriceDetail {
   @HiveField(0)
+  @JsonKey(name: "condition")
+  @ItemConditionConverter()
   ItemCondition get itemCondition;
   @HiveField(1)
+  @ItemSubConditionConverter()
   ItemSubCondition get subCondition;
   @HiveField(2)
+  @FulfillmentChannelConverter()
   FulfillmentChannel get channel;
   @HiveField(3)
   int get price;
@@ -253,6 +327,7 @@ mixin _$PriceDetail {
   @HiveField(5)
   int get point;
 
+  Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
   $PriceDetailCopyWith<PriceDetail> get copyWith;
 }
@@ -263,12 +338,22 @@ abstract class $PriceDetailCopyWith<$Res> {
           PriceDetail value, $Res Function(PriceDetail) then) =
       _$PriceDetailCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(0) ItemCondition itemCondition,
-      @HiveField(1) ItemSubCondition subCondition,
-      @HiveField(2) FulfillmentChannel channel,
-      @HiveField(3) int price,
-      @HiveField(4) int shipping,
-      @HiveField(5) int point});
+      {@HiveField(0)
+      @JsonKey(name: "condition")
+      @ItemConditionConverter()
+          ItemCondition itemCondition,
+      @HiveField(1)
+      @ItemSubConditionConverter()
+          ItemSubCondition subCondition,
+      @HiveField(2)
+      @FulfillmentChannelConverter()
+          FulfillmentChannel channel,
+      @HiveField(3)
+          int price,
+      @HiveField(4)
+          int shipping,
+      @HiveField(5)
+          int point});
 }
 
 /// @nodoc
@@ -312,12 +397,22 @@ abstract class _$PriceDetailCopyWith<$Res>
       __$PriceDetailCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(0) ItemCondition itemCondition,
-      @HiveField(1) ItemSubCondition subCondition,
-      @HiveField(2) FulfillmentChannel channel,
-      @HiveField(3) int price,
-      @HiveField(4) int shipping,
-      @HiveField(5) int point});
+      {@HiveField(0)
+      @JsonKey(name: "condition")
+      @ItemConditionConverter()
+          ItemCondition itemCondition,
+      @HiveField(1)
+      @ItemSubConditionConverter()
+          ItemSubCondition subCondition,
+      @HiveField(2)
+      @FulfillmentChannelConverter()
+          FulfillmentChannel channel,
+      @HiveField(3)
+          int price,
+      @HiveField(4)
+          int shipping,
+      @HiveField(5)
+          int point});
 }
 
 /// @nodoc
@@ -355,17 +450,28 @@ class __$PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: priceDetailTypeId)
 
 /// @nodoc
-class _$_PriceDetail implements _PriceDetail {
+class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
   const _$_PriceDetail(
-      {@HiveField(0) this.itemCondition = ItemCondition.newItem,
-      @HiveField(1) this.subCondition = ItemSubCondition.newItem,
-      @HiveField(2) this.channel = FulfillmentChannel.merchant,
-      @HiveField(3) this.price = 0,
-      @HiveField(4) this.shipping = 0,
-      @HiveField(5) this.point = 0})
+      {@HiveField(0)
+      @JsonKey(name: "condition")
+      @ItemConditionConverter()
+          this.itemCondition = ItemCondition.newItem,
+      @HiveField(1)
+      @ItemSubConditionConverter()
+          this.subCondition = ItemSubCondition.newItem,
+      @HiveField(2)
+      @FulfillmentChannelConverter()
+          this.channel = FulfillmentChannel.merchant,
+      @HiveField(3)
+          this.price = 0,
+      @HiveField(4)
+          this.shipping = 0,
+      @HiveField(5)
+          this.point = 0})
       : assert(itemCondition != null),
         assert(subCondition != null),
         assert(channel != null),
@@ -373,17 +479,23 @@ class _$_PriceDetail implements _PriceDetail {
         assert(shipping != null),
         assert(point != null);
 
-  @JsonKey(defaultValue: ItemCondition.newItem)
+  factory _$_PriceDetail.fromJson(Map<String, dynamic> json) =>
+      _$_$_PriceDetailFromJson(json);
+
   @override
   @HiveField(0)
+  @JsonKey(name: "condition")
+  @ItemConditionConverter()
   final ItemCondition itemCondition;
   @JsonKey(defaultValue: ItemSubCondition.newItem)
   @override
   @HiveField(1)
+  @ItemSubConditionConverter()
   final ItemSubCondition subCondition;
   @JsonKey(defaultValue: FulfillmentChannel.merchant)
   @override
   @HiveField(2)
+  @FulfillmentChannelConverter()
   final FulfillmentChannel channel;
   @JsonKey(defaultValue: 0)
   @override
@@ -399,8 +511,21 @@ class _$_PriceDetail implements _PriceDetail {
   final int point;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'PriceDetail(itemCondition: $itemCondition, subCondition: $subCondition, channel: $channel, price: $price, shipping: $shipping, point: $point)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'PriceDetail'))
+      ..add(DiagnosticsProperty('itemCondition', itemCondition))
+      ..add(DiagnosticsProperty('subCondition', subCondition))
+      ..add(DiagnosticsProperty('channel', channel))
+      ..add(DiagnosticsProperty('price', price))
+      ..add(DiagnosticsProperty('shipping', shipping))
+      ..add(DiagnosticsProperty('point', point));
   }
 
   @override
@@ -439,25 +564,47 @@ class _$_PriceDetail implements _PriceDetail {
   @override
   _$PriceDetailCopyWith<_PriceDetail> get copyWith =>
       __$PriceDetailCopyWithImpl<_PriceDetail>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_PriceDetailToJson(this);
+  }
 }
 
 abstract class _PriceDetail implements PriceDetail {
   const factory _PriceDetail(
-      {@HiveField(0) ItemCondition itemCondition,
-      @HiveField(1) ItemSubCondition subCondition,
-      @HiveField(2) FulfillmentChannel channel,
-      @HiveField(3) int price,
-      @HiveField(4) int shipping,
-      @HiveField(5) int point}) = _$_PriceDetail;
+      {@HiveField(0)
+      @JsonKey(name: "condition")
+      @ItemConditionConverter()
+          ItemCondition itemCondition,
+      @HiveField(1)
+      @ItemSubConditionConverter()
+          ItemSubCondition subCondition,
+      @HiveField(2)
+      @FulfillmentChannelConverter()
+          FulfillmentChannel channel,
+      @HiveField(3)
+          int price,
+      @HiveField(4)
+          int shipping,
+      @HiveField(5)
+          int point}) = _$_PriceDetail;
+
+  factory _PriceDetail.fromJson(Map<String, dynamic> json) =
+      _$_PriceDetail.fromJson;
 
   @override
   @HiveField(0)
+  @JsonKey(name: "condition")
+  @ItemConditionConverter()
   ItemCondition get itemCondition;
   @override
   @HiveField(1)
+  @ItemSubConditionConverter()
   ItemSubCondition get subCondition;
   @override
   @HiveField(2)
+  @FulfillmentChannelConverter()
   FulfillmentChannel get channel;
   @override
   @HiveField(3)
