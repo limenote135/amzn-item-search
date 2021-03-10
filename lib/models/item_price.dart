@@ -1,5 +1,6 @@
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/repository/mws.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
@@ -16,60 +17,117 @@ part 'item_price.g.dart';
 final itemPricesFutureProvider =
     FutureProvider.autoDispose.family<ItemPrices, String>((ref, asin) async {
   final mws = ref.read(mwsRepositoryProvider);
-
-  final newPricesF =
-      mws.getLowestOfferListingsForASIN([asin], ItemCondition.newItem);
-  final usedPricesF =
-      mws.getLowestOfferListingsForASIN([asin], ItemCondition.usedItem);
-  final feeInfoF =
-      mws.getMyFeesEstimate(asin, 1000, useFba: true).then((value) async {
-    if (value.fbaFees == -1 || value.fbaFees == null) {
-      return mws.getMyFeesEstimate(asin, 1000, useFba: false);
-    }
-    return value;
-  });
-
-  final newPrice = await newPricesF;
-  final usedPrice = await usedPricesF;
-  final feeInfo = await feeInfoF;
-
-  final ret = ItemPrices(
-    newPrices: newPrice.prices,
-    usedPrices: usedPrice.prices,
-    feeInfo: FeeInfo(
-      referralFeeRate: feeInfo.referralFeeRate ?? 0,
-      variableClosingFee: feeInfo.variableClosingFee ?? 0,
-      fbaFee: feeInfo.fbaFees ?? 0,
-    ),
-  );
+  final resp = await mws.getProductPrices(asin);
 
   ref.maintainState = true;
-  return ret;
+  return resp.prices;
 });
 
 @freezed
 abstract class ItemPrices with _$ItemPrices {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   @HiveType(typeId: itemPricesTypeId)
   const factory ItemPrices({
-    @HiveField(0) @Default(<PriceDetail>[]) List<PriceDetail> newPrices,
-    @HiveField(1) @Default(<PriceDetail>[]) List<PriceDetail> usedPrices,
+    @HiveField(0)
+    @JsonKey(name: "new_offers")
+    @required
+        List<PriceDetail> newPrices,
+    @HiveField(1)
+    @JsonKey(name: "used_offers")
+    @required
+        List<PriceDetail> usedPrices,
     @HiveField(2) @required FeeInfo feeInfo,
   }) = _ItemPrices;
+
+  factory ItemPrices.fromJson(Map<String, dynamic> json) =>
+      _$ItemPricesFromJson(json);
 }
 
 @freezed
 abstract class PriceDetail with _$PriceDetail {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   @HiveType(typeId: priceDetailTypeId)
   const factory PriceDetail({
-    @HiveField(0) @Default(ItemCondition.newItem) ItemCondition itemCondition,
+    @HiveField(0)
+    @JsonKey(name: "condition")
+    @ItemConditionConverter()
+    @Default(ItemCondition.newItem)
+        ItemCondition itemCondition,
     @HiveField(1)
+    @ItemSubConditionConverter()
     @Default(ItemSubCondition.newItem)
         ItemSubCondition subCondition,
     @HiveField(2)
+    @FulfillmentChannelConverter()
     @Default(FulfillmentChannel.merchant)
         FulfillmentChannel channel,
     @HiveField(3) @Default(0) int price,
     @HiveField(4) @Default(0) int shipping,
     @HiveField(5) @Default(0) int point,
   }) = _PriceDetail;
+
+  factory PriceDetail.fromJson(Map<String, dynamic> json) =>
+      _$PriceDetailFromJson(json);
+}
+
+class ItemConditionConverter implements JsonConverter<ItemCondition, String> {
+  const ItemConditionConverter();
+
+  @override
+  String toJson(ItemCondition object) {
+    if (object == null) {
+      return null;
+    }
+    return describeEnum(object);
+  }
+
+  @override
+  ItemCondition fromJson(String json) {
+    if (json == null) {
+      return null;
+    }
+    return toItemCondition(json);
+  }
+}
+
+class ItemSubConditionConverter
+    implements JsonConverter<ItemSubCondition, String> {
+  const ItemSubConditionConverter();
+
+  @override
+  String toJson(ItemSubCondition object) {
+    if (object == null) {
+      return null;
+    }
+    return describeEnum(object);
+  }
+
+  @override
+  ItemSubCondition fromJson(String json) {
+    if (json == null) {
+      return null;
+    }
+    return toItemSubCondition(json);
+  }
+}
+
+class FulfillmentChannelConverter
+    implements JsonConverter<FulfillmentChannel, String> {
+  const FulfillmentChannelConverter();
+
+  @override
+  String toJson(FulfillmentChannel object) {
+    if (object == null) {
+      return null;
+    }
+    return describeEnum(object);
+  }
+
+  @override
+  FulfillmentChannel fromJson(String json) {
+    if (json == null) {
+      return null;
+    }
+    return toFulfillmentChannel(json);
+  }
 }

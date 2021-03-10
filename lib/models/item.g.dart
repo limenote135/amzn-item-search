@@ -106,3 +106,37 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_AsinData _$_$_AsinDataFromJson(Map<String, dynamic> json) {
+  return _$_AsinData(
+    jan: json['jan'] as String ?? '',
+    asin: json['asin'] as String,
+    listPrice: json['list_price'] as int ?? 0,
+    imageUrl: json['image_url'] as String,
+    title: json['title'] as String,
+    rank: json['rank'] as int ?? 0,
+    quantity: json['quantity'] as String ?? ' - ',
+    prices: json['prices'] == null
+        ? null
+        : ItemPrices.fromJson(json['prices'] as Map<String, dynamic>),
+    category:
+        const ItemCategoryConverter().fromJson(json['category'] as String),
+  );
+}
+
+Map<String, dynamic> _$_$_AsinDataToJson(_$_AsinData instance) =>
+    <String, dynamic>{
+      'jan': instance.jan,
+      'asin': instance.asin,
+      'list_price': instance.listPrice,
+      'image_url': instance.imageUrl,
+      'title': instance.title,
+      'rank': instance.rank,
+      'quantity': instance.quantity,
+      'prices': instance.prices,
+      'category': const ItemCategoryConverter().toJson(instance.category),
+    };

@@ -21,6 +21,8 @@ const _newSampleItem = AsinData(
     rank: 0,
     quantity: "1",
     prices: ItemPrices(
+      newPrices: [],
+      usedPrices: [],
       feeInfo: FeeInfo(
         fbaFee: 30,
         variableClosingFee: 0,
