@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:io' show Platform;
 
 import 'package:amasearch/models/mws.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:package_info/package_info.dart';
 
 import 'common.dart';
 
@@ -59,7 +62,20 @@ class MwsRepository {
   Future<Map<String, dynamic>> _doRequest(String url, {String data}) async {
     final dio = _read(dioProvider);
 
-    final resp = await dio.post<String>(url, data: data);
+    final info = await PackageInfo.fromPlatform();
+
+    final appVer = "Amasearch/${info.version}";
+    final osVer =
+        "${Platform.operatingSystem}/${Platform.operatingSystemVersion}";
+    final resp = await dio.post<String>(
+      url,
+      data: data,
+      options: Options(
+        headers: <String, dynamic>{
+          "User-Agent": "$appVer $osVer",
+        },
+      ),
+    );
     return json.decode(resp.data) as Map<String, dynamic>;
   }
 }
