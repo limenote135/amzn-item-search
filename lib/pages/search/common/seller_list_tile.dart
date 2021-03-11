@@ -13,7 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final _currentPriceDetailProvider = ScopedProvider<PriceDetail>(null);
 
 class SellerListTile extends HookWidget {
-  const SellerListTile({Key key}) : super(key: key);
+  const SellerListTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class SellerListTile extends HookWidget {
                 child: Column(
                   children: [
                     const Center(child: Text("新品")),
-                    for (final price in item.prices.newPrices)
+                    for (final price in item.prices!.newPrices)
                       ProviderScope(
                         overrides: [
                           _currentPriceDetailProvider.overrideWithValue(price),
@@ -48,7 +48,7 @@ class SellerListTile extends HookWidget {
                 child: Column(
                   children: [
                     const Center(child: Text("中古")),
-                    for (final price in item.prices.usedPrices)
+                    for (final price in item.prices!.usedPrices)
                       ProviderScope(
                         overrides: [
                           _currentPriceDetailProvider.overrideWithValue(price),
@@ -67,7 +67,7 @@ class SellerListTile extends HookWidget {
 }
 
 class _OfferItem extends HookWidget {
-  const _OfferItem(this.cond, {Key key}) : super(key: key);
+  const _OfferItem(this.cond, {Key? key}) : super(key: key);
 
   final ItemCondition cond;
 
@@ -99,7 +99,5 @@ class _OfferItem extends HookWidget {
           ],
         );
     }
-
-    throw Exception("Unknown item condition: $cond");
   }
 }

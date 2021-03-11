@@ -33,7 +33,6 @@ extension UsedSubConditionExtention on UsedSubCondition {
       case UsedSubCondition.all:
         return "すべて";
     }
-    throw Exception("Invalid UsedSubCondition: $this");
   }
 
   ItemSubCondition toItemSubCondition() {
@@ -49,7 +48,6 @@ extension UsedSubConditionExtention on UsedSubCondition {
       case UsedSubCondition.all:
         throw Exception("Invalid UsedSubCondition: $this");
     }
-    throw Exception("Invalid UsedSubCondition: $this");
   }
 
   // lessEq は自身が引数で与えられたコンディションと等しいか、より悪いかどうかを返します。
@@ -82,6 +80,5 @@ extension UsedSubConditionExtention on UsedSubCondition {
         // 自身が acceptable の時は target は acceptable 以上
         return true;
     }
-    throw Exception("Invalid argument: $target");
   }
 }

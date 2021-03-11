@@ -1,5 +1,6 @@
-import 'package:amasearch/models/constants.dart';
 import 'package:hive/hive.dart';
+
+import '../constants.dart';
 
 part 'fulfillment_channel.g.dart';
 

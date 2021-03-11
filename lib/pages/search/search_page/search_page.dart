@@ -19,7 +19,7 @@ import 'item_tile.dart';
 import 'search_settings.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({Key key}) : super(key: key);
+  const SearchPage({Key? key}) : super(key: key);
   static const routeName = "/";
 
   @override
@@ -43,22 +43,22 @@ class SearchPage extends StatelessWidget {
       ),
       body: const _Body(),
       floatingActionButton: FloatingActionButton(
-        child: AnimatedTheme(
-          data: ThemeData.light(),
-          child: const Icon(Icons.camera_alt),
-        ),
         heroTag: onStartCameraHeroTag,
         onPressed: () {
           unfocus();
           Navigator.of(context).pushNamed(CameraPage.routeName);
         },
+        child: AnimatedTheme(
+          data: ThemeData.light(),
+          child: const Icon(Icons.camera_alt),
+        ),
       ),
     );
   }
 }
 
 class _AppBarTitle extends HookWidget {
-  const _AppBarTitle({Key key}) : super(key: key);
+  const _AppBarTitle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +163,7 @@ class _AppBarTitle extends HookWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

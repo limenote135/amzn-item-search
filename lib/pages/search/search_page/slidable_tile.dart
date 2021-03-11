@@ -10,7 +10,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SlidableTile extends HookWidget {
-  const SlidableTile({Key key, @required this.child}) : super(key: key);
+  const SlidableTile({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
 

@@ -13,7 +13,7 @@ import 'slidable_delete_tile.dart';
 import 'slidable_tile.dart';
 
 class ItemTile extends HookWidget {
-  const ItemTile({Key key}) : super(key: key);
+  const ItemTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class ItemTile extends HookWidget {
 }
 
 class ItemTileImpl extends HookWidget {
-  const ItemTileImpl({Key key}) : super(key: key);
+  const ItemTileImpl({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class ItemTileImpl extends HookWidget {
     final item = useProvider(controller.state);
     final firstItem = item.asins.first;
     final fromRoute = useProvider(fromRouteProvider);
-    final fbaFee = firstItem.prices?.feeInfo?.fbaFee ?? 0;
+    final fbaFee = firstItem.prices?.feeInfo.fbaFee ?? 0;
     return InkWell(
       onTap: () {
         unfocus();

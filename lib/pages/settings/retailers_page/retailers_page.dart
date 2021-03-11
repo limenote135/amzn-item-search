@@ -6,7 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RetailersPage extends StatelessWidget {
-  const RetailersPage({Key key}) : super(key: key);
+  const RetailersPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/retailer";
 
   static Route<void> route() {
@@ -28,7 +28,7 @@ class RetailersPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,17 +56,17 @@ class _Body extends HookWidget {
                     content: const Text("仕入れ先を削除してもよろしいですか？"),
                     actions: [
                       FlatButton(
-                        child: const Text("キャンセル"),
                         onPressed: () => Navigator.pop(context, false),
+                        child: const Text("キャンセル"),
                       ),
                       FlatButton(
-                        child: const Text("OK"),
                         onPressed: () => Navigator.pop(context, true),
+                        child: const Text("OK"),
                       ),
                     ],
                   ),
                 );
-                if (ok) {
+                if (ok!) {
                   context
                       .read(generalSettingsControllerProvider)
                       .removeRetailer(i);
@@ -81,7 +81,7 @@ class _Body extends HookWidget {
           onTap: () async {
             final ret = await showDialog<String>(
               context: context,
-              builder: (context) => InputDialog<String>(
+              builder: (context) => InputDialog<String?>(
                 title: const Text("仕入れ先の追加"),
                 validate: (value) => value != "" ? value : null,
               ),

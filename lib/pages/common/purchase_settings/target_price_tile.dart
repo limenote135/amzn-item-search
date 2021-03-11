@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class TargetPriceTile extends HookWidget {
-  const TargetPriceTile({Key key}) : super(key: key);
+  const TargetPriceTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class TargetPriceTile extends HookWidget {
 
     final targetPrice = _calcTargetSellPrice(
         purchasePrice > 0 ? purchasePrice : 0,
-        item.prices.feeInfo,
+        item.prices!.feeInfo,
         targetRate,
         minProfit,
         useFba);

@@ -15,7 +15,7 @@ final itemListControllerProvider =
 class ItemListController extends StateNotifier<
     List<FutureProvider<StateNotifierProvider<ItemController>>>> {
   ItemListController(this._read, this._container,
-      {List<FutureProvider<StateNotifierProvider<ItemController>>> state})
+      {List<FutureProvider<StateNotifierProvider<ItemController>>>? state})
       : super(state ?? []) {
     _fetchAll();
   }

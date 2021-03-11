@@ -18,7 +18,7 @@ final currentCodeTypeProvider = ScopedProvider<SearchType>(null);
 final _currentJanProvider = ScopedProvider<String>(null);
 
 class ItemTile extends HookWidget {
-  const ItemTile({Key key}) : super(key: key);
+  const ItemTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class ItemTile extends HookWidget {
         }
         return ProviderScope(
           overrides: [
-            _currentJanProvider.overrideWithValue(snapshot.data),
+            _currentJanProvider.overrideWithValue(snapshot.data!),
           ],
           child: const _TileImpl(),
         );
@@ -68,7 +68,7 @@ class ItemTile extends HookWidget {
 }
 
 class _TileImpl extends HookWidget {
-  const _TileImpl({Key key}) : super(key: key);
+  const _TileImpl({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

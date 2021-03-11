@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'item.dart';
@@ -8,11 +7,11 @@ part 'mws.freezed.dart';
 part 'mws.g.dart';
 
 @freezed
-abstract class GetProductByIdResponse with _$GetProductByIdResponse {
+class GetProductByIdResponse with _$GetProductByIdResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory GetProductByIdResponse({
-    @required String jan,
-    @required List<AsinData> items,
+    required String jan,
+    required List<AsinData> items,
   }) = _GetProductByIdResponse;
 
   factory GetProductByIdResponse.fromJson(Map<String, dynamic> json) =>
@@ -20,10 +19,10 @@ abstract class GetProductByIdResponse with _$GetProductByIdResponse {
 }
 
 @freezed
-abstract class GetProductPricesResponse with _$GetProductPricesResponse {
+class GetProductPricesResponse with _$GetProductPricesResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory GetProductPricesResponse({
-    @required ItemPrices prices,
+    required ItemPrices prices,
   }) = _GetProductPricesResponse;
 
   factory GetProductPricesResponse.fromJson(Map<String, dynamic> json) =>
@@ -31,18 +30,18 @@ abstract class GetProductPricesResponse with _$GetProductPricesResponse {
 }
 
 @freezed
-abstract class ListMatchingProductRequest with _$ListMatchingProductRequest {
+class ListMatchingProductRequest with _$ListMatchingProductRequest {
   const factory ListMatchingProductRequest({
-    @required String query,
-    @required String category,
+    required String query,
+    required String category,
   }) = _ListMatchingProductRequest;
 }
 
 @freezed
-abstract class ListMatchingProductResponse with _$ListMatchingProductResponse {
+class ListMatchingProductResponse with _$ListMatchingProductResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory ListMatchingProductResponse({
-    @required List<AsinData> items,
+    required List<AsinData> items,
   }) = _ListMatchingProductResponse;
 
   factory ListMatchingProductResponse.fromJson(Map<String, dynamic> json) =>

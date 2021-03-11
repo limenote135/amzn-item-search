@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class PurchaseDateTile extends StatelessWidget {
-  const PurchaseDateTile({Key key}) : super(key: key);
+  const PurchaseDateTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

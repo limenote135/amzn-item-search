@@ -24,19 +24,17 @@ final itemPricesFutureProvider =
 });
 
 @freezed
-abstract class ItemPrices with _$ItemPrices {
+class ItemPrices with _$ItemPrices {
   @JsonSerializable(fieldRename: FieldRename.snake)
   @HiveType(typeId: itemPricesTypeId)
   const factory ItemPrices({
     @HiveField(0)
     @JsonKey(name: "new_offers")
-    @required
-        List<PriceDetail> newPrices,
+        required List<PriceDetail> newPrices,
     @HiveField(1)
     @JsonKey(name: "used_offers")
-    @required
-        List<PriceDetail> usedPrices,
-    @HiveField(2) @required FeeInfo feeInfo,
+        required List<PriceDetail> usedPrices,
+    @HiveField(2) required FeeInfo feeInfo,
   }) = _ItemPrices;
 
   factory ItemPrices.fromJson(Map<String, dynamic> json) =>
@@ -44,7 +42,7 @@ abstract class ItemPrices with _$ItemPrices {
 }
 
 @freezed
-abstract class PriceDetail with _$PriceDetail {
+class PriceDetail with _$PriceDetail {
   @JsonSerializable(fieldRename: FieldRename.snake)
   @HiveType(typeId: priceDetailTypeId)
   const factory PriceDetail({
@@ -70,11 +68,11 @@ abstract class PriceDetail with _$PriceDetail {
       _$PriceDetailFromJson(json);
 }
 
-class ItemConditionConverter implements JsonConverter<ItemCondition, String> {
+class ItemConditionConverter implements JsonConverter<ItemCondition?, String?> {
   const ItemConditionConverter();
 
   @override
-  String toJson(ItemCondition object) {
+  String? toJson(ItemCondition? object) {
     if (object == null) {
       return null;
     }
@@ -82,7 +80,7 @@ class ItemConditionConverter implements JsonConverter<ItemCondition, String> {
   }
 
   @override
-  ItemCondition fromJson(String json) {
+  ItemCondition? fromJson(String? json) {
     if (json == null) {
       return null;
     }
@@ -91,11 +89,11 @@ class ItemConditionConverter implements JsonConverter<ItemCondition, String> {
 }
 
 class ItemSubConditionConverter
-    implements JsonConverter<ItemSubCondition, String> {
+    implements JsonConverter<ItemSubCondition?, String?> {
   const ItemSubConditionConverter();
 
   @override
-  String toJson(ItemSubCondition object) {
+  String? toJson(ItemSubCondition? object) {
     if (object == null) {
       return null;
     }
@@ -103,7 +101,7 @@ class ItemSubConditionConverter
   }
 
   @override
-  ItemSubCondition fromJson(String json) {
+  ItemSubCondition? fromJson(String? json) {
     if (json == null) {
       return null;
     }
@@ -112,11 +110,11 @@ class ItemSubConditionConverter
 }
 
 class FulfillmentChannelConverter
-    implements JsonConverter<FulfillmentChannel, String> {
+    implements JsonConverter<FulfillmentChannel?, String?> {
   const FulfillmentChannelConverter();
 
   @override
-  String toJson(FulfillmentChannel object) {
+  String? toJson(FulfillmentChannel? object) {
     if (object == null) {
       return null;
     }
@@ -124,7 +122,7 @@ class FulfillmentChannelConverter
   }
 
   @override
-  FulfillmentChannel fromJson(String json) {
+  FulfillmentChannel? fromJson(String? json) {
     if (json == null) {
       return null;
     }
