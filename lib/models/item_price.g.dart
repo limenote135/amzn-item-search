@@ -94,3 +94,58 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_ItemPrices _$_$_ItemPricesFromJson(Map<String, dynamic> json) {
+  return _$_ItemPrices(
+    newPrices: (json['new_offers'] as List)
+        ?.map((e) =>
+            e == null ? null : PriceDetail.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    usedPrices: (json['used_offers'] as List)
+        ?.map((e) =>
+            e == null ? null : PriceDetail.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    feeInfo: json['fee_info'] == null
+        ? null
+        : FeeInfo.fromJson(json['fee_info'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$_$_ItemPricesToJson(_$_ItemPrices instance) =>
+    <String, dynamic>{
+      'new_offers': instance.newPrices,
+      'used_offers': instance.usedPrices,
+      'fee_info': instance.feeInfo,
+    };
+
+_$_PriceDetail _$_$_PriceDetailFromJson(Map<String, dynamic> json) {
+  return _$_PriceDetail(
+    itemCondition:
+        const ItemConditionConverter().fromJson(json['condition'] as String),
+    subCondition: const ItemSubConditionConverter()
+            .fromJson(json['sub_condition'] as String) ??
+        ItemSubCondition.newItem,
+    channel: const FulfillmentChannelConverter()
+            .fromJson(json['channel'] as String) ??
+        FulfillmentChannel.merchant,
+    price: json['price'] as int ?? 0,
+    shipping: json['shipping'] as int ?? 0,
+    point: json['point'] as int ?? 0,
+  );
+}
+
+Map<String, dynamic> _$_$_PriceDetailToJson(_$_PriceDetail instance) =>
+    <String, dynamic>{
+      'condition':
+          const ItemConditionConverter().toJson(instance.itemCondition),
+      'sub_condition':
+          const ItemSubConditionConverter().toJson(instance.subCondition),
+      'channel': const FulfillmentChannelConverter().toJson(instance.channel),
+      'price': instance.price,
+      'shipping': instance.shipping,
+      'point': instance.point,
+    };

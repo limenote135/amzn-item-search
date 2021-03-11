@@ -1,4 +1,4 @@
-const categoryMap = <String, String>{
+const mwsCategoryMap = <String, String>{
   "Apparel": "服&ファッション小物",
   "Baby Product": "ベビー&マタニティ",
   "eBooks": "電子書籍",
