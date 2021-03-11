@@ -45,3 +45,22 @@ class FeeInfoAdapter extends TypeAdapter<_$_FeeInfo> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_FeeInfo _$_$_FeeInfoFromJson(Map<String, dynamic> json) {
+  return _$_FeeInfo(
+    referralFeeRate: (json['fee_rate'] as num)?.toDouble(),
+    variableClosingFee: json['closing_fee'] as int,
+    fbaFee: json['fba_fee'] as int,
+  );
+}
+
+Map<String, dynamic> _$_$_FeeInfoToJson(_$_FeeInfo instance) =>
+    <String, dynamic>{
+      'fee_rate': instance.referralFeeRate,
+      'closing_fee': instance.variableClosingFee,
+      'fba_fee': instance.fbaFee,
+    };
