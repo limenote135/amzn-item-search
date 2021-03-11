@@ -185,22 +185,26 @@ abstract class _Item implements Item {
   _$ItemCopyWith<_Item> get copyWith;
 }
 
+AsinData _$AsinDataFromJson(Map<String, dynamic> json) {
+  return _AsinData.fromJson(json);
+}
+
 /// @nodoc
 class _$AsinDataTearOff {
   const _$AsinDataTearOff();
 
 // ignore: unused_element
   _AsinData call(
-      {@required @HiveField(0) String jan,
+      {@HiveField(0) String jan = "",
       @required @HiveField(1) String asin,
-      @required @HiveField(2) int listPrice,
+      @HiveField(2) int listPrice = 0,
       @required @HiveField(3) String imageUrl,
       @required @HiveField(4) String title,
-      @required @HiveField(5) int rank,
-      @required @HiveField(6) String quantity,
+      @HiveField(5) int rank = 0,
+      @HiveField(6) String quantity = " - ",
       @HiveField(7) ItemPrices prices,
-      @HiveField(8) Uint8List imageData,
-      @required @HiveField(9) String category}) {
+      @HiveField(8) @JsonKey(ignore: true) Uint8List imageData,
+      @required @HiveField(9) @ItemCategoryConverter() String category}) {
     return _AsinData(
       jan: jan,
       asin: asin,
@@ -213,6 +217,11 @@ class _$AsinDataTearOff {
       imageData: imageData,
       category: category,
     );
+  }
+
+// ignore: unused_element
+  AsinData fromJson(Map<String, Object> json) {
+    return AsinData.fromJson(json);
   }
 }
 
@@ -239,10 +248,13 @@ mixin _$AsinData {
   @HiveField(7)
   ItemPrices get prices;
   @HiveField(8)
+  @JsonKey(ignore: true)
   Uint8List get imageData;
   @HiveField(9)
+  @ItemCategoryConverter()
   String get category;
 
+  Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
   $AsinDataCopyWith<AsinData> get copyWith;
 }
@@ -260,8 +272,8 @@ abstract class $AsinDataCopyWith<$Res> {
       @HiveField(5) int rank,
       @HiveField(6) String quantity,
       @HiveField(7) ItemPrices prices,
-      @HiveField(8) Uint8List imageData,
-      @HiveField(9) String category});
+      @HiveField(8) @JsonKey(ignore: true) Uint8List imageData,
+      @HiveField(9) @ItemCategoryConverter() String category});
 
   $ItemPricesCopyWith<$Res> get prices;
 }
@@ -327,8 +339,8 @@ abstract class _$AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
       @HiveField(5) int rank,
       @HiveField(6) String quantity,
       @HiveField(7) ItemPrices prices,
-      @HiveField(8) Uint8List imageData,
-      @HiveField(9) String category});
+      @HiveField(8) @JsonKey(ignore: true) Uint8List imageData,
+      @HiveField(9) @ItemCategoryConverter() String category});
 
   @override
   $ItemPricesCopyWith<$Res> get prices;
@@ -372,21 +384,22 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: asinDataTypeId)
 
 /// @nodoc
 class _$_AsinData implements _AsinData {
   const _$_AsinData(
-      {@required @HiveField(0) this.jan,
+      {@HiveField(0) this.jan = "",
       @required @HiveField(1) this.asin,
-      @required @HiveField(2) this.listPrice,
+      @HiveField(2) this.listPrice = 0,
       @required @HiveField(3) this.imageUrl,
       @required @HiveField(4) this.title,
-      @required @HiveField(5) this.rank,
-      @required @HiveField(6) this.quantity,
+      @HiveField(5) this.rank = 0,
+      @HiveField(6) this.quantity = " - ",
       @HiveField(7) this.prices,
-      @HiveField(8) this.imageData,
-      @required @HiveField(9) this.category})
+      @HiveField(8) @JsonKey(ignore: true) this.imageData,
+      @required @HiveField(9) @ItemCategoryConverter() this.category})
       : assert(jan != null),
         assert(asin != null),
         assert(listPrice != null),
@@ -396,12 +409,17 @@ class _$_AsinData implements _AsinData {
         assert(quantity != null),
         assert(category != null);
 
+  factory _$_AsinData.fromJson(Map<String, dynamic> json) =>
+      _$_$_AsinDataFromJson(json);
+
+  @JsonKey(defaultValue: "")
   @override
   @HiveField(0)
   final String jan;
   @override
   @HiveField(1)
   final String asin;
+  @JsonKey(defaultValue: 0)
   @override
   @HiveField(2)
   final int listPrice;
@@ -411,9 +429,11 @@ class _$_AsinData implements _AsinData {
   @override
   @HiveField(4)
   final String title;
+  @JsonKey(defaultValue: 0)
   @override
   @HiveField(5)
   final int rank;
+  @JsonKey(defaultValue: " - ")
   @override
   @HiveField(6)
   final String quantity;
@@ -422,9 +442,11 @@ class _$_AsinData implements _AsinData {
   final ItemPrices prices;
   @override
   @HiveField(8)
+  @JsonKey(ignore: true)
   final Uint8List imageData;
   @override
   @HiveField(9)
+  @ItemCategoryConverter()
   final String category;
 
   @override
@@ -481,20 +503,28 @@ class _$_AsinData implements _AsinData {
   @override
   _$AsinDataCopyWith<_AsinData> get copyWith =>
       __$AsinDataCopyWithImpl<_AsinData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_AsinDataToJson(this);
+  }
 }
 
 abstract class _AsinData implements AsinData {
   const factory _AsinData(
-      {@required @HiveField(0) String jan,
-      @required @HiveField(1) String asin,
-      @required @HiveField(2) int listPrice,
-      @required @HiveField(3) String imageUrl,
-      @required @HiveField(4) String title,
-      @required @HiveField(5) int rank,
-      @required @HiveField(6) String quantity,
-      @HiveField(7) ItemPrices prices,
-      @HiveField(8) Uint8List imageData,
-      @required @HiveField(9) String category}) = _$_AsinData;
+          {@HiveField(0) String jan,
+          @required @HiveField(1) String asin,
+          @HiveField(2) int listPrice,
+          @required @HiveField(3) String imageUrl,
+          @required @HiveField(4) String title,
+          @HiveField(5) int rank,
+          @HiveField(6) String quantity,
+          @HiveField(7) ItemPrices prices,
+          @HiveField(8) @JsonKey(ignore: true) Uint8List imageData,
+          @required @HiveField(9) @ItemCategoryConverter() String category}) =
+      _$_AsinData;
+
+  factory _AsinData.fromJson(Map<String, dynamic> json) = _$_AsinData.fromJson;
 
   @override
   @HiveField(0)
@@ -522,9 +552,11 @@ abstract class _AsinData implements AsinData {
   ItemPrices get prices;
   @override
   @HiveField(8)
+  @JsonKey(ignore: true)
   Uint8List get imageData;
   @override
   @HiveField(9)
+  @ItemCategoryConverter()
   String get category;
   @override
   @JsonKey(ignore: true)
