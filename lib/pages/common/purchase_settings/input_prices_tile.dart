@@ -5,7 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'custom_validator.dart';
 
 class InputPricesTile extends StatelessWidget {
-  const InputPricesTile({Key key}) : super(key: key);
+  const InputPricesTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

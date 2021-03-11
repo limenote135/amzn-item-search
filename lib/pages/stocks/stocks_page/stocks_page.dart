@@ -31,7 +31,7 @@ enum _StockPageActions {
 }
 
 class StocksPage extends HookWidget {
-  const StocksPage({Key key}) : super(key: key);
+  const StocksPage({Key? key}) : super(key: key);
   static const routeName = "/stocks";
 
   @override
@@ -132,7 +132,7 @@ class StocksPage extends HookWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +180,7 @@ class _Body extends HookWidget {
     );
   }
 
-  Widget _getSummary(List<StockItem> items, int index) {
+  Widget? _getSummary(List<StockItem> items, int index) {
     final current =
         DateTime.parse(items[index].purchaseDate).toLocal().dayFormat();
     if (index == 0) {
@@ -224,9 +224,9 @@ class _Body extends HookWidget {
 }
 
 class _InkWell extends HookWidget {
-  const _InkWell({Key key, this.child}) : super(key: key);
+  const _InkWell({Key? key, this.child}) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {

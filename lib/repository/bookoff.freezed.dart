@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'bookoff.dart';
 
@@ -8,6 +8,10 @@ part of 'bookoff.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 BookoffResponse _$BookoffResponseFromJson(Map<String, dynamic> json) {
   return _BookoffResponse.fromJson(json);
 }
@@ -16,12 +20,11 @@ BookoffResponse _$BookoffResponseFromJson(Map<String, dynamic> json) {
 class _$BookoffResponseTearOff {
   const _$BookoffResponseTearOff();
 
-// ignore: unused_element
   _BookoffResponse call(
-      {@JsonKey(name: "INSTORECODE") String instoreCode,
-      @JsonKey(name: "GOODS_NAME1") String title,
-      @JsonKey(name: "GOODS_NAME2") String subtitle,
-      @JsonKey(name: "JAN") String jan}) {
+      {@JsonKey(name: "INSTORECODE") required String instoreCode,
+      @JsonKey(name: "GOODS_NAME1") required String title,
+      @JsonKey(name: "GOODS_NAME2") required String subtitle,
+      @JsonKey(name: "JAN") required String jan}) {
     return _BookoffResponse(
       instoreCode: instoreCode,
       title: title,
@@ -30,30 +33,29 @@ class _$BookoffResponseTearOff {
     );
   }
 
-// ignore: unused_element
   BookoffResponse fromJson(Map<String, Object> json) {
     return BookoffResponse.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $BookoffResponse = _$BookoffResponseTearOff();
 
 /// @nodoc
 mixin _$BookoffResponse {
   @JsonKey(name: "INSTORECODE")
-  String get instoreCode;
+  String get instoreCode => throw _privateConstructorUsedError;
   @JsonKey(name: "GOODS_NAME1")
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @JsonKey(name: "GOODS_NAME2")
-  String get subtitle;
+  String get subtitle => throw _privateConstructorUsedError;
   @JsonKey(name: "JAN")
-  String get jan;
+  String get jan => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $BookoffResponseCopyWith<BookoffResponse> get copyWith;
+  $BookoffResponseCopyWith<BookoffResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -79,17 +81,28 @@ class _$BookoffResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object instoreCode = freezed,
-    Object title = freezed,
-    Object subtitle = freezed,
-    Object jan = freezed,
+    Object? instoreCode = freezed,
+    Object? title = freezed,
+    Object? subtitle = freezed,
+    Object? jan = freezed,
   }) {
     return _then(_value.copyWith(
-      instoreCode:
-          instoreCode == freezed ? _value.instoreCode : instoreCode as String,
-      title: title == freezed ? _value.title : title as String,
-      subtitle: subtitle == freezed ? _value.subtitle : subtitle as String,
-      jan: jan == freezed ? _value.jan : jan as String,
+      instoreCode: instoreCode == freezed
+          ? _value.instoreCode
+          : instoreCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      subtitle: subtitle == freezed
+          ? _value.subtitle
+          : subtitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      jan: jan == freezed
+          ? _value.jan
+          : jan // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -121,17 +134,28 @@ class __$BookoffResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object instoreCode = freezed,
-    Object title = freezed,
-    Object subtitle = freezed,
-    Object jan = freezed,
+    Object? instoreCode = freezed,
+    Object? title = freezed,
+    Object? subtitle = freezed,
+    Object? jan = freezed,
   }) {
     return _then(_BookoffResponse(
-      instoreCode:
-          instoreCode == freezed ? _value.instoreCode : instoreCode as String,
-      title: title == freezed ? _value.title : title as String,
-      subtitle: subtitle == freezed ? _value.subtitle : subtitle as String,
-      jan: jan == freezed ? _value.jan : jan as String,
+      instoreCode: instoreCode == freezed
+          ? _value.instoreCode
+          : instoreCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      subtitle: subtitle == freezed
+          ? _value.subtitle
+          : subtitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      jan: jan == freezed
+          ? _value.jan
+          : jan // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -141,10 +165,10 @@ class __$BookoffResponseCopyWithImpl<$Res>
 /// @nodoc
 class _$_BookoffResponse implements _BookoffResponse {
   const _$_BookoffResponse(
-      {@JsonKey(name: "INSTORECODE") this.instoreCode,
-      @JsonKey(name: "GOODS_NAME1") this.title,
-      @JsonKey(name: "GOODS_NAME2") this.subtitle,
-      @JsonKey(name: "JAN") this.jan});
+      {@JsonKey(name: "INSTORECODE") required this.instoreCode,
+      @JsonKey(name: "GOODS_NAME1") required this.title,
+      @JsonKey(name: "GOODS_NAME2") required this.subtitle,
+      @JsonKey(name: "JAN") required this.jan});
 
   factory _$_BookoffResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_BookoffResponseFromJson(json);
@@ -204,27 +228,28 @@ class _$_BookoffResponse implements _BookoffResponse {
 
 abstract class _BookoffResponse implements BookoffResponse {
   const factory _BookoffResponse(
-      {@JsonKey(name: "INSTORECODE") String instoreCode,
-      @JsonKey(name: "GOODS_NAME1") String title,
-      @JsonKey(name: "GOODS_NAME2") String subtitle,
-      @JsonKey(name: "JAN") String jan}) = _$_BookoffResponse;
+      {@JsonKey(name: "INSTORECODE") required String instoreCode,
+      @JsonKey(name: "GOODS_NAME1") required String title,
+      @JsonKey(name: "GOODS_NAME2") required String subtitle,
+      @JsonKey(name: "JAN") required String jan}) = _$_BookoffResponse;
 
   factory _BookoffResponse.fromJson(Map<String, dynamic> json) =
       _$_BookoffResponse.fromJson;
 
   @override
   @JsonKey(name: "INSTORECODE")
-  String get instoreCode;
+  String get instoreCode => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "GOODS_NAME1")
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "GOODS_NAME2")
-  String get subtitle;
+  String get subtitle => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "JAN")
-  String get jan;
+  String get jan => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$BookoffResponseCopyWith<_BookoffResponse> get copyWith;
+  _$BookoffResponseCopyWith<_BookoffResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }

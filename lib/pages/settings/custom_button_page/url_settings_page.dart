@@ -13,7 +13,7 @@ const usedProfitVariable = "{usedProfit}";
 const newProfitVariable = "{newProfit}";
 
 class UrlSettingsPage extends StatelessWidget {
-  const UrlSettingsPage({Key key}) : super(key: key);
+  const UrlSettingsPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/custom_button/url";
 
   static Route<CustomButtonDetail> route(CustomButtonDetail button) {
@@ -40,7 +40,7 @@ class UrlSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

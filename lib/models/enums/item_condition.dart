@@ -19,7 +19,6 @@ extension SearchConditionExtention on ItemCondition {
       case ItemCondition.usedItem:
         return "Used";
     }
-    throw Exception("Invalid SearchCondition: $this");
   }
 
   String toDisplayString() {
@@ -29,7 +28,6 @@ extension SearchConditionExtention on ItemCondition {
       case ItemCondition.usedItem:
         return "中古";
     }
-    throw Exception("Invalid SearchCondition: $this");
   }
 }
 

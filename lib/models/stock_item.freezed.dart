@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'stock_item.dart';
 
@@ -9,13 +9,15 @@ part of 'stock_item.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$StockItemTearOff {
   const _$StockItemTearOff();
 
-// ignore: unused_element
   _StockItem call(
-      {@required @HiveField(0) String purchaseDate,
+      {@HiveField(0) required String purchaseDate,
       @HiveField(1) int purchasePrice = 0,
       @HiveField(2) int sellPrice = 0,
       @HiveField(3) bool useFba = true,
@@ -25,9 +27,9 @@ class _$StockItemTearOff {
       @HiveField(7) ItemSubCondition subCondition = ItemSubCondition.newItem,
       @HiveField(8) String sku = "",
       @HiveField(9) String memo = "",
-      @required @HiveField(10) AsinData item,
+      @HiveField(10) required AsinData item,
       @HiveField(11) String retailer = "",
-      @required @HiveField(12) String id,
+      @HiveField(12) required String id,
       bool autogenSku = false}) {
     return _StockItem(
       purchaseDate: purchaseDate,
@@ -49,41 +51,41 @@ class _$StockItemTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $StockItem = _$StockItemTearOff();
 
 /// @nodoc
 mixin _$StockItem {
   @HiveField(0)
-  String get purchaseDate;
+  String get purchaseDate => throw _privateConstructorUsedError;
   @HiveField(1)
-  int get purchasePrice;
+  int get purchasePrice => throw _privateConstructorUsedError;
   @HiveField(2)
-  int get sellPrice;
+  int get sellPrice => throw _privateConstructorUsedError;
   @HiveField(3)
-  bool get useFba;
+  bool get useFba => throw _privateConstructorUsedError;
   @HiveField(4)
-  int get profitPerItem;
+  int get profitPerItem => throw _privateConstructorUsedError;
   @HiveField(5)
-  int get amount;
+  int get amount => throw _privateConstructorUsedError;
   @HiveField(6)
-  ItemCondition get condition;
+  ItemCondition get condition => throw _privateConstructorUsedError;
   @HiveField(7)
-  ItemSubCondition get subCondition;
+  ItemSubCondition get subCondition => throw _privateConstructorUsedError;
   @HiveField(8)
-  String get sku;
+  String get sku => throw _privateConstructorUsedError;
   @HiveField(9)
-  String get memo;
+  String get memo => throw _privateConstructorUsedError;
   @HiveField(10)
-  AsinData get item;
+  AsinData get item => throw _privateConstructorUsedError;
   @HiveField(11)
-  String get retailer;
+  String get retailer => throw _privateConstructorUsedError;
   @HiveField(12)
-  String get id; // 主キー
-  bool get autogenSku;
+  String get id => throw _privateConstructorUsedError; // 主キー
+  bool get autogenSku => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $StockItemCopyWith<StockItem> get copyWith;
+  $StockItemCopyWith<StockItem> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -119,54 +121,83 @@ class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
 
   @override
   $Res call({
-    Object purchaseDate = freezed,
-    Object purchasePrice = freezed,
-    Object sellPrice = freezed,
-    Object useFba = freezed,
-    Object profitPerItem = freezed,
-    Object amount = freezed,
-    Object condition = freezed,
-    Object subCondition = freezed,
-    Object sku = freezed,
-    Object memo = freezed,
-    Object item = freezed,
-    Object retailer = freezed,
-    Object id = freezed,
-    Object autogenSku = freezed,
+    Object? purchaseDate = freezed,
+    Object? purchasePrice = freezed,
+    Object? sellPrice = freezed,
+    Object? useFba = freezed,
+    Object? profitPerItem = freezed,
+    Object? amount = freezed,
+    Object? condition = freezed,
+    Object? subCondition = freezed,
+    Object? sku = freezed,
+    Object? memo = freezed,
+    Object? item = freezed,
+    Object? retailer = freezed,
+    Object? id = freezed,
+    Object? autogenSku = freezed,
   }) {
     return _then(_value.copyWith(
       purchaseDate: purchaseDate == freezed
           ? _value.purchaseDate
-          : purchaseDate as String,
+          : purchaseDate // ignore: cast_nullable_to_non_nullable
+              as String,
       purchasePrice: purchasePrice == freezed
           ? _value.purchasePrice
-          : purchasePrice as int,
-      sellPrice: sellPrice == freezed ? _value.sellPrice : sellPrice as int,
-      useFba: useFba == freezed ? _value.useFba : useFba as bool,
+          : purchasePrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      sellPrice: sellPrice == freezed
+          ? _value.sellPrice
+          : sellPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      useFba: useFba == freezed
+          ? _value.useFba
+          : useFba // ignore: cast_nullable_to_non_nullable
+              as bool,
       profitPerItem: profitPerItem == freezed
           ? _value.profitPerItem
-          : profitPerItem as int,
-      amount: amount == freezed ? _value.amount : amount as int,
-      condition:
-          condition == freezed ? _value.condition : condition as ItemCondition,
+          : profitPerItem // ignore: cast_nullable_to_non_nullable
+              as int,
+      amount: amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int,
+      condition: condition == freezed
+          ? _value.condition
+          : condition // ignore: cast_nullable_to_non_nullable
+              as ItemCondition,
       subCondition: subCondition == freezed
           ? _value.subCondition
-          : subCondition as ItemSubCondition,
-      sku: sku == freezed ? _value.sku : sku as String,
-      memo: memo == freezed ? _value.memo : memo as String,
-      item: item == freezed ? _value.item : item as AsinData,
-      retailer: retailer == freezed ? _value.retailer : retailer as String,
-      id: id == freezed ? _value.id : id as String,
-      autogenSku:
-          autogenSku == freezed ? _value.autogenSku : autogenSku as bool,
+          : subCondition // ignore: cast_nullable_to_non_nullable
+              as ItemSubCondition,
+      sku: sku == freezed
+          ? _value.sku
+          : sku // ignore: cast_nullable_to_non_nullable
+              as String,
+      memo: memo == freezed
+          ? _value.memo
+          : memo // ignore: cast_nullable_to_non_nullable
+              as String,
+      item: item == freezed
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as AsinData,
+      retailer: retailer == freezed
+          ? _value.retailer
+          : retailer // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      autogenSku: autogenSku == freezed
+          ? _value.autogenSku
+          : autogenSku // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
   @override
   $AsinDataCopyWith<$Res> get item {
-    if (_value.item == null) {
-      return null;
-    }
     return $AsinDataCopyWith<$Res>(_value.item, (value) {
       return _then(_value.copyWith(item: value));
     });
@@ -210,46 +241,78 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object purchaseDate = freezed,
-    Object purchasePrice = freezed,
-    Object sellPrice = freezed,
-    Object useFba = freezed,
-    Object profitPerItem = freezed,
-    Object amount = freezed,
-    Object condition = freezed,
-    Object subCondition = freezed,
-    Object sku = freezed,
-    Object memo = freezed,
-    Object item = freezed,
-    Object retailer = freezed,
-    Object id = freezed,
-    Object autogenSku = freezed,
+    Object? purchaseDate = freezed,
+    Object? purchasePrice = freezed,
+    Object? sellPrice = freezed,
+    Object? useFba = freezed,
+    Object? profitPerItem = freezed,
+    Object? amount = freezed,
+    Object? condition = freezed,
+    Object? subCondition = freezed,
+    Object? sku = freezed,
+    Object? memo = freezed,
+    Object? item = freezed,
+    Object? retailer = freezed,
+    Object? id = freezed,
+    Object? autogenSku = freezed,
   }) {
     return _then(_StockItem(
       purchaseDate: purchaseDate == freezed
           ? _value.purchaseDate
-          : purchaseDate as String,
+          : purchaseDate // ignore: cast_nullable_to_non_nullable
+              as String,
       purchasePrice: purchasePrice == freezed
           ? _value.purchasePrice
-          : purchasePrice as int,
-      sellPrice: sellPrice == freezed ? _value.sellPrice : sellPrice as int,
-      useFba: useFba == freezed ? _value.useFba : useFba as bool,
+          : purchasePrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      sellPrice: sellPrice == freezed
+          ? _value.sellPrice
+          : sellPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      useFba: useFba == freezed
+          ? _value.useFba
+          : useFba // ignore: cast_nullable_to_non_nullable
+              as bool,
       profitPerItem: profitPerItem == freezed
           ? _value.profitPerItem
-          : profitPerItem as int,
-      amount: amount == freezed ? _value.amount : amount as int,
-      condition:
-          condition == freezed ? _value.condition : condition as ItemCondition,
+          : profitPerItem // ignore: cast_nullable_to_non_nullable
+              as int,
+      amount: amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int,
+      condition: condition == freezed
+          ? _value.condition
+          : condition // ignore: cast_nullable_to_non_nullable
+              as ItemCondition,
       subCondition: subCondition == freezed
           ? _value.subCondition
-          : subCondition as ItemSubCondition,
-      sku: sku == freezed ? _value.sku : sku as String,
-      memo: memo == freezed ? _value.memo : memo as String,
-      item: item == freezed ? _value.item : item as AsinData,
-      retailer: retailer == freezed ? _value.retailer : retailer as String,
-      id: id == freezed ? _value.id : id as String,
-      autogenSku:
-          autogenSku == freezed ? _value.autogenSku : autogenSku as bool,
+          : subCondition // ignore: cast_nullable_to_non_nullable
+              as ItemSubCondition,
+      sku: sku == freezed
+          ? _value.sku
+          : sku // ignore: cast_nullable_to_non_nullable
+              as String,
+      memo: memo == freezed
+          ? _value.memo
+          : memo // ignore: cast_nullable_to_non_nullable
+              as String,
+      item: item == freezed
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as AsinData,
+      retailer: retailer == freezed
+          ? _value.retailer
+          : retailer // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      autogenSku: autogenSku == freezed
+          ? _value.autogenSku
+          : autogenSku // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -259,7 +322,7 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
 /// @nodoc
 class _$_StockItem implements _StockItem {
   const _$_StockItem(
-      {@required @HiveField(0) this.purchaseDate,
+      {@HiveField(0) required this.purchaseDate,
       @HiveField(1) this.purchasePrice = 0,
       @HiveField(2) this.sellPrice = 0,
       @HiveField(3) this.useFba = true,
@@ -269,24 +332,10 @@ class _$_StockItem implements _StockItem {
       @HiveField(7) this.subCondition = ItemSubCondition.newItem,
       @HiveField(8) this.sku = "",
       @HiveField(9) this.memo = "",
-      @required @HiveField(10) this.item,
+      @HiveField(10) required this.item,
       @HiveField(11) this.retailer = "",
-      @required @HiveField(12) this.id,
-      this.autogenSku = false})
-      : assert(purchaseDate != null),
-        assert(purchasePrice != null),
-        assert(sellPrice != null),
-        assert(useFba != null),
-        assert(profitPerItem != null),
-        assert(amount != null),
-        assert(condition != null),
-        assert(subCondition != null),
-        assert(sku != null),
-        assert(memo != null),
-        assert(item != null),
-        assert(retailer != null),
-        assert(id != null),
-        assert(autogenSku != null);
+      @HiveField(12) required this.id,
+      this.autogenSku = false});
 
   @override
   @HiveField(0)
@@ -414,7 +463,7 @@ class _$_StockItem implements _StockItem {
 
 abstract class _StockItem implements StockItem {
   const factory _StockItem(
-      {@required @HiveField(0) String purchaseDate,
+      {@HiveField(0) required String purchaseDate,
       @HiveField(1) int purchasePrice,
       @HiveField(2) int sellPrice,
       @HiveField(3) bool useFba,
@@ -424,53 +473,54 @@ abstract class _StockItem implements StockItem {
       @HiveField(7) ItemSubCondition subCondition,
       @HiveField(8) String sku,
       @HiveField(9) String memo,
-      @required @HiveField(10) AsinData item,
+      @HiveField(10) required AsinData item,
       @HiveField(11) String retailer,
-      @required @HiveField(12) String id,
+      @HiveField(12) required String id,
       bool autogenSku}) = _$_StockItem;
 
   @override
   @HiveField(0)
-  String get purchaseDate;
+  String get purchaseDate => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
-  int get purchasePrice;
+  int get purchasePrice => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
-  int get sellPrice;
+  int get sellPrice => throw _privateConstructorUsedError;
   @override
   @HiveField(3)
-  bool get useFba;
+  bool get useFba => throw _privateConstructorUsedError;
   @override
   @HiveField(4)
-  int get profitPerItem;
+  int get profitPerItem => throw _privateConstructorUsedError;
   @override
   @HiveField(5)
-  int get amount;
+  int get amount => throw _privateConstructorUsedError;
   @override
   @HiveField(6)
-  ItemCondition get condition;
+  ItemCondition get condition => throw _privateConstructorUsedError;
   @override
   @HiveField(7)
-  ItemSubCondition get subCondition;
+  ItemSubCondition get subCondition => throw _privateConstructorUsedError;
   @override
   @HiveField(8)
-  String get sku;
+  String get sku => throw _privateConstructorUsedError;
   @override
   @HiveField(9)
-  String get memo;
+  String get memo => throw _privateConstructorUsedError;
   @override
   @HiveField(10)
-  AsinData get item;
+  AsinData get item => throw _privateConstructorUsedError;
   @override
   @HiveField(11)
-  String get retailer;
+  String get retailer => throw _privateConstructorUsedError;
   @override
   @HiveField(12)
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override // 主キー
-  bool get autogenSku;
+  bool get autogenSku => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$StockItemCopyWith<_StockItem> get copyWith;
+  _$StockItemCopyWith<_StockItem> get copyWith =>
+      throw _privateConstructorUsedError;
 }

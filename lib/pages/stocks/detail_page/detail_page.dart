@@ -17,7 +17,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DetailPage extends HookWidget {
-  const DetailPage({Key key}) : super(key: key);
+  const DetailPage({Key? key}) : super(key: key);
   static const routeName = "/stocks/detail";
 
   static Route<void> route(StockItem item) {
@@ -57,20 +57,20 @@ class DetailPage extends HookWidget {
       ),
       body: const _Body(),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.edit),
         onPressed: () {
           Navigator.push<void>(
             context,
             EditPage.route(item),
           );
         },
+        child: const Icon(Icons.edit),
       ),
     );
   }
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,18 +84,18 @@ class _Body extends HookWidget {
         : 0;
 
     final referralFeeRate =
-        (item.item.prices.feeInfo.referralFeeRate * 100).toInt();
+        (item.item.prices!.feeInfo.referralFeeRate * 100).toInt();
     final referralFee =
-        (item.sellPrice * item.item.prices.feeInfo.referralFeeRate).round();
-    final categoryFee = item.item.prices.feeInfo.variableClosingFee;
-    final isUnknownFbaFee = item.item.prices.feeInfo.fbaFee == -1;
+        (item.sellPrice * item.item.prices!.feeInfo.referralFeeRate).round();
+    final categoryFee = item.item.prices!.feeInfo.variableClosingFee;
+    final isUnknownFbaFee = item.item.prices!.feeInfo.fbaFee == -1;
     final fbaFee =
-        item.useFba && !isUnknownFbaFee ? item.item.prices.feeInfo.fbaFee : 0;
+        item.useFba && !isUnknownFbaFee ? item.item.prices!.feeInfo.fbaFee : 0;
     final totalFeePerItem = referralFee + categoryFee + fbaFee;
     final breakEven = calcBreakEven(
         purchase: item.purchasePrice,
         useFba: item.useFba,
-        feeInfo: item.item.prices.feeInfo);
+        feeInfo: item.item.prices!.feeInfo);
 
     return ListView(
       children: [
@@ -223,7 +223,7 @@ class _Body extends HookWidget {
 }
 
 class _ItemInfoTile extends HookWidget {
-  const _ItemInfoTile({Key key}) : super(key: key);
+  const _ItemInfoTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -237,7 +237,6 @@ class _ItemInfoTile extends HookWidget {
             children: [
               Text("JAN コード", style: smallSize),
               InkWell(
-                child: ListTile(title: Text(item.item.jan)),
                 onLongPress: () {
                   Clipboard.setData(ClipboardData(text: item.item.jan))
                       .then((_) {
@@ -247,6 +246,7 @@ class _ItemInfoTile extends HookWidget {
                     ));
                   });
                 },
+                child: ListTile(title: Text(item.item.jan)),
               ),
             ],
           ),
@@ -257,7 +257,6 @@ class _ItemInfoTile extends HookWidget {
             children: [
               Text("ASIN", style: smallSize),
               InkWell(
-                child: ListTile(title: Text(item.item.asin)),
                 onLongPress: () {
                   Clipboard.setData(ClipboardData(text: item.item.asin))
                       .then((_) {
@@ -267,6 +266,7 @@ class _ItemInfoTile extends HookWidget {
                     ));
                   });
                 },
+                child: ListTile(title: Text(item.item.asin)),
               ),
             ],
           ),

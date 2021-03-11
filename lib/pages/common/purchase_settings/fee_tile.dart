@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class FeeTile extends HookWidget {
-  const FeeTile({Key key}) : super(key: key);
+  const FeeTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +24,18 @@ class FeeTile extends HookWidget {
     final totalFee = _calcTotalFee(
       sellPrice: sellPrice,
       purchasePrice: purchasePrice,
-      feeInfo: item.prices.feeInfo,
+      feeInfo: item.prices!.feeInfo,
       useFba: useFba,
     );
 
-    final feeRate = (item.prices.feeInfo.referralFeeRate * 100).round();
+    final feeRate = (item.prices!.feeInfo.referralFeeRate * 100).round();
 
     final sellFee =
-        _calcSellFee(sellPrice, item.prices.feeInfo.referralFeeRate);
-    final categoryFee = item.prices.feeInfo.variableClosingFee;
+        _calcSellFee(sellPrice, item.prices!.feeInfo.referralFeeRate);
+    final categoryFee = item.prices!.feeInfo.variableClosingFee;
 
     final fbaFeeText =
-        _fbaFeeText(useFba: useFba, feeInfo: item.prices.feeInfo);
+        _fbaFeeText(useFba: useFba, feeInfo: item.prices!.feeInfo);
 
     return ExpansionTile(
       title: TextLine(
@@ -64,7 +64,7 @@ class FeeTile extends HookWidget {
     );
   }
 
-  String _fbaFeeText({@required bool useFba, @required FeeInfo feeInfo}) {
+  String _fbaFeeText({required bool useFba, required FeeInfo feeInfo}) {
     if (!useFba) {
       return "0";
     } else if (feeInfo.fbaFee == -1) {
@@ -79,10 +79,10 @@ class FeeTile extends HookWidget {
   }
 
   String _calcTotalFee({
-    @required int sellPrice,
-    @required int purchasePrice,
-    @required FeeInfo feeInfo,
-    @required bool useFba,
+    required int sellPrice,
+    required int purchasePrice,
+    required FeeInfo feeInfo,
+    required bool useFba,
   }) {
     final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
     final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;

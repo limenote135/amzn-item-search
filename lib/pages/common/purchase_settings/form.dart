@@ -49,11 +49,11 @@ final formValueProvider =
 });
 
 class PurchaseSettingsForm extends HookWidget {
-  const PurchaseSettingsForm({Key key, this.action, this.onComplete})
+  const PurchaseSettingsForm({Key? key, this.action, this.onComplete})
       : super(key: key);
 
-  final Widget action;
-  final void Function(ByteData bytes) onComplete;
+  final Widget? action;
+  final void Function(ByteData bytes)? onComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,7 @@ class PurchaseSettingsForm extends HookWidget {
                 decoration: const InputDecoration(labelText: "メモ"),
               ),
             ),
-            if (action != null) action,
+            if (action != null) action!,
           ],
         ),
       ),
@@ -118,9 +118,9 @@ class PurchaseSettingsForm extends HookWidget {
 }
 
 class _Unfocus extends StatelessWidget {
-  const _Unfocus({Key key, this.child}) : super(key: key);
+  const _Unfocus({Key? key, this.child}) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
   @override
   Widget build(BuildContext context) {
     return base.Listener(

@@ -10,7 +10,7 @@ class VersionChecker {
     final info = await PackageInfo.fromPlatform();
     final currentVersion = Version.parse(info.version);
 
-    final remoteConfig = await RemoteConfig.instance;
+    final remoteConfig = RemoteConfig.instance;
 
     try {
       final defaultValues = <String, dynamic>{
@@ -27,6 +27,7 @@ class VersionChecker {
       final requiredVersion = Version.parse(minVersion);
 
       return currentVersion.compareTo(requiredVersion).isNegative;
+      // ignore: avoid_catches_without_on_clauses
     } catch (exception, stackTrace) {
       print('Unable to fetch remote config. Cached or default values will be '
           'used');

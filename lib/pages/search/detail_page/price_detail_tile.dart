@@ -14,7 +14,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PriceDetailTile extends HookWidget {
-  const PriceDetailTile(this.type, {Key key}) : super(key: key);
+  const PriceDetailTile(this.type, {Key? key}) : super(key: key);
 
   final ItemCondition type;
 
@@ -30,9 +30,9 @@ class PriceDetailTile extends HookWidget {
       priorFba: setting.priorFba,
     );
 
-    final sellFeeRate = (item.prices.feeInfo.referralFeeRate * 100).round();
+    final sellFeeRate = (item.prices!.feeInfo.referralFeeRate * 100).round();
     final sellFee =
-        (detail.price * item.prices.feeInfo.referralFeeRate).round();
+        (detail.price * item.prices!.feeInfo.referralFeeRate).round();
 
     final showTargetPrice = useProvider(generalSettingsControllerProvider.state
         .select((value) => value.enableTargetProfit));
@@ -43,7 +43,7 @@ class PriceDetailTile extends HookWidget {
 
     final targetPrice = calcTargetPrice(
       sellPrice: detail.price,
-      feeInfo: item.prices.feeInfo,
+      feeInfo: item.prices!.feeInfo,
       targetRate: targetPriceRate,
       minProfit: minProfit,
       useFba: setting.useFba,
@@ -68,7 +68,7 @@ class PriceDetailTile extends HookWidget {
             leading: const Text("粗利益"),
             main: Text("${calcProfitText(
               detail.price,
-              item.prices.feeInfo,
+              item.prices!.feeInfo,
               useFba: setting.useFba,
             )} 円"),
           ),
@@ -91,12 +91,12 @@ class PriceDetailTile extends HookWidget {
               ),
               TextLine(
                 leading: const Text("カテゴリー成約料"),
-                main: Text("${item.prices.feeInfo.variableClosingFee} 円"),
+                main: Text("${item.prices!.feeInfo.variableClosingFee} 円"),
               ),
               TextLine(
                 leading: const Text("FBA 手数料"),
-                main: item.prices.feeInfo.fbaFee != -1
-                    ? Text("${item.prices.feeInfo.fbaFee} 円")
+                main: item.prices!.feeInfo.fbaFee != -1
+                    ? Text("${item.prices!.feeInfo.fbaFee} 円")
                     : const Text("(不明) 円"),
               )
             ],
@@ -107,9 +107,9 @@ class PriceDetailTile extends HookWidget {
   }
 
   String _createTitle({
-    @required ItemCondition type,
-    @required ItemSubCondition subCond,
-    @required FulfillmentChannel channel,
+    required ItemCondition type,
+    required ItemSubCondition subCond,
+    required FulfillmentChannel channel,
   }) {
     final isFba = channel == FulfillmentChannel.amazon;
     if (type == ItemCondition.newItem) {

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'mws.dart';
 
@@ -8,6 +8,10 @@ part of 'mws.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 GetProductByIdResponse _$GetProductByIdResponseFromJson(
     Map<String, dynamic> json) {
   return _GetProductByIdResponse.fromJson(json);
@@ -17,33 +21,31 @@ GetProductByIdResponse _$GetProductByIdResponseFromJson(
 class _$GetProductByIdResponseTearOff {
   const _$GetProductByIdResponseTearOff();
 
-// ignore: unused_element
   _GetProductByIdResponse call(
-      {@required String jan, @required List<AsinData> items}) {
+      {required String jan, required List<AsinData> items}) {
     return _GetProductByIdResponse(
       jan: jan,
       items: items,
     );
   }
 
-// ignore: unused_element
   GetProductByIdResponse fromJson(Map<String, Object> json) {
     return GetProductByIdResponse.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $GetProductByIdResponse = _$GetProductByIdResponseTearOff();
 
 /// @nodoc
 mixin _$GetProductByIdResponse {
-  String get jan;
-  List<AsinData> get items;
+  String get jan => throw _privateConstructorUsedError;
+  List<AsinData> get items => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GetProductByIdResponseCopyWith<GetProductByIdResponse> get copyWith;
+  $GetProductByIdResponseCopyWith<GetProductByIdResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -65,12 +67,18 @@ class _$GetProductByIdResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object jan = freezed,
-    Object items = freezed,
+    Object? jan = freezed,
+    Object? items = freezed,
   }) {
     return _then(_value.copyWith(
-      jan: jan == freezed ? _value.jan : jan as String,
-      items: items == freezed ? _value.items : items as List<AsinData>,
+      jan: jan == freezed
+          ? _value.jan
+          : jan // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<AsinData>,
     ));
   }
 }
@@ -98,12 +106,18 @@ class __$GetProductByIdResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object jan = freezed,
-    Object items = freezed,
+    Object? jan = freezed,
+    Object? items = freezed,
   }) {
     return _then(_GetProductByIdResponse(
-      jan: jan == freezed ? _value.jan : jan as String,
-      items: items == freezed ? _value.items : items as List<AsinData>,
+      jan: jan == freezed
+          ? _value.jan
+          : jan // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<AsinData>,
     ));
   }
 }
@@ -112,9 +126,7 @@ class __$GetProductByIdResponseCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_GetProductByIdResponse implements _GetProductByIdResponse {
-  const _$_GetProductByIdResponse({@required this.jan, @required this.items})
-      : assert(jan != null),
-        assert(items != null);
+  const _$_GetProductByIdResponse({required this.jan, required this.items});
 
   factory _$_GetProductByIdResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_GetProductByIdResponseFromJson(json);
@@ -159,19 +171,20 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
 
 abstract class _GetProductByIdResponse implements GetProductByIdResponse {
   const factory _GetProductByIdResponse(
-      {@required String jan,
-      @required List<AsinData> items}) = _$_GetProductByIdResponse;
+      {required String jan,
+      required List<AsinData> items}) = _$_GetProductByIdResponse;
 
   factory _GetProductByIdResponse.fromJson(Map<String, dynamic> json) =
       _$_GetProductByIdResponse.fromJson;
 
   @override
-  String get jan;
+  String get jan => throw _privateConstructorUsedError;
   @override
-  List<AsinData> get items;
+  List<AsinData> get items => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$GetProductByIdResponseCopyWith<_GetProductByIdResponse> get copyWith;
+  _$GetProductByIdResponseCopyWith<_GetProductByIdResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 GetProductPricesResponse _$GetProductPricesResponseFromJson(
@@ -183,30 +196,28 @@ GetProductPricesResponse _$GetProductPricesResponseFromJson(
 class _$GetProductPricesResponseTearOff {
   const _$GetProductPricesResponseTearOff();
 
-// ignore: unused_element
-  _GetProductPricesResponse call({@required ItemPrices prices}) {
+  _GetProductPricesResponse call({required ItemPrices prices}) {
     return _GetProductPricesResponse(
       prices: prices,
     );
   }
 
-// ignore: unused_element
   GetProductPricesResponse fromJson(Map<String, Object> json) {
     return GetProductPricesResponse.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $GetProductPricesResponse = _$GetProductPricesResponseTearOff();
 
 /// @nodoc
 mixin _$GetProductPricesResponse {
-  ItemPrices get prices;
+  ItemPrices get prices => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GetProductPricesResponseCopyWith<GetProductPricesResponse> get copyWith;
+  $GetProductPricesResponseCopyWith<GetProductPricesResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -230,18 +241,18 @@ class _$GetProductPricesResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object prices = freezed,
+    Object? prices = freezed,
   }) {
     return _then(_value.copyWith(
-      prices: prices == freezed ? _value.prices : prices as ItemPrices,
+      prices: prices == freezed
+          ? _value.prices
+          : prices // ignore: cast_nullable_to_non_nullable
+              as ItemPrices,
     ));
   }
 
   @override
   $ItemPricesCopyWith<$Res> get prices {
-    if (_value.prices == null) {
-      return null;
-    }
     return $ItemPricesCopyWith<$Res>(_value.prices, (value) {
       return _then(_value.copyWith(prices: value));
     });
@@ -275,10 +286,13 @@ class __$GetProductPricesResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object prices = freezed,
+    Object? prices = freezed,
   }) {
     return _then(_GetProductPricesResponse(
-      prices: prices == freezed ? _value.prices : prices as ItemPrices,
+      prices: prices == freezed
+          ? _value.prices
+          : prices // ignore: cast_nullable_to_non_nullable
+              as ItemPrices,
     ));
   }
 }
@@ -287,8 +301,7 @@ class __$GetProductPricesResponseCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_GetProductPricesResponse implements _GetProductPricesResponse {
-  const _$_GetProductPricesResponse({@required this.prices})
-      : assert(prices != null);
+  const _$_GetProductPricesResponse({required this.prices});
 
   factory _$_GetProductPricesResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_GetProductPricesResponseFromJson(json);
@@ -326,26 +339,26 @@ class _$_GetProductPricesResponse implements _GetProductPricesResponse {
 }
 
 abstract class _GetProductPricesResponse implements GetProductPricesResponse {
-  const factory _GetProductPricesResponse({@required ItemPrices prices}) =
+  const factory _GetProductPricesResponse({required ItemPrices prices}) =
       _$_GetProductPricesResponse;
 
   factory _GetProductPricesResponse.fromJson(Map<String, dynamic> json) =
       _$_GetProductPricesResponse.fromJson;
 
   @override
-  ItemPrices get prices;
+  ItemPrices get prices => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$GetProductPricesResponseCopyWith<_GetProductPricesResponse> get copyWith;
+  _$GetProductPricesResponseCopyWith<_GetProductPricesResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 class _$ListMatchingProductRequestTearOff {
   const _$ListMatchingProductRequestTearOff();
 
-// ignore: unused_element
   _ListMatchingProductRequest call(
-      {@required String query, @required String category}) {
+      {required String query, required String category}) {
     return _ListMatchingProductRequest(
       query: query,
       category: category,
@@ -354,16 +367,16 @@ class _$ListMatchingProductRequestTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ListMatchingProductRequest = _$ListMatchingProductRequestTearOff();
 
 /// @nodoc
 mixin _$ListMatchingProductRequest {
-  String get query;
-  String get category;
+  String get query => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ListMatchingProductRequestCopyWith<ListMatchingProductRequest> get copyWith;
+  $ListMatchingProductRequestCopyWith<ListMatchingProductRequest>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -385,12 +398,18 @@ class _$ListMatchingProductRequestCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object query = freezed,
-    Object category = freezed,
+    Object? query = freezed,
+    Object? category = freezed,
   }) {
     return _then(_value.copyWith(
-      query: query == freezed ? _value.query : query as String,
-      category: category == freezed ? _value.category : category as String,
+      query: query == freezed
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -420,12 +439,18 @@ class __$ListMatchingProductRequestCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object query = freezed,
-    Object category = freezed,
+    Object? query = freezed,
+    Object? category = freezed,
   }) {
     return _then(_ListMatchingProductRequest(
-      query: query == freezed ? _value.query : query as String,
-      category: category == freezed ? _value.category : category as String,
+      query: query == freezed
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -433,9 +458,7 @@ class __$ListMatchingProductRequestCopyWithImpl<$Res>
 /// @nodoc
 class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
   const _$_ListMatchingProductRequest(
-      {@required this.query, @required this.category})
-      : assert(query != null),
-        assert(category != null);
+      {required this.query, required this.category});
 
   @override
   final String query;
@@ -474,17 +497,17 @@ class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
 abstract class _ListMatchingProductRequest
     implements ListMatchingProductRequest {
   const factory _ListMatchingProductRequest(
-      {@required String query,
-      @required String category}) = _$_ListMatchingProductRequest;
+      {required String query,
+      required String category}) = _$_ListMatchingProductRequest;
 
   @override
-  String get query;
+  String get query => throw _privateConstructorUsedError;
   @override
-  String get category;
+  String get category => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ListMatchingProductRequestCopyWith<_ListMatchingProductRequest>
-      get copyWith;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ListMatchingProductResponse _$ListMatchingProductResponseFromJson(
@@ -496,31 +519,28 @@ ListMatchingProductResponse _$ListMatchingProductResponseFromJson(
 class _$ListMatchingProductResponseTearOff {
   const _$ListMatchingProductResponseTearOff();
 
-// ignore: unused_element
-  _ListMatchingProductResponse call({@required List<AsinData> items}) {
+  _ListMatchingProductResponse call({required List<AsinData> items}) {
     return _ListMatchingProductResponse(
       items: items,
     );
   }
 
-// ignore: unused_element
   ListMatchingProductResponse fromJson(Map<String, Object> json) {
     return ListMatchingProductResponse.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ListMatchingProductResponse = _$ListMatchingProductResponseTearOff();
 
 /// @nodoc
 mixin _$ListMatchingProductResponse {
-  List<AsinData> get items;
+  List<AsinData> get items => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ListMatchingProductResponseCopyWith<ListMatchingProductResponse>
-      get copyWith;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -543,10 +563,13 @@ class _$ListMatchingProductResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object items = freezed,
+    Object? items = freezed,
   }) {
     return _then(_value.copyWith(
-      items: items == freezed ? _value.items : items as List<AsinData>,
+      items: items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<AsinData>,
     ));
   }
 }
@@ -577,10 +600,13 @@ class __$ListMatchingProductResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object items = freezed,
+    Object? items = freezed,
   }) {
     return _then(_ListMatchingProductResponse(
-      items: items == freezed ? _value.items : items as List<AsinData>,
+      items: items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<AsinData>,
     ));
   }
 }
@@ -589,8 +615,7 @@ class __$ListMatchingProductResponseCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_ListMatchingProductResponse implements _ListMatchingProductResponse {
-  const _$_ListMatchingProductResponse({@required this.items})
-      : assert(items != null);
+  const _$_ListMatchingProductResponse({required this.items});
 
   factory _$_ListMatchingProductResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_ListMatchingProductResponseFromJson(json);
@@ -629,16 +654,16 @@ class _$_ListMatchingProductResponse implements _ListMatchingProductResponse {
 
 abstract class _ListMatchingProductResponse
     implements ListMatchingProductResponse {
-  const factory _ListMatchingProductResponse({@required List<AsinData> items}) =
+  const factory _ListMatchingProductResponse({required List<AsinData> items}) =
       _$_ListMatchingProductResponse;
 
   factory _ListMatchingProductResponse.fromJson(Map<String, dynamic> json) =
       _$_ListMatchingProductResponse.fromJson;
 
   @override
-  List<AsinData> get items;
+  List<AsinData> get items => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ListMatchingProductResponseCopyWith<_ListMatchingProductResponse>
-      get copyWith;
+      get copyWith => throw _privateConstructorUsedError;
 }

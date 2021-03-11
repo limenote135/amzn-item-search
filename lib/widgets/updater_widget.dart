@@ -41,10 +41,6 @@ class _UpdaterState extends State<Updater> {
               content: const Text(message),
               actions: [
                 FlatButton(
-                  child: const Text(
-                    "アプリを終了する",
-                    style: TextStyle(color: Colors.red),
-                  ),
                   onPressed: () {
                     if (Platform.isAndroid) {
                       SystemNavigator.pop(animated: true);
@@ -52,6 +48,10 @@ class _UpdaterState extends State<Updater> {
                       exit(0);
                     }
                   },
+                  child: const Text(
+                    "アプリを終了する",
+                    style: TextStyle(color: Colors.red),
+                  ),
                 )
               ],
             ),
