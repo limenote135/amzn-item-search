@@ -11,7 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class EditPage extends StatelessWidget {
-  const EditPage({Key key}) : super(key: key);
+  const EditPage({Key? key}) : super(key: key);
   static const routeName = "/stocks/edit";
 
   static Route<void> route(StockItem item) {
@@ -38,7 +38,7 @@ class EditPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +52,9 @@ class _Body extends HookWidget {
         action: ReactiveFormConsumer(
           builder: (context, form, child) {
             return RaisedButton(
-              child: const Text("更新"),
               onPressed:
                   form.invalid ? null : () => _onSubmit(context, form, item),
+              child: const Text("更新"),
             );
           },
         ),
@@ -70,7 +70,7 @@ class _Body extends HookWidget {
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
-      fee: item.item.prices.feeInfo,
+      fee: item.item.prices!.feeInfo,
       useFba: useFba,
     );
     final newItem = item.copyWith(

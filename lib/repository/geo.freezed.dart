@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'geo.dart';
 
@@ -9,12 +9,14 @@ part of 'geo.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$GeoResponseTearOff {
   const _$GeoResponseTearOff();
 
-// ignore: unused_element
-  _GeoResponse call({@required String code, String jan = ""}) {
+  _GeoResponse call({required String code, String jan = ""}) {
     return _GeoResponse(
       code: code,
       jan: jan,
@@ -23,16 +25,16 @@ class _$GeoResponseTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $GeoResponse = _$GeoResponseTearOff();
 
 /// @nodoc
 mixin _$GeoResponse {
-  String get code;
-  String get jan;
+  String get code => throw _privateConstructorUsedError;
+  String get jan => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $GeoResponseCopyWith<GeoResponse> get copyWith;
+  $GeoResponseCopyWith<GeoResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -53,12 +55,18 @@ class _$GeoResponseCopyWithImpl<$Res> implements $GeoResponseCopyWith<$Res> {
 
   @override
   $Res call({
-    Object code = freezed,
-    Object jan = freezed,
+    Object? code = freezed,
+    Object? jan = freezed,
   }) {
     return _then(_value.copyWith(
-      code: code == freezed ? _value.code : code as String,
-      jan: jan == freezed ? _value.jan : jan as String,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      jan: jan == freezed
+          ? _value.jan
+          : jan // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -85,21 +93,25 @@ class __$GeoResponseCopyWithImpl<$Res> extends _$GeoResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object code = freezed,
-    Object jan = freezed,
+    Object? code = freezed,
+    Object? jan = freezed,
   }) {
     return _then(_GeoResponse(
-      code: code == freezed ? _value.code : code as String,
-      jan: jan == freezed ? _value.jan : jan as String,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      jan: jan == freezed
+          ? _value.jan
+          : jan // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 class _$_GeoResponse implements _GeoResponse {
-  const _$_GeoResponse({@required this.code, this.jan = ""})
-      : assert(code != null),
-        assert(jan != null);
+  const _$_GeoResponse({required this.code, this.jan = ""});
 
   @override
   final String code;
@@ -135,14 +147,15 @@ class _$_GeoResponse implements _GeoResponse {
 }
 
 abstract class _GeoResponse implements GeoResponse {
-  const factory _GeoResponse({@required String code, String jan}) =
+  const factory _GeoResponse({required String code, String jan}) =
       _$_GeoResponse;
 
   @override
-  String get code;
+  String get code => throw _privateConstructorUsedError;
   @override
-  String get jan;
+  String get jan => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$GeoResponseCopyWith<_GeoResponse> get copyWith;
+  _$GeoResponseCopyWith<_GeoResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }

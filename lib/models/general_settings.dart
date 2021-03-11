@@ -14,7 +14,7 @@ const _readAloudPattern2 = "{title}、新品利益{newProfit}、順位{rank}で�
 const _readAloudPattern3 = "{title}、中古利益{usedProfit}、順位{rank}です。";
 
 @freezed
-abstract class GeneralSettings with _$GeneralSettings {
+class GeneralSettings with _$GeneralSettings {
   @HiveType(typeId: generalSettingsTypeId)
   const factory GeneralSettings({
     @HiveField(0)
@@ -53,7 +53,7 @@ abstract class GeneralSettings with _$GeneralSettings {
     @Default(1.0)
         double readAloudVolume,
     @HiveField(9)
-        double readAloudSpeed,
+        double? readAloudSpeed,
     @HiveField(10)
     @Default([
       CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
@@ -91,20 +91,20 @@ abstract class GeneralSettings with _$GeneralSettings {
 }
 
 @freezed
-abstract class ReadAloudPattern with _$ReadAloudPattern {
+class ReadAloudPattern with _$ReadAloudPattern {
   @HiveType(typeId: readAloudPatternTypeId)
   const factory ReadAloudPattern({
-    @HiveField(0) @required String title,
-    @HiveField(1) @required String pattern,
+    @HiveField(0) required String title,
+    @HiveField(1) required String pattern,
   }) = _ReadAloudPattern;
 }
 
 @freezed
-abstract class CustomButtonDetail with _$CustomButtonDetail {
+class CustomButtonDetail with _$CustomButtonDetail {
   @HiveType(typeId: customButtonDetailTypeId)
   const factory CustomButtonDetail({
-    @HiveField(0) @required bool enable,
-    @HiveField(1) @required String title,
-    @HiveField(2) @required String pattern,
+    @HiveField(0) required bool enable,
+    @HiveField(1) required String title,
+    @HiveField(2) required String pattern,
   }) = _CustomButtonDetail;
 }

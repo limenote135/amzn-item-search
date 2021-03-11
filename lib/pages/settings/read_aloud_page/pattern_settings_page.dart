@@ -15,7 +15,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final currentPatternProvider = ScopedProvider<String>(null);
 
 class PatternSettingsPage extends StatelessWidget {
-  const PatternSettingsPage({Key key}) : super(key: key);
+  const PatternSettingsPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/read_aloud/pattern";
 
   static Route<String> route(String pattern) {
@@ -42,7 +42,7 @@ class PatternSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

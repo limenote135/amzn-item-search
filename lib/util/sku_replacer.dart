@@ -1,7 +1,6 @@
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/util/price_util.dart';
-import 'package:flutter/material.dart';
 
 const yearVar = "{yyyy}";
 const monthVar = "{mm}";
@@ -16,15 +15,15 @@ const quantityVar = "{quantity}";
 const breakEvenVar = "{breakEven}";
 
 String replaceSku({
-  @required String format,
-  @required AsinData item,
-  @required int purchase,
-  @required int sell,
-  @required PurchaseItemCondition cond,
-  @required int profit,
-  @required int quantity,
-  @required bool useFba,
-  @required DateTime date,
+  required String format,
+  required AsinData item,
+  required int purchase,
+  required int sell,
+  required PurchaseItemCondition cond,
+  required int profit,
+  required int quantity,
+  required bool useFba,
+  required DateTime date,
 }) {
   return format
       .replaceAll(yearVar, date.year.toString())
@@ -42,7 +41,7 @@ String replaceSku({
           calcBreakEven(
             purchase: purchase,
             useFba: useFba,
-            feeInfo: item.prices.feeInfo,
+            feeInfo: item.prices!.feeInfo,
           ).toString());
 }
 
@@ -59,5 +58,4 @@ String _conditionText(PurchaseItemCondition cond) {
     case PurchaseItemCondition.usedAcceptable:
       return "UAC";
   }
-  throw Exception("Invalid Condition: $cond");
 }

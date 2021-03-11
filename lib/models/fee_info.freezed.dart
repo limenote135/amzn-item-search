@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'fee_info.dart';
 
@@ -8,6 +8,10 @@ part of 'fee_info.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 FeeInfo _$FeeInfoFromJson(Map<String, dynamic> json) {
   return _FeeInfo.fromJson(json);
 }
@@ -16,19 +20,15 @@ FeeInfo _$FeeInfoFromJson(Map<String, dynamic> json) {
 class _$FeeInfoTearOff {
   const _$FeeInfoTearOff();
 
-// ignore: unused_element
   _FeeInfo call(
-      {@required
-      @HiveField(0)
+      {@HiveField(0)
       @JsonKey(name: "fee_rate")
-          double referralFeeRate,
-      @required
+          required double referralFeeRate,
       @HiveField(1)
       @JsonKey(name: "closing_fee")
-          int variableClosingFee,
-      @required
+          required int variableClosingFee,
       @HiveField(2)
-          int fbaFee}) {
+          required int fbaFee}) {
     return _FeeInfo(
       referralFeeRate: referralFeeRate,
       variableClosingFee: variableClosingFee,
@@ -36,30 +36,28 @@ class _$FeeInfoTearOff {
     );
   }
 
-// ignore: unused_element
   FeeInfo fromJson(Map<String, Object> json) {
     return FeeInfo.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $FeeInfo = _$FeeInfoTearOff();
 
 /// @nodoc
 mixin _$FeeInfo {
   @HiveField(0)
   @JsonKey(name: "fee_rate")
-  double get referralFeeRate;
+  double get referralFeeRate => throw _privateConstructorUsedError;
   @HiveField(1)
   @JsonKey(name: "closing_fee")
-  int get variableClosingFee;
+  int get variableClosingFee => throw _privateConstructorUsedError;
   @HiveField(2)
-  int get fbaFee;
+  int get fbaFee => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $FeeInfoCopyWith<FeeInfo> get copyWith;
+  $FeeInfoCopyWith<FeeInfo> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -82,18 +80,23 @@ class _$FeeInfoCopyWithImpl<$Res> implements $FeeInfoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object referralFeeRate = freezed,
-    Object variableClosingFee = freezed,
-    Object fbaFee = freezed,
+    Object? referralFeeRate = freezed,
+    Object? variableClosingFee = freezed,
+    Object? fbaFee = freezed,
   }) {
     return _then(_value.copyWith(
       referralFeeRate: referralFeeRate == freezed
           ? _value.referralFeeRate
-          : referralFeeRate as double,
+          : referralFeeRate // ignore: cast_nullable_to_non_nullable
+              as double,
       variableClosingFee: variableClosingFee == freezed
           ? _value.variableClosingFee
-          : variableClosingFee as int,
-      fbaFee: fbaFee == freezed ? _value.fbaFee : fbaFee as int,
+          : variableClosingFee // ignore: cast_nullable_to_non_nullable
+              as int,
+      fbaFee: fbaFee == freezed
+          ? _value.fbaFee
+          : fbaFee // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -120,18 +123,23 @@ class __$FeeInfoCopyWithImpl<$Res> extends _$FeeInfoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object referralFeeRate = freezed,
-    Object variableClosingFee = freezed,
-    Object fbaFee = freezed,
+    Object? referralFeeRate = freezed,
+    Object? variableClosingFee = freezed,
+    Object? fbaFee = freezed,
   }) {
     return _then(_FeeInfo(
       referralFeeRate: referralFeeRate == freezed
           ? _value.referralFeeRate
-          : referralFeeRate as double,
+          : referralFeeRate // ignore: cast_nullable_to_non_nullable
+              as double,
       variableClosingFee: variableClosingFee == freezed
           ? _value.variableClosingFee
-          : variableClosingFee as int,
-      fbaFee: fbaFee == freezed ? _value.fbaFee : fbaFee as int,
+          : variableClosingFee // ignore: cast_nullable_to_non_nullable
+              as int,
+      fbaFee: fbaFee == freezed
+          ? _value.fbaFee
+          : fbaFee // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -142,20 +150,14 @@ class __$FeeInfoCopyWithImpl<$Res> extends _$FeeInfoCopyWithImpl<$Res>
 /// @nodoc
 class _$_FeeInfo implements _FeeInfo {
   const _$_FeeInfo(
-      {@required
-      @HiveField(0)
+      {@HiveField(0)
       @JsonKey(name: "fee_rate")
-          this.referralFeeRate,
-      @required
+          required this.referralFeeRate,
       @HiveField(1)
       @JsonKey(name: "closing_fee")
-          this.variableClosingFee,
-      @required
+          required this.variableClosingFee,
       @HiveField(2)
-          this.fbaFee})
-      : assert(referralFeeRate != null),
-        assert(variableClosingFee != null),
-        assert(fbaFee != null);
+          required this.fbaFee});
 
   factory _$_FeeInfo.fromJson(Map<String, dynamic> json) =>
       _$_$_FeeInfoFromJson(json);
@@ -211,32 +213,30 @@ class _$_FeeInfo implements _FeeInfo {
 
 abstract class _FeeInfo implements FeeInfo {
   const factory _FeeInfo(
-      {@required
-      @HiveField(0)
+      {@HiveField(0)
       @JsonKey(name: "fee_rate")
-          double referralFeeRate,
-      @required
+          required double referralFeeRate,
       @HiveField(1)
       @JsonKey(name: "closing_fee")
-          int variableClosingFee,
-      @required
+          required int variableClosingFee,
       @HiveField(2)
-          int fbaFee}) = _$_FeeInfo;
+          required int fbaFee}) = _$_FeeInfo;
 
   factory _FeeInfo.fromJson(Map<String, dynamic> json) = _$_FeeInfo.fromJson;
 
   @override
   @HiveField(0)
   @JsonKey(name: "fee_rate")
-  double get referralFeeRate;
+  double get referralFeeRate => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
   @JsonKey(name: "closing_fee")
-  int get variableClosingFee;
+  int get variableClosingFee => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
-  int get fbaFee;
+  int get fbaFee => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$FeeInfoCopyWith<_FeeInfo> get copyWith;
+  _$FeeInfoCopyWith<_FeeInfo> get copyWith =>
+      throw _privateConstructorUsedError;
 }

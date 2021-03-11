@@ -2,7 +2,6 @@ import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
-import 'package:flutter/material.dart';
 
 const rankVariable = "{rank}";
 const titleVariable = "{title}";
@@ -10,27 +9,27 @@ const usedProfitVariable = "{usedProfit}";
 const newProfitVariable = "{newProfit}";
 
 String createSpeakText({
-  @required String template,
-  @required AsinData item,
-  @required bool priorFba,
-  @required UsedSubCondition usedSubCondition,
+  required String template,
+  required AsinData item,
+  required bool priorFba,
+  required UsedSubCondition usedSubCondition,
 }) {
   var newProfitText = "";
-  if (item.prices.newPrices == null || item.prices.newPrices.isEmpty) {
+  if (item.prices!.newPrices.isEmpty) {
     newProfitText = "データなし";
   } else {
     newProfitText = _filterPrice(
-      prices: item.prices.newPrices,
+      prices: item.prices!.newPrices,
       priorFba: priorFba,
     );
   }
 
   var usedProfitText = "";
-  if (item.prices.usedPrices == null || item.prices.usedPrices.isEmpty) {
+  if (item.prices!.usedPrices.isEmpty) {
     usedProfitText = "データなし";
   } else {
     usedProfitText = _filterPrice(
-      prices: item.prices.usedPrices,
+      prices: item.prices!.usedPrices,
       priorFba: priorFba,
       usedSubCond: usedSubCondition,
     );
@@ -44,9 +43,9 @@ String createSpeakText({
 }
 
 String _filterPrice({
-  @required List<PriceDetail> prices,
-  @required bool priorFba,
-  UsedSubCondition usedSubCond,
+  required List<PriceDetail> prices,
+  required bool priorFba,
+  UsedSubCondition? usedSubCond,
 }) {
   if (usedSubCond == null || usedSubCond == UsedSubCondition.all) {
     // 新品か中古全対象の場合

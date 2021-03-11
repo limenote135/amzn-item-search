@@ -17,7 +17,7 @@ String getString(AbstractControl<dynamic> form, String field) {
   switch (field) {
     case purchaseDateField:
       {
-        final date = f.control(purchaseDateField).value as DateTime;
+        final date = f.control(purchaseDateField).value as DateTime?;
         return (date ?? DateTime.now()).toUtc().toIso8601String();
       }
     case retailerField:
@@ -35,12 +35,12 @@ int getInt(AbstractControl<dynamic> form, String field) {
   switch (field) {
     case purchasePriceField:
       {
-        final purchase = f.control(purchasePriceField).value as String ?? "";
+        final purchase = f.control(purchasePriceField).value as String? ?? "";
         final price = int.tryParse(purchase);
         return price ?? 0;
       }
     case sellPriceField:
-      return f.control(sellPriceField).value as int ?? 0;
+      return f.control(sellPriceField).value as int? ?? 0;
     case quantityField:
       return f.control(quantityField).value as int;
   }

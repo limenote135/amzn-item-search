@@ -102,13 +102,13 @@ class BookoffRepository {
 ]
  */
 @freezed
-abstract class BookoffResponse with _$BookoffResponse {
+class BookoffResponse with _$BookoffResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory BookoffResponse({
-    @JsonKey(name: "INSTORECODE") String instoreCode,
-    @JsonKey(name: "GOODS_NAME1") String title,
-    @JsonKey(name: "GOODS_NAME2") String subtitle,
-    @JsonKey(name: "JAN") String jan,
+    @JsonKey(name: "INSTORECODE") required String instoreCode,
+    @JsonKey(name: "GOODS_NAME1") required String title,
+    @JsonKey(name: "GOODS_NAME2") required String subtitle,
+    @JsonKey(name: "JAN") required String jan,
   }) = _BookoffResponse;
 
   factory BookoffResponse.fromJson(Map<String, dynamic> json) =>

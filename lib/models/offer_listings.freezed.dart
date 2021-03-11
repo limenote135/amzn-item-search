@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'offer_listings.dart';
 
@@ -9,13 +9,15 @@ part of 'offer_listings.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$OfferListingsParamsTearOff {
   const _$OfferListingsParamsTearOff();
 
-// ignore: unused_element
   _OfferListingsParams call(
-      {@required String asin,
+      {required String asin,
       bool prime = false,
       bool newItem = false,
       bool usedLikeNew = false,
@@ -37,22 +39,22 @@ class _$OfferListingsParamsTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $OfferListingsParams = _$OfferListingsParamsTearOff();
 
 /// @nodoc
 mixin _$OfferListingsParams {
-  String get asin;
-  bool get prime;
-  bool get newItem;
-  bool get usedLikeNew;
-  bool get usedVeryGood;
-  bool get usedGood;
-  bool get usedAcceptable;
-  int get page;
+  String get asin => throw _privateConstructorUsedError;
+  bool get prime => throw _privateConstructorUsedError;
+  bool get newItem => throw _privateConstructorUsedError;
+  bool get usedLikeNew => throw _privateConstructorUsedError;
+  bool get usedVeryGood => throw _privateConstructorUsedError;
+  bool get usedGood => throw _privateConstructorUsedError;
+  bool get usedAcceptable => throw _privateConstructorUsedError;
+  int get page => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OfferListingsParamsCopyWith<OfferListingsParams> get copyWith;
+  $OfferListingsParamsCopyWith<OfferListingsParams> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -82,28 +84,48 @@ class _$OfferListingsParamsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object asin = freezed,
-    Object prime = freezed,
-    Object newItem = freezed,
-    Object usedLikeNew = freezed,
-    Object usedVeryGood = freezed,
-    Object usedGood = freezed,
-    Object usedAcceptable = freezed,
-    Object page = freezed,
+    Object? asin = freezed,
+    Object? prime = freezed,
+    Object? newItem = freezed,
+    Object? usedLikeNew = freezed,
+    Object? usedVeryGood = freezed,
+    Object? usedGood = freezed,
+    Object? usedAcceptable = freezed,
+    Object? page = freezed,
   }) {
     return _then(_value.copyWith(
-      asin: asin == freezed ? _value.asin : asin as String,
-      prime: prime == freezed ? _value.prime : prime as bool,
-      newItem: newItem == freezed ? _value.newItem : newItem as bool,
-      usedLikeNew:
-          usedLikeNew == freezed ? _value.usedLikeNew : usedLikeNew as bool,
-      usedVeryGood:
-          usedVeryGood == freezed ? _value.usedVeryGood : usedVeryGood as bool,
-      usedGood: usedGood == freezed ? _value.usedGood : usedGood as bool,
+      asin: asin == freezed
+          ? _value.asin
+          : asin // ignore: cast_nullable_to_non_nullable
+              as String,
+      prime: prime == freezed
+          ? _value.prime
+          : prime // ignore: cast_nullable_to_non_nullable
+              as bool,
+      newItem: newItem == freezed
+          ? _value.newItem
+          : newItem // ignore: cast_nullable_to_non_nullable
+              as bool,
+      usedLikeNew: usedLikeNew == freezed
+          ? _value.usedLikeNew
+          : usedLikeNew // ignore: cast_nullable_to_non_nullable
+              as bool,
+      usedVeryGood: usedVeryGood == freezed
+          ? _value.usedVeryGood
+          : usedVeryGood // ignore: cast_nullable_to_non_nullable
+              as bool,
+      usedGood: usedGood == freezed
+          ? _value.usedGood
+          : usedGood // ignore: cast_nullable_to_non_nullable
+              as bool,
       usedAcceptable: usedAcceptable == freezed
           ? _value.usedAcceptable
-          : usedAcceptable as bool,
-      page: page == freezed ? _value.page : page as int,
+          : usedAcceptable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      page: page == freezed
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -139,28 +161,48 @@ class __$OfferListingsParamsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object asin = freezed,
-    Object prime = freezed,
-    Object newItem = freezed,
-    Object usedLikeNew = freezed,
-    Object usedVeryGood = freezed,
-    Object usedGood = freezed,
-    Object usedAcceptable = freezed,
-    Object page = freezed,
+    Object? asin = freezed,
+    Object? prime = freezed,
+    Object? newItem = freezed,
+    Object? usedLikeNew = freezed,
+    Object? usedVeryGood = freezed,
+    Object? usedGood = freezed,
+    Object? usedAcceptable = freezed,
+    Object? page = freezed,
   }) {
     return _then(_OfferListingsParams(
-      asin: asin == freezed ? _value.asin : asin as String,
-      prime: prime == freezed ? _value.prime : prime as bool,
-      newItem: newItem == freezed ? _value.newItem : newItem as bool,
-      usedLikeNew:
-          usedLikeNew == freezed ? _value.usedLikeNew : usedLikeNew as bool,
-      usedVeryGood:
-          usedVeryGood == freezed ? _value.usedVeryGood : usedVeryGood as bool,
-      usedGood: usedGood == freezed ? _value.usedGood : usedGood as bool,
+      asin: asin == freezed
+          ? _value.asin
+          : asin // ignore: cast_nullable_to_non_nullable
+              as String,
+      prime: prime == freezed
+          ? _value.prime
+          : prime // ignore: cast_nullable_to_non_nullable
+              as bool,
+      newItem: newItem == freezed
+          ? _value.newItem
+          : newItem // ignore: cast_nullable_to_non_nullable
+              as bool,
+      usedLikeNew: usedLikeNew == freezed
+          ? _value.usedLikeNew
+          : usedLikeNew // ignore: cast_nullable_to_non_nullable
+              as bool,
+      usedVeryGood: usedVeryGood == freezed
+          ? _value.usedVeryGood
+          : usedVeryGood // ignore: cast_nullable_to_non_nullable
+              as bool,
+      usedGood: usedGood == freezed
+          ? _value.usedGood
+          : usedGood // ignore: cast_nullable_to_non_nullable
+              as bool,
       usedAcceptable: usedAcceptable == freezed
           ? _value.usedAcceptable
-          : usedAcceptable as bool,
-      page: page == freezed ? _value.page : page as int,
+          : usedAcceptable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      page: page == freezed
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -168,22 +210,14 @@ class __$OfferListingsParamsCopyWithImpl<$Res>
 /// @nodoc
 class _$_OfferListingsParams implements _OfferListingsParams {
   const _$_OfferListingsParams(
-      {@required this.asin,
+      {required this.asin,
       this.prime = false,
       this.newItem = false,
       this.usedLikeNew = false,
       this.usedVeryGood = false,
       this.usedGood = false,
       this.usedAcceptable = false,
-      this.page = 0})
-      : assert(asin != null),
-        assert(prime != null),
-        assert(newItem != null),
-        assert(usedLikeNew != null),
-        assert(usedVeryGood != null),
-        assert(usedGood != null),
-        assert(usedAcceptable != null),
-        assert(page != null);
+      this.page = 0});
 
   @override
   final String asin;
@@ -262,7 +296,7 @@ class _$_OfferListingsParams implements _OfferListingsParams {
 
 abstract class _OfferListingsParams implements OfferListingsParams {
   const factory _OfferListingsParams(
-      {@required String asin,
+      {required String asin,
       bool prime,
       bool newItem,
       bool usedLikeNew,
@@ -272,33 +306,33 @@ abstract class _OfferListingsParams implements OfferListingsParams {
       int page}) = _$_OfferListingsParams;
 
   @override
-  String get asin;
+  String get asin => throw _privateConstructorUsedError;
   @override
-  bool get prime;
+  bool get prime => throw _privateConstructorUsedError;
   @override
-  bool get newItem;
+  bool get newItem => throw _privateConstructorUsedError;
   @override
-  bool get usedLikeNew;
+  bool get usedLikeNew => throw _privateConstructorUsedError;
   @override
-  bool get usedVeryGood;
+  bool get usedVeryGood => throw _privateConstructorUsedError;
   @override
-  bool get usedGood;
+  bool get usedGood => throw _privateConstructorUsedError;
   @override
-  bool get usedAcceptable;
+  bool get usedAcceptable => throw _privateConstructorUsedError;
   @override
-  int get page;
+  int get page => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$OfferListingsParamsCopyWith<_OfferListingsParams> get copyWith;
+  _$OfferListingsParamsCopyWith<_OfferListingsParams> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 class _$OfferAtIndexParamTearOff {
   const _$OfferAtIndexParamTearOff();
 
-// ignore: unused_element
   _OfferAtIndexParam call(
-      {@required OfferListingsParams params, @required int index}) {
+      {required OfferListingsParams params, required int index}) {
     return _OfferAtIndexParam(
       params: params,
       index: index,
@@ -307,16 +341,16 @@ class _$OfferAtIndexParamTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $OfferAtIndexParam = _$OfferAtIndexParamTearOff();
 
 /// @nodoc
 mixin _$OfferAtIndexParam {
-  OfferListingsParams get params;
-  int get index;
+  OfferListingsParams get params => throw _privateConstructorUsedError;
+  int get index => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OfferAtIndexParamCopyWith<OfferAtIndexParam> get copyWith;
+  $OfferAtIndexParamCopyWith<OfferAtIndexParam> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -340,20 +374,23 @@ class _$OfferAtIndexParamCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object params = freezed,
-    Object index = freezed,
+    Object? params = freezed,
+    Object? index = freezed,
   }) {
     return _then(_value.copyWith(
-      params: params == freezed ? _value.params : params as OfferListingsParams,
-      index: index == freezed ? _value.index : index as int,
+      params: params == freezed
+          ? _value.params
+          : params // ignore: cast_nullable_to_non_nullable
+              as OfferListingsParams,
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
   @override
   $OfferListingsParamsCopyWith<$Res> get params {
-    if (_value.params == null) {
-      return null;
-    }
     return $OfferListingsParamsCopyWith<$Res>(_value.params, (value) {
       return _then(_value.copyWith(params: value));
     });
@@ -386,21 +423,25 @@ class __$OfferAtIndexParamCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object params = freezed,
-    Object index = freezed,
+    Object? params = freezed,
+    Object? index = freezed,
   }) {
     return _then(_OfferAtIndexParam(
-      params: params == freezed ? _value.params : params as OfferListingsParams,
-      index: index == freezed ? _value.index : index as int,
+      params: params == freezed
+          ? _value.params
+          : params // ignore: cast_nullable_to_non_nullable
+              as OfferListingsParams,
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 class _$_OfferAtIndexParam implements _OfferAtIndexParam {
-  const _$_OfferAtIndexParam({@required this.params, @required this.index})
-      : assert(params != null),
-        assert(index != null);
+  const _$_OfferAtIndexParam({required this.params, required this.index});
 
   @override
   final OfferListingsParams params;
@@ -436,27 +477,27 @@ class _$_OfferAtIndexParam implements _OfferAtIndexParam {
 
 abstract class _OfferAtIndexParam implements OfferAtIndexParam {
   const factory _OfferAtIndexParam(
-      {@required OfferListingsParams params,
-      @required int index}) = _$_OfferAtIndexParam;
+      {required OfferListingsParams params,
+      required int index}) = _$_OfferAtIndexParam;
 
   @override
-  OfferListingsParams get params;
+  OfferListingsParams get params => throw _privateConstructorUsedError;
   @override
-  int get index;
+  int get index => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$OfferAtIndexParamCopyWith<_OfferAtIndexParam> get copyWith;
+  _$OfferAtIndexParamCopyWith<_OfferAtIndexParam> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 class _$OfferListingsTearOff {
   const _$OfferListingsTearOff();
 
-// ignore: unused_element
   _OfferListings call(
-      {@required String asin,
+      {required String asin,
       int total = 0,
-      OfferItem cart,
+      OfferItem? cart,
       List<OfferItem> offers = const <OfferItem>[]}) {
     return _OfferListings(
       asin: asin,
@@ -468,18 +509,18 @@ class _$OfferListingsTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $OfferListings = _$OfferListingsTearOff();
 
 /// @nodoc
 mixin _$OfferListings {
-  String get asin;
-  int get total;
-  OfferItem get cart;
-  List<OfferItem> get offers;
+  String get asin => throw _privateConstructorUsedError;
+  int get total => throw _privateConstructorUsedError;
+  OfferItem? get cart => throw _privateConstructorUsedError;
+  List<OfferItem> get offers => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OfferListingsCopyWith<OfferListings> get copyWith;
+  $OfferListingsCopyWith<OfferListings> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -487,9 +528,9 @@ abstract class $OfferListingsCopyWith<$Res> {
   factory $OfferListingsCopyWith(
           OfferListings value, $Res Function(OfferListings) then) =
       _$OfferListingsCopyWithImpl<$Res>;
-  $Res call({String asin, int total, OfferItem cart, List<OfferItem> offers});
+  $Res call({String asin, int total, OfferItem? cart, List<OfferItem> offers});
 
-  $OfferItemCopyWith<$Res> get cart;
+  $OfferItemCopyWith<$Res>? get cart;
 }
 
 /// @nodoc
@@ -503,25 +544,38 @@ class _$OfferListingsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object asin = freezed,
-    Object total = freezed,
-    Object cart = freezed,
-    Object offers = freezed,
+    Object? asin = freezed,
+    Object? total = freezed,
+    Object? cart = freezed,
+    Object? offers = freezed,
   }) {
     return _then(_value.copyWith(
-      asin: asin == freezed ? _value.asin : asin as String,
-      total: total == freezed ? _value.total : total as int,
-      cart: cart == freezed ? _value.cart : cart as OfferItem,
-      offers: offers == freezed ? _value.offers : offers as List<OfferItem>,
+      asin: asin == freezed
+          ? _value.asin
+          : asin // ignore: cast_nullable_to_non_nullable
+              as String,
+      total: total == freezed
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as int,
+      cart: cart == freezed
+          ? _value.cart
+          : cart // ignore: cast_nullable_to_non_nullable
+              as OfferItem?,
+      offers: offers == freezed
+          ? _value.offers
+          : offers // ignore: cast_nullable_to_non_nullable
+              as List<OfferItem>,
     ));
   }
 
   @override
-  $OfferItemCopyWith<$Res> get cart {
+  $OfferItemCopyWith<$Res>? get cart {
     if (_value.cart == null) {
       return null;
     }
-    return $OfferItemCopyWith<$Res>(_value.cart, (value) {
+
+    return $OfferItemCopyWith<$Res>(_value.cart!, (value) {
       return _then(_value.copyWith(cart: value));
     });
   }
@@ -534,10 +588,10 @@ abstract class _$OfferListingsCopyWith<$Res>
           _OfferListings value, $Res Function(_OfferListings) then) =
       __$OfferListingsCopyWithImpl<$Res>;
   @override
-  $Res call({String asin, int total, OfferItem cart, List<OfferItem> offers});
+  $Res call({String asin, int total, OfferItem? cart, List<OfferItem> offers});
 
   @override
-  $OfferItemCopyWith<$Res> get cart;
+  $OfferItemCopyWith<$Res>? get cart;
 }
 
 /// @nodoc
@@ -553,16 +607,28 @@ class __$OfferListingsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object asin = freezed,
-    Object total = freezed,
-    Object cart = freezed,
-    Object offers = freezed,
+    Object? asin = freezed,
+    Object? total = freezed,
+    Object? cart = freezed,
+    Object? offers = freezed,
   }) {
     return _then(_OfferListings(
-      asin: asin == freezed ? _value.asin : asin as String,
-      total: total == freezed ? _value.total : total as int,
-      cart: cart == freezed ? _value.cart : cart as OfferItem,
-      offers: offers == freezed ? _value.offers : offers as List<OfferItem>,
+      asin: asin == freezed
+          ? _value.asin
+          : asin // ignore: cast_nullable_to_non_nullable
+              as String,
+      total: total == freezed
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as int,
+      cart: cart == freezed
+          ? _value.cart
+          : cart // ignore: cast_nullable_to_non_nullable
+              as OfferItem?,
+      offers: offers == freezed
+          ? _value.offers
+          : offers // ignore: cast_nullable_to_non_nullable
+              as List<OfferItem>,
     ));
   }
 }
@@ -570,13 +636,10 @@ class __$OfferListingsCopyWithImpl<$Res>
 /// @nodoc
 class _$_OfferListings implements _OfferListings {
   const _$_OfferListings(
-      {@required this.asin,
+      {required this.asin,
       this.total = 0,
       this.cart,
-      this.offers = const <OfferItem>[]})
-      : assert(asin != null),
-        assert(total != null),
-        assert(offers != null);
+      this.offers = const <OfferItem>[]});
 
   @override
   final String asin;
@@ -584,7 +647,7 @@ class _$_OfferListings implements _OfferListings {
   @override
   final int total;
   @override
-  final OfferItem cart;
+  final OfferItem? cart;
   @JsonKey(defaultValue: const <OfferItem>[])
   @override
   final List<OfferItem> offers;
@@ -624,36 +687,36 @@ class _$_OfferListings implements _OfferListings {
 
 abstract class _OfferListings implements OfferListings {
   const factory _OfferListings(
-      {@required String asin,
+      {required String asin,
       int total,
-      OfferItem cart,
+      OfferItem? cart,
       List<OfferItem> offers}) = _$_OfferListings;
 
   @override
-  String get asin;
+  String get asin => throw _privateConstructorUsedError;
   @override
-  int get total;
+  int get total => throw _privateConstructorUsedError;
   @override
-  OfferItem get cart;
+  OfferItem? get cart => throw _privateConstructorUsedError;
   @override
-  List<OfferItem> get offers;
+  List<OfferItem> get offers => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$OfferListingsCopyWith<_OfferListings> get copyWith;
+  _$OfferListingsCopyWith<_OfferListings> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 class _$OfferItemTearOff {
   const _$OfferItemTearOff();
 
-// ignore: unused_element
   _OfferItem call(
-      {@required String shopName,
+      {required String shopName,
       String sellerId = "",
-      @required int price,
-      @required String condition,
-      @required bool hasImage,
-      @required bool isFba}) {
+      required int price,
+      required String condition,
+      required bool hasImage,
+      required bool isFba}) {
     return _OfferItem(
       shopName: shopName,
       sellerId: sellerId,
@@ -666,20 +729,20 @@ class _$OfferItemTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $OfferItem = _$OfferItemTearOff();
 
 /// @nodoc
 mixin _$OfferItem {
-  String get shopName;
-  String get sellerId;
-  int get price;
-  String get condition;
-  bool get hasImage;
-  bool get isFba;
+  String get shopName => throw _privateConstructorUsedError;
+  String get sellerId => throw _privateConstructorUsedError;
+  int get price => throw _privateConstructorUsedError;
+  String get condition => throw _privateConstructorUsedError;
+  bool get hasImage => throw _privateConstructorUsedError;
+  bool get isFba => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OfferItemCopyWith<OfferItem> get copyWith;
+  $OfferItemCopyWith<OfferItem> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -705,20 +768,38 @@ class _$OfferItemCopyWithImpl<$Res> implements $OfferItemCopyWith<$Res> {
 
   @override
   $Res call({
-    Object shopName = freezed,
-    Object sellerId = freezed,
-    Object price = freezed,
-    Object condition = freezed,
-    Object hasImage = freezed,
-    Object isFba = freezed,
+    Object? shopName = freezed,
+    Object? sellerId = freezed,
+    Object? price = freezed,
+    Object? condition = freezed,
+    Object? hasImage = freezed,
+    Object? isFba = freezed,
   }) {
     return _then(_value.copyWith(
-      shopName: shopName == freezed ? _value.shopName : shopName as String,
-      sellerId: sellerId == freezed ? _value.sellerId : sellerId as String,
-      price: price == freezed ? _value.price : price as int,
-      condition: condition == freezed ? _value.condition : condition as String,
-      hasImage: hasImage == freezed ? _value.hasImage : hasImage as bool,
-      isFba: isFba == freezed ? _value.isFba : isFba as bool,
+      shopName: shopName == freezed
+          ? _value.shopName
+          : shopName // ignore: cast_nullable_to_non_nullable
+              as String,
+      sellerId: sellerId == freezed
+          ? _value.sellerId
+          : sellerId // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      condition: condition == freezed
+          ? _value.condition
+          : condition // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasImage: hasImage == freezed
+          ? _value.hasImage
+          : hasImage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFba: isFba == freezed
+          ? _value.isFba
+          : isFba // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -749,20 +830,38 @@ class __$OfferItemCopyWithImpl<$Res> extends _$OfferItemCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object shopName = freezed,
-    Object sellerId = freezed,
-    Object price = freezed,
-    Object condition = freezed,
-    Object hasImage = freezed,
-    Object isFba = freezed,
+    Object? shopName = freezed,
+    Object? sellerId = freezed,
+    Object? price = freezed,
+    Object? condition = freezed,
+    Object? hasImage = freezed,
+    Object? isFba = freezed,
   }) {
     return _then(_OfferItem(
-      shopName: shopName == freezed ? _value.shopName : shopName as String,
-      sellerId: sellerId == freezed ? _value.sellerId : sellerId as String,
-      price: price == freezed ? _value.price : price as int,
-      condition: condition == freezed ? _value.condition : condition as String,
-      hasImage: hasImage == freezed ? _value.hasImage : hasImage as bool,
-      isFba: isFba == freezed ? _value.isFba : isFba as bool,
+      shopName: shopName == freezed
+          ? _value.shopName
+          : shopName // ignore: cast_nullable_to_non_nullable
+              as String,
+      sellerId: sellerId == freezed
+          ? _value.sellerId
+          : sellerId // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      condition: condition == freezed
+          ? _value.condition
+          : condition // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasImage: hasImage == freezed
+          ? _value.hasImage
+          : hasImage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFba: isFba == freezed
+          ? _value.isFba
+          : isFba // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -770,18 +869,12 @@ class __$OfferItemCopyWithImpl<$Res> extends _$OfferItemCopyWithImpl<$Res>
 /// @nodoc
 class _$_OfferItem implements _OfferItem {
   const _$_OfferItem(
-      {@required this.shopName,
+      {required this.shopName,
       this.sellerId = "",
-      @required this.price,
-      @required this.condition,
-      @required this.hasImage,
-      @required this.isFba})
-      : assert(shopName != null),
-        assert(sellerId != null),
-        assert(price != null),
-        assert(condition != null),
-        assert(hasImage != null),
-        assert(isFba != null);
+      required this.price,
+      required this.condition,
+      required this.hasImage,
+      required this.isFba});
 
   @override
   final String shopName;
@@ -842,26 +935,27 @@ class _$_OfferItem implements _OfferItem {
 
 abstract class _OfferItem implements OfferItem {
   const factory _OfferItem(
-      {@required String shopName,
+      {required String shopName,
       String sellerId,
-      @required int price,
-      @required String condition,
-      @required bool hasImage,
-      @required bool isFba}) = _$_OfferItem;
+      required int price,
+      required String condition,
+      required bool hasImage,
+      required bool isFba}) = _$_OfferItem;
 
   @override
-  String get shopName;
+  String get shopName => throw _privateConstructorUsedError;
   @override
-  String get sellerId;
+  String get sellerId => throw _privateConstructorUsedError;
   @override
-  int get price;
+  int get price => throw _privateConstructorUsedError;
   @override
-  String get condition;
+  String get condition => throw _privateConstructorUsedError;
   @override
-  bool get hasImage;
+  bool get hasImage => throw _privateConstructorUsedError;
   @override
-  bool get isFba;
+  bool get isFba => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$OfferItemCopyWith<_OfferItem> get copyWith;
+  _$OfferItemCopyWith<_OfferItem> get copyWith =>
+      throw _privateConstructorUsedError;
 }

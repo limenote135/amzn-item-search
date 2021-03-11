@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ItemConditionTile extends StatelessWidget {
-  const ItemConditionTile({Key key}) : super(key: key);
+  const ItemConditionTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,24 +17,24 @@ class ItemConditionTile extends StatelessWidget {
                 formControlName: conditionField,
                 items: const [
                   DropdownMenuItem(
-                    child: Text("新品"),
                     value: PurchaseItemCondition.newItem,
+                    child: Text("新品"),
                   ),
                   DropdownMenuItem(
-                    child: Text("中古(ほぼ新品)"),
                     value: PurchaseItemCondition.usedMint,
+                    child: Text("中古(ほぼ新品)"),
                   ),
                   DropdownMenuItem(
-                    child: Text("中古(非常に良い)"),
                     value: PurchaseItemCondition.usedVeryGood,
+                    child: Text("中古(非常に良い)"),
                   ),
                   DropdownMenuItem(
-                    child: Text("中古(良い)"),
                     value: PurchaseItemCondition.usedGood,
+                    child: Text("中古(良い)"),
                   ),
                   DropdownMenuItem(
-                    child: Text("中古(可)"),
                     value: PurchaseItemCondition.usedAcceptable,
+                    child: Text("中古(可)"),
                   ),
                 ]),
           ),

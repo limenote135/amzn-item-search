@@ -17,7 +17,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class PurchasePage extends StatelessWidget {
-  const PurchasePage({Key key}) : super(key: key);
+  const PurchasePage({Key? key}) : super(key: key);
   static const routeName = "/search/purchase";
 
   static Route<void> route(AsinData item) {
@@ -45,9 +45,9 @@ class PurchasePage extends StatelessWidget {
 
 // TODO: statefulWidget にする？
 class _Body extends HookWidget {
-  _Body({Key key}) : super(key: key);
+  _Body({Key? key}) : super(key: key);
 
-  Uint8List imageData;
+  Uint8List? imageData;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class _Body extends HookWidget {
     final uuid = context.read(uuidProvider);
 
     // 仮で初期値を新品最安値、無ければ中古最安値にする
-    final lowestPrice = _calcLowestPrice(item.prices);
+    final lowestPrice = _calcLowestPrice(item.prices!);
     final useFba = useProvider(searchSettingsControllerProvider.state).useFba;
 
     final stock = StockItem(
@@ -81,10 +81,10 @@ class _Body extends HookWidget {
         action: ReactiveFormConsumer(
           builder: (context, form, child) {
             return RaisedButton(
-              child: const Text("仕入れる"),
               onPressed: form.invalid
                   ? null
                   : () => _onSubmit(context, form, uuid.v4(), item),
+              child: const Text("仕入れる"),
             );
           },
         ),
@@ -101,7 +101,7 @@ class _Body extends HookWidget {
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
-      fee: item.prices.feeInfo,
+      fee: item.prices!.feeInfo,
       useFba: useFba,
     );
 
@@ -127,10 +127,10 @@ class _Body extends HookWidget {
   }
 
   int _calcLowestPrice(ItemPrices prices) {
-    if (prices.newPrices != null && prices.newPrices.isNotEmpty) {
+    if (prices.newPrices.isNotEmpty) {
       return prices.newPrices.first.price;
     }
-    if (prices.usedPrices != null && prices.usedPrices.isNotEmpty) {
+    if (prices.usedPrices.isNotEmpty) {
       return prices.usedPrices.first.price;
     }
     return 0;

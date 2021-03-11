@@ -24,7 +24,7 @@ class SearchTypeAdapter extends TypeAdapter<SearchType> {
       case 4:
         return SearchType.freeWord;
       default:
-        return null;
+        return SearchType.jan;
     }
   }
 
