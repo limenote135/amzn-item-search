@@ -28,8 +28,8 @@ class StockItemAdapter extends TypeAdapter<_$_StockItem> {
       sku: fields[8] as String,
       memo: fields[9] as String,
       item: fields[10] as AsinData,
-      retailer: fields[11] as String,
-      id: fields[12] as String,
+      retailer: fields[11] as String? ?? "", // TODO: デフォルト値
+      id: fields[12] as String? ?? "",
     );
   }
 
