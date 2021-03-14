@@ -41,7 +41,7 @@ String replaceSku({
           calcBreakEven(
             purchase: purchase,
             useFba: useFba,
-            feeInfo: item.prices!.feeInfo,
+            feeInfo: item.prices?.feeInfo,
           ).toString());
 }
 

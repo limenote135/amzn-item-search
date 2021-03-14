@@ -3,6 +3,7 @@ import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
+import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/pages/search/common/util.dart';
 import 'package:amasearch/util/formatter.dart';
@@ -30,9 +31,11 @@ class PriceDetailTile extends HookWidget {
       priorFba: setting.priorFba,
     );
 
-    final sellFeeRate = (item.prices!.feeInfo.referralFeeRate * 100).round();
-    final sellFee =
-        (detail.price * item.prices!.feeInfo.referralFeeRate).round();
+    final feeInfo = item.prices?.feeInfo ??
+        const FeeInfo(referralFeeRate: 0, variableClosingFee: 0, fbaFee: -1);
+
+    final sellFeeRate = (feeInfo.referralFeeRate * 100).round();
+    final sellFee = (detail.price * feeInfo.referralFeeRate).round();
 
     final showTargetPrice = useProvider(generalSettingsControllerProvider.state
         .select((value) => value.enableTargetProfit));
@@ -43,7 +46,7 @@ class PriceDetailTile extends HookWidget {
 
     final targetPrice = calcTargetPrice(
       sellPrice: detail.price,
-      feeInfo: item.prices!.feeInfo,
+      feeInfo: feeInfo,
       targetRate: targetPriceRate,
       minProfit: minProfit,
       useFba: setting.useFba,
@@ -68,7 +71,7 @@ class PriceDetailTile extends HookWidget {
             leading: const Text("粗利益"),
             main: Text("${calcProfitText(
               detail.price,
-              item.prices!.feeInfo,
+              feeInfo,
               useFba: setting.useFba,
             )} 円"),
           ),
@@ -91,12 +94,12 @@ class PriceDetailTile extends HookWidget {
               ),
               TextLine(
                 leading: const Text("カテゴリー成約料"),
-                main: Text("${item.prices!.feeInfo.variableClosingFee} 円"),
+                main: Text("${feeInfo.variableClosingFee} 円"),
               ),
               TextLine(
                 leading: const Text("FBA 手数料"),
-                main: item.prices!.feeInfo.fbaFee != -1
-                    ? Text("${item.prices!.feeInfo.fbaFee} 円")
+                main: feeInfo.fbaFee != -1
+                    ? Text("${feeInfo.fbaFee} 円")
                     : const Text("(不明) 円"),
               )
             ],

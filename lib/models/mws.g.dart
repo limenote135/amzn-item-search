@@ -26,7 +26,9 @@ Map<String, dynamic> _$_$_GetProductByIdResponseToJson(
 _$_GetProductPricesResponse _$_$_GetProductPricesResponseFromJson(
     Map<String, dynamic> json) {
   return _$_GetProductPricesResponse(
-    prices: ItemPrices.fromJson(json['prices'] as Map<String, dynamic>),
+    prices: json['prices'] == null
+        ? null
+        : ItemPrices.fromJson(json['prices'] as Map<String, dynamic>),
   );
 }
 

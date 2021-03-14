@@ -72,7 +72,7 @@ class _Body extends HookWidget {
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
-      fee: item.item.prices!.feeInfo,
+      fee: item.item.prices?.feeInfo,
       useFba: useFba,
     );
     final newItem = item.copyWith(

@@ -22,7 +22,7 @@ class GetProductByIdResponse with _$GetProductByIdResponse {
 class GetProductPricesResponse with _$GetProductPricesResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory GetProductPricesResponse({
-    required ItemPrices prices,
+    ItemPrices? prices,
   }) = _GetProductPricesResponse;
 
   factory GetProductPricesResponse.fromJson(Map<String, dynamic> json) =>

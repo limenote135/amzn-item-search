@@ -196,7 +196,7 @@ GetProductPricesResponse _$GetProductPricesResponseFromJson(
 class _$GetProductPricesResponseTearOff {
   const _$GetProductPricesResponseTearOff();
 
-  _GetProductPricesResponse call({required ItemPrices prices}) {
+  _GetProductPricesResponse call({ItemPrices? prices}) {
     return _GetProductPricesResponse(
       prices: prices,
     );
@@ -212,7 +212,7 @@ const $GetProductPricesResponse = _$GetProductPricesResponseTearOff();
 
 /// @nodoc
 mixin _$GetProductPricesResponse {
-  ItemPrices get prices => throw _privateConstructorUsedError;
+  ItemPrices? get prices => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -225,9 +225,9 @@ abstract class $GetProductPricesResponseCopyWith<$Res> {
   factory $GetProductPricesResponseCopyWith(GetProductPricesResponse value,
           $Res Function(GetProductPricesResponse) then) =
       _$GetProductPricesResponseCopyWithImpl<$Res>;
-  $Res call({ItemPrices prices});
+  $Res call({ItemPrices? prices});
 
-  $ItemPricesCopyWith<$Res> get prices;
+  $ItemPricesCopyWith<$Res>? get prices;
 }
 
 /// @nodoc
@@ -247,13 +247,17 @@ class _$GetProductPricesResponseCopyWithImpl<$Res>
       prices: prices == freezed
           ? _value.prices
           : prices // ignore: cast_nullable_to_non_nullable
-              as ItemPrices,
+              as ItemPrices?,
     ));
   }
 
   @override
-  $ItemPricesCopyWith<$Res> get prices {
-    return $ItemPricesCopyWith<$Res>(_value.prices, (value) {
+  $ItemPricesCopyWith<$Res>? get prices {
+    if (_value.prices == null) {
+      return null;
+    }
+
+    return $ItemPricesCopyWith<$Res>(_value.prices!, (value) {
       return _then(_value.copyWith(prices: value));
     });
   }
@@ -266,10 +270,10 @@ abstract class _$GetProductPricesResponseCopyWith<$Res>
           $Res Function(_GetProductPricesResponse) then) =
       __$GetProductPricesResponseCopyWithImpl<$Res>;
   @override
-  $Res call({ItemPrices prices});
+  $Res call({ItemPrices? prices});
 
   @override
-  $ItemPricesCopyWith<$Res> get prices;
+  $ItemPricesCopyWith<$Res>? get prices;
 }
 
 /// @nodoc
@@ -292,7 +296,7 @@ class __$GetProductPricesResponseCopyWithImpl<$Res>
       prices: prices == freezed
           ? _value.prices
           : prices // ignore: cast_nullable_to_non_nullable
-              as ItemPrices,
+              as ItemPrices?,
     ));
   }
 }
@@ -301,13 +305,13 @@ class __$GetProductPricesResponseCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_GetProductPricesResponse implements _GetProductPricesResponse {
-  const _$_GetProductPricesResponse({required this.prices});
+  const _$_GetProductPricesResponse({this.prices});
 
   factory _$_GetProductPricesResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_GetProductPricesResponseFromJson(json);
 
   @override
-  final ItemPrices prices;
+  final ItemPrices? prices;
 
   @override
   String toString() {
@@ -339,14 +343,14 @@ class _$_GetProductPricesResponse implements _GetProductPricesResponse {
 }
 
 abstract class _GetProductPricesResponse implements GetProductPricesResponse {
-  const factory _GetProductPricesResponse({required ItemPrices prices}) =
+  const factory _GetProductPricesResponse({ItemPrices? prices}) =
       _$_GetProductPricesResponse;
 
   factory _GetProductPricesResponse.fromJson(Map<String, dynamic> json) =
       _$_GetProductPricesResponse.fromJson;
 
   @override
-  ItemPrices get prices => throw _privateConstructorUsedError;
+  ItemPrices? get prices => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GetProductPricesResponseCopyWith<_GetProductPricesResponse> get copyWith =>
