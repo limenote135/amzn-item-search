@@ -42,3 +42,30 @@ const mwsCategoryMap = <String, String>{
   "Automotive Parts and Accessories": "車＆バイク",
   "Pantry": "パントリー", // TODO:
 };
+
+const mwsSearchCategoryMap = <String, String>{
+  "すべて": "All",
+  "DVD": "DVD",
+  "PCソフト": "Software",
+  "アパレル": "Apparel",
+  "エレクトロニクス": "Electronics",
+  "オフィス用品": "OfficeProducts",
+  "おもちゃ": "Hobbies",
+  "音楽": "Music",
+  "カー用品": "Automotive",
+  "楽器": "MusicalInstruments",
+  "キッチン": "Kitchen",
+  "クラシック": "Classical",
+  "ゲーム": "VideoGames",
+  "シューズ": "Shoes",
+  "食品・飲料・お酒": "Grocery",
+  "スポーツ用品": "SportingGoods",
+  "時計": "Watches",
+  "ビューティー": "Beauty",
+  "ベビー＆マタニティ": "Baby",
+  "ヘルスケア": "HealthPersonalCare",
+  "ホーム": "HomeImprovement",
+  "宝石": "Jewelry",
+  "本": "Books",
+  "洋書": "ForeignBooks",
+};
