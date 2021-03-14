@@ -49,8 +49,8 @@ List<PriceDetail> _getConditionPrices({
 }) {
   switch (condition) {
     case ItemCondition.newItem:
-      return item.prices!.newPrices;
+      return item.prices?.newPrices ?? [];
     case ItemCondition.usedItem:
-      return item.prices!.usedPrices;
+      return item.prices?.usedPrices ?? [];
   }
 }

@@ -56,7 +56,7 @@ class _Body extends HookWidget {
     final uuid = context.read(uuidProvider);
 
     // 仮で初期値を新品最安値、無ければ中古最安値にする
-    final lowestPrice = _calcLowestPrice(item.prices!);
+    final lowestPrice = _calcLowestPrice(item.prices);
     final useFba = useProvider(searchSettingsControllerProvider.state).useFba;
 
     final stock = StockItem(
@@ -103,7 +103,7 @@ class _Body extends HookWidget {
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
-      fee: item.prices!.feeInfo,
+      fee: item.prices?.feeInfo,
       useFba: useFba,
     );
 
@@ -128,7 +128,10 @@ class _Body extends HookWidget {
     Navigator.of(context).popUntil((route) => route.settings.name == "/");
   }
 
-  int _calcLowestPrice(ItemPrices prices) {
+  int _calcLowestPrice(ItemPrices? prices) {
+    if(prices == null) {
+      return 0;
+    }
     if (prices.newPrices.isNotEmpty) {
       return prices.newPrices.first.price;
     }

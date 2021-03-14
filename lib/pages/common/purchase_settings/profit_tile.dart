@@ -21,7 +21,7 @@ class ProfitTile extends HookWidget {
     final profit = calcProfit(
         sellPrice: sellPrice,
         purchasePrice: purchasePrice,
-        fee: item.prices!.feeInfo,
+        fee: item.prices?.feeInfo,
         useFba: useFba);
     return ListTile(
       title: Row(

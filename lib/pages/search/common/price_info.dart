@@ -77,7 +77,7 @@ class _PriceAndProfit extends HookWidget {
             TextSpan(
               text: calcProfitText(
                 detail.price,
-                item.prices!.feeInfo,
+                item.prices?.feeInfo,
                 useFba: settings.useFba,
               ),
               style: strongTextStyle,
@@ -92,7 +92,7 @@ class _PriceAndProfit extends HookWidget {
               TextSpan(
                 text: numberFormatter.format(calcTargetPrice(
                   sellPrice: detail.price,
-                  feeInfo: item.prices!.feeInfo,
+                  feeInfo: item.prices?.feeInfo,
                   targetRate: targetPriceRate,
                   minProfit: minProfit,
                   useFba: settings.useFba,

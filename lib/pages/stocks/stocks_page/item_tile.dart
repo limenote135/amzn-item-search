@@ -67,7 +67,7 @@ class _TileBody extends HookWidget {
     final breakEven = calcBreakEven(
       purchase: item.purchasePrice,
       useFba: item.useFba,
-      feeInfo: detail.prices!.feeInfo,
+      feeInfo: detail.prices?.feeInfo,
     );
 
     return Column(

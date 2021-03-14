@@ -20,7 +20,16 @@ final itemPricesFutureProvider =
   final resp = await mws.getProductPrices(asin);
 
   ref.maintainState = true;
-  return resp.prices;
+  return resp.prices ??
+      const ItemPrices(
+        newPrices: <PriceDetail>[],
+        usedPrices: <PriceDetail>[],
+        feeInfo: FeeInfo(
+          referralFeeRate: 0,
+          variableClosingFee: 0,
+          fbaFee: -1,
+        ),
+      );
 });
 
 @freezed

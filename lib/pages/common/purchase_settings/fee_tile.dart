@@ -21,21 +21,25 @@ class FeeTile extends HookWidget {
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
 
+    final feeInfo = item.prices?.feeInfo ??
+        const FeeInfo(
+          referralFeeRate: 0,
+          variableClosingFee: 0,
+          fbaFee: -1,
+        );
     final totalFee = _calcTotalFee(
       sellPrice: sellPrice,
       purchasePrice: purchasePrice,
-      feeInfo: item.prices!.feeInfo,
+      feeInfo: feeInfo,
       useFba: useFba,
     );
 
-    final feeRate = (item.prices!.feeInfo.referralFeeRate * 100).round();
+    final feeRate = (feeInfo.referralFeeRate * 100).round();
 
-    final sellFee =
-        _calcSellFee(sellPrice, item.prices!.feeInfo.referralFeeRate);
-    final categoryFee = item.prices!.feeInfo.variableClosingFee;
+    final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
+    final categoryFee = feeInfo.variableClosingFee;
 
-    final fbaFeeText =
-        _fbaFeeText(useFba: useFba, feeInfo: item.prices!.feeInfo);
+    final fbaFeeText = _fbaFeeText(useFba: useFba, feeInfo: feeInfo);
 
     return ExpansionTile(
       title: TextLine(
