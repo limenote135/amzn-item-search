@@ -57,7 +57,7 @@ class SkuTile extends HookWidget {
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
-      fee: item.prices!.feeInfo,
+      fee: item.prices?.feeInfo,
       useFba: useFba,
     );
 

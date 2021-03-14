@@ -15,21 +15,21 @@ String createSpeakText({
   required UsedSubCondition usedSubCondition,
 }) {
   var newProfitText = "";
-  if (item.prices!.newPrices.isEmpty) {
+  if (item.prices?.newPrices.isEmpty ?? true) {
     newProfitText = "データなし";
   } else {
     newProfitText = _filterPrice(
-      prices: item.prices!.newPrices,
+      prices: item.prices?.newPrices ?? [],
       priorFba: priorFba,
     );
   }
 
   var usedProfitText = "";
-  if (item.prices!.usedPrices.isEmpty) {
+  if (item.prices?.usedPrices.isEmpty ?? true) {
     usedProfitText = "データなし";
   } else {
     usedProfitText = _filterPrice(
-      prices: item.prices!.usedPrices,
+      prices: item.prices?.usedPrices ?? [],
       priorFba: priorFba,
       usedSubCond: usedSubCondition,
     );

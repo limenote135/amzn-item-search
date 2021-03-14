@@ -1,5 +1,6 @@
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
+import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/edit_page/edit_page.dart';
@@ -83,19 +84,21 @@ class _Body extends HookWidget {
         ? (item.profitPerItem / item.purchasePrice * 100).round()
         : 0;
 
-    final referralFeeRate =
-        (item.item.prices!.feeInfo.referralFeeRate * 100).toInt();
-    final referralFee =
-        (item.sellPrice * item.item.prices!.feeInfo.referralFeeRate).round();
-    final categoryFee = item.item.prices!.feeInfo.variableClosingFee;
-    final isUnknownFbaFee = item.item.prices!.feeInfo.fbaFee == -1;
-    final fbaFee =
-        item.useFba && !isUnknownFbaFee ? item.item.prices!.feeInfo.fbaFee : 0;
+    final feeInfo = item.item.prices?.feeInfo ??
+        const FeeInfo(
+          referralFeeRate: 0,
+          variableClosingFee: 0,
+          fbaFee: -1,
+        );
+
+    final referralFeeRate = (feeInfo.referralFeeRate * 100).toInt();
+    final referralFee = (item.sellPrice * feeInfo.referralFeeRate).round();
+    final categoryFee = feeInfo.variableClosingFee;
+    final isUnknownFbaFee = feeInfo.fbaFee == -1;
+    final fbaFee = item.useFba && !isUnknownFbaFee ? feeInfo.fbaFee : 0;
     final totalFeePerItem = referralFee + categoryFee + fbaFee;
     final breakEven = calcBreakEven(
-        purchase: item.purchasePrice,
-        useFba: item.useFba,
-        feeInfo: item.item.prices!.feeInfo);
+        purchase: item.purchasePrice, useFba: item.useFba, feeInfo: feeInfo);
 
     return ListView(
       children: [

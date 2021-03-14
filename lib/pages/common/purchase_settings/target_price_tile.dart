@@ -27,7 +27,7 @@ class TargetPriceTile extends HookWidget {
 
     final targetPrice = _calcTargetSellPrice(
         purchasePrice > 0 ? purchasePrice : 0,
-        item.prices!.feeInfo,
+        item.prices?.feeInfo,
         targetRate,
         minProfit,
         useFba);
@@ -48,8 +48,11 @@ class TargetPriceTile extends HookWidget {
   }
 
   // 購入価格から目標の利益率を達成できる販売価格を計算する
-  int _calcTargetSellPrice(int purchasePrice, FeeInfo feeInfo, int rate,
+  int _calcTargetSellPrice(int purchasePrice, FeeInfo? feeInfo, int rate,
       int minProfit, bool useFba) {
+    if(feeInfo == null) {
+      return 0;
+    }
     // 販売価格 = 購入価格 + カテゴリ手数料 + FBA 手数料 + 利益
     // 利益 = max(販売価格 * 利益率, 最低利益額)
     final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;

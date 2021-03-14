@@ -8,7 +8,7 @@ import 'package:package_info/package_info.dart';
 
 import 'common.dart';
 
-const _kTestingServer = false;
+const _kTestingServer = true;
 
 final mwsRepositoryProvider = Provider((ref) => MwsRepository(ref.read));
 

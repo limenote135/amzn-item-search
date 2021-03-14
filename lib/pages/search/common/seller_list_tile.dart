@@ -31,7 +31,8 @@ class SellerListTile extends HookWidget {
                 child: Column(
                   children: [
                     const Center(child: Text("新品")),
-                    for (final price in item.prices!.newPrices)
+                    for (final price
+                        in item.prices?.newPrices ?? <PriceDetail>[])
                       ProviderScope(
                         overrides: [
                           _currentPriceDetailProvider.overrideWithValue(price),
@@ -48,7 +49,8 @@ class SellerListTile extends HookWidget {
                 child: Column(
                   children: [
                     const Center(child: Text("中古")),
-                    for (final price in item.prices!.usedPrices)
+                    for (final price
+                        in item.prices?.usedPrices ?? <PriceDetail>[])
                       ProviderScope(
                         overrides: [
                           _currentPriceDetailProvider.overrideWithValue(price),
