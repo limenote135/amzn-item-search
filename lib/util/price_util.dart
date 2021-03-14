@@ -47,6 +47,9 @@ bool isPremiumPrice(AsinData item) {
   if (item.listPrice == 0) {
     return false;
   }
+  if (item.prices == null) {
+    return false;
+  }
   if (item.prices.newPrices.isNotEmpty) {
     return item.prices.newPrices.first.price > item.listPrice;
   }
