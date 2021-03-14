@@ -109,21 +109,21 @@ class AsinData with _$AsinData {
       _$AsinDataFromJson(json);
 }
 
-class ItemCategoryConverter implements JsonConverter<String?, String?> {
+class ItemCategoryConverter implements JsonConverter<String, String?> {
   const ItemCategoryConverter();
 
   @override
-  String? toJson(String? object) {
+  String? toJson(String object) {
     return object; // JSON にするときは日本語のカテゴリを使う
   }
 
   @override
-  String? fromJson(String? json) {
+  String fromJson(String? json) {
     if (json == null) {
       return "不明";
     }
     if (mwsCategoryMap.containsKey(json)) {
-      return mwsCategoryMap[json];
+      return mwsCategoryMap[json]!;
     }
     return json;
   }

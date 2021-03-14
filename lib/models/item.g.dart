@@ -123,7 +123,8 @@ _$_AsinData _$_$_AsinDataFromJson(Map<String, dynamic> json) {
     prices: json['prices'] == null
         ? null
         : ItemPrices.fromJson(json['prices'] as Map<String, dynamic>),
-    category: json['category'] as String,
+    category:
+        const ItemCategoryConverter().fromJson(json['category'] as String?),
   );
 }
 
@@ -137,5 +138,5 @@ Map<String, dynamic> _$_$_AsinDataToJson(_$_AsinData instance) =>
       'rank': instance.rank,
       'quantity': instance.quantity,
       'prices': instance.prices,
-      'category': instance.category,
+      'category': const ItemCategoryConverter().toJson(instance.category),
     };
