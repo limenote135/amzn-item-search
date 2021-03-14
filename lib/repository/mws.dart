@@ -3,11 +3,12 @@ import 'dart:io' show Platform;
 
 import 'package:amasearch/models/mws.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
 
 import 'common.dart';
+
+const _kTestingServer = false;
 
 final mwsRepositoryProvider = Provider((ref) => MwsRepository(ref.read));
 
@@ -16,7 +17,7 @@ class MwsRepository {
 
   static const _mwsMarketPlaceId = "A1VC38T7YXB528";
 
-  static const _url = kReleaseMode
+  static const _url = !_kTestingServer
       ? "https://amasearch-stg.an.r.appspot.com"
       : "http://192.168.2.201:8080";
 
@@ -46,10 +47,11 @@ class MwsRepository {
 
   Future<ListMatchingProductResponse> listMatchingProducts(
     String query,
+    String category,
   ) async {
     final params = <String, String>{
       "query": query,
-      "category": "All",
+      "category": category,
       "marketplace": _mwsMarketPlaceId,
     };
 
