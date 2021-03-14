@@ -120,13 +120,14 @@ Map<String, dynamic> _$_$_ItemPricesToJson(_$_ItemPrices instance) =>
 
 _$_PriceDetail _$_$_PriceDetailFromJson(Map<String, dynamic> json) {
   return _$_PriceDetail(
-    itemCondition: _$enumDecode(_$ItemConditionEnumMap, json['condition']),
-    subCondition: _$enumDecodeNullable(
-            _$ItemSubConditionEnumMap, json['sub_condition']) ??
+    itemCondition:
+        const ItemConditionConverter().fromJson(json['condition'] as String?),
+    subCondition: const ItemSubConditionConverter()
+            .fromJson(json['sub_condition'] as String?) ??
         ItemSubCondition.newItem,
-    channel:
-        _$enumDecodeNullable(_$FulfillmentChannelEnumMap, json['channel']) ??
-            FulfillmentChannel.merchant,
+    channel: const FulfillmentChannelConverter()
+            .fromJson(json['channel'] as String?) ??
+        FulfillmentChannel.merchant,
     price: json['price'] as int? ?? 0,
     shipping: json['shipping'] as int? ?? 0,
     point: json['point'] as int? ?? 0,
@@ -135,65 +136,12 @@ _$_PriceDetail _$_$_PriceDetailFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_PriceDetailToJson(_$_PriceDetail instance) =>
     <String, dynamic>{
-      'condition': _$ItemConditionEnumMap[instance.itemCondition],
-      'sub_condition': _$ItemSubConditionEnumMap[instance.subCondition],
-      'channel': _$FulfillmentChannelEnumMap[instance.channel],
+      'condition':
+          const ItemConditionConverter().toJson(instance.itemCondition),
+      'sub_condition':
+          const ItemSubConditionConverter().toJson(instance.subCondition),
+      'channel': const FulfillmentChannelConverter().toJson(instance.channel),
       'price': instance.price,
       'shipping': instance.shipping,
       'point': instance.point,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-const _$ItemConditionEnumMap = {
-  ItemCondition.newItem: 'newItem',
-  ItemCondition.usedItem: 'usedItem',
-};
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
-}
-
-const _$ItemSubConditionEnumMap = {
-  ItemSubCondition.newItem: 'newItem',
-  ItemSubCondition.mint: 'mint',
-  ItemSubCondition.veryGood: 'veryGood',
-  ItemSubCondition.good: 'good',
-  ItemSubCondition.acceptable: 'acceptable',
-};
-
-const _$FulfillmentChannelEnumMap = {
-  FulfillmentChannel.merchant: 'merchant',
-  FulfillmentChannel.amazon: 'amazon',
-};

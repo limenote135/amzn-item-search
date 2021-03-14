@@ -68,63 +68,54 @@ class PriceDetail with _$PriceDetail {
       _$PriceDetailFromJson(json);
 }
 
-class ItemConditionConverter implements JsonConverter<ItemCondition?, String?> {
+class ItemConditionConverter implements JsonConverter<ItemCondition, String?> {
   const ItemConditionConverter();
 
   @override
-  String? toJson(ItemCondition? object) {
-    if (object == null) {
-      return null;
-    }
+  String toJson(ItemCondition object) {
     return describeEnum(object);
   }
 
   @override
-  ItemCondition? fromJson(String? json) {
+  ItemCondition fromJson(String? json) {
     if (json == null) {
-      return null;
+      return ItemCondition.newItem;
     }
     return toItemCondition(json);
   }
 }
 
 class ItemSubConditionConverter
-    implements JsonConverter<ItemSubCondition?, String?> {
+    implements JsonConverter<ItemSubCondition, String?> {
   const ItemSubConditionConverter();
 
   @override
-  String? toJson(ItemSubCondition? object) {
-    if (object == null) {
-      return null;
-    }
+  String? toJson(ItemSubCondition object) {
     return describeEnum(object);
   }
 
   @override
-  ItemSubCondition? fromJson(String? json) {
+  ItemSubCondition fromJson(String? json) {
     if (json == null) {
-      return null;
+      return ItemSubCondition.newItem;
     }
     return toItemSubCondition(json);
   }
 }
 
 class FulfillmentChannelConverter
-    implements JsonConverter<FulfillmentChannel?, String?> {
+    implements JsonConverter<FulfillmentChannel, String?> {
   const FulfillmentChannelConverter();
 
   @override
-  String? toJson(FulfillmentChannel? object) {
-    if (object == null) {
-      return null;
-    }
+  String? toJson(FulfillmentChannel object) {
     return describeEnum(object);
   }
 
   @override
-  FulfillmentChannel? fromJson(String? json) {
+  FulfillmentChannel fromJson(String? json) {
     if (json == null) {
-      return null;
+      return FulfillmentChannel.amazon;
     }
     return toFulfillmentChannel(json);
   }
