@@ -16,11 +16,11 @@ Future<bool> itemDeleteHandler({
       title: const Text("商品の削除"),
       content: Text(content),
       actions: [
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.pop(context, false),
           child: const Text("Cancel"),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.pop(context, true),
           child: const Text("OK"),
         ),

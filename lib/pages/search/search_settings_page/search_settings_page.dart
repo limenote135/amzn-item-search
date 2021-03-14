@@ -74,11 +74,11 @@ class _Body extends HookWidget {
                   title: const Text("検索履歴の削除"),
                   content: const Text("検索履歴からすべてのアイテムを削除します"),
                   actions: [
-                    FlatButton(
+                    TextButton(
                       onPressed: () => Navigator.pop(context, false),
                       child: const Text("Cancel"),
                     ),
-                    FlatButton(
+                    TextButton(
                       onPressed: () => Navigator.pop(context, true),
                       child: const Text("OK"),
                     ),

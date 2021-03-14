@@ -40,7 +40,7 @@ class _UpdaterState extends State<Updater> {
               title: const Text(title),
               content: const Text(message),
               actions: [
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     if (Platform.isAndroid) {
                       SystemNavigator.pop(animated: true);
