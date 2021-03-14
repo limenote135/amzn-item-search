@@ -133,6 +133,6 @@ class _Body extends HookWidget {
     if (prices.usedPrices != null && prices.usedPrices.isNotEmpty) {
       return prices.usedPrices.first.price;
     }
-    return -1;
+    return 0;
   }
 }
