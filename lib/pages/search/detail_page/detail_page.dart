@@ -99,8 +99,8 @@ class _Body extends HookWidget {
           InkWell(
             onLongPress: () {
               Clipboard.setData(ClipboardData(text: item.jan)).then((_) {
-                Scaffold.of(context).removeCurrentSnackBar();
-                Scaffold.of(context).showSnackBar(const SnackBar(
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text("JAN コードをコピーしました"),
                 ));
               });
@@ -113,8 +113,8 @@ class _Body extends HookWidget {
           InkWell(
             onLongPress: () {
               Clipboard.setData(ClipboardData(text: item.asin)).then((_) {
-                Scaffold.of(context).removeCurrentSnackBar();
-                Scaffold.of(context).showSnackBar(const SnackBar(
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text("ASIN をコピーしました"),
                 ));
               });

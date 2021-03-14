@@ -55,11 +55,11 @@ class _Body extends HookWidget {
                     title: const Text("削除の確認"),
                     content: const Text("仕入れ先を削除してもよろしいですか？"),
                     actions: [
-                      FlatButton(
+                      TextButton(
                         onPressed: () => Navigator.pop(context, false),
                         child: const Text("キャンセル"),
                       ),
-                      FlatButton(
+                      TextButton(
                         onPressed: () => Navigator.pop(context, true),
                         child: const Text("OK"),
                       ),

@@ -5,6 +5,7 @@ import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/sku_replacer.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -127,15 +128,18 @@ class __PatternEditFormState extends State<_PatternEditForm> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(yearVar),
               child: const Text("年"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(monthVar),
               child: const Text("月"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(dayVar),
               child: const Text("日"),
             ),
@@ -146,42 +150,51 @@ class __PatternEditFormState extends State<_PatternEditForm> {
           spacing: 8,
           direction: Axis.horizontal,
           children: [
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(asinVar),
               child: const Text("ASIN"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(janVar),
               child: const Text("JAN"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(condVar),
               child: const Text("状態"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(quantityVar),
               child: const Text("購入数"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(purchaseVar),
               child: const Text("仕入れ値"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(sellVar),
               child: const Text("販売価格"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(profitVar),
               child: const Text("粗利益"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(breakEvenVar),
               child: const Text("損益分岐"),
             ),
           ],
         ),
         const ThemeDivider(),
-        RaisedButton(
+        ElevatedButton(
+          style: raisedButtonStyle(context),
           onPressed: () {
             context
                 .read(generalSettingsControllerProvider)

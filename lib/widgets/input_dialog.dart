@@ -29,11 +29,11 @@ class InputDialog<T> extends HookWidget {
         },
       ),
       actions: [
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.pop(context),
           child: const Text("キャンセル"),
         ),
-        FlatButton(
+        TextButton(
           onPressed: val.value == null
               ? null
               : () {
