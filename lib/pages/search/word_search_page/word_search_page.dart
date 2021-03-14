@@ -1,5 +1,7 @@
 import 'package:amasearch/controllers/search_item_list_controller.dart';
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/mws.dart';
+import 'package:amasearch/models/mws_category.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -22,15 +24,14 @@ class WordSearchPage extends StatelessWidget {
   }
 }
 
-final _currentWordProvider = StateProvider((_) => "");
-
 class _Body extends HookWidget {
   const _Body({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
-    final word = useProvider(_currentWordProvider);
+    final word = useState<String>("");
+    final category = useState<String>("All");
     return Column(
       children: [
         Padding(
@@ -45,14 +46,35 @@ class _Body extends HookWidget {
               ),
             ),
             onSubmitted: (value) {
-              if (value != "") {
-                word.state = value;
+              if (value != "" && word.value != value) {
+                word.value = value;
               }
             },
           ),
         ),
-        if (word.state != "")
-          useProvider(searchItemResultProvider(word.state)).when(
+        ListTile(
+          title: const Text("カテゴリー"),
+          trailing: DropdownButton(
+            value: category.value,
+            items: mwsSearchCategoryMap.entries.map((entry) {
+              return DropdownMenuItem(
+                child: Text(entry.key),
+                value: entry.value,
+              );
+            }).toList(),
+            onChanged: (String value) {
+              if (category.value != value) {
+                category.value = value;
+              }
+            },
+          ),
+        ),
+        const ThemeDivider(),
+        if (word.value != "")
+          useProvider(searchItemResultProvider(ListMatchingProductRequest(
+            query: word.value,
+            category: category.value,
+          ))).when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, stackTrace) => Text("$error"),
             data: (value) {
