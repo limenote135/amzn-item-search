@@ -27,10 +27,33 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       readAloudPatterns: (fields[7] as List).cast<ReadAloudPattern>(),
       readAloudVolume: fields[8] as double,
       readAloudSpeed: fields[9] as double?,
-      customButtons: (fields[10] as List).cast<CustomButtonDetail>(),
-      csvOrder: (fields[11] as List).cast<CsvColumn>(),
-      minProfit: fields[12] as int,
-      getStocks: fields[13] as bool,
+      customButtons: (fields[10] as List?)?.cast<CustomButtonDetail>() ??
+          const [
+            CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
+            CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
+            CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
+            CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
+            CustomButtonDetail(enable: false, title: "ボタン5", pattern: ""),
+          ],
+      csvOrder: (fields[11] as List?)?.cast<CsvColumn>() ??
+          const [
+            CsvColumn.asin,
+            CsvColumn.jan,
+            CsvColumn.title,
+            CsvColumn.sellPrice,
+            CsvColumn.purchasePrice,
+            CsvColumn.profit,
+            CsvColumn.listingPrice,
+            CsvColumn.quantity,
+            CsvColumn.condition,
+            CsvColumn.shipment,
+            CsvColumn.sku,
+            CsvColumn.retailer,
+            CsvColumn.comment,
+            CsvColumn.purchaseDate
+          ],
+      minProfit: fields[12] as int? ?? 0,
+      getStocks: fields[13] as bool? ?? false,
     );
   }
 
