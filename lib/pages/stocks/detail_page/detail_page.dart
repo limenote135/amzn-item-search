@@ -240,8 +240,8 @@ class _ItemInfoTile extends HookWidget {
                 onLongPress: () {
                   Clipboard.setData(ClipboardData(text: item.item.jan))
                       .then((_) {
-                    Scaffold.of(context).removeCurrentSnackBar();
-                    Scaffold.of(context).showSnackBar(const SnackBar(
+                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("JAN コードをコピーしました"),
                     ));
                   });
@@ -260,8 +260,8 @@ class _ItemInfoTile extends HookWidget {
                 onLongPress: () {
                   Clipboard.setData(ClipboardData(text: item.item.asin))
                       .then((_) {
-                    Scaffold.of(context).removeCurrentSnackBar();
-                    Scaffold.of(context).showSnackBar(const SnackBar(
+                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("ASIN をコピーしました"),
                     ));
                   });

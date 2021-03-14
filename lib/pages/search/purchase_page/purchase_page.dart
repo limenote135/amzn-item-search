@@ -9,6 +9,7 @@ import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/form.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
+import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/uuid.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,8 @@ class _Body extends HookWidget {
         },
         action: ReactiveFormConsumer(
           builder: (context, form, child) {
-            return RaisedButton(
+            return ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: form.invalid
                   ? null
                   : () => _onSubmit(context, form, uuid.v4(), item),

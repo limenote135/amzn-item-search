@@ -25,7 +25,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   var _lastRead = "";
   var _lastReadTime = DateTime.now();
   var _lastType = SearchType.jan;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   void initState() {
@@ -95,7 +95,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                 title: const Text("エラー"),
                 content: const Text("バーコードリーダーを利用するためにはカメラの利用を許可する必要があります。"),
                 actions: [
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       Navigator.of(context).popUntil(ModalRoute.withName("/"));
                     },
