@@ -339,6 +339,154 @@ abstract class _GetProductPricesResponse implements GetProductPricesResponse {
   _$GetProductPricesResponseCopyWith<_GetProductPricesResponse> get copyWith;
 }
 
+/// @nodoc
+class _$ListMatchingProductRequestTearOff {
+  const _$ListMatchingProductRequestTearOff();
+
+// ignore: unused_element
+  _ListMatchingProductRequest call(
+      {@required String query, @required String category}) {
+    return _ListMatchingProductRequest(
+      query: query,
+      category: category,
+    );
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $ListMatchingProductRequest = _$ListMatchingProductRequestTearOff();
+
+/// @nodoc
+mixin _$ListMatchingProductRequest {
+  String get query;
+  String get category;
+
+  @JsonKey(ignore: true)
+  $ListMatchingProductRequestCopyWith<ListMatchingProductRequest> get copyWith;
+}
+
+/// @nodoc
+abstract class $ListMatchingProductRequestCopyWith<$Res> {
+  factory $ListMatchingProductRequestCopyWith(ListMatchingProductRequest value,
+          $Res Function(ListMatchingProductRequest) then) =
+      _$ListMatchingProductRequestCopyWithImpl<$Res>;
+  $Res call({String query, String category});
+}
+
+/// @nodoc
+class _$ListMatchingProductRequestCopyWithImpl<$Res>
+    implements $ListMatchingProductRequestCopyWith<$Res> {
+  _$ListMatchingProductRequestCopyWithImpl(this._value, this._then);
+
+  final ListMatchingProductRequest _value;
+  // ignore: unused_field
+  final $Res Function(ListMatchingProductRequest) _then;
+
+  @override
+  $Res call({
+    Object query = freezed,
+    Object category = freezed,
+  }) {
+    return _then(_value.copyWith(
+      query: query == freezed ? _value.query : query as String,
+      category: category == freezed ? _value.category : category as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$ListMatchingProductRequestCopyWith<$Res>
+    implements $ListMatchingProductRequestCopyWith<$Res> {
+  factory _$ListMatchingProductRequestCopyWith(
+          _ListMatchingProductRequest value,
+          $Res Function(_ListMatchingProductRequest) then) =
+      __$ListMatchingProductRequestCopyWithImpl<$Res>;
+  @override
+  $Res call({String query, String category});
+}
+
+/// @nodoc
+class __$ListMatchingProductRequestCopyWithImpl<$Res>
+    extends _$ListMatchingProductRequestCopyWithImpl<$Res>
+    implements _$ListMatchingProductRequestCopyWith<$Res> {
+  __$ListMatchingProductRequestCopyWithImpl(_ListMatchingProductRequest _value,
+      $Res Function(_ListMatchingProductRequest) _then)
+      : super(_value, (v) => _then(v as _ListMatchingProductRequest));
+
+  @override
+  _ListMatchingProductRequest get _value =>
+      super._value as _ListMatchingProductRequest;
+
+  @override
+  $Res call({
+    Object query = freezed,
+    Object category = freezed,
+  }) {
+    return _then(_ListMatchingProductRequest(
+      query: query == freezed ? _value.query : query as String,
+      category: category == freezed ? _value.category : category as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
+  const _$_ListMatchingProductRequest(
+      {@required this.query, @required this.category})
+      : assert(query != null),
+        assert(category != null);
+
+  @override
+  final String query;
+  @override
+  final String category;
+
+  @override
+  String toString() {
+    return 'ListMatchingProductRequest(query: $query, category: $category)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ListMatchingProductRequest &&
+            (identical(other.query, query) ||
+                const DeepCollectionEquality().equals(other.query, query)) &&
+            (identical(other.category, category) ||
+                const DeepCollectionEquality()
+                    .equals(other.category, category)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(query) ^
+      const DeepCollectionEquality().hash(category);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ListMatchingProductRequestCopyWith<_ListMatchingProductRequest>
+      get copyWith => __$ListMatchingProductRequestCopyWithImpl<
+          _ListMatchingProductRequest>(this, _$identity);
+}
+
+abstract class _ListMatchingProductRequest
+    implements ListMatchingProductRequest {
+  const factory _ListMatchingProductRequest(
+      {@required String query,
+      @required String category}) = _$_ListMatchingProductRequest;
+
+  @override
+  String get query;
+  @override
+  String get category;
+  @override
+  @JsonKey(ignore: true)
+  _$ListMatchingProductRequestCopyWith<_ListMatchingProductRequest>
+      get copyWith;
+}
+
 ListMatchingProductResponse _$ListMatchingProductResponseFromJson(
     Map<String, dynamic> json) {
   return _ListMatchingProductResponse.fromJson(json);

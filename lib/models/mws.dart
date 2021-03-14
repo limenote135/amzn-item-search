@@ -31,6 +31,14 @@ abstract class GetProductPricesResponse with _$GetProductPricesResponse {
 }
 
 @freezed
+abstract class ListMatchingProductRequest with _$ListMatchingProductRequest {
+  const factory ListMatchingProductRequest({
+    @required String query,
+    @required String category,
+  }) = _ListMatchingProductRequest;
+}
+
+@freezed
 abstract class ListMatchingProductResponse with _$ListMatchingProductResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory ListMatchingProductResponse({

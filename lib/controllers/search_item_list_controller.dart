@@ -1,10 +1,12 @@
 import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/mws.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final searchItemResultProvider =
-    FutureProvider.family<List<AsinData>, String>((ref, query) async {
+    FutureProvider.family<List<AsinData>, ListMatchingProductRequest>(
+        (ref, req) async {
   final mws = ref.read(mwsRepositoryProvider);
-  final resp = await mws.listMatchingProducts(query);
+  final resp = await mws.listMatchingProducts(req.query, req.category);
   return resp.items;
 });
