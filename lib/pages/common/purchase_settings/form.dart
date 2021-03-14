@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:amasearch/models/enums/item_sub_condition.dart';
+import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -39,7 +40,9 @@ final formValueProvider =
     ],
     useFbaField: item.useFba,
     quantityField: item.amount,
-    conditionField: item.subCondition.toItemPurchaseCondition(),
+    // 型推論されないので明示的に型を指定する
+    conditionField: FormControl<PurchaseItemCondition>(
+        value: item.subCondition.toItemPurchaseCondition()),
     autogenSkuField: item.autogenSku,
     skuField: item.sku,
     retailerField: item.retailer,
