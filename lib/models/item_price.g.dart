@@ -123,11 +123,9 @@ _$_PriceDetail _$_$_PriceDetailFromJson(Map<String, dynamic> json) {
     itemCondition:
         const ItemConditionConverter().fromJson(json['condition'] as String?),
     subCondition: const ItemSubConditionConverter()
-            .fromJson(json['sub_condition'] as String?) ??
-        ItemSubCondition.newItem,
+            .fromJson(json['sub_condition'] as String?),
     channel: const FulfillmentChannelConverter()
-            .fromJson(json['channel'] as String?) ??
-        FulfillmentChannel.merchant,
+            .fromJson(json['channel'] as String?),
     price: json['price'] as int? ?? 0,
     shipping: json['shipping'] as int? ?? 0,
     point: json['point'] as int? ?? 0,
