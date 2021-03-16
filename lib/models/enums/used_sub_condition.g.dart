@@ -24,7 +24,7 @@ class UsedSubConditionAdapter extends TypeAdapter<UsedSubCondition> {
       case 4:
         return UsedSubCondition.acceptable;
       default:
-        return null;
+        return UsedSubCondition.all;
     }
   }
 

@@ -71,11 +71,11 @@ Future<void> initFirebase() async {
   }
 
   // Pass all uncaught errors to Crashlytics.
-  final Function originalOnError = FlutterError.onError;
+  final Function? originalOnError = FlutterError.onError;
   FlutterError.onError = (FlutterErrorDetails errorDetails) async {
     await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
     // Forward to original handler.
-    originalOnError(errorDetails);
+    originalOnError!(errorDetails);
   };
 }
 

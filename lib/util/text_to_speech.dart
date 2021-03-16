@@ -18,7 +18,7 @@ class TextToSpeech {
 
       await _flutterTts.setVolume(settings.readAloudVolume);
       if (settings.readAloudSpeed != null) {
-        await _flutterTts.setSpeechRate(settings.readAloudSpeed);
+        await _flutterTts.setSpeechRate(settings.readAloudSpeed!);
       } else {
         final range = await getRange();
         await _flutterTts.setSpeechRate(range.normal);

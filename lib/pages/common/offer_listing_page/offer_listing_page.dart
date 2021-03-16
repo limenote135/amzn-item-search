@@ -13,7 +13,7 @@ final currentOfferListingParamProvider =
     ScopedProvider<OfferListingsParams>(null);
 
 class OfferListingPage extends StatelessWidget {
-  const OfferListingPage({Key key}) : super(key: key);
+  const OfferListingPage({Key? key}) : super(key: key);
   static const String routeName = "/offer_listing";
 
   static Route<void> route(OfferListingsParams params) {
@@ -42,7 +42,7 @@ class OfferListingPage extends StatelessWidget {
 final currentIndex = ScopedProvider<int>(null);
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

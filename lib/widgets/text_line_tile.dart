@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class TextListTile extends StatelessWidget {
   const TextListTile({
-    Key key,
-    @required this.leading,
-    @required this.main,
+    Key? key,
+    required this.leading,
+    required this.main,
   }) : super(key: key);
 
   final Widget leading;
@@ -19,9 +19,9 @@ class TextListTile extends StatelessWidget {
 
 class TextLine extends StatelessWidget {
   const TextLine({
-    Key key,
-    @required this.leading,
-    @required this.main,
+    Key? key,
+    required this.leading,
+    required this.main,
   }) : super(key: key);
 
   final Widget leading;

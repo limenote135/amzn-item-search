@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final currentOfferItemProvider = ScopedProvider<OfferItem>(null);
 
 class OfferChips extends HookWidget {
-  const OfferChips({Key key}) : super(key: key);
+  const OfferChips({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

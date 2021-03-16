@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'item_price.dart';
 
@@ -8,6 +8,10 @@ part of 'item_price.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 ItemPrices _$ItemPricesFromJson(Map<String, dynamic> json) {
   return _ItemPrices.fromJson(json);
 }
@@ -16,19 +20,15 @@ ItemPrices _$ItemPricesFromJson(Map<String, dynamic> json) {
 class _$ItemPricesTearOff {
   const _$ItemPricesTearOff();
 
-// ignore: unused_element
   _ItemPrices call(
-      {@required
-      @HiveField(0)
+      {@HiveField(0)
       @JsonKey(name: "new_offers")
-          List<PriceDetail> newPrices,
-      @required
+          required List<PriceDetail> newPrices,
       @HiveField(1)
       @JsonKey(name: "used_offers")
-          List<PriceDetail> usedPrices,
-      @required
+          required List<PriceDetail> usedPrices,
       @HiveField(2)
-          FeeInfo feeInfo}) {
+          required FeeInfo feeInfo}) {
     return _ItemPrices(
       newPrices: newPrices,
       usedPrices: usedPrices,
@@ -36,30 +36,29 @@ class _$ItemPricesTearOff {
     );
   }
 
-// ignore: unused_element
   ItemPrices fromJson(Map<String, Object> json) {
     return ItemPrices.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ItemPrices = _$ItemPricesTearOff();
 
 /// @nodoc
 mixin _$ItemPrices {
   @HiveField(0)
   @JsonKey(name: "new_offers")
-  List<PriceDetail> get newPrices;
+  List<PriceDetail> get newPrices => throw _privateConstructorUsedError;
   @HiveField(1)
   @JsonKey(name: "used_offers")
-  List<PriceDetail> get usedPrices;
+  List<PriceDetail> get usedPrices => throw _privateConstructorUsedError;
   @HiveField(2)
-  FeeInfo get feeInfo;
+  FeeInfo get feeInfo => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ItemPricesCopyWith<ItemPrices> get copyWith;
+  $ItemPricesCopyWith<ItemPrices> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -85,26 +84,28 @@ class _$ItemPricesCopyWithImpl<$Res> implements $ItemPricesCopyWith<$Res> {
 
   @override
   $Res call({
-    Object newPrices = freezed,
-    Object usedPrices = freezed,
-    Object feeInfo = freezed,
+    Object? newPrices = freezed,
+    Object? usedPrices = freezed,
+    Object? feeInfo = freezed,
   }) {
     return _then(_value.copyWith(
       newPrices: newPrices == freezed
           ? _value.newPrices
-          : newPrices as List<PriceDetail>,
+          : newPrices // ignore: cast_nullable_to_non_nullable
+              as List<PriceDetail>,
       usedPrices: usedPrices == freezed
           ? _value.usedPrices
-          : usedPrices as List<PriceDetail>,
-      feeInfo: feeInfo == freezed ? _value.feeInfo : feeInfo as FeeInfo,
+          : usedPrices // ignore: cast_nullable_to_non_nullable
+              as List<PriceDetail>,
+      feeInfo: feeInfo == freezed
+          ? _value.feeInfo
+          : feeInfo // ignore: cast_nullable_to_non_nullable
+              as FeeInfo,
     ));
   }
 
   @override
   $FeeInfoCopyWith<$Res> get feeInfo {
-    if (_value.feeInfo == null) {
-      return null;
-    }
     return $FeeInfoCopyWith<$Res>(_value.feeInfo, (value) {
       return _then(_value.copyWith(feeInfo: value));
     });
@@ -138,18 +139,23 @@ class __$ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object newPrices = freezed,
-    Object usedPrices = freezed,
-    Object feeInfo = freezed,
+    Object? newPrices = freezed,
+    Object? usedPrices = freezed,
+    Object? feeInfo = freezed,
   }) {
     return _then(_ItemPrices(
       newPrices: newPrices == freezed
           ? _value.newPrices
-          : newPrices as List<PriceDetail>,
+          : newPrices // ignore: cast_nullable_to_non_nullable
+              as List<PriceDetail>,
       usedPrices: usedPrices == freezed
           ? _value.usedPrices
-          : usedPrices as List<PriceDetail>,
-      feeInfo: feeInfo == freezed ? _value.feeInfo : feeInfo as FeeInfo,
+          : usedPrices // ignore: cast_nullable_to_non_nullable
+              as List<PriceDetail>,
+      feeInfo: feeInfo == freezed
+          ? _value.feeInfo
+          : feeInfo // ignore: cast_nullable_to_non_nullable
+              as FeeInfo,
     ));
   }
 }
@@ -160,12 +166,9 @@ class __$ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
 /// @nodoc
 class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
   const _$_ItemPrices(
-      {@required @HiveField(0) @JsonKey(name: "new_offers") this.newPrices,
-      @required @HiveField(1) @JsonKey(name: "used_offers") this.usedPrices,
-      @required @HiveField(2) this.feeInfo})
-      : assert(newPrices != null),
-        assert(usedPrices != null),
-        assert(feeInfo != null);
+      {@HiveField(0) @JsonKey(name: "new_offers") required this.newPrices,
+      @HiveField(1) @JsonKey(name: "used_offers") required this.usedPrices,
+      @HiveField(2) required this.feeInfo});
 
   factory _$_ItemPrices.fromJson(Map<String, dynamic> json) =>
       _$_$_ItemPricesFromJson(json);
@@ -231,17 +234,14 @@ class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
 
 abstract class _ItemPrices implements ItemPrices {
   const factory _ItemPrices(
-      {@required
-      @HiveField(0)
+      {@HiveField(0)
       @JsonKey(name: "new_offers")
-          List<PriceDetail> newPrices,
-      @required
+          required List<PriceDetail> newPrices,
       @HiveField(1)
       @JsonKey(name: "used_offers")
-          List<PriceDetail> usedPrices,
-      @required
+          required List<PriceDetail> usedPrices,
       @HiveField(2)
-          FeeInfo feeInfo}) = _$_ItemPrices;
+          required FeeInfo feeInfo}) = _$_ItemPrices;
 
   factory _ItemPrices.fromJson(Map<String, dynamic> json) =
       _$_ItemPrices.fromJson;
@@ -249,17 +249,18 @@ abstract class _ItemPrices implements ItemPrices {
   @override
   @HiveField(0)
   @JsonKey(name: "new_offers")
-  List<PriceDetail> get newPrices;
+  List<PriceDetail> get newPrices => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
   @JsonKey(name: "used_offers")
-  List<PriceDetail> get usedPrices;
+  List<PriceDetail> get usedPrices => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
-  FeeInfo get feeInfo;
+  FeeInfo get feeInfo => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ItemPricesCopyWith<_ItemPrices> get copyWith;
+  _$ItemPricesCopyWith<_ItemPrices> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 PriceDetail _$PriceDetailFromJson(Map<String, dynamic> json) {
@@ -270,7 +271,6 @@ PriceDetail _$PriceDetailFromJson(Map<String, dynamic> json) {
 class _$PriceDetailTearOff {
   const _$PriceDetailTearOff();
 
-// ignore: unused_element
   _PriceDetail call(
       {@HiveField(0)
       @JsonKey(name: "condition")
@@ -298,14 +298,12 @@ class _$PriceDetailTearOff {
     );
   }
 
-// ignore: unused_element
   PriceDetail fromJson(Map<String, Object> json) {
     return PriceDetail.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $PriceDetail = _$PriceDetailTearOff();
 
 /// @nodoc
@@ -313,23 +311,24 @@ mixin _$PriceDetail {
   @HiveField(0)
   @JsonKey(name: "condition")
   @ItemConditionConverter()
-  ItemCondition get itemCondition;
+  ItemCondition get itemCondition => throw _privateConstructorUsedError;
   @HiveField(1)
   @ItemSubConditionConverter()
-  ItemSubCondition get subCondition;
+  ItemSubCondition get subCondition => throw _privateConstructorUsedError;
   @HiveField(2)
   @FulfillmentChannelConverter()
-  FulfillmentChannel get channel;
+  FulfillmentChannel get channel => throw _privateConstructorUsedError;
   @HiveField(3)
-  int get price;
+  int get price => throw _privateConstructorUsedError;
   @HiveField(4)
-  int get shipping;
+  int get shipping => throw _privateConstructorUsedError;
   @HiveField(5)
-  int get point;
+  int get point => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PriceDetailCopyWith<PriceDetail> get copyWith;
+  $PriceDetailCopyWith<PriceDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -366,25 +365,38 @@ class _$PriceDetailCopyWithImpl<$Res> implements $PriceDetailCopyWith<$Res> {
 
   @override
   $Res call({
-    Object itemCondition = freezed,
-    Object subCondition = freezed,
-    Object channel = freezed,
-    Object price = freezed,
-    Object shipping = freezed,
-    Object point = freezed,
+    Object? itemCondition = freezed,
+    Object? subCondition = freezed,
+    Object? channel = freezed,
+    Object? price = freezed,
+    Object? shipping = freezed,
+    Object? point = freezed,
   }) {
     return _then(_value.copyWith(
       itemCondition: itemCondition == freezed
           ? _value.itemCondition
-          : itemCondition as ItemCondition,
+          : itemCondition // ignore: cast_nullable_to_non_nullable
+              as ItemCondition,
       subCondition: subCondition == freezed
           ? _value.subCondition
-          : subCondition as ItemSubCondition,
-      channel:
-          channel == freezed ? _value.channel : channel as FulfillmentChannel,
-      price: price == freezed ? _value.price : price as int,
-      shipping: shipping == freezed ? _value.shipping : shipping as int,
-      point: point == freezed ? _value.point : point as int,
+          : subCondition // ignore: cast_nullable_to_non_nullable
+              as ItemSubCondition,
+      channel: channel == freezed
+          ? _value.channel
+          : channel // ignore: cast_nullable_to_non_nullable
+              as FulfillmentChannel,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      shipping: shipping == freezed
+          ? _value.shipping
+          : shipping // ignore: cast_nullable_to_non_nullable
+              as int,
+      point: point == freezed
+          ? _value.point
+          : point // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -427,25 +439,38 @@ class __$PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object itemCondition = freezed,
-    Object subCondition = freezed,
-    Object channel = freezed,
-    Object price = freezed,
-    Object shipping = freezed,
-    Object point = freezed,
+    Object? itemCondition = freezed,
+    Object? subCondition = freezed,
+    Object? channel = freezed,
+    Object? price = freezed,
+    Object? shipping = freezed,
+    Object? point = freezed,
   }) {
     return _then(_PriceDetail(
       itemCondition: itemCondition == freezed
           ? _value.itemCondition
-          : itemCondition as ItemCondition,
+          : itemCondition // ignore: cast_nullable_to_non_nullable
+              as ItemCondition,
       subCondition: subCondition == freezed
           ? _value.subCondition
-          : subCondition as ItemSubCondition,
-      channel:
-          channel == freezed ? _value.channel : channel as FulfillmentChannel,
-      price: price == freezed ? _value.price : price as int,
-      shipping: shipping == freezed ? _value.shipping : shipping as int,
-      point: point == freezed ? _value.point : point as int,
+          : subCondition // ignore: cast_nullable_to_non_nullable
+              as ItemSubCondition,
+      channel: channel == freezed
+          ? _value.channel
+          : channel // ignore: cast_nullable_to_non_nullable
+              as FulfillmentChannel,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      shipping: shipping == freezed
+          ? _value.shipping
+          : shipping // ignore: cast_nullable_to_non_nullable
+              as int,
+      point: point == freezed
+          ? _value.point
+          : point // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -471,13 +496,7 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
       @HiveField(4)
           this.shipping = 0,
       @HiveField(5)
-          this.point = 0})
-      : assert(itemCondition != null),
-        assert(subCondition != null),
-        assert(channel != null),
-        assert(price != null),
-        assert(shipping != null),
-        assert(point != null);
+          this.point = 0});
 
   factory _$_PriceDetail.fromJson(Map<String, dynamic> json) =>
       _$_$_PriceDetailFromJson(json);
@@ -597,25 +616,26 @@ abstract class _PriceDetail implements PriceDetail {
   @HiveField(0)
   @JsonKey(name: "condition")
   @ItemConditionConverter()
-  ItemCondition get itemCondition;
+  ItemCondition get itemCondition => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
   @ItemSubConditionConverter()
-  ItemSubCondition get subCondition;
+  ItemSubCondition get subCondition => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
   @FulfillmentChannelConverter()
-  FulfillmentChannel get channel;
+  FulfillmentChannel get channel => throw _privateConstructorUsedError;
   @override
   @HiveField(3)
-  int get price;
+  int get price => throw _privateConstructorUsedError;
   @override
   @HiveField(4)
-  int get shipping;
+  int get shipping => throw _privateConstructorUsedError;
   @override
   @HiveField(5)
-  int get point;
+  int get point => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PriceDetailCopyWith<_PriceDetail> get copyWith;
+  _$PriceDetailCopyWith<_PriceDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -18,7 +18,7 @@ class ItemConditionAdapter extends TypeAdapter<ItemCondition> {
       case 1:
         return ItemCondition.usedItem;
       default:
-        return null;
+        return ItemCondition.newItem;
     }
   }
 

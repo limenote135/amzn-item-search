@@ -24,7 +24,7 @@ class ItemSubConditionAdapter extends TypeAdapter<ItemSubCondition> {
       case 4:
         return ItemSubCondition.acceptable;
       default:
-        return null;
+        return ItemSubCondition.newItem;
     }
   }
 

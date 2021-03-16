@@ -7,7 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TargetProfitPage extends StatelessWidget {
-  const TargetProfitPage({Key key}) : super(key: key);
+  const TargetProfitPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/targetProfit";
 
   static Route<void> route() {
@@ -29,7 +29,7 @@ class TargetProfitPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class _Body extends HookWidget {
           onTap: () async {
             final ret = await showDialog<int>(
               context: context,
-              builder: (context) => InputDialog<int>(
+              builder: (context) => InputDialog<int?>(
                 title: const Text("目標利益率"),
                 keyboardType: TextInputType.number,
                 validate: (value) {
@@ -96,7 +96,7 @@ class _Body extends HookWidget {
           onTap: () async {
             final ret = await showDialog<int>(
               context: context,
-              builder: (context) => InputDialog<int>(
+              builder: (context) => InputDialog<int?>(
                 title: const Text("最低利益額"),
                 keyboardType: TextInputType.number,
                 validate: (value) {

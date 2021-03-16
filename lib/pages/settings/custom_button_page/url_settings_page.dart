@@ -1,4 +1,5 @@
 import 'package:amasearch/models/general_settings.dart';
+import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ const usedProfitVariable = "{usedProfit}";
 const newProfitVariable = "{newProfit}";
 
 class UrlSettingsPage extends StatelessWidget {
-  const UrlSettingsPage({Key key}) : super(key: key);
+  const UrlSettingsPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/custom_button/url";
 
   static Route<CustomButtonDetail> route(CustomButtonDetail button) {
@@ -40,7 +41,7 @@ class UrlSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,19 +104,22 @@ class __UrlEditFormState extends State<_UrlEditForm> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(janVariable);
               },
               child: const Text("JAN"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(asinVariable);
               },
               child: const Text("ASIN"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(titleVariable);
               },
@@ -127,7 +131,8 @@ class __UrlEditFormState extends State<_UrlEditForm> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () {
                 Navigator.of(context).pop(CustomButtonDetail(
                   enable: widget.button.enable,

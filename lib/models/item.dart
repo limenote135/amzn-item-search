@@ -37,7 +37,7 @@ final itemFutureProvider =
 
   if (settings.enableReadAloud) {
     final data = ref.read(result.state);
-    if (data.asins == null || data.asins.isEmpty) {
+    if (data.asins.isEmpty) {
       tts.speak("見つかりませんでした。");
     } else {
       final template = settings.readAloudPatterns[settings.patternIndex];
@@ -79,51 +79,51 @@ final itemFutureProviderImpl =
 });
 
 @freezed
-abstract class Item with _$Item {
+class Item with _$Item {
   @HiveType(typeId: itemTypeId)
   const factory Item({
-    @HiveField(0) @required String searchDate,
-    @HiveField(1) @required String jan,
+    @HiveField(0) required String searchDate,
+    @HiveField(1) required String jan,
     @HiveField(2) @Default(<AsinData>[]) List<AsinData> asins,
   }) = _Item;
 }
 
 @freezed
-abstract class AsinData with _$AsinData {
+class AsinData with _$AsinData {
   @JsonSerializable(fieldRename: FieldRename.snake)
   @HiveType(typeId: asinDataTypeId)
   const factory AsinData({
     @HiveField(0) @Default("") String jan,
-    @HiveField(1) @required String asin,
+    @HiveField(1) required String asin,
     @HiveField(2) @Default(0) int listPrice, // 参考価格
-    @HiveField(3) @required String imageUrl,
-    @HiveField(4) @required String title,
+    @HiveField(3) required String imageUrl,
+    @HiveField(4) required String title,
     @HiveField(5) @Default(0) int rank,
     @HiveField(6) @Default(" - ") String quantity, // セット数
-    @HiveField(7) ItemPrices prices,
-    @HiveField(8) @JsonKey(ignore: true) Uint8List imageData,
-    @HiveField(9) @ItemCategoryConverter() @required String category,
+    @HiveField(7) ItemPrices? prices,
+    @HiveField(8) @JsonKey(ignore: true) Uint8List? imageData,
+    @HiveField(9) @ItemCategoryConverter() required String category,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>
       _$AsinDataFromJson(json);
 }
 
-class ItemCategoryConverter implements JsonConverter<String, String> {
+class ItemCategoryConverter implements JsonConverter<String, String?> {
   const ItemCategoryConverter();
 
   @override
-  String toJson(String object) {
+  String? toJson(String object) {
     return object; // JSON にするときは日本語のカテゴリを使う
   }
 
   @override
-  String fromJson(String json) {
+  String fromJson(String? json) {
     if (json == null) {
       return "不明";
     }
     if (mwsCategoryMap.containsKey(json)) {
-      return mwsCategoryMap[json];
+      return mwsCategoryMap[json]!;
     }
     return json;
   }

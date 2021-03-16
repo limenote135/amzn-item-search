@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'item.dart';
 
@@ -9,14 +9,16 @@ part of 'item.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$ItemTearOff {
   const _$ItemTearOff();
 
-// ignore: unused_element
   _Item call(
-      {@required @HiveField(0) String searchDate,
-      @required @HiveField(1) String jan,
+      {@HiveField(0) required String searchDate,
+      @HiveField(1) required String jan,
       @HiveField(2) List<AsinData> asins = const <AsinData>[]}) {
     return _Item(
       searchDate: searchDate,
@@ -27,20 +29,19 @@ class _$ItemTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Item = _$ItemTearOff();
 
 /// @nodoc
 mixin _$Item {
   @HiveField(0)
-  String get searchDate;
+  String get searchDate => throw _privateConstructorUsedError;
   @HiveField(1)
-  String get jan;
+  String get jan => throw _privateConstructorUsedError;
   @HiveField(2)
-  List<AsinData> get asins;
+  List<AsinData> get asins => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ItemCopyWith<Item> get copyWith;
+  $ItemCopyWith<Item> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -63,15 +64,23 @@ class _$ItemCopyWithImpl<$Res> implements $ItemCopyWith<$Res> {
 
   @override
   $Res call({
-    Object searchDate = freezed,
-    Object jan = freezed,
-    Object asins = freezed,
+    Object? searchDate = freezed,
+    Object? jan = freezed,
+    Object? asins = freezed,
   }) {
     return _then(_value.copyWith(
-      searchDate:
-          searchDate == freezed ? _value.searchDate : searchDate as String,
-      jan: jan == freezed ? _value.jan : jan as String,
-      asins: asins == freezed ? _value.asins : asins as List<AsinData>,
+      searchDate: searchDate == freezed
+          ? _value.searchDate
+          : searchDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      jan: jan == freezed
+          ? _value.jan
+          : jan // ignore: cast_nullable_to_non_nullable
+              as String,
+      asins: asins == freezed
+          ? _value.asins
+          : asins // ignore: cast_nullable_to_non_nullable
+              as List<AsinData>,
     ));
   }
 }
@@ -98,15 +107,23 @@ class __$ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object searchDate = freezed,
-    Object jan = freezed,
-    Object asins = freezed,
+    Object? searchDate = freezed,
+    Object? jan = freezed,
+    Object? asins = freezed,
   }) {
     return _then(_Item(
-      searchDate:
-          searchDate == freezed ? _value.searchDate : searchDate as String,
-      jan: jan == freezed ? _value.jan : jan as String,
-      asins: asins == freezed ? _value.asins : asins as List<AsinData>,
+      searchDate: searchDate == freezed
+          ? _value.searchDate
+          : searchDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      jan: jan == freezed
+          ? _value.jan
+          : jan // ignore: cast_nullable_to_non_nullable
+              as String,
+      asins: asins == freezed
+          ? _value.asins
+          : asins // ignore: cast_nullable_to_non_nullable
+              as List<AsinData>,
     ));
   }
 }
@@ -116,12 +133,9 @@ class __$ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res>
 /// @nodoc
 class _$_Item implements _Item {
   const _$_Item(
-      {@required @HiveField(0) this.searchDate,
-      @required @HiveField(1) this.jan,
-      @HiveField(2) this.asins = const <AsinData>[]})
-      : assert(searchDate != null),
-        assert(jan != null),
-        assert(asins != null);
+      {@HiveField(0) required this.searchDate,
+      @HiveField(1) required this.jan,
+      @HiveField(2) this.asins = const <AsinData>[]});
 
   @override
   @HiveField(0)
@@ -167,22 +181,22 @@ class _$_Item implements _Item {
 
 abstract class _Item implements Item {
   const factory _Item(
-      {@required @HiveField(0) String searchDate,
-      @required @HiveField(1) String jan,
+      {@HiveField(0) required String searchDate,
+      @HiveField(1) required String jan,
       @HiveField(2) List<AsinData> asins}) = _$_Item;
 
   @override
   @HiveField(0)
-  String get searchDate;
+  String get searchDate => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
-  String get jan;
+  String get jan => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
-  List<AsinData> get asins;
+  List<AsinData> get asins => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ItemCopyWith<_Item> get copyWith;
+  _$ItemCopyWith<_Item> get copyWith => throw _privateConstructorUsedError;
 }
 
 AsinData _$AsinDataFromJson(Map<String, dynamic> json) {
@@ -193,18 +207,17 @@ AsinData _$AsinDataFromJson(Map<String, dynamic> json) {
 class _$AsinDataTearOff {
   const _$AsinDataTearOff();
 
-// ignore: unused_element
   _AsinData call(
       {@HiveField(0) String jan = "",
-      @required @HiveField(1) String asin,
+      @HiveField(1) required String asin,
       @HiveField(2) int listPrice = 0,
-      @required @HiveField(3) String imageUrl,
-      @required @HiveField(4) String title,
+      @HiveField(3) required String imageUrl,
+      @HiveField(4) required String title,
       @HiveField(5) int rank = 0,
       @HiveField(6) String quantity = " - ",
-      @HiveField(7) ItemPrices prices,
-      @HiveField(8) @JsonKey(ignore: true) Uint8List imageData,
-      @required @HiveField(9) @ItemCategoryConverter() String category}) {
+      @HiveField(7) ItemPrices? prices,
+      @HiveField(8) @JsonKey(ignore: true) Uint8List? imageData,
+      @HiveField(9) @ItemCategoryConverter() required String category}) {
     return _AsinData(
       jan: jan,
       asin: asin,
@@ -219,44 +232,43 @@ class _$AsinDataTearOff {
     );
   }
 
-// ignore: unused_element
   AsinData fromJson(Map<String, Object> json) {
     return AsinData.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $AsinData = _$AsinDataTearOff();
 
 /// @nodoc
 mixin _$AsinData {
   @HiveField(0)
-  String get jan;
+  String get jan => throw _privateConstructorUsedError;
   @HiveField(1)
-  String get asin;
+  String get asin => throw _privateConstructorUsedError;
   @HiveField(2)
-  int get listPrice; // 参考価格
+  int get listPrice => throw _privateConstructorUsedError; // 参考価格
   @HiveField(3)
-  String get imageUrl;
+  String get imageUrl => throw _privateConstructorUsedError;
   @HiveField(4)
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @HiveField(5)
-  int get rank;
+  int get rank => throw _privateConstructorUsedError;
   @HiveField(6)
-  String get quantity; // セット数
+  String get quantity => throw _privateConstructorUsedError; // セット数
   @HiveField(7)
-  ItemPrices get prices;
+  ItemPrices? get prices => throw _privateConstructorUsedError;
   @HiveField(8)
   @JsonKey(ignore: true)
-  Uint8List get imageData;
+  Uint8List? get imageData => throw _privateConstructorUsedError;
   @HiveField(9)
   @ItemCategoryConverter()
-  String get category;
+  String get category => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AsinDataCopyWith<AsinData> get copyWith;
+  $AsinDataCopyWith<AsinData> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -271,11 +283,11 @@ abstract class $AsinDataCopyWith<$Res> {
       @HiveField(4) String title,
       @HiveField(5) int rank,
       @HiveField(6) String quantity,
-      @HiveField(7) ItemPrices prices,
-      @HiveField(8) @JsonKey(ignore: true) Uint8List imageData,
+      @HiveField(7) ItemPrices? prices,
+      @HiveField(8) @JsonKey(ignore: true) Uint8List? imageData,
       @HiveField(9) @ItemCategoryConverter() String category});
 
-  $ItemPricesCopyWith<$Res> get prices;
+  $ItemPricesCopyWith<$Res>? get prices;
 }
 
 /// @nodoc
@@ -288,38 +300,68 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
 
   @override
   $Res call({
-    Object jan = freezed,
-    Object asin = freezed,
-    Object listPrice = freezed,
-    Object imageUrl = freezed,
-    Object title = freezed,
-    Object rank = freezed,
-    Object quantity = freezed,
-    Object prices = freezed,
-    Object imageData = freezed,
-    Object category = freezed,
+    Object? jan = freezed,
+    Object? asin = freezed,
+    Object? listPrice = freezed,
+    Object? imageUrl = freezed,
+    Object? title = freezed,
+    Object? rank = freezed,
+    Object? quantity = freezed,
+    Object? prices = freezed,
+    Object? imageData = freezed,
+    Object? category = freezed,
   }) {
     return _then(_value.copyWith(
-      jan: jan == freezed ? _value.jan : jan as String,
-      asin: asin == freezed ? _value.asin : asin as String,
-      listPrice: listPrice == freezed ? _value.listPrice : listPrice as int,
-      imageUrl: imageUrl == freezed ? _value.imageUrl : imageUrl as String,
-      title: title == freezed ? _value.title : title as String,
-      rank: rank == freezed ? _value.rank : rank as int,
-      quantity: quantity == freezed ? _value.quantity : quantity as String,
-      prices: prices == freezed ? _value.prices : prices as ItemPrices,
-      imageData:
-          imageData == freezed ? _value.imageData : imageData as Uint8List,
-      category: category == freezed ? _value.category : category as String,
+      jan: jan == freezed
+          ? _value.jan
+          : jan // ignore: cast_nullable_to_non_nullable
+              as String,
+      asin: asin == freezed
+          ? _value.asin
+          : asin // ignore: cast_nullable_to_non_nullable
+              as String,
+      listPrice: listPrice == freezed
+          ? _value.listPrice
+          : listPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      imageUrl: imageUrl == freezed
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      rank: rank == freezed
+          ? _value.rank
+          : rank // ignore: cast_nullable_to_non_nullable
+              as int,
+      quantity: quantity == freezed
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as String,
+      prices: prices == freezed
+          ? _value.prices
+          : prices // ignore: cast_nullable_to_non_nullable
+              as ItemPrices?,
+      imageData: imageData == freezed
+          ? _value.imageData
+          : imageData // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
   @override
-  $ItemPricesCopyWith<$Res> get prices {
+  $ItemPricesCopyWith<$Res>? get prices {
     if (_value.prices == null) {
       return null;
     }
-    return $ItemPricesCopyWith<$Res>(_value.prices, (value) {
+
+    return $ItemPricesCopyWith<$Res>(_value.prices!, (value) {
       return _then(_value.copyWith(prices: value));
     });
   }
@@ -338,12 +380,12 @@ abstract class _$AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
       @HiveField(4) String title,
       @HiveField(5) int rank,
       @HiveField(6) String quantity,
-      @HiveField(7) ItemPrices prices,
-      @HiveField(8) @JsonKey(ignore: true) Uint8List imageData,
+      @HiveField(7) ItemPrices? prices,
+      @HiveField(8) @JsonKey(ignore: true) Uint8List? imageData,
       @HiveField(9) @ItemCategoryConverter() String category});
 
   @override
-  $ItemPricesCopyWith<$Res> get prices;
+  $ItemPricesCopyWith<$Res>? get prices;
 }
 
 /// @nodoc
@@ -357,29 +399,58 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object jan = freezed,
-    Object asin = freezed,
-    Object listPrice = freezed,
-    Object imageUrl = freezed,
-    Object title = freezed,
-    Object rank = freezed,
-    Object quantity = freezed,
-    Object prices = freezed,
-    Object imageData = freezed,
-    Object category = freezed,
+    Object? jan = freezed,
+    Object? asin = freezed,
+    Object? listPrice = freezed,
+    Object? imageUrl = freezed,
+    Object? title = freezed,
+    Object? rank = freezed,
+    Object? quantity = freezed,
+    Object? prices = freezed,
+    Object? imageData = freezed,
+    Object? category = freezed,
   }) {
     return _then(_AsinData(
-      jan: jan == freezed ? _value.jan : jan as String,
-      asin: asin == freezed ? _value.asin : asin as String,
-      listPrice: listPrice == freezed ? _value.listPrice : listPrice as int,
-      imageUrl: imageUrl == freezed ? _value.imageUrl : imageUrl as String,
-      title: title == freezed ? _value.title : title as String,
-      rank: rank == freezed ? _value.rank : rank as int,
-      quantity: quantity == freezed ? _value.quantity : quantity as String,
-      prices: prices == freezed ? _value.prices : prices as ItemPrices,
-      imageData:
-          imageData == freezed ? _value.imageData : imageData as Uint8List,
-      category: category == freezed ? _value.category : category as String,
+      jan: jan == freezed
+          ? _value.jan
+          : jan // ignore: cast_nullable_to_non_nullable
+              as String,
+      asin: asin == freezed
+          ? _value.asin
+          : asin // ignore: cast_nullable_to_non_nullable
+              as String,
+      listPrice: listPrice == freezed
+          ? _value.listPrice
+          : listPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      imageUrl: imageUrl == freezed
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      rank: rank == freezed
+          ? _value.rank
+          : rank // ignore: cast_nullable_to_non_nullable
+              as int,
+      quantity: quantity == freezed
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as String,
+      prices: prices == freezed
+          ? _value.prices
+          : prices // ignore: cast_nullable_to_non_nullable
+              as ItemPrices?,
+      imageData: imageData == freezed
+          ? _value.imageData
+          : imageData // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -391,23 +462,15 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
 class _$_AsinData implements _AsinData {
   const _$_AsinData(
       {@HiveField(0) this.jan = "",
-      @required @HiveField(1) this.asin,
+      @HiveField(1) required this.asin,
       @HiveField(2) this.listPrice = 0,
-      @required @HiveField(3) this.imageUrl,
-      @required @HiveField(4) this.title,
+      @HiveField(3) required this.imageUrl,
+      @HiveField(4) required this.title,
       @HiveField(5) this.rank = 0,
       @HiveField(6) this.quantity = " - ",
       @HiveField(7) this.prices,
       @HiveField(8) @JsonKey(ignore: true) this.imageData,
-      @required @HiveField(9) @ItemCategoryConverter() this.category})
-      : assert(jan != null),
-        assert(asin != null),
-        assert(listPrice != null),
-        assert(imageUrl != null),
-        assert(title != null),
-        assert(rank != null),
-        assert(quantity != null),
-        assert(category != null);
+      @HiveField(9) @ItemCategoryConverter() required this.category});
 
   factory _$_AsinData.fromJson(Map<String, dynamic> json) =>
       _$_$_AsinDataFromJson(json);
@@ -439,11 +502,11 @@ class _$_AsinData implements _AsinData {
   final String quantity;
   @override // セット数
   @HiveField(7)
-  final ItemPrices prices;
+  final ItemPrices? prices;
   @override
   @HiveField(8)
   @JsonKey(ignore: true)
-  final Uint8List imageData;
+  final Uint8List? imageData;
   @override
   @HiveField(9)
   @ItemCategoryConverter()
@@ -513,52 +576,53 @@ class _$_AsinData implements _AsinData {
 abstract class _AsinData implements AsinData {
   const factory _AsinData(
           {@HiveField(0) String jan,
-          @required @HiveField(1) String asin,
+          @HiveField(1) required String asin,
           @HiveField(2) int listPrice,
-          @required @HiveField(3) String imageUrl,
-          @required @HiveField(4) String title,
+          @HiveField(3) required String imageUrl,
+          @HiveField(4) required String title,
           @HiveField(5) int rank,
           @HiveField(6) String quantity,
-          @HiveField(7) ItemPrices prices,
-          @HiveField(8) @JsonKey(ignore: true) Uint8List imageData,
-          @required @HiveField(9) @ItemCategoryConverter() String category}) =
+          @HiveField(7) ItemPrices? prices,
+          @HiveField(8) @JsonKey(ignore: true) Uint8List? imageData,
+          @HiveField(9) @ItemCategoryConverter() required String category}) =
       _$_AsinData;
 
   factory _AsinData.fromJson(Map<String, dynamic> json) = _$_AsinData.fromJson;
 
   @override
   @HiveField(0)
-  String get jan;
+  String get jan => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
-  String get asin;
+  String get asin => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
-  int get listPrice;
+  int get listPrice => throw _privateConstructorUsedError;
   @override // 参考価格
   @HiveField(3)
-  String get imageUrl;
+  String get imageUrl => throw _privateConstructorUsedError;
   @override
   @HiveField(4)
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @override
   @HiveField(5)
-  int get rank;
+  int get rank => throw _privateConstructorUsedError;
   @override
   @HiveField(6)
-  String get quantity;
+  String get quantity => throw _privateConstructorUsedError;
   @override // セット数
   @HiveField(7)
-  ItemPrices get prices;
+  ItemPrices? get prices => throw _privateConstructorUsedError;
   @override
   @HiveField(8)
   @JsonKey(ignore: true)
-  Uint8List get imageData;
+  Uint8List? get imageData => throw _privateConstructorUsedError;
   @override
   @HiveField(9)
   @ItemCategoryConverter()
-  String get category;
+  String get category => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$AsinDataCopyWith<_AsinData> get copyWith;
+  _$AsinDataCopyWith<_AsinData> get copyWith =>
+      throw _privateConstructorUsedError;
 }

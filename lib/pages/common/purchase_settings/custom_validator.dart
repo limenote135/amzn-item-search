@@ -2,7 +2,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 const validationMessagePositiveNumberOrEmpty = "positiveNumberOrEmpty";
 
-Map<String, dynamic> positiveNumberOrEmpty(AbstractControl<dynamic> control) {
+Map<String, dynamic>? positiveNumberOrEmpty(AbstractControl<dynamic> control) {
   if (control.value == null) {
     return null;
   }

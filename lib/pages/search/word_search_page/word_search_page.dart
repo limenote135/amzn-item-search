@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'item_tile.dart';
 
 class WordSearchPage extends StatelessWidget {
-  const WordSearchPage({Key key}) : super(key: key);
+  const WordSearchPage({Key? key}) : super(key: key);
   static const String routeName = "/word_search";
 
   @override
@@ -25,7 +25,7 @@ class WordSearchPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +58,12 @@ class _Body extends HookWidget {
             value: category.value,
             items: mwsSearchCategoryMap.entries.map((entry) {
               return DropdownMenuItem(
-                child: Text(entry.key),
                 value: entry.value,
+                child: Text(entry.key),
               );
             }).toList(),
-            onChanged: (String value) {
-              if (category.value != value) {
+            onChanged: (String? value) {
+              if (value != null && category.value != value) {
                 category.value = value;
               }
             },

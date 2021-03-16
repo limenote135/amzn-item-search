@@ -21,22 +21,22 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       enableTargetProfit: fields[1] as bool,
       targetProfitValue: fields[2] as int,
       skuFormat: fields[3] as String,
-      retailers: (fields[4] as List)?.cast<String>(),
+      retailers: (fields[4] as List).cast<String>(),
       enableReadAloud: fields[5] as bool,
       patternIndex: fields[6] as int,
-      readAloudPatterns: (fields[7] as List)?.cast<ReadAloudPattern>(),
+      readAloudPatterns: (fields[7] as List).cast<ReadAloudPattern>(),
       readAloudVolume: fields[8] as double,
-      readAloudSpeed: fields[9] as double,
-      customButtons: (fields[10] as List)?.cast<CustomButtonDetail>() ??
-          [
+      readAloudSpeed: fields[9] as double?,
+      customButtons: (fields[10] as List?)?.cast<CustomButtonDetail>() ??
+          const [
             CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
             CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
             CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
             CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
             CustomButtonDetail(enable: false, title: "ボタン5", pattern: ""),
           ],
-      csvOrder: (fields[11] as List)?.cast<CsvColumn>() ??
-          [
+      csvOrder: (fields[11] as List?)?.cast<CsvColumn>() ??
+          const [
             CsvColumn.asin,
             CsvColumn.jan,
             CsvColumn.title,
@@ -52,8 +52,8 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
             CsvColumn.comment,
             CsvColumn.purchaseDate
           ],
-      minProfit: fields[12] as int ?? 0,
-      getStocks: fields[13] as bool ?? false,
+      minProfit: fields[12] as int? ?? 0,
+      getStocks: fields[13] as bool? ?? false,
     );
   }
 
