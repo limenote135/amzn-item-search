@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:amasearch/models/enums/item_sub_condition.dart';
+import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -39,7 +40,9 @@ final formValueProvider =
     ],
     useFbaField: item.useFba,
     quantityField: item.amount,
-    conditionField: item.subCondition.toItemPurchaseCondition(),
+    // 型推論されないので明示的に型を指定する
+    conditionField: FormControl<PurchaseItemCondition>(
+        value: item.subCondition.toItemPurchaseCondition()),
     autogenSkuField: item.autogenSku,
     skuField: item.sku,
     retailerField: item.retailer,
@@ -49,11 +52,11 @@ final formValueProvider =
 });
 
 class PurchaseSettingsForm extends HookWidget {
-  const PurchaseSettingsForm({Key key, this.action, this.onComplete})
+  const PurchaseSettingsForm({Key? key, this.action, this.onComplete})
       : super(key: key);
 
-  final Widget action;
-  final void Function(ByteData bytes) onComplete;
+  final Widget? action;
+  final void Function(ByteData bytes)? onComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +104,7 @@ class PurchaseSettingsForm extends HookWidget {
             const ThemeDivider(),
             const SkuTile(),
             ListTile(
-              title: ReactiveTextField(
+              title: ReactiveTextField<dynamic>(
                 formControlName: memoField,
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
@@ -109,7 +112,7 @@ class PurchaseSettingsForm extends HookWidget {
                 decoration: const InputDecoration(labelText: "メモ"),
               ),
             ),
-            if (action != null) action,
+            if (action != null) action!,
           ],
         ),
       ),
@@ -118,9 +121,9 @@ class PurchaseSettingsForm extends HookWidget {
 }
 
 class _Unfocus extends StatelessWidget {
-  const _Unfocus({Key key, this.child}) : super(key: key);
+  const _Unfocus({Key? key, this.child}) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
   @override
   Widget build(BuildContext context) {
     return base.Listener(

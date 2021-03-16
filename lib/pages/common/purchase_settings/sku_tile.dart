@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class SkuTile extends HookWidget {
-  const SkuTile({Key key}) : super(key: key);
+  const SkuTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class SkuTile extends HookWidget {
                 form.control(skuField).value =
                     _generateSku(skuFormat, item, form);
               }
-              return ReactiveTextField(
+              return ReactiveTextField<dynamic>(
                 readOnly: control.value,
                 formControlName: skuField,
                 keyboardType: TextInputType.url,
@@ -57,7 +57,7 @@ class SkuTile extends HookWidget {
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
-      fee: item.prices.feeInfo,
+      fee: item.prices?.feeInfo,
       useFba: useFba,
     );
 

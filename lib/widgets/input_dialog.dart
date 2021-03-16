@@ -3,19 +3,19 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class InputDialog<T> extends HookWidget {
   const InputDialog({
-    Key key,
-    @required this.title,
-    @required this.validate,
+    Key? key,
+    required this.title,
+    required this.validate,
     this.keyboardType,
   }) : super(key: key);
 
   final Widget title;
   final T Function(String value) validate;
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
-    final val = useState<T>(null);
+    final val = useState<T?>(null);
     return AlertDialog(
       title: title,
       content: TextField(
@@ -23,23 +23,23 @@ class InputDialog<T> extends HookWidget {
         keyboardType: keyboardType,
         onChanged: (value) {
           final validated = validate(value);
-          if (val != null) {
+          if (validated != null) {
             val.value = validated;
           }
         },
       ),
       actions: [
-        FlatButton(
-          child: const Text("キャンセル"),
+        TextButton(
           onPressed: () => Navigator.pop(context),
+          child: const Text("キャンセル"),
         ),
-        FlatButton(
-          child: const Text("OK"),
+        TextButton(
           onPressed: val.value == null
               ? null
               : () {
                   Navigator.pop<T>(context, val.value);
                 },
+          child: const Text("OK"),
         ),
       ],
     );

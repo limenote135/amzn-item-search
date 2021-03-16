@@ -14,9 +14,9 @@ const _bigSizeFbaFee = 589;
 const _moreBigSizeFbaFee = 3061;
 
 class TileImage extends HookWidget {
-  const TileImage({Key key, this.onComplete}) : super(key: key);
+  const TileImage({Key? key, this.onComplete}) : super(key: key);
 
-  final void Function(ByteData bytes) onComplete;
+  final void Function(ByteData bytes)? onComplete;
 
   @override
   Widget build(BuildContext context) {

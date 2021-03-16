@@ -9,7 +9,7 @@ part 'search_settings.freezed.dart';
 part 'search_settings.g.dart';
 
 @freezed
-abstract class SearchSettings with _$SearchSettings {
+class SearchSettings with _$SearchSettings {
   @HiveType(typeId: searchSettingsTypeId)
   const factory SearchSettings({
     @HiveField(0) @Default(SearchType.jan) SearchType type,

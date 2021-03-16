@@ -5,7 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'custom_validator.dart';
 
 class InputPricesTile extends StatelessWidget {
-  const InputPricesTile({Key key}) : super(key: key);
+  const InputPricesTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class InputPricesTile extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: ReactiveTextField(
+              child: ReactiveTextField<dynamic>(
                 formControlName: purchasePriceField,
                 keyboardType: const TextInputType.numberWithOptions(
                     signed: false, decimal: false),
@@ -32,7 +32,7 @@ class InputPricesTile extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: ReactiveTextField(
+              child: ReactiveTextField<dynamic>(
                 formControlName: sellPriceField,
                 keyboardType: const TextInputType.numberWithOptions(
                     signed: false, decimal: false),
