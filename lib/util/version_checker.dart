@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:package_info/package_info.dart';
 import 'package:pub_semver/pub_semver.dart';
@@ -22,13 +23,15 @@ class VersionChecker {
       final requiredVersion = Version.parse(minVersion);
 
       return currentVersion.compareTo(requiredVersion).isNegative;
-    } on FetchThrottledException catch (exception) {
+    } on FetchThrottledException catch (exception, stackTrace) {
       // Fetch throttled.
       print(exception);
+      await FirebaseCrashlytics.instance.recordError(exception, stackTrace);
       // ignore: avoid_catches_without_on_clauses
-    } catch (exception) {
+    } catch (exception, stackTrace) {
       print('Unable to fetch remote config. Cached or default values will be '
           'used');
+      await FirebaseCrashlytics.instance.recordError(exception, stackTrace);
     }
     return false;
   }
