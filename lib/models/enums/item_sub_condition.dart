@@ -32,7 +32,6 @@ extension ItemSubConditionExtention on ItemSubCondition {
       case ItemSubCondition.acceptable:
         return "可";
     }
-    throw Exception("Invalid UsedSubCondition: $this");
   }
 
   String toDisplayString() {
@@ -48,7 +47,6 @@ extension ItemSubConditionExtention on ItemSubCondition {
       case ItemSubCondition.acceptable:
         return "可";
     }
-    throw Exception("Invalid UsedSubCondition: $this");
   }
 
   PurchaseItemCondition toItemPurchaseCondition() {
@@ -64,7 +62,6 @@ extension ItemSubConditionExtention on ItemSubCondition {
       case ItemSubCondition.acceptable:
         return PurchaseItemCondition.usedAcceptable;
     }
-    throw Exception("Invalid UsedSubCondition: $this");
   }
 }
 

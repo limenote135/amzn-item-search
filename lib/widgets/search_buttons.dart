@@ -4,6 +4,7 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
+import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final currentItemProvider = ScopedProvider<AsinData>(null);
 
 class SearchButtons extends HookWidget {
-  const SearchButtons({Key key}) : super(key: key);
+  const SearchButtons({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +27,8 @@ class SearchButtons extends HookWidget {
       spacing: 8,
       direction: Axis.horizontal,
       children: [
-        RaisedButton(
-          child: const Text("Amazon"),
+        ElevatedButton(
+          style: raisedButtonStyle(context),
           onPressed: () async {
             final url = "https://www.amazon.co.jp/gp/product/${item.asin}/";
             await context
@@ -35,9 +36,10 @@ class SearchButtons extends HookWidget {
                 .logPushSearchButtonEvent(pushSearchButtonAmazonName);
             await FlutterWebBrowser.openWebPage(url: url);
           },
+          child: const Text("Amazon"),
         ),
-        RaisedButton(
-          child: const Text("Keepa"),
+        ElevatedButton(
+          style: raisedButtonStyle(context),
           onPressed: () async {
             final url = "https://keepa.com/#!product/5-${item.asin}/";
             await context
@@ -45,9 +47,10 @@ class SearchButtons extends HookWidget {
                 .logPushSearchButtonEvent(pushSearchButtonKeepaName);
             await FlutterWebBrowser.openWebPage(url: url);
           },
+          child: const Text("Keepa"),
         ),
-        RaisedButton(
-          child: const Text("Delta"),
+        ElevatedButton(
+          style: raisedButtonStyle(context),
           onPressed: () async {
             final url = "https://delta-tracer.com/item/detail/jp/${item.asin}/";
             await context
@@ -55,9 +58,10 @@ class SearchButtons extends HookWidget {
                 .logPushSearchButtonEvent(pushSearchButtonDeltaName);
             await FlutterWebBrowser.openWebPage(url: url);
           },
+          child: const Text("Delta"),
         ),
-        RaisedButton(
-          child: const Text("Keezon"),
+        ElevatedButton(
+          style: raisedButtonStyle(context),
           onPressed: () async {
             final url = "https://keezon.net/item/index?ASIN=${item.asin}";
             await context
@@ -65,9 +69,10 @@ class SearchButtons extends HookWidget {
                 .logPushSearchButtonEvent(pushSearchButtonKeezonName);
             await FlutterWebBrowser.openWebPage(url: url);
           },
+          child: const Text("Keezon"),
         ),
-        RaisedButton(
-          child: const Text("出品確認"),
+        ElevatedButton(
+          style: raisedButtonStyle(context),
           onPressed: () async {
             final url =
                 "https://sellercentral.amazon.co.jp/abis/listing/syh?asin=${item.asin}";
@@ -76,9 +81,10 @@ class SearchButtons extends HookWidget {
                 .logPushSearchButtonEvent(pushSearchButtonSellerCentralName);
             await FlutterWebBrowser.openWebPage(url: url);
           },
+          child: const Text("出品確認"),
         ),
-        RaisedButton(
-          child: const Text("出品一覧"),
+        ElevatedButton(
+          style: raisedButtonStyle(context),
           onPressed: () async {
             final url =
                 "https://www.amazon.co.jp/gp/offer-listing/${item.asin}/";
@@ -87,9 +93,10 @@ class SearchButtons extends HookWidget {
                 .logPushSearchButtonEvent(pushSearchButtonAmazonListName);
             await FlutterWebBrowser.openWebPage(url: url);
           },
+          child: const Text("出品一覧"),
         ),
-        RaisedButton(
-          child: const Text("新品一覧"),
+        ElevatedButton(
+          style: raisedButtonStyle(context),
           onPressed: () async {
             await context
                 .read(analyticsControllerProvider)
@@ -104,9 +111,10 @@ class SearchButtons extends HookWidget {
               ),
             );
           },
+          child: const Text("新品一覧"),
         ),
-        RaisedButton(
-          child: const Text("中古一覧"),
+        ElevatedButton(
+          style: raisedButtonStyle(context),
           onPressed: () async {
             await context
                 .read(analyticsControllerProvider)
@@ -124,11 +132,12 @@ class SearchButtons extends HookWidget {
               ),
             );
           },
+          child: const Text("中古一覧"),
         ),
         for (final button in buttons)
           if (button.enable)
-            RaisedButton(
-              child: Text(button.title),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () async {
                 final url = replaceUrl(template: button.pattern, item: item);
                 if (!url.startsWith("http")) {
@@ -139,6 +148,7 @@ class SearchButtons extends HookWidget {
                     .logPushSearchButtonEvent(button.pattern);
                 await FlutterWebBrowser.openWebPage(url: url);
               },
+              child: Text(button.title),
             ),
       ],
     );

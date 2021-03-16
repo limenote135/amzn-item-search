@@ -8,12 +8,12 @@ final currentSellerIdProvider = ScopedProvider<String>(null);
 final currentAsinProvider = ScopedProvider<String>(null);
 
 class StockText extends HookWidget {
-  const StockText({Key key}) : super(key: key);
+  const StockText({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final settings = useProvider(generalSettingsControllerProvider.state);
-    if(!settings.getStocks) {
+    if (!settings.getStocks) {
       return Container();
     }
     final sellerId = useProvider(currentSellerIdProvider);

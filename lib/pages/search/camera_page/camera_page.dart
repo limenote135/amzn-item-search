@@ -20,18 +20,18 @@ class CameraPage extends StatefulWidget {
 }
 
 class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
-  ScannerController _scannerController;
+  ScannerController? _scannerController;
   bool _isCameraGranted = false;
   var _lastRead = "";
   var _lastReadTime = DateTime.now();
   var _lastType = SearchType.jan;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance!.addObserver(this);
     _scannerController = ScannerController(
       scannerResult: (result) {
         print("Read result: $result");
@@ -95,11 +95,11 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                 title: const Text("エラー"),
                 content: const Text("バーコードリーダーを利用するためにはカメラの利用を許可する必要があります。"),
                 actions: [
-                  FlatButton(
-                    child: const Text("戻る"),
+                  TextButton(
                     onPressed: () {
                       Navigator.of(context).popUntil(ModalRoute.withName("/"));
                     },
+                    child: const Text("戻る"),
                   ),
                 ],
               );
@@ -136,7 +136,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   @override
   void dispose() {
     _scannerController = null;
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
   }
 
@@ -144,29 +144,28 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     if (!_isCameraGranted) {
       return;
     }
-    _scannerController.startCameraPreview();
+    _scannerController!.startCameraPreview();
   }
 
   void _stopCameraPreview() {
     if (!_isCameraGranted) {
       return;
     }
-    _scannerController.stopCameraPreview();
+    _scannerController!.stopCameraPreview();
   }
 
   void _startCameraWithPreview() {
     if (!_isCameraGranted) {
       return;
     }
-    // context が null になる不具合がある？
-    if (context != null && Theme.of(context).platform == TargetPlatform.iOS) {
+    if (Theme.of(context).platform == TargetPlatform.iOS) {
       Future.delayed(const Duration(seconds: 1), () {
-        _scannerController
+        _scannerController!
           ..startCamera()
           ..startCameraPreview();
       });
     } else {
-      _scannerController
+      _scannerController!
         ..startCamera()
         ..startCameraPreview();
     }
@@ -176,7 +175,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     if (!_isCameraGranted) {
       return;
     }
-    _scannerController
+    _scannerController!
       ..stopCameraPreview()
       ..stopCamera();
   }
@@ -185,14 +184,14 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     if (!_isCameraGranted) {
       return;
     }
-    _scannerController.toggleFlash();
+    _scannerController!.toggleFlash();
   }
 
   bool _isFlashOpen() {
     if (!_isCameraGranted) {
       return false;
     }
-    return _scannerController.isOpenFlash;
+    return _scannerController!.isOpenFlash;
   }
 
   @override
@@ -213,7 +212,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
             width: screenWidth,
             height: screenHeight,
             child: PlatformAiBarcodeScannerWidget(
-              platformScannerController: _scannerController,
+              platformScannerController: _scannerController!,
               unsupportedDescription: "この機能はお使いのデバイスではサポートされていません。",
             ),
           ),
@@ -231,9 +230,9 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                         _toggleFlash();
                         setState(() {}); // TODO:
                       },
+                      textColor: Colors.white,
                       child:
                           Text("${_isFlashOpen() ? "Flash On" : "Flash Off"}"),
-                      textColor: Colors.white,
                     ),
                   ],
                 ),
@@ -251,8 +250,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                               continuousReadPropName, newVal.toString());
                         });
                       },
-                      child: Text("${continuousRead ? "連続読取 On" : "連続読取 Off"}"),
                       textColor: Colors.white,
+                      child: Text("${continuousRead ? "連続読取 On" : "連続読取 Off"}"),
                     ),
                   ],
                 ),
@@ -260,7 +259,6 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                   children: [
                     const Spacer(),
                     MaterialButton(
-                      child: Text("タイプ: ${type.toDisplayString()}"),
                       textColor: Colors.white,
                       onPressed: () {
                         setState(() {
@@ -270,6 +268,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                               );
                         });
                       },
+                      child: Text("タイプ: ${type.toDisplayString()}"),
                     ),
                   ],
                 ),
@@ -304,6 +303,5 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         // freeWord は無視する
         return SearchType.jan;
     }
-    throw Exception("Unknown SearchType: ${current.toDisplayString()}");
   }
 }

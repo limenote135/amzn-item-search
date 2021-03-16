@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'search_settings.dart';
 
@@ -9,11 +9,13 @@ part of 'search_settings.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$SearchSettingsTearOff {
   const _$SearchSettingsTearOff();
 
-// ignore: unused_element
   _SearchSettings call(
       {@HiveField(0) SearchType type = SearchType.jan,
       @HiveField(1) UsedSubCondition usedSubCondition = UsedSubCondition.all,
@@ -31,24 +33,25 @@ class _$SearchSettingsTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $SearchSettings = _$SearchSettingsTearOff();
 
 /// @nodoc
 mixin _$SearchSettings {
   @HiveField(0)
-  SearchType get type;
+  SearchType get type => throw _privateConstructorUsedError;
   @HiveField(1)
-  UsedSubCondition get usedSubCondition;
+  UsedSubCondition get usedSubCondition => throw _privateConstructorUsedError;
   @HiveField(2)
-  bool get useFba;
+  bool get useFba => throw _privateConstructorUsedError;
   @HiveField(3)
-  bool get priorFba; // TODO: .g.dart でデフォルト値を設定している
+  bool get priorFba =>
+      throw _privateConstructorUsedError; // TODO: .g.dart でデフォルト値を設定している
   @HiveField(4)
-  bool get continuousCameraRead;
+  bool get continuousCameraRead => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SearchSettingsCopyWith<SearchSettings> get copyWith;
+  $SearchSettingsCopyWith<SearchSettings> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -75,22 +78,33 @@ class _$SearchSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object type = freezed,
-    Object usedSubCondition = freezed,
-    Object useFba = freezed,
-    Object priorFba = freezed,
-    Object continuousCameraRead = freezed,
+    Object? type = freezed,
+    Object? usedSubCondition = freezed,
+    Object? useFba = freezed,
+    Object? priorFba = freezed,
+    Object? continuousCameraRead = freezed,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed ? _value.type : type as SearchType,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SearchType,
       usedSubCondition: usedSubCondition == freezed
           ? _value.usedSubCondition
-          : usedSubCondition as UsedSubCondition,
-      useFba: useFba == freezed ? _value.useFba : useFba as bool,
-      priorFba: priorFba == freezed ? _value.priorFba : priorFba as bool,
+          : usedSubCondition // ignore: cast_nullable_to_non_nullable
+              as UsedSubCondition,
+      useFba: useFba == freezed
+          ? _value.useFba
+          : useFba // ignore: cast_nullable_to_non_nullable
+              as bool,
+      priorFba: priorFba == freezed
+          ? _value.priorFba
+          : priorFba // ignore: cast_nullable_to_non_nullable
+              as bool,
       continuousCameraRead: continuousCameraRead == freezed
           ? _value.continuousCameraRead
-          : continuousCameraRead as bool,
+          : continuousCameraRead // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -123,22 +137,33 @@ class __$SearchSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object type = freezed,
-    Object usedSubCondition = freezed,
-    Object useFba = freezed,
-    Object priorFba = freezed,
-    Object continuousCameraRead = freezed,
+    Object? type = freezed,
+    Object? usedSubCondition = freezed,
+    Object? useFba = freezed,
+    Object? priorFba = freezed,
+    Object? continuousCameraRead = freezed,
   }) {
     return _then(_SearchSettings(
-      type: type == freezed ? _value.type : type as SearchType,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SearchType,
       usedSubCondition: usedSubCondition == freezed
           ? _value.usedSubCondition
-          : usedSubCondition as UsedSubCondition,
-      useFba: useFba == freezed ? _value.useFba : useFba as bool,
-      priorFba: priorFba == freezed ? _value.priorFba : priorFba as bool,
+          : usedSubCondition // ignore: cast_nullable_to_non_nullable
+              as UsedSubCondition,
+      useFba: useFba == freezed
+          ? _value.useFba
+          : useFba // ignore: cast_nullable_to_non_nullable
+              as bool,
+      priorFba: priorFba == freezed
+          ? _value.priorFba
+          : priorFba // ignore: cast_nullable_to_non_nullable
+              as bool,
       continuousCameraRead: continuousCameraRead == freezed
           ? _value.continuousCameraRead
-          : continuousCameraRead as bool,
+          : continuousCameraRead // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -152,12 +177,7 @@ class _$_SearchSettings implements _SearchSettings {
       @HiveField(1) this.usedSubCondition = UsedSubCondition.all,
       @HiveField(2) this.useFba = false,
       @HiveField(3) this.priorFba = false,
-      @HiveField(4) this.continuousCameraRead = true})
-      : assert(type != null),
-        assert(usedSubCondition != null),
-        assert(useFba != null),
-        assert(priorFba != null),
-        assert(continuousCameraRead != null);
+      @HiveField(4) this.continuousCameraRead = true});
 
   @JsonKey(defaultValue: SearchType.jan)
   @override
@@ -229,20 +249,21 @@ abstract class _SearchSettings implements SearchSettings {
 
   @override
   @HiveField(0)
-  SearchType get type;
+  SearchType get type => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
-  UsedSubCondition get usedSubCondition;
+  UsedSubCondition get usedSubCondition => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
-  bool get useFba;
+  bool get useFba => throw _privateConstructorUsedError;
   @override
   @HiveField(3)
-  bool get priorFba;
+  bool get priorFba => throw _privateConstructorUsedError;
   @override // TODO: .g.dart でデフォルト値を設定している
   @HiveField(4)
-  bool get continuousCameraRead;
+  bool get continuousCameraRead => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SearchSettingsCopyWith<_SearchSettings> get copyWith;
+  _$SearchSettingsCopyWith<_SearchSettings> get copyWith =>
+      throw _privateConstructorUsedError;
 }

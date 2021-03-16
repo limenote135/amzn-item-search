@@ -55,9 +55,9 @@ class GeoRepository {
 }
 
 @freezed
-abstract class GeoResponse with _$GeoResponse {
+class GeoResponse with _$GeoResponse {
   const factory GeoResponse({
-    @required String code,
+    required String code,
     @Default("") String jan,
   }) = _GeoResponse;
 }

@@ -6,9 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 part 'offer_listings.freezed.dart';
 
 @freezed
-abstract class OfferListingsParams with _$OfferListingsParams {
+class OfferListingsParams with _$OfferListingsParams {
   const factory OfferListingsParams({
-    @required String asin,
+    required String asin,
     @Default(false) bool prime,
     @Default(false) bool newItem,
     @Default(false) bool usedLikeNew,
@@ -37,7 +37,7 @@ final offerTotalCountProvider = Provider.autoDispose
 });
 
 final cartOfferProvider =
-    Provider.autoDispose.family<AsyncValue<OfferItem>, String>((ref, asin) {
+    Provider.autoDispose.family<AsyncValue<OfferItem?>, String>((ref, asin) {
   final param = OfferListingsParams(
     asin: asin,
     prime: false,
@@ -53,10 +53,10 @@ final cartOfferProvider =
 });
 
 @freezed
-abstract class OfferAtIndexParam with _$OfferAtIndexParam {
+class OfferAtIndexParam with _$OfferAtIndexParam {
   const factory OfferAtIndexParam({
-    @required OfferListingsParams params,
-    @required int index,
+    required OfferListingsParams params,
+    required int index,
   }) = _OfferAtIndexParam;
 }
 
@@ -71,23 +71,23 @@ final offerAtIndexProvider = Provider.autoDispose
 });
 
 @freezed
-abstract class OfferListings with _$OfferListings {
+class OfferListings with _$OfferListings {
   const factory OfferListings({
-    @required String asin,
+    required String asin,
     @Default(0) int total,
-    OfferItem cart,
+    OfferItem? cart,
     @Default(<OfferItem>[]) List<OfferItem> offers,
   }) = _OfferListings;
 }
 
 @freezed
-abstract class OfferItem with _$OfferItem {
+class OfferItem with _$OfferItem {
   const factory OfferItem({
-    @required String shopName,
+    required String shopName,
     @Default("") String sellerId,
-    @required int price,
-    @required String condition,
-    @required bool hasImage,
-    @required bool isFba,
+    required int price,
+    required String condition,
+    required bool hasImage,
+    required bool isFba,
   }) = _OfferItem;
 }

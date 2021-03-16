@@ -11,7 +11,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ReadAloudSettingsPage extends StatelessWidget {
-  const ReadAloudSettingsPage({Key key}) : super(key: key);
+  const ReadAloudSettingsPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/read_aloud";
 
   static Route<void> route() {
@@ -33,7 +33,7 @@ class ReadAloudSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -133,10 +133,10 @@ class _Body extends HookWidget {
             }
             return SliderTile(
               title: "再生速度",
-              initValue: settings.readAloudSpeed ?? snapshot.data.normal,
-              min: snapshot.data.min,
-              max: snapshot.data.max,
-              divisions: (snapshot.data.max / 0.1).round(),
+              initValue: settings.readAloudSpeed ?? snapshot.data!.normal,
+              min: snapshot.data!.min,
+              max: snapshot.data!.max,
+              divisions: (snapshot.data!.max / 0.1).round(),
               onSubmit: (value) {
                 context
                     .read(generalSettingsControllerProvider)

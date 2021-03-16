@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class FeeTile extends HookWidget {
-  const FeeTile({Key key}) : super(key: key);
+  const FeeTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +21,25 @@ class FeeTile extends HookWidget {
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
 
+    final feeInfo = item.prices?.feeInfo ??
+        const FeeInfo(
+          referralFeeRate: 0,
+          variableClosingFee: 0,
+          fbaFee: -1,
+        );
     final totalFee = _calcTotalFee(
       sellPrice: sellPrice,
       purchasePrice: purchasePrice,
-      feeInfo: item.prices.feeInfo,
+      feeInfo: feeInfo,
       useFba: useFba,
     );
 
-    final feeRate = (item.prices.feeInfo.referralFeeRate * 100).round();
+    final feeRate = (feeInfo.referralFeeRate * 100).round();
 
-    final sellFee =
-        _calcSellFee(sellPrice, item.prices.feeInfo.referralFeeRate);
-    final categoryFee = item.prices.feeInfo.variableClosingFee;
+    final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
+    final categoryFee = feeInfo.variableClosingFee;
 
-    final fbaFeeText =
-        _fbaFeeText(useFba: useFba, feeInfo: item.prices.feeInfo);
+    final fbaFeeText = _fbaFeeText(useFba: useFba, feeInfo: feeInfo);
 
     return ExpansionTile(
       title: TextLine(
@@ -64,7 +68,7 @@ class FeeTile extends HookWidget {
     );
   }
 
-  String _fbaFeeText({@required bool useFba, @required FeeInfo feeInfo}) {
+  String _fbaFeeText({required bool useFba, required FeeInfo feeInfo}) {
     if (!useFba) {
       return "0";
     } else if (feeInfo.fbaFee == -1) {
@@ -79,10 +83,10 @@ class FeeTile extends HookWidget {
   }
 
   String _calcTotalFee({
-    @required int sellPrice,
-    @required int purchasePrice,
-    @required FeeInfo feeInfo,
-    @required bool useFba,
+    required int sellPrice,
+    required int purchasePrice,
+    required FeeInfo feeInfo,
+    required bool useFba,
   }) {
     final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
     final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;

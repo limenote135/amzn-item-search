@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class RetailerTile extends StatelessWidget {
-  const RetailerTile({Key key}) : super(key: key);
+  const RetailerTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class RetailerTile extends StatelessWidget {
       title: Row(
         children: [
           Expanded(
-            child: ReactiveTextField(
+            child: ReactiveTextField<dynamic>(
               formControlName: retailerField,
               decoration: const InputDecoration(labelText: "仕入れ先"),
               textAlign: TextAlign.start,
@@ -40,7 +40,7 @@ class RetailerTile extends StatelessWidget {
 }
 
 class _RetailerSelectDialog extends HookWidget {
-  const _RetailerSelectDialog({Key key}) : super(key: key);
+  const _RetailerSelectDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +51,8 @@ class _RetailerSelectDialog extends HookWidget {
       children: [
         for (final retailer in retailers)
           SimpleDialogOption(
-            child: Text(retailer),
             onPressed: () => Navigator.pop(context, retailer),
+            child: Text(retailer),
           ),
       ],
     );

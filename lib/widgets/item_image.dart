@@ -5,11 +5,11 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 class ItemImage extends StatelessWidget {
-  const ItemImage({Key key, this.url, this.data, this.onComplete})
+  const ItemImage({Key? key, this.url, this.data, this.onComplete})
       : super(key: key);
-  final String url;
-  final Uint8List data;
-  final void Function(ByteData bytes) onComplete;
+  final String? url;
+  final Uint8List? data;
+  final void Function(ByteData bytes)? onComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ItemImage extends StatelessWidget {
       return SizedBox(
         width: 75,
         child: ExtendedImage.network(
-          url,
+          url!,
           cache: true,
           fit: BoxFit.scaleDown,
           loadStateChanged: (state) {
@@ -27,9 +27,9 @@ class ItemImage extends StatelessWidget {
             }
 
             if (state.extendedImageInfo != null) {
-              state.extendedImageInfo.image
+              state.extendedImageInfo!.image
                   .toByteData(format: ImageByteFormat.png)
-                  .then((value) => onComplete?.call(value));
+                  .then((value) => onComplete?.call(value!));
             }
             return state.completedWidget;
           },
@@ -38,7 +38,7 @@ class ItemImage extends StatelessWidget {
     }
     print("image from binary");
     return ExtendedImage.memory(
-      data,
+      data!,
       fit: BoxFit.scaleDown,
     );
   }

@@ -8,7 +8,7 @@ import 'package:package_info/package_info.dart';
 
 import 'common.dart';
 
-const _kTestingServer = false;
+const _kTestingServer = true;
 
 final mwsRepositoryProvider = Provider((ref) => MwsRepository(ref.read));
 
@@ -61,7 +61,7 @@ class MwsRepository {
     return ListMatchingProductResponse.fromJson(resp);
   }
 
-  Future<Map<String, dynamic>> _doRequest(String url, {String data}) async {
+  Future<Map<String, dynamic>> _doRequest(String url, {String? data}) async {
     final dio = _read(dioProvider);
 
     final info = await PackageInfo.fromPlatform();
@@ -78,6 +78,6 @@ class MwsRepository {
         },
       ),
     );
-    return json.decode(resp.data) as Map<String, dynamic>;
+    return json.decode(resp.data!) as Map<String, dynamic>;
   }
 }

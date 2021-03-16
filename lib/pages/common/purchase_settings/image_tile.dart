@@ -7,9 +7,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ImageTile extends HookWidget {
-  const ImageTile({Key key, this.onComplete}) : super(key: key);
+  const ImageTile({Key? key, this.onComplete}) : super(key: key);
 
-  final void Function(ByteData bytes) onComplete;
+  final void Function(ByteData bytes)? onComplete;
 
   @override
   Widget build(BuildContext context) {
