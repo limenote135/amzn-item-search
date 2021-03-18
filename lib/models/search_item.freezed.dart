@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'item.dart';
+part of 'search_item.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,14 +13,14 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$ItemTearOff {
-  const _$ItemTearOff();
+class _$SearchItemTearOff {
+  const _$SearchItemTearOff();
 
-  _Item call(
+  _SearchItem call(
       {@HiveField(0) required String searchDate,
       @HiveField(1) required String jan,
       @HiveField(2) List<AsinData> asins = const <AsinData>[]}) {
-    return _Item(
+    return _SearchItem(
       searchDate: searchDate,
       jan: jan,
       asins: asins,
@@ -29,10 +29,10 @@ class _$ItemTearOff {
 }
 
 /// @nodoc
-const $Item = _$ItemTearOff();
+const $SearchItem = _$SearchItemTearOff();
 
 /// @nodoc
-mixin _$Item {
+mixin _$SearchItem {
   @HiveField(0)
   String get searchDate => throw _privateConstructorUsedError;
   @HiveField(1)
@@ -41,13 +41,15 @@ mixin _$Item {
   List<AsinData> get asins => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ItemCopyWith<Item> get copyWith => throw _privateConstructorUsedError;
+  $SearchItemCopyWith<SearchItem> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ItemCopyWith<$Res> {
-  factory $ItemCopyWith(Item value, $Res Function(Item) then) =
-      _$ItemCopyWithImpl<$Res>;
+abstract class $SearchItemCopyWith<$Res> {
+  factory $SearchItemCopyWith(
+          SearchItem value, $Res Function(SearchItem) then) =
+      _$SearchItemCopyWithImpl<$Res>;
   $Res call(
       {@HiveField(0) String searchDate,
       @HiveField(1) String jan,
@@ -55,12 +57,12 @@ abstract class $ItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ItemCopyWithImpl<$Res> implements $ItemCopyWith<$Res> {
-  _$ItemCopyWithImpl(this._value, this._then);
+class _$SearchItemCopyWithImpl<$Res> implements $SearchItemCopyWith<$Res> {
+  _$SearchItemCopyWithImpl(this._value, this._then);
 
-  final Item _value;
+  final SearchItem _value;
   // ignore: unused_field
-  final $Res Function(Item) _then;
+  final $Res Function(SearchItem) _then;
 
   @override
   $Res call({
@@ -86,9 +88,10 @@ class _$ItemCopyWithImpl<$Res> implements $ItemCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
-  factory _$ItemCopyWith(_Item value, $Res Function(_Item) then) =
-      __$ItemCopyWithImpl<$Res>;
+abstract class _$SearchItemCopyWith<$Res> implements $SearchItemCopyWith<$Res> {
+  factory _$SearchItemCopyWith(
+          _SearchItem value, $Res Function(_SearchItem) then) =
+      __$SearchItemCopyWithImpl<$Res>;
   @override
   $Res call(
       {@HiveField(0) String searchDate,
@@ -97,13 +100,14 @@ abstract class _$ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res>
-    implements _$ItemCopyWith<$Res> {
-  __$ItemCopyWithImpl(_Item _value, $Res Function(_Item) _then)
-      : super(_value, (v) => _then(v as _Item));
+class __$SearchItemCopyWithImpl<$Res> extends _$SearchItemCopyWithImpl<$Res>
+    implements _$SearchItemCopyWith<$Res> {
+  __$SearchItemCopyWithImpl(
+      _SearchItem _value, $Res Function(_SearchItem) _then)
+      : super(_value, (v) => _then(v as _SearchItem));
 
   @override
-  _Item get _value => super._value as _Item;
+  _SearchItem get _value => super._value as _SearchItem;
 
   @override
   $Res call({
@@ -111,7 +115,7 @@ class __$ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res>
     Object? jan = freezed,
     Object? asins = freezed,
   }) {
-    return _then(_Item(
+    return _then(_SearchItem(
       searchDate: searchDate == freezed
           ? _value.searchDate
           : searchDate // ignore: cast_nullable_to_non_nullable
@@ -131,8 +135,8 @@ class __$ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res>
 @HiveType(typeId: itemTypeId)
 
 /// @nodoc
-class _$_Item implements _Item {
-  const _$_Item(
+class _$_SearchItem implements _SearchItem {
+  const _$_SearchItem(
       {@HiveField(0) required this.searchDate,
       @HiveField(1) required this.jan,
       @HiveField(2) this.asins = const <AsinData>[]});
@@ -150,13 +154,13 @@ class _$_Item implements _Item {
 
   @override
   String toString() {
-    return 'Item(searchDate: $searchDate, jan: $jan, asins: $asins)';
+    return 'SearchItem(searchDate: $searchDate, jan: $jan, asins: $asins)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Item &&
+        (other is _SearchItem &&
             (identical(other.searchDate, searchDate) ||
                 const DeepCollectionEquality()
                     .equals(other.searchDate, searchDate)) &&
@@ -175,15 +179,15 @@ class _$_Item implements _Item {
 
   @JsonKey(ignore: true)
   @override
-  _$ItemCopyWith<_Item> get copyWith =>
-      __$ItemCopyWithImpl<_Item>(this, _$identity);
+  _$SearchItemCopyWith<_SearchItem> get copyWith =>
+      __$SearchItemCopyWithImpl<_SearchItem>(this, _$identity);
 }
 
-abstract class _Item implements Item {
-  const factory _Item(
+abstract class _SearchItem implements SearchItem {
+  const factory _SearchItem(
       {@HiveField(0) required String searchDate,
       @HiveField(1) required String jan,
-      @HiveField(2) List<AsinData> asins}) = _$_Item;
+      @HiveField(2) List<AsinData> asins}) = _$_SearchItem;
 
   @override
   @HiveField(0)
@@ -196,7 +200,8 @@ abstract class _Item implements Item {
   List<AsinData> get asins => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ItemCopyWith<_Item> get copyWith => throw _privateConstructorUsedError;
+  _$SearchItemCopyWith<_SearchItem> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 AsinData _$AsinDataFromJson(Map<String, dynamic> json) {

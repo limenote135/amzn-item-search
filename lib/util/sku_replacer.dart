@@ -1,5 +1,5 @@
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/util/price_util.dart';
 
 const yearVar = "{yyyy}";

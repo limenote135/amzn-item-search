@@ -1,16 +1,16 @@
 import 'dart:typed_data';
 
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final itemControllerProvider =
-    StateNotifierProvider.family<ItemController, Item>(
+    StateNotifierProvider.family<ItemController, SearchItem>(
         (ref, item) => ItemController(ref.read, item));
 
-class ItemController extends StateNotifier<Item> {
-  ItemController(this._read, Item item) : super(item);
+class ItemController extends StateNotifier<SearchItem> {
+  ItemController(this._read, SearchItem item) : super(item);
 
   static final Function eq = const ListEquality<int>().equals;
 

@@ -1,4 +1,4 @@
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
