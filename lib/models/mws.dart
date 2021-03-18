@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'item.dart';
 import 'item_price.dart';
+import 'search_item.dart';
 
 part 'mws.freezed.dart';
 part 'mws.g.dart';

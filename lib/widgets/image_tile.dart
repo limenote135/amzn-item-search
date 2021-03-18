@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/item_image.dart';

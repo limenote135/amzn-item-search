@@ -1,6 +1,6 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/item_delete_handler.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/util/util.dart';

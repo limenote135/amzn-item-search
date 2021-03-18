@@ -1,14 +1,14 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/item_list_controller.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 Future<bool> itemDeleteHandler({
   required BuildContext context,
-  List<Item>? items,
+  List<SearchItem>? items,
   bool deleteAll = false,
   required String content,
 }) async {

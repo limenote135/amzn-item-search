@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'item.dart';
+part of 'search_item.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ItemAdapter extends TypeAdapter<_$_Item> {
+class SearchItemAdapter extends TypeAdapter<_$_SearchItem> {
   @override
   final int typeId = 1;
 
   @override
-  _$_Item read(BinaryReader reader) {
+  _$_SearchItem read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_Item(
+    return _$_SearchItem(
       searchDate: fields[0] as String,
       jan: fields[1] as String,
       asins: (fields[2] as List).cast<AsinData>(),
@@ -24,7 +24,7 @@ class ItemAdapter extends TypeAdapter<_$_Item> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_Item obj) {
+  void write(BinaryWriter writer, _$_SearchItem obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -41,7 +41,7 @@ class ItemAdapter extends TypeAdapter<_$_Item> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ItemAdapter &&
+      other is SearchItemAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
