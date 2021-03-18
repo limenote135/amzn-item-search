@@ -3,9 +3,10 @@ import 'dart:ui';
 import 'package:ai_barcode/ai_barcode.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
-import 'package:amasearch/controllers/item_list_controller.dart';
+import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
+import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -24,7 +25,6 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   bool _isCameraGranted = false;
   var _lastRead = "";
   var _lastReadTime = DateTime.now();
-  var _lastType = SearchType.jan;
   final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
@@ -46,16 +46,16 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
           final settings = context.read(searchSettingsControllerProvider.state);
           switch (settings.type) {
             case SearchType.jan:
-              context.read(itemListControllerProvider).add(result);
+              context.read(searchItemControllerProvider).add(result);
               break;
             case SearchType.bookoff:
-              context.read(itemListControllerProvider).addBookoff(result);
+              context.read(searchItemControllerProvider).addBookoff(result);
               break;
             case SearchType.geo:
-              context.read(itemListControllerProvider).addGeo(result);
+              context.read(searchItemControllerProvider).addGeo(result);
               break;
             case SearchType.tsutaya:
-              context.read(itemListControllerProvider).addTsutaya(result);
+              context.read(searchItemControllerProvider).addTsutaya(result);
               break;
             case SearchType.freeWord:
               break;
@@ -67,7 +67,6 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
 
           setState(() {
             _lastRead = result;
-            _lastType = settings.type;
           });
         } else if (DateTime.now().difference(_lastReadTime) >
             const Duration(seconds: 1)) {
@@ -171,6 +170,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     }
   }
 
+  // ignore: unused_element
   void _stopCameraWithPreview() {
     if (!_isCameraGranted) {
       return;
@@ -228,7 +228,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                     MaterialButton(
                       onPressed: () {
                         _toggleFlash();
-                        setState(() {}); // TODO:
+                        setState(() {}); // TODO: 表示を更新するため setState で強制更新
                       },
                       textColor: Colors.white,
                       child:
@@ -276,9 +276,9 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                 ProviderScope(
                   overrides: [
                     currentCodeProvider.overrideWithValue(_lastRead),
-                    currentCodeTypeProvider.overrideWithValue(_lastType),
+                    fromRouteProvider.overrideWithValue(CameraPage.routeName)
                   ],
-                  child: const ItemTile(),
+                  child: const CameraItemTile(),
                 ),
                 const SizedBox(height: 50),
               ],

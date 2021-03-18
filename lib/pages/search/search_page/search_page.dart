@@ -1,4 +1,4 @@
-import 'package:amasearch/controllers/item_list_controller.dart';
+import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/search_item.dart';
@@ -145,16 +145,16 @@ class _AppBarTitle extends HookWidget {
   void _addItem(BuildContext context, SearchType type, String code) {
     switch (type) {
       case SearchType.jan:
-        context.read(itemListControllerProvider).add(code);
+        context.read(searchItemControllerProvider).add(code);
         return;
       case SearchType.bookoff:
-        context.read(itemListControllerProvider).addBookoff(code);
+        context.read(searchItemControllerProvider).addBookoff(code);
         return;
       case SearchType.geo:
-        context.read(itemListControllerProvider).addGeo(code);
+        context.read(searchItemControllerProvider).addGeo(code);
         return;
       case SearchType.tsutaya:
-        context.read(itemListControllerProvider).addTsutaya(code);
+        context.read(searchItemControllerProvider).addTsutaya(code);
         return;
       case SearchType.freeWord:
         // deprecated
@@ -169,7 +169,7 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = useProvider(itemListControllerProvider.state);
+    final items = useProvider(searchItemControllerProvider.state);
 
     return Column(
       children: [
@@ -185,7 +185,8 @@ class _Body extends HookWidget {
               }
               return ProviderScope(
                 overrides: [
-                  currentItemFutureProvider.overrideWithValue(items[index]),
+                  currentFutureSearchItemProvider
+                      .overrideWithValue(items[index]),
                 ],
                 child: const ItemTile(),
               );
