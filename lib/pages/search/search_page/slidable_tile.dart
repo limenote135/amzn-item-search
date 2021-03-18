@@ -16,9 +16,7 @@ class SlidableTile extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = useProvider(currentItemControllerProvider);
-    final firstItem = useProvider(provider.state.select((e) => e.asins.first));
-    final items = useProvider(provider.state);
+    final items = useProvider(currentSearchItemProvider);
 
     return Slidable(
       actionPane: const SlidableDrawerActionPane(),
@@ -35,7 +33,7 @@ class SlidableTile extends HookWidget {
                 .logSingleEvent(directPurchaseEventName);
             Navigator.push(
               context,
-              PurchasePage.route(firstItem),
+              PurchasePage.route(items.asins.first),
             );
           },
         ),

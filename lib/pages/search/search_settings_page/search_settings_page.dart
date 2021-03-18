@@ -1,6 +1,6 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
-import 'package:amasearch/controllers/item_list_controller.dart';
+import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
@@ -86,7 +86,7 @@ class _Body extends HookWidget {
                 ),
               );
               if (ok!) {
-                context.read(itemListControllerProvider).removeAll();
+                context.read(searchItemControllerProvider).removeAll();
                 await context
                     .read(analyticsControllerProvider)
                     .logSingleEvent(deleteAllSearchHistoryEventName);

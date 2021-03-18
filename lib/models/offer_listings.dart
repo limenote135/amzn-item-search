@@ -25,7 +25,7 @@ final offerListingsFutureProvider = FutureProvider.autoDispose
   ref.onDispose(cancelToken.cancel);
   final amazon = ref.read(amazonRepositoryProvider);
   final ret = await amazon.getOffers(param, cancelToken);
-  ref.maintainState = true; // TODO:
+  ref.maintainState = true;
   return ret;
 });
 

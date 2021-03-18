@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/models/search_item.dart';
@@ -5,33 +7,25 @@ import 'package:amasearch/repository/bookoff.dart';
 import 'package:amasearch/repository/geo.dart';
 import 'package:amasearch/repository/tsutaya.dart';
 import 'package:amasearch/util/hive_provider.dart';
+import 'package:amasearch/util/util.dart';
+import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'item_controller.dart';
+final searchItemControllerProvider =
+    StateNotifierProvider((ref) => SearchItemController(ref.read));
 
-final itemListControllerProvider =
-    StateNotifierProvider((ref) => ItemListController(ref.read, ref.container));
-
-class ItemListController extends StateNotifier<
-    List<FutureProvider<StateNotifierProvider<ItemController>>>> {
-  ItemListController(this._read, this._container,
-      {List<FutureProvider<StateNotifierProvider<ItemController>>>? state})
-      : super(state ?? []) {
+class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
+  SearchItemController(this._read) : super([]) {
     _fetchAll();
   }
 
-  final ProviderContainer _container;
+  static final Function _eq = const ListEquality<int>().equals;
+
   final Reader _read;
 
   void _fetchAll() {
     final box = _read(searchItemBoxProvider);
-    // TODO: オンデマンドで読み込むべき？
-    state = box.values
-        .map((e) =>
-            FutureProvider((_) => Future.value(itemControllerProvider(e))))
-        .toList()
-        .reversed
-        .toList();
+    state = box.values.map((e) => Future.value(e)).toList().reversed.toList();
   }
 
   void removeAll() {
@@ -48,12 +42,22 @@ class ItemListController extends StateNotifier<
     final keys = targets.map((e) => e.searchDate);
     box.deleteAll(keys);
 
-    state = box.values
-        .map((e) =>
-            FutureProvider((_) => Future.value(itemControllerProvider(e))))
-        .toList()
-        .reversed
-        .toList();
+    state = box.values.map((e) => Future.value(e)).toList().reversed.toList();
+  }
+
+  void saveImageBinary(String searchDate, Uint8List data) {
+    final box = _read(searchItemBoxProvider);
+    final entity = box.get(searchDate);
+    if (entity == null || entity.asins.isEmpty) {
+      return;
+    }
+    if (_eq(entity.asins.first.imageData, data) == false) {
+      final asins = [
+        entity.asins.first.copyWith(imageData: data),
+        ...entity.asins.skip(1),
+      ];
+      box.put(searchDate, entity.copyWith(asins: asins));
+    }
   }
 
   void add(String raw) {
@@ -70,34 +74,34 @@ class ItemListController extends StateNotifier<
         jan = jan.substring(jan.length - 13, jan.length);
       }
     }
+    final data = Future.value(
+      SearchItem(
+        searchDate: currentTimeString(),
+        jan: jan,
+      ),
+    );
     _read(analyticsControllerProvider).logSearchEvent(searchEventJan);
-    // 同じ JAN を読んだ際に、Amazon データはキャッシュして音声読み上げは再度行うためにリフレッシュする
-    _container.refresh(itemFutureProvider(jan));
-    final future = itemFutureProvider(jan);
-    state = [future, ...state];
+    state = [data, ...state];
   }
 
   void addBookoff(String code) {
-    _read(analyticsControllerProvider).logSearchEvent(searchEventBookoff);
     final code2 = code.trim();
-    _container.refresh(bookoffItemFutureProvider(code2));
-    final future = bookoffItemFutureProvider(code2);
+    final future = _read(bookoffItemFutureProvider(code2).future);
+    _read(analyticsControllerProvider).logSearchEvent(searchEventBookoff);
     state = [future, ...state];
   }
 
   void addGeo(String code) {
-    _read(analyticsControllerProvider).logSearchEvent(searchEventGeo);
     final code2 = code.trim();
-    _container.refresh(geoItemFutureProvider(code2));
-    final future = geoItemFutureProvider(code2);
+    final future = _read(geoItemFutureProvider(code2).future);
+    _read(analyticsControllerProvider).logSearchEvent(searchEventGeo);
     state = [future, ...state];
   }
 
   void addTsutaya(String code) {
-    _read(analyticsControllerProvider).logSearchEvent(searchEventTsutaya);
     final code2 = code.trim();
-    _container.refresh(tsutayaItemFutureProvider(code2));
-    final future = tsutayaItemFutureProvider(code2);
+    final future = _read(tsutayaItemFutureProvider(code2).future);
+    _read(analyticsControllerProvider).logSearchEvent(searchEventTsutaya);
     state = [future, ...state];
   }
 }

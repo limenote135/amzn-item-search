@@ -13,8 +13,7 @@ class SlidableDeleteTile extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = useProvider(currentItemControllerProvider);
-    final items = useProvider(provider.state);
+    final items = useProvider(currentSearchItemProvider);
 
     return Slidable(
       actionPane: const SlidableDrawerActionPane(),
