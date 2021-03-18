@@ -29,7 +29,11 @@ class ItemImage extends StatelessWidget {
             if (state.extendedImageInfo != null) {
               state.extendedImageInfo!.image
                   .toByteData(format: ImageByteFormat.png)
-                  .then((value) => onComplete?.call(value!));
+                  .then((value) {
+                if (value != null) {
+                  onComplete?.call(value);
+                }
+              });
             }
             return state.completedWidget;
           },

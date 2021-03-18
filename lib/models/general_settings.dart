@@ -49,51 +49,28 @@ const _defaultCsvOrder = [
 class GeneralSettings with _$GeneralSettings {
   @HiveType(typeId: generalSettingsTypeId)
   const factory GeneralSettings({
-    @HiveField(0)
-    @Default(false)
-        bool isDarkMode,
+    @HiveField(0) @Default(false) bool isDarkMode,
     // 目標利益率設定
-    @HiveField(1)
-    @Default(false)
-        bool enableTargetProfit,
-    @HiveField(2)
-    @Default(10)
-        int targetProfitValue,
+    @HiveField(1) @Default(false) bool enableTargetProfit,
+    @HiveField(2) @Default(10) int targetProfitValue,
     // SKU 設定
-    @HiveField(3)
-    @Default(_defaultSkuFormat)
-        String skuFormat,
+    @HiveField(3) @Default(_defaultSkuFormat) String skuFormat,
     // 仕入れ先設定
-    @HiveField(4)
-    @Default(<String>[])
-        List<String> retailers,
+    @HiveField(4) @Default(<String>[]) List<String> retailers,
     // 読み上げ設定
-    @HiveField(5)
-    @Default(false)
-        bool enableReadAloud,
-    @HiveField(6)
-    @Default(0)
-        int patternIndex,
+    @HiveField(5) @Default(false) bool enableReadAloud,
+    @HiveField(6) @Default(0) int patternIndex,
     @HiveField(7)
     @Default(_defaultReadAloudPatterns)
         List<ReadAloudPattern> readAloudPatterns,
-    @HiveField(8)
-    @Default(1.0)
-        double readAloudVolume,
-    @HiveField(9)
-        double? readAloudSpeed,
+    @HiveField(8) @Default(1.0) double readAloudVolume,
+    @HiveField(9) double? readAloudSpeed,
     @HiveField(10)
     @Default(_defaultCustomButtons)
         List<CustomButtonDetail> customButtons,
-    @HiveField(11)
-    @Default(_defaultCsvOrder)
-        List<CsvColumn> csvOrder,
-    @HiveField(12)
-    @Default(0)
-        int minProfit,
-    @HiveField(13)
-    @Default(false)
-        bool getStocks,
+    @HiveField(11) @Default(_defaultCsvOrder) List<CsvColumn> csvOrder,
+    @HiveField(12) @Default(0) int minProfit,
+    @HiveField(13) @Default(false) bool getStocks,
   }) = _GeneralSettings;
 }
 
