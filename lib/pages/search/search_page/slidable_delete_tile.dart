@@ -1,4 +1,4 @@
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/item_delete_handler.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/fee_info.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -50,7 +50,7 @@ class TargetPriceTile extends HookWidget {
   // 購入価格から目標の利益率を達成できる販売価格を計算する
   int _calcTargetSellPrice(int purchasePrice, FeeInfo? feeInfo, int rate,
       int minProfit, bool useFba) {
-    if(feeInfo == null) {
+    if (feeInfo == null) {
       return 0;
     }
     // 販売価格 = 購入価格 + カテゴリ手数料 + FBA 手数料 + 利益
