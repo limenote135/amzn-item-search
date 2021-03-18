@@ -1,7 +1,7 @@
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
-import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/search_item.dart';
 
 const rankVariable = "{rank}";
 const titleVariable = "{title}";

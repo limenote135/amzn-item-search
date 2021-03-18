@@ -4,8 +4,8 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
-import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/form.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
@@ -129,7 +129,7 @@ class _Body extends HookWidget {
   }
 
   int _calcLowestPrice(ItemPrices? prices) {
-    if(prices == null) {
+    if (prices == null) {
       return 0;
     }
     if (prices.newPrices.isNotEmpty) {
