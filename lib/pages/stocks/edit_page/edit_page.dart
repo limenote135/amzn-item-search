@@ -1,6 +1,6 @@
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/form.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';

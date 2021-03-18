@@ -1,5 +1,5 @@
 import 'package:amasearch/models/enums/search_type.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/search_page/item_tile.dart';
 import 'package:amasearch/repository/bookoff.dart';

@@ -1,6 +1,6 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/repository/bookoff.dart';
 import 'package:amasearch/repository/geo.dart';
 import 'package:amasearch/repository/tsutaya.dart';
@@ -40,7 +40,7 @@ class ItemListController extends StateNotifier<
     box.clear();
   }
 
-  void remove(List<Item> targets) {
+  void remove(List<SearchItem> targets) {
     if (targets.isEmpty) {
       return;
     }

@@ -1,5 +1,5 @@
 import 'package:amasearch/controllers/item_controller.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/repository/common.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

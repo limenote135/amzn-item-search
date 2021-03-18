@@ -1,5 +1,5 @@
 import 'package:amasearch/models/fee_info.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 
 import 'formatter.dart';
 

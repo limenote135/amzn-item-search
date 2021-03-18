@@ -1,4 +1,4 @@
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 
 const asinVariable = "{asin}";
 const janVariable = "{jan}";
