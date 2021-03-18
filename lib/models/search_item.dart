@@ -13,8 +13,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-part 'item.freezed.dart';
-part 'item.g.dart';
+part 'search_item.freezed.dart';
+part 'search_item.g.dart';
 
 final currentItemFutureProvider =
     ScopedProvider<FutureProvider<StateNotifierProvider<ItemController>>>(null);
@@ -61,7 +61,7 @@ final itemFutureProviderImpl =
 
   if (resp.items.isEmpty) {
     return itemControllerProvider(
-      Item(
+      SearchItem(
         searchDate: DateTime.now().toUtc().toIso8601String(),
         jan: code,
         asins: [],
@@ -70,7 +70,7 @@ final itemFutureProviderImpl =
   }
 
   return itemControllerProvider(
-    Item(
+    SearchItem(
       searchDate: DateTime.now().toUtc().toIso8601String(),
       jan: code,
       asins: resp.items,
@@ -79,13 +79,13 @@ final itemFutureProviderImpl =
 });
 
 @freezed
-class Item with _$Item {
+class SearchItem with _$SearchItem {
   @HiveType(typeId: itemTypeId)
-  const factory Item({
+  const factory SearchItem({
     @HiveField(0) required String searchDate,
     @HiveField(1) required String jan,
     @HiveField(2) @Default(<AsinData>[]) List<AsinData> asins,
-  }) = _Item;
+  }) = _SearchItem;
 }
 
 @freezed
