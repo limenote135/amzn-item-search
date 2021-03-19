@@ -8,10 +8,42 @@ part 'general_settings.g.dart';
 
 const _defaultSkuFormat =
     "{yyyy}{mm}{dd}-{asin}-{cond}-{purchasePrice}-{quantity}";
+
 const _readAloudPattern1 = "{title}、新品利益{newProfit}、"
     "中古利益{usedProfit}、順位{rank}です。";
 const _readAloudPattern2 = "{title}、新品利益{newProfit}、順位{rank}です。";
 const _readAloudPattern3 = "{title}、中古利益{usedProfit}、順位{rank}です。";
+
+const _defaultReadAloudPatterns = [
+  ReadAloudPattern(title: "パターン1", pattern: _readAloudPattern1),
+  ReadAloudPattern(title: "パターン2", pattern: _readAloudPattern2),
+  ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3),
+];
+
+const _defaultCustomButtons = [
+  CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
+  CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
+  CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
+  CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
+  CustomButtonDetail(enable: false, title: "ボタン5", pattern: ""),
+];
+
+const _defaultCsvOrder = [
+  CsvColumn.asin,
+  CsvColumn.jan,
+  CsvColumn.title,
+  CsvColumn.sellPrice,
+  CsvColumn.purchasePrice,
+  CsvColumn.profit,
+  CsvColumn.listingPrice,
+  CsvColumn.quantity,
+  CsvColumn.condition,
+  CsvColumn.shipment,
+  CsvColumn.sku,
+  CsvColumn.retailer,
+  CsvColumn.comment,
+  CsvColumn.purchaseDate
+];
 
 @freezed
 class GeneralSettings with _$GeneralSettings {
@@ -43,11 +75,7 @@ class GeneralSettings with _$GeneralSettings {
     @Default(0)
         int patternIndex,
     @HiveField(7)
-    @Default([
-      ReadAloudPattern(title: "パターン1", pattern: _readAloudPattern1),
-      ReadAloudPattern(title: "パターン2", pattern: _readAloudPattern2),
-      ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3),
-    ])
+    @Default(_defaultReadAloudPatterns)
         List<ReadAloudPattern> readAloudPatterns,
     @HiveField(8)
     @Default(1.0)
@@ -55,31 +83,10 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(9)
         double? readAloudSpeed,
     @HiveField(10)
-    @Default([
-      CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
-      CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
-      CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
-      CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
-      CustomButtonDetail(enable: false, title: "ボタン5", pattern: ""),
-    ])
+    @Default(_defaultCustomButtons)
         List<CustomButtonDetail> customButtons,
     @HiveField(11)
-    @Default([
-      CsvColumn.asin,
-      CsvColumn.jan,
-      CsvColumn.title,
-      CsvColumn.sellPrice,
-      CsvColumn.purchasePrice,
-      CsvColumn.profit,
-      CsvColumn.listingPrice,
-      CsvColumn.quantity,
-      CsvColumn.condition,
-      CsvColumn.shipment,
-      CsvColumn.sku,
-      CsvColumn.retailer,
-      CsvColumn.comment,
-      CsvColumn.purchaseDate
-    ])
+    @Default(_defaultCsvOrder)
         List<CsvColumn> csvOrder,
     @HiveField(12)
     @Default(0)
