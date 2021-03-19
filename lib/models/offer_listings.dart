@@ -52,6 +52,28 @@ final cartOfferProvider =
       .whenData((value) => value.cart);
 });
 
+final sellByAmazonProvider =
+    FutureProvider.autoDispose.family<bool, String>((ref, asin) async {
+  final param = OfferListingsParams(
+    asin: asin,
+    prime: false,
+    newItem: true,
+    usedLikeNew: false,
+    usedVeryGood: false,
+    usedGood: false,
+    usedAcceptable: false,
+  );
+  final ret = await ref.watch(offerListingsFutureProvider(param).future);
+  ref.maintainState = true;
+  return ret.cart?.sellerId == "" ||
+      ret.offers.any((element) => element.sellerId == "");
+
+  // return ref.watch(offerListingsFutureProvider(param)).whenData((value) {
+  //   return value.cart?.sellerId == "" ||
+  //       value.offers.any((element) => element.sellerId == "");
+  // });
+});
+
 @freezed
 class OfferAtIndexParam with _$OfferAtIndexParam {
   const factory OfferAtIndexParam({
