@@ -17,45 +17,34 @@ class _$GeneralSettingsTearOff {
   const _$GeneralSettingsTearOff();
 
   _GeneralSettings call(
-      {@HiveField(0) bool isDarkMode = false,
-      @HiveField(1) bool enableTargetProfit = false,
-      @HiveField(2) int targetProfitValue = 10,
-      @HiveField(3) String skuFormat = _defaultSkuFormat,
-      @HiveField(4) List<String> retailers = const <String>[],
-      @HiveField(5) bool enableReadAloud = false,
-      @HiveField(6) int patternIndex = 0,
-      @HiveField(7) List<ReadAloudPattern> readAloudPatterns = const [
-        const ReadAloudPattern(title: "パターン1", pattern: _readAloudPattern1),
-        const ReadAloudPattern(title: "パターン2", pattern: _readAloudPattern2),
-        const ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3)
-      ],
-      @HiveField(8) double readAloudVolume = 1.0,
-      @HiveField(9) double? readAloudSpeed,
-      @HiveField(10) List<CustomButtonDetail> customButtons = const [
-        const CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
-      ],
-      @HiveField(11) List<CsvColumn> csvOrder = const [
-        CsvColumn.asin,
-        CsvColumn.jan,
-        CsvColumn.title,
-        CsvColumn.sellPrice,
-        CsvColumn.purchasePrice,
-        CsvColumn.profit,
-        CsvColumn.listingPrice,
-        CsvColumn.quantity,
-        CsvColumn.condition,
-        CsvColumn.shipment,
-        CsvColumn.sku,
-        CsvColumn.retailer,
-        CsvColumn.comment,
-        CsvColumn.purchaseDate
-      ],
-      @HiveField(12) int minProfit = 0,
-      @HiveField(13) bool getStocks = false}) {
+      {@HiveField(0)
+          bool isDarkMode = false,
+      @HiveField(1)
+          bool enableTargetProfit = false,
+      @HiveField(2)
+          int targetProfitValue = 10,
+      @HiveField(3)
+          String skuFormat = _defaultSkuFormat,
+      @HiveField(4)
+          List<String> retailers = const <String>[],
+      @HiveField(5)
+          bool enableReadAloud = false,
+      @HiveField(6)
+          int patternIndex = 0,
+      @HiveField(7)
+          List<ReadAloudPattern> readAloudPatterns = _defaultReadAloudPatterns,
+      @HiveField(8)
+          double readAloudVolume = 1.0,
+      @HiveField(9)
+          double? readAloudSpeed,
+      @HiveField(10)
+          List<CustomButtonDetail> customButtons = _defaultCustomButtons,
+      @HiveField(11)
+          List<CsvColumn> csvOrder = _defaultCsvOrder,
+      @HiveField(12)
+          int minProfit = 0,
+      @HiveField(13)
+          bool getStocks = false}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
@@ -350,36 +339,11 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(4) this.retailers = const <String>[],
       @HiveField(5) this.enableReadAloud = false,
       @HiveField(6) this.patternIndex = 0,
-      @HiveField(7) this.readAloudPatterns = const [
-        const ReadAloudPattern(title: "パターン1", pattern: _readAloudPattern1),
-        const ReadAloudPattern(title: "パターン2", pattern: _readAloudPattern2),
-        const ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3)
-      ],
+      @HiveField(7) this.readAloudPatterns = _defaultReadAloudPatterns,
       @HiveField(8) this.readAloudVolume = 1.0,
       @HiveField(9) this.readAloudSpeed,
-      @HiveField(10) this.customButtons = const [
-        const CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
-      ],
-      @HiveField(11) this.csvOrder = const [
-        CsvColumn.asin,
-        CsvColumn.jan,
-        CsvColumn.title,
-        CsvColumn.sellPrice,
-        CsvColumn.purchasePrice,
-        CsvColumn.profit,
-        CsvColumn.listingPrice,
-        CsvColumn.quantity,
-        CsvColumn.condition,
-        CsvColumn.shipment,
-        CsvColumn.sku,
-        CsvColumn.retailer,
-        CsvColumn.comment,
-        CsvColumn.purchaseDate
-      ],
+      @HiveField(10) this.customButtons = _defaultCustomButtons,
+      @HiveField(11) this.csvOrder = _defaultCsvOrder,
       @HiveField(12) this.minProfit = 0,
       @HiveField(13) this.getStocks = false});
 
@@ -411,11 +375,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(6)
   final int patternIndex;
-  @JsonKey(defaultValue: const [
-    const ReadAloudPattern(title: "パターン1", pattern: _readAloudPattern1),
-    const ReadAloudPattern(title: "パターン2", pattern: _readAloudPattern2),
-    const ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3)
-  ])
+  @JsonKey(defaultValue: _defaultReadAloudPatterns)
   @override
   @HiveField(7)
   final List<ReadAloudPattern> readAloudPatterns;
@@ -426,32 +386,11 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(9)
   final double? readAloudSpeed;
-  @JsonKey(defaultValue: const [
-    const CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
-    const CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
-    const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
-    const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
-    const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
-  ])
+  @JsonKey(defaultValue: _defaultCustomButtons)
   @override
   @HiveField(10)
   final List<CustomButtonDetail> customButtons;
-  @JsonKey(defaultValue: const [
-    CsvColumn.asin,
-    CsvColumn.jan,
-    CsvColumn.title,
-    CsvColumn.sellPrice,
-    CsvColumn.purchasePrice,
-    CsvColumn.profit,
-    CsvColumn.listingPrice,
-    CsvColumn.quantity,
-    CsvColumn.condition,
-    CsvColumn.shipment,
-    CsvColumn.sku,
-    CsvColumn.retailer,
-    CsvColumn.comment,
-    CsvColumn.purchaseDate
-  ])
+  @JsonKey(defaultValue: _defaultCsvOrder)
   @override
   @HiveField(11)
   final List<CsvColumn> csvOrder;
