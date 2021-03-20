@@ -11,6 +11,7 @@ import 'package:amasearch/pages/common/purchase_settings/form.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/util/price_util.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:amasearch/util/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -39,16 +40,15 @@ class PurchasePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("仕入れ設定"),
       ),
-      body: _Body(),
+      body: const _Body(),
     );
   }
 }
 
-// TODO: statefulWidget にする？
-class _Body extends HookWidget {
-  _Body({Key? key}) : super(key: key);
+final _itemImageProvider = StateProvider.autoDispose<Uint8List?>((_) => null);
 
-  Uint8List? imageData;
+class _Body extends HookWidget {
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class _Body extends HookWidget {
     final useFba = useProvider(searchSettingsControllerProvider.state).useFba;
 
     final stock = StockItem(
-      purchaseDate: DateTime.now().toIso8601String(),
+      purchaseDate: currentTimeString(),
       sellPrice: lowestPrice,
       useFba: useFba,
       autogenSku: true,
@@ -74,19 +74,23 @@ class _Body extends HookWidget {
       ],
       child: PurchaseSettingsForm(
         onComplete: (bytes) {
-          if (item.imageData == null) {
-            // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
-            imageData = bytes.buffer.asUint8List();
-          }
+          // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
+          context.read(_itemImageProvider).state = bytes.buffer.asUint8List();
         },
         action: ReactiveFormConsumer(
           builder: (context, form, child) {
-            return ElevatedButton(
-              style: raisedButtonStyle(context),
-              onPressed: form.invalid
-                  ? null
-                  : () => _onSubmit(context, form, uuid.v4(), item),
-              child: const Text("仕入れる"),
+            return Consumer(
+              builder: (context, watch, child) {
+                final image = watch(_itemImageProvider);
+                return ElevatedButton(
+                  style: raisedButtonStyle(context),
+                  onPressed: form.invalid
+                      ? null
+                      : () => _onSubmit(
+                          context, form, uuid.v4(), item, image.state),
+                  child: const Text("仕入れる"),
+                );
+              },
             );
           },
         ),
@@ -95,7 +99,12 @@ class _Body extends HookWidget {
   }
 
   void _onSubmit(
-      BuildContext context, FormGroup form, String id, AsinData item) {
+    BuildContext context,
+    FormGroup form,
+    String id,
+    AsinData item,
+    Uint8List? image,
+  ) {
     final purchase = getInt(form, purchasePriceField);
     final sell = getInt(form, sellPriceField);
     final useFba = getBool(form, useFbaField);
@@ -118,7 +127,7 @@ class _Body extends HookWidget {
       subCondition: getCondition(form).toItemSubCondition(),
       sku: getString(form, skuField),
       memo: getString(form, memoField),
-      item: item.imageData != null ? item : item.copyWith(imageData: imageData),
+      item: image == null ? item : item.copyWith(imageData: image),
       purchaseDate: getString(form, purchaseDateField),
       retailer: getString(form, retailerField),
     );

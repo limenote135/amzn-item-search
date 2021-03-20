@@ -19,7 +19,6 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
   final Reader _read;
 
   void _fetchAll() {
-    // TODO: オンデマンドで読み込むべき？
     final box = _read(stockItemBoxProvider);
     final uuid = _read(uuidProvider);
     final data = box.values.toList()..sort(_sortFunc);

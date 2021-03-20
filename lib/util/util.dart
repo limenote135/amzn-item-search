@@ -11,3 +11,7 @@ bool isDark(BuildContext context) {
 String urlEncode(String str) {
   return Uri.encodeQueryComponent(str).replaceAll("+", "%20");
 }
+
+String currentTimeString({DateTime? time}) {
+  return (time ?? DateTime.now()).toUtc().toIso8601String();
+}

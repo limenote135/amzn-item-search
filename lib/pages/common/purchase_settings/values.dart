@@ -1,4 +1,5 @@
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 const purchasePriceField = "purchasePrice";
@@ -18,7 +19,7 @@ String getString(AbstractControl<dynamic> form, String field) {
     case purchaseDateField:
       {
         final date = f.control(purchaseDateField).value as DateTime?;
-        return (date ?? DateTime.now()).toUtc().toIso8601String();
+        return currentTimeString(time: date);
       }
     case retailerField:
       return f.control(retailerField).value as String;
