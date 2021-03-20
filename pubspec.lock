@@ -7,14 +7,14 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "17.0.0"
+    version: "18.0.0"
   ai_barcode:
     dependency: "direct main"
     description:
       name: ai_barcode
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   ai_barcode_platform_interface:
     dependency: transitive
     description:
@@ -35,7 +35,7 @@ packages:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   args:
     dependency: transitive
     description:
@@ -77,7 +77,7 @@ packages:
       name: build_daemon
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.9"
+    version: "2.1.10"
   build_resolvers:
     dependency: transitive
     description:
@@ -112,7 +112,7 @@ packages:
       name: built_value
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.0.2"
+    version: "8.0.3"
   characters:
     dependency: transitive
     description:
@@ -189,7 +189,7 @@ packages:
       name: csv
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0-nullsafety.0"
+    version: "5.0.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -210,14 +210,7 @@ packages:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0-beta7"
-  dropdown_search:
-    dependency: transitive
-    description:
-      name: dropdown_search
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.9"
+    version: "4.0.0-prev3"
   euc:
     dependency: "direct main"
     description:
@@ -266,7 +259,7 @@ packages:
       name: firebase
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.0.0"
+    version: "9.0.1"
   firebase_analytics:
     dependency: "direct main"
     description:
@@ -368,13 +361,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_plugin_android_lifecycle:
-    dependency: transitive
-    description:
-      name: flutter_plugin_android_lifecycle
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   flutter_riverpod:
     dependency: transitive
     description:
@@ -397,10 +383,10 @@ packages:
   flutter_touch_spin:
     dependency: transitive
     description:
-      path: "../flutter_touch_spin"
-      relative: true
-    source: path
-    version: "1.0.1"
+      name: flutter_touch_spin
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0-nullsafety.0"
   flutter_tts:
     dependency: "direct main"
     description:
@@ -489,7 +475,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.0"
+    version: "0.13.1"
   http_client_helper:
     dependency: transitive
     description:
@@ -511,20 +497,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
-  image_picker:
-    dependency: transitive
-    description:
-      name: image_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.2+1"
-  image_picker_platform_interface:
-    dependency: transitive
-    description:
-      name: image_picker_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   intl:
     dependency: "direct main"
     description:
@@ -552,7 +524,7 @@ packages:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.1"
   json_serializable:
     dependency: "direct main"
     description:
@@ -671,14 +643,14 @@ packages:
       name: permission_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.0"
+    version: "6.1.1"
   permission_handler_platform_interface:
     dependency: transitive
     description:
       name: permission_handler_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.0"
+    version: "3.1.1"
   petitparser:
     dependency: transitive
     description:
@@ -749,13 +721,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "9.1.0"
-  reactive_forms_widgets:
+  reactive_touch_spin:
     dependency: "direct main"
     description:
-      path: "../reactive_forms_widgets"
-      relative: true
-    source: path
-    version: "0.3.9"
+      name: reactive_touch_spin
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1-nullsafety.1"
   riverpod:
     dependency: transitive
     description:
@@ -776,7 +748,7 @@ packages:
       name: shelf
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.0"
   shelf_web_socket:
     dependency: transitive
     description:
@@ -914,7 +886,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.4"
   xdg_directories:
     dependency: transitive
     description:
