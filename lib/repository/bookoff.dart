@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:amasearch/controllers/item_controller.dart';
 import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,24 +13,17 @@ part 'bookoff.g.dart';
 
 final bookoffProvider = Provider((ref) => BookoffRepository(ref.read));
 
-final bookoffJanFutureProvider =
-    FutureProvider.autoDispose.family<String, String>((ref, code) async {
+final bookoffItemFutureProvider =
+    FutureProvider.autoDispose.family<SearchItem, String>((ref, code) async {
+  final now = currentTimeString();
   final bookoff = ref.read(bookoffProvider);
   final resp = await bookoff.get(code);
   ref.maintainState = true;
   if (resp.isEmpty) {
-    return code;
+    return SearchItem(searchDate: now, jan: code);
   }
-  return resp.first.jan;
-});
 
-final bookoffItemFutureProvider =
-    FutureProvider.family<StateNotifierProvider<ItemController>, String>(
-        (ref, code) async {
-  final jan = await ref.read(bookoffJanFutureProvider(code).future);
-
-  await ref.container.refresh(itemFutureProvider(jan));
-  return ref.watch(itemFutureProvider(jan).future);
+  return SearchItem(searchDate: now, jan: resp.first.jan);
 });
 
 const _bookoffCodeLength = 10;
