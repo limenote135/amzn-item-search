@@ -11,7 +11,7 @@ import 'package:flutter/widgets.dart' as base;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms_widgets/reactive_forms_widgets.dart';
+import 'package:reactive_touch_spin/reactive_touch_spin.dart';
 
 import 'custom_validator.dart';
 import 'fee_tile.dart';
