@@ -30,50 +30,6 @@ class SearchButtons extends HookWidget {
         ElevatedButton(
           style: raisedButtonStyle(context),
           onPressed: () async {
-            final url = "https://www.amazon.co.jp/gp/product/${item.asin}/";
-            await context
-                .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonAmazonName);
-            await FlutterWebBrowser.openWebPage(url: url);
-          },
-          child: const Text("Amazon"),
-        ),
-        ElevatedButton(
-          style: raisedButtonStyle(context),
-          onPressed: () async {
-            final url = "https://keepa.com/#!product/5-${item.asin}/";
-            await context
-                .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonKeepaName);
-            await FlutterWebBrowser.openWebPage(url: url);
-          },
-          child: const Text("Keepa"),
-        ),
-        ElevatedButton(
-          style: raisedButtonStyle(context),
-          onPressed: () async {
-            final url = "https://delta-tracer.com/item/detail/jp/${item.asin}/";
-            await context
-                .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonDeltaName);
-            await FlutterWebBrowser.openWebPage(url: url);
-          },
-          child: const Text("Delta"),
-        ),
-        ElevatedButton(
-          style: raisedButtonStyle(context),
-          onPressed: () async {
-            final url = "https://keezon.net/item/index?ASIN=${item.asin}";
-            await context
-                .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonKeezonName);
-            await FlutterWebBrowser.openWebPage(url: url);
-          },
-          child: const Text("Keezon"),
-        ),
-        ElevatedButton(
-          style: raisedButtonStyle(context),
-          onPressed: () async {
             final url =
                 "https://sellercentral.amazon.co.jp/abis/listing/syh?asin=${item.asin}";
             await context
@@ -143,9 +99,13 @@ class SearchButtons extends HookWidget {
                 if (!url.startsWith("http")) {
                   return;
                 }
+                final eventName =
+                    customButtonEventMap.containsKey(button.pattern)
+                        ? customButtonEventMap[button.pattern]!
+                        : button.pattern;
                 await context
                     .read(analyticsControllerProvider)
-                    .logPushSearchButtonEvent(button.pattern);
+                    .logPushSearchButtonEvent(eventName);
                 await FlutterWebBrowser.openWebPage(url: url);
               },
               child: Text(button.title),

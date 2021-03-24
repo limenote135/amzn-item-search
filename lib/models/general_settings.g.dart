@@ -27,7 +27,8 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       readAloudPatterns: (fields[7] as List).cast<ReadAloudPattern>(),
       readAloudVolume: fields[8] as double,
       readAloudSpeed: fields[9] as double?,
-      customButtons: (fields[10] as List?)?.cast<CustomButtonDetail>() ?? _defaultCustomButtons,
+      customButtons: (fields[10] as List?)?.cast<CustomButtonDetail>() ??
+          defaultCustomButtons,
       csvOrder: (fields[11] as List?)?.cast<CsvColumn>() ?? _defaultCsvOrder,
       minProfit: fields[12] as int? ?? 0,
       getStocks: fields[13] as bool? ?? false,
