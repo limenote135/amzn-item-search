@@ -26,14 +26,14 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_hooks: ^0.16.0
-  hooks_riverpod: ^0.13.1
+  hooks_riverpod: ^0.13.1+1
   state_notifier: ^0.7.0
   freezed_annotation: ^0.14.1
-  json_serializable: ^4.0.2
+  json_serializable: ^4.1.0
   dio: ^4.0.0-prev3
   xml: ^5.0.2
   crypto: ^3.0.0
-  uuid: ^3.0.1
+  uuid: ^3.0.2
   intl: ^0.17.0
   extended_image: ^3.0.0
   ai_barcode: ^2.1.0
@@ -44,7 +44,7 @@ dependencies:
   path_provider: ^2.0.1
   csv: ^5.0.0
   share: ^2.0.1
-  firebase_core: ^1.0.1
+  firebase_core: ^1.0.2
   firebase_analytics: ^7.1.1
   firebase_crashlytics: ^1.0.0
   firebase_remote_config: ^0.9.0-dev.0
@@ -56,7 +56,7 @@ dependencies:
   package_info: ^2.0.0
   pub_semver: ^2.0.0
   reactive_forms: ^9.1.0
-  reactive_touch_spin: ^0.0.1-nullsafety.1
+  reactive_touch_spin: ^0.0.1-nullsafety.2
   keyboard_actions: ^3.4.0
   html: ^0.15.0
 
@@ -70,8 +70,8 @@ dev_dependencies:
     sdk: flutter
   pedantic:
   pedantic_mono: ^1.11.0+2
-  build_runner: ^1.11.5
-  freezed: ^0.14.1
+  build_runner: ^1.12.2
+  freezed: ^0.14.1+1
   hive_generator: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
@@ -115,3 +115,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+dependency_overrides:
+  build: ^2.0.0
