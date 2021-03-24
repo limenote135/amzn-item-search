@@ -19,6 +19,15 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     final settings = box.get(generalSettingsKeyName) as GeneralSettings?;
     if (settings != null) {
       state = settings;
+      var buttons = state.customButtons;
+      // デフォルトを変更した際のマイグレーション
+      if (buttons.length == 5) {
+        buttons = [
+          ...defaultCustomButtons.sublist(0, 7),
+          ...buttons,
+        ];
+        state = state.copyWith(customButtons: buttons);
+      }
     }
     // 新規追加された項目が、ロード時にデフォルト値になっている可能性があるので一度保存する
     box.put(generalSettingsKeyName, state);

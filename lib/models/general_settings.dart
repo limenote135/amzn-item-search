@@ -20,7 +20,31 @@ const _defaultReadAloudPatterns = [
   ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3),
 ];
 
-const _defaultCustomButtons = [
+const customButtonAmazonUrl = "https://www.amazon.co.jp/gp/product/{asin}/";
+const customButtonKeepaUrl = "https://keepa.com/#!product/5-{asin}/";
+const customButtonDeltaUrl = "https://delta-tracer.com/item/detail/jp/{asin}/";
+const customButtonMonoSearchUrl = "https://mnsearch.com/item?kwd={asin}";
+const customButtonKeezonUrl = "https://keezon.net/item/index?ASIN={asin}";
+const customButtonMercariUrl =
+    "https://www.mercari.com/jp/search/?keyword={title}";
+const customButtonAmazonStockUrl =
+    "https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};";
+
+const defaultCustomButtons = [
+  CustomButtonDetail(
+      enable: true, title: "Amazon", pattern: customButtonAmazonUrl),
+  CustomButtonDetail(
+      enable: true, title: "Keepa", pattern: customButtonKeepaUrl),
+  CustomButtonDetail(
+      enable: true, title: "Delta", pattern: customButtonDeltaUrl),
+  CustomButtonDetail(
+      enable: true, title: "モノサーチ", pattern: customButtonMonoSearchUrl),
+  CustomButtonDetail(
+      enable: false, title: "Keezon", pattern: customButtonKeezonUrl),
+  CustomButtonDetail(
+      enable: false, title: "メルカリ", pattern: customButtonMercariUrl),
+  CustomButtonDetail(
+      enable: false, title: "在庫", pattern: customButtonAmazonStockUrl),
   CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
   CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
   CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
@@ -66,7 +90,7 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(8) @Default(1.0) double readAloudVolume,
     @HiveField(9) double? readAloudSpeed,
     @HiveField(10)
-    @Default(_defaultCustomButtons)
+    @Default(defaultCustomButtons)
         List<CustomButtonDetail> customButtons,
     @HiveField(11) @Default(_defaultCsvOrder) List<CsvColumn> csvOrder,
     @HiveField(12) @Default(0) int minProfit,
