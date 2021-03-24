@@ -38,7 +38,7 @@ class _$GeneralSettingsTearOff {
       @HiveField(9)
           double? readAloudSpeed,
       @HiveField(10)
-          List<CustomButtonDetail> customButtons = _defaultCustomButtons,
+          List<CustomButtonDetail> customButtons = defaultCustomButtons,
       @HiveField(11)
           List<CsvColumn> csvOrder = _defaultCsvOrder,
       @HiveField(12)
@@ -342,7 +342,7 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(7) this.readAloudPatterns = _defaultReadAloudPatterns,
       @HiveField(8) this.readAloudVolume = 1.0,
       @HiveField(9) this.readAloudSpeed,
-      @HiveField(10) this.customButtons = _defaultCustomButtons,
+      @HiveField(10) this.customButtons = defaultCustomButtons,
       @HiveField(11) this.csvOrder = _defaultCsvOrder,
       @HiveField(12) this.minProfit = 0,
       @HiveField(13) this.getStocks = false});
@@ -386,7 +386,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(9)
   final double? readAloudSpeed;
-  @JsonKey(defaultValue: _defaultCustomButtons)
+  @JsonKey(defaultValue: defaultCustomButtons)
   @override
   @HiveField(10)
   final List<CustomButtonDetail> customButtons;
