@@ -3,6 +3,7 @@ import 'package:amasearch/models/general_settings.dart';
 const purchaseEventName = "purchase";
 const pushSearchButtonEventName = "pushSearchButton";
 const searchEventName = "search";
+const calcEventName = "calculator";
 
 const shareEventName = "share";
 const deleteSearchHistoryEventName = "deleteSearchHistory";
@@ -36,3 +37,14 @@ const customButtonEventMap = <String, String>{
   customButtonMercariUrl: pushSearchButtonMercariName,
   customButtonAmazonStockUrl: pushSearchButtonAmazonStockName,
 };
+
+const calcEventDiv = "div";
+const calcEventMul = "mul";
+const calcEventMinus = "minus";
+const calcEventPlus = "plus";
+const calcEventPlus5p = "+5%";
+const calcEventMinus5p = "-5%";
+const calcEventPlus10p = "+10%";
+const calcEventMinus10p = "-10%";
+const calcEventFirstAction = "firstAction";
+const calcEventSecondAction = "secondAction";
