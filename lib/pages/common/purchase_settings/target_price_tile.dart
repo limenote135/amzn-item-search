@@ -14,7 +14,7 @@ class TargetPriceTile extends HookWidget {
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
 
-    final form = ReactiveForm.of(context);
+    final form = ReactiveForm.of(context)!;
     final useFba = getBool(form, useFbaField);
     final purchasePrice = getInt(form, purchasePriceField);
 

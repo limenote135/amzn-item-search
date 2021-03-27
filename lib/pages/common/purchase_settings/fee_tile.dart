@@ -16,7 +16,7 @@ class FeeTile extends HookWidget {
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
 
-    final form = ReactiveForm.of(context);
+    final form = ReactiveForm.of(context)!;
     final useFba = getBool(form, useFbaField);
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
