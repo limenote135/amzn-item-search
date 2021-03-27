@@ -13,7 +13,7 @@ class ProfitTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final form = ReactiveForm.of(context);
+    final form = ReactiveForm.of(context)!;
     final quantity = getInt(form, quantityField);
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
