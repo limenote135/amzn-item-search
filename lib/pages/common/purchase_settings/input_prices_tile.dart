@@ -13,7 +13,7 @@ class InputPricesTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final showCalc = useState(false);
-    final form = ReactiveForm.of(context) as FormGroup;
+    final form = ReactiveForm.of(context)! as FormGroup;
     return ListTile(
       title: Column(
         children: [

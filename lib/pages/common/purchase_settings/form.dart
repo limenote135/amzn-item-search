@@ -27,7 +27,7 @@ import 'values.dart';
 
 final formValueProvider =
     StateProvider.family<FormGroup, StockItem>((ref, item) {
-  return fb.group(<String, dynamic>{
+  return fb.group(<String, Object>{
     purchasePriceField: [
       item.purchasePrice == 0 ? "" : "${item.purchasePrice}",
       positiveNumberOrEmpty,
@@ -85,7 +85,7 @@ class PurchaseSettingsForm extends HookWidget {
                 children: [
                   const Expanded(child: Text("個数")),
                   Flexible(
-                    child: ReactiveTouchSpin<int>(
+                    child: ReactiveTouchSpin(
                       formControlName: quantityField,
                       textStyle: const TextStyle(fontSize: 18),
                       min: 1,
@@ -128,7 +128,7 @@ class _Unfocus extends StatelessWidget {
   Widget build(BuildContext context) {
     return base.Listener(
       onPointerDown: (event) {
-        ReactiveForm.of(context).unfocus();
+        ReactiveForm.of(context)?.unfocus();
       },
       child: child,
     );

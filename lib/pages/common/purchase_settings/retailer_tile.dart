@@ -28,7 +28,7 @@ class RetailerTile extends StatelessWidget {
                 builder: (context) => const _RetailerSelectDialog(),
               );
               if (ret != null) {
-                final form = ReactiveForm.of(context) as FormGroup;
+                final form = ReactiveForm.of(context)! as FormGroup;
                 form.control(retailerField).value = ret;
               }
             },
