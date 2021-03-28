@@ -27,13 +27,13 @@ class SkuTile extends HookWidget {
           title: ReactiveValueListenableBuilder<bool>(
             formControlName: autogenSkuField,
             builder: (context, control, child) {
-              if (control.value) {
-                final form = ReactiveForm.of(context) as FormGroup;
+              if (control.value!) {
+                final form = ReactiveForm.of(context)! as FormGroup;
                 form.control(skuField).value =
                     _generateSku(skuFormat, item, form);
               }
               return ReactiveTextField<dynamic>(
-                readOnly: control.value,
+                readOnly: control.value!,
                 formControlName: skuField,
                 keyboardType: TextInputType.url,
                 decoration: const InputDecoration(labelText: "SKU"),
