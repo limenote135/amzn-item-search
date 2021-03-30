@@ -31,18 +31,6 @@ class SearchButtons extends HookWidget {
           style: raisedButtonStyle(context),
           onPressed: () async {
             final url =
-                "https://sellercentral.amazon.co.jp/abis/listing/syh?asin=${item.asin}";
-            await context
-                .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonSellerCentralName);
-            await FlutterWebBrowser.openWebPage(url: url);
-          },
-          child: const Text("出品確認"),
-        ),
-        ElevatedButton(
-          style: raisedButtonStyle(context),
-          onPressed: () async {
-            final url =
                 "https://www.amazon.co.jp/gp/offer-listing/${item.asin}/";
             await context
                 .read(analyticsControllerProvider)
@@ -89,6 +77,17 @@ class SearchButtons extends HookWidget {
             );
           },
           child: const Text("中古一覧"),
+        ),
+        ElevatedButton(
+          style: raisedButtonStyle(context),
+          onPressed: () async {
+            final url = "https://keepa.com/#!product/5-${item.asin}/";
+            await context
+                .read(analyticsControllerProvider)
+                .logPushSearchButtonEvent(pushSearchButtonKeepaName);
+            await FlutterWebBrowser.openWebPage(url: url);
+          },
+          child: const Text("Keepa"),
         ),
         for (final button in buttons)
           if (button.enable)
