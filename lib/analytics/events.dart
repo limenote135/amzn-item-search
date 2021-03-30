@@ -23,7 +23,7 @@ const pushSearchButtonMonoSearchName = "MonoSearch";
 const pushSearchButtonKeezonName = "Keezon";
 const pushSearchButtonMercariName = "Mercari";
 const pushSearchButtonAmazonStockName = "AmazonStock";
-const pushSearchButtonSellerCentralName = "SellerCentral";
+const pushSearchButtonAmazonListableName = "AmazonListable";
 const pushSearchButtonAmazonListName = "AmazonList";
 const pushSearchButtonAmazonNewOffersName = "AmazonNewOffers";
 const pushSearchButtonAmazonUsedOffersName = "AmazonUsedOffers";
@@ -36,6 +36,7 @@ const customButtonEventMap = <String, String>{
   customButtonKeezonUrl: pushSearchButtonKeezonName,
   customButtonMercariUrl: pushSearchButtonMercariName,
   customButtonAmazonStockUrl: pushSearchButtonAmazonStockName,
+  customButtonAmazonListableUrl: pushSearchButtonAmazonListableName,
 };
 
 const calcEventDiv = "div";
