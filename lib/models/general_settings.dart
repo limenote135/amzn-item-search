@@ -29,12 +29,14 @@ const customButtonMercariUrl =
     "https://www.mercari.com/jp/search/?keyword={title}";
 const customButtonAmazonStockUrl =
     "https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};";
+const customButtonAmazonListableUrl =
+    "https://sellercentral.amazon.co.jp/abis/listing/syh?asin={asin}";
 
 const defaultCustomButtons = [
   CustomButtonDetail(
       enable: true, title: "Amazon", pattern: customButtonAmazonUrl),
   CustomButtonDetail(
-      enable: true, title: "Keepa", pattern: customButtonKeepaUrl),
+      enable: true, title: "出品確認", pattern: customButtonAmazonListableUrl),
   CustomButtonDetail(
       enable: true, title: "Delta", pattern: customButtonDeltaUrl),
   CustomButtonDetail(
