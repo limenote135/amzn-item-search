@@ -1,4 +1,3 @@
-import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
@@ -93,13 +92,7 @@ class ItemTileImpl extends HookWidget {
           isEllipsisProvider.overrideWithValue(true),
           currentFbaFeeProvider.overrideWithValue(fbaFee),
         ],
-        child: SearchItemTile(
-          onComplete: (bytes) {
-            context
-                .read(searchItemControllerProvider)
-                .saveImageBinary(item.searchDate, bytes.buffer.asUint8List());
-          },
-        ),
+        child: const SearchItemTile(),
       ),
     );
   }
