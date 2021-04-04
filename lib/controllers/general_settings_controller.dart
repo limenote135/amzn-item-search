@@ -28,6 +28,12 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
         ];
         state = state.copyWith(customButtons: buttons);
       }
+      // 損益分岐を CSV に追加するためのマイグレーション
+      final order = state.csvOrder;
+      if (order.length == 14) {
+        final newOrder = order.toList()..add(CsvColumn.breakEven);
+        state = state.copyWith(csvOrder: newOrder);
+      }
     }
     // 新規追加された項目が、ロード時にデフォルト値になっている可能性があるので一度保存する
     box.put(generalSettingsKeyName, state);
