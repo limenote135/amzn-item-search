@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
@@ -16,19 +14,16 @@ final currentSearchDateProvider = ScopedProvider<String?>(null);
 final isEllipsisProvider = ScopedProvider<bool>((_) => false);
 
 class SearchItemTile extends HookWidget {
-  const SearchItemTile({Key? key, this.onComplete}) : super(key: key);
-  final void Function(ByteData bytes)? onComplete;
+  const SearchItemTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
     final tile = Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        TileImage(
-          onComplete: onComplete,
-        ),
-        const Expanded(
+      children: const [
+        TileImage(),
+        Expanded(
           child: _ItemTileBody(),
         )
       ],
