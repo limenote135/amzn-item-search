@@ -62,13 +62,14 @@ const _defaultCsvOrder = [
   CsvColumn.purchasePrice,
   CsvColumn.profit,
   CsvColumn.listingPrice,
+  CsvColumn.breakEven,
   CsvColumn.quantity,
   CsvColumn.condition,
   CsvColumn.shipment,
   CsvColumn.sku,
   CsvColumn.retailer,
   CsvColumn.comment,
-  CsvColumn.purchaseDate
+  CsvColumn.purchaseDate,
 ];
 
 @freezed

@@ -97,8 +97,6 @@ class _Body extends HookWidget {
     final isUnknownFbaFee = feeInfo.fbaFee == -1;
     final fbaFee = item.useFba && !isUnknownFbaFee ? feeInfo.fbaFee : 0;
     final totalFeePerItem = referralFee + categoryFee + fbaFee;
-    final breakEven = calcBreakEven(
-        purchase: item.purchasePrice, useFba: item.useFba, feeInfo: feeInfo);
 
     return ListView(
       children: [
@@ -162,7 +160,7 @@ class _Body extends HookWidget {
         ),
         TextListTile(
           leading: const Text("損益分岐額"),
-          main: Text("$breakEven 円"),
+          main: Text("${item.breakEven} 円"),
         ),
         TextListTile(
           leading: const Text("SKU"),
