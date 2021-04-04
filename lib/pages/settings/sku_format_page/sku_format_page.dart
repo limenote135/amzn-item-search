@@ -120,6 +120,7 @@ class __PatternEditFormState extends State<_PatternEditForm> {
                 quantity: 2,
                 useFba: true,
                 date: DateTime.now(),
+                breakEven: 271,
               )),
             ],
           ),

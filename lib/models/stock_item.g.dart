@@ -30,13 +30,14 @@ class StockItemAdapter extends TypeAdapter<_$_StockItem> {
       item: fields[10] as AsinData,
       retailer: fields[11] as String? ?? "", // TODO: デフォルト値
       id: fields[12] as String? ?? "",
+      breakEven: fields[13] as int? ?? -1, // TODO: マイグレーションのために -1 にする
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_StockItem obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.purchaseDate)
       ..writeByte(1)
@@ -62,7 +63,9 @@ class StockItemAdapter extends TypeAdapter<_$_StockItem> {
       ..writeByte(11)
       ..write(obj.retailer)
       ..writeByte(12)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(13)
+      ..write(obj.breakEven);
   }
 
   @override

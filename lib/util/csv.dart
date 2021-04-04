@@ -76,6 +76,9 @@ class StockItemCsv {
         case CsvColumn.purchaseDate:
           ret.add(_createPurchaseDateText(item));
           break;
+        case CsvColumn.breakEven:
+          ret.add(item.breakEven);
+          break;
       }
     }
     return ret;
