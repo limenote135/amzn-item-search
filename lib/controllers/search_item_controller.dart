@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/models/search_item.dart';
@@ -18,8 +16,6 @@ class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
   SearchItemController(this._read) : super([]) {
     _fetchAll();
   }
-
-  static final Function _eq = const ListEquality<int>().equals;
 
   final Reader _read;
 
