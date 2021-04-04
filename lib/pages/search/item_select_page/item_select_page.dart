@@ -1,4 +1,4 @@
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
@@ -11,7 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'item_tile.dart';
 
 class ItemSelectPage extends HookWidget {
-  const ItemSelectPage({Key key}) : super(key: key);
+  const ItemSelectPage({Key? key}) : super(key: key);
   static const routeName = "/search/item_select";
 
   static Route<void> route(List<AsinData> asins, String fromRoute) {
@@ -36,10 +36,6 @@ class ItemSelectPage extends HookWidget {
       ),
       body: const _Body(),
       floatingActionButton: FloatingActionButton(
-        child: AnimatedTheme(
-          data: ThemeData.light(),
-          child: const Icon(Icons.camera_alt),
-        ),
         heroTag: onStartCameraHeroTag,
         onPressed: () {
           if (fromRoute == CameraPage.routeName) {
@@ -50,13 +46,17 @@ class ItemSelectPage extends HookWidget {
                 CameraPage.routeName, ModalRoute.withName("/"));
           }
         },
+        child: AnimatedTheme(
+          data: ThemeData.light(),
+          child: const Icon(Icons.camera_alt),
+        ),
       ),
     );
   }
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

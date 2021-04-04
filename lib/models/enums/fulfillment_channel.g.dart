@@ -18,7 +18,7 @@ class FulfillmentChannelAdapter extends TypeAdapter<FulfillmentChannel> {
       case 1:
         return FulfillmentChannel.amazon;
       default:
-        return null;
+        return FulfillmentChannel.merchant;
     }
   }
 

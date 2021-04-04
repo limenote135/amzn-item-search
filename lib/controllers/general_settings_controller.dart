@@ -16,29 +16,38 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
 
   void _loadSettings() {
     final box = _read(settingsBoxProvider);
-    final settings = box.get(generalSettingsKeyName) as GeneralSettings;
+    final settings = box.get(generalSettingsKeyName) as GeneralSettings?;
     if (settings != null) {
       state = settings;
+      var buttons = state.customButtons;
+      // デフォルトを変更した際のマイグレーション
+      if (buttons.length == 5) {
+        buttons = [
+          ...defaultCustomButtons.sublist(0, 7),
+          ...buttons,
+        ];
+        state = state.copyWith(customButtons: buttons);
+      }
     }
     // 新規追加された項目が、ロード時にデフォルト値になっている可能性があるので一度保存する
     box.put(generalSettingsKeyName, state);
   }
 
   void update({
-    bool isDarkMode,
+    bool? isDarkMode,
     // 目標利益率設定
-    bool enableTargetProfit,
-    int targetProfitValue,
-    int minProfit,
-    String skuFormat,
-    List<CustomButtonDetail> customButtons,
-    bool enableReadAloud,
-    int patternIndex,
-    List<ReadAloudPattern> patterns,
-    double readAloudVolume,
-    double readAloudSpeed,
-    List<CsvColumn> csvOrder,
-    bool getStocks,
+    bool? enableTargetProfit,
+    int? targetProfitValue,
+    int? minProfit,
+    String? skuFormat,
+    List<CustomButtonDetail>? customButtons,
+    bool? enableReadAloud,
+    int? patternIndex,
+    List<ReadAloudPattern>? patterns,
+    double? readAloudVolume,
+    double? readAloudSpeed,
+    List<CsvColumn>? csvOrder,
+    bool? getStocks,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -61,7 +70,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
 
   void addRetailer(String retailer) {
     final box = _read(settingsBoxProvider);
-    final retailers = <String>[...state.retailers]..add(retailer);
+    final retailers = <String>[...state.retailers, retailer];
     state = state.copyWith(
       retailers: retailers,
     );

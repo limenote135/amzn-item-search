@@ -3,8 +3,9 @@ import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
-import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/sku_replacer.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -32,7 +33,7 @@ const _newSampleItem = AsinData(
     category: "カテゴリー");
 
 class SkuFormatPage extends StatelessWidget {
-  const SkuFormatPage({Key key}) : super(key: key);
+  const SkuFormatPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/sku";
 
   static Route<void> route() {
@@ -54,7 +55,7 @@ class SkuFormatPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -127,17 +128,20 @@ class __PatternEditFormState extends State<_PatternEditForm> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            RaisedButton(
-              child: const Text("年"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(yearVar),
+              child: const Text("年"),
             ),
-            RaisedButton(
-              child: const Text("月"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(monthVar),
+              child: const Text("月"),
             ),
-            RaisedButton(
-              child: const Text("日"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(dayVar),
+              child: const Text("日"),
             ),
           ],
         ),
@@ -146,43 +150,51 @@ class __PatternEditFormState extends State<_PatternEditForm> {
           spacing: 8,
           direction: Axis.horizontal,
           children: [
-            RaisedButton(
-              child: const Text("ASIN"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(asinVar),
+              child: const Text("ASIN"),
             ),
-            RaisedButton(
-              child: const Text("JAN"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(janVar),
+              child: const Text("JAN"),
             ),
-            RaisedButton(
-              child: const Text("状態"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(condVar),
+              child: const Text("状態"),
             ),
-            RaisedButton(
-              child: const Text("購入数"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(quantityVar),
+              child: const Text("購入数"),
             ),
-            RaisedButton(
-              child: const Text("仕入れ値"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(purchaseVar),
+              child: const Text("仕入れ値"),
             ),
-            RaisedButton(
-              child: const Text("販売価格"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(sellVar),
+              child: const Text("販売価格"),
             ),
-            RaisedButton(
-              child: const Text("粗利益"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(profitVar),
+              child: const Text("粗利益"),
             ),
-            RaisedButton(
-              child: const Text("損益分岐"),
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () => _addText(breakEvenVar),
+              child: const Text("損益分岐"),
             ),
           ],
         ),
         const ThemeDivider(),
-        RaisedButton(
-          child: const Text("保存"),
+        ElevatedButton(
+          style: raisedButtonStyle(context),
           onPressed: () {
             context
                 .read(generalSettingsControllerProvider)
@@ -192,6 +204,7 @@ class __PatternEditFormState extends State<_PatternEditForm> {
                 .setUserProp(skuFormatPropName, _textEditingController.text);
             Navigator.pop(context);
           },
+          child: const Text("保存"),
         ),
       ],
     );

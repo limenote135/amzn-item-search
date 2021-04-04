@@ -10,7 +10,7 @@ import 'offer_chips.dart';
 import 'stock_text.dart';
 
 class CartTile extends HookWidget {
-  const CartTile({Key key}) : super(key: key);
+  const CartTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +36,8 @@ class CartTile extends HookWidget {
         return Column(
           children: [
             const Align(
-              child: Text("注：送料は含まれません"),
               alignment: Alignment.centerLeft,
+              child: Text("注：送料は含まれません"),
             ),
             StrongContainer(
               ListTile(

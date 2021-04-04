@@ -1,6 +1,6 @@
-import 'package:amasearch/controllers/item_controller.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/repository/common.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,24 +10,16 @@ const _noItemText = "NG";
 
 final _geoProvider = Provider((ref) => GeoRepository(ref.read));
 
-final geoJanFutureProvider =
-    FutureProvider.autoDispose.family<String, String>((ref, code) async {
+final geoItemFutureProvider =
+    FutureProvider.autoDispose.family<SearchItem, String>((ref, code) async {
+  final now = currentTimeString();
   final geo = ref.read(_geoProvider);
   final resp = await geo.get(code);
   ref.maintainState = true;
   if (resp.jan == "") {
-    return code;
+    return SearchItem(searchDate: now, jan: code);
   }
-  return resp.jan;
-});
-
-final geoItemFutureProvider =
-    FutureProvider.family<StateNotifierProvider<ItemController>, String>(
-        (ref, code) async {
-  final jan = await ref.read(geoJanFutureProvider(code).future);
-
-  await ref.container.refresh(itemFutureProvider(jan));
-  return ref.watch(itemFutureProvider(jan).future);
+  return SearchItem(searchDate: now, jan: resp.jan);
 });
 
 const _geoCodeLength = 7;
@@ -55,9 +47,9 @@ class GeoRepository {
 }
 
 @freezed
-abstract class GeoResponse with _$GeoResponse {
+class GeoResponse with _$GeoResponse {
   const factory GeoResponse({
-    @required String code,
+    required String code,
     @Default("") String jan,
   }) = _GeoResponse;
 }

@@ -1,30 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'item.dart';
+part of 'search_item.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ItemAdapter extends TypeAdapter<_$_Item> {
+class SearchItemAdapter extends TypeAdapter<_$_SearchItem> {
   @override
   final int typeId = 1;
 
   @override
-  _$_Item read(BinaryReader reader) {
+  _$_SearchItem read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_Item(
+    return _$_SearchItem(
       searchDate: fields[0] as String,
       jan: fields[1] as String,
-      asins: (fields[2] as List)?.cast<AsinData>(),
+      asins: (fields[2] as List).cast<AsinData>(),
     );
   }
 
   @override
-  void write(BinaryWriter writer, _$_Item obj) {
+  void write(BinaryWriter writer, _$_SearchItem obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -41,7 +41,7 @@ class ItemAdapter extends TypeAdapter<_$_Item> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ItemAdapter &&
+      other is SearchItemAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -64,9 +64,9 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       title: fields[4] as String,
       rank: fields[5] as int,
       quantity: fields[6] as String,
-      prices: fields[7] as ItemPrices,
-      imageData: fields[8] as Uint8List,
-      category: fields[9] as String ?? "",
+      prices: fields[7] as ItemPrices?,
+      imageData: fields[8] as Uint8List?,
+      category: fields[9] as String? ?? "",
     );
   }
 
@@ -113,18 +113,18 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
 
 _$_AsinData _$_$_AsinDataFromJson(Map<String, dynamic> json) {
   return _$_AsinData(
-    jan: json['jan'] as String ?? '',
+    jan: json['jan'] as String? ?? '',
     asin: json['asin'] as String,
-    listPrice: json['list_price'] as int ?? 0,
+    listPrice: json['list_price'] as int? ?? 0,
     imageUrl: json['image_url'] as String,
     title: json['title'] as String,
-    rank: json['rank'] as int ?? 0,
-    quantity: json['quantity'] as String ?? ' - ',
+    rank: json['rank'] as int? ?? 0,
+    quantity: json['quantity'] as String? ?? ' - ',
     prices: json['prices'] == null
         ? null
         : ItemPrices.fromJson(json['prices'] as Map<String, dynamic>),
     category:
-        const ItemCategoryConverter().fromJson(json['category'] as String),
+        const ItemCategoryConverter().fromJson(json['category'] as String?),
   );
 }
 

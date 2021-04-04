@@ -2,8 +2,9 @@ import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
-import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
@@ -15,7 +16,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final currentPatternProvider = ScopedProvider<String>(null);
 
 class PatternSettingsPage extends StatelessWidget {
-  const PatternSettingsPage({Key key}) : super(key: key);
+  const PatternSettingsPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/read_aloud/pattern";
 
   static Route<String> route(String pattern) {
@@ -42,7 +43,7 @@ class PatternSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -134,13 +135,15 @@ class __PatternEditFormState extends State<_PatternEditForm> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(rankVariable);
               },
               child: const Text("商品順位"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(titleVariable);
               },
@@ -151,13 +154,15 @@ class __PatternEditFormState extends State<_PatternEditForm> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(newProfitVariable);
               },
               child: const Text("新品粗利益"),
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(usedProfitVariable);
               },
@@ -172,7 +177,8 @@ class __PatternEditFormState extends State<_PatternEditForm> {
             Consumer(
               builder: (context, watch, child) {
                 final tts = watch(ttsProvider);
-                return RaisedButton(
+                return ElevatedButton(
+                  style: raisedButtonStyle(context),
                   onPressed: () {
                     final text =
                         _createPreviewText(_textEditingController.text);
@@ -182,7 +188,8 @@ class __PatternEditFormState extends State<_PatternEditForm> {
                 );
               },
             ),
-            RaisedButton(
+            ElevatedButton(
+              style: raisedButtonStyle(context),
               onPressed: () {
                 Navigator.of(context).pop(_textEditingController.text);
               },

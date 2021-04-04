@@ -1,5 +1,5 @@
-import 'package:amasearch/controllers/item_controller.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 const _tsutayaCodeLength = 16;
@@ -12,9 +12,8 @@ String getTsutayaJanCode(String code) {
 }
 
 final tsutayaItemFutureProvider =
-    FutureProvider.family<StateNotifierProvider<ItemController>, String>(
-        (ref, code) async {
+    FutureProvider.autoDispose.family<SearchItem, String>((ref, code) async {
   final jan = getTsutayaJanCode(code);
-  await ref.container.refresh(itemFutureProvider(jan));
-  return ref.watch(itemFutureProvider(jan).future);
+  ref.maintainState = true;
+  return SearchItem(searchDate: currentTimeString(), jan: jan);
 });

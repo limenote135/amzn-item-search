@@ -10,7 +10,7 @@ import 'offer_listing_page.dart';
 import 'stock_text.dart';
 
 class OfferTile extends HookWidget {
-  const OfferTile({Key key}) : super(key: key);
+  const OfferTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

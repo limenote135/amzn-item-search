@@ -1,5 +1,5 @@
-import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/util/util.dart';
@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'word_search_page.dart';
 
 class ItemTile extends HookWidget {
-  const ItemTile({Key key}) : super(key: key);
+  const ItemTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class ItemTile extends HookWidget {
 }
 
 class _InkWell extends HookWidget {
-  const _InkWell({Key key, this.child}) : super(key: key);
+  const _InkWell({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
 

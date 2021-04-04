@@ -1,4 +1,4 @@
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
@@ -8,12 +8,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ProfitTile extends HookWidget {
-  const ProfitTile({Key key}) : super(key: key);
+  const ProfitTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final form = ReactiveForm.of(context);
+    final form = ReactiveForm.of(context)!;
     final quantity = getInt(form, quantityField);
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
@@ -21,7 +21,7 @@ class ProfitTile extends HookWidget {
     final profit = calcProfit(
         sellPrice: sellPrice,
         purchasePrice: purchasePrice,
-        fee: item.prices.feeInfo,
+        fee: item.prices?.feeInfo,
         useFba: useFba);
     return ListTile(
       title: Row(

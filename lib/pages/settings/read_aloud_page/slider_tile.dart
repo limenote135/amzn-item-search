@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class SliderTile extends StatefulWidget {
   const SliderTile({
-    @required this.title,
-    @required this.initValue,
+    required this.title,
+    required this.initValue,
     this.min = 0,
-    @required this.max,
-    @required this.divisions,
+    required this.max,
+    required this.divisions,
     this.onSubmit,
   });
 
@@ -15,7 +15,7 @@ class SliderTile extends StatefulWidget {
   final double min;
   final double max;
   final int divisions;
-  final void Function(double) onSubmit;
+  final void Function(double)? onSubmit;
 
   @override
   _SliderTileState createState() => _SliderTileState(initValue);

@@ -1,6 +1,6 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
-import 'package:amasearch/controllers/item_list_controller.dart';
+import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
@@ -13,7 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final _currentSettingsProvider = ScopedProvider<SearchSettings>(null);
 
 class SearchSettingsPage extends StatelessWidget {
-  const SearchSettingsPage({Key key}) : super(key: key);
+  const SearchSettingsPage({Key? key}) : super(key: key);
 
   static const String routeName = "/search_setting";
 
@@ -29,7 +29,7 @@ class SearchSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,19 +74,19 @@ class _Body extends HookWidget {
                   title: const Text("検索履歴の削除"),
                   content: const Text("検索履歴からすべてのアイテムを削除します"),
                   actions: [
-                    FlatButton(
-                      child: const Text("Cancel"),
+                    TextButton(
                       onPressed: () => Navigator.pop(context, false),
+                      child: const Text("Cancel"),
                     ),
-                    FlatButton(
-                      child: const Text("OK"),
+                    TextButton(
                       onPressed: () => Navigator.pop(context, true),
+                      child: const Text("OK"),
                     ),
                   ],
                 ),
               );
-              if (ok) {
-                context.read(itemListControllerProvider).removeAll();
+              if (ok!) {
+                context.read(searchItemControllerProvider).removeAll();
                 await context
                     .read(analyticsControllerProvider)
                     .logSingleEvent(deleteAllSearchHistoryEventName);
@@ -101,7 +101,7 @@ class _Body extends HookWidget {
 }
 
 class _CodeType extends HookWidget {
-  const _CodeType({Key key}) : super(key: key);
+  const _CodeType({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,20 +115,20 @@ class _CodeType extends HookWidget {
             value: settings.type,
             items: const [
               DropdownMenuItem(
-                child: Text("JAN"),
                 value: SearchType.jan,
+                child: Text("JAN"),
               ),
               DropdownMenuItem(
-                child: Text("BOOK OFF"),
                 value: SearchType.bookoff,
+                child: Text("BOOK OFF"),
               ),
               DropdownMenuItem(
-                child: Text("ゲオ"),
                 value: SearchType.geo,
+                child: Text("ゲオ"),
               ),
               DropdownMenuItem(
-                child: Text("TSUTAYA"),
                 value: SearchType.tsutaya,
+                child: Text("TSUTAYA"),
               ),
             ],
             onChanged: (value) {
@@ -146,7 +146,7 @@ class _CodeType extends HookWidget {
 }
 
 class _UsedSubCondition extends HookWidget {
-  const _UsedSubCondition({Key key}) : super(key: key);
+  const _UsedSubCondition({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -160,24 +160,24 @@ class _UsedSubCondition extends HookWidget {
             value: settings.usedSubCondition,
             items: const [
               DropdownMenuItem(
-                child: Text("すべて"),
                 value: UsedSubCondition.all,
+                child: Text("すべて"),
               ),
               DropdownMenuItem(
-                child: Text("ほぼ新品以上"),
                 value: UsedSubCondition.mint,
+                child: Text("ほぼ新品以上"),
               ),
               DropdownMenuItem(
-                child: Text("非常に良い以上"),
                 value: UsedSubCondition.veryGood,
+                child: Text("非常に良い以上"),
               ),
               DropdownMenuItem(
-                child: Text("良い以上"),
                 value: UsedSubCondition.good,
+                child: Text("良い以上"),
               ),
               DropdownMenuItem(
-                child: Text("可以上"),
                 value: UsedSubCondition.acceptable,
+                child: Text("可以上"),
               ),
             ],
             onChanged: (value) {

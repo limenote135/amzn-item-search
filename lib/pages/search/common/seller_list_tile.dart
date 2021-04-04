@@ -1,8 +1,8 @@
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
-import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -13,7 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final _currentPriceDetailProvider = ScopedProvider<PriceDetail>(null);
 
 class SellerListTile extends HookWidget {
-  const SellerListTile({Key key}) : super(key: key);
+  const SellerListTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,8 @@ class SellerListTile extends HookWidget {
                 child: Column(
                   children: [
                     const Center(child: Text("新品")),
-                    for (final price in item.prices.newPrices)
+                    for (final price
+                        in item.prices?.newPrices ?? <PriceDetail>[])
                       ProviderScope(
                         overrides: [
                           _currentPriceDetailProvider.overrideWithValue(price),
@@ -48,7 +49,8 @@ class SellerListTile extends HookWidget {
                 child: Column(
                   children: [
                     const Center(child: Text("中古")),
-                    for (final price in item.prices.usedPrices)
+                    for (final price
+                        in item.prices?.usedPrices ?? <PriceDetail>[])
                       ProviderScope(
                         overrides: [
                           _currentPriceDetailProvider.overrideWithValue(price),
@@ -67,7 +69,7 @@ class SellerListTile extends HookWidget {
 }
 
 class _OfferItem extends HookWidget {
-  const _OfferItem(this.cond, {Key key}) : super(key: key);
+  const _OfferItem(this.cond, {Key? key}) : super(key: key);
 
   final ItemCondition cond;
 
@@ -99,7 +101,5 @@ class _OfferItem extends HookWidget {
           ],
         );
     }
-
-    throw Exception("Unknown item condition: $cond");
   }
 }

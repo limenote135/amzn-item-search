@@ -6,7 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PurchaseListPage extends StatelessWidget {
-  const PurchaseListPage({Key key}) : super(key: key);
+  const PurchaseListPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/purchase_list";
 
   static Route<void> route() {
@@ -28,7 +28,7 @@ class PurchaseListPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
