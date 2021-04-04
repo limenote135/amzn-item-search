@@ -115,10 +115,15 @@ class _Body extends HookWidget {
       fee: item.prices?.feeInfo,
       useFba: useFba,
     );
+    final breakEven = calcBreakEven(
+      purchase: purchase,
+      useFba: useFba,
+      feeInfo: item.prices?.feeInfo,
+    );
 
     final stock = StockItem(
       id: id,
-      purchasePrice: getInt(form, purchasePriceField),
+      purchasePrice: purchase,
       sellPrice: getInt(form, sellPriceField),
       useFba: getBool(form, useFbaField),
       profitPerItem: profit,
@@ -130,6 +135,7 @@ class _Body extends HookWidget {
       item: image == null ? item : item.copyWith(imageData: image),
       purchaseDate: getString(form, purchaseDateField),
       retailer: getString(form, retailerField),
+      breakEven: breakEven,
     );
     context.read(stockItemListControllerProvider).add(stock);
     context.read(analyticsControllerProvider).logPurchaseEvent(stock);

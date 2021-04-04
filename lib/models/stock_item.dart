@@ -31,6 +31,7 @@ class StockItem with _$StockItem {
     @HiveField(10) required AsinData item,
     @HiveField(11) @Default("") String retailer,
     @HiveField(12) required String id, // 主キー
+    @HiveField(13) @Default(0) int breakEven,
     @Default(false) bool autogenSku,
   }) = _StockItem;
 }

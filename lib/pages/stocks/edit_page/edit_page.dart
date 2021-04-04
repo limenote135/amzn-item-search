@@ -75,6 +75,12 @@ class _Body extends HookWidget {
       fee: item.item.prices?.feeInfo,
       useFba: useFba,
     );
+    final breakEven = calcBreakEven(
+      purchase: purchase,
+      useFba: useFba,
+      feeInfo: item.item.prices?.feeInfo,
+    );
+
     final newItem = item.copyWith(
       purchasePrice: purchase,
       sellPrice: sell,
@@ -87,6 +93,7 @@ class _Body extends HookWidget {
       retailer: getString(form, retailerField),
       memo: getString(form, memoField),
       purchaseDate: getString(form, purchaseDateField),
+      breakEven: breakEven,
     );
     context.read(stockItemListControllerProvider).update(newItem);
     Navigator.of(context).popUntil((route) => route.settings.name == "/");
