@@ -33,6 +33,8 @@ enum CsvColumn {
   comment,
   @HiveField(13)
   purchaseDate,
+  @HiveField(14)
+  breakEven,
 }
 
 extension CsvColumnExtention on CsvColumn {
@@ -66,6 +68,8 @@ extension CsvColumnExtention on CsvColumn {
         return "コメント";
       case CsvColumn.purchaseDate:
         return "仕入れ日";
+      case CsvColumn.breakEven:
+        return "損益分岐点";
     }
   }
 }

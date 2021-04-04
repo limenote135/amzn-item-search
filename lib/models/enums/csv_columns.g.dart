@@ -41,6 +41,8 @@ class CsvColumnAdapter extends TypeAdapter<CsvColumn> {
         return CsvColumn.comment;
       case 13:
         return CsvColumn.purchaseDate;
+      case 14:
+        return CsvColumn.breakEven;
       default:
         return CsvColumn.asin;
     }
@@ -90,6 +92,9 @@ class CsvColumnAdapter extends TypeAdapter<CsvColumn> {
         break;
       case CsvColumn.purchaseDate:
         writer.writeByte(13);
+        break;
+      case CsvColumn.breakEven:
+        writer.writeByte(14);
         break;
     }
   }
