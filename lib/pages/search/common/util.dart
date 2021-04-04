@@ -1,19 +1,18 @@
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
-import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
-import 'package:flutter/material.dart';
+import 'package:amasearch/models/search_item.dart';
 
 PriceDetail getPriceDetail({
-  @required AsinData item,
-  @required ItemCondition condition,
-  @required UsedSubCondition subCond,
-  @required bool priorFba,
+  required AsinData item,
+  required ItemCondition condition,
+  required UsedSubCondition subCond,
+  required bool priorFba,
 }) {
   final prices = _getConditionPrices(item: item, condition: condition);
 
-  if (prices == null || prices.isEmpty) {
+  if (prices.isEmpty) {
     return const PriceDetail(price: 0, shipping: 0);
   }
   switch (condition) {
@@ -42,18 +41,16 @@ PriceDetail getPriceDetail({
       }
       return conditionPrices.first;
   }
-  throw Exception("Invalid item condition: $condition");
 }
 
 List<PriceDetail> _getConditionPrices({
-  @required AsinData item,
-  @required ItemCondition condition,
+  required AsinData item,
+  required ItemCondition condition,
 }) {
   switch (condition) {
     case ItemCondition.newItem:
-      return item.prices.newPrices;
+      return item.prices?.newPrices ?? [];
     case ItemCondition.usedItem:
-      return item.prices.usedPrices;
+      return item.prices?.usedPrices ?? [];
   }
-  throw Exception("Invalid SearchCondition: $condition");
 }

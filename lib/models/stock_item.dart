@@ -1,6 +1,5 @@
 import 'package:amasearch/models/constants.dart';
-import 'package:amasearch/models/item.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,10 +13,10 @@ part 'stock_item.g.dart';
 final currentStockItemProvider = ScopedProvider<StockItem>(null);
 
 @freezed
-abstract class StockItem with _$StockItem {
+class StockItem with _$StockItem {
   @HiveType(typeId: stockItemTypeId)
   const factory StockItem({
-    @HiveField(0) @required String purchaseDate,
+    @HiveField(0) required String purchaseDate,
     @HiveField(1) @Default(0) int purchasePrice,
     @HiveField(2) @Default(0) int sellPrice,
     @HiveField(3) @Default(true) bool useFba,
@@ -29,9 +28,9 @@ abstract class StockItem with _$StockItem {
         ItemSubCondition subCondition,
     @HiveField(8) @Default("") String sku,
     @HiveField(9) @Default("") String memo,
-    @HiveField(10) @required AsinData item,
+    @HiveField(10) required AsinData item,
     @HiveField(11) @Default("") String retailer,
-    @HiveField(12) @required String id, // 主キー
+    @HiveField(12) required String id, // 主キー
     @Default(false) bool autogenSku,
   }) = _StockItem;
 }

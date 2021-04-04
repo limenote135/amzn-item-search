@@ -20,7 +20,6 @@ extension PurchaseItemConditionExtention on PurchaseItemCondition {
       case PurchaseItemCondition.usedAcceptable:
         return ItemCondition.usedItem;
     }
-    throw Exception("Invalid PurchaseItemCondition: $this");
   }
 
   ItemSubCondition toItemSubCondition() {
@@ -36,6 +35,5 @@ extension PurchaseItemConditionExtention on PurchaseItemCondition {
       case PurchaseItemCondition.usedAcceptable:
         return ItemSubCondition.acceptable;
     }
-    throw Exception("Invalid PurchaseItemCondition: $this");
   }
 }

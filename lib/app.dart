@@ -54,7 +54,7 @@ class MyApp extends HookWidget {
 final _currentPageProvider = StateProvider((_) => 0);
 
 class HomePage extends HookWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   static const _pages = [
     SearchPage(),
@@ -75,23 +75,24 @@ class HomePage extends HookWidget {
     final observer = useProvider(analyticsObserverProvider);
     return WillPopScope(
       onWillPop: () async {
-        return showDialog(
+        final ret = await showDialog<bool?>(
           context: context,
           builder: (context) => AlertDialog(
             title: const Text("終了確認"),
             content: const Text("終了しますか？"),
             actions: [
-              FlatButton(
-                child: const Text("Cancel"),
+              TextButton(
                 onPressed: () => Navigator.pop(context, false),
+                child: const Text("Cancel"),
               ),
-              FlatButton(
-                child: const Text("OK"),
+              TextButton(
                 onPressed: () => Navigator.pop(context, true),
+                child: const Text("OK"),
               ),
             ],
           ),
         );
+        return ret ?? false;
       },
       child: Scaffold(
         body: IndexedStack(
@@ -132,17 +133,15 @@ class HomePage extends HookWidget {
 }
 
 class _Unfocus extends HookWidget {
-  const _Unfocus({Key key, this.child}) : super(key: key);
+  const _Unfocus({Key? key, this.child}) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {
-        unfocus();
-      },
+      onTap: unfocus,
       child: child,
     );
   }

@@ -1,8 +1,10 @@
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/controllers/search_item_controller.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
+import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
@@ -13,16 +15,14 @@ import 'slidable_delete_tile.dart';
 import 'slidable_tile.dart';
 
 class ItemTile extends HookWidget {
-  const ItemTile({Key key}) : super(key: key);
+  const ItemTile({Key? key, this.deletable = true}) : super(key: key);
+
+  final bool deletable;
 
   @override
   Widget build(BuildContext context) {
-    final itemFuture = useProvider(currentItemFutureProvider);
-    return useProvider(itemFuture).whenData((value) {
-      //TODO: 不要な書き込みが多い
-      context.read(value).save();
-      return value;
-    }).when(
+    final item = useProvider(currentFutureSearchItemProvider);
+    return useProvider(searchItemFutureProvider(item)).when(
       loading: () => const ListTile(
         title: Center(child: CircularProgressIndicator()),
       ),
@@ -33,17 +33,16 @@ class ItemTile extends HookWidget {
         ),
       ),
       data: (value) {
-        final data = useProvider(value.state);
-        if (data.asins.isEmpty) {
+        if (value.asins.isEmpty) {
           return ProviderScope(
             overrides: [
-              currentItemControllerProvider.overrideWithValue(value),
+              currentSearchItemProvider.overrideWithValue(value),
             ],
             child: SlidableDeleteTile(
               child: Center(
                 child: SizedBox(
                   height: 30,
-                  child: Text("${data.jan}: 見つかりませんでした"),
+                  child: Text("${value.jan}: 見つかりませんでした"),
                 ),
               ),
             ),
@@ -51,9 +50,11 @@ class ItemTile extends HookWidget {
         }
         return ProviderScope(
           overrides: [
-            currentItemControllerProvider.overrideWithValue(value),
+            currentSearchItemProvider.overrideWithValue(value),
           ],
-          child: const SlidableTile(child: ItemTileImpl()),
+          child: deletable
+              ? const SlidableTile(child: ItemTileImpl())
+              : const ItemTileImpl(),
         );
       },
     );
@@ -61,15 +62,14 @@ class ItemTile extends HookWidget {
 }
 
 class ItemTileImpl extends HookWidget {
-  const ItemTileImpl({Key key}) : super(key: key);
+  const ItemTileImpl({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = useProvider(currentItemControllerProvider);
-    final item = useProvider(controller.state);
+    final item = useProvider(currentSearchItemProvider);
     final firstItem = item.asins.first;
     final fromRoute = useProvider(fromRouteProvider);
-    final fbaFee = firstItem.prices?.feeInfo?.fbaFee ?? 0;
+    final fbaFee = firstItem.prices?.feeInfo.fbaFee ?? 0;
     return InkWell(
       onTap: () {
         unfocus();
@@ -96,8 +96,8 @@ class ItemTileImpl extends HookWidget {
         child: SearchItemTile(
           onComplete: (bytes) {
             context
-                .read(controller)
-                .setImageBinary(firstItem.asin, bytes.buffer.asUint8List());
+                .read(searchItemControllerProvider)
+                .saveImageBinary(item.searchDate, bytes.buffer.asUint8List());
           },
         ),
       ),

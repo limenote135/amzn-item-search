@@ -42,7 +42,7 @@ class CsvColumnAdapter extends TypeAdapter<CsvColumn> {
       case 13:
         return CsvColumn.purchaseDate;
       default:
-        return null;
+        return CsvColumn.asin;
     }
   }
 

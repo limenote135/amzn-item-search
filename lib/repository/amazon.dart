@@ -15,7 +15,7 @@ final amazonRepositoryProvider = Provider((ref) => AmazonRepository(ref.read));
 
 class _ParseOfferListingsParam {
   _ParseOfferListingsParam(
-      {@required this.asin, @required this.page, @required this.body});
+      {required this.asin, required this.page, required this.body});
 
   final String asin;
   final int page;
@@ -42,7 +42,6 @@ class AmazonRepository {
       "https://www.amazon.co.jp/gp/aod/ajax/ref=dp_aod_ALL_mbc";
   static const _shopSelector = "#aod-offer-soldBy div.a-col-right";
   static const _priceSelector = "span.a-price span.a-price-whole";
-  static const _shipCostSelector = "div[id^=aod-bottlingDepositFee] + span";
   static const _shipFromSelector = "#aod-offer-shipsFrom .a-color-base";
   static const _conditionSelector = "#aod-offer-heading > h5";
   static const _imageSelector = "div#aod-condition-image";
@@ -91,12 +90,12 @@ class AmazonRepository {
       final parseParam = _ParseOfferListingsParam(
         asin: params.asin,
         page: params.page,
-        body: resp.data,
+        body: resp.data!,
       );
       final offers = await compute(_parseOfferListings, parseParam);
 
       return offers;
-    } on DioError catch(e) {
+    } on DioError catch (e) {
       throw Exception("エラー${e.type}");
     }
   }
@@ -105,12 +104,14 @@ class AmazonRepository {
     final doc = HtmlParser(param.body).parse();
 
     final cartElement = doc.querySelector("#aod-pinned-offer");
-    final cart = param.page == 0 ? _parseCartItem(cartElement) : null;
+    final cart = param.page == 0 && cartElement != null
+        ? _parseCartItem(cartElement)
+        : null;
 
-    final totalElement = doc.querySelector("#aod-filter-offer-count-string");
+    final totalElement = doc.querySelector("#aod-filter-offer-count-string")!;
     final total = _parseTotal(totalElement);
 
-    final offerElement = doc.querySelector("#aod-offer-list");
+    final offerElement = doc.querySelector("#aod-offer-list")!;
     final offers = _parseOfferItems(offerElement);
 
     return OfferListings(
@@ -121,7 +122,7 @@ class AmazonRepository {
     );
   }
 
-  static OfferItem _parseCartItem(Element offer) {
+  static OfferItem? _parseCartItem(Element offer) {
     final shopElement = offer.querySelector(_shopSelector);
     if (shopElement == null) {
       return null;
@@ -131,15 +132,15 @@ class AmazonRepository {
         shopLink == null ? shopElement.text.trim() : shopLink.text.trim();
     final sellerId = _parseSellerId(shopLink);
     final priceStr =
-        offer.querySelector(_priceSelector).text.replaceAll(",", "").trim();
-    final price = int.tryParse(priceStr) ?? 0;
+        offer.querySelector(_priceSelector)?.text.replaceAll(",", "").trim();
+    final price = int.tryParse(priceStr ?? "0") ?? 0;
     final cond = offer
-        .querySelector(_conditionSelector)
+        .querySelector(_conditionSelector)!
         .text
         .replaceAll("\n", "")
         .replaceAll("中古商品- ", "")
         .trim();
-    final shipFrom = offer.querySelector(_shipFromSelector).text.trim();
+    final shipFrom = offer.querySelector(_shipFromSelector)!.text.trim();
     final hasImage = offer.querySelector(_imageSelector) != null;
     return OfferItem(
       shopName: shopName,
@@ -157,7 +158,7 @@ class AmazonRepository {
       return 0;
     }
     final normalizeStr = totalStr.replaceAllMapped(_jpNumberRegex,
-        (Match m) => String.fromCharCode(m.group(0).codeUnitAt(0) - 0xFEE0));
+        (Match m) => String.fromCharCode(m.group(0)!.codeUnitAt(0) - 0xFEE0));
     final total = int.tryParse(normalizeStr);
     return total ?? 0;
   }
@@ -166,13 +167,13 @@ class AmazonRepository {
     final offers = root.querySelectorAll("#aod-offer");
     final items = <OfferItem>[];
     for (final offer in offers) {
-      final shopElement = offer.querySelector(_shopSelector);
+      final shopElement = offer.querySelector(_shopSelector)!;
       final shopLink = shopElement.querySelector("a");
       final shop =
           shopLink == null ? shopElement.text.trim() : shopLink.text.trim();
       final sellerId = _parseSellerId(shopLink);
       final priceStr =
-          offer.querySelector(_priceSelector).text.replaceAll(",", "").trim();
+          offer.querySelector(_priceSelector)!.text.replaceAll(",", "").trim();
       final price = int.tryParse(priceStr) ?? 0;
       // TODO: + ￥500\n 配送料 から抽出
       // 全国送料無料
@@ -182,9 +183,9 @@ class AmazonRepository {
       // final shipText = ship?.text?.trim();
       // TODO: 送料が取れない
       // print("$shop: ${shipText ?? "null"}");
-      final shipFrom = offer.querySelector(_shipFromSelector).text.trim();
+      final shipFrom = offer.querySelector(_shipFromSelector)!.text.trim();
       final cond = offer
-          .querySelector(_conditionSelector)
+          .querySelector(_conditionSelector)!
           .text
           .replaceAll("\n", "")
           .replaceAll("中古商品- ", "")
@@ -205,7 +206,7 @@ class AmazonRepository {
     return items;
   }
 
-  static String _parseSellerId(Element shopLink) {
+  static String _parseSellerId(Element? shopLink) {
     if (shopLink == null) {
       return "";
     }
@@ -246,12 +247,12 @@ class AmazonRepository {
       // final stocks = _parseStock(resp.data);
 
       return stocks;
-    } on DioError catch(e) {
+    } on DioError catch (e) {
       throw Exception("エラー${e.type}");
     }
   }
 
-  static int _parseStock(String body) {
+  static int _parseStock(String? body) {
     final doc = HtmlParser(body).parse();
 
     final availability = doc.querySelector("#availability > span");
@@ -267,6 +268,6 @@ class AmazonRepository {
         return stocks;
       }
     }
-    return doc.querySelectorAll("#quantity > option")?.length;
+    return doc.querySelectorAll("#quantity > option").length;
   }
 }

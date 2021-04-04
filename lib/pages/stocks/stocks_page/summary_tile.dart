@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final dateItemsProvider = ScopedProvider<List<StockItem>>(null);
 
 class SummaryTile extends HookWidget {
-  const SummaryTile({Key key}) : super(key: key);
+  const SummaryTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

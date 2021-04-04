@@ -2,8 +2,8 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
-import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
@@ -14,7 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'util.dart';
 
 class PriceInfo extends StatelessWidget {
-  const PriceInfo({Key key}) : super(key: key);
+  const PriceInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class PriceInfo extends StatelessWidget {
 }
 
 class _PriceAndProfit extends HookWidget {
-  const _PriceAndProfit(this.condition, {Key key}) : super(key: key);
+  const _PriceAndProfit(this.condition, {Key? key}) : super(key: key);
 
   final ItemCondition condition;
 
@@ -77,7 +77,7 @@ class _PriceAndProfit extends HookWidget {
             TextSpan(
               text: calcProfitText(
                 detail.price,
-                item.prices.feeInfo,
+                item.prices?.feeInfo,
                 useFba: settings.useFba,
               ),
               style: strongTextStyle,
@@ -92,7 +92,7 @@ class _PriceAndProfit extends HookWidget {
               TextSpan(
                 text: numberFormatter.format(calcTargetPrice(
                   sellPrice: detail.price,
-                  feeInfo: item.prices.feeInfo,
+                  feeInfo: item.prices?.feeInfo,
                   targetRate: targetPriceRate,
                   minProfit: minProfit,
                   useFba: settings.useFba,

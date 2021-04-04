@@ -9,8 +9,8 @@ import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/general_settings.dart';
-import 'package:amasearch/models/item.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/search_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -71,18 +71,18 @@ Future<void> initFirebase() async {
   }
 
   // Pass all uncaught errors to Crashlytics.
-  final Function originalOnError = FlutterError.onError;
+  final Function? originalOnError = FlutterError.onError;
   FlutterError.onError = (FlutterErrorDetails errorDetails) async {
     await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
     // Forward to original handler.
-    originalOnError(errorDetails);
+    originalOnError!(errorDetails);
   };
 }
 
 Future<void> initHive() async {
   await Hive.initFlutter();
   Hive
-    ..registerAdapter(ItemAdapter())
+    ..registerAdapter(SearchItemAdapter())
     ..registerAdapter(AsinDataAdapter())
     ..registerAdapter(ItemPricesAdapter())
     ..registerAdapter(PriceDetailAdapter())
@@ -102,7 +102,7 @@ Future<void> initHive() async {
   // await deleteBoxes();
 
   await Future.wait([
-    Hive.openBox<Item>(searchItemBoxName),
+    Hive.openBox<SearchItem>(searchItemBoxName),
     Hive.openBox<StockItem>(stockItemBoxName),
     Hive.openBox<dynamic>(settingsBoxName),
   ]);

@@ -1,16 +1,16 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
-import 'package:amasearch/controllers/item_list_controller.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/controllers/search_item_controller.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 Future<bool> itemDeleteHandler({
-  @required BuildContext context,
-  List<Item> items,
+  required BuildContext context,
+  List<SearchItem>? items,
   bool deleteAll = false,
-  @required String content,
+  required String content,
 }) async {
   final ok = await showDialog<bool>(
     context: context,
@@ -18,22 +18,22 @@ Future<bool> itemDeleteHandler({
       title: const Text("商品の削除"),
       content: Text(content),
       actions: [
-        FlatButton(
-          child: const Text("Cancel"),
+        TextButton(
           onPressed: () => Navigator.pop(context, false),
+          child: const Text("Cancel"),
         ),
-        FlatButton(
-          child: const Text("OK"),
+        TextButton(
           onPressed: () => Navigator.pop(context, true),
+          child: const Text("OK"),
         ),
       ],
     ),
   );
-  if (ok) {
+  if (ok!) {
     if (deleteAll) {
-      context.read(itemListControllerProvider).removeAll();
+      context.read(searchItemControllerProvider).removeAll();
     } else {
-      context.read(itemListControllerProvider).remove(items);
+      context.read(searchItemControllerProvider).remove(items!);
       //TODO: 複数削除できるので、削除する個数を指定したい
       await context
           .read(analyticsControllerProvider)

@@ -21,7 +21,7 @@ class SearchSettingsAdapter extends TypeAdapter<_$_SearchSettings> {
       usedSubCondition: fields[1] as UsedSubCondition,
       useFba: fields[2] as bool,
       priorFba: fields[3] as bool,
-      continuousCameraRead: fields[4] as bool ?? true, // TODO: デフォルト値
+      continuousCameraRead: fields[4] as bool? ?? true, // TODO: デフォルト値
     );
   }
 

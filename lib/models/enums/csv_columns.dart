@@ -67,6 +67,5 @@ extension CsvColumnExtention on CsvColumn {
       case CsvColumn.purchaseDate:
         return "仕入れ日";
     }
-    throw Exception("Invalid CsvColumn: $this");
   }
 }

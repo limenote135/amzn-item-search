@@ -1,5 +1,5 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/sku_replacer.dart';
@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class SkuTile extends HookWidget {
-  const SkuTile({Key key}) : super(key: key);
+  const SkuTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +27,13 @@ class SkuTile extends HookWidget {
           title: ReactiveValueListenableBuilder<bool>(
             formControlName: autogenSkuField,
             builder: (context, control, child) {
-              if (control.value) {
-                final form = ReactiveForm.of(context) as FormGroup;
+              if (control.value!) {
+                final form = ReactiveForm.of(context)! as FormGroup;
                 form.control(skuField).value =
                     _generateSku(skuFormat, item, form);
               }
-              return ReactiveTextField(
-                readOnly: control.value,
+              return ReactiveTextField<dynamic>(
+                readOnly: control.value!,
                 formControlName: skuField,
                 keyboardType: TextInputType.url,
                 decoration: const InputDecoration(labelText: "SKU"),
@@ -57,7 +57,7 @@ class SkuTile extends HookWidget {
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
-      fee: item.prices.feeInfo,
+      fee: item.prices?.feeInfo,
       useFba: useFba,
     );
 

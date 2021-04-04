@@ -47,6 +47,15 @@ class AnalyticsController {
     });
   }
 
+  Future<void> logCalcEvent(String type) {
+    return _read(_analyticsProvider).logEvent(
+      name: calcEventName,
+      parameters: <String, dynamic>{
+        "type": type,
+      },
+    );
+  }
+
   Future<void> logSingleEvent(String name) {
     return _read(_analyticsProvider)
         .logEvent(name: name, parameters: <String, dynamic>{});
