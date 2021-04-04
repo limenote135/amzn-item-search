@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'url_settings_page.dart';
 
 class CustomButtonPage extends StatelessWidget {
-  const CustomButtonPage({Key key}) : super(key: key);
+  const CustomButtonPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/custom_button";
 
   static Route<void> route() {
@@ -28,7 +28,7 @@ class CustomButtonPage extends StatelessWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
@@ -18,7 +18,7 @@ final _isSelectedProvider = Provider.family<bool, StockItem>((ref, item) {
 });
 
 class ItemTile extends HookWidget {
-  const ItemTile({Key key}) : super(key: key);
+  const ItemTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class ItemTile extends HookWidget {
 }
 
 class _TileBody extends HookWidget {
-  const _TileBody({Key key}) : super(key: key);
+  const _TileBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class _TileBody extends HookWidget {
     final breakEven = calcBreakEven(
       purchase: item.purchasePrice,
       useFba: item.useFba,
-      feeInfo: detail.prices.feeInfo,
+      feeInfo: detail.prices?.feeInfo,
     );
 
     return Column(
@@ -172,6 +172,5 @@ class _TileBody extends HookWidget {
       case ItemSubCondition.acceptable:
         return "$cond(${item.subCondition.toDisplayShortString()}) $fba";
     }
-    throw Exception("Unknown ItemSubCondition: ${item.subCondition}");
   }
 }

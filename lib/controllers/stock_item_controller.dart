@@ -7,7 +7,7 @@ final stockItemListControllerProvider =
     StateNotifierProvider((ref) => StockItemListController(ref.read));
 
 class StockItemListController extends StateNotifier<List<StockItem>> {
-  StockItemListController(this._read, {List<StockItem> state})
+  StockItemListController(this._read, {List<StockItem>? state})
       : super(state ?? []) {
     _fetchAll();
   }
@@ -19,7 +19,6 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
   final Reader _read;
 
   void _fetchAll() {
-    // TODO: オンデマンドで読み込むべき？
     final box = _read(stockItemBoxProvider);
     final uuid = _read(uuidProvider);
     final data = box.values.toList()..sort(_sortFunc);
@@ -28,12 +27,12 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     // キーを購入日から UUID に変更するためのマイグレーション
     if (data.any((element) => element.id == "")) {
       final newData = <String, StockItem>{};
-      final newState = List<StockItem>(data.length);
+      final newState = <StockItem>[];
       for (var i = 0; i < data.length; i++) {
         final id = data[i].id != "" ? data[i].id : uuid.v4();
         final storeData = data[i].id != "" ? data[i] : data[i].copyWith(id: id);
         newData[id] = storeData;
-        newState[i] = storeData;
+        newState.add(storeData);
       }
       state = newState;
       box.clear().then((_) => box.putAll(newData));

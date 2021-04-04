@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'general_settings.dart';
 
@@ -9,51 +9,42 @@ part of 'general_settings.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$GeneralSettingsTearOff {
   const _$GeneralSettingsTearOff();
 
-// ignore: unused_element
   _GeneralSettings call(
-      {@HiveField(0) bool isDarkMode = false,
-      @HiveField(1) bool enableTargetProfit = false,
-      @HiveField(2) int targetProfitValue = 10,
-      @HiveField(3) String skuFormat = _defaultSkuFormat,
-      @HiveField(4) List<String> retailers = const <String>[],
-      @HiveField(5) bool enableReadAloud = false,
-      @HiveField(6) int patternIndex = 0,
-      @HiveField(7) List<ReadAloudPattern> readAloudPatterns = const [
-        const ReadAloudPattern(title: "パターン1", pattern: _readAloudPattern1),
-        const ReadAloudPattern(title: "パターン2", pattern: _readAloudPattern2),
-        const ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3)
-      ],
-      @HiveField(8) double readAloudVolume = 1.0,
-      @HiveField(9) @nullable double readAloudSpeed,
-      @HiveField(10) List<CustomButtonDetail> customButtons = const [
-        const CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
-      ],
-      @HiveField(11) List<CsvColumn> csvOrder = const [
-        CsvColumn.asin,
-        CsvColumn.jan,
-        CsvColumn.title,
-        CsvColumn.sellPrice,
-        CsvColumn.purchasePrice,
-        CsvColumn.profit,
-        CsvColumn.listingPrice,
-        CsvColumn.quantity,
-        CsvColumn.condition,
-        CsvColumn.shipment,
-        CsvColumn.sku,
-        CsvColumn.retailer,
-        CsvColumn.comment,
-        CsvColumn.purchaseDate
-      ],
-      @HiveField(12) int minProfit = 0,
-      @HiveField(13) bool getStocks = false}) {
+      {@HiveField(0)
+          bool isDarkMode = false,
+      @HiveField(1)
+          bool enableTargetProfit = false,
+      @HiveField(2)
+          int targetProfitValue = 10,
+      @HiveField(3)
+          String skuFormat = _defaultSkuFormat,
+      @HiveField(4)
+          List<String> retailers = const <String>[],
+      @HiveField(5)
+          bool enableReadAloud = false,
+      @HiveField(6)
+          int patternIndex = 0,
+      @HiveField(7)
+          List<ReadAloudPattern> readAloudPatterns = _defaultReadAloudPatterns,
+      @HiveField(8)
+          double readAloudVolume = 1.0,
+      @HiveField(9)
+          double? readAloudSpeed,
+      @HiveField(10)
+          List<CustomButtonDetail> customButtons = defaultCustomButtons,
+      @HiveField(11)
+          List<CsvColumn> csvOrder = _defaultCsvOrder,
+      @HiveField(12)
+          int minProfit = 0,
+      @HiveField(13)
+          bool getStocks = false}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
@@ -74,43 +65,44 @@ class _$GeneralSettingsTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $GeneralSettings = _$GeneralSettingsTearOff();
 
 /// @nodoc
 mixin _$GeneralSettings {
   @HiveField(0)
-  bool get isDarkMode; // 目標利益率設定
+  bool get isDarkMode => throw _privateConstructorUsedError; // 目標利益率設定
   @HiveField(1)
-  bool get enableTargetProfit;
+  bool get enableTargetProfit => throw _privateConstructorUsedError;
   @HiveField(2)
-  int get targetProfitValue; // SKU 設定
+  int get targetProfitValue => throw _privateConstructorUsedError; // SKU 設定
   @HiveField(3)
-  String get skuFormat; // 仕入れ先設定
+  String get skuFormat => throw _privateConstructorUsedError; // 仕入れ先設定
   @HiveField(4)
-  List<String> get retailers; // 読み上げ設定
+  List<String> get retailers => throw _privateConstructorUsedError; // 読み上げ設定
   @HiveField(5)
-  bool get enableReadAloud;
+  bool get enableReadAloud => throw _privateConstructorUsedError;
   @HiveField(6)
-  int get patternIndex;
+  int get patternIndex => throw _privateConstructorUsedError;
   @HiveField(7)
-  List<ReadAloudPattern> get readAloudPatterns;
+  List<ReadAloudPattern> get readAloudPatterns =>
+      throw _privateConstructorUsedError;
   @HiveField(8)
-  double get readAloudVolume;
+  double get readAloudVolume => throw _privateConstructorUsedError;
   @HiveField(9)
-  @nullable
-  double get readAloudSpeed;
+  double? get readAloudSpeed => throw _privateConstructorUsedError;
   @HiveField(10)
-  List<CustomButtonDetail> get customButtons;
+  List<CustomButtonDetail> get customButtons =>
+      throw _privateConstructorUsedError;
   @HiveField(11)
-  List<CsvColumn> get csvOrder;
+  List<CsvColumn> get csvOrder => throw _privateConstructorUsedError;
   @HiveField(12)
-  int get minProfit;
+  int get minProfit => throw _privateConstructorUsedError;
   @HiveField(13)
-  bool get getStocks;
+  bool get getStocks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $GeneralSettingsCopyWith<GeneralSettings> get copyWith;
+  $GeneralSettingsCopyWith<GeneralSettings> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -128,7 +120,7 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(6) int patternIndex,
       @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
       @HiveField(8) double readAloudVolume,
-      @HiveField(9) @nullable double readAloudSpeed,
+      @HiveField(9) double? readAloudSpeed,
       @HiveField(10) List<CustomButtonDetail> customButtons,
       @HiveField(11) List<CsvColumn> csvOrder,
       @HiveField(12) int minProfit,
@@ -146,54 +138,78 @@ class _$GeneralSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object isDarkMode = freezed,
-    Object enableTargetProfit = freezed,
-    Object targetProfitValue = freezed,
-    Object skuFormat = freezed,
-    Object retailers = freezed,
-    Object enableReadAloud = freezed,
-    Object patternIndex = freezed,
-    Object readAloudPatterns = freezed,
-    Object readAloudVolume = freezed,
-    Object readAloudSpeed = freezed,
-    Object customButtons = freezed,
-    Object csvOrder = freezed,
-    Object minProfit = freezed,
-    Object getStocks = freezed,
+    Object? isDarkMode = freezed,
+    Object? enableTargetProfit = freezed,
+    Object? targetProfitValue = freezed,
+    Object? skuFormat = freezed,
+    Object? retailers = freezed,
+    Object? enableReadAloud = freezed,
+    Object? patternIndex = freezed,
+    Object? readAloudPatterns = freezed,
+    Object? readAloudVolume = freezed,
+    Object? readAloudSpeed = freezed,
+    Object? customButtons = freezed,
+    Object? csvOrder = freezed,
+    Object? minProfit = freezed,
+    Object? getStocks = freezed,
   }) {
     return _then(_value.copyWith(
-      isDarkMode:
-          isDarkMode == freezed ? _value.isDarkMode : isDarkMode as bool,
+      isDarkMode: isDarkMode == freezed
+          ? _value.isDarkMode
+          : isDarkMode // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableTargetProfit: enableTargetProfit == freezed
           ? _value.enableTargetProfit
-          : enableTargetProfit as bool,
+          : enableTargetProfit // ignore: cast_nullable_to_non_nullable
+              as bool,
       targetProfitValue: targetProfitValue == freezed
           ? _value.targetProfitValue
-          : targetProfitValue as int,
-      skuFormat: skuFormat == freezed ? _value.skuFormat : skuFormat as String,
-      retailers:
-          retailers == freezed ? _value.retailers : retailers as List<String>,
+          : targetProfitValue // ignore: cast_nullable_to_non_nullable
+              as int,
+      skuFormat: skuFormat == freezed
+          ? _value.skuFormat
+          : skuFormat // ignore: cast_nullable_to_non_nullable
+              as String,
+      retailers: retailers == freezed
+          ? _value.retailers
+          : retailers // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       enableReadAloud: enableReadAloud == freezed
           ? _value.enableReadAloud
-          : enableReadAloud as bool,
-      patternIndex:
-          patternIndex == freezed ? _value.patternIndex : patternIndex as int,
+          : enableReadAloud // ignore: cast_nullable_to_non_nullable
+              as bool,
+      patternIndex: patternIndex == freezed
+          ? _value.patternIndex
+          : patternIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       readAloudPatterns: readAloudPatterns == freezed
           ? _value.readAloudPatterns
-          : readAloudPatterns as List<ReadAloudPattern>,
+          : readAloudPatterns // ignore: cast_nullable_to_non_nullable
+              as List<ReadAloudPattern>,
       readAloudVolume: readAloudVolume == freezed
           ? _value.readAloudVolume
-          : readAloudVolume as double,
+          : readAloudVolume // ignore: cast_nullable_to_non_nullable
+              as double,
       readAloudSpeed: readAloudSpeed == freezed
           ? _value.readAloudSpeed
-          : readAloudSpeed as double,
+          : readAloudSpeed // ignore: cast_nullable_to_non_nullable
+              as double?,
       customButtons: customButtons == freezed
           ? _value.customButtons
-          : customButtons as List<CustomButtonDetail>,
-      csvOrder:
-          csvOrder == freezed ? _value.csvOrder : csvOrder as List<CsvColumn>,
-      minProfit: minProfit == freezed ? _value.minProfit : minProfit as int,
-      getStocks: getStocks == freezed ? _value.getStocks : getStocks as bool,
+          : customButtons // ignore: cast_nullable_to_non_nullable
+              as List<CustomButtonDetail>,
+      csvOrder: csvOrder == freezed
+          ? _value.csvOrder
+          : csvOrder // ignore: cast_nullable_to_non_nullable
+              as List<CsvColumn>,
+      minProfit: minProfit == freezed
+          ? _value.minProfit
+          : minProfit // ignore: cast_nullable_to_non_nullable
+              as int,
+      getStocks: getStocks == freezed
+          ? _value.getStocks
+          : getStocks // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -215,7 +231,7 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       @HiveField(6) int patternIndex,
       @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
       @HiveField(8) double readAloudVolume,
-      @HiveField(9) @nullable double readAloudSpeed,
+      @HiveField(9) double? readAloudSpeed,
       @HiveField(10) List<CustomButtonDetail> customButtons,
       @HiveField(11) List<CsvColumn> csvOrder,
       @HiveField(12) int minProfit,
@@ -235,54 +251,78 @@ class __$GeneralSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object isDarkMode = freezed,
-    Object enableTargetProfit = freezed,
-    Object targetProfitValue = freezed,
-    Object skuFormat = freezed,
-    Object retailers = freezed,
-    Object enableReadAloud = freezed,
-    Object patternIndex = freezed,
-    Object readAloudPatterns = freezed,
-    Object readAloudVolume = freezed,
-    Object readAloudSpeed = freezed,
-    Object customButtons = freezed,
-    Object csvOrder = freezed,
-    Object minProfit = freezed,
-    Object getStocks = freezed,
+    Object? isDarkMode = freezed,
+    Object? enableTargetProfit = freezed,
+    Object? targetProfitValue = freezed,
+    Object? skuFormat = freezed,
+    Object? retailers = freezed,
+    Object? enableReadAloud = freezed,
+    Object? patternIndex = freezed,
+    Object? readAloudPatterns = freezed,
+    Object? readAloudVolume = freezed,
+    Object? readAloudSpeed = freezed,
+    Object? customButtons = freezed,
+    Object? csvOrder = freezed,
+    Object? minProfit = freezed,
+    Object? getStocks = freezed,
   }) {
     return _then(_GeneralSettings(
-      isDarkMode:
-          isDarkMode == freezed ? _value.isDarkMode : isDarkMode as bool,
+      isDarkMode: isDarkMode == freezed
+          ? _value.isDarkMode
+          : isDarkMode // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableTargetProfit: enableTargetProfit == freezed
           ? _value.enableTargetProfit
-          : enableTargetProfit as bool,
+          : enableTargetProfit // ignore: cast_nullable_to_non_nullable
+              as bool,
       targetProfitValue: targetProfitValue == freezed
           ? _value.targetProfitValue
-          : targetProfitValue as int,
-      skuFormat: skuFormat == freezed ? _value.skuFormat : skuFormat as String,
-      retailers:
-          retailers == freezed ? _value.retailers : retailers as List<String>,
+          : targetProfitValue // ignore: cast_nullable_to_non_nullable
+              as int,
+      skuFormat: skuFormat == freezed
+          ? _value.skuFormat
+          : skuFormat // ignore: cast_nullable_to_non_nullable
+              as String,
+      retailers: retailers == freezed
+          ? _value.retailers
+          : retailers // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       enableReadAloud: enableReadAloud == freezed
           ? _value.enableReadAloud
-          : enableReadAloud as bool,
-      patternIndex:
-          patternIndex == freezed ? _value.patternIndex : patternIndex as int,
+          : enableReadAloud // ignore: cast_nullable_to_non_nullable
+              as bool,
+      patternIndex: patternIndex == freezed
+          ? _value.patternIndex
+          : patternIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       readAloudPatterns: readAloudPatterns == freezed
           ? _value.readAloudPatterns
-          : readAloudPatterns as List<ReadAloudPattern>,
+          : readAloudPatterns // ignore: cast_nullable_to_non_nullable
+              as List<ReadAloudPattern>,
       readAloudVolume: readAloudVolume == freezed
           ? _value.readAloudVolume
-          : readAloudVolume as double,
+          : readAloudVolume // ignore: cast_nullable_to_non_nullable
+              as double,
       readAloudSpeed: readAloudSpeed == freezed
           ? _value.readAloudSpeed
-          : readAloudSpeed as double,
+          : readAloudSpeed // ignore: cast_nullable_to_non_nullable
+              as double?,
       customButtons: customButtons == freezed
           ? _value.customButtons
-          : customButtons as List<CustomButtonDetail>,
-      csvOrder:
-          csvOrder == freezed ? _value.csvOrder : csvOrder as List<CsvColumn>,
-      minProfit: minProfit == freezed ? _value.minProfit : minProfit as int,
-      getStocks: getStocks == freezed ? _value.getStocks : getStocks as bool,
+          : customButtons // ignore: cast_nullable_to_non_nullable
+              as List<CustomButtonDetail>,
+      csvOrder: csvOrder == freezed
+          ? _value.csvOrder
+          : csvOrder // ignore: cast_nullable_to_non_nullable
+              as List<CsvColumn>,
+      minProfit: minProfit == freezed
+          ? _value.minProfit
+          : minProfit // ignore: cast_nullable_to_non_nullable
+              as int,
+      getStocks: getStocks == freezed
+          ? _value.getStocks
+          : getStocks // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -299,51 +339,13 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(4) this.retailers = const <String>[],
       @HiveField(5) this.enableReadAloud = false,
       @HiveField(6) this.patternIndex = 0,
-      @HiveField(7) this.readAloudPatterns = const [
-        const ReadAloudPattern(title: "パターン1", pattern: _readAloudPattern1),
-        const ReadAloudPattern(title: "パターン2", pattern: _readAloudPattern2),
-        const ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3)
-      ],
+      @HiveField(7) this.readAloudPatterns = _defaultReadAloudPatterns,
       @HiveField(8) this.readAloudVolume = 1.0,
-      @HiveField(9) @nullable this.readAloudSpeed,
-      @HiveField(10) this.customButtons = const [
-        const CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
-        const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
-      ],
-      @HiveField(11) this.csvOrder = const [
-        CsvColumn.asin,
-        CsvColumn.jan,
-        CsvColumn.title,
-        CsvColumn.sellPrice,
-        CsvColumn.purchasePrice,
-        CsvColumn.profit,
-        CsvColumn.listingPrice,
-        CsvColumn.quantity,
-        CsvColumn.condition,
-        CsvColumn.shipment,
-        CsvColumn.sku,
-        CsvColumn.retailer,
-        CsvColumn.comment,
-        CsvColumn.purchaseDate
-      ],
+      @HiveField(9) this.readAloudSpeed,
+      @HiveField(10) this.customButtons = defaultCustomButtons,
+      @HiveField(11) this.csvOrder = _defaultCsvOrder,
       @HiveField(12) this.minProfit = 0,
-      @HiveField(13) this.getStocks = false})
-      : assert(isDarkMode != null),
-        assert(enableTargetProfit != null),
-        assert(targetProfitValue != null),
-        assert(skuFormat != null),
-        assert(retailers != null),
-        assert(enableReadAloud != null),
-        assert(patternIndex != null),
-        assert(readAloudPatterns != null),
-        assert(readAloudVolume != null),
-        assert(customButtons != null),
-        assert(csvOrder != null),
-        assert(minProfit != null),
-        assert(getStocks != null);
+      @HiveField(13) this.getStocks = false});
 
   @JsonKey(defaultValue: false)
   @override
@@ -373,11 +375,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(6)
   final int patternIndex;
-  @JsonKey(defaultValue: const [
-    const ReadAloudPattern(title: "パターン1", pattern: _readAloudPattern1),
-    const ReadAloudPattern(title: "パターン2", pattern: _readAloudPattern2),
-    const ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3)
-  ])
+  @JsonKey(defaultValue: _defaultReadAloudPatterns)
   @override
   @HiveField(7)
   final List<ReadAloudPattern> readAloudPatterns;
@@ -387,34 +385,12 @@ class _$_GeneralSettings implements _GeneralSettings {
   final double readAloudVolume;
   @override
   @HiveField(9)
-  @nullable
-  final double readAloudSpeed;
-  @JsonKey(defaultValue: const [
-    const CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
-    const CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
-    const CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
-    const CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
-    const CustomButtonDetail(enable: false, title: "ボタン5", pattern: "")
-  ])
+  final double? readAloudSpeed;
+  @JsonKey(defaultValue: defaultCustomButtons)
   @override
   @HiveField(10)
   final List<CustomButtonDetail> customButtons;
-  @JsonKey(defaultValue: const [
-    CsvColumn.asin,
-    CsvColumn.jan,
-    CsvColumn.title,
-    CsvColumn.sellPrice,
-    CsvColumn.purchasePrice,
-    CsvColumn.profit,
-    CsvColumn.listingPrice,
-    CsvColumn.quantity,
-    CsvColumn.condition,
-    CsvColumn.shipment,
-    CsvColumn.sku,
-    CsvColumn.retailer,
-    CsvColumn.comment,
-    CsvColumn.purchaseDate
-  ])
+  @JsonKey(defaultValue: _defaultCsvOrder)
   @override
   @HiveField(11)
   final List<CsvColumn> csvOrder;
@@ -515,7 +491,7 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(6) int patternIndex,
       @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
       @HiveField(8) double readAloudVolume,
-      @HiveField(9) @nullable double readAloudSpeed,
+      @HiveField(9) double? readAloudSpeed,
       @HiveField(10) List<CustomButtonDetail> customButtons,
       @HiveField(11) List<CsvColumn> csvOrder,
       @HiveField(12) int minProfit,
@@ -523,60 +499,61 @@ abstract class _GeneralSettings implements GeneralSettings {
 
   @override
   @HiveField(0)
-  bool get isDarkMode;
+  bool get isDarkMode => throw _privateConstructorUsedError;
   @override // 目標利益率設定
   @HiveField(1)
-  bool get enableTargetProfit;
+  bool get enableTargetProfit => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
-  int get targetProfitValue;
+  int get targetProfitValue => throw _privateConstructorUsedError;
   @override // SKU 設定
   @HiveField(3)
-  String get skuFormat;
+  String get skuFormat => throw _privateConstructorUsedError;
   @override // 仕入れ先設定
   @HiveField(4)
-  List<String> get retailers;
+  List<String> get retailers => throw _privateConstructorUsedError;
   @override // 読み上げ設定
   @HiveField(5)
-  bool get enableReadAloud;
+  bool get enableReadAloud => throw _privateConstructorUsedError;
   @override
   @HiveField(6)
-  int get patternIndex;
+  int get patternIndex => throw _privateConstructorUsedError;
   @override
   @HiveField(7)
-  List<ReadAloudPattern> get readAloudPatterns;
+  List<ReadAloudPattern> get readAloudPatterns =>
+      throw _privateConstructorUsedError;
   @override
   @HiveField(8)
-  double get readAloudVolume;
+  double get readAloudVolume => throw _privateConstructorUsedError;
   @override
   @HiveField(9)
-  @nullable
-  double get readAloudSpeed;
+  double? get readAloudSpeed => throw _privateConstructorUsedError;
   @override
   @HiveField(10)
-  List<CustomButtonDetail> get customButtons;
+  List<CustomButtonDetail> get customButtons =>
+      throw _privateConstructorUsedError;
   @override
   @HiveField(11)
-  List<CsvColumn> get csvOrder;
+  List<CsvColumn> get csvOrder => throw _privateConstructorUsedError;
   @override
   @HiveField(12)
-  int get minProfit;
+  int get minProfit => throw _privateConstructorUsedError;
   @override
   @HiveField(13)
-  bool get getStocks;
+  bool get getStocks => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith;
+  _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 class _$ReadAloudPatternTearOff {
   const _$ReadAloudPatternTearOff();
 
-// ignore: unused_element
   _ReadAloudPattern call(
-      {@required @HiveField(0) String title,
-      @required @HiveField(1) String pattern}) {
+      {@HiveField(0) required String title,
+      @HiveField(1) required String pattern}) {
     return _ReadAloudPattern(
       title: title,
       pattern: pattern,
@@ -585,18 +562,18 @@ class _$ReadAloudPatternTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ReadAloudPattern = _$ReadAloudPatternTearOff();
 
 /// @nodoc
 mixin _$ReadAloudPattern {
   @HiveField(0)
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @HiveField(1)
-  String get pattern;
+  String get pattern => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ReadAloudPatternCopyWith<ReadAloudPattern> get copyWith;
+  $ReadAloudPatternCopyWith<ReadAloudPattern> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -618,12 +595,18 @@ class _$ReadAloudPatternCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object title = freezed,
-    Object pattern = freezed,
+    Object? title = freezed,
+    Object? pattern = freezed,
   }) {
     return _then(_value.copyWith(
-      title: title == freezed ? _value.title : title as String,
-      pattern: pattern == freezed ? _value.pattern : pattern as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      pattern: pattern == freezed
+          ? _value.pattern
+          : pattern // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -651,12 +634,18 @@ class __$ReadAloudPatternCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object title = freezed,
-    Object pattern = freezed,
+    Object? title = freezed,
+    Object? pattern = freezed,
   }) {
     return _then(_ReadAloudPattern(
-      title: title == freezed ? _value.title : title as String,
-      pattern: pattern == freezed ? _value.pattern : pattern as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      pattern: pattern == freezed
+          ? _value.pattern
+          : pattern // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -666,10 +655,7 @@ class __$ReadAloudPatternCopyWithImpl<$Res>
 /// @nodoc
 class _$_ReadAloudPattern implements _ReadAloudPattern {
   const _$_ReadAloudPattern(
-      {@required @HiveField(0) this.title,
-      @required @HiveField(1) this.pattern})
-      : assert(title != null),
-        assert(pattern != null);
+      {@HiveField(0) required this.title, @HiveField(1) required this.pattern});
 
   @override
   @HiveField(0)
@@ -707,29 +693,29 @@ class _$_ReadAloudPattern implements _ReadAloudPattern {
 
 abstract class _ReadAloudPattern implements ReadAloudPattern {
   const factory _ReadAloudPattern(
-      {@required @HiveField(0) String title,
-      @required @HiveField(1) String pattern}) = _$_ReadAloudPattern;
+      {@HiveField(0) required String title,
+      @HiveField(1) required String pattern}) = _$_ReadAloudPattern;
 
   @override
   @HiveField(0)
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
-  String get pattern;
+  String get pattern => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ReadAloudPatternCopyWith<_ReadAloudPattern> get copyWith;
+  _$ReadAloudPatternCopyWith<_ReadAloudPattern> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 class _$CustomButtonDetailTearOff {
   const _$CustomButtonDetailTearOff();
 
-// ignore: unused_element
   _CustomButtonDetail call(
-      {@required @HiveField(0) bool enable,
-      @required @HiveField(1) String title,
-      @required @HiveField(2) String pattern}) {
+      {@HiveField(0) required bool enable,
+      @HiveField(1) required String title,
+      @HiveField(2) required String pattern}) {
     return _CustomButtonDetail(
       enable: enable,
       title: title,
@@ -739,20 +725,20 @@ class _$CustomButtonDetailTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $CustomButtonDetail = _$CustomButtonDetailTearOff();
 
 /// @nodoc
 mixin _$CustomButtonDetail {
   @HiveField(0)
-  bool get enable;
+  bool get enable => throw _privateConstructorUsedError;
   @HiveField(1)
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @HiveField(2)
-  String get pattern;
+  String get pattern => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CustomButtonDetailCopyWith<CustomButtonDetail> get copyWith;
+  $CustomButtonDetailCopyWith<CustomButtonDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -777,14 +763,23 @@ class _$CustomButtonDetailCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object enable = freezed,
-    Object title = freezed,
-    Object pattern = freezed,
+    Object? enable = freezed,
+    Object? title = freezed,
+    Object? pattern = freezed,
   }) {
     return _then(_value.copyWith(
-      enable: enable == freezed ? _value.enable : enable as bool,
-      title: title == freezed ? _value.title : title as String,
-      pattern: pattern == freezed ? _value.pattern : pattern as String,
+      enable: enable == freezed
+          ? _value.enable
+          : enable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      pattern: pattern == freezed
+          ? _value.pattern
+          : pattern // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -815,14 +810,23 @@ class __$CustomButtonDetailCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object enable = freezed,
-    Object title = freezed,
-    Object pattern = freezed,
+    Object? enable = freezed,
+    Object? title = freezed,
+    Object? pattern = freezed,
   }) {
     return _then(_CustomButtonDetail(
-      enable: enable == freezed ? _value.enable : enable as bool,
-      title: title == freezed ? _value.title : title as String,
-      pattern: pattern == freezed ? _value.pattern : pattern as String,
+      enable: enable == freezed
+          ? _value.enable
+          : enable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      pattern: pattern == freezed
+          ? _value.pattern
+          : pattern // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -832,12 +836,9 @@ class __$CustomButtonDetailCopyWithImpl<$Res>
 /// @nodoc
 class _$_CustomButtonDetail implements _CustomButtonDetail {
   const _$_CustomButtonDetail(
-      {@required @HiveField(0) this.enable,
-      @required @HiveField(1) this.title,
-      @required @HiveField(2) this.pattern})
-      : assert(enable != null),
-        assert(title != null),
-        assert(pattern != null);
+      {@HiveField(0) required this.enable,
+      @HiveField(1) required this.title,
+      @HiveField(2) required this.pattern});
 
   @override
   @HiveField(0)
@@ -881,20 +882,21 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
 
 abstract class _CustomButtonDetail implements CustomButtonDetail {
   const factory _CustomButtonDetail(
-      {@required @HiveField(0) bool enable,
-      @required @HiveField(1) String title,
-      @required @HiveField(2) String pattern}) = _$_CustomButtonDetail;
+      {@HiveField(0) required bool enable,
+      @HiveField(1) required String title,
+      @HiveField(2) required String pattern}) = _$_CustomButtonDetail;
 
   @override
   @HiveField(0)
-  bool get enable;
+  bool get enable => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
-  String get pattern;
+  String get pattern => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith;
+  _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }

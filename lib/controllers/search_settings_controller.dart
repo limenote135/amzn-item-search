@@ -18,7 +18,7 @@ class SearchSettingsController extends StateNotifier<SearchSettings> {
 
   void _loadSettings() {
     final box = _read(settingsBoxProvider);
-    final settings = box.get(searchSettingsKeyName) as SearchSettings;
+    final settings = box.get(searchSettingsKeyName) as SearchSettings?;
     if (settings != null) {
       if (settings.type == SearchType.freeWord) {
         // フリーワード検索を別ページに分けたことによるマイグレーション
@@ -32,11 +32,11 @@ class SearchSettingsController extends StateNotifier<SearchSettings> {
   }
 
   void update({
-    SearchType type,
-    UsedSubCondition usedSubCondition,
-    bool useFba,
-    bool priorFba,
-    bool continuousCameraRead,
+    SearchType? type,
+    UsedSubCondition? usedSubCondition,
+    bool? useFba,
+    bool? priorFba,
+    bool? continuousCameraRead,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(

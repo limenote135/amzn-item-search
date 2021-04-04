@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 Future<bool> itemDeleteHandler({
-  @required BuildContext context,
-  List<StockItem> items,
+  required BuildContext context,
+  List<StockItem>? items,
   bool deleteAll = false,
-  @required String content,
+  required String content,
 }) async {
   final ok = await showDialog<bool>(
     context: context,
@@ -16,22 +16,22 @@ Future<bool> itemDeleteHandler({
       title: const Text("商品の削除"),
       content: Text(content),
       actions: [
-        FlatButton(
-          child: const Text("Cancel"),
+        TextButton(
           onPressed: () => Navigator.pop(context, false),
+          child: const Text("Cancel"),
         ),
-        FlatButton(
-          child: const Text("OK"),
+        TextButton(
           onPressed: () => Navigator.pop(context, true),
+          child: const Text("OK"),
         ),
       ],
     ),
   );
-  if (ok) {
+  if (ok!) {
     if (deleteAll) {
       context.read(stockItemListControllerProvider).removeAll();
     } else {
-      context.read(stockItemListControllerProvider).remove(items);
+      context.read(stockItemListControllerProvider).remove(items!);
     }
   }
   return ok;

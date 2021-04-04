@@ -17,8 +17,8 @@ class ItemPricesAdapter extends TypeAdapter<_$_ItemPrices> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_ItemPrices(
-      newPrices: (fields[0] as List)?.cast<PriceDetail>(),
-      usedPrices: (fields[1] as List)?.cast<PriceDetail>(),
+      newPrices: (fields[0] as List).cast<PriceDetail>(),
+      usedPrices: (fields[1] as List).cast<PriceDetail>(),
       feeInfo: fields[2] as FeeInfo,
     );
   }
@@ -101,17 +101,13 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
 
 _$_ItemPrices _$_$_ItemPricesFromJson(Map<String, dynamic> json) {
   return _$_ItemPrices(
-    newPrices: (json['new_offers'] as List)
-        ?.map((e) =>
-            e == null ? null : PriceDetail.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    usedPrices: (json['used_offers'] as List)
-        ?.map((e) =>
-            e == null ? null : PriceDetail.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    feeInfo: json['fee_info'] == null
-        ? null
-        : FeeInfo.fromJson(json['fee_info'] as Map<String, dynamic>),
+    newPrices: (json['new_offers'] as List<dynamic>)
+        .map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    usedPrices: (json['used_offers'] as List<dynamic>)
+        .map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    feeInfo: FeeInfo.fromJson(json['fee_info'] as Map<String, dynamic>),
   );
 }
 
@@ -125,16 +121,14 @@ Map<String, dynamic> _$_$_ItemPricesToJson(_$_ItemPrices instance) =>
 _$_PriceDetail _$_$_PriceDetailFromJson(Map<String, dynamic> json) {
   return _$_PriceDetail(
     itemCondition:
-        const ItemConditionConverter().fromJson(json['condition'] as String),
+        const ItemConditionConverter().fromJson(json['condition'] as String?),
     subCondition: const ItemSubConditionConverter()
-            .fromJson(json['sub_condition'] as String) ??
-        ItemSubCondition.newItem,
+        .fromJson(json['sub_condition'] as String?),
     channel: const FulfillmentChannelConverter()
-            .fromJson(json['channel'] as String) ??
-        FulfillmentChannel.merchant,
-    price: json['price'] as int ?? 0,
-    shipping: json['shipping'] as int ?? 0,
-    point: json['point'] as int ?? 0,
+        .fromJson(json['channel'] as String?),
+    price: json['price'] as int? ?? 0,
+    shipping: json['shipping'] as int? ?? 0,
+    point: json['point'] as int? ?? 0,
   );
 }
 

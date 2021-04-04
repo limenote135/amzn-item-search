@@ -1,6 +1,6 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/item_delete_handler.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/util/util.dart';
@@ -10,15 +10,13 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SlidableTile extends HookWidget {
-  const SlidableTile({Key key, @required this.child}) : super(key: key);
+  const SlidableTile({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final provider = useProvider(currentItemControllerProvider);
-    final firstItem = useProvider(provider.state.select((e) => e.asins.first));
-    final items = useProvider(provider.state);
+    final items = useProvider(currentSearchItemProvider);
 
     return Slidable(
       actionPane: const SlidableDrawerActionPane(),
@@ -35,7 +33,7 @@ class SlidableTile extends HookWidget {
                 .logSingleEvent(directPurchaseEventName);
             Navigator.push(
               context,
-              PurchasePage.route(firstItem),
+              PurchasePage.route(items.asins.first),
             );
           },
         ),

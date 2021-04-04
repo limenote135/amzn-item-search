@@ -20,23 +20,30 @@ final itemPricesFutureProvider =
   final resp = await mws.getProductPrices(asin);
 
   ref.maintainState = true;
-  return resp.prices;
+  return resp.prices ??
+      const ItemPrices(
+        newPrices: <PriceDetail>[],
+        usedPrices: <PriceDetail>[],
+        feeInfo: FeeInfo(
+          referralFeeRate: 0,
+          variableClosingFee: 0,
+          fbaFee: -1,
+        ),
+      );
 });
 
 @freezed
-abstract class ItemPrices with _$ItemPrices {
+class ItemPrices with _$ItemPrices {
   @JsonSerializable(fieldRename: FieldRename.snake)
   @HiveType(typeId: itemPricesTypeId)
   const factory ItemPrices({
     @HiveField(0)
     @JsonKey(name: "new_offers")
-    @required
-        List<PriceDetail> newPrices,
+        required List<PriceDetail> newPrices,
     @HiveField(1)
     @JsonKey(name: "used_offers")
-    @required
-        List<PriceDetail> usedPrices,
-    @HiveField(2) @required FeeInfo feeInfo,
+        required List<PriceDetail> usedPrices,
+    @HiveField(2) required FeeInfo feeInfo,
   }) = _ItemPrices;
 
   factory ItemPrices.fromJson(Map<String, dynamic> json) =>
@@ -44,7 +51,7 @@ abstract class ItemPrices with _$ItemPrices {
 }
 
 @freezed
-abstract class PriceDetail with _$PriceDetail {
+class PriceDetail with _$PriceDetail {
   @JsonSerializable(fieldRename: FieldRename.snake)
   @HiveType(typeId: priceDetailTypeId)
   const factory PriceDetail({
@@ -70,63 +77,54 @@ abstract class PriceDetail with _$PriceDetail {
       _$PriceDetailFromJson(json);
 }
 
-class ItemConditionConverter implements JsonConverter<ItemCondition, String> {
+class ItemConditionConverter implements JsonConverter<ItemCondition, String?> {
   const ItemConditionConverter();
 
   @override
   String toJson(ItemCondition object) {
-    if (object == null) {
-      return null;
-    }
     return describeEnum(object);
   }
 
   @override
-  ItemCondition fromJson(String json) {
+  ItemCondition fromJson(String? json) {
     if (json == null) {
-      return null;
+      return ItemCondition.newItem;
     }
     return toItemCondition(json);
   }
 }
 
 class ItemSubConditionConverter
-    implements JsonConverter<ItemSubCondition, String> {
+    implements JsonConverter<ItemSubCondition, String?> {
   const ItemSubConditionConverter();
 
   @override
-  String toJson(ItemSubCondition object) {
-    if (object == null) {
-      return null;
-    }
+  String? toJson(ItemSubCondition object) {
     return describeEnum(object);
   }
 
   @override
-  ItemSubCondition fromJson(String json) {
+  ItemSubCondition fromJson(String? json) {
     if (json == null) {
-      return null;
+      return ItemSubCondition.newItem;
     }
     return toItemSubCondition(json);
   }
 }
 
 class FulfillmentChannelConverter
-    implements JsonConverter<FulfillmentChannel, String> {
+    implements JsonConverter<FulfillmentChannel, String?> {
   const FulfillmentChannelConverter();
 
   @override
-  String toJson(FulfillmentChannel object) {
-    if (object == null) {
-      return null;
-    }
+  String? toJson(FulfillmentChannel object) {
     return describeEnum(object);
   }
 
   @override
-  FulfillmentChannel fromJson(String json) {
+  FulfillmentChannel fromJson(String? json) {
     if (json == null) {
-      return null;
+      return FulfillmentChannel.amazon;
     }
     return toFulfillmentChannel(json);
   }

@@ -1,10 +1,11 @@
-import 'package:amasearch/controllers/item_list_controller.dart';
+import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
+import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -19,7 +20,7 @@ import 'item_tile.dart';
 import 'search_settings.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({Key key}) : super(key: key);
+  const SearchPage({Key? key}) : super(key: key);
   static const routeName = "/";
 
   @override
@@ -43,22 +44,22 @@ class SearchPage extends StatelessWidget {
       ),
       body: const _Body(),
       floatingActionButton: FloatingActionButton(
-        child: AnimatedTheme(
-          data: ThemeData.light(),
-          child: const Icon(Icons.camera_alt),
-        ),
         heroTag: onStartCameraHeroTag,
         onPressed: () {
           unfocus();
           Navigator.of(context).pushNamed(CameraPage.routeName);
         },
+        child: AnimatedTheme(
+          data: ThemeData.light(),
+          child: const Icon(Icons.camera_alt),
+        ),
       ),
     );
   }
 }
 
 class _AppBarTitle extends HookWidget {
-  const _AppBarTitle({Key key}) : super(key: key);
+  const _AppBarTitle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,8 @@ class _AppBarTitle extends HookWidget {
             focusNode: focusNode,
             toolbarButtons: [
               (node) {
-                return RaisedButton.icon(
+                return ElevatedButton.icon(
+                  style: raisedButtonStyle(context),
                   icon: const Icon(Icons.search),
                   label: const Text("検索"),
                   onPressed: () {
@@ -143,16 +145,16 @@ class _AppBarTitle extends HookWidget {
   void _addItem(BuildContext context, SearchType type, String code) {
     switch (type) {
       case SearchType.jan:
-        context.read(itemListControllerProvider).add(code);
+        context.read(searchItemControllerProvider).add(code);
         return;
       case SearchType.bookoff:
-        context.read(itemListControllerProvider).addBookoff(code);
+        context.read(searchItemControllerProvider).addBookoff(code);
         return;
       case SearchType.geo:
-        context.read(itemListControllerProvider).addGeo(code);
+        context.read(searchItemControllerProvider).addGeo(code);
         return;
       case SearchType.tsutaya:
-        context.read(itemListControllerProvider).addTsutaya(code);
+        context.read(searchItemControllerProvider).addTsutaya(code);
         return;
       case SearchType.freeWord:
         // deprecated
@@ -163,11 +165,11 @@ class _AppBarTitle extends HookWidget {
 }
 
 class _Body extends HookWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final items = useProvider(itemListControllerProvider.state);
+    final items = useProvider(searchItemControllerProvider.state);
 
     return Column(
       children: [
@@ -183,7 +185,8 @@ class _Body extends HookWidget {
               }
               return ProviderScope(
                 overrides: [
-                  currentItemFutureProvider.overrideWithValue(items[index]),
+                  currentFutureSearchItemProvider
+                      .overrideWithValue(items[index]),
                 ],
                 child: const ItemTile(),
               );

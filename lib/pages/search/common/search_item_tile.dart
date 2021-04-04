@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:amasearch/models/item.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
@@ -12,12 +12,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'price_info.dart';
 
-final currentSearchDateProvider = ScopedProvider<String>(null);
+final currentSearchDateProvider = ScopedProvider<String?>(null);
 final isEllipsisProvider = ScopedProvider<bool>((_) => false);
 
 class SearchItemTile extends HookWidget {
-  const SearchItemTile({Key key, this.onComplete}) : super(key: key);
-  final void Function(ByteData bytes) onComplete;
+  const SearchItemTile({Key? key, this.onComplete}) : super(key: key);
+  final void Function(ByteData bytes)? onComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class SearchItemTile extends HookWidget {
 }
 
 class _ItemTileBody extends HookWidget {
-  const _ItemTileBody({Key key}) : super(key: key);
+  const _ItemTileBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

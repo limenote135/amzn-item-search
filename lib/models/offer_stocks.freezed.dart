@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'offer_stocks.dart';
 
@@ -9,12 +9,14 @@ part of 'offer_stocks.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$OfferStocksParamTearOff {
   const _$OfferStocksParamTearOff();
 
-// ignore: unused_element
-  _OfferStocksParam call({@required String asin, @required String sellerId}) {
+  _OfferStocksParam call({required String asin, required String sellerId}) {
     return _OfferStocksParam(
       asin: asin,
       sellerId: sellerId,
@@ -23,16 +25,16 @@ class _$OfferStocksParamTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $OfferStocksParam = _$OfferStocksParamTearOff();
 
 /// @nodoc
 mixin _$OfferStocksParam {
-  String get asin;
-  String get sellerId;
+  String get asin => throw _privateConstructorUsedError;
+  String get sellerId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OfferStocksParamCopyWith<OfferStocksParam> get copyWith;
+  $OfferStocksParamCopyWith<OfferStocksParam> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -54,12 +56,18 @@ class _$OfferStocksParamCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object asin = freezed,
-    Object sellerId = freezed,
+    Object? asin = freezed,
+    Object? sellerId = freezed,
   }) {
     return _then(_value.copyWith(
-      asin: asin == freezed ? _value.asin : asin as String,
-      sellerId: sellerId == freezed ? _value.sellerId : sellerId as String,
+      asin: asin == freezed
+          ? _value.asin
+          : asin // ignore: cast_nullable_to_non_nullable
+              as String,
+      sellerId: sellerId == freezed
+          ? _value.sellerId
+          : sellerId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -87,21 +95,25 @@ class __$OfferStocksParamCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object asin = freezed,
-    Object sellerId = freezed,
+    Object? asin = freezed,
+    Object? sellerId = freezed,
   }) {
     return _then(_OfferStocksParam(
-      asin: asin == freezed ? _value.asin : asin as String,
-      sellerId: sellerId == freezed ? _value.sellerId : sellerId as String,
+      asin: asin == freezed
+          ? _value.asin
+          : asin // ignore: cast_nullable_to_non_nullable
+              as String,
+      sellerId: sellerId == freezed
+          ? _value.sellerId
+          : sellerId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 class _$_OfferStocksParam implements _OfferStocksParam {
-  const _$_OfferStocksParam({@required this.asin, @required this.sellerId})
-      : assert(asin != null),
-        assert(sellerId != null);
+  const _$_OfferStocksParam({required this.asin, required this.sellerId});
 
   @override
   final String asin;
@@ -138,13 +150,14 @@ class _$_OfferStocksParam implements _OfferStocksParam {
 
 abstract class _OfferStocksParam implements OfferStocksParam {
   const factory _OfferStocksParam(
-      {@required String asin, @required String sellerId}) = _$_OfferStocksParam;
+      {required String asin, required String sellerId}) = _$_OfferStocksParam;
 
   @override
-  String get asin;
+  String get asin => throw _privateConstructorUsedError;
   @override
-  String get sellerId;
+  String get sellerId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$OfferStocksParamCopyWith<_OfferStocksParam> get copyWith;
+  _$OfferStocksParamCopyWith<_OfferStocksParam> get copyWith =>
+      throw _privateConstructorUsedError;
 }

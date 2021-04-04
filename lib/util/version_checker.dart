@@ -10,23 +10,23 @@ class VersionChecker {
     final info = await PackageInfo.fromPlatform();
     final currentVersion = Version.parse(info.version);
 
-    final remoteConfig = await RemoteConfig.instance;
+    final remoteConfig = RemoteConfig.instance;
 
     try {
       final defaultValues = <String, dynamic>{
         _configName: "0.2.2",
       };
       await remoteConfig.setDefaults(defaultValues);
-      await remoteConfig.fetch(expiration: const Duration(seconds: 0));
-      await remoteConfig.activateFetched();
+      await remoteConfig.setConfigSettings(
+        RemoteConfigSettings(
+            fetchTimeout: const Duration(seconds: 5),
+            minimumFetchInterval: const Duration(seconds: 0)),
+      );
+      await remoteConfig.fetchAndActivate();
       final minVersion = remoteConfig.getString(_configName);
       final requiredVersion = Version.parse(minVersion);
 
       return currentVersion.compareTo(requiredVersion).isNegative;
-    } on FetchThrottledException catch (exception, stackTrace) {
-      // Fetch throttled.
-      print(exception);
-      await FirebaseCrashlytics.instance.recordError(exception, stackTrace);
       // ignore: avoid_catches_without_on_clauses
     } catch (exception, stackTrace) {
       print('Unable to fetch remote config. Cached or default values will be '
