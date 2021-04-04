@@ -45,21 +45,6 @@ class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
     state = box.values.map((e) => Future.value(e)).toList().reversed.toList();
   }
 
-  void saveImageBinary(String searchDate, Uint8List data) {
-    final box = _read(searchItemBoxProvider);
-    final entity = box.get(searchDate);
-    if (entity == null || entity.asins.isEmpty) {
-      return;
-    }
-    if (_eq(entity.asins.first.imageData, data) == false) {
-      final asins = [
-        entity.asins.first.copyWith(imageData: data),
-        ...entity.asins.skip(1),
-      ];
-      box.put(searchDate, entity.copyWith(asins: asins));
-    }
-  }
-
   void add(String raw) {
     var jan = raw.trim();
     if (jan.length == 12) {
