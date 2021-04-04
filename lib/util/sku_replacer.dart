@@ -1,6 +1,5 @@
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/search_item.dart';
-import 'package:amasearch/util/price_util.dart';
 
 const yearVar = "{yyyy}";
 const monthVar = "{mm}";
@@ -24,6 +23,7 @@ String replaceSku({
   required int quantity,
   required bool useFba,
   required DateTime date,
+  required int breakEven,
 }) {
   return format
       .replaceAll(yearVar, date.year.toString())
@@ -36,13 +36,7 @@ String replaceSku({
       .replaceAll(sellVar, (sell).toString())
       .replaceAll(profitVar, (profit).toString())
       .replaceAll(quantityVar, (quantity).toString())
-      .replaceAll(
-          breakEvenVar,
-          calcBreakEven(
-            purchase: purchase,
-            useFba: useFba,
-            feeInfo: item.prices?.feeInfo,
-          ).toString());
+      .replaceAll(breakEvenVar, breakEven.toString());
 }
 
 String _conditionText(PurchaseItemCondition cond) {

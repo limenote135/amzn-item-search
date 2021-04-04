@@ -60,6 +60,11 @@ class SkuTile extends HookWidget {
       fee: item.prices?.feeInfo,
       useFba: useFba,
     );
+    final breakEven = calcBreakEven(
+      purchase: purchase,
+      useFba: useFba,
+      feeInfo: item.prices?.feeInfo,
+    );
 
     return replaceSku(
       format: format,
@@ -71,6 +76,7 @@ class SkuTile extends HookWidget {
       quantity: quantity,
       useFba: useFba,
       date: purchaseDate,
+      breakEven: breakEven,
     );
   }
 }
