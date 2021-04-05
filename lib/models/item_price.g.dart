@@ -17,8 +17,8 @@ class ItemPricesAdapter extends TypeAdapter<_$_ItemPrices> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_ItemPrices(
-      newPrices: (fields[0] as List).cast<PriceDetail>(),
-      usedPrices: (fields[1] as List).cast<PriceDetail>(),
+      newPrices: (fields[0] as List?)?.cast<PriceDetail>() ?? [], // TODO: 初期のころ、null で保存されているデータがある？
+      usedPrices: (fields[1] as List?)?.cast<PriceDetail>() ?? [],
       feeInfo: fields[2] as FeeInfo,
     );
   }
