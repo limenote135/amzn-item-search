@@ -35,11 +35,17 @@ const _kTestingPerformance = false;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Future.wait([
-    initStartupOption(),
-    initFirebase(),
-    initHive(),
-  ]);
+  await initFirebase();
+
+  try {
+    await Future.wait([
+      initStartupOption(),
+      initHive(),
+    ]);
+    // ignore: avoid_catches_without_on_clauses
+  } catch (e, stacktrace) {
+    await FirebaseCrashlytics.instance.recordError(e, stacktrace);
+  }
 
   // TODO:
   Intl.defaultLocale = 'ja_JP';
