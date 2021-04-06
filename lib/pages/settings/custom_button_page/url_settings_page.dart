@@ -129,6 +129,7 @@ class __UrlEditFormState extends State<_UrlEditForm> {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop(CustomButtonDetail(
+                  id: widget.button.id,
                   enable: widget.button.enable,
                   title: _titleEditingController.text,
                   pattern: _patternEditingController.text,
