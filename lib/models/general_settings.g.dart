@@ -32,43 +32,50 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
               const CustomButtonDetail(
                   pattern: 'https://www.amazon.co.jp/gp/product/{asin}/',
                   enable: true,
-                  title: 'Amazon'),
+                  title: 'Amazon',
+                  id: 'bt00'),
               const CustomButtonDetail(
                   pattern:
                       'https://sellercentral.amazon.co.jp/abis/listing/syh?asin={asin}',
                   enable: true,
-                  title: '出品確認'),
+                  title: '出品確認',
+                  id: 'bt01'),
               const CustomButtonDetail(
                   pattern: 'https://delta-tracer.com/item/detail/jp/{asin}/',
                   enable: true,
-                  title: 'Delta'),
+                  title: 'Delta',
+                  id: 'bt02'),
               const CustomButtonDetail(
                   pattern: 'https://mnsearch.com/item?kwd={asin}',
                   enable: true,
-                  title: 'モノサーチ'),
+                  title: 'モノサーチ',
+                  id: 'bt03'),
               const CustomButtonDetail(
                   pattern: 'https://keezon.net/item/index?ASIN={asin}',
                   enable: false,
-                  title: 'Keezon'),
+                  title: 'Keezon',
+                  id: 'bt04'),
               const CustomButtonDetail(
                   pattern: 'https://www.mercari.com/jp/search/?keyword={title}',
                   enable: false,
-                  title: 'メルカリ'),
+                  title: 'メルカリ',
+                  id: 'bt05'),
               const CustomButtonDetail(
                   pattern:
                       'https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};',
                   enable: false,
-                  title: '在庫'),
+                  title: '在庫',
+                  id: 'bt06'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン1'),
+                  pattern: '', enable: false, title: 'ボタン1', id: 'bt07'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン2'),
+                  pattern: '', enable: false, title: 'ボタン2', id: 'bt08'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン3'),
+                  pattern: '', enable: false, title: 'ボタン3', id: 'bt09'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン4'),
+                  pattern: '', enable: false, title: 'ボタン4', id: 'bt10'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン5')
+                  pattern: '', enable: false, title: 'ボタン5', id: 'bt11')
             ]
           : (fields[10] as List).cast<CustomButtonDetail>(),
       csvOrder: fields[11] == null
@@ -215,19 +222,22 @@ class CustomButtonDetailAdapter extends TypeAdapter<_$_CustomButtonDetail> {
       enable: fields[0] as bool,
       title: fields[1] as String,
       pattern: fields[2] as String,
+      id: fields[3] == null ? '' : fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_CustomButtonDetail obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.enable)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.pattern);
+      ..write(obj.pattern)
+      ..writeByte(3)
+      ..write(obj.id);
   }
 
   @override
