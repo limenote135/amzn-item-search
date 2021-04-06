@@ -953,11 +953,13 @@ class _$CustomButtonDetailTearOff {
   _CustomButtonDetail call(
       {@HiveField(0) required bool enable,
       @HiveField(1) required String title,
-      @HiveField(2) required String pattern}) {
+      @HiveField(2) required String pattern,
+      @HiveField(3, defaultValue: "") required String id}) {
     return _CustomButtonDetail(
       enable: enable,
       title: title,
       pattern: pattern,
+      id: id,
     );
   }
 }
@@ -973,6 +975,8 @@ mixin _$CustomButtonDetail {
   String get title => throw _privateConstructorUsedError;
   @HiveField(2)
   String get pattern => throw _privateConstructorUsedError;
+  @HiveField(3, defaultValue: "")
+  String get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomButtonDetailCopyWith<CustomButtonDetail> get copyWith =>
@@ -987,7 +991,8 @@ abstract class $CustomButtonDetailCopyWith<$Res> {
   $Res call(
       {@HiveField(0) bool enable,
       @HiveField(1) String title,
-      @HiveField(2) String pattern});
+      @HiveField(2) String pattern,
+      @HiveField(3, defaultValue: "") String id});
 }
 
 /// @nodoc
@@ -1004,6 +1009,7 @@ class _$CustomButtonDetailCopyWithImpl<$Res>
     Object? enable = freezed,
     Object? title = freezed,
     Object? pattern = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       enable: enable == freezed
@@ -1017,6 +1023,10 @@ class _$CustomButtonDetailCopyWithImpl<$Res>
       pattern: pattern == freezed
           ? _value.pattern
           : pattern // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1032,7 +1042,8 @@ abstract class _$CustomButtonDetailCopyWith<$Res>
   $Res call(
       {@HiveField(0) bool enable,
       @HiveField(1) String title,
-      @HiveField(2) String pattern});
+      @HiveField(2) String pattern,
+      @HiveField(3, defaultValue: "") String id});
 }
 
 /// @nodoc
@@ -1051,6 +1062,7 @@ class __$CustomButtonDetailCopyWithImpl<$Res>
     Object? enable = freezed,
     Object? title = freezed,
     Object? pattern = freezed,
+    Object? id = freezed,
   }) {
     return _then(_CustomButtonDetail(
       enable: enable == freezed
@@ -1065,6 +1077,10 @@ class __$CustomButtonDetailCopyWithImpl<$Res>
           ? _value.pattern
           : pattern // ignore: cast_nullable_to_non_nullable
               as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -1076,7 +1092,8 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
   const _$_CustomButtonDetail(
       {@HiveField(0) required this.enable,
       @HiveField(1) required this.title,
-      @HiveField(2) required this.pattern});
+      @HiveField(2) required this.pattern,
+      @HiveField(3, defaultValue: "") required this.id});
 
   @override
   @HiveField(0)
@@ -1087,10 +1104,13 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
   @override
   @HiveField(2)
   final String pattern;
+  @override
+  @HiveField(3, defaultValue: "")
+  final String id;
 
   @override
   String toString() {
-    return 'CustomButtonDetail(enable: $enable, title: $title, pattern: $pattern)';
+    return 'CustomButtonDetail(enable: $enable, title: $title, pattern: $pattern, id: $id)';
   }
 
   @override
@@ -1102,7 +1122,10 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.pattern, pattern) ||
-                const DeepCollectionEquality().equals(other.pattern, pattern)));
+                const DeepCollectionEquality()
+                    .equals(other.pattern, pattern)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
   }
 
   @override
@@ -1110,7 +1133,8 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(enable) ^
       const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(pattern);
+      const DeepCollectionEquality().hash(pattern) ^
+      const DeepCollectionEquality().hash(id);
 
   @JsonKey(ignore: true)
   @override
@@ -1120,9 +1144,11 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
 
 abstract class _CustomButtonDetail implements CustomButtonDetail {
   const factory _CustomButtonDetail(
-      {@HiveField(0) required bool enable,
-      @HiveField(1) required String title,
-      @HiveField(2) required String pattern}) = _$_CustomButtonDetail;
+          {@HiveField(0) required bool enable,
+          @HiveField(1) required String title,
+          @HiveField(2) required String pattern,
+          @HiveField(3, defaultValue: "") required String id}) =
+      _$_CustomButtonDetail;
 
   @override
   @HiveField(0)
@@ -1133,6 +1159,9 @@ abstract class _CustomButtonDetail implements CustomButtonDetail {
   @override
   @HiveField(2)
   String get pattern => throw _privateConstructorUsedError;
+  @override
+  @HiveField(3, defaultValue: "")
+  String get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith =>
