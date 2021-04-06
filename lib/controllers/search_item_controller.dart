@@ -6,7 +6,6 @@ import 'package:amasearch/repository/geo.dart';
 import 'package:amasearch/repository/tsutaya.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:amasearch/util/util.dart';
-import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final searchItemControllerProvider =
