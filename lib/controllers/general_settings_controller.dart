@@ -75,6 +75,8 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     bool? enableAlertVibration,
     bool? isMajorCustomer,
     KeepaSettings? keepaSettings,
+    List<ShortcutDetail>? leftShortcut,
+    List<ShortcutDetail>? rightShortcut,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -96,6 +98,8 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       enableAlertVibration: enableAlertVibration ?? state.enableAlertVibration,
       isMajorCustomer: isMajorCustomer ?? state.isMajorCustomer,
       keepaSettings: keepaSettings ?? state.keepaSettings,
+      leftSlideShortcut: leftShortcut ?? state.leftSlideShortcut,
+      rightSlideShortcut: rightShortcut ?? state.rightSlideShortcut,
     );
     box.put(generalSettingsKeyName, state);
   }

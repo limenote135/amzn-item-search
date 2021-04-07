@@ -26,6 +26,7 @@ const csvColumnTypeId = 53;
 const alertConditionTypeId = 54;
 const alertConditionSetTypeId = 55;
 const keepaSettingsTypeId = 56;
+const shortcutDetailTypeId = 57;
 
 // enums
 const fulfillmentChannelTypeId = 100;
@@ -36,3 +37,4 @@ const usedSubConditionTypeId = 104;
 const alertTypeTypeId = 105;
 const alertOfferConditionTypeId = 106;
 const keepaShowPeriodTypeId = 107;
+const shortcutTypeId = 108;

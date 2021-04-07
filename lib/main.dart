@@ -10,6 +10,7 @@ import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/models/enums/search_type.dart';
+import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/general_settings.dart';
@@ -105,6 +106,8 @@ Future<void> initHive() async {
     ..registerAdapter(AlertTypeAdapter())
     ..registerAdapter(AlertConditionAdapter())
     ..registerAdapter(AlertConditionSetAdapter())
+    ..registerAdapter(ShortcutTypeAdapter())
+    ..registerAdapter(ShortcutDetailAdapter())
     ..registerAdapter(SearchSettingsAdapter())
     ..registerAdapter(FulfillmentChannelAdapter())
     ..registerAdapter(ItemConditionAdapter())

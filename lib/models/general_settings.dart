@@ -2,6 +2,7 @@ import 'package:amasearch/models/alert_condition.dart';
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/alert_type.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
+import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -106,6 +107,15 @@ const _defaultAlert = [
 
 const _defaultKeepaSettings = KeepaSettings();
 
+const _defaultLeftShortcut = [
+  ShortcutDetail(type: ShortcutType.purchase),
+  ShortcutDetail(type: ShortcutType.web, param: "bt02"),
+];
+
+const _defaultRightShortcut = [
+  ShortcutDetail(type: ShortcutType.delete),
+];
+
 @freezed
 class GeneralSettings with _$GeneralSettings {
   @HiveType(typeId: generalSettingsTypeId)
@@ -152,6 +162,12 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(18, defaultValue: _defaultKeepaSettings)
     @Default(_defaultKeepaSettings)
         KeepaSettings keepaSettings,
+    @HiveField(19, defaultValue: _defaultLeftShortcut)
+    @Default(_defaultLeftShortcut)
+        List<ShortcutDetail> leftSlideShortcut,
+    @HiveField(20, defaultValue: _defaultRightShortcut)
+    @Default(_defaultRightShortcut)
+        List<ShortcutDetail> rightSlideShortcut,
   }) = _GeneralSettings;
 }
 
@@ -189,4 +205,13 @@ class AlertConditionSet with _$AlertConditionSet {
 
   factory AlertConditionSet.fromJson(Map<String, dynamic> json) =>
       _$AlertConditionSetFromJson(json);
+}
+
+@freezed
+class ShortcutDetail with _$ShortcutDetail {
+  @HiveType(typeId: shortcutDetailTypeId)
+  const factory ShortcutDetail({
+    @HiveField(0) required ShortcutType type,
+    @HiveField(1) @Default("") String param,
+  }) = _ShortcutDetail;
 }
