@@ -109,11 +109,14 @@ const _defaultKeepaSettings = KeepaSettings();
 
 const _defaultLeftShortcut = [
   ShortcutDetail(type: ShortcutType.purchase),
-  ShortcutDetail(type: ShortcutType.web, param: "bt02"),
+  ShortcutDetail(type: ShortcutType.none),
+  ShortcutDetail(type: ShortcutType.none),
 ];
 
 const _defaultRightShortcut = [
   ShortcutDetail(type: ShortcutType.delete),
+  ShortcutDetail(type: ShortcutType.none),
+  ShortcutDetail(type: ShortcutType.none),
 ];
 
 @freezed
