@@ -33,7 +33,7 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider.state);
+    final settings = useProvider(generalSettingsControllerProvider);
     return ListView(
       children: [
         SwitchListTile(
@@ -42,7 +42,7 @@ class _Body extends HookWidget {
           value: settings.enableTargetProfit,
           onChanged: (value) {
             context
-                .read(generalSettingsControllerProvider)
+                .read(generalSettingsControllerProvider.notifier)
                 .update(enableTargetProfit: value);
             if (value) {
               context.read(analyticsControllerProvider).setUserProp(
@@ -76,7 +76,7 @@ class _Body extends HookWidget {
             );
             if (ret != null) {
               context
-                  .read(generalSettingsControllerProvider)
+                  .read(generalSettingsControllerProvider.notifier)
                   .update(targetProfitValue: ret);
               if (settings.enableTargetProfit) {
                 await context.read(analyticsControllerProvider).setUserProp(
@@ -107,7 +107,7 @@ class _Body extends HookWidget {
             );
             if (ret != null) {
               context
-                  .read(generalSettingsControllerProvider)
+                  .read(generalSettingsControllerProvider.notifier)
                   .update(minProfit: ret);
               if (settings.enableTargetProfit) {
                 await context.read(analyticsControllerProvider).setUserProp(

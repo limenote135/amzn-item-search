@@ -26,16 +26,15 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_hooks: ^0.16.0
-  hooks_riverpod: ^0.13.1+1
+  hooks_riverpod: ^0.14.0+1
   state_notifier: ^0.7.0
   freezed_annotation: ^0.14.1
   json_serializable: ^4.1.0
   dio: ^4.0.0
-  xml: ^5.0.2
   crypto: ^3.0.1
   uuid: ^3.0.3
   intl: ^0.17.0
-  extended_image: ^4.0.0
+  extended_image: ^4.0.1
   ai_barcode: ^2.1.0
   permission_handler: ^6.1.1
   flutter_slidable: ^0.6.0-nullsafety.0
@@ -44,11 +43,11 @@ dependencies:
   path_provider: ^2.0.1
   csv: ^5.0.0
   share: ^2.0.1
-  firebase_core: ^1.0.2
-  firebase_analytics: ^8.0.0-dev.0
-  firebase_crashlytics: ^1.0.0
-  firebase_remote_config: ^0.9.0-dev.1
-  firebase_performance: ^0.6.0+1
+  firebase_core: ^1.0.3
+  firebase_analytics: ^8.0.0-dev.1
+  firebase_crashlytics: ^2.0.0
+  firebase_remote_config: ^0.9.0-dev.2
+  firebase_performance: ^0.6.0+2
   vibration: ^1.7.4-nullsafety.0
   flutter_tts: ^3.0.0
   flutter_web_browser: ^0.14.0

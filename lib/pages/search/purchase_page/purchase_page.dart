@@ -57,7 +57,7 @@ class _Body extends HookWidget {
 
     // 仮で初期値を新品最安値、無ければ中古最安値にする
     final lowestPrice = _calcLowestPrice(item.prices);
-    final useFba = useProvider(searchSettingsControllerProvider.state).useFba;
+    final useFba = useProvider(searchSettingsControllerProvider).useFba;
 
     final stock = StockItem(
       purchaseDate: currentTimeString(),

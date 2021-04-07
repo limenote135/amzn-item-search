@@ -36,14 +36,14 @@ class _PriceAndProfit extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final settings = useProvider(searchSettingsControllerProvider.state);
+    final settings = useProvider(searchSettingsControllerProvider);
 
-    final showTargetPrice = useProvider(generalSettingsControllerProvider.state
+    final showTargetPrice = useProvider(generalSettingsControllerProvider
         .select((value) => value.enableTargetProfit));
-    final targetPriceRate = useProvider(generalSettingsControllerProvider.state
+    final targetPriceRate = useProvider(generalSettingsControllerProvider
         .select((value) => value.targetProfitValue));
-    final minProfit = useProvider(generalSettingsControllerProvider.state
-        .select((value) => value.minProfit));
+    final minProfit = useProvider(
+        generalSettingsControllerProvider.select((value) => value.minProfit));
 
     final detail = getPriceDetail(
       item: item,

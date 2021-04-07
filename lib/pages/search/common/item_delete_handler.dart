@@ -31,9 +31,9 @@ Future<bool> itemDeleteHandler({
   );
   if (ok!) {
     if (deleteAll) {
-      context.read(searchItemControllerProvider).removeAll();
+      context.read(searchItemControllerProvider.notifier).removeAll();
     } else {
-      context.read(searchItemControllerProvider).remove(items!);
+      context.read(searchItemControllerProvider.notifier).remove(items!);
       //TODO: 複数削除できるので、削除する個数を指定したい
       await context
           .read(analyticsControllerProvider)
