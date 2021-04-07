@@ -116,11 +116,16 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       leftSlideShortcut: fields[19] == null
           ? [
               const ShortcutDetail(type: ShortcutType.purchase),
-              const ShortcutDetail(type: ShortcutType.web, param: 'bt02')
+              const ShortcutDetail(type: ShortcutType.none),
+              const ShortcutDetail(type: ShortcutType.none)
             ]
           : (fields[19] as List).cast<ShortcutDetail>(),
       rightSlideShortcut: fields[20] == null
-          ? [const ShortcutDetail(type: ShortcutType.delete)]
+          ? [
+              const ShortcutDetail(type: ShortcutType.delete),
+              const ShortcutDetail(type: ShortcutType.none),
+              const ShortcutDetail(type: ShortcutType.none)
+            ]
           : (fields[20] as List).cast<ShortcutDetail>(),
     );
   }

@@ -8,6 +8,7 @@ import 'package:amasearch/pages/settings/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/settings/purchase_list_page/purchase_list_page.dart';
 import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_page.dart';
 import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
+import 'package:amasearch/pages/settings/shortcut_page/shortcut_page.dart';
 import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
 import 'package:amasearch/util/auth.dart';
@@ -141,6 +142,12 @@ class _Body extends HookConsumerWidget {
           title: const Text("Keepa設定"),
           onTap: () {
             Navigator.push(context, KeepaSettings.route());
+          },
+        ),
+        ListTile(
+          title: const Text("ショートカット設定"),
+          onTap: () {
+            Navigator.push(context, ShortcutPage.route());
           },
         ),
         SwitchListTile(
