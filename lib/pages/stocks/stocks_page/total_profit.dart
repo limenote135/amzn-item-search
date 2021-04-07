@@ -8,7 +8,7 @@ class TotalProfit extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = useProvider(stockItemListControllerProvider.state);
+    final items = useProvider(stockItemListControllerProvider);
 
     var itemCount = 0;
     var profitValue = 0;
