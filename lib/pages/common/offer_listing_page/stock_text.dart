@@ -12,7 +12,7 @@ class StockText extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider.state);
+    final settings = useProvider(generalSettingsControllerProvider);
     if (!settings.getStocks) {
       return Container();
     }

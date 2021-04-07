@@ -33,7 +33,7 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider.state);
+    final settings = useProvider(generalSettingsControllerProvider);
     return ListView(
       children: [
         SwitchListTile(
@@ -41,7 +41,7 @@ class _Body extends HookWidget {
           value: settings.isDarkMode,
           onChanged: (value) {
             context
-                .read(generalSettingsControllerProvider)
+                .read(generalSettingsControllerProvider.notifier)
                 .update(isDarkMode: value);
             context
                 .read(analyticsControllerProvider)
@@ -115,7 +115,7 @@ class _Body extends HookWidget {
           value: settings.getStocks,
           onChanged: (value) {
             context
-                .read(generalSettingsControllerProvider)
+                .read(generalSettingsControllerProvider.notifier)
                 .update(getStocks: value);
             context
                 .read(analyticsControllerProvider)

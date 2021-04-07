@@ -69,7 +69,7 @@ class _AppBarTitle extends HookWidget {
 
     final focusNode = useFocusNode();
 
-    final settings = useProvider(searchSettingsControllerProvider.state);
+    final settings = useProvider(searchSettingsControllerProvider);
 
     return KeyboardActions(
       disableScroll: true,
@@ -145,16 +145,16 @@ class _AppBarTitle extends HookWidget {
   void _addItem(BuildContext context, SearchType type, String code) {
     switch (type) {
       case SearchType.jan:
-        context.read(searchItemControllerProvider).add(code);
+        context.read(searchItemControllerProvider.notifier).add(code);
         return;
       case SearchType.bookoff:
-        context.read(searchItemControllerProvider).addBookoff(code);
+        context.read(searchItemControllerProvider.notifier).addBookoff(code);
         return;
       case SearchType.geo:
-        context.read(searchItemControllerProvider).addGeo(code);
+        context.read(searchItemControllerProvider.notifier).addGeo(code);
         return;
       case SearchType.tsutaya:
-        context.read(searchItemControllerProvider).addTsutaya(code);
+        context.read(searchItemControllerProvider.notifier).addTsutaya(code);
         return;
       case SearchType.freeWord:
         // deprecated
@@ -169,7 +169,7 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = useProvider(searchItemControllerProvider.state);
+    final items = useProvider(searchItemControllerProvider);
 
     return Column(
       children: [

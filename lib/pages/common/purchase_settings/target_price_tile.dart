@@ -18,12 +18,12 @@ class TargetPriceTile extends HookWidget {
     final useFba = getBool(form, useFbaField);
     final purchasePrice = getInt(form, purchasePriceField);
 
-    final showTargetRate = useProvider(generalSettingsControllerProvider.state
+    final showTargetRate = useProvider(generalSettingsControllerProvider
         .select((value) => value.enableTargetProfit));
-    final targetRate = useProvider(generalSettingsControllerProvider.state
+    final targetRate = useProvider(generalSettingsControllerProvider
         .select((value) => value.targetProfitValue));
-    final minProfit = useProvider(generalSettingsControllerProvider.state
-        .select((value) => value.minProfit));
+    final minProfit = useProvider(
+        generalSettingsControllerProvider.select((value) => value.minProfit));
 
     final targetPrice = _calcTargetSellPrice(
         purchasePrice > 0 ? purchasePrice : 0,
