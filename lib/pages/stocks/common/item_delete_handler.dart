@@ -29,9 +29,9 @@ Future<bool> itemDeleteHandler({
   );
   if (ok!) {
     if (deleteAll) {
-      context.read(stockItemListControllerProvider).removeAll();
+      context.read(stockItemListControllerProvider.notifier).removeAll();
     } else {
-      context.read(stockItemListControllerProvider).remove(items!);
+      context.read(stockItemListControllerProvider.notifier).remove(items!);
     }
   }
   return ok;

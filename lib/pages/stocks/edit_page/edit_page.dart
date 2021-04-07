@@ -95,7 +95,7 @@ class _Body extends HookWidget {
       purchaseDate: getString(form, purchaseDateField),
       breakEven: breakEven,
     );
-    context.read(stockItemListControllerProvider).update(newItem);
+    context.read(stockItemListControllerProvider.notifier).update(newItem);
     Navigator.of(context).popUntil((route) => route.settings.name == "/");
   }
 }

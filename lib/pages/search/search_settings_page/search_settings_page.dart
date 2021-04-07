@@ -33,7 +33,7 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = useProvider(searchSettingsControllerProvider.state);
+    final settings = useProvider(searchSettingsControllerProvider);
     return ProviderScope(
       overrides: [
         _currentSettingsProvider.overrideWithValue(settings),
@@ -48,7 +48,7 @@ class _Body extends HookWidget {
             onChanged: (value) {
               if (value != settings.useFba) {
                 context
-                    .read(searchSettingsControllerProvider)
+                    .read(searchSettingsControllerProvider.notifier)
                     .update(useFba: value);
               }
             },
@@ -59,7 +59,7 @@ class _Body extends HookWidget {
             onChanged: (value) {
               if (value != settings.priorFba) {
                 context
-                    .read(searchSettingsControllerProvider)
+                    .read(searchSettingsControllerProvider.notifier)
                     .update(priorFba: value);
               }
             },
@@ -86,7 +86,7 @@ class _Body extends HookWidget {
                 ),
               );
               if (ok!) {
-                context.read(searchItemControllerProvider).removeAll();
+                context.read(searchItemControllerProvider.notifier).removeAll();
                 await context
                     .read(analyticsControllerProvider)
                     .logSingleEvent(deleteAllSearchHistoryEventName);
@@ -134,7 +134,7 @@ class _CodeType extends HookWidget {
             onChanged: (value) {
               if (value != settings.type) {
                 context
-                    .read(searchSettingsControllerProvider)
+                    .read(searchSettingsControllerProvider.notifier)
                     .update(type: value);
               }
             },
@@ -183,7 +183,7 @@ class _UsedSubCondition extends HookWidget {
             onChanged: (value) {
               if (value != settings.usedSubCondition) {
                 context
-                    .read(searchSettingsControllerProvider)
+                    .read(searchSettingsControllerProvider.notifier)
                     .update(usedSubCondition: value);
               }
             },

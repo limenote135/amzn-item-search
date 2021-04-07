@@ -37,7 +37,7 @@ final searchItemFutureProvider = FutureProvider.autoDispose
 
   ref.maintainState = true;
 
-  final settings = ref.read(generalSettingsControllerProvider.state);
+  final settings = ref.read(generalSettingsControllerProvider);
   final tts = ref.read(ttsProvider);
 
   if (settings.enableReadAloud) {
@@ -45,7 +45,7 @@ final searchItemFutureProvider = FutureProvider.autoDispose
       tts.speak("見つかりませんでした。");
     } else {
       final template = settings.readAloudPatterns[settings.patternIndex];
-      final search = ref.read(searchSettingsControllerProvider.state);
+      final search = ref.read(searchSettingsControllerProvider);
       tts.speak(createSpeakText(
         template: template.pattern,
         item: resp.items.first,

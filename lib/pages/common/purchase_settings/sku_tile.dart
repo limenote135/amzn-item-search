@@ -14,8 +14,8 @@ class SkuTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final skuFormat = useProvider(generalSettingsControllerProvider.state
-        .select((value) => value.skuFormat));
+    final skuFormat = useProvider(
+        generalSettingsControllerProvider.select((value) => value.skuFormat));
     return Column(
       children: [
         ReactiveCheckboxListTile(

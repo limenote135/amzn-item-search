@@ -5,7 +5,8 @@ import 'package:amasearch/util/uuid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final stockItemListControllerProvider =
-    StateNotifierProvider((ref) => StockItemListController(ref.read));
+    StateNotifierProvider<StockItemListController, List<StockItem>>(
+        (ref) => StockItemListController(ref.read));
 
 class StockItemListController extends StateNotifier<List<StockItem>> {
   StockItemListController(this._read, {List<StockItem>? state})

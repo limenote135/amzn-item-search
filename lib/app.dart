@@ -18,8 +18,8 @@ class MyApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final observer = useProvider(analyticsObserverProvider);
-    final isDarkMode = useProvider(generalSettingsControllerProvider.state
-        .select((value) => value.isDarkMode));
+    final isDarkMode = useProvider(
+        generalSettingsControllerProvider.select((value) => value.isDarkMode));
     return MaterialApp(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

@@ -6,7 +6,7 @@ final ttsProvider = Provider((ref) => TextToSpeech(ref.read));
 
 class TextToSpeech {
   TextToSpeech(this._reader) : _flutterTts = FlutterTts() {
-    final settings = _reader(generalSettingsControllerProvider.state);
+    final settings = _reader(generalSettingsControllerProvider);
     Future(() async {
       final dynamic languages = await _flutterTts.getLanguages;
       for (final lang in languages) {
@@ -23,7 +23,7 @@ class TextToSpeech {
         final range = await getRange();
         await _flutterTts.setSpeechRate(range.normal);
 
-        _reader(generalSettingsControllerProvider)
+        _reader(generalSettingsControllerProvider.notifier)
             .update(readAloudSpeed: range.normal);
       }
     });

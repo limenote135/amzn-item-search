@@ -22,7 +22,7 @@ class PriceDetailTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final setting = useProvider(searchSettingsControllerProvider.state);
+    final setting = useProvider(searchSettingsControllerProvider);
 
     final detail = getPriceDetail(
       item: item,
@@ -37,12 +37,12 @@ class PriceDetailTile extends HookWidget {
     final sellFeeRate = (feeInfo.referralFeeRate * 100).round();
     final sellFee = (detail.price * feeInfo.referralFeeRate).round();
 
-    final showTargetPrice = useProvider(generalSettingsControllerProvider.state
+    final showTargetPrice = useProvider(generalSettingsControllerProvider
         .select((value) => value.enableTargetProfit));
-    final targetPriceRate = useProvider(generalSettingsControllerProvider.state
+    final targetPriceRate = useProvider(generalSettingsControllerProvider
         .select((value) => value.targetProfitValue));
-    final minProfit = useProvider(generalSettingsControllerProvider.state
-        .select((value) => value.minProfit));
+    final minProfit = useProvider(
+        generalSettingsControllerProvider.select((value) => value.minProfit));
 
     final targetPrice = calcTargetPrice(
       sellPrice: detail.price,

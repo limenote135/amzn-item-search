@@ -13,7 +13,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final _isSelectedProvider = Provider.family<bool, StockItem>((ref, item) {
-  final selectedItems = ref.watch(selectedStockItemsControllerProvider.state);
+  final selectedItems = ref.watch(selectedStockItemsControllerProvider);
   return selectedItems.contains(item);
 });
 
