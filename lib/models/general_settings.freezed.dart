@@ -54,7 +54,11 @@ class _$GeneralSettingsTearOff {
       @HiveField(17, defaultValue: true)
           bool isMajorCustomer = true,
       @HiveField(18, defaultValue: _defaultKeepaSettings)
-          KeepaSettings keepaSettings = _defaultKeepaSettings}) {
+          KeepaSettings keepaSettings = _defaultKeepaSettings,
+      @HiveField(19, defaultValue: _defaultLeftShortcut)
+          List<ShortcutDetail> leftSlideShortcut = _defaultLeftShortcut,
+      @HiveField(20, defaultValue: _defaultRightShortcut)
+          List<ShortcutDetail> rightSlideShortcut = _defaultRightShortcut}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
@@ -75,6 +79,8 @@ class _$GeneralSettingsTearOff {
       enableAlertVibration: enableAlertVibration,
       isMajorCustomer: isMajorCustomer,
       keepaSettings: keepaSettings,
+      leftSlideShortcut: leftSlideShortcut,
+      rightSlideShortcut: rightSlideShortcut,
     );
   }
 }
@@ -125,6 +131,12 @@ mixin _$GeneralSettings {
   bool get isMajorCustomer => throw _privateConstructorUsedError;
   @HiveField(18, defaultValue: _defaultKeepaSettings)
   KeepaSettings get keepaSettings => throw _privateConstructorUsedError;
+  @HiveField(19, defaultValue: _defaultLeftShortcut)
+  List<ShortcutDetail> get leftSlideShortcut =>
+      throw _privateConstructorUsedError;
+  @HiveField(20, defaultValue: _defaultRightShortcut)
+  List<ShortcutDetail> get rightSlideShortcut =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith =>
@@ -174,7 +186,11 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(17, defaultValue: true)
           bool isMajorCustomer,
       @HiveField(18, defaultValue: _defaultKeepaSettings)
-          KeepaSettings keepaSettings});
+          KeepaSettings keepaSettings,
+      @HiveField(19, defaultValue: _defaultLeftShortcut)
+          List<ShortcutDetail> leftSlideShortcut,
+      @HiveField(20, defaultValue: _defaultRightShortcut)
+          List<ShortcutDetail> rightSlideShortcut});
 
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
 }
@@ -209,6 +225,8 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object? enableAlertVibration = freezed,
     Object? isMajorCustomer = freezed,
     Object? keepaSettings = freezed,
+    Object? leftSlideShortcut = freezed,
+    Object? rightSlideShortcut = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode: isDarkMode == freezed
@@ -287,6 +305,14 @@ class _$GeneralSettingsCopyWithImpl<$Res>
           ? _value.keepaSettings
           : keepaSettings // ignore: cast_nullable_to_non_nullable
               as KeepaSettings,
+      leftSlideShortcut: leftSlideShortcut == freezed
+          ? _value.leftSlideShortcut
+          : leftSlideShortcut // ignore: cast_nullable_to_non_nullable
+              as List<ShortcutDetail>,
+      rightSlideShortcut: rightSlideShortcut == freezed
+          ? _value.rightSlideShortcut
+          : rightSlideShortcut // ignore: cast_nullable_to_non_nullable
+              as List<ShortcutDetail>,
     ));
   }
 
@@ -343,7 +369,11 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       @HiveField(17, defaultValue: true)
           bool isMajorCustomer,
       @HiveField(18, defaultValue: _defaultKeepaSettings)
-          KeepaSettings keepaSettings});
+          KeepaSettings keepaSettings,
+      @HiveField(19, defaultValue: _defaultLeftShortcut)
+          List<ShortcutDetail> leftSlideShortcut,
+      @HiveField(20, defaultValue: _defaultRightShortcut)
+          List<ShortcutDetail> rightSlideShortcut});
 
   @override
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
@@ -381,6 +411,8 @@ class __$GeneralSettingsCopyWithImpl<$Res>
     Object? enableAlertVibration = freezed,
     Object? isMajorCustomer = freezed,
     Object? keepaSettings = freezed,
+    Object? leftSlideShortcut = freezed,
+    Object? rightSlideShortcut = freezed,
   }) {
     return _then(_GeneralSettings(
       isDarkMode: isDarkMode == freezed
@@ -459,6 +491,14 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           ? _value.keepaSettings
           : keepaSettings // ignore: cast_nullable_to_non_nullable
               as KeepaSettings,
+      leftSlideShortcut: leftSlideShortcut == freezed
+          ? _value.leftSlideShortcut
+          : leftSlideShortcut // ignore: cast_nullable_to_non_nullable
+              as List<ShortcutDetail>,
+      rightSlideShortcut: rightSlideShortcut == freezed
+          ? _value.rightSlideShortcut
+          : rightSlideShortcut // ignore: cast_nullable_to_non_nullable
+              as List<ShortcutDetail>,
     ));
   }
 }
@@ -505,7 +545,11 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(17, defaultValue: true)
           this.isMajorCustomer = true,
       @HiveField(18, defaultValue: _defaultKeepaSettings)
-          this.keepaSettings = _defaultKeepaSettings});
+          this.keepaSettings = _defaultKeepaSettings,
+      @HiveField(19, defaultValue: _defaultLeftShortcut)
+          this.leftSlideShortcut = _defaultLeftShortcut,
+      @HiveField(20, defaultValue: _defaultRightShortcut)
+          this.rightSlideShortcut = _defaultRightShortcut});
 
   @JsonKey(defaultValue: false)
   @override // ダークモード
@@ -582,10 +626,18 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(18, defaultValue: _defaultKeepaSettings)
   final KeepaSettings keepaSettings;
+  @JsonKey(defaultValue: _defaultLeftShortcut)
+  @override
+  @HiveField(19, defaultValue: _defaultLeftShortcut)
+  final List<ShortcutDetail> leftSlideShortcut;
+  @JsonKey(defaultValue: _defaultRightShortcut)
+  @override
+  @HiveField(20, defaultValue: _defaultRightShortcut)
+  final List<ShortcutDetail> rightSlideShortcut;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings, leftSlideShortcut: $leftSlideShortcut, rightSlideShortcut: $rightSlideShortcut)';
   }
 
   @override
@@ -647,7 +699,13 @@ class _$_GeneralSettings implements _GeneralSettings {
                     .equals(other.isMajorCustomer, isMajorCustomer)) &&
             (identical(other.keepaSettings, keepaSettings) ||
                 const DeepCollectionEquality()
-                    .equals(other.keepaSettings, keepaSettings)));
+                    .equals(other.keepaSettings, keepaSettings)) &&
+            (identical(other.leftSlideShortcut, leftSlideShortcut) ||
+                const DeepCollectionEquality()
+                    .equals(other.leftSlideShortcut, leftSlideShortcut)) &&
+            (identical(other.rightSlideShortcut, rightSlideShortcut) ||
+                const DeepCollectionEquality()
+                    .equals(other.rightSlideShortcut, rightSlideShortcut)));
   }
 
   @override
@@ -671,7 +729,9 @@ class _$_GeneralSettings implements _GeneralSettings {
       const DeepCollectionEquality().hash(alerts) ^
       const DeepCollectionEquality().hash(enableAlertVibration) ^
       const DeepCollectionEquality().hash(isMajorCustomer) ^
-      const DeepCollectionEquality().hash(keepaSettings);
+      const DeepCollectionEquality().hash(keepaSettings) ^
+      const DeepCollectionEquality().hash(leftSlideShortcut) ^
+      const DeepCollectionEquality().hash(rightSlideShortcut);
 
   @JsonKey(ignore: true)
   @override
@@ -718,7 +778,11 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(17, defaultValue: true)
           bool isMajorCustomer,
       @HiveField(18, defaultValue: _defaultKeepaSettings)
-          KeepaSettings keepaSettings}) = _$_GeneralSettings;
+          KeepaSettings keepaSettings,
+      @HiveField(19, defaultValue: _defaultLeftShortcut)
+          List<ShortcutDetail> leftSlideShortcut,
+      @HiveField(20, defaultValue: _defaultRightShortcut)
+          List<ShortcutDetail> rightSlideShortcut}) = _$_GeneralSettings;
 
   @override // ダークモード
   @HiveField(0)
@@ -779,6 +843,14 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(18, defaultValue: _defaultKeepaSettings)
   KeepaSettings get keepaSettings => throw _privateConstructorUsedError;
+  @override
+  @HiveField(19, defaultValue: _defaultLeftShortcut)
+  List<ShortcutDetail> get leftSlideShortcut =>
+      throw _privateConstructorUsedError;
+  @override
+  @HiveField(20, defaultValue: _defaultRightShortcut)
+  List<ShortcutDetail> get rightSlideShortcut =>
+      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
@@ -1396,5 +1468,167 @@ abstract class _AlertConditionSet implements AlertConditionSet {
   @override
   @JsonKey(ignore: true)
   _$AlertConditionSetCopyWith<_AlertConditionSet> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$ShortcutDetailTearOff {
+  const _$ShortcutDetailTearOff();
+
+  _ShortcutDetail call(
+      {@HiveField(0) required ShortcutType type,
+      @HiveField(1) String param = ""}) {
+    return _ShortcutDetail(
+      type: type,
+      param: param,
+    );
+  }
+}
+
+/// @nodoc
+const $ShortcutDetail = _$ShortcutDetailTearOff();
+
+/// @nodoc
+mixin _$ShortcutDetail {
+  @HiveField(0)
+  ShortcutType get type => throw _privateConstructorUsedError;
+  @HiveField(1)
+  String get param => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ShortcutDetailCopyWith<ShortcutDetail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ShortcutDetailCopyWith<$Res> {
+  factory $ShortcutDetailCopyWith(
+          ShortcutDetail value, $Res Function(ShortcutDetail) then) =
+      _$ShortcutDetailCopyWithImpl<$Res>;
+  $Res call({@HiveField(0) ShortcutType type, @HiveField(1) String param});
+}
+
+/// @nodoc
+class _$ShortcutDetailCopyWithImpl<$Res>
+    implements $ShortcutDetailCopyWith<$Res> {
+  _$ShortcutDetailCopyWithImpl(this._value, this._then);
+
+  final ShortcutDetail _value;
+  // ignore: unused_field
+  final $Res Function(ShortcutDetail) _then;
+
+  @override
+  $Res call({
+    Object? type = freezed,
+    Object? param = freezed,
+  }) {
+    return _then(_value.copyWith(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ShortcutType,
+      param: param == freezed
+          ? _value.param
+          : param // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$ShortcutDetailCopyWith<$Res>
+    implements $ShortcutDetailCopyWith<$Res> {
+  factory _$ShortcutDetailCopyWith(
+          _ShortcutDetail value, $Res Function(_ShortcutDetail) then) =
+      __$ShortcutDetailCopyWithImpl<$Res>;
+  @override
+  $Res call({@HiveField(0) ShortcutType type, @HiveField(1) String param});
+}
+
+/// @nodoc
+class __$ShortcutDetailCopyWithImpl<$Res>
+    extends _$ShortcutDetailCopyWithImpl<$Res>
+    implements _$ShortcutDetailCopyWith<$Res> {
+  __$ShortcutDetailCopyWithImpl(
+      _ShortcutDetail _value, $Res Function(_ShortcutDetail) _then)
+      : super(_value, (v) => _then(v as _ShortcutDetail));
+
+  @override
+  _ShortcutDetail get _value => super._value as _ShortcutDetail;
+
+  @override
+  $Res call({
+    Object? type = freezed,
+    Object? param = freezed,
+  }) {
+    return _then(_ShortcutDetail(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ShortcutType,
+      param: param == freezed
+          ? _value.param
+          : param // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+@HiveType(typeId: shortcutDetailTypeId)
+class _$_ShortcutDetail implements _ShortcutDetail {
+  const _$_ShortcutDetail(
+      {@HiveField(0) required this.type, @HiveField(1) this.param = ""});
+
+  @override
+  @HiveField(0)
+  final ShortcutType type;
+  @JsonKey(defaultValue: "")
+  @override
+  @HiveField(1)
+  final String param;
+
+  @override
+  String toString() {
+    return 'ShortcutDetail(type: $type, param: $param)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ShortcutDetail &&
+            (identical(other.type, type) ||
+                const DeepCollectionEquality().equals(other.type, type)) &&
+            (identical(other.param, param) ||
+                const DeepCollectionEquality().equals(other.param, param)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(type) ^
+      const DeepCollectionEquality().hash(param);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ShortcutDetailCopyWith<_ShortcutDetail> get copyWith =>
+      __$ShortcutDetailCopyWithImpl<_ShortcutDetail>(this, _$identity);
+}
+
+abstract class _ShortcutDetail implements ShortcutDetail {
+  const factory _ShortcutDetail(
+      {@HiveField(0) required ShortcutType type,
+      @HiveField(1) String param}) = _$_ShortcutDetail;
+
+  @override
+  @HiveField(0)
+  ShortcutType get type => throw _privateConstructorUsedError;
+  @override
+  @HiveField(1)
+  String get param => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$ShortcutDetailCopyWith<_ShortcutDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
