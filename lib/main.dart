@@ -44,7 +44,7 @@ Future<void> main() async {
     ]);
     // ignore: avoid_catches_without_on_clauses
   } catch (e, stacktrace) {
-    await FirebaseCrashlytics.instance.recordError(e, stacktrace);
+    await FirebaseCrashlytics.instance.recordError(e, stacktrace, fatal: true);
   }
 
   // TODO:
