@@ -113,13 +113,22 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       keepaSettings: fields[18] == null
           ? const KeepaSettings()
           : fields[18] as KeepaSettings,
+      leftSlideShortcut: fields[19] == null
+          ? [
+              const ShortcutDetail(type: ShortcutType.purchase),
+              const ShortcutDetail(type: ShortcutType.web, param: 'bt02')
+            ]
+          : (fields[19] as List).cast<ShortcutDetail>(),
+      rightSlideShortcut: fields[20] == null
+          ? [const ShortcutDetail(type: ShortcutType.delete)]
+          : (fields[20] as List).cast<ShortcutDetail>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_GeneralSettings obj) {
     writer
-      ..writeByte(19)
+      ..writeByte(21)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
@@ -157,7 +166,11 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       ..writeByte(17)
       ..write(obj.isMajorCustomer)
       ..writeByte(18)
-      ..write(obj.keepaSettings);
+      ..write(obj.keepaSettings)
+      ..writeByte(19)
+      ..write(obj.leftSlideShortcut)
+      ..writeByte(20)
+      ..write(obj.rightSlideShortcut);
   }
 
   @override
@@ -287,6 +300,43 @@ class AlertConditionSetAdapter extends TypeAdapter<_$_AlertConditionSet> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is AlertConditionSetAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ShortcutDetailAdapter extends TypeAdapter<_$_ShortcutDetail> {
+  @override
+  final int typeId = 57;
+
+  @override
+  _$_ShortcutDetail read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_ShortcutDetail(
+      type: fields[0] as ShortcutType,
+      param: fields[1] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_ShortcutDetail obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.type)
+      ..writeByte(1)
+      ..write(obj.param);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ShortcutDetailAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
