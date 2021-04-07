@@ -59,8 +59,8 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final skuPattern = useProvider(generalSettingsControllerProvider.state
-        .select((value) => value.skuFormat));
+    final skuPattern = useProvider(
+        generalSettingsControllerProvider.select((value) => value.skuFormat));
     return _PatternEditForm(skuPattern);
   }
 }
@@ -198,7 +198,7 @@ class __PatternEditFormState extends State<_PatternEditForm> {
           style: raisedButtonStyle(context),
           onPressed: () {
             context
-                .read(generalSettingsControllerProvider)
+                .read(generalSettingsControllerProvider.notifier)
                 .update(skuFormat: _textEditingController.text);
             context
                 .read(analyticsControllerProvider)

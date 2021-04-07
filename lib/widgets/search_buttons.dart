@@ -20,7 +20,7 @@ class SearchButtons extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentItemProvider);
-    final buttons = useProvider(generalSettingsControllerProvider.state
+    final buttons = useProvider(generalSettingsControllerProvider
         .select((value) => value.customButtons));
     return Wrap(
       alignment: WrapAlignment.spaceEvenly,

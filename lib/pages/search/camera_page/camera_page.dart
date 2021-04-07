@@ -43,19 +43,25 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
             content: Text(result),
           ));
 
-          final settings = context.read(searchSettingsControllerProvider.state);
+          final settings = context.read(searchSettingsControllerProvider);
           switch (settings.type) {
             case SearchType.jan:
-              context.read(searchItemControllerProvider).add(result);
+              context.read(searchItemControllerProvider.notifier).add(result);
               break;
             case SearchType.bookoff:
-              context.read(searchItemControllerProvider).addBookoff(result);
+              context
+                  .read(searchItemControllerProvider.notifier)
+                  .addBookoff(result);
               break;
             case SearchType.geo:
-              context.read(searchItemControllerProvider).addGeo(result);
+              context
+                  .read(searchItemControllerProvider.notifier)
+                  .addGeo(result);
               break;
             case SearchType.tsutaya:
-              context.read(searchItemControllerProvider).addTsutaya(result);
+              context
+                  .read(searchItemControllerProvider.notifier)
+                  .addTsutaya(result);
               break;
             case SearchType.freeWord:
               break;
@@ -199,7 +205,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     final size = window.physicalSize;
     final screenWidth = size.width / window.devicePixelRatio;
     final screenHeight = size.height / window.devicePixelRatio;
-    final settings = context.read(searchSettingsControllerProvider.state);
+    final settings = context.read(searchSettingsControllerProvider);
     final continuousRead = settings.continuousCameraRead;
     final type = settings.type;
 
@@ -244,7 +250,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                         setState(() {
                           final newVal = !continuousRead;
                           context
-                              .read(searchSettingsControllerProvider)
+                              .read(searchSettingsControllerProvider.notifier)
                               .update(continuousCameraRead: newVal);
                           context.read(analyticsControllerProvider).setUserProp(
                               continuousReadPropName, newVal.toString());
@@ -263,9 +269,9 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       onPressed: () {
                         setState(() {
                           final next = _getNext(type);
-                          context.read(searchSettingsControllerProvider).update(
-                                type: next,
-                              );
+                          context
+                              .read(searchSettingsControllerProvider.notifier)
+                              .update(type: next);
                         });
                       },
                       child: Text("タイプ: ${type.toDisplayString()}"),

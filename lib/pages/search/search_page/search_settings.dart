@@ -10,7 +10,7 @@ class SearchSetting extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final setting = useProvider(searchSettingsControllerProvider.state);
+    final setting = useProvider(searchSettingsControllerProvider);
     var condText = setting.usedSubCondition.toDisplayString();
     if (setting.usedSubCondition != UsedSubCondition.all) {
       condText += "以上";

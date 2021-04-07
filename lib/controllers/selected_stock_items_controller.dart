@@ -2,7 +2,8 @@ import 'package:amasearch/models/stock_item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final selectedStockItemsControllerProvider =
-    StateNotifierProvider((_) => SelectedStockItemsController());
+    StateNotifierProvider<SelectedStockItemsController, List<StockItem>>(
+        (_) => SelectedStockItemsController());
 
 class SelectedStockItemsController extends StateNotifier<List<StockItem>> {
   SelectedStockItemsController() : super([]);
