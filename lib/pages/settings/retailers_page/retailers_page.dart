@@ -32,8 +32,8 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final retailers = useProvider(generalSettingsControllerProvider.state
-        .select((value) => value.retailers));
+    final retailers = useProvider(
+        generalSettingsControllerProvider.select((value) => value.retailers));
     return ListView(
       children: [
         ListTile(
@@ -68,7 +68,7 @@ class _Body extends HookWidget {
                 );
                 if (ok!) {
                   context
-                      .read(generalSettingsControllerProvider)
+                      .read(generalSettingsControllerProvider.notifier)
                       .removeRetailer(i);
                 }
               },
@@ -87,7 +87,9 @@ class _Body extends HookWidget {
               ),
             );
             if (ret != null) {
-              context.read(generalSettingsControllerProvider).addRetailer(ret);
+              context
+                  .read(generalSettingsControllerProvider.notifier)
+                  .addRetailer(ret);
             }
           },
         )

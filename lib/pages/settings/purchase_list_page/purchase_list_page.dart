@@ -32,7 +32,7 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider.state);
+    final settings = useProvider(generalSettingsControllerProvider);
     void _onReorder(int oldIndex, int newIndexRaw) {
       var newIndex = newIndexRaw;
       if (oldIndex < newIndex) {
@@ -46,7 +46,9 @@ class _Body extends HookWidget {
       final cp = settings.csvOrder
         ..removeAt(oldIndex)
         ..insert(newIndex, item);
-      context.read(generalSettingsControllerProvider).update(csvOrder: cp);
+      context
+          .read(generalSettingsControllerProvider.notifier)
+          .update(csvOrder: cp);
     }
 
     return Column(

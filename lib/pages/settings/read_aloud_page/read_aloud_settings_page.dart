@@ -37,7 +37,7 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider.state);
+    final settings = useProvider(generalSettingsControllerProvider);
     final tts = useProvider(ttsProvider);
     return ListView(
       children: [
@@ -46,7 +46,7 @@ class _Body extends HookWidget {
           value: settings.enableReadAloud,
           onChanged: (value) {
             context
-                .read(generalSettingsControllerProvider)
+                .read(generalSettingsControllerProvider.notifier)
                 .update(enableReadAloud: value);
             if (value) {
               context.read(analyticsControllerProvider).setUserProp(
@@ -89,7 +89,7 @@ class _Body extends HookWidget {
                   ];
 
                   context
-                      .read(generalSettingsControllerProvider)
+                      .read(generalSettingsControllerProvider.notifier)
                       .update(patterns: updatedPattern);
 
                   if (settings.enableReadAloud && i == settings.patternIndex) {
@@ -102,7 +102,7 @@ class _Body extends HookWidget {
             ),
             onChanged: (value) {
               context
-                  .read(generalSettingsControllerProvider)
+                  .read(generalSettingsControllerProvider.notifier)
                   .update(patternIndex: i);
 
               if (settings.enableReadAloud) {
@@ -119,7 +119,7 @@ class _Body extends HookWidget {
           divisions: 10,
           onSubmit: (value) {
             context
-                .read(generalSettingsControllerProvider)
+                .read(generalSettingsControllerProvider.notifier)
                 .update(readAloudVolume: value);
 
             tts.setVolume(value);
@@ -139,7 +139,7 @@ class _Body extends HookWidget {
               divisions: (snapshot.data!.max / 0.1).round(),
               onSubmit: (value) {
                 context
-                    .read(generalSettingsControllerProvider)
+                    .read(generalSettingsControllerProvider.notifier)
                     .update(readAloudSpeed: value);
                 tts.setSpeed(value);
               },

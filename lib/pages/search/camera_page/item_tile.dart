@@ -17,7 +17,7 @@ class CameraItemTile extends HookWidget {
     if (code == "") {
       return Container();
     }
-    final items = useProvider(searchItemControllerProvider.state);
+    final items = useProvider(searchItemControllerProvider);
     return Container(
       color: isDark(context) ? Theme.of(context).backgroundColor : Colors.white,
       child: ProviderScope(

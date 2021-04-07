@@ -32,7 +32,7 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider.state);
+    final settings = useProvider(generalSettingsControllerProvider);
     return ListView.builder(
       itemCount: settings.customButtons.length,
       itemBuilder: (BuildContext context, int index) {
@@ -49,7 +49,7 @@ class _Body extends HookWidget {
                       : settings.customButtons[i]
               ];
               context
-                  .read(generalSettingsControllerProvider)
+                  .read(generalSettingsControllerProvider.notifier)
                   .update(customButtons: updated);
             },
           ),
@@ -73,7 +73,7 @@ class _Body extends HookWidget {
                     : settings.customButtons[i]
             ];
             context
-                .read(generalSettingsControllerProvider)
+                .read(generalSettingsControllerProvider.notifier)
                 .update(customButtons: updated);
           },
         );

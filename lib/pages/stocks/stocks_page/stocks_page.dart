@@ -21,7 +21,7 @@ import 'package:share/share.dart';
 import 'slidable_delete_tile.dart';
 
 final _selectedItemCount = Provider((ref) {
-  final items = ref.watch(selectedStockItemsControllerProvider.state);
+  final items = ref.watch(selectedStockItemsControllerProvider);
   return items.length;
 });
 
@@ -43,8 +43,7 @@ class StocksPage extends HookWidget {
   }
 
   AppBar _appBarSelector(BuildContext context) {
-    final selectedItems =
-        useProvider(selectedStockItemsControllerProvider.state);
+    final selectedItems = useProvider(selectedStockItemsControllerProvider);
 
     return selectedItems.isEmpty
         ? _getNormalAppBar(context)
@@ -84,8 +83,9 @@ class StocksPage extends HookWidget {
       title: Text("${selected.length} 件選択"),
       leading: IconButton(
         icon: const Icon(Icons.clear),
-        onPressed: () =>
-            context.read(selectedStockItemsControllerProvider).removeAll(),
+        onPressed: () => context
+            .read(selectedStockItemsControllerProvider.notifier)
+            .removeAll(),
       ),
       actions: [
         IconButton(
@@ -97,8 +97,12 @@ class StocksPage extends HookWidget {
               content: "${selected.length} 件のアイテムを在庫リストから削除します",
             );
             if (deleted) {
-              context.read(stockItemListControllerProvider).remove(selected);
-              context.read(selectedStockItemsControllerProvider).removeAll();
+              context
+                  .read(stockItemListControllerProvider.notifier)
+                  .remove(selected);
+              context
+                  .read(selectedStockItemsControllerProvider.notifier)
+                  .removeAll();
             }
           },
         )
@@ -108,8 +112,8 @@ class StocksPage extends HookWidget {
 
   Future<void> handleAction(
       BuildContext context, _StockPageActions value) async {
-    final itemList = context.read(stockItemListControllerProvider.state);
-    final settings = context.read(generalSettingsControllerProvider.state);
+    final itemList = context.read(stockItemListControllerProvider);
+    final settings = context.read(generalSettingsControllerProvider);
 
     switch (value) {
       case _StockPageActions.share:
@@ -136,9 +140,8 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = useProvider(stockItemListControllerProvider.state);
-    final selectedItems =
-        useProvider(selectedStockItemsControllerProvider.state);
+    final items = useProvider(stockItemListControllerProvider);
+    final selectedItems = useProvider(selectedStockItemsControllerProvider);
 
     final tile = _InkWell(
       child: selectedItems.isNotEmpty
@@ -235,7 +238,9 @@ class _InkWell extends HookWidget {
       onTap: () {
         final count = context.read(_selectedItemCount);
         if (count > 0) {
-          context.read(selectedStockItemsControllerProvider).toggleItem(item);
+          context
+              .read(selectedStockItemsControllerProvider.notifier)
+              .toggleItem(item);
         } else {
           Navigator.push(
             context,
@@ -243,8 +248,9 @@ class _InkWell extends HookWidget {
           );
         }
       },
-      onLongPress: () =>
-          context.read(selectedStockItemsControllerProvider).toggleItem(item),
+      onLongPress: () => context
+          .read(selectedStockItemsControllerProvider.notifier)
+          .toggleItem(item),
       child: child,
     );
   }

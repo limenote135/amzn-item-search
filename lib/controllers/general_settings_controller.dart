@@ -5,7 +5,8 @@ import 'package:amasearch/util/hive_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final generalSettingsControllerProvider =
-    StateNotifierProvider((ref) => GeneralSettingsController(ref.read));
+    StateNotifierProvider<GeneralSettingsController, GeneralSettings>(
+        (ref) => GeneralSettingsController(ref.read));
 
 class GeneralSettingsController extends StateNotifier<GeneralSettings> {
   GeneralSettingsController(this._read) : super(const GeneralSettings()) {

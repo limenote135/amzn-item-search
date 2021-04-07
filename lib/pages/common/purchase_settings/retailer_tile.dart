@@ -44,7 +44,7 @@ class _RetailerSelectDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final retailers = useProvider(generalSettingsControllerProvider.state
+    final retailers = useProvider(generalSettingsControllerProvider
         .select((value) => value.retailers));
     return SimpleDialog(
       title: const Text("仕入れ先の選択"),
