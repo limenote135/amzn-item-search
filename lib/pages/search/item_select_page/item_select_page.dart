@@ -61,23 +61,21 @@ class _Body extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final items = useProvider(currentAsinListProvider);
-    return ListView(
-      children: [
-        ...ListTile.divideTiles(
-          context: context,
-          tiles: [
-            for (final item in items)
-              ProviderScope(
-                overrides: [
-                  currentAsinDataProvider.overrideWithValue(item),
-                ],
-                child: const ItemTile(),
-              )
+    return ListView.separated(
+      separatorBuilder: (context, index) => const ThemeDivider(),
+      itemCount: items.length + 1,
+      itemBuilder: (BuildContext context, int index) {
+        if (index == items.length) {
+          // FloatingActionButton 用のマージン
+          return floatingActionMargin;
+        }
+        return ProviderScope(
+          overrides: [
+            currentAsinDataProvider.overrideWithValue(items[index]),
           ],
-        ).toList(),
-        const ThemeDivider(),
-        floatingActionMargin,
-      ],
+          child: const ItemTile(),
+        );
+      },
     );
   }
 }
