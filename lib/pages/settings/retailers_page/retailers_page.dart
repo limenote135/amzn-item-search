@@ -49,14 +49,15 @@ class _Body extends HookWidget {
             trailing: IconButton(
               icon: const Icon(Icons.delete),
               onPressed: () async {
-                final ok = await showDialog<bool>(
-                  context: context,
-                  builder: (context) => const ConfirmDialog(
-                    title: Text("削除の確認"),
-                    content: Text("仕入れ先を削除してもよろしいですか？"),
-                  ),
-                );
-                if (ok!) {
+                final ok = await showDialog<bool?>(
+                      context: context,
+                      builder: (context) => const ConfirmDialog(
+                        title: Text("削除の確認"),
+                        content: Text("仕入れ先を削除してもよろしいですか？"),
+                      ),
+                    ) ??
+                    false;
+                if (ok) {
                   context
                       .read(generalSettingsControllerProvider.notifier)
                       .removeRetailer(i);
@@ -69,7 +70,7 @@ class _Body extends HookWidget {
           leading: const Icon(Icons.add),
           title: const Text("追加"),
           onTap: () async {
-            final ret = await showDialog<String>(
+            final ret = await showDialog<String?>(
               context: context,
               builder: (context) => InputDialog<String?>(
                 title: const Text("仕入れ先の追加"),
