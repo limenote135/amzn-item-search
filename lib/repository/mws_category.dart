@@ -1,3 +1,4 @@
+// MWS API で取得したカテゴリから日本語名を取得
 const mwsCategoryMap = <String, String>{
   "Apparel": "服&ファッション小物",
   "Baby Product": "ベビー&マタニティ",
@@ -8,13 +9,13 @@ const mwsCategoryMap = <String, String>{
   "Photo": "家電&カメラ",
   "Photography": "家電&カメラ",
   "Home Theater": "家電&カメラ",
-  "Wireless": "家電・カメラ・AV機器",
+  "Wireless": "家電&カメラ",
   "DVD": "DVD",
   "Grocery": "食品・飲料・お酒",
   "Alcoholic Beverage": "食品・飲料・お酒",
   "Health and Beauty": "ヘルス&ビューティー",
-  "Beauty": "ビューティー",
-  "Prestige Beauty": "ビューティー",
+  "Beauty": "ヘルス&ビューティー",
+  "Prestige Beauty": "ヘルス&ビューティー",
   "Home": "ホーム&キッチン",
   "Kitchen": "ホーム&キッチン",
   "Music": "ミュージック",
@@ -29,20 +30,47 @@ const mwsCategoryMap = <String, String>{
   "Watch": "腕時計",
   "MusicalInstruments": "楽器",
   "Musical Instruments": "楽器",
-  "Hobby": "ホビー",
-  "Hobbies": "ホビー",
+  "Hobby": "おもちゃ",
+  "Hobbies": "おもちゃ",
   "DIY": "DIY・工具・ガーデン",
   "Home Improvement": "DIY・工具・ガーデン",
   "Personal Computer": "パソコン・周辺機器",
   "Major Appliances": "大型家電",
-  "Digital Device Accessory": "タブレットPCアクセサリ",
+  "Digital Device Accessory": "パソコン・周辺機器",
   "Pet Products": "ペット用品",
   "Jewelry": "ジュエリー",
   "BISS Basic": "産業・研究開発用品",
   "Automotive Parts and Accessories": "車＆バイク",
-  "Pantry": "パントリー", // TODO:
+  "Pantry": "パントリー",
 };
 
+// カテゴリの日本語名からアラートで使う ID へ変換
+const mwsCategoryIdMap = <String, int>{
+  "服&ファッション小物": 0,
+  "ベビー&マタニティ": 1,
+  "本": 2,
+  "家電&カメラ": 3,
+  "DVD": 4,
+  "食品・飲料・お酒": 5,
+  "ヘルス&ビューティー": 6,
+  "ホーム&キッチン": 7,
+  "ミュージック": 8,
+  "文房具・オフィス用品": 9,
+  "シューズ": 10,
+  "PCソフト": 11,
+  "スポーツ&アウトドア": 12,
+  "おもちゃ": 13,
+  "TVゲーム": 14,
+  "腕時計": 15,
+  "楽器": 16,
+  "DIY・工具・ガーデン": 17,
+  "パソコン・周辺機器": 18,
+  "大型家電": 19,
+  "車＆バイク": 20,
+  "パントリー": 21,
+};
+
+// ワード検索で利用する MWS のカテゴリ名に変換
 const mwsSearchCategoryMap = <String, String>{
   "すべて": "All",
   "DVD": "DVD",

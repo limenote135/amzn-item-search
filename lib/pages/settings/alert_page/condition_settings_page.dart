@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/alert_condition.dart';
 import 'package:amasearch/models/enums/alert_type.dart';
+import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/widgets/dialog.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -203,9 +205,24 @@ class _Body extends HookWidget {
             modifyCondition(newCond);
           },
         ),
-        const ListTile(
-          leading: Icon(Icons.add),
-          title: Text("カテゴリ"),
+        ListTile(
+          leading: const Icon(Icons.add),
+          title: const Text("カテゴリ"),
+          onTap: () async {
+            final val = await showConfirmationDialog<int?>(
+                context: context,
+                title: "カテゴリ",
+                actions: [
+                  for (final ent in mwsCategoryIdMap.entries)
+                    AlertDialogAction(key: ent.value, label: ent.key),
+                ]);
+            if (val == null) {
+              return;
+            }
+            final newCond = alert.conditions.toList()
+              ..add(AlertCondition(type: AlertType.category, value: val));
+            modifyCondition(newCond);
+          },
         ),
         ListTile(
           leading: const Icon(Icons.add),
@@ -268,8 +285,13 @@ class _Body extends HookWidget {
       case AlertType.rank:
         return Text("$param 位以下");
       case AlertType.category:
-        // TODO: param からカテゴリ名を引く
-        return null;
+        if (mwsCategoryIdMap.containsValue(param)) {
+          final name = mwsCategoryIdMap.entries
+              .singleWhere((element) => element.value == param)
+              .key;
+          return Text(name);
+        }
+        return const Text("不明");
       case AlertType.premium:
         return null;
       case AlertType.noAmazon:
