@@ -45,3 +45,21 @@ class InputDialog<T> extends HookWidget {
     );
   }
 }
+
+class NumberInputDialog extends StatelessWidget {
+  const NumberInputDialog({Key? key, required this.title}) : super(key: key);
+
+  final Widget title;
+
+  @override
+  Widget build(BuildContext context) {
+    return InputDialog(
+      title: title,
+      keyboardType: TextInputType.number,
+      validate: (value) {
+        final n = int.tryParse(value);
+        return n != null && n >= 0 ? n : null;
+      },
+    );
+  }
+}

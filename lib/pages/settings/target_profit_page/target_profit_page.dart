@@ -65,13 +65,8 @@ class _Body extends HookWidget {
           onTap: () async {
             final ret = await showDialog<int>(
               context: context,
-              builder: (context) => InputDialog<int?>(
-                title: const Text("目標利益率"),
-                keyboardType: TextInputType.number,
-                validate: (value) {
-                  final n = int.tryParse(value);
-                  return n != null && n >= 0 ? n : null;
-                },
+              builder: (context) => const NumberInputDialog(
+                title: Text("目標利益率"),
               ),
             );
             if (ret != null) {
@@ -96,13 +91,8 @@ class _Body extends HookWidget {
           onTap: () async {
             final ret = await showDialog<int>(
               context: context,
-              builder: (context) => InputDialog<int?>(
-                title: const Text("最低利益額"),
-                keyboardType: TextInputType.number,
-                validate: (value) {
-                  final n = int.tryParse(value);
-                  return n != null && n >= 0 ? n : null;
-                },
+              builder: (context) => const NumberInputDialog(
+                title: Text("最低利益額"),
               ),
             );
             if (ret != null) {
