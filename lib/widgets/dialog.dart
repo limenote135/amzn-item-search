@@ -63,3 +63,32 @@ class NumberInputDialog extends StatelessWidget {
     );
   }
 }
+
+class ConfirmDialog extends StatelessWidget {
+  const ConfirmDialog({
+    Key? key,
+    required this.title,
+    required this.content,
+  }) : super(key: key);
+
+  final Widget title;
+  final Widget content;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: title,
+      content: content,
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: const Text("Cancel"),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, true),
+          child: const Text("OK"),
+        ),
+      ],
+    );
+  }
+}
