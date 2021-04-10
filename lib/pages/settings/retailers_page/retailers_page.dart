@@ -1,5 +1,5 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/widgets/input_dialog.dart';
+import 'package:amasearch/widgets/dialog.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -49,24 +49,15 @@ class _Body extends HookWidget {
             trailing: IconButton(
               icon: const Icon(Icons.delete),
               onPressed: () async {
-                final ok = await showDialog<bool>(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text("削除の確認"),
-                    content: const Text("仕入れ先を削除してもよろしいですか？"),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, false),
-                        child: const Text("キャンセル"),
+                final ok = await showDialog<bool?>(
+                      context: context,
+                      builder: (context) => const ConfirmDialog(
+                        title: Text("削除の確認"),
+                        content: Text("仕入れ先を削除してもよろしいですか？"),
                       ),
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, true),
-                        child: const Text("OK"),
-                      ),
-                    ],
-                  ),
-                );
-                if (ok!) {
+                    ) ??
+                    false;
+                if (ok) {
                   context
                       .read(generalSettingsControllerProvider.notifier)
                       .removeRetailer(i);
@@ -79,7 +70,7 @@ class _Body extends HookWidget {
           leading: const Icon(Icons.add),
           title: const Text("追加"),
           onTap: () async {
-            final ret = await showDialog<String>(
+            final ret = await showDialog<String?>(
               context: context,
               builder: (context) => InputDialog<String?>(
                 title: const Text("仕入れ先の追加"),
