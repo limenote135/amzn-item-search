@@ -23,7 +23,7 @@ class RetailerTile extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.arrow_drop_down),
             onPressed: () async {
-              final ret = await showDialog<String>(
+              final ret = await showDialog<String?>(
                 context: context,
                 builder: (context) => const _RetailerSelectDialog(),
               );
@@ -44,8 +44,8 @@ class _RetailerSelectDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final retailers = useProvider(generalSettingsControllerProvider
-        .select((value) => value.retailers));
+    final retailers = useProvider(
+        generalSettingsControllerProvider.select((value) => value.retailers));
     return SimpleDialog(
       title: const Text("仕入れ先の選択"),
       children: [
