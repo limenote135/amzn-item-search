@@ -69,14 +69,15 @@ class _Body extends HookWidget {
           ListTile(
             title: const Text("検索履歴をすべて削除"),
             onTap: () async {
-              final ok = await showDialog<bool>(
-                context: context,
-                builder: (context) => const ConfirmDialog(
-                  title:  Text("検索履歴の削除"),
-                  content:  Text("検索履歴からすべてのアイテムを削除します"),
-                ),
-              );
-              if (ok!) {
+              final ok = await showDialog<bool?>(
+                    context: context,
+                    builder: (context) => const ConfirmDialog(
+                      title: Text("検索履歴の削除"),
+                      content: Text("検索履歴からすべてのアイテムを削除します"),
+                    ),
+                  ) ??
+                  false;
+              if (ok) {
                 context.read(searchItemControllerProvider.notifier).removeAll();
                 await context
                     .read(analyticsControllerProvider)

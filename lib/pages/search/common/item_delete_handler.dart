@@ -13,14 +13,15 @@ Future<bool> itemDeleteHandler({
   bool deleteAll = false,
   required String content,
 }) async {
-  final ok = await showDialog<bool>(
-    context: context,
-    builder: (context) =>  ConfirmDialog(
-      title: const Text("商品の削除"),
-      content: Text(content),
-    ),
-  );
-  if (ok!) {
+  final ok = await showDialog<bool?>(
+        context: context,
+        builder: (context) => ConfirmDialog(
+          title: const Text("商品の削除"),
+          content: Text(content),
+        ),
+      ) ??
+      false;
+  if (ok) {
     if (deleteAll) {
       context.read(searchItemControllerProvider.notifier).removeAll();
     } else {
