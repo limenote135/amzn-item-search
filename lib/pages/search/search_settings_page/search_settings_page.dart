@@ -5,6 +5,7 @@ import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/search_settings.dart';
+import 'package:amasearch/widgets/dialog.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -70,19 +71,9 @@ class _Body extends HookWidget {
             onTap: () async {
               final ok = await showDialog<bool>(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text("検索履歴の削除"),
-                  content: const Text("検索履歴からすべてのアイテムを削除します"),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, false),
-                      child: const Text("Cancel"),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, true),
-                      child: const Text("OK"),
-                    ),
-                  ],
+                builder: (context) => const ConfirmDialog(
+                  title:  Text("検索履歴の削除"),
+                  content:  Text("検索履歴からすべてのアイテムを削除します"),
                 ),
               );
               if (ok!) {

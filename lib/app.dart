@@ -8,6 +8,7 @@ import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
 import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:amasearch/widgets/dialog.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -77,19 +78,9 @@ class HomePage extends HookWidget {
       onWillPop: () async {
         final ret = await showDialog<bool?>(
           context: context,
-          builder: (context) => AlertDialog(
-            title: const Text("終了確認"),
-            content: const Text("終了しますか？"),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text("Cancel"),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, true),
-                child: const Text("OK"),
-              ),
-            ],
+          builder: (context) => const ConfirmDialog(
+            title: Text("終了確認"),
+            content: Text("終了しますか？"),
           ),
         );
         return ret ?? false;
