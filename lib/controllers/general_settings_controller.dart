@@ -55,6 +55,8 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     double? readAloudSpeed,
     List<CsvColumn>? csvOrder,
     bool? getStocks,
+    bool? enableAlert,
+    List<AlertConditionSet>? alerts,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -71,6 +73,8 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       readAloudSpeed: readAloudSpeed ?? state.readAloudSpeed,
       csvOrder: csvOrder ?? state.csvOrder,
       getStocks: getStocks ?? state.getStocks,
+      enableAlert: enableAlert ?? state.enableAlert,
+      alerts: alerts ?? state.alerts,
     );
     box.put(generalSettingsKeyName, state);
   }

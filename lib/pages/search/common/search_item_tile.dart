@@ -1,7 +1,9 @@
+import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/alert.dart';
 import 'package:amasearch/util/formatter.dart';
-import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:amasearch/widgets/strong_container.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,8 @@ class SearchItemTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
+    final search = useProvider(searchSettingsControllerProvider);
+    final settings = useProvider(generalSettingsControllerProvider);
     final tile = Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: const [
@@ -28,7 +32,11 @@ class SearchItemTile extends HookWidget {
         )
       ],
     );
-    return isPremiumPrice(item) ? StrongContainer(tile) : tile;
+    if (settings.enableAlert &&
+        settings.alerts.any((element) => element.match(item, search))) {
+      return StrongContainer(tile);
+    }
+    return tile;
   }
 }
 
