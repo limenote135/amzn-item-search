@@ -44,7 +44,11 @@ class _$GeneralSettingsTearOff {
       @HiveField(12)
           int minProfit = 0,
       @HiveField(13)
-          bool getStocks = false}) {
+          bool getStocks = false,
+      @HiveField(14)
+          bool enableAlert = true,
+      @HiveField(15)
+          List<AlertConditionSet> alerts = _defaultAlert}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
@@ -60,6 +64,8 @@ class _$GeneralSettingsTearOff {
       csvOrder: csvOrder,
       minProfit: minProfit,
       getStocks: getStocks,
+      enableAlert: enableAlert,
+      alerts: alerts,
     );
   }
 }
@@ -99,6 +105,10 @@ mixin _$GeneralSettings {
   int get minProfit => throw _privateConstructorUsedError;
   @HiveField(13)
   bool get getStocks => throw _privateConstructorUsedError;
+  @HiveField(14)
+  bool get enableAlert => throw _privateConstructorUsedError;
+  @HiveField(15)
+  List<AlertConditionSet> get alerts => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith =>
@@ -124,7 +134,9 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(10) List<CustomButtonDetail> customButtons,
       @HiveField(11) List<CsvColumn> csvOrder,
       @HiveField(12) int minProfit,
-      @HiveField(13) bool getStocks});
+      @HiveField(13) bool getStocks,
+      @HiveField(14) bool enableAlert,
+      @HiveField(15) List<AlertConditionSet> alerts});
 }
 
 /// @nodoc
@@ -152,6 +164,8 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object? csvOrder = freezed,
     Object? minProfit = freezed,
     Object? getStocks = freezed,
+    Object? enableAlert = freezed,
+    Object? alerts = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode: isDarkMode == freezed
@@ -210,6 +224,14 @@ class _$GeneralSettingsCopyWithImpl<$Res>
           ? _value.getStocks
           : getStocks // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableAlert: enableAlert == freezed
+          ? _value.enableAlert
+          : enableAlert // ignore: cast_nullable_to_non_nullable
+              as bool,
+      alerts: alerts == freezed
+          ? _value.alerts
+          : alerts // ignore: cast_nullable_to_non_nullable
+              as List<AlertConditionSet>,
     ));
   }
 }
@@ -235,7 +257,9 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       @HiveField(10) List<CustomButtonDetail> customButtons,
       @HiveField(11) List<CsvColumn> csvOrder,
       @HiveField(12) int minProfit,
-      @HiveField(13) bool getStocks});
+      @HiveField(13) bool getStocks,
+      @HiveField(14) bool enableAlert,
+      @HiveField(15) List<AlertConditionSet> alerts});
 }
 
 /// @nodoc
@@ -265,6 +289,8 @@ class __$GeneralSettingsCopyWithImpl<$Res>
     Object? csvOrder = freezed,
     Object? minProfit = freezed,
     Object? getStocks = freezed,
+    Object? enableAlert = freezed,
+    Object? alerts = freezed,
   }) {
     return _then(_GeneralSettings(
       isDarkMode: isDarkMode == freezed
@@ -323,6 +349,14 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           ? _value.getStocks
           : getStocks // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableAlert: enableAlert == freezed
+          ? _value.enableAlert
+          : enableAlert // ignore: cast_nullable_to_non_nullable
+              as bool,
+      alerts: alerts == freezed
+          ? _value.alerts
+          : alerts // ignore: cast_nullable_to_non_nullable
+              as List<AlertConditionSet>,
     ));
   }
 }
@@ -345,7 +379,9 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(10) this.customButtons = defaultCustomButtons,
       @HiveField(11) this.csvOrder = _defaultCsvOrder,
       @HiveField(12) this.minProfit = 0,
-      @HiveField(13) this.getStocks = false});
+      @HiveField(13) this.getStocks = false,
+      @HiveField(14) this.enableAlert = true,
+      @HiveField(15) this.alerts = _defaultAlert});
 
   @JsonKey(defaultValue: false)
   @override
@@ -402,10 +438,18 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(13)
   final bool getStocks;
+  @JsonKey(defaultValue: true)
+  @override
+  @HiveField(14)
+  final bool enableAlert;
+  @JsonKey(defaultValue: _defaultAlert)
+  @override
+  @HiveField(15)
+  final List<AlertConditionSet> alerts;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts)';
   }
 
   @override
@@ -453,7 +497,12 @@ class _$_GeneralSettings implements _GeneralSettings {
                     .equals(other.minProfit, minProfit)) &&
             (identical(other.getStocks, getStocks) ||
                 const DeepCollectionEquality()
-                    .equals(other.getStocks, getStocks)));
+                    .equals(other.getStocks, getStocks)) &&
+            (identical(other.enableAlert, enableAlert) ||
+                const DeepCollectionEquality()
+                    .equals(other.enableAlert, enableAlert)) &&
+            (identical(other.alerts, alerts) ||
+                const DeepCollectionEquality().equals(other.alerts, alerts)));
   }
 
   @override
@@ -472,7 +521,9 @@ class _$_GeneralSettings implements _GeneralSettings {
       const DeepCollectionEquality().hash(customButtons) ^
       const DeepCollectionEquality().hash(csvOrder) ^
       const DeepCollectionEquality().hash(minProfit) ^
-      const DeepCollectionEquality().hash(getStocks);
+      const DeepCollectionEquality().hash(getStocks) ^
+      const DeepCollectionEquality().hash(enableAlert) ^
+      const DeepCollectionEquality().hash(alerts);
 
   @JsonKey(ignore: true)
   @override
@@ -495,7 +546,9 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(10) List<CustomButtonDetail> customButtons,
       @HiveField(11) List<CsvColumn> csvOrder,
       @HiveField(12) int minProfit,
-      @HiveField(13) bool getStocks}) = _$_GeneralSettings;
+      @HiveField(13) bool getStocks,
+      @HiveField(14) bool enableAlert,
+      @HiveField(15) List<AlertConditionSet> alerts}) = _$_GeneralSettings;
 
   @override
   @HiveField(0)
@@ -541,6 +594,12 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(13)
   bool get getStocks => throw _privateConstructorUsedError;
+  @override
+  @HiveField(14)
+  bool get enableAlert => throw _privateConstructorUsedError;
+  @override
+  @HiveField(15)
+  List<AlertConditionSet> get alerts => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
@@ -898,5 +957,203 @@ abstract class _CustomButtonDetail implements CustomButtonDetail {
   @override
   @JsonKey(ignore: true)
   _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$AlertConditionSetTearOff {
+  const _$AlertConditionSetTearOff();
+
+  _AlertConditionSet call(
+      {@HiveField(0)
+          required String id,
+      @HiveField(1)
+          required String title,
+      @HiveField(2)
+          List<AlertCondition> conditions = const <AlertCondition>[]}) {
+    return _AlertConditionSet(
+      id: id,
+      title: title,
+      conditions: conditions,
+    );
+  }
+}
+
+/// @nodoc
+const $AlertConditionSet = _$AlertConditionSetTearOff();
+
+/// @nodoc
+mixin _$AlertConditionSet {
+  @HiveField(0)
+  String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
+  String get title => throw _privateConstructorUsedError;
+  @HiveField(2)
+  List<AlertCondition> get conditions => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AlertConditionSetCopyWith<AlertConditionSet> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AlertConditionSetCopyWith<$Res> {
+  factory $AlertConditionSetCopyWith(
+          AlertConditionSet value, $Res Function(AlertConditionSet) then) =
+      _$AlertConditionSetCopyWithImpl<$Res>;
+  $Res call(
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) List<AlertCondition> conditions});
+}
+
+/// @nodoc
+class _$AlertConditionSetCopyWithImpl<$Res>
+    implements $AlertConditionSetCopyWith<$Res> {
+  _$AlertConditionSetCopyWithImpl(this._value, this._then);
+
+  final AlertConditionSet _value;
+  // ignore: unused_field
+  final $Res Function(AlertConditionSet) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? title = freezed,
+    Object? conditions = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      conditions: conditions == freezed
+          ? _value.conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as List<AlertCondition>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$AlertConditionSetCopyWith<$Res>
+    implements $AlertConditionSetCopyWith<$Res> {
+  factory _$AlertConditionSetCopyWith(
+          _AlertConditionSet value, $Res Function(_AlertConditionSet) then) =
+      __$AlertConditionSetCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) List<AlertCondition> conditions});
+}
+
+/// @nodoc
+class __$AlertConditionSetCopyWithImpl<$Res>
+    extends _$AlertConditionSetCopyWithImpl<$Res>
+    implements _$AlertConditionSetCopyWith<$Res> {
+  __$AlertConditionSetCopyWithImpl(
+      _AlertConditionSet _value, $Res Function(_AlertConditionSet) _then)
+      : super(_value, (v) => _then(v as _AlertConditionSet));
+
+  @override
+  _AlertConditionSet get _value => super._value as _AlertConditionSet;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? title = freezed,
+    Object? conditions = freezed,
+  }) {
+    return _then(_AlertConditionSet(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      conditions: conditions == freezed
+          ? _value.conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as List<AlertCondition>,
+    ));
+  }
+}
+
+@HiveType(typeId: alertConditionSetTypeId)
+
+/// @nodoc
+class _$_AlertConditionSet implements _AlertConditionSet {
+  const _$_AlertConditionSet(
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.title,
+      @HiveField(2) this.conditions = const <AlertCondition>[]});
+
+  @override
+  @HiveField(0)
+  final String id;
+  @override
+  @HiveField(1)
+  final String title;
+  @JsonKey(defaultValue: const <AlertCondition>[])
+  @override
+  @HiveField(2)
+  final List<AlertCondition> conditions;
+
+  @override
+  String toString() {
+    return 'AlertConditionSet(id: $id, title: $title, conditions: $conditions)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _AlertConditionSet &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
+            (identical(other.conditions, conditions) ||
+                const DeepCollectionEquality()
+                    .equals(other.conditions, conditions)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(title) ^
+      const DeepCollectionEquality().hash(conditions);
+
+  @JsonKey(ignore: true)
+  @override
+  _$AlertConditionSetCopyWith<_AlertConditionSet> get copyWith =>
+      __$AlertConditionSetCopyWithImpl<_AlertConditionSet>(this, _$identity);
+}
+
+abstract class _AlertConditionSet implements AlertConditionSet {
+  const factory _AlertConditionSet(
+      {@HiveField(0) required String id,
+      @HiveField(1) required String title,
+      @HiveField(2) List<AlertCondition> conditions}) = _$_AlertConditionSet;
+
+  @override
+  @HiveField(0)
+  String get id => throw _privateConstructorUsedError;
+  @override
+  @HiveField(1)
+  String get title => throw _privateConstructorUsedError;
+  @override
+  @HiveField(2)
+  List<AlertCondition> get conditions => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$AlertConditionSetCopyWith<_AlertConditionSet> get copyWith =>
       throw _privateConstructorUsedError;
 }
