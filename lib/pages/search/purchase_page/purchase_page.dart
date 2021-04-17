@@ -137,7 +137,7 @@ class _Body extends HookWidget {
       retailer: getString(form, retailerField),
       breakEven: breakEven,
     );
-    context.read(stockItemListControllerProvider).add(stock);
+    context.read(stockItemListControllerProvider.notifier).add(stock);
     context.read(analyticsControllerProvider).logPurchaseEvent(stock);
 
     Navigator.of(context).popUntil((route) => route.settings.name == "/");
