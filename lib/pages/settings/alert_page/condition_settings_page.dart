@@ -6,7 +6,6 @@ import 'package:amasearch/models/alert_condition.dart';
 import 'package:amasearch/models/enums/alert_type.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/styles/font.dart';
-import 'package:amasearch/widgets/dialog.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -72,19 +71,22 @@ class _Body extends HookWidget {
           title: Text(alert.title),
           trailing: const Icon(Icons.edit),
           onTap: () async {
-            final ret = await showDialog<String?>(
+            final text = await showTextInputDialog(
               context: context,
-              builder: (context) => InputDialog<String?>(
-                title: const Text("アラート名"),
-                validate: (value) => value != "" ? value : null,
-              ),
+              textFields: [
+                DialogTextField(
+                  validator: (value) =>
+                      value!.isEmpty ? "アラート名を入力してください" : null,
+                )
+              ],
+              title: "アラート名",
             );
-            if (ret == null) {
+            if (text == null) {
               return;
             }
             final newAlerts = [
               for (var i = 0; i < alerts.length; i++)
-                i == index ? alerts[i].copyWith(title: ret) : alerts[i]
+                i == index ? alerts[i].copyWith(title: text.single) : alerts[i]
             ];
             context
                 .read(generalSettingsControllerProvider.notifier)
@@ -108,15 +110,13 @@ class _Body extends HookWidget {
                 trailing: IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () async {
-                    final ok = await showDialog<bool?>(
-                          context: context,
-                          builder: (context) => const ConfirmDialog(
-                            title: Text("条件の削除"),
-                            content: Text("この条件を削除してもよいですか？"),
-                          ),
-                        ) ??
-                        false;
-                    if (!ok) {
+                    final ret = await showOkCancelAlertDialog(
+                      context: context,
+                      title: "条件の削除",
+                      message: "この条件を削除してもよいですか？",
+                      isDestructiveAction: true,
+                    );
+                    if (ret == OkCancelResult.cancel) {
                       return;
                     }
                     final newCond = [
@@ -145,17 +145,25 @@ class _Body extends HookWidget {
             if (alert.conditions.length >= 10) {
               return;
             }
-            final val = await showDialog<int?>(
+            final val = await showTextInputDialog(
               context: context,
-              builder: (context) => const NumberInputDialog(
-                title: Text("粗利額"),
-              ),
+              textFields: [
+                DialogTextField(
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    final n = int.tryParse(value ?? "");
+                    return n != null && n >= 0 ? null : "不正な値です";
+                  },
+                )
+              ],
+              title: "粗利額",
             );
             if (val == null) {
               return;
             }
             final newCond = alert.conditions.toList()
-              ..add(AlertCondition(type: AlertType.profit, value: val));
+              ..add(AlertCondition(
+                  type: AlertType.profit, value: int.parse(val.single)));
             modifyCondition(newCond);
           },
         ),
@@ -191,17 +199,25 @@ class _Body extends HookWidget {
             if (alert.conditions.length >= 10) {
               return;
             }
-            final val = await showDialog<int?>(
+            final val = await showTextInputDialog(
               context: context,
-              builder: (context) => const NumberInputDialog(
-                title: Text("順位"),
-              ),
+              textFields: [
+                DialogTextField(
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    final n = int.tryParse(value ?? "");
+                    return n != null && n >= 0 ? null : "不正な値です";
+                  },
+                )
+              ],
+              title: "順位",
             );
             if (val == null) {
               return;
             }
             final newCond = alert.conditions.toList()
-              ..add(AlertCondition(type: AlertType.rank, value: val));
+              ..add(AlertCondition(
+                  type: AlertType.rank, value: int.parse(val.single)));
             modifyCondition(newCond);
           },
         ),
