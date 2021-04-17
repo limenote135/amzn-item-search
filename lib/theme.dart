@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const _primaryColor = Colors.green;
@@ -19,5 +20,8 @@ final darkTheme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   dividerTheme: const DividerThemeData(
     color: Colors.white,
+  ),
+  cupertinoOverrideTheme: const CupertinoThemeData(
+    textTheme: CupertinoTextThemeData(),
   ),
 );

@@ -1,8 +1,8 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/models/search_item.dart';
-import 'package:amasearch/widgets/dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,14 +13,13 @@ Future<bool> itemDeleteHandler({
   bool deleteAll = false,
   required String content,
 }) async {
-  final ok = await showDialog<bool?>(
-        context: context,
-        builder: (context) => ConfirmDialog(
-          title: const Text("商品の削除"),
-          content: Text(content),
-        ),
-      ) ??
-      false;
+  final ret = await showOkCancelAlertDialog(
+    context: context,
+    title: "商品の削除",
+    message: content,
+    isDestructiveAction: true,
+  );
+  final ok = ret == OkCancelResult.ok;
   if (ok) {
     if (deleteAll) {
       context.read(searchItemControllerProvider.notifier).removeAll();
