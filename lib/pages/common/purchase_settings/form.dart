@@ -26,7 +26,7 @@ import 'target_price_tile.dart';
 import 'values.dart';
 
 final formValueProvider =
-    StateProvider.family<FormGroup, StockItem>((ref, item) {
+    StateProvider.autoDispose.family<FormGroup, StockItem>((ref, item) {
   return fb.group(<String, Object>{
     purchasePriceField: [
       item.purchasePrice == 0 ? "" : "${item.purchasePrice}",
