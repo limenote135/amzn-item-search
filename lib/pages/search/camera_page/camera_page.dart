@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:ai_barcode/ai_barcode.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
@@ -92,24 +93,14 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         if (_isCameraGranted) {
           _startCameraWithPreview();
         } else {
-          await showDialog<void>(
+          await showOkAlertDialog(
             context: context,
             barrierDismissible: false,
-            builder: (context) {
-              return AlertDialog(
-                title: const Text("エラー"),
-                content: const Text("バーコードリーダーを利用するためにはカメラの利用を許可する必要があります。"),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).popUntil(ModalRoute.withName("/"));
-                    },
-                    child: const Text("戻る"),
-                  ),
-                ],
-              );
-            },
+            title: "エラー",
+            message: "バーコードリーダーを利用するためにはカメラの利用を許可する必要があります。",
+            okLabel: "戻る",
           );
+          Navigator.of(context).popUntil(ModalRoute.withName("/"));
         }
       },
     );

@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
@@ -8,7 +9,6 @@ import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
 import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/util.dart';
-import 'package:amasearch/widgets/dialog.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -76,14 +76,13 @@ class HomePage extends HookWidget {
     final observer = useProvider(analyticsObserverProvider);
     return WillPopScope(
       onWillPop: () async {
-        final ret = await showDialog<bool?>(
+        final ret = await showOkCancelAlertDialog(
           context: context,
-          builder: (context) => const ConfirmDialog(
-            title: Text("終了確認"),
-            content: Text("終了しますか？"),
-          ),
+          title: "終了確認",
+          message: "終了しますか？",
+          isDestructiveAction: true,
         );
-        return ret ?? false;
+        return ret == OkCancelResult.ok;
       },
       child: Scaffold(
         body: IndexedStack(
