@@ -1,8 +1,8 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/pages/settings/alert_page/condition_settings_page.dart';
 import 'package:amasearch/util/uuid.dart';
-import 'package:amasearch/widgets/dialog.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -57,15 +57,13 @@ class _Body extends HookWidget {
             trailing: IconButton(
               icon: const Icon(Icons.delete),
               onPressed: () async {
-                final ok = await showDialog<bool?>(
-                      context: context,
-                      builder: (context) => const ConfirmDialog(
-                        title: Text("条件の削除"),
-                        content: Text("この条件を削除してもよいですか？"),
-                      ),
-                    ) ??
-                    false;
-                if (ok) {
+                final ret = await showOkCancelAlertDialog(
+                  context: context,
+                  title: "条件の削除",
+                  message: "この条件を削除してもよいですか？",
+                  isDestructiveAction: true,
+                );
+                if (ret == OkCancelResult.ok) {
                   final newAlerts = [
                     for (var j = 0; j < settings.alerts.length; j++)
                       if (i != j) settings.alerts[j],
