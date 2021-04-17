@@ -80,7 +80,6 @@ const _defaultAlert = [
     title: "プレ値",
     conditions: [
       AlertCondition(type: AlertType.premium),
-      AlertCondition(type: AlertType.premium),
     ],
   ),
 ];
