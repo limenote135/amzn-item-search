@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/search_item_controller.dart';
@@ -5,7 +6,6 @@ import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/search_settings.dart';
-import 'package:amasearch/widgets/dialog.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -69,15 +69,13 @@ class _Body extends HookWidget {
           ListTile(
             title: const Text("検索履歴をすべて削除"),
             onTap: () async {
-              final ok = await showDialog<bool?>(
-                    context: context,
-                    builder: (context) => const ConfirmDialog(
-                      title: Text("検索履歴の削除"),
-                      content: Text("検索履歴からすべてのアイテムを削除します"),
-                    ),
-                  ) ??
-                  false;
-              if (ok) {
+              final ret = await showOkCancelAlertDialog(
+                context: context,
+                title: "検索履歴の削除",
+                message: "検索履歴からすべてのアイテムを削除します",
+                isDestructiveAction: true,
+              );
+              if (ret == OkCancelResult.ok) {
                 context.read(searchItemControllerProvider.notifier).removeAll();
                 await context
                     .read(analyticsControllerProvider)
