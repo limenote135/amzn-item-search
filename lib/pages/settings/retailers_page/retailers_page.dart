@@ -1,5 +1,5 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/widgets/dialog.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -49,15 +49,12 @@ class _Body extends HookWidget {
             trailing: IconButton(
               icon: const Icon(Icons.delete),
               onPressed: () async {
-                final ok = await showDialog<bool?>(
-                      context: context,
-                      builder: (context) => const ConfirmDialog(
-                        title: Text("削除の確認"),
-                        content: Text("仕入れ先を削除してもよろしいですか？"),
-                      ),
-                    ) ??
-                    false;
-                if (ok) {
+                final ret = await showOkCancelAlertDialog(
+                    context: context,
+                    title: "削除の確認",
+                    message: "仕入れ先を削除してもよろしいですか？",
+                    isDestructiveAction: true);
+                if (ret == OkCancelResult.ok) {
                   context
                       .read(generalSettingsControllerProvider.notifier)
                       .removeRetailer(i);
@@ -70,17 +67,20 @@ class _Body extends HookWidget {
           leading: const Icon(Icons.add),
           title: const Text("追加"),
           onTap: () async {
-            final ret = await showDialog<String?>(
+            final text = await showTextInputDialog(
               context: context,
-              builder: (context) => InputDialog<String?>(
-                title: const Text("仕入れ先の追加"),
-                validate: (value) => value != "" ? value : null,
-              ),
+              textFields: [
+                DialogTextField(
+                  validator: (value) => value!.isEmpty ? "仕入先を入力してください" : null,
+                )
+              ],
+              title: "仕入先の追加",
             );
-            if (ret != null) {
+
+            if (text != null) {
               context
                   .read(generalSettingsControllerProvider.notifier)
-                  .addRetailer(ret);
+                  .addRetailer(text.single);
             }
           },
         )

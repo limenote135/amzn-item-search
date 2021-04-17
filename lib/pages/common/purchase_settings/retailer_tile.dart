@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:flutter/material.dart';
@@ -5,11 +6,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class RetailerTile extends StatelessWidget {
+class RetailerTile extends HookWidget {
   const RetailerTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final retailers = useProvider(
+        generalSettingsControllerProvider.select((value) => value.retailers));
     return ListTile(
       title: Row(
         children: [
@@ -23,38 +26,23 @@ class RetailerTile extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.arrow_drop_down),
             onPressed: () async {
-              final ret = await showDialog<String?>(
+              final form = ReactiveForm.of(context)! as FormGroup;
+              final ret = await showConfirmationDialog(
                 context: context,
-                builder: (context) => const _RetailerSelectDialog(),
+                title: "仕入先の選択",
+                initialSelectedActionKey: form.control(retailerField).value,
+                actions: [
+                  for (final retailer in retailers)
+                    AlertDialogAction(key: retailer, label: retailer)
+                ],
               );
               if (ret != null) {
-                final form = ReactiveForm.of(context)! as FormGroup;
                 form.control(retailerField).value = ret;
               }
             },
           ),
         ],
       ),
-    );
-  }
-}
-
-class _RetailerSelectDialog extends HookWidget {
-  const _RetailerSelectDialog({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final retailers = useProvider(
-        generalSettingsControllerProvider.select((value) => value.retailers));
-    return SimpleDialog(
-      title: const Text("仕入れ先の選択"),
-      children: [
-        for (final retailer in retailers)
-          SimpleDialogOption(
-            onPressed: () => Navigator.pop(context, retailer),
-            child: Text(retailer),
-          ),
-      ],
     );
   }
 }

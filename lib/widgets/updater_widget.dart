@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/util/version_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +22,7 @@ class _UpdaterState extends State<Updater> {
     return Container();
   }
 
-  void _showUpdateDialog(bool needUpdate) {
+  Future<void> _showUpdateDialog(bool needUpdate) async {
     if (!needUpdate) {
       return;
     }
@@ -30,32 +31,18 @@ class _UpdaterState extends State<Updater> {
     const message = "新しいバージョンが利用可能です。"
         "更新した上で再度アプリを起動してください。";
 
-    showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return WillPopScope(
-            onWillPop: () async => false,
-            child: AlertDialog(
-              title: const Text(title),
-              content: const Text(message),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    if (Platform.isAndroid) {
-                      SystemNavigator.pop(animated: true);
-                    } else {
-                      exit(0);
-                    }
-                  },
-                  child: const Text(
-                    "アプリを終了する",
-                    style: TextStyle(color: Colors.red),
-                  ),
-                )
-              ],
-            ),
-          );
-        });
+    await showOkAlertDialog(
+      context: context,
+      barrierDismissible: false,
+      title: title,
+      message:message,
+      okLabel: "アプリを終了する",
+    );
+
+    if (Platform.isAndroid) {
+      SystemNavigator.pop(animated: true);
+    } else {
+      exit(0);
+    }
   }
 }

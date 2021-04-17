@@ -1,7 +1,7 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/widgets/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -63,16 +63,23 @@ class _Body extends HookWidget {
             ],
           ),
           onTap: () async {
-            final ret = await showDialog<int?>(
+            final ret = await showTextInputDialog(
               context: context,
-              builder: (context) => const NumberInputDialog(
-                title: Text("目標利益率"),
-              ),
+              title: "目標利益率",
+              textFields: [
+                DialogTextField(
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    final n = int.tryParse(value ?? "");
+                    return n != null && n >= 0 ? null : "不正な値です";
+                  },
+                )
+              ],
             );
             if (ret != null) {
               context
                   .read(generalSettingsControllerProvider.notifier)
-                  .update(targetProfitValue: ret);
+                  .update(targetProfitValue: int.parse(ret.single));
               if (settings.enableTargetProfit) {
                 await context.read(analyticsControllerProvider).setUserProp(
                     targetProfitPropName, "$ret(min:${settings.minProfit})");
@@ -89,16 +96,23 @@ class _Body extends HookWidget {
             ],
           ),
           onTap: () async {
-            final ret = await showDialog<int?>(
+            final ret = await showTextInputDialog(
               context: context,
-              builder: (context) => const NumberInputDialog(
-                title: Text("最低利益額"),
-              ),
+              title: "最低利益額",
+              textFields: [
+                DialogTextField(
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    final n = int.tryParse(value ?? "");
+                    return n != null && n >= 0 ? null : "不正な値です";
+                  },
+                )
+              ],
             );
             if (ret != null) {
               context
                   .read(generalSettingsControllerProvider.notifier)
-                  .update(minProfit: ret);
+                  .update(minProfit: int.parse(ret.single));
               if (settings.enableTargetProfit) {
                 await context.read(analyticsControllerProvider).setUserProp(
                     targetProfitPropName,
