@@ -8,6 +8,7 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
+import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,7 +21,8 @@ part 'mws.g.dart';
 
 const _kTestingServer = false;
 
-final mwsRepositoryProvider = Provider((ref) => MwsRepository(ref.read));
+final mwsRepositoryProvider =
+    Provider((ref) => MwsRepository(ref.read, ref.container));
 
 final searchItemFutureProvider = FutureProvider.autoDispose
     .family<SearchItem, Future<SearchItem>>((ref, paramFuture) async {
@@ -78,7 +80,7 @@ final queryItemResultProvider = FutureProvider.autoDispose
 });
 
 class MwsRepository {
-  MwsRepository(this._read);
+  MwsRepository(this._read, this._container);
 
   static const _mwsMarketPlaceId = "A1VC38T7YXB528";
 
@@ -87,6 +89,7 @@ class MwsRepository {
       : "http://192.168.2.201:8080";
 
   final Reader _read;
+  final ProviderContainer _container;
 
   Future<GetProductByIdResponse> getProductById(String code,
       {String idType = "JAN"}) async {
@@ -150,6 +153,7 @@ class MwsRepository {
       // 412: Precondition Failed
       if (e.response != null && e.response!.statusCode == 412) {
         // アプリのバージョンがサーバーの要求バージョンより低い場合
+        await _container.refresh(updateProvider);
         throw Exception("アプリケーションを更新してください");
       }
       rethrow;
