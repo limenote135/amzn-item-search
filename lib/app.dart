@@ -37,8 +37,8 @@ class MyApp extends HookWidget {
       },
       title: 'amzn-item-search',
       theme: isDarkMode ? darkTheme : lightTheme,
-      home: Stack(children: [
-        const HomePage(),
+      home: Stack(children: const [
+        HomePage(),
         Updater(),
       ]),
       routes: {

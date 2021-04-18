@@ -26,10 +26,7 @@ class ItemTile extends HookWidget {
         title: Center(child: CircularProgressIndicator()),
       ),
       error: (error, stackTrace) => ListTile(
-        title: SizedBox(
-          height: 30,
-          child: Text("$error"),
-        ),
+        title: Text("$error"),
       ),
       data: (value) {
         if (value.asins.isEmpty) {
