@@ -134,16 +134,26 @@ class MwsRepository {
     final appVer = "Amasearch/${info.version}";
     final osVer =
         "${Platform.operatingSystem}/${Platform.operatingSystemVersion}";
-    final resp = await dio.post<String>(
-      url,
-      data: data,
-      options: Options(
-        headers: <String, dynamic>{
-          "User-Agent": "$appVer $osVer",
-        },
-      ),
-    );
-    return json.decode(resp.data!) as Map<String, dynamic>;
+
+    try {
+      final resp = await dio.post<String>(
+        url,
+        data: data,
+        options: Options(
+          headers: <String, dynamic>{
+            "User-Agent": "$appVer $osVer",
+          },
+        ),
+      );
+      return json.decode(resp.data!) as Map<String, dynamic>;
+    } on DioError catch (e) {
+      // 412: Precondition Failed
+      if (e.response != null && e.response!.statusCode == 412) {
+        // アプリのバージョンがサーバーの要求バージョンより低い場合
+        throw Exception("アプリケーションを更新してください");
+      }
+      rethrow;
+    }
   }
 }
 
