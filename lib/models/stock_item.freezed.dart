@@ -28,9 +28,9 @@ class _$StockItemTearOff {
       @HiveField(8) String sku = "",
       @HiveField(9) String memo = "",
       @HiveField(10) required AsinData item,
-      @HiveField(11) String retailer = "",
-      @HiveField(12) required String id,
-      @HiveField(13) int breakEven = 0,
+      @HiveField(11, defaultValue: "") String retailer = "",
+      @HiveField(12, defaultValue: "") required String id,
+      @HiveField(13, defaultValue: -1) int breakEven = 0,
       bool autogenSku = false}) {
     return _StockItem(
       purchaseDate: purchaseDate,
@@ -79,11 +79,12 @@ mixin _$StockItem {
   String get memo => throw _privateConstructorUsedError;
   @HiveField(10)
   AsinData get item => throw _privateConstructorUsedError;
-  @HiveField(11)
-  String get retailer => throw _privateConstructorUsedError;
-  @HiveField(12)
-  String get id => throw _privateConstructorUsedError; // 主キー
-  @HiveField(13)
+  @HiveField(11, defaultValue: "")
+  String get retailer => throw _privateConstructorUsedError; // 主キー
+  @HiveField(12, defaultValue: "")
+  String get id =>
+      throw _privateConstructorUsedError; // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
+  @HiveField(13, defaultValue: -1)
   int get breakEven => throw _privateConstructorUsedError;
   bool get autogenSku => throw _privateConstructorUsedError;
 
@@ -108,9 +109,9 @@ abstract class $StockItemCopyWith<$Res> {
       @HiveField(8) String sku,
       @HiveField(9) String memo,
       @HiveField(10) AsinData item,
-      @HiveField(11) String retailer,
-      @HiveField(12) String id,
-      @HiveField(13) int breakEven,
+      @HiveField(11, defaultValue: "") String retailer,
+      @HiveField(12, defaultValue: "") String id,
+      @HiveField(13, defaultValue: -1) int breakEven,
       bool autogenSku});
 
   $AsinDataCopyWith<$Res> get item;
@@ -232,9 +233,9 @@ abstract class _$StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
       @HiveField(8) String sku,
       @HiveField(9) String memo,
       @HiveField(10) AsinData item,
-      @HiveField(11) String retailer,
-      @HiveField(12) String id,
-      @HiveField(13) int breakEven,
+      @HiveField(11, defaultValue: "") String retailer,
+      @HiveField(12, defaultValue: "") String id,
+      @HiveField(13, defaultValue: -1) int breakEven,
       bool autogenSku});
 
   @override
@@ -333,9 +334,9 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: stockItemTypeId)
-
 /// @nodoc
+
+@HiveType(typeId: stockItemTypeId)
 class _$_StockItem implements _StockItem {
   const _$_StockItem(
       {@HiveField(0) required this.purchaseDate,
@@ -349,9 +350,9 @@ class _$_StockItem implements _StockItem {
       @HiveField(8) this.sku = "",
       @HiveField(9) this.memo = "",
       @HiveField(10) required this.item,
-      @HiveField(11) this.retailer = "",
-      @HiveField(12) required this.id,
-      @HiveField(13) this.breakEven = 0,
+      @HiveField(11, defaultValue: "") this.retailer = "",
+      @HiveField(12, defaultValue: "") required this.id,
+      @HiveField(13, defaultValue: -1) this.breakEven = 0,
       this.autogenSku = false});
 
   @override
@@ -398,14 +399,14 @@ class _$_StockItem implements _StockItem {
   final AsinData item;
   @JsonKey(defaultValue: "")
   @override
-  @HiveField(11)
+  @HiveField(11, defaultValue: "")
   final String retailer;
-  @override
-  @HiveField(12)
+  @override // 主キー
+  @HiveField(12, defaultValue: "")
   final String id;
   @JsonKey(defaultValue: 0)
-  @override // 主キー
-  @HiveField(13)
+  @override // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
+  @HiveField(13, defaultValue: -1)
   final int breakEven;
   @JsonKey(defaultValue: false)
   @override
@@ -499,9 +500,9 @@ abstract class _StockItem implements StockItem {
       @HiveField(8) String sku,
       @HiveField(9) String memo,
       @HiveField(10) required AsinData item,
-      @HiveField(11) String retailer,
-      @HiveField(12) required String id,
-      @HiveField(13) int breakEven,
+      @HiveField(11, defaultValue: "") String retailer,
+      @HiveField(12, defaultValue: "") required String id,
+      @HiveField(13, defaultValue: -1) int breakEven,
       bool autogenSku}) = _$_StockItem;
 
   @override
@@ -538,13 +539,13 @@ abstract class _StockItem implements StockItem {
   @HiveField(10)
   AsinData get item => throw _privateConstructorUsedError;
   @override
-  @HiveField(11)
+  @HiveField(11, defaultValue: "")
   String get retailer => throw _privateConstructorUsedError;
-  @override
-  @HiveField(12)
-  String get id => throw _privateConstructorUsedError;
   @override // 主キー
-  @HiveField(13)
+  @HiveField(12, defaultValue: "")
+  String get id => throw _privateConstructorUsedError;
+  @override // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
+  @HiveField(13, defaultValue: -1)
   int get breakEven => throw _privateConstructorUsedError;
   @override
   bool get autogenSku => throw _privateConstructorUsedError;

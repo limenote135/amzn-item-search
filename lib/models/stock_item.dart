@@ -29,9 +29,11 @@ class StockItem with _$StockItem {
     @HiveField(8) @Default("") String sku,
     @HiveField(9) @Default("") String memo,
     @HiveField(10) required AsinData item,
-    @HiveField(11) @Default("") String retailer,
-    @HiveField(12) required String id, // 主キー
-    @HiveField(13) @Default(0) int breakEven,
+    @HiveField(11, defaultValue: "") @Default("") String retailer,
+    // 主キー
+    @HiveField(12, defaultValue: "") required String id,
+    // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
+    @HiveField(13, defaultValue: -1) @Default(0) int breakEven,
     @Default(false) bool autogenSku,
   }) = _StockItem;
 }
