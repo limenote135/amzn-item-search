@@ -37,17 +37,17 @@ class _$GeneralSettingsTearOff {
           double readAloudVolume = 1.0,
       @HiveField(9)
           double? readAloudSpeed,
-      @HiveField(10)
+      @HiveField(10, defaultValue: defaultCustomButtons)
           List<CustomButtonDetail> customButtons = defaultCustomButtons,
-      @HiveField(11)
+      @HiveField(11, defaultValue: _defaultCsvOrder)
           List<CsvColumn> csvOrder = _defaultCsvOrder,
-      @HiveField(12)
+      @HiveField(12, defaultValue: 0)
           int minProfit = 0,
-      @HiveField(13)
+      @HiveField(13, defaultValue: false)
           bool getStocks = false,
-      @HiveField(14)
+      @HiveField(14, defaultValue: true)
           bool enableAlert = true,
-      @HiveField(15)
+      @HiveField(15, defaultValue: _defaultAlert)
           List<AlertConditionSet> alerts = _defaultAlert}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
@@ -75,10 +75,11 @@ const $GeneralSettings = _$GeneralSettingsTearOff();
 
 /// @nodoc
 mixin _$GeneralSettings {
+// ダークモード
   @HiveField(0)
   bool get isDarkMode => throw _privateConstructorUsedError; // 目標利益率設定
   @HiveField(1)
-  bool get enableTargetProfit => throw _privateConstructorUsedError;
+  bool get enableTargetProfit => throw _privateConstructorUsedError; // 目標利益率
   @HiveField(2)
   int get targetProfitValue => throw _privateConstructorUsedError; // SKU 設定
   @HiveField(3)
@@ -95,19 +96,19 @@ mixin _$GeneralSettings {
   @HiveField(8)
   double get readAloudVolume => throw _privateConstructorUsedError;
   @HiveField(9)
-  double? get readAloudSpeed => throw _privateConstructorUsedError;
-  @HiveField(10)
+  double? get readAloudSpeed => throw _privateConstructorUsedError; // カスタムボタン設定
+  @HiveField(10, defaultValue: defaultCustomButtons)
   List<CustomButtonDetail> get customButtons =>
-      throw _privateConstructorUsedError;
-  @HiveField(11)
-  List<CsvColumn> get csvOrder => throw _privateConstructorUsedError;
-  @HiveField(12)
-  int get minProfit => throw _privateConstructorUsedError;
-  @HiveField(13)
-  bool get getStocks => throw _privateConstructorUsedError;
-  @HiveField(14)
+      throw _privateConstructorUsedError; // CSV の並び順
+  @HiveField(11, defaultValue: _defaultCsvOrder)
+  List<CsvColumn> get csvOrder => throw _privateConstructorUsedError; // 最低利益額
+  @HiveField(12, defaultValue: 0)
+  int get minProfit => throw _privateConstructorUsedError; // 在庫の取得設定
+  @HiveField(13, defaultValue: false)
+  bool get getStocks => throw _privateConstructorUsedError; // アラート設定
+  @HiveField(14, defaultValue: true)
   bool get enableAlert => throw _privateConstructorUsedError;
-  @HiveField(15)
+  @HiveField(15, defaultValue: _defaultAlert)
   List<AlertConditionSet> get alerts => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -121,22 +122,38 @@ abstract class $GeneralSettingsCopyWith<$Res> {
           GeneralSettings value, $Res Function(GeneralSettings) then) =
       _$GeneralSettingsCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(0) bool isDarkMode,
-      @HiveField(1) bool enableTargetProfit,
-      @HiveField(2) int targetProfitValue,
-      @HiveField(3) String skuFormat,
-      @HiveField(4) List<String> retailers,
-      @HiveField(5) bool enableReadAloud,
-      @HiveField(6) int patternIndex,
-      @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
-      @HiveField(8) double readAloudVolume,
-      @HiveField(9) double? readAloudSpeed,
-      @HiveField(10) List<CustomButtonDetail> customButtons,
-      @HiveField(11) List<CsvColumn> csvOrder,
-      @HiveField(12) int minProfit,
-      @HiveField(13) bool getStocks,
-      @HiveField(14) bool enableAlert,
-      @HiveField(15) List<AlertConditionSet> alerts});
+      {@HiveField(0)
+          bool isDarkMode,
+      @HiveField(1)
+          bool enableTargetProfit,
+      @HiveField(2)
+          int targetProfitValue,
+      @HiveField(3)
+          String skuFormat,
+      @HiveField(4)
+          List<String> retailers,
+      @HiveField(5)
+          bool enableReadAloud,
+      @HiveField(6)
+          int patternIndex,
+      @HiveField(7)
+          List<ReadAloudPattern> readAloudPatterns,
+      @HiveField(8)
+          double readAloudVolume,
+      @HiveField(9)
+          double? readAloudSpeed,
+      @HiveField(10, defaultValue: defaultCustomButtons)
+          List<CustomButtonDetail> customButtons,
+      @HiveField(11, defaultValue: _defaultCsvOrder)
+          List<CsvColumn> csvOrder,
+      @HiveField(12, defaultValue: 0)
+          int minProfit,
+      @HiveField(13, defaultValue: false)
+          bool getStocks,
+      @HiveField(14, defaultValue: true)
+          bool enableAlert,
+      @HiveField(15, defaultValue: _defaultAlert)
+          List<AlertConditionSet> alerts});
 }
 
 /// @nodoc
@@ -244,22 +261,38 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       __$GeneralSettingsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(0) bool isDarkMode,
-      @HiveField(1) bool enableTargetProfit,
-      @HiveField(2) int targetProfitValue,
-      @HiveField(3) String skuFormat,
-      @HiveField(4) List<String> retailers,
-      @HiveField(5) bool enableReadAloud,
-      @HiveField(6) int patternIndex,
-      @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
-      @HiveField(8) double readAloudVolume,
-      @HiveField(9) double? readAloudSpeed,
-      @HiveField(10) List<CustomButtonDetail> customButtons,
-      @HiveField(11) List<CsvColumn> csvOrder,
-      @HiveField(12) int minProfit,
-      @HiveField(13) bool getStocks,
-      @HiveField(14) bool enableAlert,
-      @HiveField(15) List<AlertConditionSet> alerts});
+      {@HiveField(0)
+          bool isDarkMode,
+      @HiveField(1)
+          bool enableTargetProfit,
+      @HiveField(2)
+          int targetProfitValue,
+      @HiveField(3)
+          String skuFormat,
+      @HiveField(4)
+          List<String> retailers,
+      @HiveField(5)
+          bool enableReadAloud,
+      @HiveField(6)
+          int patternIndex,
+      @HiveField(7)
+          List<ReadAloudPattern> readAloudPatterns,
+      @HiveField(8)
+          double readAloudVolume,
+      @HiveField(9)
+          double? readAloudSpeed,
+      @HiveField(10, defaultValue: defaultCustomButtons)
+          List<CustomButtonDetail> customButtons,
+      @HiveField(11, defaultValue: _defaultCsvOrder)
+          List<CsvColumn> csvOrder,
+      @HiveField(12, defaultValue: 0)
+          int minProfit,
+      @HiveField(13, defaultValue: false)
+          bool getStocks,
+      @HiveField(14, defaultValue: true)
+          bool enableAlert,
+      @HiveField(15, defaultValue: _defaultAlert)
+          List<AlertConditionSet> alerts});
 }
 
 /// @nodoc
@@ -361,30 +394,46 @@ class __$GeneralSettingsCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: generalSettingsTypeId)
-
 /// @nodoc
+
+@HiveType(typeId: generalSettingsTypeId)
 class _$_GeneralSettings implements _GeneralSettings {
   const _$_GeneralSettings(
-      {@HiveField(0) this.isDarkMode = false,
-      @HiveField(1) this.enableTargetProfit = false,
-      @HiveField(2) this.targetProfitValue = 10,
-      @HiveField(3) this.skuFormat = _defaultSkuFormat,
-      @HiveField(4) this.retailers = const <String>[],
-      @HiveField(5) this.enableReadAloud = false,
-      @HiveField(6) this.patternIndex = 0,
-      @HiveField(7) this.readAloudPatterns = _defaultReadAloudPatterns,
-      @HiveField(8) this.readAloudVolume = 1.0,
-      @HiveField(9) this.readAloudSpeed,
-      @HiveField(10) this.customButtons = defaultCustomButtons,
-      @HiveField(11) this.csvOrder = _defaultCsvOrder,
-      @HiveField(12) this.minProfit = 0,
-      @HiveField(13) this.getStocks = false,
-      @HiveField(14) this.enableAlert = true,
-      @HiveField(15) this.alerts = _defaultAlert});
+      {@HiveField(0)
+          this.isDarkMode = false,
+      @HiveField(1)
+          this.enableTargetProfit = false,
+      @HiveField(2)
+          this.targetProfitValue = 10,
+      @HiveField(3)
+          this.skuFormat = _defaultSkuFormat,
+      @HiveField(4)
+          this.retailers = const <String>[],
+      @HiveField(5)
+          this.enableReadAloud = false,
+      @HiveField(6)
+          this.patternIndex = 0,
+      @HiveField(7)
+          this.readAloudPatterns = _defaultReadAloudPatterns,
+      @HiveField(8)
+          this.readAloudVolume = 1.0,
+      @HiveField(9)
+          this.readAloudSpeed,
+      @HiveField(10, defaultValue: defaultCustomButtons)
+          this.customButtons = defaultCustomButtons,
+      @HiveField(11, defaultValue: _defaultCsvOrder)
+          this.csvOrder = _defaultCsvOrder,
+      @HiveField(12, defaultValue: 0)
+          this.minProfit = 0,
+      @HiveField(13, defaultValue: false)
+          this.getStocks = false,
+      @HiveField(14, defaultValue: true)
+          this.enableAlert = true,
+      @HiveField(15, defaultValue: _defaultAlert)
+          this.alerts = _defaultAlert});
 
   @JsonKey(defaultValue: false)
-  @override
+  @override // ダークモード
   @HiveField(0)
   final bool isDarkMode;
   @JsonKey(defaultValue: false)
@@ -392,7 +441,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   @HiveField(1)
   final bool enableTargetProfit;
   @JsonKey(defaultValue: 10)
-  @override
+  @override // 目標利益率
   @HiveField(2)
   final int targetProfitValue;
   @JsonKey(defaultValue: _defaultSkuFormat)
@@ -423,28 +472,28 @@ class _$_GeneralSettings implements _GeneralSettings {
   @HiveField(9)
   final double? readAloudSpeed;
   @JsonKey(defaultValue: defaultCustomButtons)
-  @override
-  @HiveField(10)
+  @override // カスタムボタン設定
+  @HiveField(10, defaultValue: defaultCustomButtons)
   final List<CustomButtonDetail> customButtons;
   @JsonKey(defaultValue: _defaultCsvOrder)
-  @override
-  @HiveField(11)
+  @override // CSV の並び順
+  @HiveField(11, defaultValue: _defaultCsvOrder)
   final List<CsvColumn> csvOrder;
   @JsonKey(defaultValue: 0)
-  @override
-  @HiveField(12)
+  @override // 最低利益額
+  @HiveField(12, defaultValue: 0)
   final int minProfit;
   @JsonKey(defaultValue: false)
-  @override
-  @HiveField(13)
+  @override // 在庫の取得設定
+  @HiveField(13, defaultValue: false)
   final bool getStocks;
   @JsonKey(defaultValue: true)
-  @override
-  @HiveField(14)
+  @override // アラート設定
+  @HiveField(14, defaultValue: true)
   final bool enableAlert;
   @JsonKey(defaultValue: _defaultAlert)
   @override
-  @HiveField(15)
+  @HiveField(15, defaultValue: _defaultAlert)
   final List<AlertConditionSet> alerts;
 
   @override
@@ -533,30 +582,46 @@ class _$_GeneralSettings implements _GeneralSettings {
 
 abstract class _GeneralSettings implements GeneralSettings {
   const factory _GeneralSettings(
-      {@HiveField(0) bool isDarkMode,
-      @HiveField(1) bool enableTargetProfit,
-      @HiveField(2) int targetProfitValue,
-      @HiveField(3) String skuFormat,
-      @HiveField(4) List<String> retailers,
-      @HiveField(5) bool enableReadAloud,
-      @HiveField(6) int patternIndex,
-      @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
-      @HiveField(8) double readAloudVolume,
-      @HiveField(9) double? readAloudSpeed,
-      @HiveField(10) List<CustomButtonDetail> customButtons,
-      @HiveField(11) List<CsvColumn> csvOrder,
-      @HiveField(12) int minProfit,
-      @HiveField(13) bool getStocks,
-      @HiveField(14) bool enableAlert,
-      @HiveField(15) List<AlertConditionSet> alerts}) = _$_GeneralSettings;
+      {@HiveField(0)
+          bool isDarkMode,
+      @HiveField(1)
+          bool enableTargetProfit,
+      @HiveField(2)
+          int targetProfitValue,
+      @HiveField(3)
+          String skuFormat,
+      @HiveField(4)
+          List<String> retailers,
+      @HiveField(5)
+          bool enableReadAloud,
+      @HiveField(6)
+          int patternIndex,
+      @HiveField(7)
+          List<ReadAloudPattern> readAloudPatterns,
+      @HiveField(8)
+          double readAloudVolume,
+      @HiveField(9)
+          double? readAloudSpeed,
+      @HiveField(10, defaultValue: defaultCustomButtons)
+          List<CustomButtonDetail> customButtons,
+      @HiveField(11, defaultValue: _defaultCsvOrder)
+          List<CsvColumn> csvOrder,
+      @HiveField(12, defaultValue: 0)
+          int minProfit,
+      @HiveField(13, defaultValue: false)
+          bool getStocks,
+      @HiveField(14, defaultValue: true)
+          bool enableAlert,
+      @HiveField(15, defaultValue: _defaultAlert)
+          List<AlertConditionSet> alerts}) = _$_GeneralSettings;
 
-  @override
+  @override // ダークモード
   @HiveField(0)
   bool get isDarkMode => throw _privateConstructorUsedError;
   @override // 目標利益率設定
   @HiveField(1)
   bool get enableTargetProfit => throw _privateConstructorUsedError;
-  @override
+  @override // 目標利益率
   @HiveField(2)
   int get targetProfitValue => throw _privateConstructorUsedError;
   @override // SKU 設定
@@ -581,24 +646,24 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(9)
   double? get readAloudSpeed => throw _privateConstructorUsedError;
-  @override
-  @HiveField(10)
+  @override // カスタムボタン設定
+  @HiveField(10, defaultValue: defaultCustomButtons)
   List<CustomButtonDetail> get customButtons =>
       throw _privateConstructorUsedError;
-  @override
-  @HiveField(11)
+  @override // CSV の並び順
+  @HiveField(11, defaultValue: _defaultCsvOrder)
   List<CsvColumn> get csvOrder => throw _privateConstructorUsedError;
-  @override
-  @HiveField(12)
+  @override // 最低利益額
+  @HiveField(12, defaultValue: 0)
   int get minProfit => throw _privateConstructorUsedError;
-  @override
-  @HiveField(13)
+  @override // 在庫の取得設定
+  @HiveField(13, defaultValue: false)
   bool get getStocks => throw _privateConstructorUsedError;
-  @override
-  @HiveField(14)
+  @override // アラート設定
+  @HiveField(14, defaultValue: true)
   bool get enableAlert => throw _privateConstructorUsedError;
   @override
-  @HiveField(15)
+  @HiveField(15, defaultValue: _defaultAlert)
   List<AlertConditionSet> get alerts => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
@@ -709,9 +774,9 @@ class __$ReadAloudPatternCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: readAloudPatternTypeId)
-
 /// @nodoc
+
+@HiveType(typeId: readAloudPatternTypeId)
 class _$_ReadAloudPattern implements _ReadAloudPattern {
   const _$_ReadAloudPattern(
       {@HiveField(0) required this.title, @HiveField(1) required this.pattern});
@@ -890,9 +955,9 @@ class __$CustomButtonDetailCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: customButtonDetailTypeId)
-
 /// @nodoc
+
+@HiveType(typeId: customButtonDetailTypeId)
 class _$_CustomButtonDetail implements _CustomButtonDetail {
   const _$_CustomButtonDetail(
       {@HiveField(0) required this.enable,
@@ -1086,9 +1151,9 @@ class __$AlertConditionSetCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: alertConditionSetTypeId)
-
 /// @nodoc
+
+@HiveType(typeId: alertConditionSetTypeId)
 class _$_AlertConditionSet implements _AlertConditionSet {
   const _$_AlertConditionSet(
       {@HiveField(0) required this.id,

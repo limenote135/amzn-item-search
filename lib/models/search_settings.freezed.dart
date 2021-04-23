@@ -21,7 +21,7 @@ class _$SearchSettingsTearOff {
       @HiveField(1) UsedSubCondition usedSubCondition = UsedSubCondition.all,
       @HiveField(2) bool useFba = false,
       @HiveField(3) bool priorFba = false,
-      @HiveField(4) bool continuousCameraRead = true}) {
+      @HiveField(4, defaultValue: true) bool continuousCameraRead = true}) {
     return _SearchSettings(
       type: type,
       usedSubCondition: usedSubCondition,
@@ -44,9 +44,8 @@ mixin _$SearchSettings {
   @HiveField(2)
   bool get useFba => throw _privateConstructorUsedError;
   @HiveField(3)
-  bool get priorFba =>
-      throw _privateConstructorUsedError; // TODO: .g.dart でデフォルト値を設定している
-  @HiveField(4)
+  bool get priorFba => throw _privateConstructorUsedError;
+  @HiveField(4, defaultValue: true)
   bool get continuousCameraRead => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -64,7 +63,7 @@ abstract class $SearchSettingsCopyWith<$Res> {
       @HiveField(1) UsedSubCondition usedSubCondition,
       @HiveField(2) bool useFba,
       @HiveField(3) bool priorFba,
-      @HiveField(4) bool continuousCameraRead});
+      @HiveField(4, defaultValue: true) bool continuousCameraRead});
 }
 
 /// @nodoc
@@ -121,7 +120,7 @@ abstract class _$SearchSettingsCopyWith<$Res>
       @HiveField(1) UsedSubCondition usedSubCondition,
       @HiveField(2) bool useFba,
       @HiveField(3) bool priorFba,
-      @HiveField(4) bool continuousCameraRead});
+      @HiveField(4, defaultValue: true) bool continuousCameraRead});
 }
 
 /// @nodoc
@@ -168,16 +167,16 @@ class __$SearchSettingsCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: searchSettingsTypeId)
-
 /// @nodoc
+
+@HiveType(typeId: searchSettingsTypeId)
 class _$_SearchSettings implements _SearchSettings {
   const _$_SearchSettings(
       {@HiveField(0) this.type = SearchType.jan,
       @HiveField(1) this.usedSubCondition = UsedSubCondition.all,
       @HiveField(2) this.useFba = false,
       @HiveField(3) this.priorFba = false,
-      @HiveField(4) this.continuousCameraRead = true});
+      @HiveField(4, defaultValue: true) this.continuousCameraRead = true});
 
   @JsonKey(defaultValue: SearchType.jan)
   @override
@@ -196,8 +195,8 @@ class _$_SearchSettings implements _SearchSettings {
   @HiveField(3)
   final bool priorFba;
   @JsonKey(defaultValue: true)
-  @override // TODO: .g.dart でデフォルト値を設定している
-  @HiveField(4)
+  @override
+  @HiveField(4, defaultValue: true)
   final bool continuousCameraRead;
 
   @override
@@ -241,11 +240,12 @@ class _$_SearchSettings implements _SearchSettings {
 
 abstract class _SearchSettings implements SearchSettings {
   const factory _SearchSettings(
-      {@HiveField(0) SearchType type,
-      @HiveField(1) UsedSubCondition usedSubCondition,
-      @HiveField(2) bool useFba,
-      @HiveField(3) bool priorFba,
-      @HiveField(4) bool continuousCameraRead}) = _$_SearchSettings;
+          {@HiveField(0) SearchType type,
+          @HiveField(1) UsedSubCondition usedSubCondition,
+          @HiveField(2) bool useFba,
+          @HiveField(3) bool priorFba,
+          @HiveField(4, defaultValue: true) bool continuousCameraRead}) =
+      _$_SearchSettings;
 
   @override
   @HiveField(0)
@@ -259,8 +259,8 @@ abstract class _SearchSettings implements SearchSettings {
   @override
   @HiveField(3)
   bool get priorFba => throw _privateConstructorUsedError;
-  @override // TODO: .g.dart でデフォルト値を設定している
-  @HiveField(4)
+  @override
+  @HiveField(4, defaultValue: true)
   bool get continuousCameraRead => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

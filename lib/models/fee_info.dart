@@ -11,10 +11,7 @@ class FeeInfo with _$FeeInfo {
   @HiveType(typeId: feeInfoTypeId)
   const factory FeeInfo({
     @HiveField(0) @JsonKey(name: "fee_rate") required double referralFeeRate,
-    @HiveField(1)
-    @JsonKey(name: "closing_fee")
-    required
-        int variableClosingFee,
+    @HiveField(1) @JsonKey(name: "closing_fee") required int variableClosingFee,
     @HiveField(2) required int fbaFee,
   }) = _FeeInfo;
 

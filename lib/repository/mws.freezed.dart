@@ -122,9 +122,9 @@ class __$GetProductByIdResponseCopyWithImpl<$Res>
   }
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
-
 /// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   const _$_GetProductByIdResponse({required this.jan, required this.items});
 
@@ -301,9 +301,9 @@ class __$GetProductPricesResponseCopyWithImpl<$Res>
   }
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
-
 /// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_GetProductPricesResponse implements _GetProductPricesResponse {
   const _$_GetProductPricesResponse({this.prices});
 
@@ -460,6 +460,7 @@ class __$ListMatchingProductRequestCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
   const _$_ListMatchingProductRequest(
       {required this.query, required this.category});
@@ -615,9 +616,9 @@ class __$ListMatchingProductResponseCopyWithImpl<$Res>
   }
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
-
 /// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_ListMatchingProductResponse implements _ListMatchingProductResponse {
   const _$_ListMatchingProductResponse({required this.items});
 
