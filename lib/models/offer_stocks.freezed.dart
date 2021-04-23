@@ -112,6 +112,7 @@ class __$OfferStocksParamCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_OfferStocksParam implements _OfferStocksParam {
   const _$_OfferStocksParam({required this.asin, required this.sellerId});
 

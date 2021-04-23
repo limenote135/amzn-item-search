@@ -37,10 +37,11 @@ class ItemPrices with _$ItemPrices {
   @JsonSerializable(fieldRename: FieldRename.snake)
   @HiveType(typeId: itemPricesTypeId)
   const factory ItemPrices({
-    @HiveField(0)
+    // 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
+    @HiveField(0, defaultValue: <PriceDetail>[])
     @JsonKey(name: "new_offers")
         required List<PriceDetail> newPrices,
-    @HiveField(1)
+    @HiveField(1, defaultValue: <PriceDetail>[])
     @JsonKey(name: "used_offers")
         required List<PriceDetail> usedPrices,
     @HiveField(2) required FeeInfo feeInfo,

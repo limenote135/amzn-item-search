@@ -114,9 +114,9 @@ class __$AlertConditionCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: alertConditionTypeId)
-
 /// @nodoc
+
+@HiveType(typeId: alertConditionTypeId)
 class _$_AlertCondition implements _AlertCondition {
   const _$_AlertCondition(
       {@HiveField(0) required this.type, @HiveField(1) this.value = 0});
