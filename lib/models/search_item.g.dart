@@ -66,7 +66,7 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       quantity: fields[6] as String,
       prices: fields[7] as ItemPrices?,
       imageData: fields[8] as Uint8List?,
-      category: fields[9] as String? ?? "",
+      category: fields[9] == null ? '' : fields[9] as String,
     );
   }
 

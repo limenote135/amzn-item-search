@@ -27,13 +27,80 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       readAloudPatterns: (fields[7] as List).cast<ReadAloudPattern>(),
       readAloudVolume: fields[8] as double,
       readAloudSpeed: fields[9] as double?,
-      customButtons: (fields[10] as List?)?.cast<CustomButtonDetail>() ??
-          defaultCustomButtons,
-      csvOrder: (fields[11] as List?)?.cast<CsvColumn>() ?? _defaultCsvOrder,
-      minProfit: fields[12] as int? ?? 0,
-      getStocks: fields[13] as bool? ?? false,
-      enableAlert: fields[14] as bool? ?? true,
-      alerts: (fields[15] as List?)?.cast<AlertConditionSet>() ?? _defaultAlert,
+      customButtons: fields[10] == null
+          ? [
+              const CustomButtonDetail(
+                  pattern: 'https://www.amazon.co.jp/gp/product/{asin}/',
+                  enable: true,
+                  title: 'Amazon'),
+              const CustomButtonDetail(
+                  pattern:
+                      'https://sellercentral.amazon.co.jp/abis/listing/syh?asin={asin}',
+                  enable: true,
+                  title: '出品確認'),
+              const CustomButtonDetail(
+                  pattern: 'https://delta-tracer.com/item/detail/jp/{asin}/',
+                  enable: true,
+                  title: 'Delta'),
+              const CustomButtonDetail(
+                  pattern: 'https://mnsearch.com/item?kwd={asin}',
+                  enable: true,
+                  title: 'モノサーチ'),
+              const CustomButtonDetail(
+                  pattern: 'https://keezon.net/item/index?ASIN={asin}',
+                  enable: false,
+                  title: 'Keezon'),
+              const CustomButtonDetail(
+                  pattern: 'https://www.mercari.com/jp/search/?keyword={title}',
+                  enable: false,
+                  title: 'メルカリ'),
+              const CustomButtonDetail(
+                  pattern:
+                      'https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};',
+                  enable: false,
+                  title: '在庫'),
+              const CustomButtonDetail(
+                  pattern: '', enable: false, title: 'ボタン1'),
+              const CustomButtonDetail(
+                  pattern: '', enable: false, title: 'ボタン2'),
+              const CustomButtonDetail(
+                  pattern: '', enable: false, title: 'ボタン3'),
+              const CustomButtonDetail(
+                  pattern: '', enable: false, title: 'ボタン4'),
+              const CustomButtonDetail(
+                  pattern: '', enable: false, title: 'ボタン5')
+            ]
+          : (fields[10] as List).cast<CustomButtonDetail>(),
+      csvOrder: fields[11] == null
+          ? [
+              CsvColumn.asin,
+              CsvColumn.jan,
+              CsvColumn.title,
+              CsvColumn.sellPrice,
+              CsvColumn.purchasePrice,
+              CsvColumn.profit,
+              CsvColumn.listingPrice,
+              CsvColumn.breakEven,
+              CsvColumn.quantity,
+              CsvColumn.condition,
+              CsvColumn.shipment,
+              CsvColumn.sku,
+              CsvColumn.retailer,
+              CsvColumn.comment,
+              CsvColumn.purchaseDate
+            ]
+          : (fields[11] as List).cast<CsvColumn>(),
+      minProfit: fields[12] == null ? 0 : fields[12] as int,
+      getStocks: fields[13] == null ? false : fields[13] as bool,
+      enableAlert: fields[14] == null ? true : fields[14] as bool,
+      alerts: fields[15] == null
+          ? [
+              const AlertConditionSet(
+                  title: 'プレ値',
+                  id: 'default',
+                  conditions: [const AlertCondition(type: AlertType.premium)])
+            ]
+          : (fields[15] as List).cast<AlertConditionSet>(),
     );
   }
 

@@ -144,10 +144,10 @@ class __$FeeInfoCopyWithImpl<$Res> extends _$FeeInfoCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
+
 @JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: feeInfoTypeId)
-
-/// @nodoc
 class _$_FeeInfo implements _FeeInfo {
   const _$_FeeInfo(
       {@HiveField(0)

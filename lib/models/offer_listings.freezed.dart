@@ -208,6 +208,7 @@ class __$OfferListingsParamsCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_OfferListingsParams implements _OfferListingsParams {
   const _$_OfferListingsParams(
       {required this.asin,
@@ -440,6 +441,7 @@ class __$OfferAtIndexParamCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_OfferAtIndexParam implements _OfferAtIndexParam {
   const _$_OfferAtIndexParam({required this.params, required this.index});
 
@@ -634,6 +636,7 @@ class __$OfferListingsCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_OfferListings implements _OfferListings {
   const _$_OfferListings(
       {required this.asin,
@@ -867,6 +870,7 @@ class __$OfferItemCopyWithImpl<$Res> extends _$OfferItemCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_OfferItem implements _OfferItem {
   const _$_OfferItem(
       {required this.shopName,
