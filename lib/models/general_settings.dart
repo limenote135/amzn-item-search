@@ -88,9 +88,11 @@ const _defaultAlert = [
 class GeneralSettings with _$GeneralSettings {
   @HiveType(typeId: generalSettingsTypeId)
   const factory GeneralSettings({
+    // ダークモード
     @HiveField(0) @Default(false) bool isDarkMode,
     // 目標利益率設定
     @HiveField(1) @Default(false) bool enableTargetProfit,
+    // 目標利益率
     @HiveField(2) @Default(10) int targetProfitValue,
     // SKU 設定
     @HiveField(3) @Default(_defaultSkuFormat) String skuFormat,
@@ -104,14 +106,23 @@ class GeneralSettings with _$GeneralSettings {
         List<ReadAloudPattern> readAloudPatterns,
     @HiveField(8) @Default(1.0) double readAloudVolume,
     @HiveField(9) double? readAloudSpeed,
-    @HiveField(10)
+    // カスタムボタン設定
+    @HiveField(10, defaultValue: defaultCustomButtons)
     @Default(defaultCustomButtons)
         List<CustomButtonDetail> customButtons,
-    @HiveField(11) @Default(_defaultCsvOrder) List<CsvColumn> csvOrder,
-    @HiveField(12) @Default(0) int minProfit,
-    @HiveField(13) @Default(false) bool getStocks,
-    @HiveField(14) @Default(true) bool enableAlert,
-    @HiveField(15) @Default(_defaultAlert) List<AlertConditionSet> alerts,
+    // CSV の並び順
+    @HiveField(11, defaultValue: _defaultCsvOrder)
+    @Default(_defaultCsvOrder)
+        List<CsvColumn> csvOrder,
+    // 最低利益額
+    @HiveField(12, defaultValue: 0) @Default(0) int minProfit,
+    // 在庫の取得設定
+    @HiveField(13, defaultValue: false) @Default(false) bool getStocks,
+    // アラート設定
+    @HiveField(14, defaultValue: true) @Default(true) bool enableAlert,
+    @HiveField(15, defaultValue: _defaultAlert)
+    @Default(_defaultAlert)
+        List<AlertConditionSet> alerts,
   }) = _GeneralSettings;
 }
 

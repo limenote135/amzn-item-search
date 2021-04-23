@@ -45,7 +45,9 @@ class AsinData with _$AsinData {
     @HiveField(6) @Default(" - ") String quantity, // セット数
     @HiveField(7) ItemPrices? prices,
     @HiveField(8) @JsonKey(ignore: true) Uint8List? imageData,
-    @HiveField(9) @ItemCategoryConverter() required String category,
+    @HiveField(9, defaultValue: "")
+    @ItemCategoryConverter()
+        required String category,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>
