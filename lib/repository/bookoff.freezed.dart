@@ -160,9 +160,9 @@ class __$BookoffResponseCopyWithImpl<$Res>
   }
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
-
 /// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_BookoffResponse implements _BookoffResponse {
   const _$_BookoffResponse(
       {@JsonKey(name: "INSTORECODE") required this.instoreCode,

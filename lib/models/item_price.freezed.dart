@@ -21,10 +21,10 @@ class _$ItemPricesTearOff {
   const _$ItemPricesTearOff();
 
   _ItemPrices call(
-      {@HiveField(0)
+      {@HiveField(0, defaultValue: const <PriceDetail>[])
       @JsonKey(name: "new_offers")
           required List<PriceDetail> newPrices,
-      @HiveField(1)
+      @HiveField(1, defaultValue: const <PriceDetail>[])
       @JsonKey(name: "used_offers")
           required List<PriceDetail> usedPrices,
       @HiveField(2)
@@ -46,10 +46,11 @@ const $ItemPrices = _$ItemPricesTearOff();
 
 /// @nodoc
 mixin _$ItemPrices {
-  @HiveField(0)
+// 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
+  @HiveField(0, defaultValue: const <PriceDetail>[])
   @JsonKey(name: "new_offers")
   List<PriceDetail> get newPrices => throw _privateConstructorUsedError;
-  @HiveField(1)
+  @HiveField(1, defaultValue: const <PriceDetail>[])
   @JsonKey(name: "used_offers")
   List<PriceDetail> get usedPrices => throw _privateConstructorUsedError;
   @HiveField(2)
@@ -67,9 +68,14 @@ abstract class $ItemPricesCopyWith<$Res> {
           ItemPrices value, $Res Function(ItemPrices) then) =
       _$ItemPricesCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(0) @JsonKey(name: "new_offers") List<PriceDetail> newPrices,
-      @HiveField(1) @JsonKey(name: "used_offers") List<PriceDetail> usedPrices,
-      @HiveField(2) FeeInfo feeInfo});
+      {@HiveField(0, defaultValue: const <PriceDetail>[])
+      @JsonKey(name: "new_offers")
+          List<PriceDetail> newPrices,
+      @HiveField(1, defaultValue: const <PriceDetail>[])
+      @JsonKey(name: "used_offers")
+          List<PriceDetail> usedPrices,
+      @HiveField(2)
+          FeeInfo feeInfo});
 
   $FeeInfoCopyWith<$Res> get feeInfo;
 }
@@ -119,9 +125,14 @@ abstract class _$ItemPricesCopyWith<$Res> implements $ItemPricesCopyWith<$Res> {
       __$ItemPricesCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(0) @JsonKey(name: "new_offers") List<PriceDetail> newPrices,
-      @HiveField(1) @JsonKey(name: "used_offers") List<PriceDetail> usedPrices,
-      @HiveField(2) FeeInfo feeInfo});
+      {@HiveField(0, defaultValue: const <PriceDetail>[])
+      @JsonKey(name: "new_offers")
+          List<PriceDetail> newPrices,
+      @HiveField(1, defaultValue: const <PriceDetail>[])
+      @JsonKey(name: "used_offers")
+          List<PriceDetail> usedPrices,
+      @HiveField(2)
+          FeeInfo feeInfo});
 
   @override
   $FeeInfoCopyWith<$Res> get feeInfo;
@@ -160,25 +171,30 @@ class __$ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
+
 @JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: itemPricesTypeId)
-
-/// @nodoc
 class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
   const _$_ItemPrices(
-      {@HiveField(0) @JsonKey(name: "new_offers") required this.newPrices,
-      @HiveField(1) @JsonKey(name: "used_offers") required this.usedPrices,
-      @HiveField(2) required this.feeInfo});
+      {@HiveField(0, defaultValue: const <PriceDetail>[])
+      @JsonKey(name: "new_offers")
+          required this.newPrices,
+      @HiveField(1, defaultValue: const <PriceDetail>[])
+      @JsonKey(name: "used_offers")
+          required this.usedPrices,
+      @HiveField(2)
+          required this.feeInfo});
 
   factory _$_ItemPrices.fromJson(Map<String, dynamic> json) =>
       _$_$_ItemPricesFromJson(json);
 
-  @override
-  @HiveField(0)
+  @override // 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
+  @HiveField(0, defaultValue: const <PriceDetail>[])
   @JsonKey(name: "new_offers")
   final List<PriceDetail> newPrices;
   @override
-  @HiveField(1)
+  @HiveField(1, defaultValue: const <PriceDetail>[])
   @JsonKey(name: "used_offers")
   final List<PriceDetail> usedPrices;
   @override
@@ -234,10 +250,10 @@ class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
 
 abstract class _ItemPrices implements ItemPrices {
   const factory _ItemPrices(
-      {@HiveField(0)
+      {@HiveField(0, defaultValue: const <PriceDetail>[])
       @JsonKey(name: "new_offers")
           required List<PriceDetail> newPrices,
-      @HiveField(1)
+      @HiveField(1, defaultValue: const <PriceDetail>[])
       @JsonKey(name: "used_offers")
           required List<PriceDetail> usedPrices,
       @HiveField(2)
@@ -246,12 +262,12 @@ abstract class _ItemPrices implements ItemPrices {
   factory _ItemPrices.fromJson(Map<String, dynamic> json) =
       _$_ItemPrices.fromJson;
 
-  @override
-  @HiveField(0)
+  @override // 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
+  @HiveField(0, defaultValue: const <PriceDetail>[])
   @JsonKey(name: "new_offers")
   List<PriceDetail> get newPrices => throw _privateConstructorUsedError;
   @override
-  @HiveField(1)
+  @HiveField(1, defaultValue: const <PriceDetail>[])
   @JsonKey(name: "used_offers")
   List<PriceDetail> get usedPrices => throw _privateConstructorUsedError;
   @override
@@ -475,10 +491,10 @@ class __$PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
+
 @JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: priceDetailTypeId)
-
-/// @nodoc
 class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
   const _$_PriceDetail(
       {@HiveField(0)

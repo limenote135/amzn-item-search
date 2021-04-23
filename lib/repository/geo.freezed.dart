@@ -110,6 +110,7 @@ class __$GeoResponseCopyWithImpl<$Res> extends _$GeoResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_GeoResponse implements _GeoResponse {
   const _$_GeoResponse({required this.code, this.jan = ""});
 
