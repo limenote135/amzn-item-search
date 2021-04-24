@@ -14,13 +14,13 @@ import 'fee_info.dart';
 part 'item_price.freezed.dart';
 part 'item_price.g.dart';
 
-final itemPricesFutureProvider =
-    FutureProvider.autoDispose.family<ItemPrices, String>((ref, asin) async {
+final itemPricesFutureProvider = FutureProvider.autoDispose
+    .family<ItemPriceFutureProviderResponse, String>((ref, asin) async {
   final mws = ref.read(mwsRepositoryProvider);
   final resp = await mws.getProductPrices(asin);
 
   ref.maintainState = true;
-  return resp.prices ??
+  final prices = resp.prices ??
       const ItemPrices(
         newPrices: <PriceDetail>[],
         usedPrices: <PriceDetail>[],
@@ -30,7 +30,19 @@ final itemPricesFutureProvider =
           fbaFee: -1,
         ),
       );
+  return ItemPriceFutureProviderResponse(
+    prices: prices,
+    sellByAmazon: resp.sellByAmazon,
+  );
 });
+
+@freezed
+class ItemPriceFutureProviderResponse with _$ItemPriceFutureProviderResponse {
+  const factory ItemPriceFutureProviderResponse({
+    required ItemPrices prices,
+    required bool? sellByAmazon,
+  }) = _ItemPriceFutureProviderResponse;
+}
 
 @freezed
 class ItemPrices with _$ItemPrices {
