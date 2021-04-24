@@ -67,13 +67,14 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       prices: fields[7] as ItemPrices?,
       imageData: fields[8] as Uint8List?,
       category: fields[9] == null ? '' : fields[9] as String,
+      sellByAmazon: fields[10] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_AsinData obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.jan)
       ..writeByte(1)
@@ -93,7 +94,9 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       ..writeByte(8)
       ..write(obj.imageData)
       ..writeByte(9)
-      ..write(obj.category);
+      ..write(obj.category)
+      ..writeByte(10)
+      ..write(obj.sellByAmazon);
   }
 
   @override
@@ -125,6 +128,7 @@ _$_AsinData _$_$_AsinDataFromJson(Map<String, dynamic> json) {
         : ItemPrices.fromJson(json['prices'] as Map<String, dynamic>),
     category:
         const ItemCategoryConverter().fromJson(json['category'] as String?),
+    sellByAmazon: json['sell_by_amazon'] as bool?,
   );
 }
 
@@ -139,4 +143,5 @@ Map<String, dynamic> _$_$_AsinDataToJson(_$_AsinData instance) =>
       'quantity': instance.quantity,
       'prices': instance.prices,
       'category': const ItemCategoryConverter().toJson(instance.category),
+      'sell_by_amazon': instance.sellByAmazon,
     };

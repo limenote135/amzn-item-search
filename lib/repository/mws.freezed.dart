@@ -196,9 +196,10 @@ GetProductPricesResponse _$GetProductPricesResponseFromJson(
 class _$GetProductPricesResponseTearOff {
   const _$GetProductPricesResponseTearOff();
 
-  _GetProductPricesResponse call({ItemPrices? prices}) {
+  _GetProductPricesResponse call({ItemPrices? prices, bool? sellByAmazon}) {
     return _GetProductPricesResponse(
       prices: prices,
+      sellByAmazon: sellByAmazon,
     );
   }
 
@@ -213,6 +214,7 @@ const $GetProductPricesResponse = _$GetProductPricesResponseTearOff();
 /// @nodoc
 mixin _$GetProductPricesResponse {
   ItemPrices? get prices => throw _privateConstructorUsedError;
+  bool? get sellByAmazon => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -225,7 +227,7 @@ abstract class $GetProductPricesResponseCopyWith<$Res> {
   factory $GetProductPricesResponseCopyWith(GetProductPricesResponse value,
           $Res Function(GetProductPricesResponse) then) =
       _$GetProductPricesResponseCopyWithImpl<$Res>;
-  $Res call({ItemPrices? prices});
+  $Res call({ItemPrices? prices, bool? sellByAmazon});
 
   $ItemPricesCopyWith<$Res>? get prices;
 }
@@ -242,12 +244,17 @@ class _$GetProductPricesResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? prices = freezed,
+    Object? sellByAmazon = freezed,
   }) {
     return _then(_value.copyWith(
       prices: prices == freezed
           ? _value.prices
           : prices // ignore: cast_nullable_to_non_nullable
               as ItemPrices?,
+      sellByAmazon: sellByAmazon == freezed
+          ? _value.sellByAmazon
+          : sellByAmazon // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -270,7 +277,7 @@ abstract class _$GetProductPricesResponseCopyWith<$Res>
           $Res Function(_GetProductPricesResponse) then) =
       __$GetProductPricesResponseCopyWithImpl<$Res>;
   @override
-  $Res call({ItemPrices? prices});
+  $Res call({ItemPrices? prices, bool? sellByAmazon});
 
   @override
   $ItemPricesCopyWith<$Res>? get prices;
@@ -291,12 +298,17 @@ class __$GetProductPricesResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? prices = freezed,
+    Object? sellByAmazon = freezed,
   }) {
     return _then(_GetProductPricesResponse(
       prices: prices == freezed
           ? _value.prices
           : prices // ignore: cast_nullable_to_non_nullable
               as ItemPrices?,
+      sellByAmazon: sellByAmazon == freezed
+          ? _value.sellByAmazon
+          : sellByAmazon // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -305,17 +317,19 @@ class __$GetProductPricesResponseCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_GetProductPricesResponse implements _GetProductPricesResponse {
-  const _$_GetProductPricesResponse({this.prices});
+  const _$_GetProductPricesResponse({this.prices, this.sellByAmazon});
 
   factory _$_GetProductPricesResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_GetProductPricesResponseFromJson(json);
 
   @override
   final ItemPrices? prices;
+  @override
+  final bool? sellByAmazon;
 
   @override
   String toString() {
-    return 'GetProductPricesResponse(prices: $prices)';
+    return 'GetProductPricesResponse(prices: $prices, sellByAmazon: $sellByAmazon)';
   }
 
   @override
@@ -323,12 +337,17 @@ class _$_GetProductPricesResponse implements _GetProductPricesResponse {
     return identical(this, other) ||
         (other is _GetProductPricesResponse &&
             (identical(other.prices, prices) ||
-                const DeepCollectionEquality().equals(other.prices, prices)));
+                const DeepCollectionEquality().equals(other.prices, prices)) &&
+            (identical(other.sellByAmazon, sellByAmazon) ||
+                const DeepCollectionEquality()
+                    .equals(other.sellByAmazon, sellByAmazon)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(prices);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(prices) ^
+      const DeepCollectionEquality().hash(sellByAmazon);
 
   @JsonKey(ignore: true)
   @override
@@ -343,14 +362,16 @@ class _$_GetProductPricesResponse implements _GetProductPricesResponse {
 }
 
 abstract class _GetProductPricesResponse implements GetProductPricesResponse {
-  const factory _GetProductPricesResponse({ItemPrices? prices}) =
-      _$_GetProductPricesResponse;
+  const factory _GetProductPricesResponse(
+      {ItemPrices? prices, bool? sellByAmazon}) = _$_GetProductPricesResponse;
 
   factory _GetProductPricesResponse.fromJson(Map<String, dynamic> json) =
       _$_GetProductPricesResponse.fromJson;
 
   @override
   ItemPrices? get prices => throw _privateConstructorUsedError;
+  @override
+  bool? get sellByAmazon => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GetProductPricesResponseCopyWith<_GetProductPricesResponse> get copyWith =>
