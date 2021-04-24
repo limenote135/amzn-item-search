@@ -42,6 +42,9 @@ extension AlertConditionSetExtension on AlertConditionSet {
             // Condition 未設定の場合
           }
           break;
+        case AlertType.condition:
+          // 利益額との組み合わせでチェックするため、ここでは何もしない
+          break;
         case AlertType.rank:
           if (!(item.rank <= cond.value)) {
             return false;
@@ -55,16 +58,15 @@ extension AlertConditionSetExtension on AlertConditionSet {
             return false;
           }
           break;
-        case AlertType.condition:
-          // TODO: Handle this case.
-          break;
         case AlertType.premium:
           if (!isPremiumPrice(item)) {
             return false;
           }
           break;
         case AlertType.noAmazon:
-          // TODO: Handle this case.
+          if (item.sellByAmazon != false) {
+            return false;
+          }
           break;
         case AlertType.noNewOffer:
           if (item.prices?.newPrices.isNotEmpty ?? false) {
