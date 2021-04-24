@@ -66,8 +66,11 @@ final searchItemFutureProvider = FutureProvider.autoDispose
     jan: param.jan,
     asins: resp.items,
   );
-  // ignore: unawaited_futures
-  box.put(param.searchDate, searchItem);
+  // 見つからなかった場合は保存しない
+  if (resp.items.isNotEmpty) {
+    // ignore: unawaited_futures
+    box.put(param.searchDate, searchItem);
+  }
   return searchItem;
 });
 
