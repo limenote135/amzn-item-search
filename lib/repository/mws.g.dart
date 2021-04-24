@@ -29,6 +29,7 @@ _$_GetProductPricesResponse _$_$_GetProductPricesResponseFromJson(
     prices: json['prices'] == null
         ? null
         : ItemPrices.fromJson(json['prices'] as Map<String, dynamic>),
+    sellByAmazon: json['sell_by_amazon'] as bool?,
   );
 }
 
@@ -36,6 +37,7 @@ Map<String, dynamic> _$_$_GetProductPricesResponseToJson(
         _$_GetProductPricesResponse instance) =>
     <String, dynamic>{
       'prices': instance.prices,
+      'sell_by_amazon': instance.sellByAmazon,
     };
 
 _$_ListMatchingProductResponse _$_$_ListMatchingProductResponseFromJson(
