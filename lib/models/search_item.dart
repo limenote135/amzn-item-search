@@ -48,6 +48,7 @@ class AsinData with _$AsinData {
     @HiveField(9, defaultValue: "")
     @ItemCategoryConverter()
         required String category,
+    @HiveField(10) bool? sellByAmazon,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>

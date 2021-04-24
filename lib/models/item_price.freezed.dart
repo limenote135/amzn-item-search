@@ -12,6 +12,190 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+/// @nodoc
+class _$ItemPriceFutureProviderResponseTearOff {
+  const _$ItemPriceFutureProviderResponseTearOff();
+
+  _ItemPriceFutureProviderResponse call(
+      {required ItemPrices prices, required bool? sellByAmazon}) {
+    return _ItemPriceFutureProviderResponse(
+      prices: prices,
+      sellByAmazon: sellByAmazon,
+    );
+  }
+}
+
+/// @nodoc
+const $ItemPriceFutureProviderResponse =
+    _$ItemPriceFutureProviderResponseTearOff();
+
+/// @nodoc
+mixin _$ItemPriceFutureProviderResponse {
+  ItemPrices get prices => throw _privateConstructorUsedError;
+  bool? get sellByAmazon => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ItemPriceFutureProviderResponseCopyWith<ItemPriceFutureProviderResponse>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ItemPriceFutureProviderResponseCopyWith<$Res> {
+  factory $ItemPriceFutureProviderResponseCopyWith(
+          ItemPriceFutureProviderResponse value,
+          $Res Function(ItemPriceFutureProviderResponse) then) =
+      _$ItemPriceFutureProviderResponseCopyWithImpl<$Res>;
+  $Res call({ItemPrices prices, bool? sellByAmazon});
+
+  $ItemPricesCopyWith<$Res> get prices;
+}
+
+/// @nodoc
+class _$ItemPriceFutureProviderResponseCopyWithImpl<$Res>
+    implements $ItemPriceFutureProviderResponseCopyWith<$Res> {
+  _$ItemPriceFutureProviderResponseCopyWithImpl(this._value, this._then);
+
+  final ItemPriceFutureProviderResponse _value;
+  // ignore: unused_field
+  final $Res Function(ItemPriceFutureProviderResponse) _then;
+
+  @override
+  $Res call({
+    Object? prices = freezed,
+    Object? sellByAmazon = freezed,
+  }) {
+    return _then(_value.copyWith(
+      prices: prices == freezed
+          ? _value.prices
+          : prices // ignore: cast_nullable_to_non_nullable
+              as ItemPrices,
+      sellByAmazon: sellByAmazon == freezed
+          ? _value.sellByAmazon
+          : sellByAmazon // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+
+  @override
+  $ItemPricesCopyWith<$Res> get prices {
+    return $ItemPricesCopyWith<$Res>(_value.prices, (value) {
+      return _then(_value.copyWith(prices: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$ItemPriceFutureProviderResponseCopyWith<$Res>
+    implements $ItemPriceFutureProviderResponseCopyWith<$Res> {
+  factory _$ItemPriceFutureProviderResponseCopyWith(
+          _ItemPriceFutureProviderResponse value,
+          $Res Function(_ItemPriceFutureProviderResponse) then) =
+      __$ItemPriceFutureProviderResponseCopyWithImpl<$Res>;
+  @override
+  $Res call({ItemPrices prices, bool? sellByAmazon});
+
+  @override
+  $ItemPricesCopyWith<$Res> get prices;
+}
+
+/// @nodoc
+class __$ItemPriceFutureProviderResponseCopyWithImpl<$Res>
+    extends _$ItemPriceFutureProviderResponseCopyWithImpl<$Res>
+    implements _$ItemPriceFutureProviderResponseCopyWith<$Res> {
+  __$ItemPriceFutureProviderResponseCopyWithImpl(
+      _ItemPriceFutureProviderResponse _value,
+      $Res Function(_ItemPriceFutureProviderResponse) _then)
+      : super(_value, (v) => _then(v as _ItemPriceFutureProviderResponse));
+
+  @override
+  _ItemPriceFutureProviderResponse get _value =>
+      super._value as _ItemPriceFutureProviderResponse;
+
+  @override
+  $Res call({
+    Object? prices = freezed,
+    Object? sellByAmazon = freezed,
+  }) {
+    return _then(_ItemPriceFutureProviderResponse(
+      prices: prices == freezed
+          ? _value.prices
+          : prices // ignore: cast_nullable_to_non_nullable
+              as ItemPrices,
+      sellByAmazon: sellByAmazon == freezed
+          ? _value.sellByAmazon
+          : sellByAmazon // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ItemPriceFutureProviderResponse
+    with DiagnosticableTreeMixin
+    implements _ItemPriceFutureProviderResponse {
+  const _$_ItemPriceFutureProviderResponse(
+      {required this.prices, required this.sellByAmazon});
+
+  @override
+  final ItemPrices prices;
+  @override
+  final bool? sellByAmazon;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ItemPriceFutureProviderResponse(prices: $prices, sellByAmazon: $sellByAmazon)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ItemPriceFutureProviderResponse'))
+      ..add(DiagnosticsProperty('prices', prices))
+      ..add(DiagnosticsProperty('sellByAmazon', sellByAmazon));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ItemPriceFutureProviderResponse &&
+            (identical(other.prices, prices) ||
+                const DeepCollectionEquality().equals(other.prices, prices)) &&
+            (identical(other.sellByAmazon, sellByAmazon) ||
+                const DeepCollectionEquality()
+                    .equals(other.sellByAmazon, sellByAmazon)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(prices) ^
+      const DeepCollectionEquality().hash(sellByAmazon);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ItemPriceFutureProviderResponseCopyWith<_ItemPriceFutureProviderResponse>
+      get copyWith => __$ItemPriceFutureProviderResponseCopyWithImpl<
+          _ItemPriceFutureProviderResponse>(this, _$identity);
+}
+
+abstract class _ItemPriceFutureProviderResponse
+    implements ItemPriceFutureProviderResponse {
+  const factory _ItemPriceFutureProviderResponse(
+      {required ItemPrices prices,
+      required bool? sellByAmazon}) = _$_ItemPriceFutureProviderResponse;
+
+  @override
+  ItemPrices get prices => throw _privateConstructorUsedError;
+  @override
+  bool? get sellByAmazon => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$ItemPriceFutureProviderResponseCopyWith<_ItemPriceFutureProviderResponse>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 ItemPrices _$ItemPricesFromJson(Map<String, dynamic> json) {
   return _ItemPrices.fromJson(json);
 }
