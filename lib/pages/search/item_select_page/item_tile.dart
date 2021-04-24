@@ -22,7 +22,8 @@ class ItemTile extends HookWidget {
       ),
       data: (value) {
         final newItem = item.copyWith(
-          prices: value,
+          prices: value.prices,
+          sellByAmazon: value.sellByAmazon,
         );
         return ProviderScope(
           overrides: [

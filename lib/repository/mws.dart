@@ -178,6 +178,7 @@ class GetProductPricesResponse with _$GetProductPricesResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory GetProductPricesResponse({
     ItemPrices? prices,
+    bool? sellByAmazon,
   }) = _GetProductPricesResponse;
 
   factory GetProductPricesResponse.fromJson(Map<String, dynamic> json) =>
