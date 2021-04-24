@@ -264,6 +264,18 @@ class _Body extends HookWidget {
             modifyCondition(newCond);
           },
         ),
+        ListTile(
+          leading: const Icon(Icons.add),
+          title: const Text("Amazon販売なし"),
+          onTap: () {
+            if (alert.conditions.length >= 10) {
+              return;
+            }
+            final newCond = alert.conditions.toList()
+              ..add(const AlertCondition(type: AlertType.noAmazon));
+            modifyCondition(newCond);
+          },
+        ),
       ],
     );
   }
@@ -281,8 +293,7 @@ class _Body extends HookWidget {
       case AlertType.premium:
         return const Text("定価以上(プレ値)");
       case AlertType.noAmazon:
-        // TODO: 未実装
-        return Container();
+        return const Text("Amazon販売なし");
       case AlertType.noNewOffer:
         return const Text("新品なし");
     }
