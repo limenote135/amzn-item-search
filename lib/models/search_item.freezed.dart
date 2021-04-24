@@ -234,7 +234,9 @@ class _$AsinDataTearOff {
           Uint8List? imageData,
       @HiveField(9, defaultValue: "")
       @ItemCategoryConverter()
-          required String category}) {
+          required String category,
+      @HiveField(10)
+          bool? sellByAmazon}) {
     return _AsinData(
       jan: jan,
       asin: asin,
@@ -246,6 +248,7 @@ class _$AsinDataTearOff {
       prices: prices,
       imageData: imageData,
       category: category,
+      sellByAmazon: sellByAmazon,
     );
   }
 
@@ -281,6 +284,8 @@ mixin _$AsinData {
   @HiveField(9, defaultValue: "")
   @ItemCategoryConverter()
   String get category => throw _privateConstructorUsedError;
+  @HiveField(10)
+  bool? get sellByAmazon => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -293,28 +298,17 @@ abstract class $AsinDataCopyWith<$Res> {
   factory $AsinDataCopyWith(AsinData value, $Res Function(AsinData) then) =
       _$AsinDataCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(0)
-          String jan,
-      @HiveField(1)
-          String asin,
-      @HiveField(2)
-          int listPrice,
-      @HiveField(3)
-          String imageUrl,
-      @HiveField(4)
-          String title,
-      @HiveField(5)
-          int rank,
-      @HiveField(6)
-          String quantity,
-      @HiveField(7)
-          ItemPrices? prices,
-      @HiveField(8)
-      @JsonKey(ignore: true)
-          Uint8List? imageData,
-      @HiveField(9, defaultValue: "")
-      @ItemCategoryConverter()
-          String category});
+      {@HiveField(0) String jan,
+      @HiveField(1) String asin,
+      @HiveField(2) int listPrice,
+      @HiveField(3) String imageUrl,
+      @HiveField(4) String title,
+      @HiveField(5) int rank,
+      @HiveField(6) String quantity,
+      @HiveField(7) ItemPrices? prices,
+      @HiveField(8) @JsonKey(ignore: true) Uint8List? imageData,
+      @HiveField(9, defaultValue: "") @ItemCategoryConverter() String category,
+      @HiveField(10) bool? sellByAmazon});
 
   $ItemPricesCopyWith<$Res>? get prices;
 }
@@ -339,6 +333,7 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
     Object? prices = freezed,
     Object? imageData = freezed,
     Object? category = freezed,
+    Object? sellByAmazon = freezed,
   }) {
     return _then(_value.copyWith(
       jan: jan == freezed
@@ -381,6 +376,10 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
+      sellByAmazon: sellByAmazon == freezed
+          ? _value.sellByAmazon
+          : sellByAmazon // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -402,28 +401,17 @@ abstract class _$AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
       __$AsinDataCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(0)
-          String jan,
-      @HiveField(1)
-          String asin,
-      @HiveField(2)
-          int listPrice,
-      @HiveField(3)
-          String imageUrl,
-      @HiveField(4)
-          String title,
-      @HiveField(5)
-          int rank,
-      @HiveField(6)
-          String quantity,
-      @HiveField(7)
-          ItemPrices? prices,
-      @HiveField(8)
-      @JsonKey(ignore: true)
-          Uint8List? imageData,
-      @HiveField(9, defaultValue: "")
-      @ItemCategoryConverter()
-          String category});
+      {@HiveField(0) String jan,
+      @HiveField(1) String asin,
+      @HiveField(2) int listPrice,
+      @HiveField(3) String imageUrl,
+      @HiveField(4) String title,
+      @HiveField(5) int rank,
+      @HiveField(6) String quantity,
+      @HiveField(7) ItemPrices? prices,
+      @HiveField(8) @JsonKey(ignore: true) Uint8List? imageData,
+      @HiveField(9, defaultValue: "") @ItemCategoryConverter() String category,
+      @HiveField(10) bool? sellByAmazon});
 
   @override
   $ItemPricesCopyWith<$Res>? get prices;
@@ -450,6 +438,7 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
     Object? prices = freezed,
     Object? imageData = freezed,
     Object? category = freezed,
+    Object? sellByAmazon = freezed,
   }) {
     return _then(_AsinData(
       jan: jan == freezed
@@ -492,6 +481,10 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
+      sellByAmazon: sellByAmazon == freezed
+          ? _value.sellByAmazon
+          : sellByAmazon // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -523,7 +516,9 @@ class _$_AsinData implements _AsinData {
           this.imageData,
       @HiveField(9, defaultValue: "")
       @ItemCategoryConverter()
-          required this.category});
+          required this.category,
+      @HiveField(10)
+          this.sellByAmazon});
 
   factory _$_AsinData.fromJson(Map<String, dynamic> json) =>
       _$_$_AsinDataFromJson(json);
@@ -564,10 +559,13 @@ class _$_AsinData implements _AsinData {
   @HiveField(9, defaultValue: "")
   @ItemCategoryConverter()
   final String category;
+  @override
+  @HiveField(10)
+  final bool? sellByAmazon;
 
   @override
   String toString() {
-    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category)';
+    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category, sellByAmazon: $sellByAmazon)';
   }
 
   @override
@@ -598,7 +596,10 @@ class _$_AsinData implements _AsinData {
                     .equals(other.imageData, imageData)) &&
             (identical(other.category, category) ||
                 const DeepCollectionEquality()
-                    .equals(other.category, category)));
+                    .equals(other.category, category)) &&
+            (identical(other.sellByAmazon, sellByAmazon) ||
+                const DeepCollectionEquality()
+                    .equals(other.sellByAmazon, sellByAmazon)));
   }
 
   @override
@@ -613,7 +614,8 @@ class _$_AsinData implements _AsinData {
       const DeepCollectionEquality().hash(quantity) ^
       const DeepCollectionEquality().hash(prices) ^
       const DeepCollectionEquality().hash(imageData) ^
-      const DeepCollectionEquality().hash(category);
+      const DeepCollectionEquality().hash(category) ^
+      const DeepCollectionEquality().hash(sellByAmazon);
 
   @JsonKey(ignore: true)
   @override
@@ -649,7 +651,9 @@ abstract class _AsinData implements AsinData {
           Uint8List? imageData,
       @HiveField(9, defaultValue: "")
       @ItemCategoryConverter()
-          required String category}) = _$_AsinData;
+          required String category,
+      @HiveField(10)
+          bool? sellByAmazon}) = _$_AsinData;
 
   factory _AsinData.fromJson(Map<String, dynamic> json) = _$_AsinData.fromJson;
 
@@ -685,6 +689,9 @@ abstract class _AsinData implements AsinData {
   @HiveField(9, defaultValue: "")
   @ItemCategoryConverter()
   String get category => throw _privateConstructorUsedError;
+  @override
+  @HiveField(10)
+  bool? get sellByAmazon => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$AsinDataCopyWith<_AsinData> get copyWith =>
