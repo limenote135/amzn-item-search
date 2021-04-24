@@ -104,11 +104,33 @@ class _ItemTileBody extends HookWidget {
           ],
         ),
         const PriceInfo(),
-        if (date != null)
-          Text(
-            "検索日: ${DateTime.parse(date).toLocal().format()}",
-            style: smallSize,
-          )
+        Row(
+          children: [
+            item.sellByAmazon == null
+                ? Expanded(child: Container())
+                : Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                        text: "Amazon販売: ",
+                        children: [
+                          item.sellByAmazon == true
+                              ? const TextSpan(text: "有")
+                              : const TextSpan(
+                                  text: "無", style: strongTextStyle)
+                        ],
+                      ),
+                      style: smallSize,
+                    ),
+                  ),
+            if (date != null)
+              Expanded(
+                child: Text(
+                  "検索日: ${DateTime.parse(date).toLocal().format()}",
+                  style: smallSize,
+                ),
+              ),
+          ],
+        ),
       ],
     );
   }
