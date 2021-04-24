@@ -10,7 +10,9 @@ import 'package:amasearch/util/price_util.dart';
 
 extension AlertConditionSetExtension on AlertConditionSet {
   bool match(AsinData item, SearchSettings settings) {
-    if (conditions.isEmpty) {
+    if (conditions.isEmpty ||
+        (conditions.length == 1 && conditions[0].type == AlertType.condition)) {
+      // 条件無しまたは、粗利条件を設定せずにコンディション条件だけ設定している場合
       return false;
     }
     for (final cond in conditions) {
