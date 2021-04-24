@@ -23,7 +23,10 @@ class ItemTile extends HookWidget {
         title: Text("$error"),
       ),
       data: (value) {
-        final newItem = item.copyWith(prices: value);
+        final newItem = item.copyWith(
+          prices: value.prices,
+          sellByAmazon: value.sellByAmazon,
+        );
         return ProviderScope(
           overrides: [
             currentAsinDataProvider.overrideWithValue(newItem),
