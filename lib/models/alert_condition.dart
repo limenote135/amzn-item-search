@@ -11,8 +11,8 @@ part 'alert_condition.g.dart';
 class AlertCondition with _$AlertCondition {
   @HiveType(typeId: alertConditionTypeId)
   const factory AlertCondition({
-    @HiveField(0) required AlertType type,
-    @HiveField(1) @Default(0) int value,
+    @HiveField(0) @JsonKey(name: "t") required AlertType type,
+    @HiveField(1) @JsonKey(name: "v") @Default(0) int value,
   }) = _AlertCondition;
 
   factory AlertCondition.fromJson(Map<String, dynamic> json) =>
