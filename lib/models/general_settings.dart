@@ -153,4 +153,7 @@ class AlertConditionSet with _$AlertConditionSet {
     @HiveField(1) required String title,
     @HiveField(2) @Default(<AlertCondition>[]) List<AlertCondition> conditions,
   }) = _AlertConditionSet;
+
+  factory AlertConditionSet.fromJson(Map<String, dynamic> json) =>
+      _$AlertConditionSetFromJson(json);
 }
