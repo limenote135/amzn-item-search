@@ -42,3 +42,56 @@ class AlertConditionAdapter extends TypeAdapter<_$_AlertCondition> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_AlertCondition _$_$_AlertConditionFromJson(Map<String, dynamic> json) {
+  return _$_AlertCondition(
+    type: _$enumDecode(_$AlertTypeEnumMap, json['type']),
+    value: json['value'] as int? ?? 0,
+  );
+}
+
+Map<String, dynamic> _$_$_AlertConditionToJson(_$_AlertCondition instance) =>
+    <String, dynamic>{
+      'type': _$AlertTypeEnumMap[instance.type],
+      'value': instance.value,
+    };
+
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
+}) {
+  if (source == null) {
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
+  }
+
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
+}
+
+const _$AlertTypeEnumMap = {
+  AlertType.profit: 'profit',
+  AlertType.rank: 'rank',
+  AlertType.category: 'category',
+  AlertType.condition: 'condition',
+  AlertType.premium: 'premium',
+  AlertType.noAmazon: 'noAmazon',
+  AlertType.noNewOffer: 'noNewOffer',
+};

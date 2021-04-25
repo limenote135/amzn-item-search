@@ -1025,6 +1025,10 @@ abstract class _CustomButtonDetail implements CustomButtonDetail {
       throw _privateConstructorUsedError;
 }
 
+AlertConditionSet _$AlertConditionSetFromJson(Map<String, dynamic> json) {
+  return _AlertConditionSet.fromJson(json);
+}
+
 /// @nodoc
 class _$AlertConditionSetTearOff {
   const _$AlertConditionSetTearOff();
@@ -1042,6 +1046,10 @@ class _$AlertConditionSetTearOff {
       conditions: conditions,
     );
   }
+
+  AlertConditionSet fromJson(Map<String, Object> json) {
+    return AlertConditionSet.fromJson(json);
+  }
 }
 
 /// @nodoc
@@ -1056,6 +1064,7 @@ mixin _$AlertConditionSet {
   @HiveField(2)
   List<AlertCondition> get conditions => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $AlertConditionSetCopyWith<AlertConditionSet> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1152,13 +1161,16 @@ class __$AlertConditionSetCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 @HiveType(typeId: alertConditionSetTypeId)
 class _$_AlertConditionSet implements _AlertConditionSet {
   const _$_AlertConditionSet(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.title,
       @HiveField(2) this.conditions = const <AlertCondition>[]});
+
+  factory _$_AlertConditionSet.fromJson(Map<String, dynamic> json) =>
+      _$_$_AlertConditionSetFromJson(json);
 
   @override
   @HiveField(0)
@@ -1200,6 +1212,11 @@ class _$_AlertConditionSet implements _AlertConditionSet {
   @override
   _$AlertConditionSetCopyWith<_AlertConditionSet> get copyWith =>
       __$AlertConditionSetCopyWithImpl<_AlertConditionSet>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_AlertConditionSetToJson(this);
+  }
 }
 
 abstract class _AlertConditionSet implements AlertConditionSet {
@@ -1207,6 +1224,9 @@ abstract class _AlertConditionSet implements AlertConditionSet {
       {@HiveField(0) required String id,
       @HiveField(1) required String title,
       @HiveField(2) List<AlertCondition> conditions}) = _$_AlertConditionSet;
+
+  factory _AlertConditionSet.fromJson(Map<String, dynamic> json) =
+      _$_AlertConditionSet.fromJson;
 
   @override
   @HiveField(0)
