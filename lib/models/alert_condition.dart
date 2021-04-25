@@ -14,4 +14,7 @@ class AlertCondition with _$AlertCondition {
     @HiveField(0) required AlertType type,
     @HiveField(1) @Default(0) int value,
   }) = _AlertCondition;
+
+  factory AlertCondition.fromJson(Map<String, dynamic> json) =>
+      _$AlertConditionFromJson(json);
 }
