@@ -12,16 +12,25 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+AlertCondition _$AlertConditionFromJson(Map<String, dynamic> json) {
+  return _AlertCondition.fromJson(json);
+}
+
 /// @nodoc
 class _$AlertConditionTearOff {
   const _$AlertConditionTearOff();
 
   _AlertCondition call(
-      {@HiveField(0) required AlertType type, @HiveField(1) int value = 0}) {
+      {@HiveField(0) @JsonKey(name: "t") required AlertType type,
+      @HiveField(1) @JsonKey(name: "v") int value = 0}) {
     return _AlertCondition(
       type: type,
       value: value,
     );
+  }
+
+  AlertCondition fromJson(Map<String, Object> json) {
+    return AlertCondition.fromJson(json);
   }
 }
 
@@ -31,10 +40,13 @@ const $AlertCondition = _$AlertConditionTearOff();
 /// @nodoc
 mixin _$AlertCondition {
   @HiveField(0)
+  @JsonKey(name: "t")
   AlertType get type => throw _privateConstructorUsedError;
   @HiveField(1)
+  @JsonKey(name: "v")
   int get value => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $AlertConditionCopyWith<AlertCondition> get copyWith =>
       throw _privateConstructorUsedError;
@@ -45,7 +57,9 @@ abstract class $AlertConditionCopyWith<$Res> {
   factory $AlertConditionCopyWith(
           AlertCondition value, $Res Function(AlertCondition) then) =
       _$AlertConditionCopyWithImpl<$Res>;
-  $Res call({@HiveField(0) AlertType type, @HiveField(1) int value});
+  $Res call(
+      {@HiveField(0) @JsonKey(name: "t") AlertType type,
+      @HiveField(1) @JsonKey(name: "v") int value});
 }
 
 /// @nodoc
@@ -82,7 +96,9 @@ abstract class _$AlertConditionCopyWith<$Res>
           _AlertCondition value, $Res Function(_AlertCondition) then) =
       __$AlertConditionCopyWithImpl<$Res>;
   @override
-  $Res call({@HiveField(0) AlertType type, @HiveField(1) int value});
+  $Res call(
+      {@HiveField(0) @JsonKey(name: "t") AlertType type,
+      @HiveField(1) @JsonKey(name: "v") int value});
 }
 
 /// @nodoc
@@ -115,18 +131,23 @@ class __$AlertConditionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 @HiveType(typeId: alertConditionTypeId)
 class _$_AlertCondition implements _AlertCondition {
   const _$_AlertCondition(
-      {@HiveField(0) required this.type, @HiveField(1) this.value = 0});
+      {@HiveField(0) @JsonKey(name: "t") required this.type,
+      @HiveField(1) @JsonKey(name: "v") this.value = 0});
+
+  factory _$_AlertCondition.fromJson(Map<String, dynamic> json) =>
+      _$_$_AlertConditionFromJson(json);
 
   @override
   @HiveField(0)
+  @JsonKey(name: "t")
   final AlertType type;
-  @JsonKey(defaultValue: 0)
   @override
   @HiveField(1)
+  @JsonKey(name: "v")
   final int value;
 
   @override
@@ -154,18 +175,28 @@ class _$_AlertCondition implements _AlertCondition {
   @override
   _$AlertConditionCopyWith<_AlertCondition> get copyWith =>
       __$AlertConditionCopyWithImpl<_AlertCondition>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_AlertConditionToJson(this);
+  }
 }
 
 abstract class _AlertCondition implements AlertCondition {
   const factory _AlertCondition(
-      {@HiveField(0) required AlertType type,
-      @HiveField(1) int value}) = _$_AlertCondition;
+      {@HiveField(0) @JsonKey(name: "t") required AlertType type,
+      @HiveField(1) @JsonKey(name: "v") int value}) = _$_AlertCondition;
+
+  factory _AlertCondition.fromJson(Map<String, dynamic> json) =
+      _$_AlertCondition.fromJson;
 
   @override
   @HiveField(0)
+  @JsonKey(name: "t")
   AlertType get type => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
+  @JsonKey(name: "v")
   int get value => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

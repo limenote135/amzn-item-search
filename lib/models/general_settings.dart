@@ -150,7 +150,13 @@ class AlertConditionSet with _$AlertConditionSet {
   @HiveType(typeId: alertConditionSetTypeId)
   const factory AlertConditionSet({
     @HiveField(0) required String id,
-    @HiveField(1) required String title,
-    @HiveField(2) @Default(<AlertCondition>[]) List<AlertCondition> conditions,
+    @HiveField(1) @JsonKey(name: "t") required String title,
+    @HiveField(2)
+    @JsonKey(name: "c")
+    @Default(<AlertCondition>[])
+        List<AlertCondition> conditions,
   }) = _AlertConditionSet;
+
+  factory AlertConditionSet.fromJson(Map<String, dynamic> json) =>
+      _$AlertConditionSetFromJson(json);
 }

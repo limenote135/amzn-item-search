@@ -269,3 +269,25 @@ class AlertConditionSetAdapter extends TypeAdapter<_$_AlertConditionSet> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_AlertConditionSet _$_$_AlertConditionSetFromJson(Map<String, dynamic> json) {
+  return _$_AlertConditionSet(
+    id: json['id'] as String,
+    title: json['t'] as String,
+    conditions: (json['c'] as List<dynamic>)
+        .map((e) => AlertCondition.fromJson(e as Map<String, dynamic>))
+        .toList(),
+  );
+}
+
+Map<String, dynamic> _$_$_AlertConditionSetToJson(
+        _$_AlertConditionSet instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      't': instance.title,
+      'c': instance.conditions,
+    };
