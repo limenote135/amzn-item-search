@@ -64,8 +64,7 @@ class _AppBarTitle extends HookWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: 仮で値をデフォルトでセットしておく
-    final textEditingController =
-        useTextEditingController(text: "4987241127030"); // 4987241120888
+    final textEditingController = useTextEditingController(); // 4987241120888
 
     final focusNode = useFocusNode();
 
