@@ -1025,6 +1025,10 @@ abstract class _CustomButtonDetail implements CustomButtonDetail {
       throw _privateConstructorUsedError;
 }
 
+AlertConditionSet _$AlertConditionSetFromJson(Map<String, dynamic> json) {
+  return _AlertConditionSet.fromJson(json);
+}
+
 /// @nodoc
 class _$AlertConditionSetTearOff {
   const _$AlertConditionSetTearOff();
@@ -1033,14 +1037,20 @@ class _$AlertConditionSetTearOff {
       {@HiveField(0)
           required String id,
       @HiveField(1)
+      @JsonKey(name: "t")
           required String title,
       @HiveField(2)
+      @JsonKey(name: "c")
           List<AlertCondition> conditions = const <AlertCondition>[]}) {
     return _AlertConditionSet(
       id: id,
       title: title,
       conditions: conditions,
     );
+  }
+
+  AlertConditionSet fromJson(Map<String, Object> json) {
+    return AlertConditionSet.fromJson(json);
   }
 }
 
@@ -1052,10 +1062,13 @@ mixin _$AlertConditionSet {
   @HiveField(0)
   String get id => throw _privateConstructorUsedError;
   @HiveField(1)
+  @JsonKey(name: "t")
   String get title => throw _privateConstructorUsedError;
   @HiveField(2)
+  @JsonKey(name: "c")
   List<AlertCondition> get conditions => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $AlertConditionSetCopyWith<AlertConditionSet> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1068,8 +1081,8 @@ abstract class $AlertConditionSetCopyWith<$Res> {
       _$AlertConditionSetCopyWithImpl<$Res>;
   $Res call(
       {@HiveField(0) String id,
-      @HiveField(1) String title,
-      @HiveField(2) List<AlertCondition> conditions});
+      @HiveField(1) @JsonKey(name: "t") String title,
+      @HiveField(2) @JsonKey(name: "c") List<AlertCondition> conditions});
 }
 
 /// @nodoc
@@ -1113,8 +1126,8 @@ abstract class _$AlertConditionSetCopyWith<$Res>
   @override
   $Res call(
       {@HiveField(0) String id,
-      @HiveField(1) String title,
-      @HiveField(2) List<AlertCondition> conditions});
+      @HiveField(1) @JsonKey(name: "t") String title,
+      @HiveField(2) @JsonKey(name: "c") List<AlertCondition> conditions});
 }
 
 /// @nodoc
@@ -1152,23 +1165,32 @@ class __$AlertConditionSetCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 @HiveType(typeId: alertConditionSetTypeId)
 class _$_AlertConditionSet implements _AlertConditionSet {
   const _$_AlertConditionSet(
-      {@HiveField(0) required this.id,
-      @HiveField(1) required this.title,
-      @HiveField(2) this.conditions = const <AlertCondition>[]});
+      {@HiveField(0)
+          required this.id,
+      @HiveField(1)
+      @JsonKey(name: "t")
+          required this.title,
+      @HiveField(2)
+      @JsonKey(name: "c")
+          this.conditions = const <AlertCondition>[]});
+
+  factory _$_AlertConditionSet.fromJson(Map<String, dynamic> json) =>
+      _$_$_AlertConditionSetFromJson(json);
 
   @override
   @HiveField(0)
   final String id;
   @override
   @HiveField(1)
+  @JsonKey(name: "t")
   final String title;
-  @JsonKey(defaultValue: const <AlertCondition>[])
   @override
   @HiveField(2)
+  @JsonKey(name: "c")
   final List<AlertCondition> conditions;
 
   @override
@@ -1200,22 +1222,33 @@ class _$_AlertConditionSet implements _AlertConditionSet {
   @override
   _$AlertConditionSetCopyWith<_AlertConditionSet> get copyWith =>
       __$AlertConditionSetCopyWithImpl<_AlertConditionSet>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_AlertConditionSetToJson(this);
+  }
 }
 
 abstract class _AlertConditionSet implements AlertConditionSet {
   const factory _AlertConditionSet(
-      {@HiveField(0) required String id,
-      @HiveField(1) required String title,
-      @HiveField(2) List<AlertCondition> conditions}) = _$_AlertConditionSet;
+          {@HiveField(0) required String id,
+          @HiveField(1) @JsonKey(name: "t") required String title,
+          @HiveField(2) @JsonKey(name: "c") List<AlertCondition> conditions}) =
+      _$_AlertConditionSet;
+
+  factory _AlertConditionSet.fromJson(Map<String, dynamic> json) =
+      _$_AlertConditionSet.fromJson;
 
   @override
   @HiveField(0)
   String get id => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
+  @JsonKey(name: "t")
   String get title => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
+  @JsonKey(name: "c")
   List<AlertCondition> get conditions => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
