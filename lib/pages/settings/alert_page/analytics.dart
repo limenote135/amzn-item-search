@@ -11,5 +11,5 @@ void updateAlertConditionAnalytics(
   final js = jsonEncode(alerts);
   context
       .read(analyticsControllerProvider)
-      .setUserProp(alertSettingsPropname, js);
+      .setUserProp(alertSettingsPropName, js);
 }

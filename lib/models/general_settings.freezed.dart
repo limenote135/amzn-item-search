@@ -48,7 +48,9 @@ class _$GeneralSettingsTearOff {
       @HiveField(14, defaultValue: true)
           bool enableAlert = true,
       @HiveField(15, defaultValue: _defaultAlert)
-          List<AlertConditionSet> alerts = _defaultAlert}) {
+          List<AlertConditionSet> alerts = _defaultAlert,
+      @HiveField(16, defaultValue: false)
+          bool enableAlertVibration = false}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
@@ -66,6 +68,7 @@ class _$GeneralSettingsTearOff {
       getStocks: getStocks,
       enableAlert: enableAlert,
       alerts: alerts,
+      enableAlertVibration: enableAlertVibration,
     );
   }
 }
@@ -110,6 +113,8 @@ mixin _$GeneralSettings {
   bool get enableAlert => throw _privateConstructorUsedError;
   @HiveField(15, defaultValue: _defaultAlert)
   List<AlertConditionSet> get alerts => throw _privateConstructorUsedError;
+  @HiveField(16, defaultValue: false)
+  bool get enableAlertVibration => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith =>
@@ -153,7 +158,9 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(14, defaultValue: true)
           bool enableAlert,
       @HiveField(15, defaultValue: _defaultAlert)
-          List<AlertConditionSet> alerts});
+          List<AlertConditionSet> alerts,
+      @HiveField(16, defaultValue: false)
+          bool enableAlertVibration});
 }
 
 /// @nodoc
@@ -183,6 +190,7 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object? getStocks = freezed,
     Object? enableAlert = freezed,
     Object? alerts = freezed,
+    Object? enableAlertVibration = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode: isDarkMode == freezed
@@ -249,6 +257,10 @@ class _$GeneralSettingsCopyWithImpl<$Res>
           ? _value.alerts
           : alerts // ignore: cast_nullable_to_non_nullable
               as List<AlertConditionSet>,
+      enableAlertVibration: enableAlertVibration == freezed
+          ? _value.enableAlertVibration
+          : enableAlertVibration // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -292,7 +304,9 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       @HiveField(14, defaultValue: true)
           bool enableAlert,
       @HiveField(15, defaultValue: _defaultAlert)
-          List<AlertConditionSet> alerts});
+          List<AlertConditionSet> alerts,
+      @HiveField(16, defaultValue: false)
+          bool enableAlertVibration});
 }
 
 /// @nodoc
@@ -324,6 +338,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
     Object? getStocks = freezed,
     Object? enableAlert = freezed,
     Object? alerts = freezed,
+    Object? enableAlertVibration = freezed,
   }) {
     return _then(_GeneralSettings(
       isDarkMode: isDarkMode == freezed
@@ -390,6 +405,10 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           ? _value.alerts
           : alerts // ignore: cast_nullable_to_non_nullable
               as List<AlertConditionSet>,
+      enableAlertVibration: enableAlertVibration == freezed
+          ? _value.enableAlertVibration
+          : enableAlertVibration // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -430,7 +449,9 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(14, defaultValue: true)
           this.enableAlert = true,
       @HiveField(15, defaultValue: _defaultAlert)
-          this.alerts = _defaultAlert});
+          this.alerts = _defaultAlert,
+      @HiveField(16, defaultValue: false)
+          this.enableAlertVibration = false});
 
   @JsonKey(defaultValue: false)
   @override // ダークモード
@@ -495,10 +516,14 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(15, defaultValue: _defaultAlert)
   final List<AlertConditionSet> alerts;
+  @JsonKey(defaultValue: false)
+  @override
+  @HiveField(16, defaultValue: false)
+  final bool enableAlertVibration;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration)';
   }
 
   @override
@@ -551,7 +576,10 @@ class _$_GeneralSettings implements _GeneralSettings {
                 const DeepCollectionEquality()
                     .equals(other.enableAlert, enableAlert)) &&
             (identical(other.alerts, alerts) ||
-                const DeepCollectionEquality().equals(other.alerts, alerts)));
+                const DeepCollectionEquality().equals(other.alerts, alerts)) &&
+            (identical(other.enableAlertVibration, enableAlertVibration) ||
+                const DeepCollectionEquality()
+                    .equals(other.enableAlertVibration, enableAlertVibration)));
   }
 
   @override
@@ -572,7 +600,8 @@ class _$_GeneralSettings implements _GeneralSettings {
       const DeepCollectionEquality().hash(minProfit) ^
       const DeepCollectionEquality().hash(getStocks) ^
       const DeepCollectionEquality().hash(enableAlert) ^
-      const DeepCollectionEquality().hash(alerts);
+      const DeepCollectionEquality().hash(alerts) ^
+      const DeepCollectionEquality().hash(enableAlertVibration);
 
   @JsonKey(ignore: true)
   @override
@@ -613,7 +642,9 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(14, defaultValue: true)
           bool enableAlert,
       @HiveField(15, defaultValue: _defaultAlert)
-          List<AlertConditionSet> alerts}) = _$_GeneralSettings;
+          List<AlertConditionSet> alerts,
+      @HiveField(16, defaultValue: false)
+          bool enableAlertVibration}) = _$_GeneralSettings;
 
   @override // ダークモード
   @HiveField(0)
@@ -665,6 +696,9 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(15, defaultValue: _defaultAlert)
   List<AlertConditionSet> get alerts => throw _privateConstructorUsedError;
+  @override
+  @HiveField(16, defaultValue: false)
+  bool get enableAlertVibration => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
