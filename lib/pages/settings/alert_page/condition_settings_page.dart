@@ -165,9 +165,21 @@ class _Body extends HookWidget {
             if (val == null) {
               return;
             }
-            final newCond = alert.conditions.toList()
-              ..add(AlertCondition(
-                  type: AlertType.profit, value: int.parse(val.single)));
+            if (alert.conditions.any((e) => e.type == AlertType.profit)) {
+              final ret = await showOkCancelAlertDialog(
+                context: context,
+                title: "条件の上書き",
+                message: "既存の設定を上書きしますか？",
+              );
+              if (ret == OkCancelResult.cancel) {
+                return;
+              }
+            }
+            final newCond = alert.conditions
+                .where(((e) => e.type != AlertType.profit))
+                .toList()
+                  ..add(AlertCondition(
+                      type: AlertType.profit, value: int.parse(val.single)));
             modifyCondition(newCond);
           },
         ),
@@ -191,8 +203,20 @@ class _Body extends HookWidget {
             if (val == null) {
               return;
             }
-            final newCond = alert.conditions.toList()
-              ..add(AlertCondition(type: AlertType.condition, value: val));
+            if (alert.conditions.any((e) => e.type == AlertType.condition)) {
+              final ret = await showOkCancelAlertDialog(
+                context: context,
+                title: "条件の上書き",
+                message: "既存の設定を上書きしますか？",
+              );
+              if (ret == OkCancelResult.cancel) {
+                return;
+              }
+            }
+            final newCond = alert.conditions
+                .where(((e) => e.type != AlertType.condition))
+                .toList()
+                  ..add(AlertCondition(type: AlertType.condition, value: val));
             modifyCondition(newCond);
           },
         ),
@@ -219,9 +243,21 @@ class _Body extends HookWidget {
             if (val == null) {
               return;
             }
-            final newCond = alert.conditions.toList()
-              ..add(AlertCondition(
-                  type: AlertType.rank, value: int.parse(val.single)));
+            if (alert.conditions.any((e) => e.type == AlertType.rank)) {
+              final ret = await showOkCancelAlertDialog(
+                context: context,
+                title: "条件の上書き",
+                message: "既存の設定を上書きしますか？",
+              );
+              if (ret == OkCancelResult.cancel) {
+                return;
+              }
+            }
+            final newCond = alert.conditions
+                .where(((e) => e.type != AlertType.rank))
+                .toList()
+                  ..add(AlertCondition(
+                      type: AlertType.rank, value: int.parse(val.single)));
             modifyCondition(newCond);
           },
         ),
@@ -239,8 +275,20 @@ class _Body extends HookWidget {
             if (val == null) {
               return;
             }
-            final newCond = alert.conditions.toList()
-              ..add(AlertCondition(type: AlertType.category, value: val));
+            if (alert.conditions.any((e) => e.type == AlertType.category)) {
+              final ret = await showOkCancelAlertDialog(
+                context: context,
+                title: "条件の上書き",
+                message: "既存の設定を上書きしますか？",
+              );
+              if (ret == OkCancelResult.cancel) {
+                return;
+              }
+            }
+            final newCond = alert.conditions
+                .where(((e) => e.type != AlertType.category))
+                .toList()
+                  ..add(AlertCondition(type: AlertType.category, value: val));
             modifyCondition(newCond);
           },
         ),
@@ -248,11 +296,10 @@ class _Body extends HookWidget {
           leading: const Icon(Icons.add),
           title: const Text("定価以上(プレ値)"),
           onTap: () {
-            if (alert.conditions.length >= 10) {
-              return;
-            }
-            final newCond = alert.conditions.toList()
-              ..add(const AlertCondition(type: AlertType.premium));
+            final newCond = alert.conditions
+                .where(((e) => e.type != AlertType.premium))
+                .toList()
+                  ..add(const AlertCondition(type: AlertType.premium));
             modifyCondition(newCond);
           },
         ),
@@ -260,11 +307,10 @@ class _Body extends HookWidget {
           leading: const Icon(Icons.add),
           title: const Text("新品なし"),
           onTap: () {
-            if (alert.conditions.length >= 10) {
-              return;
-            }
-            final newCond = alert.conditions.toList()
-              ..add(const AlertCondition(type: AlertType.noNewOffer));
+            final newCond = alert.conditions
+                .where(((e) => e.type != AlertType.noNewOffer))
+                .toList()
+                  ..add(const AlertCondition(type: AlertType.noNewOffer));
             modifyCondition(newCond);
           },
         ),
@@ -272,11 +318,10 @@ class _Body extends HookWidget {
           leading: const Icon(Icons.add),
           title: const Text("Amazon販売なし"),
           onTap: () {
-            if (alert.conditions.length >= 10) {
-              return;
-            }
-            final newCond = alert.conditions.toList()
-              ..add(const AlertCondition(type: AlertType.noAmazon));
+            final newCond = alert.conditions
+                .where(((e) => e.type != AlertType.noAmazon))
+                .toList()
+                  ..add(const AlertCondition(type: AlertType.noAmazon));
             modifyCondition(newCond);
           },
         ),
