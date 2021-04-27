@@ -1,5 +1,4 @@
 import 'package:amasearch/models/general_settings.dart';
-import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -105,21 +104,18 @@ class __UrlEditFormState extends State<_UrlEditForm> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
-              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(janVariable);
               },
               child: const Text("JAN"),
             ),
             ElevatedButton(
-              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(asinVariable);
               },
               child: const Text("ASIN"),
             ),
             ElevatedButton(
-              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(titleVariable);
               },
@@ -132,7 +128,6 @@ class __UrlEditFormState extends State<_UrlEditForm> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
-              style: raisedButtonStyle(context),
               onPressed: () {
                 Navigator.of(context).pop(CustomButtonDetail(
                   enable: widget.button.enable,

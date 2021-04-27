@@ -5,7 +5,6 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
-import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -82,7 +81,6 @@ class _AppBarTitle extends HookWidget {
             toolbarButtons: [
               (node) {
                 return ElevatedButton.icon(
-                  style: raisedButtonStyle(context),
                   icon: const Icon(Icons.search),
                   label: const Text("検索"),
                   onPressed: () {
