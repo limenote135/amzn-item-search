@@ -200,6 +200,11 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     final continuousRead = settings.continuousCameraRead;
     final type = settings.type;
 
+    final borderBox = BoxDecoration(
+      border: Border.all(color: Colors.white),
+      borderRadius: BorderRadius.circular(5),
+    );
+
     return Scaffold(
       key: _scaffoldKey,
       body: Stack(
@@ -216,24 +221,42 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
           SafeArea(
             child: Column(
               children: [
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: <Widget>[
+                //     const BackButton(
+                //       color: Colors.white,
+                //     ),
+                //     MaterialButton(
+                //       onPressed: () {
+                //         _toggleFlash();
+                //         setState(() {}); // TODO: 表示を更新するため setState で強制更新
+                //       },
+                //       textColor: Colors.white,
+                //       child: Text.rich(TextSpan(
+                //         text: "Flash: ",
+                //         children: [
+                //           WidgetSpan(
+                //             child: Container(
+                //               padding: const EdgeInsets.all(2),
+                //               decoration: _isFlashOpen() ? borderBox : null,
+                //               child: const Text("On"),
+                //             ),
+                //           ),
+                //           WidgetSpan(
+                //             child: Container(
+                //               padding: const EdgeInsets.all(2),
+                //               decoration: _isFlashOpen() ? null : borderBox,
+                //               child: const Text("Off"),
+                //             ),
+                //           ),
+                //         ],
+                //       )),
+                //     ),
+                //   ],
+                // ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const BackButton(
-                      color: Colors.white,
-                    ),
-                    MaterialButton(
-                      onPressed: () {
-                        _toggleFlash();
-                        setState(() {}); // TODO: 表示を更新するため setState で強制更新
-                      },
-                      textColor: Colors.white,
-                      child:
-                          Text("${_isFlashOpen() ? "Flash On" : "Flash Off"}"),
-                    ),
-                  ],
-                ),
-                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Spacer(),
                     MaterialButton(
@@ -248,7 +271,25 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                         });
                       },
                       textColor: Colors.white,
-                      child: Text("${continuousRead ? "連続読取 On" : "連続読取 Off"}"),
+                      child: Text.rich(TextSpan(
+                        text: "連続読取: ",
+                        children: [
+                          WidgetSpan(
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: continuousRead ? borderBox : null,
+                              child: const Text("On"),
+                            ),
+                          ),
+                          WidgetSpan(
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: continuousRead ? null : borderBox,
+                              child: const Text("Off"),
+                            ),
+                          ),
+                        ],
+                      )),
                     ),
                   ],
                 ),
