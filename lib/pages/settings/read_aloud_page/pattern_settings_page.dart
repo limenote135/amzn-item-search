@@ -4,7 +4,6 @@ import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
-import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
@@ -136,14 +135,12 @@ class __PatternEditFormState extends State<_PatternEditForm> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
-              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(rankVariable);
               },
               child: const Text("商品順位"),
             ),
             ElevatedButton(
-              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(titleVariable);
               },
@@ -155,14 +152,12 @@ class __PatternEditFormState extends State<_PatternEditForm> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
-              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(newProfitVariable);
               },
               child: const Text("新品粗利益"),
             ),
             ElevatedButton(
-              style: raisedButtonStyle(context),
               onPressed: () {
                 _addText(usedProfitVariable);
               },
@@ -178,7 +173,6 @@ class __PatternEditFormState extends State<_PatternEditForm> {
               builder: (context, watch, child) {
                 final tts = watch(ttsProvider);
                 return ElevatedButton(
-                  style: raisedButtonStyle(context),
                   onPressed: () {
                     final text =
                         _createPreviewText(_textEditingController.text);
@@ -189,7 +183,6 @@ class __PatternEditFormState extends State<_PatternEditForm> {
               },
             ),
             ElevatedButton(
-              style: raisedButtonStyle(context),
               onPressed: () {
                 Navigator.of(context).pop(_textEditingController.text);
               },

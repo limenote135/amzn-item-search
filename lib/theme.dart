@@ -1,27 +1,27 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-const _primaryColor = Colors.green;
+const _schemaColor = FlexScheme.gold;
 
-final lightTheme = ThemeData(
-  primarySwatch: _primaryColor,
-  // This makes the visual density adapt to the platform that you run
-  // the app on. For desktop platforms, the controls will be smaller and
-  // closer together (more dense) than on mobile platforms.
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  dividerTheme: const DividerThemeData(
-    color: Colors.black,
-  ),
-);
+final lightTheme = FlexColorScheme.light(
+  scheme: _schemaColor,
+  appBarStyle: FlexAppBarStyle.surface,
+  visualDensity: FlexColorScheme.comfortablePlatformDensity,
+).toTheme.copyWith(
+      dividerTheme: const DividerThemeData(
+        color: Colors.grey,
+      ),
+    );
 
-final darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  primarySwatch: _primaryColor,
+final darkTheme = FlexColorScheme.dark(
+  scheme: _schemaColor,
   visualDensity: VisualDensity.adaptivePlatformDensity,
-  dividerTheme: const DividerThemeData(
-    color: Colors.white,
-  ),
-  cupertinoOverrideTheme: const CupertinoThemeData(
-    textTheme: CupertinoTextThemeData(),
-  ),
-);
+).toTheme.copyWith(
+      dividerTheme: const DividerThemeData(
+        color: Colors.white,
+      ),
+      cupertinoOverrideTheme: const CupertinoThemeData(
+        textTheme: CupertinoTextThemeData(),
+      ),
+    );
