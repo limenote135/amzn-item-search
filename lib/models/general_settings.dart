@@ -123,6 +123,9 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(15, defaultValue: _defaultAlert)
     @Default(_defaultAlert)
         List<AlertConditionSet> alerts,
+    @HiveField(16, defaultValue: false)
+    @Default(false)
+        bool enableAlertVibration,
   }) = _GeneralSettings;
 }
 
