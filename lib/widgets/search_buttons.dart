@@ -4,7 +4,6 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
-import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,6 @@ class SearchButtons extends HookWidget {
       direction: Axis.horizontal,
       children: [
         ElevatedButton(
-          style: raisedButtonStyle(context),
           onPressed: () async {
             final url =
                 "https://www.amazon.co.jp/gp/offer-listing/${item.asin}/";
@@ -40,7 +38,6 @@ class SearchButtons extends HookWidget {
           child: const Text("出品一覧"),
         ),
         ElevatedButton(
-          style: raisedButtonStyle(context),
           onPressed: () async {
             await context
                 .read(analyticsControllerProvider)
@@ -58,7 +55,6 @@ class SearchButtons extends HookWidget {
           child: const Text("新品一覧"),
         ),
         ElevatedButton(
-          style: raisedButtonStyle(context),
           onPressed: () async {
             await context
                 .read(analyticsControllerProvider)
@@ -79,7 +75,6 @@ class SearchButtons extends HookWidget {
           child: const Text("中古一覧"),
         ),
         ElevatedButton(
-          style: raisedButtonStyle(context),
           onPressed: () async {
             final url = "https://keepa.com/#!product/5-${item.asin}/";
             await context
@@ -92,7 +87,6 @@ class SearchButtons extends HookWidget {
         for (final button in buttons)
           if (button.enable)
             ElevatedButton(
-              style: raisedButtonStyle(context),
               onPressed: () async {
                 final url = replaceUrl(template: button.pattern, item: item);
                 if (!url.startsWith("http")) {
