@@ -9,7 +9,6 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/form.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
-import 'package:amasearch/styles/button.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/util/uuid.dart';
@@ -83,7 +82,6 @@ class _Body extends HookWidget {
               builder: (context, watch, child) {
                 final image = watch(_itemImageProvider);
                 return ElevatedButton(
-                  style: raisedButtonStyle(context),
                   onPressed: form.invalid
                       ? null
                       : () => _onSubmit(
