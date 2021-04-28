@@ -5,4 +5,5 @@ const skuFormatPropName = "skuFormat";
 const readAloudPropName = "readAloudFormat";
 const getStocksPropName = "getStocks";
 const enableAlertPropName = "enableAlert";
-const alertSettingsPropname = "alert";
+const alertSettingsPropName = "alert";
+const enableAlertVibrationPropName = "enableAlertVibration";

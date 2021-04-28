@@ -57,6 +57,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     bool? getStocks,
     bool? enableAlert,
     List<AlertConditionSet>? alerts,
+    bool? enableAlertVibration,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -75,6 +76,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       getStocks: getStocks ?? state.getStocks,
       enableAlert: enableAlert ?? state.enableAlert,
       alerts: alerts ?? state.alerts,
+      enableAlertVibration: enableAlertVibration ?? state.enableAlertVibration,
     );
     box.put(generalSettingsKeyName, state);
   }
