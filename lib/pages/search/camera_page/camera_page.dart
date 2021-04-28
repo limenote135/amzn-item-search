@@ -177,6 +177,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       ..stopCamera();
   }
 
+  // ignore: unused_element
   void _toggleFlash() {
     if (!_isCameraGranted) {
       return;
@@ -184,6 +185,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     _scannerController!.toggleFlash();
   }
 
+  // ignore: unused_element
   bool _isFlashOpen() {
     if (!_isCameraGranted) {
       return false;

@@ -5,6 +5,7 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/util/alert.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
@@ -13,6 +14,7 @@ import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
+import 'package:vibration/vibration.dart';
 
 import 'common.dart';
 
@@ -66,10 +68,19 @@ final searchItemFutureProvider = FutureProvider.autoDispose
     jan: param.jan,
     asins: resp.items,
   );
-  // 見つからなかった場合は保存しない
   if (resp.items.isNotEmpty) {
+    // 空じゃない場合のみ保存
     // ignore: unawaited_futures
     box.put(param.searchDate, searchItem);
+
+    if (settings.enableAlert && settings.enableAlertVibration) {
+      final item = resp.items.first;
+      final searchSettings = ref.read(searchSettingsControllerProvider);
+      if (settings.alerts
+          .any((element) => element.match(item, searchSettings))) {
+        await Vibration.vibrate(duration: 400, amplitude: 128);
+      }
+    }
   }
   return searchItem;
 });
