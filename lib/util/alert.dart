@@ -37,11 +37,30 @@ extension AlertConditionSetExtension on AlertConditionSet {
                 fee: item.prices?.feeInfo,
                 useFba: settings.useFba);
 
-            if (profit <= cond.value) {
+            if (profit < cond.value) {
               return false;
             }
           } else {
             // Condition 未設定の場合
+            PriceDetail price;
+            if (item.prices!.newPrices.isNotEmpty) {
+              price = item.prices!.newPrices.first;
+            } else if (item.prices!.usedPrices.isNotEmpty) {
+              price = item.prices!.usedPrices.first;
+            } else {
+              // 中古も新品も無い場合
+              return false;
+            }
+
+            final profit = calcProfit(
+              sellPrice: price.price,
+              purchasePrice: 0,
+              fee: item.prices?.feeInfo,
+              useFba: settings.useFba,
+            );
+            if (profit < cond.value) {
+              return false;
+            }
           }
           break;
         case AlertType.condition:
