@@ -56,6 +56,18 @@ class _Body extends HookWidget {
                 .setUserProp(enableAlertPropName, value.toString());
           },
         ),
+        SwitchListTile(
+          title: const Text("条件一致時にバイブレーション"),
+          value: settings.enableAlertVibration,
+          onChanged: (value) {
+            context
+                .read(generalSettingsControllerProvider.notifier)
+                .update(enableAlertVibration: value);
+            context
+                .read(analyticsControllerProvider)
+                .setUserProp(enableAlertVibrationPropName, value.toString());
+          },
+        ),
         const ThemeDivider(),
         for (var i = 0; i < settings.alerts.length; i++)
           ListTile(
