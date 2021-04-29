@@ -11,7 +11,7 @@ class ThemeDivider extends StatelessWidget {
       thickness: theme.thickness,
       indent: theme.indent,
       endIndent: theme.endIndent,
-      height: 5,
+      height: 2,
     );
   }
 }
