@@ -26,7 +26,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_hooks: ^0.16.0
-  hooks_riverpod: ^0.14.0+2
+  hooks_riverpod: ^0.14.0+3
   state_notifier: ^0.7.0
   freezed_annotation: ^0.14.1
   json_serializable: ^4.1.1
@@ -43,11 +43,11 @@ dependencies:
   path_provider: ^2.0.1
   csv: ^5.0.0
   share: ^2.0.1
-  firebase_core: ^1.0.4
-  firebase_analytics: ^8.0.1
-  firebase_crashlytics: ^2.0.1
-  firebase_remote_config: ^0.10.0-dev.1
-  firebase_performance: ^0.7.0+1
+  firebase_core: ^1.1.0
+  firebase_analytics: ^8.0.2
+  firebase_crashlytics: ^2.0.2
+  firebase_remote_config: ^0.10.0-dev.2
+  firebase_performance: ^0.7.0+2
   vibration: ^1.7.4-nullsafety.0
   flutter_tts: ^3.0.0
   flutter_web_browser: ^0.14.0
