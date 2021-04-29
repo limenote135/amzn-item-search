@@ -9,6 +9,7 @@ analyzer:
     - lib/main_global_object_key.dart
     - lib/**/*.g.dart
     - lib/**/*.freezed.dart
+    - lib/util/euc/*.dart
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
