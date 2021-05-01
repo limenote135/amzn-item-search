@@ -80,6 +80,7 @@ class _Body extends HookWidget {
                 await context
                     .read(analyticsControllerProvider)
                     .logSingleEvent(deleteAllSearchHistoryEventName);
+                Navigator.pop(context);
               }
             },
           ),
