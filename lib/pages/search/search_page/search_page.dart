@@ -4,7 +4,7 @@ import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
-import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
+import 'package:amasearch/pages/search/search_page/search_bar.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -25,22 +25,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 8,
-        title: const _AppBarTitle(),
-        actions: [
-          AnimatedTheme(
-            data: isDark(context) ? ThemeData.dark() : ThemeData.light(),
-            child: IconButton(
-              icon: const Icon(Icons.settings),
-              tooltip: "検索設定",
-              onPressed: () {
-                Navigator.of(context).pushNamed(SearchSettingsPage.routeName);
-              },
-            ),
-          )
-        ],
-      ),
+      appBar: const SearchBar(),
       body: const _Body(),
       floatingActionButton: FloatingActionButton(
         heroTag: onStartCameraHeroTag,
