@@ -1,5 +1,6 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
+import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/item_price.dart';
@@ -111,6 +112,7 @@ class _PriceAndProfit extends HookWidget {
     if (detail.price == 0) {
       return " - ";
     }
-    return detail.subCondition.toDisplayShortString();
+    final channel = detail.channel == FulfillmentChannel.amazon ? " (FBA)" : "";
+    return detail.subCondition.toDisplayShortString() + channel;
   }
 }
