@@ -14,7 +14,6 @@ class ItemImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (data == null) {
-      print("image from internet");
       return ExtendedImage.network(
         url!,
         cache: true,
@@ -37,7 +36,6 @@ class ItemImage extends StatelessWidget {
         },
       );
     }
-    print("image from binary");
     return ExtendedImage.memory(
       data!,
       fit: BoxFit.scaleDown,
