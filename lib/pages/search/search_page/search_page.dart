@@ -118,10 +118,8 @@ class _AppBarTitle extends HookWidget {
       case SearchType.tsutaya:
         return const InputDecoration(hintText: "TSUTAYA");
       case SearchType.freeWord:
-        // deprecated
-        break;
+        throw Exception("freeWord is deprecated: $type");
     }
-    throw Exception("Unknown SearchType: $type");
   }
 
   void _addItem(BuildContext context, SearchType type, String code) {
