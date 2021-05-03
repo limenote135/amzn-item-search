@@ -43,7 +43,7 @@ class _Body extends HookWidget {
         newIndex -= 1;
       }
       final item = settings.csvOrder[oldIndex];
-      final cp = settings.csvOrder
+      final cp = settings.csvOrder.toList()
         ..removeAt(oldIndex)
         ..insert(newIndex, item);
       context
