@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
@@ -58,6 +59,9 @@ class _Body extends HookWidget {
     final lowestPrice = _calcLowestPrice(item.prices);
     final useFba = useProvider(searchSettingsControllerProvider).useFba;
 
+    final isMajorCustomer = useProvider(generalSettingsControllerProvider
+        .select((value) => value.isMajorCustomer));
+
     final stock = StockItem(
       purchaseDate: currentTimeString(),
       sellPrice: lowestPrice,
@@ -85,7 +89,13 @@ class _Body extends HookWidget {
                   onPressed: form.invalid
                       ? null
                       : () => _onSubmit(
-                          context, form, uuid.v4(), item, image.state),
+                            context,
+                            form,
+                            uuid.v4(),
+                            item,
+                            image.state,
+                            isMajorCustomer,
+                          ),
                   child: const Text("仕入れる"),
                 );
               },
@@ -102,6 +112,7 @@ class _Body extends HookWidget {
     String id,
     AsinData item,
     Uint8List? image,
+    bool isMajorCustomer,
   ) {
     final purchase = getInt(form, purchasePriceField);
     final sell = getInt(form, sellPriceField);
@@ -112,10 +123,12 @@ class _Body extends HookWidget {
       purchasePrice: purchase,
       fee: item.prices?.feeInfo,
       useFba: useFba,
+      isMajorCustomer: isMajorCustomer,
     );
     final breakEven = calcBreakEven(
       purchase: purchase,
       useFba: useFba,
+      isMajorCustomer: isMajorCustomer,
       feeInfo: item.prices?.feeInfo,
     );
 
