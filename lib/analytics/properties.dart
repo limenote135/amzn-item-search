@@ -7,3 +7,4 @@ const getStocksPropName = "getStocks";
 const enableAlertPropName = "enableAlert";
 const alertSettingsPropName = "alert";
 const enableAlertVibrationPropName = "enableAlertVibration";
+const majorCustomerPropName = "majorCustomer";

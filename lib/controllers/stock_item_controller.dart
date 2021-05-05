@@ -41,6 +41,7 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
             breakEven: calcBreakEven(
               purchase: storeData.purchasePrice,
               useFba: storeData.useFba,
+              isMajorCustomer: true, // この時点では小口設定ができなかったので true に固定
               feeInfo: storeData.item.prices?.feeInfo,
             ),
           );

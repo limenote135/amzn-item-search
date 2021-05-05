@@ -1,6 +1,4 @@
 import 'package:amasearch/controllers/search_item_controller.dart';
-import 'package:amasearch/controllers/search_settings_controller.dart';
-import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
@@ -13,7 +11,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:keyboard_actions/keyboard_actions.dart';
 
 import 'item_tile.dart';
 import 'search_settings.dart';

@@ -1,3 +1,4 @@
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/search_item.dart';
@@ -44,6 +45,9 @@ class _Body extends HookWidget {
   Widget build(BuildContext context) {
     final item = useProvider(currentStockItemProvider);
 
+    final isMajorCustomer = useProvider(generalSettingsControllerProvider
+        .select((value) => value.isMajorCustomer));
+
     return ProviderScope(
       overrides: [
         currentAsinDataProvider.overrideWithValue(item.item), // 不要になってるかも？
@@ -52,8 +56,14 @@ class _Body extends HookWidget {
         action: ReactiveFormConsumer(
           builder: (context, form, child) {
             return ElevatedButton(
-              onPressed:
-                  form.invalid ? null : () => _onSubmit(context, form, item),
+              onPressed: form.invalid
+                  ? null
+                  : () => _onSubmit(
+                        context,
+                        form,
+                        item,
+                        isMajorCustomer: isMajorCustomer,
+                      ),
               child: const Text("更新"),
             );
           },
@@ -62,7 +72,12 @@ class _Body extends HookWidget {
     );
   }
 
-  void _onSubmit(BuildContext context, FormGroup form, StockItem item) {
+  void _onSubmit(
+    BuildContext context,
+    FormGroup form,
+    StockItem item, {
+    required bool isMajorCustomer,
+  }) {
     final purchase = getInt(form, purchasePriceField);
     final sell = getInt(form, sellPriceField);
     final useFba = getBool(form, useFbaField);
@@ -72,10 +87,12 @@ class _Body extends HookWidget {
       purchasePrice: purchase,
       fee: item.item.prices?.feeInfo,
       useFba: useFba,
+      isMajorCustomer: isMajorCustomer,
     );
     final breakEven = calcBreakEven(
       purchase: purchase,
       useFba: useFba,
+      isMajorCustomer: isMajorCustomer,
       feeInfo: item.item.prices?.feeInfo,
     );
 
