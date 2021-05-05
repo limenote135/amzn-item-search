@@ -49,6 +49,18 @@ class _Body extends HookWidget {
                 .setUserProp(darkModePropName, value.toString());
           },
         ),
+        SwitchListTile(
+          title: const Text("大口出品者"),
+          value: settings.isMajorCustomer,
+          onChanged: (value) {
+            context
+                .read(generalSettingsControllerProvider.notifier)
+                .update(isMajorCustomer: value);
+            context
+                .read(analyticsControllerProvider)
+                .setUserProp(majorCustomerPropName, value.toString());
+          },
+        ),
         ListTile(
           title: const Text("目標利益率設定"),
           subtitle: settings.enableTargetProfit == false

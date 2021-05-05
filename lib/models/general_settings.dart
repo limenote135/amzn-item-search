@@ -126,6 +126,7 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(16, defaultValue: false)
     @Default(false)
         bool enableAlertVibration,
+    @HiveField(17, defaultValue: true) @Default(true) bool isMajorCustomer,
   }) = _GeneralSettings;
 }
 

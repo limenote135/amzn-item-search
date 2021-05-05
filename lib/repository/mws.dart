@@ -76,8 +76,11 @@ final searchItemFutureProvider = FutureProvider.autoDispose
     if (settings.enableAlert && settings.enableAlertVibration) {
       final item = resp.items.first;
       final searchSettings = ref.read(searchSettingsControllerProvider);
-      if (settings.alerts
-          .any((element) => element.match(item, searchSettings))) {
+      if (settings.alerts.any((element) => element.match(
+            item,
+            searchSettings,
+            isMajorCustomer: settings.isMajorCustomer,
+          ))) {
         await Vibration.vibrate(duration: 400, amplitude: 128);
       }
     }
