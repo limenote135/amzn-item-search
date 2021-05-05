@@ -106,7 +106,9 @@ class PriceDetailTile extends HookWidget {
               TextLine(
                 leading: const Text("FBA 手数料"),
                 main: feeInfo.fbaFee != -1
-                    ? Text("${feeInfo.fbaFee} 円")
+                    ? Text(setting.useFba
+                        ? "${feeInfo.fbaFee} 円"
+                        : "(${feeInfo.fbaFee} 円)")
                     : const Text("(不明) 円"),
               )
             ],
