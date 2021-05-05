@@ -45,6 +45,8 @@ class _PriceAndProfit extends HookWidget {
         .select((value) => value.targetProfitValue));
     final minProfit = useProvider(
         generalSettingsControllerProvider.select((value) => value.minProfit));
+    final isMajorCustomer = useProvider(generalSettingsControllerProvider
+        .select((value) => value.isMajorCustomer));
 
     final detail = getPriceDetail(
       item: item,
@@ -80,6 +82,7 @@ class _PriceAndProfit extends HookWidget {
                 detail.price,
                 item.prices?.feeInfo,
                 useFba: settings.useFba,
+                isMajorCustomer: isMajorCustomer,
               ),
               style: strongTextStyle,
             ),
@@ -97,6 +100,7 @@ class _PriceAndProfit extends HookWidget {
                   targetRate: targetPriceRate,
                   minProfit: minProfit,
                   useFba: settings.useFba,
+                  isMajorCustomer: isMajorCustomer,
                 )),
                 style: strongTextStyle,
               ),

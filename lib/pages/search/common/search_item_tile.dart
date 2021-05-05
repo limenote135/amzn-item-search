@@ -33,7 +33,11 @@ class SearchItemTile extends HookWidget {
       ],
     );
     if (settings.enableAlert &&
-        settings.alerts.any((element) => element.match(item, search))) {
+        settings.alerts.any((element) => element.match(
+              item,
+              search,
+              isMajorCustomer: settings.isMajorCustomer,
+            ))) {
       return StrongContainer(tile);
     }
     return tile;
