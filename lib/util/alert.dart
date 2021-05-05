@@ -9,7 +9,11 @@ import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/util/price_util.dart';
 
 extension AlertConditionSetExtension on AlertConditionSet {
-  bool match(AsinData item, SearchSettings settings) {
+  bool match(
+    AsinData item,
+    SearchSettings settings, {
+    required bool isMajorCustomer,
+  }) {
     if (conditions.isEmpty ||
         (conditions.length == 1 && conditions[0].type == AlertType.condition)) {
       // 条件無しまたは、粗利条件を設定せずにコンディション条件だけ設定している場合
@@ -32,10 +36,12 @@ extension AlertConditionSetExtension on AlertConditionSet {
             final detail = _getPriceDetail(
                 item: item, cond: condition, priorFba: settings.priorFba);
             final profit = calcProfit(
-                sellPrice: detail.price,
-                purchasePrice: 0,
-                fee: item.prices?.feeInfo,
-                useFba: settings.useFba);
+              sellPrice: detail.price,
+              purchasePrice: 0,
+              fee: item.prices?.feeInfo,
+              useFba: settings.useFba,
+              isMajorCustomer: isMajorCustomer,
+            );
 
             if (profit < cond.value) {
               return false;
@@ -57,6 +63,7 @@ extension AlertConditionSetExtension on AlertConditionSet {
               purchasePrice: 0,
               fee: item.prices?.feeInfo,
               useFba: settings.useFba,
+              isMajorCustomer: isMajorCustomer,
             );
             if (profit < cond.value) {
               return false;

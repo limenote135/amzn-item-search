@@ -24,6 +24,15 @@ class PriceDetailTile extends HookWidget {
     final item = useProvider(currentAsinDataProvider);
     final setting = useProvider(searchSettingsControllerProvider);
 
+    final showTargetPrice = useProvider(generalSettingsControllerProvider
+        .select((value) => value.enableTargetProfit));
+    final targetPriceRate = useProvider(generalSettingsControllerProvider
+        .select((value) => value.targetProfitValue));
+    final minProfit = useProvider(
+        generalSettingsControllerProvider.select((value) => value.minProfit));
+    final isMajorCustomer = useProvider(generalSettingsControllerProvider
+        .select((value) => value.isMajorCustomer));
+
     final detail = getPriceDetail(
       item: item,
       condition: type,
@@ -35,14 +44,10 @@ class PriceDetailTile extends HookWidget {
         const FeeInfo(referralFeeRate: 0, variableClosingFee: 0, fbaFee: -1);
 
     final sellFeeRate = (feeInfo.referralFeeRate * 100).round();
-    final sellFee = (detail.price * feeInfo.referralFeeRate).round();
-
-    final showTargetPrice = useProvider(generalSettingsControllerProvider
-        .select((value) => value.enableTargetProfit));
-    final targetPriceRate = useProvider(generalSettingsControllerProvider
-        .select((value) => value.targetProfitValue));
-    final minProfit = useProvider(
-        generalSettingsControllerProvider.select((value) => value.minProfit));
+    var sellFee = (detail.price * feeInfo.referralFeeRate).round();
+    if (!isMajorCustomer) {
+      sellFee += 100; // 小口手数料
+    }
 
     final targetPrice = calcTargetPrice(
       sellPrice: detail.price,
@@ -50,6 +55,7 @@ class PriceDetailTile extends HookWidget {
       targetRate: targetPriceRate,
       minProfit: minProfit,
       useFba: setting.useFba,
+      isMajorCustomer: isMajorCustomer,
     );
 
     return ExpansionTile(
@@ -73,6 +79,7 @@ class PriceDetailTile extends HookWidget {
               detail.price,
               feeInfo,
               useFba: setting.useFba,
+              isMajorCustomer: isMajorCustomer,
             )} 円"),
           ),
           if (showTargetPrice)
