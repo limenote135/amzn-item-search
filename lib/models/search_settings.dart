@@ -16,8 +16,8 @@ class SearchSettings with _$SearchSettings {
     @HiveField(1)
     @Default(UsedSubCondition.all)
         UsedSubCondition usedSubCondition,
-    @HiveField(2) @Default(false) bool useFba,
-    @HiveField(3) @Default(false) bool priorFba,
+    @HiveField(2) @Default(true) bool useFba,
+    @HiveField(3) @Default(true) bool priorFba,
     @HiveField(4, defaultValue: true) @Default(true) bool continuousCameraRead,
   }) = _SearchSettings;
 }
