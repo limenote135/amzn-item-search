@@ -19,8 +19,8 @@ class _$SearchSettingsTearOff {
   _SearchSettings call(
       {@HiveField(0) SearchType type = SearchType.jan,
       @HiveField(1) UsedSubCondition usedSubCondition = UsedSubCondition.all,
-      @HiveField(2) bool useFba = false,
-      @HiveField(3) bool priorFba = false,
+      @HiveField(2) bool useFba = true,
+      @HiveField(3) bool priorFba = true,
       @HiveField(4, defaultValue: true) bool continuousCameraRead = true}) {
     return _SearchSettings(
       type: type,
@@ -174,8 +174,8 @@ class _$_SearchSettings implements _SearchSettings {
   const _$_SearchSettings(
       {@HiveField(0) this.type = SearchType.jan,
       @HiveField(1) this.usedSubCondition = UsedSubCondition.all,
-      @HiveField(2) this.useFba = false,
-      @HiveField(3) this.priorFba = false,
+      @HiveField(2) this.useFba = true,
+      @HiveField(3) this.priorFba = true,
       @HiveField(4, defaultValue: true) this.continuousCameraRead = true});
 
   @JsonKey(defaultValue: SearchType.jan)
@@ -186,11 +186,11 @@ class _$_SearchSettings implements _SearchSettings {
   @override
   @HiveField(1)
   final UsedSubCondition usedSubCondition;
-  @JsonKey(defaultValue: false)
+  @JsonKey(defaultValue: true)
   @override
   @HiveField(2)
   final bool useFba;
-  @JsonKey(defaultValue: false)
+  @JsonKey(defaultValue: true)
   @override
   @HiveField(3)
   final bool priorFba;
