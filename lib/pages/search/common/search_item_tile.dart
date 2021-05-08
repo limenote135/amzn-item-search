@@ -1,5 +1,6 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
+import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/alert.dart';
@@ -52,6 +53,8 @@ class _ItemTileBody extends HookWidget {
     final item = useProvider(currentAsinDataProvider);
     final date = useProvider(currentSearchDateProvider);
     final isEllipsis = useProvider(isEllipsisProvider);
+
+    final cartPrice = getCartPrice(item.prices);
 
     final smallSize = smallFontSize(context);
     return Column(
@@ -107,35 +110,62 @@ class _ItemTileBody extends HookWidget {
             )
           ],
         ),
-        const PriceInfo(),
         Row(
           children: [
-            item.sellByAmazon == null
-                ? Expanded(child: Container())
-                : Expanded(
-                    child: Text.rich(
+            Expanded(
+              child: Text.rich(
+                TextSpan(
+                  text: "カート: ",
+                  children: [
+                    if (cartPrice == -1)
+                      const TextSpan(text: " - ")
+                    else
                       TextSpan(
-                        text: "Amazon販売: ",
-                        children: [
-                          item.sellByAmazon == true
-                              ? const TextSpan(text: "有")
-                              : const TextSpan(
-                                  text: "無", style: strongTextStyle)
-                        ],
+                        text: numberFormatter.format(cartPrice),
+                        style: strongTextStyle,
                       ),
-                      style: smallSize,
-                    ),
-                  ),
-            if (date != null)
+                    const TextSpan(text: " 円"),
+                  ],
+                  style: smallSize,
+                ),
+              ),
+            ),
+            if (item.sellByAmazon != null)
               Expanded(
-                child: Text(
-                  "検索日: ${DateTime.parse(date).toLocal().format()}",
+                child: Text.rich(
+                  TextSpan(
+                    text: "Amazon販売: ",
+                    children: [
+                      if (item.sellByAmazon == true)
+                        const TextSpan(text: "有")
+                      else
+                        const TextSpan(text: "無", style: strongTextStyle)
+                    ],
+                  ),
                   style: smallSize,
                 ),
               ),
           ],
         ),
+        const PriceInfo(),
+        if (date != null)
+          Text(
+            "検索日: ${DateTime.parse(date).toLocal().format()}",
+            style: smallSize,
+          ),
       ],
     );
+  }
+
+  int getCartPrice(ItemPrices? prices) {
+    if (prices == null) {
+      return -1;
+    }
+    // 中古がカートを取っている場合には情報が取れないようなので新品のみ見る
+    final price = prices.newPrices.where((element) => element.isCart).toList();
+    if (price.isEmpty) {
+      return -1;
+    }
+    return price[0].price;
   }
 }
