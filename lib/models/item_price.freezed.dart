@@ -487,7 +487,9 @@ class _$PriceDetailTearOff {
       @HiveField(4)
           int shipping = 0,
       @HiveField(5)
-          int point = 0}) {
+          int point = 0,
+      @HiveField(6, defaultValue: false)
+          bool isCart = false}) {
     return _PriceDetail(
       itemCondition: itemCondition,
       subCondition: subCondition,
@@ -495,6 +497,7 @@ class _$PriceDetailTearOff {
       price: price,
       shipping: shipping,
       point: point,
+      isCart: isCart,
     );
   }
 
@@ -524,6 +527,8 @@ mixin _$PriceDetail {
   int get shipping => throw _privateConstructorUsedError;
   @HiveField(5)
   int get point => throw _privateConstructorUsedError;
+  @HiveField(6, defaultValue: false)
+  bool get isCart => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -552,7 +557,9 @@ abstract class $PriceDetailCopyWith<$Res> {
       @HiveField(4)
           int shipping,
       @HiveField(5)
-          int point});
+          int point,
+      @HiveField(6, defaultValue: false)
+          bool isCart});
 }
 
 /// @nodoc
@@ -571,6 +578,7 @@ class _$PriceDetailCopyWithImpl<$Res> implements $PriceDetailCopyWith<$Res> {
     Object? price = freezed,
     Object? shipping = freezed,
     Object? point = freezed,
+    Object? isCart = freezed,
   }) {
     return _then(_value.copyWith(
       itemCondition: itemCondition == freezed
@@ -597,6 +605,10 @@ class _$PriceDetailCopyWithImpl<$Res> implements $PriceDetailCopyWith<$Res> {
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int,
+      isCart: isCart == freezed
+          ? _value.isCart
+          : isCart // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -624,7 +636,9 @@ abstract class _$PriceDetailCopyWith<$Res>
       @HiveField(4)
           int shipping,
       @HiveField(5)
-          int point});
+          int point,
+      @HiveField(6, defaultValue: false)
+          bool isCart});
 }
 
 /// @nodoc
@@ -645,6 +659,7 @@ class __$PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
     Object? price = freezed,
     Object? shipping = freezed,
     Object? point = freezed,
+    Object? isCart = freezed,
   }) {
     return _then(_PriceDetail(
       itemCondition: itemCondition == freezed
@@ -671,6 +686,10 @@ class __$PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int,
+      isCart: isCart == freezed
+          ? _value.isCart
+          : isCart // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -696,7 +715,9 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
       @HiveField(4)
           this.shipping = 0,
       @HiveField(5)
-          this.point = 0});
+          this.point = 0,
+      @HiveField(6, defaultValue: false)
+          this.isCart = false});
 
   factory _$_PriceDetail.fromJson(Map<String, dynamic> json) =>
       _$_$_PriceDetailFromJson(json);
@@ -728,10 +749,14 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
   @override
   @HiveField(5)
   final int point;
+  @JsonKey(defaultValue: false)
+  @override
+  @HiveField(6, defaultValue: false)
+  final bool isCart;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PriceDetail(itemCondition: $itemCondition, subCondition: $subCondition, channel: $channel, price: $price, shipping: $shipping, point: $point)';
+    return 'PriceDetail(itemCondition: $itemCondition, subCondition: $subCondition, channel: $channel, price: $price, shipping: $shipping, point: $point, isCart: $isCart)';
   }
 
   @override
@@ -744,7 +769,8 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
       ..add(DiagnosticsProperty('channel', channel))
       ..add(DiagnosticsProperty('price', price))
       ..add(DiagnosticsProperty('shipping', shipping))
-      ..add(DiagnosticsProperty('point', point));
+      ..add(DiagnosticsProperty('point', point))
+      ..add(DiagnosticsProperty('isCart', isCart));
   }
 
   @override
@@ -766,7 +792,9 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
                 const DeepCollectionEquality()
                     .equals(other.shipping, shipping)) &&
             (identical(other.point, point) ||
-                const DeepCollectionEquality().equals(other.point, point)));
+                const DeepCollectionEquality().equals(other.point, point)) &&
+            (identical(other.isCart, isCart) ||
+                const DeepCollectionEquality().equals(other.isCart, isCart)));
   }
 
   @override
@@ -777,7 +805,8 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
       const DeepCollectionEquality().hash(channel) ^
       const DeepCollectionEquality().hash(price) ^
       const DeepCollectionEquality().hash(shipping) ^
-      const DeepCollectionEquality().hash(point);
+      const DeepCollectionEquality().hash(point) ^
+      const DeepCollectionEquality().hash(isCart);
 
   @JsonKey(ignore: true)
   @override
@@ -807,7 +836,9 @@ abstract class _PriceDetail implements PriceDetail {
       @HiveField(4)
           int shipping,
       @HiveField(5)
-          int point}) = _$_PriceDetail;
+          int point,
+      @HiveField(6, defaultValue: false)
+          bool isCart}) = _$_PriceDetail;
 
   factory _PriceDetail.fromJson(Map<String, dynamic> json) =
       _$_PriceDetail.fromJson;
@@ -834,6 +865,9 @@ abstract class _PriceDetail implements PriceDetail {
   @override
   @HiveField(5)
   int get point => throw _privateConstructorUsedError;
+  @override
+  @HiveField(6, defaultValue: false)
+  bool get isCart => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PriceDetailCopyWith<_PriceDetail> get copyWith =>
