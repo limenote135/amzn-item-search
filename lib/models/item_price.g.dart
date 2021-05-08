@@ -65,13 +65,14 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
       price: fields[3] as int,
       shipping: fields[4] as int,
       point: fields[5] as int,
+      isCart: fields[6] == null ? false : fields[6] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_PriceDetail obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.itemCondition)
       ..writeByte(1)
@@ -83,7 +84,9 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
       ..writeByte(4)
       ..write(obj.shipping)
       ..writeByte(5)
-      ..write(obj.point);
+      ..write(obj.point)
+      ..writeByte(6)
+      ..write(obj.isCart);
   }
 
   @override
@@ -131,6 +134,7 @@ _$_PriceDetail _$_$_PriceDetailFromJson(Map<String, dynamic> json) {
     price: json['price'] as int? ?? 0,
     shipping: json['shipping'] as int? ?? 0,
     point: json['point'] as int? ?? 0,
+    isCart: json['is_cart'] as bool? ?? false,
   );
 }
 
@@ -144,4 +148,5 @@ Map<String, dynamic> _$_$_PriceDetailToJson(_$_PriceDetail instance) =>
       'price': instance.price,
       'shipping': instance.shipping,
       'point': instance.point,
+      'is_cart': instance.isCart,
     };
