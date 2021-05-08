@@ -84,6 +84,7 @@ class PriceDetail with _$PriceDetail {
     @HiveField(3) @Default(0) int price,
     @HiveField(4) @Default(0) int shipping,
     @HiveField(5) @Default(0) int point,
+    @HiveField(6, defaultValue: false) @Default(false) bool isCart,
   }) = _PriceDetail;
 
   factory PriceDetail.fromJson(Map<String, dynamic> json) =>
