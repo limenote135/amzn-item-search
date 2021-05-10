@@ -37,8 +37,10 @@ class SummaryTile extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text("商品数: $itemCount 個", textAlign: TextAlign.center),
-            Text("仕入額: $totalPurchase 円", textAlign: TextAlign.center),
-            Text("粗利額: $profitValue 円", textAlign: TextAlign.center),
+            Text("仕入総額: ${numberFormatter.format(totalPurchase)} 円",
+                textAlign: TextAlign.center),
+            Text("粗利総額: ${numberFormatter.format(profitValue)}円",
+                textAlign: TextAlign.center),
           ],
         ),
         Row(
