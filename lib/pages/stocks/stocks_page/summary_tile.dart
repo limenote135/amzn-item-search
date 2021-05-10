@@ -16,10 +16,20 @@ class SummaryTile extends HookWidget {
 
     var itemCount = 0;
     var profitValue = 0;
+    var totalPurchase = 0;
+    var totalSellPrice = 0;
+
     for (final item in items) {
       itemCount += item.amount;
       profitValue += item.profitPerItem * item.amount;
+      totalPurchase += item.purchasePrice * item.amount;
+      totalSellPrice += item.sellPrice * item.amount;
     }
+    final roi =
+        totalPurchase == 0 ? 0 : (profitValue / totalPurchase * 100).round();
+    final profitRate =
+        totalSellPrice == 0 ? 0 : (profitValue / totalSellPrice * 100).round();
+
     return Column(
       children: [
         Text(day),
@@ -29,10 +39,23 @@ class SummaryTile extends HookWidget {
               child: Text("商品数: $itemCount 個", textAlign: TextAlign.center),
             ),
             Expanded(
+              child: Text("購入額: $totalPurchase 円", textAlign: TextAlign.center),
+            ),
+            Expanded(
               child: Text("粗利益: $profitValue 円", textAlign: TextAlign.center),
             ),
           ],
-        )
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Text("利益率: $profitRate %", textAlign: TextAlign.center),
+            ),
+            Expanded(
+              child: Text("ROI: $roi %", textAlign: TextAlign.center),
+            ),
+          ],
+        ),
       ],
     );
   }
