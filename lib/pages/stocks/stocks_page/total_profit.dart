@@ -1,4 +1,5 @@
 import 'package:amasearch/controllers/stock_item_controller.dart';
+import 'package:amasearch/util/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -28,27 +29,20 @@ class TotalProfit extends HookWidget {
     return Column(
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Expanded(
-              child: Text("商品総数: $itemCount 個", textAlign: TextAlign.center),
-            ),
-            Expanded(
-              child:
-                  Text("購入総額: $totalPurchase 円", textAlign: TextAlign.center),
-            ),
-            Expanded(
-              child: Text("粗利益総額: $profitValue 円", textAlign: TextAlign.center),
-            ),
+            Text("総商品数: $itemCount 個", textAlign: TextAlign.center),
+            Text("仕入総額: ${numberFormatter.format(totalPurchase)} 円",
+                textAlign: TextAlign.center),
+            Text("粗利総額: ${numberFormatter.format(profitValue)}円",
+                textAlign: TextAlign.center),
           ],
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Expanded(
-              child: Text("利益率: $profitRate %", textAlign: TextAlign.center),
-            ),
-            Expanded(
-              child: Text("ROI: $roi %", textAlign: TextAlign.center),
-            ),
+            Text("利益率: $profitRate %", textAlign: TextAlign.center),
+            Text("ROI: $roi %", textAlign: TextAlign.center),
           ],
         ),
       ],
