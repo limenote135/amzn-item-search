@@ -28,8 +28,9 @@ class TotalProfit extends HookWidget {
         totalSellPrice == 0 ? 0 : (profitValue / totalSellPrice * 100).round();
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        Wrap(
+          alignment: WrapAlignment.spaceAround,
+          spacing: 8,
           children: [
             Text("総商品数: $itemCount 個", textAlign: TextAlign.center),
             Text("仕入総額: ${numberFormatter.format(totalPurchase)} 円",
