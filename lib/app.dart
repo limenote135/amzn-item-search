@@ -1,9 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/search_page/search_page.dart';
-import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:amasearch/pages/search/word_search_page/word_search_page.dart';
 import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
@@ -42,10 +40,6 @@ class MyApp extends HookWidget {
         HomePage(),
         LifecycleManager(callback: UpdateCheckObserver(), child: Updater()),
       ]),
-      routes: {
-        SearchSettingsPage.routeName: (context) => const SearchSettingsPage(),
-        CameraPage.routeName: (context) => CameraPage(),
-      },
       navigatorObservers: [
         observer,
       ],
