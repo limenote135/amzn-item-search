@@ -106,7 +106,7 @@ class SearchBar extends HookWidget with PreferredSizeWidget {
                           onPressed: () {
                             unfocus();
                             Navigator.of(context)
-                                .pushNamed(SearchSettingsPage.routeName);
+                                .push(SearchSettingsPage.route());
                           },
                         ),
                       )
