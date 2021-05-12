@@ -28,7 +28,7 @@ class SearchPage extends StatelessWidget {
         heroTag: onStartCameraHeroTag,
         onPressed: () {
           unfocus();
-          Navigator.of(context).pushNamed(CameraPage.routeName);
+          Navigator.of(context).push(CameraPage.route());
         },
         child: AnimatedTheme(
           data: ThemeData.light(),
