@@ -17,6 +17,12 @@ import 'item_tile.dart';
 
 class CameraPage extends StatefulWidget {
   static const routeName = "/camera";
+
+  static Route<void> route() {
+    return MaterialPageRoute(
+      builder: (context) => CameraPage(),
+    );
+  }
   @override
   _CameraPageState createState() => _CameraPageState();
 }
