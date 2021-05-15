@@ -15,6 +15,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MyApp extends HookWidget {
+  const MyApp({Key? key}): super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final observer = useProvider(analyticsObserverProvider);
