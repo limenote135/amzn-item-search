@@ -53,7 +53,7 @@ Future<void> main() async {
   Intl.defaultLocale = 'ja_JP';
 
   runZonedGuarded(() {
-    runApp(ProviderScope(child: MyApp()));
+    runApp(ProviderScope(child: const MyApp()));
   }, (error, stackTrace) {
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });
