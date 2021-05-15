@@ -7,8 +7,28 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'lifecycle_manager.dart';
+
 final updateProvider =
     FutureProvider<bool>((_) => VersionChecker().needUpdate());
+
+class UpdateCheckObserver with LifecycleCallback {
+  const UpdateCheckObserver();
+
+  @override
+  void onResumed(BuildContext context) {
+    context.refresh(updateProvider);
+  }
+
+  @override
+  void onPaused(BuildContext context) {}
+
+  @override
+  void onInactive(BuildContext context) {}
+
+  @override
+  void onDetached(BuildContext context) {}
+}
 
 class Updater extends HookWidget {
   const Updater({Key? key}) : super(key: key);
