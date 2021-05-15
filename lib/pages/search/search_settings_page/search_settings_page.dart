@@ -15,8 +15,13 @@ final _currentSettingsProvider = ScopedProvider<SearchSettings>(null);
 
 class SearchSettingsPage extends StatelessWidget {
   const SearchSettingsPage({Key? key}) : super(key: key);
-
   static const String routeName = "/search_setting";
+
+  static Route<void> route() {
+    return MaterialPageRoute(
+      builder: (context) => const SearchSettingsPage(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
