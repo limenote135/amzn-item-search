@@ -6,11 +6,13 @@ import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/util/alert.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
@@ -149,6 +151,9 @@ class MwsRepository {
   Future<Map<String, dynamic>> _doRequest(String url, {String? data}) async {
     final dio = _read(dioProvider);
 
+    final user = await _read(authStateChangesProvider.last);
+    final token = await user!.getIdToken();
+
     final info = await PackageInfo.fromPlatform();
 
     final appVer = "Amasearch/${info.version}";
@@ -162,16 +167,27 @@ class MwsRepository {
         options: Options(
           headers: <String, dynamic>{
             "User-Agent": "$appVer $osVer",
+            "Authorization": "Bearer $token",
           },
         ),
       );
       return json.decode(resp.data!) as Map<String, dynamic>;
-    } on DioError catch (e) {
-      // 412: Precondition Failed
-      if (e.response != null && e.response!.statusCode == 412) {
-        // アプリのバージョンがサーバーの要求バージョンより低い場合
-        await _container.refresh(updateProvider);
-        throw Exception("アプリケーションを更新してください");
+    } on DioError catch (e, stack) {
+      if (e.response == null || e.response!.statusCode == null) {
+        rethrow;
+      }
+      if (e.response!.statusCode! >= 500) {
+        // サーバーサイドエラー
+        await FirebaseCrashlytics.instance.recordError(e, stack);
+        throw Exception("サーバーエラー");
+      }
+
+      switch (e.response!.statusCode) {
+        case 412:
+          await _container.refresh(updateProvider);
+          throw Exception("アプリケーションを更新してください");
+        case 401:
+          throw Exception("ログインされていません");
       }
       rethrow;
     }
