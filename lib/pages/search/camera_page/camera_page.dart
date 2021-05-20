@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
@@ -13,6 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vibration/vibration.dart';
 
+import 'ios_camera_scan_overlay_shape.dart';
 import 'item_tile.dart';
 
 class CameraPage extends StatefulWidget {
@@ -23,6 +25,7 @@ class CameraPage extends StatefulWidget {
       builder: (context) => CameraPage(),
     );
   }
+
   @override
   _CameraPageState createState() => _CameraPageState();
 }
@@ -226,9 +229,17 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
               unsupportedDescription: "この機能はお使いのデバイスではサポートされていません。",
             ),
           ),
+          if (Platform.isIOS)
+            // iOS ではカメラの読み取り枠が表示されないので自前で用意する
+            Container(
+              decoration: const ShapeDecoration(
+                shape: IosCameraScanOverlayShape(),
+              ),
+            ),
           SafeArea(
             child: Column(
               children: [
+                // https://github.com/pdliuw/ai_barcode/issues/12
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 //   children: <Widget>[
