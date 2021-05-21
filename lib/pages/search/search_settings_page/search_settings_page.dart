@@ -19,6 +19,7 @@ class SearchSettingsPage extends StatelessWidget {
 
   static Route<void> route() {
     return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
       builder: (context) => const SearchSettingsPage(),
     );
   }
