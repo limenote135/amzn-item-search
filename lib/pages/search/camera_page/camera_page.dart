@@ -22,6 +22,7 @@ class CameraPage extends StatefulWidget {
 
   static Route<void> route() {
     return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
       builder: (context) => CameraPage(),
     );
   }
