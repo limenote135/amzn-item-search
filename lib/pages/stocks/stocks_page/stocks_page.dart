@@ -55,7 +55,7 @@ class StocksPage extends HookWidget {
       title: const Text("仕入れ済み商品"),
       actions: [
         PopupMenuButton<_StockPageActions>(
-          padding: const EdgeInsets.all(0),
+          padding: EdgeInsets.zero,
           onSelected: (value) => handleAction(context, value),
           itemBuilder: (context) => const [
             PopupMenuItem(

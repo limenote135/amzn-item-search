@@ -25,8 +25,7 @@ class InputPricesTile extends HookWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ReactiveTextField<dynamic>(
                     formControlName: purchasePriceField,
-                    keyboardType: const TextInputType.numberWithOptions(
-                        signed: false, decimal: false),
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                         labelText: "仕入価格", suffixText: "円"),
                     textAlign: TextAlign.end,
@@ -41,8 +40,7 @@ class InputPricesTile extends HookWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ReactiveTextField<dynamic>(
                     formControlName: sellPriceField,
-                    keyboardType: const TextInputType.numberWithOptions(
-                        signed: false, decimal: false),
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                         labelText: "販売価格", suffixText: "円"),
                     textAlign: TextAlign.end,

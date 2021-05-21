@@ -53,7 +53,7 @@ Future<void> main() async {
   Intl.defaultLocale = 'ja_JP';
 
   runZonedGuarded(() {
-    runApp(ProviderScope(child: const MyApp()));
+    runApp(const ProviderScope(child: MyApp()));
   }, (error, stackTrace) {
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });
@@ -83,6 +83,7 @@ Future<void> initFirebase() async {
   FlutterError.onError = (FlutterErrorDetails errorDetails) async {
     await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
     // Forward to original handler.
+    // ignore: avoid_dynamic_calls
     originalOnError!(errorDetails);
   };
 }
