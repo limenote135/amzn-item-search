@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:amasearch/models/offer_listings.dart';
-import 'package:amasearch/repository/common.dart';
+import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
