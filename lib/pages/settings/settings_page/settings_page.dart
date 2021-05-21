@@ -4,6 +4,7 @@ import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/settings/alert_page/alert_page.dart';
 import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.dart';
+import 'package:amasearch/pages/settings/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/settings/purchase_list_page/purchase_list_page.dart';
 import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_page.dart';
 import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
@@ -133,6 +134,12 @@ class _Body extends HookWidget {
               context,
               AlertPage.route(),
             );
+          },
+        ),
+        ListTile(
+          title: const Text("Keepa設定"),
+          onTap: () {
+            Navigator.push(context, KeepaSettings.route());
           },
         ),
         SwitchListTile(
