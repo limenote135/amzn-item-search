@@ -4,6 +4,7 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/item_image.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,34 +30,66 @@ class TileImage extends HookWidget {
       constraints: const BoxConstraints.tightFor(width: 75),
       child: Column(
         children: [
-          ItemImage(
-            url: asinData.imageUrl,
-            data: asinData.imageData,
-            onComplete: onComplete,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 1),
+            child: ItemImage(
+              url: asinData.imageUrl,
+              data: asinData.imageData,
+              onComplete: onComplete,
+            ),
           ),
           if (isPremiumPrice(asinData))
-            Container(
-              width: double.infinity,
-              alignment: Alignment.center,
-              color: Colors.red[400],
-              child: Text("プレ値", style: captionSize),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 1),
+              child: Container(
+                width: double.infinity,
+                alignment: Alignment.center,
+                color: Colors.red[400],
+                child: Text("プレ値", style: captionSize),
+              ),
             ),
           if (fbaFee >= _bigSizeFbaFee)
-            Container(
-              width: double.infinity,
-              alignment: Alignment.center,
-              color: Colors.lightGreen[200],
-              child: fbaFee >= _moreBigSizeFbaFee
-                  ? Text("特大型", style: captionSize)
-                  : Text("大型", style: captionSize),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 1),
+              child: Container(
+                width: double.infinity,
+                alignment: Alignment.center,
+                color: Colors.lightGreen[200],
+                child: fbaFee >= _moreBigSizeFbaFee
+                    ? Text("特大型", style: captionSize)
+                    : Text("大型", style: captionSize),
+              ),
             ),
           if (asinCount > 1)
-            Container(
-              width: double.infinity,
-              alignment: Alignment.center,
-              color: Colors.blue[100],
-              child: Text("複数", style: captionSize),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 1),
+              child: Container(
+                width: double.infinity,
+                alignment: Alignment.center,
+                color: Colors.blue[100],
+                child: Text("複数", style: captionSize),
+              ),
             ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 1),
+            child: ExtendedImage.network(
+              "https://graph.keepa.com/pricehistory.png?new=1&domain=jp&width=300&asin=${asinData.asin}&salesrank=1&height=150",
+              // // TODO: Cookie を入れる
+              // headers: <String, String>{
+              //   'Cookie': 'key_a=value_a;key_b=value_b',
+              // },
+              loadStateChanged: (state) {
+                if (state.extendedImageLoadState != LoadState.completed) {
+                  return null;
+                }
+                return ExtendedRawImage(
+                  image: state.extendedImageInfo?.image,
+                  sourceRect: const Rect.fromLTWH(36, 20, 150, 90),
+                );
+                // return state.completedWidget;
+              },
+            ),
+          ),
         ],
       ),
     );
