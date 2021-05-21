@@ -20,7 +20,7 @@ class VersionChecker {
       await remoteConfig.setConfigSettings(
         RemoteConfigSettings(
             fetchTimeout: const Duration(seconds: 5),
-            minimumFetchInterval: const Duration(seconds: 0)),
+            minimumFetchInterval: Duration.zero),
       );
       await remoteConfig.fetchAndActivate();
       final minVersion = remoteConfig.getString(_configName);
