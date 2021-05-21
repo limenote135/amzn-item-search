@@ -42,8 +42,8 @@ class ItemSelectPage extends HookWidget {
             Navigator.of(context)
                 .popUntil(ModalRoute.withName(CameraPage.routeName));
           } else {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                CameraPage.routeName, ModalRoute.withName("/"));
+            Navigator.of(context).pushAndRemoveUntil(
+                CameraPage.route(), ModalRoute.withName("/"));
           }
         },
         child: AnimatedTheme(
