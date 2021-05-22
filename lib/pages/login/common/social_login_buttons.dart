@@ -10,6 +10,8 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'sign_in_with_apple.dart';
+
 class SocialLoginButtons extends HookWidget {
   const SocialLoginButtons({Key? key}) : super(key: key);
 
@@ -58,7 +60,14 @@ class SocialLoginButtons extends HookWidget {
             text: "AppleID でログイン",
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            onPressed: () {},
+            onPressed: () async {
+              final ret = await signInWithApple();
+              if (ret == null) {
+                return;
+              }
+              print(ret);
+              Navigator.of(context).pop();
+            },
           ),
         Padding(
           padding: const EdgeInsets.only(top: 16),
