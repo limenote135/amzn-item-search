@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amasearch/app.dart';
 import 'package:amasearch/models/alert_condition.dart';
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/alert_type.dart';
@@ -26,8 +27,6 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-
-import 'app.dart';
 
 // Toggle this for testing Crashlytics in your app locally.
 const _kTestingCrashlytics = false;
