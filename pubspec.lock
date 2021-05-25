@@ -225,6 +225,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  euc:
+    dependency: "direct main"
+    description:
+      path: "packages/euc"
+      relative: true
+    source: path
+    version: "0.0.1"
   extended_image:
     dependency: "direct main"
     description:
