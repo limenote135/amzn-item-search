@@ -48,5 +48,16 @@
 	<false/>
 	<key>NSCameraUsageDescription</key>
 	<string>バーコードの読み取りにカメラを利用します</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+       <dict>
+           <key>CFBundleTypeRole</key>
+           <string>Editor</string>
+           <key>CFBundleURLSchemes</key>
+           <array>
+               <string>com.googleusercontent.apps.890414837237-vv0qnqmd05bt72oc87avbpbah12hd749</string>
+           </array>
+       </dict>
+    </array>
 </dict>
 </plist>
