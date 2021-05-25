@@ -36,7 +36,6 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   bool _isCameraGranted = false;
   var _lastRead = "";
   var _lastReadTime = DateTime.now();
-  final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   void initState() {
@@ -49,12 +48,10 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
 
         if (_lastRead != result) {
           Vibration.vibrate(duration: 50, amplitude: 128);
-          _scaffoldKey.currentState?.removeCurrentSnackBar();
-          _scaffoldKey.currentState?.showSnackBar(SnackBar(
-            content: Text(result),
-          ));
 
           final settings = context.read(searchSettingsControllerProvider);
+          showSuggestion(result.length, settings.type);
+
           switch (settings.type) {
             case SearchType.jan:
               context.read(searchItemControllerProvider.notifier).add(result);
@@ -87,10 +84,6 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
           });
         } else if (DateTime.now().difference(_lastReadTime) >
             const Duration(seconds: 1)) {
-          _scaffoldKey.currentState?.removeCurrentSnackBar();
-          _scaffoldKey.currentState?.showSnackBar(SnackBar(
-            content: Text("$result は読み込み済みです"),
-          ));
           setState(() {
             _lastReadTime = DateTime.now();
           });
@@ -114,6 +107,19 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         }
       },
     );
+  }
+
+  void showSuggestion(int len, SearchType current) {
+    if (len == 7 && current != SearchType.geo) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("GEO のコードではないですか？")));
+    } else if (len == 16 && current != SearchType.tsutaya) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("TSUTAYA のコードではないですか？")));
+    } else if (len == 17 && current != SearchType.bookoff) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("BOOK OFF のコードではないですか？")));
+    }
   }
 
   @override
@@ -218,7 +224,6 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     );
 
     return Scaffold(
-      key: _scaffoldKey,
       body: Stack(
         children: [
           Container(
@@ -341,7 +346,15 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                 const SizedBox(height: 50),
               ],
             ),
-          )
+          ),
+          ProviderListener(
+            provider: searchSettingsControllerProvider,
+            onChange: (context, value) {
+              // コードタイプを変更した際に lastRead をリセットする
+              _lastRead = "";
+            },
+            child: const SizedBox(),
+          ),
         ],
       ),
     );
