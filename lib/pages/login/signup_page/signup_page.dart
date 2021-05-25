@@ -3,6 +3,7 @@ import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -39,13 +40,12 @@ class SignupPage extends HookWidget {
         final email = emailKey.currentState!.value;
         final password = passwordKey.currentState!.value;
         try {
-          final userCredential = await auth.createUserWithEmailAndPassword(
+          await auth.createUserWithEmailAndPassword(
             email: email!,
             password: password!,
           );
-          print(userCredential);
           Navigator.pop(context);
-        } on FirebaseAuthException catch (e) {
+        } on FirebaseAuthException catch (e, stack) {
           var msg = "不明なエラー";
           switch (e.code) {
             case "weak-password":
@@ -61,6 +61,7 @@ class SignupPage extends HookWidget {
               msg = "操作が許可されていません";
               break;
             default:
+              await FirebaseCrashlytics.instance.recordError(e, stack);
               msg = e.code;
               break;
           }
