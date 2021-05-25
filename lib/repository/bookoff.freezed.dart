@@ -23,7 +23,7 @@ class _$BookoffResponseTearOff {
   _BookoffResponse call(
       {@JsonKey(name: "INSTORECODE") required String instoreCode,
       @JsonKey(name: "GOODS_NAME1") required String title,
-      @JsonKey(name: "GOODS_NAME2") required String subtitle,
+      @JsonKey(name: "GOODS_NAME2") String? subtitle,
       @JsonKey(name: "JAN") required String jan}) {
     return _BookoffResponse(
       instoreCode: instoreCode,
@@ -48,7 +48,7 @@ mixin _$BookoffResponse {
   @JsonKey(name: "GOODS_NAME1")
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: "GOODS_NAME2")
-  String get subtitle => throw _privateConstructorUsedError;
+  String? get subtitle => throw _privateConstructorUsedError;
   @JsonKey(name: "JAN")
   String get jan => throw _privateConstructorUsedError;
 
@@ -66,7 +66,7 @@ abstract class $BookoffResponseCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "INSTORECODE") String instoreCode,
       @JsonKey(name: "GOODS_NAME1") String title,
-      @JsonKey(name: "GOODS_NAME2") String subtitle,
+      @JsonKey(name: "GOODS_NAME2") String? subtitle,
       @JsonKey(name: "JAN") String jan});
 }
 
@@ -98,7 +98,7 @@ class _$BookoffResponseCopyWithImpl<$Res>
       subtitle: subtitle == freezed
           ? _value.subtitle
           : subtitle // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       jan: jan == freezed
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
@@ -117,7 +117,7 @@ abstract class _$BookoffResponseCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "INSTORECODE") String instoreCode,
       @JsonKey(name: "GOODS_NAME1") String title,
-      @JsonKey(name: "GOODS_NAME2") String subtitle,
+      @JsonKey(name: "GOODS_NAME2") String? subtitle,
       @JsonKey(name: "JAN") String jan});
 }
 
@@ -151,7 +151,7 @@ class __$BookoffResponseCopyWithImpl<$Res>
       subtitle: subtitle == freezed
           ? _value.subtitle
           : subtitle // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       jan: jan == freezed
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
@@ -167,7 +167,7 @@ class _$_BookoffResponse implements _BookoffResponse {
   const _$_BookoffResponse(
       {@JsonKey(name: "INSTORECODE") required this.instoreCode,
       @JsonKey(name: "GOODS_NAME1") required this.title,
-      @JsonKey(name: "GOODS_NAME2") required this.subtitle,
+      @JsonKey(name: "GOODS_NAME2") this.subtitle,
       @JsonKey(name: "JAN") required this.jan});
 
   factory _$_BookoffResponse.fromJson(Map<String, dynamic> json) =>
@@ -181,7 +181,7 @@ class _$_BookoffResponse implements _BookoffResponse {
   final String title;
   @override
   @JsonKey(name: "GOODS_NAME2")
-  final String subtitle;
+  final String? subtitle;
   @override
   @JsonKey(name: "JAN")
   final String jan;
@@ -230,7 +230,7 @@ abstract class _BookoffResponse implements BookoffResponse {
   const factory _BookoffResponse(
       {@JsonKey(name: "INSTORECODE") required String instoreCode,
       @JsonKey(name: "GOODS_NAME1") required String title,
-      @JsonKey(name: "GOODS_NAME2") required String subtitle,
+      @JsonKey(name: "GOODS_NAME2") String? subtitle,
       @JsonKey(name: "JAN") required String jan}) = _$_BookoffResponse;
 
   factory _BookoffResponse.fromJson(Map<String, dynamic> json) =
@@ -244,7 +244,7 @@ abstract class _BookoffResponse implements BookoffResponse {
   String get title => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "GOODS_NAME2")
-  String get subtitle => throw _privateConstructorUsedError;
+  String? get subtitle => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "JAN")
   String get jan => throw _privateConstructorUsedError;
