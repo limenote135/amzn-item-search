@@ -1,11 +1,9 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/pages/search/search_page/search_page.dart';
-import 'package:amasearch/pages/search/word_search_page/word_search_page.dart';
-import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
-import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
+import 'package:amasearch/pages/home_page.dart';
+import 'package:amasearch/pages/login_root_page.dart';
 import 'package:amasearch/theme.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/lifecycle_manager.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
@@ -15,13 +13,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MyApp extends HookWidget {
-  const MyApp({Key? key}): super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final observer = useProvider(analyticsObserverProvider);
     final isDarkMode = useProvider(
         generalSettingsControllerProvider.select((value) => value.isDarkMode));
+    final authStateChanges = useProvider(authStateChangesProvider);
     return MaterialApp(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
@@ -37,84 +36,36 @@ class MyApp extends HookWidget {
         );
       },
       title: 'アマサーチ',
-      theme: isDarkMode ? darkTheme : lightTheme,
-      home: Stack(children: const [
-        HomePage(),
-        LifecycleManager(callback: UpdateCheckObserver(), child: Updater()),
-      ]),
+      theme: authStateChanges.maybeWhen(
+        data: (value) {
+          if (value == null) {
+            return lightTheme;
+          } else {
+            return isDarkMode ? darkTheme : lightTheme;
+          }
+        },
+        orElse: () => lightTheme,
+      ),
+      home: authStateChanges.when(
+        loading: () {
+          return const Center(child: CircularProgressIndicator());
+        },
+        error: (error, stack) => SafeArea(
+          child: Text("$error"),
+        ),
+        data: (value) {
+          if (value == null) {
+            return const LoginRootPage();
+          }
+          return Stack(children: const [
+            HomePage(),
+            LifecycleManager(callback: UpdateCheckObserver(), child: Updater()),
+          ]);
+        },
+      ),
       navigatorObservers: [
         observer,
       ],
-    );
-  }
-}
-
-final _currentPageProvider = StateProvider((_) => 0);
-
-class HomePage extends HookWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  static const _pages = [
-    SearchPage(),
-    WordSearchPage(),
-    StocksPage(),
-    SettingsPage(),
-  ];
-  static const _names = [
-    SearchPage.routeName,
-    WordSearchPage.routeName,
-    StocksPage.routeName,
-    SettingsPage.routeName,
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    final currentPage = useProvider(_currentPageProvider);
-    final observer = useProvider(analyticsObserverProvider);
-    return WillPopScope(
-      onWillPop: () async {
-        final ret = await showOkCancelAlertDialog(
-          context: context,
-          title: "終了確認",
-          message: "終了しますか？",
-          isDestructiveAction: true,
-        );
-        return ret == OkCancelResult.ok;
-      },
-      child: Scaffold(
-        body: IndexedStack(
-          index: currentPage.state,
-          children: _pages,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: "コード検索",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.find_in_page),
-              label: "ワード検索",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              label: "仕入れ",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: "設定",
-            ),
-          ],
-          currentIndex: currentPage.state,
-          onTap: (value) {
-            if (currentPage.state != value) {
-              currentPage.state = value;
-              observer.analytics.setCurrentScreen(screenName: _names[value]);
-            }
-          },
-        ),
-      ),
     );
   }
 }
