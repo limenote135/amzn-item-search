@@ -8,9 +8,11 @@ import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_pag
 import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
 import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
 
@@ -35,6 +37,7 @@ class _Body extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final settings = useProvider(generalSettingsControllerProvider);
+    final auth = useProvider(firebaseAuthProvider);
     return ListView(
       children: [
         SwitchListTile(
@@ -145,6 +148,13 @@ class _Body extends HookWidget {
           },
         ),
         const ThemeDivider(),
+        ListTile(
+          title: const Text("ログアウト"),
+          onTap: () async {
+            await auth.signOut();
+            await GoogleSignIn().signOut();
+          },
+        ),
         ListTile(
           title: const Text("このアプリについて"),
           onTap: () async {
