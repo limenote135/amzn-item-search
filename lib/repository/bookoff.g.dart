@@ -10,7 +10,7 @@ _$_BookoffResponse _$_$_BookoffResponseFromJson(Map<String, dynamic> json) {
   return _$_BookoffResponse(
     instoreCode: json['INSTORECODE'] as String,
     title: json['GOODS_NAME1'] as String,
-    subtitle: json['GOODS_NAME2'] as String,
+    subtitle: json['GOODS_NAME2'] as String?,
     jan: json['JAN'] as String,
   );
 }
