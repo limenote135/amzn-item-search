@@ -52,7 +52,28 @@ class AmazonRepository {
   static final _stockRegex = RegExp(r"残り(\d+)点");
   static final _jpNumberRegex = RegExp("[０-９]");
 
+  static const _productUrl = "https://www.amazon.co.jp/gp/product/";
+
   final Reader _read;
+
+  Future<void> _ensureCookie(String asin) async {
+    final dio = await _read(dioProvider.future);
+    final jar = await _read(persistCookieJarProvider.future);
+    final cookie = await jar.loadForRequest(Uri(host: "amazon.co.jp"));
+    final now = DateTime.now();
+    if (cookie.isNotEmpty &&
+        cookie.every((e) => e.expires?.isAfter(now) ?? false)) {
+      return;
+    }
+    final url = "$_productUrl$asin";
+
+    await dio.get<String>(
+      url,
+      options: Options(headers: <String, String>{
+        HttpHeaders.userAgentHeader: _userAgent,
+      }),
+    );
+  }
 
   Future<OfferListings> getOffers(
       OfferListingsParams params, CancelToken cancelToken) async {
@@ -71,7 +92,8 @@ class AmazonRepository {
       "filters": reqParamStr,
       "pageno": params.page + 1,
     };
-    final dio = _read(dioProvider);
+    final dio = await _read(dioProvider.future);
+    await _ensureCookie(params.asin);
     try {
       final resp = await dio.get<String>(
         _offerUrlBase,
@@ -220,7 +242,7 @@ class AmazonRepository {
 
   Future<int> getStockCount(
       String asin, String sellerId, CancelToken cancelToken) async {
-    final dio = _read(dioProvider);
+    final dio = await _read(dioProvider.future);
 
     final url = _stockUrlBase.replaceAll("[asin]", asin);
     final query = <String, dynamic>{
