@@ -148,7 +148,7 @@ class MwsRepository {
   }
 
   Future<Map<String, dynamic>> _doRequest(String url, {String? data}) async {
-    final dio = _read(dioProvider);
+    final dio = await _read(dioProvider.future);
 
     final user = await _read(authStateChangesProvider.last);
     final token = await user!.getIdToken();

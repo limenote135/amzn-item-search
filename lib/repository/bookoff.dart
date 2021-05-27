@@ -39,7 +39,8 @@ class BookoffRepository {
         : value;
     try {
       final url = "$_baseURL$code";
-      final result = await _read(dioProvider).get<String>(url);
+      final dio = await _read(dioProvider.future);
+      final result = await dio.get<String>(url);
 
       final body = result.data.toString();
       final normalized = body.substring("callback(".length, body.length - 1);
