@@ -1,12 +1,11 @@
 import 'dart:convert';
 
 import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'common.dart';
 
 part 'bookoff.freezed.dart';
 part 'bookoff.g.dart';
@@ -40,7 +39,8 @@ class BookoffRepository {
         : value;
     try {
       final url = "$_baseURL$code";
-      final result = await _read(dioProvider).get<String>(url);
+      final dio = await _read(dioProvider.future);
+      final result = await dio.get<String>(url);
 
       final body = result.data.toString();
       final normalized = body.substring("callback(".length, body.length - 1);
