@@ -1,5 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/models/enums/keepa_show_period.dart';
+import 'package:amasearch/models/keepa_settings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/price_util.dart';
@@ -19,6 +22,18 @@ class TileImage extends HookWidget {
 
   final void Function(ByteData bytes)? onComplete;
 
+  static String _createKeepaUrl(String asin, KeepaSettings settings) {
+    final params = <String>[
+      "new=${settings.showNew ? "1" : "0"}",
+      "used=${settings.showUsed ? "1" : "0"}",
+      "amazon=${settings.showAmazon ? "1" : "0"}",
+      "range=${settings.period.toValue()}",
+    ];
+    return "https://graph.keepa.com/pricehistory.png?"
+        "asin=$asin&domain=jp&width=300&height=150&salesrank=1&"
+        "${params.join("&")}";
+  }
+
   @override
   Widget build(BuildContext context) {
     final asinData = useProvider(currentAsinDataProvider);
@@ -26,6 +41,10 @@ class TileImage extends HookWidget {
     final fbaFee = useProvider(currentFbaFeeProvider);
 
     final captionSize = captionSizeBlackText(context);
+
+    final keepaSettings = useProvider(generalSettingsControllerProvider
+        .select((value) => value.keepaSettings));
+
     return ConstrainedBox(
       constraints: const BoxConstraints.tightFor(width: 75),
       child: Column(
@@ -73,8 +92,8 @@ class TileImage extends HookWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 1),
             child: ExtendedImage.network(
-              "https://graph.keepa.com/pricehistory.png?new=1&domain=jp&width=300&asin=${asinData.asin}&salesrank=1&height=150",
-              // // TODO: Cookie を入れる
+              _createKeepaUrl(asinData.asin, keepaSettings),
+              // Cookie を入れる場合は以下のようにする
               // headers: <String, String>{
               //   'Cookie': 'key_a=value_a;key_b=value_b',
               // },
@@ -84,9 +103,9 @@ class TileImage extends HookWidget {
                 }
                 return ExtendedRawImage(
                   image: state.extendedImageInfo?.image,
-                  sourceRect: const Rect.fromLTWH(36, 20, 150, 90),
+                  // グラフ部分だけをトリミング
+                  sourceRect: const Rect.fromLTWH(45, 20, 80, 110),
                 );
-                // return state.completedWidget;
               },
             ),
           ),
