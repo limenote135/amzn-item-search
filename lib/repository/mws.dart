@@ -7,6 +7,7 @@ import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/util/alert.dart';
 import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
@@ -17,8 +18,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
 import 'package:vibration/vibration.dart';
-
-import 'common.dart';
 
 part 'mws.freezed.dart';
 part 'mws.g.dart';
@@ -149,7 +148,7 @@ class MwsRepository {
   }
 
   Future<Map<String, dynamic>> _doRequest(String url, {String? data}) async {
-    final dio = _read(dioProvider);
+    final dio = await _read(dioProvider.future);
 
     final user = await _read(authStateChangesProvider.last);
     final token = await user!.getIdToken();
