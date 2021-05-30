@@ -10,12 +10,21 @@ class VersionChecker {
   static const String _iosConfigName = "ios_min_app_version";
 
   static String _getConfigName() {
-    if(Platform.isAndroid) {
+    if (Platform.isAndroid) {
       return _androidConfigName;
     } else {
       return _iosConfigName;
     }
   }
+
+  static Duration _getMinInterval() {
+    if (Platform.isIOS) {
+      return const Duration(minutes: 5);
+    } else {
+      return Duration.zero;
+    }
+  }
+
   Future<bool> needUpdate() async {
     final info = await PackageInfo.fromPlatform();
     final currentVersion = Version.parse(info.version);
@@ -25,13 +34,13 @@ class VersionChecker {
 
     try {
       final defaultValues = <String, dynamic>{
-        configName: "0.2.2",
+        configName: "0.10.0",
       };
       await remoteConfig.setDefaults(defaultValues);
       await remoteConfig.setConfigSettings(
         RemoteConfigSettings(
             fetchTimeout: const Duration(seconds: 5),
-            minimumFetchInterval: Duration.zero),
+            minimumFetchInterval: _getMinInterval()),
       );
       await remoteConfig.fetchAndActivate();
       final minVersion = remoteConfig.getString(configName);
