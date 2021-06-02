@@ -33,11 +33,13 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 // Toggle this for testing Crashlytics in your app locally.
 const _kTestingCrashlytics = false;
 const _kTestingAnalytics = false;
 const _kTestingPerformance = false;
+const _kTestingInAppPurchase = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +50,7 @@ Future<void> main() async {
     await Future.wait([
       initStartupOption(),
       initHive(),
+      initRevenueCat(),
       clearDiskCachedImages(duration: const Duration(days: 6)),
     ]);
     // ignore: avoid_catches_without_on_clauses
@@ -140,4 +143,11 @@ Future<void> deleteBoxes() async {
   // await Hive.deleteBoxFromDisk(searchItemBoxName);
   // await Hive.deleteBoxFromDisk(stockItemBoxName);
   await Hive.deleteBoxFromDisk(settingsBoxName);
+}
+
+Future<void> initRevenueCat() async {
+  if (kDebugMode) {
+    await Purchases.setDebugLogsEnabled(_kTestingInAppPurchase);
+  }
+  await Purchases.setup("jFBnMUNKUXuvysgLbDaFcGdzWTKncCxW");
 }

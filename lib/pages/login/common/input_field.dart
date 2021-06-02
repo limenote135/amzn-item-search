@@ -1,6 +1,5 @@
+import 'package:amasearch/util/validators.dart';
 import 'package:flutter/material.dart';
-
-import 'validators.dart';
 
 class EmailFormField extends StatelessWidget {
   const EmailFormField({
