@@ -17,12 +17,9 @@ class VersionChecker {
     }
   }
 
+  static const Duration _minInterval = Duration(minutes: 1);
   static Duration _getMinInterval() {
-    if (Platform.isIOS) {
-      return const Duration(minutes: 5);
-    } else {
-      return Duration.zero;
-    }
+    return _minInterval;
   }
 
   Future<bool> needUpdate() async {
