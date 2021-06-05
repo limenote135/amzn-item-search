@@ -175,13 +175,14 @@ class MwsRepository {
       if (e.response == null || e.response!.statusCode == null) {
         rethrow;
       }
-      if (e.response!.statusCode! >= 500) {
+      final code = e.response!.statusCode!;
+      if (code >= 500) {
         // サーバーサイドエラー
         await FirebaseCrashlytics.instance.recordError(e, stack);
-        throw Exception("サーバーエラー");
+        throw Exception("サーバーエラー($code)");
       }
 
-      switch (e.response!.statusCode) {
+      switch (code) {
         case 412:
           await _container.refresh(updateProvider);
           throw Exception("アプリケーションを更新してください");
