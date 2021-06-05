@@ -121,7 +121,9 @@ class AiBarcodeScannerView:NSObject,FlutterPlatformView{
                     try self.scanner.startScanning(resultBlock: { codes in
                         if let codes = codes {
                             for code in codes {
-                                let stringValue = code.stringValue!
+                                guard let stringValue = code.stringValue else {
+                                    continue
+                                }
                                 if(self.flutterResult != nil){
                                     self.flutterResult?("\(stringValue)");
                                 }
@@ -132,7 +134,7 @@ class AiBarcodeScannerView:NSObject,FlutterPlatformView{
                     })
                 } catch {
                     NSLog("Unable to start scanning error:\(error)")
-                    self.flutterResult?("Unable to start scanning error:\(error)");
+                    //self.flutterResult?("Unable to start scanning error:\(error)");
                 }
             } else {
                 self.flutterResult?("Unable to start scanning This app does not have permission to access the camera");
