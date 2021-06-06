@@ -129,6 +129,7 @@ class _CameraPageState extends ConsumerState<CameraPage>
         _startCameraPreview();
         break;
       case AppLifecycleState.paused:
+        _stopCameraPreview();
         // このメソッドは、画面がオフで表示されていないときに呼び出され、ページが破棄されたときには呼び出されません
         break;
       case AppLifecycleState.inactive:
