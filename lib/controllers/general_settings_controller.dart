@@ -1,6 +1,7 @@
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/general_settings.dart';
+import 'package:amasearch/models/keepa_settings.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -59,6 +60,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     List<AlertConditionSet>? alerts,
     bool? enableAlertVibration,
     bool? isMajorCustomer,
+    KeepaSettings? keepaSettings,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -79,6 +81,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       alerts: alerts ?? state.alerts,
       enableAlertVibration: enableAlertVibration ?? state.enableAlertVibration,
       isMajorCustomer: isMajorCustomer ?? state.isMajorCustomer,
+      keepaSettings: keepaSettings ?? state.keepaSettings,
     );
     box.put(generalSettingsKeyName, state);
   }
