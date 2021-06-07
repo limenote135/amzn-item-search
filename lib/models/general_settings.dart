@@ -5,6 +5,8 @@ import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
+import 'keepa_settings.dart';
+
 part 'general_settings.freezed.dart';
 part 'general_settings.g.dart';
 
@@ -84,6 +86,8 @@ const _defaultAlert = [
   ),
 ];
 
+const _defaultKeepaSettings = KeepaSettings();
+
 @freezed
 class GeneralSettings with _$GeneralSettings {
   @HiveType(typeId: generalSettingsTypeId)
@@ -127,6 +131,9 @@ class GeneralSettings with _$GeneralSettings {
     @Default(false)
         bool enableAlertVibration,
     @HiveField(17, defaultValue: true) @Default(true) bool isMajorCustomer,
+    @HiveField(18, defaultValue: _defaultKeepaSettings)
+    @Default(_defaultKeepaSettings)
+        KeepaSettings keepaSettings,
   }) = _GeneralSettings;
 }
 
