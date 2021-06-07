@@ -99,7 +99,7 @@ class SearchButtons extends HookWidget {
                 await context
                     .read(analyticsControllerProvider)
                     .logPushSearchButtonEvent(eventName);
-                await FlutterWebBrowser.openWebPage(url: url);
+                await FlutterWebBrowser.openWebPage(url: Uri.encodeFull(url));
               },
               child: Text(button.title),
             ),
