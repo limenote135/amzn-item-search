@@ -22,7 +22,12 @@ class TileImage extends HookWidget {
 
   final void Function(ByteData bytes)? onComplete;
 
-  static String _createKeepaUrl(String asin, KeepaSettings settings) {
+  static String _createKeepaUrl(
+    String asin,
+    KeepaSettings settings, {
+    String width = "300",
+    String height = "150",
+  }) {
     final params = <String>[
       "new=${settings.showNew ? "1" : "0"}",
       "used=${settings.showUsed ? "1" : "0"}",
@@ -30,7 +35,7 @@ class TileImage extends HookWidget {
       "range=${settings.period.toValue()}",
     ];
     return "https://graph.keepa.com/pricehistory.png?"
-        "asin=$asin&domain=jp&width=300&height=150&salesrank=1&"
+        "asin=$asin&domain=jp&width=$width&height=$height&salesrank=1&"
         "${params.join("&")}";
   }
 
@@ -101,10 +106,44 @@ class TileImage extends HookWidget {
                 if (state.extendedImageLoadState != LoadState.completed) {
                   return null;
                 }
-                return ExtendedRawImage(
-                  image: state.extendedImageInfo?.image,
-                  // グラフ部分だけをトリミング
-                  sourceRect: const Rect.fromLTWH(45, 20, 80, 110),
+                return GestureDetector(
+                  onTap: () {
+                    showDialog<void>(
+                        context: context,
+                        builder: (context) {
+                          return GestureDetector(
+                            onTap: () {
+                              // InteractiveViewer を使うとダイアログが閉じられなくので、
+                              // GestureDetector でタップ検知して閉じる
+                              Navigator.pop(context);
+                            },
+                            child: InteractiveViewer(
+                              child: SimpleDialog(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      // 画像内はダイアログを閉じないために GestureDetector で上書き
+                                    },
+                                    child: ExtendedImage.network(
+                                      _createKeepaUrl(
+                                        asinData.asin,
+                                        keepaSettings,
+                                        width: "600",
+                                        height: "300",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  },
+                  child: ExtendedRawImage(
+                    image: state.extendedImageInfo?.image,
+                    // グラフ部分だけをトリミング
+                    sourceRect: const Rect.fromLTWH(45, 20, 80, 110),
+                  ),
                 );
               },
             ),
