@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/pages/login/login_page/password_reset_page.dart';
 import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/auth.dart';
@@ -53,10 +54,15 @@ class _Body extends HookWidget {
         final email = emailKey.currentState!.value!;
         final password = passwordKey.currentState!.value!;
         try {
-          await auth.signInWithEmailAndPassword(
+          final cred = await auth.signInWithEmailAndPassword(
             email: email,
             password: password,
           );
+
+          await context
+              .read(analyticsControllerProvider)
+              .setUserId(cred.user?.uid);
+
           Navigator.pop(context);
         } on FirebaseAuthException catch (e, stack) {
           var msg = "不明なエラー";

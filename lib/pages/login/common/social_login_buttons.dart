@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/pages/login/common/sign_in_with_google.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:flutter/gestures.dart';
@@ -34,7 +35,11 @@ class SocialLoginButtons extends HookWidget {
               // ログインキャンセルした場合などは何もしない
               return;
             }
-            await auth.signInWithCredential(cred);
+            final fbCred = await auth.signInWithCredential(cred);
+            await context
+                .read(analyticsControllerProvider)
+                .setUserId(fbCred.user?.uid);
+
             Navigator.of(context).pop();
           },
         ),
@@ -50,6 +55,11 @@ class SocialLoginButtons extends HookWidget {
                 return;
               }
               await auth.signInWithCredential(cred);
+              final fbCred = await auth.signInWithCredential(cred);
+              await context
+                  .read(analyticsControllerProvider)
+                  .setUserId(fbCred.user?.uid);
+
               Navigator.of(context).pop();
             },
           ),

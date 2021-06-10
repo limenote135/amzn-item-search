@@ -64,4 +64,8 @@ class AnalyticsController {
   Future<void> setUserProp(String name, String value) {
     return _read(_analyticsProvider).setUserProperty(name: name, value: value);
   }
+
+  Future<void> setUserId(String? uid) {
+    return _read(_analyticsProvider).setUserId(uid);
+  }
 }
