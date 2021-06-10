@@ -57,6 +57,8 @@ class MyApp extends HookWidget {
           if (value == null) {
             return const LoginRootPage();
           }
+          // TODO: 仮で毎回起動時にセットする
+          context.read(analyticsControllerProvider).setUserId(value.uid);
           return Stack(children: const [
             HomePage(),
             LifecycleManager(callback: UpdateCheckObserver(), child: Updater()),
