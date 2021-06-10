@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -40,10 +41,15 @@ class SignupPage extends HookWidget {
         final email = emailKey.currentState!.value;
         final password = passwordKey.currentState!.value;
         try {
-          await auth.createUserWithEmailAndPassword(
+          final cred = await auth.createUserWithEmailAndPassword(
             email: email!,
             password: password!,
           );
+
+          await context
+              .read(analyticsControllerProvider)
+              .setUserId(cred.user?.uid);
+
           Navigator.pop(context);
         } on FirebaseAuthException catch (e, stack) {
           var msg = "不明なエラー";
