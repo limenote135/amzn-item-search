@@ -52,66 +52,64 @@ class SearchBar extends HookWidget with PreferredSizeWidget {
           ),
         ],
       ),
-      child: SizedBox.expand(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(
-            _horizontalMargin,
-            MediaQuery.of(context).viewPadding.top + 6,
-            _horizontalMargin,
-            0,
-          ),
-          child: Material(
-            elevation: _elevation,
-            borderRadius: _borderRadius,
-            child: Container(
-              height: 48,
-              alignment: Alignment.center,
-              decoration: null,
-              child: ClipRRect(
-                borderRadius: _borderRadius,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: focusNode.requestFocus,
-                        child: const Icon(Icons.search, color: Colors.grey),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: TextField(
-                            focusNode: focusNode,
-                            controller: textEditingController,
-                            keyboardType: TextInputType.number,
-                            style: const TextStyle(fontSize: 18),
-                            decoration: _createInputDecoration(
-                              context,
-                              settings.type,
-                            ),
-                            onSubmitted: (value) {
-                              if (value != "") {
-                                _addItem(context, settings.type, value);
-                                textEditingController.clear();
-                              }
-                            },
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          _horizontalMargin,
+          MediaQuery.of(context).viewPadding.top + 6,
+          _horizontalMargin,
+          0,
+        ),
+        child: Material(
+          elevation: _elevation,
+          borderRadius: _borderRadius,
+          child: Container(
+            height: 48,
+            alignment: Alignment.center,
+            decoration: null,
+            child: ClipRRect(
+              borderRadius: _borderRadius,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: focusNode.requestFocus,
+                      child: const Icon(Icons.search, color: Colors.grey),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: TextField(
+                          focusNode: focusNode,
+                          controller: textEditingController,
+                          keyboardType: TextInputType.number,
+                          style: const TextStyle(fontSize: 18),
+                          decoration: _createInputDecoration(
+                            context,
+                            settings.type,
                           ),
-                        ),
-                      ),
-                      Padding(
-                        // ボタン長押しした際のリップルに TextField が被るので Padding を入れる
-                        padding: const EdgeInsets.only(left: 8),
-                        child: IconButton(
-                          icon: const Icon(Icons.settings),
-                          onPressed: () {
-                            unfocus();
-                            Navigator.of(context)
-                                .push(SearchSettingsPage.route());
+                          onSubmitted: (value) {
+                            if (value != "") {
+                              _addItem(context, settings.type, value);
+                              textEditingController.clear();
+                            }
                           },
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                    Padding(
+                      // ボタン長押しした際のリップルに TextField が被るので Padding を入れる
+                      padding: const EdgeInsets.only(left: 8),
+                      child: IconButton(
+                        icon: const Icon(Icons.settings),
+                        onPressed: () {
+                          unfocus();
+                          Navigator.of(context)
+                              .push(SearchSettingsPage.route());
+                        },
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
