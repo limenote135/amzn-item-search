@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
@@ -151,8 +152,16 @@ class _Body extends HookWidget {
         ListTile(
           title: const Text("ログアウト"),
           onTap: () async {
-            await auth.signOut();
-            await GoogleSignIn().signOut();
+            final ret = await showOkCancelAlertDialog(
+              context: context,
+              title: "ログアウト",
+              message: "ログアウトしますか？",
+              isDestructiveAction: true,
+            );
+            if (ret == OkCancelResult.ok) {
+              await auth.signOut();
+              await GoogleSignIn().signOut();
+            }
           },
         ),
         ListTile(
