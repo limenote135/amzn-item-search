@@ -6,6 +6,7 @@ import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -41,6 +42,7 @@ class SignupPage extends HookWidget {
         final email = emailKey.currentState!.value;
         final password = passwordKey.currentState!.value;
         try {
+          await EasyLoading.show(status: 'loading...');
           final cred = await auth.createUserWithEmailAndPassword(
             email: email!,
             password: password!,
@@ -71,11 +73,16 @@ class SignupPage extends HookWidget {
               msg = e.code;
               break;
           }
+          // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
+          await EasyLoading.dismiss();
+
           await showOkAlertDialog(
             context: context,
             title: "エラー",
             message: msg,
           );
+        } finally {
+          await EasyLoading.dismiss();
         }
       }
       pwController.clear();
