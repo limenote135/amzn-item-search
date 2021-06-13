@@ -25,6 +25,7 @@ const customButtonDetailTypeId = 52;
 const csvColumnTypeId = 53;
 const alertConditionTypeId = 54;
 const alertConditionSetTypeId = 55;
+const keepaSettingsTypeId = 56;
 
 // enums
 const fulfillmentChannelTypeId = 100;
@@ -34,3 +35,4 @@ const searchTypeTypeId = 103;
 const usedSubConditionTypeId = 104;
 const alertTypeTypeId = 105;
 const alertOfferConditionTypeId = 106;
+const keepaShowPeriodTypeId = 107;
