@@ -52,7 +52,9 @@ class _$GeneralSettingsTearOff {
       @HiveField(16, defaultValue: false)
           bool enableAlertVibration = false,
       @HiveField(17, defaultValue: true)
-          bool isMajorCustomer = true}) {
+          bool isMajorCustomer = true,
+      @HiveField(18, defaultValue: _defaultKeepaSettings)
+          KeepaSettings keepaSettings = _defaultKeepaSettings}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
@@ -72,6 +74,7 @@ class _$GeneralSettingsTearOff {
       alerts: alerts,
       enableAlertVibration: enableAlertVibration,
       isMajorCustomer: isMajorCustomer,
+      keepaSettings: keepaSettings,
     );
   }
 }
@@ -120,6 +123,8 @@ mixin _$GeneralSettings {
   bool get enableAlertVibration => throw _privateConstructorUsedError;
   @HiveField(17, defaultValue: true)
   bool get isMajorCustomer => throw _privateConstructorUsedError;
+  @HiveField(18, defaultValue: _defaultKeepaSettings)
+  KeepaSettings get keepaSettings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith =>
@@ -167,7 +172,11 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(16, defaultValue: false)
           bool enableAlertVibration,
       @HiveField(17, defaultValue: true)
-          bool isMajorCustomer});
+          bool isMajorCustomer,
+      @HiveField(18, defaultValue: _defaultKeepaSettings)
+          KeepaSettings keepaSettings});
+
+  $KeepaSettingsCopyWith<$Res> get keepaSettings;
 }
 
 /// @nodoc
@@ -199,6 +208,7 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object? alerts = freezed,
     Object? enableAlertVibration = freezed,
     Object? isMajorCustomer = freezed,
+    Object? keepaSettings = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode: isDarkMode == freezed
@@ -273,7 +283,18 @@ class _$GeneralSettingsCopyWithImpl<$Res>
           ? _value.isMajorCustomer
           : isMajorCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
+      keepaSettings: keepaSettings == freezed
+          ? _value.keepaSettings
+          : keepaSettings // ignore: cast_nullable_to_non_nullable
+              as KeepaSettings,
     ));
+  }
+
+  @override
+  $KeepaSettingsCopyWith<$Res> get keepaSettings {
+    return $KeepaSettingsCopyWith<$Res>(_value.keepaSettings, (value) {
+      return _then(_value.copyWith(keepaSettings: value));
+    });
   }
 }
 
@@ -320,7 +341,12 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       @HiveField(16, defaultValue: false)
           bool enableAlertVibration,
       @HiveField(17, defaultValue: true)
-          bool isMajorCustomer});
+          bool isMajorCustomer,
+      @HiveField(18, defaultValue: _defaultKeepaSettings)
+          KeepaSettings keepaSettings});
+
+  @override
+  $KeepaSettingsCopyWith<$Res> get keepaSettings;
 }
 
 /// @nodoc
@@ -354,6 +380,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
     Object? alerts = freezed,
     Object? enableAlertVibration = freezed,
     Object? isMajorCustomer = freezed,
+    Object? keepaSettings = freezed,
   }) {
     return _then(_GeneralSettings(
       isDarkMode: isDarkMode == freezed
@@ -428,6 +455,10 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           ? _value.isMajorCustomer
           : isMajorCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
+      keepaSettings: keepaSettings == freezed
+          ? _value.keepaSettings
+          : keepaSettings // ignore: cast_nullable_to_non_nullable
+              as KeepaSettings,
     ));
   }
 }
@@ -472,7 +503,9 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(16, defaultValue: false)
           this.enableAlertVibration = false,
       @HiveField(17, defaultValue: true)
-          this.isMajorCustomer = true});
+          this.isMajorCustomer = true,
+      @HiveField(18, defaultValue: _defaultKeepaSettings)
+          this.keepaSettings = _defaultKeepaSettings});
 
   @JsonKey(defaultValue: false)
   @override // ダークモード
@@ -545,10 +578,14 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(17, defaultValue: true)
   final bool isMajorCustomer;
+  @JsonKey(defaultValue: _defaultKeepaSettings)
+  @override
+  @HiveField(18, defaultValue: _defaultKeepaSettings)
+  final KeepaSettings keepaSettings;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings)';
   }
 
   @override
@@ -607,7 +644,10 @@ class _$_GeneralSettings implements _GeneralSettings {
                     other.enableAlertVibration, enableAlertVibration)) &&
             (identical(other.isMajorCustomer, isMajorCustomer) ||
                 const DeepCollectionEquality()
-                    .equals(other.isMajorCustomer, isMajorCustomer)));
+                    .equals(other.isMajorCustomer, isMajorCustomer)) &&
+            (identical(other.keepaSettings, keepaSettings) ||
+                const DeepCollectionEquality()
+                    .equals(other.keepaSettings, keepaSettings)));
   }
 
   @override
@@ -630,7 +670,8 @@ class _$_GeneralSettings implements _GeneralSettings {
       const DeepCollectionEquality().hash(enableAlert) ^
       const DeepCollectionEquality().hash(alerts) ^
       const DeepCollectionEquality().hash(enableAlertVibration) ^
-      const DeepCollectionEquality().hash(isMajorCustomer);
+      const DeepCollectionEquality().hash(isMajorCustomer) ^
+      const DeepCollectionEquality().hash(keepaSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -675,7 +716,9 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(16, defaultValue: false)
           bool enableAlertVibration,
       @HiveField(17, defaultValue: true)
-          bool isMajorCustomer}) = _$_GeneralSettings;
+          bool isMajorCustomer,
+      @HiveField(18, defaultValue: _defaultKeepaSettings)
+          KeepaSettings keepaSettings}) = _$_GeneralSettings;
 
   @override // ダークモード
   @HiveField(0)
@@ -733,6 +776,9 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(17, defaultValue: true)
   bool get isMajorCustomer => throw _privateConstructorUsedError;
+  @override
+  @HiveField(18, defaultValue: _defaultKeepaSettings)
+  KeepaSettings get keepaSettings => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>

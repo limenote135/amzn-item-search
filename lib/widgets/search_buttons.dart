@@ -3,6 +3,7 @@ import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:flutter/cupertino.dart';
@@ -76,11 +77,10 @@ class SearchButtons extends HookWidget {
         ),
         ElevatedButton(
           onPressed: () async {
-            final url = "https://keepa.com/#!product/5-${item.asin}/";
             await context
                 .read(analyticsControllerProvider)
                 .logPushSearchButtonEvent(pushSearchButtonKeepaName);
-            await FlutterWebBrowser.openWebPage(url: url);
+            await Navigator.push(context, KeepaPage.route(item.asin));
           },
           child: const Text("Keepa"),
         ),

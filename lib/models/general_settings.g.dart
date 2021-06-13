@@ -103,13 +103,16 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
           : (fields[15] as List).cast<AlertConditionSet>(),
       enableAlertVibration: fields[16] == null ? false : fields[16] as bool,
       isMajorCustomer: fields[17] == null ? true : fields[17] as bool,
+      keepaSettings: fields[18] == null
+          ? const KeepaSettings()
+          : fields[18] as KeepaSettings,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_GeneralSettings obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(19)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
@@ -145,7 +148,9 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       ..writeByte(16)
       ..write(obj.enableAlertVibration)
       ..writeByte(17)
-      ..write(obj.isMajorCustomer);
+      ..write(obj.isMajorCustomer)
+      ..writeByte(18)
+      ..write(obj.keepaSettings);
   }
 
   @override
