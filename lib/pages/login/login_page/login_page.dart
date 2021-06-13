@@ -39,12 +39,12 @@ class LoginPage extends StatelessWidget {
 class _Body extends HookWidget {
   const _Body({Key? key}) : super(key: key);
 
+  static final emailKey = GlobalKey<FormFieldState<String>>();
+  static final passwordKey = GlobalKey<FormFieldState<String>>();
+  static final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final emailKey = GlobalKey<FormFieldState<String>>();
-    final passwordKey = GlobalKey<FormFieldState<String>>();
-    final formKey = GlobalKey<FormState>();
-
     final pwController = useTextEditingController();
     final pwFocusNode = useFocusNode();
 

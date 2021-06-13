@@ -23,12 +23,12 @@ class SignupPage extends HookWidget {
         builder: (context) => const SignupPage());
   }
 
+  static final emailKey = GlobalKey<FormFieldState<String>>();
+  static final passwordKey = GlobalKey<FormFieldState<String>>();
+  static final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final emailKey = GlobalKey<FormFieldState<String>>();
-    final passwordKey = GlobalKey<FormFieldState<String>>();
-    final formKey = GlobalKey<FormState>();
-
     final pwController = useTextEditingController();
     final pw2Controller = useTextEditingController();
 
