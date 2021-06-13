@@ -18,7 +18,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class PurchasePage extends StatelessWidget {
+class PurchasePage extends HookWidget {
   const PurchasePage({Key? key}) : super(key: key);
   static const routeName = "/search/purchase";
 
@@ -36,12 +36,64 @@ class PurchasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("仕入れ設定"),
-      ),
-      body: const _Body(),
+    final item = useProvider(currentAsinDataProvider);
+
+    // 仮で初期値を新品最安値、無ければ中古最安値にする
+    final lowestPrice = _calcLowestPrice(item.prices);
+    final useFba = useProvider(searchSettingsControllerProvider).useFba;
+
+    final stock = StockItem(
+      purchaseDate: currentTimeString(),
+      sellPrice: lowestPrice,
+      useFba: useFba,
+      autogenSku: true,
+      item: item,
+      id: context.read(uuidProvider).v4(), // たぶん空文字でも問題ない
     );
+    final form = useProvider(formValueProvider(stock));
+    return ProviderScope(
+      overrides: [
+        currentStockItemProvider.overrideWithValue(stock),
+      ],
+      child: ReactiveForm(
+        formGroup: form.state,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text("仕入れ設定"),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: _SaveButton(
+                  builder: (context, onSave) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: const StadiumBorder(),
+                      ),
+                      onPressed: onSave,
+                      child: const Text("仕入れ"),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          body: const _Body(),
+        ),
+      ),
+    );
+  }
+
+  int _calcLowestPrice(ItemPrices? prices) {
+    if (prices == null) {
+      return 0;
+    }
+    if (prices.newPrices.isNotEmpty) {
+      return prices.newPrices.first.price;
+    }
+    if (prices.usedPrices.isNotEmpty) {
+      return prices.usedPrices.first.price;
+    }
+    return 0;
   }
 }
 
@@ -52,57 +104,53 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    return PurchaseSettingsForm(
+      onComplete: (bytes) {
+        // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
+        context.read(_itemImageProvider).state = bytes.buffer.asUint8List();
+      },
+      action: _SaveButton(
+        builder: (context, onSave) {
+          return ElevatedButton(
+            onPressed: onSave,
+            child: const Text("仕入れる"),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _SaveButton extends HookWidget {
+  const _SaveButton({Key? key, required this.builder}) : super(key: key);
+
+  final Widget Function(BuildContext context, void Function()? onSave) builder;
+
+  @override
+  Widget build(BuildContext context) {
     final item = useProvider(currentAsinDataProvider);
-    final uuid = context.read(uuidProvider);
-
-    // 仮で初期値を新品最安値、無ければ中古最安値にする
-    final lowestPrice = _calcLowestPrice(item.prices);
-    final useFba = useProvider(searchSettingsControllerProvider).useFba;
-
     final isMajorCustomer = useProvider(generalSettingsControllerProvider
         .select((value) => value.isMajorCustomer));
 
-    final stock = StockItem(
-      purchaseDate: currentTimeString(),
-      sellPrice: lowestPrice,
-      useFba: useFba,
-      autogenSku: true,
-      item: item,
-      id: uuid.v4(),
-    );
-
-    return ProviderScope(
-      overrides: [
-        currentStockItemProvider.overrideWithValue(stock),
-      ],
-      child: PurchaseSettingsForm(
-        onComplete: (bytes) {
-          // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
-          context.read(_itemImageProvider).state = bytes.buffer.asUint8List();
-        },
-        action: ReactiveFormConsumer(
-          builder: (context, form, child) {
-            return Consumer(
-              builder: (context, watch, child) {
-                final image = watch(_itemImageProvider);
-                return ElevatedButton(
-                  onPressed: form.invalid
-                      ? null
-                      : () => _onSubmit(
-                            context,
-                            form,
-                            uuid.v4(),
-                            item,
-                            image.state,
-                            isMajorCustomer,
-                          ),
-                  child: const Text("仕入れる"),
-                );
-              },
-            );
+    return ReactiveFormConsumer(
+      builder: (context, form, child) {
+        return Consumer(
+          builder: (context, watch, child) {
+            final image = watch(_itemImageProvider);
+            final onSave = form.invalid
+                ? null
+                : () => _onSubmit(
+                      context,
+                      form,
+                      context.read(uuidProvider).v4(),
+                      item,
+                      image.state,
+                      isMajorCustomer,
+                    );
+            return builder(context, onSave);
           },
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -152,18 +200,5 @@ class _Body extends HookWidget {
     context.read(analyticsControllerProvider).logPurchaseEvent(stock);
 
     Navigator.of(context).popUntil((route) => route.settings.name == "/");
-  }
-
-  int _calcLowestPrice(ItemPrices? prices) {
-    if (prices == null) {
-      return 0;
-    }
-    if (prices.newPrices.isNotEmpty) {
-      return prices.newPrices.first.price;
-    }
-    if (prices.usedPrices.isNotEmpty) {
-      return prices.usedPrices.first.price;
-    }
-    return 0;
   }
 }
