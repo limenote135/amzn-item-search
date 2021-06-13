@@ -11,7 +11,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class EditPage extends StatelessWidget {
+class EditPage extends HookWidget {
   const EditPage({Key? key}) : super(key: key);
   static const routeName = "/stocks/edit";
 
@@ -29,11 +29,33 @@ class EditPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("仕入れ内容の変更"),
+    final item = useProvider(currentStockItemProvider);
+    final form = useProvider(formValueProvider(item));
+
+    return ReactiveForm(
+      formGroup: form.state,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("仕入れ内容の変更"),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: _SaveButton(
+                builder: (context, onSave) {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                    ),
+                    onPressed: onSave,
+                    child: const Text("更新"),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+        body: const _Body(),
       ),
-      body: const _Body(),
     );
   }
 }
@@ -45,30 +67,51 @@ class _Body extends HookWidget {
   Widget build(BuildContext context) {
     final item = useProvider(currentStockItemProvider);
 
-    final isMajorCustomer = useProvider(generalSettingsControllerProvider
-        .select((value) => value.isMajorCustomer));
-
     return ProviderScope(
       overrides: [
-        currentAsinDataProvider.overrideWithValue(item.item), // 不要になってるかも？
+        currentAsinDataProvider.overrideWithValue(item.item),
       ],
       child: PurchaseSettingsForm(
-        action: ReactiveFormConsumer(
-          builder: (context, form, child) {
+        action: _SaveButton(
+          builder: (context, onSave) {
             return ElevatedButton(
-              onPressed: form.invalid
-                  ? null
-                  : () => _onSubmit(
-                        context,
-                        form,
-                        item,
-                        isMajorCustomer: isMajorCustomer,
-                      ),
+              onPressed: onSave,
               child: const Text("更新"),
             );
           },
         ),
       ),
+    );
+  }
+}
+
+class _SaveButton extends HookWidget {
+  const _SaveButton({Key? key, required this.builder}) : super(key: key);
+
+  final Widget Function(BuildContext context, void Function()? onSave) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final item = useProvider(currentStockItemProvider);
+    final isMajorCustomer = useProvider(generalSettingsControllerProvider
+        .select((value) => value.isMajorCustomer));
+
+    return ReactiveFormConsumer(
+      builder: (context, form, child) {
+        return Consumer(
+          builder: (context, watch, child) {
+            final onSave = form.invalid
+                ? null
+                : () => _onSubmit(
+                      context,
+                      form,
+                      item,
+                      isMajorCustomer: isMajorCustomer,
+                    );
+            return builder(context, onSave);
+          },
+        );
+      },
     );
   }
 
