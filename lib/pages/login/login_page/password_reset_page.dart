@@ -33,11 +33,11 @@ class PasswordResetPage extends StatelessWidget {
 class _Body extends HookWidget {
   const _Body({Key? key}) : super(key: key);
 
+  static final formKey = GlobalKey<FormState>();
+  static final fieldKey = GlobalKey<FormFieldState<String>>();
+
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    final fieldKey = GlobalKey<FormFieldState<String>>();
-
     final auth = useProvider(firebaseAuthProvider);
 
     Future<void> _onSubmit() async {
