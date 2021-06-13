@@ -17,11 +17,6 @@ class VersionChecker {
     }
   }
 
-  static const Duration _minInterval = Duration(minutes: 1);
-  static Duration _getMinInterval() {
-    return _minInterval;
-  }
-
   Future<bool> needUpdate() async {
     final info = await PackageInfo.fromPlatform();
     final currentVersion = Version.parse(info.version);
@@ -36,8 +31,8 @@ class VersionChecker {
       await remoteConfig.setDefaults(defaultValues);
       await remoteConfig.setConfigSettings(
         RemoteConfigSettings(
-            fetchTimeout: const Duration(seconds: 5),
-            minimumFetchInterval: _getMinInterval()),
+            fetchTimeout: const Duration(seconds: 15),
+            minimumFetchInterval: const Duration(minutes: 15)),
       );
       await remoteConfig.fetchAndActivate();
       final minVersion = remoteConfig.getString(configName);
