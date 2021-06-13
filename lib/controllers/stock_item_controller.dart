@@ -56,12 +56,14 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
 
   void add(StockItem item) {
     final box = _read(stockItemBoxProvider);
-    state = [item, ...state];
+    // 過去の日付で仕入れをする場合があるため、仕入後には再ソートする
+    state = [item, ...state]..sort(_sortFunc);
     box.put(item.id, item);
   }
 
   void update(StockItem item) {
     final box = _read(stockItemBoxProvider);
+    // 仕入れ日を変更する場合があるため、再ソートする
     state = [for (final i in state) i.id == item.id ? item : i]
       ..sort(_sortFunc);
     box.put(item.id, item);
