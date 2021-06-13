@@ -44,10 +44,10 @@ class SearchPage extends StatelessWidget {
   }
 }
 
-GlobalKey _appBarKey = GlobalKey();
-
 class _AppBar extends HookWidget {
   const _AppBar({Key? key}) : super(key: key);
+
+  static final _appBarKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
