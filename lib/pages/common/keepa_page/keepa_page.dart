@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/util/util.dart';
@@ -30,6 +31,17 @@ class KeepaPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Keepa"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () async {
+              await clearDiskCachedImages();
+              context
+                  .read(generalSettingsControllerProvider.notifier)
+                  .changeKeepaExtraParam();
+            },
+          ),
+        ],
       ),
       body: const _Body(),
     );
@@ -102,7 +114,7 @@ class _Body extends HookWidget {
 
       return "https://graph.keepa.com/pricehistory.png?"
           "asin=$asin&domain=co.jp&width=600&salesrank=1&height=300&"
-          "${params.join("&")}";
+          "${params.join("&")}${settings.extraParam}";
     }
 
     return Column(
@@ -191,7 +203,22 @@ class _Body extends HookWidget {
             await FlutterWebBrowser.openWebPage(url: url);
           },
           child: const Text("ブラウザで開く"),
-        )
+        ),
+        InkWell(
+          onTap: () async {
+            await showOkAlertDialog(
+                context: context,
+                message: "ブラウザで Keepa へログインした上で、"
+                    "右上のボタンを押して再読み込みすると表示されるようになります。");
+          },
+          child: const Text(
+            "ランキングが表示されない場合",
+            style: TextStyle(
+              color: Colors.blue,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+        ),
       ],
     );
   }
