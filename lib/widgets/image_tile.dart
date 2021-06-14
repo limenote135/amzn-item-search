@@ -36,7 +36,7 @@ class TileImage extends HookWidget {
     ];
     return "https://graph.keepa.com/pricehistory.png?"
         "asin=$asin&domain=jp&width=$width&height=$height&salesrank=1&"
-        "${params.join("&")}";
+        "${params.join("&")}${settings.extraParam}";
   }
 
   @override
