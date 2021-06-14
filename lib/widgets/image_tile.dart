@@ -36,7 +36,7 @@ class TileImage extends HookWidget {
     ];
     return "https://graph.keepa.com/pricehistory.png?"
         "asin=$asin&domain=jp&width=$width&height=$height&salesrank=1&"
-        "${params.join("&")}";
+        "${params.join("&")}${settings.extraParam}";
   }
 
   @override
@@ -142,7 +142,7 @@ class TileImage extends HookWidget {
                   child: ExtendedRawImage(
                     image: state.extendedImageInfo?.image,
                     // グラフ部分だけをトリミング
-                    sourceRect: const Rect.fromLTWH(45, 20, 80, 110),
+                    sourceRect: const Rect.fromLTWH(45, 20, 80, 100),
                   ),
                 );
               },

@@ -16,5 +16,6 @@ class KeepaSettings with _$KeepaSettings {
     @HiveField(3, defaultValue: KeepaShowPeriod.month)
     @Default(KeepaShowPeriod.month)
         KeepaShowPeriod period,
+    @HiveField(4, defaultValue: "") @Default("") String extraParam,
   }) = _KeepaSettings;
 }
