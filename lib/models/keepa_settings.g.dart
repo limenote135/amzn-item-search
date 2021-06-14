@@ -23,13 +23,14 @@ class KeepaSettingsAdapter extends TypeAdapter<_$_KeepaSettings> {
       period: fields[3] == null
           ? KeepaShowPeriod.month
           : fields[3] as KeepaShowPeriod,
+      extraParam: fields[4] == null ? '' : fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_KeepaSettings obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.showNew)
       ..writeByte(1)
@@ -37,7 +38,9 @@ class KeepaSettingsAdapter extends TypeAdapter<_$_KeepaSettings> {
       ..writeByte(2)
       ..write(obj.showAmazon)
       ..writeByte(3)
-      ..write(obj.period);
+      ..write(obj.period)
+      ..writeByte(4)
+      ..write(obj.extraParam);
   }
 
   @override
