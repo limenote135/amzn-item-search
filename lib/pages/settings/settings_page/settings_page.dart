@@ -11,8 +11,10 @@ import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
 import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
 import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -171,6 +173,39 @@ class _Body extends HookWidget {
             }
           },
         ),
+        ListTile(
+          title: const Text("アカウントの削除"),
+          onTap: () async {
+            final ret = await showOkCancelAlertDialog(
+              context: context,
+              title: "アカウントの削除",
+              message: "アカウントを削除すると同じアカウントで再登録はできません。\n"
+                  "本当に削除してよろしいですか？",
+              isDestructiveAction: true,
+            );
+            if (ret == OkCancelResult.ok) {
+              try {
+                await EasyLoading.show(status: '削除中...');
+                final fn = context
+                    .read(cloudFunctionProvider(functionNameDisableUser));
+                await fn.call<String>("");
+
+                await EasyLoading.dismiss();
+                await showOkAlertDialog(
+                  context: context,
+                  message: "ご利用ありがとうございました。",
+                );
+                await auth.signOut();
+                await GoogleSignIn().signOut();
+              } finally {
+                if (EasyLoading.isShow) {
+                  await EasyLoading.dismiss();
+                }
+              }
+            }
+          },
+        ),
+        const ThemeDivider(),
         ListTile(
           title: const Text("このアプリについて"),
           onTap: () async {
