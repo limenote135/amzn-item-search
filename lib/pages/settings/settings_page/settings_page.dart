@@ -3,6 +3,7 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/settings/alert_page/alert_page.dart';
+import 'package:amasearch/pages/settings/amazon_page/amazon_page.dart';
 import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.dart';
 import 'package:amasearch/pages/settings/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/settings/purchase_list_page/purchase_list_page.dart';
@@ -72,6 +73,12 @@ class _Body extends HookConsumerWidget {
             ref
                 .read(analyticsControllerProvider)
                 .setUserProp(majorCustomerPropName, value.toString());
+          },
+        ),
+        ListTile(
+          title: const Text("Amazon連携"),
+          onTap: () {
+            Navigator.push(context, AmazonPage.route());
           },
         ),
         const ThemeDivider(),
