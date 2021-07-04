@@ -121,7 +121,7 @@ class _CodeType extends HookWidget {
               ),
               DropdownMenuItem(
                 value: SearchType.geo,
-                child: Text("ゲオ"),
+                child: Text("GEO"),
               ),
               DropdownMenuItem(
                 value: SearchType.tsutaya,
