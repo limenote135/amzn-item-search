@@ -61,8 +61,8 @@ class StocksPage extends HookWidget {
             PopupMenuItem(
               value: _StockPageActions.share,
               child: ListTile(
-                leading: Icon(Icons.share),
-                title: Text("共有"),
+                leading: Icon(Icons.file_upload_outlined),
+                title: Text("商品リストを送る"),
               ),
             ),
             PopupMenuItem(
