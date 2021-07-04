@@ -144,13 +144,13 @@ class SearchBar extends HookWidget with PreferredSizeWidget {
   String _getHintText(SearchType type) {
     switch (type) {
       case SearchType.jan:
-        return "JANコード";
+        return "JANコード検索";
       case SearchType.bookoff:
-        return "BookOff";
+        return "BookOff 検索";
       case SearchType.geo:
-        return "Geo";
+        return "GEO 検索";
       case SearchType.tsutaya:
-        return "TSUTAYA";
+        return "TSUTAYA 検索";
       case SearchType.freeWord:
         // deprecated
         break;
