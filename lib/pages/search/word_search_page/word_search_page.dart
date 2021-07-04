@@ -8,17 +8,93 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'item_tile.dart';
 
+final _wordProvider = StateProvider((_) => "");
+final _categoryProvider = StateProvider((_) => "All");
+
 class WordSearchPage extends StatelessWidget {
   const WordSearchPage({Key? key}) : super(key: key);
   static const String routeName = "/word_search";
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("フリーワード検索"),
+    return const Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            _AppBar(),
+            _Body(),
+          ],
+        ),
       ),
-      body: const _Body(),
+    );
+  }
+}
+
+class _AppBar extends HookWidget {
+  const _AppBar({Key? key}) : super(key: key);
+
+  static final _appBarKey = GlobalKey();
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = useTextEditingController();
+    final word = useProvider(_wordProvider);
+    final category = useProvider(_categoryProvider);
+
+    final height = useState<double>(0);
+    WidgetsBinding.instance?.addPostFrameCallback((cb) {
+      // build が完了した後に AppBar の高さを計算して設定、再描画する
+      final obj = _appBarKey.currentContext?.findRenderObject();
+      if (obj != null) {
+        // ValueNotifier 内で値が同じなら set がスキップされるので、事前にチェックはしないでよい
+        height.value = obj.paintBounds.height;
+      }
+    });
+    return SliverAppBar(
+      title: Column(
+        key: _appBarKey,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                hintText: "フリーワード検索",
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: controller.clear,
+                ),
+              ),
+              onSubmitted: (value) {
+                if (value != "" && word.state != value) {
+                  word.state = value;
+                }
+              },
+            ),
+          ),
+          ListTile(
+            title: const Text("カテゴリー"),
+            trailing: DropdownButton(
+              value: category.state,
+              items: mwsSearchCategoryMap.entries.map((entry) {
+                return DropdownMenuItem(
+                  value: entry.value,
+                  child: Text(entry.key),
+                );
+              }).toList(),
+              onChanged: (String? value) {
+                if (value != null && category.state != value) {
+                  category.state = value;
+                }
+              },
+            ),
+          ),
+          const ThemeDivider(),
+        ],
+      ),
+      centerTitle: true,
+      toolbarHeight: height.value,
+      floating: true,
     );
   }
 }
@@ -28,77 +104,43 @@ class _Body extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = useTextEditingController();
-    final word = useState<String>("");
-    final category = useState<String>("All");
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: TextField(
-            controller: controller,
-            decoration: InputDecoration(
-              hintText: "単語を入力してください",
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.clear),
-                onPressed: controller.clear,
-              ),
-            ),
-            onSubmitted: (value) {
-              if (value != "" && word.value != value) {
-                word.value = value;
-              }
-            },
-          ),
+    final word = useProvider(_wordProvider);
+    final category = useProvider(_categoryProvider);
+
+    if (word.state == "") {
+      return SliverList(
+        delegate: SliverChildListDelegate([Container()]),
+      );
+    }
+
+    return SliverList(
+      delegate: useProvider(queryItemResultProvider(ListMatchingProductRequest(
+        query: word.state,
+        category: category.state,
+      ))).when(
+        loading: () => SliverChildListDelegate(
+          [const Center(child: CircularProgressIndicator())],
         ),
-        ListTile(
-          title: const Text("カテゴリー"),
-          trailing: DropdownButton(
-            value: category.value,
-            items: mwsSearchCategoryMap.entries.map((entry) {
-              return DropdownMenuItem(
-                value: entry.value,
-                child: Text(entry.key),
-              );
-            }).toList(),
-            onChanged: (String? value) {
-              if (value != null && category.value != value) {
-                category.value = value;
-              }
-            },
-          ),
+        error: (error, stackTrace) => SliverChildListDelegate(
+          [Text("$error")],
         ),
-        const ThemeDivider(),
-        if (word.value != "")
-          useProvider(queryItemResultProvider(ListMatchingProductRequest(
-            query: word.value,
-            category: category.value,
-          ))).when(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stackTrace) => Text("$error"),
-            data: (value) {
-              return Expanded(
-                child: ListView(
-                  children: [
-                    ...ListTile.divideTiles(
-                      context: context,
-                      tiles: [
-                        for (final item in value)
-                          ProviderScope(
-                            overrides: [
-                              currentAsinDataProvider.overrideWithValue(item),
-                            ],
-                            child: const ItemTile(),
-                          ),
-                      ],
-                    ).toList(),
-                    const ThemeDivider(),
-                  ],
-                ),
+        data: (items) {
+          return SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              if (index.isOdd) {
+                return const ThemeDivider();
+              }
+              return ProviderScope(
+                overrides: [
+                  currentAsinDataProvider.overrideWithValue(items[index ~/ 2]),
+                ],
+                child: const ItemTile(),
               );
             },
-          )
-      ],
+            childCount: items.length * 2,
+          );
+        },
+      ),
     );
   }
 }
