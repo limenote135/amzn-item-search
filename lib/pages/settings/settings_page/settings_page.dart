@@ -82,7 +82,7 @@ class _Body extends HookWidget {
         ),
         ListTile(
           title: const Text("SKU フォーマット"),
-          subtitle: Text("${settings.skuFormat}"),
+          subtitle: Text(settings.skuFormat),
           onTap: () {
             Navigator.push(
               context,

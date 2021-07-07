@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 class SliderTile extends StatefulWidget {
   const SliderTile({
+    Key? key,
     required this.title,
     required this.initValue,
     this.min = 0,
     required this.max,
     required this.divisions,
     this.onSubmit,
-  });
+  }) : super(key: key);
 
   final String title;
   final double initValue;
@@ -18,13 +19,17 @@ class SliderTile extends StatefulWidget {
   final void Function(double)? onSubmit;
 
   @override
-  _SliderTileState createState() => _SliderTileState(initValue);
+  _SliderTileState createState() => _SliderTileState();
 }
 
 class _SliderTileState extends State<SliderTile> {
-  _SliderTileState(this._value);
+  late double _value;
 
-  double _value;
+  @override
+  void initState() {
+    super.initState();
+    _value = widget.initValue;
+  }
 
   @override
   Widget build(BuildContext context) {
