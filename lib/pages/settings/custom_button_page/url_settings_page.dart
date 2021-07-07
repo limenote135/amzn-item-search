@@ -54,23 +54,22 @@ class _UrlEditForm extends StatefulWidget {
 
   final CustomButtonDetail button;
   @override
-  __UrlEditFormState createState() => __UrlEditFormState(button);
+  __UrlEditFormState createState() => __UrlEditFormState();
 }
 
 class __UrlEditFormState extends State<_UrlEditForm> {
-  __UrlEditFormState(CustomButtonDetail button)
-      : _patternEditingController = TextEditingController(text: button.pattern),
-        _titleEditingController = TextEditingController(text: button.title);
-
-  final TextEditingController _patternEditingController;
-  final TextEditingController _titleEditingController;
+  late final TextEditingController _patternEditingController;
+  late final TextEditingController _titleEditingController;
 
   @override
   void initState() {
     super.initState();
+    _patternEditingController =
+        TextEditingController(text: widget.button.pattern);
     _patternEditingController.addListener(() {
       setState(() {});
     });
+    _titleEditingController = TextEditingController(text: widget.button.title);
     _titleEditingController.addListener(() {
       setState(() {});
     });
