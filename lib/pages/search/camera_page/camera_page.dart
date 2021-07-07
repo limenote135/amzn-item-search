@@ -18,12 +18,14 @@ import 'ios_camera_scan_overlay_shape.dart';
 import 'item_tile.dart';
 
 class CameraPage extends StatefulWidget {
+  const CameraPage({Key? key}) : super(key: key);
+
   static const routeName = "/camera";
 
   static Route<void> route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => CameraPage(),
+      builder: (context) => const CameraPage(),
     );
   }
 
@@ -44,8 +46,6 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     WidgetsBinding.instance!.addObserver(this);
     _scannerController = ScannerController(
       scannerResult: (result) {
-        print("Read result: $result");
-
         if (_lastRead != result) {
           Vibration.vibrate(duration: 50, amplitude: 128);
 
