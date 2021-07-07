@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   static final emailKey = GlobalKey<FormFieldState<String>>();
@@ -44,11 +44,11 @@ class _Body extends HookWidget {
   static final formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final pwController = useTextEditingController();
     final pwFocusNode = useFocusNode();
 
-    final auth = useProvider(firebaseAuthProvider);
+    final auth = ref.watch(firebaseAuthProvider);
 
     Future<void> _onSubmit() async {
       if (formKey.currentState?.validate() ?? false) {
@@ -62,9 +62,7 @@ class _Body extends HookWidget {
             password: password,
           );
 
-          await context
-              .read(analyticsControllerProvider)
-              .setUserId(cred.user?.uid);
+          await ref.read(analyticsControllerProvider).setUserId(cred.user?.uid);
 
           Navigator.pop(context);
         } on FirebaseAuthException catch (e, stack) {

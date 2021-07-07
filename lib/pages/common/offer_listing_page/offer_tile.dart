@@ -2,21 +2,20 @@ import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'offer_chips.dart';
 import 'offer_listing_page.dart';
 import 'stock_text.dart';
 
-class OfferTile extends HookWidget {
+class OfferTile extends HookConsumerWidget {
   const OfferTile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final index = useProvider(currentIndex);
-    final param = useProvider(currentOfferListingParamProvider);
-    final offerItem = useProvider(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final index = ref.watch(currentIndex);
+    final param = ref.watch(currentOfferListingParamProvider);
+    final offerItem = ref.watch(
       offerAtIndexProvider(OfferAtIndexParam(
         params: param,
         index: index,

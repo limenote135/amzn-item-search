@@ -17,7 +17,7 @@ import 'package:vibration/vibration.dart';
 import 'ios_camera_scan_overlay_shape.dart';
 import 'item_tile.dart';
 
-class CameraPage extends StatefulWidget {
+class CameraPage extends ConsumerStatefulWidget {
   const CameraPage({Key? key}) : super(key: key);
 
   static const routeName = "/camera";
@@ -33,7 +33,8 @@ class CameraPage extends StatefulWidget {
   _CameraPageState createState() => _CameraPageState();
 }
 
-class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
+class _CameraPageState extends ConsumerState<CameraPage>
+    with WidgetsBindingObserver {
   ScannerController? _scannerController;
   bool _isCameraGranted = false;
   var _lastRead = "";
@@ -49,25 +50,23 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         if (_lastRead != result) {
           Vibration.vibrate(duration: 50, amplitude: 128);
 
-          final settings = context.read(searchSettingsControllerProvider);
+          final settings = ref.read(searchSettingsControllerProvider);
           showSuggestion(result.length, settings.type);
 
           switch (settings.type) {
             case SearchType.jan:
-              context.read(searchItemControllerProvider.notifier).add(result);
+              ref.read(searchItemControllerProvider.notifier).add(result);
               break;
             case SearchType.bookoff:
-              context
+              ref
                   .read(searchItemControllerProvider.notifier)
                   .addBookoff(result);
               break;
             case SearchType.geo:
-              context
-                  .read(searchItemControllerProvider.notifier)
-                  .addGeo(result);
+              ref.read(searchItemControllerProvider.notifier).addGeo(result);
               break;
             case SearchType.tsutaya:
-              context
+              ref
                   .read(searchItemControllerProvider.notifier)
                   .addTsutaya(result);
               break;
@@ -214,7 +213,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     final size = window.physicalSize;
     final screenWidth = size.width / window.devicePixelRatio;
     final screenHeight = size.height / window.devicePixelRatio;
-    final settings = context.read(searchSettingsControllerProvider);
+    final settings = ref.read(searchSettingsControllerProvider);
     final continuousRead = settings.continuousCameraRead;
     final type = settings.type;
 
@@ -222,6 +221,11 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       border: Border.all(color: Colors.white),
       borderRadius: BorderRadius.circular(5),
     );
+
+    ref.listen(searchSettingsControllerProvider, (value) {
+      // コードタイプを変更した際に lastRead をリセットする
+      _lastRead = "";
+    });
 
     return Scaffold(
       body: Stack(
@@ -288,10 +292,10 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       onPressed: () {
                         setState(() {
                           final newVal = !continuousRead;
-                          context
+                          ref
                               .read(searchSettingsControllerProvider.notifier)
                               .update(continuousCameraRead: newVal);
-                          context.read(analyticsControllerProvider).setUserProp(
+                          ref.read(analyticsControllerProvider).setUserProp(
                               continuousReadPropName, newVal.toString());
                         });
                       },
@@ -326,7 +330,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       onPressed: () {
                         setState(() {
                           final next = _getNext(type);
-                          context
+                          ref
                               .read(searchSettingsControllerProvider.notifier)
                               .update(type: next);
                         });
@@ -346,14 +350,6 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                 const SizedBox(height: 50),
               ],
             ),
-          ),
-          ProviderListener(
-            provider: searchSettingsControllerProvider,
-            onChange: (context, value) {
-              // コードタイプを変更した際に lastRead をリセットする
-              _lastRead = "";
-            },
-            child: const SizedBox(),
           ),
         ],
       ),

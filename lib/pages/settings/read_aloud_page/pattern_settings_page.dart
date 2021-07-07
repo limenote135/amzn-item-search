@@ -9,10 +9,10 @@ import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final currentPatternProvider = ScopedProvider<String>(null);
+final currentPatternProvider =
+    Provider<String>((_) => throw UnimplementedError());
 
 class PatternSettingsPage extends StatelessWidget {
   const PatternSettingsPage({Key? key}) : super(key: key);
@@ -41,17 +41,17 @@ class PatternSettingsPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final pattern = useProvider(currentPatternProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final pattern = ref.watch(currentPatternProvider);
     return _PatternEditForm(pattern);
   }
 }
 
-class _PatternEditForm extends StatefulWidget {
+class _PatternEditForm extends ConsumerStatefulWidget {
   const _PatternEditForm(this.pattern);
 
   final String pattern;
@@ -90,7 +90,7 @@ const _sampleItem = AsinData(
   ),
 );
 
-class __PatternEditFormState extends State<_PatternEditForm> {
+class __PatternEditFormState extends ConsumerState<_PatternEditForm> {
   late final TextEditingController _textEditingController;
 
   @override
@@ -167,18 +167,13 @@ class __PatternEditFormState extends State<_PatternEditForm> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Consumer(
-              builder: (context, watch, child) {
-                final tts = watch(ttsProvider);
-                return ElevatedButton(
-                  onPressed: () {
-                    final text =
-                        _createPreviewText(_textEditingController.text);
-                    tts.speak(text);
-                  },
-                  child: const Text("読み上げテスト"),
-                );
+            ElevatedButton(
+              onPressed: () {
+                final tts = ref.read(ttsProvider);
+                final text = _createPreviewText(_textEditingController.text);
+                tts.speak(text);
               },
+              child: const Text("読み上げテスト"),
             ),
             ElevatedButton(
               onPressed: () {

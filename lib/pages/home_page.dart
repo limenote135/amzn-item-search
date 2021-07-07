@@ -5,12 +5,11 @@ import 'package:amasearch/pages/search/word_search_page/word_search_page.dart';
 import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final _currentPageProvider = StateProvider((_) => 0);
 
-class HomePage extends HookWidget {
+class HomePage extends HookConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   static const _pages = [
@@ -27,9 +26,9 @@ class HomePage extends HookWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    final currentPage = useProvider(_currentPageProvider);
-    final observer = useProvider(analyticsObserverProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentPage = ref.watch(_currentPageProvider);
+    final observer = ref.watch(analyticsObserverProvider);
     return WillPopScope(
       onWillPop: () async {
         final ret = await showOkCancelAlertDialog(
