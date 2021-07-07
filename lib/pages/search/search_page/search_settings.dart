@@ -2,15 +2,14 @@ import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SearchSetting extends HookWidget {
+class SearchSetting extends HookConsumerWidget {
   const SearchSetting({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final setting = useProvider(searchSettingsControllerProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final setting = ref.watch(searchSettingsControllerProvider);
     var condText = setting.usedSubCondition.toDisplayString();
     if (setting.usedSubCondition != UsedSubCondition.all) {
       condText += "以上";

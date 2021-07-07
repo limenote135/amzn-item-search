@@ -13,7 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../common/input_field.dart';
 import '../common/social_login_buttons.dart';
 
-class SignupPage extends HookWidget {
+class SignupPage extends HookConsumerWidget {
   const SignupPage({Key? key}) : super(key: key);
   static const routeName = "/login/signup";
 
@@ -28,14 +28,14 @@ class SignupPage extends HookWidget {
   static final formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final pwController = useTextEditingController();
     final pw2Controller = useTextEditingController();
 
     final pwFocusNode = useFocusNode();
     final pw2FocusNode = useFocusNode();
 
-    final auth = useProvider(firebaseAuthProvider);
+    final auth = ref.watch(firebaseAuthProvider);
 
     Future<void> _onSubmit() async {
       if (formKey.currentState?.validate() ?? false) {
@@ -48,9 +48,7 @@ class SignupPage extends HookWidget {
             password: password!,
           );
 
-          await context
-              .read(analyticsControllerProvider)
-              .setUserId(cred.user?.uid);
+          await ref.read(analyticsControllerProvider).setUserId(cred.user?.uid);
 
           Navigator.pop(context);
         } on FirebaseAuthException catch (e, stack) {

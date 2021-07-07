@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void updateAlertConditionAnalytics(
-    BuildContext context, List<AlertConditionSet> alerts) {
+    BuildContext context, WidgetRef ref, List<AlertConditionSet> alerts) {
   final js = jsonEncode(alerts);
-  context
-      .read(analyticsControllerProvider)
-      .setUserProp(alertSettingsPropName, js);
+  ref.read(analyticsControllerProvider).setUserProp(alertSettingsPropName, js);
 }

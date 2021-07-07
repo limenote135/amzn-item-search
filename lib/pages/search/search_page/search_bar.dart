@@ -8,7 +8,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 
-class SearchBar extends HookWidget with PreferredSizeWidget {
+class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
   const SearchBar({Key? key}) : super(key: key);
 
   @override
@@ -19,10 +19,10 @@ class SearchBar extends HookWidget with PreferredSizeWidget {
   static const _borderRadius = BorderRadius.all(Radius.circular(8));
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final textEditingController = useTextEditingController();
     final focusNode = useFocusNode();
-    final settings = useProvider(searchSettingsControllerProvider);
+    final settings = ref.watch(searchSettingsControllerProvider);
 
     return KeyboardActions(
       disableScroll: true,
@@ -42,7 +42,7 @@ class SearchBar extends HookWidget with PreferredSizeWidget {
                     node.unfocus();
                     final value = textEditingController.text;
                     if (value != "") {
-                      _addItem(context, settings.type, value);
+                      _addItem(context, ref, settings.type, value);
                       textEditingController.clear();
                     }
                   },
@@ -90,7 +90,7 @@ class SearchBar extends HookWidget with PreferredSizeWidget {
                           ),
                           onSubmitted: (value) {
                             if (value != "") {
-                              _addItem(context, settings.type, value);
+                              _addItem(context, ref, settings.type, value);
                               textEditingController.clear();
                             }
                           },
@@ -158,19 +158,20 @@ class SearchBar extends HookWidget with PreferredSizeWidget {
     throw Exception("Unknown SearchType: $type");
   }
 
-  void _addItem(BuildContext context, SearchType type, String code) {
+  void _addItem(
+      BuildContext context, WidgetRef ref, SearchType type, String code) {
     switch (type) {
       case SearchType.jan:
-        context.read(searchItemControllerProvider.notifier).add(code);
+        ref.read(searchItemControllerProvider.notifier).add(code);
         return;
       case SearchType.bookoff:
-        context.read(searchItemControllerProvider.notifier).addBookoff(code);
+        ref.read(searchItemControllerProvider.notifier).addBookoff(code);
         return;
       case SearchType.geo:
-        context.read(searchItemControllerProvider.notifier).addGeo(code);
+        ref.read(searchItemControllerProvider.notifier).addGeo(code);
         return;
       case SearchType.tsutaya:
-        context.read(searchItemControllerProvider.notifier).addTsutaya(code);
+        ref.read(searchItemControllerProvider.notifier).addTsutaya(code);
         return;
       case SearchType.freeWord:
         // deprecated

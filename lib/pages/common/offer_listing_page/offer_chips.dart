@@ -2,17 +2,17 @@ import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/repository/amazon.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final currentOfferItemProvider = ScopedProvider<OfferItem>(null);
+final currentOfferItemProvider =
+    Provider<OfferItem>((_) => throw UnimplementedError());
 
-class OfferChips extends HookWidget {
+class OfferChips extends HookConsumerWidget {
   const OfferChips({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final offer = useProvider(currentOfferItemProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final offer = ref.watch(currentOfferItemProvider);
     final chipTheme =
         ChipTheme.of(context).copyWith(labelStyle: blackTextStyle);
     return Wrap(

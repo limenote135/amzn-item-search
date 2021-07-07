@@ -8,19 +8,19 @@ import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dar
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final currentItemProvider = ScopedProvider<AsinData>(null);
+final currentItemProvider =
+    Provider<AsinData>((_) => throw UnimplementedError());
 
-class SearchButtons extends HookWidget {
+class SearchButtons extends HookConsumerWidget {
   const SearchButtons({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentItemProvider);
-    final buttons = useProvider(generalSettingsControllerProvider
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentItemProvider);
+    final buttons = ref.watch(generalSettingsControllerProvider
         .select((value) => value.customButtons));
     return Wrap(
       alignment: WrapAlignment.spaceEvenly,
@@ -31,7 +31,7 @@ class SearchButtons extends HookWidget {
           onPressed: () async {
             final url =
                 "https://www.amazon.co.jp/gp/offer-listing/${item.asin}/";
-            await context
+            await ref
                 .read(analyticsControllerProvider)
                 .logPushSearchButtonEvent(pushSearchButtonAmazonListName);
             await FlutterWebBrowser.openWebPage(url: url);
@@ -40,7 +40,7 @@ class SearchButtons extends HookWidget {
         ),
         ElevatedButton(
           onPressed: () async {
-            await context
+            await ref
                 .read(analyticsControllerProvider)
                 .logPushSearchButtonEvent(pushSearchButtonAmazonNewOffersName);
             await Navigator.push(
@@ -57,7 +57,7 @@ class SearchButtons extends HookWidget {
         ),
         ElevatedButton(
           onPressed: () async {
-            await context
+            await ref
                 .read(analyticsControllerProvider)
                 .logPushSearchButtonEvent(pushSearchButtonAmazonUsedOffersName);
             await Navigator.push(
@@ -77,7 +77,7 @@ class SearchButtons extends HookWidget {
         ),
         ElevatedButton(
           onPressed: () async {
-            await context
+            await ref
                 .read(analyticsControllerProvider)
                 .logPushSearchButtonEvent(pushSearchButtonKeepaName);
             await Navigator.push(context, KeepaPage.route(item.asin));
@@ -96,7 +96,7 @@ class SearchButtons extends HookWidget {
                     customButtonEventMap.containsKey(button.pattern)
                         ? customButtonEventMap[button.pattern]!
                         : button.pattern;
-                await context
+                await ref
                     .read(analyticsControllerProvider)
                     .logPushSearchButtonEvent(eventName);
                 await FlutterWebBrowser.openWebPage(url: Uri.encodeFull(url));

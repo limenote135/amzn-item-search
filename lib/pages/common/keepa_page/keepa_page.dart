@@ -8,9 +8,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final currentAsinProvider = ScopedProvider<String>(null);
+final currentAsinProvider = Provider<String>((_) => throw UnimplementedError());
 
-class KeepaPage extends StatelessWidget {
+class KeepaPage extends ConsumerWidget {
   const KeepaPage({Key? key}) : super(key: key);
   static const String routeName = "/keepa";
 
@@ -27,7 +27,7 @@ class KeepaPage extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Keepa"),
@@ -36,7 +36,7 @@ class KeepaPage extends StatelessWidget {
             icon: const Icon(Icons.refresh),
             onPressed: () async {
               await clearDiskCachedImages();
-              context
+              ref
                   .read(generalSettingsControllerProvider.notifier)
                   .changeKeepaExtraParam();
             },
@@ -48,7 +48,7 @@ class KeepaPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   static List<bool> _createRangeState(KeepaShowPeriod period) {
@@ -67,14 +67,14 @@ class _Body extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final asin = useProvider(currentAsinProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asin = ref.watch(currentAsinProvider);
     final media = MediaQuery.of(context);
     final defaultSize = DefaultTextStyle.of(context).style.fontSize!;
     final scale = media.textScaleFactor;
     final height = defaultSize * scale * 2;
 
-    final settings = useProvider(generalSettingsControllerProvider
+    final settings = ref.watch(generalSettingsControllerProvider
         .select((value) => value.keepaSettings));
 
     final displayState = useState(

@@ -9,7 +9,6 @@ import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'util.dart';
@@ -29,23 +28,23 @@ class PriceInfo extends StatelessWidget {
   }
 }
 
-class _PriceAndProfit extends HookWidget {
+class _PriceAndProfit extends HookConsumerWidget {
   const _PriceAndProfit(this.condition, {Key? key}) : super(key: key);
 
   final ItemCondition condition;
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentAsinDataProvider);
-    final settings = useProvider(searchSettingsControllerProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
+    final settings = ref.watch(searchSettingsControllerProvider);
 
-    final showTargetPrice = useProvider(generalSettingsControllerProvider
+    final showTargetPrice = ref.watch(generalSettingsControllerProvider
         .select((value) => value.enableTargetProfit));
-    final targetPriceRate = useProvider(generalSettingsControllerProvider
+    final targetPriceRate = ref.watch(generalSettingsControllerProvider
         .select((value) => value.targetProfitValue));
-    final minProfit = useProvider(
+    final minProfit = ref.watch(
         generalSettingsControllerProvider.select((value) => value.minProfit));
-    final isMajorCustomer = useProvider(generalSettingsControllerProvider
+    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
         .select((value) => value.isMajorCustomer));
 
     final detail = getPriceDetail(
