@@ -20,11 +20,12 @@ enum _Op {
 
 class Calculator extends HookWidget {
   const Calculator({
+    Key? key,
     required this.firstButtonText,
     required this.onFirstButtonPushed,
     required this.secondButtonText,
     required this.onSecondButtonPushed,
-  });
+  }) : super(key: key);
 
   final String firstButtonText;
   final String secondButtonText;

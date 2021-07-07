@@ -74,7 +74,7 @@ class FeeTile extends HookWidget {
     } else if (feeInfo.fbaFee == -1) {
       return "(不明)";
     } else {
-      return "${numberFormatter.format(feeInfo.fbaFee)}";
+      return numberFormatter.format(feeInfo.fbaFee);
     }
   }
 
@@ -96,7 +96,7 @@ class FeeTile extends HookWidget {
     if (useFba && feeInfo.fbaFee == -1) {
       return "$str + α";
     } else {
-      return "$str";
+      return str;
     }
   }
 }
