@@ -8,10 +8,10 @@ import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/search_settings.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final _currentSettingsProvider = ScopedProvider<SearchSettings>(null);
+final _currentSettingsProvider =
+    Provider<SearchSettings>((_) => throw UnimplementedError());
 
 class SearchSettingsPage extends StatelessWidget {
   const SearchSettingsPage({Key? key}) : super(key: key);
@@ -35,12 +35,12 @@ class SearchSettingsPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final settings = useProvider(searchSettingsControllerProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(searchSettingsControllerProvider);
     return ProviderScope(
       overrides: [
         _currentSettingsProvider.overrideWithValue(settings),
@@ -54,7 +54,7 @@ class _Body extends HookWidget {
             title: const Text("FBA 利用"),
             onChanged: (value) {
               if (value != settings.useFba) {
-                context
+                ref
                     .read(searchSettingsControllerProvider.notifier)
                     .update(useFba: value);
               }
@@ -65,7 +65,7 @@ class _Body extends HookWidget {
             title: const Text("FBA 出品を優先表示"),
             onChanged: (value) {
               if (value != settings.priorFba) {
-                context
+                ref
                     .read(searchSettingsControllerProvider.notifier)
                     .update(priorFba: value);
               }
@@ -82,8 +82,8 @@ class _Body extends HookWidget {
                 isDestructiveAction: true,
               );
               if (ret == OkCancelResult.ok) {
-                context.read(searchItemControllerProvider.notifier).removeAll();
-                await context
+                ref.read(searchItemControllerProvider.notifier).removeAll();
+                await ref
                     .read(analyticsControllerProvider)
                     .logSingleEvent(deleteAllSearchHistoryEventName);
                 Navigator.pop(context);
@@ -97,12 +97,12 @@ class _Body extends HookWidget {
   }
 }
 
-class _CodeType extends HookWidget {
+class _CodeType extends HookConsumerWidget {
   const _CodeType({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final settings = useProvider(_currentSettingsProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(_currentSettingsProvider);
     return ListTile(
       title: Row(
         children: [
@@ -130,7 +130,7 @@ class _CodeType extends HookWidget {
             ],
             onChanged: (value) {
               if (value != settings.type) {
-                context
+                ref
                     .read(searchSettingsControllerProvider.notifier)
                     .update(type: value);
               }
@@ -142,12 +142,12 @@ class _CodeType extends HookWidget {
   }
 }
 
-class _UsedSubCondition extends HookWidget {
+class _UsedSubCondition extends HookConsumerWidget {
   const _UsedSubCondition({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final settings = useProvider(_currentSettingsProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(_currentSettingsProvider);
     return ListTile(
       title: Row(
         children: [
@@ -179,7 +179,7 @@ class _UsedSubCondition extends HookWidget {
             ],
             onChanged: (value) {
               if (value != settings.usedSubCondition) {
-                context
+                ref
                     .read(searchSettingsControllerProvider.notifier)
                     .update(usedSubCondition: value);
               }

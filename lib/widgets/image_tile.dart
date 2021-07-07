@@ -9,15 +9,14 @@ import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final currentFbaFeeProvider = ScopedProvider((_) => 0);
+final currentFbaFeeProvider = Provider((_) => 0);
 
 const _bigSizeFbaFee = 589;
 const _moreBigSizeFbaFee = 3061;
 
-class TileImage extends HookWidget {
+class TileImage extends HookConsumerWidget {
   const TileImage({Key? key, this.onComplete}) : super(key: key);
 
   final void Function(ByteData bytes)? onComplete;
@@ -40,14 +39,14 @@ class TileImage extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final asinData = useProvider(currentAsinDataProvider);
-    final asinCount = useProvider(currentAsinCountProvider);
-    final fbaFee = useProvider(currentFbaFeeProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asinData = ref.watch(currentAsinDataProvider);
+    final asinCount = ref.watch(currentAsinCountProvider);
+    final fbaFee = ref.watch(currentFbaFeeProvider);
 
     final captionSize = captionSizeBlackText(context);
 
-    final keepaSettings = useProvider(generalSettingsControllerProvider
+    final keepaSettings = ref.watch(generalSettingsControllerProvider
         .select((value) => value.keepaSettings));
 
     return ConstrainedBox(

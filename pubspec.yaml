@@ -29,8 +29,8 @@ dependencies:
     path: ./packages/euc
   ai_barcode:
     path: ./packages/ai_barcode
-  flutter_hooks: ^0.17.0
-  hooks_riverpod: ^0.14.0+4
+  flutter_hooks: ^0.18.0
+  hooks_riverpod: ^1.0.0-dev.3
   state_notifier: ^0.7.0
   freezed_annotation: ^0.14.2
   json_serializable: ^4.1.3

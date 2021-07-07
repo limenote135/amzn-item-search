@@ -7,7 +7,6 @@ import 'package:amasearch/pages/settings/alert_page/condition_settings_page.dart
 import 'package:amasearch/util/uuid.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'analytics.dart';
@@ -34,13 +33,13 @@ class AlertPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider);
-    final uuid = useProvider(uuidProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(generalSettingsControllerProvider);
+    final uuid = ref.watch(uuidProvider);
     return ListView(
       children: [
         SwitchListTile(
@@ -48,10 +47,10 @@ class _Body extends HookWidget {
           subtitle: const Text("条件に一致した商品が強調表示されます。"),
           value: settings.enableAlert,
           onChanged: (value) {
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(enableAlert: value);
-            context
+            ref
                 .read(analyticsControllerProvider)
                 .setUserProp(enableAlertPropName, value.toString());
           },
@@ -60,10 +59,10 @@ class _Body extends HookWidget {
           title: const Text("条件一致時にバイブレーション"),
           value: settings.enableAlertVibration,
           onChanged: (value) {
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(enableAlertVibration: value);
-            context
+            ref
                 .read(analyticsControllerProvider)
                 .setUserProp(enableAlertVibrationPropName, value.toString());
           },
@@ -87,10 +86,10 @@ class _Body extends HookWidget {
                     for (var j = 0; j < settings.alerts.length; j++)
                       if (i != j) settings.alerts[j],
                   ];
-                  context
+                  ref
                       .read(generalSettingsControllerProvider.notifier)
                       .update(alerts: newAlerts);
-                  updateAlertConditionAnalytics(context, newAlerts);
+                  updateAlertConditionAnalytics(context, ref, newAlerts);
                 }
               },
             ),
@@ -109,7 +108,7 @@ class _Body extends HookWidget {
               id: uuid.v4(),
               title: "アラート条件",
             );
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(alerts: [...settings.alerts, item]);
           },

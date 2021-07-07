@@ -184,7 +184,9 @@ class MwsRepository {
 
       switch (code) {
         case 412:
-          await _container.refresh(updateProvider);
+
+          // TODO:  await を外したが、これで問題ないか要確認
+          _container.refresh(updateProvider);
           throw Exception("アプリケーションを更新してください");
         case 401:
           throw Exception("ログインされていません");
