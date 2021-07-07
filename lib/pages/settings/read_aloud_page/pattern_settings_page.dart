@@ -56,7 +56,7 @@ class _PatternEditForm extends StatefulWidget {
 
   final String pattern;
   @override
-  __PatternEditFormState createState() => __PatternEditFormState(pattern);
+  __PatternEditFormState createState() => __PatternEditFormState();
 }
 
 const _sampleItem = AsinData(
@@ -91,14 +91,12 @@ const _sampleItem = AsinData(
 );
 
 class __PatternEditFormState extends State<_PatternEditForm> {
-  __PatternEditFormState(String pattern)
-      : _textEditingController = TextEditingController(text: pattern);
-
-  final TextEditingController _textEditingController;
+  late final TextEditingController _textEditingController;
 
   @override
   void initState() {
     super.initState();
+    _textEditingController = TextEditingController(text: widget.pattern);
     _textEditingController.addListener(() {
       setState(() {});
     });
