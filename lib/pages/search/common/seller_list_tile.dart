@@ -7,17 +7,17 @@ import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final _currentPriceDetailProvider = ScopedProvider<PriceDetail>(null);
+final _currentPriceDetailProvider =
+    Provider<PriceDetail>((_) => throw UnimplementedError());
 
-class SellerListTile extends HookWidget {
+class SellerListTile extends HookConsumerWidget {
   const SellerListTile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentAsinDataProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
     return ExpansionTile(
       title: const Text("出品価格情報"),
       children: [
@@ -68,14 +68,14 @@ class SellerListTile extends HookWidget {
   }
 }
 
-class _OfferItem extends HookWidget {
+class _OfferItem extends HookConsumerWidget {
   const _OfferItem(this.cond, {Key? key}) : super(key: key);
 
   final ItemCondition cond;
 
   @override
-  Widget build(BuildContext context) {
-    final detail = useProvider(_currentPriceDetailProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final detail = ref.watch(_currentPriceDetailProvider);
     final smallFont = smallFontSize(context);
 
     final isFbaStr = detail.channel == FulfillmentChannel.amazon ? "(FBA)" : "";

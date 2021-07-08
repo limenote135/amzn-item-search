@@ -3,7 +3,6 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TargetProfitPage extends StatelessWidget {
@@ -28,12 +27,12 @@ class TargetProfitPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(generalSettingsControllerProvider);
     return ListView(
       children: [
         SwitchListTile(
@@ -41,14 +40,14 @@ class _Body extends HookWidget {
           subtitle: const Text("商品検索時に設定した利益率を達成する仕入れ額を表示します"),
           value: settings.enableTargetProfit,
           onChanged: (value) {
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(enableTargetProfit: value);
             if (value) {
-              context.read(analyticsControllerProvider).setUserProp(
+              ref.read(analyticsControllerProvider).setUserProp(
                   targetProfitPropName, "${settings.targetProfitValue}");
             } else {
-              context
+              ref
                   .read(analyticsControllerProvider)
                   .setUserProp(targetProfitPropName, "$value");
             }
@@ -77,11 +76,11 @@ class _Body extends HookWidget {
               ],
             );
             if (ret != null) {
-              context
+              ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(targetProfitValue: int.parse(ret.single));
               if (settings.enableTargetProfit) {
-                await context.read(analyticsControllerProvider).setUserProp(
+                await ref.read(analyticsControllerProvider).setUserProp(
                     targetProfitPropName, "$ret(min:${settings.minProfit})");
               }
             }
@@ -110,11 +109,11 @@ class _Body extends HookWidget {
               ],
             );
             if (ret != null) {
-              context
+              ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(minProfit: int.parse(ret.single));
               if (settings.enableTargetProfit) {
-                await context.read(analyticsControllerProvider).setUserProp(
+                await ref.read(analyticsControllerProvider).setUserProp(
                     targetProfitPropName,
                     "${settings.targetProfitValue}(min:$ret)");
               }

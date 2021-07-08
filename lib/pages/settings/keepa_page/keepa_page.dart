@@ -1,7 +1,6 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class KeepaSettings extends StatelessWidget {
@@ -24,12 +23,12 @@ class KeepaSettings extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(generalSettingsControllerProvider
         .select((value) => value.keepaSettings));
     return ListView(
       children: [
@@ -44,7 +43,7 @@ class _Body extends HookWidget {
             final newState = settings.copyWith(showNew: value);
             if (newState.showNew || newState.showUsed || newState.showAmazon) {
               // １つ以上は常に選択されるようにする
-              context
+              ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(keepaSettings: newState);
             }
@@ -57,7 +56,7 @@ class _Body extends HookWidget {
             final newState = settings.copyWith(showUsed: value);
             if (newState.showNew || newState.showUsed || newState.showAmazon) {
               // １つ以上は常に選択されるようにする
-              context
+              ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(keepaSettings: newState);
             }
@@ -70,7 +69,7 @@ class _Body extends HookWidget {
             final newState = settings.copyWith(showAmazon: value);
             if (newState.showNew || newState.showUsed || newState.showAmazon) {
               // １つ以上は常に選択されるようにする
-              context
+              ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(keepaSettings: newState);
             }
@@ -89,7 +88,7 @@ class _Body extends HookWidget {
             onChanged: (value) {
               if (value != null && settings.period != value) {
                 final newState = settings.copyWith(period: value);
-                context
+                ref
                     .read(generalSettingsControllerProvider.notifier)
                     .update(keepaSettings: newState);
               }

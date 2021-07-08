@@ -14,7 +14,6 @@ import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share/share.dart';
 
@@ -30,33 +29,33 @@ enum _StockPageActions {
   clear,
 }
 
-class StocksPage extends HookWidget {
+class StocksPage extends HookConsumerWidget {
   const StocksPage({Key? key}) : super(key: key);
   static const routeName = "/stocks";
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: _appBarSelector(context),
+      appBar: _appBarSelector(context, ref),
       body: const _Body(),
     );
   }
 
-  AppBar _appBarSelector(BuildContext context) {
-    final selectedItems = useProvider(selectedStockItemsControllerProvider);
+  AppBar _appBarSelector(BuildContext context, WidgetRef ref) {
+    final selectedItems = ref.watch(selectedStockItemsControllerProvider);
 
     return selectedItems.isEmpty
-        ? _getNormalAppBar(context)
-        : _getItemSelectAppBar(context, selectedItems);
+        ? _getNormalAppBar(context, ref)
+        : _getItemSelectAppBar(context, ref, selectedItems);
   }
 
-  AppBar _getNormalAppBar(BuildContext context) {
+  AppBar _getNormalAppBar(BuildContext context, WidgetRef ref) {
     return AppBar(
       title: const Text("仕入れ済み商品"),
       actions: [
         PopupMenuButton<_StockPageActions>(
           padding: EdgeInsets.zero,
-          onSelected: (value) => handleAction(context, value),
+          onSelected: (value) => handleAction(context, ref, value),
           itemBuilder: (context) => const [
             PopupMenuItem(
               value: _StockPageActions.share,
@@ -78,14 +77,14 @@ class StocksPage extends HookWidget {
     );
   }
 
-  AppBar _getItemSelectAppBar(BuildContext context, List<StockItem> selected) {
+  AppBar _getItemSelectAppBar(
+      BuildContext context, WidgetRef ref, List<StockItem> selected) {
     return AppBar(
       title: Text("${selected.length} 件選択"),
       leading: IconButton(
         icon: const Icon(Icons.clear),
-        onPressed: () => context
-            .read(selectedStockItemsControllerProvider.notifier)
-            .removeAll(),
+        onPressed: () =>
+            ref.read(selectedStockItemsControllerProvider.notifier).removeAll(),
       ),
       actions: [
         IconButton(
@@ -93,14 +92,15 @@ class StocksPage extends HookWidget {
           onPressed: () async {
             final deleted = await itemDeleteHandler(
               context: context,
+              ref: ref,
               items: selected,
               content: "${selected.length} 件のアイテムを在庫リストから削除します",
             );
             if (deleted) {
-              context
+              ref
                   .read(stockItemListControllerProvider.notifier)
                   .remove(selected);
-              context
+              ref
                   .read(selectedStockItemsControllerProvider.notifier)
                   .removeAll();
             }
@@ -111,22 +111,23 @@ class StocksPage extends HookWidget {
   }
 
   Future<void> handleAction(
-      BuildContext context, _StockPageActions value) async {
-    final itemList = context.read(stockItemListControllerProvider);
-    final settings = context.read(generalSettingsControllerProvider);
+      BuildContext context, WidgetRef ref, _StockPageActions value) async {
+    final itemList = ref.read(stockItemListControllerProvider);
+    final settings = ref.read(generalSettingsControllerProvider);
 
     switch (value) {
       case _StockPageActions.share:
         final file =
             await StockItemCsv.create("StockList", itemList, settings.csvOrder);
         await Share.shareFiles([file.absolute.path], subject: "仕入れ済み商品一覧");
-        await context
+        await ref
             .read(analyticsControllerProvider)
             .logSingleEvent(shareEventName);
         break;
       case _StockPageActions.clear:
         await itemDeleteHandler(
           context: context,
+          ref: ref,
           deleteAll: true,
           content: "在庫リストからすべてのアイテムを削除します",
         );
@@ -135,13 +136,13 @@ class StocksPage extends HookWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final items = useProvider(stockItemListControllerProvider);
-    final selectedItems = useProvider(selectedStockItemsControllerProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final items = ref.watch(stockItemListControllerProvider);
+    final selectedItems = ref.watch(selectedStockItemsControllerProvider);
 
     final tile = _InkWell(
       child: selectedItems.isNotEmpty
@@ -226,19 +227,19 @@ class _Body extends HookWidget {
   }
 }
 
-class _InkWell extends HookWidget {
+class _InkWell extends HookConsumerWidget {
   const _InkWell({Key? key, this.child}) : super(key: key);
 
   final Widget? child;
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentStockItemProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentStockItemProvider);
     return InkWell(
       onTap: () {
-        final count = context.read(_selectedItemCount);
+        final count = ref.read(_selectedItemCount);
         if (count > 0) {
-          context
+          ref
               .read(selectedStockItemsControllerProvider.notifier)
               .toggleItem(item);
         } else {
@@ -248,7 +249,7 @@ class _InkWell extends HookWidget {
           );
         }
       },
-      onLongPress: () => context
+      onLongPress: () => ref
           .read(selectedStockItemsControllerProvider.notifier)
           .toggleItem(item),
       child: child,

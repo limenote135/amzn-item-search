@@ -4,7 +4,6 @@ import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PasswordResetPage extends StatelessWidget {
@@ -30,15 +29,15 @@ class PasswordResetPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   static final formKey = GlobalKey<FormState>();
   static final fieldKey = GlobalKey<FormFieldState<String>>();
 
   @override
-  Widget build(BuildContext context) {
-    final auth = useProvider(firebaseAuthProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final auth = ref.watch(firebaseAuthProvider);
 
     Future<void> _onSubmit() async {
       if (formKey.currentState?.validate() != true) {

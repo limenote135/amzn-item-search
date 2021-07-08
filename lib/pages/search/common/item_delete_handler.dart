@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 Future<bool> itemDeleteHandler({
   required BuildContext context,
+  required WidgetRef ref,
   List<SearchItem>? items,
   bool deleteAll = false,
   required String content,
@@ -22,11 +23,11 @@ Future<bool> itemDeleteHandler({
   final ok = ret == OkCancelResult.ok;
   if (ok) {
     if (deleteAll) {
-      context.read(searchItemControllerProvider.notifier).removeAll();
+      ref.read(searchItemControllerProvider.notifier).removeAll();
     } else {
-      context.read(searchItemControllerProvider.notifier).remove(items!);
+      ref.read(searchItemControllerProvider.notifier).remove(items!);
       //TODO: 複数削除できるので、削除する個数を指定したい
-      await context
+      await ref
           .read(analyticsControllerProvider)
           .logSingleEvent(deleteSearchHistoryEventName);
     }

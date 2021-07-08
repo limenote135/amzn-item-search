@@ -15,7 +15,6 @@ import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
@@ -35,23 +34,23 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider);
-    final auth = useProvider(firebaseAuthProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(generalSettingsControllerProvider);
+    final auth = ref.watch(firebaseAuthProvider);
     return ListView(
       children: [
         SwitchListTile(
           title: const Text("ダークモード"),
           value: settings.isDarkMode,
           onChanged: (value) {
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(isDarkMode: value);
-            context
+            ref
                 .read(analyticsControllerProvider)
                 .setUserProp(darkModePropName, value.toString());
           },
@@ -60,10 +59,10 @@ class _Body extends HookWidget {
           title: const Text("大口出品者"),
           value: settings.isMajorCustomer,
           onChanged: (value) {
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(isMajorCustomer: value);
-            context
+            ref
                 .read(analyticsControllerProvider)
                 .setUserProp(majorCustomerPropName, value.toString());
           },
@@ -149,10 +148,10 @@ class _Body extends HookWidget {
           subtitle: const Text("出品一覧画面が重くなります。"),
           value: settings.getStocks,
           onChanged: (value) {
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(getStocks: value);
-            context
+            ref
                 .read(analyticsControllerProvider)
                 .setUserProp(getStocksPropName, value.toString());
           },
@@ -186,8 +185,8 @@ class _Body extends HookWidget {
             if (ret == OkCancelResult.ok) {
               try {
                 await EasyLoading.show(status: '削除中...');
-                final fn = context
-                    .read(cloudFunctionProvider(functionNameDisableUser));
+                final fn =
+                    ref.read(cloudFunctionProvider(functionNameDisableUser));
                 await fn.call<String>("");
 
                 await EasyLoading.dismiss();

@@ -1,6 +1,5 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'url_settings_page.dart';
@@ -27,12 +26,12 @@ class CustomButtonPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(generalSettingsControllerProvider);
     return ListView.builder(
       itemCount: settings.customButtons.length,
       itemBuilder: (BuildContext context, int index) {
@@ -48,7 +47,7 @@ class _Body extends HookWidget {
                       ? settings.customButtons[i].copyWith(enable: value)
                       : settings.customButtons[i]
               ];
-              context
+              ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(customButtons: updated);
             },
@@ -72,7 +71,7 @@ class _Body extends HookWidget {
                       )
                     : settings.customButtons[i]
             ];
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(customButtons: updated);
           },
