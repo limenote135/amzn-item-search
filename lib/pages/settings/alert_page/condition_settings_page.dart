@@ -8,12 +8,12 @@ import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'analytics.dart';
 
-final _currentAlertConditionSetIndexProvider = ScopedProvider<int>(null);
+final _currentAlertConditionSetIndexProvider =
+    Provider<int>((_) => throw UnimplementedError());
 
 class ConditionSettingsPage extends StatelessWidget {
   const ConditionSettingsPage({Key? key}) : super(key: key);
@@ -44,13 +44,13 @@ class ConditionSettingsPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final index = useProvider(_currentAlertConditionSetIndexProvider);
-    final alerts = useProvider(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final index = ref.watch(_currentAlertConditionSetIndexProvider);
+    final alerts = ref.watch(
         generalSettingsControllerProvider.select((value) => value.alerts));
     final alert = alerts[index];
 
@@ -62,10 +62,10 @@ class _Body extends HookWidget {
         for (var i = 0; i < alerts.length; i++)
           i == index ? newAlert : alerts[i]
       ];
-      context
+      ref
           .read(generalSettingsControllerProvider.notifier)
           .update(alerts: newAlerts);
-      updateAlertConditionAnalytics(context, newAlerts);
+      updateAlertConditionAnalytics(context, ref, newAlerts);
     }
 
     return ListView(
@@ -91,10 +91,10 @@ class _Body extends HookWidget {
               for (var i = 0; i < alerts.length; i++)
                 i == index ? alerts[i].copyWith(title: text.single) : alerts[i]
             ];
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(alerts: newAlerts);
-            updateAlertConditionAnalytics(context, newAlerts);
+            updateAlertConditionAnalytics(context, ref, newAlerts);
           },
         ),
         const ThemeDivider(),

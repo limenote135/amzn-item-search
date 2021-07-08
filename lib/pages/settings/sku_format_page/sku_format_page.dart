@@ -9,7 +9,6 @@ import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/sku_replacer.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 const _newSampleItem = AsinData(
@@ -53,18 +52,18 @@ class SkuFormatPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final skuPattern = useProvider(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final skuPattern = ref.watch(
         generalSettingsControllerProvider.select((value) => value.skuFormat));
     return _PatternEditForm(skuPattern);
   }
 }
 
-class _PatternEditForm extends StatefulWidget {
+class _PatternEditForm extends ConsumerStatefulWidget {
   const _PatternEditForm(this.pattern);
   final String pattern;
 
@@ -72,7 +71,7 @@ class _PatternEditForm extends StatefulWidget {
   __PatternEditFormState createState() => __PatternEditFormState();
 }
 
-class __PatternEditFormState extends State<_PatternEditForm> {
+class __PatternEditFormState extends ConsumerState<_PatternEditForm> {
   late final TextEditingController _textEditingController;
 
   @override
@@ -182,10 +181,10 @@ class __PatternEditFormState extends State<_PatternEditForm> {
         const ThemeDivider(),
         ElevatedButton(
           onPressed: () {
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(skuFormat: _textEditingController.text);
-            context
+            ref
                 .read(analyticsControllerProvider)
                 .setUserProp(skuFormatPropName, _textEditingController.text);
             Navigator.pop(context);

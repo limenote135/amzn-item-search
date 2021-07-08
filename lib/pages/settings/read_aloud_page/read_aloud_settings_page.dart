@@ -6,7 +6,6 @@ import 'package:amasearch/pages/settings/read_aloud_page/slider_tile.dart';
 import 'package:amasearch/util/text_to_speech.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -32,28 +31,28 @@ class ReadAloudSettingsPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final settings = useProvider(generalSettingsControllerProvider);
-    final tts = useProvider(ttsProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(generalSettingsControllerProvider);
+    final tts = ref.watch(ttsProvider);
     return ListView(
       children: [
         SwitchListTile(
           title: const Text("音声読み上げを有効にする"),
           value: settings.enableReadAloud,
           onChanged: (value) {
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(enableReadAloud: value);
             if (value) {
-              context.read(analyticsControllerProvider).setUserProp(
+              ref.read(analyticsControllerProvider).setUserProp(
                   readAloudPropName,
                   settings.readAloudPatterns[settings.patternIndex].pattern);
             } else {
-              context
+              ref
                   .read(analyticsControllerProvider)
                   .setUserProp(readAloudPropName, "");
             }
@@ -88,12 +87,12 @@ class _Body extends HookWidget {
                           : settings.readAloudPatterns[index],
                   ];
 
-                  context
+                  ref
                       .read(generalSettingsControllerProvider.notifier)
                       .update(patterns: updatedPattern);
 
                   if (settings.enableReadAloud && i == settings.patternIndex) {
-                    context.read(analyticsControllerProvider).setUserProp(
+                    ref.read(analyticsControllerProvider).setUserProp(
                         readAloudPropName,
                         settings.readAloudPatterns[i].pattern);
                   }
@@ -101,12 +100,12 @@ class _Body extends HookWidget {
               },
             ),
             onChanged: (value) {
-              context
+              ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(patternIndex: i);
 
               if (settings.enableReadAloud) {
-                context.read(analyticsControllerProvider).setUserProp(
+                ref.read(analyticsControllerProvider).setUserProp(
                     readAloudPropName, settings.readAloudPatterns[i].pattern);
               }
             },
@@ -118,7 +117,7 @@ class _Body extends HookWidget {
           max: 1,
           divisions: 10,
           onSubmit: (value) {
-            context
+            ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(readAloudVolume: value);
 
@@ -138,7 +137,7 @@ class _Body extends HookWidget {
               max: snapshot.data!.max,
               divisions: (snapshot.data!.max / 0.1).round(),
               onSubmit: (value) {
-                context
+                ref
                     .read(generalSettingsControllerProvider.notifier)
                     .update(readAloudSpeed: value);
                 tts.setSpeed(value);

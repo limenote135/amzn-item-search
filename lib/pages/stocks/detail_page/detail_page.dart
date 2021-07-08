@@ -13,10 +13,9 @@ import 'package:amasearch/widgets/text_line_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class DetailPage extends HookWidget {
+class DetailPage extends HookConsumerWidget {
   const DetailPage({Key? key}) : super(key: key);
   static const routeName = "/stocks/detail";
 
@@ -33,8 +32,8 @@ class DetailPage extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentStockItemProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentStockItemProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text("仕入れ商品詳細"),
@@ -44,6 +43,7 @@ class DetailPage extends HookWidget {
             onPressed: () async {
               final deleted = await itemDeleteHandler(
                 context: context,
+                ref: ref,
                 items: [item],
                 content: "在庫リストからアイテムを削除します",
               );
@@ -69,12 +69,12 @@ class DetailPage extends HookWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentStockItemProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentStockItemProvider);
 
     final profitRate = item.sellPrice > 0
         ? (item.profitPerItem / item.sellPrice * 100).round()
@@ -222,12 +222,12 @@ class _Body extends HookWidget {
   }
 }
 
-class _ItemInfoTile extends HookWidget {
+class _ItemInfoTile extends HookConsumerWidget {
   const _ItemInfoTile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentStockItemProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentStockItemProvider);
     final smallSize = smallFontSize(context);
     return Row(
       children: [

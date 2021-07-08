@@ -10,7 +10,8 @@ import 'enums/item_sub_condition.dart';
 part 'stock_item.freezed.dart';
 part 'stock_item.g.dart';
 
-final currentStockItemProvider = ScopedProvider<StockItem>(null);
+final currentStockItemProvider =
+    Provider<StockItem>((_) => throw UnimplementedError());
 
 @freezed
 class StockItem with _$StockItem {

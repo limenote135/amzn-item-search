@@ -7,11 +7,10 @@ import 'package:amasearch/pages/common/purchase_settings/form.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class EditPage extends HookWidget {
+class EditPage extends HookConsumerWidget {
   const EditPage({Key? key}) : super(key: key);
   static const routeName = "/stocks/edit";
 
@@ -28,9 +27,9 @@ class EditPage extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentStockItemProvider);
-    final form = useProvider(formValueProvider(item));
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentStockItemProvider);
+    final form = ref.watch(formValueProvider(item));
 
     return ReactiveForm(
       formGroup: form.state,
@@ -60,12 +59,12 @@ class EditPage extends HookWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentStockItemProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentStockItemProvider);
 
     return ProviderScope(
       overrides: [
@@ -85,15 +84,15 @@ class _Body extends HookWidget {
   }
 }
 
-class _SaveButton extends HookWidget {
+class _SaveButton extends HookConsumerWidget {
   const _SaveButton({Key? key, required this.builder}) : super(key: key);
 
   final Widget Function(BuildContext context, void Function()? onSave) builder;
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentStockItemProvider);
-    final isMajorCustomer = useProvider(generalSettingsControllerProvider
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentStockItemProvider);
+    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
         .select((value) => value.isMajorCustomer));
 
     return ReactiveFormConsumer(
@@ -104,6 +103,7 @@ class _SaveButton extends HookWidget {
                 ? null
                 : () => _onSubmit(
                       context,
+                      ref,
                       form,
                       item,
                       isMajorCustomer: isMajorCustomer,
@@ -117,6 +117,7 @@ class _SaveButton extends HookWidget {
 
   void _onSubmit(
     BuildContext context,
+    WidgetRef ref,
     FormGroup form,
     StockItem item, {
     required bool isMajorCustomer,
@@ -153,7 +154,7 @@ class _SaveButton extends HookWidget {
       purchaseDate: getString(form, purchaseDateField),
       breakEven: breakEven,
     );
-    context.read(stockItemListControllerProvider.notifier).update(newItem);
+    ref.read(stockItemListControllerProvider.notifier).update(newItem);
     Navigator.of(context).popUntil((route) => route.settings.name == "/");
   }
 }

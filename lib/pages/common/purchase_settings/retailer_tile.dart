@@ -2,16 +2,15 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class RetailerTile extends HookWidget {
+class RetailerTile extends HookConsumerWidget {
   const RetailerTile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final retailers = useProvider(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final retailers = ref.watch(
         generalSettingsControllerProvider.select((value) => value.retailers));
     return ListTile(
       title: Row(

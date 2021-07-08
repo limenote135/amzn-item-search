@@ -10,7 +10,6 @@ import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final _isSelectedProvider = Provider.family<bool, StockItem>((ref, item) {
@@ -18,13 +17,13 @@ final _isSelectedProvider = Provider.family<bool, StockItem>((ref, item) {
   return selectedItems.contains(item);
 });
 
-class ItemTile extends HookWidget {
+class ItemTile extends HookConsumerWidget {
   const ItemTile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentStockItemProvider);
-    final isSelected = useProvider(_isSelectedProvider(item));
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentStockItemProvider);
+    final isSelected = ref.watch(_isSelectedProvider(item));
 
     return ProviderScope(
       overrides: [
@@ -52,16 +51,16 @@ class ItemTile extends HookWidget {
   }
 }
 
-class _TileBody extends HookWidget {
+class _TileBody extends HookConsumerWidget {
   const _TileBody({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentStockItemProvider);
-    final detail = useProvider(currentAsinDataProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentStockItemProvider);
+    final detail = ref.watch(currentAsinDataProvider);
     final smallSize = smallFontSize(context);
 
-    final isMajorCustomer = useProvider(generalSettingsControllerProvider
+    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
         .select((value) => value.isMajorCustomer));
 
     final profitRate = item.sellPrice > 0

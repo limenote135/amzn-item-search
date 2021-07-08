@@ -3,94 +3,96 @@ import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/strong_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'offer_chips.dart';
 import 'stock_text.dart';
 
-class CartTile extends HookWidget {
+class CartTile extends HookConsumerWidget {
   const CartTile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final asin = useProvider(currentAsinProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asin = ref.watch(currentAsinProvider);
     final bigSize = bigFontSize(context);
-    return useProvider(cartOfferProvider(asin)).when(
-      loading: () => const ListTile(
-        title: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-      error: (error, stackTrace) => ListTile(
-        title: Text("$error"),
-      ),
-      data: (value) {
-        if (value == null) {
-          return const StrongContainer(
-            ListTile(
-              title: Text("カート無し"),
+    return ref.watch(cartOfferProvider(asin)).when(
+          loading: () => const ListTile(
+            title: Center(
+              child: CircularProgressIndicator(),
             ),
-          );
-        }
-        return Column(
-          children: [
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text("注：送料は含まれません"),
-            ),
-            StrongContainer(
-              ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text("カート情報"),
-                    Row(
+          ),
+          error: (error, stackTrace) => ListTile(
+            title: Text("$error"),
+          ),
+          data: (value) {
+            if (value == null) {
+              return const StrongContainer(
+                ListTile(
+                  title: Text("カート無し"),
+                ),
+              );
+            }
+            return Column(
+              children: [
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("注：送料は含まれません"),
+                ),
+                StrongContainer(
+                  ListTile(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Column(
-                            children: [
-                              RichText(
-                                text: TextSpan(
-                                  style: bigSize,
-                                  children: [
-                                    TextSpan(
-                                      text: numberFormatter.format(value.price),
-                                      style: strongTextStyle,
+                        const Text("カート情報"),
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Column(
+                                children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      style: bigSize,
+                                      children: [
+                                        TextSpan(
+                                          text: numberFormatter
+                                              .format(value.price),
+                                          style: strongTextStyle,
+                                        ),
+                                        const TextSpan(
+                                            text: "円", style: blackTextStyle),
+                                      ],
                                     ),
-                                    const TextSpan(
-                                        text: "円", style: blackTextStyle),
-                                  ],
-                                ),
-                              ),
-                              ProviderScope(
-                                overrides: [
-                                  currentSellerIdProvider
-                                      .overrideWithValue(value.sellerId),
+                                  ),
+                                  ProviderScope(
+                                    overrides: [
+                                      currentSellerIdProvider
+                                          .overrideWithValue(value.sellerId),
+                                    ],
+                                    child: const StockText(),
+                                  ),
                                 ],
-                                child: const StockText(),
                               ),
-                            ],
-                          ),
+                            ),
+                            Expanded(
+                              child: ProviderScope(
+                                overrides: [
+                                  currentOfferItemProvider
+                                      .overrideWithValue(value),
+                                ],
+                                child: const OfferChips(),
+                              ),
+                            )
+                          ],
                         ),
-                        Expanded(
-                          child: ProviderScope(
-                            overrides: [
-                              currentOfferItemProvider.overrideWithValue(value),
-                            ],
-                            child: const OfferChips(),
-                          ),
-                        )
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         );
-      },
-    );
   }
 }

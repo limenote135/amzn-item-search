@@ -30,16 +30,16 @@ class WordSearchPage extends StatelessWidget {
   }
 }
 
-class _AppBar extends HookWidget {
+class _AppBar extends HookConsumerWidget {
   const _AppBar({Key? key}) : super(key: key);
 
   static final _appBarKey = GlobalKey();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController();
-    final word = useProvider(_wordProvider);
-    final category = useProvider(_categoryProvider);
+    final word = ref.watch(_wordProvider);
+    final category = ref.watch(_categoryProvider);
 
     final height = useState<double>(0);
     WidgetsBinding.instance?.addPostFrameCallback((cb) {
@@ -99,13 +99,13 @@ class _AppBar extends HookWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final word = useProvider(_wordProvider);
-    final category = useProvider(_categoryProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final word = ref.watch(_wordProvider);
+    final category = ref.watch(_categoryProvider);
 
     if (word.state == "") {
       return SliverList(
@@ -114,33 +114,36 @@ class _Body extends HookWidget {
     }
 
     return SliverList(
-      delegate: useProvider(queryItemResultProvider(ListMatchingProductRequest(
-        query: word.state,
-        category: category.state,
-      ))).when(
-        loading: () => SliverChildListDelegate(
-          [const Center(child: CircularProgressIndicator())],
-        ),
-        error: (error, stackTrace) => SliverChildListDelegate(
-          [Text("$error")],
-        ),
-        data: (items) {
-          return SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              if (index.isOdd) {
-                return const ThemeDivider();
-              }
-              return ProviderScope(
-                overrides: [
-                  currentAsinDataProvider.overrideWithValue(items[index ~/ 2]),
-                ],
-                child: const ItemTile(),
+      delegate: ref
+          .watch(queryItemResultProvider(ListMatchingProductRequest(
+            query: word.state,
+            category: category.state,
+          )))
+          .when(
+            loading: () => SliverChildListDelegate(
+              [const Center(child: CircularProgressIndicator())],
+            ),
+            error: (error, stackTrace) => SliverChildListDelegate(
+              [Text("$error")],
+            ),
+            data: (items) {
+              return SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  if (index.isOdd) {
+                    return const ThemeDivider();
+                  }
+                  return ProviderScope(
+                    overrides: [
+                      currentAsinDataProvider
+                          .overrideWithValue(items[index ~/ 2]),
+                    ],
+                    child: const ItemTile(),
+                  );
+                },
+                childCount: items.length * 2,
               );
             },
-            childCount: items.length * 2,
-          );
-        },
-      ),
+          ),
     );
   }
 }

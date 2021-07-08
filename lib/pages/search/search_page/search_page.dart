@@ -44,13 +44,13 @@ class SearchPage extends StatelessWidget {
   }
 }
 
-class _AppBar extends HookWidget {
+class _AppBar extends HookConsumerWidget {
   const _AppBar({Key? key}) : super(key: key);
 
   static final _appBarKey = GlobalKey();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final height = useState<double>(0);
     WidgetsBinding.instance?.addPostFrameCallback((cb) {
       // build が完了した後に AppBar の高さを計算して設定、再描画する
@@ -75,12 +75,12 @@ class _AppBar extends HookWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final items = useProvider(searchItemControllerProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final items = ref.watch(searchItemControllerProvider);
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {

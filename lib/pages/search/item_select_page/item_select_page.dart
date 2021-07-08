@@ -5,12 +5,11 @@ import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'item_tile.dart';
 
-class ItemSelectPage extends HookWidget {
+class ItemSelectPage extends HookConsumerWidget {
   const ItemSelectPage({Key? key}) : super(key: key);
   static const routeName = "/search/item_select";
 
@@ -28,8 +27,8 @@ class ItemSelectPage extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final fromRoute = useProvider(fromRouteProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final fromRoute = ref.watch(fromRouteProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text("商品選択"),
@@ -55,12 +54,12 @@ class ItemSelectPage extends HookWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final items = useProvider(currentAsinListProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final items = ref.watch(currentAsinListProvider);
     return ListView.separated(
       separatorBuilder: (context, index) => const ThemeDivider(),
       itemCount: items.length + 1,

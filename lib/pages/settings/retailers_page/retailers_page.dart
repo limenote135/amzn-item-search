@@ -2,7 +2,6 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RetailersPage extends StatelessWidget {
@@ -27,12 +26,12 @@ class RetailersPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final retailers = useProvider(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final retailers = ref.watch(
         generalSettingsControllerProvider.select((value) => value.retailers));
     return ListView(
       children: [
@@ -55,7 +54,7 @@ class _Body extends HookWidget {
                     message: "仕入れ先を削除してもよろしいですか？",
                     isDestructiveAction: true);
                 if (ret == OkCancelResult.ok) {
-                  context
+                  ref
                       .read(generalSettingsControllerProvider.notifier)
                       .removeRetailer(i);
                 }
@@ -78,7 +77,7 @@ class _Body extends HookWidget {
             );
 
             if (text != null) {
-              context
+              ref
                   .read(generalSettingsControllerProvider.notifier)
                   .addRetailer(text.single);
             }

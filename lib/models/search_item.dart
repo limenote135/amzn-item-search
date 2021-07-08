@@ -10,16 +10,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 part 'search_item.freezed.dart';
 part 'search_item.g.dart';
 
-final currentSearchItemProvider = ScopedProvider<SearchItem>(null);
+final currentSearchItemProvider =
+    Provider<SearchItem>((_) => throw UnimplementedError());
 
-final currentAsinDataProvider = ScopedProvider<AsinData>(null);
+final currentAsinDataProvider =
+    Provider<AsinData>((_) => throw UnimplementedError());
 
-final currentAsinListProvider = ScopedProvider<List<AsinData>>(null);
+final currentAsinListProvider =
+    Provider<List<AsinData>>((_) => throw UnimplementedError());
 
-final currentAsinCountProvider = ScopedProvider<int>((_) => 1);
+final currentAsinCountProvider = Provider<int>((_) => 1);
 
 final currentFutureSearchItemProvider =
-    ScopedProvider<Future<SearchItem>>(null);
+    Provider<Future<SearchItem>>((_) => throw UnimplementedError());
 
 @freezed
 class SearchItem with _$SearchItem {
