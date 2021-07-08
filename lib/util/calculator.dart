@@ -2,7 +2,6 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final _displayTextProvider = StateProvider.autoDispose<String>((_) => "0");
@@ -18,7 +17,7 @@ enum _Op {
   equal,
 }
 
-class Calculator extends HookWidget {
+class Calculator extends HookConsumerWidget {
   const Calculator({
     Key? key,
     required this.firstButtonText,
@@ -33,11 +32,11 @@ class Calculator extends HookWidget {
   final void Function(double val) onSecondButtonPushed;
 
   @override
-  Widget build(BuildContext context) {
-    final displayText = useProvider(_displayTextProvider);
-    final total = useProvider(_totalProvider);
-    final op = useProvider(_currentOp);
-    final inputComplete = useProvider(_inputCompleteProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final displayText = ref.watch(_displayTextProvider);
+    final total = ref.watch(_totalProvider);
+    final op = ref.watch(_currentOp);
+    final inputComplete = ref.watch(_inputCompleteProvider);
 
     return OutlinedButtonTheme(
       data: OutlinedButtonThemeData(
@@ -99,7 +98,7 @@ class Calculator extends HookWidget {
                         onPressed: () async {
                           _pushOp(displayText, total, op, inputComplete,
                               _Op.division);
-                          await context
+                          await ref
                               .read(analyticsControllerProvider)
                               .logCalcEvent(calcEventDiv);
                         },
@@ -124,7 +123,7 @@ class Calculator extends HookWidget {
                         onPressed: () async {
                           _pushOp(displayText, total, op, inputComplete,
                               _Op.multiple);
-                          await context
+                          await ref
                               .read(analyticsControllerProvider)
                               .logCalcEvent(calcEventMul);
                         },
@@ -149,7 +148,7 @@ class Calculator extends HookWidget {
                         onPressed: () async {
                           _pushOp(
                               displayText, total, op, inputComplete, _Op.minus);
-                          await context
+                          await ref
                               .read(analyticsControllerProvider)
                               .logCalcEvent(calcEventMinus);
                         },
@@ -174,7 +173,7 @@ class Calculator extends HookWidget {
                         onPressed: () async {
                           _pushOp(
                               displayText, total, op, inputComplete, _Op.plus);
-                          await context
+                          await ref
                               .read(analyticsControllerProvider)
                               .logCalcEvent(calcEventPlus);
                         },
@@ -195,7 +194,7 @@ class Calculator extends HookWidget {
                             OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                         onPressed: () async {
                           _pushRatio(displayText, total, inputComplete, 1.05);
-                          await context
+                          await ref
                               .read(analyticsControllerProvider)
                               .logCalcEvent(calcEventPlus5p);
                         },
@@ -205,7 +204,7 @@ class Calculator extends HookWidget {
                             OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                         onPressed: () async {
                           _pushRatio(displayText, total, inputComplete, 0.95);
-                          await context
+                          await ref
                               .read(analyticsControllerProvider)
                               .logCalcEvent(calcEventMinus5p);
                         },
@@ -219,7 +218,7 @@ class Calculator extends HookWidget {
                             OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                         onPressed: () async {
                           _pushRatio(displayText, total, inputComplete, 1.1);
-                          await context
+                          await ref
                               .read(analyticsControllerProvider)
                               .logCalcEvent(calcEventPlus10p);
                         },
@@ -229,7 +228,7 @@ class Calculator extends HookWidget {
                             OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                         onPressed: () async {
                           _pushRatio(displayText, total, inputComplete, 0.9);
-                          await context
+                          await ref
                               .read(analyticsControllerProvider)
                               .logCalcEvent(calcEventMinus10p);
                         },
@@ -249,7 +248,7 @@ class Calculator extends HookWidget {
                           _pushOp(
                               displayText, total, op, inputComplete, _Op.equal);
                           onFirstButtonPushed(val);
-                          await context
+                          await ref
                               .read(analyticsControllerProvider)
                               .logCalcEvent(calcEventFirstAction);
                         },
@@ -269,7 +268,7 @@ class Calculator extends HookWidget {
                           _pushOp(
                               displayText, total, op, inputComplete, _Op.equal);
                           onSecondButtonPushed(val);
-                          await context
+                          await ref
                               .read(analyticsControllerProvider)
                               .logCalcEvent(calcEventSecondAction);
                         },

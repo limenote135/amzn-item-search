@@ -1,17 +1,17 @@
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final dateItemsProvider = ScopedProvider<List<StockItem>>(null);
+final dateItemsProvider =
+    Provider<List<StockItem>>((_) => throw UnimplementedError());
 
-class SummaryTile extends HookWidget {
+class SummaryTile extends HookConsumerWidget {
   const SummaryTile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final items = useProvider(dateItemsProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final items = ref.watch(dateItemsProvider);
     final day = DateTime.parse(items.first.purchaseDate).toLocal().dayFormat();
 
     var itemCount = 0;

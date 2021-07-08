@@ -14,11 +14,10 @@ import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/util/uuid.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class PurchasePage extends HookWidget {
+class PurchasePage extends HookConsumerWidget {
   const PurchasePage({Key? key}) : super(key: key);
   static const routeName = "/search/purchase";
 
@@ -35,12 +34,12 @@ class PurchasePage extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentAsinDataProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
 
     // 仮で初期値を新品最安値、無ければ中古最安値にする
     final lowestPrice = _calcLowestPrice(item.prices);
-    final useFba = useProvider(searchSettingsControllerProvider).useFba;
+    final useFba = ref.watch(searchSettingsControllerProvider).useFba;
 
     final stock = StockItem(
       purchaseDate: currentTimeString(),
@@ -48,9 +47,9 @@ class PurchasePage extends HookWidget {
       useFba: useFba,
       autogenSku: true,
       item: item,
-      id: context.read(uuidProvider).v4(), // たぶん空文字でも問題ない
+      id: ref.read(uuidProvider).v4(), // たぶん空文字でも問題ない
     );
-    final form = useProvider(formValueProvider(stock));
+    final form = ref.watch(formValueProvider(stock));
     return ProviderScope(
       overrides: [
         currentStockItemProvider.overrideWithValue(stock),
@@ -99,15 +98,15 @@ class PurchasePage extends HookWidget {
 
 final _itemImageProvider = StateProvider.autoDispose<Uint8List?>((_) => null);
 
-class _Body extends HookWidget {
+class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return PurchaseSettingsForm(
       onComplete: (bytes) {
         // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
-        context.read(_itemImageProvider).state = bytes.buffer.asUint8List();
+        ref.read(_itemImageProvider).state = bytes.buffer.asUint8List();
       },
       action: _SaveButton(
         builder: (context, onSave) {
@@ -121,41 +120,39 @@ class _Body extends HookWidget {
   }
 }
 
-class _SaveButton extends HookWidget {
+class _SaveButton extends HookConsumerWidget {
   const _SaveButton({Key? key, required this.builder}) : super(key: key);
 
   final Widget Function(BuildContext context, void Function()? onSave) builder;
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentAsinDataProvider);
-    final isMajorCustomer = useProvider(generalSettingsControllerProvider
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
+    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
         .select((value) => value.isMajorCustomer));
 
     return ReactiveFormConsumer(
       builder: (context, form, child) {
-        return Consumer(
-          builder: (context, watch, child) {
-            final image = watch(_itemImageProvider);
-            final onSave = form.invalid
-                ? null
-                : () => _onSubmit(
-                      context,
-                      form,
-                      context.read(uuidProvider).v4(),
-                      item,
-                      image.state,
-                      isMajorCustomer,
-                    );
-            return builder(context, onSave);
-          },
-        );
+        final image = ref.watch(_itemImageProvider);
+        final onSave = form.invalid
+            ? null
+            : () => _onSubmit(
+                  context,
+                  ref,
+                  form,
+                  ref.read(uuidProvider).v4(),
+                  item,
+                  image.state,
+                  isMajorCustomer,
+                );
+        return builder(context, onSave);
       },
     );
   }
 
   void _onSubmit(
     BuildContext context,
+    WidgetRef ref,
     FormGroup form,
     String id,
     AsinData item,
@@ -196,8 +193,8 @@ class _SaveButton extends HookWidget {
       retailer: getString(form, retailerField),
       breakEven: breakEven,
     );
-    context.read(stockItemListControllerProvider.notifier).add(stock);
-    context.read(analyticsControllerProvider).logPurchaseEvent(stock);
+    ref.read(stockItemListControllerProvider.notifier).add(stock);
+    ref.read(analyticsControllerProvider).logPurchaseEvent(stock);
 
     Navigator.of(context).popUntil((route) => route.settings.name == "/");
   }

@@ -8,22 +8,22 @@ import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:amasearch/widgets/strong_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'price_info.dart';
 
-final currentSearchDateProvider = ScopedProvider<String?>(null);
-final isEllipsisProvider = ScopedProvider<bool>((_) => false);
+final currentSearchDateProvider =
+    Provider<String?>((_) => throw UnimplementedError());
+final isEllipsisProvider = Provider<bool>((_) => false);
 
-class SearchItemTile extends HookWidget {
+class SearchItemTile extends HookConsumerWidget {
   const SearchItemTile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentAsinDataProvider);
-    final search = useProvider(searchSettingsControllerProvider);
-    final settings = useProvider(generalSettingsControllerProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
+    final search = ref.watch(searchSettingsControllerProvider);
+    final settings = ref.watch(generalSettingsControllerProvider);
     final tile = Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: const [
@@ -45,14 +45,14 @@ class SearchItemTile extends HookWidget {
   }
 }
 
-class _ItemTileBody extends HookWidget {
+class _ItemTileBody extends HookConsumerWidget {
   const _ItemTileBody({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final item = useProvider(currentAsinDataProvider);
-    final date = useProvider(currentSearchDateProvider);
-    final isEllipsis = useProvider(isEllipsisProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
+    final date = ref.watch(currentSearchDateProvider);
+    final isEllipsis = ref.watch(isEllipsisProvider);
 
     final cartPrice = getCartPrice(item.prices);
 

@@ -9,19 +9,18 @@ import 'package:amasearch/widgets/lifecycle_manager.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MyApp extends HookWidget {
+class MyApp extends HookConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final observer = useProvider(analyticsObserverProvider);
-    final isDarkMode = useProvider(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final observer = ref.watch(analyticsObserverProvider);
+    final isDarkMode = ref.watch(
         generalSettingsControllerProvider.select((value) => value.isDarkMode));
-    final authStateChanges = useProvider(authStateChangesProvider);
+    final authStateChanges = ref.watch(authStateChangesProvider);
     return MaterialApp(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
@@ -59,7 +58,7 @@ class MyApp extends HookWidget {
             return const LoginRootPage();
           }
           // TODO: 仮で毎回起動時にセットする
-          context.read(analyticsControllerProvider).setUserId(value.uid);
+          ref.read(analyticsControllerProvider).setUserId(value.uid);
           return Stack(children: const [
             HomePage(),
             LifecycleManager(callback: UpdateCheckObserver(), child: Updater()),
@@ -73,7 +72,7 @@ class MyApp extends HookWidget {
   }
 }
 
-class _Unfocus extends HookWidget {
+class _Unfocus extends StatelessWidget {
   const _Unfocus({Key? key, this.child}) : super(key: key);
 
   final Widget? child;
