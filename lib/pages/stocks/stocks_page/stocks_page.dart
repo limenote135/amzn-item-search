@@ -1,3 +1,8 @@
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
@@ -14,7 +19,9 @@ import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 
 import 'slidable_delete_tile.dart';
@@ -25,9 +32,33 @@ final _selectedItemCount = Provider((ref) {
 });
 
 enum _StockPageActions {
+  upload,
   share,
   clear,
 }
+
+// 仕入れ日のリスト
+final _daysProvider = Provider((ref) {
+  final items = ref.watch(stockItemListControllerProvider);
+  return [
+    ...{
+      ...items.map((e) => DateTime.parse(e.purchaseDate).toLocal().dayFormat())
+    }
+  ];
+});
+
+// 実績シェア用に仕入れ日ごとに GlobalKey を作成
+final _captureKeyMapProvider = Provider((ref) {
+  final days = ref.watch(_daysProvider);
+  final map = <String, GlobalKey>{};
+  for (final day in days) {
+    map[day] = GlobalKey();
+  }
+  return map;
+});
+
+// トータル仕入れ向けに GlobalKey を作成
+final _summaryKey = GlobalKey();
 
 class StocksPage extends HookConsumerWidget {
   const StocksPage({Key? key}) : super(key: key);
@@ -58,10 +89,17 @@ class StocksPage extends HookConsumerWidget {
           onSelected: (value) => handleAction(context, ref, value),
           itemBuilder: (context) => const [
             PopupMenuItem(
-              value: _StockPageActions.share,
+              value: _StockPageActions.upload,
               child: ListTile(
                 leading: Icon(Icons.file_upload_outlined),
                 title: Text("商品リストを送る"),
+              ),
+            ),
+            PopupMenuItem(
+              value: _StockPageActions.share,
+              child: ListTile(
+                leading: Icon(Icons.share),
+                title: Text("仕入実績をシェア"),
               ),
             ),
             PopupMenuItem(
@@ -115,14 +153,35 @@ class StocksPage extends HookConsumerWidget {
     final itemList = ref.read(stockItemListControllerProvider);
     final settings = ref.read(generalSettingsControllerProvider);
 
+    final days = ref.watch(_daysProvider);
+    final maps = ref.watch(_captureKeyMapProvider);
+
     switch (value) {
-      case _StockPageActions.share:
+      case _StockPageActions.upload:
         final file =
             await StockItemCsv.create("StockList", itemList, settings.csvOrder);
         await Share.shareFiles([file.absolute.path], subject: "仕入れ済み商品一覧");
         await ref
             .read(analyticsControllerProvider)
-            .logSingleEvent(shareEventName);
+            .logSingleEvent(uploadListEventName);
+        break;
+      case _StockPageActions.share:
+        final result = await showConfirmationDialog(
+          context: context,
+          title: "シェアする日を決めてください",
+          message: "どの日の実績をシェアしますか？",
+          actions: [
+            const AlertDialogAction(key: "total", label: "トータル実績"),
+            ...days.map((e) => AlertDialogAction(key: e, label: e))
+          ],
+        );
+        if (result != null) {
+          final key = result == "total" ? _summaryKey : maps[result]!;
+          await shareImageAndText(key);
+          await ref
+              .read(analyticsControllerProvider)
+              .logSingleEvent(shareSnsEventName);
+        }
         break;
       case _StockPageActions.clear:
         await itemDeleteHandler(
@@ -134,6 +193,43 @@ class StocksPage extends HookConsumerWidget {
         break;
     }
   }
+
+  Future<ByteData> exportToImage(GlobalKey globalKey) async {
+    final boundary =
+        globalKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+
+    final image = await boundary!.toImage(
+      pixelRatio: 3,
+    );
+    final byteData = await image.toByteData(
+      format: ui.ImageByteFormat.png,
+    );
+    return byteData!;
+  }
+
+  Future<File> saveFile(String filename, List<int> imageData) async {
+    final directory = await getTemporaryDirectory();
+
+    final exportFile = File('${directory.path}/$filename.png');
+    if (!exportFile.existsSync()) {
+      await exportFile.create(recursive: true);
+    }
+    final file = await exportFile.writeAsBytes(imageData);
+    return file;
+  }
+
+  Future shareImageAndText(GlobalKey globalKey) async {
+    final bytes = await exportToImage(globalKey);
+    final widgetImageBytes =
+        bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
+    final applicationDocumentsFile = await saveFile("stock", widgetImageBytes);
+
+    final path = applicationDocumentsFile.path;
+    // TODO: 正式リリース時にはハッシュタグ付きでシェアする
+    // await Share.shareFiles([path], subject: "仕入実績", text: "#amzn-item-search");
+    await Share.shareFiles([path], subject: "仕入実績");
+    await applicationDocumentsFile.delete();
+  }
 }
 
 class _Body extends HookConsumerWidget {
@@ -144,6 +240,8 @@ class _Body extends HookConsumerWidget {
     final items = ref.watch(stockItemListControllerProvider);
     final selectedItems = ref.watch(selectedStockItemsControllerProvider);
 
+    final keyMaps = ref.watch(_captureKeyMapProvider);
+
     final tile = _InkWell(
       child: selectedItems.isNotEmpty
           ? const ItemTile()
@@ -152,7 +250,13 @@ class _Body extends HookConsumerWidget {
 
     return Column(
       children: [
-        const WithUnderLine(TotalProfit()),
+        WithUnderLine(RepaintBoundary(
+          key: _summaryKey,
+          child: Container(
+            color: Theme.of(context).backgroundColor,
+            child: const TotalProfit(),
+          ),
+        )),
         Expanded(
           child: ListView.separated(
             separatorBuilder: (context, index) => const ThemeDivider(),
@@ -167,9 +271,14 @@ class _Body extends HookConsumerWidget {
 
               final summary = _getSummary(items, index);
               if (summary != null) {
+                final day =
+                    DateTime.parse(items[index].purchaseDate).dayFormat();
                 return Column(
                   children: [
-                    summary,
+                    RepaintBoundary(
+                      key: keyMaps[day],
+                      child: summary,
+                    ),
                     const ThemeDivider(),
                     tileImpl,
                   ],

@@ -30,28 +30,31 @@ class SummaryTile extends HookConsumerWidget {
     final profitRate =
         totalSellPrice == 0 ? 0 : (profitValue / totalSellPrice * 100).round();
 
-    return Column(
-      children: [
-        Text(day),
-        Wrap(
-          alignment: WrapAlignment.spaceAround,
-          spacing: 8,
-          children: [
-            Text("商品数: $itemCount 個", textAlign: TextAlign.center),
-            Text("仕入額: ${numberFormatter.format(totalPurchase)} 円",
-                textAlign: TextAlign.center),
-            Text("粗利額: ${numberFormatter.format(profitValue)}円",
-                textAlign: TextAlign.center),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text("利益率: $profitRate %", textAlign: TextAlign.center),
-            Text("ROI: $roi %", textAlign: TextAlign.center),
-          ],
-        ),
-      ],
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: Column(
+        children: [
+          Text(day),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 8,
+            children: [
+              Text("商品数: $itemCount 個", textAlign: TextAlign.center),
+              Text("仕入額: ${numberFormatter.format(totalPurchase)} 円",
+                  textAlign: TextAlign.center),
+              Text("粗利額: ${numberFormatter.format(profitValue)}円",
+                  textAlign: TextAlign.center),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("利益率: $profitRate %", textAlign: TextAlign.center),
+              Text("ROI: $roi %", textAlign: TextAlign.center),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
