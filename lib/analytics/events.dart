@@ -5,7 +5,8 @@ const pushSearchButtonEventName = "pushSearchButton";
 const searchEventName = "search";
 const calcEventName = "calculator";
 
-const shareEventName = "share";
+const uploadListEventName = "uploadList";
+const shareSnsEventName = "snsShare";
 const deleteSearchHistoryEventName = "deleteSearchHistory";
 const deleteAllSearchHistoryEventName = "deleteAllSearchHistory";
 const directPurchaseEventName = "directPurchase";
