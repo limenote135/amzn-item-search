@@ -225,6 +225,8 @@ class StocksPage extends HookConsumerWidget {
     final applicationDocumentsFile = await saveFile("stock", widgetImageBytes);
 
     final path = applicationDocumentsFile.path;
+    // TODO: 正式リリース時にはハッシュタグ付きでシェアする
+    // await Share.shareFiles([path], subject: "仕入実績", text: "#amzn-item-search");
     await Share.shareFiles([path], subject: "仕入実績");
     await applicationDocumentsFile.delete();
   }
