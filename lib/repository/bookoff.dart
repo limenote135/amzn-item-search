@@ -13,11 +13,11 @@ part 'bookoff.g.dart';
 final bookoffProvider = Provider((ref) => BookoffRepository(ref.read));
 
 final bookoffItemFutureProvider =
-    FutureProvider.autoDispose.family<SearchItem, String>((ref, code) async {
+    FutureProvider.family<SearchItem, String>((ref, code) async {
   final now = currentTimeString();
   final bookoff = ref.read(bookoffProvider);
   final resp = await bookoff.get(code);
-  ref.maintainState = true;
+  // ref.maintainState = true;
   if (resp.isEmpty) {
     return SearchItem(searchDate: now, jan: code);
   }
