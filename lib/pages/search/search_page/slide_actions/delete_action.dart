@@ -1,5 +1,8 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/events.dart';
+import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/models/search_item.dart';
-import 'package:amasearch/pages/search/common/item_delete_handler.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -18,12 +21,22 @@ class DeleteAction extends HookConsumerWidget {
       icon: Icons.delete,
       onTap: () async {
         unfocus();
-        await itemDeleteHandler(
+        // ダイアログの前に read しておこないと例外が出る
+        // Slidable() の直下に IconSlideAction を置かず、別 Widget にしていることが原因？
+        final itemController = ref.read(searchItemControllerProvider.notifier);
+        final analyzer = ref.read(analyticsControllerProvider);
+
+        final ret = await showOkCancelAlertDialog(
           context: Scaffold.of(context).context,
-          ref: ref,
-          items: [items],
-          content: "在庫リストからアイテムを削除します",
+          title: "商品の削除",
+          message: "在庫リストからアイテムを削除します",
+          isDestructiveAction: true,
         );
+        final ok = ret == OkCancelResult.ok;
+        if (ok) {
+          itemController.remove([items]);
+          await analyzer.logSingleEvent(deleteSearchHistoryEventName);
+        }
       },
     );
   }

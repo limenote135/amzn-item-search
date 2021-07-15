@@ -9,7 +9,6 @@ import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'slidable_delete_tile.dart';
 import 'slidable_tile.dart';
 
 class ItemTile extends HookConsumerWidget {
@@ -31,12 +30,10 @@ class ItemTile extends HookConsumerWidget {
                 overrides: [
                   currentSearchItemProvider.overrideWithValue(value),
                 ],
-                child: SlidableDeleteTile(
-                  child: Center(
-                    child: SizedBox(
-                      height: 30,
-                      child: Text("${value.jan}: 見つかりませんでした"),
-                    ),
+                child: Center(
+                  child: SizedBox(
+                    height: 30,
+                    child: Text("${value.jan}: 見つかりませんでした"),
                   ),
                 ),
               );
