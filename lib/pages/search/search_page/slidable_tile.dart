@@ -1,6 +1,8 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/general_settings.dart';
+import 'package:amasearch/pages/search/camera_page/camera_page.dart';
+import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/search_page/slide_actions/navigation_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -17,35 +19,49 @@ class SlidableTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final settings = ref.watch(generalSettingsControllerProvider);
-    final left = settings.leftSlideShortcut;
-    final right = settings.rightSlideShortcut;
-    final buttons = settings.customButtons;
+    final from = ref.watch(fromRouteProvider);
+    final left = ref.watch(generalSettingsControllerProvider
+        .select((value) => value.leftSlideShortcut));
+    final right = ref.watch(generalSettingsControllerProvider
+        .select((value) => value.rightSlideShortcut));
+    final buttons = ref.watch(generalSettingsControllerProvider
+        .select((value) => value.customButtons));
 
     return Slidable(
       actionPane: const SlidableDrawerActionPane(),
       actionExtentRatio: 0.2,
       actions: [
         for (final act in left)
-          _getAction(context, act.type, act.param, buttons)
+          if (needShow(from, act.type)) _getAction(act.type, act.param, buttons)
       ],
       secondaryActions: [
         for (final act in right)
-          _getAction(context, act.type, act.param, buttons)
+          if (needShow(from, act.type)) _getAction(act.type, act.param, buttons)
       ],
       child: child,
     );
   }
 
-  Widget _getAction(BuildContext context, ShortcutType type, String param,
-      List<CustomButtonDetail> buttons) {
+  bool needShow(String from, ShortcutType type) {
+    if (from == CameraPage.routeName && type == ShortcutType.delete) {
+      // カメラページの場合は delete 不可
+      return false;
+    }
+    if (type == ShortcutType.none) {
+      // none の場合は非表示
+      return false;
+    }
+    return true;
+  }
+
+  Widget _getAction(
+      ShortcutType type, String param, List<CustomButtonDetail> buttons) {
     switch (type) {
       case ShortcutType.purchase:
         return const PurchaseAction();
       case ShortcutType.delete:
         return const DeleteAction();
       case ShortcutType.web:
-        // TODO: Keepa や出品一覧の対応
         final button = buttons.firstWhere((element) => element.id == param);
         return ProviderScope(
           overrides: [
