@@ -13,9 +13,7 @@ import 'slidable_delete_tile.dart';
 import 'slidable_tile.dart';
 
 class ItemTile extends HookConsumerWidget {
-  const ItemTile({Key? key, this.deletable = true}) : super(key: key);
-
-  final bool deletable;
+  const ItemTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,9 +45,7 @@ class ItemTile extends HookConsumerWidget {
               overrides: [
                 currentSearchItemProvider.overrideWithValue(value),
               ],
-              child: deletable
-                  ? const SlidableTile(child: ItemTileImpl())
-                  : const ItemTileImpl(),
+              child: const SlidableTile(child: ItemTileImpl()),
             );
           },
         );
