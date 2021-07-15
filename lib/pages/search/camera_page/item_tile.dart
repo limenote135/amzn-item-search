@@ -23,7 +23,7 @@ class CameraItemTile extends HookConsumerWidget {
         overrides: [
           currentFutureSearchItemProvider.overrideWithValue(items.first),
         ],
-        child: const ItemTile(deletable: false),
+        child: const ItemTile(),
       ),
     );
   }
