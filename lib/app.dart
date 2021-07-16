@@ -7,6 +7,7 @@ import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/lifecycle_manager.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -50,9 +51,12 @@ class MyApp extends HookConsumerWidget {
         loading: () {
           return const Center(child: CircularProgressIndicator());
         },
-        error: (error, stack) => SafeArea(
-          child: Text("$error"),
-        ),
+        error: (error, stackTrace) {
+          FirebaseCrashlytics.instance.recordError(error, stackTrace);
+          return SafeArea(
+            child: Text("$error"),
+          );
+        },
         data: (value) {
           if (value == null) {
             return const LoginRootPage();
