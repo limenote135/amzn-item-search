@@ -11,11 +11,11 @@ const _noItemText = "NG";
 final _geoProvider = Provider((ref) => GeoRepository(ref.read));
 
 final geoItemFutureProvider =
-    FutureProvider.autoDispose.family<SearchItem, String>((ref, code) async {
+    FutureProvider.family<SearchItem, String>((ref, code) async {
   final now = currentTimeString();
   final geo = ref.read(_geoProvider);
   final resp = await geo.get(code);
-  ref.maintainState = true;
+  // ref.maintainState = true;
   if (resp.jan == "") {
     return SearchItem(searchDate: now, jan: code);
   }
