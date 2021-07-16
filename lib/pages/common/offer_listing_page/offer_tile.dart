@@ -1,6 +1,7 @@
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -28,7 +29,10 @@ class OfferTile extends HookConsumerWidget {
           child: CircularProgressIndicator(),
         ),
       ),
-      error: (error, stackTrace) => Text("$error"),
+      error: (error, stackTrace) {
+        FirebaseCrashlytics.instance.recordError(error, stackTrace);
+        return Text("$error");
+      },
       data: (value) {
         return ListTile(
           title: Row(children: [
