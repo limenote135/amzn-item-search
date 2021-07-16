@@ -36,45 +36,54 @@ const customButtonAmazonStockUrl =
     "https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};";
 const customButtonAmazonListableUrl =
     "https://sellercentral.amazon.co.jp/abis/listing/syh?asin={asin}";
+const customButtonAmazonListingsUrl =
+    "https://www.amazon.co.jp/gp/offer-listing/{asin}/";
 
+// カスタムボタンではないが、ショートカットで設定するために定義を用意しておく
+const amazonListingsButton = CustomButtonDetail(
+  id: "bt00",
+  enable: true,
+  title: "出品一覧",
+  pattern: customButtonAmazonListingsUrl,
+);
 const defaultCustomButtons = [
   CustomButtonDetail(
-      id: "bt00",
+      id: "bt01",
       enable: true,
       title: "Amazon",
       pattern: customButtonAmazonUrl),
   CustomButtonDetail(
-      id: "bt01",
+      id: "bt02",
       enable: true,
       title: "出品確認",
       pattern: customButtonAmazonListableUrl),
   CustomButtonDetail(
-      id: "bt02", enable: true, title: "Delta", pattern: customButtonDeltaUrl),
+      id: "bt03", enable: true, title: "Delta", pattern: customButtonDeltaUrl),
   CustomButtonDetail(
-      id: "bt03",
+      id: "bt04",
       enable: true,
       title: "モノサーチ",
       pattern: customButtonMonoSearchUrl),
   CustomButtonDetail(
-      id: "bt04",
+      id: "bt05",
       enable: false,
       title: "Keezon",
       pattern: customButtonKeezonUrl),
   CustomButtonDetail(
-      id: "bt05",
+      id: "bt06",
       enable: false,
       title: "メルカリ",
       pattern: customButtonMercariUrl),
   CustomButtonDetail(
-      id: "bt06",
+      id: "bt07",
       enable: false,
       title: "在庫",
       pattern: customButtonAmazonStockUrl),
-  CustomButtonDetail(id: "bt07", enable: false, title: "ボタン1", pattern: ""),
-  CustomButtonDetail(id: "bt08", enable: false, title: "ボタン2", pattern: ""),
-  CustomButtonDetail(id: "bt09", enable: false, title: "ボタン3", pattern: ""),
-  CustomButtonDetail(id: "bt10", enable: false, title: "ボタン4", pattern: ""),
-  CustomButtonDetail(id: "bt11", enable: false, title: "ボタン5", pattern: ""),
+  CustomButtonDetail(id: "bt08", enable: false, title: "ボタン1", pattern: ""),
+  CustomButtonDetail(id: "bt09", enable: false, title: "ボタン2", pattern: ""),
+  CustomButtonDetail(id: "bt10", enable: false, title: "ボタン3", pattern: ""),
+  CustomButtonDetail(id: "bt11", enable: false, title: "ボタン4", pattern: ""),
+  CustomButtonDetail(id: "bt12", enable: false, title: "ボタン5", pattern: ""),
 ];
 
 const _defaultCsvOrder = [

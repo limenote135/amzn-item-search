@@ -24,9 +24,10 @@ class SlidableTile extends HookConsumerWidget {
         .select((value) => value.leftSlideShortcut));
     final right = ref.watch(generalSettingsControllerProvider
         .select((value) => value.rightSlideShortcut));
-    final buttons = ref.watch(generalSettingsControllerProvider
+    final baseButtons = ref.watch(generalSettingsControllerProvider
         .select((value) => value.customButtons));
 
+    final buttons = [...baseButtons, amazonListingsButton];
     return Slidable(
       actionPane: const SlidableDrawerActionPane(),
       actionExtentRatio: 0.2,

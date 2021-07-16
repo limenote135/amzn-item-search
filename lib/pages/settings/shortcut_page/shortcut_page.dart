@@ -40,6 +40,9 @@ class _Body extends HookConsumerWidget {
     final buttons = ref.watch(generalSettingsControllerProvider
         .select((value) => value.customButtons));
 
+    final allWebButtons = [...buttons, amazonListingsButton];
+
+    // ここには  amazonListingsButton は含めない
     final enableButtons = buttons.where((element) => element.enable).toList();
 
     return ListView(children: [
@@ -52,13 +55,13 @@ class _Body extends HookConsumerWidget {
       const ThemeDivider(),
       ListTile(
         title: Text(
-          "左スワイプ",
+          "左端スワイプ",
           style: Theme.of(context).textTheme.caption,
         ),
       ),
       for (var i = 0; i < left.length; i++)
         ListTile(
-          title: _createTitle(left[i], buttons),
+          title: _createTitle(left[i], allWebButtons),
           trailing: const Icon(Icons.settings),
           onTap: () async {
             final item = await _selectAction(context, enableButtons);
@@ -77,13 +80,13 @@ class _Body extends HookConsumerWidget {
       const ThemeDivider(),
       ListTile(
         title: Text(
-          "右スワイプ",
+          "右端スワイプ",
           style: Theme.of(context).textTheme.caption,
         ),
       ),
       for (var i = 0; i < right.length; i++)
         ListTile(
-          title: _createTitle(right[i], buttons),
+          title: _createTitle(right[i], allWebButtons),
           trailing: const Icon(Icons.settings),
           onTap: () async {
             final item = await _selectAction(context, enableButtons);
@@ -170,7 +173,7 @@ class _Body extends HookConsumerWidget {
       case _deleteKey:
         return const ShortcutDetail(type: ShortcutType.delete);
       case _offersKey:
-        return const ShortcutDetail(type: ShortcutType.web, param: "");
+        return const ShortcutDetail(type: ShortcutType.web, param: "bt00");
       case _newOffersKey:
         return const ShortcutDetail(
             type: ShortcutType.navigation, param: navigationTargetNewOffers);
@@ -182,7 +185,7 @@ class _Body extends HookConsumerWidget {
             type: ShortcutType.navigation, param: navigationTargetKeepa);
       default:
         final button = buttons.firstWhere((element) => element.id == ret);
-        return ShortcutDetail(type: ShortcutType.web, param: button.pattern);
+        return ShortcutDetail(type: ShortcutType.web, param: button.id);
     }
   }
 }
