@@ -6,6 +6,7 @@ import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -21,9 +22,13 @@ class ItemTile extends HookConsumerWidget {
           loading: () => const ListTile(
             title: Center(child: CircularProgressIndicator()),
           ),
-          error: (error, stackTrace) => ListTile(
-            title: Text("$error"),
-          ),
+          error: (error, stackTrace) {
+            FirebaseCrashlytics.instance.recordError(error, stackTrace);
+            return ListTile(
+              title: Text("$error"
+              ),
+            );
+          },
           data: (value) {
             if (value.asins.isEmpty) {
               return ProviderScope(

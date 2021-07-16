@@ -1,5 +1,6 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/offer_stocks.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -22,7 +23,10 @@ class StockText extends HookConsumerWidget {
     final smallSize = Theme.of(context).textTheme.bodyText2;
     return ref.watch(offerStocksFutureProvider(param)).when(
           loading: () => Text("在庫: loading", style: smallSize),
-          error: (error, stackTrace) => Text("$error"),
+          error: (error, stackTrace) {
+            FirebaseCrashlytics.instance.recordError(error, stackTrace);
+            return Text("$error");
+          },
           data: (value) {
             return value == 0
                 ? Text("在庫: 不明", style: smallSize)

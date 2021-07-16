@@ -1,5 +1,6 @@
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -48,7 +49,10 @@ class _Body extends HookConsumerWidget {
     final param = ref.watch(currentOfferListingParamProvider);
     return ref.watch(offerTotalCountProvider(param)).when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stackTrace) => Text("$error"),
+          error: (error, stackTrace) {
+            FirebaseCrashlytics.instance.recordError(error, stackTrace);
+            return Text("$error");
+          },
           data: (value) {
             if (value == 0) {
               return ProviderScope(
