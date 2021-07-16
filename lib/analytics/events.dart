@@ -38,6 +38,7 @@ const customButtonEventMap = <String, String>{
   customButtonMercariUrl: pushSearchButtonMercariName,
   customButtonAmazonStockUrl: pushSearchButtonAmazonStockName,
   customButtonAmazonListableUrl: pushSearchButtonAmazonListableName,
+  customButtonAmazonListingsUrl: pushSearchButtonAmazonListName,
 };
 
 const calcEventDiv = "div";

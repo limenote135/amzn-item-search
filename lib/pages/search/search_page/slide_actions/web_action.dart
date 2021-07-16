@@ -30,10 +30,12 @@ class WebAction extends HookConsumerWidget {
       icon: Icons.search,
       onTap: () async {
         unfocus();
-        await ref
-            .read(analyticsControllerProvider)
-            .logPushSearchButtonEvent(eventName);
-        await FlutterWebBrowser.openWebPage(url: url);
+        if (url.startsWith("http")) {
+          await ref
+              .read(analyticsControllerProvider)
+              .logPushSearchButtonEvent(eventName);
+          await FlutterWebBrowser.openWebPage(url: url);
+        }
       },
     );
   }

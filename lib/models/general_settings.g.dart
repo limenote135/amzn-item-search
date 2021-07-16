@@ -33,49 +33,49 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
                   pattern: 'https://www.amazon.co.jp/gp/product/{asin}/',
                   enable: true,
                   title: 'Amazon',
-                  id: 'bt00'),
+                  id: 'bt01'),
               const CustomButtonDetail(
                   pattern:
                       'https://sellercentral.amazon.co.jp/abis/listing/syh?asin={asin}',
                   enable: true,
                   title: '出品確認',
-                  id: 'bt01'),
+                  id: 'bt02'),
               const CustomButtonDetail(
                   pattern: 'https://delta-tracer.com/item/detail/jp/{asin}/',
                   enable: true,
                   title: 'Delta',
-                  id: 'bt02'),
+                  id: 'bt03'),
               const CustomButtonDetail(
                   pattern: 'https://mnsearch.com/item?kwd={asin}',
                   enable: true,
                   title: 'モノサーチ',
-                  id: 'bt03'),
+                  id: 'bt04'),
               const CustomButtonDetail(
                   pattern: 'https://keezon.net/item/index?ASIN={asin}',
                   enable: false,
                   title: 'Keezon',
-                  id: 'bt04'),
+                  id: 'bt05'),
               const CustomButtonDetail(
                   pattern: 'https://www.mercari.com/jp/search/?keyword={title}',
                   enable: false,
                   title: 'メルカリ',
-                  id: 'bt05'),
+                  id: 'bt06'),
               const CustomButtonDetail(
                   pattern:
                       'https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};',
                   enable: false,
                   title: '在庫',
-                  id: 'bt06'),
+                  id: 'bt07'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン1', id: 'bt07'),
+                  pattern: '', enable: false, title: 'ボタン1', id: 'bt08'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン2', id: 'bt08'),
+                  pattern: '', enable: false, title: 'ボタン2', id: 'bt09'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン3', id: 'bt09'),
+                  pattern: '', enable: false, title: 'ボタン3', id: 'bt10'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン4', id: 'bt10'),
+                  pattern: '', enable: false, title: 'ボタン4', id: 'bt11'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン5', id: 'bt11')
+                  pattern: '', enable: false, title: 'ボタン5', id: 'bt12')
             ]
           : (fields[10] as List).cast<CustomButtonDetail>(),
       csvOrder: fields[11] == null
