@@ -2,6 +2,7 @@ import 'package:amasearch/models/alert_condition.dart';
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/alert_type.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
+import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -35,27 +36,54 @@ const customButtonAmazonStockUrl =
     "https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};";
 const customButtonAmazonListableUrl =
     "https://sellercentral.amazon.co.jp/abis/listing/syh?asin={asin}";
+const customButtonAmazonListingsUrl =
+    "https://www.amazon.co.jp/gp/offer-listing/{asin}/";
 
+// カスタムボタンではないが、ショートカットで設定するために定義を用意しておく
+const amazonListingsButton = CustomButtonDetail(
+  id: "bt00",
+  enable: true,
+  title: "出品一覧",
+  pattern: customButtonAmazonListingsUrl,
+);
 const defaultCustomButtons = [
   CustomButtonDetail(
-      enable: true, title: "Amazon", pattern: customButtonAmazonUrl),
+      id: "bt01",
+      enable: true,
+      title: "Amazon",
+      pattern: customButtonAmazonUrl),
   CustomButtonDetail(
-      enable: true, title: "出品確認", pattern: customButtonAmazonListableUrl),
+      id: "bt02",
+      enable: true,
+      title: "出品確認",
+      pattern: customButtonAmazonListableUrl),
   CustomButtonDetail(
-      enable: true, title: "Delta", pattern: customButtonDeltaUrl),
+      id: "bt03", enable: true, title: "Delta", pattern: customButtonDeltaUrl),
   CustomButtonDetail(
-      enable: true, title: "モノサーチ", pattern: customButtonMonoSearchUrl),
+      id: "bt04",
+      enable: true,
+      title: "モノサーチ",
+      pattern: customButtonMonoSearchUrl),
   CustomButtonDetail(
-      enable: false, title: "Keezon", pattern: customButtonKeezonUrl),
+      id: "bt05",
+      enable: false,
+      title: "Keezon",
+      pattern: customButtonKeezonUrl),
   CustomButtonDetail(
-      enable: false, title: "メルカリ", pattern: customButtonMercariUrl),
+      id: "bt06",
+      enable: false,
+      title: "メルカリ",
+      pattern: customButtonMercariUrl),
   CustomButtonDetail(
-      enable: false, title: "在庫", pattern: customButtonAmazonStockUrl),
-  CustomButtonDetail(enable: false, title: "ボタン1", pattern: ""),
-  CustomButtonDetail(enable: false, title: "ボタン2", pattern: ""),
-  CustomButtonDetail(enable: false, title: "ボタン3", pattern: ""),
-  CustomButtonDetail(enable: false, title: "ボタン4", pattern: ""),
-  CustomButtonDetail(enable: false, title: "ボタン5", pattern: ""),
+      id: "bt07",
+      enable: false,
+      title: "在庫",
+      pattern: customButtonAmazonStockUrl),
+  CustomButtonDetail(id: "bt08", enable: false, title: "ボタン1", pattern: ""),
+  CustomButtonDetail(id: "bt09", enable: false, title: "ボタン2", pattern: ""),
+  CustomButtonDetail(id: "bt10", enable: false, title: "ボタン3", pattern: ""),
+  CustomButtonDetail(id: "bt11", enable: false, title: "ボタン4", pattern: ""),
+  CustomButtonDetail(id: "bt12", enable: false, title: "ボタン5", pattern: ""),
 ];
 
 const _defaultCsvOrder = [
@@ -87,6 +115,18 @@ const _defaultAlert = [
 ];
 
 const _defaultKeepaSettings = KeepaSettings();
+
+const _defaultLeftShortcut = [
+  ShortcutDetail(type: ShortcutType.purchase),
+  ShortcutDetail(type: ShortcutType.none),
+  ShortcutDetail(type: ShortcutType.none),
+];
+
+const _defaultRightShortcut = [
+  ShortcutDetail(type: ShortcutType.delete),
+  ShortcutDetail(type: ShortcutType.none),
+  ShortcutDetail(type: ShortcutType.none),
+];
 
 @freezed
 class GeneralSettings with _$GeneralSettings {
@@ -134,6 +174,12 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(18, defaultValue: _defaultKeepaSettings)
     @Default(_defaultKeepaSettings)
         KeepaSettings keepaSettings,
+    @HiveField(19, defaultValue: _defaultLeftShortcut)
+    @Default(_defaultLeftShortcut)
+        List<ShortcutDetail> leftSlideShortcut,
+    @HiveField(20, defaultValue: _defaultRightShortcut)
+    @Default(_defaultRightShortcut)
+        List<ShortcutDetail> rightSlideShortcut,
   }) = _GeneralSettings;
 }
 
@@ -153,6 +199,7 @@ class CustomButtonDetail with _$CustomButtonDetail {
     @HiveField(0) required bool enable,
     @HiveField(1) required String title,
     @HiveField(2) required String pattern,
+    @HiveField(3, defaultValue: "") required String id,
   }) = _CustomButtonDetail;
 }
 
@@ -170,4 +217,13 @@ class AlertConditionSet with _$AlertConditionSet {
 
   factory AlertConditionSet.fromJson(Map<String, dynamic> json) =>
       _$AlertConditionSetFromJson(json);
+}
+
+@freezed
+class ShortcutDetail with _$ShortcutDetail {
+  @HiveType(typeId: shortcutDetailTypeId)
+  const factory ShortcutDetail({
+    @HiveField(0) required ShortcutType type,
+    @HiveField(1) @Default("") String param,
+  }) = _ShortcutDetail;
 }

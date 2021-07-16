@@ -1,6 +1,7 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
@@ -30,7 +31,7 @@ class SearchButtons extends HookConsumerWidget {
         ElevatedButton(
           onPressed: () async {
             final url =
-                "https://www.amazon.co.jp/gp/offer-listing/${item.asin}/";
+                replaceUrl(template: customButtonAmazonListingsUrl, item: item);
             await ref
                 .read(analyticsControllerProvider)
                 .logPushSearchButtonEvent(pushSearchButtonAmazonListName);
