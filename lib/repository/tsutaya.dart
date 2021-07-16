@@ -12,8 +12,8 @@ String getTsutayaJanCode(String code) {
 }
 
 final tsutayaItemFutureProvider =
-    FutureProvider.autoDispose.family<SearchItem, String>((ref, code) async {
+    FutureProvider.family<SearchItem, String>((ref, code) async {
   final jan = getTsutayaJanCode(code);
-  ref.maintainState = true;
+  // ref.maintainState = true;
   return SearchItem(searchDate: currentTimeString(), jan: jan);
 });
