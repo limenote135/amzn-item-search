@@ -3,6 +3,7 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,9 +19,12 @@ class ItemTile extends HookConsumerWidget {
           loading: () => const ListTile(
             title: Center(child: CircularProgressIndicator()),
           ),
-          error: (error, stackTrace) => ListTile(
-            title: Text("$error"),
-          ),
+          error: (error, stackTrace) {
+            FirebaseCrashlytics.instance.recordError(error, stackTrace);
+            return ListTile(
+              title: Text("$error"),
+            );
+          },
           data: (value) {
             final newItem = item.copyWith(
               prices: value.prices,

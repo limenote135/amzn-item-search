@@ -2,6 +2,7 @@ import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/strong_container.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -21,9 +22,12 @@ class CartTile extends HookConsumerWidget {
               child: CircularProgressIndicator(),
             ),
           ),
-          error: (error, stackTrace) => ListTile(
-            title: Text("$error"),
-          ),
+          error: (error, stackTrace) {
+            FirebaseCrashlytics.instance.recordError(error, stackTrace);
+            return ListTile(
+              title: Text("$error"),
+            );
+          },
           data: (value) {
             if (value == null) {
               return const StrongContainer(
