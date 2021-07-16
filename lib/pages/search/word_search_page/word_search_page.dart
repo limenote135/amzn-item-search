@@ -2,6 +2,7 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -123,9 +124,12 @@ class _Body extends HookConsumerWidget {
             loading: () => SliverChildListDelegate(
               [const Center(child: CircularProgressIndicator())],
             ),
-            error: (error, stackTrace) => SliverChildListDelegate(
-              [Text("$error")],
-            ),
+            error: (error, stackTrace) {
+              FirebaseCrashlytics.instance.recordError(error, stackTrace);
+              return SliverChildListDelegate(
+                [Text("$error")],
+              );
+            },
             data: (items) {
               return SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
