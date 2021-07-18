@@ -143,11 +143,7 @@ class AiBarcodeScannerView:NSObject,FlutterPlatformView{
     }
     
     func stopCameraPreview(){
-        if(self.scanner.isScanning()){
-            self.scanner.stopScanning()
-            
-        }
-        
+        self.scanner.stopScanning()
     }
     func openFlash(){
         //        scanner?.setTorchMode(MTBTorchMode.on)
