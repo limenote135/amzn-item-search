@@ -32,9 +32,8 @@ class _Body extends HookConsumerWidget {
         .select((value) => value.keepaSettings));
     return ListView(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 8),
-          child: Text("デフォルト表示設定"),
+        ListTile(
+          title: Text("デフォルト表示設定", style: Theme.of(context).textTheme.caption),
         ),
         SwitchListTile(
           title: const Text("新品価格"),

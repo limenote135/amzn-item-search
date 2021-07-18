@@ -42,8 +42,13 @@ class _Body extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
     final auth = ref.watch(firebaseAuthProvider);
+
+    final captionStyle = Theme.of(context).textTheme.caption;
     return ListView(
       children: [
+        ListTile(
+          title: Text("全般", style: captionStyle),
+        ),
         SwitchListTile(
           title: const Text("ダークモード"),
           value: settings.isDarkMode,
@@ -68,6 +73,10 @@ class _Body extends HookConsumerWidget {
                 .setUserProp(majorCustomerPropName, value.toString());
           },
         ),
+        const ThemeDivider(),
+        ListTile(
+          title: Text("検索設定", style: captionStyle),
+        ),
         ListTile(
           title: const Text("目標利益率設定"),
           subtitle: settings.enableTargetProfit == false
@@ -77,25 +86,6 @@ class _Body extends HookConsumerWidget {
             Navigator.push(
               context,
               TargetProfitPage.route(),
-            );
-          },
-        ),
-        ListTile(
-          title: const Text("SKU フォーマット"),
-          subtitle: Text(settings.skuFormat),
-          onTap: () {
-            Navigator.push(
-              context,
-              SkuFormatPage.route(),
-            );
-          },
-        ),
-        ListTile(
-          title: const Text("仕入れ先設定"),
-          onTap: () {
-            Navigator.push(
-              context,
-              RetailersPage.route(),
             );
           },
         ),
@@ -121,15 +111,6 @@ class _Body extends HookConsumerWidget {
           },
         ),
         ListTile(
-          title: const Text("CSV設定"),
-          onTap: () {
-            Navigator.push(
-              context,
-              PurchaseListPage.route(),
-            );
-          },
-        ),
-        ListTile(
           title: const Text("アラート設定"),
           onTap: () {
             Navigator.push(
@@ -151,7 +132,7 @@ class _Body extends HookConsumerWidget {
           },
         ),
         SwitchListTile(
-          title: const Text("出品一覧で在庫を取得(β)"),
+          title: const Text("出品一覧で在庫数を取得(β)"),
           subtitle: const Text("出品一覧画面が重くなります。"),
           value: settings.getStocks,
           onChanged: (value) {
@@ -164,6 +145,41 @@ class _Body extends HookConsumerWidget {
           },
         ),
         const ThemeDivider(),
+        ListTile(
+          title: Text("仕入れ設定", style: captionStyle),
+        ),
+        ListTile(
+          title: const Text("SKU フォーマット"),
+          subtitle: Text(settings.skuFormat),
+          onTap: () {
+            Navigator.push(
+              context,
+              SkuFormatPage.route(),
+            );
+          },
+        ),
+        ListTile(
+          title: const Text("仕入れ先設定"),
+          onTap: () {
+            Navigator.push(
+              context,
+              RetailersPage.route(),
+            );
+          },
+        ),
+        ListTile(
+          title: const Text("CSV設定"),
+          onTap: () {
+            Navigator.push(
+              context,
+              PurchaseListPage.route(),
+            );
+          },
+        ),
+        const ThemeDivider(),
+        ListTile(
+          title: Text("その他", style: captionStyle),
+        ),
         ListTile(
           title: const Text("ログアウト"),
           onTap: () async {
