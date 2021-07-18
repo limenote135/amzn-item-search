@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -36,14 +40,30 @@ class GeoRepository {
         : value;
 
     final url = "$_baseURL$code";
-    final dio = await _read(dioProvider.future);
-    final result = await dio.get<String>(url);
+    try {
+      final dio = await _read(dioProvider.future);
+      final result = await dio.get<String>(url);
 
-    final body = result.data.toString();
-    if (body == _noItemText) {
-      return GeoResponse(code: code);
+      final body = result.data.toString();
+      if (body == _noItemText) {
+        return GeoResponse(code: code);
+      }
+      return GeoResponse(code: code, jan: body);
+    } on DioError catch (e, stack) {
+      if (e.error is SocketException) {
+        throw Exception("通信環境の良いところで再度お試しください");
+      }
+      final code = e.response!.statusCode!;
+      if (code >= 500) {
+        // サーバーサイドエラー
+        await FirebaseCrashlytics.instance.recordError(e, stack);
+        throw Exception("サーバーエラー($code)");
+      }
+      rethrow;
+    } on SocketException catch (e, stack) {
+      await FirebaseCrashlytics.instance.recordError(e, stack);
+      throw Exception("通信環境の良いところで再度お試しください");
     }
-    return GeoResponse(code: code, jan: body);
   }
 }
 
