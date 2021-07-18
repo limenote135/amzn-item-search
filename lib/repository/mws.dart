@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io' show Platform;
+import 'dart:io' show Platform, SocketException;
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
@@ -22,7 +22,7 @@ import 'package:vibration/vibration.dart';
 part 'mws.freezed.dart';
 part 'mws.g.dart';
 
-const _kTestingServer = false;
+const _kTestingServer = true;
 
 final mwsRepositoryProvider =
     Provider((ref) => MwsRepository(ref.read, ref.container));
@@ -172,6 +172,9 @@ class MwsRepository {
       );
       return json.decode(resp.data!) as Map<String, dynamic>;
     } on DioError catch (e, stack) {
+      if (e.error is SocketException) {
+        throw Exception("通信環境の良いところで再度お試しください");
+      }
       if (e.response == null || e.response!.statusCode == null) {
         rethrow;
       }
@@ -184,7 +187,6 @@ class MwsRepository {
 
       switch (code) {
         case 412:
-
           // TODO:  await を外したが、これで問題ないか要確認
           _container.refresh(updateProvider);
           throw Exception("アプリケーションを更新してください");
@@ -192,6 +194,9 @@ class MwsRepository {
           throw Exception("ログインされていません");
       }
       rethrow;
+    } on SocketException catch (e, stack) {
+      await FirebaseCrashlytics.instance.recordError(e, stack);
+      throw Exception("通信環境の良いところで再度お試しください");
     }
   }
 }
