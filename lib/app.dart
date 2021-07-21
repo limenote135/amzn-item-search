@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/home_page.dart';
@@ -32,8 +34,16 @@ class MyApp extends HookConsumerWidget {
         Locale("ja", "JP"),
       ],
       builder: (context, child) {
-        return _Unfocus(
-          child: FlutterEasyLoading(child: child),
+        // 2Column でそれぞれ fontSize 15 で10文字入る程度の文字サイズにする
+        // (15 * 10文字 + 左右余白 8 * 2 + 予備4) * 2Column < width
+        final media = MediaQuery.of(context);
+        final maxScale = (media.size.width - 40) / 300;
+        final scale = min(media.textScaleFactor, maxScale);
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
+          child: _Unfocus(
+            child: FlutterEasyLoading(child: child),
+          ),
         );
       },
       title: 'アマサーチ',
