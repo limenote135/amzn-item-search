@@ -1471,6 +1471,10 @@ abstract class _AlertConditionSet implements AlertConditionSet {
       throw _privateConstructorUsedError;
 }
 
+ShortcutDetail _$ShortcutDetailFromJson(Map<String, dynamic> json) {
+  return _ShortcutDetail.fromJson(json);
+}
+
 /// @nodoc
 class _$ShortcutDetailTearOff {
   const _$ShortcutDetailTearOff();
@@ -1482,6 +1486,10 @@ class _$ShortcutDetailTearOff {
       type: type,
       param: param,
     );
+  }
+
+  ShortcutDetail fromJson(Map<String, Object> json) {
+    return ShortcutDetail.fromJson(json);
   }
 }
 
@@ -1495,6 +1503,7 @@ mixin _$ShortcutDetail {
   @HiveField(1)
   String get param => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ShortcutDetailCopyWith<ShortcutDetail> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1575,11 +1584,14 @@ class __$ShortcutDetailCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 @HiveType(typeId: shortcutDetailTypeId)
 class _$_ShortcutDetail implements _ShortcutDetail {
   const _$_ShortcutDetail(
       {@HiveField(0) required this.type, @HiveField(1) this.param = ""});
+
+  factory _$_ShortcutDetail.fromJson(Map<String, dynamic> json) =>
+      _$_$_ShortcutDetailFromJson(json);
 
   @override
   @HiveField(0)
@@ -1614,12 +1626,20 @@ class _$_ShortcutDetail implements _ShortcutDetail {
   @override
   _$ShortcutDetailCopyWith<_ShortcutDetail> get copyWith =>
       __$ShortcutDetailCopyWithImpl<_ShortcutDetail>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ShortcutDetailToJson(this);
+  }
 }
 
 abstract class _ShortcutDetail implements ShortcutDetail {
   const factory _ShortcutDetail(
       {@HiveField(0) required ShortcutType type,
       @HiveField(1) String param}) = _$_ShortcutDetail;
+
+  factory _ShortcutDetail.fromJson(Map<String, dynamic> json) =
+      _$_ShortcutDetail.fromJson;
 
   @override
   @HiveField(0)
