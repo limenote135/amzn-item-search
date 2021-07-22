@@ -367,3 +367,50 @@ Map<String, dynamic> _$_$_AlertConditionSetToJson(
       't': instance.title,
       'c': instance.conditions,
     };
+
+_$_ShortcutDetail _$_$_ShortcutDetailFromJson(Map<String, dynamic> json) {
+  return _$_ShortcutDetail(
+    type: _$enumDecode(_$ShortcutTypeEnumMap, json['type']),
+    param: json['param'] as String? ?? '',
+  );
+}
+
+Map<String, dynamic> _$_$_ShortcutDetailToJson(_$_ShortcutDetail instance) =>
+    <String, dynamic>{
+      'type': _$ShortcutTypeEnumMap[instance.type],
+      'param': instance.param,
+    };
+
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
+}) {
+  if (source == null) {
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
+  }
+
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
+}
+
+const _$ShortcutTypeEnumMap = {
+  ShortcutType.none: 'none',
+  ShortcutType.purchase: 'purchase',
+  ShortcutType.delete: 'delete',
+  ShortcutType.web: 'web',
+  ShortcutType.navigation: 'navigation',
+};
