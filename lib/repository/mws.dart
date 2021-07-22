@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io' show Platform;
+import 'dart:io';
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
@@ -16,13 +16,12 @@ import 'package:dio/dio.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:package_info/package_info.dart';
 import 'package:vibration/vibration.dart';
+
+import 'common.dart';
 
 part 'mws.freezed.dart';
 part 'mws.g.dart';
-
-const _kTestingServer = false;
 
 final mwsRepositoryProvider =
     Provider((ref) => MwsRepository(ref.read, ref.container));
@@ -102,10 +101,6 @@ class MwsRepository {
 
   static const _mwsMarketPlaceId = "A1VC38T7YXB528";
 
-  static const _url = !_kTestingServer
-      ? "https://amasearch-stg.an.r.appspot.com"
-      : "http://192.168.2.201:8080";
-
   final Reader _read;
   final ProviderContainer _container;
 
@@ -117,7 +112,7 @@ class MwsRepository {
       "marketplace": _mwsMarketPlaceId,
     };
 
-    final resp = await _doRequest("$_url/v1beta1/mws/product",
+    final resp = await _doRequest("$serverUrl/v1beta1/mws/product",
         data: json.encode(params));
     return GetProductByIdResponse.fromJson(resp);
   }
@@ -126,8 +121,8 @@ class MwsRepository {
     final params = <String, String>{
       "code": code,
     };
-    final resp =
-        await _doRequest("$_url/v1beta1/mws/prices", data: json.encode(params));
+    final resp = await _doRequest("$serverUrl/v1beta1/mws/prices",
+        data: json.encode(params));
     return GetProductPricesResponse.fromJson(resp);
   }
 
@@ -141,8 +136,8 @@ class MwsRepository {
       "marketplace": _mwsMarketPlaceId,
     };
 
-    final resp =
-        await _doRequest("$_url/v1beta1/mws/search", data: json.encode(params));
+    final resp = await _doRequest("$serverUrl/v1beta1/mws/search",
+        data: json.encode(params));
 
     return ListMatchingProductResponse.fromJson(resp);
   }
@@ -151,27 +146,19 @@ class MwsRepository {
     final dio = await _read(dioProvider.future);
 
     final user = await _read(authStateChangesProvider.last);
-    final token = await user!.getIdToken();
-
-    final info = await PackageInfo.fromPlatform();
-
-    final appVer = "Amasearch/${info.version}";
-    final osVer =
-        "${Platform.operatingSystem}/${Platform.operatingSystemVersion}";
+    final header = await commonHeader(user!);
 
     try {
       final resp = await dio.post<String>(
         url,
         data: data,
-        options: Options(
-          headers: <String, dynamic>{
-            "User-Agent": "$appVer $osVer",
-            "Authorization": "Bearer $token",
-          },
-        ),
+        options: Options(headers: header),
       );
       return json.decode(resp.data!) as Map<String, dynamic>;
     } on DioError catch (e, stack) {
+      if (e.error is SocketException) {
+        throw Exception("通信環境の良いところで再度お試しください");
+      }
       if (e.response == null || e.response!.statusCode == null) {
         rethrow;
       }
@@ -184,7 +171,6 @@ class MwsRepository {
 
       switch (code) {
         case 412:
-
           // TODO:  await を外したが、これで問題ないか要確認
           _container.refresh(updateProvider);
           throw Exception("アプリケーションを更新してください");
@@ -192,6 +178,9 @@ class MwsRepository {
           throw Exception("ログインされていません");
       }
       rethrow;
+    } on SocketException catch (e, stack) {
+      await FirebaseCrashlytics.instance.recordError(e, stack);
+      throw Exception("通信環境の良いところで再度お試しください");
     }
   }
 }
