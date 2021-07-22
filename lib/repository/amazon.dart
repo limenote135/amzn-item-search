@@ -6,6 +6,7 @@ import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:html/dom.dart';
@@ -117,8 +118,20 @@ class AmazonRepository {
       final offers = await compute(_parseOfferListings, parseParam);
 
       return offers;
-    } on DioError catch (e) {
-      throw Exception("エラー${e.type}");
+    } on DioError catch (e, stack) {
+      if (e.error is SocketException) {
+        throw Exception("通信環境の良いところで再度お試しください");
+      }
+      final code = e.response!.statusCode!;
+      if (code >= 500) {
+        // サーバーサイドエラー
+        await FirebaseCrashlytics.instance.recordError(e, stack);
+        throw Exception("サーバーエラー($code)");
+      }
+      rethrow;
+    } on SocketException catch (e, stack) {
+      await FirebaseCrashlytics.instance.recordError(e, stack);
+      throw Exception("通信環境の良いところで再度お試しください");
     }
   }
 

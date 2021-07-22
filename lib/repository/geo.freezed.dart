@@ -12,6 +12,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+GeoResponse _$GeoResponseFromJson(Map<String, dynamic> json) {
+  return _GeoResponse.fromJson(json);
+}
+
 /// @nodoc
 class _$GeoResponseTearOff {
   const _$GeoResponseTearOff();
@@ -21,6 +25,10 @@ class _$GeoResponseTearOff {
       code: code,
       jan: jan,
     );
+  }
+
+  GeoResponse fromJson(Map<String, Object> json) {
+    return GeoResponse.fromJson(json);
   }
 }
 
@@ -32,6 +40,7 @@ mixin _$GeoResponse {
   String get code => throw _privateConstructorUsedError;
   String get jan => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $GeoResponseCopyWith<GeoResponse> get copyWith =>
       throw _privateConstructorUsedError;
@@ -110,9 +119,12 @@ class __$GeoResponseCopyWithImpl<$Res> extends _$GeoResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_GeoResponse implements _GeoResponse {
   const _$_GeoResponse({required this.code, this.jan = ""});
+
+  factory _$_GeoResponse.fromJson(Map<String, dynamic> json) =>
+      _$_$_GeoResponseFromJson(json);
 
   @override
   final String code;
@@ -145,11 +157,19 @@ class _$_GeoResponse implements _GeoResponse {
   @override
   _$GeoResponseCopyWith<_GeoResponse> get copyWith =>
       __$GeoResponseCopyWithImpl<_GeoResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_GeoResponseToJson(this);
+  }
 }
 
 abstract class _GeoResponse implements GeoResponse {
   const factory _GeoResponse({required String code, String jan}) =
       _$_GeoResponse;
+
+  factory _GeoResponse.fromJson(Map<String, dynamic> json) =
+      _$_GeoResponse.fromJson;
 
   @override
   String get code => throw _privateConstructorUsedError;

@@ -1,12 +1,19 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-part 'geo.freezed.dart';
+import 'common.dart';
 
-const _noItemText = "NG";
+part 'geo.freezed.dart';
+part 'geo.g.dart';
 
 final _geoProvider = Provider((ref) => GeoRepository(ref.read));
 
@@ -28,22 +35,52 @@ class GeoRepository {
   GeoRepository(this._read);
 
   final Reader _read;
-  static const _baseURL = "https://bo.sedolist.info/sedoroid/geo/?CODE=";
 
   Future<GeoResponse> get(String value) async {
+    if (value.length == janCodeLength &&
+        (value.startsWith("45") || value.startsWith("49"))) {
+      // JAN コードと思われる場合には見つからなかった扱いにする
+      return GeoResponse(code: value);
+    }
     final code = value.length > _geoCodeLength
         ? value.substring(1, 1 + _geoCodeLength)
         : value;
 
-    final url = "$_baseURL$code";
+    const url = "$serverUrl/v1beta1/geo/code";
     final dio = await _read(dioProvider.future);
-    final result = await dio.get<String>(url);
 
-    final body = result.data.toString();
-    if (body == _noItemText) {
-      return GeoResponse(code: code);
+    final user = await _read(authStateChangesProvider.last);
+
+    final header = await commonHeader(user!);
+
+    final param = <String, String>{
+      "code": code,
+    };
+    try {
+      final resp = await dio.post<String>(
+        url,
+        data: param,
+        options: Options(headers: header),
+      );
+
+      final data = json.decode(resp.data!) as Map<String, dynamic>;
+
+      return GeoResponse.fromJson(data);
+    } on DioError catch (e, stack) {
+      if (e.error is SocketException) {
+        throw Exception("通信環境の良いところで再度お試しください");
+      }
+      final code = e.response!.statusCode!;
+      if (code >= 500) {
+        // サーバーサイドエラー
+        await FirebaseCrashlytics.instance.recordError(e, stack);
+        throw Exception("サーバーエラー($code)");
+      }
+      rethrow;
+    } on SocketException catch (e, stack) {
+      await FirebaseCrashlytics.instance.recordError(e, stack);
+      throw Exception("通信環境の良いところで再度お試しください");
     }
-    return GeoResponse(code: code, jan: body);
   }
 }
 
@@ -53,4 +90,7 @@ class GeoResponse with _$GeoResponse {
     required String code,
     @Default("") String jan,
   }) = _GeoResponse;
+
+  factory GeoResponse.fromJson(Map<String, dynamic> json) =>
+      _$GeoResponseFromJson(json);
 }
