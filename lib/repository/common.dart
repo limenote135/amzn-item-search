@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:package_info/package_info.dart';
 
+const janCodeLength = 13;
+
 const _kTestingServer = false;
 
 const serverUrl = !_kTestingServer
