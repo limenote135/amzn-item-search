@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/repository/common.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:dio/dio.dart';
@@ -36,6 +37,11 @@ class BookoffRepository {
   static const _baseURL = "http://www.bookoffonline.co.jp/bolapi/api/goods/";
 
   Future<List<BookoffResponse>> get(String value) async {
+    if (value.length == janCodeLength &&
+        (value.startsWith("45") || value.startsWith("49"))) {
+      // JAN コードと思われる場合は API コールしない
+      return Future.value([]);
+    }
     final code = value.length > _bookoffCodeLength
         ? value.substring(0, _bookoffCodeLength)
         : value;

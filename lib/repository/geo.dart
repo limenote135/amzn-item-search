@@ -37,6 +37,11 @@ class GeoRepository {
   final Reader _read;
 
   Future<GeoResponse> get(String value) async {
+    if (value.length == janCodeLength &&
+        (value.startsWith("45") || value.startsWith("49"))) {
+      // JAN コードと思われる場合には見つからなかった扱いにする
+      return GeoResponse(code: value);
+    }
     final code = value.length > _geoCodeLength
         ? value.substring(1, 1 + _geoCodeLength)
         : value;
