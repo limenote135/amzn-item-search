@@ -8,3 +8,5 @@ const enableAlertPropName = "enableAlert";
 const alertSettingsPropName = "alert";
 const enableAlertVibrationPropName = "enableAlertVibration";
 const majorCustomerPropName = "majorCustomer";
+const leftShortcutSettingsPropName = "leftShortcut";
+const rightShortcutSettingsPropName = "rightShortcut";

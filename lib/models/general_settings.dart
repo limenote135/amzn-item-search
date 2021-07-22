@@ -226,4 +226,7 @@ class ShortcutDetail with _$ShortcutDetail {
     @HiveField(0) required ShortcutType type,
     @HiveField(1) @Default("") String param,
   }) = _ShortcutDetail;
+
+  factory ShortcutDetail.fromJson(Map<String, dynamic> json) =>
+      _$ShortcutDetailFromJson(json);
 }

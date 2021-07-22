@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/general_settings.dart';
@@ -74,6 +78,10 @@ class _Body extends HookConsumerWidget {
               ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(leftShortcut: updated);
+              final js = jsonEncode(updated);
+              await ref
+                  .read(analyticsControllerProvider)
+                  .setUserProp(leftShortcutSettingsPropName, js);
             }
           },
         ),
@@ -99,6 +107,10 @@ class _Body extends HookConsumerWidget {
               ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(rightShortcut: updated);
+              final js = jsonEncode(updated);
+              await ref
+                  .read(analyticsControllerProvider)
+                  .setUserProp(rightShortcutSettingsPropName, js);
             }
           },
         ),
