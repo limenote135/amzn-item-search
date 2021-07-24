@@ -228,7 +228,6 @@ class StocksPage extends HookConsumerWidget {
     // TODO: 正式リリース時にはハッシュタグ付きでシェアする
     // await Share.shareFiles([path], subject: "仕入実績", text: "#amzn-item-search");
     await Share.shareFiles([path], subject: "仕入実績");
-    await applicationDocumentsFile.delete();
   }
 }
 
