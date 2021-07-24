@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
@@ -13,7 +12,6 @@ import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vibration/vibration.dart';
@@ -148,40 +146,22 @@ class MwsRepository {
     final user = await _read(authStateChangesProvider.last);
     final header = await commonHeader(user!);
 
-    try {
-      final resp = await dio.post<String>(
-        url,
-        data: data,
-        options: Options(headers: header),
-      );
-      return json.decode(resp.data!) as Map<String, dynamic>;
-    } on DioError catch (e, stack) {
-      if (e.error is SocketException) {
-        throw Exception("通信環境の良いところで再度お試しください");
-      }
-      if (e.response == null || e.response!.statusCode == null) {
-        rethrow;
-      }
-      final code = e.response!.statusCode!;
-      if (code >= 500) {
-        // サーバーサイドエラー
-        await FirebaseCrashlytics.instance.recordError(e, stack);
-        throw Exception("サーバーエラー($code)");
-      }
-
-      switch (code) {
-        case 412:
-          // TODO:  await を外したが、これで問題ないか要確認
-          _container.refresh(updateProvider);
-          throw Exception("アプリケーションを更新してください");
-        case 401:
-          throw Exception("ログインされていません");
-      }
-      rethrow;
-    } on SocketException catch (e, stack) {
-      await FirebaseCrashlytics.instance.recordError(e, stack);
-      throw Exception("通信環境の良いところで再度お試しください");
-    }
+    final resp = await dio.post(
+      url,
+      data: data,
+      opt: Options(headers: header),
+      customHandler: (code) {
+        switch (code) {
+          case 412:
+            // TODO:  await を外したが、これで問題ないか要確認
+            _container.refresh(updateProvider);
+            throw Exception("アプリケーションを更新してください");
+          case 401:
+            throw Exception("ログインされていません");
+        }
+      },
+    );
+    return json.decode(resp.data!) as Map<String, dynamic>;
   }
 }
 

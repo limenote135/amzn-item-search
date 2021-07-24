@@ -6,7 +6,6 @@ import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:html/dom.dart';
@@ -68,12 +67,10 @@ class AmazonRepository {
     }
     final url = "$_productUrl$asin";
 
-    await dio.get<String>(
-      url,
-      options: Options(headers: <String, String>{
-        HttpHeaders.userAgentHeader: _userAgent,
-      }),
-    );
+    final opt = Options(headers: <String, String>{
+      HttpHeaders.userAgentHeader: _userAgent,
+    });
+    await dio.get(url, opt: opt);
   }
 
   Future<OfferListings> getOffers(
@@ -95,44 +92,26 @@ class AmazonRepository {
     };
     final dio = await _read(dioProvider.future);
     await _ensureCookie(params.asin);
-    try {
-      final resp = await dio.get<String>(
-        _offerUrlBase,
-        queryParameters: query,
-        options: Options(headers: <String, String>{
-          HttpHeaders.userAgentHeader: _userAgent,
-        }),
-        cancelToken: cancelToken,
-      );
-      if (resp.statusCode != 200) {
-        throw Exception("エラー${resp.statusCode}");
-      }
-      if (resp.data == "") {
-        throw Exception("エラー");
-      }
-      final parseParam = _ParseOfferListingsParam(
-        asin: params.asin,
-        page: params.page,
-        body: resp.data!,
-      );
-      final offers = await compute(_parseOfferListings, parseParam);
 
-      return offers;
-    } on DioError catch (e, stack) {
-      if (e.error is SocketException) {
-        throw Exception("通信環境の良いところで再度お試しください");
-      }
-      final code = e.response!.statusCode!;
-      if (code >= 500) {
-        // サーバーサイドエラー
-        await FirebaseCrashlytics.instance.recordError(e, stack);
-        throw Exception("サーバーエラー($code)");
-      }
-      rethrow;
-    } on SocketException catch (e, stack) {
-      await FirebaseCrashlytics.instance.recordError(e, stack);
-      throw Exception("通信環境の良いところで再度お試しください");
+    final opt = Options(headers: <String, String>{
+      HttpHeaders.userAgentHeader: _userAgent,
+    });
+    final resp = await dio.get(_offerUrlBase,
+        query: query, opt: opt, cancelToken: cancelToken);
+    if (resp.statusCode != 200) {
+      throw Exception("エラー${resp.statusCode}");
     }
+    if (resp.data == "") {
+      throw Exception("エラー");
+    }
+    final parseParam = _ParseOfferListingsParam(
+      asin: params.asin,
+      page: params.page,
+      body: resp.data!,
+    );
+    final offers = await compute(_parseOfferListings, parseParam);
+
+    return offers;
   }
 
   static OfferListings _parseOfferListings(_ParseOfferListingsParam param) {
@@ -263,28 +242,22 @@ class AmazonRepository {
       "marketplaceID": _marketPlaceJp,
     };
 
-    try {
-      final resp = await dio.get<String>(
-        url,
-        queryParameters: query,
-        options: Options(headers: <String, String>{
-          HttpHeaders.userAgentHeader: _userAgent,
-        }),
-        cancelToken: cancelToken,
-      );
-      if (resp.statusCode != 200) {
-        throw Exception("エラー${resp.statusCode}");
-      }
-      if (resp.data == "") {
-        throw Exception("エラー");
-      }
-      final stocks = await compute(_parseStock, resp.data);
-      // final stocks = _parseStock(resp.data);
+    final opt = Options(headers: <String, String>{
+      HttpHeaders.userAgentHeader: _userAgent,
+    });
+    final resp =
+        await dio.get(url, query: query, opt: opt, cancelToken: cancelToken);
 
-      return stocks;
-    } on DioError catch (e) {
-      throw Exception("エラー${e.type}");
+    if (resp.statusCode != 200) {
+      throw Exception("エラー${resp.statusCode}");
     }
+    if (resp.data == "") {
+      throw Exception("エラー");
+    }
+    final stocks = await compute(_parseStock, resp.data);
+    // final stocks = _parseStock(resp.data);
+
+    return stocks;
   }
 
   static int _parseStock(String? body) {
