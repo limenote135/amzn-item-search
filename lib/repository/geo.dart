@@ -44,7 +44,8 @@ class GeoRepository {
         ? value.substring(1, 1 + _geoCodeLength)
         : value;
 
-    const url = "$serverUrl/v1beta1/geo/code";
+    final serverUrl = await _read(serverUrlProvider.future);
+    final url = "$serverUrl/v1beta1/geo/code";
     final dio = await _read(dioProvider.future);
 
     final user = await _read(authStateChangesProvider.last);
