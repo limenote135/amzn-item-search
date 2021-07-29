@@ -23,6 +23,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -79,6 +80,12 @@ Future<void> initFirebase() async {
           .setPerformanceCollectionEnabled(_kTestingPerformance),
     ]);
   }
+
+  await RemoteConfig.instance.setConfigSettings(
+    RemoteConfigSettings(
+        fetchTimeout: const Duration(seconds: 15),
+        minimumFetchInterval: const Duration(minutes: 15)),
+  );
 
   // Pass all uncaught errors to Crashlytics.
   final Function? originalOnError = FlutterError.onError;
