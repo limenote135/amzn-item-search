@@ -29,11 +29,6 @@ class VersionChecker {
         configName: "0.10.0",
       };
       await remoteConfig.setDefaults(defaultValues);
-      await remoteConfig.setConfigSettings(
-        RemoteConfigSettings(
-            fetchTimeout: const Duration(seconds: 15),
-            minimumFetchInterval: const Duration(minutes: 15)),
-      );
       await remoteConfig.fetchAndActivate();
       final minVersion = remoteConfig.getString(configName);
       final requiredVersion = Version.parse(minVersion);
