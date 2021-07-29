@@ -1,41 +1,24 @@
-import 'dart:io';
-
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:package_info/package_info.dart';
 import 'package:pub_semver/pub_semver.dart';
 
 class VersionChecker {
-  static const String _androidConfigName = "android_min_app_version";
-  static const String _iosConfigName = "ios_min_app_version";
-
-  static String _getConfigName() {
-    if (Platform.isAndroid) {
-      return _androidConfigName;
-    } else {
-      return _iosConfigName;
-    }
-  }
+  static const String _configName = "min_app_version";
 
   Future<bool> needUpdate() async {
     final info = await PackageInfo.fromPlatform();
     final currentVersion = Version.parse(info.version);
 
     final remoteConfig = RemoteConfig.instance;
-    final configName = _getConfigName();
 
     try {
       final defaultValues = <String, dynamic>{
-        configName: "0.10.0",
+        _configName: "0.10.0",
       };
       await remoteConfig.setDefaults(defaultValues);
-      await remoteConfig.setConfigSettings(
-        RemoteConfigSettings(
-            fetchTimeout: const Duration(seconds: 15),
-            minimumFetchInterval: const Duration(minutes: 15)),
-      );
       await remoteConfig.fetchAndActivate();
-      final minVersion = remoteConfig.getString(configName);
+      final minVersion = remoteConfig.getString(_configName);
       final requiredVersion = Version.parse(minVersion);
 
       return currentVersion.compareTo(requiredVersion).isNegative;

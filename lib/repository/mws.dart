@@ -110,6 +110,7 @@ class MwsRepository {
       "marketplace": _mwsMarketPlaceId,
     };
 
+    final serverUrl = await _read(serverUrlProvider.future);
     final resp = await _doRequest("$serverUrl/v1beta1/mws/product",
         data: json.encode(params));
     return GetProductByIdResponse.fromJson(resp);
@@ -119,6 +120,8 @@ class MwsRepository {
     final params = <String, String>{
       "code": code,
     };
+
+    final serverUrl = await _read(serverUrlProvider.future);
     final resp = await _doRequest("$serverUrl/v1beta1/mws/prices",
         data: json.encode(params));
     return GetProductPricesResponse.fromJson(resp);
@@ -134,6 +137,7 @@ class MwsRepository {
       "marketplace": _mwsMarketPlaceId,
     };
 
+    final serverUrl = await _read(serverUrlProvider.future);
     final resp = await _doRequest("$serverUrl/v1beta1/mws/search",
         data: json.encode(params));
 
