@@ -35,6 +35,21 @@ extension UsedSubConditionExtention on UsedSubCondition {
     }
   }
 
+  String toDisplayShortString() {
+    switch (this) {
+      case UsedSubCondition.mint:
+        return "ほぼ新";
+      case UsedSubCondition.veryGood:
+        return "非良";
+      case UsedSubCondition.good:
+        return "良い";
+      case UsedSubCondition.acceptable:
+        return "可";
+      case UsedSubCondition.all:
+        return "すべて";
+    }
+  }
+
   ItemSubCondition toItemSubCondition() {
     switch (this) {
       case UsedSubCondition.mint:

@@ -10,19 +10,42 @@ class SearchSetting extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final setting = ref.watch(searchSettingsControllerProvider);
-    var condText = setting.usedSubCondition.toDisplayString();
+    var condText = setting.usedSubCondition.toDisplayShortString();
     if (setting.usedSubCondition != UsedSubCondition.all) {
       condText += "以上";
     }
+    final textSize = Theme.of(context).textTheme.bodyText2;
     return ListTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Center(child: Text("検索設定")),
-          Text("タイプ: ${setting.type.toDisplayString()}"),
-          Text("中古コンディション: $condText"),
-          Text("FBA利用: ${setting.useFba ? "する" : "しない"}"),
-          Text("FBA優先表示: ${setting.priorFba ? "する" : "しない"}"),
+          Center(
+              child: Text(
+            "検索設定",
+            style: textSize,
+          )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("タイプ: ${setting.type.toDisplayString()}",
+                      style: textSize),
+                  Text("中古表示: $condText", style: textSize),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("FBA利用: ${setting.useFba ? "する" : "しない"}",
+                      style: textSize),
+                  Text("FBA優先表示: ${setting.priorFba ? "する" : "しない"}",
+                      style: textSize),
+                ],
+              )
+            ],
+          ),
         ],
       ),
     );
