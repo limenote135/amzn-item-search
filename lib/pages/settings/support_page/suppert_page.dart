@@ -48,7 +48,7 @@ class _Body extends ConsumerWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: TextFormField(
               key: emailKey,
               initialValue: mail,
@@ -60,7 +60,7 @@ class _Body extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: TextFormField(
               key: contentKey,
               minLines: 4,
