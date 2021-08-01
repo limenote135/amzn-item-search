@@ -6,3 +6,4 @@ final cloudFunctionProvider = Provider.family<HttpsCallable, String>(
         .httpsCallable(name));
 
 const functionNameDisableUser = "disable-user";
+const functionNameSendSupport = "send-support";

@@ -19,3 +19,10 @@ String? passwordValidator(String? value) {
   }
   return null;
 }
+
+String? notEmptyValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return "入力してください";
+  }
+  return null;
+}

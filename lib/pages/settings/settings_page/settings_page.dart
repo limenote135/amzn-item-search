@@ -10,6 +10,7 @@ import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_pag
 import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
 import 'package:amasearch/pages/settings/shortcut_page/shortcut_page.dart';
 import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
+import 'package:amasearch/pages/settings/support_page/suppert_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
@@ -193,6 +194,12 @@ class _Body extends HookConsumerWidget {
               await auth.signOut();
               await GoogleSignIn().signOut();
             }
+          },
+        ),
+        ListTile(
+          title: const Text("問い合わせ"),
+          onTap: () {
+            Navigator.push(context, SupportPage.route());
           },
         ),
         ListTile(
