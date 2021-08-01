@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
@@ -55,6 +57,10 @@ class _PriceAndProfit extends HookConsumerWidget {
     );
     final smallSize = smallFontSize(context);
 
+    final query = MediaQuery.of(context);
+    final width = (query.size.width - 75) / 2 / query.textScaleFactor;
+    // 4ケタ円商品+4桁円送料が入らない場合は送料は改行して表示する
+    final needNewLine = Platform.isIOS ? width < 160 : width < 140;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -64,7 +70,9 @@ class _PriceAndProfit extends HookConsumerWidget {
               text: numberFormatter.format(detail.price),
               style: strongTextStyle,
             ),
-            const TextSpan(text: " 円(送 "),
+            const TextSpan(text: " 円"),
+            if (needNewLine) const TextSpan(text: "\n"),
+            const TextSpan(text: "(送 "),
             TextSpan(
               text: numberFormatter.format(detail.shipping),
               style: strongTextStyle,
