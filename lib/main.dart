@@ -19,6 +19,7 @@ import 'package:amasearch/models/keepa_settings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/search_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -46,6 +47,7 @@ Future<void> main() async {
     await Future.wait([
       initStartupOption(),
       initHive(),
+      clearDiskCachedImages(duration: const Duration(days: 6)),
     ]);
     // ignore: avoid_catches_without_on_clauses
   } catch (e, stacktrace) {
