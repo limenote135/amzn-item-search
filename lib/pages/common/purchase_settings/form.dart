@@ -80,7 +80,7 @@ class PurchaseSettingsForm extends StatelessWidget {
               children: [
                 const Expanded(child: Text("個数")),
                 Flexible(
-                  child: ReactiveTouchSpin(
+                  child: ReactiveTouchSpin<dynamic>(
                     formControlName: quantityField,
                     textStyle: const TextStyle(fontSize: 18),
                     min: 1,
