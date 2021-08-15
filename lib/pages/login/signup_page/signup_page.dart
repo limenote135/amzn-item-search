@@ -67,7 +67,11 @@ class SignupPage extends HookConsumerWidget {
               msg = "操作が許可されていません";
               break;
             default:
-              await FirebaseCrashlytics.instance.recordError(e, stack);
+              await FirebaseCrashlytics.instance
+                  .recordError(e, stack, information: [
+                DiagnosticsNode.message("createUserWithEmailAndPassword error"),
+                DiagnosticsNode.message("Code: ${e.code}"),
+              ]);
               msg = e.code;
               break;
           }
@@ -80,7 +84,9 @@ class SignupPage extends HookConsumerWidget {
             message: msg,
           );
         } finally {
-          await EasyLoading.dismiss();
+          if (EasyLoading.isShow) {
+            await EasyLoading.dismiss();
+          }
         }
       }
       pwController.clear();
