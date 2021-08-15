@@ -50,7 +50,12 @@ class _Body extends HookConsumerWidget {
     return ref.watch(offerTotalCountProvider(param)).when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stackTrace) {
-            FirebaseCrashlytics.instance.recordError(error, stackTrace);
+            FirebaseCrashlytics.instance
+                .recordError(error, stackTrace, information: [
+              DiagnosticsNode.message(
+                  "OfferListingsPage._Body.offerTotalCountProvider"),
+              DiagnosticsNode.message("Param: ${param.toString()}"),
+            ]);
             return Text("$error");
           },
           data: (value) {

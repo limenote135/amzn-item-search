@@ -18,7 +18,12 @@ class ItemTile extends HookConsumerWidget {
             title: Center(child: CircularProgressIndicator()),
           ),
           error: (error, stackTrace) {
-            FirebaseCrashlytics.instance.recordError(error, stackTrace);
+            FirebaseCrashlytics.instance
+                .recordError(error, stackTrace, information: [
+              DiagnosticsNode.message(
+                  "ItemSelectPage.ItemTile.itemPricesFutureProvider"),
+              DiagnosticsNode.message("ASIN: ${item.asin}"),
+            ]);
             return ListTile(
               title: Text("$error"),
             );

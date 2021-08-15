@@ -24,7 +24,11 @@ class StockText extends HookConsumerWidget {
     return ref.watch(offerStocksFutureProvider(param)).when(
           loading: () => Text("在庫: loading", style: smallSize),
           error: (error, stackTrace) {
-            FirebaseCrashlytics.instance.recordError(error, stackTrace);
+            FirebaseCrashlytics.instance
+                .recordError(error, stackTrace, information: [
+              DiagnosticsNode.message("StockText.offerStocksFutureProvider"),
+              DiagnosticsNode.message("ASIN: $asin, SellerID: $sellerId"),
+            ]);
             return Text("$error");
           },
           data: (value) {
