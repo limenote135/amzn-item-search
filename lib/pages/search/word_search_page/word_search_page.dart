@@ -125,7 +125,13 @@ class _Body extends HookConsumerWidget {
               [const Center(child: CircularProgressIndicator())],
             ),
             error: (error, stackTrace) {
-              FirebaseCrashlytics.instance.recordError(error, stackTrace);
+              FirebaseCrashlytics.instance
+                  .recordError(error, stackTrace, information: [
+                DiagnosticsNode.message(
+                    "WordSearchPage.AppBar.Body.queryItemResultProvider"),
+                DiagnosticsNode.message(
+                    "query: ${word.state}, category: ${category.state}"),
+              ]);
               return SliverChildListDelegate(
                 [Text("$error")],
               );

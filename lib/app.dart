@@ -62,7 +62,10 @@ class MyApp extends HookConsumerWidget {
           return const Center(child: CircularProgressIndicator());
         },
         error: (error, stackTrace) {
-          FirebaseCrashlytics.instance.recordError(error, stackTrace);
+          FirebaseCrashlytics.instance.recordError(error, stackTrace,
+              information: [
+                DiagnosticsNode.message("onAuthStateChanges error")
+              ]);
           return SafeArea(
             child: Text("$error"),
           );

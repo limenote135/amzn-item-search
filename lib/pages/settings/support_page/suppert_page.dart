@@ -108,6 +108,7 @@ class _Body extends ConsumerWidget {
                     "device": "$appVer $device",
                   });
 
+                  // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
                   await EasyLoading.dismiss();
                   await showOkAlertDialog(
                     context: context,
