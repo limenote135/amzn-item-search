@@ -81,7 +81,11 @@ class _Body extends HookConsumerWidget {
               msg = "メールアドレスかパスワードが違います";
               break;
             default:
-              await FirebaseCrashlytics.instance.recordError(e, stack);
+              await FirebaseCrashlytics.instance
+                  .recordError(e, stack, information: [
+                DiagnosticsNode.message("SignInWithEmailAndPassword error"),
+                DiagnosticsNode.message("Code: ${e.code}"),
+              ]);
               msg = e.code;
               break;
           }
@@ -93,7 +97,9 @@ class _Body extends HookConsumerWidget {
             message: msg,
           );
         } finally {
-          await EasyLoading.dismiss();
+          if (EasyLoading.isShow) {
+            await EasyLoading.dismiss();
+          }
         }
       }
       pwController.clear();

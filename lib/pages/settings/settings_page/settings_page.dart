@@ -219,6 +219,7 @@ class _Body extends HookConsumerWidget {
                     ref.read(cloudFunctionProvider(functionNameDisableUser));
                 await fn.call<String>("");
 
+                // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
                 await EasyLoading.dismiss();
                 await showOkAlertDialog(
                   context: context,

@@ -23,7 +23,11 @@ class CartTile extends HookConsumerWidget {
             ),
           ),
           error: (error, stackTrace) {
-            FirebaseCrashlytics.instance.recordError(error, stackTrace);
+            FirebaseCrashlytics.instance
+                .recordError(error, stackTrace, information: [
+              DiagnosticsNode.message("CartTile.cartOfferProvider"),
+              DiagnosticsNode.message("ASIN: $asin"),
+            ]);
             return ListTile(
               title: Text("$error"),
             );
