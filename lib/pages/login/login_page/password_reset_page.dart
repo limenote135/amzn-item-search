@@ -4,6 +4,7 @@ import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PasswordResetPage extends StatelessWidget {
@@ -51,7 +52,11 @@ class _Body extends HookConsumerWidget {
       final email = fieldKey.currentState!.value!;
       if (ret == OkCancelResult.ok) {
         try {
+          await EasyLoading.show(status: '送信中...');
           await auth.sendPasswordResetEmail(email: email);
+
+          // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
+          await EasyLoading.dismiss();
           await showOkAlertDialog(
               context: context,
               title: "パスワードのリセット",
@@ -69,11 +74,17 @@ class _Body extends HookConsumerWidget {
             default:
               msg = e.code;
           }
+          // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
+          await EasyLoading.dismiss();
           await showOkAlertDialog(
             context: context,
             title: "エラー",
             message: msg,
           );
+        } finally {
+          if (EasyLoading.isShow) {
+            await EasyLoading.dismiss();
+          }
         }
       }
     }
