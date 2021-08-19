@@ -48,6 +48,16 @@ class SignupPage extends HookConsumerWidget {
             password: password!,
           );
 
+          if (cred.user?.emailVerified == false) {
+            await cred.user?.sendEmailVerification();
+            await EasyLoading.dismiss();
+            await showOkAlertDialog(
+              context: context,
+              title: "メールアドレスの確認",
+              message: "入力されたアドレスに確認メールを送信しました。",
+            );
+          }
+
           await ref.read(analyticsControllerProvider).setUserId(cred.user?.uid);
 
           Navigator.pop(context);
