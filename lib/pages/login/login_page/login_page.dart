@@ -62,6 +62,16 @@ class _Body extends HookConsumerWidget {
             password: password,
           );
 
+          if (cred.user?.emailVerified == false) {
+            await cred.user?.sendEmailVerification();
+            await EasyLoading.dismiss();
+            await showOkAlertDialog(
+              context: context,
+              title: "メールアドレスの確認",
+              message: "メールアドレスの確認がされていません。このまま確認できない場合、一定期間後にアカウントが無効化されます。",
+            );
+          }
+
           await ref.read(analyticsControllerProvider).setUserId(cred.user?.uid);
 
           Navigator.pop(context);
