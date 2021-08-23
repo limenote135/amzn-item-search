@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class IosCameraScanOverlayShape extends ShapeBorder {
-  const IosCameraScanOverlayShape({
+class CameraScanOverlayShape extends ShapeBorder {
+  const CameraScanOverlayShape({
     this.borderColor = Colors.red,
     this.borderWidth = 8.0,
     this.overlayColor = const Color.fromRGBO(0, 0, 0, 80),
@@ -164,7 +164,7 @@ class IosCameraScanOverlayShape extends ShapeBorder {
 
   @override
   ShapeBorder scale(double t) {
-    return IosCameraScanOverlayShape(
+    return CameraScanOverlayShape(
       borderColor: borderColor,
       borderWidth: borderWidth,
       overlayColor: overlayColor,
