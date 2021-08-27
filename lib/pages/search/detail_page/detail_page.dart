@@ -58,13 +58,16 @@ class DetailPage extends HookConsumerWidget {
           const Spacer(),
           FloatingActionButton(
             heroTag: onStartCameraHeroTag,
-            onPressed: () {
+            onPressed: () async {
               if (fromRoute == CameraPage.routeName) {
                 Navigator.of(context)
                     .popUntil(ModalRoute.withName(CameraPage.routeName));
               } else {
-                Navigator.of(context).pushAndRemoveUntil(
-                    CameraPage.route(), ModalRoute.withName("/"));
+                final route = await CameraPage.route(context);
+                if (route != null) {
+                  await Navigator.of(context)
+                      .pushAndRemoveUntil(route, ModalRoute.withName("/"));
+                }
               }
             },
             child: AnimatedTheme(
