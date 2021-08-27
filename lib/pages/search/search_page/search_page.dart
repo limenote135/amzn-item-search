@@ -31,9 +31,12 @@ class SearchPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: onStartCameraHeroTag,
-        onPressed: () {
+        onPressed: () async {
           unfocus();
-          Navigator.of(context).push(CameraPage.route());
+          final route = await CameraPage.route(context);
+          if (route != null) {
+            await Navigator.of(context).push(route);
+          }
         },
         child: AnimatedTheme(
           data: ThemeData.light(),
