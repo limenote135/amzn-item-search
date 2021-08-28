@@ -104,6 +104,10 @@ class MwsRepository {
 
   Future<GetProductByIdResponse> getProductById(String code,
       {String idType = "JAN"}) async {
+    if (int.tryParse(code) == null) {
+      // 数値以外が含まれる場合は JAN コードではない
+      return Future.value(GetProductByIdResponse(jan: code, items: []));
+    }
     final params = <String, String>{
       "code": code,
       "type": idType,
