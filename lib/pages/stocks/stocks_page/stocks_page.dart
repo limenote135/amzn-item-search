@@ -218,7 +218,7 @@ class StocksPage extends HookConsumerWidget {
     return file;
   }
 
-  Future shareImageAndText(GlobalKey globalKey) async {
+  Future<void> shareImageAndText(GlobalKey globalKey) async {
     final bytes = await exportToImage(globalKey);
     final widgetImageBytes =
         bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);

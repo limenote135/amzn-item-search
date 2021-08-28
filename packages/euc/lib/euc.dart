@@ -5,7 +5,7 @@ import './euc_table.dart';
 
 class EucJPDecoder extends Converter<List<int>, String> {
   @override
-  String convert(input) {
+  String convert(List<int> input) {
     final result = <int>[];
     for (var i = 0; i < input.length; i++) {
       final c1 = input[i];
