@@ -44,6 +44,10 @@ class GeoRepository {
         ? value.substring(1, 1 + _geoCodeLength)
         : value;
 
+    if (int.tryParse(code) == null) {
+      // トリミング後にコードに数字以外が含まれる場合はゲオのコードではない
+      return GeoResponse(code: value);
+    }
     final serverUrl = await _read(serverUrlProvider.future);
     final url = "$serverUrl/v1beta1/geo/code";
     final dio = await _read(dioProvider.future);

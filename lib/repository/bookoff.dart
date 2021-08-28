@@ -49,6 +49,10 @@ class BookoffRepository {
       // JAN コードと思われる場合は API コールしない
       return Future.value([]);
     }
+    if(int.tryParse(value) == null) {
+      // 数字以外が含まれる場合はブックオフのコードではない
+      return Future.value([]);
+    }
     final code = value.length > _bookoffCodeLength
         ? value.substring(0, _bookoffCodeLength)
         : value;
