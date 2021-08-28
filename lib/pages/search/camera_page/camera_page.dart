@@ -57,8 +57,8 @@ class CameraPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SafeArea(
-      child: ref.watch(_backCameraFutureProvider).when(
+    return Scaffold(
+      body: ref.watch(_backCameraFutureProvider).when(
             loading: () => Container(),
             error: (error, stackTrace) {
               FirebaseCrashlytics.instance.recordError(error, stackTrace,
@@ -66,9 +66,19 @@ class CameraPage extends ConsumerWidget {
               return Container();
             },
             data: (value) {
-              return ProviderScope(
-                overrides: [_currentCameraProvider.overrideWithValue(value)],
-                child: const _Body(),
+              return SafeArea(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ProviderScope(
+                        overrides: [
+                          _currentCameraProvider.overrideWithValue(value)
+                        ],
+                        child: const _Body(),
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           ),
