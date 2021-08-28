@@ -142,7 +142,7 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     _controller = null;
   }
 
-  Future _processCameraImage(CameraImage image) async {
+  Future<void> _processCameraImage(CameraImage image) async {
     final allBytes = WriteBuffer();
     for (final plane in image.planes) {
       allBytes.putUint8List(plane.bytes);
