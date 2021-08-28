@@ -32,6 +32,7 @@ class HttpClient {
     String url, {
     Map<String, dynamic>? query,
     Options? opt,
+    void Function(int code)? customHandler,
     CancelToken? cancelToken,
   }) async {
     try {
@@ -55,6 +56,8 @@ class HttpClient {
         rethrow;
       }
       final code = e.response!.statusCode!;
+      customHandler?.call(code);
+
       if (code >= 500) {
         // サーバーサイドエラー
         await FirebaseCrashlytics.instance.recordError(e, stack, information: [
@@ -84,9 +87,15 @@ class HttpClient {
     dynamic data,
     Options? opt,
     void Function(int code)? customHandler,
+    CancelToken? cancelToken,
   }) async {
     try {
-      return await dio.post<String>(url, data: data, options: opt);
+      return await dio.post<String>(
+        url,
+        data: data,
+        options: opt,
+        cancelToken: cancelToken,
+      );
     } on DioError catch (e, stack) {
       await FirebaseCrashlytics.instance.log("Post request");
       if (e.error is SocketException) {
