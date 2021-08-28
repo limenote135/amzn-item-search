@@ -25,6 +25,16 @@ final bookoffItemFutureProvider =
   return SearchItem(searchDate: now, jan: resp.first.jan);
 });
 
+class _NotFoundException implements Exception {
+  _NotFoundException(this.message);
+  String message;
+
+  @override
+  String toString() {
+    return message;
+  }
+}
+
 const _bookoffCodeLength = 10;
 
 class BookoffRepository {
@@ -44,14 +54,26 @@ class BookoffRepository {
         : value;
     final url = "$_baseURL$code";
     final dio = await _read(dioProvider.future);
-    final result = await dio.get(url);
+    try {
+      final result = await dio.get(
+        url,
+        customHandler: (code) {
+          if (400 <= code && code < 500) {
+            throw _NotFoundException("Not found: $url");
+          }
+        },
+      );
 
-    final body = result.data.toString();
-    final normalized = body.substring("callback(".length, body.length - 1);
-    final js = jsonDecode(normalized) as List<dynamic>;
-    return js
-        .map((dynamic e) => BookoffResponse.fromJson(e as Map<String, dynamic>))
-        .toList();
+      final body = result.data.toString();
+      final normalized = body.substring("callback(".length, body.length - 1);
+      final js = jsonDecode(normalized) as List<dynamic>;
+      return js
+          .map((dynamic e) =>
+              BookoffResponse.fromJson(e as Map<String, dynamic>))
+          .toList();
+    } on _NotFoundException catch (_) {
+      return Future.value([]);
+    }
   }
 }
 
