@@ -196,13 +196,15 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
       }
       final result = barcodes.first.value.rawValue;
       if (result != null &&
-          int.tryParse(result) != null &&
-          _lastRead != result) {
+          _lastRead != result &&
+          (int.tryParse(result) != null // JAN, Bookoff, Tsutaya の場合
+              ||
+              result.endsWith('c') // Geo の場合
+          )) {
         await Vibration.vibrate(duration: 50, amplitude: 128);
 
         final settings = ref.read(searchSettingsControllerProvider);
-        showSuggestion(result.length, settings.type);
-
+        showSuggestion(result, settings.type);
         switch (settings.type) {
           case SearchType.jan:
             ref.read(searchItemControllerProvider.notifier).add(result);
@@ -238,14 +240,14 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     }
   }
 
-  void showSuggestion(int len, SearchType current) {
-    if (len == 7 && current != SearchType.geo) {
+  void showSuggestion(String result, SearchType current) {
+    if (result.endsWith('c') && current != SearchType.geo) {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("GEO のコードではないですか？")));
-    } else if (len == 16 && current != SearchType.tsutaya) {
+    } else if (result.length == 16 && current != SearchType.tsutaya) {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("TSUTAYA のコードではないですか？")));
-    } else if (len == 17 && current != SearchType.bookoff) {
+    } else if (result.length == 17 && current != SearchType.bookoff) {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("BOOK OFF のコードではないですか？")));
     }
