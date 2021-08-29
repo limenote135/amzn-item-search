@@ -183,7 +183,7 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
   }
 
   Future<void> processImage(InputImage inputImage) async {
-    if (isBusy) {
+    if (isBusy || !mounted) {
       return;
     }
     try {
@@ -226,14 +226,18 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
           Navigator.of(context).popUntil(ModalRoute.withName("/"));
         }
 
-        setState(() {
-          _lastRead = result;
-        });
+        if (mounted) {
+          setState(() {
+            _lastRead = result;
+          });
+        }
       } else if (DateTime.now().difference(_lastReadTime) >
           const Duration(seconds: 1)) {
-        setState(() {
-          _lastReadTime = DateTime.now();
-        });
+        if (mounted) {
+          setState(() {
+            _lastReadTime = DateTime.now();
+          });
+        }
       }
     } finally {
       isBusy = false;
@@ -357,6 +361,9 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
                   const Spacer(),
                   MaterialButton(
                     onPressed: () {
+                      if (!mounted) {
+                        return;
+                      }
                       setState(() {
                         final newVal = !continuousRead;
                         ref
@@ -395,6 +402,9 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
                   MaterialButton(
                     textColor: Colors.white,
                     onPressed: () {
+                      if (!mounted) {
+                        return;
+                      }
                       setState(() {
                         final next = _getNext(type);
                         ref
