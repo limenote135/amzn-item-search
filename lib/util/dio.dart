@@ -45,7 +45,12 @@ class HttpClient {
     } on DioError catch (e, stack) {
       await FirebaseCrashlytics.instance.log("Get request");
       if (e.error is SocketException) {
+        await FirebaseCrashlytics.instance.log("SocketException");
         throw Exception("通信環境の良いところで再度お試しください");
+      }
+      if (e.type == DioErrorType.cancel) {
+        await FirebaseCrashlytics.instance.log("DioErrorType.cancel");
+        throw Exception("通信エラー");
       }
       if (e.response == null || e.response!.statusCode == null) {
         await FirebaseCrashlytics.instance.recordError(e, stack, information: [
@@ -53,7 +58,7 @@ class HttpClient {
           DiagnosticsNode.message("URL: $url"),
           DiagnosticsNode.message("resp: ${e.response.toString()}"),
         ]);
-        rethrow;
+        throw Exception("通信環境の良いところで再度お試しください");
       }
       final code = e.response!.statusCode!;
       customHandler?.call(code);
@@ -72,7 +77,7 @@ class HttpClient {
         DiagnosticsNode.message("URL: $url"),
         DiagnosticsNode.message("resp: ${e.response.toString()}"),
       ]);
-      rethrow;
+      throw Exception("通信環境の良いところで再度お試しください");
     } on SocketException catch (e, stack) {
       await FirebaseCrashlytics.instance.recordError(e, stack, information: [
         DiagnosticsNode.message("SocketException"),
@@ -99,7 +104,12 @@ class HttpClient {
     } on DioError catch (e, stack) {
       await FirebaseCrashlytics.instance.log("Post request");
       if (e.error is SocketException) {
+        await FirebaseCrashlytics.instance.log("SocketException");
         throw Exception("通信環境の良いところで再度お試しください");
+      }
+      if (e.type == DioErrorType.cancel) {
+        await FirebaseCrashlytics.instance.log("DioErrorType.cancel");
+        throw Exception("通信エラー");
       }
       if (e.response == null || e.response!.statusCode == null) {
         await FirebaseCrashlytics.instance.recordError(e, stack, information: [
@@ -107,7 +117,7 @@ class HttpClient {
           DiagnosticsNode.message("URL: $url"),
           DiagnosticsNode.message("resp: ${e.response.toString()}"),
         ]);
-        rethrow;
+        throw Exception("通信環境の良いところで再度お試しください");
       }
       final code = e.response!.statusCode!;
       customHandler?.call(code);
