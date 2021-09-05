@@ -43,7 +43,7 @@ class HttpClient {
         cancelToken: cancelToken,
       );
     } on DioError catch (e, stack) {
-      await FirebaseCrashlytics.instance.log("Get request");
+      await FirebaseCrashlytics.instance.log("Get request: $url");
       if (e.error is SocketException) {
         await FirebaseCrashlytics.instance.log("SocketException");
         throw Exception("通信環境の良いところで再度お試しください");
@@ -102,7 +102,7 @@ class HttpClient {
         cancelToken: cancelToken,
       );
     } on DioError catch (e, stack) {
-      await FirebaseCrashlytics.instance.log("Post request");
+      await FirebaseCrashlytics.instance.log("Post request: $url");
       if (e.error is SocketException) {
         await FirebaseCrashlytics.instance.log("SocketException");
         throw Exception("通信環境の良いところで再度お試しください");
