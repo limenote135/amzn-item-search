@@ -4,6 +4,8 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/repository/common.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -49,7 +51,7 @@ class BookoffRepository {
       // JAN コードと思われる場合は API コールしない
       return Future.value([]);
     }
-    if(int.tryParse(value) == null) {
+    if (int.tryParse(value) == null) {
       // 数字以外が含まれる場合はブックオフのコードではない
       return Future.value([]);
     }
@@ -69,6 +71,14 @@ class BookoffRepository {
       );
 
       final body = result.data.toString();
+      if (!body.startsWith("callback(")) {
+        await FirebaseCrashlytics.instance
+            .recordError(Exception("Invalid Response"), null, information: [
+          DiagnosticsNode.message("Unexpected bookoff response"),
+          DiagnosticsNode.message("URL: $url"),
+        ]);
+        return Future.value([]);
+      }
       final normalized = body.substring("callback(".length, body.length - 1);
       final js = jsonDecode(normalized) as List<dynamic>;
       return js
