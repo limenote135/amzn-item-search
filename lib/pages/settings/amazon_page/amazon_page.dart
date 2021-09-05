@@ -1,6 +1,6 @@
 import 'package:amasearch/repository/common.dart';
 import 'package:amasearch/util/auth.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -29,10 +29,8 @@ class AmazonPage extends ConsumerWidget {
           child: CircularProgressIndicator(),
         ),
         error: (error, stackTrace) {
-          FirebaseCrashlytics.instance
-              .recordError(error, stackTrace, information: [
-            DiagnosticsNode.message("AmazonPage serverUrlProvider when"),
-          ]);
+          recordError(error, stackTrace,
+              information: const ["AmazonPage serverUrlProvider when"]);
           return ListTile(
             title: Text("$error"),
           );
@@ -53,17 +51,15 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final url = ref.watch(_currentServerUrlProvider);
+    final serverUrl = ref.watch(_currentServerUrlProvider);
     final user = ref.watch(authStateChangesProvider);
     return user.when(
         loading: () => const Center(
               child: CircularProgressIndicator(),
             ),
         error: (error, stackTrace) {
-          FirebaseCrashlytics.instance
-              .recordError(error, stackTrace, information: [
-            DiagnosticsNode.message("AmazonPage body user when"),
-          ]);
+          recordError(error, stackTrace,
+              information: const ["AmazonPage body user when"]);
           return ListTile(
             title: Text("$error"),
           );
@@ -75,12 +71,12 @@ class _Body extends ConsumerWidget {
             );
           }
           return WebView(
-            initialUrl: "$url/spapi/auth?user=${user.uid}",
+            initialUrl: "$serverUrl/spapi/auth?user=${user.uid}",
             javascriptMode: JavascriptMode.unrestricted,
             onPageFinished: (url) async {
-              if (url.startsWith("$url/spapi/callback")) {
+              if (url.startsWith("$serverUrl/spapi/callback")) {
                 final token = await user.getIdTokenResult(true);
-                if (token.claims?["hoge"] == "true") {
+                if (token.claims?[customClaimsLwaKey] == true) {
                   Navigator.pop(context);
                 }
               }
