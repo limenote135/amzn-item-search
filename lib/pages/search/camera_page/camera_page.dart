@@ -194,13 +194,17 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
           barcodes.isEmpty) {
         return;
       }
-      final result = barcodes.first.value.rawValue;
+      final val = barcodes.first.value;
+      if (val.rawValue == null ||
+          val.type == BarcodeType.url ||
+          val.type == BarcodeType.contactInfo ||
+          val.type == BarcodeType.email) {
+        return;
+      }
+      final result = val.rawValue;
       if (result != null &&
-          _lastRead != result &&
-          (int.tryParse(result) != null // JAN, Bookoff, Tsutaya の場合
-              ||
-              result.endsWith('c') // Geo の場合
-          )) {
+          !result.contains("errorCode") &&
+          _lastRead != result) {
         await Vibration.vibrate(duration: 50, amplitude: 128);
 
         final settings = ref.read(searchSettingsControllerProvider);
