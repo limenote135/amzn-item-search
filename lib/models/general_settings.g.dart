@@ -350,17 +350,17 @@ class ShortcutDetailAdapter extends TypeAdapter<_$_ShortcutDetail> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AlertConditionSet _$_$_AlertConditionSetFromJson(Map<String, dynamic> json) {
-  return _$_AlertConditionSet(
-    id: json['id'] as String,
-    title: json['t'] as String,
-    conditions: (json['c'] as List<dynamic>)
-        .map((e) => AlertCondition.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+_$_AlertConditionSet _$$_AlertConditionSetFromJson(Map<String, dynamic> json) =>
+    _$_AlertConditionSet(
+      id: json['id'] as String,
+      title: json['t'] as String,
+      conditions: (json['c'] as List<dynamic>?)
+              ?.map((e) => AlertCondition.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <AlertCondition>[],
+    );
 
-Map<String, dynamic> _$_$_AlertConditionSetToJson(
+Map<String, dynamic> _$$_AlertConditionSetToJson(
         _$_AlertConditionSet instance) =>
     <String, dynamic>{
       'id': instance.id,
@@ -368,14 +368,13 @@ Map<String, dynamic> _$_$_AlertConditionSetToJson(
       'c': instance.conditions,
     };
 
-_$_ShortcutDetail _$_$_ShortcutDetailFromJson(Map<String, dynamic> json) {
-  return _$_ShortcutDetail(
-    type: _$enumDecode(_$ShortcutTypeEnumMap, json['type']),
-    param: json['param'] as String? ?? '',
-  );
-}
+_$_ShortcutDetail _$$_ShortcutDetailFromJson(Map<String, dynamic> json) =>
+    _$_ShortcutDetail(
+      type: _$enumDecode(_$ShortcutTypeEnumMap, json['type']),
+      param: json['param'] as String? ?? '',
+    );
 
-Map<String, dynamic> _$_$_ShortcutDetailToJson(_$_ShortcutDetail instance) =>
+Map<String, dynamic> _$$_ShortcutDetailToJson(_$_ShortcutDetail instance) =>
     <String, dynamic>{
       'type': _$ShortcutTypeEnumMap[instance.type],
       'param': instance.param,
