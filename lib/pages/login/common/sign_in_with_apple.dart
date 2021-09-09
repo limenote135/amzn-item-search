@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:amasearch/util/error_report.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -49,7 +49,7 @@ Future<OAuthCredential?> signInWithApple() async {
     );
   } on SignInWithAppleAuthorizationException catch (e, stack) {
     if (e.code != AuthorizationErrorCode.canceled) {
-      await FirebaseCrashlytics.instance.recordError(e, stack, information: [
+      await recordError(e, stack, information: [
         DiagnosticsNode.message("SignInWithApple failed"),
         DiagnosticsNode.message("Code: ${e.code}"),
       ]);
