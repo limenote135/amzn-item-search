@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/repository/common.dart';
 import 'package:amasearch/util/dio.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/util.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -72,8 +72,7 @@ class BookoffRepository {
 
       final body = result.data.toString();
       if (!body.startsWith("callback(")) {
-        await FirebaseCrashlytics.instance
-            .recordError(Exception("Invalid Response"), null, information: [
+        await recordError(Exception("Invalid Response"), null, information: [
           DiagnosticsNode.message("Unexpected bookoff response"),
           DiagnosticsNode.message("URL: $url"),
         ]);

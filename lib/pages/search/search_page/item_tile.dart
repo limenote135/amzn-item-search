@@ -4,9 +4,9 @@ import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
 import 'package:amasearch/repository/mws.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,8 +23,7 @@ class ItemTile extends HookConsumerWidget {
             title: Center(child: CircularProgressIndicator()),
           ),
           error: (error, stackTrace) {
-            FirebaseCrashlytics.instance
-                .recordError(error, stackTrace, information: [
+            recordError(error, stackTrace, information: [
               DiagnosticsNode.message(
                   "SearchPage.ItemTile.searchItemFutureProvider"),
               DiagnosticsNode.message("item: ${item.toString()}"),
