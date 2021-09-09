@@ -1,6 +1,6 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/offer_stocks.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,8 +24,7 @@ class StockText extends HookConsumerWidget {
     return ref.watch(offerStocksFutureProvider(param)).when(
           loading: () => Text("在庫: loading", style: smallSize),
           error: (error, stackTrace) {
-            FirebaseCrashlytics.instance
-                .recordError(error, stackTrace, information: [
+            recordError(error, stackTrace, information: [
               DiagnosticsNode.message("StockText.offerStocksFutureProvider"),
               DiagnosticsNode.message("ASIN: $asin, SellerID: $sellerId"),
             ]);

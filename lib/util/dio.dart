@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:amasearch/util/error_report.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -53,7 +54,7 @@ class HttpClient {
         throw Exception("通信エラー");
       }
       if (e.response == null || e.response!.statusCode == null) {
-        await FirebaseCrashlytics.instance.recordError(e, stack, information: [
+        await recordError(e, stack, information: [
           DiagnosticsNode.message("response or status code is null"),
           DiagnosticsNode.message("URL: $url"),
           DiagnosticsNode.message("resp: ${e.response.toString()}"),
@@ -65,21 +66,21 @@ class HttpClient {
 
       if (code >= 500) {
         // サーバーサイドエラー
-        await FirebaseCrashlytics.instance.recordError(e, stack, information: [
+        await recordError(e, stack, information: [
           DiagnosticsNode.message("ServerSideError: $code"),
           DiagnosticsNode.message("URL: $url"),
           DiagnosticsNode.message("resp: ${e.response.toString()}"),
         ]);
         throw Exception("サーバーエラー($code)");
       }
-      await FirebaseCrashlytics.instance.recordError(e, stack, information: [
+      await recordError(e, stack, information: [
         DiagnosticsNode.message("Unknown error"),
         DiagnosticsNode.message("URL: $url"),
         DiagnosticsNode.message("resp: ${e.response.toString()}"),
       ]);
       throw Exception("通信環境の良いところで再度お試しください");
     } on SocketException catch (e, stack) {
-      await FirebaseCrashlytics.instance.recordError(e, stack, information: [
+      await recordError(e, stack, information: [
         DiagnosticsNode.message("SocketException"),
         DiagnosticsNode.message("URL: $url"),
       ]);
@@ -112,9 +113,10 @@ class HttpClient {
         throw Exception("通信エラー");
       }
       if (e.response == null || e.response!.statusCode == null) {
-        await FirebaseCrashlytics.instance.recordError(e, stack, information: [
+        await recordError(e, stack, information: [
           DiagnosticsNode.message("response or status code is null"),
           DiagnosticsNode.message("URL: $url"),
+          DiagnosticsNode.message("params: $data"),
           DiagnosticsNode.message("resp: ${e.response.toString()}"),
         ]);
         throw Exception("通信環境の良いところで再度お試しください");
@@ -124,23 +126,26 @@ class HttpClient {
 
       if (code >= 500) {
         // サーバーサイドエラー
-        await FirebaseCrashlytics.instance.recordError(e, stack, information: [
+        await recordError(e, stack, information: [
           DiagnosticsNode.message("ServerSideError: $code"),
           DiagnosticsNode.message("URL: $url"),
+          DiagnosticsNode.message("params: $data"),
           DiagnosticsNode.message("resp: ${e.response.toString()}"),
         ]);
         throw Exception("サーバーエラー($code)");
       }
-      await FirebaseCrashlytics.instance.recordError(e, stack, information: [
+      await recordError(e, stack, information: [
         DiagnosticsNode.message("Unknown error"),
         DiagnosticsNode.message("URL: $url"),
+        DiagnosticsNode.message("params: $data"),
         DiagnosticsNode.message("resp: ${e.response.toString()}"),
       ]);
       throw Exception("通信環境の良いところで再度お試しください");
     } on SocketException catch (e, stack) {
-      await FirebaseCrashlytics.instance.recordError(e, stack, information: [
+      await recordError(e, stack, information: [
         DiagnosticsNode.message("SocketException"),
         DiagnosticsNode.message("URL: $url"),
+        DiagnosticsNode.message("params: $data"),
       ]);
       throw Exception("通信環境の良いところで再度お試しください");
     }
