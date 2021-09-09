@@ -159,7 +159,7 @@ class StocksPage extends HookConsumerWidget {
     switch (value) {
       case _StockPageActions.upload:
         final file =
-            await StockItemCsv.create("StockList", itemList, settings.csvOrder);
+            await createStockItemCsv("StockList", itemList, settings.csvOrder);
         await Share.shareFiles([file.absolute.path], subject: "仕入れ済み商品一覧");
         await ref
             .read(analyticsControllerProvider)
