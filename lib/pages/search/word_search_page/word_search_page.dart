@@ -1,8 +1,8 @@
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -125,8 +125,7 @@ class _Body extends HookConsumerWidget {
               [const Center(child: CircularProgressIndicator())],
             ),
             error: (error, stackTrace) {
-              FirebaseCrashlytics.instance
-                  .recordError(error, stackTrace, information: [
+              recordError(error, stackTrace, information: [
                 DiagnosticsNode.message(
                     "WordSearchPage.AppBar.Body.queryItemResultProvider"),
                 DiagnosticsNode.message(
