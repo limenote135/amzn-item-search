@@ -19,6 +19,7 @@ import 'package:amasearch/models/keepa_settings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/search_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -51,7 +52,7 @@ Future<void> main() async {
     ]);
     // ignore: avoid_catches_without_on_clauses
   } catch (e, stacktrace) {
-    await FirebaseCrashlytics.instance.recordError(e, stacktrace,
+    await recordError(e, stacktrace,
         fatal: true, information: [DiagnosticsNode.message("Startup failed")]);
   }
 
@@ -61,7 +62,7 @@ Future<void> main() async {
   runZonedGuarded(() {
     runApp(const ProviderScope(child: MyApp()));
   }, (error, stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    recordError(error, stackTrace);
   });
 }
 

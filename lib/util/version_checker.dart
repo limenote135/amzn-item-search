@@ -1,8 +1,9 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:pub_semver/pub_semver.dart';
+
+import 'error_report.dart';
 
 class VersionChecker {
   static const String _configName = "min_app_version";
@@ -26,7 +27,7 @@ class VersionChecker {
       // ignore: avoid_catches_without_on_clauses
     } catch (exception, stackTrace) {
       // 取得失敗してもエラーにしない
-      await FirebaseCrashlytics.instance.recordError(exception, stackTrace,
+      await recordError(exception, stackTrace,
           information: [DiagnosticsNode.message("RemoteConfig error")]);
     }
     return false;
