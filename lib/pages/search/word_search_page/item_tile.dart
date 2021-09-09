@@ -2,8 +2,8 @@ import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/util.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -20,8 +20,7 @@ class ItemTile extends HookConsumerWidget {
             title: Center(child: CircularProgressIndicator()),
           ),
           error: (error, stackTrace) {
-            FirebaseCrashlytics.instance
-                .recordError(error, stackTrace, information: [
+            recordError(error, stackTrace, information: [
               DiagnosticsNode.message(
                   "WordSearchPage.ItemTile.itemPricesFutureProvider"),
               DiagnosticsNode.message("ASIN: ${item.asin}"),

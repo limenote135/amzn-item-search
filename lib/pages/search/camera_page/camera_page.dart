@@ -8,8 +8,8 @@ import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/pages/search/camera_page/item_tile.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:camera/camera.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
@@ -61,7 +61,7 @@ class CameraPage extends ConsumerWidget {
       body: ref.watch(_backCameraFutureProvider).when(
             loading: () => Container(),
             error: (error, stackTrace) {
-              FirebaseCrashlytics.instance.recordError(error, stackTrace,
+              recordError(error, stackTrace,
                   information: [DiagnosticsNode.message("CameraPage build")]);
               return Container();
             },
