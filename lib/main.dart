@@ -61,9 +61,7 @@ Future<void> main() async {
 
   runZonedGuarded(() {
     runApp(const ProviderScope(child: MyApp()));
-  }, (error, stackTrace) {
-    recordError(error, stackTrace);
-  });
+  }, recordError);
 }
 
 Future<void> initStartupOption() async {
