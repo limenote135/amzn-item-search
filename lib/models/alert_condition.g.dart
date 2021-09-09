@@ -47,14 +47,13 @@ class AlertConditionAdapter extends TypeAdapter<_$_AlertCondition> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AlertCondition _$_$_AlertConditionFromJson(Map<String, dynamic> json) {
-  return _$_AlertCondition(
-    type: _$enumDecode(_$AlertTypeEnumMap, json['t']),
-    value: json['v'] as int,
-  );
-}
+_$_AlertCondition _$$_AlertConditionFromJson(Map<String, dynamic> json) =>
+    _$_AlertCondition(
+      type: _$enumDecode(_$AlertTypeEnumMap, json['t']),
+      value: json['v'] as int? ?? 0,
+    );
 
-Map<String, dynamic> _$_$_AlertConditionToJson(_$_AlertCondition instance) =>
+Map<String, dynamic> _$$_AlertConditionToJson(_$_AlertCondition instance) =>
     <String, dynamic>{
       't': _$AlertTypeEnumMap[instance.type],
       'v': instance.value,
