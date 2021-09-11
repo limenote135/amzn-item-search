@@ -121,130 +121,123 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
       ResolutionPreset.high,
       enableAudio: false,
     );
-    if (mounted) {
-      // ここで setState しないと Dispose 済みの _controller で build されてエラーになる
-      setState(() {});
-    }
 
-    await _controller?.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      _controller?.startImageStream(_processCameraImage);
-      setState(() {});
-      previousCameraController?.dispose();
-    });
+    await _controller?.initialize();
+    if (!mounted) {
+      return;
+    }
+    await _controller?.startImageStream(_processCameraImage);
+    setState(() {});
+    await previousCameraController?.dispose();
   }
 
   Future<void> _stopLiveFeed() async {
-    await _controller?.stopImageStream();
     await _controller?.dispose();
-    _controller = null;
   }
 
   Future<void> _processCameraImage(CameraImage image) async {
-    final allBytes = WriteBuffer();
-    for (final plane in image.planes) {
-      allBytes.putUint8List(plane.bytes);
-    }
-    final bytes = allBytes.done().buffer.asUint8List();
-
-    final imageSize = Size(image.width.toDouble(), image.height.toDouble());
-
-    final imageRotation =
-        InputImageRotationMethods.fromRawValue(_camera.sensorOrientation) ??
-            InputImageRotation.Rotation_0deg;
-
-    final inputImageFormat =
-        InputImageFormatMethods.fromRawValue(image.format.raw as int) ??
-            InputImageFormat.NV21;
-
-    final planeData = image.planes.map(
-      (Plane plane) {
-        return InputImagePlaneMetadata(
-          bytesPerRow: plane.bytesPerRow,
-          height: plane.height,
-          width: plane.width,
-        );
-      },
-    ).toList();
-
-    final inputImageData = InputImageData(
-      size: imageSize,
-      imageRotation: imageRotation,
-      inputImageFormat: inputImageFormat,
-      planeData: planeData,
-    );
-
-    final inputImage =
-        InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
-
-    await processImage(inputImage);
-  }
-
-  Future<void> processImage(InputImage inputImage) async {
-    if (isBusy || !mounted) {
+    if (!mounted || isBusy) {
       return;
     }
     try {
       isBusy = true;
-      final barcodes = await barcodeScanner.processImage(inputImage);
-      if (inputImage.inputImageData?.size == null ||
-          inputImage.inputImageData?.imageRotation == null ||
-          barcodes.isEmpty) {
-        return;
+      final allBytes = WriteBuffer();
+      for (final plane in image.planes) {
+        allBytes.putUint8List(plane.bytes);
       }
-      final val = barcodes.first.value;
-      if (val.rawValue == null ||
-          val.type == BarcodeType.url ||
-          val.type == BarcodeType.contactInfo ||
-          val.type == BarcodeType.email) {
-        return;
-      }
-      final result = val.rawValue;
-      if (result != null &&
-          !result.contains("errorCode") &&
-          _lastRead != result) {
-        await Vibration.vibrate(duration: 50, amplitude: 128);
+      final bytes = allBytes.done().buffer.asUint8List();
 
-        final settings = ref.read(searchSettingsControllerProvider);
-        showSuggestion(result, settings.type);
-        switch (settings.type) {
-          case SearchType.jan:
-            ref.read(searchItemControllerProvider.notifier).add(result);
-            break;
-          case SearchType.bookoff:
-            ref.read(searchItemControllerProvider.notifier).addBookoff(result);
-            break;
-          case SearchType.geo:
-            ref.read(searchItemControllerProvider.notifier).addGeo(result);
-            break;
-          case SearchType.tsutaya:
-            ref.read(searchItemControllerProvider.notifier).addTsutaya(result);
-            break;
-          case SearchType.freeWord:
-            break;
-        }
+      final imageSize = Size(image.width.toDouble(), image.height.toDouble());
 
-        if (!settings.continuousCameraRead) {
-          Navigator.of(context).popUntil(ModalRoute.withName("/"));
-        }
+      final imageRotation =
+          InputImageRotationMethods.fromRawValue(_camera.sensorOrientation) ??
+              InputImageRotation.Rotation_0deg;
 
-        if (mounted) {
-          setState(() {
-            _lastRead = result;
-          });
-        }
-      } else if (DateTime.now().difference(_lastReadTime) >
-          const Duration(seconds: 1)) {
-        if (mounted) {
-          setState(() {
-            _lastReadTime = DateTime.now();
-          });
-        }
-      }
+      final inputImageFormat =
+          InputImageFormatMethods.fromRawValue(image.format.raw as int) ??
+              InputImageFormat.NV21;
+
+      final planeData = image.planes.map(
+        (Plane plane) {
+          return InputImagePlaneMetadata(
+            bytesPerRow: plane.bytesPerRow,
+            height: plane.height,
+            width: plane.width,
+          );
+        },
+      ).toList();
+
+      final inputImageData = InputImageData(
+        size: imageSize,
+        imageRotation: imageRotation,
+        inputImageFormat: inputImageFormat,
+        planeData: planeData,
+      );
+
+      final inputImage =
+          InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
+
+      await processImage(inputImage);
     } finally {
       isBusy = false;
+    }
+  }
+
+  Future<void> processImage(InputImage inputImage) async {
+    final barcodes = await barcodeScanner.processImage(inputImage);
+    if (inputImage.inputImageData?.size == null ||
+        inputImage.inputImageData?.imageRotation == null ||
+        barcodes.isEmpty) {
+      return;
+    }
+    final val = barcodes.first.value;
+    if (val.rawValue == null ||
+        val.type == BarcodeType.url ||
+        val.type == BarcodeType.contactInfo ||
+        val.type == BarcodeType.email) {
+      return;
+    }
+    final result = val.rawValue;
+    if (result != null &&
+        !result.contains("errorCode") &&
+        _lastRead != result) {
+      await Vibration.vibrate(duration: 50, amplitude: 128);
+
+      final settings = ref.read(searchSettingsControllerProvider);
+      showSuggestion(result, settings.type);
+      switch (settings.type) {
+        case SearchType.jan:
+          ref.read(searchItemControllerProvider.notifier).add(result);
+          break;
+        case SearchType.bookoff:
+          ref.read(searchItemControllerProvider.notifier).addBookoff(result);
+          break;
+        case SearchType.geo:
+          ref.read(searchItemControllerProvider.notifier).addGeo(result);
+          break;
+        case SearchType.tsutaya:
+          ref.read(searchItemControllerProvider.notifier).addTsutaya(result);
+          break;
+        case SearchType.freeWord:
+          break;
+      }
+
+      if (!settings.continuousCameraRead) {
+        Navigator.of(context).popUntil(ModalRoute.withName("/"));
+      }
+
+      if (mounted) {
+        setState(() {
+          _lastRead = result;
+        });
+      }
+    } else if (DateTime.now().difference(_lastReadTime) >
+        const Duration(seconds: 1)) {
+      if (mounted) {
+        setState(() {
+          _lastReadTime = DateTime.now();
+        });
+      }
     }
   }
 
@@ -271,9 +264,7 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     }
 
     if (state == AppLifecycleState.inactive) {
-      cameraController
-        ..stopImageStream()
-        ..dispose();
+      _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
       _startLiveFeed();
     }
