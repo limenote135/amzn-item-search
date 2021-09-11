@@ -114,25 +114,23 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AsinData _$_$_AsinDataFromJson(Map<String, dynamic> json) {
-  return _$_AsinData(
-    jan: json['jan'] as String? ?? '',
-    asin: json['asin'] as String,
-    listPrice: json['list_price'] as int? ?? 0,
-    imageUrl: json['image_url'] as String,
-    title: json['title'] as String,
-    rank: json['rank'] as int? ?? 0,
-    quantity: json['quantity'] as String? ?? ' - ',
-    prices: json['prices'] == null
-        ? null
-        : ItemPrices.fromJson(json['prices'] as Map<String, dynamic>),
-    category:
-        const ItemCategoryConverter().fromJson(json['category'] as String?),
-    sellByAmazon: json['sell_by_amazon'] as bool?,
-  );
-}
+_$_AsinData _$$_AsinDataFromJson(Map<String, dynamic> json) => _$_AsinData(
+      jan: json['jan'] as String? ?? '',
+      asin: json['asin'] as String,
+      listPrice: json['list_price'] as int? ?? 0,
+      imageUrl: json['image_url'] as String,
+      title: json['title'] as String,
+      rank: json['rank'] as int? ?? 0,
+      quantity: json['quantity'] as String? ?? ' - ',
+      prices: json['prices'] == null
+          ? null
+          : ItemPrices.fromJson(json['prices'] as Map<String, dynamic>),
+      category:
+          const ItemCategoryConverter().fromJson(json['category'] as String),
+      sellByAmazon: json['sell_by_amazon'] as bool?,
+    );
 
-Map<String, dynamic> _$_$_AsinDataToJson(_$_AsinData instance) =>
+Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
     <String, dynamic>{
       'jan': instance.jan,
       'asin': instance.asin,

@@ -104,41 +104,45 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ItemPrices _$_$_ItemPricesFromJson(Map<String, dynamic> json) {
-  return _$_ItemPrices(
-    newPrices: (json['new_offers'] as List<dynamic>)
-        .map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    usedPrices: (json['used_offers'] as List<dynamic>)
-        .map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    feeInfo: FeeInfo.fromJson(json['fee_info'] as Map<String, dynamic>),
-  );
-}
+_$_ItemPrices _$$_ItemPricesFromJson(Map<String, dynamic> json) =>
+    _$_ItemPrices(
+      newPrices: (json['new_offers'] as List<dynamic>)
+          .map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      usedPrices: (json['used_offers'] as List<dynamic>)
+          .map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      feeInfo: FeeInfo.fromJson(json['fee_info'] as Map<String, dynamic>),
+    );
 
-Map<String, dynamic> _$_$_ItemPricesToJson(_$_ItemPrices instance) =>
+Map<String, dynamic> _$$_ItemPricesToJson(_$_ItemPrices instance) =>
     <String, dynamic>{
       'new_offers': instance.newPrices,
       'used_offers': instance.usedPrices,
       'fee_info': instance.feeInfo,
     };
 
-_$_PriceDetail _$_$_PriceDetailFromJson(Map<String, dynamic> json) {
-  return _$_PriceDetail(
-    itemCondition:
-        const ItemConditionConverter().fromJson(json['condition'] as String?),
-    subCondition: const ItemSubConditionConverter()
-        .fromJson(json['sub_condition'] as String?),
-    channel: const FulfillmentChannelConverter()
-        .fromJson(json['channel'] as String?),
-    price: json['price'] as int? ?? 0,
-    shipping: json['shipping'] as int? ?? 0,
-    point: json['point'] as int? ?? 0,
-    isCart: json['is_cart'] as bool? ?? false,
-  );
-}
+_$_PriceDetail _$$_PriceDetailFromJson(Map<String, dynamic> json) =>
+    _$_PriceDetail(
+      itemCondition: json['condition'] == null
+          ? ItemCondition.newItem
+          : const ItemConditionConverter()
+              .fromJson(json['condition'] as String),
+      subCondition: json['sub_condition'] == null
+          ? ItemSubCondition.newItem
+          : const ItemSubConditionConverter()
+              .fromJson(json['sub_condition'] as String),
+      channel: json['channel'] == null
+          ? FulfillmentChannel.merchant
+          : const FulfillmentChannelConverter()
+              .fromJson(json['channel'] as String),
+      price: json['price'] as int? ?? 0,
+      shipping: json['shipping'] as int? ?? 0,
+      point: json['point'] as int? ?? 0,
+      isCart: json['is_cart'] as bool? ?? false,
+    );
 
-Map<String, dynamic> _$_$_PriceDetailToJson(_$_PriceDetail instance) =>
+Map<String, dynamic> _$$_PriceDetailToJson(_$_PriceDetail instance) =>
     <String, dynamic>{
       'condition':
           const ItemConditionConverter().toJson(instance.itemCondition),

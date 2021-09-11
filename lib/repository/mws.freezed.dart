@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'mws.dart';
 
@@ -129,7 +130,7 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   const _$_GetProductByIdResponse({required this.jan, required this.items});
 
   factory _$_GetProductByIdResponse.fromJson(Map<String, dynamic> json) =>
-      _$_$_GetProductByIdResponseFromJson(json);
+      _$$_GetProductByIdResponseFromJson(json);
 
   @override
   final String jan;
@@ -165,7 +166,7 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_GetProductByIdResponseToJson(this);
+    return _$$_GetProductByIdResponseToJson(this);
   }
 }
 
@@ -320,7 +321,7 @@ class _$_GetProductPricesResponse implements _GetProductPricesResponse {
   const _$_GetProductPricesResponse({this.prices, this.sellByAmazon});
 
   factory _$_GetProductPricesResponse.fromJson(Map<String, dynamic> json) =>
-      _$_$_GetProductPricesResponseFromJson(json);
+      _$$_GetProductPricesResponseFromJson(json);
 
   @override
   final ItemPrices? prices;
@@ -357,7 +358,7 @@ class _$_GetProductPricesResponse implements _GetProductPricesResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_GetProductPricesResponseToJson(this);
+    return _$$_GetProductPricesResponseToJson(this);
   }
 }
 
@@ -644,7 +645,7 @@ class _$_ListMatchingProductResponse implements _ListMatchingProductResponse {
   const _$_ListMatchingProductResponse({required this.items});
 
   factory _$_ListMatchingProductResponse.fromJson(Map<String, dynamic> json) =>
-      _$_$_ListMatchingProductResponseFromJson(json);
+      _$$_ListMatchingProductResponseFromJson(json);
 
   @override
   final List<AsinData> items;
@@ -674,7 +675,7 @@ class _$_ListMatchingProductResponse implements _ListMatchingProductResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_ListMatchingProductResponseToJson(this);
+    return _$$_ListMatchingProductResponseToJson(this);
   }
 }
 
