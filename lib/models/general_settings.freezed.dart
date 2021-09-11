@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'general_settings.dart';
 
@@ -1394,7 +1395,7 @@ class _$_AlertConditionSet implements _AlertConditionSet {
           this.conditions = const <AlertCondition>[]});
 
   factory _$_AlertConditionSet.fromJson(Map<String, dynamic> json) =>
-      _$_$_AlertConditionSetFromJson(json);
+      _$$_AlertConditionSetFromJson(json);
 
   @override
   @HiveField(0)
@@ -1440,7 +1441,7 @@ class _$_AlertConditionSet implements _AlertConditionSet {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_AlertConditionSetToJson(this);
+    return _$$_AlertConditionSetToJson(this);
   }
 }
 
@@ -1591,7 +1592,7 @@ class _$_ShortcutDetail implements _ShortcutDetail {
       {@HiveField(0) required this.type, @HiveField(1) this.param = ""});
 
   factory _$_ShortcutDetail.fromJson(Map<String, dynamic> json) =>
-      _$_$_ShortcutDetailFromJson(json);
+      _$$_ShortcutDetailFromJson(json);
 
   @override
   @HiveField(0)
@@ -1629,7 +1630,7 @@ class _$_ShortcutDetail implements _ShortcutDetail {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_ShortcutDetailToJson(this);
+    return _$$_ShortcutDetailToJson(this);
   }
 }
 
