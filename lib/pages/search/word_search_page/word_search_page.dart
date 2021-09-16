@@ -126,10 +126,8 @@ class _Body extends HookConsumerWidget {
             ),
             error: (error, stackTrace) {
               recordError(error, stackTrace, information: [
-                DiagnosticsNode.message(
-                    "WordSearchPage.AppBar.Body.queryItemResultProvider"),
-                DiagnosticsNode.message(
-                    "query: ${word.state}, category: ${category.state}"),
+                "WordSearchPage.AppBar.Body.queryItemResultProvider",
+                "query: ${word.state}, category: ${category.state}",
               ]);
               return SliverChildListDelegate(
                 [Text("$error")],
