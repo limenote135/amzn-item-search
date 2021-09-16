@@ -78,8 +78,8 @@ class SignupPage extends HookConsumerWidget {
               break;
             default:
               await recordError(e, stack, information: [
-                DiagnosticsNode.message("createUserWithEmailAndPassword error"),
-                DiagnosticsNode.message("Code: ${e.code}"),
+                "createUserWithEmailAndPassword error",
+                "Code: ${e.code}",
               ]);
               msg = e.code;
               break;

@@ -92,8 +92,8 @@ class _Body extends HookConsumerWidget {
               break;
             default:
               await recordError(e, stack, information: [
-                DiagnosticsNode.message("SignInWithEmailAndPassword error"),
-                DiagnosticsNode.message("Code: ${e.code}"),
+                "SignInWithEmailAndPassword error",
+                "Code: ${e.code}",
               ]);
               msg = e.code;
               break;
