@@ -19,9 +19,8 @@ class ItemTile extends HookConsumerWidget {
           ),
           error: (error, stackTrace) {
             recordError(error, stackTrace, information: [
-              DiagnosticsNode.message(
-                  "ItemSelectPage.ItemTile.itemPricesFutureProvider"),
-              DiagnosticsNode.message("ASIN: ${item.asin}"),
+              "ItemSelectPage.ItemTile.itemPricesFutureProvider",
+              "ASIN: ${item.asin}",
             ]);
             return ListTile(
               title: Text("$error"),

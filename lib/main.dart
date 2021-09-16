@@ -53,7 +53,7 @@ Future<void> main() async {
     // ignore: avoid_catches_without_on_clauses
   } catch (e, stacktrace) {
     await recordError(e, stacktrace,
-        fatal: true, information: [DiagnosticsNode.message("Startup failed")]);
+        fatal: true, information: const ["Startup failed"]);
   }
 
   // TODO:

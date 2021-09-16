@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:amasearch/util/error_report.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
 
@@ -49,8 +48,8 @@ Future<Map<String, dynamic>> commonHeader(User user) async {
     };
   } on FirebaseAuthException catch (e, stack) {
     await recordError(e, stack, information: [
-      DiagnosticsNode.message("code: ${e.code}"),
-      DiagnosticsNode.message(e.message ?? "null"),
+      "code: ${e.code}",
+      e.message ?? "null",
     ]);
     throw Exception("通信環境の良いところで再度お試しください");
   }
