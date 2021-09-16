@@ -62,8 +62,8 @@ class MyApp extends HookConsumerWidget {
           return const Center(child: CircularProgressIndicator());
         },
         error: (error, stackTrace) {
-          recordError(error, stackTrace, information: [
-            DiagnosticsNode.message("onAuthStateChanges error")
+          recordError(error, stackTrace, information: const [
+            "onAuthStateChanges error"
           ]);
           return SafeArea(
             child: Text("$error"),

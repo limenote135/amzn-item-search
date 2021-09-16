@@ -5,7 +5,6 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -55,9 +54,9 @@ class HttpClient {
       }
       if (e.response == null || e.response!.statusCode == null) {
         await recordError(e, stack, information: [
-          DiagnosticsNode.message("response or status code is null"),
-          DiagnosticsNode.message("URL: $url"),
-          DiagnosticsNode.message("resp: ${e.response.toString()}"),
+          "response or status code is null",
+          "URL: $url",
+          "resp: ${e.response.toString()}",
         ]);
         throw Exception("通信環境の良いところで再度お試しください");
       }
@@ -67,22 +66,22 @@ class HttpClient {
       if (code >= 500) {
         // サーバーサイドエラー
         await recordError(e, stack, information: [
-          DiagnosticsNode.message("ServerSideError: $code"),
-          DiagnosticsNode.message("URL: $url"),
-          DiagnosticsNode.message("resp: ${e.response.toString()}"),
+          "ServerSideError: $code",
+          "URL: $url",
+          "resp: ${e.response.toString()}",
         ]);
         throw Exception("サーバーエラー($code)");
       }
       await recordError(e, stack, information: [
-        DiagnosticsNode.message("Unknown error"),
-        DiagnosticsNode.message("URL: $url"),
-        DiagnosticsNode.message("resp: ${e.response.toString()}"),
+        "Unknown error",
+        "URL: $url",
+        "resp: ${e.response.toString()}",
       ]);
       throw Exception("通信環境の良いところで再度お試しください");
     } on SocketException catch (e, stack) {
       await recordError(e, stack, information: [
-        DiagnosticsNode.message("SocketException"),
-        DiagnosticsNode.message("URL: $url"),
+        "SocketException",
+        "URL: $url",
       ]);
       throw Exception("通信環境の良いところで再度お試しください");
     }
@@ -114,10 +113,10 @@ class HttpClient {
       }
       if (e.response == null || e.response!.statusCode == null) {
         await recordError(e, stack, information: [
-          DiagnosticsNode.message("response or status code is null"),
-          DiagnosticsNode.message("URL: $url"),
-          DiagnosticsNode.message("params: $data"),
-          DiagnosticsNode.message("resp: ${e.response.toString()}"),
+          "response or status code is null",
+          "URL: $url",
+          "params: $data",
+          "resp: ${e.response.toString()}",
         ]);
         throw Exception("通信環境の良いところで再度お試しください");
       }
@@ -127,25 +126,25 @@ class HttpClient {
       if (code >= 500) {
         // サーバーサイドエラー
         await recordError(e, stack, information: [
-          DiagnosticsNode.message("ServerSideError: $code"),
-          DiagnosticsNode.message("URL: $url"),
-          DiagnosticsNode.message("params: $data"),
-          DiagnosticsNode.message("resp: ${e.response.toString()}"),
+          "ServerSideError: $code",
+          "URL: $url",
+          "params: $data",
+          "resp: ${e.response.toString()}",
         ]);
         throw Exception("サーバーエラー($code)");
       }
       await recordError(e, stack, information: [
-        DiagnosticsNode.message("Unknown error"),
-        DiagnosticsNode.message("URL: $url"),
-        DiagnosticsNode.message("params: $data"),
-        DiagnosticsNode.message("resp: ${e.response.toString()}"),
+        "Unknown error",
+        "URL: $url",
+        "params: $data",
+        "resp: ${e.response.toString()}",
       ]);
       throw Exception("通信環境の良いところで再度お試しください");
     } on SocketException catch (e, stack) {
       await recordError(e, stack, information: [
-        DiagnosticsNode.message("SocketException"),
-        DiagnosticsNode.message("URL: $url"),
-        DiagnosticsNode.message("params: $data"),
+        "SocketException",
+        "URL: $url",
+        "params: $data",
       ]);
       throw Exception("通信環境の良いところで再度お試しください");
     }

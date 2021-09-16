@@ -24,9 +24,8 @@ class ItemTile extends HookConsumerWidget {
           ),
           error: (error, stackTrace) {
             recordError(error, stackTrace, information: [
-              DiagnosticsNode.message(
-                  "SearchPage.ItemTile.searchItemFutureProvider"),
-              DiagnosticsNode.message("item: ${item.toString()}"),
+              "SearchPage.ItemTile.searchItemFutureProvider",
+              "item: ${item.toString()}",
             ]);
             return ListTile(
               title: Text("$error"),

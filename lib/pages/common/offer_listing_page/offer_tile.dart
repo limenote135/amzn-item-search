@@ -31,8 +31,8 @@ class OfferTile extends HookConsumerWidget {
       ),
       error: (error, stackTrace) {
         recordError(error, stackTrace, information: [
-          DiagnosticsNode.message("OfferTile.offerItem"),
-          DiagnosticsNode.message("index: $index, param: ${param.toString()}"),
+          "OfferTile.offerItem",
+          "index: $index, param: ${param.toString()}",
         ]);
         return Text("$error");
       },
