@@ -5,7 +5,6 @@ import 'package:amasearch/repository/common.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/util.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -73,8 +72,8 @@ class BookoffRepository {
       final body = result.data.toString();
       if (!body.startsWith("callback(")) {
         await recordError(Exception("Invalid Response"), null, information: [
-          DiagnosticsNode.message("Unexpected bookoff response"),
-          DiagnosticsNode.message("URL: $url"),
+          "Unexpected bookoff response",
+          "URL: $url",
         ]);
         return Future.value([]);
       }

@@ -1,5 +1,4 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:pub_semver/pub_semver.dart';
 
@@ -28,7 +27,7 @@ class VersionChecker {
     } catch (exception, stackTrace) {
       // 取得失敗してもエラーにしない
       await recordError(exception, stackTrace,
-          information: [DiagnosticsNode.message("RemoteConfig error")]);
+          information: const ["RemoteConfig error"]);
     }
     return false;
   }

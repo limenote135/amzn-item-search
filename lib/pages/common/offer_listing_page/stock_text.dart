@@ -25,8 +25,8 @@ class StockText extends HookConsumerWidget {
           loading: () => Text("在庫: loading", style: smallSize),
           error: (error, stackTrace) {
             recordError(error, stackTrace, information: [
-              DiagnosticsNode.message("StockText.offerStocksFutureProvider"),
-              DiagnosticsNode.message("ASIN: $asin, SellerID: $sellerId"),
+              "StockText.offerStocksFutureProvider",
+              "ASIN: $asin, SellerID: $sellerId",
             ]);
             return Text("$error");
           },
