@@ -51,9 +51,8 @@ class _Body extends HookConsumerWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stackTrace) {
             recordError(error, stackTrace, information: [
-              DiagnosticsNode.message(
-                  "OfferListingsPage._Body.offerTotalCountProvider"),
-              DiagnosticsNode.message("Param: ${param.toString()}"),
+              "OfferListingsPage._Body.offerTotalCountProvider",
+              "Param: ${param.toString()}",
             ]);
             return Text("$error");
           },

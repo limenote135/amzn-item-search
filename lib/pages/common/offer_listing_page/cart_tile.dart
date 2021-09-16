@@ -24,8 +24,8 @@ class CartTile extends HookConsumerWidget {
           ),
           error: (error, stackTrace) {
             recordError(error, stackTrace, information: [
-              DiagnosticsNode.message("CartTile.cartOfferProvider"),
-              DiagnosticsNode.message("ASIN: $asin"),
+              "CartTile.cartOfferProvider",
+              "ASIN: $asin",
             ]);
             return ListTile(
               title: Text("$error"),
