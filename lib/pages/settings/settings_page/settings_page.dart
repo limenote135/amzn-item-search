@@ -3,6 +3,7 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/settings/alert_page/alert_page.dart';
+import 'package:amasearch/pages/settings/amazon_page/amazon_page.dart';
 import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.dart';
 import 'package:amasearch/pages/settings/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/settings/purchase_list_page/purchase_list_page.dart';
@@ -20,6 +21,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
+
+import 'amazon_status.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -42,7 +45,6 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
-    final auth = ref.watch(firebaseAuthProvider);
 
     final captionStyle = Theme.of(context).textTheme.caption;
     return ListView(
@@ -72,6 +74,13 @@ class _Body extends HookConsumerWidget {
             ref
                 .read(analyticsControllerProvider)
                 .setUserProp(majorCustomerPropName, value.toString());
+          },
+        ),
+        ListTile(
+          title: const Text("Amazon連携"),
+          subtitle: const AmazonStatus(),
+          onTap: () {
+            Navigator.push(context, AmazonPage.route());
           },
         ),
         const ThemeDivider(),
@@ -191,7 +200,7 @@ class _Body extends HookConsumerWidget {
               isDestructiveAction: true,
             );
             if (ret == OkCancelResult.ok) {
-              await auth.signOut();
+              await ref.read(firebaseAuthProvider).signOut();
               await GoogleSignIn().signOut();
             }
           },
@@ -225,7 +234,7 @@ class _Body extends HookConsumerWidget {
                   context: context,
                   message: "ご利用ありがとうございました。",
                 );
-                await auth.signOut();
+                await ref.read(firebaseAuthProvider).signOut();
                 await GoogleSignIn().signOut();
               } finally {
                 if (EasyLoading.isShow) {

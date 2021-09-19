@@ -115,7 +115,7 @@ class MwsRepository {
     };
 
     final serverUrl = await _read(serverUrlProvider.future);
-    final resp = await _doRequest("$serverUrl/v1beta1/mws/product",
+    final resp = await _doRequest("$serverUrl/v1/mws/product",
         data: json.encode(params));
     return GetProductByIdResponse.fromJson(resp);
   }
@@ -126,8 +126,8 @@ class MwsRepository {
     };
 
     final serverUrl = await _read(serverUrlProvider.future);
-    final resp = await _doRequest("$serverUrl/v1beta1/mws/prices",
-        data: json.encode(params));
+    final resp =
+        await _doRequest("$serverUrl/v1/mws/prices", data: json.encode(params));
     return GetProductPricesResponse.fromJson(resp);
   }
 
@@ -142,8 +142,8 @@ class MwsRepository {
     };
 
     final serverUrl = await _read(serverUrlProvider.future);
-    final resp = await _doRequest("$serverUrl/v1beta1/mws/search",
-        data: json.encode(params));
+    final resp =
+        await _doRequest("$serverUrl/v1/mws/search", data: json.encode(params));
 
     return ListMatchingProductResponse.fromJson(resp);
   }
@@ -152,6 +152,10 @@ class MwsRepository {
     final dio = await _read(dioProvider.future);
 
     final user = await _read(authStateChangesProvider.last);
+    final lwa = await _read(linkedWithAmazonProvider.last);
+    if (lwa != true) {
+      throw Exception("設定メニューからAmazonとの連携を行ってください");
+    }
     final header = await commonHeader(user!);
 
     final resp = await dio.post(
@@ -165,7 +169,7 @@ class MwsRepository {
             _container.refresh(updateProvider);
             throw Exception("アプリケーションを更新してください");
           case 401:
-            throw Exception("ログインされていません");
+            throw Exception("設定メニューからAmazonとの連携を行ってください");
         }
       },
     );

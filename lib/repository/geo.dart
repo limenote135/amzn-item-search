@@ -53,6 +53,10 @@ class GeoRepository {
     final dio = await _read(dioProvider.future);
 
     final user = await _read(authStateChangesProvider.last);
+    final lwa = await _read(linkedWithAmazonProvider.last);
+    if (lwa != true) {
+      throw Exception("設定メニューからAmazonとの連携を行ってください");
+    }
 
     final header = await commonHeader(user!);
 
