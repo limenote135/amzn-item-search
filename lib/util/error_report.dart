@@ -7,7 +7,9 @@ Future<void> recordError(
   bool fatal = false,
 }) async {
   final log = (StringBuffer()..writeAll(information, '\n')).toString();
-  await FirebaseCrashlytics.instance.log(log);
+  if (log.isNotEmpty) {
+    await FirebaseCrashlytics.instance.log(log);
+  }
   await FirebaseCrashlytics.instance
       .recordError(exception, stackTrace, fatal: fatal);
 }
