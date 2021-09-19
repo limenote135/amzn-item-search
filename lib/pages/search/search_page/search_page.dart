@@ -3,6 +3,8 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/search_page/search_bar.dart';
+import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -84,6 +86,37 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final items = ref.watch(searchItemControllerProvider);
+
+    if (items.isEmpty) {
+      return SliverList(
+        delegate: SliverChildListDelegate([
+          ref.watch(linkedWithAmazonProvider).when(
+                loading: () => const ListTile(
+                  title: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                error: (error, stackTrace) {
+                  recordError(error, stackTrace, information: const [
+                    "SearchPage.Body.linkedWithAmazonProvider",
+                  ]);
+                  return ListTile(
+                    title: Text("$error"),
+                  );
+                },
+                data: (isLinked) {
+                  if (isLinked == true) {
+                    return Container();
+                  }
+                  return const ListTile(
+                    title: Text("設定メニューからAmazonと連携してください"),
+                  );
+                },
+              )
+        ]),
+      );
+    }
+
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
