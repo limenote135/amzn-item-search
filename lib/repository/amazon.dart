@@ -48,7 +48,7 @@ class AmazonRepository {
 
   static const _stockUrlBase = "https://www.amazon.co.jp/dp/[asin]/ref=sr_1_1";
 
-  static final _totalRegex = RegExp(r"その他(.+?)個のオプション");
+  static final _totalRegex = RegExp(r"(\d+)個のオプション");
   static final _stockRegex = RegExp(r"残り(\d+)点");
   static final _jpNumberRegex = RegExp("[０-９]");
 
