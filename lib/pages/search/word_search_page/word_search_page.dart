@@ -1,4 +1,3 @@
-import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/util/error_report.dart';
@@ -10,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'item_tile.dart';
 
 final _wordProvider = StateProvider((_) => "");
-final _categoryProvider = StateProvider((_) => "All");
+final _categoryProvider = StateProvider((_) => "");
 
 class WordSearchPage extends StatelessWidget {
   const WordSearchPage({Key? key}) : super(key: key);
@@ -67,7 +66,12 @@ class _AppBar extends HookConsumerWidget {
                 ),
               ),
               onSubmitted: (value) {
-                if (value != "" && word.state != value) {
+                if (value != "") {
+                  if (word.state == value) {
+                    // エラー時などに再読み込みさせるため、いったん空にする
+                    // リクエストに成功していた場合はキャッシュが使われる
+                    word.state = "";
+                  }
                   word.state = value;
                 }
               },
@@ -77,7 +81,7 @@ class _AppBar extends HookConsumerWidget {
             title: const Text("カテゴリー"),
             trailing: DropdownButton(
               value: category.state,
-              items: mwsSearchCategoryMap.entries.map((entry) {
+              items: amazonSearchCategoryMap.entries.map((entry) {
                 return DropdownMenuItem(
                   value: entry.value,
                   child: Text(entry.key),
@@ -141,8 +145,7 @@ class _Body extends HookConsumerWidget {
                   }
                   return ProviderScope(
                     overrides: [
-                      currentAsinDataProvider
-                          .overrideWithValue(items[index ~/ 2]),
+                      currentAsinProvider.overrideWithValue(items[index ~/ 2]),
                     ],
                     child: const ItemTile(),
                   );

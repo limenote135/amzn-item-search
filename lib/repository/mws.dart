@@ -87,11 +87,11 @@ final searchItemFutureProvider = FutureProvider.autoDispose
 });
 
 final queryItemResultProvider = FutureProvider.autoDispose
-    .family<List<AsinData>, ListMatchingProductRequest>((ref, req) async {
+    .family<List<String>, ListMatchingProductRequest>((ref, req) async {
   final mws = ref.read(mwsRepositoryProvider);
-  final resp = await mws.listMatchingProducts(req.query, req.category);
+  final resp = await mws.queryItems(req.query, req.category);
   ref.maintainState = true;
-  return resp.items;
+  return resp.asins;
 });
 
 class MwsRepository {
@@ -131,6 +131,27 @@ class MwsRepository {
     return GetProductPricesResponse.fromJson(resp);
   }
 
+  Future<QueryItemsResponse> queryItems(String query, String category) async {
+    final params = <String, String>{
+      "word": query,
+      "category": category,
+      "marketplace": _mwsMarketPlaceId,
+    };
+
+    final serverUrl = await _read(serverUrlProvider.future);
+    final resp = await _doRequest("$serverUrl/v1beta1/spapi/query",
+        data: json.encode(params));
+    return QueryItemsResponse.fromJson(resp);
+  }
+
+  Future<GetAsinDataResponse> getAsinData(String asin) async {
+    final serverUrl = await _read(serverUrlProvider.future);
+    final url = "$serverUrl/v1beta1/spapi/asin/$asin";
+
+    final resp = await _doGetRequest(url);
+    return GetAsinDataResponse.fromJson(resp);
+  }
+
   Future<ListMatchingProductResponse> listMatchingProducts(
     String query,
     String category,
@@ -146,6 +167,32 @@ class MwsRepository {
         await _doRequest("$serverUrl/v1/mws/search", data: json.encode(params));
 
     return ListMatchingProductResponse.fromJson(resp);
+  }
+
+  Future<Map<String, dynamic>> _doGetRequest(String url) async {
+    final dio = await _read(dioProvider.future);
+
+    final user = await _read(authStateChangesProvider.last);
+    final lwa = await _read(linkedWithAmazonProvider.last);
+    if (lwa != true) {
+      throw Exception("設定メニューからAmazonとの連携を行ってください");
+    }
+    final header = await commonHeader(user!);
+    final resp = await dio.get(
+      url,
+      opt: Options(headers: header),
+      customHandler: (code) {
+        switch (code) {
+          case 412:
+            // TODO:  await を外したが、これで問題ないか要確認
+            _container.refresh(updateProvider);
+            throw Exception("アプリケーションを更新してください");
+          case 401:
+            throw Exception("設定メニューからAmazonとの連携を行ってください");
+        }
+      },
+    );
+    return json.decode(resp.data!) as Map<String, dynamic>;
   }
 
   Future<Map<String, dynamic>> _doRequest(String url, {String? data}) async {
@@ -218,4 +265,25 @@ class ListMatchingProductResponse with _$ListMatchingProductResponse {
 
   factory ListMatchingProductResponse.fromJson(Map<String, dynamic> json) =>
       _$ListMatchingProductResponseFromJson(json);
+}
+
+@freezed
+class QueryItemsResponse with _$QueryItemsResponse {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory QueryItemsResponse({required List<String> asins}) =
+      _QueryItemsResponse;
+
+  factory QueryItemsResponse.fromJson(Map<String, dynamic> json) =>
+      _$QueryItemsResponseFromJson(json);
+}
+
+@freezed
+class GetAsinDataResponse with _$GetAsinDataResponse {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory GetAsinDataResponse({
+    required AsinData data,
+  }) = _GetAsinDataResponse;
+
+  factory GetAsinDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$GetAsinDataResponseFromJson(json);
 }
