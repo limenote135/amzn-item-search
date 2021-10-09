@@ -19,4 +19,3 @@ linter:
     type_annotate_public_apis: false
     flutter_style_todos: false
     prefer_single_quotes: false
-    sort_pub_dependencies: false
