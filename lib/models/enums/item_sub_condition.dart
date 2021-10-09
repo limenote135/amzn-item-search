@@ -68,14 +68,19 @@ extension ItemSubConditionExtention on ItemSubCondition {
 ItemSubCondition toItemSubCondition(String condition) {
   switch (condition) {
     case "New":
+    case "new":
       return ItemSubCondition.newItem;
     case "Mint":
+    case "like_new":
       return ItemSubCondition.mint;
     case "VeryGood":
+    case "very_good":
       return ItemSubCondition.veryGood;
     case "Good":
+    case "good":
       return ItemSubCondition.good;
     case "Acceptable":
+    case "acceptable":
       return ItemSubCondition.acceptable;
     default:
       throw Exception("Unknown item sub condition: $condition");
