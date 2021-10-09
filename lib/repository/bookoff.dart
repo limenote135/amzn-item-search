@@ -54,6 +54,10 @@ class BookoffRepository {
       // 数字以外が含まれる場合はブックオフのコードではない
       return Future.value([]);
     }
+    // コードが短い場合はリクエストしない
+    if (value.length < _bookoffCodeLength) {
+      return Future.value([]);
+    }
     final code = value.length > _bookoffCodeLength
         ? value.substring(0, _bookoffCodeLength)
         : value;
