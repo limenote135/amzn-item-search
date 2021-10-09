@@ -51,3 +51,27 @@ Map<String, dynamic> _$$_ListMatchingProductResponseToJson(
     <String, dynamic>{
       'items': instance.items,
     };
+
+_$_QueryItemsResponse _$$_QueryItemsResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_QueryItemsResponse(
+      asins: (json['asins'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$$_QueryItemsResponseToJson(
+        _$_QueryItemsResponse instance) =>
+    <String, dynamic>{
+      'asins': instance.asins,
+    };
+
+_$_GetAsinDataResponse _$$_GetAsinDataResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_GetAsinDataResponse(
+      data: AsinData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$_GetAsinDataResponseToJson(
+        _$_GetAsinDataResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
