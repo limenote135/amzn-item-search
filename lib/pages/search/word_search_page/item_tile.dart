@@ -1,4 +1,3 @@
-import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
@@ -9,33 +8,31 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'word_search_page.dart';
 
+final currentAsinProvider = Provider<String>((_) => throw UnimplementedError());
+
 class ItemTile extends HookConsumerWidget {
   const ItemTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final item = ref.watch(currentAsinDataProvider);
-    return ref.watch(itemPricesFutureProvider(item.asin)).when(
+    final asin = ref.watch(currentAsinProvider);
+    return ref.watch(asinDataFutureProvider(asin)).when(
           loading: () => const ListTile(
             title: Center(child: CircularProgressIndicator()),
           ),
           error: (error, stackTrace) {
             recordError(error, stackTrace, information: [
-              "WordSearchPage.ItemTile.itemPricesFutureProvider",
-              "ASIN: ${item.asin}",
+              "WordSearchPage.ItemTile.asinDataFutureProvider",
+              "ASIN: $asin",
             ]);
             return ListTile(
               title: Text("$error"),
             );
           },
           data: (value) {
-            final newItem = item.copyWith(
-              prices: value.prices,
-              sellByAmazon: value.sellByAmazon,
-            );
             return ProviderScope(
               overrides: [
-                currentAsinDataProvider.overrideWithValue(newItem),
+                currentAsinDataProvider.overrideWithValue(value),
                 currentSearchDateProvider.overrideWithValue(null),
               ],
               child: const _InkWell(
