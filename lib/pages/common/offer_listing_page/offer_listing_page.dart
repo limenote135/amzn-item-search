@@ -1,5 +1,5 @@
 import 'package:amasearch/models/offer_listings.dart';
-import 'package:amasearch/util/error_report.dart';
+import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -47,39 +47,37 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final param = ref.watch(currentOfferListingParamProvider);
-    return ref.watch(offerTotalCountProvider(param)).when(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stackTrace) {
-            recordError(error, stackTrace, information: [
-              "OfferListingsPage._Body.offerTotalCountProvider",
-              "Param: ${param.toString()}",
-            ]);
-            return Text("$error");
-          },
-          data: (value) {
-            if (value == 0) {
-              return ProviderScope(
-                overrides: [
-                  currentAsinProvider.overrideWithValue(param.asin),
-                ],
-                child: const CartTile(),
-              );
-            }
-            return ListView.separated(
-              itemBuilder: (context, index) {
-                return ProviderScope(
-                  overrides: [
-                    currentAsinProvider.overrideWithValue(param.asin),
-                    currentIndex.overrideWithValue(index),
-                  ],
-                  child: _selectWidgets(index, value),
-                );
-              },
-              itemCount: value,
-              separatorBuilder: (context, index) => const ThemeDivider(),
+    final offerTotalCountAsyncValue = ref.watch(offerTotalCountProvider(param));
+    return AsyncValueWidget<int>(
+      value: offerTotalCountAsyncValue,
+      errorInfo: [
+        "OfferListingsPage._Body.offerTotalCountProvider",
+        "Param: ${param.toString()}",
+      ],
+      data: (value) {
+        if (value == 0) {
+          return ProviderScope(
+            overrides: [
+              currentAsinProvider.overrideWithValue(param.asin),
+            ],
+            child: const CartTile(),
+          );
+        }
+        return ListView.separated(
+          itemBuilder: (context, index) {
+            return ProviderScope(
+              overrides: [
+                currentAsinProvider.overrideWithValue(param.asin),
+                currentIndex.overrideWithValue(index),
+              ],
+              child: _selectWidgets(index, value),
             );
           },
+          itemCount: value,
+          separatorBuilder: (context, index) => const ThemeDivider(),
         );
+      },
+    );
   }
 
   Widget _selectWidgets(int index, int total) {
