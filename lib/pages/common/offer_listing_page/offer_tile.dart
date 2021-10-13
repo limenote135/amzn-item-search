@@ -1,7 +1,7 @@
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/styles/font.dart';
-import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,58 +23,49 @@ class OfferTile extends HookConsumerWidget {
       )),
     );
     final bigSize = bigFontSize(context);
-    return offerItem.when(
-      loading: () => const ListTile(
-        title: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-      error: (error, stackTrace) {
-        recordError(error, stackTrace, information: [
-          "OfferTile.offerItem",
-          "index: $index, param: ${param.toString()}",
-        ]);
-        return Text("$error");
-      },
-      data: (value) {
-        return ListTile(
-          title: Row(children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      style: bigSize,
-                      children: [
-                        TextSpan(
-                          text: numberFormatter.format(value.price),
-                          style: strongTextStyle,
-                        ),
-                        const TextSpan(text: "円"),
-                      ],
-                    ),
-                  ),
-                  ProviderScope(
-                    overrides: [
-                      currentSellerIdProvider.overrideWithValue(value.sellerId),
+    return AsyncValueListTileWidget<OfferItem>(
+      value: offerItem,
+      errorInfo: [
+        "OfferTile.offerItem",
+        "index: $index, param: ${param.toString()}",
+      ],
+      data: (value) => ListTile(
+        title: Row(children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              children: [
+                RichText(
+                  text: TextSpan(
+                    style: bigSize,
+                    children: [
+                      TextSpan(
+                        text: numberFormatter.format(value.price),
+                        style: strongTextStyle,
+                      ),
+                      const TextSpan(text: "円"),
                     ],
-                    child: const StockText(),
                   ),
-                ],
-              ),
+                ),
+                ProviderScope(
+                  overrides: [
+                    currentSellerIdProvider.overrideWithValue(value.sellerId),
+                  ],
+                  child: const StockText(),
+                ),
+              ],
             ),
-            Expanded(
-              child: ProviderScope(
-                overrides: [
-                  currentOfferItemProvider.overrideWithValue(value),
-                ],
-                child: const OfferChips(),
-              ),
+          ),
+          Expanded(
+            child: ProviderScope(
+              overrides: [
+                currentOfferItemProvider.overrideWithValue(value),
+              ],
+              child: const OfferChips(),
             ),
-          ]),
-        );
-      },
+          ),
+        ]),
+      ),
     );
   }
 }
