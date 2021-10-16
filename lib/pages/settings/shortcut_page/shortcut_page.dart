@@ -77,7 +77,7 @@ class _Body extends HookConsumerWidget {
                   .read(generalSettingsControllerProvider.notifier)
                   .update(leftShortcut: updated);
               final prop =
-                  AnalyticsController.encodeShortCutToUserProp(updated);
+                  AnalyticsController.encodeShortcutToUserProp(updated);
               await ref
                   .read(analyticsControllerProvider)
                   .setUserProp(leftShortcutSettingsPropName, prop);
@@ -107,7 +107,7 @@ class _Body extends HookConsumerWidget {
                   .read(generalSettingsControllerProvider.notifier)
                   .update(rightShortcut: updated);
               final prop =
-                  AnalyticsController.encodeShortCutToUserProp(updated);
+                  AnalyticsController.encodeShortcutToUserProp(updated);
               await ref
                   .read(analyticsControllerProvider)
                   .setUserProp(rightShortcutSettingsPropName, prop);
