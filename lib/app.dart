@@ -6,10 +6,11 @@ import 'package:amasearch/pages/home_page.dart';
 import 'package:amasearch/pages/login_root_page.dart';
 import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/auth.dart';
-import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:amasearch/widgets/lifecycle_manager.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -57,18 +58,12 @@ class MyApp extends HookConsumerWidget {
         },
         orElse: () => lightTheme,
       ),
-      home: authStateChanges.when(
-        loading: () {
-          return const Center(child: CircularProgressIndicator());
-        },
-        error: (error, stackTrace) {
-          recordError(error, stackTrace, information: const [
-            "onAuthStateChanges error"
-          ]);
-          return SafeArea(
-            child: Text("$error"),
-          );
-        },
+      // TODO: エラー時に SafeArea で囲んでない
+      home: AsyncValueWidget<User?>(
+        value: authStateChanges,
+        errorInfo: const [
+          "onAuthStateChanges error",
+        ],
         data: (value) {
           if (value == null) {
             return const LoginRootPage();

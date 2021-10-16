@@ -4,8 +4,8 @@ import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
 import 'package:amasearch/repository/mws.dart';
-import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,41 +18,35 @@ class ItemTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentFutureSearchItemProvider);
-    return ref.watch(searchItemFutureProvider(item)).when(
-          loading: () => const ListTile(
-            title: Center(child: CircularProgressIndicator()),
-          ),
-          error: (error, stackTrace) {
-            recordError(error, stackTrace, information: [
-              "SearchPage.ItemTile.searchItemFutureProvider",
-              "item: ${item.toString()}",
-            ]);
-            return ListTile(
-              title: Text("$error"),
-            );
-          },
-          data: (value) {
-            if (value.asins.isEmpty) {
-              return ProviderScope(
-                overrides: [
-                  currentSearchItemProvider.overrideWithValue(value),
-                ],
-                child: Center(
-                  child: SizedBox(
-                    height: 30,
-                    child: Text("${value.jan}: 見つかりませんでした"),
-                  ),
-                ),
-              );
-            }
-            return ProviderScope(
-              overrides: [
-                currentSearchItemProvider.overrideWithValue(value),
-              ],
-              child: const SlidableTile(child: ItemTileImpl()),
-            );
-          },
+    final searchItemAsyncValue = ref.watch(searchItemFutureProvider(item));
+    return AsyncValueListTileWidget<SearchItem>(
+      value: searchItemAsyncValue,
+      errorInfo: [
+        "SearchPage.ItemTile.searchItemFutureProvider",
+        "item: ${item.toString()}",
+      ],
+      data: (value) {
+        if (value.asins.isEmpty) {
+          return ProviderScope(
+            overrides: [
+              currentSearchItemProvider.overrideWithValue(value),
+            ],
+            child: Center(
+              child: SizedBox(
+                height: 30,
+                child: Text("${value.jan}: 見つかりませんでした"),
+              ),
+            ),
+          );
+        }
+        return ProviderScope(
+          overrides: [
+            currentSearchItemProvider.overrideWithValue(value),
+          ],
+          child: const SlidableTile(child: ItemTileImpl()),
         );
+      },
+    );
   }
 }
 
