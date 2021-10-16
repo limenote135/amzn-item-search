@@ -4,7 +4,6 @@ import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'events.dart';
@@ -72,19 +71,43 @@ class AnalyticsController {
     return _read(_analyticsProvider).setUserId(uid);
   }
 
-  static String encodeShortCutToUserProp(List<ShortcutDetail> commands) {
+  static String encodeShortcutToUserProp(List<ShortcutDetail> commands) {
+    // ユーザープロパティの値の最大は36文字
     final buffer = StringBuffer("[");
     for (var i = 0; i < commands.length; i++) {
       if (commands[i].type != ShortcutType.none) {
+        final val = _createShortcutPropVal(commands[i]);
         buffer
           ..write("(")
-          ..write(describeEnum(commands[i].type))
-          ..write(":")
-          ..write(commands[i].param)
+          ..write(val)
           ..write(")");
       }
     }
     buffer.write("]");
     return buffer.toString();
+  }
+
+  static String _createShortcutPropVal(ShortcutDetail command) {
+    switch (command.type) {
+      case ShortcutType.none:
+        // ここにはこないはず
+        return "";
+      case ShortcutType.purchase:
+        return "buy";
+      case ShortcutType.delete:
+        return "del";
+      case ShortcutType.web:
+        return "web:${command.param}";
+      case ShortcutType.navigation:
+        switch (command.param) {
+          case navigationTargetNewOffers:
+            return "nav:new";
+          case navigationTargetUsedOffers:
+            return "nav:used";
+          case navigationTargetKeepa:
+            return "nav:kp";
+        }
+        return "nav:${command.param}";
+    }
   }
 }
