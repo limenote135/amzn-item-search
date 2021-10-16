@@ -4,8 +4,8 @@ import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/search_page/search_bar.dart';
 import 'package:amasearch/util/auth.dart';
-import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/cupertino.dart';
@@ -88,31 +88,23 @@ class _Body extends HookConsumerWidget {
     final items = ref.watch(searchItemControllerProvider);
 
     if (items.isEmpty) {
+      final isLwaAsyncValue = ref.watch(linkedWithAmazonProvider);
       return SliverList(
         delegate: SliverChildListDelegate([
-          ref.watch(linkedWithAmazonProvider).when(
-                loading: () => const ListTile(
-                  title: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-                error: (error, stackTrace) {
-                  recordError(error, stackTrace, information: const [
-                    "SearchPage.Body.linkedWithAmazonProvider",
-                  ]);
-                  return ListTile(
-                    title: Text("$error"),
-                  );
-                },
-                data: (isLinked) {
-                  if (isLinked == true) {
-                    return Container();
-                  }
-                  return const ListTile(
-                    title: Text("設定メニューからAmazonと連携してください"),
-                  );
-                },
-              )
+          AsyncValueListTileWidget(
+            value: isLwaAsyncValue,
+            errorInfo: const [
+              "SearchPage.Body.linkedWithAmazonProvider",
+            ],
+            data: (isLinked) {
+              if (isLinked == true) {
+                return Container();
+              }
+              return const ListTile(
+                title: Text("設定メニューからAmazonと連携してください"),
+              );
+            },
+          ),
         ]),
       );
     }
