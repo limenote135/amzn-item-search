@@ -14,7 +14,8 @@ String encodeShortcutToUserProp(List<ShortcutDetail> commands) {
     }
   }
   buffer.write("]");
-  return buffer.toString();
+  final ret = buffer.toString();
+  return ret.length > 36 ? ret.substring(0, 36) : ret;
 }
 
 String _createShortcutPropVal(ShortcutDetail command) {
