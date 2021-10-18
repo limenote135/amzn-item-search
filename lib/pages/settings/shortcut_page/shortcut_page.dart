@@ -8,6 +8,8 @@ import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'analytics.dart';
+
 class ShortcutPage extends StatelessWidget {
   const ShortcutPage({Key? key}) : super(key: key);
   static const String routeName = "/settings/shortcut";
@@ -76,8 +78,7 @@ class _Body extends HookConsumerWidget {
               ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(leftShortcut: updated);
-              final prop =
-                  AnalyticsController.encodeShortcutToUserProp(updated);
+              final prop = encodeShortcutToUserProp(updated);
               await ref
                   .read(analyticsControllerProvider)
                   .setUserProp(leftShortcutSettingsPropName, prop);
@@ -106,8 +107,7 @@ class _Body extends HookConsumerWidget {
               ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(rightShortcut: updated);
-              final prop =
-                  AnalyticsController.encodeShortcutToUserProp(updated);
+              final prop = encodeShortcutToUserProp(updated);
               await ref
                   .read(analyticsControllerProvider)
                   .setUserProp(rightShortcutSettingsPropName, prop);
