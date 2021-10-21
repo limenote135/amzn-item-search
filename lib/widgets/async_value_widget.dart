@@ -2,6 +2,8 @@ import 'package:amasearch/util/error_report.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'progress_indicator.dart';
+
 class AsyncValueWidget<T> extends StatelessWidget {
   const AsyncValueWidget({
     Key? key,
@@ -18,7 +20,7 @@ class AsyncValueWidget<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return value.when(
       data: data,
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => centeredCircularProgressIndicator,
       error: (e, st) {
         recordError(e, st, information: errorInfo);
         return ListTile(
@@ -46,7 +48,7 @@ class AsyncValueListTileWidget<T> extends StatelessWidget {
     return value.when(
       data: data,
       loading: () => const ListTile(
-        title: Center(child: CircularProgressIndicator()),
+        title: centeredCircularProgressIndicator,
       ),
       error: (e, st) {
         recordError(e, st, information: errorInfo);
