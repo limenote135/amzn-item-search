@@ -46,7 +46,6 @@ app.*.map.json
 
 /key.jks
 /keys
-/website
 /ios/build
 
 /android/app/google-services.json
