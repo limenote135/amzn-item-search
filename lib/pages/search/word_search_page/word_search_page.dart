@@ -1,6 +1,7 @@
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/util/error_report.dart';
+import 'package:amasearch/widgets/progress_indicator.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -126,7 +127,7 @@ class _Body extends HookConsumerWidget {
           )))
           .when(
             loading: () => SliverChildListDelegate(
-              [const Center(child: CircularProgressIndicator())],
+              [centeredCircularProgressIndicator],
             ),
             error: (error, stackTrace) {
               recordError(error, stackTrace, information: [
