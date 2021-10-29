@@ -1,12 +1,13 @@
 import 'package:amasearch/models/enums/item_sub_condition.dart';
-import 'package:amasearch/models/enums/shortcut_type.dart';
-import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'events.dart';
+
+const propValueMaxLength = 36;
+const eventValueMaxLength = 100;
 
 final _analyticsProvider = Provider((_) => FirebaseAnalytics());
 
@@ -21,10 +22,13 @@ class AnalyticsController {
   final Reader _read;
 
   Future<void> logPurchaseEvent(StockItem stock) {
+    final title = stock.item.title.length > eventValueMaxLength
+        ? stock.item.title.substring(0, eventValueMaxLength)
+        : stock.item.title;
     return _read(_analyticsProvider)
         .logEvent(name: purchaseEventName, parameters: <String, dynamic>{
       "ASIN": stock.item.asin,
-      "title": stock.item.title,
+      "title": title,
       "quantity": stock.amount,
       "purchasePrice": stock.purchasePrice,
       "sellPrice": stock.sellPrice,
@@ -64,50 +68,14 @@ class AnalyticsController {
   }
 
   Future<void> setUserProp(String name, String value) {
-    return _read(_analyticsProvider).setUserProperty(name: name, value: value);
+    final normalizedVal = value.length > propValueMaxLength
+        ? value.substring(0, propValueMaxLength)
+        : value;
+    return _read(_analyticsProvider)
+        .setUserProperty(name: name, value: normalizedVal);
   }
 
   Future<void> setUserId(String? uid) {
     return _read(_analyticsProvider).setUserId(uid);
-  }
-
-  static String encodeShortcutToUserProp(List<ShortcutDetail> commands) {
-    // ユーザープロパティの値の最大は36文字
-    final buffer = StringBuffer("[");
-    for (var i = 0; i < commands.length; i++) {
-      if (commands[i].type != ShortcutType.none) {
-        final val = _createShortcutPropVal(commands[i]);
-        buffer
-          ..write("(")
-          ..write(val)
-          ..write(")");
-      }
-    }
-    buffer.write("]");
-    return buffer.toString();
-  }
-
-  static String _createShortcutPropVal(ShortcutDetail command) {
-    switch (command.type) {
-      case ShortcutType.none:
-        // ここにはこないはず
-        return "";
-      case ShortcutType.purchase:
-        return "buy";
-      case ShortcutType.delete:
-        return "del";
-      case ShortcutType.web:
-        return "web:${command.param}";
-      case ShortcutType.navigation:
-        switch (command.param) {
-          case navigationTargetNewOffers:
-            return "nav:new";
-          case navigationTargetUsedOffers:
-            return "nav:used";
-          case navigationTargetKeepa:
-            return "nav:kp";
-        }
-        return "nav:${command.param}";
-    }
   }
 }
