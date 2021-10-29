@@ -6,6 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'events.dart';
 
+const propValueMaxLength = 36;
+const eventValueMaxLength = 100;
+
 final _analyticsProvider = Provider((_) => FirebaseAnalytics());
 
 final analyticsObserverProvider = Provider((ref) =>
@@ -19,10 +22,13 @@ class AnalyticsController {
   final Reader _read;
 
   Future<void> logPurchaseEvent(StockItem stock) {
+    final title = stock.item.title.length > eventValueMaxLength
+        ? stock.item.title.substring(0, eventValueMaxLength)
+        : stock.item.title;
     return _read(_analyticsProvider)
         .logEvent(name: purchaseEventName, parameters: <String, dynamic>{
       "ASIN": stock.item.asin,
-      "title": stock.item.title,
+      "title": title,
       "quantity": stock.amount,
       "purchasePrice": stock.purchasePrice,
       "sellPrice": stock.sellPrice,
@@ -62,7 +68,11 @@ class AnalyticsController {
   }
 
   Future<void> setUserProp(String name, String value) {
-    return _read(_analyticsProvider).setUserProperty(name: name, value: value);
+    final normalizedVal = value.length > propValueMaxLength
+        ? value.substring(0, propValueMaxLength)
+        : value;
+    return _read(_analyticsProvider)
+        .setUserProperty(name: name, value: normalizedVal);
   }
 
   Future<void> setUserId(String? uid) {

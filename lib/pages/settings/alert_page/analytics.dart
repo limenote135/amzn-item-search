@@ -8,8 +8,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 void updateAlertConditionAnalytics(
     BuildContext context, WidgetRef ref, List<AlertConditionSet> alerts) {
   final prop = _encodeAlertConditionToUserProps(alerts);
-  ref.read(analyticsControllerProvider).setUserProp(
-      alertSettingsPropName, prop.length > 36 ? prop.substring(0, 36) : prop);
+  ref
+      .read(analyticsControllerProvider)
+      .setUserProp(alertSettingsPropName, prop);
 }
 
 String _encodeAlertConditionToUserProps(List<AlertConditionSet> alerts) {
