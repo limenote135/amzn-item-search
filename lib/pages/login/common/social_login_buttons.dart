@@ -90,7 +90,8 @@ class SocialLoginButtons extends HookConsumerWidget {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
                         await FlutterWebBrowser.openWebPage(
-                          url: "https://www.google.co.jp",
+                          url:
+                              "https://amasearch.app.knz-c.com/terms/terms_of_service.txt",
                         );
                       },
                   ),
@@ -104,7 +105,7 @@ class SocialLoginButtons extends HookConsumerWidget {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
                         await FlutterWebBrowser.openWebPage(
-                          url: "https://www.yahoo.co.jp",
+                          url: "https://amasearch.app.knz-c.com/terms/privacy_policy.txt",
                         );
                       },
                   ),
