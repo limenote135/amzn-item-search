@@ -34,7 +34,7 @@ class _$BookoffResponseTearOff {
     );
   }
 
-  BookoffResponse fromJson(Map<String, Object> json) {
+  BookoffResponse fromJson(Map<String, Object?> json) {
     return BookoffResponse.fromJson(json);
   }
 }
@@ -195,26 +195,19 @@ class _$_BookoffResponse implements _BookoffResponse {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _BookoffResponse &&
+        (other.runtimeType == runtimeType &&
+            other is _BookoffResponse &&
             (identical(other.instoreCode, instoreCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.instoreCode, instoreCode)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
+                other.instoreCode == instoreCode) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.subtitle, subtitle) ||
-                const DeepCollectionEquality()
-                    .equals(other.subtitle, subtitle)) &&
-            (identical(other.jan, jan) ||
-                const DeepCollectionEquality().equals(other.jan, jan)));
+                other.subtitle == subtitle) &&
+            (identical(other.jan, jan) || other.jan == jan));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(instoreCode) ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(subtitle) ^
-      const DeepCollectionEquality().hash(jan);
+      Object.hash(runtimeType, instoreCode, title, subtitle, jan);
 
   @JsonKey(ignore: true)
   @override
@@ -239,16 +232,16 @@ abstract class _BookoffResponse implements BookoffResponse {
 
   @override
   @JsonKey(name: "INSTORECODE")
-  String get instoreCode => throw _privateConstructorUsedError;
+  String get instoreCode;
   @override
   @JsonKey(name: "GOODS_NAME1")
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
   @JsonKey(name: "GOODS_NAME2")
-  String? get subtitle => throw _privateConstructorUsedError;
+  String? get subtitle;
   @override
   @JsonKey(name: "JAN")
-  String get jan => throw _privateConstructorUsedError;
+  String get jan;
   @override
   @JsonKey(ignore: true)
   _$BookoffResponseCopyWith<_BookoffResponse> get copyWith =>
