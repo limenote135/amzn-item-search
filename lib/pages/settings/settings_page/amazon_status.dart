@@ -10,8 +10,8 @@ class AmazonStatus extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(linkedWithAmazonProvider);
     return user.when(
-      loading: () => const Text(""),
-      error: (error, stackTrace) {
+      loading: (_) => const Text(""),
+      error: (error, stackTrace, _) {
         recordError(error, stackTrace,
             information: const ["AmazonStatus.linkedWithAmazonProvider when"]);
         return Text("$error");

@@ -126,10 +126,10 @@ class _Body extends HookConsumerWidget {
             category: category.state,
           )))
           .when(
-            loading: () => SliverChildListDelegate(
+            loading: (_) => SliverChildListDelegate(
               [centeredCircularProgressIndicator],
             ),
-            error: (error, stackTrace) {
+            error: (error, stackTrace, _) {
               recordError(error, stackTrace, information: [
                 "WordSearchPage.AppBar.Body.queryItemResultProvider",
                 "query: ${word.state}, category: ${category.state}",

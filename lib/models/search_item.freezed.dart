@@ -161,22 +161,17 @@ class _$_SearchItem implements _SearchItem {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SearchItem &&
+        (other.runtimeType == runtimeType &&
+            other is _SearchItem &&
             (identical(other.searchDate, searchDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.searchDate, searchDate)) &&
-            (identical(other.jan, jan) ||
-                const DeepCollectionEquality().equals(other.jan, jan)) &&
-            (identical(other.asins, asins) ||
-                const DeepCollectionEquality().equals(other.asins, asins)));
+                other.searchDate == searchDate) &&
+            (identical(other.jan, jan) || other.jan == jan) &&
+            const DeepCollectionEquality().equals(other.asins, asins));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(searchDate) ^
-      const DeepCollectionEquality().hash(jan) ^
-      const DeepCollectionEquality().hash(asins);
+  int get hashCode => Object.hash(
+      runtimeType, searchDate, jan, const DeepCollectionEquality().hash(asins));
 
   @JsonKey(ignore: true)
   @override
@@ -192,13 +187,13 @@ abstract class _SearchItem implements SearchItem {
 
   @override
   @HiveField(0)
-  String get searchDate => throw _privateConstructorUsedError;
+  String get searchDate;
   @override
   @HiveField(1)
-  String get jan => throw _privateConstructorUsedError;
+  String get jan;
   @override
   @HiveField(2)
-  List<AsinData> get asins => throw _privateConstructorUsedError;
+  List<AsinData> get asins;
   @override
   @JsonKey(ignore: true)
   _$SearchItemCopyWith<_SearchItem> get copyWith =>
@@ -253,7 +248,7 @@ class _$AsinDataTearOff {
     );
   }
 
-  AsinData fromJson(Map<String, Object> json) {
+  AsinData fromJson(Map<String, Object?> json) {
     return AsinData.fromJson(json);
   }
 }
@@ -572,51 +567,30 @@ class _$_AsinData implements _AsinData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AsinData &&
-            (identical(other.jan, jan) ||
-                const DeepCollectionEquality().equals(other.jan, jan)) &&
-            (identical(other.asin, asin) ||
-                const DeepCollectionEquality().equals(other.asin, asin)) &&
+        (other.runtimeType == runtimeType &&
+            other is _AsinData &&
+            (identical(other.jan, jan) || other.jan == jan) &&
+            (identical(other.asin, asin) || other.asin == asin) &&
             (identical(other.listPrice, listPrice) ||
-                const DeepCollectionEquality()
-                    .equals(other.listPrice, listPrice)) &&
+                other.listPrice == listPrice) &&
             (identical(other.imageUrl, imageUrl) ||
-                const DeepCollectionEquality()
-                    .equals(other.imageUrl, imageUrl)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.rank, rank) ||
-                const DeepCollectionEquality().equals(other.rank, rank)) &&
+                other.imageUrl == imageUrl) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.rank, rank) || other.rank == rank) &&
             (identical(other.quantity, quantity) ||
-                const DeepCollectionEquality()
-                    .equals(other.quantity, quantity)) &&
-            (identical(other.prices, prices) ||
-                const DeepCollectionEquality().equals(other.prices, prices)) &&
+                other.quantity == quantity) &&
+            (identical(other.prices, prices) || other.prices == prices) &&
             (identical(other.imageData, imageData) ||
-                const DeepCollectionEquality()
-                    .equals(other.imageData, imageData)) &&
+                other.imageData == imageData) &&
             (identical(other.category, category) ||
-                const DeepCollectionEquality()
-                    .equals(other.category, category)) &&
+                other.category == category) &&
             (identical(other.sellByAmazon, sellByAmazon) ||
-                const DeepCollectionEquality()
-                    .equals(other.sellByAmazon, sellByAmazon)));
+                other.sellByAmazon == sellByAmazon));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(jan) ^
-      const DeepCollectionEquality().hash(asin) ^
-      const DeepCollectionEquality().hash(listPrice) ^
-      const DeepCollectionEquality().hash(imageUrl) ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(rank) ^
-      const DeepCollectionEquality().hash(quantity) ^
-      const DeepCollectionEquality().hash(prices) ^
-      const DeepCollectionEquality().hash(imageData) ^
-      const DeepCollectionEquality().hash(category) ^
-      const DeepCollectionEquality().hash(sellByAmazon);
+  int get hashCode => Object.hash(runtimeType, jan, asin, listPrice, imageUrl,
+      title, rank, quantity, prices, imageData, category, sellByAmazon);
 
   @JsonKey(ignore: true)
   @override
@@ -660,39 +634,39 @@ abstract class _AsinData implements AsinData {
 
   @override
   @HiveField(0)
-  String get jan => throw _privateConstructorUsedError;
+  String get jan;
   @override
   @HiveField(1)
-  String get asin => throw _privateConstructorUsedError;
+  String get asin;
   @override
   @HiveField(2)
-  int get listPrice => throw _privateConstructorUsedError;
+  int get listPrice;
   @override // 参考価格
   @HiveField(3)
-  String get imageUrl => throw _privateConstructorUsedError;
+  String get imageUrl;
   @override
   @HiveField(4)
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
   @HiveField(5)
-  int get rank => throw _privateConstructorUsedError;
+  int get rank;
   @override
   @HiveField(6)
-  String get quantity => throw _privateConstructorUsedError;
+  String get quantity;
   @override // セット数
   @HiveField(7)
-  ItemPrices? get prices => throw _privateConstructorUsedError;
+  ItemPrices? get prices;
   @override
   @HiveField(8)
   @JsonKey(ignore: true)
-  Uint8List? get imageData => throw _privateConstructorUsedError;
+  Uint8List? get imageData;
   @override
   @HiveField(9, defaultValue: "")
   @ItemCategoryConverter()
-  String get category => throw _privateConstructorUsedError;
+  String get category;
   @override
   @HiveField(10)
-  bool? get sellByAmazon => throw _privateConstructorUsedError;
+  bool? get sellByAmazon;
   @override
   @JsonKey(ignore: true)
   _$AsinDataCopyWith<_AsinData> get copyWith =>

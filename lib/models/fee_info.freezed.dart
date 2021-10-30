@@ -37,7 +37,7 @@ class _$FeeInfoTearOff {
     );
   }
 
-  FeeInfo fromJson(Map<String, Object> json) {
+  FeeInfo fromJson(Map<String, Object?> json) {
     return FeeInfo.fromJson(json);
   }
 }
@@ -183,23 +183,18 @@ class _$_FeeInfo implements _FeeInfo {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _FeeInfo &&
+        (other.runtimeType == runtimeType &&
+            other is _FeeInfo &&
             (identical(other.referralFeeRate, referralFeeRate) ||
-                const DeepCollectionEquality()
-                    .equals(other.referralFeeRate, referralFeeRate)) &&
+                other.referralFeeRate == referralFeeRate) &&
             (identical(other.variableClosingFee, variableClosingFee) ||
-                const DeepCollectionEquality()
-                    .equals(other.variableClosingFee, variableClosingFee)) &&
-            (identical(other.fbaFee, fbaFee) ||
-                const DeepCollectionEquality().equals(other.fbaFee, fbaFee)));
+                other.variableClosingFee == variableClosingFee) &&
+            (identical(other.fbaFee, fbaFee) || other.fbaFee == fbaFee));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(referralFeeRate) ^
-      const DeepCollectionEquality().hash(variableClosingFee) ^
-      const DeepCollectionEquality().hash(fbaFee);
+      Object.hash(runtimeType, referralFeeRate, variableClosingFee, fbaFee);
 
   @JsonKey(ignore: true)
   @override
@@ -228,14 +223,14 @@ abstract class _FeeInfo implements FeeInfo {
   @override
   @HiveField(0)
   @JsonKey(name: "fee_rate")
-  double get referralFeeRate => throw _privateConstructorUsedError;
+  double get referralFeeRate;
   @override
   @HiveField(1)
   @JsonKey(name: "closing_fee")
-  int get variableClosingFee => throw _privateConstructorUsedError;
+  int get variableClosingFee;
   @override
   @HiveField(2)
-  int get fbaFee => throw _privateConstructorUsedError;
+  int get fbaFee;
   @override
   @JsonKey(ignore: true)
   _$FeeInfoCopyWith<_FeeInfo> get copyWith =>
