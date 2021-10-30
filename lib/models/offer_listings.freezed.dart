@@ -253,41 +253,25 @@ class _$_OfferListingsParams implements _OfferListingsParams {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _OfferListingsParams &&
-            (identical(other.asin, asin) ||
-                const DeepCollectionEquality().equals(other.asin, asin)) &&
-            (identical(other.prime, prime) ||
-                const DeepCollectionEquality().equals(other.prime, prime)) &&
-            (identical(other.newItem, newItem) ||
-                const DeepCollectionEquality()
-                    .equals(other.newItem, newItem)) &&
+        (other.runtimeType == runtimeType &&
+            other is _OfferListingsParams &&
+            (identical(other.asin, asin) || other.asin == asin) &&
+            (identical(other.prime, prime) || other.prime == prime) &&
+            (identical(other.newItem, newItem) || other.newItem == newItem) &&
             (identical(other.usedLikeNew, usedLikeNew) ||
-                const DeepCollectionEquality()
-                    .equals(other.usedLikeNew, usedLikeNew)) &&
+                other.usedLikeNew == usedLikeNew) &&
             (identical(other.usedVeryGood, usedVeryGood) ||
-                const DeepCollectionEquality()
-                    .equals(other.usedVeryGood, usedVeryGood)) &&
+                other.usedVeryGood == usedVeryGood) &&
             (identical(other.usedGood, usedGood) ||
-                const DeepCollectionEquality()
-                    .equals(other.usedGood, usedGood)) &&
+                other.usedGood == usedGood) &&
             (identical(other.usedAcceptable, usedAcceptable) ||
-                const DeepCollectionEquality()
-                    .equals(other.usedAcceptable, usedAcceptable)) &&
-            (identical(other.page, page) ||
-                const DeepCollectionEquality().equals(other.page, page)));
+                other.usedAcceptable == usedAcceptable) &&
+            (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(asin) ^
-      const DeepCollectionEquality().hash(prime) ^
-      const DeepCollectionEquality().hash(newItem) ^
-      const DeepCollectionEquality().hash(usedLikeNew) ^
-      const DeepCollectionEquality().hash(usedVeryGood) ^
-      const DeepCollectionEquality().hash(usedGood) ^
-      const DeepCollectionEquality().hash(usedAcceptable) ^
-      const DeepCollectionEquality().hash(page);
+  int get hashCode => Object.hash(runtimeType, asin, prime, newItem,
+      usedLikeNew, usedVeryGood, usedGood, usedAcceptable, page);
 
   @JsonKey(ignore: true)
   @override
@@ -308,21 +292,21 @@ abstract class _OfferListingsParams implements OfferListingsParams {
       int page}) = _$_OfferListingsParams;
 
   @override
-  String get asin => throw _privateConstructorUsedError;
+  String get asin;
   @override
-  bool get prime => throw _privateConstructorUsedError;
+  bool get prime;
   @override
-  bool get newItem => throw _privateConstructorUsedError;
+  bool get newItem;
   @override
-  bool get usedLikeNew => throw _privateConstructorUsedError;
+  bool get usedLikeNew;
   @override
-  bool get usedVeryGood => throw _privateConstructorUsedError;
+  bool get usedVeryGood;
   @override
-  bool get usedGood => throw _privateConstructorUsedError;
+  bool get usedGood;
   @override
-  bool get usedAcceptable => throw _privateConstructorUsedError;
+  bool get usedAcceptable;
   @override
-  int get page => throw _privateConstructorUsedError;
+  int get page;
   @override
   @JsonKey(ignore: true)
   _$OfferListingsParamsCopyWith<_OfferListingsParams> get copyWith =>
@@ -459,18 +443,14 @@ class _$_OfferAtIndexParam implements _OfferAtIndexParam {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _OfferAtIndexParam &&
-            (identical(other.params, params) ||
-                const DeepCollectionEquality().equals(other.params, params)) &&
-            (identical(other.index, index) ||
-                const DeepCollectionEquality().equals(other.index, index)));
+        (other.runtimeType == runtimeType &&
+            other is _OfferAtIndexParam &&
+            (identical(other.params, params) || other.params == params) &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(params) ^
-      const DeepCollectionEquality().hash(index);
+  int get hashCode => Object.hash(runtimeType, params, index);
 
   @JsonKey(ignore: true)
   @override
@@ -484,9 +464,9 @@ abstract class _OfferAtIndexParam implements OfferAtIndexParam {
       required int index}) = _$_OfferAtIndexParam;
 
   @override
-  OfferListingsParams get params => throw _privateConstructorUsedError;
+  OfferListingsParams get params;
   @override
-  int get index => throw _privateConstructorUsedError;
+  int get index;
   @override
   @JsonKey(ignore: true)
   _$OfferAtIndexParamCopyWith<_OfferAtIndexParam> get copyWith =>
@@ -664,24 +644,17 @@ class _$_OfferListings implements _OfferListings {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _OfferListings &&
-            (identical(other.asin, asin) ||
-                const DeepCollectionEquality().equals(other.asin, asin)) &&
-            (identical(other.total, total) ||
-                const DeepCollectionEquality().equals(other.total, total)) &&
-            (identical(other.cart, cart) ||
-                const DeepCollectionEquality().equals(other.cart, cart)) &&
-            (identical(other.offers, offers) ||
-                const DeepCollectionEquality().equals(other.offers, offers)));
+        (other.runtimeType == runtimeType &&
+            other is _OfferListings &&
+            (identical(other.asin, asin) || other.asin == asin) &&
+            (identical(other.total, total) || other.total == total) &&
+            (identical(other.cart, cart) || other.cart == cart) &&
+            const DeepCollectionEquality().equals(other.offers, offers));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(asin) ^
-      const DeepCollectionEquality().hash(total) ^
-      const DeepCollectionEquality().hash(cart) ^
-      const DeepCollectionEquality().hash(offers);
+  int get hashCode => Object.hash(runtimeType, asin, total, cart,
+      const DeepCollectionEquality().hash(offers));
 
   @JsonKey(ignore: true)
   @override
@@ -697,13 +670,13 @@ abstract class _OfferListings implements OfferListings {
       List<OfferItem> offers}) = _$_OfferListings;
 
   @override
-  String get asin => throw _privateConstructorUsedError;
+  String get asin;
   @override
-  int get total => throw _privateConstructorUsedError;
+  int get total;
   @override
-  OfferItem? get cart => throw _privateConstructorUsedError;
+  OfferItem? get cart;
   @override
-  List<OfferItem> get offers => throw _privateConstructorUsedError;
+  List<OfferItem> get offers;
   @override
   @JsonKey(ignore: true)
   _$OfferListingsCopyWith<_OfferListings> get copyWith =>
@@ -903,34 +876,23 @@ class _$_OfferItem implements _OfferItem {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _OfferItem &&
+        (other.runtimeType == runtimeType &&
+            other is _OfferItem &&
             (identical(other.shopName, shopName) ||
-                const DeepCollectionEquality()
-                    .equals(other.shopName, shopName)) &&
+                other.shopName == shopName) &&
             (identical(other.sellerId, sellerId) ||
-                const DeepCollectionEquality()
-                    .equals(other.sellerId, sellerId)) &&
-            (identical(other.price, price) ||
-                const DeepCollectionEquality().equals(other.price, price)) &&
+                other.sellerId == sellerId) &&
+            (identical(other.price, price) || other.price == price) &&
             (identical(other.condition, condition) ||
-                const DeepCollectionEquality()
-                    .equals(other.condition, condition)) &&
+                other.condition == condition) &&
             (identical(other.hasImage, hasImage) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasImage, hasImage)) &&
-            (identical(other.isFba, isFba) ||
-                const DeepCollectionEquality().equals(other.isFba, isFba)));
+                other.hasImage == hasImage) &&
+            (identical(other.isFba, isFba) || other.isFba == isFba));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(shopName) ^
-      const DeepCollectionEquality().hash(sellerId) ^
-      const DeepCollectionEquality().hash(price) ^
-      const DeepCollectionEquality().hash(condition) ^
-      const DeepCollectionEquality().hash(hasImage) ^
-      const DeepCollectionEquality().hash(isFba);
+  int get hashCode => Object.hash(
+      runtimeType, shopName, sellerId, price, condition, hasImage, isFba);
 
   @JsonKey(ignore: true)
   @override
@@ -948,17 +910,17 @@ abstract class _OfferItem implements OfferItem {
       required bool isFba}) = _$_OfferItem;
 
   @override
-  String get shopName => throw _privateConstructorUsedError;
+  String get shopName;
   @override
-  String get sellerId => throw _privateConstructorUsedError;
+  String get sellerId;
   @override
-  int get price => throw _privateConstructorUsedError;
+  int get price;
   @override
-  String get condition => throw _privateConstructorUsedError;
+  String get condition;
   @override
-  bool get hasImage => throw _privateConstructorUsedError;
+  bool get hasImage;
   @override
-  bool get isFba => throw _privateConstructorUsedError;
+  bool get isFba;
   @override
   @JsonKey(ignore: true)
   _$OfferItemCopyWith<_OfferItem> get copyWith =>

@@ -22,8 +22,8 @@ class StockText extends HookConsumerWidget {
     final param = OfferStocksParam(asin: asin, sellerId: sellerId);
     final smallSize = Theme.of(context).textTheme.bodyText2;
     return ref.watch(offerStocksFutureProvider(param)).when(
-          loading: () => Text("在庫: loading", style: smallSize),
-          error: (error, stackTrace) {
+          loading: (_) => Text("在庫: loading", style: smallSize),
+          error: (error, stackTrace, _) {
             recordError(error, stackTrace, information: [
               "StockText.offerStocksFutureProvider",
               "ASIN: $asin, SellerID: $sellerId",

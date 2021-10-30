@@ -30,7 +30,7 @@ class _$AlertConditionTearOff {
     );
   }
 
-  AlertCondition fromJson(Map<String, Object> json) {
+  AlertCondition fromJson(Map<String, Object?> json) {
     return AlertCondition.fromJson(json);
   }
 }
@@ -159,18 +159,14 @@ class _$_AlertCondition implements _AlertCondition {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AlertCondition &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)) &&
-            (identical(other.value, value) ||
-                const DeepCollectionEquality().equals(other.value, value)));
+        (other.runtimeType == runtimeType &&
+            other is _AlertCondition &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.value, value) || other.value == value));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(type) ^
-      const DeepCollectionEquality().hash(value);
+  int get hashCode => Object.hash(runtimeType, type, value);
 
   @JsonKey(ignore: true)
   @override
@@ -194,11 +190,11 @@ abstract class _AlertCondition implements AlertCondition {
   @override
   @HiveField(0)
   @JsonKey(name: "t")
-  AlertType get type => throw _privateConstructorUsedError;
+  AlertType get type;
   @override
   @HiveField(1)
   @JsonKey(name: "v")
-  int get value => throw _privateConstructorUsedError;
+  int get value;
   @override
   @JsonKey(ignore: true)
   _$AlertConditionCopyWith<_AlertCondition> get copyWith =>
