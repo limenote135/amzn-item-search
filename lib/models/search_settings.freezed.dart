@@ -208,30 +208,21 @@ class _$_SearchSettings implements _SearchSettings {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SearchSettings &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)) &&
+        (other.runtimeType == runtimeType &&
+            other is _SearchSettings &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.usedSubCondition, usedSubCondition) ||
-                const DeepCollectionEquality()
-                    .equals(other.usedSubCondition, usedSubCondition)) &&
-            (identical(other.useFba, useFba) ||
-                const DeepCollectionEquality().equals(other.useFba, useFba)) &&
+                other.usedSubCondition == usedSubCondition) &&
+            (identical(other.useFba, useFba) || other.useFba == useFba) &&
             (identical(other.priorFba, priorFba) ||
-                const DeepCollectionEquality()
-                    .equals(other.priorFba, priorFba)) &&
+                other.priorFba == priorFba) &&
             (identical(other.continuousCameraRead, continuousCameraRead) ||
-                const DeepCollectionEquality()
-                    .equals(other.continuousCameraRead, continuousCameraRead)));
+                other.continuousCameraRead == continuousCameraRead));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(type) ^
-      const DeepCollectionEquality().hash(usedSubCondition) ^
-      const DeepCollectionEquality().hash(useFba) ^
-      const DeepCollectionEquality().hash(priorFba) ^
-      const DeepCollectionEquality().hash(continuousCameraRead);
+  int get hashCode => Object.hash(runtimeType, type, usedSubCondition, useFba,
+      priorFba, continuousCameraRead);
 
   @JsonKey(ignore: true)
   @override
@@ -250,19 +241,19 @@ abstract class _SearchSettings implements SearchSettings {
 
   @override
   @HiveField(0)
-  SearchType get type => throw _privateConstructorUsedError;
+  SearchType get type;
   @override
   @HiveField(1)
-  UsedSubCondition get usedSubCondition => throw _privateConstructorUsedError;
+  UsedSubCondition get usedSubCondition;
   @override
   @HiveField(2)
-  bool get useFba => throw _privateConstructorUsedError;
+  bool get useFba;
   @override
   @HiveField(3)
-  bool get priorFba => throw _privateConstructorUsedError;
+  bool get priorFba;
   @override
   @HiveField(4, defaultValue: true)
-  bool get continuousCameraRead => throw _privateConstructorUsedError;
+  bool get continuousCameraRead;
   @override
   @JsonKey(ignore: true)
   _$SearchSettingsCopyWith<_SearchSettings> get copyWith =>

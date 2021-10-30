@@ -20,8 +20,8 @@ class AsyncValueWidget<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return value.when(
       data: data,
-      loading: () => centeredCircularProgressIndicator,
-      error: (e, st) {
+      loading: (_) => centeredCircularProgressIndicator,
+      error: (e, st, _) {
         recordError(e, st, information: errorInfo);
         return ListTile(
           title: Text("$e"),
@@ -47,10 +47,10 @@ class AsyncValueListTileWidget<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return value.when(
       data: data,
-      loading: () => const ListTile(
+      loading: (_) => const ListTile(
         title: centeredCircularProgressIndicator,
       ),
-      error: (e, st) {
+      error: (e, st, _) {
         recordError(e, st, information: errorInfo);
         return ListTile(
           title: Text("$e"),

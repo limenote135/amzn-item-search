@@ -30,7 +30,7 @@ class _$GetProductByIdResponseTearOff {
     );
   }
 
-  GetProductByIdResponse fromJson(Map<String, Object> json) {
+  GetProductByIdResponse fromJson(Map<String, Object?> json) {
     return GetProductByIdResponse.fromJson(json);
   }
 }
@@ -145,18 +145,15 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _GetProductByIdResponse &&
-            (identical(other.jan, jan) ||
-                const DeepCollectionEquality().equals(other.jan, jan)) &&
-            (identical(other.items, items) ||
-                const DeepCollectionEquality().equals(other.items, items)));
+        (other.runtimeType == runtimeType &&
+            other is _GetProductByIdResponse &&
+            (identical(other.jan, jan) || other.jan == jan) &&
+            const DeepCollectionEquality().equals(other.items, items));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(jan) ^
-      const DeepCollectionEquality().hash(items);
+      Object.hash(runtimeType, jan, const DeepCollectionEquality().hash(items));
 
   @JsonKey(ignore: true)
   @override
@@ -179,9 +176,9 @@ abstract class _GetProductByIdResponse implements GetProductByIdResponse {
       _$_GetProductByIdResponse.fromJson;
 
   @override
-  String get jan => throw _privateConstructorUsedError;
+  String get jan;
   @override
-  List<AsinData> get items => throw _privateConstructorUsedError;
+  List<AsinData> get items;
   @override
   @JsonKey(ignore: true)
   _$GetProductByIdResponseCopyWith<_GetProductByIdResponse> get copyWith =>
@@ -204,7 +201,7 @@ class _$GetProductPricesResponseTearOff {
     );
   }
 
-  GetProductPricesResponse fromJson(Map<String, Object> json) {
+  GetProductPricesResponse fromJson(Map<String, Object?> json) {
     return GetProductPricesResponse.fromJson(json);
   }
 }
@@ -336,19 +333,15 @@ class _$_GetProductPricesResponse implements _GetProductPricesResponse {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _GetProductPricesResponse &&
-            (identical(other.prices, prices) ||
-                const DeepCollectionEquality().equals(other.prices, prices)) &&
+        (other.runtimeType == runtimeType &&
+            other is _GetProductPricesResponse &&
+            (identical(other.prices, prices) || other.prices == prices) &&
             (identical(other.sellByAmazon, sellByAmazon) ||
-                const DeepCollectionEquality()
-                    .equals(other.sellByAmazon, sellByAmazon)));
+                other.sellByAmazon == sellByAmazon));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(prices) ^
-      const DeepCollectionEquality().hash(sellByAmazon);
+  int get hashCode => Object.hash(runtimeType, prices, sellByAmazon);
 
   @JsonKey(ignore: true)
   @override
@@ -370,9 +363,9 @@ abstract class _GetProductPricesResponse implements GetProductPricesResponse {
       _$_GetProductPricesResponse.fromJson;
 
   @override
-  ItemPrices? get prices => throw _privateConstructorUsedError;
+  ItemPrices? get prices;
   @override
-  bool? get sellByAmazon => throw _privateConstructorUsedError;
+  bool? get sellByAmazon;
   @override
   @JsonKey(ignore: true)
   _$GetProductPricesResponseCopyWith<_GetProductPricesResponse> get copyWith =>
@@ -500,19 +493,15 @@ class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ListMatchingProductRequest &&
-            (identical(other.query, query) ||
-                const DeepCollectionEquality().equals(other.query, query)) &&
+        (other.runtimeType == runtimeType &&
+            other is _ListMatchingProductRequest &&
+            (identical(other.query, query) || other.query == query) &&
             (identical(other.category, category) ||
-                const DeepCollectionEquality()
-                    .equals(other.category, category)));
+                other.category == category));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(query) ^
-      const DeepCollectionEquality().hash(category);
+  int get hashCode => Object.hash(runtimeType, query, category);
 
   @JsonKey(ignore: true)
   @override
@@ -528,9 +517,9 @@ abstract class _ListMatchingProductRequest
       required String category}) = _$_ListMatchingProductRequest;
 
   @override
-  String get query => throw _privateConstructorUsedError;
+  String get query;
   @override
-  String get category => throw _privateConstructorUsedError;
+  String get category;
   @override
   @JsonKey(ignore: true)
   _$ListMatchingProductRequestCopyWith<_ListMatchingProductRequest>
@@ -552,7 +541,7 @@ class _$ListMatchingProductResponseTearOff {
     );
   }
 
-  ListMatchingProductResponse fromJson(Map<String, Object> json) {
+  ListMatchingProductResponse fromJson(Map<String, Object?> json) {
     return ListMatchingProductResponse.fromJson(json);
   }
 }
@@ -658,14 +647,14 @@ class _$_ListMatchingProductResponse implements _ListMatchingProductResponse {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ListMatchingProductResponse &&
-            (identical(other.items, items) ||
-                const DeepCollectionEquality().equals(other.items, items)));
+        (other.runtimeType == runtimeType &&
+            other is _ListMatchingProductResponse &&
+            const DeepCollectionEquality().equals(other.items, items));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(items);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(items));
 
   @JsonKey(ignore: true)
   @override
@@ -688,7 +677,7 @@ abstract class _ListMatchingProductResponse
       _$_ListMatchingProductResponse.fromJson;
 
   @override
-  List<AsinData> get items => throw _privateConstructorUsedError;
+  List<AsinData> get items;
   @override
   @JsonKey(ignore: true)
   _$ListMatchingProductResponseCopyWith<_ListMatchingProductResponse>
@@ -709,7 +698,7 @@ class _$QueryItemsResponseTearOff {
     );
   }
 
-  QueryItemsResponse fromJson(Map<String, Object> json) {
+  QueryItemsResponse fromJson(Map<String, Object?> json) {
     return QueryItemsResponse.fromJson(json);
   }
 }
@@ -811,14 +800,14 @@ class _$_QueryItemsResponse implements _QueryItemsResponse {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _QueryItemsResponse &&
-            (identical(other.asins, asins) ||
-                const DeepCollectionEquality().equals(other.asins, asins)));
+        (other.runtimeType == runtimeType &&
+            other is _QueryItemsResponse &&
+            const DeepCollectionEquality().equals(other.asins, asins));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(asins);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(asins));
 
   @JsonKey(ignore: true)
   @override
@@ -839,7 +828,7 @@ abstract class _QueryItemsResponse implements QueryItemsResponse {
       _$_QueryItemsResponse.fromJson;
 
   @override
-  List<String> get asins => throw _privateConstructorUsedError;
+  List<String> get asins;
   @override
   @JsonKey(ignore: true)
   _$QueryItemsResponseCopyWith<_QueryItemsResponse> get copyWith =>
@@ -860,7 +849,7 @@ class _$GetAsinDataResponseTearOff {
     );
   }
 
-  GetAsinDataResponse fromJson(Map<String, Object> json) {
+  GetAsinDataResponse fromJson(Map<String, Object?> json) {
     return GetAsinDataResponse.fromJson(json);
   }
 }
@@ -974,14 +963,13 @@ class _$_GetAsinDataResponse implements _GetAsinDataResponse {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _GetAsinDataResponse &&
-            (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)));
+        (other.runtimeType == runtimeType &&
+            other is _GetAsinDataResponse &&
+            (identical(other.data, data) || other.data == data));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(data);
+  int get hashCode => Object.hash(runtimeType, data);
 
   @JsonKey(ignore: true)
   @override
@@ -1003,7 +991,7 @@ abstract class _GetAsinDataResponse implements GetAsinDataResponse {
       _$_GetAsinDataResponse.fromJson;
 
   @override
-  AsinData get data => throw _privateConstructorUsedError;
+  AsinData get data;
   @override
   @JsonKey(ignore: true)
   _$GetAsinDataResponseCopyWith<_GetAsinDataResponse> get copyWith =>

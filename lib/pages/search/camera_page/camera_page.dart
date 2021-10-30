@@ -59,8 +59,8 @@ class CameraPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: ref.watch(_backCameraFutureProvider).when(
-            loading: () => Container(),
-            error: (error, stackTrace) {
+            loading: (_) => Container(),
+            error: (error, stackTrace, _) {
               recordError(error, stackTrace,
                   information: const ["CameraPage build"]);
               return Container();

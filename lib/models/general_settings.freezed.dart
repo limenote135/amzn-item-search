@@ -644,95 +644,74 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _GeneralSettings &&
+        (other.runtimeType == runtimeType &&
+            other is _GeneralSettings &&
             (identical(other.isDarkMode, isDarkMode) ||
-                const DeepCollectionEquality()
-                    .equals(other.isDarkMode, isDarkMode)) &&
+                other.isDarkMode == isDarkMode) &&
             (identical(other.enableTargetProfit, enableTargetProfit) ||
-                const DeepCollectionEquality()
-                    .equals(other.enableTargetProfit, enableTargetProfit)) &&
+                other.enableTargetProfit == enableTargetProfit) &&
             (identical(other.targetProfitValue, targetProfitValue) ||
-                const DeepCollectionEquality()
-                    .equals(other.targetProfitValue, targetProfitValue)) &&
+                other.targetProfitValue == targetProfitValue) &&
             (identical(other.skuFormat, skuFormat) ||
-                const DeepCollectionEquality()
-                    .equals(other.skuFormat, skuFormat)) &&
-            (identical(other.retailers, retailers) ||
-                const DeepCollectionEquality()
-                    .equals(other.retailers, retailers)) &&
+                other.skuFormat == skuFormat) &&
+            const DeepCollectionEquality().equals(other.retailers, retailers) &&
             (identical(other.enableReadAloud, enableReadAloud) ||
-                const DeepCollectionEquality()
-                    .equals(other.enableReadAloud, enableReadAloud)) &&
+                other.enableReadAloud == enableReadAloud) &&
             (identical(other.patternIndex, patternIndex) ||
-                const DeepCollectionEquality()
-                    .equals(other.patternIndex, patternIndex)) &&
-            (identical(other.readAloudPatterns, readAloudPatterns) ||
-                const DeepCollectionEquality()
-                    .equals(other.readAloudPatterns, readAloudPatterns)) &&
+                other.patternIndex == patternIndex) &&
+            const DeepCollectionEquality()
+                .equals(other.readAloudPatterns, readAloudPatterns) &&
             (identical(other.readAloudVolume, readAloudVolume) ||
-                const DeepCollectionEquality()
-                    .equals(other.readAloudVolume, readAloudVolume)) &&
+                other.readAloudVolume == readAloudVolume) &&
             (identical(other.readAloudSpeed, readAloudSpeed) ||
-                const DeepCollectionEquality()
-                    .equals(other.readAloudSpeed, readAloudSpeed)) &&
-            (identical(other.customButtons, customButtons) ||
-                const DeepCollectionEquality()
-                    .equals(other.customButtons, customButtons)) &&
-            (identical(other.csvOrder, csvOrder) ||
-                const DeepCollectionEquality()
-                    .equals(other.csvOrder, csvOrder)) &&
+                other.readAloudSpeed == readAloudSpeed) &&
+            const DeepCollectionEquality()
+                .equals(other.customButtons, customButtons) &&
+            const DeepCollectionEquality().equals(other.csvOrder, csvOrder) &&
             (identical(other.minProfit, minProfit) ||
-                const DeepCollectionEquality()
-                    .equals(other.minProfit, minProfit)) &&
+                other.minProfit == minProfit) &&
             (identical(other.getStocks, getStocks) ||
-                const DeepCollectionEquality()
-                    .equals(other.getStocks, getStocks)) &&
+                other.getStocks == getStocks) &&
             (identical(other.enableAlert, enableAlert) ||
-                const DeepCollectionEquality()
-                    .equals(other.enableAlert, enableAlert)) &&
-            (identical(other.alerts, alerts) ||
-                const DeepCollectionEquality().equals(other.alerts, alerts)) &&
+                other.enableAlert == enableAlert) &&
+            const DeepCollectionEquality().equals(other.alerts, alerts) &&
             (identical(other.enableAlertVibration, enableAlertVibration) ||
-                const DeepCollectionEquality().equals(
-                    other.enableAlertVibration, enableAlertVibration)) &&
+                other.enableAlertVibration == enableAlertVibration) &&
             (identical(other.isMajorCustomer, isMajorCustomer) ||
-                const DeepCollectionEquality()
-                    .equals(other.isMajorCustomer, isMajorCustomer)) &&
+                other.isMajorCustomer == isMajorCustomer) &&
             (identical(other.keepaSettings, keepaSettings) ||
-                const DeepCollectionEquality()
-                    .equals(other.keepaSettings, keepaSettings)) &&
-            (identical(other.leftSlideShortcut, leftSlideShortcut) ||
-                const DeepCollectionEquality()
-                    .equals(other.leftSlideShortcut, leftSlideShortcut)) &&
-            (identical(other.rightSlideShortcut, rightSlideShortcut) ||
-                const DeepCollectionEquality()
-                    .equals(other.rightSlideShortcut, rightSlideShortcut)));
+                other.keepaSettings == keepaSettings) &&
+            const DeepCollectionEquality()
+                .equals(other.leftSlideShortcut, leftSlideShortcut) &&
+            const DeepCollectionEquality()
+                .equals(other.rightSlideShortcut, rightSlideShortcut));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(isDarkMode) ^
-      const DeepCollectionEquality().hash(enableTargetProfit) ^
-      const DeepCollectionEquality().hash(targetProfitValue) ^
-      const DeepCollectionEquality().hash(skuFormat) ^
-      const DeepCollectionEquality().hash(retailers) ^
-      const DeepCollectionEquality().hash(enableReadAloud) ^
-      const DeepCollectionEquality().hash(patternIndex) ^
-      const DeepCollectionEquality().hash(readAloudPatterns) ^
-      const DeepCollectionEquality().hash(readAloudVolume) ^
-      const DeepCollectionEquality().hash(readAloudSpeed) ^
-      const DeepCollectionEquality().hash(customButtons) ^
-      const DeepCollectionEquality().hash(csvOrder) ^
-      const DeepCollectionEquality().hash(minProfit) ^
-      const DeepCollectionEquality().hash(getStocks) ^
-      const DeepCollectionEquality().hash(enableAlert) ^
-      const DeepCollectionEquality().hash(alerts) ^
-      const DeepCollectionEquality().hash(enableAlertVibration) ^
-      const DeepCollectionEquality().hash(isMajorCustomer) ^
-      const DeepCollectionEquality().hash(keepaSettings) ^
-      const DeepCollectionEquality().hash(leftSlideShortcut) ^
-      const DeepCollectionEquality().hash(rightSlideShortcut);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        isDarkMode,
+        enableTargetProfit,
+        targetProfitValue,
+        skuFormat,
+        const DeepCollectionEquality().hash(retailers),
+        enableReadAloud,
+        patternIndex,
+        const DeepCollectionEquality().hash(readAloudPatterns),
+        readAloudVolume,
+        readAloudSpeed,
+        const DeepCollectionEquality().hash(customButtons),
+        const DeepCollectionEquality().hash(csvOrder),
+        minProfit,
+        getStocks,
+        enableAlert,
+        const DeepCollectionEquality().hash(alerts),
+        enableAlertVibration,
+        isMajorCustomer,
+        keepaSettings,
+        const DeepCollectionEquality().hash(leftSlideShortcut),
+        const DeepCollectionEquality().hash(rightSlideShortcut)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -787,71 +766,67 @@ abstract class _GeneralSettings implements GeneralSettings {
 
   @override // ダークモード
   @HiveField(0)
-  bool get isDarkMode => throw _privateConstructorUsedError;
+  bool get isDarkMode;
   @override // 目標利益率設定
   @HiveField(1)
-  bool get enableTargetProfit => throw _privateConstructorUsedError;
+  bool get enableTargetProfit;
   @override // 目標利益率
   @HiveField(2)
-  int get targetProfitValue => throw _privateConstructorUsedError;
+  int get targetProfitValue;
   @override // SKU 設定
   @HiveField(3)
-  String get skuFormat => throw _privateConstructorUsedError;
+  String get skuFormat;
   @override // 仕入れ先設定
   @HiveField(4)
-  List<String> get retailers => throw _privateConstructorUsedError;
+  List<String> get retailers;
   @override // 読み上げ設定
   @HiveField(5)
-  bool get enableReadAloud => throw _privateConstructorUsedError;
+  bool get enableReadAloud;
   @override
   @HiveField(6)
-  int get patternIndex => throw _privateConstructorUsedError;
+  int get patternIndex;
   @override
   @HiveField(7)
-  List<ReadAloudPattern> get readAloudPatterns =>
-      throw _privateConstructorUsedError;
+  List<ReadAloudPattern> get readAloudPatterns;
   @override
   @HiveField(8)
-  double get readAloudVolume => throw _privateConstructorUsedError;
+  double get readAloudVolume;
   @override
   @HiveField(9)
-  double? get readAloudSpeed => throw _privateConstructorUsedError;
+  double? get readAloudSpeed;
   @override // カスタムボタン設定
   @HiveField(10, defaultValue: defaultCustomButtons)
-  List<CustomButtonDetail> get customButtons =>
-      throw _privateConstructorUsedError;
+  List<CustomButtonDetail> get customButtons;
   @override // CSV の並び順
   @HiveField(11, defaultValue: _defaultCsvOrder)
-  List<CsvColumn> get csvOrder => throw _privateConstructorUsedError;
+  List<CsvColumn> get csvOrder;
   @override // 最低利益額
   @HiveField(12, defaultValue: 0)
-  int get minProfit => throw _privateConstructorUsedError;
+  int get minProfit;
   @override // 在庫の取得設定
   @HiveField(13, defaultValue: false)
-  bool get getStocks => throw _privateConstructorUsedError;
+  bool get getStocks;
   @override // アラート設定
   @HiveField(14, defaultValue: true)
-  bool get enableAlert => throw _privateConstructorUsedError;
+  bool get enableAlert;
   @override
   @HiveField(15, defaultValue: _defaultAlert)
-  List<AlertConditionSet> get alerts => throw _privateConstructorUsedError;
+  List<AlertConditionSet> get alerts;
   @override
   @HiveField(16, defaultValue: false)
-  bool get enableAlertVibration => throw _privateConstructorUsedError;
+  bool get enableAlertVibration;
   @override
   @HiveField(17, defaultValue: true)
-  bool get isMajorCustomer => throw _privateConstructorUsedError;
+  bool get isMajorCustomer;
   @override
   @HiveField(18, defaultValue: _defaultKeepaSettings)
-  KeepaSettings get keepaSettings => throw _privateConstructorUsedError;
+  KeepaSettings get keepaSettings;
   @override
   @HiveField(19, defaultValue: _defaultLeftShortcut)
-  List<ShortcutDetail> get leftSlideShortcut =>
-      throw _privateConstructorUsedError;
+  List<ShortcutDetail> get leftSlideShortcut;
   @override
   @HiveField(20, defaultValue: _defaultRightShortcut)
-  List<ShortcutDetail> get rightSlideShortcut =>
-      throw _privateConstructorUsedError;
+  List<ShortcutDetail> get rightSlideShortcut;
   @override
   @JsonKey(ignore: true)
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
@@ -983,18 +958,14 @@ class _$_ReadAloudPattern implements _ReadAloudPattern {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ReadAloudPattern &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.pattern, pattern) ||
-                const DeepCollectionEquality().equals(other.pattern, pattern)));
+        (other.runtimeType == runtimeType &&
+            other is _ReadAloudPattern &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.pattern, pattern) || other.pattern == pattern));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(pattern);
+  int get hashCode => Object.hash(runtimeType, title, pattern);
 
   @JsonKey(ignore: true)
   @override
@@ -1009,10 +980,10 @@ abstract class _ReadAloudPattern implements ReadAloudPattern {
 
   @override
   @HiveField(0)
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
   @HiveField(1)
-  String get pattern => throw _privateConstructorUsedError;
+  String get pattern;
   @override
   @JsonKey(ignore: true)
   _$ReadAloudPatternCopyWith<_ReadAloudPattern> get copyWith =>
@@ -1189,25 +1160,16 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _CustomButtonDetail &&
-            (identical(other.enable, enable) ||
-                const DeepCollectionEquality().equals(other.enable, enable)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.pattern, pattern) ||
-                const DeepCollectionEquality()
-                    .equals(other.pattern, pattern)) &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)));
+        (other.runtimeType == runtimeType &&
+            other is _CustomButtonDetail &&
+            (identical(other.enable, enable) || other.enable == enable) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.pattern, pattern) || other.pattern == pattern) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(enable) ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(pattern) ^
-      const DeepCollectionEquality().hash(id);
+  int get hashCode => Object.hash(runtimeType, enable, title, pattern, id);
 
   @JsonKey(ignore: true)
   @override
@@ -1225,16 +1187,16 @@ abstract class _CustomButtonDetail implements CustomButtonDetail {
 
   @override
   @HiveField(0)
-  bool get enable => throw _privateConstructorUsedError;
+  bool get enable;
   @override
   @HiveField(1)
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
   @HiveField(2)
-  String get pattern => throw _privateConstructorUsedError;
+  String get pattern;
   @override
   @HiveField(3, defaultValue: "")
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
   @JsonKey(ignore: true)
   _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith =>
@@ -1265,7 +1227,7 @@ class _$AlertConditionSetTearOff {
     );
   }
 
-  AlertConditionSet fromJson(Map<String, Object> json) {
+  AlertConditionSet fromJson(Map<String, Object?> json) {
     return AlertConditionSet.fromJson(json);
   }
 }
@@ -1417,22 +1379,17 @@ class _$_AlertConditionSet implements _AlertConditionSet {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AlertConditionSet &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.conditions, conditions) ||
-                const DeepCollectionEquality()
-                    .equals(other.conditions, conditions)));
+        (other.runtimeType == runtimeType &&
+            other is _AlertConditionSet &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            const DeepCollectionEquality()
+                .equals(other.conditions, conditions));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(conditions);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, const DeepCollectionEquality().hash(conditions));
 
   @JsonKey(ignore: true)
   @override
@@ -1457,15 +1414,15 @@ abstract class _AlertConditionSet implements AlertConditionSet {
 
   @override
   @HiveField(0)
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
   @HiveField(1)
   @JsonKey(name: "t")
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
   @HiveField(2)
   @JsonKey(name: "c")
-  List<AlertCondition> get conditions => throw _privateConstructorUsedError;
+  List<AlertCondition> get conditions;
   @override
   @JsonKey(ignore: true)
   _$AlertConditionSetCopyWith<_AlertConditionSet> get copyWith =>
@@ -1489,7 +1446,7 @@ class _$ShortcutDetailTearOff {
     );
   }
 
-  ShortcutDetail fromJson(Map<String, Object> json) {
+  ShortcutDetail fromJson(Map<String, Object?> json) {
     return ShortcutDetail.fromJson(json);
   }
 }
@@ -1610,18 +1567,14 @@ class _$_ShortcutDetail implements _ShortcutDetail {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ShortcutDetail &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)) &&
-            (identical(other.param, param) ||
-                const DeepCollectionEquality().equals(other.param, param)));
+        (other.runtimeType == runtimeType &&
+            other is _ShortcutDetail &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.param, param) || other.param == param));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(type) ^
-      const DeepCollectionEquality().hash(param);
+  int get hashCode => Object.hash(runtimeType, type, param);
 
   @JsonKey(ignore: true)
   @override
@@ -1644,10 +1597,10 @@ abstract class _ShortcutDetail implements ShortcutDetail {
 
   @override
   @HiveField(0)
-  ShortcutType get type => throw _privateConstructorUsedError;
+  ShortcutType get type;
   @override
   @HiveField(1)
-  String get param => throw _privateConstructorUsedError;
+  String get param;
   @override
   @JsonKey(ignore: true)
   _$ShortcutDetailCopyWith<_ShortcutDetail> get copyWith =>
