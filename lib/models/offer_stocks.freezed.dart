@@ -130,19 +130,15 @@ class _$_OfferStocksParam implements _OfferStocksParam {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _OfferStocksParam &&
-            (identical(other.asin, asin) ||
-                const DeepCollectionEquality().equals(other.asin, asin)) &&
+        (other.runtimeType == runtimeType &&
+            other is _OfferStocksParam &&
+            (identical(other.asin, asin) || other.asin == asin) &&
             (identical(other.sellerId, sellerId) ||
-                const DeepCollectionEquality()
-                    .equals(other.sellerId, sellerId)));
+                other.sellerId == sellerId));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(asin) ^
-      const DeepCollectionEquality().hash(sellerId);
+  int get hashCode => Object.hash(runtimeType, asin, sellerId);
 
   @JsonKey(ignore: true)
   @override
@@ -155,9 +151,9 @@ abstract class _OfferStocksParam implements OfferStocksParam {
       {required String asin, required String sellerId}) = _$_OfferStocksParam;
 
   @override
-  String get asin => throw _privateConstructorUsedError;
+  String get asin;
   @override
-  String get sellerId => throw _privateConstructorUsedError;
+  String get sellerId;
   @override
   @JsonKey(ignore: true)
   _$OfferStocksParamCopyWith<_OfferStocksParam> get copyWith =>

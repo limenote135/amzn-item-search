@@ -160,19 +160,15 @@ class _$_ItemPriceFutureProviderResponse
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ItemPriceFutureProviderResponse &&
-            (identical(other.prices, prices) ||
-                const DeepCollectionEquality().equals(other.prices, prices)) &&
+        (other.runtimeType == runtimeType &&
+            other is _ItemPriceFutureProviderResponse &&
+            (identical(other.prices, prices) || other.prices == prices) &&
             (identical(other.sellByAmazon, sellByAmazon) ||
-                const DeepCollectionEquality()
-                    .equals(other.sellByAmazon, sellByAmazon)));
+                other.sellByAmazon == sellByAmazon));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(prices) ^
-      const DeepCollectionEquality().hash(sellByAmazon);
+  int get hashCode => Object.hash(runtimeType, prices, sellByAmazon);
 
   @JsonKey(ignore: true)
   @override
@@ -188,9 +184,9 @@ abstract class _ItemPriceFutureProviderResponse
       required bool? sellByAmazon}) = _$_ItemPriceFutureProviderResponse;
 
   @override
-  ItemPrices get prices => throw _privateConstructorUsedError;
+  ItemPrices get prices;
   @override
-  bool? get sellByAmazon => throw _privateConstructorUsedError;
+  bool? get sellByAmazon;
   @override
   @JsonKey(ignore: true)
   _$ItemPriceFutureProviderResponseCopyWith<_ItemPriceFutureProviderResponse>
@@ -221,7 +217,7 @@ class _$ItemPricesTearOff {
     );
   }
 
-  ItemPrices fromJson(Map<String, Object> json) {
+  ItemPrices fromJson(Map<String, Object?> json) {
     return ItemPrices.fromJson(json);
   }
 }
@@ -404,23 +400,20 @@ class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ItemPrices &&
-            (identical(other.newPrices, newPrices) ||
-                const DeepCollectionEquality()
-                    .equals(other.newPrices, newPrices)) &&
-            (identical(other.usedPrices, usedPrices) ||
-                const DeepCollectionEquality()
-                    .equals(other.usedPrices, usedPrices)) &&
-            (identical(other.feeInfo, feeInfo) ||
-                const DeepCollectionEquality().equals(other.feeInfo, feeInfo)));
+        (other.runtimeType == runtimeType &&
+            other is _ItemPrices &&
+            const DeepCollectionEquality().equals(other.newPrices, newPrices) &&
+            const DeepCollectionEquality()
+                .equals(other.usedPrices, usedPrices) &&
+            (identical(other.feeInfo, feeInfo) || other.feeInfo == feeInfo));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(newPrices) ^
-      const DeepCollectionEquality().hash(usedPrices) ^
-      const DeepCollectionEquality().hash(feeInfo);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(newPrices),
+      const DeepCollectionEquality().hash(usedPrices),
+      feeInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -450,14 +443,14 @@ abstract class _ItemPrices implements ItemPrices {
   @override // 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
   @HiveField(0, defaultValue: <PriceDetail>[])
   @JsonKey(name: "new_offers")
-  List<PriceDetail> get newPrices => throw _privateConstructorUsedError;
+  List<PriceDetail> get newPrices;
   @override
   @HiveField(1, defaultValue: <PriceDetail>[])
   @JsonKey(name: "used_offers")
-  List<PriceDetail> get usedPrices => throw _privateConstructorUsedError;
+  List<PriceDetail> get usedPrices;
   @override
   @HiveField(2)
-  FeeInfo get feeInfo => throw _privateConstructorUsedError;
+  FeeInfo get feeInfo;
   @override
   @JsonKey(ignore: true)
   _$ItemPricesCopyWith<_ItemPrices> get copyWith =>
@@ -502,7 +495,7 @@ class _$PriceDetailTearOff {
     );
   }
 
-  PriceDetail fromJson(Map<String, Object> json) {
+  PriceDetail fromJson(Map<String, Object?> json) {
     return PriceDetail.fromJson(json);
   }
 }
@@ -777,37 +770,23 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PriceDetail &&
+        (other.runtimeType == runtimeType &&
+            other is _PriceDetail &&
             (identical(other.itemCondition, itemCondition) ||
-                const DeepCollectionEquality()
-                    .equals(other.itemCondition, itemCondition)) &&
+                other.itemCondition == itemCondition) &&
             (identical(other.subCondition, subCondition) ||
-                const DeepCollectionEquality()
-                    .equals(other.subCondition, subCondition)) &&
-            (identical(other.channel, channel) ||
-                const DeepCollectionEquality()
-                    .equals(other.channel, channel)) &&
-            (identical(other.price, price) ||
-                const DeepCollectionEquality().equals(other.price, price)) &&
+                other.subCondition == subCondition) &&
+            (identical(other.channel, channel) || other.channel == channel) &&
+            (identical(other.price, price) || other.price == price) &&
             (identical(other.shipping, shipping) ||
-                const DeepCollectionEquality()
-                    .equals(other.shipping, shipping)) &&
-            (identical(other.point, point) ||
-                const DeepCollectionEquality().equals(other.point, point)) &&
-            (identical(other.isCart, isCart) ||
-                const DeepCollectionEquality().equals(other.isCart, isCart)));
+                other.shipping == shipping) &&
+            (identical(other.point, point) || other.point == point) &&
+            (identical(other.isCart, isCart) || other.isCart == isCart));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(itemCondition) ^
-      const DeepCollectionEquality().hash(subCondition) ^
-      const DeepCollectionEquality().hash(channel) ^
-      const DeepCollectionEquality().hash(price) ^
-      const DeepCollectionEquality().hash(shipping) ^
-      const DeepCollectionEquality().hash(point) ^
-      const DeepCollectionEquality().hash(isCart);
+  int get hashCode => Object.hash(runtimeType, itemCondition, subCondition,
+      channel, price, shipping, point, isCart);
 
   @JsonKey(ignore: true)
   @override
@@ -848,27 +827,27 @@ abstract class _PriceDetail implements PriceDetail {
   @HiveField(0)
   @JsonKey(name: "condition")
   @ItemConditionConverter()
-  ItemCondition get itemCondition => throw _privateConstructorUsedError;
+  ItemCondition get itemCondition;
   @override
   @HiveField(1)
   @ItemSubConditionConverter()
-  ItemSubCondition get subCondition => throw _privateConstructorUsedError;
+  ItemSubCondition get subCondition;
   @override
   @HiveField(2)
   @FulfillmentChannelConverter()
-  FulfillmentChannel get channel => throw _privateConstructorUsedError;
+  FulfillmentChannel get channel;
   @override
   @HiveField(3)
-  int get price => throw _privateConstructorUsedError;
+  int get price;
   @override
   @HiveField(4)
-  int get shipping => throw _privateConstructorUsedError;
+  int get shipping;
   @override
   @HiveField(5)
-  int get point => throw _privateConstructorUsedError;
+  int get point;
   @override
   @HiveField(6, defaultValue: false)
-  bool get isCart => throw _privateConstructorUsedError;
+  bool get isCart;
   @override
   @JsonKey(ignore: true)
   _$PriceDetailCopyWith<_PriceDetail> get copyWith =>

@@ -30,52 +30,53 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       customButtons: fields[10] == null
           ? [
               const CustomButtonDetail(
-                  pattern: 'https://www.amazon.co.jp/gp/product/{asin}/',
+                  id: 'bt01',
                   enable: true,
                   title: 'Amazon',
-                  id: 'bt01'),
+                  pattern: 'https://www.amazon.co.jp/gp/product/{asin}/'),
               const CustomButtonDetail(
-                  pattern:
-                      'https://sellercentral.amazon.co.jp/abis/listing/syh?asin={asin}',
+                  id: 'bt02',
                   enable: true,
                   title: '出品確認',
-                  id: 'bt02'),
+                  pattern:
+                      'https://sellercentral.amazon.co.jp/abis/listing/syh?asin={asin}'),
               const CustomButtonDetail(
-                  pattern: 'https://delta-tracer.com/item/detail/jp/{asin}/',
+                  id: 'bt03',
                   enable: true,
                   title: 'Delta',
-                  id: 'bt03'),
+                  pattern: 'https://delta-tracer.com/item/detail/jp/{asin}/'),
               const CustomButtonDetail(
-                  pattern: 'https://mnsearch.com/item?kwd={asin}',
+                  id: 'bt04',
                   enable: true,
                   title: 'モノサーチ',
-                  id: 'bt04'),
+                  pattern: 'https://mnsearch.com/item?kwd={asin}'),
               const CustomButtonDetail(
-                  pattern: 'https://keezon.net/item/index?ASIN={asin}',
+                  id: 'bt05',
                   enable: false,
                   title: 'Keezon',
-                  id: 'bt05'),
+                  pattern: 'https://keezon.net/item/index?ASIN={asin}'),
               const CustomButtonDetail(
-                  pattern: 'https://www.mercari.com/jp/search/?keyword={title}',
+                  id: 'bt06',
                   enable: false,
                   title: 'メルカリ',
-                  id: 'bt06'),
-              const CustomButtonDetail(
                   pattern:
-                      'https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};',
+                      'https://www.mercari.com/jp/search/?keyword={title}'),
+              const CustomButtonDetail(
+                  id: 'bt07',
                   enable: false,
                   title: '在庫',
-                  id: 'bt07'),
+                  pattern:
+                      'https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};'),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン1', id: 'bt08'),
+                  id: 'bt08', enable: false, title: 'ボタン1', pattern: ''),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン2', id: 'bt09'),
+                  id: 'bt09', enable: false, title: 'ボタン2', pattern: ''),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン3', id: 'bt10'),
+                  id: 'bt10', enable: false, title: 'ボタン3', pattern: ''),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン4', id: 'bt11'),
+                  id: 'bt11', enable: false, title: 'ボタン4', pattern: ''),
               const CustomButtonDetail(
-                  pattern: '', enable: false, title: 'ボタン5', id: 'bt12')
+                  id: 'bt12', enable: false, title: 'ボタン5', pattern: '')
             ]
           : (fields[10] as List).cast<CustomButtonDetail>(),
       csvOrder: fields[11] == null
@@ -103,8 +104,8 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       alerts: fields[15] == null
           ? [
               const AlertConditionSet(
-                  title: 'プレ値',
                   id: 'default',
+                  title: 'プレ値',
                   conditions: [const AlertCondition(type: AlertType.premium)])
             ]
           : (fields[15] as List).cast<AlertConditionSet>(),
@@ -370,7 +371,7 @@ Map<String, dynamic> _$$_AlertConditionSetToJson(
 
 _$_ShortcutDetail _$$_ShortcutDetailFromJson(Map<String, dynamic> json) =>
     _$_ShortcutDetail(
-      type: _$enumDecode(_$ShortcutTypeEnumMap, json['type']),
+      type: $enumDecode(_$ShortcutTypeEnumMap, json['type']),
       param: json['param'] as String? ?? '',
     );
 
@@ -379,32 +380,6 @@ Map<String, dynamic> _$$_ShortcutDetailToJson(_$_ShortcutDetail instance) =>
       'type': _$ShortcutTypeEnumMap[instance.type],
       'param': instance.param,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
 
 const _$ShortcutTypeEnumMap = {
   ShortcutType.none: 'none',

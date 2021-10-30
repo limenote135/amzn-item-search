@@ -28,7 +28,7 @@ class _$GeoResponseTearOff {
     );
   }
 
-  GeoResponse fromJson(Map<String, Object> json) {
+  GeoResponse fromJson(Map<String, Object?> json) {
     return GeoResponse.fromJson(json);
   }
 }
@@ -141,18 +141,14 @@ class _$_GeoResponse implements _GeoResponse {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _GeoResponse &&
-            (identical(other.code, code) ||
-                const DeepCollectionEquality().equals(other.code, code)) &&
-            (identical(other.jan, jan) ||
-                const DeepCollectionEquality().equals(other.jan, jan)));
+        (other.runtimeType == runtimeType &&
+            other is _GeoResponse &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.jan, jan) || other.jan == jan));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(code) ^
-      const DeepCollectionEquality().hash(jan);
+  int get hashCode => Object.hash(runtimeType, code, jan);
 
   @JsonKey(ignore: true)
   @override
@@ -173,9 +169,9 @@ abstract class _GeoResponse implements GeoResponse {
       _$_GeoResponse.fromJson;
 
   @override
-  String get code => throw _privateConstructorUsedError;
+  String get code;
   @override
-  String get jan => throw _privateConstructorUsedError;
+  String get jan;
   @override
   @JsonKey(ignore: true)
   _$GeoResponseCopyWith<_GeoResponse> get copyWith =>
