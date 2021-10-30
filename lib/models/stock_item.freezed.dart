@@ -421,66 +421,52 @@ class _$_StockItem implements _StockItem {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _StockItem &&
+        (other.runtimeType == runtimeType &&
+            other is _StockItem &&
             (identical(other.purchaseDate, purchaseDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.purchaseDate, purchaseDate)) &&
+                other.purchaseDate == purchaseDate) &&
             (identical(other.purchasePrice, purchasePrice) ||
-                const DeepCollectionEquality()
-                    .equals(other.purchasePrice, purchasePrice)) &&
+                other.purchasePrice == purchasePrice) &&
             (identical(other.sellPrice, sellPrice) ||
-                const DeepCollectionEquality()
-                    .equals(other.sellPrice, sellPrice)) &&
-            (identical(other.useFba, useFba) ||
-                const DeepCollectionEquality().equals(other.useFba, useFba)) &&
+                other.sellPrice == sellPrice) &&
+            (identical(other.useFba, useFba) || other.useFba == useFba) &&
             (identical(other.profitPerItem, profitPerItem) ||
-                const DeepCollectionEquality()
-                    .equals(other.profitPerItem, profitPerItem)) &&
-            (identical(other.amount, amount) ||
-                const DeepCollectionEquality().equals(other.amount, amount)) &&
+                other.profitPerItem == profitPerItem) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.condition, condition) ||
-                const DeepCollectionEquality()
-                    .equals(other.condition, condition)) &&
+                other.condition == condition) &&
             (identical(other.subCondition, subCondition) ||
-                const DeepCollectionEquality()
-                    .equals(other.subCondition, subCondition)) &&
-            (identical(other.sku, sku) ||
-                const DeepCollectionEquality().equals(other.sku, sku)) &&
-            (identical(other.memo, memo) ||
-                const DeepCollectionEquality().equals(other.memo, memo)) &&
-            (identical(other.item, item) ||
-                const DeepCollectionEquality().equals(other.item, item)) &&
+                other.subCondition == subCondition) &&
+            (identical(other.sku, sku) || other.sku == sku) &&
+            (identical(other.memo, memo) || other.memo == memo) &&
+            (identical(other.item, item) || other.item == item) &&
             (identical(other.retailer, retailer) ||
-                const DeepCollectionEquality()
-                    .equals(other.retailer, retailer)) &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
+                other.retailer == retailer) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.breakEven, breakEven) ||
-                const DeepCollectionEquality()
-                    .equals(other.breakEven, breakEven)) &&
+                other.breakEven == breakEven) &&
             (identical(other.autogenSku, autogenSku) ||
-                const DeepCollectionEquality()
-                    .equals(other.autogenSku, autogenSku)));
+                other.autogenSku == autogenSku));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(purchaseDate) ^
-      const DeepCollectionEquality().hash(purchasePrice) ^
-      const DeepCollectionEquality().hash(sellPrice) ^
-      const DeepCollectionEquality().hash(useFba) ^
-      const DeepCollectionEquality().hash(profitPerItem) ^
-      const DeepCollectionEquality().hash(amount) ^
-      const DeepCollectionEquality().hash(condition) ^
-      const DeepCollectionEquality().hash(subCondition) ^
-      const DeepCollectionEquality().hash(sku) ^
-      const DeepCollectionEquality().hash(memo) ^
-      const DeepCollectionEquality().hash(item) ^
-      const DeepCollectionEquality().hash(retailer) ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(breakEven) ^
-      const DeepCollectionEquality().hash(autogenSku);
+  int get hashCode => Object.hash(
+      runtimeType,
+      purchaseDate,
+      purchasePrice,
+      sellPrice,
+      useFba,
+      profitPerItem,
+      amount,
+      condition,
+      subCondition,
+      sku,
+      memo,
+      item,
+      retailer,
+      id,
+      breakEven,
+      autogenSku);
 
   @JsonKey(ignore: true)
   @override
@@ -508,48 +494,48 @@ abstract class _StockItem implements StockItem {
 
   @override
   @HiveField(0)
-  String get purchaseDate => throw _privateConstructorUsedError;
+  String get purchaseDate;
   @override
   @HiveField(1)
-  int get purchasePrice => throw _privateConstructorUsedError;
+  int get purchasePrice;
   @override
   @HiveField(2)
-  int get sellPrice => throw _privateConstructorUsedError;
+  int get sellPrice;
   @override
   @HiveField(3)
-  bool get useFba => throw _privateConstructorUsedError;
+  bool get useFba;
   @override
   @HiveField(4)
-  int get profitPerItem => throw _privateConstructorUsedError;
+  int get profitPerItem;
   @override
   @HiveField(5)
-  int get amount => throw _privateConstructorUsedError;
+  int get amount;
   @override
   @HiveField(6)
-  ItemCondition get condition => throw _privateConstructorUsedError;
+  ItemCondition get condition;
   @override
   @HiveField(7)
-  ItemSubCondition get subCondition => throw _privateConstructorUsedError;
+  ItemSubCondition get subCondition;
   @override
   @HiveField(8)
-  String get sku => throw _privateConstructorUsedError;
+  String get sku;
   @override
   @HiveField(9)
-  String get memo => throw _privateConstructorUsedError;
+  String get memo;
   @override
   @HiveField(10)
-  AsinData get item => throw _privateConstructorUsedError;
+  AsinData get item;
   @override
   @HiveField(11, defaultValue: "")
-  String get retailer => throw _privateConstructorUsedError;
+  String get retailer;
   @override // 主キー
   @HiveField(12, defaultValue: "")
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
   @HiveField(13, defaultValue: -1)
-  int get breakEven => throw _privateConstructorUsedError;
+  int get breakEven;
   @override
-  bool get autogenSku => throw _privateConstructorUsedError;
+  bool get autogenSku;
   @override
   @JsonKey(ignore: true)
   _$StockItemCopyWith<_StockItem> get copyWith =>

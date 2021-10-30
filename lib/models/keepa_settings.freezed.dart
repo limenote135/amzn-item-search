@@ -218,31 +218,21 @@ class _$_KeepaSettings implements _KeepaSettings {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _KeepaSettings &&
-            (identical(other.showNew, showNew) ||
-                const DeepCollectionEquality()
-                    .equals(other.showNew, showNew)) &&
+        (other.runtimeType == runtimeType &&
+            other is _KeepaSettings &&
+            (identical(other.showNew, showNew) || other.showNew == showNew) &&
             (identical(other.showUsed, showUsed) ||
-                const DeepCollectionEquality()
-                    .equals(other.showUsed, showUsed)) &&
+                other.showUsed == showUsed) &&
             (identical(other.showAmazon, showAmazon) ||
-                const DeepCollectionEquality()
-                    .equals(other.showAmazon, showAmazon)) &&
-            (identical(other.period, period) ||
-                const DeepCollectionEquality().equals(other.period, period)) &&
+                other.showAmazon == showAmazon) &&
+            (identical(other.period, period) || other.period == period) &&
             (identical(other.extraParam, extraParam) ||
-                const DeepCollectionEquality()
-                    .equals(other.extraParam, extraParam)));
+                other.extraParam == extraParam));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(showNew) ^
-      const DeepCollectionEquality().hash(showUsed) ^
-      const DeepCollectionEquality().hash(showAmazon) ^
-      const DeepCollectionEquality().hash(period) ^
-      const DeepCollectionEquality().hash(extraParam);
+  int get hashCode => Object.hash(
+      runtimeType, showNew, showUsed, showAmazon, period, extraParam);
 
   @JsonKey(ignore: true)
   @override
@@ -260,19 +250,19 @@ abstract class _KeepaSettings implements KeepaSettings {
 
   @override
   @HiveField(0, defaultValue: true)
-  bool get showNew => throw _privateConstructorUsedError;
+  bool get showNew;
   @override
   @HiveField(1, defaultValue: true)
-  bool get showUsed => throw _privateConstructorUsedError;
+  bool get showUsed;
   @override
   @HiveField(2, defaultValue: true)
-  bool get showAmazon => throw _privateConstructorUsedError;
+  bool get showAmazon;
   @override
   @HiveField(3, defaultValue: KeepaShowPeriod.month)
-  KeepaShowPeriod get period => throw _privateConstructorUsedError;
+  KeepaShowPeriod get period;
   @override
   @HiveField(4, defaultValue: "")
-  String get extraParam => throw _privateConstructorUsedError;
+  String get extraParam;
   @override
   @JsonKey(ignore: true)
   _$KeepaSettingsCopyWith<_KeepaSettings> get copyWith =>
