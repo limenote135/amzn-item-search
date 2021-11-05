@@ -1,29 +1,42 @@
-import { Box, Container, Typography, Button } from "@mui/material";
+import React from "react";
+import { Box } from "@mui/material";
+import Feature from "@/components/lp/FeatureSection";
+import Menu from "@/components/lp/Menu";
+import Detail from "@/components/lp/DetailSection";
+import Footer from "@/components/lp/Footer";
+import Title from "@/components/lp/Title";
+import CatchPhrase from "@/components/lp/CatchPhrase";
 
-import type { NextPage } from "next";
-
-import Link from "@/components/Link";
-
-const Index: NextPage = () => {
-  return (
-    <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Next.js v5-beta with TypeScript example
-        </Typography>
-
-        <Link href="/about" color="secondary">
-          Go to the about page
-        </Link>
+const Component = () => (
+  <>
+    <Menu />
+    <main>
+      <Box
+        sx={{
+          backgroundRepeat: "no-repeat",
+          background: {
+            xs: "url(img/dec1_sp.svg) no-repeat, linear-gradient(#EDEBEA, #FEFEFE)",
+            md: "url(img/dec1_pc.svg) no-repeat, linear-gradient(#EDEBEA, #FEFEFE)",
+          },
+          backgroundPosition: {
+            xs: "left top",
+            sm: "right top",
+            md: "right top",
+          },
+        }}
+      >
+        <Title />
+        <Feature />
       </Box>
-      <Box>
-        <Button variant="contained" color="primary">
-          Css
-        </Button>
-        <Button variant="contained">Css</Button>
-      </Box>
-    </Container>
-  );
+      <Detail />
+      <CatchPhrase />
+    </main>
+    <Footer />
+  </>
+);
+
+const Container = () => {
+  return <Component />;
 };
 
-export default Index;
+export default Container;
