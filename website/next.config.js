@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
     return {
       ...config,
       watchOptions: {
@@ -11,4 +15,9 @@ module.exports = {
     };
   },
   reactStrictMode: true,
+  images: {
+    domains: ["play.google.com", "tools.applemediaservices.com"],
+    loader: "custom",
+  },
+  // basePath: "/lp2",
 };
