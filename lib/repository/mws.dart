@@ -172,8 +172,8 @@ class MwsRepository {
   Future<Map<String, dynamic>> _doGetRequest(String url) async {
     final dio = await _read(dioProvider.future);
 
-    final user = await _read(authStateChangesProvider.last);
-    final lwa = await _read(linkedWithAmazonProvider.last);
+    final user = await _read(authStateChangesProvider.future);
+    final lwa = await _read(linkedWithAmazonProvider.future);
     if (lwa != true) {
       throw Exception("設定メニューからAmazonとの連携を行ってください");
     }
@@ -198,8 +198,8 @@ class MwsRepository {
   Future<Map<String, dynamic>> _doRequest(String url, {String? data}) async {
     final dio = await _read(dioProvider.future);
 
-    final user = await _read(authStateChangesProvider.last);
-    final lwa = await _read(linkedWithAmazonProvider.last);
+    final user = await _read(authStateChangesProvider.future);
+    final lwa = await _read(linkedWithAmazonProvider.future);
     if (lwa != true) {
       throw Exception("設定メニューからAmazonとの連携を行ってください");
     }

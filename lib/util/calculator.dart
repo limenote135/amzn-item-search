@@ -33,10 +33,10 @@ class Calculator extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final displayText = ref.watch(_displayTextProvider);
-    final total = ref.watch(_totalProvider);
-    final op = ref.watch(_currentOp);
-    final inputComplete = ref.watch(_inputCompleteProvider);
+    final displayText = ref.watch(_displayTextProvider.state);
+    final total = ref.watch(_totalProvider.state);
+    final op = ref.watch(_currentOp.state);
+    final inputComplete = ref.watch(_inputCompleteProvider.state);
 
     return OutlinedButtonTheme(
       data: OutlinedButtonThemeData(
