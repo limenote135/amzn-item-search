@@ -34,8 +34,8 @@ class Updater extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen<AsyncValue<bool>>(updateProvider, (value) {
-      value.whenData((value) {
+    ref.listen<AsyncValue<bool>>(updateProvider, (value, _) {
+      value?.whenData((value) {
         _showUpdateDialog(value, context);
       });
     });

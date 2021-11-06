@@ -57,7 +57,7 @@ class PurchasePage extends HookConsumerWidget {
         currentStockItemProvider.overrideWithValue(stock),
       ],
       child: ReactiveForm(
-        formGroup: form.state,
+        formGroup: form,
         child: Scaffold(
           appBar: AppBar(
             title: const Text("仕入れ設定"),
@@ -108,7 +108,8 @@ class _Body extends HookConsumerWidget {
     return PurchaseSettingsForm(
       onComplete: (bytes) {
         // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
-        ref.read(_itemImageProvider).state = bytes.buffer.asUint8List();
+        ref.read(_itemImageProvider.notifier).state =
+            bytes.buffer.asUint8List();
       },
       action: _SaveButton(
         builder: (context, onSave) {
@@ -152,7 +153,7 @@ class _SaveButton extends HookConsumerWidget {
             }
           }
 
-          _onSubmit(ref, form, ref.read(uuidProvider).v4(), item, image.state,
+          _onSubmit(ref, form, ref.read(uuidProvider).v4(), item, image,
               isMajorCustomer);
           Navigator.of(context).popUntil((route) => route.settings.name == "/");
         }

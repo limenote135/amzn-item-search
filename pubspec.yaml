@@ -60,7 +60,7 @@ dependencies:
   google_sign_in: ^5.2.1
   hive: ^2.0.4
   hive_flutter: ^1.1.0
-  hooks_riverpod: 1.0.0-dev.11
+  hooks_riverpod: 1.0.0
   html: ^0.15.0
   intl: ^0.17.0
   json_annotation: ^4.3.0
@@ -72,7 +72,7 @@ dependencies:
   pub_semver: ^2.1.0
   reactive_forms: ^10.6.4
   reactive_touch_spin: ^0.2.0-nullsafety.2
-  riverpod: 1.0.0-dev.10
+  riverpod: 1.0.0
   share: ^2.0.4
   sign_in_with_apple: ^3.2.0
   state_notifier: ^0.7.1
