@@ -59,8 +59,8 @@ class CameraPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: ref.watch(_backCameraFutureProvider).when(
-            loading: (_) => Container(),
-            error: (error, stackTrace, _) {
+            loading: () => Container(),
+            error: (error, stackTrace) {
               recordError(error, stackTrace,
                   information: const ["CameraPage build"]);
               return Container();
@@ -294,7 +294,7 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
       borderRadius: BorderRadius.circular(5),
     );
 
-    ref.listen(searchSettingsControllerProvider, (value) {
+    ref.listen(searchSettingsControllerProvider, (value, _) {
       // コードタイプを変更した際に lastRead をリセットする
       _lastRead = "";
     });

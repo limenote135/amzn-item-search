@@ -32,7 +32,7 @@ class EditPage extends HookConsumerWidget {
     final form = ref.watch(formValueProvider(item));
 
     return ReactiveForm(
-      formGroup: form.state,
+      formGroup: form,
       child: Scaffold(
         appBar: AppBar(
           title: const Text("仕入れ内容の変更"),
