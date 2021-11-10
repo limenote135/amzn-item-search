@@ -12,5 +12,7 @@ services:
     volumes:
       - ./:/app:delegated
       - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     tty: true
 #    command: "yarn build && yarn export"
