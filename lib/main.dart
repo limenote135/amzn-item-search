@@ -108,6 +108,7 @@ Future<void> initHive() async {
     ..registerAdapter(PriceDetailAdapter())
     ..registerAdapter(FeeInfoAdapter())
     ..registerAdapter(StockItemAdapter())
+    ..registerAdapter(ListingRestrictionsAdapter())
     ..registerAdapter(GeneralSettingsAdapter())
     ..registerAdapter(ReadAloudPatternAdapter())
     ..registerAdapter(CustomButtonDetailAdapter())

@@ -1,9 +1,11 @@
 import 'dart:typed_data';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
+import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
@@ -110,9 +112,11 @@ class _Body extends HookConsumerWidget {
       },
       action: _SaveButton(
         builder: (context, onSave) {
-          return ElevatedButton(
-            onPressed: onSave,
-            child: const Text("仕入れる"),
+          return ListTile(
+            title: ElevatedButton(
+              onPressed: onSave,
+              child: const Text("仕入れる"),
+            ),
           );
         },
       ),
@@ -134,24 +138,39 @@ class _SaveButton extends HookConsumerWidget {
     return ReactiveFormConsumer(
       builder: (context, form, child) {
         final image = ref.watch(_itemImageProvider);
-        final onSave = form.invalid
-            ? null
-            : () => _onSubmit(
-                  context,
-                  ref,
-                  form,
-                  ref.read(uuidProvider).v4(),
-                  item,
-                  image.state,
-                  isMajorCustomer,
-                );
-        return builder(context, onSave);
+
+        Future<void> _onSave() async {
+          final cond = getCondition(form).toItemCondition();
+          if (_isRestricted(cond, item.restrictions)) {
+            final ret = await showOkCancelAlertDialog(
+              context: context,
+              title: "出品不可商品",
+              message: "${cond.toDisplayString()}では出品できませんがよろしいですか？",
+            );
+            if (ret != OkCancelResult.ok) {
+              return;
+            }
+          }
+
+          _onSubmit(ref, form, ref.read(uuidProvider).v4(), item, image.state,
+              isMajorCustomer);
+          Navigator.of(context).popUntil((route) => route.settings.name == "/");
+        }
+
+        return builder(context, form.invalid ? null : _onSave);
       },
     );
   }
 
+  bool _isRestricted(ItemCondition cond, ListingRestrictions restrictions) {
+    if (cond == ItemCondition.newItem) {
+      return restrictions.newItem;
+    } else {
+      return restrictions.used;
+    }
+  }
+
   void _onSubmit(
-    BuildContext context,
     WidgetRef ref,
     FormGroup form,
     String id,
@@ -195,7 +214,5 @@ class _SaveButton extends HookConsumerWidget {
     );
     ref.read(stockItemListControllerProvider.notifier).add(stock);
     ref.read(analyticsControllerProvider).logPurchaseEvent(stock);
-
-    Navigator.of(context).popUntil((route) => route.settings.name == "/");
   }
 }

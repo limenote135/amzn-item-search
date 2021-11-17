@@ -232,7 +232,10 @@ class _$AsinDataTearOff {
       @ItemCategoryConverter()
           required String category,
       @HiveField(10)
-          bool? sellByAmazon}) {
+          bool? sellByAmazon,
+      @HiveField(11, defaultValue: defaultListingRestrictions)
+      @JsonKey()
+          ListingRestrictions restrictions = defaultListingRestrictions}) {
     return _AsinData(
       jan: jan,
       asin: asin,
@@ -245,6 +248,7 @@ class _$AsinDataTearOff {
       imageData: imageData,
       category: category,
       sellByAmazon: sellByAmazon,
+      restrictions: restrictions,
     );
   }
 
@@ -274,16 +278,24 @@ mixin _$AsinData {
   String get quantity => throw _privateConstructorUsedError; // セット数
   @HiveField(7)
   ItemPrices? get prices => throw _privateConstructorUsedError;
+
   @HiveField(8)
   @JsonKey(ignore: true)
   Uint8List? get imageData => throw _privateConstructorUsedError;
+
   @HiveField(9, defaultValue: "")
   @ItemCategoryConverter()
   String get category => throw _privateConstructorUsedError;
+
   @HiveField(10)
   bool? get sellByAmazon => throw _privateConstructorUsedError;
 
+  @HiveField(11, defaultValue: defaultListingRestrictions)
+  @JsonKey()
+  ListingRestrictions get restrictions => throw _privateConstructorUsedError;
+
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $AsinDataCopyWith<AsinData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -293,20 +305,39 @@ mixin _$AsinData {
 abstract class $AsinDataCopyWith<$Res> {
   factory $AsinDataCopyWith(AsinData value, $Res Function(AsinData) then) =
       _$AsinDataCopyWithImpl<$Res>;
+
   $Res call(
-      {@HiveField(0) String jan,
-      @HiveField(1) String asin,
-      @HiveField(2) int listPrice,
-      @HiveField(3) String imageUrl,
-      @HiveField(4) String title,
-      @HiveField(5) int rank,
-      @HiveField(6) String quantity,
-      @HiveField(7) ItemPrices? prices,
-      @HiveField(8) @JsonKey(ignore: true) Uint8List? imageData,
-      @HiveField(9, defaultValue: "") @ItemCategoryConverter() String category,
-      @HiveField(10) bool? sellByAmazon});
+      {@HiveField(0)
+          String jan,
+      @HiveField(1)
+          String asin,
+      @HiveField(2)
+          int listPrice,
+      @HiveField(3)
+          String imageUrl,
+      @HiveField(4)
+          String title,
+      @HiveField(5)
+          int rank,
+      @HiveField(6)
+          String quantity,
+      @HiveField(7)
+          ItemPrices? prices,
+      @HiveField(8)
+      @JsonKey(ignore: true)
+          Uint8List? imageData,
+      @HiveField(9, defaultValue: "")
+      @ItemCategoryConverter()
+          String category,
+      @HiveField(10)
+          bool? sellByAmazon,
+      @HiveField(11, defaultValue: defaultListingRestrictions)
+      @JsonKey()
+          ListingRestrictions restrictions});
 
   $ItemPricesCopyWith<$Res>? get prices;
+
+  $ListingRestrictionsCopyWith<$Res> get restrictions;
 }
 
 /// @nodoc
@@ -330,6 +361,7 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
     Object? imageData = freezed,
     Object? category = freezed,
     Object? sellByAmazon = freezed,
+    Object? restrictions = freezed,
   }) {
     return _then(_value.copyWith(
       jan: jan == freezed
@@ -376,6 +408,10 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
           ? _value.sellByAmazon
           : sellByAmazon // ignore: cast_nullable_to_non_nullable
               as bool?,
+      restrictions: restrictions == freezed
+          ? _value.restrictions
+          : restrictions // ignore: cast_nullable_to_non_nullable
+              as ListingRestrictions,
     ));
   }
 
@@ -389,28 +425,55 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
       return _then(_value.copyWith(prices: value));
     });
   }
+
+  @override
+  $ListingRestrictionsCopyWith<$Res> get restrictions {
+    return $ListingRestrictionsCopyWith<$Res>(_value.restrictions, (value) {
+      return _then(_value.copyWith(restrictions: value));
+    });
+  }
 }
 
 /// @nodoc
 abstract class _$AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
   factory _$AsinDataCopyWith(_AsinData value, $Res Function(_AsinData) then) =
       __$AsinDataCopyWithImpl<$Res>;
+
   @override
   $Res call(
-      {@HiveField(0) String jan,
-      @HiveField(1) String asin,
-      @HiveField(2) int listPrice,
-      @HiveField(3) String imageUrl,
-      @HiveField(4) String title,
-      @HiveField(5) int rank,
-      @HiveField(6) String quantity,
-      @HiveField(7) ItemPrices? prices,
-      @HiveField(8) @JsonKey(ignore: true) Uint8List? imageData,
-      @HiveField(9, defaultValue: "") @ItemCategoryConverter() String category,
-      @HiveField(10) bool? sellByAmazon});
+      {@HiveField(0)
+          String jan,
+      @HiveField(1)
+          String asin,
+      @HiveField(2)
+          int listPrice,
+      @HiveField(3)
+          String imageUrl,
+      @HiveField(4)
+          String title,
+      @HiveField(5)
+          int rank,
+      @HiveField(6)
+          String quantity,
+      @HiveField(7)
+          ItemPrices? prices,
+      @HiveField(8)
+      @JsonKey(ignore: true)
+          Uint8List? imageData,
+      @HiveField(9, defaultValue: "")
+      @ItemCategoryConverter()
+          String category,
+      @HiveField(10)
+          bool? sellByAmazon,
+      @HiveField(11, defaultValue: defaultListingRestrictions)
+      @JsonKey()
+          ListingRestrictions restrictions});
 
   @override
   $ItemPricesCopyWith<$Res>? get prices;
+
+  @override
+  $ListingRestrictionsCopyWith<$Res> get restrictions;
 }
 
 /// @nodoc
@@ -435,6 +498,7 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
     Object? imageData = freezed,
     Object? category = freezed,
     Object? sellByAmazon = freezed,
+    Object? restrictions = freezed,
   }) {
     return _then(_AsinData(
       jan: jan == freezed
@@ -481,6 +545,10 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
           ? _value.sellByAmazon
           : sellByAmazon // ignore: cast_nullable_to_non_nullable
               as bool?,
+      restrictions: restrictions == freezed
+          ? _value.restrictions
+          : restrictions // ignore: cast_nullable_to_non_nullable
+              as ListingRestrictions,
     ));
   }
 }
@@ -514,7 +582,10 @@ class _$_AsinData implements _AsinData {
       @ItemCategoryConverter()
           required this.category,
       @HiveField(10)
-          this.sellByAmazon});
+          this.sellByAmazon,
+      @HiveField(11, defaultValue: defaultListingRestrictions)
+      @JsonKey()
+          this.restrictions = defaultListingRestrictions});
 
   factory _$_AsinData.fromJson(Map<String, dynamic> json) =>
       _$$_AsinDataFromJson(json);
@@ -558,10 +629,14 @@ class _$_AsinData implements _AsinData {
   @override
   @HiveField(10)
   final bool? sellByAmazon;
+  @override
+  @HiveField(11, defaultValue: defaultListingRestrictions)
+  @JsonKey()
+  final ListingRestrictions restrictions;
 
   @override
   String toString() {
-    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category, sellByAmazon: $sellByAmazon)';
+    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category, sellByAmazon: $sellByAmazon, restrictions: $restrictions)';
   }
 
   @override
@@ -585,12 +660,26 @@ class _$_AsinData implements _AsinData {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.sellByAmazon, sellByAmazon) ||
-                other.sellByAmazon == sellByAmazon));
+                other.sellByAmazon == sellByAmazon) &&
+            (identical(other.restrictions, restrictions) ||
+                other.restrictions == restrictions));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, jan, asin, listPrice, imageUrl,
-      title, rank, quantity, prices, imageData, category, sellByAmazon);
+  int get hashCode => Object.hash(
+      runtimeType,
+      jan,
+      asin,
+      listPrice,
+      imageUrl,
+      title,
+      rank,
+      quantity,
+      prices,
+      imageData,
+      category,
+      sellByAmazon,
+      restrictions);
 
   @JsonKey(ignore: true)
   @override
@@ -628,7 +717,10 @@ abstract class _AsinData implements AsinData {
       @ItemCategoryConverter()
           required String category,
       @HiveField(10)
-          bool? sellByAmazon}) = _$_AsinData;
+          bool? sellByAmazon,
+      @HiveField(11, defaultValue: defaultListingRestrictions)
+      @JsonKey()
+          ListingRestrictions restrictions}) = _$_AsinData;
 
   factory _AsinData.fromJson(Map<String, dynamic> json) = _$_AsinData.fromJson;
 
@@ -660,15 +752,232 @@ abstract class _AsinData implements AsinData {
   @HiveField(8)
   @JsonKey(ignore: true)
   Uint8List? get imageData;
+
   @override
   @HiveField(9, defaultValue: "")
   @ItemCategoryConverter()
   String get category;
+
   @override
   @HiveField(10)
   bool? get sellByAmazon;
+
+  @override
+  @HiveField(11, defaultValue: defaultListingRestrictions)
+  @JsonKey()
+  ListingRestrictions get restrictions;
+
   @override
   @JsonKey(ignore: true)
   _$AsinDataCopyWith<_AsinData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ListingRestrictions _$ListingRestrictionsFromJson(Map<String, dynamic> json) {
+  return _ListingRestrictions.fromJson(json);
+}
+
+/// @nodoc
+class _$ListingRestrictionsTearOff {
+  const _$ListingRestrictionsTearOff();
+
+  _ListingRestrictions call(
+      {@HiveField(0)
+      @JsonKey(name: "new", defaultValue: false)
+          bool newItem = false,
+      @HiveField(1)
+      @JsonKey(defaultValue: false)
+          bool used = false}) {
+    return _ListingRestrictions(
+      newItem: newItem,
+      used: used,
+    );
+  }
+
+  ListingRestrictions fromJson(Map<String, Object?> json) {
+    return ListingRestrictions.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $ListingRestrictions = _$ListingRestrictionsTearOff();
+
+/// @nodoc
+mixin _$ListingRestrictions {
+  @HiveField(0)
+  @JsonKey(name: "new", defaultValue: false)
+  bool get newItem => throw _privateConstructorUsedError;
+
+  @HiveField(1)
+  @JsonKey(defaultValue: false)
+  bool get used => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ListingRestrictionsCopyWith<ListingRestrictions> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ListingRestrictionsCopyWith<$Res> {
+  factory $ListingRestrictionsCopyWith(
+          ListingRestrictions value, $Res Function(ListingRestrictions) then) =
+      _$ListingRestrictionsCopyWithImpl<$Res>;
+
+  $Res call(
+      {@HiveField(0) @JsonKey(name: "new", defaultValue: false) bool newItem,
+      @HiveField(1) @JsonKey(defaultValue: false) bool used});
+}
+
+/// @nodoc
+class _$ListingRestrictionsCopyWithImpl<$Res>
+    implements $ListingRestrictionsCopyWith<$Res> {
+  _$ListingRestrictionsCopyWithImpl(this._value, this._then);
+
+  final ListingRestrictions _value;
+
+  // ignore: unused_field
+  final $Res Function(ListingRestrictions) _then;
+
+  @override
+  $Res call({
+    Object? newItem = freezed,
+    Object? used = freezed,
+  }) {
+    return _then(_value.copyWith(
+      newItem: newItem == freezed
+          ? _value.newItem
+          : newItem // ignore: cast_nullable_to_non_nullable
+              as bool,
+      used: used == freezed
+          ? _value.used
+          : used // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$ListingRestrictionsCopyWith<$Res>
+    implements $ListingRestrictionsCopyWith<$Res> {
+  factory _$ListingRestrictionsCopyWith(_ListingRestrictions value,
+          $Res Function(_ListingRestrictions) then) =
+      __$ListingRestrictionsCopyWithImpl<$Res>;
+
+  @override
+  $Res call(
+      {@HiveField(0) @JsonKey(name: "new", defaultValue: false) bool newItem,
+      @HiveField(1) @JsonKey(defaultValue: false) bool used});
+}
+
+/// @nodoc
+class __$ListingRestrictionsCopyWithImpl<$Res>
+    extends _$ListingRestrictionsCopyWithImpl<$Res>
+    implements _$ListingRestrictionsCopyWith<$Res> {
+  __$ListingRestrictionsCopyWithImpl(
+      _ListingRestrictions _value, $Res Function(_ListingRestrictions) _then)
+      : super(_value, (v) => _then(v as _ListingRestrictions));
+
+  @override
+  _ListingRestrictions get _value => super._value as _ListingRestrictions;
+
+  @override
+  $Res call({
+    Object? newItem = freezed,
+    Object? used = freezed,
+  }) {
+    return _then(_ListingRestrictions(
+      newItem: newItem == freezed
+          ? _value.newItem
+          : newItem // ignore: cast_nullable_to_non_nullable
+              as bool,
+      used: used == freezed
+          ? _value.used
+          : used // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+@HiveType(typeId: listingRestrictionTypeId)
+class _$_ListingRestrictions implements _ListingRestrictions {
+  const _$_ListingRestrictions(
+      {@HiveField(0)
+      @JsonKey(name: "new", defaultValue: false)
+          this.newItem = false,
+      @HiveField(1)
+      @JsonKey(defaultValue: false)
+          this.used = false});
+
+  factory _$_ListingRestrictions.fromJson(Map<String, dynamic> json) =>
+      _$$_ListingRestrictionsFromJson(json);
+
+  @override
+  @HiveField(0)
+  @JsonKey(name: "new", defaultValue: false)
+  final bool newItem;
+  @override
+  @HiveField(1)
+  @JsonKey(defaultValue: false)
+  final bool used;
+
+  @override
+  String toString() {
+    return 'ListingRestrictions(newItem: $newItem, used: $used)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ListingRestrictions &&
+            (identical(other.newItem, newItem) || other.newItem == newItem) &&
+            (identical(other.used, used) || other.used == used));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, newItem, used);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ListingRestrictionsCopyWith<_ListingRestrictions> get copyWith =>
+      __$ListingRestrictionsCopyWithImpl<_ListingRestrictions>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ListingRestrictionsToJson(this);
+  }
+}
+
+abstract class _ListingRestrictions implements ListingRestrictions {
+  const factory _ListingRestrictions(
+      {@HiveField(0)
+      @JsonKey(name: "new", defaultValue: false)
+          bool newItem,
+      @HiveField(1)
+      @JsonKey(defaultValue: false)
+          bool used}) = _$_ListingRestrictions;
+
+  factory _ListingRestrictions.fromJson(Map<String, dynamic> json) =
+      _$_ListingRestrictions.fromJson;
+
+  @override
+  @HiveField(0)
+  @JsonKey(name: "new", defaultValue: false)
+  bool get newItem;
+
+  @override
+  @HiveField(1)
+  @JsonKey(defaultValue: false)
+  bool get used;
+
+  @override
+  @JsonKey(ignore: true)
+  _$ListingRestrictionsCopyWith<_ListingRestrictions> get copyWith =>
       throw _privateConstructorUsedError;
 }
