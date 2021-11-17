@@ -148,6 +148,7 @@ class _ItemTileBody extends HookConsumerWidget {
           ],
         ),
         const PriceInfo(),
+        const _ListingRestrictions(),
         if (date != null)
           Text(
             "検索日: ${DateTime.parse(date).toLocal().format()}",
@@ -167,5 +168,32 @@ class _ItemTileBody extends HookConsumerWidget {
       return -1;
     }
     return price[0].price;
+  }
+}
+
+class _ListingRestrictions extends ConsumerWidget {
+  const _ListingRestrictions({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
+
+    final smallStrongText = smallFontSize(context)!.merge(strongTextStyle);
+
+    if (!item.restrictions.newItem && !item.restrictions.used) {
+      return Container();
+    }
+    final listingNew = item.restrictions.newItem
+        ? Text("新品出品不可", style: smallStrongText)
+        : const Spacer();
+    final listingUsed = item.restrictions.used
+        ? Text("中古出品不可", style: smallStrongText)
+        : const Spacer();
+    return Row(
+      children: [
+        Expanded(child: listingNew),
+        Expanded(child: listingUsed),
+      ],
+    );
   }
 }
