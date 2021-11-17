@@ -12,23 +12,24 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 const _newSampleItem = AsinData(
-    jan: "450000000000000",
-    asin: "ASIN",
-    listPrice: 0,
-    imageUrl: "",
-    title: "商品名",
-    rank: 0,
-    quantity: "1",
-    prices: ItemPrices(
-      newPrices: [],
-      usedPrices: [],
-      feeInfo: FeeInfo(
-        fbaFee: 30,
-        variableClosingFee: 0,
-        referralFeeRate: 15,
-      ),
+  jan: "450000000000000",
+  asin: "ASIN",
+  listPrice: 0,
+  imageUrl: "",
+  title: "商品名",
+  rank: 0,
+  quantity: "1",
+  prices: ItemPrices(
+    newPrices: [],
+    usedPrices: [],
+    feeInfo: FeeInfo(
+      fbaFee: 30,
+      variableClosingFee: 0,
+      referralFeeRate: 15,
     ),
-    category: "カテゴリー");
+  ),
+  category: "カテゴリー",
+);
 
 class SkuFormatPage extends StatelessWidget {
   const SkuFormatPage({Key? key}) : super(key: key);
