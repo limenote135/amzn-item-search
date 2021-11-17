@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:amasearch/repository/common.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
@@ -46,6 +48,11 @@ class _Body extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final serverUrl = ref.watch(_currentServerUrlProvider);
     final userAsyncValue = ref.watch(authStateChangesProvider);
+
+    if (Platform.isAndroid) {
+      WebView.platform = SurfaceAndroidWebView();
+    }
+
     return AsyncValueWidget<User?>(
       value: userAsyncValue,
       errorInfo: const [
