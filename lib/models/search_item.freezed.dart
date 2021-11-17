@@ -278,24 +278,19 @@ mixin _$AsinData {
   String get quantity => throw _privateConstructorUsedError; // セット数
   @HiveField(7)
   ItemPrices? get prices => throw _privateConstructorUsedError;
-
   @HiveField(8)
   @JsonKey(ignore: true)
   Uint8List? get imageData => throw _privateConstructorUsedError;
-
   @HiveField(9, defaultValue: "")
   @ItemCategoryConverter()
   String get category => throw _privateConstructorUsedError;
-
   @HiveField(10)
   bool? get sellByAmazon => throw _privateConstructorUsedError;
-
   @HiveField(11, defaultValue: defaultListingRestrictions)
   @JsonKey()
   ListingRestrictions get restrictions => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $AsinDataCopyWith<AsinData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -305,7 +300,6 @@ mixin _$AsinData {
 abstract class $AsinDataCopyWith<$Res> {
   factory $AsinDataCopyWith(AsinData value, $Res Function(AsinData) then) =
       _$AsinDataCopyWithImpl<$Res>;
-
   $Res call(
       {@HiveField(0)
           String jan,
@@ -336,7 +330,6 @@ abstract class $AsinDataCopyWith<$Res> {
           ListingRestrictions restrictions});
 
   $ItemPricesCopyWith<$Res>? get prices;
-
   $ListingRestrictionsCopyWith<$Res> get restrictions;
 }
 
@@ -438,7 +431,6 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
 abstract class _$AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
   factory _$AsinDataCopyWith(_AsinData value, $Res Function(_AsinData) then) =
       __$AsinDataCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {@HiveField(0)
@@ -471,7 +463,6 @@ abstract class _$AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
 
   @override
   $ItemPricesCopyWith<$Res>? get prices;
-
   @override
   $ListingRestrictionsCopyWith<$Res> get restrictions;
 }
@@ -752,21 +743,17 @@ abstract class _AsinData implements AsinData {
   @HiveField(8)
   @JsonKey(ignore: true)
   Uint8List? get imageData;
-
   @override
   @HiveField(9, defaultValue: "")
   @ItemCategoryConverter()
   String get category;
-
   @override
   @HiveField(10)
   bool? get sellByAmazon;
-
   @override
   @HiveField(11, defaultValue: defaultListingRestrictions)
   @JsonKey()
   ListingRestrictions get restrictions;
-
   @override
   @JsonKey(ignore: true)
   _$AsinDataCopyWith<_AsinData> get copyWith =>
@@ -807,13 +794,11 @@ mixin _$ListingRestrictions {
   @HiveField(0)
   @JsonKey(name: "new", defaultValue: false)
   bool get newItem => throw _privateConstructorUsedError;
-
   @HiveField(1)
   @JsonKey(defaultValue: false)
   bool get used => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $ListingRestrictionsCopyWith<ListingRestrictions> get copyWith =>
       throw _privateConstructorUsedError;
@@ -824,7 +809,6 @@ abstract class $ListingRestrictionsCopyWith<$Res> {
   factory $ListingRestrictionsCopyWith(
           ListingRestrictions value, $Res Function(ListingRestrictions) then) =
       _$ListingRestrictionsCopyWithImpl<$Res>;
-
   $Res call(
       {@HiveField(0) @JsonKey(name: "new", defaultValue: false) bool newItem,
       @HiveField(1) @JsonKey(defaultValue: false) bool used});
@@ -836,7 +820,6 @@ class _$ListingRestrictionsCopyWithImpl<$Res>
   _$ListingRestrictionsCopyWithImpl(this._value, this._then);
 
   final ListingRestrictions _value;
-
   // ignore: unused_field
   final $Res Function(ListingRestrictions) _then;
 
@@ -864,7 +847,6 @@ abstract class _$ListingRestrictionsCopyWith<$Res>
   factory _$ListingRestrictionsCopyWith(_ListingRestrictions value,
           $Res Function(_ListingRestrictions) then) =
       __$ListingRestrictionsCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {@HiveField(0) @JsonKey(name: "new", defaultValue: false) bool newItem,
@@ -970,12 +952,10 @@ abstract class _ListingRestrictions implements ListingRestrictions {
   @HiveField(0)
   @JsonKey(name: "new", defaultValue: false)
   bool get newItem;
-
   @override
   @HiveField(1)
   @JsonKey(defaultValue: false)
   bool get used;
-
   @override
   @JsonKey(ignore: true)
   _$ListingRestrictionsCopyWith<_ListingRestrictions> get copyWith =>
