@@ -61,10 +61,33 @@ class AsinData with _$AsinData {
     @ItemCategoryConverter()
         required String category,
     @HiveField(10) bool? sellByAmazon,
+    @HiveField(11, defaultValue: defaultListingRestrictions)
+    @Default(defaultListingRestrictions)
+    @JsonKey()
+        ListingRestrictions restrictions,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>
       _$AsinDataFromJson(json);
+}
+
+const defaultListingRestrictions =
+    ListingRestrictions(newItem: false, used: false);
+
+@freezed
+class ListingRestrictions with _$ListingRestrictions {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  @HiveType(typeId: listingRestrictionTypeId)
+  const factory ListingRestrictions({
+    @HiveField(0)
+    @Default(false)
+    @JsonKey(name: "new", defaultValue: false)
+        bool newItem,
+    @HiveField(1) @Default(false) @JsonKey(defaultValue: false) bool used,
+  }) = _ListingRestrictions;
+
+  factory ListingRestrictions.fromJson(Map<String, dynamic> json) =>
+      _$ListingRestrictionsFromJson(json);
 }
 
 class ItemCategoryConverter implements JsonConverter<String, String> {
