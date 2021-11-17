@@ -5,13 +5,17 @@ import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/search_buttons.dart';
+import 'package:amasearch/widgets/strong_container.dart';
 import 'package:amasearch/widgets/text_line_tile.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'price_detail_tile.dart';
@@ -87,10 +91,12 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
+    final isRestricted = item.restrictions.newItem | item.restrictions.used;
     return ListView(
       children: ListTile.divideTiles(
         context: context,
         tiles: [
+          if (isRestricted) const _Restricted(),
           ListTile(
             leading: ItemImage(
               url: item.imageUrl,
@@ -143,5 +149,48 @@ class _Body extends HookConsumerWidget {
         ],
       ).toList(),
     );
+  }
+}
+
+class _Restricted extends ConsumerWidget {
+  const _Restricted({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
+
+    final target = _createRestrictedText(item.restrictions);
+    return StrongContainer(
+      ListTile(
+        title: Column(
+          children: [
+            Text("出品不可商品です$target", style: strongTextStyle),
+            Text.rich(TextSpan(
+                text: "出品許可申請はこちら",
+                style: const TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () async {
+                    await FlutterWebBrowser.openWebPage(
+                      url:
+                          "https://sellercentral.amazon.co.jp/hz/approvalrequest/restrictions/approve?asin=${item.asin}",
+                    );
+                  })),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _createRestrictedText(ListingRestrictions restrictions) {
+    if (restrictions.newItem && !restrictions.used) {
+      return "(新品)";
+    }
+    if (!restrictions.newItem && restrictions.used) {
+      return "(中古)";
+    }
+    return "(新/古)";
   }
 }
