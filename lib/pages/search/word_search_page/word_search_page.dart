@@ -39,7 +39,7 @@ class _AppBar extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController();
-    final word = ref.watch(_wordProvider);
+    final word = ref.watch(_wordProvider.state);
     final category = ref.watch(_categoryProvider);
 
     final height = useState<double>(0);
@@ -81,7 +81,7 @@ class _AppBar extends HookConsumerWidget {
           ListTile(
             title: const Text("カテゴリー"),
             trailing: DropdownButton(
-              value: category.state,
+              value: category,
               items: amazonSearchCategoryMap.entries.map((entry) {
                 return DropdownMenuItem(
                   value: entry.value,
@@ -89,8 +89,8 @@ class _AppBar extends HookConsumerWidget {
                 );
               }).toList(),
               onChanged: (String? value) {
-                if (value != null && category.state != value) {
-                  category.state = value;
+                if (value != null && category != value) {
+                  ref.read(_categoryProvider.notifier).state = value;
                 }
               },
             ),
@@ -113,7 +113,7 @@ class _Body extends HookConsumerWidget {
     final word = ref.watch(_wordProvider);
     final category = ref.watch(_categoryProvider);
 
-    if (word.state == "") {
+    if (word == "") {
       return SliverList(
         delegate: SliverChildListDelegate([Container()]),
       );
@@ -122,17 +122,17 @@ class _Body extends HookConsumerWidget {
     return SliverList(
       delegate: ref
           .watch(queryItemResultProvider(ListMatchingProductRequest(
-            query: word.state,
-            category: category.state,
+            query: word,
+            category: category,
           )))
           .when(
-            loading: (_) => SliverChildListDelegate(
+            loading: () => SliverChildListDelegate(
               [centeredCircularProgressIndicator],
             ),
-            error: (error, stackTrace, _) {
+            error: (error, stackTrace) {
               recordError(error, stackTrace, information: [
                 "WordSearchPage.AppBar.Body.queryItemResultProvider",
-                "query: ${word.state}, category: ${category.state}",
+                "query: $word, category: $category",
               ]);
               return SliverChildListDelegate(
                 [Text("$error")],
