@@ -184,15 +184,15 @@ class _ListingRestrictions extends ConsumerWidget {
       return Container();
     }
     final listingNew = item.restrictions.newItem
-        ? Text("新品出品不可", style: smallStrongText)
+        ? Expanded(child: Text("新品出品不可", style: smallStrongText))
         : const Spacer();
     final listingUsed = item.restrictions.used
-        ? Text("中古出品不可", style: smallStrongText)
+        ? Expanded(child: Text("中古出品不可", style: smallStrongText))
         : const Spacer();
     return Row(
       children: [
-        Expanded(child: listingNew),
-        Expanded(child: listingUsed),
+        listingNew,
+        listingUsed,
       ],
     );
   }

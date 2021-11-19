@@ -38,18 +38,24 @@ class SlidableTile extends HookConsumerWidget {
 
     final buttons = [...baseButtons, amazonListingsButton];
     return Slidable(
-      actionPane: const SlidableDrawerActionPane(),
-      actionExtentRatio: 0.2,
-      actions: [
-        for (final act in left)
-          if (needShow(from, act.type))
-            _getAction(context, ref, act.type, act.param, buttons, items)
-      ],
-      secondaryActions: [
-        for (final act in right)
-          if (needShow(from, act.type))
-            _getAction(context, ref, act.type, act.param, buttons, items)
-      ],
+      startActionPane: ActionPane(
+        motion: const DrawerMotion(),
+        extentRatio: 0.2,
+        children: [
+          for (final act in left)
+            if (needShow(from, act.type))
+              _getAction(ref, act.type, act.param, buttons, items)
+        ],
+      ),
+      endActionPane: ActionPane(
+        motion: const DrawerMotion(),
+        extentRatio: 0.2,
+        children: [
+          for (final act in right)
+            if (needShow(from, act.type))
+              _getAction(ref, act.type, act.param, buttons, items)
+        ],
+      ),
       child: child,
     );
   }
@@ -66,30 +72,29 @@ class SlidableTile extends HookConsumerWidget {
     return true;
   }
 
-  Widget _getAction(BuildContext context, WidgetRef ref, ShortcutType type,
-      String param, List<CustomButtonDetail> buttons, SearchItem item) {
+  Widget _getAction(WidgetRef ref, ShortcutType type, String param,
+      List<CustomButtonDetail> buttons, SearchItem item) {
     switch (type) {
       case ShortcutType.purchase:
-        return _purchaseAction(context, ref, item);
+        return _purchaseAction(ref, item);
       case ShortcutType.delete:
-        return _deleteAction(context, ref, item);
+        return _deleteAction(ref, item);
       case ShortcutType.web:
         final button = buttons.firstWhere((element) => element.id == param);
         return _webAction(ref, button, item);
       case ShortcutType.navigation:
-        return _navigationAction(context, ref, param, item);
+        return _navigationAction(ref, param, item);
       case ShortcutType.none:
         throw Exception("Invalid type");
     }
   }
 
-  IconSlideAction _purchaseAction(
-      BuildContext context, WidgetRef ref, SearchItem item) {
-    return IconSlideAction(
-      caption: "仕入れ",
-      color: Colors.blue,
+  SlidableAction _purchaseAction(WidgetRef ref, SearchItem item) {
+    return SlidableAction(
+      label: "仕入れ",
+      backgroundColor: Colors.blue,
       icon: Icons.add_shopping_cart,
-      onTap: () {
+      onPressed: (context) {
         unfocus();
         ref
             .read(analyticsControllerProvider)
@@ -102,13 +107,12 @@ class SlidableTile extends HookConsumerWidget {
     );
   }
 
-  IconSlideAction _deleteAction(
-      BuildContext context, WidgetRef ref, SearchItem item) {
-    return IconSlideAction(
-      caption: "削除",
-      color: Colors.red,
+  SlidableAction _deleteAction(WidgetRef ref, SearchItem item) {
+    return SlidableAction(
+      label: "削除",
+      backgroundColor: Colors.red,
       icon: Icons.delete,
-      onTap: () async {
+      onPressed: (context) async {
         unfocus();
         final ret = await showOkCancelAlertDialog(
           context: context,
@@ -127,18 +131,18 @@ class SlidableTile extends HookConsumerWidget {
     );
   }
 
-  IconSlideAction _webAction(
+  SlidableAction _webAction(
       WidgetRef ref, CustomButtonDetail button, SearchItem item) {
     final url = replaceUrl(template: button.pattern, item: item.asins.first);
     final eventName = customButtonEventMap.containsKey(button.pattern)
         ? customButtonEventMap[button.pattern]!
         : button.pattern;
 
-    return IconSlideAction(
-      caption: button.title,
-      color: Colors.indigo,
+    return SlidableAction(
+      label: button.title,
+      backgroundColor: Colors.indigo,
       icon: Icons.search,
-      onTap: () async {
+      onPressed: (_) async {
         unfocus();
         if (url.startsWith("http")) {
           await ref
@@ -150,8 +154,8 @@ class SlidableTile extends HookConsumerWidget {
     );
   }
 
-  IconSlideAction _navigationAction(
-      BuildContext context, WidgetRef ref, String target, SearchItem item) {
+  SlidableAction _navigationAction(
+      WidgetRef ref, String target, SearchItem item) {
     var title = "";
     var event = "";
     Route<void> navigation;
@@ -183,11 +187,11 @@ class SlidableTile extends HookConsumerWidget {
       default:
         throw Exception("Unknown navigation target: $target");
     }
-    return IconSlideAction(
-      caption: title,
-      color: Colors.deepPurpleAccent,
+    return SlidableAction(
+      label: title,
+      backgroundColor: Colors.deepPurpleAccent,
       icon: Icons.search,
-      onTap: () async {
+      onPressed: (context) async {
         unfocus();
         await ref
             .read(analyticsControllerProvider)
