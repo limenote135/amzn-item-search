@@ -14,24 +14,26 @@ class SlidableDeleteTile extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentStockItemProvider);
     return Slidable(
-      actionPane: const SlidableDrawerActionPane(),
-      actionExtentRatio: 0.25,
-      secondaryActions: [
-        IconSlideAction(
-          caption: "削除",
-          color: Colors.red,
-          icon: Icons.delete,
-          onTap: () async {
-            unfocus();
-            await itemDeleteHandler(
-              context: context,
-              ref: ref,
-              items: [item],
-              content: "在庫リストからアイテムを削除します",
-            );
-          },
-        ),
-      ],
+      endActionPane: ActionPane(
+        motion: const DrawerMotion(),
+        extentRatio: 0.25,
+        children: [
+          SlidableAction(
+            label: "削除",
+            backgroundColor: Colors.red,
+            icon: Icons.delete,
+            onPressed: (context) async {
+              unfocus();
+              await itemDeleteHandler(
+                context: context,
+                ref: ref,
+                items: [item],
+                content: "在庫リストからアイテムを削除します",
+              );
+            },
+          ),
+        ],
+      ),
       child: child,
     );
   }
