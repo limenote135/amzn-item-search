@@ -41,7 +41,7 @@ class HomePage extends HookConsumerWidget {
       },
       child: Scaffold(
         body: IndexedStack(
-          index: currentPage.state,
+          index: currentPage,
           children: _pages,
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -64,10 +64,10 @@ class HomePage extends HookConsumerWidget {
               label: "設定",
             ),
           ],
-          currentIndex: currentPage.state,
+          currentIndex: currentPage,
           onTap: (value) {
-            if (currentPage.state != value) {
-              currentPage.state = value;
+            if (currentPage != value) {
+              ref.read(_currentPageProvider.notifier).state = value;
               observer.analytics.setCurrentScreen(screenName: _names[value]);
             }
           },
