@@ -22,13 +22,14 @@ class SlidableDeleteTile extends HookConsumerWidget {
             label: "削除",
             backgroundColor: Colors.red,
             icon: Icons.delete,
-            onPressed: (context) async {
+            onPressed: (_) async {
               unfocus();
+              // onPressed から渡される context だとダイアログが表示できないので Widget の context を使う
               await itemDeleteHandler(
                 context: context,
                 ref: ref,
                 items: [item],
-                content: "在庫リストからアイテムを削除します",
+                content: "リストからアイテムを削除します",
               );
             },
           ),

@@ -37,23 +37,28 @@ class SlidableTile extends HookConsumerWidget {
     final items = ref.watch(currentSearchItemProvider);
 
     final buttons = [...baseButtons, amazonListingsButton];
+
+    final leftActive = left.fold<int>(
+        0, (prev, e) => e.type != ShortcutType.none ? prev + 1 : prev);
+    final rightActive = right.fold<int>(
+        0, (prev, e) => e.type != ShortcutType.none ? prev + 1 : prev);
     return Slidable(
       startActionPane: ActionPane(
         motion: const DrawerMotion(),
-        extentRatio: 0.2,
+        extentRatio: leftActive > 0 ? 0.2 * leftActive : 0.2,
         children: [
           for (final act in left)
             if (needShow(from, act.type))
-              _getAction(ref, act.type, act.param, buttons, items)
+              _getAction(context, ref, act.type, act.param, buttons, items)
         ],
       ),
       endActionPane: ActionPane(
         motion: const DrawerMotion(),
-        extentRatio: 0.2,
+        extentRatio: rightActive > 0 ? 0.2 * rightActive : 0.2,
         children: [
           for (final act in right)
             if (needShow(from, act.type))
-              _getAction(ref, act.type, act.param, buttons, items)
+              _getAction(context, ref, act.type, act.param, buttons, items)
         ],
       ),
       child: child,
@@ -72,13 +77,13 @@ class SlidableTile extends HookConsumerWidget {
     return true;
   }
 
-  Widget _getAction(WidgetRef ref, ShortcutType type, String param,
-      List<CustomButtonDetail> buttons, SearchItem item) {
+  Widget _getAction(BuildContext context, WidgetRef ref, ShortcutType type,
+      String param, List<CustomButtonDetail> buttons, SearchItem item) {
     switch (type) {
       case ShortcutType.purchase:
         return _purchaseAction(ref, item);
       case ShortcutType.delete:
-        return _deleteAction(ref, item);
+        return _deleteAction(context, ref, item);
       case ShortcutType.web:
         final button = buttons.firstWhere((element) => element.id == param);
         return _webAction(ref, button, item);
@@ -107,17 +112,19 @@ class SlidableTile extends HookConsumerWidget {
     );
   }
 
-  SlidableAction _deleteAction(WidgetRef ref, SearchItem item) {
+  SlidableAction _deleteAction(
+      BuildContext context, WidgetRef ref, SearchItem item) {
     return SlidableAction(
       label: "削除",
       backgroundColor: Colors.red,
       icon: Icons.delete,
-      onPressed: (context) async {
+      onPressed: (_) async {
         unfocus();
+        // onPressed から渡される context だとダイアログが表示できないので Widget の context を使う
         final ret = await showOkCancelAlertDialog(
           context: context,
-          title: "商品の削除",
-          message: "在庫リストからアイテムを削除します",
+          title: "商品の削sl除",
+          message: "リストからアイテムを削除します",
           isDestructiveAction: true,
         );
         final ok = ret == OkCancelResult.ok;
