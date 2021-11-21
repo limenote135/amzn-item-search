@@ -123,7 +123,7 @@ class SlidableTile extends HookConsumerWidget {
         // onPressed から渡される context だとダイアログが表示できないので Widget の context を使う
         final ret = await showOkCancelAlertDialog(
           context: context,
-          title: "商品の削sl除",
+          title: "商品の削除",
           message: "リストからアイテムを削除します",
           isDestructiveAction: true,
         );
