@@ -1,0 +1,38 @@
+{
+  "identifier" : "1961793C",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "1000",
+      "familyShareable" : false,
+      "internalID" : "38C87826",
+      "localizations" : [
+        {
+          "description" : "コーヒーをおごります",
+          "displayName" : "コーヒー代",
+          "locale" : "ja"
+        },
+        {
+          "description" : "display_description",
+          "displayName" : "display_name",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "amasearch_donation_sample_1",
+      "referenceName" : "寄付サンプル1",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}
