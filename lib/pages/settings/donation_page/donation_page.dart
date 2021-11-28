@@ -39,6 +39,9 @@ class _Body extends HookConsumerWidget {
         }
         final packages = offers.availablePackages;
 
+        // final offers2 = value.offerings.all["NoAds"];
+        // final isAdActive = value.purchaseInfo.entitlements
+        //     .all["amasearch_no_ads_sample_entitlement2"]?.isActive;
         return Column(
           children: [
             const ListTile(
@@ -60,6 +63,37 @@ class _Body extends HookConsumerWidget {
                 },
               ),
             ),
+            // ListTile(
+            //   title: Text("広告の状態: $isAdActive"),
+            // ),
+            // ListTile(
+            //   title: Text(offers2!.availablePackages[0].product.title),
+            //   subtitle: Text(offers2.availablePackages[0].product.description),
+            //   trailing: Text(offers2.availablePackages[0].product.priceString),
+            //   onTap: () async {
+            //     try {
+            //       await EasyLoading.show(status: "処理中...");
+            //       final info = await Purchases.purchasePackage(
+            //           offers2.availablePackages[0]);
+            //
+            //       ref.refresh(purchaseStateNotifierProvider.notifier);
+            //       print("uid: ${info.originalAppUserId}, "
+            //           "purcahseDates: ${info.requestDate}");
+            //       print(info);
+            //     } catch (e) {
+            //       print(e);
+            //     } finally {
+            //       await EasyLoading.dismiss();
+            //     }
+            //   },
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     await Purchases.restoreTransactions();
+            //     ref.refresh(purchaseStateNotifierProvider.notifier);
+            //   },
+            //   child: const Text("復元"),
+            // ),
           ],
         );
       },
