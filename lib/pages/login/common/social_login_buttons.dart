@@ -9,6 +9,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 import 'sign_in_with_apple.dart';
 
@@ -38,9 +39,13 @@ class SocialLoginButtons extends HookConsumerWidget {
                 return;
               }
               final fbCred = await auth.signInWithCredential(cred);
-              await ref
-                  .read(analyticsControllerProvider)
-                  .setUserId(fbCred.user?.uid);
+
+              if (fbCred.user != null) {
+                await Purchases.logIn(fbCred.user!.uid);
+                await ref
+                    .read(analyticsControllerProvider)
+                    .setUserId(fbCred.user!.uid);
+              }
 
               Navigator.of(context).pop();
             } finally {
@@ -64,9 +69,13 @@ class SocialLoginButtons extends HookConsumerWidget {
                 }
                 await auth.signInWithCredential(cred);
                 final fbCred = await auth.signInWithCredential(cred);
-                await ref
-                    .read(analyticsControllerProvider)
-                    .setUserId(fbCred.user?.uid);
+
+                if (fbCred.user != null) {
+                  await Purchases.logIn(fbCred.user!.uid);
+                  await ref
+                      .read(analyticsControllerProvider)
+                      .setUserId(fbCred.user!.uid);
+                }
 
                 Navigator.of(context).pop();
               } finally {
