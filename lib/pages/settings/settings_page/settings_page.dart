@@ -191,15 +191,15 @@ class _Body extends HookConsumerWidget {
         ListTile(
           title: Text("その他", style: captionStyle),
         ),
-        ListTile(
-          title: const Text("コーヒーをおごる"),
-          onTap: () {
-            Navigator.push(
-              context,
-              DonationPage.route(),
-            );
-          },
-        ),
+        // ListTile(
+        //   title: const Text("コーヒーをおごる"),
+        //   onTap: () {
+        //     Navigator.push(
+        //       context,
+        //       DonationPage.route(),
+        //     );
+        //   },
+        // ),
         ListTile(
           title: const Text("ログアウト"),
           onTap: () async {
