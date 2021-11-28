@@ -19,4 +19,13 @@ class PurchaseStateNotifier extends StateNotifier<AsyncValue<PurchaseState>> {
       return PurchaseState(purchaseInfo: purchaserInfo, offerings: offerings);
     });
   }
+
+  Future<void> refreshState() async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      final purchaserInfo = await Purchases.getPurchaserInfo();
+      final offerings = await Purchases.getOfferings();
+      return PurchaseState(purchaseInfo: purchaserInfo, offerings: offerings);
+    });
+  }
 }
