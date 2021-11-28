@@ -81,6 +81,9 @@ class _Body extends HookConsumerWidget {
 
           await ref.read(analyticsControllerProvider).setUserId(cred.user?.uid);
 
+          //TODO: revoke されて再ログインする場合にエラー状態から復帰しないのでリフレッシュする
+          ref.refresh(linkedWithAmazonProvider);
+
           Navigator.pop(context);
         } on FirebaseAuthException catch (e, stack) {
           var msg = "不明なエラー";
