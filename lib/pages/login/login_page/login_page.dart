@@ -62,24 +62,27 @@ class _Body extends HookConsumerWidget {
             email: email,
             password: password,
           );
-          if (cred.user != null) {
-            await Purchases.logIn(cred.user!.uid);
-            await ref
-                .read(analyticsControllerProvider)
-                .setUserId(cred.user!.uid);
+          final user = cred.user;
+          if (user != null) {
+            await Purchases.logIn(user.uid);
+            await ref.read(analyticsControllerProvider).setUserId(user.uid);
+
+            if (user.emailVerified == false) {
+              if (cred.user?.emailVerified == false) {
+                await cred.user?.sendEmailVerification();
+                await EasyLoading.dismiss();
+                await showOkAlertDialog(
+                  context: context,
+                  title: "メールアドレスの確認",
+                  message:
+                      "メールアドレスの確認がされていません。このまま確認できない場合、一定期間後にアカウントが無効化されます。",
+                );
+              }
+            }
           }
 
-          if (cred.user?.emailVerified == false) {
-            await cred.user?.sendEmailVerification();
-            await EasyLoading.dismiss();
-            await showOkAlertDialog(
-              context: context,
-              title: "メールアドレスの確認",
-              message: "メールアドレスの確認がされていません。このまま確認できない場合、一定期間後にアカウントが無効化されます。",
-            );
-          }
-
-          await ref.read(analyticsControllerProvider).setUserId(cred.user?.uid);
+          //TODO: revoke されて再ログインする場合にエラー状態から復帰しないのでリフレッシュする
+          ref.refresh(linkedWithAmazonProvider);
 
           Navigator.pop(context);
         } on FirebaseAuthException catch (e, stack) {
