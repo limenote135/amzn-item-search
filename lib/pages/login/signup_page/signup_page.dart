@@ -49,23 +49,20 @@ class SignupPage extends HookConsumerWidget {
             password: password!,
           );
 
-          if (cred.user != null) {
-            await Purchases.logIn(cred.user!.uid);
-            await ref
-                .read(analyticsControllerProvider)
-                .setUserId(cred.user!.uid);
+          final user = cred.user;
+          if (user != null) {
+            await Purchases.logIn(user.uid);
+            await ref.read(analyticsControllerProvider).setUserId(user.uid);
+            if (user.emailVerified == false) {
+              await cred.user?.sendEmailVerification();
+              await EasyLoading.dismiss();
+              await showOkAlertDialog(
+                context: context,
+                title: "メールアドレスの確認",
+                message: "入力されたアドレスに確認メールを送信しました。",
+              );
+            }
           }
-          if (cred.user?.emailVerified == false) {
-            await cred.user?.sendEmailVerification();
-            await EasyLoading.dismiss();
-            await showOkAlertDialog(
-              context: context,
-              title: "メールアドレスの確認",
-              message: "入力されたアドレスに確認メールを送信しました。",
-            );
-          }
-
-          await ref.read(analyticsControllerProvider).setUserId(cred.user?.uid);
 
           Navigator.pop(context);
         } on FirebaseAuthException catch (e, stack) {
