@@ -40,11 +40,10 @@ class SocialLoginButtons extends HookConsumerWidget {
               }
               final fbCred = await auth.signInWithCredential(cred);
 
-              if (fbCred.user != null) {
-                await Purchases.logIn(fbCred.user!.uid);
-                await ref
-                    .read(analyticsControllerProvider)
-                    .setUserId(fbCred.user!.uid);
+              final user = fbCred.user;
+              if (user != null) {
+                await Purchases.logIn(user.uid);
+                await ref.read(analyticsControllerProvider).setUserId(user.uid);
               }
 
               Navigator.of(context).pop();
@@ -70,11 +69,12 @@ class SocialLoginButtons extends HookConsumerWidget {
                 await auth.signInWithCredential(cred);
                 final fbCred = await auth.signInWithCredential(cred);
 
-                if (fbCred.user != null) {
-                  await Purchases.logIn(fbCred.user!.uid);
+                final user = fbCred.user;
+                if (user != null) {
+                  await Purchases.logIn(user.uid);
                   await ref
                       .read(analyticsControllerProvider)
-                      .setUserId(fbCred.user!.uid);
+                      .setUserId(user.uid);
                 }
 
                 Navigator.of(context).pop();
@@ -114,7 +114,8 @@ class SocialLoginButtons extends HookConsumerWidget {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
                         await FlutterWebBrowser.openWebPage(
-                          url: "https://amasearch.app.knz-c.com/terms/privacy_policy.txt",
+                          url:
+                              "https://amasearch.app.knz-c.com/terms/privacy_policy.txt",
                         );
                       },
                   ),
