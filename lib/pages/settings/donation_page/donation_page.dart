@@ -1,5 +1,7 @@
 import 'package:amasearch/controllers/purchase_state_notifier.dart';
+import 'package:amasearch/models/purchase_state.dart';
 import 'package:amasearch/pages/settings/donation_page/donation_message_page.dart';
+import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -29,9 +31,9 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final iap = ref.watch(purchaseStateNotifierProvider);
-    return iap.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stackTrace) => Center(child: Text("$error")),
+    return AsyncValueWidget<PurchaseState>(
+      value: iap,
+      errorInfo: const ["Purchase state notifier when"],
       data: (value) {
         final offers = value.offerings.current;
         if (offers == null || offers.availablePackages.isEmpty) {
