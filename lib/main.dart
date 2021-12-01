@@ -50,7 +50,7 @@ Future<void> main() async {
     await Future.wait([
       initStartupOption(),
       initHive(),
-      initRevenueCat(),
+      // initRevenueCat(),
       clearDiskCachedImages(duration: const Duration(days: 6)),
     ]);
     // ignore: avoid_catches_without_on_clauses
