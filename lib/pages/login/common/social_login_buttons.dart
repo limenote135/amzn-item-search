@@ -42,7 +42,7 @@ class SocialLoginButtons extends HookConsumerWidget {
 
               final user = fbCred.user;
               if (user != null) {
-                await Purchases.logIn(user.uid);
+                // await Purchases.logIn(user.uid);
                 await ref.read(analyticsControllerProvider).setUserId(user.uid);
               }
 
@@ -71,7 +71,7 @@ class SocialLoginButtons extends HookConsumerWidget {
 
                 final user = fbCred.user;
                 if (user != null) {
-                  await Purchases.logIn(user.uid);
+                  // await Purchases.logIn(user.uid);
                   await ref
                       .read(analyticsControllerProvider)
                       .setUserId(user.uid);

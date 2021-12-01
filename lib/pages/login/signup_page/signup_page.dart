@@ -51,7 +51,7 @@ class SignupPage extends HookConsumerWidget {
 
           final user = cred.user;
           if (user != null) {
-            await Purchases.logIn(user.uid);
+            // await Purchases.logIn(user.uid);
             await ref.read(analyticsControllerProvider).setUserId(user.uid);
             if (user.emailVerified == false) {
               await cred.user?.sendEmailVerification();
