@@ -70,8 +70,10 @@ class _Body extends HookConsumerWidget {
             // ),
             // ListTile(
             //   title: Text(offers2!.availablePackages[0].product.title),
-            //   subtitle: Text(offers2.availablePackages[0].product.description),
-            //   trailing: Text(offers2.availablePackages[0].product.priceString),
+            //   subtitle:
+            //       Text(offers2.availablePackages[0].product.description),
+            //   trailing:
+            //       Text(offers2.availablePackages[0].product.priceString),
             //   onTap: () async {
             //     try {
             //       await EasyLoading.show(status: "処理中...");

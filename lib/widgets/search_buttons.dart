@@ -7,7 +7,6 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
 import 'package:amasearch/util/url_replacer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
