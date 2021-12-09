@@ -95,7 +95,7 @@ class ItemConditionConverter implements JsonConverter<ItemCondition, String> {
 
   @override
   String toJson(ItemCondition object) {
-    return describeEnum(object);
+    return object.name;
   }
 
   @override
@@ -110,7 +110,7 @@ class ItemSubConditionConverter
 
   @override
   String toJson(ItemSubCondition object) {
-    return describeEnum(object);
+    return object.name;
   }
 
   @override
@@ -125,7 +125,7 @@ class FulfillmentChannelConverter
 
   @override
   String toJson(FulfillmentChannel object) {
-    return describeEnum(object);
+    return object.name;
   }
 
   @override
