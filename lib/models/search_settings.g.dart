@@ -22,13 +22,14 @@ class SearchSettingsAdapter extends TypeAdapter<_$_SearchSettings> {
       useFba: fields[2] as bool,
       priorFba: fields[3] as bool,
       continuousCameraRead: fields[4] == null ? true : fields[4] as bool,
+      continuousInput: fields[5] == null ? false : fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SearchSettings obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.type)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class SearchSettingsAdapter extends TypeAdapter<_$_SearchSettings> {
       ..writeByte(3)
       ..write(obj.priorFba)
       ..writeByte(4)
-      ..write(obj.continuousCameraRead);
+      ..write(obj.continuousCameraRead)
+      ..writeByte(5)
+      ..write(obj.continuousInput);
   }
 
   @override
