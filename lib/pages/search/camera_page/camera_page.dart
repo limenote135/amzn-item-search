@@ -103,6 +103,14 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
   var _lastRead = "";
   var _lastReadTime = DateTime.now();
 
+  double _minAvailableZoom = 1;
+  double _maxAvailableZoom = 1;
+  double _currentScale = 1;
+  double _baseScale = 1;
+
+  // Counting pointers (number of user fingers on screen)
+  int _pointers = 0;
+
   @override
   void initState() {
     super.initState();
@@ -114,13 +122,18 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
 
   Future<void> _startLiveFeed() async {
     final previousCameraController = _controller;
-    _controller = CameraController(
+    final controller = CameraController(
       _camera,
-      ResolutionPreset.high,
+      ResolutionPreset.veryHigh,
       enableAudio: false,
     );
+    _controller = controller;
 
-    await _controller?.initialize();
+    await controller.initialize();
+    await Future.wait<void>([
+      controller.getMaxZoomLevel().then((value) => _maxAvailableZoom = value),
+      controller.getMinZoomLevel().then((value) => _minAvailableZoom = value),
+    ]);
     if (!mounted) {
       return;
     }
@@ -281,6 +294,38 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     super.dispose();
   }
 
+  void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
+    if (_controller == null) {
+      return;
+    }
+
+    final cameraController = _controller!;
+
+    final offset = Offset(
+      details.localPosition.dx / constraints.maxWidth,
+      details.localPosition.dy / constraints.maxHeight,
+    );
+    cameraController
+      ..setExposurePoint(offset)
+      ..setFocusPoint(offset);
+  }
+
+  void _handleScaleStart(ScaleStartDetails details) {
+    _baseScale = _currentScale;
+  }
+
+  Future<void> _handleScaleUpdate(ScaleUpdateDetails details) async {
+    // When there are not exactly two fingers on screen don't scale
+    if (_controller == null || _pointers != 2) {
+      return;
+    }
+
+    _currentScale = (_baseScale * details.scale)
+        .clamp(_minAvailableZoom, _maxAvailableZoom);
+
+    await _controller!.setZoomLevel(_currentScale);
+  }
+
   @override
   Widget build(BuildContext context) {
     final settings = ref.read(searchSettingsControllerProvider);
@@ -304,10 +349,29 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     return Stack(
       fit: StackFit.expand,
       children: [
-        CameraPreview(_controller!),
-        Container(
-          decoration: const ShapeDecoration(
-            shape: CameraScanOverlayShape(),
+        Listener(
+          onPointerDown: (_) => _pointers++,
+          onPointerUp: (_) => _pointers--,
+          child: CameraPreview(
+            _controller!,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onScaleStart: _handleScaleStart,
+                  onScaleUpdate: _handleScaleUpdate,
+                  onTapDown: (details) => onViewFinderTap(details, constraints),
+                );
+              },
+            ),
+          ),
+        ),
+        IgnorePointer(
+          ignoring: true,
+          child: Container(
+            decoration: const ShapeDecoration(
+              shape: CameraScanOverlayShape(),
+            ),
           ),
         ),
         SafeArea(
@@ -351,7 +415,10 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Spacer(),
+                  const IgnorePointer(
+                    ignoring: true,
+                    child: Spacer(),
+                  ),
                   MaterialButton(
                     onPressed: () {
                       if (!mounted) {
