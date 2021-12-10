@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
-import 'package:riverpod/riverpod.dart';
 
 final _currentPackageProvider =
     Provider<Package>((_) => throw UnimplementedError());

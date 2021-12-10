@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';

@@ -1,6 +1,5 @@
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
 part 'alert_type.g.dart';
@@ -69,8 +68,7 @@ extension AlertOfferConditionExtension on AlertOfferCondition {
         return UsedSubCondition.acceptable;
       case AlertOfferCondition.newItem:
       case AlertOfferCondition.usedAll:
-        throw Exception(
-            "Cannot convert to UsedSubCondition form ${describeEnum(this)}");
+        throw Exception("Cannot convert to UsedSubCondition form $name");
     }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -96,7 +95,7 @@ class ItemConditionConverter implements JsonConverter<ItemCondition, String> {
 
   @override
   String toJson(ItemCondition object) {
-    return describeEnum(object);
+    return object.name;
   }
 
   @override
@@ -111,7 +110,7 @@ class ItemSubConditionConverter
 
   @override
   String toJson(ItemSubCondition object) {
-    return describeEnum(object);
+    return object.name;
   }
 
   @override
@@ -126,7 +125,7 @@ class FulfillmentChannelConverter
 
   @override
   String toJson(FulfillmentChannel object) {
-    return describeEnum(object);
+    return object.name;
   }
 
   @override
