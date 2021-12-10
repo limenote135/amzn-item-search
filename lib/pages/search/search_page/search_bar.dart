@@ -18,6 +18,8 @@ class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
   static const _horizontalMargin = 16.0;
   static const _borderRadius = BorderRadius.all(Radius.circular(8));
 
+  static void _doNotHideKeyboardCallBack() {}
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textEditingController = useTextEditingController();
@@ -88,6 +90,9 @@ class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
                             context,
                             settings.type,
                           ),
+                          onEditingComplete: settings.continuousInput
+                              ? _doNotHideKeyboardCallBack
+                              : null,
                           onSubmitted: (value) {
                             if (value != "") {
                               _addItem(context, ref, settings.type, value);

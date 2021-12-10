@@ -71,6 +71,18 @@ class _Body extends HookConsumerWidget {
               }
             },
           ),
+          SwitchListTile(
+            value: settings.continuousInput,
+            title: const Text("連続入力モード"),
+            subtitle: const Text("バーコードリーダーを使う場合"),
+            onChanged: (value) {
+              if (value != settings.continuousInput) {
+                ref
+                    .read(searchSettingsControllerProvider.notifier)
+                    .update(continuousInput: value);
+              }
+            },
+          ),
           const ThemeDivider(),
           ListTile(
             title: const Text("検索履歴をすべて削除"),
