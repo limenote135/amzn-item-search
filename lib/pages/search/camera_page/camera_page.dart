@@ -281,6 +281,21 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     super.dispose();
   }
 
+  void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
+    if (_controller == null) {
+      return;
+    }
+
+    final CameraController cameraController = _controller!;
+
+    final offset = Offset(
+      details.localPosition.dx / constraints.maxWidth,
+      details.localPosition.dy / constraints.maxHeight,
+    );
+    cameraController.setExposurePoint(offset);
+    cameraController.setFocusPoint(offset);
+  }
+
   @override
   Widget build(BuildContext context) {
     final settings = ref.read(searchSettingsControllerProvider);
@@ -304,10 +319,23 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     return Stack(
       fit: StackFit.expand,
       children: [
-        CameraPreview(_controller!),
-        Container(
-          decoration: const ShapeDecoration(
-            shape: CameraScanOverlayShape(),
+        CameraPreview(
+          _controller!,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTapDown: (details) => onViewFinderTap(details, constraints),
+              );
+            },
+          ),
+        ),
+        IgnorePointer(
+          ignoring: true,
+          child: Container(
+            decoration: const ShapeDecoration(
+              shape: CameraScanOverlayShape(),
+            ),
           ),
         ),
         SafeArea(
@@ -351,7 +379,10 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Spacer(),
+                  const IgnorePointer(
+                    ignoring: true,
+                    child: Spacer(),
+                  ),
                   MaterialButton(
                     onPressed: () {
                       if (!mounted) {
