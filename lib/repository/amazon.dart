@@ -198,12 +198,16 @@ class AmazonRepository {
       // TODO: 送料が取れない
       // print("$shop: ${shipText ?? "null"}");
       final shipFrom = offer.querySelector(_shipFromSelector)!.text.trim();
-      final cond = offer
-          .querySelector(_conditionSelector)!
-          .text
-          .replaceAll("\n", "")
-          .replaceAll("中古商品- ", "")
-          .trim();
+      final condRaw = offer.querySelector(_conditionSelector)!.text;
+      var cond = "不明";
+      if (condRaw.contains("新品")) {
+        cond = "新品";
+      } else {
+        final temp = condRaw.split("-");
+        if (temp.length == 2) {
+          cond = temp[1].trim();
+        }
+      }
       final hasImage = offer.querySelector(_imageSelector) != null;
       items.add(
         OfferItem(
