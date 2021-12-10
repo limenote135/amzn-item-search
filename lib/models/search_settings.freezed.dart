@@ -22,13 +22,15 @@ class _$SearchSettingsTearOff {
       @HiveField(1) UsedSubCondition usedSubCondition = UsedSubCondition.all,
       @HiveField(2) bool useFba = true,
       @HiveField(3) bool priorFba = true,
-      @HiveField(4, defaultValue: true) bool continuousCameraRead = true}) {
+      @HiveField(4, defaultValue: true) bool continuousCameraRead = true,
+      @HiveField(5, defaultValue: false) bool continuousInput = false}) {
     return _SearchSettings(
       type: type,
       usedSubCondition: usedSubCondition,
       useFba: useFba,
       priorFba: priorFba,
       continuousCameraRead: continuousCameraRead,
+      continuousInput: continuousInput,
     );
   }
 }
@@ -48,6 +50,8 @@ mixin _$SearchSettings {
   bool get priorFba => throw _privateConstructorUsedError;
   @HiveField(4, defaultValue: true)
   bool get continuousCameraRead => throw _privateConstructorUsedError;
+  @HiveField(5, defaultValue: false)
+  bool get continuousInput => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SearchSettingsCopyWith<SearchSettings> get copyWith =>
@@ -64,7 +68,8 @@ abstract class $SearchSettingsCopyWith<$Res> {
       @HiveField(1) UsedSubCondition usedSubCondition,
       @HiveField(2) bool useFba,
       @HiveField(3) bool priorFba,
-      @HiveField(4, defaultValue: true) bool continuousCameraRead});
+      @HiveField(4, defaultValue: true) bool continuousCameraRead,
+      @HiveField(5, defaultValue: false) bool continuousInput});
 }
 
 /// @nodoc
@@ -83,6 +88,7 @@ class _$SearchSettingsCopyWithImpl<$Res>
     Object? useFba = freezed,
     Object? priorFba = freezed,
     Object? continuousCameraRead = freezed,
+    Object? continuousInput = freezed,
   }) {
     return _then(_value.copyWith(
       type: type == freezed
@@ -105,6 +111,10 @@ class _$SearchSettingsCopyWithImpl<$Res>
           ? _value.continuousCameraRead
           : continuousCameraRead // ignore: cast_nullable_to_non_nullable
               as bool,
+      continuousInput: continuousInput == freezed
+          ? _value.continuousInput
+          : continuousInput // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -121,7 +131,8 @@ abstract class _$SearchSettingsCopyWith<$Res>
       @HiveField(1) UsedSubCondition usedSubCondition,
       @HiveField(2) bool useFba,
       @HiveField(3) bool priorFba,
-      @HiveField(4, defaultValue: true) bool continuousCameraRead});
+      @HiveField(4, defaultValue: true) bool continuousCameraRead,
+      @HiveField(5, defaultValue: false) bool continuousInput});
 }
 
 /// @nodoc
@@ -142,6 +153,7 @@ class __$SearchSettingsCopyWithImpl<$Res>
     Object? useFba = freezed,
     Object? priorFba = freezed,
     Object? continuousCameraRead = freezed,
+    Object? continuousInput = freezed,
   }) {
     return _then(_SearchSettings(
       type: type == freezed
@@ -164,6 +176,10 @@ class __$SearchSettingsCopyWithImpl<$Res>
           ? _value.continuousCameraRead
           : continuousCameraRead // ignore: cast_nullable_to_non_nullable
               as bool,
+      continuousInput: continuousInput == freezed
+          ? _value.continuousInput
+          : continuousInput // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -177,7 +193,8 @@ class _$_SearchSettings implements _SearchSettings {
       @HiveField(1) this.usedSubCondition = UsedSubCondition.all,
       @HiveField(2) this.useFba = true,
       @HiveField(3) this.priorFba = true,
-      @HiveField(4, defaultValue: true) this.continuousCameraRead = true});
+      @HiveField(4, defaultValue: true) this.continuousCameraRead = true,
+      @HiveField(5, defaultValue: false) this.continuousInput = false});
 
   @JsonKey(defaultValue: SearchType.jan)
   @override
@@ -199,10 +216,14 @@ class _$_SearchSettings implements _SearchSettings {
   @override
   @HiveField(4, defaultValue: true)
   final bool continuousCameraRead;
+  @JsonKey(defaultValue: false)
+  @override
+  @HiveField(5, defaultValue: false)
+  final bool continuousInput;
 
   @override
   String toString() {
-    return 'SearchSettings(type: $type, usedSubCondition: $usedSubCondition, useFba: $useFba, priorFba: $priorFba, continuousCameraRead: $continuousCameraRead)';
+    return 'SearchSettings(type: $type, usedSubCondition: $usedSubCondition, useFba: $useFba, priorFba: $priorFba, continuousCameraRead: $continuousCameraRead, continuousInput: $continuousInput)';
   }
 
   @override
@@ -217,12 +238,14 @@ class _$_SearchSettings implements _SearchSettings {
             (identical(other.priorFba, priorFba) ||
                 other.priorFba == priorFba) &&
             (identical(other.continuousCameraRead, continuousCameraRead) ||
-                other.continuousCameraRead == continuousCameraRead));
+                other.continuousCameraRead == continuousCameraRead) &&
+            (identical(other.continuousInput, continuousInput) ||
+                other.continuousInput == continuousInput));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, type, usedSubCondition, useFba,
-      priorFba, continuousCameraRead);
+      priorFba, continuousCameraRead, continuousInput);
 
   @JsonKey(ignore: true)
   @override
@@ -236,7 +259,8 @@ abstract class _SearchSettings implements SearchSettings {
           @HiveField(1) UsedSubCondition usedSubCondition,
           @HiveField(2) bool useFba,
           @HiveField(3) bool priorFba,
-          @HiveField(4, defaultValue: true) bool continuousCameraRead}) =
+          @HiveField(4, defaultValue: true) bool continuousCameraRead,
+          @HiveField(5, defaultValue: false) bool continuousInput}) =
       _$_SearchSettings;
 
   @override
@@ -254,6 +278,9 @@ abstract class _SearchSettings implements SearchSettings {
   @override
   @HiveField(4, defaultValue: true)
   bool get continuousCameraRead;
+  @override
+  @HiveField(5, defaultValue: false)
+  bool get continuousInput;
   @override
   @JsonKey(ignore: true)
   _$SearchSettingsCopyWith<_SearchSettings> get copyWith =>
