@@ -19,5 +19,6 @@ class SearchSettings with _$SearchSettings {
     @HiveField(2) @Default(true) bool useFba,
     @HiveField(3) @Default(true) bool priorFba,
     @HiveField(4, defaultValue: true) @Default(true) bool continuousCameraRead,
+    @HiveField(5, defaultValue: false) @Default(false) bool continuousInput,
   }) = _SearchSettings;
 }
