@@ -73,8 +73,8 @@ class _Body extends HookConsumerWidget {
                 await showOkAlertDialog(
                   context: context,
                   title: "メールアドレスの確認",
-                  message:
-                      "メールアドレスの確認がされていません。このまま確認できない場合、一定期間後にアカウントが無効化されます。",
+                  message: "メールアドレスの確認がされていないため、再度確認メールを送信しました。\n"
+                      "このまま確認できない場合、一定期間後にアカウントが無効化されます。",
                 );
               }
             }
