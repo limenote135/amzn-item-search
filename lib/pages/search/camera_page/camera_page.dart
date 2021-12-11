@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
@@ -415,10 +417,12 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const IgnorePointer(
-                    ignoring: true,
-                    child: Spacer(),
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    color: Colors.white,
+                    icon: const _BackIcon(),
                   ),
+                  const Spacer(),
                   MaterialButton(
                     onPressed: () {
                       if (!mounted) {
@@ -506,5 +510,17 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
         // freeWord は無視する
         return SearchType.jan;
     }
+  }
+}
+
+class _BackIcon extends StatelessWidget {
+  const _BackIcon({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (Platform.isAndroid) {
+      return const Icon(Icons.arrow_back);
+    }
+    return const Icon(Icons.arrow_back_ios_new);
   }
 }
