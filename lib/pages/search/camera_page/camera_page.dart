@@ -328,16 +328,16 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     await _controller!.setZoomLevel(_currentScale);
   }
 
+  static final BoxDecoration _borderBox = BoxDecoration(
+    border: Border.all(color: Colors.white),
+    borderRadius: BorderRadius.circular(5),
+  );
+
   @override
   Widget build(BuildContext context) {
     final settings = ref.read(searchSettingsControllerProvider);
     final continuousRead = settings.continuousCameraRead;
     final type = settings.type;
-
-    final borderBox = BoxDecoration(
-      border: Border.all(color: Colors.white),
-      borderRadius: BorderRadius.circular(5),
-    );
 
     ref.listen(searchSettingsControllerProvider, (value, _) {
       // コードタイプを変更した際に lastRead をリセットする
@@ -414,72 +414,8 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
               //     ),
               //   ],
               // ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    color: Colors.white,
-                    icon: const _BackIcon(),
-                  ),
-                  const Spacer(),
-                  MaterialButton(
-                    onPressed: () {
-                      if (!mounted) {
-                        return;
-                      }
-                      setState(() {
-                        final newVal = !continuousRead;
-                        ref
-                            .read(searchSettingsControllerProvider.notifier)
-                            .update(continuousCameraRead: newVal);
-                        ref.read(analyticsControllerProvider).setUserProp(
-                            continuousReadPropName, newVal.toString());
-                      });
-                    },
-                    textColor: Colors.white,
-                    child: Text.rich(TextSpan(
-                      text: "連続読取: ",
-                      children: [
-                        WidgetSpan(
-                          child: Container(
-                            padding: const EdgeInsets.all(2),
-                            decoration: continuousRead ? borderBox : null,
-                            child: const Text("On"),
-                          ),
-                        ),
-                        WidgetSpan(
-                          child: Container(
-                            padding: const EdgeInsets.all(2),
-                            decoration: continuousRead ? null : borderBox,
-                            child: const Text("Off"),
-                          ),
-                        ),
-                      ],
-                    )),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Spacer(),
-                  MaterialButton(
-                    textColor: Colors.white,
-                    onPressed: () {
-                      if (!mounted) {
-                        return;
-                      }
-                      setState(() {
-                        final next = _getNext(type);
-                        ref
-                            .read(searchSettingsControllerProvider.notifier)
-                            .update(type: next);
-                      });
-                    },
-                    child: Text("タイプ: ${type.toDisplayString()}"),
-                  ),
-                ],
-              ),
+              _continuousReadButtonRow(continuousRead),
+              _searchCodeTypeRow(type),
               const Spacer(),
               ProviderScope(
                 overrides: [
@@ -491,6 +427,79 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
               const SizedBox(height: 50),
             ],
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _continuousReadButtonRow(bool continuousRead) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          color: Colors.white,
+          icon: const _BackIcon(),
+        ),
+        const Spacer(),
+        MaterialButton(
+          onPressed: () {
+            if (!mounted) {
+              return;
+            }
+            setState(() {
+              final newVal = !continuousRead;
+              ref
+                  .read(searchSettingsControllerProvider.notifier)
+                  .update(continuousCameraRead: newVal);
+              ref
+                  .read(analyticsControllerProvider)
+                  .setUserProp(continuousReadPropName, newVal.toString());
+            });
+          },
+          textColor: Colors.white,
+          child: Text.rich(TextSpan(
+            text: "連続読取: ",
+            children: [
+              WidgetSpan(
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: continuousRead ? _borderBox : null,
+                  child: const Text("On"),
+                ),
+              ),
+              WidgetSpan(
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: continuousRead ? null : _borderBox,
+                  child: const Text("Off"),
+                ),
+              ),
+            ],
+          )),
+        ),
+      ],
+    );
+  }
+
+  Widget _searchCodeTypeRow(SearchType type) {
+    return Row(
+      children: [
+        const Spacer(),
+        MaterialButton(
+          textColor: Colors.white,
+          onPressed: () {
+            if (!mounted) {
+              return;
+            }
+            setState(() {
+              final next = _getNext(type);
+              ref
+                  .read(searchSettingsControllerProvider.notifier)
+                  .update(type: next);
+            });
+          },
+          child: Text("タイプ: ${type.toDisplayString()}"),
         ),
       ],
     );
