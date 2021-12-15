@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,6 +27,14 @@ class TextToSpeech {
 
         _reader(generalSettingsControllerProvider.notifier)
             .update(readAloudSpeed: range.normal);
+      }
+
+      if (Platform.isIOS) {
+        await _flutterTts
+            .setIosAudioCategory(IosTextToSpeechAudioCategory.ambientSolo, [
+          IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+          IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+        ]);
       }
     });
   }
