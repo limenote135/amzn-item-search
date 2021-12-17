@@ -59,13 +59,20 @@ class _PriceAndProfit extends HookConsumerWidget {
 
     final query = MediaQuery.of(context);
     final width = (query.size.width - 75) / 2 / query.textScaleFactor;
+
+    final priceDigit = _getDigit(detail.price);
+    final shipDigit = _getDigit(detail.shipping);
+    final digit = priceDigit + shipDigit;
+
     // 4ケタ円商品+4桁円送料が入らない場合は送料は改行して表示する
-    final needNewLine = Platform.isIOS ? width < 160 : width < 140;
+    final needNewLine =
+        (Platform.isIOS ? width < 160 : width < 140) && digit > 8;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text.rich(
-          TextSpan(text: "${condition.toDisplayString()}最安: ", children: [
+          TextSpan(text: "${condition.toDisplayString()}: ", children: [
             TextSpan(
               text: numberFormatter.format(detail.price),
               style: strongTextStyle,
@@ -117,6 +124,19 @@ class _PriceAndProfit extends HookConsumerWidget {
           ),
       ],
     );
+  }
+
+  int _getDigit(int n) {
+    if (n == 0) {
+      return 1;
+    }
+    var digit = 0;
+    var num = n;
+    while (num != 0) {
+      num ~/= 10;
+      digit++;
+    }
+    return digit;
   }
 
   String _conditionText(PriceDetail detail) {
