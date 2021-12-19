@@ -10,6 +10,7 @@ import 'package:amasearch/pages/search/camera_page/item_tile.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:camera/camera.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
@@ -209,14 +210,17 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
         barcodes.isEmpty) {
       return;
     }
-    final val = barcodes.first.value;
-    if (val.rawValue == null ||
-        val.type == BarcodeType.url ||
-        val.type == BarcodeType.contactInfo ||
-        val.type == BarcodeType.email) {
+    final val = barcodes.firstWhereOrNull(
+      (e) =>
+          e.value.rawValue != null &&
+          e.value.type != BarcodeType.url &&
+          e.value.type != BarcodeType.contactInfo &&
+          e.value.type != BarcodeType.email,
+    );
+    if (val == null) {
       return;
     }
-    final result = val.rawValue;
+    final result = val.value.rawValue;
     if (result != null &&
         !result.contains("errorCode") &&
         _lastRead != result) {
