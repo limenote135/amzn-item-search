@@ -163,13 +163,6 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     }
     try {
       isBusy = true;
-      final allBytes = WriteBuffer();
-      for (final plane in image.planes) {
-        allBytes.putUint8List(plane.bytes);
-      }
-      final bytes = allBytes.done().buffer.asUint8List();
-
-      final imageSize = Size(image.width.toDouble(), image.height.toDouble());
 
       final imageRotation =
           InputImageRotationMethods.fromRawValue(_camera.sensorOrientation) ??
@@ -179,11 +172,29 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
           InputImageFormatMethods.fromRawValue(image.format.raw as int) ??
               InputImageFormat.NV21;
 
+      final isRGBA = inputImageFormat == InputImageFormat.BGRA8888;
+
+      final allBytes = WriteBuffer();
+      for (final plane in image.planes) {
+        if (isRGBA) {
+          // RGBA(iOS) の場合は上下 1/3 は捨てる
+          final oneThird = plane.bytesPerRow * plane.height! ~/ 3;
+          allBytes.putUint8List(plane.bytes.sublist(oneThird, oneThird * 2));
+        } else {
+          allBytes.putUint8List(plane.bytes);
+        }
+      }
+      final bytes = allBytes.done().buffer.asUint8List();
+
+      // RGBA8888(iOS) の場合、上下 1/3 は捨てる
+      final height = isRGBA ? image.height / 3 : image.height.toDouble();
+      final imageSize = Size(image.width.toDouble(), height);
+
       final planeData = image.planes.map(
         (Plane plane) {
           return InputImagePlaneMetadata(
             bytesPerRow: plane.bytesPerRow,
-            height: plane.height,
+            height: isRGBA ? plane.height! ~/ 3 : plane.height,
             width: plane.width,
           );
         },
