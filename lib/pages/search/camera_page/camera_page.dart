@@ -101,6 +101,8 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
   late CameraDescription _camera;
   Widget? customPaint;
 
+  var _isFlashOpen = false;
+
   var isBusy = false;
 
   var _lastRead = "";
@@ -389,41 +391,7 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
         SafeArea(
           child: Column(
             children: [
-              // https://github.com/pdliuw/ai_barcode/issues/12
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: <Widget>[
-              //     const BackButton(
-              //       color: Colors.white,
-              //     ),
-              //     MaterialButton(
-              //       onPressed: () {
-              //         _toggleFlash();
-              //         setState(() {}); // TODO: 表示を更新するため setState で強制更新
-              //       },
-              //       textColor: Colors.white,
-              //       child: Text.rich(TextSpan(
-              //         text: "Flash: ",
-              //         children: [
-              //           WidgetSpan(
-              //             child: Container(
-              //               padding: const EdgeInsets.all(2),
-              //               decoration: _isFlashOpen() ? borderBox : null,
-              //               child: const Text("On"),
-              //             ),
-              //           ),
-              //           WidgetSpan(
-              //             child: Container(
-              //               padding: const EdgeInsets.all(2),
-              //               decoration: _isFlashOpen() ? null : borderBox,
-              //               child: const Text("Off"),
-              //             ),
-              //           ),
-              //         ],
-              //       )),
-              //     ),
-              //   ],
-              // ),
+              _flushButtonRow(),
               _continuousReadButtonRow(continuousRead),
               _searchCodeTypeRow(type),
               const Spacer(),
@@ -434,9 +402,54 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
                 ],
                 child: const CameraItemTile(),
               ),
-              const SizedBox(height: 50),
             ],
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _flushButtonRow() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          color: Colors.white,
+          icon: const _BackIcon(),
+        ),
+        const Spacer(),
+        MaterialButton(
+          onPressed: () async {
+            if (!mounted || _controller == null) {
+              return;
+            }
+            await _controller!
+                .setFlashMode(_isFlashOpen ? FlashMode.off : FlashMode.torch);
+            setState(() {
+              _isFlashOpen = !_isFlashOpen;
+            });
+          },
+          textColor: Colors.white,
+          child: Text.rich(TextSpan(
+            text: "Flash: ",
+            children: [
+              WidgetSpan(
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: _isFlashOpen ? _borderBox : null,
+                  child: const Text("On"),
+                ),
+              ),
+              WidgetSpan(
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: _isFlashOpen ? null : _borderBox,
+                  child: const Text("Off"),
+                ),
+              ),
+            ],
+          )),
         ),
       ],
     );
@@ -446,11 +459,6 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          color: Colors.white,
-          icon: const _BackIcon(),
-        ),
         const Spacer(),
         MaterialButton(
           onPressed: () {
