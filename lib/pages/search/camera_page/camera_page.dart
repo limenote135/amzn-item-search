@@ -139,7 +139,13 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     if (!mounted) {
       return;
     }
-    await _controller?.startImageStream(_processCameraImage);
+    await controller.startImageStream(_processCameraImage);
+
+    // TODO: 適当に最初からズームしておく
+    _currentScale = (1 + (_maxAvailableZoom / 8 + 1) * 0.5)
+        .clamp(_minAvailableZoom, _maxAvailableZoom);
+
+    await controller.setZoomLevel(_currentScale);
     setState(() {});
     await previousCameraController?.dispose();
   }
