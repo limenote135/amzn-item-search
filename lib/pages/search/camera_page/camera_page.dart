@@ -101,6 +101,8 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
   late CameraDescription _camera;
   Widget? customPaint;
 
+  var _isFlashOpen = false;
+
   var isBusy = false;
 
   var _lastRead = "";
@@ -161,13 +163,6 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     }
     try {
       isBusy = true;
-      final allBytes = WriteBuffer();
-      for (final plane in image.planes) {
-        allBytes.putUint8List(plane.bytes);
-      }
-      final bytes = allBytes.done().buffer.asUint8List();
-
-      final imageSize = Size(image.width.toDouble(), image.height.toDouble());
 
       final imageRotation =
           InputImageRotationMethods.fromRawValue(_camera.sensorOrientation) ??
@@ -177,11 +172,29 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
           InputImageFormatMethods.fromRawValue(image.format.raw as int) ??
               InputImageFormat.NV21;
 
+      final isRGBA = inputImageFormat == InputImageFormat.BGRA8888;
+
+      final allBytes = WriteBuffer();
+      for (final plane in image.planes) {
+        if (isRGBA) {
+          // RGBA(iOS) の場合は上下 1/3 は捨てる
+          final oneThird = plane.bytesPerRow * plane.height! ~/ 3;
+          allBytes.putUint8List(plane.bytes.sublist(oneThird, oneThird * 2));
+        } else {
+          allBytes.putUint8List(plane.bytes);
+        }
+      }
+      final bytes = allBytes.done().buffer.asUint8List();
+
+      // RGBA8888(iOS) の場合、上下 1/3 は捨てる
+      final height = isRGBA ? image.height / 3 : image.height.toDouble();
+      final imageSize = Size(image.width.toDouble(), height);
+
       final planeData = image.planes.map(
         (Plane plane) {
           return InputImagePlaneMetadata(
             bytesPerRow: plane.bytesPerRow,
-            height: plane.height,
+            height: isRGBA ? plane.height! ~/ 3 : plane.height,
             width: plane.width,
           );
         },
@@ -389,41 +402,7 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
         SafeArea(
           child: Column(
             children: [
-              // https://github.com/pdliuw/ai_barcode/issues/12
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: <Widget>[
-              //     const BackButton(
-              //       color: Colors.white,
-              //     ),
-              //     MaterialButton(
-              //       onPressed: () {
-              //         _toggleFlash();
-              //         setState(() {}); // TODO: 表示を更新するため setState で強制更新
-              //       },
-              //       textColor: Colors.white,
-              //       child: Text.rich(TextSpan(
-              //         text: "Flash: ",
-              //         children: [
-              //           WidgetSpan(
-              //             child: Container(
-              //               padding: const EdgeInsets.all(2),
-              //               decoration: _isFlashOpen() ? borderBox : null,
-              //               child: const Text("On"),
-              //             ),
-              //           ),
-              //           WidgetSpan(
-              //             child: Container(
-              //               padding: const EdgeInsets.all(2),
-              //               decoration: _isFlashOpen() ? null : borderBox,
-              //               child: const Text("Off"),
-              //             ),
-              //           ),
-              //         ],
-              //       )),
-              //     ),
-              //   ],
-              // ),
+              _flushButtonRow(),
               _continuousReadButtonRow(continuousRead),
               _searchCodeTypeRow(type),
               const Spacer(),
@@ -434,9 +413,54 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
                 ],
                 child: const CameraItemTile(),
               ),
-              const SizedBox(height: 50),
             ],
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _flushButtonRow() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          color: Colors.white,
+          icon: const _BackIcon(),
+        ),
+        const Spacer(),
+        MaterialButton(
+          onPressed: () async {
+            if (!mounted || _controller == null) {
+              return;
+            }
+            await _controller!
+                .setFlashMode(_isFlashOpen ? FlashMode.off : FlashMode.torch);
+            setState(() {
+              _isFlashOpen = !_isFlashOpen;
+            });
+          },
+          textColor: Colors.white,
+          child: Text.rich(TextSpan(
+            text: "Flash: ",
+            children: [
+              WidgetSpan(
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: _isFlashOpen ? _borderBox : null,
+                  child: const Text("On"),
+                ),
+              ),
+              WidgetSpan(
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: _isFlashOpen ? null : _borderBox,
+                  child: const Text("Off"),
+                ),
+              ),
+            ],
+          )),
         ),
       ],
     );
@@ -446,11 +470,6 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          color: Colors.white,
-          icon: const _BackIcon(),
-        ),
         const Spacer(),
         MaterialButton(
           onPressed: () {
