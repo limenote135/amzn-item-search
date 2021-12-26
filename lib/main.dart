@@ -79,7 +79,8 @@ Future<void> initFirebase() async {
     await Future.wait([
       FirebaseCrashlytics.instance
           .setCrashlyticsCollectionEnabled(_kTestingCrashlytics),
-      FirebaseAnalytics().setAnalyticsCollectionEnabled(_kTestingAnalytics),
+      FirebaseAnalytics.instance
+          .setAnalyticsCollectionEnabled(_kTestingAnalytics),
       FirebasePerformance.instance
           .setPerformanceCollectionEnabled(_kTestingPerformance),
     ]);
