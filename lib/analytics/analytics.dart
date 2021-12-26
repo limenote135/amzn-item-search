@@ -1,7 +1,6 @@
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'events.dart';
@@ -9,23 +8,19 @@ import 'events.dart';
 const propValueMaxLength = 36;
 const eventValueMaxLength = 100;
 
-final _analyticsProvider = Provider((_) => FirebaseAnalytics());
+final analyticsObserverProvider = Provider(
+    (ref) => FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance));
 
-final analyticsObserverProvider = Provider((ref) =>
-    FirebaseAnalyticsObserver(analytics: ref.read(_analyticsProvider)));
-
-final analyticsControllerProvider =
-    Provider((ref) => AnalyticsController(ref.read));
+final analyticsControllerProvider = Provider((_) => AnalyticsController());
 
 class AnalyticsController {
-  AnalyticsController(this._read);
-  final Reader _read;
+  AnalyticsController();
 
   Future<void> logPurchaseEvent(StockItem stock) {
     final title = stock.item.title.length > eventValueMaxLength
         ? stock.item.title.substring(0, eventValueMaxLength)
         : stock.item.title;
-    return _read(_analyticsProvider)
+    return FirebaseAnalytics.instance
         .logEvent(name: purchaseEventName, parameters: <String, dynamic>{
       "ASIN": stock.item.asin,
       "title": title,
@@ -39,7 +34,7 @@ class AnalyticsController {
   }
 
   Future<void> logPushSearchButtonEvent(String name) {
-    return _read(_analyticsProvider).logEvent(
+    return FirebaseAnalytics.instance.logEvent(
         name: pushSearchButtonEventName,
         parameters: <String, dynamic>{
           "type": name,
@@ -47,14 +42,14 @@ class AnalyticsController {
   }
 
   Future<void> logSearchEvent(String type) {
-    return _read(_analyticsProvider)
+    return FirebaseAnalytics.instance
         .logEvent(name: searchEventName, parameters: <String, dynamic>{
       "type": type,
     });
   }
 
   Future<void> logCalcEvent(String type) {
-    return _read(_analyticsProvider).logEvent(
+    return FirebaseAnalytics.instance.logEvent(
       name: calcEventName,
       parameters: <String, dynamic>{
         "type": type,
@@ -63,7 +58,7 @@ class AnalyticsController {
   }
 
   Future<void> logSingleEvent(String name) {
-    return _read(_analyticsProvider)
+    return FirebaseAnalytics.instance
         .logEvent(name: name, parameters: <String, dynamic>{});
   }
 
@@ -71,11 +66,11 @@ class AnalyticsController {
     final normalizedVal = value.length > propValueMaxLength
         ? value.substring(0, propValueMaxLength)
         : value;
-    return _read(_analyticsProvider)
+    return FirebaseAnalytics.instance
         .setUserProperty(name: name, value: normalizedVal);
   }
 
   Future<void> setUserId(String? uid) {
-    return _read(_analyticsProvider).setUserId(uid);
+    return FirebaseAnalytics.instance.setUserId(id: uid);
   }
 }
