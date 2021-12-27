@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
@@ -74,7 +76,7 @@ class _Body extends HookConsumerWidget {
           SwitchListTile(
             value: settings.continuousInput,
             title: const Text("連続入力モード"),
-            subtitle: const Text("バーコードリーダーを使う場合"),
+            subtitle: const Text("外部バーコードリーダーを使う場合"),
             onChanged: (value) {
               if (value != settings.continuousInput) {
                 ref
@@ -83,6 +85,26 @@ class _Body extends HookConsumerWidget {
               }
             },
           ),
+          if (Platform.isIOS)
+            ListTile(
+              onTap: () async {
+                await showOkAlertDialog(
+                  context: context,
+                  message: "iOS では、外部バーコードリーダーを接続すると"
+                      "文字入力時にキーボードが表示されなくなります。\n\n"
+                      "代わりに、ほとんどのバーコードリーダーにはスキャンボタンを2回押すと"
+                      "キーボードを表示する機能があるため、これを有効化することをオススメします。\n\n"
+                      "詳しくはバーコードリーダーの説明書をご確認ください。",
+                );
+              },
+              title: const Text(
+                "外部バーコードリーダーを使う場合の注意",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
           const ThemeDivider(),
           ListTile(
             title: const Text("検索履歴をすべて削除"),
