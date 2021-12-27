@@ -47,6 +47,13 @@ final _daysProvider = Provider((ref) {
   ];
 });
 
+final _stockPageModeProvider = StateProvider((_) => _StockPageMode.normal);
+
+enum _StockPageMode {
+  normal,
+  delete,
+}
+
 // 実績シェア用に仕入れ日ごとに GlobalKey を作成
 final _captureKeyMapProvider = Provider((ref) {
   final days = ref.watch(_daysProvider);
@@ -66,6 +73,13 @@ class StocksPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // 選択アイテム数が 0 になったらノーマルモードに戻る
+    ref.listen<int>(_selectedItemCount, (previous, next) {
+      if (next == 0) {
+        ref.read(_stockPageModeProvider.notifier).state = _StockPageMode.normal;
+      }
+    });
+
     return Scaffold(
       appBar: _appBarSelector(context, ref),
       body: const _Body(),
@@ -74,10 +88,14 @@ class StocksPage extends HookConsumerWidget {
 
   AppBar _appBarSelector(BuildContext context, WidgetRef ref) {
     final selectedItems = ref.watch(selectedStockItemsControllerProvider);
+    final mode = ref.watch(_stockPageModeProvider);
 
-    return selectedItems.isEmpty
-        ? _getNormalAppBar(context, ref)
-        : _getItemSelectAppBar(context, ref, selectedItems);
+    switch (mode) {
+      case _StockPageMode.normal:
+        return _getNormalAppBar(context, ref);
+      case _StockPageMode.delete:
+        return _getItemSelectAppBar(context, ref, selectedItems);
+    }
   }
 
   AppBar _getNormalAppBar(BuildContext context, WidgetRef ref) {
@@ -120,10 +138,12 @@ class StocksPage extends HookConsumerWidget {
     return AppBar(
       title: Text("${selected.length} 件選択"),
       leading: IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: () =>
-            ref.read(selectedStockItemsControllerProvider.notifier).removeAll(),
-      ),
+          icon: const Icon(Icons.clear),
+          onPressed: () {
+            ref.read(_stockPageModeProvider.notifier).state =
+                _StockPageMode.normal;
+            ref.read(selectedStockItemsControllerProvider.notifier).removeAll();
+          }),
       actions: [
         IconButton(
           icon: const Icon(Icons.delete),
@@ -237,14 +257,14 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final items = ref.watch(stockItemListControllerProvider);
-    final selectedItems = ref.watch(selectedStockItemsControllerProvider);
+    final mode = ref.watch(_stockPageModeProvider);
 
     final keyMaps = ref.watch(_captureKeyMapProvider);
 
     final tile = _InkWell(
-      child: selectedItems.isNotEmpty
-          ? const ItemTile()
-          : const SlidableDeleteTile(child: ItemTile()),
+      child: mode == _StockPageMode.normal
+          ? const SlidableDeleteTile(child: ItemTile())
+          : const ItemTile(),
     );
 
     return Column(
@@ -343,23 +363,40 @@ class _InkWell extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentStockItemProvider);
+    final mode = ref.watch(_stockPageModeProvider);
+
     return InkWell(
       onTap: () {
-        final count = ref.read(_selectedItemCount);
-        if (count > 0) {
-          ref
-              .read(selectedStockItemsControllerProvider.notifier)
-              .toggleItem(item);
-        } else {
-          Navigator.push(
-            context,
-            DetailPage.route(item),
-          );
+        switch (mode) {
+          case _StockPageMode.normal:
+            // ノーマルモードでタップ時は詳細画面へ遷移
+            Navigator.push(
+              context,
+              DetailPage.route(item),
+            );
+            break;
+          case _StockPageMode.delete:
+            // 削除モードでタップ時は選択アイテムに追加
+            ref
+                .read(selectedStockItemsControllerProvider.notifier)
+                .toggleItem(item);
+            break;
         }
       },
-      onLongPress: () => ref
-          .read(selectedStockItemsControllerProvider.notifier)
-          .toggleItem(item),
+      onLongPress: () {
+        switch (mode) {
+          case _StockPageMode.normal:
+            // ノーマルモードで長押しした場合は削除画面に切り替え
+            ref.read(_stockPageModeProvider.notifier).state =
+                _StockPageMode.delete;
+            break;
+          case _StockPageMode.delete:
+            break;
+        }
+        ref
+            .read(selectedStockItemsControllerProvider.notifier)
+            .toggleItem(item);
+      },
       child: child,
     );
   }
