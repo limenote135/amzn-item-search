@@ -208,7 +208,8 @@ class _Body extends HookConsumerWidget {
           onTap: () async {
             await showOkAlertDialog(
                 context: context,
-                message: "ブラウザで Keepa へログインした上で、"
+                message: "ランキンググラフが表示されない場合、"
+                    "ブラウザで Keepa へログインした上で、"
                     "右上のボタンを押して再読み込みすると表示されるようになります。");
           },
           child: const Text(
