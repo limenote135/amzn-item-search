@@ -14,6 +14,33 @@ class InputPricesTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final showCalc = useState(false);
+
+    final purchasePriceFocus = useFocusNode();
+    final purchasePriceController = useTextEditingController();
+    purchasePriceFocus.addListener(() {
+      final text = purchasePriceController.text;
+      if (!purchasePriceFocus.hasFocus || text == "") {
+        return;
+      }
+      purchasePriceController.value = purchasePriceController.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: 0, extentOffset: text.length),
+      );
+    });
+
+    final sellPriceFocus = useFocusNode();
+    final sellPriceController = useTextEditingController();
+    sellPriceFocus.addListener(() {
+      final text = sellPriceController.text;
+      if (!sellPriceFocus.hasFocus || text == "") {
+        return;
+      }
+      sellPriceController.value = sellPriceController.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: 0, extentOffset: text.length),
+      );
+    });
+
     final form = ReactiveForm.of(context)! as FormGroup;
     return ListTile(
       title: Column(
@@ -26,6 +53,8 @@ class InputPricesTile extends HookConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ReactiveTextField<dynamic>(
                     formControlName: purchasePriceField,
+                    controller: purchasePriceController,
+                    focusNode: purchasePriceFocus,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                         labelText: "仕入価格", suffixText: "円"),
@@ -41,6 +70,8 @@ class InputPricesTile extends HookConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ReactiveTextField<dynamic>(
                     formControlName: sellPriceField,
+                    controller: sellPriceController,
+                    focusNode: sellPriceFocus,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                         labelText: "販売価格", suffixText: "円"),
