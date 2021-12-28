@@ -811,7 +811,7 @@ packages:
       name: keyboard_actions
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.4.5"
+    version: "3.4.6"
   lints:
     dependency: transitive
     description:
@@ -1063,14 +1063,14 @@ packages:
       name: reactive_forms
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "10.6.8"
+    version: "11.0.0"
   reactive_touch_spin:
     dependency: "direct main"
     description:
       name: reactive_touch_spin
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0-nullsafety.2"
+    version: "0.3.0-nullsafety.2"
   riverpod:
     dependency: "direct main"
     description:
