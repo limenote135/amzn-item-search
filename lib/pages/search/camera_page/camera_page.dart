@@ -110,7 +110,7 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
 
   double _minAvailableZoom = 1;
   double _maxAvailableZoom = 1;
-  double _currentScale = 1;
+  double _currentScale = 1.5;
   double _baseScale = 1;
 
   // Counting pointers (number of user fingers on screen)
@@ -144,10 +144,7 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     }
     await controller.startImageStream(_processCameraImage);
 
-    // TODO: 適当に最初からズームしておく
-    _currentScale = (1 + (_maxAvailableZoom / 8 + 1) * 0.5)
-        .clamp(_minAvailableZoom, _maxAvailableZoom);
-
+    // 最初から1.5倍程度にズームしておく
     await controller.setZoomLevel(_currentScale);
     setState(() {});
     await previousCameraController?.dispose();
