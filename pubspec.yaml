@@ -66,7 +66,7 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.4.0
   json_serializable: ^6.1.3
-  keyboard_actions: ^3.4.6
+  keyboard_actions: 3.4.4 # https://github.com/diegoveloper/flutter_keyboard_actions/commit/2960caade1d0347f1d7a0f79b32405b3c4310ca1 のリリース待ち
   package_info_plus: ^1.3.0
   path_provider: ^2.0.8
   permission_handler: 8.3.0
