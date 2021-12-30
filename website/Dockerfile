@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package*.json *.lock ./
 
-RUN yarn install
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn/v6 yarn install
 
 COPY . .
 
