@@ -1,1 +1,8 @@
-include: package:flutter_lints/flutter.yaml
+analyzer:
+  exclude:
+    - /**/*.dart
+  errors:
+    deprecated_member_use: ignore
+    must_be_immutable: ignore
+    unused_local_variable: ignore
+    unused_import: ignore
