@@ -37,6 +37,8 @@ dependencies:
   euc:
     path: ./packages/euc
   extended_image: ^6.0.1
+  fast_barcode_scanner:
+    path: ./packages/fast_barcode_scanner/fast_barcode_scanner
   firebase_analytics: ^9.0.4
   firebase_auth: ^3.3.4
   firebase_core: ^1.10.6
