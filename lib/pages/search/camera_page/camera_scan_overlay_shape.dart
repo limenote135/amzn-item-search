@@ -7,8 +7,6 @@ class CameraScanOverlayShape extends ShapeBorder {
     this.overlayColor = const Color.fromRGBO(0, 0, 0, 80),
     this.borderRadius = 0,
     this.borderLength = 40,
-    this.cutOutWidth = 300,
-    this.cutOutHeight = 150,
     this.cutOutBottomOffset = 0,
   });
 
@@ -18,9 +16,6 @@ class CameraScanOverlayShape extends ShapeBorder {
   final double borderRadius;
   final double borderLength;
   final double cutOutBottomOffset;
-
-  final double cutOutWidth;
-  final double cutOutHeight;
 
   @override
   EdgeInsetsGeometry get dimensions => const EdgeInsets.all(10);
@@ -62,6 +57,8 @@ class CameraScanOverlayShape extends ShapeBorder {
     final borderWidthSize = width / 2;
     final height = rect.height;
     final borderOffset = borderWidth / 2;
+    final cutOutWidth = rect.width - 45;
+    final cutOutHeight = 1 / (16 / 9) * cutOutWidth;
     final _borderLengthWidth = borderLength > cutOutWidth / 2 + borderWidth * 2
         ? borderWidthSize / 2
         : borderLength;
