@@ -6,32 +6,15 @@ import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
-import 'package:amasearch/pages/search/camera_page/item_tile.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
-import 'package:amasearch/util/error_report.dart';
-import 'package:camera/camera.dart';
-import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
+import 'package:fast_barcode_scanner/fast_barcode_scanner.dart';
 import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vibration/vibration.dart';
 
 import 'camera_scan_overlay_shape.dart';
-
-final _backCameraFutureProvider = FutureProvider<CameraDescription>((_) async {
-  final cameras = await availableCameras();
-  for (var i = 0; i < cameras.length; i++) {
-    if (cameras[i].lensDirection == CameraLensDirection.back) {
-      return cameras[i];
-    }
-  }
-  throw Exception("背面カメラが見つかりませんでした");
-});
-
-final _currentCameraProvider =
-    Provider<CameraDescription>((_) => throw UnimplementedError());
+import 'item_tile.dart';
 
 class CameraPage extends ConsumerWidget {
   const CameraPage({Key? key}) : super(key: key);
@@ -58,31 +41,10 @@ class CameraPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      body: ref.watch(_backCameraFutureProvider).when(
-            loading: () => Container(),
-            error: (error, stackTrace) {
-              recordError(error, stackTrace,
-                  information: const ["CameraPage build"]);
-              return Container();
-            },
-            data: (value) {
-              return SafeArea(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: ProviderScope(
-                        overrides: [
-                          _currentCameraProvider.overrideWithValue(value)
-                        ],
-                        child: const _Body(),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+    return const Scaffold(
+      body: SafeArea(
+        child: _Body(),
+      ),
     );
   }
 }
@@ -94,11 +56,9 @@ class _Body extends ConsumerStatefulWidget {
   _BodyState createState() => _BodyState();
 }
 
-class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
-  final barcodeScanner = GoogleMlKit.vision.barcodeScanner();
+class _BodyState extends ConsumerState<_Body> {
+  final _controller = CameraController();
 
-  CameraController? _controller;
-  late CameraDescription _camera;
   Widget? customPaint;
 
   var _isFlashOpen = false;
@@ -119,123 +79,77 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance!.addObserver(this);
-    _camera = ref.read(_currentCameraProvider);
-    _startLiveFeed();
+    _controller.events.addListener(onInitialized);
   }
 
-  Future<void> _startLiveFeed() async {
-    final previousCameraController = _controller;
-    final controller = CameraController(
-      _camera,
-      ResolutionPreset.veryHigh,
-      enableAudio: false,
-    );
-    _controller = controller;
+  void onInitialized() {
+    if (_controller.state.isInitialized) {
+      initZoomLevel();
+      _isFlashOpen = _controller.state.torchState;
 
-    await controller.initialize();
+      _controller.events.removeListener(onInitialized);
+    }
+  }
+
+  Future<void> initZoomLevel() async {
     await Future.wait<void>([
-      controller.getMaxZoomLevel().then((value) => _maxAvailableZoom = value),
-      controller.getMinZoomLevel().then((value) => _minAvailableZoom = value),
+      _controller.getMaxZoomLevel().then((value) => _maxAvailableZoom = value),
+      _controller.getMinZoomLevel().then((value) => _minAvailableZoom = value),
+      _controller.setZoomLevel(1.5),
     ]);
-    if (!mounted) {
-      return;
-    }
-    await controller.startImageStream(_processCameraImage);
-
-    // 最初から1.5倍程度にズームしておく
-    await controller.setZoomLevel(_currentScale);
-    setState(() {});
-    await previousCameraController?.dispose();
   }
 
-  Future<void> _stopLiveFeed() async {
-    await _controller?.dispose();
-  }
-
-  Future<void> _processCameraImage(CameraImage image) async {
-    if (!mounted || isBusy) {
-      return;
-    }
-    try {
-      isBusy = true;
-
-      final imageRotation =
-          InputImageRotationMethods.fromRawValue(_camera.sensorOrientation) ??
-              InputImageRotation.Rotation_0deg;
-
-      final inputImageFormat =
-          InputImageFormatMethods.fromRawValue(image.format.raw as int) ??
-              InputImageFormat.NV21;
-
-      final isRGBA = inputImageFormat == InputImageFormat.BGRA8888;
-
-      final allBytes = WriteBuffer();
-      for (final plane in image.planes) {
-        if (isRGBA) {
-          // RGBA(iOS) の場合は上下 1/3 は捨てる
-          final oneThird = plane.bytesPerRow * plane.height! ~/ 3;
-          allBytes.putUint8List(plane.bytes.sublist(oneThird, oneThird * 2));
-        } else {
-          allBytes.putUint8List(plane.bytes);
-        }
-      }
-      final bytes = allBytes.done().buffer.asUint8List();
-
-      // RGBA8888(iOS) の場合、上下 1/3 は捨てる
-      final height = isRGBA ? image.height / 3 : image.height.toDouble();
-      final imageSize = Size(image.width.toDouble(), height);
-
-      final planeData = image.planes.map(
-        (Plane plane) {
-          return InputImagePlaneMetadata(
-            bytesPerRow: plane.bytesPerRow,
-            height: isRGBA ? plane.height! ~/ 3 : plane.height,
-            width: plane.width,
-          );
-        },
-      ).toList();
-
-      final inputImageData = InputImageData(
-        size: imageSize,
-        imageRotation: imageRotation,
-        inputImageFormat: inputImageFormat,
-        planeData: planeData,
-      );
-
-      final inputImage =
-          InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
-
-      await processImage(inputImage);
-    } finally {
-      isBusy = false;
+  void showSuggestion(String result, SearchType current) {
+    if (result.endsWith('c') && current != SearchType.geo) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("GEO のコードではないですか？")));
+    } else if (result.length == 16 && current != SearchType.tsutaya) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("TSUTAYA のコードではないですか？")));
+    } else if (result.length == 17 && current != SearchType.bookoff) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("BOOK OFF のコードではないですか？")));
     }
   }
 
-  Future<void> processImage(InputImage inputImage) async {
-    final barcodes = await barcodeScanner.processImage(inputImage);
-    if (inputImage.inputImageData?.size == null ||
-        inputImage.inputImageData?.imageRotation == null ||
-        barcodes.isEmpty) {
+  void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
+    if (!_controller.state.isInitialized) {
       return;
     }
-    final val = barcodes.firstWhereOrNull(
-      (e) =>
-          e.value.rawValue != null &&
-          e.value.type != BarcodeType.url &&
-          e.value.type != BarcodeType.contactInfo &&
-          e.value.type != BarcodeType.email,
+
+    final offset = Offset(
+      details.localPosition.dx / constraints.maxWidth,
+      details.localPosition.dy / constraints.maxHeight,
     );
-    if (val == null) {
+    _controller.setFocusPoint(offset.dx, offset.dy);
+  }
+
+  void _handleScaleStart(ScaleStartDetails details) {
+    _baseScale = _currentScale;
+  }
+
+  Future<void> _handleScaleUpdate(ScaleUpdateDetails details) async {
+    // When there are not exactly two fingers on screen don't scale
+    if (!_controller.state.isInitialized || _pointers != 2) {
       return;
     }
-    final result = val.value.rawValue;
-    if (result != null &&
-        !result.contains("errorCode") &&
-        _lastRead != result) {
-      await Vibration.vibrate(duration: 50, amplitude: 128);
 
+    _currentScale = (_baseScale * details.scale)
+        .clamp(_minAvailableZoom, _maxAvailableZoom);
+
+    await _controller.setZoomLevel(_currentScale);
+  }
+
+  static final BoxDecoration _borderBox = BoxDecoration(
+    border: Border.all(color: Colors.white),
+    borderRadius: BorderRadius.circular(5),
+  );
+
+  void _handleBarcode(Barcode code) {
+    final result = code.value;
+
+    if (_lastRead != result) {
+      Vibration.vibrate(duration: 50, amplitude: 128);
       final settings = ref.read(searchSettingsControllerProvider);
       showSuggestion(result, settings.type);
       switch (settings.type) {
@@ -258,7 +172,6 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
       if (!settings.continuousCameraRead) {
         Navigator.of(context).popUntil(ModalRoute.withName("/"));
       }
-
       if (mounted) {
         setState(() {
           _lastRead = result;
@@ -274,85 +187,6 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
     }
   }
 
-  void showSuggestion(String result, SearchType current) {
-    if (result.endsWith('c') && current != SearchType.geo) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("GEO のコードではないですか？")));
-    } else if (result.length == 16 && current != SearchType.tsutaya) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("TSUTAYA のコードではないですか？")));
-    } else if (result.length == 17 && current != SearchType.bookoff) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("BOOK OFF のコードではないですか？")));
-    }
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    final cameraController = _controller;
-
-    // App state changed before we got the chance to initialize.
-    if (cameraController == null || !cameraController.value.isInitialized) {
-      return;
-    }
-
-    if (state == AppLifecycleState.inactive) {
-      _stopLiveFeed();
-    } else if (state == AppLifecycleState.resumed) {
-      _startLiveFeed();
-    }
-    super.didChangeAppLifecycleState(state);
-  }
-
-  @override
-  void deactivate() {
-    super.deactivate();
-  }
-
-  @override
-  void dispose() {
-    _stopLiveFeed();
-    WidgetsBinding.instance!.removeObserver(this);
-    super.dispose();
-  }
-
-  void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
-    if (_controller == null) {
-      return;
-    }
-
-    final cameraController = _controller!;
-
-    final offset = Offset(
-      details.localPosition.dx / constraints.maxWidth,
-      details.localPosition.dy / constraints.maxHeight,
-    );
-    cameraController
-      ..setExposurePoint(offset)
-      ..setFocusPoint(offset);
-  }
-
-  void _handleScaleStart(ScaleStartDetails details) {
-    _baseScale = _currentScale;
-  }
-
-  Future<void> _handleScaleUpdate(ScaleUpdateDetails details) async {
-    // When there are not exactly two fingers on screen don't scale
-    if (_controller == null || _pointers != 2) {
-      return;
-    }
-
-    _currentScale = (_baseScale * details.scale)
-        .clamp(_minAvailableZoom, _maxAvailableZoom);
-
-    await _controller!.setZoomLevel(_currentScale);
-  }
-
-  static final BoxDecoration _borderBox = BoxDecoration(
-    border: Border.all(color: Colors.white),
-    borderRadius: BorderRadius.circular(5),
-  );
-
   @override
   Widget build(BuildContext context) {
     final settings = ref.read(searchSettingsControllerProvider);
@@ -364,28 +198,31 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
       _lastRead = "";
     });
 
-    final controller = _controller;
-    if (controller == null || !controller.value.isInitialized) {
-      return Container();
-    }
-    return Stack(
-      fit: StackFit.expand,
+    return BarcodeCamera(
+      types: const [
+        BarcodeType.ean8,
+        BarcodeType.ean13,
+        BarcodeType.code128,
+      ],
+      resolution: Resolution.hd1080,
+      framerate: Framerate.fps60,
+      mode: DetectionMode.continuous,
+      position: CameraPosition.back,
+      onScan: _handleBarcode,
       children: [
+        // const MaterialPreviewOverlay(),
         Listener(
           onPointerDown: (_) => _pointers++,
           onPointerUp: (_) => _pointers--,
-          child: CameraPreview(
-            _controller!,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onScaleStart: _handleScaleStart,
-                  onScaleUpdate: _handleScaleUpdate,
-                  onTapDown: (details) => onViewFinderTap(details, constraints),
-                );
-              },
-            ),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onScaleStart: _handleScaleStart,
+                onScaleUpdate: _handleScaleUpdate,
+                onTapDown: (details) => onViewFinderTap(details, constraints),
+              );
+            },
           ),
         ),
         IgnorePointer(
@@ -429,11 +266,10 @@ class _BodyState extends ConsumerState<_Body> with WidgetsBindingObserver {
         const Spacer(),
         MaterialButton(
           onPressed: () async {
-            if (!mounted || _controller == null) {
+            if (!mounted || !_controller.state.isInitialized) {
               return;
             }
-            await _controller!
-                .setFlashMode(_isFlashOpen ? FlashMode.off : FlashMode.torch);
+            await _controller.toggleTorch();
             setState(() {
               _isFlashOpen = !_isFlashOpen;
             });
