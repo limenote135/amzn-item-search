@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:purchases_flutter/offerings_wrapper.dart';
-import 'package:purchases_flutter/purchaser_info_wrapper.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 part 'purchase_state.freezed.dart';
 
