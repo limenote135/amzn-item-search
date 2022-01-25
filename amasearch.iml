@@ -21,6 +21,15 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/euc/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/euc/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/euc/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner_platform_interface/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner_platform_interface/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner_platform_interface/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner/build" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
