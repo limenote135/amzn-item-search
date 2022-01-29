@@ -110,7 +110,7 @@ class StocksPage extends HookConsumerWidget {
               value: _StockPageActions.upload,
               child: ListTile(
                 leading: Icon(Icons.file_upload_outlined),
-                title: Text("商品リストを送る"),
+                title: Text("商品リストを転送"),
               ),
             ),
             PopupMenuItem(
