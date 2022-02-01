@@ -67,6 +67,7 @@ class _Body extends ConsumerWidget {
         key: formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ListTile(
               title: Text(
@@ -93,14 +94,35 @@ class _Body extends ConsumerWidget {
                 keyboardType: TextInputType.emailAddress,
               ),
             ),
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(
+                  "お礼のメッセージと使い道の写真の送り先です",
+                  style: Theme.of(context).textTheme.caption,
+                  // textAlign: TextAlign.left,
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(8),
               child: TextFormField(
                 key: nameKey,
                 decoration: const InputDecoration(
-                  hintText: "おなまえ(任意)",
+                  hintText: "おなまえ または TwitterID(任意)",
                 ),
                 textInputAction: TextInputAction.next,
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(
+                  "TwitterIDを入れると、お礼のリプライが届きます",
+                  style: Theme.of(context).textTheme.caption,
+                ),
               ),
             ),
             Padding(

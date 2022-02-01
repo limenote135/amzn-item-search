@@ -89,6 +89,10 @@ class BookoffRepository {
           .toList();
     } on _NotFoundException catch (_) {
       return Future.value([]);
+      // ignore: avoid_catches_without_on_clauses
+    } catch (e, stack) {
+      await recordError(e, stack, information: ["code: $value"]);
+      return Future.value([]);
     }
   }
 }
