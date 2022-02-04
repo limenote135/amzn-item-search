@@ -6,6 +6,28 @@ if (localPropertiesFile.exists()) {
     }
 }
 
+def dartEnvironmentVariables = [:];
+if (project.hasProperty('dart-defines')) {
+    // カンマ区切りかつBase64でエンコードされている dart-defines をデコードして変数に格納します。
+    dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
+            .split(',')
+            .collectEntries { entry ->
+                def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
+                [(pair.first()): pair.last()]
+            }
+}
+
+task selectGoogleServicesJson(type: Copy) {
+    from "src/res/${dartEnvironmentVariables.FLAVOR}/google-services.json"
+    into './'
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == 'processDebugGoogleServices' || task.name == 'processReleaseGoogleServices') {
+        task.dependsOn selectGoogleServicesJson
+    }
+}
+
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
@@ -48,8 +70,12 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.knzc.amasearch"
+        if (dartEnvironmentVariables.FLAVOR == 'prod') {
+            applicationId "com.knzc.app.amasearch"
+        } else {
+            applicationId "com.knzc.amasearch"
+        }
+        resValue "string", "app_name", "アマサーチ" + (dartEnvironmentVariables.FLAVOR == 'prod' ? '' : "-${dartEnvironmentVariables.FLAVOR}")
         minSdkVersion 28
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
