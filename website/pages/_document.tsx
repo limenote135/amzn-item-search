@@ -5,6 +5,7 @@ import * as React from "react";
 
 import createEmotionCache from "@/styles/createEmotionCache";
 import theme from "@/styles/theme";
+import { GA_TRACKING_ID } from "@/plugin/gtags";
 
 export default class MyDocument extends Document {
   render(): JSX.Element {
@@ -13,7 +14,29 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta property="og:url" content="https://amasearch.knz-c.com/" />
+          <meta property="og:title" content="アマサーチ" />
+          <meta property="og:type" content="website" />
+          <meta property="og:description" content="はやい、つよい、使いやすい、せどりリサーチアプリ" />
+          <meta property="og:image" content="https://amasearch.knz-c.com/img/ogp.png" />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:creator" content="@knz_r1" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+          {GA_TRACKING_ID && (
+            <>
+              <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${GA_TRACKING_ID}');
+                  `,
+                }}
+              />
+            </>
+          )}
         </Head>
         <body>
           <Main />
