@@ -50,3 +50,5 @@ app.*.map.json
 /ios/build
 
 /android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
+/ios/Flutter/DartDefines.xcconfig

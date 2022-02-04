@@ -1,0 +1,12 @@
+//
+//  dev.xcconfig
+//  Runner
+//
+//  Created by laptop on 2022/02/04.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+FLAVOR=prod
+APP_NAME_SUFFIX=
+APP_ID=com.knzc.app.amasearch
