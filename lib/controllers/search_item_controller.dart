@@ -21,7 +21,7 @@ class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
 
   void _fetchAll() {
     final box = _read(searchItemBoxProvider);
-    state = box.values.map((e) => Future.value(e)).toList().reversed.toList();
+    state = box.values.map(Future.value).toList().reversed.toList();
   }
 
   void removeAll() {
@@ -38,7 +38,7 @@ class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
     final keys = targets.map((e) => e.searchDate);
     box.deleteAll(keys);
 
-    state = box.values.map((e) => Future.value(e)).toList().reversed.toList();
+    state = box.values.map(Future.value).toList().reversed.toList();
   }
 
   void add(String raw) {
