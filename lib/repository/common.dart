@@ -17,7 +17,7 @@ final serverUrlProvider = FutureProvider<String>((_) async {
   if (_kTestingServer) {
     return Future.value(_localServerUrl);
   }
-  final remoteConfig = RemoteConfig.instance;
+  final remoteConfig = FirebaseRemoteConfig.instance;
   try {
     final defaultValues = <String, dynamic>{
       _serverUrlConfigName: _defaultServerUrl,
