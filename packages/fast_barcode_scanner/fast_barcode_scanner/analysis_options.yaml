@@ -6,3 +6,4 @@ analyzer:
     must_be_immutable: ignore
     unused_local_variable: ignore
     unused_import: ignore
+    unnecessary_import: ignore
