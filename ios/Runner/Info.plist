@@ -15,7 +15,9 @@
 		<string>ja</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>amzn-item-search</string>
+	<string>amzn-item-search$(APP_NAME_SUFFIX)</string>
+	<key>CFBundleDisplayName</key>
+	<string>amzn-item-search$(APP_NAME_SUFFIX)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
