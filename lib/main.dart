@@ -86,7 +86,7 @@ Future<void> initFirebase() async {
     ]);
   }
 
-  await RemoteConfig.instance.setConfigSettings(
+  await FirebaseRemoteConfig.instance.setConfigSettings(
     RemoteConfigSettings(
         fetchTimeout: const Duration(seconds: 15),
         minimumFetchInterval: const Duration(minutes: 15)),

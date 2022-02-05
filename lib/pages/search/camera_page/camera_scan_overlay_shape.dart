@@ -59,16 +59,15 @@ class CameraScanOverlayShape extends ShapeBorder {
     final borderOffset = borderWidth / 2;
     final cutOutWidth = rect.width - 45;
     final cutOutHeight = 1 / (16 / 9) * cutOutWidth;
-    final _borderLengthWidth = borderLength > cutOutWidth / 2 + borderWidth * 2
+    final borderLengthWidth = borderLength > cutOutWidth / 2 + borderWidth * 2
         ? borderWidthSize / 2
         : borderLength;
-    final _borderLengthHeight =
-        borderLength > cutOutHeight / 2 + borderWidth * 2
-            ? borderWidthSize / 2
-            : borderLength;
-    final _cutOutWidth =
+    final borderLengthHeight = borderLength > cutOutHeight / 2 + borderWidth * 2
+        ? borderWidthSize / 2
+        : borderLength;
+    final clampedCutOutWidth =
         cutOutWidth < width ? cutOutWidth : width - borderOffset;
-    final _cutOutHeight =
+    final clampedCutOutHeight =
         cutOutHeight < height ? cutOutHeight : height - borderOffset;
 
     final backgroundPaint = Paint()
@@ -86,14 +85,14 @@ class CameraScanOverlayShape extends ShapeBorder {
       ..blendMode = BlendMode.dstOut;
 
     final cutOutRect = Rect.fromLTWH(
-      rect.left + width / 2 - _cutOutWidth / 2 + borderOffset,
+      rect.left + width / 2 - clampedCutOutWidth / 2 + borderOffset,
       -cutOutBottomOffset +
           rect.top +
           height / 2 -
-          _cutOutHeight / 2 +
+          clampedCutOutHeight / 2 +
           borderOffset,
-      _cutOutWidth - borderOffset * 2,
-      _cutOutHeight - borderOffset * 2,
+      clampedCutOutWidth - borderOffset * 2,
+      clampedCutOutHeight - borderOffset * 2,
     );
 
     canvas
@@ -108,10 +107,10 @@ class CameraScanOverlayShape extends ShapeBorder {
       // Draw top right corner
       ..drawRRect(
         RRect.fromLTRBAndCorners(
-          cutOutRect.right - _borderLengthWidth,
+          cutOutRect.right - borderLengthWidth,
           cutOutRect.top,
           cutOutRect.right,
-          cutOutRect.top + _borderLengthHeight,
+          cutOutRect.top + borderLengthHeight,
           topRight: Radius.circular(borderRadius),
         ),
         borderPaint,
@@ -121,8 +120,8 @@ class CameraScanOverlayShape extends ShapeBorder {
         RRect.fromLTRBAndCorners(
           cutOutRect.left,
           cutOutRect.top,
-          cutOutRect.left + _borderLengthWidth,
-          cutOutRect.top + _borderLengthHeight,
+          cutOutRect.left + borderLengthWidth,
+          cutOutRect.top + borderLengthHeight,
           topLeft: Radius.circular(borderRadius),
         ),
         borderPaint,
@@ -130,8 +129,8 @@ class CameraScanOverlayShape extends ShapeBorder {
       // Draw bottom right corner
       ..drawRRect(
         RRect.fromLTRBAndCorners(
-          cutOutRect.right - _borderLengthWidth,
-          cutOutRect.bottom - _borderLengthHeight,
+          cutOutRect.right - borderLengthWidth,
+          cutOutRect.bottom - borderLengthHeight,
           cutOutRect.right,
           cutOutRect.bottom,
           bottomRight: Radius.circular(borderRadius),
@@ -142,8 +141,8 @@ class CameraScanOverlayShape extends ShapeBorder {
       ..drawRRect(
         RRect.fromLTRBAndCorners(
           cutOutRect.left,
-          cutOutRect.bottom - _borderLengthWidth,
-          cutOutRect.left + _borderLengthHeight,
+          cutOutRect.bottom - borderLengthWidth,
+          cutOutRect.left + borderLengthHeight,
           cutOutRect.bottom,
           bottomLeft: Radius.circular(borderRadius),
         ),
