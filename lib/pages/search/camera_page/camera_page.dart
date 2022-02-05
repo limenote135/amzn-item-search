@@ -225,10 +225,10 @@ class _BodyState extends ConsumerState<_Body> {
             },
           ),
         ),
-        IgnorePointer(
+        const IgnorePointer(
           ignoring: true,
-          child: Container(
-            decoration: const ShapeDecoration(
+          child: DecoratedBox(
+            decoration: ShapeDecoration(
               shape: CameraScanOverlayShape(),
             ),
           ),

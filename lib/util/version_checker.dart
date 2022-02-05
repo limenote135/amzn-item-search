@@ -11,7 +11,7 @@ class VersionChecker {
     final info = await PackageInfo.fromPlatform();
     final currentVersion = Version.parse(info.version);
 
-    final remoteConfig = RemoteConfig.instance;
+    final remoteConfig = FirebaseRemoteConfig.instance;
 
     try {
       final defaultValues = <String, dynamic>{
