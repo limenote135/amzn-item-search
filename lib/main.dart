@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:amasearch/app.dart';
 import 'package:amasearch/models/alert_condition.dart';
@@ -49,7 +50,7 @@ Future<void> main() async {
     await Future.wait([
       initStartupOption(),
       initHive(),
-      // initRevenueCat(),
+      initRevenueCat(),
       clearDiskCachedImages(duration: const Duration(days: 6)),
     ]);
     // ignore: avoid_catches_without_on_clauses
@@ -149,5 +150,9 @@ Future<void> initRevenueCat() async {
   if (kDebugMode) {
     await Purchases.setDebugLogsEnabled(_kTestingInAppPurchase);
   }
-  await Purchases.setup("jFBnMUNKUXuvysgLbDaFcGdzWTKncCxW");
+  if (Platform.isAndroid) {
+    await Purchases.setup("goog_kHLAwmYlrkPYuUcTrkIyilEmZtp");
+  } else {
+    await Purchases.setup("appl_TjNyfkblPMFQBFKYdtQAIDibZns");
+  }
 }
