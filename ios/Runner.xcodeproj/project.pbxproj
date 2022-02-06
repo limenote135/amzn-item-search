@@ -96,6 +96,7 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				40C7966B25E22009006B5F48 /* GoogleService-Info.plist */,
 				40A6640927AD726400EA290C /* dev.xcconfig */,
 				40AE77002668C32F00431E06 /* Configuration.storekit */,
 				40AE77022668C66500431E06 /* StoreKitTestCertificate.cer */,
@@ -119,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				402BA7E52652939200D8E2CE /* Runner.entitlements */,
-				40C7966B25E22009006B5F48 /* GoogleService-Info.plist */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
