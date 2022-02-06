@@ -5,6 +5,7 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/settings/alert_page/alert_page.dart';
 import 'package:amasearch/pages/settings/amazon_page/amazon_page.dart';
 import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.dart';
+import 'package:amasearch/pages/settings/donation_page/donation_page.dart';
 import 'package:amasearch/pages/settings/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/settings/purchase_list_page/purchase_list_page.dart';
 import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_page.dart';
@@ -190,15 +191,15 @@ class _Body extends HookConsumerWidget {
         ListTile(
           title: Text("その他", style: captionStyle),
         ),
-        // ListTile(
-        //   title: const Text("コーヒーをおごる"),
-        //   onTap: () {
-        //     Navigator.push(
-        //       context,
-        //       DonationPage.route(),
-        //     );
-        //   },
-        // ),
+        ListTile(
+          title: const Text("コーヒーをおごる"),
+          onTap: () {
+            Navigator.push(
+              context,
+              DonationPage.route(),
+            );
+          },
+        ),
         ListTile(
           title: const Text("ログアウト"),
           onTap: () async {
