@@ -7,6 +7,7 @@ import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:fast_barcode_scanner/fast_barcode_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -76,6 +77,10 @@ class _BodyState extends ConsumerState<_Body> {
   // Counting pointers (number of user fingers on screen)
   int _pointers = 0;
 
+  // error handling
+  bool hasError = false;
+  String? error;
+
   @override
   void initState() {
     super.initState();
@@ -83,6 +88,17 @@ class _BodyState extends ConsumerState<_Body> {
   }
 
   void onInitialized() {
+    if (_controller.state.hasError) {
+      setState(() {
+        recordError(
+          _controller.state.error,
+          null,
+          information: const ["onCameraInitialized"],
+        );
+        hasError = true;
+        error = _controller.state.error?.toString();
+      });
+    }
     if (_controller.state.isInitialized) {
       initZoomLevel();
       _isFlashOpen = _controller.state.torchState;
@@ -197,6 +213,10 @@ class _BodyState extends ConsumerState<_Body> {
       // コードタイプを変更した際に lastRead をリセットする
       _lastRead = "";
     });
+
+    if (hasError) {
+      return _ErrorMessage(error: error ?? "不明なエラー");
+    }
 
     return BarcodeCamera(
       types: const [
@@ -393,5 +413,29 @@ class _BackIcon extends StatelessWidget {
       return const Icon(Icons.arrow_back);
     }
     return const Icon(Icons.arrow_back_ios_new);
+  }
+}
+
+class _ErrorMessage extends StatelessWidget {
+  const _ErrorMessage({Key? key, required this.error}) : super(key: key);
+
+  final String error;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text("お使いの端末ではご利用いただけません。"),
+          Text(error),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("戻る")),
+        ],
+      ),
+    );
   }
 }
