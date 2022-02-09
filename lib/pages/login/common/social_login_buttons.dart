@@ -54,7 +54,7 @@ class SocialLoginButtons extends HookConsumerWidget {
         if (Platform.isIOS)
           SignInButton(
             Buttons.Apple,
-            text: "AppleID でログイン",
+            text: "Apple でログイン",
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(horizontal: 10),
             onPressed: () async {
@@ -99,7 +99,7 @@ class SocialLoginButtons extends HookConsumerWidget {
                       ..onTap = () async {
                         await FlutterWebBrowser.openWebPage(
                           url:
-                              "https://amasearch.app.knz-c.com/terms/terms_of_service.txt",
+                              "https://amasearch.knz-c.com/terms/terms_of_service.txt",
                         );
                       },
                   ),
@@ -114,7 +114,7 @@ class SocialLoginButtons extends HookConsumerWidget {
                       ..onTap = () async {
                         await FlutterWebBrowser.openWebPage(
                           url:
-                              "https://amasearch.app.knz-c.com/terms/privacy_policy.txt",
+                              "https://amasearch.knz-c.com/terms/privacy_policy.txt",
                         );
                       },
                   ),
