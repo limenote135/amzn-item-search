@@ -23,13 +23,15 @@ const TitleBarContainer = ({ isOpen, handleToggleDrawerOpen, returnToTop }: Draw
       </Box>
       <Box flexGrow={1} />
       <Box display={{ xs: "none", sm: "block" }}>
-        <Link href={"/terms/service"} color={"#FFF"}>
-          <Button color={"inherit"}>利用規約</Button>
-        </Link>
-        <Link href={"/terms/privacy"} color={"#FFF"}>
-          <Button color={"inherit"}>プライバシーポリシー</Button>
-        </Link>
-        <Button color={"inherit"}>お問い合わせ</Button>
+        <Button color={"inherit"} href={"/terms/service"}>
+          利用規約
+        </Button>
+        <Button color={"inherit"} href={"/terms/privacy"}>
+          プライバシーポリシー
+        </Button>
+        <Button color={"inherit"} href={"/contact"}>
+          お問い合わせ
+        </Button>
       </Box>
       <IconButton sx={{ display: { sm: "none" } }} onClick={handleToggleDrawerOpen}>
         <MenuIcon />

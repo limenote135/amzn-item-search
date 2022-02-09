@@ -48,7 +48,7 @@ const MyDrawer = ({ isOpen, handleToggleDrawerOpen }: DrawerProp) => (
         </Link>
       </ListItem>
       <ListItem button>
-        <Link href={"/terms/privacy"} color={"#FFF"} sx={{ textDecoration: "none" }}>
+        <Link href={"/contact"} color={"#FFF"} sx={{ textDecoration: "none" }}>
           <CenteredListItemText>お問い合わせ</CenteredListItemText>
         </Link>
       </ListItem>
