@@ -40,7 +40,9 @@ const FooterContainer = ({ returnToTop }: FooterProps) => (
           <Link href={"/terms/privacy"} color={"#FFF"} sx={{ textDecoration: "none" }}>
             <Typography my={1}>プライバシーポリシー</Typography>
           </Link>
-          <Typography my={1}>お問い合わせ</Typography>
+          <Link href={"/contact"} color={"#FFF"} sx={{ textDecoration: "none" }}>
+            <Typography my={1}>お問い合わせ</Typography>
+          </Link>
         </Box>
       </Box>
     </Box>
