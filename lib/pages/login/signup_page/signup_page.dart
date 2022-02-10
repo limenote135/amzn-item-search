@@ -5,10 +5,12 @@ import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../common/input_field.dart';
 import '../common/social_login_buttons.dart';
@@ -50,8 +52,11 @@ class SignupPage extends HookConsumerWidget {
 
           final user = cred.user;
           if (user != null) {
-            // await Purchases.logIn(user.uid);
-            await ref.read(analyticsControllerProvider).setUserId(user.uid);
+            await Future.wait([
+              Purchases.logIn(user.uid),
+              FirebaseCrashlytics.instance.setUserIdentifier(user.uid),
+              ref.read(analyticsControllerProvider).setUserId(user.uid),
+            ]);
             if (user.emailVerified == false) {
               await cred.user?.sendEmailVerification();
               await EasyLoading.dismiss();
