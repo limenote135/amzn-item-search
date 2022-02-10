@@ -54,7 +54,8 @@ class _Body extends HookConsumerWidget {
                 itemCount: packages.length,
                 itemBuilder: (context, i) {
                   return ListTile(
-                    title: Text(packages[i].product.title),
+                    title: Text(
+                        packages[i].product.title.replaceAll("(amzn-item-search)", "")),
                     subtitle: Text(packages[i].product.description),
                     trailing: Text(packages[i].product.priceString),
                     onTap: () {
