@@ -19,5 +19,6 @@ module.exports = {
     domains: ["play.google.com", "tools.applemediaservices.com"],
     loader: "custom",
   },
+  trailingSlash: true,
   // basePath: "/lp2",
 };
