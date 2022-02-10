@@ -225,7 +225,7 @@ class _BodyState extends ConsumerState<_Body> {
         BarcodeType.code128,
       ],
       resolution: Resolution.hd1080,
-      framerate: Framerate.fps60,
+      framerate: Framerate.fps30,
       mode: DetectionMode.continuous,
       position: CameraPosition.back,
       onScan: _handleBarcode,
