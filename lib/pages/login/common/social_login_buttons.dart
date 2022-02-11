@@ -12,6 +12,7 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
+import '../../../util/error_report.dart';
 import 'sign_in_with_apple.dart';
 
 class SocialLoginButtons extends HookConsumerWidget {
@@ -51,6 +52,8 @@ class SocialLoginButtons extends HookConsumerWidget {
               }
 
               Navigator.of(context).pop();
+            } catch (e, stack) {
+              recordError(e, stack, const ["Google SignIn"]);
             } finally {
               await EasyLoading.dismiss();
             }
@@ -82,6 +85,8 @@ class SocialLoginButtons extends HookConsumerWidget {
                 }
 
                 Navigator.of(context).pop();
+              } catch (e, stack) {
+                recordError(e, stack, const ["SignInWithApple"]);
               } finally {
                 await EasyLoading.dismiss();
               }
