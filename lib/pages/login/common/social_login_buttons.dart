@@ -52,8 +52,9 @@ class SocialLoginButtons extends HookConsumerWidget {
               }
 
               Navigator.of(context).pop();
+              // ignore: avoid_catches_without_on_clauses
             } catch (e, stack) {
-              recordError(e, stack, const ["Google SignIn"]);
+              await recordError(e, stack, information: const ["Google SignIn"]);
             } finally {
               await EasyLoading.dismiss();
             }
@@ -85,8 +86,11 @@ class SocialLoginButtons extends HookConsumerWidget {
                 }
 
                 Navigator.of(context).pop();
+                // ignore: avoid_catches_without_on_clauses
               } catch (e, stack) {
-                recordError(e, stack, const ["SignInWithApple"]);
+                await recordError(e, stack,
+                    information: const ["SignInWithApple"]);
+                rethrow;
               } finally {
                 await EasyLoading.dismiss();
               }
