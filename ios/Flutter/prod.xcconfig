@@ -10,3 +10,4 @@
 FLAVOR=prod
 APP_NAME_SUFFIX=
 APP_ID=com.knzc.app.amasearch
+GOOGLE_SIGN_IN_ID=com.googleusercontent.apps.157832618677-i9v4vujc1tj51dtk9mgqvu735ngc3btf
