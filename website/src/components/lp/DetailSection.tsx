@@ -92,7 +92,7 @@ const DetailContainer = ({ reference, inView }: DetailProp) => (
         title={"インストアコード対応で仕入れ効率UP"}
         text={
           "JANコードだけでなく、<b>BOOKOFF、GEO、TSUTAYAのインストアコードに対応。</b><br/>" +
-          "<b>仕入れ効率を高める</b>ことで売買をスムーズにします。"
+          "これらの店舗でもスムーズな仕入れを実現します。"
         }
         image={"/img/detail02.png"}
       />
@@ -113,10 +113,9 @@ const DetailContainer = ({ reference, inView }: DetailProp) => (
         fontColor={""}
         title={"多彩なアラート機能で、<br/>利益商品を見逃さない"}
         text={
-          "Webでのせどりが一般的になった今、<br/>" +
-          "利益商品を狙うための鍵は<b>スピードです。</b><br/>" +
+          "リサーチで重要なのは大量の商品からいかに素早く利益商品を見つけ出すか。<br/>" +
           "amzn-item-searchは多彩で便利なアラームを搭載。<br/>" +
-          "あなたの売買を有利に導きます。"
+          "利益商品を見逃しません。"
         }
         image={"/img/detail04.png"}
       />
