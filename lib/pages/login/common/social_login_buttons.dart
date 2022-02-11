@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/pages/login/common/sign_in_with_google.dart';
 import 'package:amasearch/util/auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 import 'sign_in_with_apple.dart';
 
@@ -41,8 +43,11 @@ class SocialLoginButtons extends HookConsumerWidget {
 
               final user = fbCred.user;
               if (user != null) {
-                // await Purchases.logIn(user.uid);
-                await ref.read(analyticsControllerProvider).setUserId(user.uid);
+                await Future.wait([
+                  Purchases.logIn(user.uid),
+                  FirebaseCrashlytics.instance.setUserIdentifier(user.uid),
+                  ref.read(analyticsControllerProvider).setUserId(user.uid),
+                ]);
               }
 
               Navigator.of(context).pop();
@@ -65,15 +70,15 @@ class SocialLoginButtons extends HookConsumerWidget {
                 if (cred == null) {
                   return;
                 }
-                await auth.signInWithCredential(cred);
                 final fbCred = await auth.signInWithCredential(cred);
 
                 final user = fbCred.user;
                 if (user != null) {
-                  // await Purchases.logIn(user.uid);
-                  await ref
-                      .read(analyticsControllerProvider)
-                      .setUserId(user.uid);
+                  await Future.wait([
+                    Purchases.logIn(user.uid),
+                    FirebaseCrashlytics.instance.setUserIdentifier(user.uid),
+                    ref.read(analyticsControllerProvider).setUserId(user.uid),
+                  ]);
                 }
 
                 Navigator.of(context).pop();
