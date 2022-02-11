@@ -87,7 +87,7 @@ class _Body extends ConsumerWidget {
                 controller:
                     TextEditingController(text: auth.currentUser?.email),
                 decoration: const InputDecoration(
-                  label: Text("お礼の連絡先"),
+                  label: Text("お礼の連絡先(任意)"),
                   hintText: "メールアドレス(任意)",
                 ),
                 textInputAction: TextInputAction.next,
