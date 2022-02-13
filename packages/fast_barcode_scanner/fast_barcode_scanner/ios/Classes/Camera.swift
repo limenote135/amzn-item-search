@@ -118,6 +118,9 @@ class Camera: NSObject {
             captureDevice.activeFormat = optimalFormat
             captureDevice.activeVideoMaxFrameDuration =
                 optimalFormat.videoSupportedFrameRateRanges.first!.minFrameDuration
+            captureDevice.focusPointOfInterest = CGPoint(x: 0.5, y: 0.5)
+            captureDevice.autoFocusRangeRestriction = .near
+            captureDevice.focusMode = .continuousAutoFocus
             captureDevice.unlockForConfiguration()
         } catch {
             throw ScannerError.configurationError(error.localizedDescription)
@@ -189,6 +192,7 @@ class Camera: NSObject {
         try captureDevice.lockForConfiguration()
         captureDevice.focusPointOfInterest = CGPoint(x: x, y: y)
         captureDevice.focusMode = .autoFocus
+        captureDevice.autoFocusRangeRestriction = .near
         captureDevice.unlockForConfiguration()
     }
 
