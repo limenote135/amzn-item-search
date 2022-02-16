@@ -37,6 +37,7 @@ class _Body extends HookConsumerWidget {
       itemBuilder: (BuildContext context, int index) {
         final button = settings.customButtons[index];
         return ListTile(
+          leading: const Icon(Icons.settings),
           title: Text(button.title),
           trailing: Switch(
             value: button.enable,
