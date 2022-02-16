@@ -10,7 +10,7 @@ const janCodeLength = 13;
 
 const _kTestingServer = false;
 const _localServerUrl = "http://192.168.2.201:8080";
-const _defaultServerUrl = "https://amasearch-stg.an.r.appspot.com";
+const _defaultServerUrl = "https://api.amasearch.app.knz-c.com";
 const _serverUrlConfigName = "server_url";
 
 final serverUrlProvider = FutureProvider<String>((_) async {
