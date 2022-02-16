@@ -157,7 +157,8 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				13CE52F7485D3604F889EEA8 /* [CP] Embed Pods Frameworks */,
-				40687AE426579B1B008E0169 /* ShellScript */,
+				40687AE426579B1B008E0169 /* run Crashlytics */,
+				40C0EB2127BD1AD000DA3DC1 /* Upload dSYM to Crashlytics */,
 				FBBDADFA8FB1DF02005C0549 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -270,7 +271,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\\cp -f ${SRCROOT}/res/${FLAVOR}/GoogleService-Info.plist ${SRCROOT}/GoogleService-Info.plist\n";
 		};
-		40687AE426579B1B008E0169 /* ShellScript */ = {
+		40687AE426579B1B008E0169 /* run Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -280,6 +281,7 @@
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
+			name = "run Crashlytics";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -287,6 +289,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/FirebaseCrashlytics/run\n";
+		};
+		40C0EB2127BD1AD000DA3DC1 /* Upload dSYM to Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Upload dSYM to Crashlytics";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${PROJECT_DIR}/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
 		5D1FDF03A86E7CDE04C3BBFB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
