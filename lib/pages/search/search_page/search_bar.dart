@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/pages/search/search_settings_page/search_settings_page.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
@@ -41,7 +44,9 @@ class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
                   icon: const Icon(Icons.search),
                   label: const Text("検索"),
                   onPressed: () {
-                    node.unfocus();
+                    if (!settings.continuousInput) {
+                      node.unfocus();
+                    }
                     final value = textEditingController.text;
                     if (value != "") {
                       _addItem(context, ref, settings.type, value);
@@ -93,10 +98,16 @@ class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
                           onEditingComplete: settings.continuousInput
                               ? _doNotHideKeyboardCallBack
                               : null,
-                          onSubmitted: (value) {
+                          onSubmitted: (value) async {
                             if (value != "") {
                               _addItem(context, ref, settings.type, value);
                               textEditingController.clear();
+                              if (Platform.isIOS && settings.continuousInput) {
+                                await Future<void>.delayed(
+                                    const Duration(milliseconds: 200));
+                                await SystemChannels.textInput
+                                    .invokeMethod<void>('TextInput.show');
+                              }
                             }
                           },
                         ),
