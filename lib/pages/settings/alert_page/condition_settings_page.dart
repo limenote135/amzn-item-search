@@ -178,8 +178,8 @@ class _Body extends HookConsumerWidget {
             final newCond = alert.conditions
                 .where(((e) => e.type != AlertType.profit))
                 .toList()
-                  ..add(AlertCondition(
-                      type: AlertType.profit, value: int.parse(val.single)));
+              ..add(AlertCondition(
+                  type: AlertType.profit, value: int.parse(val.single)));
             modifyCondition(newCond);
           },
         ),
@@ -216,7 +216,7 @@ class _Body extends HookConsumerWidget {
             final newCond = alert.conditions
                 .where(((e) => e.type != AlertType.condition))
                 .toList()
-                  ..add(AlertCondition(type: AlertType.condition, value: val));
+              ..add(AlertCondition(type: AlertType.condition, value: val));
             modifyCondition(newCond);
           },
         ),
@@ -256,8 +256,8 @@ class _Body extends HookConsumerWidget {
             final newCond = alert.conditions
                 .where(((e) => e.type != AlertType.rank))
                 .toList()
-                  ..add(AlertCondition(
-                      type: AlertType.rank, value: int.parse(val.single)));
+              ..add(AlertCondition(
+                  type: AlertType.rank, value: int.parse(val.single)));
             modifyCondition(newCond);
           },
         ),
@@ -288,7 +288,7 @@ class _Body extends HookConsumerWidget {
             final newCond = alert.conditions
                 .where(((e) => e.type != AlertType.category))
                 .toList()
-                  ..add(AlertCondition(type: AlertType.category, value: val));
+              ..add(AlertCondition(type: AlertType.category, value: val));
             modifyCondition(newCond);
           },
         ),
@@ -299,7 +299,7 @@ class _Body extends HookConsumerWidget {
             final newCond = alert.conditions
                 .where(((e) => e.type != AlertType.premium))
                 .toList()
-                  ..add(const AlertCondition(type: AlertType.premium));
+              ..add(const AlertCondition(type: AlertType.premium));
             modifyCondition(newCond);
           },
         ),
@@ -310,7 +310,7 @@ class _Body extends HookConsumerWidget {
             final newCond = alert.conditions
                 .where(((e) => e.type != AlertType.noNewOffer))
                 .toList()
-                  ..add(const AlertCondition(type: AlertType.noNewOffer));
+              ..add(const AlertCondition(type: AlertType.noNewOffer));
             modifyCondition(newCond);
           },
         ),
@@ -321,7 +321,7 @@ class _Body extends HookConsumerWidget {
             final newCond = alert.conditions
                 .where(((e) => e.type != AlertType.noAmazon))
                 .toList()
-                  ..add(const AlertCondition(type: AlertType.noAmazon));
+              ..add(const AlertCondition(type: AlertType.noAmazon));
             modifyCondition(newCond);
           },
         ),
@@ -359,7 +359,7 @@ class _Body extends HookConsumerWidget {
         final val = AlertOfferCondition.values[param];
         return Text(val.toDisplayString());
       case AlertType.rank:
-        return Text("$param 位以下");
+        return Text("$param 位以内");
       case AlertType.category:
         if (mwsCategoryIdMap.containsValue(param)) {
           final name = mwsCategoryIdMap.entries
