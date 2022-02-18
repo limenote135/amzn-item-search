@@ -57,7 +57,9 @@ const MyDrawer = ({ isOpen, handleToggleDrawerOpen }: DrawerProp) => (
           <Typography variant={"body2"} color={"black"} my={2} fontWeight={"bold"}>
             今すぐアプリをダウンロード
           </Typography>
-          <AppDownloadBadge direction={"column"} scale={1} />
+          <Typography color={"black"}>
+            <AppDownloadBadge direction={"column"} scale={1} />
+          </Typography>
         </Box>
       </CenteredListItem>
     </List>
