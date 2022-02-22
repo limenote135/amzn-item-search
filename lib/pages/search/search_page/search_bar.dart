@@ -104,7 +104,8 @@ class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
                               textEditingController.clear();
                               if (Platform.isIOS && settings.continuousInput) {
                                 await Future<void>.delayed(
-                                    const Duration(milliseconds: 200));
+                                  const Duration(milliseconds: 200),
+                                );
                                 await SystemChannels.textInput
                                     .invokeMethod<void>('TextInput.show');
                               }
@@ -136,7 +137,9 @@ class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
   }
 
   InputDecoration _createInputDecoration(
-      BuildContext context, SearchType type) {
+    BuildContext context,
+    SearchType type,
+  ) {
     final text = _getHintText(type);
 
     return InputDecoration(
@@ -175,7 +178,11 @@ class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
   }
 
   void _addItem(
-      BuildContext context, WidgetRef ref, SearchType type, String code) {
+    BuildContext context,
+    WidgetRef ref,
+    SearchType type,
+    String code,
+  ) {
     switch (type) {
       case SearchType.jan:
         ref.read(searchItemControllerProvider.notifier).add(code);

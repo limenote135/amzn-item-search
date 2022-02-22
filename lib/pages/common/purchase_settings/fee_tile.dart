@@ -59,7 +59,9 @@ class FeeTile extends HookConsumerWidget {
                 main: Text("${numberFormatter.format(categoryFee)} 円"),
               ),
               TextLine(
-                  leading: const Text("FBA手数料"), main: Text("$fbaFeeText 円")),
+                leading: const Text("FBA手数料"),
+                main: Text("$fbaFeeText 円"),
+              ),
             ],
           ),
         )

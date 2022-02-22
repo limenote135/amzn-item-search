@@ -32,10 +32,14 @@ class TotalProfit extends HookConsumerWidget {
           spacing: 8,
           children: [
             Text("総商品数: $itemCount 個", textAlign: TextAlign.center),
-            Text("仕入総額: ${numberFormatter.format(totalPurchase)} 円",
-                textAlign: TextAlign.center),
-            Text("粗利総額: ${numberFormatter.format(profitValue)}円",
-                textAlign: TextAlign.center),
+            Text(
+              "仕入総額: ${numberFormatter.format(totalPurchase)} 円",
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              "粗利総額: ${numberFormatter.format(profitValue)}円",
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
         Row(

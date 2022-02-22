@@ -48,10 +48,14 @@ Future<OAuthCredential?> signInWithApple() async {
     );
   } on SignInWithAppleAuthorizationException catch (e, stack) {
     if (e.code != AuthorizationErrorCode.canceled) {
-      await recordError(e, stack, information: [
-        "SignInWithApple failed",
-        "Code: ${e.code}",
-      ]);
+      await recordError(
+        e,
+        stack,
+        information: [
+          "SignInWithApple failed",
+          "Code: ${e.code}",
+        ],
+      );
     }
     return null;
   }

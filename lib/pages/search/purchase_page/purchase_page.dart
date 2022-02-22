@@ -133,8 +133,10 @@ class _SaveButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
-    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.isMajorCustomer));
+    final isMajorCustomer = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.isMajorCustomer),
+    );
 
     return ReactiveFormConsumer(
       builder: (context, form, child) {
@@ -153,8 +155,14 @@ class _SaveButton extends HookConsumerWidget {
             }
           }
 
-          _onSubmit(ref, form, ref.read(uuidProvider).v4(), item, image,
-              isMajorCustomer);
+          _onSubmit(
+            ref,
+            form,
+            ref.read(uuidProvider).v4(),
+            item,
+            image,
+            isMajorCustomer,
+          );
           Navigator.of(context).popUntil((route) => route.settings.name == "/");
         }
 

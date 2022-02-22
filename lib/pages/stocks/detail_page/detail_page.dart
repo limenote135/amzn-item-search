@@ -139,7 +139,8 @@ class _Body extends HookConsumerWidget {
           title: TextLine(
             leading: const Text("手数料"),
             main: Text(
-                _getFeeText(totalFeePerItem, item.amount, isUnknownFbaFee)),
+              _getFeeText(totalFeePerItem, item.amount, isUnknownFbaFee),
+            ),
           ),
           children: [
             const ThemeDivider(),
@@ -241,9 +242,11 @@ class _ItemInfoTile extends HookConsumerWidget {
                   Clipboard.setData(ClipboardData(text: item.item.jan))
                       .then((_) {
                     ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("JAN コードをコピーしました"),
-                    ));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("JAN コードをコピーしました"),
+                      ),
+                    );
                   });
                 },
                 child: ListTile(title: Text(item.item.jan)),
@@ -261,9 +264,11 @@ class _ItemInfoTile extends HookConsumerWidget {
                   Clipboard.setData(ClipboardData(text: item.item.asin))
                       .then((_) {
                     ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("ASIN をコピーしました"),
-                    ));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("ASIN をコピーしました"),
+                      ),
+                    );
                   });
                 },
                 child: ListTile(title: Text(item.item.asin)),

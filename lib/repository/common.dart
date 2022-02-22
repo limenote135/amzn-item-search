@@ -47,10 +47,14 @@ Future<Map<String, dynamic>> commonHeader(User user) async {
       "Authorization": "Bearer $token",
     };
   } on FirebaseAuthException catch (e, stack) {
-    await recordError(e, stack, information: [
-      "code: ${e.code}",
-      e.message ?? "null",
-    ]);
+    await recordError(
+      e,
+      stack,
+      information: [
+        "code: ${e.code}",
+        e.message ?? "null",
+      ],
+    );
     throw Exception("通信環境の良いところで再度お試しください");
   }
 }

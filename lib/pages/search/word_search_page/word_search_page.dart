@@ -121,19 +121,27 @@ class _Body extends HookConsumerWidget {
 
     return SliverList(
       delegate: ref
-          .watch(queryItemResultProvider(ListMatchingProductRequest(
-            query: word,
-            category: category,
-          )))
+          .watch(
+            queryItemResultProvider(
+              ListMatchingProductRequest(
+                query: word,
+                category: category,
+              ),
+            ),
+          )
           .when(
             loading: () => SliverChildListDelegate(
               [centeredCircularProgressIndicator],
             ),
             error: (error, stackTrace) {
-              recordError(error, stackTrace, information: [
-                "WordSearchPage.AppBar.Body.queryItemResultProvider",
-                "query: $word, category: $category",
-              ]);
+              recordError(
+                error,
+                stackTrace,
+                information: [
+                  "WordSearchPage.AppBar.Body.queryItemResultProvider",
+                  "query: $word, category: $category",
+                ],
+              );
               return SliverChildListDelegate(
                 [Text("$error")],
               );

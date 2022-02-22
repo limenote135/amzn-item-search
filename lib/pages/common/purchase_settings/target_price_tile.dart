@@ -17,19 +17,25 @@ class TargetPriceTile extends HookConsumerWidget {
     final useFba = getBool(form, useFbaField);
     final purchasePrice = getInt(form, purchasePriceField);
 
-    final showTargetRate = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.enableTargetProfit));
-    final targetRate = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.targetProfitValue));
+    final showTargetRate = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.enableTargetProfit),
+    );
+    final targetRate = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.targetProfitValue),
+    );
     final minProfit = ref.watch(
-        generalSettingsControllerProvider.select((value) => value.minProfit));
+      generalSettingsControllerProvider.select((value) => value.minProfit),
+    );
 
     final targetPrice = _calcTargetSellPrice(
-        purchasePrice > 0 ? purchasePrice : 0,
-        item.prices?.feeInfo,
-        targetRate,
-        minProfit,
-        useFba);
+      purchasePrice > 0 ? purchasePrice : 0,
+      item.prices?.feeInfo,
+      targetRate,
+      minProfit,
+      useFba,
+    );
 
     if (!showTargetRate) {
       return Container();
@@ -47,8 +53,13 @@ class TargetPriceTile extends HookConsumerWidget {
   }
 
   // 購入価格から目標の利益率を達成できる販売価格を計算する
-  int _calcTargetSellPrice(int purchasePrice, FeeInfo? feeInfo, int rate,
-      int minProfit, bool useFba) {
+  int _calcTargetSellPrice(
+    int purchasePrice,
+    FeeInfo? feeInfo,
+    int rate,
+    int minProfit,
+    bool useFba,
+  ) {
     if (feeInfo == null) {
       return 0;
     }

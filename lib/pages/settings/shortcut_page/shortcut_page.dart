@@ -37,84 +37,91 @@ class _Body extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final left = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.leftSlideShortcut));
-    final right = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.rightSlideShortcut));
-    final buttons = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.customButtons));
+    final left = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.leftSlideShortcut),
+    );
+    final right = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.rightSlideShortcut),
+    );
+    final buttons = ref.watch(
+      generalSettingsControllerProvider.select((value) => value.customButtons),
+    );
 
     final allWebButtons = [...buttons, amazonListingsButton];
 
     // ここには  amazonListingsButton は含めない
     final enableButtons = buttons.where((element) => element.enable).toList();
 
-    return ListView(children: [
-      ListTile(
-        title: Text(
-          "検索商品を左右にスワイプした際のショートカットを設定します。",
-          style: Theme.of(context).textTheme.caption,
-        ),
-      ),
-      const ThemeDivider(),
-      ListTile(
-        title: Text(
-          "左端スワイプ",
-          style: Theme.of(context).textTheme.caption,
-        ),
-      ),
-      for (var i = 0; i < left.length; i++)
+    return ListView(
+      children: [
         ListTile(
-          title: _createTitle(left[i], allWebButtons),
-          trailing: const Icon(Icons.settings),
-          onTap: () async {
-            final item = await _selectAction(context, enableButtons);
-            if (item != null) {
-              final updated = [
-                for (var j = 0; j < left.length; j++)
-                  if (i == j) item else left[j]
-              ];
-
-              ref
-                  .read(generalSettingsControllerProvider.notifier)
-                  .update(leftShortcut: updated);
-              final prop = encodeShortcutToUserProp(updated);
-              await ref
-                  .read(analyticsControllerProvider)
-                  .setUserProp(leftShortcutSettingsPropName, prop);
-            }
-          },
+          title: Text(
+            "検索商品を左右にスワイプした際のショートカットを設定します。",
+            style: Theme.of(context).textTheme.caption,
+          ),
         ),
-      const ThemeDivider(),
-      ListTile(
-        title: Text(
-          "右端スワイプ",
-          style: Theme.of(context).textTheme.caption,
-        ),
-      ),
-      for (var i = 0; i < right.length; i++)
+        const ThemeDivider(),
         ListTile(
-          title: _createTitle(right[i], allWebButtons),
-          trailing: const Icon(Icons.settings),
-          onTap: () async {
-            final item = await _selectAction(context, enableButtons);
-            if (item != null) {
-              final updated = [
-                for (var j = 0; j < right.length; j++)
-                  if (i == j) item else right[j]
-              ];
-
-              ref
-                  .read(generalSettingsControllerProvider.notifier)
-                  .update(rightShortcut: updated);
-              final prop = encodeShortcutToUserProp(updated);
-              await ref
-                  .read(analyticsControllerProvider)
-                  .setUserProp(rightShortcutSettingsPropName, prop);
-            }
-          },
+          title: Text(
+            "左端スワイプ",
+            style: Theme.of(context).textTheme.caption,
+          ),
         ),
-    ]);
+        for (var i = 0; i < left.length; i++)
+          ListTile(
+            title: _createTitle(left[i], allWebButtons),
+            trailing: const Icon(Icons.settings),
+            onTap: () async {
+              final item = await _selectAction(context, enableButtons);
+              if (item != null) {
+                final updated = [
+                  for (var j = 0; j < left.length; j++)
+                    if (i == j) item else left[j]
+                ];
+
+                ref
+                    .read(generalSettingsControllerProvider.notifier)
+                    .update(leftShortcut: updated);
+                final prop = encodeShortcutToUserProp(updated);
+                await ref
+                    .read(analyticsControllerProvider)
+                    .setUserProp(leftShortcutSettingsPropName, prop);
+              }
+            },
+          ),
+        const ThemeDivider(),
+        ListTile(
+          title: Text(
+            "右端スワイプ",
+            style: Theme.of(context).textTheme.caption,
+          ),
+        ),
+        for (var i = 0; i < right.length; i++)
+          ListTile(
+            title: _createTitle(right[i], allWebButtons),
+            trailing: const Icon(Icons.settings),
+            onTap: () async {
+              final item = await _selectAction(context, enableButtons);
+              if (item != null) {
+                final updated = [
+                  for (var j = 0; j < right.length; j++)
+                    if (i == j) item else right[j]
+                ];
+
+                ref
+                    .read(generalSettingsControllerProvider.notifier)
+                    .update(rightShortcut: updated);
+                final prop = encodeShortcutToUserProp(updated);
+                await ref
+                    .read(analyticsControllerProvider)
+                    .setUserProp(rightShortcutSettingsPropName, prop);
+              }
+            },
+          ),
+      ],
+    );
   }
 
   Widget _createTitle(ShortcutDetail data, List<CustomButtonDetail> buttons) {
@@ -156,7 +163,9 @@ class _Body extends HookConsumerWidget {
   static const _keepaKey = "keepa";
 
   Future<ShortcutDetail?> _selectAction(
-      BuildContext context, List<CustomButtonDetail> buttons) async {
+    BuildContext context,
+    List<CustomButtonDetail> buttons,
+  ) async {
     final ret = await showConfirmationDialog(
       context: context,
       title: "アクションを選択",
@@ -188,13 +197,19 @@ class _Body extends HookConsumerWidget {
         return const ShortcutDetail(type: ShortcutType.web, param: "bt00");
       case _newOffersKey:
         return const ShortcutDetail(
-            type: ShortcutType.navigation, param: navigationTargetNewOffers);
+          type: ShortcutType.navigation,
+          param: navigationTargetNewOffers,
+        );
       case _usedOffersKey:
         return const ShortcutDetail(
-            type: ShortcutType.navigation, param: navigationTargetUsedOffers);
+          type: ShortcutType.navigation,
+          param: navigationTargetUsedOffers,
+        );
       case _keepaKey:
         return const ShortcutDetail(
-            type: ShortcutType.navigation, param: navigationTargetKeepa);
+          type: ShortcutType.navigation,
+          param: navigationTargetKeepa,
+        );
       default:
         final button = buttons.firstWhere((element) => element.id == ret);
         return ShortcutDetail(type: ShortcutType.web, param: button.id);

@@ -41,7 +41,8 @@ final formValueProvider =
     quantityField: item.amount,
     // 型推論されないので明示的に型を指定する
     conditionField: FormControl<PurchaseItemCondition>(
-        value: item.subCondition.toItemPurchaseCondition()),
+      value: item.subCondition.toItemPurchaseCondition(),
+    ),
     autogenSkuField: item.autogenSku,
     skuField: item.sku,
     retailerField: item.retailer,
