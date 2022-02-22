@@ -14,29 +14,30 @@ class ItemConditionTile extends StatelessWidget {
           const Expanded(child: Text("商品状態")),
           Flexible(
             child: ReactiveDropdownField<PurchaseItemCondition>(
-                formControlName: conditionField,
-                items: const [
-                  DropdownMenuItem(
-                    value: PurchaseItemCondition.newItem,
-                    child: Text("新品"),
-                  ),
-                  DropdownMenuItem(
-                    value: PurchaseItemCondition.usedMint,
-                    child: Text("中古(ほぼ新品)"),
-                  ),
-                  DropdownMenuItem(
-                    value: PurchaseItemCondition.usedVeryGood,
-                    child: Text("中古(非常に良い)"),
-                  ),
-                  DropdownMenuItem(
-                    value: PurchaseItemCondition.usedGood,
-                    child: Text("中古(良い)"),
-                  ),
-                  DropdownMenuItem(
-                    value: PurchaseItemCondition.usedAcceptable,
-                    child: Text("中古(可)"),
-                  ),
-                ]),
+              formControlName: conditionField,
+              items: const [
+                DropdownMenuItem(
+                  value: PurchaseItemCondition.newItem,
+                  child: Text("新品"),
+                ),
+                DropdownMenuItem(
+                  value: PurchaseItemCondition.usedMint,
+                  child: Text("中古(ほぼ新品)"),
+                ),
+                DropdownMenuItem(
+                  value: PurchaseItemCondition.usedVeryGood,
+                  child: Text("中古(非常に良い)"),
+                ),
+                DropdownMenuItem(
+                  value: PurchaseItemCondition.usedGood,
+                  child: Text("中古(良い)"),
+                ),
+                DropdownMenuItem(
+                  value: PurchaseItemCondition.usedAcceptable,
+                  child: Text("中古(可)"),
+                ),
+              ],
+            ),
           ),
         ],
       ),

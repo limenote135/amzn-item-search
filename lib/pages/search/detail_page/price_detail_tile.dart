@@ -23,14 +23,21 @@ class PriceDetailTile extends HookConsumerWidget {
     final item = ref.watch(currentAsinDataProvider);
     final setting = ref.watch(searchSettingsControllerProvider);
 
-    final showTargetPrice = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.enableTargetProfit));
-    final targetPriceRate = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.targetProfitValue));
+    final showTargetPrice = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.enableTargetProfit),
+    );
+    final targetPriceRate = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.targetProfitValue),
+    );
     final minProfit = ref.watch(
-        generalSettingsControllerProvider.select((value) => value.minProfit));
-    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.isMajorCustomer));
+      generalSettingsControllerProvider.select((value) => value.minProfit),
+    );
+    final isMajorCustomer = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.isMajorCustomer),
+    );
 
     final detail = getPriceDetail(
       item: item,
@@ -61,11 +68,13 @@ class PriceDetailTile extends HookConsumerWidget {
       title: Column(
         children: [
           TextLine(
-            leading: Text(_createTitle(
-              type: type,
-              subCond: detail.subCondition, //TODO:表示している商品の状態を出すべき？
-              channel: detail.channel,
-            )),
+            leading: Text(
+              _createTitle(
+                type: type,
+                subCond: detail.subCondition, //TODO:表示している商品の状態を出すべき？
+                channel: detail.channel,
+              ),
+            ),
             main: Text("${numberFormatter.format(detail.price)} 円"),
           ),
           TextLine(
@@ -74,12 +83,14 @@ class PriceDetailTile extends HookConsumerWidget {
           ),
           TextLine(
             leading: const Text("粗利益"),
-            main: Text("${calcProfitText(
-              detail.price,
-              feeInfo,
-              useFba: setting.useFba,
-              isMajorCustomer: isMajorCustomer,
-            )} 円"),
+            main: Text(
+              "${calcProfitText(
+                detail.price,
+                feeInfo,
+                useFba: setting.useFba,
+                isMajorCustomer: isMajorCustomer,
+              )} 円",
+            ),
           ),
           if (showTargetPrice)
             TextLine(
@@ -105,9 +116,11 @@ class PriceDetailTile extends HookConsumerWidget {
               TextLine(
                 leading: const Text("FBA 手数料"),
                 main: feeInfo.fbaFee != -1
-                    ? Text(setting.useFba
-                        ? "${feeInfo.fbaFee} 円"
-                        : "(${feeInfo.fbaFee} 円)")
+                    ? Text(
+                        setting.useFba
+                            ? "${feeInfo.fbaFee} 円"
+                            : "(${feeInfo.fbaFee} 円)",
+                      )
                     : const Text("(不明) 円"),
               )
             ],

@@ -65,119 +65,161 @@ class Calculator extends HookConsumerWidget {
                       ),
                     ),
                     _ExpandedButton(
-                        onPressed: () {
-                          displayText.state = "0";
-                          op.state = _Op.plus;
-                          total.state = 0;
-                          inputComplete.state = true;
-                        },
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor:
-                              isDark(context) ? Colors.white12 : Colors.black12,
-                          primary:
-                              isDark(context) ? Colors.white70 : Colors.black87,
-                        ),
-                        child: const Text("C")),
+                      onPressed: () {
+                        displayText.state = "0";
+                        op.state = _Op.plus;
+                        total.state = 0;
+                        inputComplete.state = true;
+                      },
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor:
+                            isDark(context) ? Colors.white12 : Colors.black12,
+                        primary:
+                            isDark(context) ? Colors.white70 : Colors.black87,
+                      ),
+                      child: const Text("C"),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, "7", inputComplete),
-                        child: const Text("7")),
+                      onPressed: () =>
+                          _pushNumber(displayText, "7", inputComplete),
+                      child: const Text("7"),
+                    ),
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, "8", inputComplete),
-                        child: const Text("8")),
+                      onPressed: () =>
+                          _pushNumber(displayText, "8", inputComplete),
+                      child: const Text("8"),
+                    ),
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, "9", inputComplete),
-                        child: const Text("9")),
+                      onPressed: () =>
+                          _pushNumber(displayText, "9", inputComplete),
+                      child: const Text("9"),
+                    ),
                     _OperatorButton(
-                        onPressed: () async {
-                          _pushOp(displayText, total, op, inputComplete,
-                              _Op.division);
-                          await ref
-                              .read(analyticsControllerProvider)
-                              .logCalcEvent(calcEventDiv);
-                        },
-                        child: const Text("÷")),
+                      onPressed: () async {
+                        _pushOp(
+                          displayText,
+                          total,
+                          op,
+                          inputComplete,
+                          _Op.division,
+                        );
+                        await ref
+                            .read(analyticsControllerProvider)
+                            .logCalcEvent(calcEventDiv);
+                      },
+                      child: const Text("÷"),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, "4", inputComplete),
-                        child: const Text("4")),
+                      onPressed: () =>
+                          _pushNumber(displayText, "4", inputComplete),
+                      child: const Text("4"),
+                    ),
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, "5", inputComplete),
-                        child: const Text("5")),
+                      onPressed: () =>
+                          _pushNumber(displayText, "5", inputComplete),
+                      child: const Text("5"),
+                    ),
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, "6", inputComplete),
-                        child: const Text("6")),
+                      onPressed: () =>
+                          _pushNumber(displayText, "6", inputComplete),
+                      child: const Text("6"),
+                    ),
                     _OperatorButton(
-                        onPressed: () async {
-                          _pushOp(displayText, total, op, inputComplete,
-                              _Op.multiple);
-                          await ref
-                              .read(analyticsControllerProvider)
-                              .logCalcEvent(calcEventMul);
-                        },
-                        child: const Text("×")),
+                      onPressed: () async {
+                        _pushOp(
+                          displayText,
+                          total,
+                          op,
+                          inputComplete,
+                          _Op.multiple,
+                        );
+                        await ref
+                            .read(analyticsControllerProvider)
+                            .logCalcEvent(calcEventMul);
+                      },
+                      child: const Text("×"),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, "1", inputComplete),
-                        child: const Text("1")),
+                      onPressed: () =>
+                          _pushNumber(displayText, "1", inputComplete),
+                      child: const Text("1"),
+                    ),
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, "2", inputComplete),
-                        child: const Text("2")),
+                      onPressed: () =>
+                          _pushNumber(displayText, "2", inputComplete),
+                      child: const Text("2"),
+                    ),
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, "3", inputComplete),
-                        child: const Text("3")),
+                      onPressed: () =>
+                          _pushNumber(displayText, "3", inputComplete),
+                      child: const Text("3"),
+                    ),
                     _OperatorButton(
-                        onPressed: () async {
-                          _pushOp(
-                              displayText, total, op, inputComplete, _Op.minus);
-                          await ref
-                              .read(analyticsControllerProvider)
-                              .logCalcEvent(calcEventMinus);
-                        },
-                        child: const Text("-")),
+                      onPressed: () async {
+                        _pushOp(
+                          displayText,
+                          total,
+                          op,
+                          inputComplete,
+                          _Op.minus,
+                        );
+                        await ref
+                            .read(analyticsControllerProvider)
+                            .logCalcEvent(calcEventMinus);
+                      },
+                      child: const Text("-"),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, ".", inputComplete),
-                        child: const Text(".")),
+                      onPressed: () =>
+                          _pushNumber(displayText, ".", inputComplete),
+                      child: const Text("."),
+                    ),
                     _ExpandedButton(
-                        onPressed: () =>
-                            _pushNumber(displayText, "0", inputComplete),
-                        child: const Text("0")),
+                      onPressed: () =>
+                          _pushNumber(displayText, "0", inputComplete),
+                      child: const Text("0"),
+                    ),
                     _OperatorButton(
-                        onPressed: () => _pushOp(
-                            displayText, total, op, inputComplete, _Op.equal),
-                        child: const Text("=")),
+                      onPressed: () => _pushOp(
+                        displayText,
+                        total,
+                        op,
+                        inputComplete,
+                        _Op.equal,
+                      ),
+                      child: const Text("="),
+                    ),
                     _OperatorButton(
-                        onPressed: () async {
-                          _pushOp(
-                              displayText, total, op, inputComplete, _Op.plus);
-                          await ref
-                              .read(analyticsControllerProvider)
-                              .logCalcEvent(calcEventPlus);
-                        },
-                        child: const Text("+")),
+                      onPressed: () async {
+                        _pushOp(
+                          displayText,
+                          total,
+                          op,
+                          inputComplete,
+                          _Op.plus,
+                        );
+                        await ref
+                            .read(analyticsControllerProvider)
+                            .logCalcEvent(calcEventPlus);
+                      },
+                      child: const Text("+"),
+                    ),
                   ],
                 )
               ],
@@ -190,89 +232,99 @@ class Calculator extends HookConsumerWidget {
                 Row(
                   children: [
                     _ExpandedButton(
-                        style:
-                            OutlinedButton.styleFrom(padding: EdgeInsets.zero),
-                        onPressed: () async {
-                          _pushRatio(displayText, total, inputComplete, 1.05);
-                          await ref
-                              .read(analyticsControllerProvider)
-                              .logCalcEvent(calcEventPlus5p);
-                        },
-                        child: const Text("+5%")),
+                      style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
+                      onPressed: () async {
+                        _pushRatio(displayText, total, inputComplete, 1.05);
+                        await ref
+                            .read(analyticsControllerProvider)
+                            .logCalcEvent(calcEventPlus5p);
+                      },
+                      child: const Text("+5%"),
+                    ),
                     _ExpandedButton(
-                        style:
-                            OutlinedButton.styleFrom(padding: EdgeInsets.zero),
-                        onPressed: () async {
-                          _pushRatio(displayText, total, inputComplete, 0.95);
-                          await ref
-                              .read(analyticsControllerProvider)
-                              .logCalcEvent(calcEventMinus5p);
-                        },
-                        child: const Text("-5%")),
+                      style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
+                      onPressed: () async {
+                        _pushRatio(displayText, total, inputComplete, 0.95);
+                        await ref
+                            .read(analyticsControllerProvider)
+                            .logCalcEvent(calcEventMinus5p);
+                      },
+                      child: const Text("-5%"),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
                     _ExpandedButton(
-                        style:
-                            OutlinedButton.styleFrom(padding: EdgeInsets.zero),
-                        onPressed: () async {
-                          _pushRatio(displayText, total, inputComplete, 1.1);
-                          await ref
-                              .read(analyticsControllerProvider)
-                              .logCalcEvent(calcEventPlus10p);
-                        },
-                        child: const Text("+10%")),
+                      style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
+                      onPressed: () async {
+                        _pushRatio(displayText, total, inputComplete, 1.1);
+                        await ref
+                            .read(analyticsControllerProvider)
+                            .logCalcEvent(calcEventPlus10p);
+                      },
+                      child: const Text("+10%"),
+                    ),
                     _ExpandedButton(
-                        style:
-                            OutlinedButton.styleFrom(padding: EdgeInsets.zero),
-                        onPressed: () async {
-                          _pushRatio(displayText, total, inputComplete, 0.9);
-                          await ref
-                              .read(analyticsControllerProvider)
-                              .logCalcEvent(calcEventMinus10p);
-                        },
-                        child: const Text("-10%")),
+                      style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
+                      onPressed: () async {
+                        _pushRatio(displayText, total, inputComplete, 0.9);
+                        await ref
+                            .read(analyticsControllerProvider)
+                            .logCalcEvent(calcEventMinus10p);
+                      },
+                      child: const Text("-10%"),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
                     _ExpandedButton(
-                        style:
-                            OutlinedButton.styleFrom(padding: EdgeInsets.zero),
-                        onPressed: () async {
-                          final calcOp =
-                              inputComplete.state ? _Op.equal : op.state;
-                          final val =
-                              _calc(total.state, displayText.state, calcOp);
-                          _pushOp(
-                              displayText, total, op, inputComplete, _Op.equal);
-                          onFirstButtonPushed(val);
-                          await ref
-                              .read(analyticsControllerProvider)
-                              .logCalcEvent(calcEventFirstAction);
-                        },
-                        child: Text(firstButtonText)),
+                      style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
+                      onPressed: () async {
+                        final calcOp =
+                            inputComplete.state ? _Op.equal : op.state;
+                        final val =
+                            _calc(total.state, displayText.state, calcOp);
+                        _pushOp(
+                          displayText,
+                          total,
+                          op,
+                          inputComplete,
+                          _Op.equal,
+                        );
+                        onFirstButtonPushed(val);
+                        await ref
+                            .read(analyticsControllerProvider)
+                            .logCalcEvent(calcEventFirstAction);
+                      },
+                      child: Text(firstButtonText),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
                     _ExpandedButton(
-                        style:
-                            OutlinedButton.styleFrom(padding: EdgeInsets.zero),
-                        onPressed: () async {
-                          final calcOp =
-                              inputComplete.state ? _Op.equal : op.state;
-                          final val =
-                              _calc(total.state, displayText.state, calcOp);
-                          _pushOp(
-                              displayText, total, op, inputComplete, _Op.equal);
-                          onSecondButtonPushed(val);
-                          await ref
-                              .read(analyticsControllerProvider)
-                              .logCalcEvent(calcEventSecondAction);
-                        },
-                        child: Text(secondButtonText)),
+                      style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
+                      onPressed: () async {
+                        final calcOp =
+                            inputComplete.state ? _Op.equal : op.state;
+                        final val =
+                            _calc(total.state, displayText.state, calcOp);
+                        _pushOp(
+                          displayText,
+                          total,
+                          op,
+                          inputComplete,
+                          _Op.equal,
+                        );
+                        onSecondButtonPushed(val);
+                        await ref
+                            .read(analyticsControllerProvider)
+                            .logCalcEvent(calcEventSecondAction);
+                      },
+                      child: Text(secondButtonText),
+                    ),
                   ],
                 ),
               ],
@@ -283,8 +335,11 @@ class Calculator extends HookConsumerWidget {
     );
   }
 
-  void _pushNumber(StateController<String> current, String str,
-      StateController<bool> inputComplete) {
+  void _pushNumber(
+    StateController<String> current,
+    String str,
+    StateController<bool> inputComplete,
+  ) {
     if (inputComplete.state || current.state == "0" && str != ".") {
       current.state = str;
       inputComplete.state = false;

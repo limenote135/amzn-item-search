@@ -14,8 +14,11 @@ import 'package:html/parser.dart';
 final amazonRepositoryProvider = Provider((ref) => AmazonRepository(ref.read));
 
 class _ParseOfferListingsParam {
-  _ParseOfferListingsParam(
-      {required this.asin, required this.page, required this.body});
+  _ParseOfferListingsParam({
+    required this.asin,
+    required this.page,
+    required this.body,
+  });
 
   final String asin;
   final int page;
@@ -67,14 +70,18 @@ class AmazonRepository {
     }
     final url = "$_productUrl$asin";
 
-    final opt = Options(headers: <String, String>{
-      HttpHeaders.userAgentHeader: _userAgent,
-    });
+    final opt = Options(
+      headers: <String, String>{
+        HttpHeaders.userAgentHeader: _userAgent,
+      },
+    );
     await dio.get(url, opt: opt);
   }
 
   Future<OfferListings> getOffers(
-      OfferListingsParams params, CancelToken cancelToken) async {
+    OfferListingsParams params,
+    CancelToken cancelToken,
+  ) async {
     final reqParam = <String, dynamic>{
       "all": true,
       "primeEligible": params.prime,
@@ -93,11 +100,17 @@ class AmazonRepository {
     final dio = await _read(dioProvider.future);
     await _ensureCookie(params.asin);
 
-    final opt = Options(headers: <String, String>{
-      HttpHeaders.userAgentHeader: _userAgent,
-    });
-    final resp = await dio.get(_offerUrlBase,
-        query: query, opt: opt, cancelToken: cancelToken);
+    final opt = Options(
+      headers: <String, String>{
+        HttpHeaders.userAgentHeader: _userAgent,
+      },
+    );
+    final resp = await dio.get(
+      _offerUrlBase,
+      query: query,
+      opt: opt,
+      cancelToken: cancelToken,
+    );
     if (resp.statusCode != 200) {
       throw Exception("エラー${resp.statusCode}");
     }
@@ -171,8 +184,10 @@ class AmazonRepository {
     if (totalStr == null) {
       return 0;
     }
-    final normalizeStr = totalStr.replaceAllMapped(_jpNumberRegex,
-        (Match m) => String.fromCharCode(m.group(0)!.codeUnitAt(0) - 0xFEE0));
+    final normalizeStr = totalStr.replaceAllMapped(
+      _jpNumberRegex,
+      (Match m) => String.fromCharCode(m.group(0)!.codeUnitAt(0) - 0xFEE0),
+    );
     final total = int.tryParse(normalizeStr);
     return total ?? 0;
   }
@@ -237,7 +252,10 @@ class AmazonRepository {
   }
 
   Future<int> getStockCount(
-      String asin, String sellerId, CancelToken cancelToken) async {
+    String asin,
+    String sellerId,
+    CancelToken cancelToken,
+  ) async {
     final dio = await _read(dioProvider.future);
 
     final url = _stockUrlBase.replaceAll("[asin]", asin);
@@ -246,9 +264,11 @@ class AmazonRepository {
       "marketplaceID": _marketPlaceJp,
     };
 
-    final opt = Options(headers: <String, String>{
-      HttpHeaders.userAgentHeader: _userAgent,
-    });
+    final opt = Options(
+      headers: <String, String>{
+        HttpHeaders.userAgentHeader: _userAgent,
+      },
+    );
     final resp =
         await dio.get(url, query: query, opt: opt, cancelToken: cancelToken);
 

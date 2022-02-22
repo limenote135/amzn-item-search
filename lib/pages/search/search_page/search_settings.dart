@@ -20,28 +20,35 @@ class SearchSetting extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-              child: Text(
-            "検索設定",
-            style: textSize,
-          )),
+            child: Text(
+              "検索設定",
+              style: textSize,
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("タイプ: ${setting.type.toDisplayString()}",
-                      style: textSize),
+                  Text(
+                    "タイプ: ${setting.type.toDisplayString()}",
+                    style: textSize,
+                  ),
                   Text("中古表示: $condText", style: textSize),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("FBA利用: ${setting.useFba ? "する" : "しない"}",
-                      style: textSize),
-                  Text("FBA優先表示: ${setting.priorFba ? "する" : "しない"}",
-                      style: textSize),
+                  Text(
+                    "FBA利用: ${setting.useFba ? "する" : "しない"}",
+                    style: textSize,
+                  ),
+                  Text(
+                    "FBA優先表示: ${setting.priorFba ? "する" : "しない"}",
+                    style: textSize,
+                  ),
                 ],
               )
             ],

@@ -7,7 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final searchSettingsControllerProvider =
     StateNotifierProvider<SearchSettingsController, SearchSettings>(
-        (ref) => SearchSettingsController(ref.read));
+  (ref) => SearchSettingsController(ref.read),
+);
 
 class SearchSettingsController extends StateNotifier<SearchSettings> {
   SearchSettingsController(this._read) : super(const SearchSettings()) {

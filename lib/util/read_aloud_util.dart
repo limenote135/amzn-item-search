@@ -91,8 +91,9 @@ String _filterPrice({
     }
     if (priorFba) {
       final fbaItem = subItems.firstWhere(
-          (element) => element.channel == FulfillmentChannel.amazon,
-          orElse: () => subItems.first);
+        (element) => element.channel == FulfillmentChannel.amazon,
+        orElse: () => subItems.first,
+      );
       return _calcProfitSpeakText(
         listPrice: fbaItem.price,
         fee: fee,

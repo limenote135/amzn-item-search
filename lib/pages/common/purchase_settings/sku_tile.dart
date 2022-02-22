@@ -14,9 +14,12 @@ class SkuTile extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
     final skuFormat = ref.watch(
-        generalSettingsControllerProvider.select((value) => value.skuFormat));
-    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.isMajorCustomer));
+      generalSettingsControllerProvider.select((value) => value.skuFormat),
+    );
+    final isMajorCustomer = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.isMajorCustomer),
+    );
     return Column(
       children: [
         ReactiveCheckboxListTile(

@@ -24,10 +24,14 @@ class StockText extends HookConsumerWidget {
     return ref.watch(offerStocksFutureProvider(param)).when(
           loading: () => Text("在庫: loading", style: smallSize),
           error: (error, stackTrace) {
-            recordError(error, stackTrace, information: [
-              "StockText.offerStocksFutureProvider",
-              "ASIN: $asin, SellerID: $sellerId",
-            ]);
+            recordError(
+              error,
+              stackTrace,
+              information: [
+                "StockText.offerStocksFutureProvider",
+                "ASIN: $asin, SellerID: $sellerId",
+              ],
+            );
             return Text("$error");
           },
           data: (value) {

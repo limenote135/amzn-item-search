@@ -12,8 +12,11 @@ class AmazonStatus extends ConsumerWidget {
     return user.when(
       loading: () => const Text(""),
       error: (error, stackTrace) {
-        recordError(error, stackTrace,
-            information: const ["AmazonStatus.linkedWithAmazonProvider when"]);
+        recordError(
+          error,
+          stackTrace,
+          information: const ["AmazonStatus.linkedWithAmazonProvider when"],
+        );
         return const Text("エラー: 状態を取得できませんでした");
       },
       data: (value) {
