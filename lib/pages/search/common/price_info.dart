@@ -40,14 +40,21 @@ class _PriceAndProfit extends HookConsumerWidget {
     final item = ref.watch(currentAsinDataProvider);
     final settings = ref.watch(searchSettingsControllerProvider);
 
-    final showTargetPrice = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.enableTargetProfit));
-    final targetPriceRate = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.targetProfitValue));
+    final showTargetPrice = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.enableTargetProfit),
+    );
+    final targetPriceRate = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.targetProfitValue),
+    );
     final minProfit = ref.watch(
-        generalSettingsControllerProvider.select((value) => value.minProfit));
-    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.isMajorCustomer));
+      generalSettingsControllerProvider.select((value) => value.minProfit),
+    );
+    final isMajorCustomer = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.isMajorCustomer),
+    );
 
     final detail = getPriceDetail(
       item: item,
@@ -72,54 +79,65 @@ class _PriceAndProfit extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text.rich(
-          TextSpan(text: "${condition.toDisplayString()}: ", children: [
-            TextSpan(
-              text: numberFormatter.format(detail.price),
-              style: strongTextStyle,
-            ),
-            const TextSpan(text: " 円"),
-            if (needNewLine) const TextSpan(text: "\n"),
-            const TextSpan(text: "(送 "),
-            TextSpan(
-              text: numberFormatter.format(detail.shipping),
-              style: strongTextStyle,
-            ),
-            const TextSpan(text: " 円)"),
-          ]),
+          TextSpan(
+            text: "${condition.toDisplayString()}: ",
+            children: [
+              TextSpan(
+                text: numberFormatter.format(detail.price),
+                style: strongTextStyle,
+              ),
+              const TextSpan(text: " 円"),
+              if (needNewLine) const TextSpan(text: "\n"),
+              const TextSpan(text: "(送 "),
+              TextSpan(
+                text: numberFormatter.format(detail.shipping),
+                style: strongTextStyle,
+              ),
+              const TextSpan(text: " 円)"),
+            ],
+          ),
           style: smallSize,
         ),
         Text("状態: ${_conditionText(detail)}", style: smallSize),
         Text.rich(
-          TextSpan(text: "粗利益: ", children: [
-            TextSpan(
-              text: calcProfitText(
-                detail.price,
-                item.prices?.feeInfo,
-                useFba: settings.useFba,
-                isMajorCustomer: isMajorCustomer,
+          TextSpan(
+            text: "粗利益: ",
+            children: [
+              TextSpan(
+                text: calcProfitText(
+                  detail.price,
+                  item.prices?.feeInfo,
+                  useFba: settings.useFba,
+                  isMajorCustomer: isMajorCustomer,
+                ),
+                style: strongTextStyle,
               ),
-              style: strongTextStyle,
-            ),
-            const TextSpan(text: " 円"),
-          ]),
+              const TextSpan(text: " 円"),
+            ],
+          ),
           style: smallSize,
         ),
         if (showTargetPrice)
           Text.rich(
-            TextSpan(text: "目標額: ", children: [
-              TextSpan(
-                text: numberFormatter.format(calcTargetPrice(
-                  sellPrice: detail.price,
-                  feeInfo: item.prices?.feeInfo,
-                  targetRate: targetPriceRate,
-                  minProfit: minProfit,
-                  useFba: settings.useFba,
-                  isMajorCustomer: isMajorCustomer,
-                )),
-                style: strongTextStyle,
-              ),
-              const TextSpan(text: "円"),
-            ]),
+            TextSpan(
+              text: "目標額: ",
+              children: [
+                TextSpan(
+                  text: numberFormatter.format(
+                    calcTargetPrice(
+                      sellPrice: detail.price,
+                      feeInfo: item.prices?.feeInfo,
+                      targetRate: targetPriceRate,
+                      minProfit: minProfit,
+                      useFba: settings.useFba,
+                      isMajorCustomer: isMajorCustomer,
+                    ),
+                  ),
+                  style: strongTextStyle,
+                ),
+                const TextSpan(text: "円"),
+              ],
+            ),
             style: smallSize,
           ),
       ],

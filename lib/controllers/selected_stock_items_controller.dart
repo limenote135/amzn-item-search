@@ -3,7 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final selectedStockItemsControllerProvider =
     StateNotifierProvider<SelectedStockItemsController, List<StockItem>>(
-        (_) => SelectedStockItemsController());
+  (_) => SelectedStockItemsController(),
+);
 
 class SelectedStockItemsController extends StateNotifier<List<StockItem>> {
   SelectedStockItemsController() : super([]);

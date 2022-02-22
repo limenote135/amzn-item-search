@@ -21,8 +21,9 @@ class SignupPage extends HookConsumerWidget {
 
   static Route<void> route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
-        builder: (context) => const SignupPage());
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const SignupPage(),
+    );
   }
 
   static final emailKey = GlobalKey<FormFieldState<String>>();
@@ -85,10 +86,14 @@ class SignupPage extends HookConsumerWidget {
               msg = "操作が許可されていません";
               break;
             default:
-              await recordError(e, stack, information: [
-                "createUserWithEmailAndPassword error",
-                "Code: ${e.code}",
-              ]);
+              await recordError(
+                e,
+                stack,
+                information: [
+                  "createUserWithEmailAndPassword error",
+                  "Code: ${e.code}",
+                ],
+              );
               msg = e.code;
               break;
           }
@@ -126,7 +131,9 @@ class SignupPage extends HookConsumerWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       child: EmailFormField(
                         fieldKey: emailKey,
                         onSubmit: (_) => pwFocusNode.requestFocus(),
@@ -134,7 +141,9 @@ class SignupPage extends HookConsumerWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       child: PasswordFormField(
                         fieldKey: passwordKey,
                         controller: pwController,
@@ -145,7 +154,9 @@ class SignupPage extends HookConsumerWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       child: PasswordFormField(
                         controller: pw2Controller,
                         focusNode: pw2FocusNode,

@@ -28,8 +28,9 @@ class _Body extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final settings = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.keepaSettings));
+    final settings = ref.watch(
+      generalSettingsControllerProvider.select((value) => value.keepaSettings),
+    );
     return ListView(
       children: [
         ListTile(

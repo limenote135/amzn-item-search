@@ -88,8 +88,11 @@ class SocialLoginButtons extends HookConsumerWidget {
                 Navigator.of(context).pop();
                 // ignore: avoid_catches_without_on_clauses
               } catch (e, stack) {
-                await recordError(e, stack,
-                    information: const ["SignInWithApple"]);
+                await recordError(
+                  e,
+                  stack,
+                  information: const ["SignInWithApple"],
+                );
                 rethrow;
               } finally {
                 await EasyLoading.dismiss();

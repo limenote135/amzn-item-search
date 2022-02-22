@@ -60,8 +60,10 @@ class _TileBody extends HookConsumerWidget {
     final detail = ref.watch(currentAsinDataProvider);
     final smallSize = smallFontSize(context);
 
-    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.isMajorCustomer));
+    final isMajorCustomer = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.isMajorCustomer),
+    );
 
     final profitRate = item.sellPrice > 0
         ? (item.profitPerItem / item.sellPrice * 100).round()
@@ -87,7 +89,8 @@ class _TileBody extends HookConsumerWidget {
         Row(
           children: [
             Expanded(
-                child: Text("参考価格: ${detail.listPrice} 円", style: smallSize)),
+              child: Text("参考価格: ${detail.listPrice} 円", style: smallSize),
+            ),
             Expanded(child: Text("順位: ${detail.rank} 位", style: smallSize))
           ],
         ),
@@ -99,23 +102,29 @@ class _TileBody extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text.rich(
-                    TextSpan(text: "販売予定: ", children: [
-                      TextSpan(
-                        text: numberFormatter.format(item.sellPrice),
-                        style: strongTextStyle,
-                      ),
-                      const TextSpan(text: " 円"),
-                    ]),
+                    TextSpan(
+                      text: "販売予定: ",
+                      children: [
+                        TextSpan(
+                          text: numberFormatter.format(item.sellPrice),
+                          style: strongTextStyle,
+                        ),
+                        const TextSpan(text: " 円"),
+                      ],
+                    ),
                     style: smallSize,
                   ),
                   Text.rich(
-                    TextSpan(text: "仕入れ値: ", children: [
-                      TextSpan(
-                        text: numberFormatter.format(item.purchasePrice),
-                        style: strongTextStyle,
-                      ),
-                      const TextSpan(text: " 円"),
-                    ]),
+                    TextSpan(
+                      text: "仕入れ値: ",
+                      children: [
+                        TextSpan(
+                          text: numberFormatter.format(item.purchasePrice),
+                          style: strongTextStyle,
+                        ),
+                        const TextSpan(text: " 円"),
+                      ],
+                    ),
                     style: smallSize,
                   ),
                 ],
@@ -126,13 +135,16 @@ class _TileBody extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text.rich(
-                    TextSpan(text: "粗利益: ", children: [
-                      TextSpan(
-                        text: numberFormatter.format(item.profitPerItem),
-                        style: strongTextStyle,
-                      ),
-                      const TextSpan(text: " 円 / 個"),
-                    ]),
+                    TextSpan(
+                      text: "粗利益: ",
+                      children: [
+                        TextSpan(
+                          text: numberFormatter.format(item.profitPerItem),
+                          style: strongTextStyle,
+                        ),
+                        const TextSpan(text: " 円 / 個"),
+                      ],
+                    ),
                     style: smallSize,
                   ),
                   Text("利益率: $profitRate %", style: smallSize),
@@ -145,7 +157,8 @@ class _TileBody extends HookConsumerWidget {
           children: [
             Expanded(child: Text("損益分岐: $breakEven円", style: smallSize)),
             Expanded(
-                child: Text("状態: ${_conditionText(item)}", style: smallSize)),
+              child: Text("状態: ${_conditionText(item)}", style: smallSize),
+            ),
           ],
         ),
         Row(
@@ -153,9 +166,10 @@ class _TileBody extends HookConsumerWidget {
             Expanded(child: Text("個数: ${item.amount} 個", style: smallSize)),
             Expanded(
               child: Text(
-                  "仕入れ日: "
-                  "${DateTime.parse(item.purchaseDate).toLocal().format()}",
-                  style: smallSize),
+                "仕入れ日: "
+                "${DateTime.parse(item.purchaseDate).toLocal().format()}",
+                style: smallSize,
+              ),
             ),
           ],
         )

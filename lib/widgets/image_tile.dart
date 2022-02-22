@@ -46,8 +46,9 @@ class TileImage extends HookConsumerWidget {
 
     final captionSize = captionSizeBlackText(context);
 
-    final keepaSettings = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.keepaSettings));
+    final keepaSettings = ref.watch(
+      generalSettingsControllerProvider.select((value) => value.keepaSettings),
+    );
 
     return ConstrainedBox(
       constraints: const BoxConstraints.tightFor(width: 75),
@@ -108,35 +109,36 @@ class TileImage extends HookConsumerWidget {
                 return GestureDetector(
                   onTap: () {
                     showDialog<void>(
-                        context: context,
-                        builder: (context) {
-                          return GestureDetector(
-                            onTap: () {
-                              // InteractiveViewer を使うとダイアログが閉じられなくので、
-                              // GestureDetector でタップ検知して閉じる
-                              Navigator.pop(context);
-                            },
-                            child: InteractiveViewer(
-                              child: SimpleDialog(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      // 画像内はダイアログを閉じないために GestureDetector で上書き
-                                    },
-                                    child: ExtendedImage.network(
-                                      _createKeepaUrl(
-                                        asinData.asin,
-                                        keepaSettings,
-                                        width: "600",
-                                        height: "300",
-                                      ),
+                      context: context,
+                      builder: (context) {
+                        return GestureDetector(
+                          onTap: () {
+                            // InteractiveViewer を使うとダイアログが閉じられなくので、
+                            // GestureDetector でタップ検知して閉じる
+                            Navigator.pop(context);
+                          },
+                          child: InteractiveViewer(
+                            child: SimpleDialog(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    // 画像内はダイアログを閉じないために GestureDetector で上書き
+                                  },
+                                  child: ExtendedImage.network(
+                                    _createKeepaUrl(
+                                      asinData.asin,
+                                      keepaSettings,
+                                      width: "600",
+                                      height: "300",
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          );
-                        });
+                          ),
+                        );
+                      },
+                    );
                   },
                   child: ExtendedRawImage(
                     image: state.extendedImageInfo?.image,

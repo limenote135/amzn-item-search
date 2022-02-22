@@ -57,7 +57,9 @@ class InputPricesTile extends HookConsumerWidget {
                     focusNode: purchasePriceFocus,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
-                        labelText: "仕入価格", suffixText: "円"),
+                      labelText: "仕入価格",
+                      suffixText: "円",
+                    ),
                     textAlign: TextAlign.end,
                     validationMessages: (control) => {
                       validationMessagePositiveNumberOrEmpty: "不正な値です",
@@ -74,7 +76,9 @@ class InputPricesTile extends HookConsumerWidget {
                     focusNode: sellPriceFocus,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
-                        labelText: "販売価格", suffixText: "円"),
+                      labelText: "販売価格",
+                      suffixText: "円",
+                    ),
                     textAlign: TextAlign.end,
                     validationMessages: (control) => {
                       ValidationMessage.required: "販売価格は必須です",
