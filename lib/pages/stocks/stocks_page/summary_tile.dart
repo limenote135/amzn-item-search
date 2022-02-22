@@ -40,10 +40,14 @@ class SummaryTile extends HookConsumerWidget {
             spacing: 8,
             children: [
               Text("商品数: $itemCount 個", textAlign: TextAlign.center),
-              Text("仕入額: ${numberFormatter.format(totalPurchase)} 円",
-                  textAlign: TextAlign.center),
-              Text("粗利額: ${numberFormatter.format(profitValue)}円",
-                  textAlign: TextAlign.center),
+              Text(
+                "仕入額: ${numberFormatter.format(totalPurchase)} 円",
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "粗利額: ${numberFormatter.format(profitValue)}円",
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
           Row(

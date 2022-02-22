@@ -27,21 +27,30 @@ class SlidableTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final from = ref.watch(fromRouteProvider);
-    final left = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.leftSlideShortcut));
-    final right = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.rightSlideShortcut));
-    final baseButtons = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.customButtons));
+    final left = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.leftSlideShortcut),
+    );
+    final right = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.rightSlideShortcut),
+    );
+    final baseButtons = ref.watch(
+      generalSettingsControllerProvider.select((value) => value.customButtons),
+    );
 
     final items = ref.watch(currentSearchItemProvider);
 
     final buttons = [...baseButtons, amazonListingsButton];
 
     final leftActive = left.fold<int>(
-        0, (prev, e) => e.type != ShortcutType.none ? prev + 1 : prev);
+      0,
+      (prev, e) => e.type != ShortcutType.none ? prev + 1 : prev,
+    );
     final rightActive = right.fold<int>(
-        0, (prev, e) => e.type != ShortcutType.none ? prev + 1 : prev);
+      0,
+      (prev, e) => e.type != ShortcutType.none ? prev + 1 : prev,
+    );
     return Slidable(
       startActionPane: ActionPane(
         motion: const DrawerMotion(),
@@ -77,8 +86,14 @@ class SlidableTile extends HookConsumerWidget {
     return true;
   }
 
-  Widget _getAction(BuildContext context, WidgetRef ref, ShortcutType type,
-      String param, List<CustomButtonDetail> buttons, SearchItem item) {
+  Widget _getAction(
+    BuildContext context,
+    WidgetRef ref,
+    ShortcutType type,
+    String param,
+    List<CustomButtonDetail> buttons,
+    SearchItem item,
+  ) {
     switch (type) {
       case ShortcutType.purchase:
         return _purchaseAction(ref, item);
@@ -113,7 +128,10 @@ class SlidableTile extends HookConsumerWidget {
   }
 
   SlidableAction _deleteAction(
-      BuildContext context, WidgetRef ref, SearchItem item) {
+    BuildContext context,
+    WidgetRef ref,
+    SearchItem item,
+  ) {
     return SlidableAction(
       label: "削除",
       backgroundColor: Colors.red,
@@ -139,7 +157,10 @@ class SlidableTile extends HookConsumerWidget {
   }
 
   SlidableAction _webAction(
-      WidgetRef ref, CustomButtonDetail button, SearchItem item) {
+    WidgetRef ref,
+    CustomButtonDetail button,
+    SearchItem item,
+  ) {
     final url = replaceUrl(template: button.pattern, item: item.asins.first);
     final eventName = customButtonEventMap.containsKey(button.pattern)
         ? customButtonEventMap[button.pattern]!
@@ -162,7 +183,10 @@ class SlidableTile extends HookConsumerWidget {
   }
 
   SlidableAction _navigationAction(
-      WidgetRef ref, String target, SearchItem item) {
+    WidgetRef ref,
+    String target,
+    SearchItem item,
+  ) {
     var title = "";
     var event = "";
     Route<void> navigation;
@@ -175,21 +199,25 @@ class SlidableTile extends HookConsumerWidget {
       case navigationTargetNewOffers:
         title = "新品一覧";
         event = pushSearchButtonAmazonNewOffersName;
-        navigation = OfferListingPage.route(OfferListingsParams(
-          asin: item.asins.first.asin,
-          newItem: true,
-        ));
+        navigation = OfferListingPage.route(
+          OfferListingsParams(
+            asin: item.asins.first.asin,
+            newItem: true,
+          ),
+        );
         break;
       case navigationTargetUsedOffers:
         title = "中古一覧";
         event = pushSearchButtonAmazonUsedOffersName;
-        navigation = OfferListingPage.route(OfferListingsParams(
-          asin: item.asins.first.asin,
-          usedLikeNew: true,
-          usedVeryGood: true,
-          usedGood: true,
-          usedAcceptable: true,
-        ));
+        navigation = OfferListingPage.route(
+          OfferListingsParams(
+            asin: item.asins.first.asin,
+            usedLikeNew: true,
+            usedVeryGood: true,
+            usedGood: true,
+            usedAcceptable: true,
+          ),
+        );
         break;
       default:
         throw Exception("Unknown navigation target: $target");

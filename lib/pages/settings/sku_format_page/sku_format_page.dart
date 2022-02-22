@@ -59,7 +59,8 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final skuPattern = ref.watch(
-        generalSettingsControllerProvider.select((value) => value.skuFormat));
+      generalSettingsControllerProvider.select((value) => value.skuFormat),
+    );
     return _PatternEditForm(skuPattern);
   }
 }
@@ -107,18 +108,20 @@ class __PatternEditFormState extends ConsumerState<_PatternEditForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("プレビュー", style: smallSize),
-              Text(replaceSku(
-                format: _textEditingController.text,
-                item: _newSampleItem,
-                purchase: 200,
-                sell: 300,
-                cond: PurchaseItemCondition.newItem,
-                profit: 5,
-                quantity: 2,
-                useFba: true,
-                date: DateTime.now(),
-                breakEven: 271,
-              )),
+              Text(
+                replaceSku(
+                  format: _textEditingController.text,
+                  item: _newSampleItem,
+                  purchase: 200,
+                  sell: 300,
+                  cond: PurchaseItemCondition.newItem,
+                  profit: 5,
+                  quantity: 2,
+                  useFba: true,
+                  date: DateTime.now(),
+                  breakEven: 271,
+                ),
+              ),
             ],
           ),
         ),

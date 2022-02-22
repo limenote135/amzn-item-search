@@ -23,7 +23,8 @@ class MyApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final observer = ref.watch(analyticsObserverProvider);
     final isDarkMode = ref.watch(
-        generalSettingsControllerProvider.select((value) => value.isDarkMode));
+      generalSettingsControllerProvider.select((value) => value.isDarkMode),
+    );
     final authStateChanges = ref.watch(authStateChangesProvider);
     return MaterialApp(
       localizationsDelegates: const [
@@ -70,10 +71,15 @@ class MyApp extends HookConsumerWidget {
           }
           // TODO: 仮で毎回起動時にセットする
           ref.read(analyticsControllerProvider).setUserId(value.uid);
-          return Stack(children: const [
-            HomePage(),
-            LifecycleManager(callback: UpdateCheckObserver(), child: Updater()),
-          ]);
+          return Stack(
+            children: const [
+              HomePage(),
+              LifecycleManager(
+                callback: UpdateCheckObserver(),
+                child: Updater(),
+              ),
+            ],
+          );
         },
       ),
       navigatorObservers: [

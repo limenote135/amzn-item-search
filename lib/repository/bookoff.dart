@@ -75,17 +75,22 @@ class BookoffRepository {
 
       final body = result.data.toString();
       if (!body.startsWith("callback(")) {
-        await recordError(Exception("Invalid Response"), null, information: [
-          "Unexpected bookoff response",
-          "URL: $url",
-        ]);
+        await recordError(
+          Exception("Invalid Response"),
+          null,
+          information: [
+            "Unexpected bookoff response",
+            "URL: $url",
+          ],
+        );
         return Future.value([]);
       }
       final normalized = body.substring("callback(".length, body.length - 1);
       final js = jsonDecode(normalized) as List<dynamic>;
       return js
-          .map((dynamic e) =>
-              BookoffResponse.fromJson(e as Map<String, dynamic>))
+          .map(
+            (dynamic e) => BookoffResponse.fromJson(e as Map<String, dynamic>),
+          )
           .toList();
     } on _NotFoundException catch (_) {
       return Future.value([]);

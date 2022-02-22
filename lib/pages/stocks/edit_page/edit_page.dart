@@ -92,8 +92,10 @@ class _SaveButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentStockItemProvider);
-    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.isMajorCustomer));
+    final isMajorCustomer = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.isMajorCustomer),
+    );
 
     return ReactiveFormConsumer(
       builder: (context, form, child) {

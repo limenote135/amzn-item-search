@@ -58,7 +58,9 @@ class CartTile extends HookConsumerWidget {
                                       style: strongTextStyle,
                                     ),
                                     const TextSpan(
-                                        text: "円", style: blackTextStyle),
+                                      text: "円",
+                                      style: blackTextStyle,
+                                    ),
                                   ],
                                 ),
                               ),

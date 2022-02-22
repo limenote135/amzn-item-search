@@ -9,7 +9,10 @@ const propValueMaxLength = 36;
 const eventValueMaxLength = 100;
 
 final analyticsObserverProvider = Provider(
-    (ref) => FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance));
+  (ref) => FirebaseAnalyticsObserver(
+    analytics: FirebaseAnalytics.instance,
+  ),
+);
 
 final analyticsControllerProvider = Provider((_) => AnalyticsController());
 
@@ -20,32 +23,37 @@ class AnalyticsController {
     final title = stock.item.title.length > eventValueMaxLength
         ? stock.item.title.substring(0, eventValueMaxLength)
         : stock.item.title;
-    return FirebaseAnalytics.instance
-        .logEvent(name: purchaseEventName, parameters: <String, dynamic>{
-      "ASIN": stock.item.asin,
-      "title": title,
-      "quantity": stock.amount,
-      "purchasePrice": stock.purchasePrice,
-      "sellPrice": stock.sellPrice,
-      "profit": stock.profitPerItem,
-      "condition": stock.subCondition.toDisplayString(),
-      "retailer": stock.retailer,
-    });
+    return FirebaseAnalytics.instance.logEvent(
+      name: purchaseEventName,
+      parameters: <String, dynamic>{
+        "ASIN": stock.item.asin,
+        "title": title,
+        "quantity": stock.amount,
+        "purchasePrice": stock.purchasePrice,
+        "sellPrice": stock.sellPrice,
+        "profit": stock.profitPerItem,
+        "condition": stock.subCondition.toDisplayString(),
+        "retailer": stock.retailer,
+      },
+    );
   }
 
   Future<void> logPushSearchButtonEvent(String name) {
     return FirebaseAnalytics.instance.logEvent(
-        name: pushSearchButtonEventName,
-        parameters: <String, dynamic>{
-          "type": name,
-        });
+      name: pushSearchButtonEventName,
+      parameters: <String, dynamic>{
+        "type": name,
+      },
+    );
   }
 
   Future<void> logSearchEvent(String type) {
-    return FirebaseAnalytics.instance
-        .logEvent(name: searchEventName, parameters: <String, dynamic>{
-      "type": type,
-    });
+    return FirebaseAnalytics.instance.logEvent(
+      name: searchEventName,
+      parameters: <String, dynamic>{
+        "type": type,
+      },
+    );
   }
 
   Future<void> logCalcEvent(String type) {

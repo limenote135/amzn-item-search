@@ -11,7 +11,8 @@ class RetailerTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final retailers = ref.watch(
-        generalSettingsControllerProvider.select((value) => value.retailers));
+      generalSettingsControllerProvider.select((value) => value.retailers),
+    );
     return ListTile(
       title: Row(
         children: [

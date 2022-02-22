@@ -34,7 +34,10 @@ extension AlertConditionSetExtension on AlertConditionSet {
                 AlertOfferCondition.values[typeConditions.first.value];
 
             final detail = _getPriceDetail(
-                item: item, cond: condition, priorFba: settings.priorFba);
+              item: item,
+              cond: condition,
+              priorFba: settings.priorFba,
+            );
             final profit = calcProfit(
               sellPrice: detail.price,
               purchasePrice: 0,
@@ -138,8 +141,10 @@ PriceDetail _getPriceDetail({
       }
 
       if (priorFba) {
-        condPrices.firstWhere((e) => e.channel == FulfillmentChannel.amazon,
-            orElse: () => condPrices.first);
+        condPrices.firstWhere(
+          (e) => e.channel == FulfillmentChannel.amazon,
+          orElse: () => condPrices.first,
+        );
       }
       return condPrices.first;
   }

@@ -10,7 +10,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final searchItemControllerProvider =
     StateNotifierProvider<SearchItemController, List<Future<SearchItem>>>(
-        (ref) => SearchItemController(ref.read));
+  (ref) => SearchItemController(ref.read),
+);
 
 class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
   SearchItemController(this._read) : super([]) {
