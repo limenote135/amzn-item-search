@@ -34,11 +34,13 @@ class SearchItemTile extends HookConsumerWidget {
       ],
     );
     if (settings.enableAlert &&
-        settings.alerts.any((element) => element.match(
-              item,
-              search,
-              isMajorCustomer: settings.isMajorCustomer,
-            ))) {
+        settings.alerts.any(
+          (element) => element.match(
+            item,
+            search,
+            isMajorCustomer: settings.isMajorCustomer,
+          ),
+        )) {
       return StrongContainer(tile);
     }
     return tile;

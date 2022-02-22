@@ -51,7 +51,11 @@ class _Body extends ConsumerWidget {
     final auth = ref.watch(firebaseAuthProvider);
 
     Future<void> sendDonation(
-        String email, String name, String message, String date) async {
+      String email,
+      String name,
+      String message,
+      String date,
+    ) async {
       final fn = ref.read(cloudFunctionProvider(functionNameSendDonation));
       await fn.call<String>(<String, String>{
         "item": "${package.product.title}:${package.product.priceString}",

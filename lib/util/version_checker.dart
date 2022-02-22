@@ -26,8 +26,11 @@ class VersionChecker {
       // ignore: avoid_catches_without_on_clauses
     } catch (exception, stackTrace) {
       // 取得失敗してもエラーにしない
-      await recordError(exception, stackTrace,
-          information: const ["RemoteConfig error"]);
+      await recordError(
+        exception,
+        stackTrace,
+        information: const ["RemoteConfig error"],
+      );
     }
     return false;
   }

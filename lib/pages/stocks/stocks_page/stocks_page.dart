@@ -134,16 +134,20 @@ class StocksPage extends HookConsumerWidget {
   }
 
   AppBar _getItemSelectAppBar(
-      BuildContext context, WidgetRef ref, List<StockItem> selected) {
+    BuildContext context,
+    WidgetRef ref,
+    List<StockItem> selected,
+  ) {
     return AppBar(
       title: Text("${selected.length} 件選択"),
       leading: IconButton(
-          icon: const Icon(Icons.clear),
-          onPressed: () {
-            ref.read(_stockPageModeProvider.notifier).state =
-                _StockPageMode.normal;
-            ref.read(selectedStockItemsControllerProvider.notifier).removeAll();
-          }),
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          ref.read(_stockPageModeProvider.notifier).state =
+              _StockPageMode.normal;
+          ref.read(selectedStockItemsControllerProvider.notifier).removeAll();
+        },
+      ),
       actions: [
         IconButton(
           icon: const Icon(Icons.delete),
@@ -169,7 +173,10 @@ class StocksPage extends HookConsumerWidget {
   }
 
   Future<void> handleAction(
-      BuildContext context, WidgetRef ref, _StockPageActions value) async {
+    BuildContext context,
+    WidgetRef ref,
+    _StockPageActions value,
+  ) async {
     final itemList = ref.read(stockItemListControllerProvider);
     final settings = ref.read(generalSettingsControllerProvider);
 
@@ -267,13 +274,15 @@ class _Body extends HookConsumerWidget {
 
     return Column(
       children: [
-        WithUnderLine(RepaintBoundary(
-          key: _summaryKey,
-          child: Container(
-            color: Theme.of(context).backgroundColor,
-            child: const TotalProfit(),
+        WithUnderLine(
+          RepaintBoundary(
+            key: _summaryKey,
+            child: Container(
+              color: Theme.of(context).backgroundColor,
+              child: const TotalProfit(),
+            ),
           ),
-        )),
+        ),
         Expanded(
           child: ListView.separated(
             separatorBuilder: (context, index) => const ThemeDivider(),

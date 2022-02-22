@@ -20,8 +20,9 @@ class SearchButtons extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentItemProvider);
-    final buttons = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.customButtons));
+    final buttons = ref.watch(
+      generalSettingsControllerProvider.select((value) => value.customButtons),
+    );
     return Wrap(
       alignment: WrapAlignment.spaceEvenly,
       spacing: 8,

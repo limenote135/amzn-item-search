@@ -51,7 +51,8 @@ class _Body extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final index = ref.watch(_currentAlertConditionSetIndexProvider);
     final alerts = ref.watch(
-        generalSettingsControllerProvider.select((value) => value.alerts));
+      generalSettingsControllerProvider.select((value) => value.alerts),
+    );
     final alert = alerts[index];
 
     final smallSize = smallFontSize(context);
@@ -178,8 +179,12 @@ class _Body extends HookConsumerWidget {
             final newCond = alert.conditions
                 .where(((e) => e.type != AlertType.profit))
                 .toList()
-              ..add(AlertCondition(
-                  type: AlertType.profit, value: int.parse(val.single)));
+              ..add(
+                AlertCondition(
+                  type: AlertType.profit,
+                  value: int.parse(val.single),
+                ),
+              );
             modifyCondition(newCond);
           },
         ),
@@ -197,7 +202,9 @@ class _Body extends HookConsumerWidget {
               actions: [
                 for (final val in AlertOfferCondition.values)
                   AlertDialogAction(
-                      key: val.index, label: val.toDisplayString())
+                    key: val.index,
+                    label: val.toDisplayString(),
+                  )
               ],
             );
             if (val == null) {
@@ -256,8 +263,12 @@ class _Body extends HookConsumerWidget {
             final newCond = alert.conditions
                 .where(((e) => e.type != AlertType.rank))
                 .toList()
-              ..add(AlertCondition(
-                  type: AlertType.rank, value: int.parse(val.single)));
+              ..add(
+                AlertCondition(
+                  type: AlertType.rank,
+                  value: int.parse(val.single),
+                ),
+              );
             modifyCondition(newCond);
           },
         ),
@@ -266,12 +277,13 @@ class _Body extends HookConsumerWidget {
           title: const Text("カテゴリ"),
           onTap: () async {
             final val = await showConfirmationDialog<int?>(
-                context: context,
-                title: "カテゴリ",
-                actions: [
-                  for (final ent in mwsCategoryIdMap.entries)
-                    AlertDialogAction(key: ent.value, label: ent.key),
-                ]);
+              context: context,
+              title: "カテゴリ",
+              actions: [
+                for (final ent in mwsCategoryIdMap.entries)
+                  AlertDialogAction(key: ent.value, label: ent.key),
+              ],
+            );
             if (val == null) {
               return;
             }
@@ -378,8 +390,10 @@ class _Body extends HookConsumerWidget {
   }
 }
 
-List<Widget> _dividedTiles(
-    {required List<Widget> children, required Widget divider}) {
+List<Widget> _dividedTiles({
+  required List<Widget> children,
+  required Widget divider,
+}) {
   final itemCount = max(0, children.length * 2 - 1);
   Widget childDelegate(int index) {
     final itemIndex = index ~/ 2;

@@ -55,12 +55,15 @@ class _Body extends HookConsumerWidget {
                 itemBuilder: (context, i) {
                   return ListTile(
                     title: Text(
-                        packages[i].product.title.replaceAll("(amzn-item-search)", "")),
+                      packages[i].product.title.replaceAll("(amzn-item-search)", ""),
+                    ),
                     subtitle: Text(packages[i].product.description),
                     trailing: Text(packages[i].product.priceString),
                     onTap: () {
                       Navigator.push(
-                          context, DonationMessagePage.route(packages[i]));
+                        context,
+                        DonationMessagePage.route(packages[i]),
+                      );
                     },
                   );
                 },

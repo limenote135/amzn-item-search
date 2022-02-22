@@ -22,8 +22,9 @@ class LoginPage extends StatelessWidget {
 
   static Route<void> route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
-        builder: (context) => const LoginPage());
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const LoginPage(),
+    );
   }
 
   @override
@@ -105,10 +106,14 @@ class _Body extends HookConsumerWidget {
               msg = "メールアドレスかパスワードが違います";
               break;
             default:
-              await recordError(e, stack, information: [
-                "SignInWithEmailAndPassword error",
-                "Code: ${e.code}",
-              ]);
+              await recordError(
+                e,
+                stack,
+                information: [
+                  "SignInWithEmailAndPassword error",
+                  "Code: ${e.code}",
+                ],
+              );
               msg = e.code;
               break;
           }

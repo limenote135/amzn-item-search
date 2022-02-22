@@ -18,14 +18,17 @@ class ProfitTile extends HookConsumerWidget {
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
     final useFba = getBool(form, useFbaField);
-    final isMajorCustomer = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.isMajorCustomer));
+    final isMajorCustomer = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.isMajorCustomer),
+    );
     final profit = calcProfit(
-        sellPrice: sellPrice,
-        purchasePrice: purchasePrice,
-        fee: item.prices?.feeInfo,
-        isMajorCustomer: isMajorCustomer,
-        useFba: useFba);
+      sellPrice: sellPrice,
+      purchasePrice: purchasePrice,
+      fee: item.prices?.feeInfo,
+      isMajorCustomer: isMajorCustomer,
+      useFba: useFba,
+    );
     return ListTile(
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

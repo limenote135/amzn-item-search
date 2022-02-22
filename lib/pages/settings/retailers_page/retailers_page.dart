@@ -32,7 +32,8 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final retailers = ref.watch(
-        generalSettingsControllerProvider.select((value) => value.retailers));
+      generalSettingsControllerProvider.select((value) => value.retailers),
+    );
     return ListView(
       children: [
         ListTile(
@@ -49,10 +50,11 @@ class _Body extends HookConsumerWidget {
               icon: const Icon(Icons.delete),
               onPressed: () async {
                 final ret = await showOkCancelAlertDialog(
-                    context: context,
-                    title: "削除の確認",
-                    message: "仕入れ先を削除してもよろしいですか？",
-                    isDestructiveAction: true);
+                  context: context,
+                  title: "削除の確認",
+                  message: "仕入れ先を削除してもよろしいですか？",
+                  isDestructiveAction: true,
+                );
                 if (ret == OkCancelResult.ok) {
                   ref
                       .read(generalSettingsControllerProvider.notifier)
