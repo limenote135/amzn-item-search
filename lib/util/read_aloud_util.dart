@@ -1,7 +1,9 @@
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
+import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/util/price_util.dart';
 
 const rankVariable = "{rank}";
 const titleVariable = "{title}";
@@ -12,26 +14,35 @@ String createSpeakText({
   required String template,
   required AsinData item,
   required bool priorFba,
+  required bool useFba,
   required UsedSubCondition usedSubCondition,
+  required bool isMajorCustomer,
 }) {
   var newProfitText = "";
-  if (item.prices?.newPrices.isEmpty ?? true) {
+  final prices = item.prices;
+  if (prices == null || prices.newPrices.isEmpty) {
     newProfitText = "データなし";
   } else {
     newProfitText = _filterPrice(
-      prices: item.prices?.newPrices ?? [],
+      prices: prices.newPrices,
+      fee: prices.feeInfo,
       priorFba: priorFba,
+      useFba: useFba,
+      isMajorCustomer: isMajorCustomer,
     );
   }
 
   var usedProfitText = "";
-  if (item.prices?.usedPrices.isEmpty ?? true) {
+  if (prices == null || prices.usedPrices.isEmpty) {
     usedProfitText = "データなし";
   } else {
     usedProfitText = _filterPrice(
-      prices: item.prices?.usedPrices ?? [],
+      prices: prices.usedPrices,
+      fee: prices.feeInfo,
       priorFba: priorFba,
+      useFba: useFba,
       usedSubCond: usedSubCondition,
+      isMajorCustomer: isMajorCustomer,
     );
   }
 
@@ -44,8 +55,11 @@ String createSpeakText({
 
 String _filterPrice({
   required List<PriceDetail> prices,
+  required FeeInfo? fee,
   required bool priorFba,
+  required bool useFba,
   UsedSubCondition? usedSubCond,
+  required bool isMajorCustomer,
 }) {
   if (usedSubCond == null || usedSubCond == UsedSubCondition.all) {
     // 新品か中古全対象の場合
@@ -54,9 +68,19 @@ String _filterPrice({
         (element) => element.channel == FulfillmentChannel.amazon,
         orElse: () => prices.first,
       );
-      return "${fbaItem.price}円";
+      return _calcProfitSpeakText(
+        listPrice: fbaItem.price,
+        fee: fee,
+        useFba: useFba,
+        isMajorCustomer: isMajorCustomer,
+      );
     } else {
-      return "${prices.first.price}円";
+      return _calcProfitSpeakText(
+        listPrice: prices.first.price,
+        fee: fee,
+        useFba: useFba,
+        isMajorCustomer: isMajorCustomer,
+      );
     }
   } else {
     // 中古でコンディション指定の場合
@@ -69,8 +93,37 @@ String _filterPrice({
       final fbaItem = subItems.firstWhere(
           (element) => element.channel == FulfillmentChannel.amazon,
           orElse: () => subItems.first);
-      return "${fbaItem.price}円";
+      return _calcProfitSpeakText(
+        listPrice: fbaItem.price,
+        fee: fee,
+        useFba: useFba,
+        isMajorCustomer: isMajorCustomer,
+      );
     }
-    return "${subItems.first.price}円";
+    return _calcProfitSpeakText(
+      listPrice: prices.first.price,
+      fee: fee,
+      useFba: useFba,
+      isMajorCustomer: isMajorCustomer,
+    );
   }
+}
+
+String _calcProfitSpeakText({
+  required int listPrice,
+  required FeeInfo? fee,
+  required bool useFba,
+  required bool isMajorCustomer,
+}) {
+  final profit = calcProfit(
+    sellPrice: listPrice,
+    purchasePrice: 0,
+    fee: fee,
+    useFba: useFba,
+    isMajorCustomer: isMajorCustomer,
+  );
+  if (profit == 0) {
+    return "$listPrice円";
+  }
+  return "$profit円";
 }
