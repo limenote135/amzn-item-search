@@ -40,6 +40,7 @@ final searchItemFutureProvider = FutureProvider.autoDispose
   ref.maintainState = true;
 
   final settings = ref.read(generalSettingsControllerProvider);
+  final searchSetting = ref.read(searchSettingsControllerProvider);
   final tts = ref.read(ttsProvider);
 
   if (settings.enableReadAloud) {
@@ -52,7 +53,9 @@ final searchItemFutureProvider = FutureProvider.autoDispose
         template: template.pattern,
         item: resp.items.first,
         priorFba: search.priorFba,
+        useFba: searchSetting.useFba,
         usedSubCondition: search.usedSubCondition,
+        isMajorCustomer: settings.isMajorCustomer,
       ));
     }
   }
