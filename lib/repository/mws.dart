@@ -49,14 +49,16 @@ final searchItemFutureProvider = FutureProvider.autoDispose
     } else {
       final template = settings.readAloudPatterns[settings.patternIndex];
       final search = ref.read(searchSettingsControllerProvider);
-      tts.speak(createSpeakText(
-        template: template.pattern,
-        item: resp.items.first,
-        priorFba: search.priorFba,
-        useFba: searchSetting.useFba,
-        usedSubCondition: search.usedSubCondition,
-        isMajorCustomer: settings.isMajorCustomer,
-      ));
+      tts.speak(
+        createSpeakText(
+          template: template.pattern,
+          item: resp.items.first,
+          priorFba: search.priorFba,
+          useFba: searchSetting.useFba,
+          usedSubCondition: search.usedSubCondition,
+          isMajorCustomer: settings.isMajorCustomer,
+        ),
+      );
     }
   }
 
@@ -77,11 +79,13 @@ final searchItemFutureProvider = FutureProvider.autoDispose
     if (settings.enableAlert && settings.enableAlertVibration) {
       final item = resp.items.first;
       final searchSettings = ref.read(searchSettingsControllerProvider);
-      if (settings.alerts.any((element) => element.match(
-            item,
-            searchSettings,
-            isMajorCustomer: settings.isMajorCustomer,
-          ))) {
+      if (settings.alerts.any(
+        (element) => element.match(
+          item,
+          searchSettings,
+          isMajorCustomer: settings.isMajorCustomer,
+        ),
+      )) {
         await Vibration.vibrate(duration: 400, amplitude: 128);
       }
     }
@@ -105,8 +109,10 @@ class MwsRepository {
   final Reader _read;
   final ProviderContainer _container;
 
-  Future<GetProductByIdResponse> getProductById(String code,
-      {String idType = "JAN"}) async {
+  Future<GetProductByIdResponse> getProductById(
+    String code, {
+    String idType = "JAN",
+  }) async {
     if (int.tryParse(code) == null) {
       // 数値以外が含まれる場合は JAN コードではない
       return Future.value(GetProductByIdResponse(jan: code, items: []));
@@ -118,8 +124,10 @@ class MwsRepository {
     };
 
     final serverUrl = await _read(serverUrlProvider.future);
-    final resp = await _doRequest("$serverUrl/v1/mws/product",
-        data: json.encode(params));
+    final resp = await _doRequest(
+      "$serverUrl/v1/mws/product",
+      data: json.encode(params),
+    );
     return GetProductByIdResponse.fromJson(resp);
   }
 
@@ -142,8 +150,10 @@ class MwsRepository {
     };
 
     final serverUrl = await _read(serverUrlProvider.future);
-    final resp = await _doRequest("$serverUrl/v1beta1/spapi/query",
-        data: json.encode(params));
+    final resp = await _doRequest(
+      "$serverUrl/v1beta1/spapi/query",
+      data: json.encode(params),
+    );
     return QueryItemsResponse.fromJson(resp);
   }
 

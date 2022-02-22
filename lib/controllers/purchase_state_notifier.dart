@@ -4,7 +4,8 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 
 final purchaseStateNotifierProvider =
     StateNotifierProvider<PurchaseStateNotifier, AsyncValue<PurchaseState>>(
-        (_) => PurchaseStateNotifier());
+  (_) => PurchaseStateNotifier(),
+);
 
 class PurchaseStateNotifier extends StateNotifier<AsyncValue<PurchaseState>> {
   PurchaseStateNotifier() : super(const AsyncValue.loading()) {

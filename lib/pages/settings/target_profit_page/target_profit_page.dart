@@ -45,7 +45,9 @@ class _Body extends HookConsumerWidget {
                 .update(enableTargetProfit: value);
             if (value) {
               ref.read(analyticsControllerProvider).setUserProp(
-                  targetProfitPropName, "${settings.targetProfitValue}");
+                    targetProfitPropName,
+                    "${settings.targetProfitValue}",
+                  );
             } else {
               ref
                   .read(analyticsControllerProvider)
@@ -81,7 +83,9 @@ class _Body extends HookConsumerWidget {
                   .update(targetProfitValue: int.parse(ret.single));
               if (settings.enableTargetProfit) {
                 await ref.read(analyticsControllerProvider).setUserProp(
-                    targetProfitPropName, "$ret(min:${settings.minProfit})");
+                      targetProfitPropName,
+                      "$ret(min:${settings.minProfit})",
+                    );
               }
             }
           },
@@ -114,8 +118,9 @@ class _Body extends HookConsumerWidget {
                   .update(minProfit: int.parse(ret.single));
               if (settings.enableTargetProfit) {
                 await ref.read(analyticsControllerProvider).setUserProp(
-                    targetProfitPropName,
-                    "${settings.targetProfitValue}(min:$ret)");
+                      targetProfitPropName,
+                      "${settings.targetProfitValue}(min:$ret)",
+                    );
               }
             }
           },

@@ -49,8 +49,9 @@ class _Body extends HookConsumerWidget {
                 .update(enableReadAloud: value);
             if (value) {
               ref.read(analyticsControllerProvider).setUserProp(
-                  readAloudPropName,
-                  settings.readAloudPatterns[settings.patternIndex].pattern);
+                    readAloudPropName,
+                    settings.readAloudPatterns[settings.patternIndex].pattern,
+                  );
             } else {
               ref
                   .read(analyticsControllerProvider)
@@ -71,7 +72,8 @@ class _Body extends HookConsumerWidget {
                 Navigator.push(
                   context,
                   PatternSettingsPage.route(
-                      settings.readAloudPatterns[i].pattern),
+                    settings.readAloudPatterns[i].pattern,
+                  ),
                 ).then((value) {
                   if (value == null) {
                     return;
@@ -93,8 +95,9 @@ class _Body extends HookConsumerWidget {
 
                   if (settings.enableReadAloud && i == settings.patternIndex) {
                     ref.read(analyticsControllerProvider).setUserProp(
-                        readAloudPropName,
-                        settings.readAloudPatterns[i].pattern);
+                          readAloudPropName,
+                          settings.readAloudPatterns[i].pattern,
+                        );
                   }
                 });
               },
@@ -106,7 +109,9 @@ class _Body extends HookConsumerWidget {
 
               if (settings.enableReadAloud) {
                 ref.read(analyticsControllerProvider).setUserProp(
-                    readAloudPropName, settings.readAloudPatterns[i].pattern);
+                      readAloudPropName,
+                      settings.readAloudPatterns[i].pattern,
+                    );
               }
             },
           ),

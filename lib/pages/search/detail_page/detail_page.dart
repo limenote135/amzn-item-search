@@ -108,9 +108,11 @@ class _Body extends HookConsumerWidget {
             onLongPress: () {
               Clipboard.setData(ClipboardData(text: item.jan)).then((_) {
                 ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("JAN コードをコピーしました"),
-                ));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("JAN コードをコピーしました"),
+                  ),
+                );
               });
             },
             child: TextListTile(
@@ -122,9 +124,11 @@ class _Body extends HookConsumerWidget {
             onLongPress: () {
               Clipboard.setData(ClipboardData(text: item.asin)).then((_) {
                 ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("ASIN をコピーしました"),
-                ));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("ASIN をコピーしました"),
+                  ),
+                );
               });
             },
             child: TextListTile(
@@ -165,7 +169,8 @@ class _Restricted extends ConsumerWidget {
         title: Column(
           children: [
             Text("出品不可商品です$target", style: strongTextStyle),
-            Text.rich(TextSpan(
+            Text.rich(
+              TextSpan(
                 text: "出品許可申請はこちら",
                 style: const TextStyle(
                   color: Colors.blue,
@@ -177,7 +182,9 @@ class _Restricted extends ConsumerWidget {
                       url:
                           "https://sellercentral.amazon.co.jp/hz/approvalrequest/restrictions/approve?asin=${item.asin}",
                     );
-                  })),
+                  },
+              ),
+            ),
           ],
         ),
       ),

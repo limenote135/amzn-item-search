@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void updateAlertConditionAnalytics(
-    BuildContext context, WidgetRef ref, List<AlertConditionSet> alerts) {
+  BuildContext context,
+  WidgetRef ref,
+  List<AlertConditionSet> alerts,
+) {
   final prop = _encodeAlertConditionToUserProps(alerts);
   ref
       .read(analyticsControllerProvider)

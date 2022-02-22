@@ -58,9 +58,10 @@ class _Body extends HookConsumerWidget {
           // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
           await EasyLoading.dismiss();
           await showOkAlertDialog(
-              context: context,
-              title: "パスワードのリセット",
-              message: "パスワードリセットメールを送信しました");
+            context: context,
+            title: "パスワードのリセット",
+            message: "パスワードリセットメールを送信しました",
+          );
           Navigator.pop(context);
         } on FirebaseAuthException catch (e) {
           var msg = "不明なエラー";

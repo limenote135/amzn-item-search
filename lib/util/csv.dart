@@ -10,7 +10,10 @@ import 'package:euc/jis.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<File> createStockItemCsv(
-    String filename, List<StockItem> items, List<CsvColumn> order) async {
+  String filename,
+  List<StockItem> items,
+  List<CsvColumn> order,
+) async {
   final tempDir = await getTemporaryDirectory();
   final csvDirPath = tempDir.absolute.path;
   final file = File("$csvDirPath/$filename.csv");

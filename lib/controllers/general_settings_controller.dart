@@ -7,7 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final generalSettingsControllerProvider =
     StateNotifierProvider<GeneralSettingsController, GeneralSettings>(
-        (ref) => GeneralSettingsController(ref.read));
+  (ref) => GeneralSettingsController(ref.read),
+);
 
 class GeneralSettingsController extends StateNotifier<GeneralSettings> {
   GeneralSettingsController(this._read) : super(const GeneralSettings()) {

@@ -94,8 +94,10 @@ class _OfferItem extends HookConsumerWidget {
       case ItemCondition.usedItem:
         return Row(
           children: [
-            Text("${detail.subCondition.toDisplayShortString()}$isFbaStr",
-                style: smallFont),
+            Text(
+              "${detail.subCondition.toDisplayShortString()}$isFbaStr",
+              style: smallFont,
+            ),
             const Spacer(),
             Text("$priceStr 円(送 $shippingStr 円)", style: smallFont),
           ],

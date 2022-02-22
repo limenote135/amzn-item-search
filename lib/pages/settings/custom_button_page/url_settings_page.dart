@@ -128,12 +128,14 @@ class __UrlEditFormState extends State<_UrlEditForm> {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop(CustomButtonDetail(
-                  id: widget.button.id,
-                  enable: widget.button.enable,
-                  title: _titleEditingController.text,
-                  pattern: _patternEditingController.text,
-                ));
+                Navigator.of(context).pop(
+                  CustomButtonDetail(
+                    id: widget.button.id,
+                    enable: widget.button.enable,
+                    title: _titleEditingController.text,
+                    pattern: _patternEditingController.text,
+                  ),
+                );
               },
               child: const Text("保存"),
             ),

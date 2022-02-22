@@ -55,16 +55,23 @@ Future<void> main() async {
     ]);
     // ignore: avoid_catches_without_on_clauses
   } catch (e, stacktrace) {
-    await recordError(e, stacktrace,
-        fatal: true, information: const ["Startup failed"]);
+    await recordError(
+      e,
+      stacktrace,
+      fatal: true,
+      information: const ["Startup failed"],
+    );
   }
 
   // TODO:
   Intl.defaultLocale = 'ja_JP';
 
-  runZonedGuarded(() {
-    runApp(const ProviderScope(child: MyApp()));
-  }, recordError);
+  runZonedGuarded(
+    () {
+      runApp(const ProviderScope(child: MyApp()));
+    },
+    recordError,
+  );
 }
 
 Future<void> initStartupOption() async {
@@ -89,8 +96,9 @@ Future<void> initFirebase() async {
 
   await FirebaseRemoteConfig.instance.setConfigSettings(
     RemoteConfigSettings(
-        fetchTimeout: const Duration(seconds: 15),
-        minimumFetchInterval: const Duration(minutes: 15)),
+      fetchTimeout: const Duration(seconds: 15),
+      minimumFetchInterval: const Duration(minutes: 15),
+    ),
   );
 
   // Pass all uncaught errors to Crashlytics.

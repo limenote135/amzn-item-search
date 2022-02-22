@@ -53,11 +53,15 @@ class HttpClient {
         throw Exception("通信エラー");
       }
       if (e.response == null || e.response!.statusCode == null) {
-        await recordError(e, stack, information: [
-          "response or status code is null",
-          "URL: $url",
-          "resp: ${e.response.toString()}",
-        ]);
+        await recordError(
+          e,
+          stack,
+          information: [
+            "response or status code is null",
+            "URL: $url",
+            "resp: ${e.response.toString()}",
+          ],
+        );
         throw Exception("通信環境の良いところで再度お試しください");
       }
       final code = e.response!.statusCode!;
@@ -65,24 +69,36 @@ class HttpClient {
 
       if (code >= 500) {
         // サーバーサイドエラー
-        await recordError(e, stack, information: [
-          "ServerSideError: $code",
-          "URL: $url",
-          "resp: ${e.response.toString()}",
-        ]);
+        await recordError(
+          e,
+          stack,
+          information: [
+            "ServerSideError: $code",
+            "URL: $url",
+            "resp: ${e.response.toString()}",
+          ],
+        );
         throw Exception("サーバーエラー($code)");
       }
-      await recordError(e, stack, information: [
-        "Unknown error",
-        "URL: $url",
-        "resp: ${e.response.toString()}",
-      ]);
+      await recordError(
+        e,
+        stack,
+        information: [
+          "Unknown error",
+          "URL: $url",
+          "resp: ${e.response.toString()}",
+        ],
+      );
       throw Exception("通信環境の良いところで再度お試しください");
     } on SocketException catch (e, stack) {
-      await recordError(e, stack, information: [
-        "SocketException",
-        "URL: $url",
-      ]);
+      await recordError(
+        e,
+        stack,
+        information: [
+          "SocketException",
+          "URL: $url",
+        ],
+      );
       throw Exception("通信環境の良いところで再度お試しください");
     }
   }
@@ -112,12 +128,16 @@ class HttpClient {
         throw Exception("通信エラー");
       }
       if (e.response == null || e.response!.statusCode == null) {
-        await recordError(e, stack, information: [
-          "response or status code is null",
-          "URL: $url",
-          "params: $data",
-          "resp: ${e.response.toString()}",
-        ]);
+        await recordError(
+          e,
+          stack,
+          information: [
+            "response or status code is null",
+            "URL: $url",
+            "params: $data",
+            "resp: ${e.response.toString()}",
+          ],
+        );
         throw Exception("通信環境の良いところで再度お試しください");
       }
       final code = e.response!.statusCode!;
@@ -125,27 +145,39 @@ class HttpClient {
 
       if (code >= 500) {
         // サーバーサイドエラー
-        await recordError(e, stack, information: [
-          "ServerSideError: $code",
+        await recordError(
+          e,
+          stack,
+          information: [
+            "ServerSideError: $code",
+            "URL: $url",
+            "params: $data",
+            "resp: ${e.response.toString()}",
+          ],
+        );
+        throw Exception("サーバーエラー($code)");
+      }
+      await recordError(
+        e,
+        stack,
+        information: [
+          "Unknown error",
           "URL: $url",
           "params: $data",
           "resp: ${e.response.toString()}",
-        ]);
-        throw Exception("サーバーエラー($code)");
-      }
-      await recordError(e, stack, information: [
-        "Unknown error",
-        "URL: $url",
-        "params: $data",
-        "resp: ${e.response.toString()}",
-      ]);
+        ],
+      );
       throw Exception("通信環境の良いところで再度お試しください");
     } on SocketException catch (e, stack) {
-      await recordError(e, stack, information: [
-        "SocketException",
-        "URL: $url",
-        "params: $data",
-      ]);
+      await recordError(
+        e,
+        stack,
+        information: [
+          "SocketException",
+          "URL: $url",
+          "params: $data",
+        ],
+      );
       throw Exception("通信環境の良いところで再度お試しください");
     }
   }

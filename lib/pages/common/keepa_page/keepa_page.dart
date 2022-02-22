@@ -74,11 +74,13 @@ class _Body extends HookConsumerWidget {
     final scale = media.textScaleFactor;
     final height = defaultSize * scale * 2;
 
-    final settings = ref.watch(generalSettingsControllerProvider
-        .select((value) => value.keepaSettings));
+    final settings = ref.watch(
+      generalSettingsControllerProvider.select((value) => value.keepaSettings),
+    );
 
     final displayState = useState(
-        <bool>[settings.showNew, settings.showUsed, settings.showAmazon]);
+      <bool>[settings.showNew, settings.showUsed, settings.showAmazon],
+    );
     final rangeState = useState(_createRangeState(settings.period));
 
     String createUrl() {
@@ -108,8 +110,10 @@ class _Body extends HookConsumerWidget {
       }
 
       if (isDark(context)) {
-        params.add("cBackground=000000&cFont=cdcdcd&cAmazon=ffba63&"
-            "cNew=8888dd&cUsed=ffffff");
+        params.add(
+          "cBackground=000000&cFont=cdcdcd&cAmazon=ffba63&"
+          "cNew=8888dd&cUsed=ffffff",
+        );
       }
 
       return "https://graph.keepa.com/pricehistory.png?"
@@ -137,7 +141,9 @@ class _Body extends HookConsumerWidget {
                     }
                   },
                   constraints: BoxConstraints(
-                      minWidth: (media.size.width - 40) / 3, minHeight: height),
+                    minWidth: (media.size.width - 40) / 3,
+                    minHeight: height,
+                  ),
                   children: const [
                     Text("新品"),
                     Text("中古"),
@@ -207,10 +213,11 @@ class _Body extends HookConsumerWidget {
         InkWell(
           onTap: () async {
             await showOkAlertDialog(
-                context: context,
-                message: "ランキンググラフが表示されない場合、"
-                    "ブラウザで Keepa へログインした上で、"
-                    "右上のボタンを押して再読み込みすると表示されるようになります。");
+              context: context,
+              message: "ランキンググラフが表示されない場合、"
+                  "ブラウザで Keepa へログインした上で、"
+                  "右上のボタンを押して再読み込みすると表示されるようになります。",
+            );
           },
           child: const Text(
             "ランキングが表示されない場合",

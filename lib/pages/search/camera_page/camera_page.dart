@@ -295,25 +295,27 @@ class _BodyState extends ConsumerState<_Body> {
             });
           },
           textColor: Colors.white,
-          child: Text.rich(TextSpan(
-            text: "Flash: ",
-            children: [
-              WidgetSpan(
-                child: Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: _isFlashOpen ? _borderBox : null,
-                  child: const Text("On"),
+          child: Text.rich(
+            TextSpan(
+              text: "Flash: ",
+              children: [
+                WidgetSpan(
+                  child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: _isFlashOpen ? _borderBox : null,
+                    child: const Text("On"),
+                  ),
                 ),
-              ),
-              WidgetSpan(
-                child: Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: _isFlashOpen ? null : _borderBox,
-                  child: const Text("Off"),
+                WidgetSpan(
+                  child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: _isFlashOpen ? null : _borderBox,
+                    child: const Text("Off"),
+                  ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            ),
+          ),
         ),
       ],
     );
@@ -340,25 +342,27 @@ class _BodyState extends ConsumerState<_Body> {
             });
           },
           textColor: Colors.white,
-          child: Text.rich(TextSpan(
-            text: "連続読取: ",
-            children: [
-              WidgetSpan(
-                child: Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: continuousRead ? _borderBox : null,
-                  child: const Text("On"),
+          child: Text.rich(
+            TextSpan(
+              text: "連続読取: ",
+              children: [
+                WidgetSpan(
+                  child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: continuousRead ? _borderBox : null,
+                    child: const Text("On"),
+                  ),
                 ),
-              ),
-              WidgetSpan(
-                child: Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: continuousRead ? null : _borderBox,
-                  child: const Text("Off"),
+                WidgetSpan(
+                  child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: continuousRead ? null : _borderBox,
+                    child: const Text("Off"),
+                  ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            ),
+          ),
         ),
       ],
     );
@@ -430,10 +434,11 @@ class _ErrorMessage extends StatelessWidget {
           const Text("お使いの端末ではご利用いただけません。"),
           Text(error),
           ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("戻る")),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text("戻る"),
+          ),
         ],
       ),
     );

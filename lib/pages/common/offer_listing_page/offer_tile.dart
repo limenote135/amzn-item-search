@@ -17,10 +17,12 @@ class OfferTile extends HookConsumerWidget {
     final index = ref.watch(currentIndex);
     final param = ref.watch(currentOfferListingParamProvider);
     final offerItem = ref.watch(
-      offerAtIndexProvider(OfferAtIndexParam(
-        params: param,
-        index: index,
-      )),
+      offerAtIndexProvider(
+        OfferAtIndexParam(
+          params: param,
+          index: index,
+        ),
+      ),
     );
     final bigSize = bigFontSize(context);
     return AsyncValueListTileWidget<OfferItem>(
@@ -30,41 +32,43 @@ class OfferTile extends HookConsumerWidget {
         "index: $index, param: ${param.toString()}",
       ],
       data: (value) => ListTile(
-        title: Row(children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Column(
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: bigSize,
-                    children: [
-                      TextSpan(
-                        text: numberFormatter.format(value.price),
-                        style: strongTextStyle,
-                      ),
-                      const TextSpan(text: "円"),
-                    ],
+        title: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: bigSize,
+                      children: [
+                        TextSpan(
+                          text: numberFormatter.format(value.price),
+                          style: strongTextStyle,
+                        ),
+                        const TextSpan(text: "円"),
+                      ],
+                    ),
                   ),
-                ),
-                ProviderScope(
-                  overrides: [
-                    currentSellerIdProvider.overrideWithValue(value.sellerId),
-                  ],
-                  child: const StockText(),
-                ),
-              ],
+                  ProviderScope(
+                    overrides: [
+                      currentSellerIdProvider.overrideWithValue(value.sellerId),
+                    ],
+                    child: const StockText(),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: ProviderScope(
-              overrides: [
-                currentOfferItemProvider.overrideWithValue(value),
-              ],
-              child: const OfferChips(),
+            Expanded(
+              child: ProviderScope(
+                overrides: [
+                  currentOfferItemProvider.overrideWithValue(value),
+                ],
+                child: const OfferChips(),
+              ),
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
     );
   }

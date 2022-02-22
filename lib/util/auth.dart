@@ -6,7 +6,8 @@ final firebaseAuthProvider =
     Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
 
 final authStateChangesProvider = StreamProvider<User?>(
-    (ref) => ref.watch(firebaseAuthProvider).authStateChanges());
+  (ref) => ref.watch(firebaseAuthProvider).authStateChanges(),
+);
 
 const customClaimsLwaKey = "lwa";
 
