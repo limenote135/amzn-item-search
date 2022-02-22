@@ -192,7 +192,9 @@ class __PatternEditFormState extends ConsumerState<_PatternEditForm> {
       template: base,
       item: _sampleItem,
       priorFba: false,
+      useFba: true,
       usedSubCondition: UsedSubCondition.all,
+      isMajorCustomer: true,
     );
   }
 
