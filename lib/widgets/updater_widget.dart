@@ -5,6 +5,7 @@ import 'package:amasearch/util/version_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'lifecycle_manager.dart';
 
@@ -34,8 +35,8 @@ class Updater extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen<AsyncValue<bool>>(updateProvider, (value, _) {
-      value?.whenData((value) {
+    ref.listen<AsyncValue<bool>>(updateProvider, (_, value) {
+      value.whenData((value) {
         _showUpdateDialog(value, context);
       });
     });
@@ -51,17 +52,26 @@ class Updater extends HookConsumerWidget {
     const message = "新しいバージョンが利用可能です。"
         "更新した上で再度アプリを起動してください。";
 
-    await showOkAlertDialog(
+    final result = await showOkCancelAlertDialog(
       context: context,
       barrierDismissible: false,
       title: title,
       message: message,
-      okLabel: "アプリを終了する",
+      cancelLabel: "アプリを終了",
+      okLabel: "ストアを開く",
     );
 
     if (Platform.isAndroid) {
+      if (result == OkCancelResult.ok) {
+        await launch(
+          "https://play.google.com/store/apps/details?id=com.knzc.app.amasearch",
+        );
+      }
       await SystemNavigator.pop(animated: true);
     } else {
+      if (result == OkCancelResult.ok) {
+        await launch("https://apps.apple.com/jp/app/id1608782445");
+      }
       exit(0);
     }
   }

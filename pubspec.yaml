@@ -80,6 +80,7 @@ dependencies:
   share: ^2.0.4
   sign_in_with_apple: ^3.3.0
   state_notifier: ^0.7.2+1
+  url_launcher: ^6.0.20
   uuid: ^3.0.6
   vibration: ^1.7.4-nullsafety.0
   webview_flutter: ^3.0.0
