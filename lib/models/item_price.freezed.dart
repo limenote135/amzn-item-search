@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'item_price.dart';
@@ -162,13 +163,16 @@ class _$_ItemPriceFutureProviderResponse
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ItemPriceFutureProviderResponse &&
-            (identical(other.prices, prices) || other.prices == prices) &&
-            (identical(other.sellByAmazon, sellByAmazon) ||
-                other.sellByAmazon == sellByAmazon));
+            const DeepCollectionEquality().equals(other.prices, prices) &&
+            const DeepCollectionEquality()
+                .equals(other.sellByAmazon, sellByAmazon));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, prices, sellByAmazon);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(prices),
+      const DeepCollectionEquality().hash(sellByAmazon));
 
   @JsonKey(ignore: true)
   @override
@@ -405,7 +409,7 @@ class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
             const DeepCollectionEquality().equals(other.newPrices, newPrices) &&
             const DeepCollectionEquality()
                 .equals(other.usedPrices, usedPrices) &&
-            (identical(other.feeInfo, feeInfo) || other.feeInfo == feeInfo));
+            const DeepCollectionEquality().equals(other.feeInfo, feeInfo));
   }
 
   @override
@@ -413,7 +417,7 @@ class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
       runtimeType,
       const DeepCollectionEquality().hash(newPrices),
       const DeepCollectionEquality().hash(usedPrices),
-      feeInfo);
+      const DeepCollectionEquality().hash(feeInfo));
 
   @JsonKey(ignore: true)
   @override
@@ -721,29 +725,29 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
   @JsonKey(name: "condition")
   @ItemConditionConverter()
   final ItemCondition itemCondition;
-  @JsonKey(defaultValue: ItemSubCondition.newItem)
+  @JsonKey()
   @override
   @HiveField(1)
   @ItemSubConditionConverter()
   final ItemSubCondition subCondition;
-  @JsonKey(defaultValue: FulfillmentChannel.merchant)
+  @JsonKey()
   @override
   @HiveField(2)
   @FulfillmentChannelConverter()
   final FulfillmentChannel channel;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   @HiveField(3)
   final int price;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   @HiveField(4)
   final int shipping;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   @HiveField(5)
   final int point;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   @HiveField(6, defaultValue: false)
   final bool isCart;
@@ -772,21 +776,27 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _PriceDetail &&
-            (identical(other.itemCondition, itemCondition) ||
-                other.itemCondition == itemCondition) &&
-            (identical(other.subCondition, subCondition) ||
-                other.subCondition == subCondition) &&
-            (identical(other.channel, channel) || other.channel == channel) &&
-            (identical(other.price, price) || other.price == price) &&
-            (identical(other.shipping, shipping) ||
-                other.shipping == shipping) &&
-            (identical(other.point, point) || other.point == point) &&
-            (identical(other.isCart, isCart) || other.isCart == isCart));
+            const DeepCollectionEquality()
+                .equals(other.itemCondition, itemCondition) &&
+            const DeepCollectionEquality()
+                .equals(other.subCondition, subCondition) &&
+            const DeepCollectionEquality().equals(other.channel, channel) &&
+            const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality().equals(other.shipping, shipping) &&
+            const DeepCollectionEquality().equals(other.point, point) &&
+            const DeepCollectionEquality().equals(other.isCart, isCart));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, itemCondition, subCondition,
-      channel, price, shipping, point, isCart);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(itemCondition),
+      const DeepCollectionEquality().hash(subCondition),
+      const DeepCollectionEquality().hash(channel),
+      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(shipping),
+      const DeepCollectionEquality().hash(point),
+      const DeepCollectionEquality().hash(isCart));
 
   @JsonKey(ignore: true)
   @override

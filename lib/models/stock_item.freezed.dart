@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'stock_item.dart';
@@ -359,57 +360,57 @@ class _$_StockItem implements _StockItem {
   @override
   @HiveField(0)
   final String purchaseDate;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   @HiveField(1)
   final int purchasePrice;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   @HiveField(2)
   final int sellPrice;
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override
   @HiveField(3)
   final bool useFba;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   @HiveField(4)
   final int profitPerItem;
-  @JsonKey(defaultValue: 1)
+  @JsonKey()
   @override
   @HiveField(5)
   final int amount;
-  @JsonKey(defaultValue: ItemCondition.newItem)
+  @JsonKey()
   @override
   @HiveField(6)
   final ItemCondition condition;
-  @JsonKey(defaultValue: ItemSubCondition.newItem)
+  @JsonKey()
   @override
   @HiveField(7)
   final ItemSubCondition subCondition;
-  @JsonKey(defaultValue: "")
+  @JsonKey()
   @override
   @HiveField(8)
   final String sku;
-  @JsonKey(defaultValue: "")
+  @JsonKey()
   @override
   @HiveField(9)
   final String memo;
   @override
   @HiveField(10)
   final AsinData item;
-  @JsonKey(defaultValue: "")
+  @JsonKey()
   @override
   @HiveField(11, defaultValue: "")
   final String retailer;
   @override // 主キー
   @HiveField(12, defaultValue: "")
   final String id;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
   @HiveField(13, defaultValue: -1)
   final int breakEven;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool autogenSku;
 
@@ -423,50 +424,46 @@ class _$_StockItem implements _StockItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _StockItem &&
-            (identical(other.purchaseDate, purchaseDate) ||
-                other.purchaseDate == purchaseDate) &&
-            (identical(other.purchasePrice, purchasePrice) ||
-                other.purchasePrice == purchasePrice) &&
-            (identical(other.sellPrice, sellPrice) ||
-                other.sellPrice == sellPrice) &&
-            (identical(other.useFba, useFba) || other.useFba == useFba) &&
-            (identical(other.profitPerItem, profitPerItem) ||
-                other.profitPerItem == profitPerItem) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.condition, condition) ||
-                other.condition == condition) &&
-            (identical(other.subCondition, subCondition) ||
-                other.subCondition == subCondition) &&
-            (identical(other.sku, sku) || other.sku == sku) &&
-            (identical(other.memo, memo) || other.memo == memo) &&
-            (identical(other.item, item) || other.item == item) &&
-            (identical(other.retailer, retailer) ||
-                other.retailer == retailer) &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.breakEven, breakEven) ||
-                other.breakEven == breakEven) &&
-            (identical(other.autogenSku, autogenSku) ||
-                other.autogenSku == autogenSku));
+            const DeepCollectionEquality()
+                .equals(other.purchaseDate, purchaseDate) &&
+            const DeepCollectionEquality()
+                .equals(other.purchasePrice, purchasePrice) &&
+            const DeepCollectionEquality().equals(other.sellPrice, sellPrice) &&
+            const DeepCollectionEquality().equals(other.useFba, useFba) &&
+            const DeepCollectionEquality()
+                .equals(other.profitPerItem, profitPerItem) &&
+            const DeepCollectionEquality().equals(other.amount, amount) &&
+            const DeepCollectionEquality().equals(other.condition, condition) &&
+            const DeepCollectionEquality()
+                .equals(other.subCondition, subCondition) &&
+            const DeepCollectionEquality().equals(other.sku, sku) &&
+            const DeepCollectionEquality().equals(other.memo, memo) &&
+            const DeepCollectionEquality().equals(other.item, item) &&
+            const DeepCollectionEquality().equals(other.retailer, retailer) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.breakEven, breakEven) &&
+            const DeepCollectionEquality()
+                .equals(other.autogenSku, autogenSku));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      purchaseDate,
-      purchasePrice,
-      sellPrice,
-      useFba,
-      profitPerItem,
-      amount,
-      condition,
-      subCondition,
-      sku,
-      memo,
-      item,
-      retailer,
-      id,
-      breakEven,
-      autogenSku);
+      const DeepCollectionEquality().hash(purchaseDate),
+      const DeepCollectionEquality().hash(purchasePrice),
+      const DeepCollectionEquality().hash(sellPrice),
+      const DeepCollectionEquality().hash(useFba),
+      const DeepCollectionEquality().hash(profitPerItem),
+      const DeepCollectionEquality().hash(amount),
+      const DeepCollectionEquality().hash(condition),
+      const DeepCollectionEquality().hash(subCondition),
+      const DeepCollectionEquality().hash(sku),
+      const DeepCollectionEquality().hash(memo),
+      const DeepCollectionEquality().hash(item),
+      const DeepCollectionEquality().hash(retailer),
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(breakEven),
+      const DeepCollectionEquality().hash(autogenSku));
 
   @JsonKey(ignore: true)
   @override
