@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/util/release_notes.dart';
 import 'package:amasearch/util/version_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,8 +37,11 @@ class Updater extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<AsyncValue<bool>>(updateProvider, (_, value) {
-      value.whenData((value) {
-        _showUpdateDialog(value, context);
+      value.whenData((needUpdate) {
+        _showUpdateDialog(needUpdate, context);
+        if (!needUpdate) {
+          _showReleaseNoteDialog(context);
+        }
       });
     });
     return Container();
@@ -74,5 +78,18 @@ class Updater extends HookConsumerWidget {
       }
       exit(0);
     }
+  }
+
+  Future<void> _showReleaseNoteDialog(BuildContext context) async {
+    final notes = await getReleaseNotes();
+    if (notes == null) {
+      return;
+    }
+
+    await showOkAlertDialog(
+      context: context,
+      title: "アプリが更新されました！",
+      message: notes,
+    );
   }
 }
