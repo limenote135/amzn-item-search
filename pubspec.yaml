@@ -78,6 +78,7 @@ dependencies:
   reactive_touch_spin: ^0.4.1
   riverpod: 1.0.3
   share: ^2.0.4
+  shared_preferences: ^2.0.13
   sign_in_with_apple: ^3.3.0
   state_notifier: ^0.7.2+1
   url_launcher: ^6.0.20
