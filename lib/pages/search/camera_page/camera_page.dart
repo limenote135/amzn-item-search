@@ -209,7 +209,7 @@ class _BodyState extends ConsumerState<_Body> {
     final continuousRead = settings.continuousCameraRead;
     final type = settings.type;
 
-    ref.listen(searchSettingsControllerProvider, (value, _) {
+    ref.listen(searchSettingsControllerProvider, (_, __) {
       // コードタイプを変更した際に lastRead をリセットする
       _lastRead = "";
     });
