@@ -372,7 +372,7 @@ Map<String, dynamic> _$$_AlertConditionSetToJson(
 _$_ShortcutDetail _$$_ShortcutDetailFromJson(Map<String, dynamic> json) =>
     _$_ShortcutDetail(
       type: $enumDecode(_$ShortcutTypeEnumMap, json['type']),
-      param: json['param'] as String? ?? '',
+      param: json['param'] as String? ?? "",
     );
 
 Map<String, dynamic> _$$_ShortcutDetailToJson(_$_ShortcutDetail instance) =>
