@@ -27,7 +27,7 @@ class LoginRootPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 48),
               child: ExtendedImage.asset(
-                "assets/title.png",
+                "assets/title_b2.png",
                 scale: scale,
               ),
             ),
