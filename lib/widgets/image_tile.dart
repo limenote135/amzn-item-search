@@ -56,10 +56,13 @@ class TileImage extends HookConsumerWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 1),
-            child: ItemImage(
-              url: asinData.imageUrl,
-              data: asinData.imageData,
-              onComplete: onComplete,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 100),
+              child: ItemImage(
+                url: asinData.imageUrl,
+                data: asinData.imageData,
+                onComplete: onComplete,
+              ),
             ),
           ),
           if (isPremiumPrice(asinData))
