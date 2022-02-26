@@ -56,4 +56,16 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     state = [];
     box.clear();
   }
+
+  void setListingDate(List<StockItem> items, String date) {
+    final box = _read(stockItemBoxProvider);
+    final itemMap = <String, StockItem>{};
+    for (final e in items) {
+      itemMap[e.id] = e.copyWith(listingDate: date);
+    }
+    state = [
+      for (final e in state) itemMap.containsKey(e.id) ? itemMap[e.id]! : e
+    ];
+    box.putAll(itemMap);
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/listing_item.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
@@ -38,4 +39,18 @@ class StockItem with _$StockItem {
     @HiveField(14) String? listingDate,
     @Default(false) bool autogenSku,
   }) = _StockItem;
+}
+
+extension StockItemExtention on StockItem {
+  ListingItem toListingItem() {
+    return ListingItem(
+      sku: sku,
+      asin: item.asin,
+      sellPrice: sellPrice,
+      amount: amount,
+      condition: condition,
+      subCondition: subCondition,
+      useFba: useFba,
+    );
+  }
 }
