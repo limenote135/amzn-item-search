@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'purchase_state.dart';
@@ -45,6 +46,9 @@ abstract class $PurchaseStateCopyWith<$Res> {
           PurchaseState value, $Res Function(PurchaseState) then) =
       _$PurchaseStateCopyWithImpl<$Res>;
   $Res call({PurchaserInfo purchaseInfo, Offerings offerings});
+
+  $PurchaserInfoCopyWith<$Res> get purchaseInfo;
+  $OfferingsCopyWith<$Res> get offerings;
 }
 
 /// @nodoc
@@ -72,6 +76,20 @@ class _$PurchaseStateCopyWithImpl<$Res>
               as Offerings,
     ));
   }
+
+  @override
+  $PurchaserInfoCopyWith<$Res> get purchaseInfo {
+    return $PurchaserInfoCopyWith<$Res>(_value.purchaseInfo, (value) {
+      return _then(_value.copyWith(purchaseInfo: value));
+    });
+  }
+
+  @override
+  $OfferingsCopyWith<$Res> get offerings {
+    return $OfferingsCopyWith<$Res>(_value.offerings, (value) {
+      return _then(_value.copyWith(offerings: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -82,6 +100,11 @@ abstract class _$PurchaseStateCopyWith<$Res>
       __$PurchaseStateCopyWithImpl<$Res>;
   @override
   $Res call({PurchaserInfo purchaseInfo, Offerings offerings});
+
+  @override
+  $PurchaserInfoCopyWith<$Res> get purchaseInfo;
+  @override
+  $OfferingsCopyWith<$Res> get offerings;
 }
 
 /// @nodoc
@@ -133,14 +156,16 @@ class _$_PurchaseState implements _PurchaseState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _PurchaseState &&
-            (identical(other.purchaseInfo, purchaseInfo) ||
-                other.purchaseInfo == purchaseInfo) &&
-            (identical(other.offerings, offerings) ||
-                other.offerings == offerings));
+            const DeepCollectionEquality()
+                .equals(other.purchaseInfo, purchaseInfo) &&
+            const DeepCollectionEquality().equals(other.offerings, offerings));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, purchaseInfo, offerings);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(purchaseInfo),
+      const DeepCollectionEquality().hash(offerings));
 
   @JsonKey(ignore: true)
   @override

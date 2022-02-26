@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'keepa_settings.dart';
@@ -189,23 +190,23 @@ class _$_KeepaSettings implements _KeepaSettings {
       @HiveField(4, defaultValue: "")
           this.extraParam = ""});
 
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override
   @HiveField(0, defaultValue: true)
   final bool showNew;
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override
   @HiveField(1, defaultValue: true)
   final bool showUsed;
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override
   @HiveField(2, defaultValue: true)
   final bool showAmazon;
-  @JsonKey(defaultValue: KeepaShowPeriod.month)
+  @JsonKey()
   @override
   @HiveField(3, defaultValue: KeepaShowPeriod.month)
   final KeepaShowPeriod period;
-  @JsonKey(defaultValue: "")
+  @JsonKey()
   @override
   @HiveField(4, defaultValue: "")
   final String extraParam;
@@ -220,19 +221,23 @@ class _$_KeepaSettings implements _KeepaSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _KeepaSettings &&
-            (identical(other.showNew, showNew) || other.showNew == showNew) &&
-            (identical(other.showUsed, showUsed) ||
-                other.showUsed == showUsed) &&
-            (identical(other.showAmazon, showAmazon) ||
-                other.showAmazon == showAmazon) &&
-            (identical(other.period, period) || other.period == period) &&
-            (identical(other.extraParam, extraParam) ||
-                other.extraParam == extraParam));
+            const DeepCollectionEquality().equals(other.showNew, showNew) &&
+            const DeepCollectionEquality().equals(other.showUsed, showUsed) &&
+            const DeepCollectionEquality()
+                .equals(other.showAmazon, showAmazon) &&
+            const DeepCollectionEquality().equals(other.period, period) &&
+            const DeepCollectionEquality()
+                .equals(other.extraParam, extraParam));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, showNew, showUsed, showAmazon, period, extraParam);
+      runtimeType,
+      const DeepCollectionEquality().hash(showNew),
+      const DeepCollectionEquality().hash(showUsed),
+      const DeepCollectionEquality().hash(showAmazon),
+      const DeepCollectionEquality().hash(period),
+      const DeepCollectionEquality().hash(extraParam));
 
   @JsonKey(ignore: true)
   @override

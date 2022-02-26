@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'offer_listings.dart';
@@ -223,25 +224,25 @@ class _$_OfferListingsParams implements _OfferListingsParams {
 
   @override
   final String asin;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool prime;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool newItem;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool usedLikeNew;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool usedVeryGood;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool usedGood;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool usedAcceptable;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   final int page;
 
@@ -255,23 +256,30 @@ class _$_OfferListingsParams implements _OfferListingsParams {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _OfferListingsParams &&
-            (identical(other.asin, asin) || other.asin == asin) &&
-            (identical(other.prime, prime) || other.prime == prime) &&
-            (identical(other.newItem, newItem) || other.newItem == newItem) &&
-            (identical(other.usedLikeNew, usedLikeNew) ||
-                other.usedLikeNew == usedLikeNew) &&
-            (identical(other.usedVeryGood, usedVeryGood) ||
-                other.usedVeryGood == usedVeryGood) &&
-            (identical(other.usedGood, usedGood) ||
-                other.usedGood == usedGood) &&
-            (identical(other.usedAcceptable, usedAcceptable) ||
-                other.usedAcceptable == usedAcceptable) &&
-            (identical(other.page, page) || other.page == page));
+            const DeepCollectionEquality().equals(other.asin, asin) &&
+            const DeepCollectionEquality().equals(other.prime, prime) &&
+            const DeepCollectionEquality().equals(other.newItem, newItem) &&
+            const DeepCollectionEquality()
+                .equals(other.usedLikeNew, usedLikeNew) &&
+            const DeepCollectionEquality()
+                .equals(other.usedVeryGood, usedVeryGood) &&
+            const DeepCollectionEquality().equals(other.usedGood, usedGood) &&
+            const DeepCollectionEquality()
+                .equals(other.usedAcceptable, usedAcceptable) &&
+            const DeepCollectionEquality().equals(other.page, page));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, asin, prime, newItem,
-      usedLikeNew, usedVeryGood, usedGood, usedAcceptable, page);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(asin),
+      const DeepCollectionEquality().hash(prime),
+      const DeepCollectionEquality().hash(newItem),
+      const DeepCollectionEquality().hash(usedLikeNew),
+      const DeepCollectionEquality().hash(usedVeryGood),
+      const DeepCollectionEquality().hash(usedGood),
+      const DeepCollectionEquality().hash(usedAcceptable),
+      const DeepCollectionEquality().hash(page));
 
   @JsonKey(ignore: true)
   @override
@@ -445,12 +453,15 @@ class _$_OfferAtIndexParam implements _OfferAtIndexParam {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _OfferAtIndexParam &&
-            (identical(other.params, params) || other.params == params) &&
-            (identical(other.index, index) || other.index == index));
+            const DeepCollectionEquality().equals(other.params, params) &&
+            const DeepCollectionEquality().equals(other.index, index));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, params, index);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(params),
+      const DeepCollectionEquality().hash(index));
 
   @JsonKey(ignore: true)
   @override
@@ -627,12 +638,12 @@ class _$_OfferListings implements _OfferListings {
 
   @override
   final String asin;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   final int total;
   @override
   final OfferItem? cart;
-  @JsonKey(defaultValue: const <OfferItem>[])
+  @JsonKey()
   @override
   final List<OfferItem> offers;
 
@@ -646,14 +657,18 @@ class _$_OfferListings implements _OfferListings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _OfferListings &&
-            (identical(other.asin, asin) || other.asin == asin) &&
-            (identical(other.total, total) || other.total == total) &&
-            (identical(other.cart, cart) || other.cart == cart) &&
+            const DeepCollectionEquality().equals(other.asin, asin) &&
+            const DeepCollectionEquality().equals(other.total, total) &&
+            const DeepCollectionEquality().equals(other.cart, cart) &&
             const DeepCollectionEquality().equals(other.offers, offers));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, asin, total, cart,
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(asin),
+      const DeepCollectionEquality().hash(total),
+      const DeepCollectionEquality().hash(cart),
       const DeepCollectionEquality().hash(offers));
 
   @JsonKey(ignore: true)
@@ -856,7 +871,7 @@ class _$_OfferItem implements _OfferItem {
 
   @override
   final String shopName;
-  @JsonKey(defaultValue: "")
+  @JsonKey()
   @override
   final String sellerId;
   @override
@@ -878,21 +893,23 @@ class _$_OfferItem implements _OfferItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _OfferItem &&
-            (identical(other.shopName, shopName) ||
-                other.shopName == shopName) &&
-            (identical(other.sellerId, sellerId) ||
-                other.sellerId == sellerId) &&
-            (identical(other.price, price) || other.price == price) &&
-            (identical(other.condition, condition) ||
-                other.condition == condition) &&
-            (identical(other.hasImage, hasImage) ||
-                other.hasImage == hasImage) &&
-            (identical(other.isFba, isFba) || other.isFba == isFba));
+            const DeepCollectionEquality().equals(other.shopName, shopName) &&
+            const DeepCollectionEquality().equals(other.sellerId, sellerId) &&
+            const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality().equals(other.condition, condition) &&
+            const DeepCollectionEquality().equals(other.hasImage, hasImage) &&
+            const DeepCollectionEquality().equals(other.isFba, isFba));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, shopName, sellerId, price, condition, hasImage, isFba);
+      runtimeType,
+      const DeepCollectionEquality().hash(shopName),
+      const DeepCollectionEquality().hash(sellerId),
+      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(condition),
+      const DeepCollectionEquality().hash(hasImage),
+      const DeepCollectionEquality().hash(isFba));
 
   @JsonKey(ignore: true)
   @override
