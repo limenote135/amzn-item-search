@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'search_settings.dart';
@@ -196,27 +197,27 @@ class _$_SearchSettings implements _SearchSettings {
       @HiveField(4, defaultValue: true) this.continuousCameraRead = true,
       @HiveField(5, defaultValue: false) this.continuousInput = false});
 
-  @JsonKey(defaultValue: SearchType.jan)
+  @JsonKey()
   @override
   @HiveField(0)
   final SearchType type;
-  @JsonKey(defaultValue: UsedSubCondition.all)
+  @JsonKey()
   @override
   @HiveField(1)
   final UsedSubCondition usedSubCondition;
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override
   @HiveField(2)
   final bool useFba;
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override
   @HiveField(3)
   final bool priorFba;
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override
   @HiveField(4, defaultValue: true)
   final bool continuousCameraRead;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   @HiveField(5, defaultValue: false)
   final bool continuousInput;
@@ -231,21 +232,26 @@ class _$_SearchSettings implements _SearchSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SearchSettings &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.usedSubCondition, usedSubCondition) ||
-                other.usedSubCondition == usedSubCondition) &&
-            (identical(other.useFba, useFba) || other.useFba == useFba) &&
-            (identical(other.priorFba, priorFba) ||
-                other.priorFba == priorFba) &&
-            (identical(other.continuousCameraRead, continuousCameraRead) ||
-                other.continuousCameraRead == continuousCameraRead) &&
-            (identical(other.continuousInput, continuousInput) ||
-                other.continuousInput == continuousInput));
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality()
+                .equals(other.usedSubCondition, usedSubCondition) &&
+            const DeepCollectionEquality().equals(other.useFba, useFba) &&
+            const DeepCollectionEquality().equals(other.priorFba, priorFba) &&
+            const DeepCollectionEquality()
+                .equals(other.continuousCameraRead, continuousCameraRead) &&
+            const DeepCollectionEquality()
+                .equals(other.continuousInput, continuousInput));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, type, usedSubCondition, useFba,
-      priorFba, continuousCameraRead, continuousInput);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(usedSubCondition),
+      const DeepCollectionEquality().hash(useFba),
+      const DeepCollectionEquality().hash(priorFba),
+      const DeepCollectionEquality().hash(continuousCameraRead),
+      const DeepCollectionEquality().hash(continuousInput));
 
   @JsonKey(ignore: true)
   @override
