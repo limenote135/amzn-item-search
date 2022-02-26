@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'general_settings.dart';
@@ -552,86 +553,86 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(20, defaultValue: _defaultRightShortcut)
           this.rightSlideShortcut = _defaultRightShortcut});
 
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override // ダークモード
   @HiveField(0)
   final bool isDarkMode;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override // 目標利益率設定
   @HiveField(1)
   final bool enableTargetProfit;
-  @JsonKey(defaultValue: 10)
+  @JsonKey()
   @override // 目標利益率
   @HiveField(2)
   final int targetProfitValue;
-  @JsonKey(defaultValue: _defaultSkuFormat)
+  @JsonKey()
   @override // SKU 設定
   @HiveField(3)
   final String skuFormat;
-  @JsonKey(defaultValue: const <String>[])
+  @JsonKey()
   @override // 仕入れ先設定
   @HiveField(4)
   final List<String> retailers;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override // 読み上げ設定
   @HiveField(5)
   final bool enableReadAloud;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   @HiveField(6)
   final int patternIndex;
-  @JsonKey(defaultValue: _defaultReadAloudPatterns)
+  @JsonKey()
   @override
   @HiveField(7)
   final List<ReadAloudPattern> readAloudPatterns;
-  @JsonKey(defaultValue: 1.0)
+  @JsonKey()
   @override
   @HiveField(8)
   final double readAloudVolume;
   @override
   @HiveField(9)
   final double? readAloudSpeed;
-  @JsonKey(defaultValue: defaultCustomButtons)
+  @JsonKey()
   @override // カスタムボタン設定
   @HiveField(10, defaultValue: defaultCustomButtons)
   final List<CustomButtonDetail> customButtons;
-  @JsonKey(defaultValue: _defaultCsvOrder)
+  @JsonKey()
   @override // CSV の並び順
   @HiveField(11, defaultValue: _defaultCsvOrder)
   final List<CsvColumn> csvOrder;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override // 最低利益額
   @HiveField(12, defaultValue: 0)
   final int minProfit;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override // 在庫の取得設定
   @HiveField(13, defaultValue: false)
   final bool getStocks;
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override // アラート設定
   @HiveField(14, defaultValue: true)
   final bool enableAlert;
-  @JsonKey(defaultValue: _defaultAlert)
+  @JsonKey()
   @override
   @HiveField(15, defaultValue: _defaultAlert)
   final List<AlertConditionSet> alerts;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   @HiveField(16, defaultValue: false)
   final bool enableAlertVibration;
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override
   @HiveField(17, defaultValue: true)
   final bool isMajorCustomer;
-  @JsonKey(defaultValue: _defaultKeepaSettings)
+  @JsonKey()
   @override
   @HiveField(18, defaultValue: _defaultKeepaSettings)
   final KeepaSettings keepaSettings;
-  @JsonKey(defaultValue: _defaultLeftShortcut)
+  @JsonKey()
   @override
   @HiveField(19, defaultValue: _defaultLeftShortcut)
   final List<ShortcutDetail> leftSlideShortcut;
-  @JsonKey(defaultValue: _defaultRightShortcut)
+  @JsonKey()
   @override
   @HiveField(20, defaultValue: _defaultRightShortcut)
   final List<ShortcutDetail> rightSlideShortcut;
@@ -646,41 +647,38 @@ class _$_GeneralSettings implements _GeneralSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _GeneralSettings &&
-            (identical(other.isDarkMode, isDarkMode) ||
-                other.isDarkMode == isDarkMode) &&
-            (identical(other.enableTargetProfit, enableTargetProfit) ||
-                other.enableTargetProfit == enableTargetProfit) &&
-            (identical(other.targetProfitValue, targetProfitValue) ||
-                other.targetProfitValue == targetProfitValue) &&
-            (identical(other.skuFormat, skuFormat) ||
-                other.skuFormat == skuFormat) &&
+            const DeepCollectionEquality()
+                .equals(other.isDarkMode, isDarkMode) &&
+            const DeepCollectionEquality()
+                .equals(other.enableTargetProfit, enableTargetProfit) &&
+            const DeepCollectionEquality()
+                .equals(other.targetProfitValue, targetProfitValue) &&
+            const DeepCollectionEquality().equals(other.skuFormat, skuFormat) &&
             const DeepCollectionEquality().equals(other.retailers, retailers) &&
-            (identical(other.enableReadAloud, enableReadAloud) ||
-                other.enableReadAloud == enableReadAloud) &&
-            (identical(other.patternIndex, patternIndex) ||
-                other.patternIndex == patternIndex) &&
+            const DeepCollectionEquality()
+                .equals(other.enableReadAloud, enableReadAloud) &&
+            const DeepCollectionEquality()
+                .equals(other.patternIndex, patternIndex) &&
             const DeepCollectionEquality()
                 .equals(other.readAloudPatterns, readAloudPatterns) &&
-            (identical(other.readAloudVolume, readAloudVolume) ||
-                other.readAloudVolume == readAloudVolume) &&
-            (identical(other.readAloudSpeed, readAloudSpeed) ||
-                other.readAloudSpeed == readAloudSpeed) &&
+            const DeepCollectionEquality()
+                .equals(other.readAloudVolume, readAloudVolume) &&
+            const DeepCollectionEquality()
+                .equals(other.readAloudSpeed, readAloudSpeed) &&
             const DeepCollectionEquality()
                 .equals(other.customButtons, customButtons) &&
             const DeepCollectionEquality().equals(other.csvOrder, csvOrder) &&
-            (identical(other.minProfit, minProfit) ||
-                other.minProfit == minProfit) &&
-            (identical(other.getStocks, getStocks) ||
-                other.getStocks == getStocks) &&
-            (identical(other.enableAlert, enableAlert) ||
-                other.enableAlert == enableAlert) &&
+            const DeepCollectionEquality().equals(other.minProfit, minProfit) &&
+            const DeepCollectionEquality().equals(other.getStocks, getStocks) &&
+            const DeepCollectionEquality()
+                .equals(other.enableAlert, enableAlert) &&
             const DeepCollectionEquality().equals(other.alerts, alerts) &&
-            (identical(other.enableAlertVibration, enableAlertVibration) ||
-                other.enableAlertVibration == enableAlertVibration) &&
-            (identical(other.isMajorCustomer, isMajorCustomer) ||
-                other.isMajorCustomer == isMajorCustomer) &&
-            (identical(other.keepaSettings, keepaSettings) ||
-                other.keepaSettings == keepaSettings) &&
+            const DeepCollectionEquality()
+                .equals(other.enableAlertVibration, enableAlertVibration) &&
+            const DeepCollectionEquality()
+                .equals(other.isMajorCustomer, isMajorCustomer) &&
+            const DeepCollectionEquality()
+                .equals(other.keepaSettings, keepaSettings) &&
             const DeepCollectionEquality()
                 .equals(other.leftSlideShortcut, leftSlideShortcut) &&
             const DeepCollectionEquality()
@@ -690,25 +688,25 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        isDarkMode,
-        enableTargetProfit,
-        targetProfitValue,
-        skuFormat,
+        const DeepCollectionEquality().hash(isDarkMode),
+        const DeepCollectionEquality().hash(enableTargetProfit),
+        const DeepCollectionEquality().hash(targetProfitValue),
+        const DeepCollectionEquality().hash(skuFormat),
         const DeepCollectionEquality().hash(retailers),
-        enableReadAloud,
-        patternIndex,
+        const DeepCollectionEquality().hash(enableReadAloud),
+        const DeepCollectionEquality().hash(patternIndex),
         const DeepCollectionEquality().hash(readAloudPatterns),
-        readAloudVolume,
-        readAloudSpeed,
+        const DeepCollectionEquality().hash(readAloudVolume),
+        const DeepCollectionEquality().hash(readAloudSpeed),
         const DeepCollectionEquality().hash(customButtons),
         const DeepCollectionEquality().hash(csvOrder),
-        minProfit,
-        getStocks,
-        enableAlert,
+        const DeepCollectionEquality().hash(minProfit),
+        const DeepCollectionEquality().hash(getStocks),
+        const DeepCollectionEquality().hash(enableAlert),
         const DeepCollectionEquality().hash(alerts),
-        enableAlertVibration,
-        isMajorCustomer,
-        keepaSettings,
+        const DeepCollectionEquality().hash(enableAlertVibration),
+        const DeepCollectionEquality().hash(isMajorCustomer),
+        const DeepCollectionEquality().hash(keepaSettings),
         const DeepCollectionEquality().hash(leftSlideShortcut),
         const DeepCollectionEquality().hash(rightSlideShortcut)
       ]);
@@ -960,12 +958,15 @@ class _$_ReadAloudPattern implements _ReadAloudPattern {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ReadAloudPattern &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.pattern, pattern) || other.pattern == pattern));
+            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.pattern, pattern));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, pattern);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(pattern));
 
   @JsonKey(ignore: true)
   @override
@@ -1162,14 +1163,19 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _CustomButtonDetail &&
-            (identical(other.enable, enable) || other.enable == enable) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.pattern, pattern) || other.pattern == pattern) &&
-            (identical(other.id, id) || other.id == id));
+            const DeepCollectionEquality().equals(other.enable, enable) &&
+            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.pattern, pattern) &&
+            const DeepCollectionEquality().equals(other.id, id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, enable, title, pattern, id);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(enable),
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(pattern),
+      const DeepCollectionEquality().hash(id));
 
   @JsonKey(ignore: true)
   @override
@@ -1381,15 +1387,18 @@ class _$_AlertConditionSet implements _AlertConditionSet {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _AlertConditionSet &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
                 .equals(other.conditions, conditions));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, title, const DeepCollectionEquality().hash(conditions));
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(conditions));
 
   @JsonKey(ignore: true)
   @override
@@ -1554,7 +1563,7 @@ class _$_ShortcutDetail implements _ShortcutDetail {
   @override
   @HiveField(0)
   final ShortcutType type;
-  @JsonKey(defaultValue: "")
+  @JsonKey()
   @override
   @HiveField(1)
   final String param;
@@ -1569,12 +1578,15 @@ class _$_ShortcutDetail implements _ShortcutDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ShortcutDetail &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.param, param) || other.param == param));
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other.param, param));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, type, param);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(param));
 
   @JsonKey(ignore: true)
   @override

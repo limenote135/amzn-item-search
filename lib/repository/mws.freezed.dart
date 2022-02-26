@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'mws.dart';
@@ -147,13 +148,15 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _GetProductByIdResponse &&
-            (identical(other.jan, jan) || other.jan == jan) &&
+            const DeepCollectionEquality().equals(other.jan, jan) &&
             const DeepCollectionEquality().equals(other.items, items));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, jan, const DeepCollectionEquality().hash(items));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(jan),
+      const DeepCollectionEquality().hash(items));
 
   @JsonKey(ignore: true)
   @override
@@ -335,13 +338,16 @@ class _$_GetProductPricesResponse implements _GetProductPricesResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _GetProductPricesResponse &&
-            (identical(other.prices, prices) || other.prices == prices) &&
-            (identical(other.sellByAmazon, sellByAmazon) ||
-                other.sellByAmazon == sellByAmazon));
+            const DeepCollectionEquality().equals(other.prices, prices) &&
+            const DeepCollectionEquality()
+                .equals(other.sellByAmazon, sellByAmazon));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, prices, sellByAmazon);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(prices),
+      const DeepCollectionEquality().hash(sellByAmazon));
 
   @JsonKey(ignore: true)
   @override
@@ -495,13 +501,15 @@ class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ListMatchingProductRequest &&
-            (identical(other.query, query) || other.query == query) &&
-            (identical(other.category, category) ||
-                other.category == category));
+            const DeepCollectionEquality().equals(other.query, query) &&
+            const DeepCollectionEquality().equals(other.category, category));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, query, category);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(query),
+      const DeepCollectionEquality().hash(category));
 
   @JsonKey(ignore: true)
   @override
@@ -965,11 +973,12 @@ class _$_GetAsinDataResponse implements _GetAsinDataResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _GetAsinDataResponse &&
-            (identical(other.data, data) || other.data == data));
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
   @JsonKey(ignore: true)
   @override

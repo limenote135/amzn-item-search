@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'search_item.dart';
@@ -148,7 +149,7 @@ class _$_SearchItem implements _SearchItem {
   @override
   @HiveField(1)
   final String jan;
-  @JsonKey(defaultValue: const <AsinData>[])
+  @JsonKey()
   @override
   @HiveField(2)
   final List<AsinData> asins;
@@ -163,15 +164,18 @@ class _$_SearchItem implements _SearchItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SearchItem &&
-            (identical(other.searchDate, searchDate) ||
-                other.searchDate == searchDate) &&
-            (identical(other.jan, jan) || other.jan == jan) &&
+            const DeepCollectionEquality()
+                .equals(other.searchDate, searchDate) &&
+            const DeepCollectionEquality().equals(other.jan, jan) &&
             const DeepCollectionEquality().equals(other.asins, asins));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, searchDate, jan, const DeepCollectionEquality().hash(asins));
+      runtimeType,
+      const DeepCollectionEquality().hash(searchDate),
+      const DeepCollectionEquality().hash(jan),
+      const DeepCollectionEquality().hash(asins));
 
   @JsonKey(ignore: true)
   @override
@@ -581,14 +585,14 @@ class _$_AsinData implements _AsinData {
   factory _$_AsinData.fromJson(Map<String, dynamic> json) =>
       _$$_AsinDataFromJson(json);
 
-  @JsonKey(defaultValue: "")
+  @JsonKey()
   @override
   @HiveField(0)
   final String jan;
   @override
   @HiveField(1)
   final String asin;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   @HiveField(2)
   final int listPrice;
@@ -598,11 +602,11 @@ class _$_AsinData implements _AsinData {
   @override
   @HiveField(4)
   final String title;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   @HiveField(5)
   final int rank;
-  @JsonKey(defaultValue: " - ")
+  @JsonKey()
   @override
   @HiveField(6)
   final String quantity;
@@ -635,42 +639,37 @@ class _$_AsinData implements _AsinData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _AsinData &&
-            (identical(other.jan, jan) || other.jan == jan) &&
-            (identical(other.asin, asin) || other.asin == asin) &&
-            (identical(other.listPrice, listPrice) ||
-                other.listPrice == listPrice) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.rank, rank) || other.rank == rank) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
-            (identical(other.prices, prices) || other.prices == prices) &&
-            (identical(other.imageData, imageData) ||
-                other.imageData == imageData) &&
-            (identical(other.category, category) ||
-                other.category == category) &&
-            (identical(other.sellByAmazon, sellByAmazon) ||
-                other.sellByAmazon == sellByAmazon) &&
-            (identical(other.restrictions, restrictions) ||
-                other.restrictions == restrictions));
+            const DeepCollectionEquality().equals(other.jan, jan) &&
+            const DeepCollectionEquality().equals(other.asin, asin) &&
+            const DeepCollectionEquality().equals(other.listPrice, listPrice) &&
+            const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
+            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.rank, rank) &&
+            const DeepCollectionEquality().equals(other.quantity, quantity) &&
+            const DeepCollectionEquality().equals(other.prices, prices) &&
+            const DeepCollectionEquality().equals(other.imageData, imageData) &&
+            const DeepCollectionEquality().equals(other.category, category) &&
+            const DeepCollectionEquality()
+                .equals(other.sellByAmazon, sellByAmazon) &&
+            const DeepCollectionEquality()
+                .equals(other.restrictions, restrictions));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      jan,
-      asin,
-      listPrice,
-      imageUrl,
-      title,
-      rank,
-      quantity,
-      prices,
-      imageData,
-      category,
-      sellByAmazon,
-      restrictions);
+      const DeepCollectionEquality().hash(jan),
+      const DeepCollectionEquality().hash(asin),
+      const DeepCollectionEquality().hash(listPrice),
+      const DeepCollectionEquality().hash(imageUrl),
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(rank),
+      const DeepCollectionEquality().hash(quantity),
+      const DeepCollectionEquality().hash(prices),
+      const DeepCollectionEquality().hash(imageData),
+      const DeepCollectionEquality().hash(category),
+      const DeepCollectionEquality().hash(sellByAmazon),
+      const DeepCollectionEquality().hash(restrictions));
 
   @JsonKey(ignore: true)
   @override
@@ -917,12 +916,15 @@ class _$_ListingRestrictions implements _ListingRestrictions {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ListingRestrictions &&
-            (identical(other.newItem, newItem) || other.newItem == newItem) &&
-            (identical(other.used, used) || other.used == used));
+            const DeepCollectionEquality().equals(other.newItem, newItem) &&
+            const DeepCollectionEquality().equals(other.used, used));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, newItem, used);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(newItem),
+      const DeepCollectionEquality().hash(used));
 
   @JsonKey(ignore: true)
   @override

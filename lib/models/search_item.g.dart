@@ -157,13 +157,13 @@ class ListingRestrictionsAdapter extends TypeAdapter<_$_ListingRestrictions> {
 // **************************************************************************
 
 _$_AsinData _$$_AsinDataFromJson(Map<String, dynamic> json) => _$_AsinData(
-      jan: json['jan'] as String? ?? '',
+      jan: json['jan'] as String? ?? "",
       asin: json['asin'] as String,
       listPrice: json['list_price'] as int? ?? 0,
       imageUrl: json['image_url'] as String,
       title: json['title'] as String,
       rank: json['rank'] as int? ?? 0,
-      quantity: json['quantity'] as String? ?? ' - ',
+      quantity: json['quantity'] as String? ?? " - ",
       prices: json['prices'] == null
           ? null
           : ItemPrices.fromJson(json['prices'] as Map<String, dynamic>),
