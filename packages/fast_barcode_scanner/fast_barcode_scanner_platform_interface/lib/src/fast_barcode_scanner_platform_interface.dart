@@ -1,10 +1,12 @@
 import 'package:fast_barcode_scanner_platform_interface/src/types/image_source.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+import 'method_channel_fast_barcode_scanner.dart';
 import 'types/barcode.dart';
 import 'types/barcode_type.dart';
 import 'types/preview_configuration.dart';
-import 'method_channel_fast_barcode_scanner.dart';
+
+typedef OnDetectionHandler = void Function(List<Barcode>);
 
 /// The interface that implementations of fast_barcode_scanner must implement.
 ///
@@ -39,7 +41,8 @@ abstract class FastBarcodeScannerPlatform extends PlatformInterface {
       Resolution resolution,
       Framerate framerate,
       DetectionMode detectionMode,
-      CameraPosition position) {
+      CameraPosition position,
+      {IOSApiMode? apiMode}) {
     throw UnimplementedError('init() has not been implemented');
   }
 
@@ -106,7 +109,7 @@ abstract class FastBarcodeScannerPlatform extends PlatformInterface {
   }
 
   /// Set the method to be called when a barcode is detected
-  void setOnDetectHandler(void Function(Barcode) handler) {
+  void setOnDetectHandler(OnDetectionHandler handler) {
     throw UnimplementedError('setOnDetectHandler() has not been implemented');
   }
 
