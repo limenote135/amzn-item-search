@@ -161,8 +161,11 @@ class _BodyState extends ConsumerState<_Body> {
     borderRadius: BorderRadius.circular(5),
   );
 
-  void _handleBarcode(Barcode code) {
-    final result = code.value;
+  void _handleBarcode(List<Barcode> codes) {
+    if (codes.isEmpty) {
+      return;
+    }
+    final result = codes[0].value;
 
     if (_lastRead != result) {
       Vibration.vibrate(duration: 50, amplitude: 128);
@@ -223,12 +226,14 @@ class _BodyState extends ConsumerState<_Body> {
         BarcodeType.ean8,
         BarcodeType.ean13,
         BarcodeType.code128,
+        BarcodeType.codabar,
       ],
       resolution: Resolution.hd1080,
       framerate: Framerate.fps30,
       mode: DetectionMode.continuous,
       position: CameraPosition.back,
       onScan: _handleBarcode,
+      apiMode: IOSApiMode.visionStandard,
       children: [
         // const MaterialPreviewOverlay(),
         Listener(
