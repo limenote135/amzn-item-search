@@ -1,14 +1,23 @@
 import AVFoundation
 
+typealias AVBarcodeMetadataConverter = (AVMetadataObject) -> AVMetadataMachineReadableCodeObject?
+
 class AVFoundationBarcodeScanner: NSObject, BarcodeScanner, AVCaptureMetadataOutputObjectsDelegate {
     typealias Barcode = AVMetadataMachineReadableCodeObject
 
-    init(resultHandler: @escaping ResultHandler) {
+    init(barcodeObjectLayerConverter: @escaping AVBarcodeMetadataConverter, resultHandler: @escaping ResultHandler) {
         self.resultHandler = resultHandler
+        self.barcodeMetadataConverter = barcodeObjectLayerConverter
     }
 
     // Detections are handled by this function.
     var resultHandler: ResultHandler
+
+    // metadata objects (barcodes) returned by AVFoundation are measured within the context of the VideoPreviewLayer
+    // before some of the metadata can be used (like the location of the object's corner points), it must be converted by that layer
+    // in order to decouple this class from the view, we need the plugin to provide a function in which to process these
+    // objects with the videoPreviewLayer reference
+    var barcodeMetadataConverter: AVBarcodeMetadataConverter
 
     // Acts as an "on detection notifier"
     // for the Camera.
@@ -62,28 +71,47 @@ class AVFoundationBarcodeScanner: NSObject, BarcodeScanner, AVCaptureMetadataOut
     func metadataOutput(_ output: AVCaptureMetadataOutput,
                         didOutput metadataObjects: [AVMetadataObject],
                         from connection: AVCaptureConnection) {
-		guard
-			let metadata = metadataObjects.first,
-			let readableCode = metadata as? AVMetadataMachineReadableCodeObject,
-            var type = flutterMetadataObjectTypes[readableCode.type],
-            var value = readableCode.stringValue
-        else { return }
 
-        // Fix UPC-A, see https://developer.apple.com/library/archive/technotes/tn2325/_index.html#//apple_ref/doc/uid/DTS40013824-CH1-IS_UPC_A_SUPPORTED_
-        if readableCode.type == .ean13 {
-            if value.hasPrefix("0") {
-                // UPC-A
-                guard symbologies.contains("upcA") else { return }
-                type = "upcA"
-                value.removeFirst()
-            } else {
-                // EAN-13
-                guard symbologies.contains(type) else { return }
+        var scannedCodes: [[Any?]] = []
+        for metadata in metadataObjects {
+            guard
+                let readableCode = metadata as? AVMetadataMachineReadableCodeObject,
+                var type = flutterMetadataObjectTypes[readableCode.type],
+                var value = readableCode.stringValue
+            else { continue }
+            let transformedCode = barcodeMetadataConverter(readableCode)
+
+            // Fix UPC-A, see https://developer.apple.com/library/archive/technotes/tn2325/_index.html#//apple_ref/doc/uid/DTS40013824-CH1-IS_UPC_A_SUPPORTED_
+            if readableCode.type == .ean13 {
+                if value.hasPrefix("0") {
+                    // UPC-A
+                    guard symbologies.contains("upcA") else { continue }
+                    type = "upcA"
+                    value.removeFirst()
+                } else {
+                    // EAN-13
+                    guard symbologies.contains(type) else { continue }
+                }
             }
+            scannedCodes.append([type, value, nil, transformedCode?.corners.pointList])
         }
 
         onDetection?()
 
-        resultHandler([type, value])
+        resultHandler(scannedCodes)
 	}
+}
+
+extension Array where Element == CGPoint {
+    // convert bounding Rect to point list
+    var pointList: [[Int]] {
+        get {
+            [
+                [Int(self[0].x), Int(self[0].y)],
+                [Int(self[1].x), Int(self[1].y)],
+                [Int(self[2].x), Int(self[2].y)],
+                [Int(self[3].x), Int(self[3].y)]
+            ]
+        }
+    }
 }
