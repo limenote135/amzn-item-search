@@ -85,7 +85,7 @@ class Updater extends HookConsumerWidget {
     if (notes == null) {
       return;
     }
-
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     await showOkAlertDialog(
       context: context,
       title: "アプリが更新されました！",
