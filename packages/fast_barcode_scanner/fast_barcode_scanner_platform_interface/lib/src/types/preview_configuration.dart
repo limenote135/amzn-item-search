@@ -57,14 +57,23 @@ class PreviewConfiguration {
   final int textureId;
 
   /// The resolution which is used when scanning for barcodes.
-  final String analysisResolution;
+  late final String analysisResolution;
+
+  /// The width of the image used for analysis. This may be different than the preview width
+  final int analysisWidth;
+
+  /// The height of the image used for analysis. This may be different than the preview height
+  final int analysisHeight;
 
   PreviewConfiguration(Map<dynamic, dynamic> response)
       : textureId = response["textureId"],
         targetRotation = response["targetRotation"],
         height = response["height"],
         width = response["width"],
-        analysisResolution = response["analysis"];
+        analysisWidth = response["analysisWidth"],
+        analysisHeight = response["analysisHeight"] {
+    analysisResolution = "${analysisWidth}x$analysisHeight";
+  }
 
   @override
   bool operator ==(Object other) =>
@@ -73,7 +82,9 @@ class PreviewConfiguration {
       other.height == height &&
       other.width == width &&
       other.targetRotation == targetRotation &&
-      other.analysisResolution == analysisResolution;
+      other.analysisResolution == analysisResolution &&
+      other.analysisWidth == analysisWidth &&
+      other.analysisHeight == analysisHeight;
 
   @override
   int get hashCode =>
@@ -82,5 +93,55 @@ class PreviewConfiguration {
       height.hashCode ^
       width.hashCode ^
       targetRotation.hashCode ^
-      analysisResolution.hashCode;
+      analysisResolution.hashCode ^
+      analysisWidth.hashCode ^
+      analysisHeight.hashCode;
+
+  @override
+  String toString() {
+    return 'PreviewConfiguration{width: $width, height: $height, targetRotation: $targetRotation, textureId: $textureId, analysisResolution: $analysisResolution, analysisWidth: $analysisWidth, analysisHeight: $analysisHeight}';
+  }
+}
+
+abstract class IOSApiMode {
+  static const avFoundation = AVFoundationMode();
+  static const visionStandard = VisionMode();
+
+  const IOSApiMode();
+
+  String get name;
+
+  Map<String, dynamic> get configMap => {
+        "apiMode": name,
+        ...extraConfig,
+      };
+
+  Map<String, dynamic> get extraConfig => {};
+}
+
+class AVFoundationMode extends IOSApiMode {
+  @override
+  final String name = "avFoundation";
+
+  const AVFoundationMode();
+}
+
+class VisionMode extends IOSApiMode {
+  static const standardConfidence = 0.6;
+
+  /// The minimum confidence that the Vision API should use to filter scanned
+  /// codes given as a number between 0..1
+  ///
+  /// defaults to 0.6
+  final double confidence;
+
+  @override
+  final String name = "vision";
+
+  const VisionMode({this.confidence = standardConfidence});
+
+  @override
+  Map<String, dynamic> get extraConfig => {
+        "confidence": confidence.clamp(0, 1),
+      };
 }

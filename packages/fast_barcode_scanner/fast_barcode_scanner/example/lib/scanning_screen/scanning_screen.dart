@@ -1,5 +1,5 @@
 import 'package:fast_barcode_scanner/fast_barcode_scanner.dart';
-import 'package:flutter/foundation.dart';
+import 'package:fast_barcode_scanner_example/scanning_screen/scanning_overlay_config.dart';
 import 'package:flutter/material.dart';
 
 import '../configure_screen/configure_screen.dart';
@@ -8,9 +8,14 @@ import '../utils.dart';
 import 'scans_counter.dart';
 
 class ScanningScreen extends StatefulWidget {
-  const ScanningScreen({Key? key, required this.dispose}) : super(key: key);
+  const ScanningScreen({
+    Key? key,
+    required this.dispose,
+    this.apiMode = IOSApiMode.avFoundation,
+  }) : super(key: key);
 
   final bool dispose;
+  final IOSApiMode? apiMode;
 
   @override
   _ScanningScreenState createState() => _ScanningScreenState();
@@ -20,8 +25,30 @@ class _ScanningScreenState extends State<ScanningScreen> {
   final _torchIconState = ValueNotifier(false);
   final _cameraRunning = ValueNotifier(true);
   final _scannerRunning = ValueNotifier(true);
+  bool _isShowingBottomSheet = false;
+  final greenPaint = Paint()
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 2.0
+    ..strokeCap = StrokeCap.round
+    ..color = Colors.green;
+
+  final orangePaint = Paint()
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 4.0
+    ..strokeCap = StrokeCap.round
+    ..strokeJoin = StrokeJoin.bevel
+    ..color = Colors.orange;
+
+  ScanningOverlayConfig _scanningOverlayConfig = ScanningOverlayConfig(
+    availableOverlays: ScanningOverlayType.values,
+    enabledOverlays: [
+      ScanningOverlayType.materialOverlay,
+      ScanningOverlayType.codeBoundaryOverlay,
+    ],
+  );
 
   final cam = CameraController();
+  var zoomLevel = 1.0;
 
   void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
     final offset = Offset(
@@ -44,6 +71,22 @@ class _ScanningScreenState extends State<ScanningScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              if (zoomLevel == 1.0) {
+                cam.setZoomLevel(1.5);
+                setState(() {
+                  zoomLevel = 1.5;
+                });
+              } else {
+                cam.setZoomLevel(1.0);
+                setState(() {
+                  zoomLevel = 1.0;
+                });
+              }
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.info),
             onPressed: () {
@@ -76,16 +119,55 @@ class _ScanningScreenState extends State<ScanningScreen> {
           BarcodeType.ean8,
           BarcodeType.ean13,
           BarcodeType.code128,
-          BarcodeType.qr
+          BarcodeType.qr,
+          BarcodeType.codabar,
         ],
         resolution: Resolution.hd720,
         framerate: Framerate.fps30,
-        mode: DetectionMode.pauseVideo,
+        mode: DetectionMode.continuous,
         position: CameraPosition.back,
-        onScan: (code) => history.add(code),
+        apiMode: widget.apiMode,
+        onScan: (code) {
+          history.addAll(code);
+        },
         children: [
-          const MaterialPreviewOverlay(),
-          // BlurPreviewOverlay(),
+          if (_scanningOverlayConfig.enabledOverlays
+              .contains(ScanningOverlayType.materialOverlay))
+            MaterialPreviewOverlay(
+              rectOfInterest: const WideRectOfInterest(),
+              onScan: (codes) {
+                // these are codes that only appear within the finder rectangle
+              },
+              showSensing: true,
+              onScannedBoundaryColorSelector: (codes) {
+                if (codes.isNotEmpty) {
+                  return codes.first.value.hashCode % 2 == 0
+                      ? Colors.orange
+                      : Colors.green;
+                }
+                return null;
+              },
+              showScanLine: true,
+            ),
+          if (_scanningOverlayConfig.enabledOverlays
+              .contains(ScanningOverlayType.codeBoundaryOverlay))
+            CodeBoundaryOverlay(
+              codeBorderPaintBuilder: (code) {
+                return code.value.hashCode % 2 == 0 ? orangePaint : greenPaint;
+              },
+              codeValueDisplayBuilder: (code) {
+                return BasicBarcodeValueDisplay(
+                  text: code.value,
+                  color: code.value.hashCode % 2 == 0
+                      ? Colors.orange
+                      : Colors.green,
+                  location: CodeValueDisplayLocation.centerTop,
+                );
+              },
+            ),
+          if (_scanningOverlayConfig.enabledOverlays
+              .contains(ScanningOverlayType.blurPreview))
+            const BlurPreviewOverlay(),
           LayoutBuilder(
             builder: (context, constraints) {
               return GestureDetector(
@@ -97,119 +179,137 @@ class _ScanningScreenState extends State<ScanningScreen> {
         ],
         dispose: widget.dispose,
       ),
-      bottomSheet: SafeArea(
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ScansCounter(),
-              const Divider(height: 1),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      ValueListenableBuilder<bool>(
-                          valueListenable: _cameraRunning,
-                          builder: (context, isRunning, _) {
-                            return ElevatedButton(
-                              onPressed: () {
-                                final future = isRunning
-                                    ? cam.pauseCamera()
-                                    : cam.resumeCamera();
-
-                                future
-                                    .then((_) =>
-                                        _cameraRunning.value = !isRunning)
-                                    .catchError((error, stack) {
-                                  presentErrorAlert(context, error, stack);
-                                });
-                              },
-                              child: Text(
-                                  isRunning ? 'Pause Camera' : 'Resume Camera'),
-                            );
-                          }),
-                      ValueListenableBuilder<bool>(
-                          valueListenable: _scannerRunning,
-                          builder: (context, isRunning, _) {
-                            return ElevatedButton(
-                              onPressed: () {
-                                cam.setZoomLevel(1.5);
-                                // final future = isRunning
-                                //     ? cam.pauseScanner()
-                                //     : cam.resumeScanner();
-                                //
-                                // future
-                                //     .then((_) =>
-                                //         _scannerRunning.value = !isRunning)
-                                //     .catchError((error, stackTrace) {
-                                //   presentErrorAlert(context, error, stackTrace);
-                                // });
-                              },
-                              child: Text(isRunning
-                                  ? 'Pause Scanner'
-                                  : 'Resume Scanner'),
-                            );
-                          }),
-                      ValueListenableBuilder<bool>(
-                        valueListenable: _torchIconState,
-                        builder: (context, isTorchActive, _) => ElevatedButton(
-                          onPressed: () async {
-                            final minF = cam.getMinZoomLevel();
-                            final maxF = cam.getMaxZoomLevel();
-
-                            final min = await minF;
-                            final max = await maxF;
-
-                            print("$min - $max");
-
-                            // cam
-                            //     .toggleTorch()
-                            //     .then((torchState) =>
-                            //         _torchIconState.value = torchState)
-                            //     .catchError((error, stackTrace) {
-                            //   presentErrorAlert(context, error, stackTrace);
-                            // });
-                          },
-                          child: Text('Torch: ${isTorchActive ? 'on' : 'off'}'),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          final config = cam.state.scannerConfig;
-                          if (config != null) {
-                            // swallow errors
-                            cam.pauseCamera().catchError((_, __) {});
-
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => ConfigureScreen(config),
-                              ),
-                            );
-
-                            cam.resumeCamera().catchError((error, stack) =>
-                                presentErrorAlert(context, error, stack));
-                          }
-                        },
-                        child: const Text('Update Configuration'),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            _isShowingBottomSheet = !_isShowingBottomSheet;
+          });
+        },
+        child: Icon(_isShowingBottomSheet ? Icons.close : Icons.settings),
       ),
+      bottomSheet: _isShowingBottomSheet
+          ? SafeArea(
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const ScansCounter(),
+                    const Divider(height: 1),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            ValueListenableBuilder<bool>(
+                                valueListenable: _cameraRunning,
+                                builder: (context, isRunning, _) {
+                                  return ElevatedButton(
+                                    onPressed: () {
+                                      final future = isRunning
+                                          ? cam.pauseCamera()
+                                          : cam.resumeCamera();
+
+                                      future
+                                          .then((_) =>
+                                              _cameraRunning.value = !isRunning)
+                                          .catchError((error, stack) {
+                                        presentErrorAlert(
+                                            context, error, stack);
+                                      });
+                                    },
+                                    child: Text(isRunning
+                                        ? 'Pause Camera'
+                                        : 'Resume Camera'),
+                                  );
+                                }),
+                            ValueListenableBuilder<bool>(
+                                valueListenable: _scannerRunning,
+                                builder: (context, isRunning, _) {
+                                  return ElevatedButton(
+                                    onPressed: () {
+                                      final future = isRunning
+                                          ? cam.pauseScanner()
+                                          : cam.resumeScanner();
+
+                                      future
+                                          .then((_) => _scannerRunning.value =
+                                              !isRunning)
+                                          .catchError((error, stackTrace) {
+                                        presentErrorAlert(
+                                            context, error, stackTrace);
+                                      });
+                                    },
+                                    child: Text(isRunning
+                                        ? 'Pause Scanner'
+                                        : 'Resume Scanner'),
+                                  );
+                                }),
+                            ValueListenableBuilder<bool>(
+                              valueListenable: _torchIconState,
+                              builder: (context, isTorchActive, _) =>
+                                  ElevatedButton(
+                                onPressed: () {
+                                  cam
+                                      .toggleTorch()
+                                      .then((torchState) =>
+                                          _torchIconState.value = torchState)
+                                      .catchError((error, stackTrace) {
+                                    presentErrorAlert(
+                                        context, error, stackTrace);
+                                  });
+                                },
+                                child: Text(
+                                    'Torch: ${isTorchActive ? 'on' : 'off'}'),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () async {
+                                final config = cam.state.scannerConfig;
+                                if (config != null) {
+                                  // swallow errors
+                                  cam.pauseCamera().catchError((_, __) {});
+
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => ConfigureScreen(
+                                        config,
+                                        _scanningOverlayConfig,
+                                        onOverlayConfigurationChanged:
+                                            (overlayConfig) {
+                                          setState(() {
+                                            _scanningOverlayConfig =
+                                                overlayConfig;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  );
+
+                                  cam.resumeCamera().catchError((error,
+                                          stack) =>
+                                      presentErrorAlert(context, error, stack));
+                                }
+                              },
+                              child: const Text('Update Configuration'),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : null,
     );
   }
 }
