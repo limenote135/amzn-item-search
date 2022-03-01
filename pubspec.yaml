@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.5+9999
+version: 1.1.0+9999
 
 environment:
   sdk: '>=2.15.0 <3.0.0'
@@ -25,7 +25,7 @@ dependencies:
   ai_barcode:
     path: ./packages/ai_barcode
   camera: ^0.9.4+6 # https://github.com/flutter/flutter/issues/90070 待ち
-  cloud_functions: ^3.2.7
+  cloud_functions: ^3.2.9
   collection: ^1.15.0
   cookie_jar: ^3.0.1
   crypto: ^3.0.1
@@ -39,12 +39,12 @@ dependencies:
   extended_image: ^6.0.1
   fast_barcode_scanner:
     path: ./packages/fast_barcode_scanner/fast_barcode_scanner
-  firebase_analytics: ^9.1.0
-  firebase_auth: ^3.3.7
-  firebase_core: ^1.12.0
-  firebase_crashlytics: ^2.5.1
-  firebase_performance: ^0.8.0+5
-  firebase_remote_config: ^2.0.0
+  firebase_analytics: ^9.1.2
+  firebase_auth: ^3.3.9
+  firebase_core: ^1.13.1
+  firebase_crashlytics: ^2.5.3
+  firebase_performance: ^0.8.0+7
+  firebase_remote_config: ^2.0.2
   flex_color_scheme: ^4.2.0
   flutter:
     sdk: flutter
@@ -61,7 +61,7 @@ dependencies:
   freezed_annotation: ^1.1.0
   google_ml_kit: ^0.7.3
   google_sign_in: ^5.2.4
-  hive: ^2.0.5
+  hive: ^2.0.6
   hive_flutter: ^1.1.0
   hooks_riverpod: 1.0.3
   html: ^0.15.0
@@ -71,9 +71,9 @@ dependencies:
   keyboard_actions: 3.4.4 # https://github.com/diegoveloper/flutter_keyboard_actions/commit/2960caade1d0347f1d7a0f79b32405b3c4310ca1 のリリース待ち
   package_info_plus: ^1.4.0
   path_provider: ^2.0.9
-  permission_handler: 8.3.0
+  permission_handler: ^9.2.0
   pub_semver: ^2.1.0
-  purchases_flutter: ^3.9.4
+  purchases_flutter: ^3.9.5
   reactive_forms: ^11.0.1
   reactive_touch_spin: ^0.4.1
   riverpod: 1.0.3
@@ -84,7 +84,7 @@ dependencies:
   url_launcher: ^6.0.20
   uuid: ^3.0.6
   vibration: ^1.7.4-nullsafety.0
-  webview_flutter: ^3.0.0
+  webview_flutter: ^3.0.1
 
 dev_dependencies:
   build_runner: ^2.1.7
