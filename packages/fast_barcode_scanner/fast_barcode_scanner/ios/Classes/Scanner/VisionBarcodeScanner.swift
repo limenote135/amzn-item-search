@@ -110,7 +110,6 @@ class VisionBarcodeScanner: NSObject, BarcodeScanner, AVCaptureVideoDataOutputSa
     private func handleVisionRequestUpdate(request: VNRequest?, error: Error?) {
         guard let results = request?.results as? [VNBarcodeObservation] else {
             print("Error scanning image: \(String(describing: error))")
-            resultHandler(error)
             return
         }
 
