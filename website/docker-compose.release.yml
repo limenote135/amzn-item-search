@@ -1,0 +1,25 @@
+version: "3.8"
+networks:
+  backend:
+
+x-environment: &deploy-proj-env
+  DEPLOY_PROJECT: amasearch-live
+  DEPLOY_REGION: asia-northeast1
+
+x-firebase-volume: &firebase-volume
+  - amasearch-firebase-auth:/root/.config
+  - ./:/app
+  - /app/node_modules
+
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile_release
+    environment: *deploy-proj-env
+    volumes: *firebase-volume
+    tty: true
+    command: sh -c "yarn build && yarn export && mv out/404/index.html out/404.html && firebase deploy --project $$DEPLOY_PROJECT"
+
+volumes:
+  amasearch-firebase-auth:
