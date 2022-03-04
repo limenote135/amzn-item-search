@@ -1,0 +1,18 @@
+version: "3.8"
+networks:
+  backend:
+
+services:
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app:delegated
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    tty: true
+#    command: "yarn build && yarn export"
