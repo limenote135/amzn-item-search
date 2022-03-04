@@ -111,7 +111,7 @@ const FeatureContainer = ({ reference, inView }: FeatureProp) => (
         <Grid item xs={12} md={6} display={"flex"} px={{ xs: 0, sm: 2 }} justifyContent={"center"}>
           <FeatureItem
             title={"充実した機能"}
-            content={"せどり仕入れに必要な機能を網羅した、オールインワンのシステム設計。"}
+            content={"せどり仕入れに必要な機能を網羅した、オールインワンのシステム設計"}
             icon={<Image src={"/img/feature3.png"} width={300} height={300} alt={""} />}
           />
         </Grid>
