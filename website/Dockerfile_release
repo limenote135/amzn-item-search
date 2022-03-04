@@ -1,0 +1,17 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+
+RUN apk update \
+ && apk --no-cache add openjdk11-jre-headless    \
+ && rm -rf /var/cache/apk/*
+
+RUN npm i -g firebase-tools
+
+COPY package*.json *.lock ./
+
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn/v6 yarn install
+
+COPY . .
+
+CMD sh
