@@ -26,7 +26,7 @@ class _$BookoffResponseTearOff {
       {@JsonKey(name: "INSTORECODE") required String instoreCode,
       @JsonKey(name: "GOODS_NAME1") required String title,
       @JsonKey(name: "GOODS_NAME2") String? subtitle,
-      @JsonKey(name: "JAN") required String jan}) {
+      @JsonKey(name: "JAN") String jan = ""}) {
     return _BookoffResponse(
       instoreCode: instoreCode,
       title: title,
@@ -170,7 +170,7 @@ class _$_BookoffResponse implements _BookoffResponse {
       {@JsonKey(name: "INSTORECODE") required this.instoreCode,
       @JsonKey(name: "GOODS_NAME1") required this.title,
       @JsonKey(name: "GOODS_NAME2") this.subtitle,
-      @JsonKey(name: "JAN") required this.jan});
+      @JsonKey(name: "JAN") this.jan = ""});
 
   factory _$_BookoffResponse.fromJson(Map<String, dynamic> json) =>
       _$$_BookoffResponseFromJson(json);
@@ -229,7 +229,7 @@ abstract class _BookoffResponse implements BookoffResponse {
       {@JsonKey(name: "INSTORECODE") required String instoreCode,
       @JsonKey(name: "GOODS_NAME1") required String title,
       @JsonKey(name: "GOODS_NAME2") String? subtitle,
-      @JsonKey(name: "JAN") required String jan}) = _$_BookoffResponse;
+      @JsonKey(name: "JAN") String jan}) = _$_BookoffResponse;
 
   factory _BookoffResponse.fromJson(Map<String, dynamic> json) =
       _$_BookoffResponse.fromJson;

@@ -19,7 +19,7 @@ final bookoffItemFutureProvider =
   final bookoff = ref.read(bookoffProvider);
   final resp = await bookoff.get(code);
   // ref.maintainState = true;
-  if (resp.isEmpty) {
+  if (resp.isEmpty || resp.first.jan == "") {
     return SearchItem(searchDate: now, jan: code);
   }
 
@@ -148,7 +148,7 @@ class BookoffResponse with _$BookoffResponse {
     @JsonKey(name: "INSTORECODE") required String instoreCode,
     @JsonKey(name: "GOODS_NAME1") required String title,
     @JsonKey(name: "GOODS_NAME2") String? subtitle,
-    @JsonKey(name: "JAN") required String jan,
+    @JsonKey(name: "JAN") @Default("") String jan,
   }) = _BookoffResponse;
 
   factory BookoffResponse.fromJson(Map<String, dynamic> json) =>
