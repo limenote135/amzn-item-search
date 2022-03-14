@@ -13,6 +13,7 @@ class ItemConditionTile extends StatelessWidget {
         children: [
           const Expanded(child: Text("商品状態")),
           Flexible(
+            flex: 2,
             child: ReactiveDropdownField<PurchaseItemCondition>(
               formControlName: conditionField,
               items: const [
