@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/pages/common/purchase_settings/quantity_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as base;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_touch_spin/reactive_touch_spin.dart';
 
 import 'custom_validator.dart';
 import 'fee_tile.dart';
@@ -38,7 +38,12 @@ final formValueProvider =
       Validators.min(0),
     ],
     useFbaField: item.useFba,
-    quantityField: item.amount,
+    quantityField: [
+      item.amount,
+      Validators.required,
+      Validators.number,
+      Validators.min(1),
+    ],
     // 型推論されないので明示的に型を指定する
     conditionField: FormControl<PurchaseItemCondition>(
       value: item.subCondition.toItemPurchaseCondition(),
@@ -76,22 +81,7 @@ class PurchaseSettingsForm extends StatelessWidget {
             formControlName: useFbaField,
             title: const Text("FBA を利用"),
           ),
-          ListTile(
-            title: Row(
-              children: [
-                const Expanded(child: Text("個数")),
-                Flexible(
-                  child: ReactiveTouchSpin<dynamic>(
-                    formControlName: quantityField,
-                    textStyle: const TextStyle(fontSize: 18),
-                    min: 1,
-                    max: 99,
-                    step: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          const QuantityTile(),
           const ProfitTile(),
           const FeeTile(),
           const TargetPriceTile(),

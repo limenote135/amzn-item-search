@@ -43,7 +43,7 @@ int getInt(AbstractControl<dynamic> form, String field) {
     case sellPriceField:
       return f.control(sellPriceField).value as int? ?? 0;
     case quantityField:
-      return f.control(quantityField).value as int;
+      return f.control(quantityField).value as int? ?? 0;
   }
   throw Exception("Invalid field: $field");
 }
