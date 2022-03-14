@@ -97,12 +97,24 @@ class _Body extends HookConsumerWidget {
         context: context,
         tiles: [
           if (isRestricted) const _Restricted(),
-          ListTile(
-            leading: ItemImage(
-              url: item.imageUrl,
-              data: item.imageData,
+          InkWell(
+            onLongPress: () {
+              Clipboard.setData(ClipboardData(text: item.title)).then((_) {
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("商品名をコピーしました"),
+                  ),
+                );
+              });
+            },
+            child: ListTile(
+              leading: ItemImage(
+                url: item.imageUrl,
+                data: item.imageData,
+              ),
+              title: Text(item.title),
             ),
-            title: Text(item.title),
           ),
           InkWell(
             onLongPress: () {
