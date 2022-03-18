@@ -69,6 +69,8 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    ndkVersion "23.1.7779620"
+
     defaultConfig {
         if (dartEnvironmentVariables.FLAVOR == 'prod') {
             applicationId "com.knzc.app.amasearch"
@@ -148,3 +150,5 @@ dependencies {
 
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
+
+android.buildTypes.release.ndk.debugSymbolLevel = 'FULL'
