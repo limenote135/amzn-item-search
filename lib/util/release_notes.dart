@@ -15,8 +15,8 @@ Future<String?> getReleaseNotes() async {
   final currentVersion = Version.parse(info.version);
 
   final prefs = await SharedPreferences.getInstance();
-  final lastReadVersionRaw = prefs.getString(_prefKey) ?? "1.0.0";
-  final lastReadVersion = Version.parse(lastReadVersionRaw);
+  final lastReadVersionRaw = prefs.getString(_prefKey);
+  final lastReadVersion = Version.parse(lastReadVersionRaw ?? "1.0.0");
 
   if (currentVersion == lastReadVersion) {
     return null;
@@ -43,6 +43,13 @@ Future<String?> getReleaseNotes() async {
       // 起動中のバージョンが最新バージョンではない場合
       return null;
     }
+
+    if (lastReadVersionRaw == null) {
+      // 初回起動時は更新履歴は表示せず、値の更新だけ行う
+      await prefs.setString(_prefKey, latestVersion.toString());
+      return null;
+    }
+
     if (lastReadVersion < latestVersion) {
       // SharedPreference に表示した ReleaseNotes のバージョンを保存
       await prefs.setString(_prefKey, latestVersion.toString());
