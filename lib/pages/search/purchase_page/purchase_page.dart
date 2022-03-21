@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
-import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
@@ -133,10 +132,6 @@ class _SaveButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
-    final isMajorCustomer = ref.watch(
-      generalSettingsControllerProvider
-          .select((value) => value.isMajorCustomer),
-    );
 
     return ReactiveFormConsumer(
       builder: (context, form, child) {
@@ -161,7 +156,6 @@ class _SaveButton extends HookConsumerWidget {
             ref.read(uuidProvider).v4(),
             item,
             image,
-            isMajorCustomer,
           );
           Navigator.of(context).popUntil((route) => route.settings.name == "/");
         }
@@ -185,7 +179,6 @@ class _SaveButton extends HookConsumerWidget {
     String id,
     AsinData item,
     Uint8List? image,
-    bool isMajorCustomer,
   ) {
     final purchase = getInt(form, purchasePriceField);
     final sell = getInt(form, sellPriceField);
@@ -196,12 +189,10 @@ class _SaveButton extends HookConsumerWidget {
       purchasePrice: purchase,
       fee: item.prices?.feeInfo,
       useFba: useFba,
-      isMajorCustomer: isMajorCustomer,
     );
     final breakEven = calcBreakEven(
       purchase: purchase,
       useFba: useFba,
-      isMajorCustomer: isMajorCustomer,
       feeInfo: item.prices?.feeInfo,
     );
 

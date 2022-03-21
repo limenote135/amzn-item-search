@@ -51,10 +51,6 @@ class _PriceAndProfit extends HookConsumerWidget {
     final minProfit = ref.watch(
       generalSettingsControllerProvider.select((value) => value.minProfit),
     );
-    final isMajorCustomer = ref.watch(
-      generalSettingsControllerProvider
-          .select((value) => value.isMajorCustomer),
-    );
 
     final detail = getPriceDetail(
       item: item,
@@ -108,7 +104,6 @@ class _PriceAndProfit extends HookConsumerWidget {
                   detail.price,
                   item.prices?.feeInfo,
                   useFba: settings.useFba,
-                  isMajorCustomer: isMajorCustomer,
                 ),
                 style: strongTextStyle,
               ),
@@ -130,7 +125,6 @@ class _PriceAndProfit extends HookConsumerWidget {
                       targetRate: targetPriceRate,
                       minProfit: minProfit,
                       useFba: settings.useFba,
-                      isMajorCustomer: isMajorCustomer,
                     ),
                   ),
                   style: strongTextStyle,

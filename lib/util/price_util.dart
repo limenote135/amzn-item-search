@@ -9,7 +9,6 @@ String calcProfitText(
   int price,
   FeeInfo? fee, {
   required bool useFba,
-  required bool isMajorCustomer,
 }) {
   if (fee == null) {
     return "不明";
@@ -20,7 +19,6 @@ String calcProfitText(
     purchasePrice: 0,
     fee: fee,
     useFba: useFba,
-    isMajorCustomer: isMajorCustomer,
   );
 
   if (fee.fbaFee == -1) {
@@ -37,16 +35,11 @@ int calcProfit({
   required int purchasePrice,
   required FeeInfo? fee,
   required bool useFba,
-  required bool isMajorCustomer,
 }) {
   if (fee == null) {
     return 0;
   }
-  var referralFee = (sellPrice * fee.referralFeeRate).round();
-  if (!isMajorCustomer) {
-    // 小口
-    referralFee += 100;
-  }
+  final referralFee = (sellPrice * fee.referralFeeRate).round();
   final fbaFee = useFba && fee.fbaFee != -1 ? fee.fbaFee : 0;
   final totalFee = referralFee + fee.variableClosingFee + fbaFee;
   final profit = sellPrice - purchasePrice - totalFee;
@@ -77,7 +70,6 @@ int calcTargetPrice({
   required int targetRate,
   required int minProfit,
   required bool useFba,
-  required bool isMajorCustomer,
 }) {
   if (feeInfo == null) {
     return 0;
@@ -93,24 +85,21 @@ int calcTargetPrice({
   final profit = minProfit > rawProfit ? minProfit : rawProfit;
   final price = sellPrice * (1 - feeInfo.referralFeeRate) - profit;
   final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
-  final smallCustomer = isMajorCustomer ? 0 : 100;
 
-  return (price - feeInfo.variableClosingFee - fbaFee - smallCustomer).round();
+  return (price - feeInfo.variableClosingFee - fbaFee).round();
 }
 
 // 購入価格から、利益が0円になる販売価格を計算
 int calcBreakEven({
   required int purchase,
   required bool useFba,
-  required bool isMajorCustomer,
   required FeeInfo? feeInfo,
 }) {
   if (feeInfo == null) {
     return 0;
   }
-  final smallCustomer = isMajorCustomer ? 0 : 100; // 小口手数料
   final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
-  final temp = purchase + fbaFee + feeInfo.variableClosingFee + smallCustomer;
+  final temp = purchase + fbaFee + feeInfo.variableClosingFee;
   final breakEven = temp / (1 - feeInfo.referralFeeRate);
   return breakEven.round();
 }

@@ -1,4 +1,3 @@
-import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
@@ -60,11 +59,6 @@ class _TileBody extends HookConsumerWidget {
     final detail = ref.watch(currentAsinDataProvider);
     final smallSize = smallFontSize(context);
 
-    final isMajorCustomer = ref.watch(
-      generalSettingsControllerProvider
-          .select((value) => value.isMajorCustomer),
-    );
-
     final profitRate = item.sellPrice > 0
         ? (item.profitPerItem / item.sellPrice * 100).round()
         : 0;
@@ -72,7 +66,6 @@ class _TileBody extends HookConsumerWidget {
     final breakEven = calcBreakEven(
       purchase: item.purchasePrice,
       useFba: item.useFba,
-      isMajorCustomer: isMajorCustomer,
       feeInfo: detail.prices?.feeInfo,
     );
 
