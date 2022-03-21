@@ -56,7 +56,6 @@ final searchItemFutureProvider = FutureProvider.autoDispose
           priorFba: search.priorFba,
           useFba: searchSetting.useFba,
           usedSubCondition: search.usedSubCondition,
-          isMajorCustomer: settings.isMajorCustomer,
         ),
       );
     }
@@ -83,7 +82,6 @@ final searchItemFutureProvider = FutureProvider.autoDispose
         (element) => element.match(
           item,
           searchSettings,
-          isMajorCustomer: settings.isMajorCustomer,
         ),
       )) {
         await Vibration.vibrate(duration: 400, amplitude: 128);

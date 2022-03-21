@@ -34,10 +34,6 @@ class PriceDetailTile extends HookConsumerWidget {
     final minProfit = ref.watch(
       generalSettingsControllerProvider.select((value) => value.minProfit),
     );
-    final isMajorCustomer = ref.watch(
-      generalSettingsControllerProvider
-          .select((value) => value.isMajorCustomer),
-    );
 
     final detail = getPriceDetail(
       item: item,
@@ -50,10 +46,7 @@ class PriceDetailTile extends HookConsumerWidget {
         const FeeInfo(referralFeeRate: 0, variableClosingFee: 0, fbaFee: -1);
 
     final sellFeeRate = (feeInfo.referralFeeRate * 100).round();
-    var sellFee = (detail.price * feeInfo.referralFeeRate).round();
-    if (!isMajorCustomer) {
-      sellFee += 100; // 小口手数料
-    }
+    final sellFee = (detail.price * feeInfo.referralFeeRate).round();
 
     final targetPrice = calcTargetPrice(
       sellPrice: detail.price,
@@ -61,7 +54,6 @@ class PriceDetailTile extends HookConsumerWidget {
       targetRate: targetPriceRate,
       minProfit: minProfit,
       useFba: setting.useFba,
-      isMajorCustomer: isMajorCustomer,
     );
 
     return ExpansionTile(
@@ -88,7 +80,6 @@ class PriceDetailTile extends HookConsumerWidget {
                 detail.price,
                 feeInfo,
                 useFba: setting.useFba,
-                isMajorCustomer: isMajorCustomer,
               )} 円",
             ),
           ),

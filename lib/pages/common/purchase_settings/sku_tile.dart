@@ -16,10 +16,6 @@ class SkuTile extends HookConsumerWidget {
     final skuFormat = ref.watch(
       generalSettingsControllerProvider.select((value) => value.skuFormat),
     );
-    final isMajorCustomer = ref.watch(
-      generalSettingsControllerProvider
-          .select((value) => value.isMajorCustomer),
-    );
     return Column(
       children: [
         ReactiveCheckboxListTile(
@@ -37,7 +33,6 @@ class SkuTile extends HookConsumerWidget {
                   skuFormat,
                   item,
                   form,
-                  isMajorCustomer: isMajorCustomer,
                 );
               }
               return ReactiveTextField<dynamic>(
@@ -57,9 +52,8 @@ class SkuTile extends HookConsumerWidget {
   String _generateSku(
     String format,
     AsinData item,
-    FormGroup form, {
-    required bool isMajorCustomer,
-  }) {
+    FormGroup form,
+  ) {
     final purchase = getInt(form, purchasePriceField);
     final sell = getInt(form, sellPriceField);
     final cond = getCondition(form);
@@ -72,12 +66,10 @@ class SkuTile extends HookConsumerWidget {
       purchasePrice: purchase,
       fee: item.prices?.feeInfo,
       useFba: useFba,
-      isMajorCustomer: isMajorCustomer,
     );
     final breakEven = calcBreakEven(
       purchase: purchase,
       useFba: useFba,
-      isMajorCustomer: isMajorCustomer,
       feeInfo: item.prices?.feeInfo,
     );
 
