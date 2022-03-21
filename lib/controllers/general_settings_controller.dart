@@ -22,35 +22,6 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     final settings = box.get(generalSettingsKeyName) as GeneralSettings?;
     if (settings != null) {
       state = settings;
-
-      // デフォルトを変更した際のマイグレーション
-      var buttons = state.customButtons;
-      if (buttons.length == 5) {
-        buttons = [
-          ...defaultCustomButtons.sublist(0, 7),
-          ...buttons,
-        ];
-        state = state.copyWith(customButtons: buttons);
-      }
-
-      // CustomButtonDetail に ID を追加した際のマイグレーション
-      buttons = state.customButtons;
-      if (buttons.any((element) => element.id == "")) {
-        for (var i = 0; i < buttons.length; i++) {
-          buttons[i] = buttons[i].copyWith(
-            // bt00 は Amazon 出品一覧用に確保しているので１つずらす
-            id: "bt${(i + 1).toString().padLeft(2, "0")}",
-          );
-        }
-        state = state.copyWith(customButtons: buttons);
-      }
-
-      // 損益分岐を CSV に追加するためのマイグレーション
-      final order = state.csvOrder;
-      if (order.length == 14) {
-        final newOrder = order.toList()..add(CsvColumn.breakEven);
-        state = state.copyWith(csvOrder: newOrder);
-      }
     }
     // 新規追加された項目が、ロード時にデフォルト値になっている可能性があるので一度保存する
     box.put(generalSettingsKeyName, state);
