@@ -1,7 +1,5 @@
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/hive_provider.dart';
-import 'package:amasearch/util/price_util.dart';
-import 'package:amasearch/util/uuid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final stockItemListControllerProvider =
@@ -23,36 +21,8 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
 
   void _fetchAll() {
     final box = _read(stockItemBoxProvider);
-    final uuid = _read(uuidProvider);
     final data = box.values.toList()..sort(_sortFunc);
     state = data;
-
-    // キーを購入日から UUID に変更するためのマイグレーション
-    // 損益分岐を保存するようにした際のマイグレーション
-    if (data.any((element) => element.id == "") ||
-        data.any((element) => element.breakEven == -1)) {
-      final newData = <String, StockItem>{};
-      final newState = <StockItem>[];
-      for (var i = 0; i < data.length; i++) {
-        final id = data[i].id != "" ? data[i].id : uuid.v4();
-        var storeData = data[i].id != "" ? data[i] : data[i].copyWith(id: id);
-        // 損益分岐のマイグレーション
-        if (storeData.breakEven == -1) {
-          storeData = storeData.copyWith(
-            breakEven: calcBreakEven(
-              purchase: storeData.purchasePrice,
-              useFba: storeData.useFba,
-              isMajorCustomer: true, // この時点では小口設定ができなかったので true に固定
-              feeInfo: storeData.item.prices?.feeInfo,
-            ),
-          );
-        }
-        newData[id] = storeData;
-        newState.add(storeData);
-      }
-      state = newState;
-      box.clear().then((_) => box.putAll(newData));
-    }
   }
 
   void add(StockItem item) {
