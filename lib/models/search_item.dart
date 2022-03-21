@@ -65,6 +65,7 @@ class AsinData with _$AsinData {
     @Default(defaultListingRestrictions)
     @JsonKey()
         ListingRestrictions restrictions,
+    @HiveField(12, defaultValue: "") @Default("") String model,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>
