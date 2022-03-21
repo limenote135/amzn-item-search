@@ -19,8 +19,12 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
 
   void _loadSettings() {
     final box = _read(settingsBoxProvider);
-    final settings = box.get(generalSettingsKeyName) as GeneralSettings?;
+    var settings = box.get(generalSettingsKeyName) as GeneralSettings?;
     if (settings != null) {
+      // 小口設定の削除に伴うマイグレーション since v1.2.0
+      if (settings.isMajorCustomer == false) {
+        settings = settings.copyWith(isMajorCustomer: true);
+      }
       state = settings;
     }
     // 新規追加された項目が、ロード時にデフォルト値になっている可能性があるので一度保存する
