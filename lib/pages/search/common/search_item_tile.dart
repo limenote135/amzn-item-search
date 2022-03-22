@@ -38,7 +38,6 @@ class SearchItemTile extends HookConsumerWidget {
           (element) => element.match(
             item,
             search,
-            isMajorCustomer: settings.isMajorCustomer,
           ),
         )) {
       return StrongContainer(tile);
