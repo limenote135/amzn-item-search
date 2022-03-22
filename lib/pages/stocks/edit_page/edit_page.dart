@@ -1,4 +1,3 @@
-import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/search_item.dart';
@@ -92,10 +91,6 @@ class _SaveButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentStockItemProvider);
-    final isMajorCustomer = ref.watch(
-      generalSettingsControllerProvider
-          .select((value) => value.isMajorCustomer),
-    );
 
     return ReactiveFormConsumer(
       builder: (context, form, child) {
@@ -108,7 +103,6 @@ class _SaveButton extends HookConsumerWidget {
                       ref,
                       form,
                       item,
-                      isMajorCustomer: isMajorCustomer,
                     );
             return builder(context, onSave);
           },
@@ -121,9 +115,8 @@ class _SaveButton extends HookConsumerWidget {
     BuildContext context,
     WidgetRef ref,
     FormGroup form,
-    StockItem item, {
-    required bool isMajorCustomer,
-  }) {
+    StockItem item,
+  ) {
     final purchase = getInt(form, purchasePriceField);
     final sell = getInt(form, sellPriceField);
     final useFba = getBool(form, useFbaField);
@@ -133,12 +126,10 @@ class _SaveButton extends HookConsumerWidget {
       purchasePrice: purchase,
       fee: item.item.prices?.feeInfo,
       useFba: useFba,
-      isMajorCustomer: isMajorCustomer,
     );
     final breakEven = calcBreakEven(
       purchase: purchase,
       useFba: useFba,
-      isMajorCustomer: isMajorCustomer,
       feeInfo: item.item.prices?.feeInfo,
     );
 

@@ -21,12 +21,7 @@ class SearchSettingsController extends StateNotifier<SearchSettings> {
     final box = _read(settingsBoxProvider);
     final settings = box.get(searchSettingsKeyName) as SearchSettings?;
     if (settings != null) {
-      if (settings.type == SearchType.freeWord) {
-        // フリーワード検索を別ページに分けたことによるマイグレーション
-        state = settings.copyWith(type: SearchType.jan);
-      } else {
-        state = settings;
-      }
+      state = settings;
     }
     // デフォルト値が設定されている可能性があるので、一度保存する
     box.put(searchSettingsKeyName, state);
