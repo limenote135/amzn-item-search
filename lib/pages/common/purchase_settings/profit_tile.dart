@@ -1,4 +1,3 @@
-import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/formatter.dart';
@@ -18,15 +17,11 @@ class ProfitTile extends HookConsumerWidget {
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
     final useFba = getBool(form, useFbaField);
-    final isMajorCustomer = ref.watch(
-      generalSettingsControllerProvider
-          .select((value) => value.isMajorCustomer),
-    );
+
     final profit = calcProfit(
       sellPrice: sellPrice,
       purchasePrice: purchasePrice,
       fee: item.prices?.feeInfo,
-      isMajorCustomer: isMajorCustomer,
       useFba: useFba,
     );
     return ListTile(

@@ -16,7 +16,6 @@ String createSpeakText({
   required bool priorFba,
   required bool useFba,
   required UsedSubCondition usedSubCondition,
-  required bool isMajorCustomer,
 }) {
   var newProfitText = "";
   final prices = item.prices;
@@ -28,7 +27,6 @@ String createSpeakText({
       fee: prices.feeInfo,
       priorFba: priorFba,
       useFba: useFba,
-      isMajorCustomer: isMajorCustomer,
     );
   }
 
@@ -42,7 +40,6 @@ String createSpeakText({
       priorFba: priorFba,
       useFba: useFba,
       usedSubCond: usedSubCondition,
-      isMajorCustomer: isMajorCustomer,
     );
   }
 
@@ -59,7 +56,6 @@ String _filterPrice({
   required bool priorFba,
   required bool useFba,
   UsedSubCondition? usedSubCond,
-  required bool isMajorCustomer,
 }) {
   if (usedSubCond == null || usedSubCond == UsedSubCondition.all) {
     // 新品か中古全対象の場合
@@ -72,14 +68,12 @@ String _filterPrice({
         listPrice: fbaItem.price,
         fee: fee,
         useFba: useFba,
-        isMajorCustomer: isMajorCustomer,
       );
     } else {
       return _calcProfitSpeakText(
         listPrice: prices.first.price,
         fee: fee,
         useFba: useFba,
-        isMajorCustomer: isMajorCustomer,
       );
     }
   } else {
@@ -98,14 +92,12 @@ String _filterPrice({
         listPrice: fbaItem.price,
         fee: fee,
         useFba: useFba,
-        isMajorCustomer: isMajorCustomer,
       );
     }
     return _calcProfitSpeakText(
       listPrice: prices.first.price,
       fee: fee,
       useFba: useFba,
-      isMajorCustomer: isMajorCustomer,
     );
   }
 }
@@ -114,14 +106,12 @@ String _calcProfitSpeakText({
   required int listPrice,
   required FeeInfo? fee,
   required bool useFba,
-  required bool isMajorCustomer,
 }) {
   final profit = calcProfit(
     sellPrice: listPrice,
     purchasePrice: 0,
     fee: fee,
     useFba: useFba,
-    isMajorCustomer: isMajorCustomer,
   );
   if (profit == 0) {
     return "$listPrice円";

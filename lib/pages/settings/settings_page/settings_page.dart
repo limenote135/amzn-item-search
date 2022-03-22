@@ -65,18 +65,6 @@ class _Body extends HookConsumerWidget {
                 .setUserProp(darkModePropName, value.toString());
           },
         ),
-        SwitchListTile(
-          title: const Text("大口出品者"),
-          value: settings.isMajorCustomer,
-          onChanged: (value) {
-            ref
-                .read(generalSettingsControllerProvider.notifier)
-                .update(isMajorCustomer: value);
-            ref
-                .read(analyticsControllerProvider)
-                .setUserProp(majorCustomerPropName, value.toString());
-          },
-        ),
         ListTile(
           title: const Text("Amazon連携"),
           subtitle: const AmazonStatus(),
