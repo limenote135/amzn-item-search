@@ -3,6 +3,9 @@ import 'package:amasearch/models/search_item.dart';
 
 import 'formatter.dart';
 
+// 消費税率
+const TaxRate = 1.1;
+
 // 指定した価格から手数料を引いた粗利益を計算し、文字列として返します。
 // FBA 手数料が不明な場合、"-α" として表示します。
 String calcProfitText(
@@ -39,9 +42,10 @@ int calcProfit({
   if (fee == null) {
     return 0;
   }
-  final referralFee = (sellPrice * fee.referralFeeRate).round();
+  final referralFee = (sellPrice * fee.referralFeeRate * TaxRate).round();
   final fbaFee = useFba && fee.fbaFee != -1 ? fee.fbaFee : 0;
-  final totalFee = referralFee + fee.variableClosingFee + fbaFee;
+  final closingFee = (fee.variableClosingFee * TaxRate).round();
+  final totalFee = referralFee + closingFee + fbaFee;
   final profit = sellPrice - purchasePrice - totalFee;
 
   return profit;
@@ -74,19 +78,20 @@ int calcTargetPrice({
   if (feeInfo == null) {
     return 0;
   }
-  // TotalFee = sellPrice * referralFeeRate + variableClosingFee + fbaFee + 小口
+  // TaxRate = 1.10
+  // TotalFee = (sellPrice * referralFeeRate + variableClosingFee) * TaxRate + fbaFee
   // Profit = sellPrice * profitRate
   // purchasePrice = sellPrice - TotalFee - Profit
   // purchasePrice = sellPrice
-  //      - (sellPrice * feeRate + closingFee + fbaFee + 小口)
+  //      - ((sellPrice * feeRate + closingFee) * TaxRate + fbaFee)
   //      - Profit
-  // purchasePrice = sellPrice(1 - FeeRate) - closingFee - fbaFee - 小口 - Profit
+  // purchasePrice = sellPrice(1 - FeeRate) - closingFee - fbaFee - Profit
   final rawProfit = sellPrice * (targetRate / 100);
   final profit = minProfit > rawProfit ? minProfit : rawProfit;
-  final price = sellPrice * (1 - feeInfo.referralFeeRate) - profit;
+  final price = sellPrice * (1 - feeInfo.referralFeeRate * TaxRate) - profit;
   final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
 
-  return (price - feeInfo.variableClosingFee - fbaFee).round();
+  return (price - feeInfo.variableClosingFee * TaxRate - fbaFee).round();
 }
 
 // 購入価格から、利益が0円になる販売価格を計算
@@ -99,7 +104,7 @@ int calcBreakEven({
     return 0;
   }
   final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
-  final temp = purchase + fbaFee + feeInfo.variableClosingFee;
-  final breakEven = temp / (1 - feeInfo.referralFeeRate);
+  final temp = purchase + fbaFee + (feeInfo.variableClosingFee * TaxRate);
+  final breakEven = temp / (1 - feeInfo.referralFeeRate * TaxRate);
   return breakEven.round();
 }
