@@ -2,6 +2,7 @@ import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/text_line_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class FeeTile extends HookConsumerWidget {
 
     final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
     final categoryFee = feeInfo.variableClosingFee;
+    final tax = ((sellFee + categoryFee) * (TaxRate - 1)).round();
 
     final fbaFeeText = _fbaFeeText(useFba: useFba, feeInfo: feeInfo);
 
@@ -57,6 +59,10 @@ class FeeTile extends HookConsumerWidget {
               TextLine(
                 leading: const Text("カテゴリ成約料"),
                 main: Text("${numberFormatter.format(categoryFee)} 円"),
+              ),
+              TextLine(
+                leading: const Text("上記にかかる消費税"),
+                main: Text("$tax 円"),
               ),
               TextLine(
                 leading: const Text("FBA手数料"),
@@ -91,7 +97,8 @@ class FeeTile extends HookConsumerWidget {
   }) {
     final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
     final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
-    final totalFee = sellFee + feeInfo.variableClosingFee + fbaFee;
+    final totalFee =
+        ((sellFee + feeInfo.variableClosingFee) * TaxRate + fbaFee).round();
     final str = numberFormatter.format(totalFee);
 
     if (useFba && feeInfo.fbaFee == -1) {
