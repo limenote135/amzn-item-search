@@ -48,6 +48,9 @@ class PriceDetailTile extends HookConsumerWidget {
     final sellFeeRate = (feeInfo.referralFeeRate * 100).round();
     final sellFee = (detail.price * feeInfo.referralFeeRate).round();
 
+    final tax =
+        ((sellFee + feeInfo.variableClosingFee) * (TaxRate - 1)).round();
+
     final targetPrice = calcTargetPrice(
       sellPrice: detail.price,
       feeInfo: feeInfo,
@@ -103,6 +106,10 @@ class PriceDetailTile extends HookConsumerWidget {
               TextLine(
                 leading: const Text("カテゴリー成約料"),
                 main: Text("${feeInfo.variableClosingFee} 円"),
+              ),
+              TextLine(
+                leading: const Text("上記にかかる消費税"),
+                main: Text("$tax 円"),
               ),
               TextLine(
                 leading: const Text("FBA 手数料"),
