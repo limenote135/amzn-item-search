@@ -2,6 +2,7 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -63,13 +64,19 @@ class TargetPriceTile extends HookConsumerWidget {
     if (feeInfo == null) {
       return 0;
     }
-    // 販売価格 = 購入価格 + カテゴリ手数料 + FBA 手数料 + 利益
+    // 販売価格 = 購入価格 + 販売手数料 + カテゴリ手数料 + FBA 手数料 + 利益
     // 利益 = max(販売価格 * 利益率, 最低利益額)
+    // 販売手数料 = 販売価格 * 販売手数料率 * 税率
     final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
-    final price = purchasePrice + feeInfo.variableClosingFee + fbaFee;
+    final price = purchasePrice + feeInfo.variableClosingFee * TaxRate + fbaFee;
+
+    // 販売価格 - max(販売価格 * 利益率, 最低利益) =
+    //      購入価格 + 販売手数料 + カテゴリ手数料 + FBA 手数料
+    // 販売価格 - max(販売価格 * 利益率, 最低利益) - (販売価格 * 手数料率 * 税率) =
+    //      購入価格 + カテゴリ手数料 + FBA 手数料
 
     // 利益 = 販売価格 * 利益率の場合の販売価格を計算
-    final denominator = 1 - feeInfo.referralFeeRate - rate / 100;
+    final denominator = 1 - feeInfo.referralFeeRate * TaxRate - rate / 100;
     final sellPrice1 = denominator > 0 ? (price / denominator).round() : 0;
     final profitTemp = sellPrice1 * rate / 100;
 
@@ -79,7 +86,7 @@ class TargetPriceTile extends HookConsumerWidget {
     }
 
     // 利益率では最低利益額を下回るので、利益額を最低利益額として販売価格を計算
-    final denominator2 = 1 - feeInfo.referralFeeRate;
+    final denominator2 = 1 - feeInfo.referralFeeRate * TaxRate;
     final sellPrice2 = ((price + minProfit) / denominator2).round();
     return sellPrice2 > 0 ? sellPrice2 : 0;
   }

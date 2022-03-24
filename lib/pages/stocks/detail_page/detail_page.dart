@@ -6,6 +6,7 @@ import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/edit_page/edit_page.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/search_buttons.dart';
@@ -93,9 +94,10 @@ class _Body extends HookConsumerWidget {
     final referralFeeRate = (feeInfo.referralFeeRate * 100).toInt();
     final referralFee = (item.sellPrice * feeInfo.referralFeeRate).round();
     final categoryFee = feeInfo.variableClosingFee;
+    final tax = ((referralFee + categoryFee) * (TaxRate - 1)).round();
     final isUnknownFbaFee = feeInfo.fbaFee == -1;
     final fbaFee = item.useFba && !isUnknownFbaFee ? feeInfo.fbaFee : 0;
-    final totalFeePerItem = referralFee + categoryFee + fbaFee;
+    final totalFeePerItem = referralFee + categoryFee + tax + fbaFee;
 
     return ListView(
       children: [
@@ -144,17 +146,27 @@ class _Body extends HookConsumerWidget {
           ),
           children: [
             const ThemeDivider(),
-            TextListTile(
-              leading: Text("販売手数料($referralFeeRate%)"),
-              main: Text("$referralFee 円"),
-            ),
-            TextListTile(
-              leading: const Text("カテゴリ成約料"),
-              main: Text("$categoryFee 円"),
-            ),
-            TextListTile(
-              leading: const Text("FBA手数料"),
-              main: Text(isUnknownFbaFee ? "(不明) 円" : "$fbaFee 円"),
+            ListTile(
+              title: Column(
+                children: [
+                  TextLine(
+                    leading: Text("販売手数料($referralFeeRate%)"),
+                    main: Text("$referralFee 円"),
+                  ),
+                  TextLine(
+                    leading: const Text("カテゴリ成約料"),
+                    main: Text("$categoryFee 円"),
+                  ),
+                  TextLine(
+                    leading: const Text("上記にかかる消費税"),
+                    main: Text("$tax 円"),
+                  ),
+                  TextLine(
+                    leading: const Text("FBA手数料"),
+                    main: Text(isUnknownFbaFee ? "(不明) 円" : "$fbaFee 円"),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
