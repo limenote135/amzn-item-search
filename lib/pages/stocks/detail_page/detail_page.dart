@@ -101,12 +101,24 @@ class _Body extends HookConsumerWidget {
 
     return ListView(
       children: [
-        ListTile(
-          leading: ItemImage(
-            url: item.item.imageUrl,
-            data: item.item.imageData,
+        InkWell(
+          onLongPress: () {
+            Clipboard.setData(ClipboardData(text: item.item.title)).then((_) {
+              ScaffoldMessenger.of(context).removeCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("商品名をコピーしました"),
+                ),
+              );
+            });
+          },
+          child: ListTile(
+            leading: ItemImage(
+              url: item.item.imageUrl,
+              data: item.item.imageData,
+            ),
+            title: Text(item.item.title),
           ),
-          title: Text(item.item.title),
         ),
         const _ItemInfoTile(),
         const ThemeDivider(),
