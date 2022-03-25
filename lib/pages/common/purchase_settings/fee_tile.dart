@@ -38,7 +38,7 @@ class FeeTile extends HookConsumerWidget {
 
     final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
     final categoryFee = feeInfo.variableClosingFee;
-    final tax = ((sellFee + categoryFee) * (TaxRate - 1)).round();
+    final tax = ((sellFee + categoryFee) * (taxRate - 1)).round();
 
     final fbaFeeText = _fbaFeeText(useFba: useFba, feeInfo: feeInfo);
 
@@ -98,7 +98,7 @@ class FeeTile extends HookConsumerWidget {
     final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
     final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
     final totalFee =
-        ((sellFee + feeInfo.variableClosingFee) * TaxRate + fbaFee).round();
+        ((sellFee + feeInfo.variableClosingFee) * taxRate + fbaFee).round();
     final str = numberFormatter.format(totalFee);
 
     if (useFba && feeInfo.fbaFee == -1) {
