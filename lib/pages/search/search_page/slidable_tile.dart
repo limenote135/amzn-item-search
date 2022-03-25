@@ -9,8 +9,6 @@ import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
-import 'package:amasearch/pages/search/camera_page/camera_page.dart';
-import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:amasearch/util/util.dart';
@@ -20,13 +18,17 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SlidableTile extends HookConsumerWidget {
-  const SlidableTile({Key? key, required this.child}) : super(key: key);
+  const SlidableTile({
+    Key? key,
+    required this.child,
+    this.disableDelete = false,
+  }) : super(key: key);
 
   final Widget child;
+  final bool disableDelete;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final from = ref.watch(fromRouteProvider);
     final left = ref.watch(
       generalSettingsControllerProvider
           .select((value) => value.leftSlideShortcut),
@@ -39,7 +41,7 @@ class SlidableTile extends HookConsumerWidget {
       generalSettingsControllerProvider.select((value) => value.customButtons),
     );
 
-    final items = ref.watch(currentSearchItemProvider);
+    final item = ref.watch(currentSearchItemProvider);
 
     final buttons = [...baseButtons, amazonListingsButton];
 
@@ -57,8 +59,8 @@ class SlidableTile extends HookConsumerWidget {
         extentRatio: leftActive > 0 ? 0.2 * leftActive : 0.2,
         children: [
           for (final act in left)
-            if (needShow(from, act.type))
-              _getAction(context, ref, act.type, act.param, buttons, items)
+            if (needShow(act.type, disableDelete: disableDelete))
+              _getAction(context, ref, act.type, act.param, buttons, item)
         ],
       ),
       endActionPane: ActionPane(
@@ -66,17 +68,17 @@ class SlidableTile extends HookConsumerWidget {
         extentRatio: rightActive > 0 ? 0.2 * rightActive : 0.2,
         children: [
           for (final act in right)
-            if (needShow(from, act.type))
-              _getAction(context, ref, act.type, act.param, buttons, items)
+            if (needShow(act.type, disableDelete: disableDelete))
+              _getAction(context, ref, act.type, act.param, buttons, item)
         ],
       ),
       child: child,
     );
   }
 
-  bool needShow(String from, ShortcutType type) {
-    if (from == CameraPage.routeName && type == ShortcutType.delete) {
-      // カメラページの場合は delete 不可
+  bool needShow(ShortcutType type, {required bool disableDelete}) {
+    if (type == ShortcutType.delete && disableDelete) {
+      // カメラページや複数商品選択画面の場合は delete 不可
       return false;
     }
     if (type == ShortcutType.none) {

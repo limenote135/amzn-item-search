@@ -71,9 +71,12 @@ class _Body extends HookConsumerWidget {
           // FloatingActionButton 用のマージン
           return floatingActionMargin;
         }
+        final searchItem =
+            SearchItem(searchDate: "", jan: "", asins: [items[index]]);
         return ProviderScope(
           overrides: [
             currentAsinDataProvider.overrideWithValue(items[index]),
+            currentSearchItemProvider.overrideWithValue(searchItem),
           ],
           child: const ItemTile(),
         );
