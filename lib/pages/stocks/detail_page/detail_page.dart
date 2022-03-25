@@ -94,7 +94,7 @@ class _Body extends HookConsumerWidget {
     final referralFeeRate = (feeInfo.referralFeeRate * 100).toInt();
     final referralFee = (item.sellPrice * feeInfo.referralFeeRate).round();
     final categoryFee = feeInfo.variableClosingFee;
-    final tax = ((referralFee + categoryFee) * (TaxRate - 1)).round();
+    final tax = ((referralFee + categoryFee) * (taxRate - 1)).round();
     final isUnknownFbaFee = feeInfo.fbaFee == -1;
     final fbaFee = item.useFba && !isUnknownFbaFee ? feeInfo.fbaFee : 0;
     final totalFeePerItem = referralFee + categoryFee + tax + fbaFee;

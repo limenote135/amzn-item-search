@@ -68,7 +68,7 @@ class TargetPriceTile extends HookConsumerWidget {
     // 利益 = max(販売価格 * 利益率, 最低利益額)
     // 販売手数料 = 販売価格 * 販売手数料率 * 税率
     final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
-    final price = purchasePrice + feeInfo.variableClosingFee * TaxRate + fbaFee;
+    final price = purchasePrice + feeInfo.variableClosingFee * taxRate + fbaFee;
 
     // 販売価格 - max(販売価格 * 利益率, 最低利益) =
     //      購入価格 + 販売手数料 + カテゴリ手数料 + FBA 手数料
@@ -76,7 +76,7 @@ class TargetPriceTile extends HookConsumerWidget {
     //      購入価格 + カテゴリ手数料 + FBA 手数料
 
     // 利益 = 販売価格 * 利益率の場合の販売価格を計算
-    final denominator = 1 - feeInfo.referralFeeRate * TaxRate - rate / 100;
+    final denominator = 1 - feeInfo.referralFeeRate * taxRate - rate / 100;
     final sellPrice1 = denominator > 0 ? (price / denominator).round() : 0;
     final profitTemp = sellPrice1 * rate / 100;
 
@@ -86,7 +86,7 @@ class TargetPriceTile extends HookConsumerWidget {
     }
 
     // 利益率では最低利益額を下回るので、利益額を最低利益額として販売価格を計算
-    final denominator2 = 1 - feeInfo.referralFeeRate * TaxRate;
+    final denominator2 = 1 - feeInfo.referralFeeRate * taxRate;
     final sellPrice2 = ((price + minProfit) / denominator2).round();
     return sellPrice2 > 0 ? sellPrice2 : 0;
   }
