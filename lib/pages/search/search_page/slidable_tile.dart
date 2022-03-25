@@ -47,31 +47,51 @@ class SlidableTile extends HookConsumerWidget {
 
     final leftActive = left.fold<int>(
       0,
-      (prev, e) => e.type != ShortcutType.none ? prev + 1 : prev,
+      (prev, e) {
+        if (e.type != ShortcutType.none) {
+          if (e.type == ShortcutType.delete && disableDelete) {
+            return prev;
+          }
+          return prev + 1;
+        }
+        return prev;
+      },
     );
     final rightActive = right.fold<int>(
       0,
-      (prev, e) => e.type != ShortcutType.none ? prev + 1 : prev,
+      (prev, e) {
+        if (e.type != ShortcutType.none) {
+          if (e.type == ShortcutType.delete && disableDelete) {
+            return prev;
+          }
+          return prev + 1;
+        }
+        return prev;
+      },
     );
     return Slidable(
-      startActionPane: ActionPane(
-        motion: const DrawerMotion(),
-        extentRatio: leftActive > 0 ? 0.2 * leftActive : 0.2,
-        children: [
-          for (final act in left)
-            if (needShow(act.type, disableDelete: disableDelete))
-              _getAction(context, ref, act.type, act.param, buttons, item)
-        ],
-      ),
-      endActionPane: ActionPane(
-        motion: const DrawerMotion(),
-        extentRatio: rightActive > 0 ? 0.2 * rightActive : 0.2,
-        children: [
-          for (final act in right)
-            if (needShow(act.type, disableDelete: disableDelete))
-              _getAction(context, ref, act.type, act.param, buttons, item)
-        ],
-      ),
+      startActionPane: leftActive > 0
+          ? ActionPane(
+              motion: const DrawerMotion(),
+              extentRatio: 0.2 * leftActive,
+              children: [
+                for (final act in left)
+                  if (needShow(act.type, disableDelete: disableDelete))
+                    _getAction(context, ref, act.type, act.param, buttons, item)
+              ],
+            )
+          : null,
+      endActionPane: rightActive > 0
+          ? ActionPane(
+              motion: const DrawerMotion(),
+              extentRatio: 0.2 * rightActive,
+              children: [
+                for (final act in right)
+                  if (needShow(act.type, disableDelete: disableDelete))
+                    _getAction(context, ref, act.type, act.param, buttons, item)
+              ],
+            )
+          : null,
       child: child,
     );
   }
