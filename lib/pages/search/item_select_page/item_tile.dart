@@ -3,6 +3,7 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
+import 'package:amasearch/pages/search/search_page/slidable_tile.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -30,8 +31,11 @@ class ItemTile extends HookConsumerWidget {
             currentAsinDataProvider.overrideWithValue(newItem),
             currentSearchDateProvider.overrideWithValue(null),
           ],
-          child: const _InkWell(
-            child: SearchItemTile(),
+          child: const SlidableTile(
+            disableDelete: true,
+            child: _InkWell(
+              child: SearchItemTile(),
+            ),
           ),
         );
       },
