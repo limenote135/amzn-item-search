@@ -239,7 +239,9 @@ class _$AsinDataTearOff {
           bool? sellByAmazon,
       @HiveField(11, defaultValue: defaultListingRestrictions)
       @JsonKey()
-          ListingRestrictions restrictions = defaultListingRestrictions}) {
+          ListingRestrictions restrictions = defaultListingRestrictions,
+      @HiveField(12, defaultValue: "")
+          String model = ""}) {
     return _AsinData(
       jan: jan,
       asin: asin,
@@ -253,6 +255,7 @@ class _$AsinDataTearOff {
       category: category,
       sellByAmazon: sellByAmazon,
       restrictions: restrictions,
+      model: model,
     );
   }
 
@@ -293,6 +296,8 @@ mixin _$AsinData {
   @HiveField(11, defaultValue: defaultListingRestrictions)
   @JsonKey()
   ListingRestrictions get restrictions => throw _privateConstructorUsedError;
+  @HiveField(12, defaultValue: "")
+  String get model => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -331,7 +336,9 @@ abstract class $AsinDataCopyWith<$Res> {
           bool? sellByAmazon,
       @HiveField(11, defaultValue: defaultListingRestrictions)
       @JsonKey()
-          ListingRestrictions restrictions});
+          ListingRestrictions restrictions,
+      @HiveField(12, defaultValue: "")
+          String model});
 
   $ItemPricesCopyWith<$Res>? get prices;
   $ListingRestrictionsCopyWith<$Res> get restrictions;
@@ -359,6 +366,7 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
     Object? category = freezed,
     Object? sellByAmazon = freezed,
     Object? restrictions = freezed,
+    Object? model = freezed,
   }) {
     return _then(_value.copyWith(
       jan: jan == freezed
@@ -409,6 +417,10 @@ class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
           ? _value.restrictions
           : restrictions // ignore: cast_nullable_to_non_nullable
               as ListingRestrictions,
+      model: model == freezed
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -463,7 +475,9 @@ abstract class _$AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
           bool? sellByAmazon,
       @HiveField(11, defaultValue: defaultListingRestrictions)
       @JsonKey()
-          ListingRestrictions restrictions});
+          ListingRestrictions restrictions,
+      @HiveField(12, defaultValue: "")
+          String model});
 
   @override
   $ItemPricesCopyWith<$Res>? get prices;
@@ -494,6 +508,7 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
     Object? category = freezed,
     Object? sellByAmazon = freezed,
     Object? restrictions = freezed,
+    Object? model = freezed,
   }) {
     return _then(_AsinData(
       jan: jan == freezed
@@ -544,6 +559,10 @@ class __$AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
           ? _value.restrictions
           : restrictions // ignore: cast_nullable_to_non_nullable
               as ListingRestrictions,
+      model: model == freezed
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -580,7 +599,9 @@ class _$_AsinData implements _AsinData {
           this.sellByAmazon,
       @HiveField(11, defaultValue: defaultListingRestrictions)
       @JsonKey()
-          this.restrictions = defaultListingRestrictions});
+          this.restrictions = defaultListingRestrictions,
+      @HiveField(12, defaultValue: "")
+          this.model = ""});
 
   factory _$_AsinData.fromJson(Map<String, dynamic> json) =>
       _$$_AsinDataFromJson(json);
@@ -628,10 +649,14 @@ class _$_AsinData implements _AsinData {
   @HiveField(11, defaultValue: defaultListingRestrictions)
   @JsonKey()
   final ListingRestrictions restrictions;
+  @JsonKey()
+  @override
+  @HiveField(12, defaultValue: "")
+  final String model;
 
   @override
   String toString() {
-    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category, sellByAmazon: $sellByAmazon, restrictions: $restrictions)';
+    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category, sellByAmazon: $sellByAmazon, restrictions: $restrictions, model: $model)';
   }
 
   @override
@@ -652,7 +677,8 @@ class _$_AsinData implements _AsinData {
             const DeepCollectionEquality()
                 .equals(other.sellByAmazon, sellByAmazon) &&
             const DeepCollectionEquality()
-                .equals(other.restrictions, restrictions));
+                .equals(other.restrictions, restrictions) &&
+            const DeepCollectionEquality().equals(other.model, model));
   }
 
   @override
@@ -669,7 +695,8 @@ class _$_AsinData implements _AsinData {
       const DeepCollectionEquality().hash(imageData),
       const DeepCollectionEquality().hash(category),
       const DeepCollectionEquality().hash(sellByAmazon),
-      const DeepCollectionEquality().hash(restrictions));
+      const DeepCollectionEquality().hash(restrictions),
+      const DeepCollectionEquality().hash(model));
 
   @JsonKey(ignore: true)
   @override
@@ -710,7 +737,9 @@ abstract class _AsinData implements AsinData {
           bool? sellByAmazon,
       @HiveField(11, defaultValue: defaultListingRestrictions)
       @JsonKey()
-          ListingRestrictions restrictions}) = _$_AsinData;
+          ListingRestrictions restrictions,
+      @HiveField(12, defaultValue: "")
+          String model}) = _$_AsinData;
 
   factory _AsinData.fromJson(Map<String, dynamic> json) = _$_AsinData.fromJson;
 
@@ -753,6 +782,9 @@ abstract class _AsinData implements AsinData {
   @HiveField(11, defaultValue: defaultListingRestrictions)
   @JsonKey()
   ListingRestrictions get restrictions;
+  @override
+  @HiveField(12, defaultValue: "")
+  String get model;
   @override
   @JsonKey(ignore: true)
   _$AsinDataCopyWith<_AsinData> get copyWith =>

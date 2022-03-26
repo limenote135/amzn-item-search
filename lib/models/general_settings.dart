@@ -3,6 +3,7 @@ import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/alert_type.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
+import 'package:amasearch/util/variable_format.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -14,10 +15,12 @@ part 'general_settings.g.dart';
 const _defaultSkuFormat =
     "{yyyy}{mm}{dd}-{asin}-{cond}-{purchasePrice}-{quantity}";
 
-const _readAloudPattern1 = "{title}、新品利益{newProfit}、"
-    "中古利益{usedProfit}、順位{rank}です。";
-const _readAloudPattern2 = "{title}、新品利益{newProfit}、順位{rank}です。";
-const _readAloudPattern3 = "{title}、中古利益{usedProfit}、順位{rank}です。";
+const _readAloudPattern1 = "$titleVariable、新品利益$newProfitVariable、"
+    "中古利益$usedProfitVariable、順位$rankVariableです。";
+const _readAloudPattern2 =
+    "$titleVariable、新品利益$newProfitVariable、順位$rankVariableです。";
+const _readAloudPattern3 =
+    "$titleVariable、中古利益$usedProfitVariable、順位$rankVariableです。";
 
 const _defaultReadAloudPatterns = [
   ReadAloudPattern(title: "パターン1", pattern: _readAloudPattern1),
@@ -25,19 +28,22 @@ const _defaultReadAloudPatterns = [
   ReadAloudPattern(title: "パターン3", pattern: _readAloudPattern3),
 ];
 
-const customButtonAmazonUrl = "https://www.amazon.co.jp/gp/product/{asin}/";
-const customButtonKeepaUrl = "https://keepa.com/#!product/5-{asin}/";
-const customButtonDeltaUrl = "https://delta-tracer.com/item/detail/jp/{asin}/";
-const customButtonMonoSearchUrl = "https://mnsearch.com/item?kwd={asin}";
-const customButtonKeezonUrl = "https://keezon.net/item/index?ASIN={asin}";
+const customButtonAmazonUrl =
+    "https://www.amazon.co.jp/gp/product/$asinVariable/";
+const customButtonKeepaUrl = "https://keepa.com/#!product/5-$asinVariable/";
+const customButtonDeltaUrl =
+    "https://delta-tracer.com/item/detail/jp/$asinVariable/";
+const customButtonMonoSearchUrl = "https://mnsearch.com/item?kwd=$asinVariable";
+const customButtonKeezonUrl =
+    "https://keezon.net/item/index?ASIN=$asinVariable";
 const customButtonMercariUrl =
-    "https://www.mercari.com/jp/search/?keyword={title}";
+    "https://www.mercari.com/jp/search/?keyword=$titleVariable";
 const customButtonAmazonStockUrl =
-    "https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};";
+    "https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:$asinVariable;";
 const customButtonAmazonListableUrl =
-    "https://sellercentral.amazon.co.jp/abis/listing/syh?asin={asin}";
+    "https://sellercentral.amazon.co.jp/abis/listing/syh?asin=$asinVariable";
 const customButtonAmazonListingsUrl =
-    "https://www.amazon.co.jp/gp/offer-listing/{asin}/";
+    "https://www.amazon.co.jp/gp/offer-listing/$asinVariable/";
 
 // カスタムボタンではないが、ショートカットで設定するために定義を用意しておく
 const amazonListingsButton = CustomButtonDetail(

@@ -1,16 +1,11 @@
 import 'package:amasearch/models/general_settings.dart';
-import 'package:amasearch/util/url_replacer.dart';
+import 'package:amasearch/util/variable_format.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final currentButtonProvider =
     Provider<CustomButtonDetail>((_) => throw UnimplementedError());
-
-const rankVariable = "{rank}";
-const titleVariable = "{title}";
-const usedProfitVariable = "{usedProfit}";
-const newProfitVariable = "{newProfit}";
 
 class UrlSettingsPage extends StatelessWidget {
   const UrlSettingsPage({Key? key}) : super(key: key);
@@ -119,6 +114,12 @@ class __UrlEditFormState extends State<_UrlEditForm> {
                 _addText(titleVariable);
               },
               child: const Text("商品名"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                _addText(modelVariable);
+              },
+              child: const Text("型番"),
             ),
           ],
         ),
