@@ -5,10 +5,7 @@ import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/util/price_util.dart';
 
-const rankVariable = "{rank}";
-const titleVariable = "{title}";
-const usedProfitVariable = "{usedProfit}";
-const newProfitVariable = "{newProfit}";
+import 'variable_format.dart';
 
 String createSpeakText({
   required String template,
