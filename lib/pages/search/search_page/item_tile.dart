@@ -1,4 +1,5 @@
 import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
@@ -19,6 +20,7 @@ class ItemTile extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentFutureSearchItemProvider);
     final searchItemAsyncValue = ref.watch(searchItemFutureProvider(item));
+    final from = ref.watch(fromRouteProvider);
     return AsyncValueListTileWidget<SearchItem>(
       value: searchItemAsyncValue,
       errorInfo: [
@@ -43,7 +45,11 @@ class ItemTile extends HookConsumerWidget {
           overrides: [
             currentSearchItemProvider.overrideWithValue(value),
           ],
-          child: const SlidableTile(child: ItemTileImpl()),
+          child: SlidableTile(
+            // カメラページで表示する場合は削除不可
+            disableDelete: from == CameraPage.routeName,
+            child: const ItemTileImpl(),
+          ),
         );
       },
     );
