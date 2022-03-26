@@ -97,7 +97,7 @@ class _Body extends HookConsumerWidget {
               msg = "不正なメールアドレスです";
               break;
             case "user-disabled":
-              msg = "このユーザーは既に退会しています";
+              msg = "このユーザーは無効化されているか既に退会しています";
               break;
             case "user-not-found":
               msg = "ユーザーが見つかりませんでした";
