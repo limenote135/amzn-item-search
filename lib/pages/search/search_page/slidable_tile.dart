@@ -5,6 +5,7 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/general_settings.dart';
+import 'package:amasearch/models/general_settings_default.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';

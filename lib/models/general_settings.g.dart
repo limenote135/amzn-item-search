@@ -68,15 +68,56 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
                   pattern:
                       'https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};'),
               const CustomButtonDetail(
-                  id: 'bt08', enable: false, title: 'ボタン1', pattern: ''),
+                  id: 'bt08',
+                  enable: false,
+                  title: 'Keepa(ブラウザ)',
+                  pattern: 'https://keepa.com/#!product/5-{asin}/'),
               const CustomButtonDetail(
-                  id: 'bt09', enable: false, title: 'ボタン2', pattern: ''),
+                  id: 'bt09',
+                  enable: false,
+                  title: '楽天',
+                  pattern: 'https://search.rakuten.co.jp/search/mall/{jan}/'),
               const CustomButtonDetail(
-                  id: 'bt10', enable: false, title: 'ボタン3', pattern: ''),
+                  id: 'bt10',
+                  enable: false,
+                  title: '価格.com(型番)',
+                  pattern: 'https://kakaku.com/search_results/{model}'),
               const CustomButtonDetail(
-                  id: 'bt11', enable: false, title: 'ボタン4', pattern: ''),
+                  id: 'bt11',
+                  enable: false,
+                  title: 'ヤフオク!',
+                  pattern:
+                      'https://auctions.yahoo.co.jp/search/search?ei=utf-8&p={title}'),
               const CustomButtonDetail(
-                  id: 'bt12', enable: false, title: 'ボタン5', pattern: '')
+                  id: 'bt12',
+                  enable: false,
+                  title: 'BookOff',
+                  pattern:
+                      'https://www.bookoffonline.co.jp/display/L001,st=a,q={jan}'),
+              const CustomButtonDetail(
+                  id: 'bt13',
+                  enable: false,
+                  title: '駿河屋',
+                  pattern:
+                      'https://www.suruga-ya.jp/search?category=&search_word={jan}'),
+              const CustomButtonDetail(
+                  id: 'bt14',
+                  enable: false,
+                  title: '販売履歴',
+                  pattern:
+                      'https://sellercentral.amazon.co.jp/orders-v3/search?page=1&qt=asin&q={asin}'),
+              const CustomButtonDetail(
+                  id: 'bt15', enable: false, title: 'ボタン1', pattern: ''),
+              const CustomButtonDetail(
+                  id: 'bt16', enable: false, title: 'ボタン2', pattern: ''),
+              const CustomButtonDetail(
+                  id: 'bt17', enable: false, title: 'ボタン3', pattern: ''),
+              const CustomButtonDetail(
+                  id: 'bt17', enable: false, title: 'ボタン4', pattern: ''),
+              const CustomButtonDetail(
+                  id: 'bt19', enable: false, title: 'ボタン5', pattern: ''),
+              const CustomButtonDetail(
+                  id: 'bt20', enable: false, title: 'ボタン6', pattern: '')
             ]
           : (fields[10] as List).cast<CustomButtonDetail>(),
       csvOrder: fields[11] == null

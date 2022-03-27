@@ -1,7 +1,7 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/models/general_settings.dart';
+import 'package:amasearch/models/general_settings_default.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
@@ -100,7 +100,7 @@ class SearchButtons extends HookConsumerWidget {
                 await ref
                     .read(analyticsControllerProvider)
                     .logPushSearchButtonEvent(eventName);
-                await FlutterWebBrowser.openWebPage(url: Uri.encodeFull(url));
+                await FlutterWebBrowser.openWebPage(url: url);
               },
               child: Text(button.title),
             ),

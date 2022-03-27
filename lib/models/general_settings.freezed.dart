@@ -26,7 +26,7 @@ class _$GeneralSettingsTearOff {
       @HiveField(2)
           int targetProfitValue = 10,
       @HiveField(3)
-          String skuFormat = _defaultSkuFormat,
+          String skuFormat = defaultSkuFormat,
       @HiveField(4)
           List<String> retailers = const <String>[],
       @HiveField(5)
@@ -34,33 +34,33 @@ class _$GeneralSettingsTearOff {
       @HiveField(6)
           int patternIndex = 0,
       @HiveField(7)
-          List<ReadAloudPattern> readAloudPatterns = _defaultReadAloudPatterns,
+          List<ReadAloudPattern> readAloudPatterns = defaultReadAloudPatterns,
       @HiveField(8)
           double readAloudVolume = 1.0,
       @HiveField(9)
           double? readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
           List<CustomButtonDetail> customButtons = defaultCustomButtons,
-      @HiveField(11, defaultValue: _defaultCsvOrder)
-          List<CsvColumn> csvOrder = _defaultCsvOrder,
+      @HiveField(11, defaultValue: defaultCsvOrder)
+          List<CsvColumn> csvOrder = defaultCsvOrder,
       @HiveField(12, defaultValue: 0)
           int minProfit = 0,
       @HiveField(13, defaultValue: false)
           bool getStocks = false,
       @HiveField(14, defaultValue: true)
           bool enableAlert = true,
-      @HiveField(15, defaultValue: _defaultAlert)
-          List<AlertConditionSet> alerts = _defaultAlert,
+      @HiveField(15, defaultValue: defaultAlert)
+          List<AlertConditionSet> alerts = defaultAlert,
       @HiveField(16, defaultValue: false)
           bool enableAlertVibration = false,
       @HiveField(17, defaultValue: true)
           bool isMajorCustomer = true,
-      @HiveField(18, defaultValue: _defaultKeepaSettings)
-          KeepaSettings keepaSettings = _defaultKeepaSettings,
-      @HiveField(19, defaultValue: _defaultLeftShortcut)
-          List<ShortcutDetail> leftSlideShortcut = _defaultLeftShortcut,
-      @HiveField(20, defaultValue: _defaultRightShortcut)
-          List<ShortcutDetail> rightSlideShortcut = _defaultRightShortcut}) {
+      @HiveField(18, defaultValue: defaultKeepaSettings)
+          KeepaSettings keepaSettings = defaultKeepaSettings,
+      @HiveField(19, defaultValue: defaultLeftShortcut)
+          List<ShortcutDetail> leftSlideShortcut = defaultLeftShortcut,
+      @HiveField(20, defaultValue: defaultRightShortcut)
+          List<ShortcutDetail> rightSlideShortcut = defaultRightShortcut}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
@@ -117,7 +117,7 @@ mixin _$GeneralSettings {
   @HiveField(10, defaultValue: defaultCustomButtons)
   List<CustomButtonDetail> get customButtons =>
       throw _privateConstructorUsedError; // CSV の並び順
-  @HiveField(11, defaultValue: _defaultCsvOrder)
+  @HiveField(11, defaultValue: defaultCsvOrder)
   List<CsvColumn> get csvOrder => throw _privateConstructorUsedError; // 最低利益額
   @HiveField(12, defaultValue: 0)
   int get minProfit => throw _privateConstructorUsedError; // 在庫の取得設定
@@ -125,18 +125,18 @@ mixin _$GeneralSettings {
   bool get getStocks => throw _privateConstructorUsedError; // アラート設定
   @HiveField(14, defaultValue: true)
   bool get enableAlert => throw _privateConstructorUsedError;
-  @HiveField(15, defaultValue: _defaultAlert)
+  @HiveField(15, defaultValue: defaultAlert)
   List<AlertConditionSet> get alerts => throw _privateConstructorUsedError;
   @HiveField(16, defaultValue: false)
   bool get enableAlertVibration => throw _privateConstructorUsedError;
   @HiveField(17, defaultValue: true)
   bool get isMajorCustomer => throw _privateConstructorUsedError;
-  @HiveField(18, defaultValue: _defaultKeepaSettings)
+  @HiveField(18, defaultValue: defaultKeepaSettings)
   KeepaSettings get keepaSettings => throw _privateConstructorUsedError;
-  @HiveField(19, defaultValue: _defaultLeftShortcut)
+  @HiveField(19, defaultValue: defaultLeftShortcut)
   List<ShortcutDetail> get leftSlideShortcut =>
       throw _privateConstructorUsedError;
-  @HiveField(20, defaultValue: _defaultRightShortcut)
+  @HiveField(20, defaultValue: defaultRightShortcut)
   List<ShortcutDetail> get rightSlideShortcut =>
       throw _privateConstructorUsedError;
 
@@ -173,7 +173,7 @@ abstract class $GeneralSettingsCopyWith<$Res> {
           double? readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
           List<CustomButtonDetail> customButtons,
-      @HiveField(11, defaultValue: _defaultCsvOrder)
+      @HiveField(11, defaultValue: defaultCsvOrder)
           List<CsvColumn> csvOrder,
       @HiveField(12, defaultValue: 0)
           int minProfit,
@@ -181,17 +181,17 @@ abstract class $GeneralSettingsCopyWith<$Res> {
           bool getStocks,
       @HiveField(14, defaultValue: true)
           bool enableAlert,
-      @HiveField(15, defaultValue: _defaultAlert)
+      @HiveField(15, defaultValue: defaultAlert)
           List<AlertConditionSet> alerts,
       @HiveField(16, defaultValue: false)
           bool enableAlertVibration,
       @HiveField(17, defaultValue: true)
           bool isMajorCustomer,
-      @HiveField(18, defaultValue: _defaultKeepaSettings)
+      @HiveField(18, defaultValue: defaultKeepaSettings)
           KeepaSettings keepaSettings,
-      @HiveField(19, defaultValue: _defaultLeftShortcut)
+      @HiveField(19, defaultValue: defaultLeftShortcut)
           List<ShortcutDetail> leftSlideShortcut,
-      @HiveField(20, defaultValue: _defaultRightShortcut)
+      @HiveField(20, defaultValue: defaultRightShortcut)
           List<ShortcutDetail> rightSlideShortcut});
 
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
@@ -356,7 +356,7 @@ abstract class _$GeneralSettingsCopyWith<$Res>
           double? readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
           List<CustomButtonDetail> customButtons,
-      @HiveField(11, defaultValue: _defaultCsvOrder)
+      @HiveField(11, defaultValue: defaultCsvOrder)
           List<CsvColumn> csvOrder,
       @HiveField(12, defaultValue: 0)
           int minProfit,
@@ -364,17 +364,17 @@ abstract class _$GeneralSettingsCopyWith<$Res>
           bool getStocks,
       @HiveField(14, defaultValue: true)
           bool enableAlert,
-      @HiveField(15, defaultValue: _defaultAlert)
+      @HiveField(15, defaultValue: defaultAlert)
           List<AlertConditionSet> alerts,
       @HiveField(16, defaultValue: false)
           bool enableAlertVibration,
       @HiveField(17, defaultValue: true)
           bool isMajorCustomer,
-      @HiveField(18, defaultValue: _defaultKeepaSettings)
+      @HiveField(18, defaultValue: defaultKeepaSettings)
           KeepaSettings keepaSettings,
-      @HiveField(19, defaultValue: _defaultLeftShortcut)
+      @HiveField(19, defaultValue: defaultLeftShortcut)
           List<ShortcutDetail> leftSlideShortcut,
-      @HiveField(20, defaultValue: _defaultRightShortcut)
+      @HiveField(20, defaultValue: defaultRightShortcut)
           List<ShortcutDetail> rightSlideShortcut});
 
   @override
@@ -517,7 +517,7 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(2)
           this.targetProfitValue = 10,
       @HiveField(3)
-          this.skuFormat = _defaultSkuFormat,
+          this.skuFormat = defaultSkuFormat,
       @HiveField(4)
           this.retailers = const <String>[],
       @HiveField(5)
@@ -525,33 +525,33 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(6)
           this.patternIndex = 0,
       @HiveField(7)
-          this.readAloudPatterns = _defaultReadAloudPatterns,
+          this.readAloudPatterns = defaultReadAloudPatterns,
       @HiveField(8)
           this.readAloudVolume = 1.0,
       @HiveField(9)
           this.readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
           this.customButtons = defaultCustomButtons,
-      @HiveField(11, defaultValue: _defaultCsvOrder)
-          this.csvOrder = _defaultCsvOrder,
+      @HiveField(11, defaultValue: defaultCsvOrder)
+          this.csvOrder = defaultCsvOrder,
       @HiveField(12, defaultValue: 0)
           this.minProfit = 0,
       @HiveField(13, defaultValue: false)
           this.getStocks = false,
       @HiveField(14, defaultValue: true)
           this.enableAlert = true,
-      @HiveField(15, defaultValue: _defaultAlert)
-          this.alerts = _defaultAlert,
+      @HiveField(15, defaultValue: defaultAlert)
+          this.alerts = defaultAlert,
       @HiveField(16, defaultValue: false)
           this.enableAlertVibration = false,
       @HiveField(17, defaultValue: true)
           this.isMajorCustomer = true,
-      @HiveField(18, defaultValue: _defaultKeepaSettings)
-          this.keepaSettings = _defaultKeepaSettings,
-      @HiveField(19, defaultValue: _defaultLeftShortcut)
-          this.leftSlideShortcut = _defaultLeftShortcut,
-      @HiveField(20, defaultValue: _defaultRightShortcut)
-          this.rightSlideShortcut = _defaultRightShortcut});
+      @HiveField(18, defaultValue: defaultKeepaSettings)
+          this.keepaSettings = defaultKeepaSettings,
+      @HiveField(19, defaultValue: defaultLeftShortcut)
+          this.leftSlideShortcut = defaultLeftShortcut,
+      @HiveField(20, defaultValue: defaultRightShortcut)
+          this.rightSlideShortcut = defaultRightShortcut});
 
   @JsonKey()
   @override // ダークモード
@@ -598,7 +598,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   final List<CustomButtonDetail> customButtons;
   @JsonKey()
   @override // CSV の並び順
-  @HiveField(11, defaultValue: _defaultCsvOrder)
+  @HiveField(11, defaultValue: defaultCsvOrder)
   final List<CsvColumn> csvOrder;
   @JsonKey()
   @override // 最低利益額
@@ -614,7 +614,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   final bool enableAlert;
   @JsonKey()
   @override
-  @HiveField(15, defaultValue: _defaultAlert)
+  @HiveField(15, defaultValue: defaultAlert)
   final List<AlertConditionSet> alerts;
   @JsonKey()
   @override
@@ -626,15 +626,15 @@ class _$_GeneralSettings implements _GeneralSettings {
   final bool isMajorCustomer;
   @JsonKey()
   @override
-  @HiveField(18, defaultValue: _defaultKeepaSettings)
+  @HiveField(18, defaultValue: defaultKeepaSettings)
   final KeepaSettings keepaSettings;
   @JsonKey()
   @override
-  @HiveField(19, defaultValue: _defaultLeftShortcut)
+  @HiveField(19, defaultValue: defaultLeftShortcut)
   final List<ShortcutDetail> leftSlideShortcut;
   @JsonKey()
   @override
-  @HiveField(20, defaultValue: _defaultRightShortcut)
+  @HiveField(20, defaultValue: defaultRightShortcut)
   final List<ShortcutDetail> rightSlideShortcut;
 
   @override
@@ -741,7 +741,7 @@ abstract class _GeneralSettings implements GeneralSettings {
           double? readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
           List<CustomButtonDetail> customButtons,
-      @HiveField(11, defaultValue: _defaultCsvOrder)
+      @HiveField(11, defaultValue: defaultCsvOrder)
           List<CsvColumn> csvOrder,
       @HiveField(12, defaultValue: 0)
           int minProfit,
@@ -749,17 +749,17 @@ abstract class _GeneralSettings implements GeneralSettings {
           bool getStocks,
       @HiveField(14, defaultValue: true)
           bool enableAlert,
-      @HiveField(15, defaultValue: _defaultAlert)
+      @HiveField(15, defaultValue: defaultAlert)
           List<AlertConditionSet> alerts,
       @HiveField(16, defaultValue: false)
           bool enableAlertVibration,
       @HiveField(17, defaultValue: true)
           bool isMajorCustomer,
-      @HiveField(18, defaultValue: _defaultKeepaSettings)
+      @HiveField(18, defaultValue: defaultKeepaSettings)
           KeepaSettings keepaSettings,
-      @HiveField(19, defaultValue: _defaultLeftShortcut)
+      @HiveField(19, defaultValue: defaultLeftShortcut)
           List<ShortcutDetail> leftSlideShortcut,
-      @HiveField(20, defaultValue: _defaultRightShortcut)
+      @HiveField(20, defaultValue: defaultRightShortcut)
           List<ShortcutDetail> rightSlideShortcut}) = _$_GeneralSettings;
 
   @override // ダークモード
@@ -796,7 +796,7 @@ abstract class _GeneralSettings implements GeneralSettings {
   @HiveField(10, defaultValue: defaultCustomButtons)
   List<CustomButtonDetail> get customButtons;
   @override // CSV の並び順
-  @HiveField(11, defaultValue: _defaultCsvOrder)
+  @HiveField(11, defaultValue: defaultCsvOrder)
   List<CsvColumn> get csvOrder;
   @override // 最低利益額
   @HiveField(12, defaultValue: 0)
@@ -808,7 +808,7 @@ abstract class _GeneralSettings implements GeneralSettings {
   @HiveField(14, defaultValue: true)
   bool get enableAlert;
   @override
-  @HiveField(15, defaultValue: _defaultAlert)
+  @HiveField(15, defaultValue: defaultAlert)
   List<AlertConditionSet> get alerts;
   @override
   @HiveField(16, defaultValue: false)
@@ -817,13 +817,13 @@ abstract class _GeneralSettings implements GeneralSettings {
   @HiveField(17, defaultValue: true)
   bool get isMajorCustomer;
   @override
-  @HiveField(18, defaultValue: _defaultKeepaSettings)
+  @HiveField(18, defaultValue: defaultKeepaSettings)
   KeepaSettings get keepaSettings;
   @override
-  @HiveField(19, defaultValue: _defaultLeftShortcut)
+  @HiveField(19, defaultValue: defaultLeftShortcut)
   List<ShortcutDetail> get leftSlideShortcut;
   @override
-  @HiveField(20, defaultValue: _defaultRightShortcut)
+  @HiveField(20, defaultValue: defaultRightShortcut)
   List<ShortcutDetail> get rightSlideShortcut;
   @override
   @JsonKey(ignore: true)
