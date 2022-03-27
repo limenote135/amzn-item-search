@@ -1,4 +1,4 @@
-import 'package:amasearch/models/general_settings.dart';
+import 'package:amasearch/models/general_settings_default.dart';
 
 const purchaseEventName = "purchase";
 const pushSearchButtonEventName = "pushSearchButton";
@@ -27,12 +27,20 @@ const pushSearchButtonMercariName = "Mercari";
 const pushSearchButtonAmazonStockName = "AmazonStock";
 const pushSearchButtonAmazonListableName = "AmazonListable";
 const pushSearchButtonAmazonListName = "AmazonList";
+const pushSearchButtonKeepaWebName = "Keepa(Web)";
+const pushSearchButtonRakutenName = "Rakuten";
+const pushSearchButtonKakakuComModelName = "KakakuComModel";
+const pushSearchButtonYahooAuctionName = "YahooAuction";
+const pushSearchButtonBookOffUrl = "BookOff";
+const pushSearchButtonSurugayaUrl = "Surugaya";
+const pushSearchButtonOrderHistoryUrl = "OrderHistory";
+
 const pushSearchButtonAmazonNewOffersName = "AmazonNewOffers";
 const pushSearchButtonAmazonUsedOffersName = "AmazonUsedOffers";
+const pushSearchButtonOpenKeepaName = "OpenKeepa"; // KeepaPage からブラウザで開いた
 
 const customButtonEventMap = <String, String>{
   customButtonAmazonUrl: pushSearchButtonAmazonName,
-  customButtonKeepaUrl: pushSearchButtonKeepaName,
   customButtonDeltaUrl: pushSearchButtonDeltaName,
   customButtonMonoSearchUrl: pushSearchButtonMonoSearchName,
   customButtonKeezonUrl: pushSearchButtonKeezonName,
@@ -40,6 +48,13 @@ const customButtonEventMap = <String, String>{
   customButtonAmazonStockUrl: pushSearchButtonAmazonStockName,
   customButtonAmazonListableUrl: pushSearchButtonAmazonListableName,
   customButtonAmazonListingsUrl: pushSearchButtonAmazonListName,
+  customButtonKeepaUrl: pushSearchButtonKeepaWebName,
+  customButtonRakutenUrl: pushSearchButtonRakutenName,
+  customButtonKakakuComModelUrl: pushSearchButtonKakakuComModelName,
+  customButtonYahooAuctionUrl: pushSearchButtonYahooAuctionName,
+  customButtonBookOffUrl: pushSearchButtonBookOffUrl,
+  customButtonSurugayaUrl: pushSearchButtonSurugayaUrl,
+  customButtonOrderHistoryUrl: pushSearchButtonOrderHistoryUrl,
 };
 
 const calcEventDiv = "div";
