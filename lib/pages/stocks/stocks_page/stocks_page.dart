@@ -58,11 +58,11 @@ final _daysProvider = Provider((ref) {
   ];
 });
 
-final _stockPageModeProvider = StateProvider((_) => _StockPageMode.normal);
+final _stockPageModeProvider = StateProvider((_) => StockPageMode.normal);
 
 final _selectAllProvider = StateProvider((_) => false);
 
-enum _StockPageMode {
+enum StockPageMode {
   normal,
   select,
   listing,
@@ -90,8 +90,8 @@ class StocksPage extends HookConsumerWidget {
     final mode = ref.watch(_stockPageModeProvider);
     // 選択モードで選択アイテム数が 0 になったらノーマルモードに戻る
     ref.listen<int>(_selectedItemCount, (previous, next) {
-      if (next == 0 && mode == _StockPageMode.select) {
-        ref.read(_stockPageModeProvider.notifier).state = _StockPageMode.normal;
+      if (next == 0 && mode == StockPageMode.select) {
+        ref.read(_stockPageModeProvider.notifier).state = StockPageMode.normal;
         ref.read(_selectAllProvider.notifier).state = false;
       }
     });
@@ -103,7 +103,7 @@ class StocksPage extends HookConsumerWidget {
   }
 
   void _resetState(WidgetRef ref) {
-    ref.read(_stockPageModeProvider.notifier).state = _StockPageMode.normal;
+    ref.read(_stockPageModeProvider.notifier).state = StockPageMode.normal;
     ref.read(selectedStockItemsControllerProvider.notifier).removeAll();
     ref.read(_selectAllProvider.notifier).state = false;
   }
@@ -113,11 +113,11 @@ class StocksPage extends HookConsumerWidget {
     final mode = ref.watch(_stockPageModeProvider);
 
     switch (mode) {
-      case _StockPageMode.normal:
+      case StockPageMode.normal:
         return _getNormalAppBar(context, ref);
-      case _StockPageMode.select:
+      case StockPageMode.select:
         return _getItemSelectAppBar(context, ref, selectedItems);
-      case _StockPageMode.listing:
+      case StockPageMode.listing:
         return _getListingsAppbar(context, ref, selectedItems);
     }
   }
@@ -373,8 +373,7 @@ class StocksPage extends HookConsumerWidget {
         );
         break;
       case _StockPageActions.listing:
-        ref.read(_stockPageModeProvider.notifier).state =
-            _StockPageMode.listing;
+        ref.read(_stockPageModeProvider.notifier).state = StockPageMode.listing;
         break;
     }
   }
@@ -427,14 +426,14 @@ class _Body extends HookConsumerWidget {
     final selectAll = ref.watch(_selectAllProvider);
 
     final tile = _InkWell(
-      child: mode == _StockPageMode.normal
+      child: mode == StockPageMode.normal
           ? const SlidableDeleteTile(child: ItemTile())
           : const ItemTile(),
     );
 
     return Column(
       children: [
-        if (mode == _StockPageMode.select || mode == _StockPageMode.listing)
+        if (mode == StockPageMode.select || mode == StockPageMode.listing)
           WithUnderLine(
             CheckboxListTile(
               controlAffinity: ListTileControlAffinity.leading,
@@ -459,15 +458,16 @@ class _Body extends HookConsumerWidget {
               },
             ),
           ),
-        WithUnderLine(
-          RepaintBoundary(
-            key: _summaryKey,
-            child: Container(
-              color: Theme.of(context).backgroundColor,
-              child: const TotalProfit(),
+        if (mode == StockPageMode.normal)
+          WithUnderLine(
+            RepaintBoundary(
+              key: _summaryKey,
+              child: Container(
+                color: Theme.of(context).backgroundColor,
+                child: const TotalProfit(),
+              ),
             ),
           ),
-        ),
         Expanded(
           child: ListView.separated(
             separatorBuilder: (context, index) => const ThemeDivider(),
@@ -488,7 +488,12 @@ class _Body extends HookConsumerWidget {
                   children: [
                     RepaintBoundary(
                       key: keyMaps[day],
-                      child: summary,
+                      child: ProviderScope(
+                        overrides: [
+                          currentPageModeProvider.overrideWithValue(mode),
+                        ],
+                        child: summary,
+                      ),
                     ),
                     const ThemeDivider(),
                     tileImpl,
@@ -560,15 +565,15 @@ class _InkWell extends HookConsumerWidget {
     return InkWell(
       onTap: () {
         switch (mode) {
-          case _StockPageMode.normal:
+          case StockPageMode.normal:
             // ノーマルモードでタップ時は詳細画面へ遷移
             Navigator.push(
               context,
               DetailPage.route(item),
             );
             break;
-          case _StockPageMode.select:
-          case _StockPageMode.listing:
+          case StockPageMode.select:
+          case StockPageMode.listing:
             // 選択モード・出品モードでタップ時は選択アイテムに追加
             ref
                 .read(selectedStockItemsControllerProvider.notifier)
@@ -578,13 +583,13 @@ class _InkWell extends HookConsumerWidget {
       },
       onLongPress: () {
         switch (mode) {
-          case _StockPageMode.normal:
+          case StockPageMode.normal:
             // ノーマルモードで長押しした場合は選択モードに切り替え
             ref.read(_stockPageModeProvider.notifier).state =
-                _StockPageMode.select;
+                StockPageMode.select;
             break;
-          case _StockPageMode.select:
-          case _StockPageMode.listing:
+          case StockPageMode.select:
+          case StockPageMode.listing:
             break;
         }
         ref
