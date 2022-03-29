@@ -157,10 +157,35 @@ class _TileBody extends HookConsumerWidget {
         Row(
           children: [
             Expanded(child: Text("個数: ${item.amount} 個", style: smallSize)),
+          ],
+        ),
+        Row(
+          children: [
             Expanded(
               child: Text(
                 "仕入れ日: "
                 "${DateTime.parse(item.purchaseDate).toLocal().format()}",
+                style: smallSize,
+              ),
+            ),
+            Expanded(
+              child: Text.rich(
+                TextSpan(
+                  text: "出品日: ",
+                  children: [
+                    if (item.listingDate != null)
+                      TextSpan(
+                        text: DateTime.parse(item.listingDate!)
+                            .toLocal()
+                            .dayFormat(),
+                      )
+                    else
+                      const TextSpan(
+                        text: "未出品",
+                        style: strongTextStyle,
+                      )
+                  ],
+                ),
                 style: smallSize,
               ),
             ),
