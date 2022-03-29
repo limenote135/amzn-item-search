@@ -33,6 +33,7 @@ class _$StockItemTearOff {
       @HiveField(11, defaultValue: "") String retailer = "",
       @HiveField(12, defaultValue: "") required String id,
       @HiveField(13, defaultValue: -1) int breakEven = 0,
+      @HiveField(14) String? listingDate,
       bool autogenSku = false}) {
     return _StockItem(
       purchaseDate: purchaseDate,
@@ -49,6 +50,7 @@ class _$StockItemTearOff {
       retailer: retailer,
       id: id,
       breakEven: breakEven,
+      listingDate: listingDate,
       autogenSku: autogenSku,
     );
   }
@@ -88,6 +90,8 @@ mixin _$StockItem {
       throw _privateConstructorUsedError; // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
   @HiveField(13, defaultValue: -1)
   int get breakEven => throw _privateConstructorUsedError;
+  @HiveField(14)
+  String? get listingDate => throw _privateConstructorUsedError;
   bool get autogenSku => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -114,6 +118,7 @@ abstract class $StockItemCopyWith<$Res> {
       @HiveField(11, defaultValue: "") String retailer,
       @HiveField(12, defaultValue: "") String id,
       @HiveField(13, defaultValue: -1) int breakEven,
+      @HiveField(14) String? listingDate,
       bool autogenSku});
 
   $AsinDataCopyWith<$Res> get item;
@@ -143,6 +148,7 @@ class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
     Object? retailer = freezed,
     Object? id = freezed,
     Object? breakEven = freezed,
+    Object? listingDate = freezed,
     Object? autogenSku = freezed,
   }) {
     return _then(_value.copyWith(
@@ -202,6 +208,10 @@ class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
           ? _value.breakEven
           : breakEven // ignore: cast_nullable_to_non_nullable
               as int,
+      listingDate: listingDate == freezed
+          ? _value.listingDate
+          : listingDate // ignore: cast_nullable_to_non_nullable
+              as String?,
       autogenSku: autogenSku == freezed
           ? _value.autogenSku
           : autogenSku // ignore: cast_nullable_to_non_nullable
@@ -238,6 +248,7 @@ abstract class _$StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
       @HiveField(11, defaultValue: "") String retailer,
       @HiveField(12, defaultValue: "") String id,
       @HiveField(13, defaultValue: -1) int breakEven,
+      @HiveField(14) String? listingDate,
       bool autogenSku});
 
   @override
@@ -269,6 +280,7 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
     Object? retailer = freezed,
     Object? id = freezed,
     Object? breakEven = freezed,
+    Object? listingDate = freezed,
     Object? autogenSku = freezed,
   }) {
     return _then(_StockItem(
@@ -328,6 +340,10 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
           ? _value.breakEven
           : breakEven // ignore: cast_nullable_to_non_nullable
               as int,
+      listingDate: listingDate == freezed
+          ? _value.listingDate
+          : listingDate // ignore: cast_nullable_to_non_nullable
+              as String?,
       autogenSku: autogenSku == freezed
           ? _value.autogenSku
           : autogenSku // ignore: cast_nullable_to_non_nullable
@@ -355,6 +371,7 @@ class _$_StockItem implements _StockItem {
       @HiveField(11, defaultValue: "") this.retailer = "",
       @HiveField(12, defaultValue: "") required this.id,
       @HiveField(13, defaultValue: -1) this.breakEven = 0,
+      @HiveField(14) this.listingDate,
       this.autogenSku = false});
 
   @override
@@ -410,13 +427,16 @@ class _$_StockItem implements _StockItem {
   @override // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
   @HiveField(13, defaultValue: -1)
   final int breakEven;
+  @override
+  @HiveField(14)
+  final String? listingDate;
   @JsonKey()
   @override
   final bool autogenSku;
 
   @override
   String toString() {
-    return 'StockItem(purchaseDate: $purchaseDate, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, profitPerItem: $profitPerItem, amount: $amount, condition: $condition, subCondition: $subCondition, sku: $sku, memo: $memo, item: $item, retailer: $retailer, id: $id, breakEven: $breakEven, autogenSku: $autogenSku)';
+    return 'StockItem(purchaseDate: $purchaseDate, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, profitPerItem: $profitPerItem, amount: $amount, condition: $condition, subCondition: $subCondition, sku: $sku, memo: $memo, item: $item, retailer: $retailer, id: $id, breakEven: $breakEven, listingDate: $listingDate, autogenSku: $autogenSku)';
   }
 
   @override
@@ -443,6 +463,8 @@ class _$_StockItem implements _StockItem {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.breakEven, breakEven) &&
             const DeepCollectionEquality()
+                .equals(other.listingDate, listingDate) &&
+            const DeepCollectionEquality()
                 .equals(other.autogenSku, autogenSku));
   }
 
@@ -463,6 +485,7 @@ class _$_StockItem implements _StockItem {
       const DeepCollectionEquality().hash(retailer),
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(breakEven),
+      const DeepCollectionEquality().hash(listingDate),
       const DeepCollectionEquality().hash(autogenSku));
 
   @JsonKey(ignore: true)
@@ -487,6 +510,7 @@ abstract class _StockItem implements StockItem {
       @HiveField(11, defaultValue: "") String retailer,
       @HiveField(12, defaultValue: "") required String id,
       @HiveField(13, defaultValue: -1) int breakEven,
+      @HiveField(14) String? listingDate,
       bool autogenSku}) = _$_StockItem;
 
   @override
@@ -531,6 +555,9 @@ abstract class _StockItem implements StockItem {
   @override // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
   @HiveField(13, defaultValue: -1)
   int get breakEven;
+  @override
+  @HiveField(14)
+  String? get listingDate;
   @override
   bool get autogenSku;
   @override
