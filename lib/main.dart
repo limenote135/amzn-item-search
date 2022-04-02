@@ -104,7 +104,16 @@ Future<void> initFirebase() async {
   // Pass all uncaught errors to Crashlytics.
   final Function? originalOnError = FlutterError.onError;
   FlutterError.onError = (FlutterErrorDetails errorDetails) async {
-    await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+    final exception = errorDetails.exceptionAsString();
+    // 商品画像や Keepa 画像の表示に失敗した場合(NotFound や通信エラー)のエラーは送信しない
+    if (!exception.startsWith(
+          "Bad state: Failed to load https://m.media-amazon.com/images/",
+        ) &&
+        !exception.contains(
+          "Bad state: Failed to load https://graph.keepa.com/pricehistory.png",
+        )) {
+      await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+    }
     // Forward to original handler.
     // ignore: avoid_dynamic_calls
     originalOnError!(errorDetails);
