@@ -15,13 +15,22 @@ import 'package:amasearch/pages/stocks/detail_page/detail_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/item_tile.dart';
 import 'package:amasearch/pages/stocks/stocks_page/summary_tile.dart';
 import 'package:amasearch/pages/stocks/stocks_page/total_profit.dart';
+import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/csv.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/util/listings.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 
@@ -36,6 +45,7 @@ enum _StockPageActions {
   upload,
   share,
   clear,
+  listing,
 }
 
 // 仕入れ日のリスト
@@ -48,11 +58,14 @@ final _daysProvider = Provider((ref) {
   ];
 });
 
-final _stockPageModeProvider = StateProvider((_) => _StockPageMode.normal);
+final _stockPageModeProvider = StateProvider((_) => StockPageMode.normal);
 
-enum _StockPageMode {
+final _selectAllProvider = StateProvider((_) => false);
+
+enum StockPageMode {
   normal,
-  delete,
+  select,
+  listing,
 }
 
 // 実績シェア用に仕入れ日ごとに GlobalKey を作成
@@ -74,10 +87,12 @@ class StocksPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 選択アイテム数が 0 になったらノーマルモードに戻る
+    final mode = ref.watch(_stockPageModeProvider);
+    // 選択モードで選択アイテム数が 0 になったらノーマルモードに戻る
     ref.listen<int>(_selectedItemCount, (previous, next) {
-      if (next == 0) {
-        ref.read(_stockPageModeProvider.notifier).state = _StockPageMode.normal;
+      if (next == 0 && mode == StockPageMode.select) {
+        ref.read(_stockPageModeProvider.notifier).state = StockPageMode.normal;
+        ref.read(_selectAllProvider.notifier).state = false;
       }
     });
 
@@ -87,15 +102,23 @@ class StocksPage extends HookConsumerWidget {
     );
   }
 
+  void _resetState(WidgetRef ref) {
+    ref.read(_stockPageModeProvider.notifier).state = StockPageMode.normal;
+    ref.read(selectedStockItemsControllerProvider.notifier).removeAll();
+    ref.read(_selectAllProvider.notifier).state = false;
+  }
+
   AppBar _appBarSelector(BuildContext context, WidgetRef ref) {
     final selectedItems = ref.watch(selectedStockItemsControllerProvider);
     final mode = ref.watch(_stockPageModeProvider);
 
     switch (mode) {
-      case _StockPageMode.normal:
+      case StockPageMode.normal:
         return _getNormalAppBar(context, ref);
-      case _StockPageMode.delete:
+      case StockPageMode.select:
         return _getItemSelectAppBar(context, ref, selectedItems);
+      case StockPageMode.listing:
+        return _getListingsAppbar(context, ref, selectedItems);
     }
   }
 
@@ -122,6 +145,13 @@ class StocksPage extends HookConsumerWidget {
               ),
             ),
             PopupMenuItem(
+              value: _StockPageActions.listing,
+              child: ListTile(
+                leading: Icon(Icons.upload_file),
+                title: Text("Amazonへ出品登録"),
+              ),
+            ),
+            PopupMenuItem(
               value: _StockPageActions.clear,
               child: ListTile(
                 leading: Icon(Icons.delete),
@@ -144,12 +174,16 @@ class StocksPage extends HookConsumerWidget {
       leading: IconButton(
         icon: const Icon(Icons.clear),
         onPressed: () {
-          ref.read(_stockPageModeProvider.notifier).state =
-              _StockPageMode.normal;
-          ref.read(selectedStockItemsControllerProvider.notifier).removeAll();
+          _resetState(ref);
         },
       ),
       actions: [
+        IconButton(
+          icon: const Icon(Icons.upload_file),
+          onPressed: () async {
+            await _callListings(context, ref, selected);
+          },
+        ),
         IconButton(
           icon: const Icon(Icons.delete),
           onPressed: () async {
@@ -168,9 +202,124 @@ class StocksPage extends HookConsumerWidget {
                   .removeAll();
             }
           },
-        )
+        ),
       ],
     );
+  }
+
+  AppBar _getListingsAppbar(
+    BuildContext context,
+    WidgetRef ref,
+    List<StockItem> selected,
+  ) {
+    return AppBar(
+      title: Text("${selected.length} 件選択"),
+      leading: IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          _resetState(ref);
+        },
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: const StadiumBorder(),
+            ),
+            onPressed: () async {
+              await _callListings(context, ref, selected);
+            },
+            child: const Text("確定"),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _callListings(
+    BuildContext context,
+    WidgetRef ref,
+    List<StockItem> selected,
+  ) async {
+    final user = await ref.read(authStateChangesProvider.future);
+
+    final isOk = await showOkCancelAlertDialog(
+      context: context,
+      title: "Amazonへ出品登録",
+      message: "${selected.length}件の商品を出品登録します\n"
+          "(コンディション説明と商品写真は現在未対応です)",
+    );
+
+    if (isOk != OkCancelResult.ok) {
+      return;
+    }
+
+    try {
+      await EasyLoading.show(status: "出品処理中...");
+      final items = selected.map((e) => e.toListingItem()).toList();
+      final file = await createListingsFile(items);
+      final filename = basename(file.path);
+      final gcsPath =
+          "Users/${user!.uid}/Listings/$listingsFileVersion/$filename";
+      try {
+        await FirebaseStorage.instance.ref(gcsPath).putFile(file);
+      } on FirebaseException catch (e, stack) {
+        await recordError(e, stack, information: const ["UploadListingFile"]);
+        await EasyLoading.dismiss();
+        await showOkAlertDialog(
+          context: context,
+          title: "エラー",
+          message: "エラーが発生しました\n"
+              "${e.message}(${e.code})",
+        );
+        return;
+      }
+      final fn = ref.read(cloudFunctionProvider(functionNameListingItems));
+      await fn.call<String>(<String, String>{
+        "version": listingsFileVersion,
+        "filename": filename,
+      });
+
+      ref.read(stockItemListControllerProvider.notifier).setListingDate(
+            selected,
+            currentTimeString(),
+          );
+
+      await EasyLoading.dismiss();
+      final ret = await showOkCancelAlertDialog(
+        context: context,
+        title: "出品登録",
+        message: "Amazonへ出品登録を行いました。\n"
+            "処理状況はセラーセントラルで確認できます。",
+        okLabel: "閉じる",
+        cancelLabel: "セラーセントラルを開く",
+      );
+      _resetState(ref);
+      if (ret == OkCancelResult.cancel) {
+        // セラーセントラルを開く
+        const url = "https://sellercentral.amazon.co.jp/listing/status";
+        await FlutterWebBrowser.openWebPage(url: url);
+      }
+
+      await ref
+          .read(analyticsControllerProvider)
+          .logSingleEvent(amazonListingEventName);
+      // ignore: avoid_catches_without_on_clauses
+    } catch (e, st) {
+      await recordError(e, st, information: const ["Amazon listings"]);
+      await EasyLoading.dismiss();
+      await showOkAlertDialog(
+        context: context,
+        title: "エラー",
+        message: "出品に失敗しました\n"
+            "${e.toString()}",
+      );
+    } finally {
+      if (EasyLoading.isShow) {
+        await EasyLoading.dismiss();
+      }
+    }
   }
 
   Future<void> handleAction(
@@ -188,7 +337,10 @@ class StocksPage extends HookConsumerWidget {
       case _StockPageActions.upload:
         final timestamp = DateTime.now().timestampFormat();
         final file = await createStockItemCsv(
-            "StockList_$timestamp", itemList, settings.csvOrder);
+          "StockList_$timestamp",
+          itemList,
+          settings.csvOrder,
+        );
         await Share.shareFiles(
           [file.absolute.path],
           subject: "仕入れ済み商品一覧_$timestamp",
@@ -223,6 +375,9 @@ class StocksPage extends HookConsumerWidget {
           deleteAll: true,
           content: "在庫リストからすべてのアイテムを削除します",
         );
+        break;
+      case _StockPageActions.listing:
+        ref.read(_stockPageModeProvider.notifier).state = StockPageMode.listing;
         break;
     }
   }
@@ -272,23 +427,51 @@ class _Body extends HookConsumerWidget {
 
     final keyMaps = ref.watch(_captureKeyMapProvider);
 
+    final selectAll = ref.watch(_selectAllProvider);
+
     final tile = _InkWell(
-      child: mode == _StockPageMode.normal
+      child: mode == StockPageMode.normal
           ? const SlidableDeleteTile(child: ItemTile())
           : const ItemTile(),
     );
 
     return Column(
       children: [
-        WithUnderLine(
-          RepaintBoundary(
-            key: _summaryKey,
-            child: Container(
-              color: Theme.of(context).backgroundColor,
-              child: const TotalProfit(),
+        if (mode == StockPageMode.select || mode == StockPageMode.listing)
+          WithUnderLine(
+            CheckboxListTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              title: const Text("すべて選択"),
+              value: selectAll,
+              onChanged: (value) {
+                if (value == null) {
+                  return;
+                }
+
+                if (value) {
+                  ref
+                      .read(selectedStockItemsControllerProvider.notifier)
+                      .setItems(items);
+                  ref.read(_selectAllProvider.notifier).state = true;
+                } else {
+                  ref
+                      .read(selectedStockItemsControllerProvider.notifier)
+                      .removeAll();
+                  ref.read(_selectAllProvider.notifier).state = false;
+                }
+              },
             ),
           ),
-        ),
+        if (mode == StockPageMode.normal)
+          WithUnderLine(
+            RepaintBoundary(
+              key: _summaryKey,
+              child: Container(
+                color: Theme.of(context).backgroundColor,
+                child: const TotalProfit(),
+              ),
+            ),
+          ),
         Expanded(
           child: ListView.separated(
             separatorBuilder: (context, index) => const ThemeDivider(),
@@ -309,7 +492,12 @@ class _Body extends HookConsumerWidget {
                   children: [
                     RepaintBoundary(
                       key: keyMaps[day],
-                      child: summary,
+                      child: ProviderScope(
+                        overrides: [
+                          currentPageModeProvider.overrideWithValue(mode),
+                        ],
+                        child: summary,
+                      ),
                     ),
                     const ThemeDivider(),
                     tileImpl,
@@ -381,15 +569,16 @@ class _InkWell extends HookConsumerWidget {
     return InkWell(
       onTap: () {
         switch (mode) {
-          case _StockPageMode.normal:
+          case StockPageMode.normal:
             // ノーマルモードでタップ時は詳細画面へ遷移
             Navigator.push(
               context,
               DetailPage.route(item),
             );
             break;
-          case _StockPageMode.delete:
-            // 削除モードでタップ時は選択アイテムに追加
+          case StockPageMode.select:
+          case StockPageMode.listing:
+            // 選択モード・出品モードでタップ時は選択アイテムに追加
             ref
                 .read(selectedStockItemsControllerProvider.notifier)
                 .toggleItem(item);
@@ -398,12 +587,13 @@ class _InkWell extends HookConsumerWidget {
       },
       onLongPress: () {
         switch (mode) {
-          case _StockPageMode.normal:
-            // ノーマルモードで長押しした場合は削除画面に切り替え
+          case StockPageMode.normal:
+            // ノーマルモードで長押しした場合は選択モードに切り替え
             ref.read(_stockPageModeProvider.notifier).state =
-                _StockPageMode.delete;
+                StockPageMode.select;
             break;
-          case _StockPageMode.delete:
+          case StockPageMode.select:
+          case StockPageMode.listing:
             break;
         }
         ref

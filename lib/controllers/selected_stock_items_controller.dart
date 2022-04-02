@@ -22,6 +22,10 @@ class SelectedStockItemsController extends StateNotifier<List<StockItem>> {
     }
   }
 
+  void setItems(List<StockItem> items) {
+    state = [...items];
+  }
+
   void removeAll() {
     state = [];
   }
