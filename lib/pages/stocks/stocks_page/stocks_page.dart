@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -185,12 +186,17 @@ class StocksPage extends HookConsumerWidget {
 
     switch (value) {
       case _StockPageActions.upload:
-        final file =
-            await createStockItemCsv("StockList", itemList, settings.csvOrder);
-        await Share.shareFiles([file.absolute.path], subject: "仕入れ済み商品一覧");
+        final timestamp = DateTime.now().timestampFormat();
+        final file = await createStockItemCsv(
+            "StockList_$timestamp", itemList, settings.csvOrder);
+        await Share.shareFiles(
+          [file.absolute.path],
+          subject: "仕入れ済み商品一覧_$timestamp",
+        );
         await ref
             .read(analyticsControllerProvider)
             .logSingleEvent(uploadListEventName);
+        unawaited(file.delete());
         break;
       case _StockPageActions.share:
         final result = await showConfirmationDialog(
