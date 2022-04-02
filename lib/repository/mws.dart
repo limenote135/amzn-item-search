@@ -7,6 +7,7 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/util/alert.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/dio.dart';
+import 'package:amasearch/util/exceptions.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:amasearch/util/read_aloud_util.dart';
 import 'package:amasearch/util/text_to_speech.dart';
@@ -194,6 +195,8 @@ class MwsRepository {
       opt: Options(headers: header),
       customHandler: (code) {
         switch (code) {
+          case 404:
+            throw const AmazonItemNotFoundException("このマーケットでは販売できない商品です");
           case 412:
             // TODO:  await を外したが、これで問題ないか要確認
             _container.refresh(updateProvider);
