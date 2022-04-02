@@ -10,6 +10,7 @@ const shareSnsEventName = "snsShare";
 const deleteSearchHistoryEventName = "deleteSearchHistory";
 const deleteAllSearchHistoryEventName = "deleteAllSearchHistory";
 const directPurchaseEventName = "directPurchase";
+const amazonListingEventName = "amazonListing";
 
 const searchEventJan = "searchJan";
 const searchEventWord = "searchWord";

@@ -301,6 +301,10 @@ class StocksPage extends HookConsumerWidget {
         const url = "https://sellercentral.amazon.co.jp/listing/status";
         await FlutterWebBrowser.openWebPage(url: url);
       }
+
+      await ref
+          .read(analyticsControllerProvider)
+          .logSingleEvent(amazonListingEventName);
       // ignore: avoid_catches_without_on_clauses
     } catch (e, st) {
       await recordError(e, st, information: const ["Amazon listings"]);
