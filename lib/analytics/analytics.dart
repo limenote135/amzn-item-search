@@ -39,10 +39,13 @@ class AnalyticsController {
   }
 
   Future<void> logPushSearchButtonEvent(String name) {
+    final value = name.length > eventValueMaxLength
+        ? name.substring(0, eventValueMaxLength)
+        : name;
     return FirebaseAnalytics.instance.logEvent(
       name: pushSearchButtonEventName,
       parameters: <String, dynamic>{
-        "type": name,
+        "type": value,
       },
     );
   }
