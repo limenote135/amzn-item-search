@@ -9,6 +9,7 @@ import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'slidable_tile.dart';
@@ -29,10 +30,16 @@ class ItemTile extends HookConsumerWidget {
       ],
       data: (value) {
         if (value.asins.isEmpty) {
-          return ProviderScope(
-            overrides: [
-              currentSearchItemProvider.overrideWithValue(value),
-            ],
+          return InkWell(
+            onLongPress: () async {
+              await Clipboard.setData(ClipboardData(text: value.jan));
+              ScaffoldMessenger.of(context).removeCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("コピーしました: ${value.jan}"),
+                ),
+              );
+            },
             child: Center(
               child: SizedBox(
                 height: 30,
