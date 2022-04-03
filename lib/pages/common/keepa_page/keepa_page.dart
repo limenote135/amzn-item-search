@@ -1,4 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/util/util.dart';
@@ -205,6 +207,9 @@ class _Body extends HookConsumerWidget {
         ),
         ElevatedButton(
           onPressed: () async {
+            await ref
+                .read(analyticsControllerProvider)
+                .logPushSearchButtonEvent(pushSearchButtonOpenKeepaName);
             final url = "https://keepa.com/#!product/5-$asin/";
             await FlutterWebBrowser.openWebPage(url: url);
           },
