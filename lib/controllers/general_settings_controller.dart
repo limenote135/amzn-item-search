@@ -1,6 +1,7 @@
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/general_settings.dart';
+import 'package:amasearch/models/general_settings_default.dart';
 import 'package:amasearch/models/keepa_settings.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,14 +22,68 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     final box = _read(settingsBoxProvider);
     var settings = box.get(generalSettingsKeyName) as GeneralSettings?;
     if (settings != null) {
-      // 小口設定の削除に伴うマイグレーション since v1.2.0
+      // 小口設定の削除に伴うマイグレーション since v1.1.4
       if (settings.isMajorCustomer == false) {
         settings = settings.copyWith(isMajorCustomer: true);
       }
+
+      // カスタムボタンを増やした際のマイグレーション since v1.2.0
+      var buttons = settings.customButtons;
+      if (buttons.length == 12) {
+        buttons = migrateCustomButtonsToV1_2_0(buttons);
+        settings = settings.copyWith(customButtons: buttons);
+      }
+
       state = settings;
     }
     // 新規追加された項目が、ロード時にデフォルト値になっている可能性があるので一度保存する
     box.put(generalSettingsKeyName, state);
+  }
+
+  List<CustomButtonDetail> migrateCustomButtonsToV1_2_0(
+    List<CustomButtonDetail> current,
+  ) {
+    var migrationIndex = 0;
+    final newButtons = <CustomButtonDetail>[];
+
+    // 未使用ボタンに新しいプリセットを追加していく処理
+    for (var i = 0; i < current.length; i++) {
+      if (!current[i].enable && current[i].pattern == "") {
+        newButtons.add(
+          current[i].copyWith(
+            title: migrationCustomButtons[migrationIndex].title,
+            pattern: migrationCustomButtons[migrationIndex].pattern,
+          ),
+        );
+        migrationIndex++;
+      } else {
+        newButtons.add(current[i]);
+      }
+    }
+
+    // 新しくボタンを追加していく処理
+    var buttonIndex = 1;
+    for (var i = newButtons.length + 1; i <= 20; i++) {
+      if (migrationIndex < migrationCustomButtons.length) {
+        newButtons.add(
+          migrationCustomButtons[migrationIndex].copyWith(
+            id: "bt$i",
+          ),
+        );
+        migrationIndex++;
+      } else {
+        newButtons.add(
+          CustomButtonDetail(
+            id: "bt$i",
+            enable: false,
+            title: "ボタン$buttonIndex",
+            pattern: "",
+          ),
+        );
+        buttonIndex++;
+      }
+    }
+    return newButtons;
   }
 
   void update({
