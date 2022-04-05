@@ -348,7 +348,6 @@ class StocksPage extends HookConsumerWidget {
         await ref
             .read(analyticsControllerProvider)
             .logSingleEvent(uploadListEventName);
-        unawaited(file.delete());
         break;
       case _StockPageActions.share:
         final result = await showConfirmationDialog(
