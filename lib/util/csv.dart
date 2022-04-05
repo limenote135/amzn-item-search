@@ -15,7 +15,13 @@ Future<File> createStockItemCsv(
   List<CsvColumn> order,
 ) async {
   final tempDir = await getTemporaryDirectory();
-  final csvDirPath = tempDir.absolute.path;
+  final csvDirPath = "${tempDir.absolute.path}/stockList";
+  final csvDir = Directory(csvDirPath);
+  if (csvDir.existsSync()) {
+    csvDir.deleteSync(recursive: true);
+  }
+  csvDir.createSync();
+
   final file = File("$csvDirPath/$filename.csv");
   final data = <List<Object>>[
     _createHeader(order),
