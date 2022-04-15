@@ -83,6 +83,8 @@ class _Body extends HookConsumerWidget {
     final displayState = useState(
       <bool>[settings.showNew, settings.showUsed, settings.showAmazon],
     );
+    final showBuyBox = useState(settings.showFba);
+    final showFba = useState(settings.showFba);
     final rangeState = useState(_createRangeState(settings.period));
 
     String createUrl() {
@@ -90,6 +92,8 @@ class _Body extends HookConsumerWidget {
         "new=${displayState.value[0] ? "1" : "0"}",
         "used=${displayState.value[1] ? "1" : "0"}",
         "amazon=${displayState.value[2] ? "1" : "0"}",
+        "bb=${showBuyBox.value ? "1" : "0"}",
+        "fba=${showFba.value ? "1" : "0"}",
       ];
 
       final index = rangeState.value.indexOf(true);
@@ -128,54 +132,81 @@ class _Body extends HookConsumerWidget {
         ListTile(
           title: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: ToggleButtons(
-                  isSelected: displayState.value,
-                  borderRadius: BorderRadius.circular(30),
-                  onPressed: (index) {
-                    // コピーするため toList する
-                    final newState = displayState.value.toList();
-                    newState[index] = !newState[index];
-                    if (newState.any((e) => e)) {
-                      // 1つ以上は常に選択されるようにする
-                      displayState.value = newState;
-                    }
-                  },
-                  constraints: BoxConstraints(
-                    minWidth: (media.size.width - 40) / 3,
-                    minHeight: height,
-                  ),
-                  children: const [
-                    Text("新品"),
-                    Text("中古"),
-                    Text("Amazon"),
-                  ],
+              ToggleButtons(
+                isSelected: displayState.value,
+                borderRadius: BorderRadius.circular(30),
+                onPressed: (index) {
+                  // コピーするため toList する
+                  final newState = displayState.value.toList();
+                  newState[index] = !newState[index];
+                  if (newState.any((e) => e)) {
+                    // 1つ以上は常に選択されるようにする
+                    displayState.value = newState;
+                  }
+                },
+                constraints: BoxConstraints(
+                  minWidth: (media.size.width - 40) / 3,
+                  minHeight: height,
                 ),
+                children: const [
+                  Text("新品"),
+                  Text("中古"),
+                  Text("Amazon"),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: ToggleButtons(
-                  isSelected: rangeState.value,
-                  borderRadius: BorderRadius.circular(30),
-                  onPressed: (index) {
-                    final newState =
-                        List.generate(rangeState.value.length, (_) => false);
-                    newState[index] = true;
-                    rangeState.value = newState;
-                  },
-                  constraints: BoxConstraints(
-                    minWidth: (media.size.width - 40) / 5,
-                    minHeight: height,
+              Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Text("カート価格"),
+                        const Spacer(),
+                        Switch(
+                          // title: const Text("カート"),
+                          value: showBuyBox.value,
+                          onChanged: (value) {
+                            showBuyBox.value = value;
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                  children: const [
-                    Text("1日"),
-                    Text("7日"),
-                    Text("31日"),
-                    Text("90日"),
-                    Text("365日"),
-                  ],
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Text("FBA 配送"),
+                        const Spacer(),
+                        Switch(
+                          value: showFba.value,
+                          onChanged: (value) {
+                            showFba.value = value;
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              ToggleButtons(
+                isSelected: rangeState.value,
+                borderRadius: BorderRadius.circular(30),
+                onPressed: (index) {
+                  final newState =
+                      List.generate(rangeState.value.length, (_) => false);
+                  newState[index] = true;
+                  rangeState.value = newState;
+                },
+                constraints: BoxConstraints(
+                  minWidth: (media.size.width - 40) / 5,
+                  minHeight: height,
                 ),
+                children: const [
+                  Text("1日"),
+                  Text("7日"),
+                  Text("31日"),
+                  Text("90日"),
+                  Text("365日"),
+                ],
               )
             ],
           ),

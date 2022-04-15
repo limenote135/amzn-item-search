@@ -31,6 +31,8 @@ class TileImage extends HookConsumerWidget {
       "new=${settings.showNew ? "1" : "0"}",
       "used=${settings.showUsed ? "1" : "0"}",
       "amazon=${settings.showAmazon ? "1" : "0"}",
+      "bb=${settings.showBuyBox ? "1" : "0"}",
+      "fba=${settings.showFba ? "1" : "0"}",
       "range=${settings.period.toValue()}",
     ];
     return "https://graph.keepa.com/pricehistory.png?"
