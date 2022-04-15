@@ -75,6 +75,26 @@ class _Body extends HookConsumerWidget {
             }
           },
         ),
+        SwitchListTile(
+          title: const Text("カート価格"),
+          value: settings.showBuyBox,
+          onChanged: (value) {
+            final newState = settings.copyWith(showBuyBox: value);
+            ref
+                .read(generalSettingsControllerProvider.notifier)
+                .update(keepaSettings: newState);
+          },
+        ),
+        SwitchListTile(
+          title: const Text("FBA 配送"),
+          value: settings.showFba,
+          onChanged: (value) {
+            final newState = settings.copyWith(showFba: value);
+            ref
+                .read(generalSettingsControllerProvider.notifier)
+                .update(keepaSettings: newState);
+          },
+        ),
         ListTile(
           title: const Text("期間"),
           trailing: DropdownButton<KeepaShowPeriod>(
