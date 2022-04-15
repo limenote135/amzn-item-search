@@ -148,7 +148,7 @@ class TileImage extends HookConsumerWidget {
                   child: ExtendedRawImage(
                     image: state.extendedImageInfo?.image,
                     // グラフ部分だけをトリミング
-                    sourceRect: const Rect.fromLTWH(45, 20, 80, 100),
+                    sourceRect: const Rect.fromLTWH(45, 20, 100, 100),
                   ),
                 );
               },
