@@ -31,6 +31,8 @@ class TileImage extends HookConsumerWidget {
       "new=${settings.showNew ? "1" : "0"}",
       "used=${settings.showUsed ? "1" : "0"}",
       "amazon=${settings.showAmazon ? "1" : "0"}",
+      "bb=${settings.showBuyBox ? "1" : "0"}",
+      "fba=${settings.showFba ? "1" : "0"}",
       "range=${settings.period.toValue()}",
     ];
     return "https://graph.keepa.com/pricehistory.png?"
@@ -146,7 +148,7 @@ class TileImage extends HookConsumerWidget {
                   child: ExtendedRawImage(
                     image: state.extendedImageInfo?.image,
                     // グラフ部分だけをトリミング
-                    sourceRect: const Rect.fromLTWH(45, 20, 80, 100),
+                    sourceRect: const Rect.fromLTWH(45, 20, 100, 100),
                   ),
                 );
               },

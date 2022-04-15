@@ -28,13 +28,19 @@ class _$KeepaSettingsTearOff {
       @HiveField(3, defaultValue: KeepaShowPeriod.month)
           KeepaShowPeriod period = KeepaShowPeriod.month,
       @HiveField(4, defaultValue: "")
-          String extraParam = ""}) {
+          String extraParam = "",
+      @HiveField(5, defaultValue: true)
+          bool showBuyBox = true,
+      @HiveField(6, defaultValue: false)
+          bool showFba = false}) {
     return _KeepaSettings(
       showNew: showNew,
       showUsed: showUsed,
       showAmazon: showAmazon,
       period: period,
       extraParam: extraParam,
+      showBuyBox: showBuyBox,
+      showFba: showFba,
     );
   }
 }
@@ -54,6 +60,10 @@ mixin _$KeepaSettings {
   KeepaShowPeriod get period => throw _privateConstructorUsedError;
   @HiveField(4, defaultValue: "")
   String get extraParam => throw _privateConstructorUsedError;
+  @HiveField(5, defaultValue: true)
+  bool get showBuyBox => throw _privateConstructorUsedError;
+  @HiveField(6, defaultValue: false)
+  bool get showFba => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $KeepaSettingsCopyWith<KeepaSettings> get copyWith =>
@@ -70,7 +80,9 @@ abstract class $KeepaSettingsCopyWith<$Res> {
       @HiveField(1, defaultValue: true) bool showUsed,
       @HiveField(2, defaultValue: true) bool showAmazon,
       @HiveField(3, defaultValue: KeepaShowPeriod.month) KeepaShowPeriod period,
-      @HiveField(4, defaultValue: "") String extraParam});
+      @HiveField(4, defaultValue: "") String extraParam,
+      @HiveField(5, defaultValue: true) bool showBuyBox,
+      @HiveField(6, defaultValue: false) bool showFba});
 }
 
 /// @nodoc
@@ -89,6 +101,8 @@ class _$KeepaSettingsCopyWithImpl<$Res>
     Object? showAmazon = freezed,
     Object? period = freezed,
     Object? extraParam = freezed,
+    Object? showBuyBox = freezed,
+    Object? showFba = freezed,
   }) {
     return _then(_value.copyWith(
       showNew: showNew == freezed
@@ -111,6 +125,14 @@ class _$KeepaSettingsCopyWithImpl<$Res>
           ? _value.extraParam
           : extraParam // ignore: cast_nullable_to_non_nullable
               as String,
+      showBuyBox: showBuyBox == freezed
+          ? _value.showBuyBox
+          : showBuyBox // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showFba: showFba == freezed
+          ? _value.showFba
+          : showFba // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -127,7 +149,9 @@ abstract class _$KeepaSettingsCopyWith<$Res>
       @HiveField(1, defaultValue: true) bool showUsed,
       @HiveField(2, defaultValue: true) bool showAmazon,
       @HiveField(3, defaultValue: KeepaShowPeriod.month) KeepaShowPeriod period,
-      @HiveField(4, defaultValue: "") String extraParam});
+      @HiveField(4, defaultValue: "") String extraParam,
+      @HiveField(5, defaultValue: true) bool showBuyBox,
+      @HiveField(6, defaultValue: false) bool showFba});
 }
 
 /// @nodoc
@@ -148,6 +172,8 @@ class __$KeepaSettingsCopyWithImpl<$Res>
     Object? showAmazon = freezed,
     Object? period = freezed,
     Object? extraParam = freezed,
+    Object? showBuyBox = freezed,
+    Object? showFba = freezed,
   }) {
     return _then(_KeepaSettings(
       showNew: showNew == freezed
@@ -170,6 +196,14 @@ class __$KeepaSettingsCopyWithImpl<$Res>
           ? _value.extraParam
           : extraParam // ignore: cast_nullable_to_non_nullable
               as String,
+      showBuyBox: showBuyBox == freezed
+          ? _value.showBuyBox
+          : showBuyBox // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showFba: showFba == freezed
+          ? _value.showFba
+          : showFba // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -188,7 +222,11 @@ class _$_KeepaSettings implements _KeepaSettings {
       @HiveField(3, defaultValue: KeepaShowPeriod.month)
           this.period = KeepaShowPeriod.month,
       @HiveField(4, defaultValue: "")
-          this.extraParam = ""});
+          this.extraParam = "",
+      @HiveField(5, defaultValue: true)
+          this.showBuyBox = true,
+      @HiveField(6, defaultValue: false)
+          this.showFba = false});
 
   @JsonKey()
   @override
@@ -210,10 +248,18 @@ class _$_KeepaSettings implements _KeepaSettings {
   @override
   @HiveField(4, defaultValue: "")
   final String extraParam;
+  @JsonKey()
+  @override
+  @HiveField(5, defaultValue: true)
+  final bool showBuyBox;
+  @JsonKey()
+  @override
+  @HiveField(6, defaultValue: false)
+  final bool showFba;
 
   @override
   String toString() {
-    return 'KeepaSettings(showNew: $showNew, showUsed: $showUsed, showAmazon: $showAmazon, period: $period, extraParam: $extraParam)';
+    return 'KeepaSettings(showNew: $showNew, showUsed: $showUsed, showAmazon: $showAmazon, period: $period, extraParam: $extraParam, showBuyBox: $showBuyBox, showFba: $showFba)';
   }
 
   @override
@@ -227,7 +273,10 @@ class _$_KeepaSettings implements _KeepaSettings {
                 .equals(other.showAmazon, showAmazon) &&
             const DeepCollectionEquality().equals(other.period, period) &&
             const DeepCollectionEquality()
-                .equals(other.extraParam, extraParam));
+                .equals(other.extraParam, extraParam) &&
+            const DeepCollectionEquality()
+                .equals(other.showBuyBox, showBuyBox) &&
+            const DeepCollectionEquality().equals(other.showFba, showFba));
   }
 
   @override
@@ -237,7 +286,9 @@ class _$_KeepaSettings implements _KeepaSettings {
       const DeepCollectionEquality().hash(showUsed),
       const DeepCollectionEquality().hash(showAmazon),
       const DeepCollectionEquality().hash(period),
-      const DeepCollectionEquality().hash(extraParam));
+      const DeepCollectionEquality().hash(extraParam),
+      const DeepCollectionEquality().hash(showBuyBox),
+      const DeepCollectionEquality().hash(showFba));
 
   @JsonKey(ignore: true)
   @override
@@ -251,7 +302,9 @@ abstract class _KeepaSettings implements KeepaSettings {
       @HiveField(1, defaultValue: true) bool showUsed,
       @HiveField(2, defaultValue: true) bool showAmazon,
       @HiveField(3, defaultValue: KeepaShowPeriod.month) KeepaShowPeriod period,
-      @HiveField(4, defaultValue: "") String extraParam}) = _$_KeepaSettings;
+      @HiveField(4, defaultValue: "") String extraParam,
+      @HiveField(5, defaultValue: true) bool showBuyBox,
+      @HiveField(6, defaultValue: false) bool showFba}) = _$_KeepaSettings;
 
   @override
   @HiveField(0, defaultValue: true)
@@ -268,6 +321,12 @@ abstract class _KeepaSettings implements KeepaSettings {
   @override
   @HiveField(4, defaultValue: "")
   String get extraParam;
+  @override
+  @HiveField(5, defaultValue: true)
+  bool get showBuyBox;
+  @override
+  @HiveField(6, defaultValue: false)
+  bool get showFba;
   @override
   @JsonKey(ignore: true)
   _$KeepaSettingsCopyWith<_KeepaSettings> get copyWith =>
