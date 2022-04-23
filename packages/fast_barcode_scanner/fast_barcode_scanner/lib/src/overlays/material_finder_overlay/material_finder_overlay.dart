@@ -158,6 +158,7 @@ class MaterialPreviewOverlayState extends State<MaterialPreviewOverlay>
           children: [
             CustomPaint(
               painter: MaterialFinderPainter(
+                opacity: 0,
                 borderPaint: defaultBorderPaint,
                 backgroundColor: widget.backgroundColor,
                 rectOfInterest: widget.rectOfInterest,
