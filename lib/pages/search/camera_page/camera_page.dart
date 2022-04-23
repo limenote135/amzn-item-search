@@ -15,6 +15,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:vibration/vibration.dart';
 
 import 'camera_scan_overlay_shape.dart';
+import 'code_filter_rect.dart';
 import 'item_tile.dart';
 
 class CameraPage extends ConsumerWidget {
@@ -232,10 +233,13 @@ class _BodyState extends ConsumerState<_Body> {
       framerate: Framerate.fps30,
       mode: DetectionMode.continuous,
       position: CameraPosition.back,
-      onScan: _handleBarcode,
       apiMode: IOSApiMode.visionStandard,
       children: [
-        // const MaterialPreviewOverlay(),
+        MaterialPreviewOverlay(
+          backgroundColor: null,
+          rectOfInterest: const CodeFilterRect(),
+          onScan: _handleBarcode,
+        ),
         Listener(
           onPointerDown: (_) => _pointers++,
           onPointerUp: (_) => _pointers--,
