@@ -59,6 +59,8 @@ class _Body extends ConsumerStatefulWidget {
 }
 
 class _BodyState extends ConsumerState<_Body> {
+  static const _rectOfInterest = CodeFilterRect();
+
   final _controller = CameraController();
 
   Widget? customPaint;
@@ -162,11 +164,32 @@ class _BodyState extends ConsumerState<_Body> {
     borderRadius: BorderRadius.circular(5),
   );
 
+  List<Barcode> _filterBarcodes(List<Barcode> codes) {
+    final analysisSize = _controller.analysisSize;
+    final previewSize = context.size;
+    if (analysisSize != null && previewSize != null) {
+      return codes
+          .where(
+            _rectOfInterest.buildCodeFilter(
+              analysisSize: analysisSize,
+              previewSize: previewSize,
+            ),
+          )
+          .toList();
+    } else {
+      return codes;
+    }
+  }
+
   void _handleBarcode(List<Barcode> codes) {
     if (codes.isEmpty) {
       return;
     }
-    final result = codes[0].value;
+    final targets = _filterBarcodes(codes);
+    if (targets.isEmpty) {
+      return;
+    }
+    final result = targets[0].value;
 
     if (_lastRead != result) {
       Vibration.vibrate(duration: 50, amplitude: 128);
@@ -234,12 +257,10 @@ class _BodyState extends ConsumerState<_Body> {
       mode: DetectionMode.continuous,
       position: CameraPosition.back,
       apiMode: IOSApiMode.visionStandard,
+      onScan: _handleBarcode,
       children: [
-        MaterialPreviewOverlay(
-          backgroundColor: null,
-          rectOfInterest: const CodeFilterRect(),
-          onScan: _handleBarcode,
-        ),
+        // スキャン対象範囲を表示したい場合はコメントアウトを外す
+        // const MaterialPreviewOverlay(rectOfInterest: CodeFilterRect()),
         Listener(
           onPointerDown: (_) => _pointers++,
           onPointerUp: (_) => _pointers--,
