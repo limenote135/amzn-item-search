@@ -1,13 +1,21 @@
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class ItemConditionTile extends StatelessWidget {
+class ItemConditionTile extends HookConsumerWidget {
   const ItemConditionTile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
+    final form = ReactiveForm.of(context)!;
+    // build 時に現在の値を束縛しておく
+    final current = getCondition(form);
+
     return ListTile(
       title: Row(
         children: [
@@ -15,6 +23,33 @@ class ItemConditionTile extends StatelessWidget {
           Flexible(
             flex: 2,
             child: ReactiveDropdownField<PurchaseItemCondition>(
+              onChanged: (value) {
+                if (value == null) {
+                  return;
+                }
+                // onChanged が呼ばれたタイミングではリビルド前なので、
+                // current は変更前の値が束縛されたままになっている
+
+                final sellPrice = getInt(form, sellPriceField);
+                final useFba = getBool(form, useFbaField);
+                final currentLowestPrice = getLowestPrice(
+                  item.prices,
+                  condition: current.toItemSubCondition(),
+                  priorFba: useFba,
+                );
+                if (sellPrice == currentLowestPrice) {
+                  // 販売価格が手動で変更されていないので、コンディションに合わせて新しい値に変更する
+                  final newPrice = getLowestPrice(
+                    item.prices,
+                    condition: value.toItemSubCondition(),
+                    priorFba: useFba,
+                  );
+                  if (newPrice != null) {
+                    (form as FormGroup).control(sellPriceField).value =
+                        newPrice;
+                  }
+                }
+              },
               formControlName: conditionField,
               items: const [
                 DropdownMenuItem(
