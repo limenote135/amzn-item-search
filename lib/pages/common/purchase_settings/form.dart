@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/pages/common/purchase_settings/fba_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/quantity_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -77,10 +78,7 @@ class PurchaseSettingsForm extends StatelessWidget {
           const ThemeDivider(),
           const InputPricesTile(),
           const ItemConditionTile(),
-          ReactiveSwitchListTile(
-            formControlName: useFbaField,
-            title: const Text("FBA を利用"),
-          ),
+          const FbaTile(),
           const QuantityTile(),
           const ProfitTile(),
           const FeeTile(),
