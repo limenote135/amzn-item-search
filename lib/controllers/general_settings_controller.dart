@@ -108,6 +108,10 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     KeepaSettings? keepaSettings,
     List<ShortcutDetail>? leftShortcut,
     List<ShortcutDetail>? rightShortcut,
+    List<String>? newConditionTexts,
+    int? newConditionTextIndex,
+    List<String>? usedConditionTexts,
+    int? usedConditionTextIndex,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -131,6 +135,12 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       keepaSettings: keepaSettings ?? state.keepaSettings,
       leftSlideShortcut: leftShortcut ?? state.leftSlideShortcut,
       rightSlideShortcut: rightShortcut ?? state.rightSlideShortcut,
+      newConditionTexts: newConditionTexts ?? state.newConditionTexts,
+      newConditionTextIndex:
+          newConditionTextIndex ?? state.newConditionTextIndex,
+      usedConditionTexts: usedConditionTexts ?? state.usedConditionTexts,
+      usedConditionTextIndex:
+          usedConditionTextIndex ?? state.usedConditionTextIndex,
     );
     box.put(generalSettingsKeyName, state);
   }

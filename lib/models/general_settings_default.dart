@@ -240,3 +240,14 @@ const defaultRightShortcut = [
   ShortcutDetail(type: ShortcutType.none),
   ShortcutDetail(type: ShortcutType.none),
 ];
+
+const defaultNewConditionTexts = [
+  "新品未開封品ですが、パッケージや外箱等にスレがある場合もございますので、予めご了承ください。",
+  "新品未開封品です。Amazon配送センターより送料無料、365日年中無休で迅速に発送致します。",
+  "商品は当店のスタッフが丁寧に梱包して発送させていただきます。",
+];
+const defaultUsedConditionText = [
+  "商品は当店のスタッフが丁寧に検品したものを発送させていただきます。",
+  "中古品のため、ご使用に影響ない程度の使用感・経年劣化、キズ、汚れなどがある場合がございます。",
+  "多少の使用感はありますが、目立った傷もなく非常に状態のよいものなります。",
+];
