@@ -64,6 +64,14 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(20, defaultValue: defaultRightShortcut)
     @Default(defaultRightShortcut)
         List<ShortcutDetail> rightSlideShortcut,
+    @HiveField(21, defaultValue: defaultNewConditionTexts)
+    @Default(defaultNewConditionTexts)
+        List<String> newConditionTexts,
+    @HiveField(22, defaultValue: 0) @Default(0) int newConditionTextIndex,
+    @HiveField(23, defaultValue: defaultUsedConditionText)
+    @Default(defaultUsedConditionText)
+        List<String> usedConditionTexts,
+    @HiveField(24, defaultValue: 0) @Default(0) int usedConditionTextIndex,
   }) = _GeneralSettings;
 }
 
