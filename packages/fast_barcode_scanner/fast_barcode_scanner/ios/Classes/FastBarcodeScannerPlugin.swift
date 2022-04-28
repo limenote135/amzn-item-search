@@ -83,11 +83,12 @@ public class FastBarcodeScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHan
         if configuration.apiMode == ApiMode.avFoundation {
             scanner = AVFoundationBarcodeScanner(barcodeObjectLayerConverter: { barcodes in
                 self.factory.preview?.videoPreviewLayer.transformedMetadataObject(for: barcodes) as? AVMetadataMachineReadableCodeObject
-            }) { [unowned self] barcode in
-                detectionsSink?(barcode)
+            }) { [unowned self] barcodes in
+                detectionsSink?(barcodes)
             }
         } else {
             scanner = VisionBarcodeScanner(cornerPointConverter: { observation in
+
                 func convert(point: CGPoint) -> CGPoint? {
                     self.factory.preview?.videoPreviewLayer.layerPointConverted(fromCaptureDevicePoint: point)
                 }
@@ -104,9 +105,11 @@ public class FastBarcodeScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHan
                     [Int(bottomLeft.x), Int(bottomLeft.y)],
                     [Int(bottomRight.x), Int(bottomRight.y)]
                 ]
-            }, confidence: configuration.confidence) { [unowned self] barcodes in
+            }, confidence: configuration.confidence, resultHandler: { [unowned self] barcodes in
                 detectionsSink?(barcodes)
-            }
+            }, errorHandler: { [unowned self] error in
+                detectionsSink?(error)
+            })
         }
 
         let camera = try Camera(configuration: configuration, scanner: scanner)
@@ -204,6 +207,10 @@ public class FastBarcodeScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHan
             resultHandler(result)
         }
 
+        let visionErrorHandler: VisionBarcodeScanner.ErrorHandler = { error in
+            resultHandler(error)
+        }
+
         if let container = args as? [Any] {
             guard
                     let byteBuffer = container[0] as? FlutterStandardTypedData,
@@ -213,11 +220,11 @@ public class FastBarcodeScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHan
                 throw ScannerError.loadingDataFailed
             }
 
-            let scanner = VisionBarcodeScanner(cornerPointConverter: { _ in [] }, confidence: 0.6, resultHandler: visionResultHandler)
+            let scanner = VisionBarcodeScanner(cornerPointConverter: { _ in [] }, confidence: 0.6, resultHandler: visionResultHandler, errorHandler: visionErrorHandler)
             scanner.process(cgImage)
         } else {
             guard
-//                picker == nil,
+
                     let root = UIApplication.shared.delegate?.window??.rootViewController
                     else {
                 return resultHandler(nil)
@@ -231,7 +238,7 @@ public class FastBarcodeScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHan
                 }
 
                 self?.picker = nil
-                let scanner = VisionBarcodeScanner(cornerPointConverter: { _ in [] }, confidence: 0.6, resultHandler: visionResultHandler)
+                let scanner = VisionBarcodeScanner(cornerPointConverter: { _ in [] }, confidence: 0.6, resultHandler: visionResultHandler, errorHandler: visionErrorHandler)
                 scanner.process(cgImage)
             }
 
