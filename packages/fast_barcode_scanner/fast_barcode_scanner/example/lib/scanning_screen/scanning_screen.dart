@@ -134,7 +134,7 @@ class _ScanningScreenState extends State<ScanningScreen> {
           if (_scanningOverlayConfig.enabledOverlays
               .contains(ScanningOverlayType.materialOverlay))
             MaterialPreviewOverlay(
-              rectOfInterest: const WideRectOfInterest(),
+              rectOfInterest: RectOfInterest.wide(), // this can be wide or square
               onScan: (codes) {
                 // these are codes that only appear within the finder rectangle
               },
@@ -147,7 +147,6 @@ class _ScanningScreenState extends State<ScanningScreen> {
                 }
                 return null;
               },
-              showScanLine: true,
             ),
           if (_scanningOverlayConfig.enabledOverlays
               .contains(ScanningOverlayType.codeBoundaryOverlay))
