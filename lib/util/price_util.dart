@@ -1,5 +1,9 @@
+import 'package:amasearch/models/enums/fulfillment_channel.dart';
+import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
+import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
+import 'package:collection/collection.dart';
 
 import 'formatter.dart';
 
@@ -108,4 +112,32 @@ int calcBreakEven({
   final temp = purchase + fbaFee + (feeInfo.variableClosingFee * taxRate);
   final breakEven = temp / (1 - feeInfo.referralFeeRate * taxRate);
   return breakEven.round();
+}
+
+int? getLowestPrice(
+  ItemPrices? prices, {
+  required ItemSubCondition condition,
+  required bool priorFba,
+}) {
+  if (prices == null) {
+    return null;
+  }
+  final targets = condition == ItemSubCondition.newItem
+      ? prices.newPrices
+      : prices.usedPrices.where((element) => element.subCondition == condition);
+
+  if (targets.isEmpty) {
+    return null;
+  }
+
+  if (priorFba) {
+    // FBA 価格があればそれを使う
+    final fbaPrices = targets.firstWhereOrNull(
+      (element) => element.channel == FulfillmentChannel.amazon,
+    );
+    if (fbaPrices != null) {
+      return fbaPrices.price;
+    }
+  }
+  return targets.first.price;
 }
