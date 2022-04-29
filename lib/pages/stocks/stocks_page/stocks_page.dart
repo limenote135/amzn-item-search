@@ -227,9 +227,11 @@ class StocksPage extends HookConsumerWidget {
             style: ElevatedButton.styleFrom(
               shape: const StadiumBorder(),
             ),
-            onPressed: () async {
-              await _callListings(context, ref, selected);
-            },
+            onPressed: selected.isNotEmpty
+                ? () async {
+                    await _callListings(context, ref, selected);
+                  }
+                : null,
             child: const Text("確定"),
           ),
         ),
