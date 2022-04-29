@@ -86,6 +86,12 @@ List<Object> _createData(StockItem item, List<CsvColumn> order) {
       case CsvColumn.breakEven:
         ret.add(item.breakEven);
         break;
+      case CsvColumn.conditionText:
+        ret.add(item.conditionText);
+        break;
+      case CsvColumn.otherCost:
+        ret.add(item.otherCost);
+        break;
     }
   }
   return ret;
