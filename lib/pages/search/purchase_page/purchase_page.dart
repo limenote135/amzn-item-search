@@ -5,8 +5,8 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
+import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
-import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/form.dart';
@@ -14,6 +14,7 @@ import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/util/uuid.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -38,13 +39,28 @@ class PurchasePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
 
-    // 仮で初期値を新品最安値、無ければ中古最安値にする
-    final lowestPrice = _calcLowestPrice(item.prices);
-    final useFba = ref.watch(searchSettingsControllerProvider).useFba;
+    final useFba = ref.watch(
+      searchSettingsControllerProvider.select((value) => value.useFba),
+    );
+
+    // 仮で初期値を新品最安値にする
+    var lowestPrice = getLowestPrice(
+      item.prices,
+      condition: ItemSubCondition.newItem,
+      priorFba: useFba,
+    );
+    // 新品最安値が無い場合、中古 VeryGood にする
+    lowestPrice ??= getLowestPrice(
+      item.prices,
+      condition: ItemSubCondition.veryGood,
+      priorFba: useFba,
+    );
+    // 中古 VeryGood も無い場合、中古最安値にする
+    lowestPrice ??= item.prices?.usedPrices.firstOrNull?.price;
 
     final stock = StockItem(
       purchaseDate: currentTimeString(),
-      sellPrice: lowestPrice,
+      sellPrice: lowestPrice ?? 0,
       useFba: useFba,
       autogenSku: true,
       item: item,
@@ -81,19 +97,6 @@ class PurchasePage extends HookConsumerWidget {
         ),
       ),
     );
-  }
-
-  int _calcLowestPrice(ItemPrices? prices) {
-    if (prices == null) {
-      return 0;
-    }
-    if (prices.newPrices.isNotEmpty) {
-      return prices.newPrices.first.price;
-    }
-    if (prices.usedPrices.isNotEmpty) {
-      return prices.usedPrices.first.price;
-    }
-    return 0;
   }
 }
 
