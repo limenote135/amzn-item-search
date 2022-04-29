@@ -5,6 +5,7 @@ import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/condition_text_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/fba_tile.dart';
+import 'package:amasearch/pages/common/purchase_settings/other_cost_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/quantity_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -50,6 +51,12 @@ final formValueProvider =
     conditionField: FormControl<PurchaseItemCondition>(
       value: item.subCondition.toItemPurchaseCondition(),
     ),
+    otherCostField: [
+      item.otherCost,
+      Validators.required,
+      Validators.number,
+      Validators.min(0),
+    ],
     autogenSkuField: item.autogenSku,
     skuField: item.sku,
     retailerField: item.retailer,
@@ -82,6 +89,7 @@ class PurchaseSettingsForm extends StatelessWidget {
           const ItemConditionTile(),
           const FbaTile(),
           const QuantityTile(),
+          const OtherCostTile(),
           const ProfitTile(),
           const FeeTile(),
           const TargetPriceTile(),
