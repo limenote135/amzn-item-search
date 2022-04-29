@@ -99,6 +99,8 @@ class _Body extends HookConsumerWidget {
     final fbaFee = item.useFba && !isUnknownFbaFee ? feeInfo.fbaFee : 0;
     final totalFeePerItem = referralFee + categoryFee + tax + fbaFee;
 
+    final smallText = Theme.of(context).textTheme.bodyText2;
+
     return ListView(
       children: [
         InkWell(
@@ -197,6 +199,18 @@ class _Body extends HookConsumerWidget {
         TextListTile(
           leading: const Text("仕入れ日"),
           main: Text(DateTime.parse(item.purchaseDate).toLocal().dayFormat()),
+        ),
+        ListTile(
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("コンディション説明"),
+              Text(
+                item.conditionText,
+                style: smallText,
+              ),
+            ],
+          ),
         ),
         ListTile(
           title: Column(
