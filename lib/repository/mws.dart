@@ -181,6 +181,21 @@ class MwsRepository {
     return ListMatchingProductResponse.fromJson(resp);
   }
 
+  void _customHandler(int code) {
+    switch (code) {
+      case 403:
+        throw Exception("Amazonとの連携が正しく行われていません");
+      case 404:
+        throw const AmazonItemNotFoundException("このマーケットでは販売できない商品です");
+      case 412:
+        // TODO:  await を外したが、これで問題ないか要確認
+        _container.refresh(updateProvider);
+        throw Exception("アプリケーションを更新してください");
+      case 401:
+        throw Exception("設定メニューからAmazonとの連携を行ってください");
+    }
+  }
+
   Future<Map<String, dynamic>> _doGetRequest(String url) async {
     final dio = await _read(dioProvider.future);
 
@@ -193,18 +208,7 @@ class MwsRepository {
     final resp = await dio.get(
       url,
       opt: Options(headers: header),
-      customHandler: (code) {
-        switch (code) {
-          case 404:
-            throw const AmazonItemNotFoundException("このマーケットでは販売できない商品です");
-          case 412:
-            // TODO:  await を外したが、これで問題ないか要確認
-            _container.refresh(updateProvider);
-            throw Exception("アプリケーションを更新してください");
-          case 401:
-            throw Exception("設定メニューからAmazonとの連携を行ってください");
-        }
-      },
+      customHandler: _customHandler,
     );
     return json.decode(resp.data!) as Map<String, dynamic>;
   }
@@ -223,16 +227,7 @@ class MwsRepository {
       url,
       data: data,
       opt: Options(headers: header),
-      customHandler: (code) {
-        switch (code) {
-          case 412:
-            // TODO:  await を外したが、これで問題ないか要確認
-            _container.refresh(updateProvider);
-            throw Exception("アプリケーションを更新してください");
-          case 401:
-            throw Exception("設定メニューからAmazonとの連携を行ってください");
-        }
-      },
+      customHandler: _customHandler,
     );
     return json.decode(resp.data!) as Map<String, dynamic>;
   }
