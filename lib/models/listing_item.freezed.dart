@@ -29,7 +29,8 @@ class _$ListingItemTearOff {
       required int amount,
       required ItemCondition condition,
       required ItemSubCondition subCondition,
-      required bool useFba}) {
+      required bool useFba,
+      required String conditionText}) {
     return _ListingItem(
       sku: sku,
       asin: asin,
@@ -38,6 +39,7 @@ class _$ListingItemTearOff {
       condition: condition,
       subCondition: subCondition,
       useFba: useFba,
+      conditionText: conditionText,
     );
   }
 
@@ -58,6 +60,7 @@ mixin _$ListingItem {
   ItemCondition get condition => throw _privateConstructorUsedError;
   ItemSubCondition get subCondition => throw _privateConstructorUsedError;
   bool get useFba => throw _privateConstructorUsedError;
+  String get conditionText => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -77,7 +80,8 @@ abstract class $ListingItemCopyWith<$Res> {
       int amount,
       ItemCondition condition,
       ItemSubCondition subCondition,
-      bool useFba});
+      bool useFba,
+      String conditionText});
 }
 
 /// @nodoc
@@ -97,6 +101,7 @@ class _$ListingItemCopyWithImpl<$Res> implements $ListingItemCopyWith<$Res> {
     Object? condition = freezed,
     Object? subCondition = freezed,
     Object? useFba = freezed,
+    Object? conditionText = freezed,
   }) {
     return _then(_value.copyWith(
       sku: sku == freezed
@@ -127,6 +132,10 @@ class _$ListingItemCopyWithImpl<$Res> implements $ListingItemCopyWith<$Res> {
           ? _value.useFba
           : useFba // ignore: cast_nullable_to_non_nullable
               as bool,
+      conditionText: conditionText == freezed
+          ? _value.conditionText
+          : conditionText // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -145,7 +154,8 @@ abstract class _$ListingItemCopyWith<$Res>
       int amount,
       ItemCondition condition,
       ItemSubCondition subCondition,
-      bool useFba});
+      bool useFba,
+      String conditionText});
 }
 
 /// @nodoc
@@ -167,6 +177,7 @@ class __$ListingItemCopyWithImpl<$Res> extends _$ListingItemCopyWithImpl<$Res>
     Object? condition = freezed,
     Object? subCondition = freezed,
     Object? useFba = freezed,
+    Object? conditionText = freezed,
   }) {
     return _then(_ListingItem(
       sku: sku == freezed
@@ -197,6 +208,10 @@ class __$ListingItemCopyWithImpl<$Res> extends _$ListingItemCopyWithImpl<$Res>
           ? _value.useFba
           : useFba // ignore: cast_nullable_to_non_nullable
               as bool,
+      conditionText: conditionText == freezed
+          ? _value.conditionText
+          : conditionText // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -212,7 +227,8 @@ class _$_ListingItem implements _ListingItem {
       required this.amount,
       required this.condition,
       required this.subCondition,
-      required this.useFba});
+      required this.useFba,
+      required this.conditionText});
 
   factory _$_ListingItem.fromJson(Map<String, dynamic> json) =>
       _$$_ListingItemFromJson(json);
@@ -231,10 +247,12 @@ class _$_ListingItem implements _ListingItem {
   final ItemSubCondition subCondition;
   @override
   final bool useFba;
+  @override
+  final String conditionText;
 
   @override
   String toString() {
-    return 'ListingItem(sku: $sku, asin: $asin, sellPrice: $sellPrice, amount: $amount, condition: $condition, subCondition: $subCondition, useFba: $useFba)';
+    return 'ListingItem(sku: $sku, asin: $asin, sellPrice: $sellPrice, amount: $amount, condition: $condition, subCondition: $subCondition, useFba: $useFba, conditionText: $conditionText)';
   }
 
   @override
@@ -249,7 +267,9 @@ class _$_ListingItem implements _ListingItem {
             const DeepCollectionEquality().equals(other.condition, condition) &&
             const DeepCollectionEquality()
                 .equals(other.subCondition, subCondition) &&
-            const DeepCollectionEquality().equals(other.useFba, useFba));
+            const DeepCollectionEquality().equals(other.useFba, useFba) &&
+            const DeepCollectionEquality()
+                .equals(other.conditionText, conditionText));
   }
 
   @override
@@ -261,7 +281,8 @@ class _$_ListingItem implements _ListingItem {
       const DeepCollectionEquality().hash(amount),
       const DeepCollectionEquality().hash(condition),
       const DeepCollectionEquality().hash(subCondition),
-      const DeepCollectionEquality().hash(useFba));
+      const DeepCollectionEquality().hash(useFba),
+      const DeepCollectionEquality().hash(conditionText));
 
   @JsonKey(ignore: true)
   @override
@@ -282,7 +303,8 @@ abstract class _ListingItem implements ListingItem {
       required int amount,
       required ItemCondition condition,
       required ItemSubCondition subCondition,
-      required bool useFba}) = _$_ListingItem;
+      required bool useFba,
+      required String conditionText}) = _$_ListingItem;
 
   factory _ListingItem.fromJson(Map<String, dynamic> json) =
       _$_ListingItem.fromJson;
@@ -301,6 +323,8 @@ abstract class _ListingItem implements ListingItem {
   ItemSubCondition get subCondition;
   @override
   bool get useFba;
+  @override
+  String get conditionText;
   @override
   @JsonKey(ignore: true)
   _$ListingItemCopyWith<_ListingItem> get copyWith =>
