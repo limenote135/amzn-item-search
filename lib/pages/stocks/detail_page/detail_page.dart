@@ -141,6 +141,10 @@ class _Body extends HookConsumerWidget {
           main: Text("${item.amount} 個"),
         ),
         TextListTile(
+          leading: const Text("その他費用"),
+          main: Text("${item.otherCost} 円"),
+        ),
+        TextListTile(
           leading: const Text("粗利益"),
           main: Column(
             crossAxisAlignment: CrossAxisAlignment.end,

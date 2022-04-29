@@ -26,6 +26,7 @@ String calcProfitText(
     purchasePrice: 0,
     fee: fee,
     useFba: useFba,
+    otherCost: 0,
   );
 
   if (fee.fbaFee == -1) {
@@ -42,6 +43,7 @@ int calcProfit({
   required int purchasePrice,
   required FeeInfo? fee,
   required bool useFba,
+  required int otherCost,
 }) {
   if (fee == null) {
     return 0;
@@ -50,7 +52,7 @@ int calcProfit({
   final fbaFee = useFba && fee.fbaFee != -1 ? fee.fbaFee : 0;
   final closingFee = (fee.variableClosingFee * taxRate).round();
   final totalFee = referralFee + closingFee + fbaFee;
-  final profit = sellPrice - purchasePrice - totalFee;
+  final profit = sellPrice - purchasePrice - totalFee - otherCost;
 
   return profit;
 }
@@ -104,12 +106,14 @@ int calcBreakEven({
   required int purchase,
   required bool useFba,
   required FeeInfo? feeInfo,
+  required int otherCost,
 }) {
   if (feeInfo == null) {
     return 0;
   }
   final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
-  final temp = purchase + fbaFee + (feeInfo.variableClosingFee * taxRate);
+  final temp =
+      purchase + fbaFee + (feeInfo.variableClosingFee * taxRate) + otherCost;
   final breakEven = temp / (1 - feeInfo.referralFeeRate * taxRate);
   return breakEven.round();
 }
