@@ -18,7 +18,7 @@ type Props = {
 const Container = ({ reference, inView }: Props) => (
   <Box bgcolor={"#fedd6b"} textAlign={"center"} py={4} display={"flex"} flexDirection={"column"}>
     <Box display={{ xs: "block", sm: "none" }}>
-      <Image src={PersonImg} width={140} height={140} alt={""} />
+      <Image src={PersonImg} alt={""} />
     </Box>
     <Typography
       variant={"h4"}

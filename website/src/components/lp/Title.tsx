@@ -102,7 +102,7 @@ const TitleContainer = ({
           </Fade>
         </Grid>
         <Grid item xs={12} md={6} pt={2}>
-          <Image src={N0984} width={400} height={388} alt={""} />
+          <Image src={N0984} alt={""} />
         </Grid>
         <Grid item xs={12} md={6} sx={{ backgroundColor: "rgba(243, 241, 241, .6)" }}>
           <Box ref={descriptionRef} />

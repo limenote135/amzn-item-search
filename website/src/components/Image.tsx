@@ -13,8 +13,8 @@ type BreakPoints = {
 };
 
 type ImgProps = Omit<ImageProps, "width" | "height"> & {
-  width: string | number | BreakPoints;
-  height: string | number | BreakPoints;
+  width?: string | number | BreakPoints;
+  height?: string | number | BreakPoints;
 };
 
 const determineSize = (width: number, breakpoints: BreakPoints): string | number => {
@@ -29,18 +29,18 @@ const determineSize = (width: number, breakpoints: BreakPoints): string | number
 export const Image = (props: ImgProps) => {
   const windowsSize = useWindowSize();
 
-  let width: string | number = "";
-  let height: string | number = "";
+  let width: string | number | undefined = undefined;
+  let height: string | number | undefined = undefined;
 
   if (typeof props.width === "string" || typeof props.width === "number") {
     width = props.width;
-  } else {
+  } else if (typeof props.width === "object") {
     width = determineSize(windowsSize.width, props.width);
   }
 
   if (typeof props.height === "string" || typeof props.height === "number") {
     height = props.height;
-  } else {
+  } else if (typeof props.height === "object") {
     height = determineSize(windowsSize.width, props.height);
   }
 
