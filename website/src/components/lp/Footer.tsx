@@ -3,6 +3,8 @@ import React from "react";
 import { Image } from "@/components/Image";
 import Link from "@/components/Link";
 
+import WhiteLogo from "@/assets/lp/logo_w.png";
+
 const returnToTop = () => {
   window.scrollTo({
     top: 0,
@@ -24,7 +26,7 @@ const FooterContainer = ({ returnToTop }: FooterProps) => (
     <Box display={"inline-block"}>
       <Box display={"flex"} justifyContent={"center"} alignItems={"center"} flexDirection={{ xs: "column", md: "row" }}>
         <Box sx={{ cursor: "pointer" }} order={{ xs: 2, md: 1 }}>
-          <Image src={"/img/logo_w.png"} width={240} height={67} onClick={returnToTop} alt={"トップへ戻る"} />
+          <Image src={WhiteLogo} width={240} height={67} onClick={returnToTop} alt={"トップへ戻る"} />
         </Box>
         <Box
           display={"flex"}
