@@ -34,7 +34,7 @@ const DualLineDetailItem = ({ fontColor, title, text, image }: DetailItemProp) =
     </Box>
     <Grid container alignItems={"center"} flexDirection={"row"}>
       <Grid item xs={12} md={6} textAlign={{ xs: "center", md: "right" }} p={2}>
-        <Image src={image} width={300} height={567} alt={""} />
+        <Image src={image} alt={""} />
       </Grid>
       <Grid item xs={12} md={6} p={2} textAlign={"center"}>
         <Typography

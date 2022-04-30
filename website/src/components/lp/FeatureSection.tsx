@@ -104,7 +104,7 @@ const FeatureContainer = ({ reference, inView }: FeatureProp) => (
           <FeatureItem
             title={"直観的で使いやすいUI"}
             content={"説明なしで使いこなせるシンプルでわかりやすいユーザーインターフェース"}
-            icon={<Image src={Feature01} width={300} height={300} alt={""} />}
+            icon={<Image src={Feature01} alt={""} />}
           />
         </Grid>
 
@@ -112,14 +112,14 @@ const FeatureContainer = ({ reference, inView }: FeatureProp) => (
           <FeatureItem
             title={"圧倒的な動作スピード"}
             content={"高速バーコードリーダーと軽快なアプリ動作でスピーディーな仕入れが可能に"}
-            icon={<Image src={Feature02} width={300} height={300} alt={""} />}
+            icon={<Image src={Feature02} alt={""} />}
           />
         </Grid>
         <Grid item xs={12} md={6} display={"flex"} px={{ xs: 0, sm: 2 }} justifyContent={"center"}>
           <FeatureItem
             title={"充実した機能"}
             content={"せどり仕入れに必要な機能を網羅した、オールインワンのシステム設計"}
-            icon={<Image src={Feature03} width={300} height={300} alt={""} />}
+            icon={<Image src={Feature03} alt={""} />}
           />
         </Grid>
         <Grid item xs={12} md={6} display={"flex"} px={{ xs: 0, sm: 2 }} justifyContent={"center"}>
