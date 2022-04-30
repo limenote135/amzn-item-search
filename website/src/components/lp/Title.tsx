@@ -5,6 +5,13 @@ import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { parser } from "@/plugin/budoux";
 
+import BlackLogo from "@/assets/lp/logo_b.png";
+import AppScreen from "@/assets/lp/app_screen.png";
+import N0984 from "@/assets/lp/n0984.png";
+import Copy1Pc from "@/assets/lp/copy1_pc.svg";
+import Copy2Pc from "@/assets/lp/copy2_pc.svg";
+import Copy2Sp from "@/assets/lp/copy2_sp.svg";
+
 type FadeIns = [boolean, boolean];
 
 type Props = {
@@ -16,6 +23,19 @@ type Props = {
   copyRef: (node?: Element | null | undefined) => void;
   copyInView: boolean;
 };
+
+// Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+// というエラーが出るので、 forwardRef を使う
+const Copy1Container = React.forwardRef((_, ref) => (
+  <>
+    <Box display={{ xs: "none", md: "block" }} ref={ref}>
+      <Copy1Pc width={100} height={700} />
+    </Box>
+    <Box display={{ xs: "block", md: "none" }} ref={ref}>
+      <Copy1Pc width={75} height={400} />
+    </Box>
+  </>
+));
 
 const TitleContainer = ({
   fadeIns,
@@ -33,39 +53,22 @@ const TitleContainer = ({
         <Grid item xs={12} textAlign={"center"} display={{ xs: "block", md: "none" }} mt={2}>
           <Fade in={fadeIns[1]} timeout={2000}>
             <Box>
-              <Image
-                src={"/img/logo_b.png"}
-                width={{ xs: 300, sm: 400 }}
-                height={{ xs: 83, sm: 111 }}
-                alt={"amzn-item-search"}
-              />
+              <Image src={BlackLogo} width={{ xs: 300, sm: 400 }} height={{ xs: 83, sm: 111 }} alt={"amzn-item-search"} />
             </Box>
           </Fade>
         </Grid>
         <Grid item xs={7} sm={6} md={4} textAlign={"center"}>
-          <Image
-            src="/img/app_screen.png"
-            width={{ xs: "211", md: "370" }}
-            height={{ xs: "400", md: "700" }}
-            alt="アプリ画面"
-          />
+          <Image src={AppScreen} width={{ xs: "211", md: "370" }} height={{ xs: "400", md: "700" }} alt="アプリ画面" />
         </Grid>
         <Grid item xs={5} sm={6} md={2} textAlign={"center"}>
           <Fade in={fadeIns[0]} timeout={2000}>
-            <Box>
-              <Image
-                src={"/img/copy1_pc.svg"}
-                width={{ xs: "75", md: "100" }}
-                height={{ xs: "400", md: "700" }}
-                alt={"あなたのせどりをとことん楽に。"}
-              />
-            </Box>
+            <Copy1Container />
           </Fade>
         </Grid>
         <Grid item xs={12} md={6} textAlign={"center"}>
           <Fade in={fadeIns[1]} timeout={2000}>
             <Box my={10} display={{ xs: "none", md: "block" }}>
-              <Image src={"/img/logo_b.png"} width={400} height={112} alt={"amzn-item-search"} />
+              <Image src={BlackLogo} width={400} height={112} alt={"amzn-item-search"} />
             </Box>
           </Fade>
           <Fade in={fadeIns[0]} timeout={2000}>
@@ -99,7 +102,7 @@ const TitleContainer = ({
           </Fade>
         </Grid>
         <Grid item xs={12} md={6} pt={2}>
-          <Image src={"/img/n0984.png"} width={400} height={388} alt={""} />
+          <Image src={N0984} width={400} height={388} alt={""} />
         </Grid>
         <Grid item xs={12} md={6} sx={{ backgroundColor: "rgba(243, 241, 241, .6)" }}>
           <Box ref={descriptionRef} />
@@ -150,22 +153,12 @@ const TitleContainer = ({
         <Grid item xs={12} ref={copyRef} textAlign={{ xs: "right", md: "center" }}>
           <Fade in={copyInView} timeout={2000}>
             <Box mt={4} mb={8} display={{ xs: "none", md: "block" }}>
-              <Image
-                src={"/img/copy2_pc.svg"}
-                width={800}
-                height={100}
-                alt={"amzn-item-searchは、はやい。つよい。使いやすい。"}
-              />
+              <Copy2Pc width={800} height={100} alt={"amzn-item-searchは、はやい。つよい。使いやすい。"} />
             </Box>
           </Fade>
           <Fade in={copyInView} timeout={2000}>
             <Box display={{ xs: "block", md: "none" }}>
-              <Image
-                src={"/img/copy2_sp.svg"}
-                width={400}
-                height={300}
-                alt={"amzn-item-searchは、はやい。つよい。使いやすい。"}
-              />
+              <Copy2Sp width={400} height={300} alt={"amzn-item-searchは、はやい。つよい。使いやすい。"} />
             </Box>
           </Fade>
         </Grid>

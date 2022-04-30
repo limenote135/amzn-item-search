@@ -6,19 +6,14 @@ import { Image } from "@/components/Image";
 import Link from "@/components/Link";
 import Drawer, { DrawerProp } from "@/components/lp/Drawer";
 
-const returnToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-};
+import WhiteLogo from "@/assets/lp/logo_w.png";
 
-const TitleBarContainer = ({ isOpen, handleToggleDrawerOpen, returnToTop }: DrawerProp) => (
+const TitleBarContainer = ({ isOpen, handleToggleDrawerOpen }: DrawerProp) => (
   <AppBar position={"sticky"} component={"header"}>
     <Toolbar>
       <Box sx={{ cursor: "pointer" }}>
         <Link href={"/"}>
-          <Image src={"/img/logo_w.png"} width={(483 * 44) / 135} height={44} alt={"アプリロゴ"} />
+          <Image src={WhiteLogo} width={(483 * 44) / 135} height={44} alt={"アプリロゴ"} />
         </Link>
       </Box>
       <Box flexGrow={1} />
@@ -37,7 +32,7 @@ const TitleBarContainer = ({ isOpen, handleToggleDrawerOpen, returnToTop }: Draw
         <MenuIcon />
       </IconButton>
     </Toolbar>
-    <Drawer isOpen={isOpen} handleToggleDrawerOpen={handleToggleDrawerOpen} returnToTop={returnToTop} />
+    <Drawer isOpen={isOpen} handleToggleDrawerOpen={handleToggleDrawerOpen} />
   </AppBar>
 );
 
@@ -60,7 +55,7 @@ const Menu = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <TitleBarContainer isOpen={isOpen} handleToggleDrawerOpen={toggleDrawerOpen} returnToTop={returnToTop} />
+      <TitleBarContainer isOpen={isOpen} handleToggleDrawerOpen={toggleDrawerOpen} />
     </ThemeProvider>
   );
 };
