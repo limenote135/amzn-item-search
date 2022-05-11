@@ -16,6 +16,7 @@ class ListingItem with _$ListingItem {
     required ItemCondition condition,
     required ItemSubCondition subCondition,
     required bool useFba,
+    required String conditionText,
   }) = _ListingItem;
 
   factory ListingItem.fromJson(Map<String, dynamic> json) =>

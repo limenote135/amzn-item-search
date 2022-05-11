@@ -37,7 +37,10 @@ class StockItem with _$StockItem {
     // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
     @HiveField(13, defaultValue: -1) @Default(0) int breakEven,
     @HiveField(14) String? listingDate,
+    // 仕入れ確定した後はデフォルト false とするが、仕入れ時にはデフォルト true で、
+    // 仕入れ画面で切り替えられるように、永続化はしないがメンバとして値を持っておく
     @Default(false) bool autogenSku,
+    @HiveField(15, defaultValue: "") @Default("") String conditionText,
   }) = _StockItem;
 }
 
@@ -51,6 +54,7 @@ extension StockItemExtention on StockItem {
       condition: condition,
       subCondition: subCondition,
       useFba: useFba,
+      conditionText: conditionText,
     );
   }
 }

@@ -249,8 +249,7 @@ class StocksPage extends HookConsumerWidget {
     final isOk = await showOkCancelAlertDialog(
       context: context,
       title: "Amazonへ出品登録",
-      message: "${selected.length}件の商品を出品登録します\n"
-          "(コンディション説明と商品写真は現在未対応です)",
+      message: "${selected.length}件の商品を出品登録します",
     );
 
     if (isOk != OkCancelResult.ok) {
