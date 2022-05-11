@@ -32,13 +32,14 @@ class StockItemAdapter extends TypeAdapter<_$_StockItem> {
       id: fields[12] == null ? '' : fields[12] as String,
       breakEven: fields[13] == null ? -1 : fields[13] as int,
       listingDate: fields[14] as String?,
+      conditionText: fields[15] == null ? '' : fields[15] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_StockItem obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.purchaseDate)
       ..writeByte(1)
@@ -68,7 +69,9 @@ class StockItemAdapter extends TypeAdapter<_$_StockItem> {
       ..writeByte(13)
       ..write(obj.breakEven)
       ..writeByte(14)
-      ..write(obj.listingDate);
+      ..write(obj.listingDate)
+      ..writeByte(15)
+      ..write(obj.conditionText);
   }
 
   @override

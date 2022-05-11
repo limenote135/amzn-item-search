@@ -1,3 +1,4 @@
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
@@ -12,6 +13,7 @@ class ItemConditionTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
+    final settings = ref.watch(generalSettingsControllerProvider);
     final form = ReactiveForm.of(context)!;
     // build 時に現在の値を束縛しておく
     final current = getCondition(form);
@@ -30,6 +32,7 @@ class ItemConditionTile extends HookConsumerWidget {
                 // onChanged が呼ばれたタイミングではリビルド前なので、
                 // current は変更前の値が束縛されたままになっている
 
+                // 販売価格の変更
                 final sellPrice = getInt(form, sellPriceField);
                 final useFba = getBool(form, useFbaField);
                 final currentLowestPrice = getLowestPrice(
@@ -48,6 +51,19 @@ class ItemConditionTile extends HookConsumerWidget {
                     (form as FormGroup).control(sellPriceField).value =
                         newPrice;
                   }
+                }
+
+                // コンディション説明の変更
+                if (current == PurchaseItemCondition.newItem) {
+                  // 新品からそれ以外に変更した場合
+                  (form as FormGroup).control(conditionTextField).value =
+                      settings
+                          .usedConditionTexts[settings.usedConditionTextIndex];
+                } else if (value == PurchaseItemCondition.newItem) {
+                  // 中古から新品に変更した場合
+                  (form as FormGroup).control(conditionTextField).value =
+                      settings
+                          .newConditionTexts[settings.newConditionTextIndex];
                 }
               },
               formControlName: conditionField,

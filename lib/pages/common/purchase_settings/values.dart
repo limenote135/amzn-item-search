@@ -11,6 +11,7 @@ const retailerField = "retailer";
 const purchaseDateField = "purchaseField";
 const autogenSkuField = "autogenSku";
 const skuField = "sku";
+const conditionTextField = "conditionText";
 const memoField = "memo";
 
 String getString(AbstractControl<dynamic> form, String field) {
@@ -27,6 +28,8 @@ String getString(AbstractControl<dynamic> form, String field) {
       return f.control(skuField).value as String;
     case memoField:
       return f.control(memoField).value as String;
+    case conditionTextField:
+      return f.control(conditionTextField).value as String;
   }
   throw Exception("Invalid field: $field");
 }

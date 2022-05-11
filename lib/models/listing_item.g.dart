@@ -16,6 +16,7 @@ _$_ListingItem _$$_ListingItemFromJson(Map<String, dynamic> json) =>
       subCondition:
           $enumDecode(_$ItemSubConditionEnumMap, json['sub_condition']),
       useFba: json['use_fba'] as bool,
+      conditionText: json['condition_text'] as String,
     );
 
 Map<String, dynamic> _$$_ListingItemToJson(_$_ListingItem instance) =>
@@ -27,6 +28,7 @@ Map<String, dynamic> _$$_ListingItemToJson(_$_ListingItem instance) =>
       'condition': _$ItemConditionEnumMap[instance.condition],
       'sub_condition': _$ItemSubConditionEnumMap[instance.subCondition],
       'use_fba': instance.useFba,
+      'condition_text': instance.conditionText,
     };
 
 const _$ItemConditionEnumMap = {
