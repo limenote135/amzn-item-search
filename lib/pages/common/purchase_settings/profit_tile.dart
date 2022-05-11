@@ -17,12 +17,14 @@ class ProfitTile extends HookConsumerWidget {
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
     final useFba = getBool(form, useFbaField);
+    final otherCost = getInt(form, otherCostField);
 
     final profit = calcProfit(
       sellPrice: sellPrice,
       purchasePrice: purchasePrice,
       fee: item.prices?.feeInfo,
       useFba: useFba,
+      otherCost: otherCost,
     );
     return ListTile(
       title: Row(

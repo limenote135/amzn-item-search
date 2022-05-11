@@ -41,6 +41,7 @@ class StockItem with _$StockItem {
     // 仕入れ画面で切り替えられるように、永続化はしないがメンバとして値を持っておく
     @Default(false) bool autogenSku,
     @HiveField(15, defaultValue: "") @Default("") String conditionText,
+    @HiveField(16, defaultValue: 0) @Default(0) int otherCost,
   }) = _StockItem;
 }
 
