@@ -60,17 +60,20 @@ class SkuTile extends HookConsumerWidget {
     final quantity = getInt(form, quantityField);
     final useFba = getBool(form, useFbaField);
     final purchaseDate = getPurchaseDate(form);
+    final otherCost = getInt(form, otherCostField);
 
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
       fee: item.prices?.feeInfo,
       useFba: useFba,
+      otherCost: otherCost,
     );
     final breakEven = calcBreakEven(
       purchase: purchase,
       useFba: useFba,
       feeInfo: item.prices?.feeInfo,
+      otherCost: otherCost,
     );
 
     return replaceSku(

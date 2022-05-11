@@ -34,6 +34,12 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
         settings = settings.copyWith(customButtons: buttons);
       }
 
+      // CSV にカラムを足した際のマイグレーション since v1.3.0
+      if (settings.csvOrder.length == 15) {
+        settings.csvOrder
+            .addAll([CsvColumn.otherCost, CsvColumn.conditionText]);
+      }
+
       state = settings;
     }
     // 新規追加された項目が、ロード時にデフォルト値になっている可能性があるので一度保存する

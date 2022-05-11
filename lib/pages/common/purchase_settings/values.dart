@@ -13,6 +13,7 @@ const autogenSkuField = "autogenSku";
 const skuField = "sku";
 const conditionTextField = "conditionText";
 const memoField = "memo";
+const otherCostField = "otherCost";
 
 String getString(AbstractControl<dynamic> form, String field) {
   final f = form as FormGroup;
@@ -47,6 +48,8 @@ int getInt(AbstractControl<dynamic> form, String field) {
       return f.control(sellPriceField).value as int? ?? 0;
     case quantityField:
       return f.control(quantityField).value as int? ?? 0;
+    case otherCostField:
+      return f.control(otherCostField).value as int? ?? 0;
   }
   throw Exception("Invalid field: $field");
 }

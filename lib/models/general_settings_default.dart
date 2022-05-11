@@ -210,9 +210,11 @@ const defaultCsvOrder = [
   CsvColumn.breakEven,
   CsvColumn.quantity,
   CsvColumn.condition,
+  CsvColumn.otherCost,
   CsvColumn.shipment,
   CsvColumn.sku,
   CsvColumn.retailer,
+  CsvColumn.conditionText,
   CsvColumn.comment,
   CsvColumn.purchaseDate,
 ];

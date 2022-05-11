@@ -35,7 +35,8 @@ class _$StockItemTearOff {
       @HiveField(13, defaultValue: -1) int breakEven = 0,
       @HiveField(14) String? listingDate,
       bool autogenSku = false,
-      @HiveField(15, defaultValue: "") String conditionText = ""}) {
+      @HiveField(15, defaultValue: "") String conditionText = "",
+      @HiveField(16, defaultValue: 0) int otherCost = 0}) {
     return _StockItem(
       purchaseDate: purchaseDate,
       purchasePrice: purchasePrice,
@@ -54,6 +55,7 @@ class _$StockItemTearOff {
       listingDate: listingDate,
       autogenSku: autogenSku,
       conditionText: conditionText,
+      otherCost: otherCost,
     );
   }
 }
@@ -99,6 +101,8 @@ mixin _$StockItem {
   bool get autogenSku => throw _privateConstructorUsedError;
   @HiveField(15, defaultValue: "")
   String get conditionText => throw _privateConstructorUsedError;
+  @HiveField(16, defaultValue: 0)
+  int get otherCost => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $StockItemCopyWith<StockItem> get copyWith =>
@@ -126,7 +130,8 @@ abstract class $StockItemCopyWith<$Res> {
       @HiveField(13, defaultValue: -1) int breakEven,
       @HiveField(14) String? listingDate,
       bool autogenSku,
-      @HiveField(15, defaultValue: "") String conditionText});
+      @HiveField(15, defaultValue: "") String conditionText,
+      @HiveField(16, defaultValue: 0) int otherCost});
 
   $AsinDataCopyWith<$Res> get item;
 }
@@ -158,6 +163,7 @@ class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
     Object? listingDate = freezed,
     Object? autogenSku = freezed,
     Object? conditionText = freezed,
+    Object? otherCost = freezed,
   }) {
     return _then(_value.copyWith(
       purchaseDate: purchaseDate == freezed
@@ -228,6 +234,10 @@ class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
           ? _value.conditionText
           : conditionText // ignore: cast_nullable_to_non_nullable
               as String,
+      otherCost: otherCost == freezed
+          ? _value.otherCost
+          : otherCost // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
@@ -262,7 +272,8 @@ abstract class _$StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
       @HiveField(13, defaultValue: -1) int breakEven,
       @HiveField(14) String? listingDate,
       bool autogenSku,
-      @HiveField(15, defaultValue: "") String conditionText});
+      @HiveField(15, defaultValue: "") String conditionText,
+      @HiveField(16, defaultValue: 0) int otherCost});
 
   @override
   $AsinDataCopyWith<$Res> get item;
@@ -296,6 +307,7 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
     Object? listingDate = freezed,
     Object? autogenSku = freezed,
     Object? conditionText = freezed,
+    Object? otherCost = freezed,
   }) {
     return _then(_StockItem(
       purchaseDate: purchaseDate == freezed
@@ -366,6 +378,10 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
           ? _value.conditionText
           : conditionText // ignore: cast_nullable_to_non_nullable
               as String,
+      otherCost: otherCost == freezed
+          ? _value.otherCost
+          : otherCost // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -391,7 +407,8 @@ class _$_StockItem implements _StockItem {
       @HiveField(13, defaultValue: -1) this.breakEven = 0,
       @HiveField(14) this.listingDate,
       this.autogenSku = false,
-      @HiveField(15, defaultValue: "") this.conditionText = ""});
+      @HiveField(15, defaultValue: "") this.conditionText = "",
+      @HiveField(16, defaultValue: 0) this.otherCost = 0});
 
   @override
   @HiveField(0)
@@ -457,10 +474,14 @@ class _$_StockItem implements _StockItem {
   @override
   @HiveField(15, defaultValue: "")
   final String conditionText;
+  @JsonKey()
+  @override
+  @HiveField(16, defaultValue: 0)
+  final int otherCost;
 
   @override
   String toString() {
-    return 'StockItem(purchaseDate: $purchaseDate, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, profitPerItem: $profitPerItem, amount: $amount, condition: $condition, subCondition: $subCondition, sku: $sku, memo: $memo, item: $item, retailer: $retailer, id: $id, breakEven: $breakEven, listingDate: $listingDate, autogenSku: $autogenSku, conditionText: $conditionText)';
+    return 'StockItem(purchaseDate: $purchaseDate, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, profitPerItem: $profitPerItem, amount: $amount, condition: $condition, subCondition: $subCondition, sku: $sku, memo: $memo, item: $item, retailer: $retailer, id: $id, breakEven: $breakEven, listingDate: $listingDate, autogenSku: $autogenSku, conditionText: $conditionText, otherCost: $otherCost)';
   }
 
   @override
@@ -491,7 +512,8 @@ class _$_StockItem implements _StockItem {
             const DeepCollectionEquality()
                 .equals(other.autogenSku, autogenSku) &&
             const DeepCollectionEquality()
-                .equals(other.conditionText, conditionText));
+                .equals(other.conditionText, conditionText) &&
+            const DeepCollectionEquality().equals(other.otherCost, otherCost));
   }
 
   @override
@@ -513,7 +535,8 @@ class _$_StockItem implements _StockItem {
       const DeepCollectionEquality().hash(breakEven),
       const DeepCollectionEquality().hash(listingDate),
       const DeepCollectionEquality().hash(autogenSku),
-      const DeepCollectionEquality().hash(conditionText));
+      const DeepCollectionEquality().hash(conditionText),
+      const DeepCollectionEquality().hash(otherCost));
 
   @JsonKey(ignore: true)
   @override
@@ -539,7 +562,8 @@ abstract class _StockItem implements StockItem {
       @HiveField(13, defaultValue: -1) int breakEven,
       @HiveField(14) String? listingDate,
       bool autogenSku,
-      @HiveField(15, defaultValue: "") String conditionText}) = _$_StockItem;
+      @HiveField(15, defaultValue: "") String conditionText,
+      @HiveField(16, defaultValue: 0) int otherCost}) = _$_StockItem;
 
   @override
   @HiveField(0)
@@ -592,6 +616,9 @@ abstract class _StockItem implements StockItem {
   @override
   @HiveField(15, defaultValue: "")
   String get conditionText;
+  @override
+  @HiveField(16, defaultValue: 0)
+  int get otherCost;
   @override
   @JsonKey(ignore: true)
   _$StockItemCopyWith<_StockItem> get copyWith =>
