@@ -109,6 +109,7 @@ String _calcProfitSpeakText({
     purchasePrice: 0,
     fee: fee,
     useFba: useFba,
+    otherCost: 0,
   );
   if (profit == 0) {
     return "$listPrice円";

@@ -67,6 +67,7 @@ class _TileBody extends HookConsumerWidget {
       purchase: item.purchasePrice,
       useFba: item.useFba,
       feeInfo: detail.prices?.feeInfo,
+      otherCost: item.otherCost,
     );
 
     return Column(

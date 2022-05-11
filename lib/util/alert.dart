@@ -42,6 +42,7 @@ extension AlertConditionSetExtension on AlertConditionSet {
               purchasePrice: 0,
               fee: item.prices?.feeInfo,
               useFba: settings.useFba,
+              otherCost: 0,
             );
 
             if (profit < cond.value) {
@@ -64,6 +65,7 @@ extension AlertConditionSetExtension on AlertConditionSet {
               purchasePrice: 0,
               fee: item.prices?.feeInfo,
               useFba: settings.useFba,
+              otherCost: 0,
             );
             if (profit < cond.value) {
               return false;

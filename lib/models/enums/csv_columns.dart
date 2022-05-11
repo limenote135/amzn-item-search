@@ -35,6 +35,10 @@ enum CsvColumn {
   purchaseDate,
   @HiveField(14)
   breakEven,
+  @HiveField(15)
+  conditionText,
+  @HiveField(16)
+  otherCost,
 }
 
 extension CsvColumnExtention on CsvColumn {
@@ -70,6 +74,10 @@ extension CsvColumnExtention on CsvColumn {
         return "仕入れ日";
       case CsvColumn.breakEven:
         return "損益分岐点";
+      case CsvColumn.conditionText:
+        return "コンディション説明";
+      case CsvColumn.otherCost:
+        return "その他費用";
     }
   }
 }

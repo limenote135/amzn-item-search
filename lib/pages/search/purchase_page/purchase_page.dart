@@ -196,17 +196,20 @@ class _SaveButton extends HookConsumerWidget {
     final purchase = getInt(form, purchasePriceField);
     final sell = getInt(form, sellPriceField);
     final useFba = getBool(form, useFbaField);
+    final otherCost = getInt(form, otherCostField);
 
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
       fee: item.prices?.feeInfo,
       useFba: useFba,
+      otherCost: otherCost,
     );
     final breakEven = calcBreakEven(
       purchase: purchase,
       useFba: useFba,
       feeInfo: item.prices?.feeInfo,
+      otherCost: otherCost,
     );
 
     final stock = StockItem(
@@ -225,6 +228,7 @@ class _SaveButton extends HookConsumerWidget {
       retailer: getString(form, retailerField),
       breakEven: breakEven,
       conditionText: getString(form, conditionTextField),
+      otherCost: getInt(form, otherCostField),
     );
     ref.read(stockItemListControllerProvider.notifier).add(stock);
     ref.read(analyticsControllerProvider).logPurchaseEvent(stock);
