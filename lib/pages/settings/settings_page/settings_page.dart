@@ -4,6 +4,7 @@ import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/settings/alert_page/alert_page.dart';
 import 'package:amasearch/pages/settings/amazon_page/amazon_page.dart';
+import 'package:amasearch/pages/settings/condition_text_page/condition_text_page.dart';
 import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.dart';
 import 'package:amasearch/pages/settings/donation_page/donation_page.dart';
 import 'package:amasearch/pages/settings/keepa_page/keepa_page.dart';
@@ -172,6 +173,15 @@ class _Body extends HookConsumerWidget {
             Navigator.push(
               context,
               PurchaseListPage.route(),
+            );
+          },
+        ),
+        ListTile(
+          title: const Text("コンディション説明設定"),
+          onTap: () {
+            Navigator.push(
+              context,
+              ConditionTextPage.route(),
             );
           },
         ),

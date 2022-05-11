@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
@@ -38,6 +39,14 @@ class PurchasePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
+    final conditionTexts = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.newConditionTexts),
+    );
+    final conditionIndex = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.newConditionTextIndex),
+    );
 
     final useFba = ref.watch(
       searchSettingsControllerProvider.select((value) => value.useFba),
@@ -64,6 +73,7 @@ class PurchasePage extends HookConsumerWidget {
       useFba: useFba,
       autogenSku: true,
       item: item,
+      conditionText: conditionTexts[conditionIndex],
       id: ref.read(uuidProvider).v4(), // たぶん空文字でも問題ない
     );
     final form = ref.watch(formValueProvider(stock));
@@ -214,6 +224,7 @@ class _SaveButton extends HookConsumerWidget {
       purchaseDate: getString(form, purchaseDateField),
       retailer: getString(form, retailerField),
       breakEven: breakEven,
+      conditionText: getString(form, conditionTextField),
     );
     ref.read(stockItemListControllerProvider.notifier).add(stock);
     ref.read(analyticsControllerProvider).logPurchaseEvent(stock);

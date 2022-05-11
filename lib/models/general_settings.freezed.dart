@@ -60,7 +60,15 @@ class _$GeneralSettingsTearOff {
       @HiveField(19, defaultValue: defaultLeftShortcut)
           List<ShortcutDetail> leftSlideShortcut = defaultLeftShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          List<ShortcutDetail> rightSlideShortcut = defaultRightShortcut}) {
+          List<ShortcutDetail> rightSlideShortcut = defaultRightShortcut,
+      @HiveField(21, defaultValue: defaultNewConditionTexts)
+          List<String> newConditionTexts = defaultNewConditionTexts,
+      @HiveField(22, defaultValue: 0)
+          int newConditionTextIndex = 0,
+      @HiveField(23, defaultValue: defaultUsedConditionText)
+          List<String> usedConditionTexts = defaultUsedConditionText,
+      @HiveField(24, defaultValue: 0)
+          int usedConditionTextIndex = 0}) {
     return _GeneralSettings(
       isDarkMode: isDarkMode,
       enableTargetProfit: enableTargetProfit,
@@ -83,6 +91,10 @@ class _$GeneralSettingsTearOff {
       keepaSettings: keepaSettings,
       leftSlideShortcut: leftSlideShortcut,
       rightSlideShortcut: rightSlideShortcut,
+      newConditionTexts: newConditionTexts,
+      newConditionTextIndex: newConditionTextIndex,
+      usedConditionTexts: usedConditionTexts,
+      usedConditionTextIndex: usedConditionTextIndex,
     );
   }
 }
@@ -139,6 +151,14 @@ mixin _$GeneralSettings {
   @HiveField(20, defaultValue: defaultRightShortcut)
   List<ShortcutDetail> get rightSlideShortcut =>
       throw _privateConstructorUsedError;
+  @HiveField(21, defaultValue: defaultNewConditionTexts)
+  List<String> get newConditionTexts => throw _privateConstructorUsedError;
+  @HiveField(22, defaultValue: 0)
+  int get newConditionTextIndex => throw _privateConstructorUsedError;
+  @HiveField(23, defaultValue: defaultUsedConditionText)
+  List<String> get usedConditionTexts => throw _privateConstructorUsedError;
+  @HiveField(24, defaultValue: 0)
+  int get usedConditionTextIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith =>
@@ -192,7 +212,15 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(19, defaultValue: defaultLeftShortcut)
           List<ShortcutDetail> leftSlideShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          List<ShortcutDetail> rightSlideShortcut});
+          List<ShortcutDetail> rightSlideShortcut,
+      @HiveField(21, defaultValue: defaultNewConditionTexts)
+          List<String> newConditionTexts,
+      @HiveField(22, defaultValue: 0)
+          int newConditionTextIndex,
+      @HiveField(23, defaultValue: defaultUsedConditionText)
+          List<String> usedConditionTexts,
+      @HiveField(24, defaultValue: 0)
+          int usedConditionTextIndex});
 
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
 }
@@ -229,6 +257,10 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object? keepaSettings = freezed,
     Object? leftSlideShortcut = freezed,
     Object? rightSlideShortcut = freezed,
+    Object? newConditionTexts = freezed,
+    Object? newConditionTextIndex = freezed,
+    Object? usedConditionTexts = freezed,
+    Object? usedConditionTextIndex = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode: isDarkMode == freezed
@@ -315,6 +347,22 @@ class _$GeneralSettingsCopyWithImpl<$Res>
           ? _value.rightSlideShortcut
           : rightSlideShortcut // ignore: cast_nullable_to_non_nullable
               as List<ShortcutDetail>,
+      newConditionTexts: newConditionTexts == freezed
+          ? _value.newConditionTexts
+          : newConditionTexts // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      newConditionTextIndex: newConditionTextIndex == freezed
+          ? _value.newConditionTextIndex
+          : newConditionTextIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      usedConditionTexts: usedConditionTexts == freezed
+          ? _value.usedConditionTexts
+          : usedConditionTexts // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      usedConditionTextIndex: usedConditionTextIndex == freezed
+          ? _value.usedConditionTextIndex
+          : usedConditionTextIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
@@ -375,7 +423,15 @@ abstract class _$GeneralSettingsCopyWith<$Res>
       @HiveField(19, defaultValue: defaultLeftShortcut)
           List<ShortcutDetail> leftSlideShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          List<ShortcutDetail> rightSlideShortcut});
+          List<ShortcutDetail> rightSlideShortcut,
+      @HiveField(21, defaultValue: defaultNewConditionTexts)
+          List<String> newConditionTexts,
+      @HiveField(22, defaultValue: 0)
+          int newConditionTextIndex,
+      @HiveField(23, defaultValue: defaultUsedConditionText)
+          List<String> usedConditionTexts,
+      @HiveField(24, defaultValue: 0)
+          int usedConditionTextIndex});
 
   @override
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
@@ -415,6 +471,10 @@ class __$GeneralSettingsCopyWithImpl<$Res>
     Object? keepaSettings = freezed,
     Object? leftSlideShortcut = freezed,
     Object? rightSlideShortcut = freezed,
+    Object? newConditionTexts = freezed,
+    Object? newConditionTextIndex = freezed,
+    Object? usedConditionTexts = freezed,
+    Object? usedConditionTextIndex = freezed,
   }) {
     return _then(_GeneralSettings(
       isDarkMode: isDarkMode == freezed
@@ -501,6 +561,22 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           ? _value.rightSlideShortcut
           : rightSlideShortcut // ignore: cast_nullable_to_non_nullable
               as List<ShortcutDetail>,
+      newConditionTexts: newConditionTexts == freezed
+          ? _value.newConditionTexts
+          : newConditionTexts // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      newConditionTextIndex: newConditionTextIndex == freezed
+          ? _value.newConditionTextIndex
+          : newConditionTextIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      usedConditionTexts: usedConditionTexts == freezed
+          ? _value.usedConditionTexts
+          : usedConditionTexts // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      usedConditionTextIndex: usedConditionTextIndex == freezed
+          ? _value.usedConditionTextIndex
+          : usedConditionTextIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -551,7 +627,15 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(19, defaultValue: defaultLeftShortcut)
           this.leftSlideShortcut = defaultLeftShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          this.rightSlideShortcut = defaultRightShortcut});
+          this.rightSlideShortcut = defaultRightShortcut,
+      @HiveField(21, defaultValue: defaultNewConditionTexts)
+          this.newConditionTexts = defaultNewConditionTexts,
+      @HiveField(22, defaultValue: 0)
+          this.newConditionTextIndex = 0,
+      @HiveField(23, defaultValue: defaultUsedConditionText)
+          this.usedConditionTexts = defaultUsedConditionText,
+      @HiveField(24, defaultValue: 0)
+          this.usedConditionTextIndex = 0});
 
   @JsonKey()
   @override // ダークモード
@@ -636,10 +720,26 @@ class _$_GeneralSettings implements _GeneralSettings {
   @override
   @HiveField(20, defaultValue: defaultRightShortcut)
   final List<ShortcutDetail> rightSlideShortcut;
+  @JsonKey()
+  @override
+  @HiveField(21, defaultValue: defaultNewConditionTexts)
+  final List<String> newConditionTexts;
+  @JsonKey()
+  @override
+  @HiveField(22, defaultValue: 0)
+  final int newConditionTextIndex;
+  @JsonKey()
+  @override
+  @HiveField(23, defaultValue: defaultUsedConditionText)
+  final List<String> usedConditionTexts;
+  @JsonKey()
+  @override
+  @HiveField(24, defaultValue: 0)
+  final int usedConditionTextIndex;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings, leftSlideShortcut: $leftSlideShortcut, rightSlideShortcut: $rightSlideShortcut)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings, leftSlideShortcut: $leftSlideShortcut, rightSlideShortcut: $rightSlideShortcut, newConditionTexts: $newConditionTexts, newConditionTextIndex: $newConditionTextIndex, usedConditionTexts: $usedConditionTexts, usedConditionTextIndex: $usedConditionTextIndex)';
   }
 
   @override
@@ -682,7 +782,15 @@ class _$_GeneralSettings implements _GeneralSettings {
             const DeepCollectionEquality()
                 .equals(other.leftSlideShortcut, leftSlideShortcut) &&
             const DeepCollectionEquality()
-                .equals(other.rightSlideShortcut, rightSlideShortcut));
+                .equals(other.rightSlideShortcut, rightSlideShortcut) &&
+            const DeepCollectionEquality()
+                .equals(other.newConditionTexts, newConditionTexts) &&
+            const DeepCollectionEquality()
+                .equals(other.newConditionTextIndex, newConditionTextIndex) &&
+            const DeepCollectionEquality()
+                .equals(other.usedConditionTexts, usedConditionTexts) &&
+            const DeepCollectionEquality()
+                .equals(other.usedConditionTextIndex, usedConditionTextIndex));
   }
 
   @override
@@ -708,7 +816,11 @@ class _$_GeneralSettings implements _GeneralSettings {
         const DeepCollectionEquality().hash(isMajorCustomer),
         const DeepCollectionEquality().hash(keepaSettings),
         const DeepCollectionEquality().hash(leftSlideShortcut),
-        const DeepCollectionEquality().hash(rightSlideShortcut)
+        const DeepCollectionEquality().hash(rightSlideShortcut),
+        const DeepCollectionEquality().hash(newConditionTexts),
+        const DeepCollectionEquality().hash(newConditionTextIndex),
+        const DeepCollectionEquality().hash(usedConditionTexts),
+        const DeepCollectionEquality().hash(usedConditionTextIndex)
       ]);
 
   @JsonKey(ignore: true)
@@ -760,7 +872,15 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(19, defaultValue: defaultLeftShortcut)
           List<ShortcutDetail> leftSlideShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          List<ShortcutDetail> rightSlideShortcut}) = _$_GeneralSettings;
+          List<ShortcutDetail> rightSlideShortcut,
+      @HiveField(21, defaultValue: defaultNewConditionTexts)
+          List<String> newConditionTexts,
+      @HiveField(22, defaultValue: 0)
+          int newConditionTextIndex,
+      @HiveField(23, defaultValue: defaultUsedConditionText)
+          List<String> usedConditionTexts,
+      @HiveField(24, defaultValue: 0)
+          int usedConditionTextIndex}) = _$_GeneralSettings;
 
   @override // ダークモード
   @HiveField(0)
@@ -825,6 +945,18 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(20, defaultValue: defaultRightShortcut)
   List<ShortcutDetail> get rightSlideShortcut;
+  @override
+  @HiveField(21, defaultValue: defaultNewConditionTexts)
+  List<String> get newConditionTexts;
+  @override
+  @HiveField(22, defaultValue: 0)
+  int get newConditionTextIndex;
+  @override
+  @HiveField(23, defaultValue: defaultUsedConditionText)
+  List<String> get usedConditionTexts;
+  @override
+  @HiveField(24, defaultValue: 0)
+  int get usedConditionTextIndex;
   @override
   @JsonKey(ignore: true)
   _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
