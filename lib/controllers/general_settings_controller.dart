@@ -36,8 +36,12 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
 
       // CSV にカラムを足した際のマイグレーション since v1.3.0
       if (settings.csvOrder.length == 15) {
-        settings.csvOrder
-            .addAll([CsvColumn.otherCost, CsvColumn.conditionText]);
+        final newOrder = <CsvColumn>[
+          ...settings.csvOrder,
+          CsvColumn.otherCost,
+          CsvColumn.conditionText,
+        ];
+        settings = settings.copyWith(csvOrder: newOrder);
       }
 
       state = settings;
