@@ -10,8 +10,8 @@ class StrongContainer extends StatelessWidget {
           bodyColor: Colors.black,
           displayColor: Colors.black,
         );
-    return Container(
-      color: Colors.red[100],
+    return ColoredBox(
+      color: Colors.red.shade100,
       child: Theme(
         data: Theme.of(context).copyWith(textTheme: newTextTheme),
         child: child,

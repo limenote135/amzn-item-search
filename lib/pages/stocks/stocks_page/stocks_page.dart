@@ -466,7 +466,7 @@ class _Body extends HookConsumerWidget {
           WithUnderLine(
             RepaintBoundary(
               key: _summaryKey,
-              child: Container(
+              child: ColoredBox(
                 color: Theme.of(context).backgroundColor,
                 child: const TotalProfit(),
               ),

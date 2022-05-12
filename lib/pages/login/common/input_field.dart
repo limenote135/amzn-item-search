@@ -18,7 +18,6 @@ class EmailFormField extends StatelessWidget {
     return TextFormField(
       key: fieldKey,
       autofocus: autoFocus,
-      autocorrect: true,
       validator: emailValidator,
       decoration: InputDecoration(
         hintText: "メールアドレス",
@@ -60,7 +59,6 @@ class PasswordFormField extends StatelessWidget {
     return TextFormField(
       key: fieldKey,
       controller: controller,
-      autocorrect: true,
       focusNode: focusNode,
       validator: validator ?? passwordValidator,
       decoration: InputDecoration(
