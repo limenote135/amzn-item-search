@@ -420,19 +420,16 @@ class _ExpandedButton extends StatelessWidget {
     Key? key,
     this.style,
     this.onPressed,
-    this.flex = 1,
     required this.child,
   }) : super(key: key);
 
   final ButtonStyle? style;
   final void Function()? onPressed;
-  final int flex;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: flex,
       child: OutlinedButton(
         style: style,
         onPressed: onPressed,
@@ -446,12 +443,10 @@ class _OperatorButton extends StatelessWidget {
   const _OperatorButton({
     Key? key,
     this.onPressed,
-    this.flex = 1,
     required this.child,
   }) : super(key: key);
 
   final void Function()? onPressed;
-  final int flex;
   final Widget child;
 
   @override
