@@ -56,7 +56,7 @@ class _AppBar extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final height = useState<double>(0);
-    WidgetsBinding.instance?.addPostFrameCallback((cb) {
+    WidgetsBinding.instance.addPostFrameCallback((cb) {
       // build が完了した後に AppBar の高さを計算して設定、再描画する
       final obj = _appBarKey.currentContext?.findRenderObject();
       if (obj != null) {
