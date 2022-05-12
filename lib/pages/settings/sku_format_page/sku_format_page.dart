@@ -146,7 +146,6 @@ class __PatternEditFormState extends ConsumerState<_PatternEditForm> {
         Wrap(
           alignment: WrapAlignment.spaceEvenly,
           spacing: 8,
-          direction: Axis.horizontal,
           children: [
             ElevatedButton(
               onPressed: () => _addText(asinVar),

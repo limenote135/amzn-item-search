@@ -227,11 +227,6 @@ class _Body extends HookConsumerWidget {
                 animationMinScale: 0.7,
                 maxScale: 4,
                 animationMaxScale: 4.5,
-                speed: 1,
-                inertialSpeed: 100,
-                initialScale: 1,
-                inPageView: false,
-                initialAlignment: InitialAlignment.center,
               );
             },
           ),

@@ -17,7 +17,7 @@ class CameraItemTile extends HookConsumerWidget {
       return Container();
     }
     final items = ref.watch(searchItemControllerProvider);
-    return Container(
+    return ColoredBox(
       color: isDark(context) ? Theme.of(context).backgroundColor : Colors.white,
       child: ProviderScope(
         overrides: [
