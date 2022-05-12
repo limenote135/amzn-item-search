@@ -67,14 +67,20 @@ class Updater extends HookConsumerWidget {
 
     if (Platform.isAndroid) {
       if (result == OkCancelResult.ok) {
-        await launch(
-          "https://play.google.com/store/apps/details?id=com.knzc.app.amasearch",
+        await launchUrl(
+          Uri.parse(
+            "https://play.google.com/store/apps/details?id=com.knzc.app.amasearch",
+          ),
         );
       }
       await SystemNavigator.pop(animated: true);
     } else {
       if (result == OkCancelResult.ok) {
-        await launch("https://apps.apple.com/jp/app/id1608782445");
+        await launchUrl(
+          Uri.parse(
+            "https://apps.apple.com/jp/app/id1608782445",
+          ),
+        );
       }
       exit(0);
     }

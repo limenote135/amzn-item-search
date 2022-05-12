@@ -20,7 +20,6 @@ class RetailerTile extends HookConsumerWidget {
             child: ReactiveTextField<dynamic>(
               formControlName: retailerField,
               decoration: const InputDecoration(labelText: "仕入れ先"),
-              textAlign: TextAlign.start,
             ),
           ),
           IconButton(

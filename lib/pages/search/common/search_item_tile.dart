@@ -25,7 +25,6 @@ class SearchItemTile extends HookConsumerWidget {
     final search = ref.watch(searchSettingsControllerProvider);
     final settings = ref.watch(generalSettingsControllerProvider);
     final tile = Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: const [
         TileImage(),
         Expanded(

@@ -71,7 +71,6 @@ class _Body extends ConsumerWidget {
         key: formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ListTile(
               title: Text(

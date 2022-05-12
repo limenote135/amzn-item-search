@@ -72,7 +72,6 @@ class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
           child: Container(
             height: 48,
             alignment: Alignment.center,
-            decoration: null,
             child: ClipRRect(
               borderRadius: _borderRadius,
               child: Container(
