@@ -16,7 +16,6 @@ class ItemImage extends StatelessWidget {
     if (data == null) {
       return ExtendedImage.network(
         url!,
-        cache: true,
         fit: BoxFit.scaleDown,
         loadStateChanged: (state) {
           if (state.extendedImageLoadState != LoadState.completed) {

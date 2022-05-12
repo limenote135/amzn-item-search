@@ -29,10 +29,9 @@ class ItemTile extends HookConsumerWidget {
         currentStockItemProvider.overrideWithValue(item),
         currentAsinDataProvider.overrideWithValue(item.item),
       ],
-      child: Container(
+      child: ColoredBox(
         color: _getSelectedColor(context, isSelected),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
             TileImage(),
             Expanded(child: _TileBody()),

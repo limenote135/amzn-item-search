@@ -23,7 +23,6 @@ class ConditionTextTile extends ConsumerWidget {
               maxLines: null,
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(labelText: "コンディション説明"),
-              textAlign: TextAlign.start,
               style: smallText,
             ),
           ),

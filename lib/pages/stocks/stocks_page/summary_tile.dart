@@ -22,7 +22,7 @@ class SummaryTile extends HookConsumerWidget {
 
     // 選択モード・出品モードでは邪魔なので日付のみ表示する
     if (pageMode == StockPageMode.select || pageMode == StockPageMode.listing) {
-      return Container(
+      return ColoredBox(
         color: Theme.of(context).backgroundColor,
         child: Text(day),
       );
@@ -44,7 +44,7 @@ class SummaryTile extends HookConsumerWidget {
     final profitRate =
         totalSellPrice == 0 ? 0 : (profitValue / totalSellPrice * 100).round();
 
-    return Container(
+    return ColoredBox(
       color: Theme.of(context).backgroundColor,
       child: Column(
         children: [
