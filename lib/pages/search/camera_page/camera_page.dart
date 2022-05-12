@@ -253,9 +253,7 @@ class _BodyState extends ConsumerState<_Body> {
         BarcodeType.codabar,
       ],
       resolution: Resolution.hd1080,
-      framerate: Framerate.fps30,
       mode: DetectionMode.continuous,
-      position: CameraPosition.back,
       apiMode: IOSApiMode.visionStandard,
       onScan: _handleBarcode,
       children: [
@@ -276,7 +274,6 @@ class _BodyState extends ConsumerState<_Body> {
           ),
         ),
         const IgnorePointer(
-          ignoring: true,
           child: DecoratedBox(
             decoration: ShapeDecoration(
               shape: CameraScanOverlayShape(),

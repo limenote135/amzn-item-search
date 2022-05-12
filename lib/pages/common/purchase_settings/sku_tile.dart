@@ -40,7 +40,6 @@ class SkuTile extends HookConsumerWidget {
                 formControlName: skuField,
                 keyboardType: TextInputType.url,
                 decoration: const InputDecoration(labelText: "SKU"),
-                textAlign: TextAlign.start,
               );
             },
           ),

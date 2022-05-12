@@ -17,7 +17,7 @@ void updateAlertConditionAnalytics(
 }
 
 String _encodeAlertConditionToUserProps(List<AlertConditionSet> alerts) {
-  final buffer = StringBuffer("");
+  final buffer = StringBuffer();
   for (var i = 0; i < alerts.length; i++) {
     final val = _createAlertConditionPropVal(alerts[i]);
     buffer

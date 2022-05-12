@@ -134,7 +134,7 @@ class _Body extends HookConsumerWidget {
               ),
           ],
           divider: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text("AND", style: smallSize),
           ),
         ),

@@ -26,7 +26,6 @@ class SearchButtons extends HookConsumerWidget {
     return Wrap(
       alignment: WrapAlignment.spaceEvenly,
       spacing: 8,
-      direction: Axis.horizontal,
       children: [
         ElevatedButton(
           onPressed: () async {

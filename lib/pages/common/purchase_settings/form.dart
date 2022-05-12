@@ -103,7 +103,6 @@ class PurchaseSettingsForm extends StatelessWidget {
               formControlName: memoField,
               maxLines: null,
               keyboardType: TextInputType.multiline,
-              textAlign: TextAlign.start,
               decoration: const InputDecoration(labelText: "メモ"),
             ),
           ),
