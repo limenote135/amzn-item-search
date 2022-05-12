@@ -544,7 +544,7 @@ packages:
       name: flutter_hooks
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.18.3"
+    version: "0.18.4"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -584,7 +584,7 @@ packages:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   flutter_signin_button:
     dependency: "direct main"
     description:
@@ -832,7 +832,7 @@ packages:
       name: hooks_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   html:
     dependency: "direct main"
     description:
