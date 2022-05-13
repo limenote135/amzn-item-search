@@ -112,10 +112,10 @@ class _Body extends ConsumerWidget {
                 if (result == null || result.isEmpty) {
                   return;
                 }
-                settings.newConditionTexts[i] = result[0];
+                settings.usedConditionTexts[i] = result[0];
                 ref
                     .read(generalSettingsControllerProvider.notifier)
-                    .update(newConditionTexts: settings.newConditionTexts);
+                    .update(usedConditionTexts: settings.usedConditionTexts);
               },
             ),
             onChanged: (value) {
