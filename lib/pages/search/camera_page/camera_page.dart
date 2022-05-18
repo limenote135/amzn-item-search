@@ -170,7 +170,7 @@ class _BodyState extends ConsumerState<_Body> {
     if (analysisSize != null && previewSize != null) {
       return codes
           .where(
-            _rectOfInterest.buildCodeFilter(
+            _rectOfInterest.codeFilter(
               analysisSize: analysisSize,
               previewSize: previewSize,
             ),
