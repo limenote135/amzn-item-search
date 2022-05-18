@@ -10,7 +10,7 @@ rm -rf ios/Pods
 flutter clean
 rm -rf "$NAME"
 rm "$NAME".zip
-flutter build ipa --release --export-options-plist=./ExportOptions.plist --build-number="$1" --dart-define=FLAVOR=prod
+flutter build ipa --release --build-number="$1" --dart-define=FLAVOR=prod
 zip -r "$NAME".zip "$NAME"
 
 open ./build/ios/archive/Runner.xcarchive
