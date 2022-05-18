@@ -30,7 +30,7 @@ class _CodeBoundaryOverlayState extends State<CodeBoundaryOverlay> {
           final analysisSize = _cameraController.analysisSize;
           if (analysisSize != null && barcodes.isNotEmpty) {
             return CustomPaint(
-              painter: CodeBorderPainter(
+              painter: CodeBoarderPainter(
                 imageSize: analysisSize,
                 barcodes: barcodes,
                 barcodePaintSelector: widget.codeBorderPaintBuilder,
