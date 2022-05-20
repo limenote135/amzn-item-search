@@ -1,9 +1,8 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
-
 import '../camera_controller.dart';
 import '../types/scanner_event.dart';
+import 'package:flutter/material.dart';
 
 /// Blurs the preview when a barcode is detected
 ///
