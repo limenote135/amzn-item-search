@@ -24,7 +24,7 @@ class LifecycleManager extends ConsumerStatefulWidget {
   final LifecycleCallback? callback;
 
   @override
-  _LifeCycleManagerState createState() => _LifeCycleManagerState();
+  ConsumerState<LifecycleManager> createState() => _LifeCycleManagerState();
 }
 
 class _LifeCycleManagerState extends ConsumerState<LifecycleManager>
