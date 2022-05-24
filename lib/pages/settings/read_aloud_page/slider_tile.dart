@@ -19,7 +19,7 @@ class SliderTile extends StatefulWidget {
   final void Function(double)? onSubmit;
 
   @override
-  _SliderTileState createState() => _SliderTileState();
+  State<SliderTile> createState() => _SliderTileState();
 }
 
 class _SliderTileState extends State<SliderTile> {
