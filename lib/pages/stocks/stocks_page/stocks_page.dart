@@ -128,7 +128,7 @@ class StocksPage extends HookConsumerWidget {
       actions: [
         PopupMenuButton<_StockPageActions>(
           padding: EdgeInsets.zero,
-          onSelected: (value) => handleAction(context, ref, value),
+          onSelected: (value) => _handleAction(context, ref, value),
           itemBuilder: (context) => const [
             PopupMenuItem(
               value: _StockPageActions.upload,
@@ -323,7 +323,7 @@ class StocksPage extends HookConsumerWidget {
     }
   }
 
-  Future<void> handleAction(
+  Future<void> _handleAction(
     BuildContext context,
     WidgetRef ref,
     _StockPageActions value,
