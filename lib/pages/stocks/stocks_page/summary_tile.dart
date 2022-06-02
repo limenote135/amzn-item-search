@@ -1,5 +1,5 @@
 import 'package:amasearch/models/stock_item.dart';
-import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
+import 'package:amasearch/pages/stocks/stocks_page/app_bars/page_mode.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
