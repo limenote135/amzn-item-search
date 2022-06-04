@@ -49,14 +49,13 @@ final searchItemFutureProvider = FutureProvider.autoDispose
       tts.speak("見つかりませんでした。");
     } else {
       final template = settings.readAloudPatterns[settings.patternIndex];
-      final search = ref.read(searchSettingsControllerProvider);
       tts.speak(
         createSpeakText(
           template: template.pattern,
           item: resp.items.first,
-          priorFba: search.priorFba,
+          priorFba: searchSetting.priorFba,
           useFba: searchSetting.useFba,
-          usedSubCondition: search.usedSubCondition,
+          usedSubCondition: searchSetting.usedSubCondition,
         ),
       );
     }
