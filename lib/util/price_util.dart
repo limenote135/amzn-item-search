@@ -1,5 +1,6 @@
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
+import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
@@ -128,7 +129,8 @@ int? getLowestPrice(
   }
   final targets = condition == ItemSubCondition.newItem
       ? prices.newPrices
-      : prices.usedPrices.where((element) => element.subCondition == condition);
+      : prices.usedPrices.where((element) =>
+          condition.toUsedSubCondition().lessEq(element.subCondition));
 
   if (targets.isEmpty) {
     return null;
