@@ -52,7 +52,7 @@ String _filterPrice({
   required FeeInfo? fee,
   required bool priorFba,
   required bool useFba,
-  UsedSubCondition? usedSubCond,
+  UsedSubCondition? usedSubCond, // 新品の場合は null になる
 }) {
   if (usedSubCond == null || usedSubCond == UsedSubCondition.all) {
     // 新品か中古全対象の場合
@@ -92,7 +92,7 @@ String _filterPrice({
       );
     }
     return _calcProfitSpeakText(
-      listPrice: prices.first.price,
+      listPrice: subItems.first.price,
       fee: fee,
       useFba: useFba,
     );
@@ -113,6 +113,9 @@ String _calcProfitSpeakText({
   );
   if (profit == 0) {
     return "$listPrice円";
+  }
+  if (profit < 0) {
+    return "マイナス${profit * -1}円";
   }
   return "$profit円";
 }
