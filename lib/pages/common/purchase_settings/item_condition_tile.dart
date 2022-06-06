@@ -1,4 +1,5 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
@@ -35,11 +36,24 @@ class ItemConditionTile extends HookConsumerWidget {
                 // 販売価格の変更
                 final sellPrice = getInt(form, sellPriceField);
                 final useFba = getBool(form, useFbaField);
+
+                var condition = current.toItemSubCondition();
+                if (current == PurchaseItemCondition.newItem &&
+                    (item.prices?.newPrices.isEmpty ?? true)) {
+                  // 新品出品無しで、新品から中古の変える場合
+                  // 新品出品が無い場合は初期では中古の最安値になっているはず
+                  condition = ItemSubCondition.acceptable;
+                } else if (value == PurchaseItemCondition.newItem &&
+                    (item.prices?.usedPrices.isEmpty ?? true)) {
+                  // 中古出品が無しで、新品にコンディションを買える場合
+                  condition = ItemSubCondition.newItem;
+                }
                 final currentLowestPrice = getLowestPrice(
                   item.prices,
-                  condition: current.toItemSubCondition(),
+                  condition: condition,
                   priorFba: useFba,
                 );
+
                 if (sellPrice == currentLowestPrice) {
                   // 販売価格が手動で変更されていないので、コンディションに合わせて新しい値に変更する
                   final newPrice = getLowestPrice(
