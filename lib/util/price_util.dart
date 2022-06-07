@@ -129,8 +129,10 @@ int? getLowestPrice(
   }
   final targets = condition == ItemSubCondition.newItem
       ? prices.newPrices
-      : prices.usedPrices.where((element) =>
-          condition.toUsedSubCondition().lessEq(element.subCondition));
+      : prices.usedPrices.where(
+          (element) =>
+              condition.toUsedSubCondition().lessEq(element.subCondition),
+        );
 
   if (targets.isEmpty) {
     return null;
