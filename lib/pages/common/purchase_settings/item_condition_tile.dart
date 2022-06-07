@@ -41,8 +41,14 @@ class ItemConditionTile extends HookConsumerWidget {
                 if (current == PurchaseItemCondition.newItem &&
                     (item.prices?.newPrices.isEmpty ?? true)) {
                   // 新品出品無しで、新品から中古の変える場合
-                  // 新品出品が無い場合は初期では中古の最安値になっているはず
-                  condition = ItemSubCondition.acceptable;
+                  // 新品出品が無い場合、初期は非常に良いがあればそれ、無ければ最安値になっているはず
+                  if (item.prices?.usedPrices.any((element) =>
+                          element.subCondition == ItemSubCondition.veryGood) ??
+                      false) {
+                    condition = ItemSubCondition.veryGood;
+                  } else {
+                    condition = ItemSubCondition.acceptable;
+                  }
                 } else if (value == PurchaseItemCondition.newItem &&
                     (item.prices?.usedPrices.isEmpty ?? true)) {
                   // 中古出品が無しで、新品にコンディションを買える場合
