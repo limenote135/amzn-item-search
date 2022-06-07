@@ -183,7 +183,7 @@ class MwsRepository {
   void _customHandler(int code) {
     switch (code) {
       case 403:
-        throw Exception("Amazonとの連携が正しく行われていません");
+        throw Exception("Amazonからのデータ取得ができませんでした\nしばらく待ってから設定より再連携してください");
       case 404:
         throw const AmazonItemNotFoundException("このマーケットでは販売できない商品です");
       case 412:
