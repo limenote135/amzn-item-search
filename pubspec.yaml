@@ -76,7 +76,7 @@ dependencies:
   purchases_flutter: ^3.10.0
   reactive_forms: ^13.0.0
   riverpod: 1.0.3
-  share: ^2.0.4 # TODO: Discontinued
+  share_plus: ^4.0.7
   shared_preferences: ^2.0.15
   sign_in_with_apple: ^4.0.0
   state_notifier: ^0.7.2+1
