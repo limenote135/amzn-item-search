@@ -18,5 +18,5 @@ Map<String, dynamic>? positiveNumberOrEmpty(AbstractControl<dynamic> control) {
     }
     return <String, dynamic>{validationMessagePositiveNumberOrEmpty: false};
   }
-  return <String, dynamic>{"positiveNumberOrEmpty": false};
+  return <String, dynamic>{validationMessagePositiveNumberOrEmpty: false};
 }

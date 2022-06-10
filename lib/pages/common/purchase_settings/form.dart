@@ -6,6 +6,7 @@ import 'package:amasearch/pages/common/purchase_settings/fba_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/other_cost_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/quantity_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
+import 'package:amasearch/util/custom_validator.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ import 'package:flutter/widgets.dart' as base;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'custom_validator.dart';
 import 'fee_tile.dart';
 import 'image_tile.dart';
 import 'input_prices_tile.dart';
