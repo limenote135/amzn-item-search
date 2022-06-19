@@ -1,5 +1,4 @@
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
-import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/stocks/detail_page/detail_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/common.dart';
@@ -18,6 +17,7 @@ import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'provider.dart';
 import 'slidable_delete_tile.dart';
 
 final _selectedItemCount = Provider((ref) {
@@ -65,7 +65,7 @@ class _Body extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final items = ref.watch(stockItemListControllerProvider);
+    final items = ref.watch(filteredStockListProvider);
     final mode = ref.watch(stockPageModeProvider);
     final keyMaps = ref.watch(captureKeyMapProvider);
     final selectAll = ref.watch(selectAllProvider);
