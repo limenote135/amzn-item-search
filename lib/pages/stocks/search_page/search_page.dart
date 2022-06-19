@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/models/enums/listing_state.dart';
 import 'package:amasearch/models/enums/product_condition.dart';
+import 'package:amasearch/models/stock_item_filter.dart';
 import 'package:amasearch/pages/stocks/search_page/values.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/custom_validator.dart';
@@ -80,6 +81,7 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final form = ref.watch(formValueProvider);
+    final filter = ref.watch(currentStockItemFilterProvider);
     final theme = Theme.of(context);
     final smallSize = smallFontSize(context);
 
@@ -210,31 +212,27 @@ class _Body extends ConsumerWidget {
                 ),
               ],
             ),
-            ListTile(
-              title: ReactiveFormConsumer(
-                builder: (context, formGroup, child) {
-                  Future<void> _onPressed() async {
-                    await showDialog<void>(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (_) {
-                        return AlertDialog(
-                          title: Text("This is the title"),
-                          content: Text("This is the content"),
-                          actions: [
-                            TextButton(
-                              child: Text("Cancel"),
-                              onPressed: () => Navigator.pop(context),
-                            ),
-                            TextButton(
-                              child: Text("OK"),
-                              onPressed: () => print('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
+          ),
+          ListTile(
+            title: ReactiveFormConsumer(
+              builder: (context, formGroup, child) {
+                Future<void> _onPressed() async {
+                  ref.read(currentStockItemFilterProvider.notifier).state =
+                      filter.copyWith(
+                    keyword: getNullableString(form, keywordField),
+                    listingState: getListingState(form),
+                    productCondition: getProductCondition(form),
+                    purchasePriceLower:
+                        getNullableInt(form, purchasePriceLowerField),
+                    purchasePriceUpper:
+                        getNullableInt(form, purchasePriceUpperField),
+                    sellPriceLower: getNullableInt(form, sellPriceLowerField),
+                    sellPriceUpper: getNullableInt(form, sellPriceUpperField),
+                    purchaseDateRange:
+                        getNullableDateRange(form, purchaseDateRangeField),
+                  );
+                  Navigator.pop(context);
+                }
 
                 return ElevatedButton(
                   onPressed: form.invalid ? null : _onPressed,
