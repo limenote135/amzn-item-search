@@ -91,3 +91,27 @@ final filteredStockListProvider = Provider(
     return items.toList();
   },
 );
+
+final filterCountProvider = Provider((ref) {
+  final filter = ref.watch(currentStockItemFilterProvider);
+  var count = 0;
+  if (filter.keyword != null && filter.keyword != "") {
+    count++;
+  }
+  if (filter.listingState != ListingState.all) {
+    count++;
+  }
+  if (filter.productCondition != ProductCondition.all) {
+    count++;
+  }
+  if (filter.purchasePriceUpper != null || filter.purchasePriceLower != null) {
+    count++;
+  }
+  if (filter.sellPriceLower != null || filter.sellPriceUpper != null) {
+    count++;
+  }
+  if (filter.purchaseDateRange != null) {
+    count++;
+  }
+  return count;
+});

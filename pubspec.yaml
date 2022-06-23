@@ -23,6 +23,7 @@ environment:
 dependencies:
   adaptive_dialog: ^1.6.4
   archive: ^3.3.0
+  badges: ^2.0.3
   camera: ^0.9.4+6 # https://github.com/flutter/flutter/issues/90070 待ち
   cloud_functions: ^3.2.16
   collection: ^1.16.0
