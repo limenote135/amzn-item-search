@@ -1,16 +1,11 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
-import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/stocks_page/share/keys.dart';
 import 'package:amasearch/pages/stocks/stocks_page/share/share.dart';
-import 'package:amasearch/util/csv.dart';
-import 'package:amasearch/util/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:share_plus/share_plus.dart';
 
 import 'page_mode.dart';
 
@@ -75,27 +70,12 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
     WidgetRef ref,
     _StockPageActions value,
   ) async {
-    final itemList = ref.read(stockItemListControllerProvider);
-    final settings = ref.read(generalSettingsControllerProvider);
-
     final days = ref.watch(daysProvider);
     final maps = ref.watch(captureKeyMapProvider);
 
     switch (value) {
       case _StockPageActions.upload:
-        final timestamp = DateTime.now().timestampFormat();
-        final file = await createStockItemCsv(
-          "StockList_$timestamp",
-          itemList,
-          settings.csvOrder,
-        );
-        await Share.shareFiles(
-          [file.absolute.path],
-          subject: "仕入れ済み商品一覧_$timestamp",
-        );
-        await ref
-            .read(analyticsControllerProvider)
-            .logSingleEvent(uploadListEventName);
+        ref.read(stockPageModeProvider.notifier).state = StockPageMode.upload;
         break;
       case _StockPageActions.share:
         final result = await showConfirmationDialog(
