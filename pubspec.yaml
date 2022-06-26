@@ -25,7 +25,7 @@ dependencies:
   archive: ^3.3.0
   camera: ^0.9.4+6 # https://github.com/flutter/flutter/issues/90070 待ち
   cloud_functions: ^3.2.16
-  collection: ^1.15.0
+  collection: ^1.16.0
   cookie_jar: ^3.0.1
   crypto: ^3.0.2
   csv: ^5.0.1
@@ -59,7 +59,6 @@ dependencies:
   flutter_tts: ^3.4.0
   flutter_web_browser: ^0.17.1
   freezed_annotation: ^1.1.0
-  google_ml_kit: ^0.7.3
   google_sign_in: ^5.3.3
   hive: ^2.2.1
   hive_flutter: ^1.1.0
@@ -77,7 +76,7 @@ dependencies:
   purchases_flutter: ^3.10.0
   reactive_forms: ^13.0.0
   riverpod: 1.0.3
-  share: ^2.0.4 # TODO: Discontinued
+  share_plus: ^4.0.7
   shared_preferences: ^2.0.15
   sign_in_with_apple: ^4.0.0
   state_notifier: ^0.7.2+1
