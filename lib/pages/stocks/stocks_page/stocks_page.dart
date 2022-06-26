@@ -7,6 +7,7 @@ import 'package:amasearch/pages/stocks/stocks_page/app_bars/item_select_appbar.d
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/listings_appbar.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/normal_appbar.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/page_mode.dart';
+import 'package:amasearch/pages/stocks/stocks_page/app_bars/upload_appbar.dart';
 import 'package:amasearch/pages/stocks/stocks_page/item_tile.dart';
 import 'package:amasearch/pages/stocks/stocks_page/share/keys.dart';
 import 'package:amasearch/pages/stocks/stocks_page/summary_tile.dart';
@@ -53,6 +54,8 @@ class StocksPage extends HookConsumerWidget {
         return const ItemSelectAppBar();
       case StockPageMode.listing:
         return const ListingsAppBar();
+      case StockPageMode.upload:
+        return const UploadAppBar();
     }
   }
 }
@@ -75,7 +78,9 @@ class _Body extends HookConsumerWidget {
 
     return Column(
       children: [
-        if (mode == StockPageMode.select || mode == StockPageMode.listing)
+        if (mode == StockPageMode.select ||
+            mode == StockPageMode.listing ||
+            mode == StockPageMode.upload)
           WithUnderLine(
             CheckboxListTile(
               controlAffinity: ListTileControlAffinity.leading,
@@ -216,6 +221,7 @@ class _InkWell extends HookConsumerWidget {
             break;
           case StockPageMode.select:
           case StockPageMode.listing:
+          case StockPageMode.upload:
             // 選択モード・出品モードでタップ時は選択アイテムに追加
             ref
                 .read(selectedStockItemsControllerProvider.notifier)
@@ -232,6 +238,7 @@ class _InkWell extends HookConsumerWidget {
             break;
           case StockPageMode.select:
           case StockPageMode.listing:
+          case StockPageMode.upload:
             break;
         }
         ref
