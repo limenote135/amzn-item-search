@@ -21,7 +21,9 @@ class SummaryTile extends HookConsumerWidget {
     final day = DateTime.parse(items.first.purchaseDate).toLocal().dayFormat();
 
     // 選択モード・出品モードでは邪魔なので日付のみ表示する
-    if (pageMode == StockPageMode.select || pageMode == StockPageMode.listing) {
+    if (pageMode == StockPageMode.select ||
+        pageMode == StockPageMode.listing ||
+        pageMode == StockPageMode.upload) {
       return ColoredBox(
         color: Theme.of(context).backgroundColor,
         child: Text(day),
