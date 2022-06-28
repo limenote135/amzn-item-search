@@ -111,7 +111,6 @@ class _Body extends HookConsumerWidget {
             child: ListTile(
               leading: ItemImage(
                 url: item.imageUrl,
-                data: item.imageData,
               ),
               title: Text(item.title),
             ),
