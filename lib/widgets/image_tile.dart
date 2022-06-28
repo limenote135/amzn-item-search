@@ -62,8 +62,6 @@ class TileImage extends HookConsumerWidget {
               constraints: const BoxConstraints(maxHeight: 100),
               child: ItemImage(
                 url: asinData.imageUrl,
-                data: asinData.imageData,
-                onComplete: onComplete,
               ),
             ),
           ),
