@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
@@ -67,21 +65,17 @@ final formValueProvider =
 });
 
 class PurchaseSettingsForm extends StatelessWidget {
-  const PurchaseSettingsForm({Key? key, this.action, this.onComplete})
-      : super(key: key);
+  const PurchaseSettingsForm({Key? key, this.action}) : super(key: key);
 
   final Widget? action;
-  final void Function(ByteData bytes)? onComplete;
 
   @override
   Widget build(BuildContext context) {
     return _Unfocus(
       child: ListView(
         children: [
-          WithUnderLine(
-            ImageTile(
-              onComplete: onComplete,
-            ),
+          const WithUnderLine(
+            ImageTile(),
           ),
           const SellerListTile(),
           const ThemeDivider(),
