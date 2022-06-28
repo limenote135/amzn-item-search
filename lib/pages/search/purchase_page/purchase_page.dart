@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
@@ -110,19 +108,12 @@ class PurchasePage extends HookConsumerWidget {
   }
 }
 
-final _itemImageProvider = StateProvider.autoDispose<Uint8List?>((_) => null);
-
 class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return PurchaseSettingsForm(
-      onComplete: (bytes) {
-        // 仕入れリストに入れるときのために画像のバイナリデータを保持しておく
-        ref.read(_itemImageProvider.notifier).state =
-            bytes.buffer.asUint8List();
-      },
       action: _SaveButton(
         builder: (context, onSave) {
           return ListTile(
@@ -148,8 +139,6 @@ class _SaveButton extends HookConsumerWidget {
 
     return ReactiveFormConsumer(
       builder: (context, form, child) {
-        final image = ref.watch(_itemImageProvider);
-
         Future<void> _onSave() async {
           final cond = getCondition(form).toItemCondition();
           if (_isRestricted(cond, item.restrictions)) {
@@ -168,7 +157,6 @@ class _SaveButton extends HookConsumerWidget {
             form,
             ref.read(uuidProvider).v4(),
             item,
-            image,
           );
           Navigator.of(context).popUntil((route) => route.settings.name == "/");
         }
@@ -191,7 +179,6 @@ class _SaveButton extends HookConsumerWidget {
     FormGroup form,
     String id,
     AsinData item,
-    Uint8List? image,
   ) {
     final purchase = getInt(form, purchasePriceField);
     final sell = getInt(form, sellPriceField);
@@ -223,7 +210,7 @@ class _SaveButton extends HookConsumerWidget {
       subCondition: getCondition(form).toItemSubCondition(),
       sku: getString(form, skuField),
       memo: getString(form, memoField),
-      item: image == null ? item : item.copyWith(imageData: image),
+      item: item,
       purchaseDate: getString(form, purchaseDateField),
       retailer: getString(form, retailerField),
       breakEven: breakEven,
