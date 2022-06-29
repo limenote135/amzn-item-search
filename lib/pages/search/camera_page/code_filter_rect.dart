@@ -7,8 +7,8 @@ class CodeFilterRect extends RectOfInterest {
   @override
   Rect rect(Rect previewWidgetRect) {
     final width = previewWidgetRect.width;
-    // 中心から高さの 40% 分がスキャン対象範囲
-    final height = previewWidgetRect.height * 0.4;
+    // 中心から高さの 25% 分がスキャン対象範囲
+    final height = previewWidgetRect.height / 4;
     return Rect.fromCenter(
       center: previewWidgetRect.center,
       width: width,
