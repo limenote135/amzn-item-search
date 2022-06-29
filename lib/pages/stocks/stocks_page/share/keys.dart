@@ -1,11 +1,11 @@
 // 仕入れ日のリスト
-import 'package:amasearch/controllers/stock_item_controller.dart';
+import 'package:amasearch/pages/stocks/stocks_page/provider.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
 
 final daysProvider = Provider((ref) {
-  final items = ref.watch(stockItemListControllerProvider);
+  final items = ref.watch(filteredStockListProvider);
   return [
     ...{
       ...items.map((e) => DateTime.parse(e.purchaseDate).toLocal().dayFormat())
