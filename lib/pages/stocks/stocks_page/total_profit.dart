@@ -1,4 +1,4 @@
-import 'package:amasearch/controllers/stock_item_controller.dart';
+import 'package:amasearch/pages/stocks/stocks_page/provider.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,7 +8,7 @@ class TotalProfit extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final items = ref.watch(stockItemListControllerProvider);
+    final items = ref.watch(filteredStockListProvider);
 
     var itemCount = 0;
     var profitValue = 0;
