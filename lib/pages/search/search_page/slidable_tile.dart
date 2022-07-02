@@ -137,6 +137,7 @@ class SlidableTile extends HookConsumerWidget {
       label: "仕入れ",
       backgroundColor: Colors.blue,
       icon: Icons.add_shopping_cart,
+      padding: EdgeInsets.zero,
       onPressed: (context) {
         unfocus();
         ref
@@ -159,6 +160,7 @@ class SlidableTile extends HookConsumerWidget {
       label: "削除",
       backgroundColor: Colors.red,
       icon: Icons.delete,
+      padding: EdgeInsets.zero,
       onPressed: (_) async {
         unfocus();
         // onPressed から渡される context だとダイアログが表示できないので Widget の context を使う
@@ -193,6 +195,7 @@ class SlidableTile extends HookConsumerWidget {
       label: button.title,
       backgroundColor: Colors.indigo,
       icon: Icons.search,
+      padding: EdgeInsets.zero,
       onPressed: (_) async {
         unfocus();
         if (url.startsWith("http")) {
@@ -249,6 +252,7 @@ class SlidableTile extends HookConsumerWidget {
       label: title,
       backgroundColor: Colors.deepPurpleAccent,
       icon: Icons.search,
+      padding: EdgeInsets.zero,
       onPressed: (context) async {
         unfocus();
         await ref
