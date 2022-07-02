@@ -72,32 +72,38 @@ class PurchaseSettingsForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _Unfocus(
-      child: ListView(
+      child: Column(
         children: [
-          const WithUnderLine(
-            ImageTile(),
-          ),
-          const SellerListTile(),
-          const ThemeDivider(),
-          const InputPricesTile(),
-          const ItemConditionTile(),
-          const FbaTile(),
-          const QuantityTile(),
-          const OtherCostTile(),
-          const ProfitTile(),
-          const FeeTile(),
-          const TargetPriceTile(),
-          const RetailerTile(),
-          const PurchaseDateTile(),
-          const ThemeDivider(),
-          const SkuTile(),
-          const ConditionTextTile(),
-          ListTile(
-            title: ReactiveTextField<dynamic>(
-              formControlName: memoField,
-              maxLines: null,
-              keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(labelText: "メモ"),
+          Expanded(
+            child: ListView(
+              children: [
+                const WithUnderLine(
+                  ImageTile(),
+                ),
+                const SellerListTile(),
+                const ThemeDivider(),
+                const InputPricesTile(),
+                const ItemConditionTile(),
+                const FbaTile(),
+                const QuantityTile(),
+                const OtherCostTile(),
+                const ProfitTile(),
+                const FeeTile(),
+                const TargetPriceTile(),
+                const RetailerTile(),
+                const PurchaseDateTile(),
+                const ThemeDivider(),
+                const SkuTile(),
+                const ConditionTextTile(),
+                ListTile(
+                  title: ReactiveTextField<dynamic>(
+                    formControlName: memoField,
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    decoration: const InputDecoration(labelText: "メモ"),
+                  ),
+                ),
+              ],
             ),
           ),
           if (action != null) action!,

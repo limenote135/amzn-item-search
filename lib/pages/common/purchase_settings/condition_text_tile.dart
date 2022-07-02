@@ -9,6 +9,9 @@ import 'package:reactive_forms/reactive_forms.dart';
 class ConditionTextTile extends ConsumerWidget {
   const ConditionTextTile({Key? key}) : super(key: key);
 
+  static const _textMaxHeight = 160.0;
+  static const _maxTextLengthInDialog = 128;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
@@ -18,12 +21,15 @@ class ConditionTextTile extends ConsumerWidget {
       title: Row(
         children: [
           Expanded(
-            child: ReactiveTextField<dynamic>(
-              formControlName: conditionTextField,
-              maxLines: null,
-              keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(labelText: "コンディション説明"),
-              style: smallText,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: _textMaxHeight),
+              child: ReactiveTextField<dynamic>(
+                formControlName: conditionTextField,
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
+                decoration: const InputDecoration(labelText: "コンディション説明"),
+                style: smallText,
+              ),
             ),
           ),
           IconButton(
@@ -43,7 +49,9 @@ class ConditionTextTile extends ConsumerWidget {
                   for (final text in texts)
                     AlertDialogAction(
                       key: text,
-                      label: text,
+                      label: text.length > _maxTextLengthInDialog
+                          ? "${text.substring(0, _maxTextLengthInDialog)}..."
+                          : text,
                     )
                 ],
               );
