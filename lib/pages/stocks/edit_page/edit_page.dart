@@ -35,22 +35,6 @@ class EditPage extends HookConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("仕入れ内容の変更"),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: _SaveButton(
-                builder: (context, onSave) {
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: const StadiumBorder(),
-                    ),
-                    onPressed: onSave,
-                    child: const Text("更新"),
-                  );
-                },
-              ),
-            ),
-          ],
         ),
         body: const _Body(),
       ),
@@ -72,9 +56,11 @@ class _Body extends HookConsumerWidget {
       child: PurchaseSettingsForm(
         action: _SaveButton(
           builder: (context, onSave) {
-            return ElevatedButton(
-              onPressed: onSave,
-              child: const Text("更新"),
+            return ListTile(
+              title: ElevatedButton(
+                onPressed: onSave,
+                child: const Text("更新"),
+              ),
             );
           },
         ),
