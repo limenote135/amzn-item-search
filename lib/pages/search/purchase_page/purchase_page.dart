@@ -84,22 +84,6 @@ class PurchasePage extends HookConsumerWidget {
         child: Scaffold(
           appBar: AppBar(
             title: const Text("仕入れ設定"),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: _SaveButton(
-                  builder: (context, onSave) {
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: const StadiumBorder(),
-                      ),
-                      onPressed: onSave,
-                      child: const Text("仕入れ"),
-                    );
-                  },
-                ),
-              ),
-            ],
           ),
           body: const _Body(),
         ),
