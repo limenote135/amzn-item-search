@@ -41,18 +41,13 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
                   pattern:
                       'https://sellercentral.amazon.co.jp/abis/listing/syh?asin={asin}'),
               const CustomButtonDetail(
-                  id: 'bt03',
-                  enable: true,
-                  title: 'Delta',
-                  pattern: 'https://delta-tracer.com/item/detail/jp/{asin}/'),
-              const CustomButtonDetail(
                   id: 'bt04',
                   enable: true,
                   title: 'モノサーチ',
                   pattern: 'https://mnsearch.com/item?kwd={asin}'),
               const CustomButtonDetail(
                   id: 'bt05',
-                  enable: false,
+                  enable: true,
                   title: 'Keezon',
                   pattern: 'https://keezon.net/item/index?ASIN={asin}'),
               const CustomButtonDetail(
@@ -117,7 +112,9 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
               const CustomButtonDetail(
                   id: 'bt19', enable: false, title: 'ボタン5', pattern: ''),
               const CustomButtonDetail(
-                  id: 'bt20', enable: false, title: 'ボタン6', pattern: '')
+                  id: 'bt20', enable: false, title: 'ボタン6', pattern: ''),
+              const CustomButtonDetail(
+                  id: 'bt21', enable: false, title: 'ボタン7', pattern: '')
             ]
           : (fields[10] as List).cast<CustomButtonDetail>(),
       csvOrder: fields[11] == null
