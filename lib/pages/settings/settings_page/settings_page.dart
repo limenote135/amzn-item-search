@@ -225,7 +225,7 @@ class _Body extends HookConsumerWidget {
             final ret = await showOkCancelAlertDialog(
               context: context,
               title: "アカウントの削除",
-              message: "アカウントを削除すると同じアカウントで再登録はできません。\n"
+              message: "アカウントを削除すると同じメールアドレスで再登録はできません。\n"
                   "本当に削除してよろしいですか？",
               isDestructiveAction: true,
             );
