@@ -1,6 +1,11 @@
+import 'dart:math';
+
+import 'package:amasearch/models/query_params.dart';
+import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/util/error_report.dart';
+import 'package:amasearch/util/exceptions.dart';
 import 'package:amasearch/widgets/progress_indicator.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +14,54 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'item_tile.dart';
 
-final _wordProvider = StateProvider((_) => "");
-final _categoryProvider = StateProvider((_) => "");
+final _currentQueryItemsRequest = StateProvider(
+  (ref) => const ListMatchingProductRequest(query: "", category: ""),
+);
+
+final _queryItemResponseProvider =
+    FutureProvider.family<List<String>, ListMatchingProductRequest>(
+        (ref, param) async {
+  if (param.query == "") {
+    return const [];
+  }
+  final mws = ref.watch(mwsRepositoryProvider);
+  final resp = await mws.queryItems(param.query, param.category);
+  return resp.asins;
+});
+
+final _currentMatchingProductCount =
+    Provider.family<AsyncValue<int>, ListMatchingProductRequest>((ref, param) {
+  final asins = ref.watch(_queryItemResponseProvider(param));
+  return asins.whenData((value) => value.length);
+});
+
+const _kPageSize = 20;
+
+final _asinDataPage =
+    FutureProvider.family<List<AsinData>, AsinDataPageParam>((ref, page) async {
+  final mws = ref.watch(mwsRepositoryProvider);
+  final asins = await ref.watch(_queryItemResponseProvider(page.param).future);
+  final total = asins.length;
+  final start = page.page * _kPageSize;
+  final end = min(total, start + _kPageSize);
+  final req = asins.sublist(start, end);
+  final resp = await mws.batchGetAsinData(req);
+  return resp.data;
+});
+
+final asinDataAtIndex =
+    Provider.family<AsyncValue<AsinData>, AsinDataIndexAtParam>((ref, index) {
+  final offsetInPage = index.index % _kPageSize;
+  final page = index.index ~/ _kPageSize;
+  final param = AsinDataPageParam(param: index.param, page: page);
+  return ref.watch(_asinDataPage(param)).whenData((value) {
+    final data = value[offsetInPage];
+    if (data.asin == "") {
+      throw const AmazonItemNotFoundException("このマーケットでは販売できない商品です");
+    }
+    return data;
+  });
+});
 
 class WordSearchPage extends StatelessWidget {
   const WordSearchPage({Key? key}) : super(key: key);
@@ -39,8 +90,7 @@ class _AppBar extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController();
-    final word = ref.watch(_wordProvider.state);
-    final category = ref.watch(_categoryProvider);
+    final req = ref.watch(_currentQueryItemsRequest);
 
     final height = useState<double>(0);
     WidgetsBinding.instance.addPostFrameCallback((cb) {
@@ -68,12 +118,13 @@ class _AppBar extends HookConsumerWidget {
               ),
               onSubmitted: (value) {
                 if (value != "") {
-                  if (word.state == value) {
-                    // エラー時などに再読み込みさせるため、いったん空にする
-                    // リクエストに成功していた場合はキャッシュが使われる
-                    word.state = "";
+                  if (req.query == value) {
+                    // 変更がない場合は強制リロードする
+                    ref.refresh(_queryItemResponseProvider(req));
+                    return;
                   }
-                  word.state = value;
+                  ref.read(_currentQueryItemsRequest.notifier).state =
+                      req.copyWith(query: value);
                 }
               },
             ),
@@ -81,7 +132,7 @@ class _AppBar extends HookConsumerWidget {
           ListTile(
             title: const Text("カテゴリー"),
             trailing: DropdownButton(
-              value: category,
+              value: req.category,
               items: amazonSearchCategoryMap.entries.map((entry) {
                 return DropdownMenuItem(
                   value: entry.value,
@@ -89,8 +140,9 @@ class _AppBar extends HookConsumerWidget {
                 );
               }).toList(),
               onChanged: (String? value) {
-                if (value != null && category != value) {
-                  ref.read(_categoryProvider.notifier).state = value;
+                if (value != null && req.category != value) {
+                  ref.read(_currentQueryItemsRequest.notifier).state =
+                      req.copyWith(category: value);
                 }
               },
             ),
@@ -105,72 +157,64 @@ class _AppBar extends HookConsumerWidget {
   }
 }
 
-class _Body extends HookConsumerWidget {
+class _Body extends ConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   static const _maxQueryLength = 128;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final word = ref.watch(_wordProvider);
-    final category = ref.watch(_categoryProvider);
+    final param = ref.watch(_currentQueryItemsRequest);
+    final totalAsyncValue = ref.watch(_currentMatchingProductCount(param));
 
-    if (word == "") {
+    if (param.query == "") {
       return SliverList(
         delegate: SliverChildListDelegate([Container()]),
       );
     }
 
-    if (word.length > _maxQueryLength) {
+    if (param.query.length > _maxQueryLength) {
       return SliverList(
         delegate: SliverChildListDelegate([const Text("エラー: 検索文字列が長すぎます")]),
       );
     }
-
     return SliverList(
-      delegate: ref
-          .watch(
-            queryItemResultProvider(
-              ListMatchingProductRequest(
-                query: word,
-                category: category,
-              ),
-            ),
-          )
-          .when(
-            loading: () => SliverChildListDelegate(
-              [centeredCircularProgressIndicator],
-            ),
-            error: (error, stackTrace) {
-              recordError(
-                error,
-                stackTrace,
-                information: [
-                  "WordSearchPage.AppBar.Body.queryItemResultProvider",
-                  "query: $word, category: $category",
+      delegate: totalAsyncValue.when(
+        loading: () => SliverChildListDelegate([
+          const ListTile(title: centeredCircularProgressIndicator),
+        ]),
+        error: (error, stackTrace) {
+          recordError(
+            error,
+            stackTrace,
+            information: [
+              "WordSearchPage.AppBar.Body.totalAsyncValue",
+              "req: $param",
+            ],
+          );
+          return SliverChildListDelegate([Text("$error")]);
+        },
+        data: (value) {
+          if (value == 0) {
+            return SliverChildListDelegate([Container()]);
+          }
+          return SliverChildBuilderDelegate(
+            (context, index) {
+              if (index.isOdd) {
+                return const ThemeDivider();
+              }
+              return ProviderScope(
+                overrides: [
+                  currentQueryParam.overrideWithValue(param),
+                  currentIndex.overrideWithValue(index ~/ 2),
                 ],
-              );
-              return SliverChildListDelegate(
-                [Text("$error")],
+                child: const ItemTile(),
               );
             },
-            data: (items) {
-              return SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  if (index.isOdd) {
-                    return const ThemeDivider();
-                  }
-                  return ProviderScope(
-                    overrides: [
-                      currentAsinProvider.overrideWithValue(items[index ~/ 2]),
-                    ],
-                    child: const ItemTile(),
-                  );
-                },
-                childCount: items.length * 2,
-              );
-            },
-          ),
+            childCount: value * 2,
+          );
+        },
+      ),
     );
   }
 }
