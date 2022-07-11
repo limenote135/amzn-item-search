@@ -72,12 +72,12 @@ const defaultCustomButtons = [
     title: "出品確認",
     pattern: customButtonAmazonListableUrl,
   ),
-  // CustomButtonDetail(
-  //   id: "bt03",
-  //   enable: true,
-  //   title: "Delta",
-  //   pattern: customButtonDeltaUrl,
-  // ),
+  CustomButtonDetail(
+    id: "bt03",
+    enable: true,
+    title: "Delta",
+    pattern: customButtonDeltaUrl,
+  ),
   CustomButtonDetail(
     id: "bt04",
     enable: true,
@@ -86,7 +86,7 @@ const defaultCustomButtons = [
   ),
   CustomButtonDetail(
     id: "bt05",
-    enable: true,
+    enable: false,
     title: "Keezon",
     pattern: customButtonKeezonUrl,
   ),
@@ -150,7 +150,6 @@ const defaultCustomButtons = [
   CustomButtonDetail(id: "bt17", enable: false, title: "ボタン4", pattern: ""),
   CustomButtonDetail(id: "bt19", enable: false, title: "ボタン5", pattern: ""),
   CustomButtonDetail(id: "bt20", enable: false, title: "ボタン6", pattern: ""),
-  CustomButtonDetail(id: "bt21", enable: false, title: "ボタン7", pattern: ""),
 ];
 
 // v1.2.0 でカスタムボタンを20個に増やした際に新しく追加したプリセット
