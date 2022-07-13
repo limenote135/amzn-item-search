@@ -472,13 +472,10 @@ class _$PriceDetailTearOff {
   _PriceDetail call(
       {@HiveField(0)
       @JsonKey(name: "condition")
-      @ItemConditionConverter()
           ItemCondition itemCondition = ItemCondition.newItem,
       @HiveField(1)
-      @ItemSubConditionConverter()
           ItemSubCondition subCondition = ItemSubCondition.newItem,
       @HiveField(2)
-      @FulfillmentChannelConverter()
           FulfillmentChannel channel = FulfillmentChannel.merchant,
       @HiveField(3)
           int price = 0,
@@ -511,13 +508,10 @@ const $PriceDetail = _$PriceDetailTearOff();
 mixin _$PriceDetail {
   @HiveField(0)
   @JsonKey(name: "condition")
-  @ItemConditionConverter()
   ItemCondition get itemCondition => throw _privateConstructorUsedError;
   @HiveField(1)
-  @ItemSubConditionConverter()
   ItemSubCondition get subCondition => throw _privateConstructorUsedError;
   @HiveField(2)
-  @FulfillmentChannelConverter()
   FulfillmentChannel get channel => throw _privateConstructorUsedError;
   @HiveField(3)
   int get price => throw _privateConstructorUsedError;
@@ -540,24 +534,13 @@ abstract class $PriceDetailCopyWith<$Res> {
           PriceDetail value, $Res Function(PriceDetail) then) =
       _$PriceDetailCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(0)
-      @JsonKey(name: "condition")
-      @ItemConditionConverter()
-          ItemCondition itemCondition,
-      @HiveField(1)
-      @ItemSubConditionConverter()
-          ItemSubCondition subCondition,
-      @HiveField(2)
-      @FulfillmentChannelConverter()
-          FulfillmentChannel channel,
-      @HiveField(3)
-          int price,
-      @HiveField(4)
-          int shipping,
-      @HiveField(5)
-          int point,
-      @HiveField(6, defaultValue: false)
-          bool isCart});
+      {@HiveField(0) @JsonKey(name: "condition") ItemCondition itemCondition,
+      @HiveField(1) ItemSubCondition subCondition,
+      @HiveField(2) FulfillmentChannel channel,
+      @HiveField(3) int price,
+      @HiveField(4) int shipping,
+      @HiveField(5) int point,
+      @HiveField(6, defaultValue: false) bool isCart});
 }
 
 /// @nodoc
@@ -619,24 +602,13 @@ abstract class _$PriceDetailCopyWith<$Res>
       __$PriceDetailCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(0)
-      @JsonKey(name: "condition")
-      @ItemConditionConverter()
-          ItemCondition itemCondition,
-      @HiveField(1)
-      @ItemSubConditionConverter()
-          ItemSubCondition subCondition,
-      @HiveField(2)
-      @FulfillmentChannelConverter()
-          FulfillmentChannel channel,
-      @HiveField(3)
-          int price,
-      @HiveField(4)
-          int shipping,
-      @HiveField(5)
-          int point,
-      @HiveField(6, defaultValue: false)
-          bool isCart});
+      {@HiveField(0) @JsonKey(name: "condition") ItemCondition itemCondition,
+      @HiveField(1) ItemSubCondition subCondition,
+      @HiveField(2) FulfillmentChannel channel,
+      @HiveField(3) int price,
+      @HiveField(4) int shipping,
+      @HiveField(5) int point,
+      @HiveField(6, defaultValue: false) bool isCart});
 }
 
 /// @nodoc
@@ -694,19 +666,20 @@ class __$PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable(fieldRename: FieldRename.snake, converters: [
+  ItemConditionConverter(),
+  ItemSubConditionConverter(),
+  FulfillmentChannelConverter()
+])
 @HiveType(typeId: priceDetailTypeId)
 class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
   const _$_PriceDetail(
       {@HiveField(0)
       @JsonKey(name: "condition")
-      @ItemConditionConverter()
           this.itemCondition = ItemCondition.newItem,
       @HiveField(1)
-      @ItemSubConditionConverter()
           this.subCondition = ItemSubCondition.newItem,
       @HiveField(2)
-      @FulfillmentChannelConverter()
           this.channel = FulfillmentChannel.merchant,
       @HiveField(3)
           this.price = 0,
@@ -723,17 +696,14 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
   @override
   @HiveField(0)
   @JsonKey(name: "condition")
-  @ItemConditionConverter()
   final ItemCondition itemCondition;
   @JsonKey()
   @override
   @HiveField(1)
-  @ItemSubConditionConverter()
   final ItemSubCondition subCondition;
   @JsonKey()
   @override
   @HiveField(2)
-  @FulfillmentChannelConverter()
   final FulfillmentChannel channel;
   @JsonKey()
   @override
@@ -811,24 +781,13 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
 
 abstract class _PriceDetail implements PriceDetail {
   const factory _PriceDetail(
-      {@HiveField(0)
-      @JsonKey(name: "condition")
-      @ItemConditionConverter()
-          ItemCondition itemCondition,
-      @HiveField(1)
-      @ItemSubConditionConverter()
-          ItemSubCondition subCondition,
-      @HiveField(2)
-      @FulfillmentChannelConverter()
-          FulfillmentChannel channel,
-      @HiveField(3)
-          int price,
-      @HiveField(4)
-          int shipping,
-      @HiveField(5)
-          int point,
-      @HiveField(6, defaultValue: false)
-          bool isCart}) = _$_PriceDetail;
+      {@HiveField(0) @JsonKey(name: "condition") ItemCondition itemCondition,
+      @HiveField(1) ItemSubCondition subCondition,
+      @HiveField(2) FulfillmentChannel channel,
+      @HiveField(3) int price,
+      @HiveField(4) int shipping,
+      @HiveField(5) int point,
+      @HiveField(6, defaultValue: false) bool isCart}) = _$_PriceDetail;
 
   factory _PriceDetail.fromJson(Map<String, dynamic> json) =
       _$_PriceDetail.fromJson;
@@ -836,15 +795,12 @@ abstract class _PriceDetail implements PriceDetail {
   @override
   @HiveField(0)
   @JsonKey(name: "condition")
-  @ItemConditionConverter()
   ItemCondition get itemCondition;
   @override
   @HiveField(1)
-  @ItemSubConditionConverter()
   ItemSubCondition get subCondition;
   @override
   @HiveField(2)
-  @FulfillmentChannelConverter()
   FulfillmentChannel get channel;
   @override
   @HiveField(3)
