@@ -444,7 +444,7 @@ _$_ShortcutDetail _$$_ShortcutDetailFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_ShortcutDetailToJson(_$_ShortcutDetail instance) =>
     <String, dynamic>{
-      'type': _$ShortcutTypeEnumMap[instance.type],
+      'type': _$ShortcutTypeEnumMap[instance.type]!,
       'param': instance.param,
     };
 

@@ -25,8 +25,8 @@ Map<String, dynamic> _$$_ListingItemToJson(_$_ListingItem instance) =>
       'asin': instance.asin,
       'sell_price': instance.sellPrice,
       'amount': instance.amount,
-      'condition': _$ItemConditionEnumMap[instance.condition],
-      'sub_condition': _$ItemSubConditionEnumMap[instance.subCondition],
+      'condition': _$ItemConditionEnumMap[instance.condition]!,
+      'sub_condition': _$ItemSubConditionEnumMap[instance.subCondition]!,
       'use_fba': instance.useFba,
       'condition_text': instance.conditionText,
     };
