@@ -64,20 +64,24 @@ class ItemPrices with _$ItemPrices {
 
 @freezed
 class PriceDetail with _$PriceDetail {
-  @JsonSerializable(fieldRename: FieldRename.snake)
+  @JsonSerializable(
+    fieldRename: FieldRename.snake,
+    converters: [
+      ItemConditionConverter(),
+      ItemSubConditionConverter(),
+      FulfillmentChannelConverter(),
+    ],
+  )
   @HiveType(typeId: priceDetailTypeId)
   const factory PriceDetail({
     @HiveField(0)
     @JsonKey(name: "condition")
-    @ItemConditionConverter()
     @Default(ItemCondition.newItem)
         ItemCondition itemCondition,
     @HiveField(1)
-    @ItemSubConditionConverter()
     @Default(ItemSubCondition.newItem)
         ItemSubCondition subCondition,
     @HiveField(2)
-    @FulfillmentChannelConverter()
     @Default(FulfillmentChannel.merchant)
         FulfillmentChannel channel,
     @HiveField(3) @Default(0) int price,

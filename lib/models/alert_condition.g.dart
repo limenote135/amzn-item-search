@@ -55,7 +55,7 @@ _$_AlertCondition _$$_AlertConditionFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_AlertConditionToJson(_$_AlertCondition instance) =>
     <String, dynamic>{
-      't': _$AlertTypeEnumMap[instance.type],
+      't': _$AlertTypeEnumMap[instance.type]!,
       'v': instance.value,
     };
 
