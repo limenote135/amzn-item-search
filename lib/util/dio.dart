@@ -65,6 +65,10 @@ class HttpClient {
         throw Exception("通信環境の良いところで再度お試しください");
       }
       final code = e.response!.statusCode!;
+      if (code == 429) {
+        // 429: Too Many Requests
+        throw Exception("少し時間をおいて再度お試しください");
+      }
       customHandler?.call(code);
 
       if (code >= 500) {
@@ -141,6 +145,10 @@ class HttpClient {
         throw Exception("通信環境の良いところで再度お試しください");
       }
       final code = e.response!.statusCode!;
+      if (code == 429) {
+        // 429: Too Many Requests
+        throw Exception("少し時間をおいて再度お試しください");
+      }
       customHandler?.call(code);
 
       if (code >= 500) {
