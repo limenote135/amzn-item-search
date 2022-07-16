@@ -108,6 +108,8 @@ class _AppBar extends HookConsumerWidget {
 class _Body extends HookConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
+  static const _maxQueryLength = 128;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final word = ref.watch(_wordProvider);
@@ -116,6 +118,12 @@ class _Body extends HookConsumerWidget {
     if (word == "") {
       return SliverList(
         delegate: SliverChildListDelegate([Container()]),
+      );
+    }
+
+    if (word.length > _maxQueryLength) {
+      return SliverList(
+        delegate: SliverChildListDelegate([const Text("エラー: 検索文字列が長すぎます")]),
       );
     }
 
