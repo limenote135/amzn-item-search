@@ -63,11 +63,22 @@ class GeoRepository {
     final param = <String, String>{
       "code": code,
     };
-    final resp =
-        await dio.post(url, data: param, opt: Options(headers: header));
+    final resp = await dio.post(
+      url,
+      data: param,
+      opt: Options(headers: header),
+      customHandler: _customHandler,
+    );
     final data = json.decode(resp.data!) as Map<String, dynamic>;
 
     return GeoResponse.fromJson(data);
+  }
+
+  void _customHandler(int code) {
+    switch (code) {
+      case 408:
+        throw Exception("少し時間をおいてから再度お試しください");
+    }
   }
 }
 
