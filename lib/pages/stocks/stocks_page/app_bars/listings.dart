@@ -82,11 +82,10 @@ Future<void> callListings(
       await FlutterWebBrowser.openWebPage(url: url);
     }
 
-    await ref
-        .read(analyticsControllerProvider)
-        .logSingleEvent(amazonListingEventName);
+    final analytics = ref.read(analyticsControllerProvider);
+    await analytics.logSingleEvent(amazonListingEventName);
 
-    await requestReview();
+    await requestReview(analytics);
     // ignore: avoid_catches_without_on_clauses
   } catch (e, st) {
     await recordError(e, st, information: const ["Amazon listings"]);
