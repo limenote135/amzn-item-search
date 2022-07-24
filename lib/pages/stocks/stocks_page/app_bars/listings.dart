@@ -7,6 +7,7 @@ import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/listings.dart';
+import 'package:amasearch/util/review.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,8 @@ Future<void> callListings(
     await ref
         .read(analyticsControllerProvider)
         .logSingleEvent(amazonListingEventName);
+
+    await requestReview();
     // ignore: avoid_catches_without_on_clauses
   } catch (e, st) {
     await recordError(e, st, information: const ["Amazon listings"]);
