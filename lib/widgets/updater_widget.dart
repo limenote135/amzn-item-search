@@ -6,6 +6,7 @@ import 'package:amasearch/util/version_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:release_notes_dialog/release_notes_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'lifecycle_manager.dart';
@@ -92,10 +93,13 @@ class Updater extends HookConsumerWidget {
       return;
     }
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    await showOkAlertDialog(
+    await showDialog<void>(
       context: context,
-      title: "アプリが更新されました！",
-      message: notes,
+      builder: (context) => ReleaseNotesDialog(
+        title: "アプリが更新されました！",
+        closeButtonString: "OK",
+        releases: notes,
+      ),
     );
   }
 }
