@@ -1134,6 +1134,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "13.0.0"
+  release_notes_dialog:
+    dependency: "direct main"
+    description:
+      name: release_notes_dialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   riverpod:
     dependency: "direct main"
     description:
