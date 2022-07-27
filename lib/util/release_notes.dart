@@ -1,70 +1,66 @@
-import 'dart:convert';
-
-import 'package:amasearch/models/release_notes.dart';
-import 'package:amasearch/util/error_report.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pub_semver/pub_semver.dart';
+import 'package:release_notes_dialog/release_notes_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const String _configName = "release_notes";
 const String _prefKey = "release_note_ver";
 
-Future<String?> getReleaseNotes() async {
-  final info = await PackageInfo.fromPlatform();
-  final currentVersion = Version.parse(info.version);
+var releaseNotesVersion = Version(1, 4, 0);
+const releases = <Release>[
+  Release("1.4.0", [
+    ReleaseSublist(
+      name: "更新内容",
+      changes: [
+        "仕入れ画面で商品の検索が可能になりました",
+        "商品リストを転送する際に指定したもののみ含めるようになりました",
+      ],
+    )
+  ]),
+  Release("1.3.3", [
+    ReleaseSublist(
+      name: "更新内容",
+      changes: [
+        "仕入れた商品にコンディション説明とその他費用を設定できるようになりました",
+        "仕入れ画面で商品状態を変更すると、それに合わせて販売価格を自動変更するようになりました",
+      ],
+    ),
+  ]),
+  Release("1.2.2", [
+    ReleaseSublist(
+      name: "更新内容",
+      changes: [
+        "Keepaグラフにカート価格とFBA配送を表示できるようになりました",
+      ],
+    ),
+  ]),
+  Release("1.2.0", [
+    ReleaseSublist(
+      name: "更新内容",
+      changes: [
+        "アプリ内から直接Amazonに出品できるようになりました",
+        "カスタムボタンのURLに型番を設定できるようになりました",
+        "カスタムボタンの個数が増えました",
+        "検索時にAmazonのデータが見つからなかった場合、長押しでコードをコピーできるようにしました",
+        "CSVファイルを転送する際にファイル名にタイムスタンプを入れるようにしました",
+      ],
+    ),
+  ]),
+];
 
+Future<List<Release>?> getReleaseNotes() async {
   final prefs = await SharedPreferences.getInstance();
   final lastReadVersionRaw = prefs.getString(_prefKey);
-  final lastReadVersion = Version.parse(lastReadVersionRaw ?? "1.0.0");
+  if (lastReadVersionRaw == null) {
+    // 初回起動時は更新履歴は表示せず、値の更新だけ行う
+    await prefs.setString(_prefKey, releaseNotesVersion.toString());
+    return null;
+  }
+  final lastReadVersion = Version.parse(lastReadVersionRaw);
 
-  if (currentVersion == lastReadVersion) {
+  if (releaseNotesVersion <= lastReadVersion) {
     return null;
   }
 
-  final remoteConfig = FirebaseRemoteConfig.instance;
-
-  try {
-    final defaultValue = <String, dynamic>{
-      _configName: "",
-    };
-    await remoteConfig.setDefaults(defaultValue);
-    await remoteConfig.fetchAndActivate();
-    final rawData = remoteConfig.getString(_configName);
-    if (rawData.isEmpty) {
-      return null;
-    }
-    final latestReleaseNotes = json.decode(rawData) as Map<String, dynamic>;
-
-    final notes = ReleaseNotes.fromJson(latestReleaseNotes);
-    final latestVersion = Version.parse(notes.version);
-
-    if (currentVersion < latestVersion) {
-      // 起動中のバージョンが最新バージョンではない場合
-      return null;
-    }
-
-    if (lastReadVersionRaw == null) {
-      // 初回起動時は更新履歴は表示せず、値の更新だけ行う
-      await prefs.setString(_prefKey, latestVersion.toString());
-      return null;
-    }
-
-    if (lastReadVersion < latestVersion) {
-      // SharedPreference に表示した ReleaseNotes のバージョンを保存
-      await prefs.setString(_prefKey, latestVersion.toString());
-      return notes.text;
-    }
-    return null;
-    // ignore: avoid_catches_without_on_clauses
-  } catch (exception, stackTrace) {
-    // 取得失敗してもエラーにしない
-    await recordError(
-      exception,
-      stackTrace,
-      information: const ["RemoteConfig error"],
-    );
-  }
-
-  return null;
+  // SharedPreference に表示した ReleaseNotes のバージョンを保存
+  await prefs.setString(_prefKey, releaseNotesVersion.toString());
+  return releases;
 }
