@@ -1,5 +1,7 @@
+import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
+import 'package:amasearch/util/review.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -30,7 +32,12 @@ class UploadAppBar extends ConsumerWidget implements PreferredSizeWidget {
             ),
             onPressed: selectedItems.isNotEmpty
                 ? () async {
-                    await uploadCsv(ref, selectedItems, settings.csvOrder);
+                    final analytics = ref.read(analyticsControllerProvider);
+                    final isSuccess =
+                        await uploadCsv(ref, selectedItems, settings.csvOrder);
+                    if (isSuccess) {
+                      await requestReview(analytics);
+                    }
                   }
                 : null,
             child: const Text("確定"),
