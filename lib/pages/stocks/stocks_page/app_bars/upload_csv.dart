@@ -9,7 +9,7 @@ import 'package:share_plus/share_plus.dart';
 
 import 'common.dart';
 
-Future<void> uploadCsv(
+Future<bool> uploadCsv(
   WidgetRef ref,
   List<StockItem> itemList,
   List<CsvColumn> order,
@@ -20,7 +20,7 @@ Future<void> uploadCsv(
     itemList,
     order,
   );
-  await Share.shareFiles(
+  final result = await Share.shareFilesWithResult(
     [file.absolute.path],
     subject: "仕入れ済み商品一覧_$timestamp",
   );
@@ -28,4 +28,6 @@ Future<void> uploadCsv(
   await ref
       .read(analyticsControllerProvider)
       .logSingleEvent(uploadListEventName);
+
+  return result.status == ShareResultStatus.success;
 }
