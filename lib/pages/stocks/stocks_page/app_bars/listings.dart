@@ -24,6 +24,7 @@ Future<void> callListings(
   List<StockItem> selected,
 ) async {
   final user = await ref.read(authStateChangesProvider.future);
+  final analytics = ref.read(analyticsControllerProvider);
 
   final isOk = await showOkCancelAlertDialog(
     context: context,
@@ -65,6 +66,7 @@ Future<void> callListings(
           selected,
           currentTimeString(),
         );
+    await analytics.logSingleEvent(amazonListingEventName);
 
     await EasyLoading.dismiss();
     final ret = await showOkCancelAlertDialog(
@@ -81,9 +83,6 @@ Future<void> callListings(
       const url = "https://sellercentral.amazon.co.jp/listing/status";
       await FlutterWebBrowser.openWebPage(url: url);
     }
-
-    final analytics = ref.read(analyticsControllerProvider);
-    await analytics.logSingleEvent(amazonListingEventName);
 
     await requestReview(analytics);
     // ignore: avoid_catches_without_on_clauses
