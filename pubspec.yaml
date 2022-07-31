@@ -21,7 +21,7 @@ environment:
   sdk: '>=2.15.0 <3.0.0'
 
 dependencies:
-  adaptive_dialog: ^1.6.4+2
+  adaptive_dialog: ^1.7.0
   archive: ^3.3.1
   badges: ^2.0.3
   camera: ^0.9.4+6 # https://github.com/flutter/flutter/issues/90070 待ち
@@ -40,7 +40,7 @@ dependencies:
   fast_barcode_scanner:
     path: ./packages/fast_barcode_scanner/fast_barcode_scanner
   firebase_analytics: ^9.3.0
-  firebase_auth: ^3.6.0
+  firebase_auth: ^3.6.1
   firebase_core: ^1.20.0
   firebase_crashlytics: ^2.8.6
   firebase_performance: ^0.8.2+1
@@ -86,7 +86,7 @@ dependencies:
   state_notifier: ^0.7.2+1
   url_launcher: ^6.1.5
   uuid: ^3.0.6
-  vibration: ^1.7.4-nullsafety.0
+  vibration: ^1.7.5
   webview_flutter: ^3.0.4
 
 dev_dependencies:
