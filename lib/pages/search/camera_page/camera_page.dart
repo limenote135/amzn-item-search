@@ -192,7 +192,7 @@ class _BodyState extends ConsumerState<_Body> {
     final result = targets[0].value;
 
     if (_lastRead != result) {
-      Vibration.vibrate(duration: 50, amplitude: 128);
+      Vibration.vibrate(pattern: [0, 100], intensities: [0, 255]);
       final settings = ref.read(searchSettingsControllerProvider);
       showSuggestion(result, settings.type);
       switch (settings.type) {
