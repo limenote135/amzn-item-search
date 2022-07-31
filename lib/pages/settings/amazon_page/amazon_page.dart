@@ -69,10 +69,7 @@ class _Body extends ConsumerWidget {
           javascriptMode: JavascriptMode.unrestricted,
           onPageFinished: (url) async {
             if (url.startsWith("$serverUrl/spapi/callback")) {
-              final token = await user.getIdTokenResult(true);
-              if (token.claims?[customClaimsLwaKey] == true) {
-                Navigator.pop(context);
-              }
+              await user.getIdTokenResult(true);
             }
           },
         );
