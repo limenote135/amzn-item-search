@@ -84,7 +84,7 @@ final searchItemFutureProvider = FutureProvider.autoDispose
           searchSettings,
         ),
       )) {
-        await Vibration.vibrate(duration: 400, amplitude: 128);
+        await Vibration.vibrate(pattern: [200, 600], intensities: [0, 255]);
       }
     }
   }
