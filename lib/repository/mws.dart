@@ -186,6 +186,8 @@ class MwsRepository {
         throw Exception("Amazonからのデータ取得ができませんでした\nしばらく待ってから設定より再連携してください");
       case 404:
         throw const AmazonItemNotFoundException("このマーケットでは販売できない商品です");
+      case 408:
+        throw Exception("少し時間をおいてから再度お試しください");
       case 412:
         // TODO:  await を外したが、これで問題ないか要確認
         _container.refresh(updateProvider);
