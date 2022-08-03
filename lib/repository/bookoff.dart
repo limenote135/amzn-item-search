@@ -46,8 +46,11 @@ class BookoffRepository {
 
   Future<List<BookoffResponse>> get(String value) async {
     if (value.length == janCodeLength &&
-        (value.startsWith("45") || value.startsWith("49"))) {
+        (value.startsWith("45") ||
+            value.startsWith("49") ||
+            value.startsWith("978"))) {
       // JAN コードと思われる場合は API コールしない
+      // 978 は書籍の ISBN コード
       return Future.value([]);
     }
     if (int.tryParse(value) == null) {

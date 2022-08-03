@@ -50,7 +50,9 @@ class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
       jan = "0$jan";
     }
     if (jan.length > 13) {
-      if (jan.startsWith("45") || jan.startsWith("49")) {
+      if (jan.startsWith("45") ||
+          jan.startsWith("49") ||
+          jan.startsWith("978")) {
         jan = jan.substring(0, 13);
       } else {
         jan = jan.substring(jan.length - 13, jan.length);
