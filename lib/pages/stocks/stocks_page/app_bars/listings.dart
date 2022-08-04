@@ -24,7 +24,9 @@ Future<void> callListings(
   List<StockItem> selected,
 ) async {
   final user = await ref.read(authStateChangesProvider.future);
+  // 非同期関数の後に ref.read すると No ProviderScope found になる場合があるので事前に呼ぶ
   final analytics = ref.read(analyticsControllerProvider);
+  final controller = ref.read(stockItemListControllerProvider.notifier);
 
   final isOk = await showOkCancelAlertDialog(
     context: context,
@@ -56,16 +58,18 @@ Future<void> callListings(
       );
       return;
     }
+
     final fn = ref.read(cloudFunctionProvider(functionNameListingItems));
     await fn.call<String>(<String, String>{
       "version": listingsFileVersion,
       "filename": filename,
     });
 
-    ref.read(stockItemListControllerProvider.notifier).setListingDate(
-          selected,
-          currentTimeString(),
-        );
+    controller.setListingDate(
+      selected,
+      currentTimeString(),
+    );
+
     await analytics.logSingleEvent(amazonListingEventName);
 
     await EasyLoading.dismiss();
