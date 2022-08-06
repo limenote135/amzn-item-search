@@ -2,6 +2,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/pages/login/common/input_field.dart';
 import 'package:amasearch/theme.dart';
 import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -63,16 +64,27 @@ class _Body extends HookConsumerWidget {
             message: "パスワードリセットメールを送信しました",
           );
           Navigator.pop(context);
-        } on FirebaseAuthException catch (e) {
+        } on FirebaseAuthException catch (e, stack) {
           var msg = "不明なエラー";
           switch (e.code) {
             case "invalid-email":
               msg = "不正なメールアドレスです";
               break;
+            case "user-disabled":
+              msg = "このユーザーは無効化されているか既に退会しています";
+              break;
             case "user-not-found":
               msg = "ユーザーが見つかりませんでした";
               break;
             default:
+              await recordError(
+                e,
+                stack,
+                information: [
+                  "SignInWithEmailAndPassword error",
+                  "Code: ${e.code}",
+                ],
+              );
               msg = e.code;
           }
           // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
