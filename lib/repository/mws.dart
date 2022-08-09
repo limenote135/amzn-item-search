@@ -149,7 +149,7 @@ class MwsRepository {
 
     final serverUrl = await _read(serverUrlProvider.future);
     final resp = await _doRequest(
-      "$serverUrl/v1beta1/spapi/query",
+      "$serverUrl/v1beta2/spapi/query",
       data: json.encode(params),
     );
     return QueryItemsResponse.fromJson(resp);
@@ -161,6 +161,15 @@ class MwsRepository {
 
     final resp = await _doGetRequest(url);
     return GetAsinDataResponse.fromJson(resp);
+  }
+
+  Future<BatchGetAsinDataResponse> batchGetAsinData(List<String> asins) async {
+    final serverUrl = await _read(serverUrlProvider.future);
+    final url = "$serverUrl/v1beta2/spapi/asins";
+    final params = <String, Object>{"asins": asins};
+
+    final resp = await _doRequest(url, data: json.encode(params));
+    return BatchGetAsinDataResponse.fromJson(resp);
   }
 
   Future<ListMatchingProductResponse> listMatchingProducts(
@@ -296,4 +305,15 @@ class GetAsinDataResponse with _$GetAsinDataResponse {
 
   factory GetAsinDataResponse.fromJson(Map<String, dynamic> json) =>
       _$GetAsinDataResponseFromJson(json);
+}
+
+@freezed
+class BatchGetAsinDataResponse with _$BatchGetAsinDataResponse {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory BatchGetAsinDataResponse({
+    required List<AsinData> data,
+  }) = _BatchGetAsinDataResponse;
+
+  factory BatchGetAsinDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$BatchGetAsinDataResponseFromJson(json);
 }

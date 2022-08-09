@@ -1006,3 +1006,157 @@ abstract class _GetAsinDataResponse implements GetAsinDataResponse {
   _$GetAsinDataResponseCopyWith<_GetAsinDataResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+BatchGetAsinDataResponse _$BatchGetAsinDataResponseFromJson(
+    Map<String, dynamic> json) {
+  return _BatchGetAsinDataResponse.fromJson(json);
+}
+
+/// @nodoc
+class _$BatchGetAsinDataResponseTearOff {
+  const _$BatchGetAsinDataResponseTearOff();
+
+  _BatchGetAsinDataResponse call({required List<AsinData> data}) {
+    return _BatchGetAsinDataResponse(
+      data: data,
+    );
+  }
+
+  BatchGetAsinDataResponse fromJson(Map<String, Object?> json) {
+    return BatchGetAsinDataResponse.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $BatchGetAsinDataResponse = _$BatchGetAsinDataResponseTearOff();
+
+/// @nodoc
+mixin _$BatchGetAsinDataResponse {
+  List<AsinData> get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BatchGetAsinDataResponseCopyWith<BatchGetAsinDataResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BatchGetAsinDataResponseCopyWith<$Res> {
+  factory $BatchGetAsinDataResponseCopyWith(BatchGetAsinDataResponse value,
+          $Res Function(BatchGetAsinDataResponse) then) =
+      _$BatchGetAsinDataResponseCopyWithImpl<$Res>;
+  $Res call({List<AsinData> data});
+}
+
+/// @nodoc
+class _$BatchGetAsinDataResponseCopyWithImpl<$Res>
+    implements $BatchGetAsinDataResponseCopyWith<$Res> {
+  _$BatchGetAsinDataResponseCopyWithImpl(this._value, this._then);
+
+  final BatchGetAsinDataResponse _value;
+  // ignore: unused_field
+  final $Res Function(BatchGetAsinDataResponse) _then;
+
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<AsinData>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$BatchGetAsinDataResponseCopyWith<$Res>
+    implements $BatchGetAsinDataResponseCopyWith<$Res> {
+  factory _$BatchGetAsinDataResponseCopyWith(_BatchGetAsinDataResponse value,
+          $Res Function(_BatchGetAsinDataResponse) then) =
+      __$BatchGetAsinDataResponseCopyWithImpl<$Res>;
+  @override
+  $Res call({List<AsinData> data});
+}
+
+/// @nodoc
+class __$BatchGetAsinDataResponseCopyWithImpl<$Res>
+    extends _$BatchGetAsinDataResponseCopyWithImpl<$Res>
+    implements _$BatchGetAsinDataResponseCopyWith<$Res> {
+  __$BatchGetAsinDataResponseCopyWithImpl(_BatchGetAsinDataResponse _value,
+      $Res Function(_BatchGetAsinDataResponse) _then)
+      : super(_value, (v) => _then(v as _BatchGetAsinDataResponse));
+
+  @override
+  _BatchGetAsinDataResponse get _value =>
+      super._value as _BatchGetAsinDataResponse;
+
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_BatchGetAsinDataResponse(
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<AsinData>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$_BatchGetAsinDataResponse implements _BatchGetAsinDataResponse {
+  const _$_BatchGetAsinDataResponse({required this.data});
+
+  factory _$_BatchGetAsinDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_BatchGetAsinDataResponseFromJson(json);
+
+  @override
+  final List<AsinData> data;
+
+  @override
+  String toString() {
+    return 'BatchGetAsinDataResponse(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _BatchGetAsinDataResponse &&
+            const DeepCollectionEquality().equals(other.data, data));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+
+  @JsonKey(ignore: true)
+  @override
+  _$BatchGetAsinDataResponseCopyWith<_BatchGetAsinDataResponse> get copyWith =>
+      __$BatchGetAsinDataResponseCopyWithImpl<_BatchGetAsinDataResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BatchGetAsinDataResponseToJson(this);
+  }
+}
+
+abstract class _BatchGetAsinDataResponse implements BatchGetAsinDataResponse {
+  const factory _BatchGetAsinDataResponse({required List<AsinData> data}) =
+      _$_BatchGetAsinDataResponse;
+
+  factory _BatchGetAsinDataResponse.fromJson(Map<String, dynamic> json) =
+      _$_BatchGetAsinDataResponse.fromJson;
+
+  @override
+  List<AsinData> get data;
+  @override
+  @JsonKey(ignore: true)
+  _$BatchGetAsinDataResponseCopyWith<_BatchGetAsinDataResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
