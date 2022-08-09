@@ -15,13 +15,13 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.4.3+9999
+version: 1.5.0+9999
 
 environment:
   sdk: '>=2.15.0 <3.0.0'
 
 dependencies:
-  adaptive_dialog: ^1.7.0
+  adaptive_dialog: ^1.8.0
   archive: ^3.3.1
   badges: ^2.0.3
   camera: ^0.9.4+6 # https://github.com/flutter/flutter/issues/90070 待ち
@@ -31,7 +31,7 @@ dependencies:
   crypto: ^3.0.2
   csv: ^5.0.1
   cupertino_icons: ^1.0.5
-  device_info_plus: ^4.0.1
+  device_info_plus: ^4.0.2
   dio: ^4.0.6
   dio_cookie_manager: ^2.0.0
   euc:
@@ -40,7 +40,7 @@ dependencies:
   fast_barcode_scanner:
     path: ./packages/fast_barcode_scanner/fast_barcode_scanner
   firebase_analytics: ^9.3.0
-  firebase_auth: ^3.6.1
+  firebase_auth: ^3.6.2
   firebase_core: ^1.20.0
   firebase_crashlytics: ^2.8.6
   firebase_performance: ^0.8.2+1
@@ -54,13 +54,13 @@ dependencies:
   flutter_launcher_icons: ^0.9.3
   flutter_localizations:
     sdk: flutter
-  flutter_native_splash: ^2.2.6
+  flutter_native_splash: ^2.2.7
   flutter_signin_button: ^2.0.0
   flutter_slidable: ^2.0.0
   flutter_tts: ^3.5.0
   flutter_web_browser: ^0.17.1
   freezed_annotation: ^1.1.0
-  google_sign_in: ^5.4.0
+  google_sign_in: ^5.4.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   hooks_riverpod: 1.0.4
