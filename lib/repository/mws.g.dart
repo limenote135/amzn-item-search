@@ -75,3 +75,17 @@ Map<String, dynamic> _$$_GetAsinDataResponseToJson(
     <String, dynamic>{
       'data': instance.data,
     };
+
+_$_BatchGetAsinDataResponse _$$_BatchGetAsinDataResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_BatchGetAsinDataResponse(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => AsinData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_BatchGetAsinDataResponseToJson(
+        _$_BatchGetAsinDataResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
