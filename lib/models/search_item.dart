@@ -40,6 +40,15 @@ final asinDataFutureProvider =
   }
 });
 
+final listingsRestrictionFutureProvider = FutureProvider.autoDispose
+    .family<ListingRestrictions, String>((ref, asin) async {
+  final mws = ref.read(mwsRepositoryProvider);
+  final resp = await mws.getRestrictionInfo(asin);
+
+  ref.maintainState = true;
+  return resp;
+});
+
 @freezed
 class SearchItem with _$SearchItem {
   @HiveType(typeId: itemTypeId)
