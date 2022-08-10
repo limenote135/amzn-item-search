@@ -123,7 +123,7 @@ class MwsRepository {
 
     final serverUrl = await _read(serverUrlProvider.future);
     final resp = await _doRequest(
-      "$serverUrl/v1/mws/product",
+      "$serverUrl/v1beta2/spapi/product",
       data: json.encode(params),
     );
     return GetProductByIdResponse.fromJson(resp);
@@ -170,6 +170,14 @@ class MwsRepository {
 
     final resp = await _doRequest(url, data: json.encode(params));
     return BatchGetAsinDataResponse.fromJson(resp);
+  }
+
+  Future<ListingRestrictions> getRestrictionInfo(String asin) async {
+    final serverUrl = await _read(serverUrlProvider.future);
+    final url = "$serverUrl/v1beta2/spapi/restrictions/$asin";
+
+    final resp = await _doGetRequest(url);
+    return ListingRestrictions.fromJson(resp);
   }
 
   Future<ListMatchingProductResponse> listMatchingProducts(
@@ -243,6 +251,7 @@ class MwsRepository {
   }
 }
 
+// TODO: パラメータを JAN ではなく code にする？
 @freezed
 class GetProductByIdResponse with _$GetProductByIdResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)

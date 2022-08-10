@@ -1,4 +1,3 @@
-import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
@@ -14,17 +13,17 @@ class ItemTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
-    final itemPriceAsyncValue = ref.watch(itemPricesFutureProvider(item.asin));
-    return AsyncValueListTileWidget<ItemPriceFutureProviderResponse>(
-      value: itemPriceAsyncValue,
+    final listingRestrictionAsyncValue =
+        ref.watch(listingsRestrictionFutureProvider(item.asin));
+    return AsyncValueListTileWidget<ListingRestrictions>(
+      value: listingRestrictionAsyncValue,
       errorInfo: [
-        "ItemSelectPage.ItemTile.itemPricesFutureProvider",
+        "ItemSelectPage.ItemTile.listingRestrictionFutureProvider",
         "ASIN: ${item.asin}",
       ],
       data: (value) {
         final newItem = item.copyWith(
-          prices: value.prices,
-          sellByAmazon: value.sellByAmazon,
+          restrictions: value,
         );
         return ProviderScope(
           overrides: [
