@@ -1,9 +1,7 @@
 import 'package:amasearch/models/constants.dart';
-import 'package:amasearch/repository/mws.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'enums/fulfillment_channel.dart';
 import 'enums/item_condition.dart';
@@ -12,36 +10,6 @@ import 'fee_info.dart';
 
 part 'item_price.freezed.dart';
 part 'item_price.g.dart';
-
-final itemPricesFutureProvider = FutureProvider.autoDispose
-    .family<ItemPriceFutureProviderResponse, String>((ref, asin) async {
-  final mws = ref.read(mwsRepositoryProvider);
-  final resp = await mws.getProductPrices(asin);
-
-  ref.maintainState = true;
-  final prices = resp.prices ??
-      const ItemPrices(
-        newPrices: <PriceDetail>[],
-        usedPrices: <PriceDetail>[],
-        feeInfo: FeeInfo(
-          referralFeeRate: 0,
-          variableClosingFee: 0,
-          fbaFee: -1,
-        ),
-      );
-  return ItemPriceFutureProviderResponse(
-    prices: prices,
-    sellByAmazon: resp.sellByAmazon,
-  );
-});
-
-@freezed
-class ItemPriceFutureProviderResponse with _$ItemPriceFutureProviderResponse {
-  const factory ItemPriceFutureProviderResponse({
-    required ItemPrices prices,
-    required bool? sellByAmazon,
-  }) = _ItemPriceFutureProviderResponse;
-}
 
 @freezed
 class ItemPrices with _$ItemPrices {
