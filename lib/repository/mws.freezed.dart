@@ -21,7 +21,7 @@ GetProductByIdResponse _$GetProductByIdResponseFromJson(
 
 /// @nodoc
 mixin _$GetProductByIdResponse {
-  String get jan => throw _privateConstructorUsedError;
+  String get code => throw _privateConstructorUsedError;
   List<AsinData> get items => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $GetProductByIdResponseCopyWith<$Res> {
   factory $GetProductByIdResponseCopyWith(GetProductByIdResponse value,
           $Res Function(GetProductByIdResponse) then) =
       _$GetProductByIdResponseCopyWithImpl<$Res>;
-  $Res call({String jan, List<AsinData> items});
+  $Res call({String code, List<AsinData> items});
 }
 
 /// @nodoc
@@ -49,13 +49,13 @@ class _$GetProductByIdResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? jan = freezed,
+    Object? code = freezed,
     Object? items = freezed,
   }) {
     return _then(_value.copyWith(
-      jan: jan == freezed
-          ? _value.jan
-          : jan // ignore: cast_nullable_to_non_nullable
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
       items: items == freezed
           ? _value.items
@@ -72,7 +72,7 @@ abstract class _$$_GetProductByIdResponseCopyWith<$Res>
           $Res Function(_$_GetProductByIdResponse) then) =
       __$$_GetProductByIdResponseCopyWithImpl<$Res>;
   @override
-  $Res call({String jan, List<AsinData> items});
+  $Res call({String code, List<AsinData> items});
 }
 
 /// @nodoc
@@ -89,13 +89,13 @@ class __$$_GetProductByIdResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? jan = freezed,
+    Object? code = freezed,
     Object? items = freezed,
   }) {
     return _then(_$_GetProductByIdResponse(
-      jan: jan == freezed
-          ? _value.jan
-          : jan // ignore: cast_nullable_to_non_nullable
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
       items: items == freezed
           ? _value._items
@@ -110,14 +110,14 @@ class __$$_GetProductByIdResponseCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   const _$_GetProductByIdResponse(
-      {required this.jan, required final List<AsinData> items})
+      {required this.code, required final List<AsinData> items})
       : _items = items;
 
   factory _$_GetProductByIdResponse.fromJson(Map<String, dynamic> json) =>
       _$$_GetProductByIdResponseFromJson(json);
 
   @override
-  final String jan;
+  final String code;
   final List<AsinData> _items;
   @override
   List<AsinData> get items {
@@ -127,7 +127,7 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
 
   @override
   String toString() {
-    return 'GetProductByIdResponse(jan: $jan, items: $items)';
+    return 'GetProductByIdResponse(code: $code, items: $items)';
   }
 
   @override
@@ -135,7 +135,7 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GetProductByIdResponse &&
-            const DeepCollectionEquality().equals(other.jan, jan) &&
+            const DeepCollectionEquality().equals(other.code, code) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
@@ -143,7 +143,7 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(jan),
+      const DeepCollectionEquality().hash(code),
       const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
@@ -162,14 +162,14 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
 
 abstract class _GetProductByIdResponse implements GetProductByIdResponse {
   const factory _GetProductByIdResponse(
-      {required final String jan,
+      {required final String code,
       required final List<AsinData> items}) = _$_GetProductByIdResponse;
 
   factory _GetProductByIdResponse.fromJson(Map<String, dynamic> json) =
       _$_GetProductByIdResponse.fromJson;
 
   @override
-  String get jan;
+  String get code;
   @override
   List<AsinData> get items;
   @override
@@ -179,31 +179,31 @@ abstract class _GetProductByIdResponse implements GetProductByIdResponse {
 }
 
 /// @nodoc
-mixin _$ListMatchingProductRequest {
+mixin _$QueryItemsRequest {
   String get query => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ListMatchingProductRequestCopyWith<ListMatchingProductRequest>
-      get copyWith => throw _privateConstructorUsedError;
+  $QueryItemsRequestCopyWith<QueryItemsRequest> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ListMatchingProductRequestCopyWith<$Res> {
-  factory $ListMatchingProductRequestCopyWith(ListMatchingProductRequest value,
-          $Res Function(ListMatchingProductRequest) then) =
-      _$ListMatchingProductRequestCopyWithImpl<$Res>;
+abstract class $QueryItemsRequestCopyWith<$Res> {
+  factory $QueryItemsRequestCopyWith(
+          QueryItemsRequest value, $Res Function(QueryItemsRequest) then) =
+      _$QueryItemsRequestCopyWithImpl<$Res>;
   $Res call({String query, String category});
 }
 
 /// @nodoc
-class _$ListMatchingProductRequestCopyWithImpl<$Res>
-    implements $ListMatchingProductRequestCopyWith<$Res> {
-  _$ListMatchingProductRequestCopyWithImpl(this._value, this._then);
+class _$QueryItemsRequestCopyWithImpl<$Res>
+    implements $QueryItemsRequestCopyWith<$Res> {
+  _$QueryItemsRequestCopyWithImpl(this._value, this._then);
 
-  final ListMatchingProductRequest _value;
+  final QueryItemsRequest _value;
   // ignore: unused_field
-  final $Res Function(ListMatchingProductRequest) _then;
+  final $Res Function(QueryItemsRequest) _then;
 
   @override
   $Res call({
@@ -224,35 +224,32 @@ class _$ListMatchingProductRequestCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_ListMatchingProductRequestCopyWith<$Res>
-    implements $ListMatchingProductRequestCopyWith<$Res> {
-  factory _$$_ListMatchingProductRequestCopyWith(
-          _$_ListMatchingProductRequest value,
-          $Res Function(_$_ListMatchingProductRequest) then) =
-      __$$_ListMatchingProductRequestCopyWithImpl<$Res>;
+abstract class _$$_QueryItemsRequestCopyWith<$Res>
+    implements $QueryItemsRequestCopyWith<$Res> {
+  factory _$$_QueryItemsRequestCopyWith(_$_QueryItemsRequest value,
+          $Res Function(_$_QueryItemsRequest) then) =
+      __$$_QueryItemsRequestCopyWithImpl<$Res>;
   @override
   $Res call({String query, String category});
 }
 
 /// @nodoc
-class __$$_ListMatchingProductRequestCopyWithImpl<$Res>
-    extends _$ListMatchingProductRequestCopyWithImpl<$Res>
-    implements _$$_ListMatchingProductRequestCopyWith<$Res> {
-  __$$_ListMatchingProductRequestCopyWithImpl(
-      _$_ListMatchingProductRequest _value,
-      $Res Function(_$_ListMatchingProductRequest) _then)
-      : super(_value, (v) => _then(v as _$_ListMatchingProductRequest));
+class __$$_QueryItemsRequestCopyWithImpl<$Res>
+    extends _$QueryItemsRequestCopyWithImpl<$Res>
+    implements _$$_QueryItemsRequestCopyWith<$Res> {
+  __$$_QueryItemsRequestCopyWithImpl(
+      _$_QueryItemsRequest _value, $Res Function(_$_QueryItemsRequest) _then)
+      : super(_value, (v) => _then(v as _$_QueryItemsRequest));
 
   @override
-  _$_ListMatchingProductRequest get _value =>
-      super._value as _$_ListMatchingProductRequest;
+  _$_QueryItemsRequest get _value => super._value as _$_QueryItemsRequest;
 
   @override
   $Res call({
     Object? query = freezed,
     Object? category = freezed,
   }) {
-    return _then(_$_ListMatchingProductRequest(
+    return _then(_$_QueryItemsRequest(
       query: query == freezed
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -267,9 +264,8 @@ class __$$_ListMatchingProductRequestCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
-  const _$_ListMatchingProductRequest(
-      {required this.query, required this.category});
+class _$_QueryItemsRequest implements _QueryItemsRequest {
+  const _$_QueryItemsRequest({required this.query, required this.category});
 
   @override
   final String query;
@@ -278,14 +274,14 @@ class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
 
   @override
   String toString() {
-    return 'ListMatchingProductRequest(query: $query, category: $category)';
+    return 'QueryItemsRequest(query: $query, category: $category)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ListMatchingProductRequest &&
+            other is _$_QueryItemsRequest &&
             const DeepCollectionEquality().equals(other.query, query) &&
             const DeepCollectionEquality().equals(other.category, category));
   }
@@ -298,16 +294,15 @@ class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
 
   @JsonKey(ignore: true)
   @override
-  _$$_ListMatchingProductRequestCopyWith<_$_ListMatchingProductRequest>
-      get copyWith => __$$_ListMatchingProductRequestCopyWithImpl<
-          _$_ListMatchingProductRequest>(this, _$identity);
+  _$$_QueryItemsRequestCopyWith<_$_QueryItemsRequest> get copyWith =>
+      __$$_QueryItemsRequestCopyWithImpl<_$_QueryItemsRequest>(
+          this, _$identity);
 }
 
-abstract class _ListMatchingProductRequest
-    implements ListMatchingProductRequest {
-  const factory _ListMatchingProductRequest(
+abstract class _QueryItemsRequest implements QueryItemsRequest {
+  const factory _QueryItemsRequest(
       {required final String query,
-      required final String category}) = _$_ListMatchingProductRequest;
+      required final String category}) = _$_QueryItemsRequest;
 
   @override
   String get query;
@@ -315,8 +310,8 @@ abstract class _ListMatchingProductRequest
   String get category;
   @override
   @JsonKey(ignore: true)
-  _$$_ListMatchingProductRequestCopyWith<_$_ListMatchingProductRequest>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_QueryItemsRequestCopyWith<_$_QueryItemsRequest> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 QueryItemsResponse _$QueryItemsResponseFromJson(Map<String, dynamic> json) {

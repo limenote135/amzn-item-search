@@ -15,12 +15,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'item_tile.dart';
 
 final _currentQueryItemsRequest = StateProvider(
-  (ref) => const ListMatchingProductRequest(query: "", category: ""),
+  (ref) => const QueryItemsRequest(query: "", category: ""),
 );
 
 final _queryItemResponseProvider =
-    FutureProvider.family<List<String>, ListMatchingProductRequest>(
-        (ref, param) async {
+    FutureProvider.family<List<String>, QueryItemsRequest>((ref, param) async {
   if (param.query == "") {
     return const [];
   }
@@ -30,7 +29,7 @@ final _queryItemResponseProvider =
 });
 
 final _currentMatchingProductCount =
-    Provider.family<AsyncValue<int>, ListMatchingProductRequest>((ref, param) {
+    Provider.family<AsyncValue<int>, QueryItemsRequest>((ref, param) {
   final asins = ref.watch(_queryItemResponseProvider(param));
   return asins.whenData((value) => value.length);
 });
