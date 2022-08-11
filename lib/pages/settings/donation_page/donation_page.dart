@@ -55,10 +55,10 @@ class _Body extends HookConsumerWidget {
                 itemBuilder: (context, i) {
                   return ListTile(
                     title: Text(
-                      packages[i].product.title.replaceAll("(アマサーチ)", ""),
+                      packages[i].storeProduct.title.replaceAll("(アマサーチ)", ""),
                     ),
-                    subtitle: Text(packages[i].product.description),
-                    trailing: Text(packages[i].product.priceString),
+                    subtitle: Text(packages[i].storeProduct.description),
+                    trailing: Text(packages[i].storeProduct.priceString),
                     onTap: () {
                       Navigator.push(
                         context,

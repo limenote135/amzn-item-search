@@ -168,8 +168,13 @@ Future<void> initRevenueCat() async {
     await Purchases.setDebugLogsEnabled(_kTestingInAppPurchase);
   }
   if (Platform.isAndroid) {
-    await Purchases.setup("goog_kHLAwmYlrkPYuUcTrkIyilEmZtp");
+    await Purchases.configure(
+      PurchasesConfiguration("goog_kHLAwmYlrkPYuUcTrkIyilEmZtp"),
+      // PurchasesConfiguration("goog_ZpBjhMgCgarXfMBGnhMHngLslFn"),
+    );
   } else {
-    await Purchases.setup("appl_TjNyfkblPMFQBFKYdtQAIDibZns");
+    await Purchases.configure(
+      PurchasesConfiguration("appl_TjNyfkblPMFQBFKYdtQAIDibZns"),
+    );
   }
 }
