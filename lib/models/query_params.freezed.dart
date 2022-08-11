@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AsinDataPageParam {
-  ListMatchingProductRequest get param => throw _privateConstructorUsedError;
+  QueryItemsRequest get param => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,9 +29,9 @@ abstract class $AsinDataPageParamCopyWith<$Res> {
   factory $AsinDataPageParamCopyWith(
           AsinDataPageParam value, $Res Function(AsinDataPageParam) then) =
       _$AsinDataPageParamCopyWithImpl<$Res>;
-  $Res call({ListMatchingProductRequest param, int page});
+  $Res call({QueryItemsRequest param, int page});
 
-  $ListMatchingProductRequestCopyWith<$Res> get param;
+  $QueryItemsRequestCopyWith<$Res> get param;
 }
 
 /// @nodoc
@@ -52,7 +52,7 @@ class _$AsinDataPageParamCopyWithImpl<$Res>
       param: param == freezed
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
-              as ListMatchingProductRequest,
+              as QueryItemsRequest,
       page: page == freezed
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -61,8 +61,8 @@ class _$AsinDataPageParamCopyWithImpl<$Res>
   }
 
   @override
-  $ListMatchingProductRequestCopyWith<$Res> get param {
-    return $ListMatchingProductRequestCopyWith<$Res>(_value.param, (value) {
+  $QueryItemsRequestCopyWith<$Res> get param {
+    return $QueryItemsRequestCopyWith<$Res>(_value.param, (value) {
       return _then(_value.copyWith(param: value));
     });
   }
@@ -75,10 +75,10 @@ abstract class _$$_AsinDataPageParamCopyWith<$Res>
           $Res Function(_$_AsinDataPageParam) then) =
       __$$_AsinDataPageParamCopyWithImpl<$Res>;
   @override
-  $Res call({ListMatchingProductRequest param, int page});
+  $Res call({QueryItemsRequest param, int page});
 
   @override
-  $ListMatchingProductRequestCopyWith<$Res> get param;
+  $QueryItemsRequestCopyWith<$Res> get param;
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class __$$_AsinDataPageParamCopyWithImpl<$Res>
       param: param == freezed
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
-              as ListMatchingProductRequest,
+              as QueryItemsRequest,
       page: page == freezed
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -116,7 +116,7 @@ class _$_AsinDataPageParam implements _AsinDataPageParam {
   const _$_AsinDataPageParam({required this.param, required this.page});
 
   @override
-  final ListMatchingProductRequest param;
+  final QueryItemsRequest param;
   @override
   final int page;
 
@@ -149,11 +149,11 @@ class _$_AsinDataPageParam implements _AsinDataPageParam {
 
 abstract class _AsinDataPageParam implements AsinDataPageParam {
   const factory _AsinDataPageParam(
-      {required final ListMatchingProductRequest param,
+      {required final QueryItemsRequest param,
       required final int page}) = _$_AsinDataPageParam;
 
   @override
-  ListMatchingProductRequest get param;
+  QueryItemsRequest get param;
   @override
   int get page;
   @override
@@ -164,7 +164,7 @@ abstract class _AsinDataPageParam implements AsinDataPageParam {
 
 /// @nodoc
 mixin _$AsinDataIndexAtParam {
-  ListMatchingProductRequest get param => throw _privateConstructorUsedError;
+  QueryItemsRequest get param => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -177,9 +177,9 @@ abstract class $AsinDataIndexAtParamCopyWith<$Res> {
   factory $AsinDataIndexAtParamCopyWith(AsinDataIndexAtParam value,
           $Res Function(AsinDataIndexAtParam) then) =
       _$AsinDataIndexAtParamCopyWithImpl<$Res>;
-  $Res call({ListMatchingProductRequest param, int index});
+  $Res call({QueryItemsRequest param, int index});
 
-  $ListMatchingProductRequestCopyWith<$Res> get param;
+  $QueryItemsRequestCopyWith<$Res> get param;
 }
 
 /// @nodoc
@@ -200,7 +200,7 @@ class _$AsinDataIndexAtParamCopyWithImpl<$Res>
       param: param == freezed
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
-              as ListMatchingProductRequest,
+              as QueryItemsRequest,
       index: index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -209,8 +209,8 @@ class _$AsinDataIndexAtParamCopyWithImpl<$Res>
   }
 
   @override
-  $ListMatchingProductRequestCopyWith<$Res> get param {
-    return $ListMatchingProductRequestCopyWith<$Res>(_value.param, (value) {
+  $QueryItemsRequestCopyWith<$Res> get param {
+    return $QueryItemsRequestCopyWith<$Res>(_value.param, (value) {
       return _then(_value.copyWith(param: value));
     });
   }
@@ -223,10 +223,10 @@ abstract class _$$_AsinDataIndexAtParamCopyWith<$Res>
           $Res Function(_$_AsinDataIndexAtParam) then) =
       __$$_AsinDataIndexAtParamCopyWithImpl<$Res>;
   @override
-  $Res call({ListMatchingProductRequest param, int index});
+  $Res call({QueryItemsRequest param, int index});
 
   @override
-  $ListMatchingProductRequestCopyWith<$Res> get param;
+  $QueryItemsRequestCopyWith<$Res> get param;
 }
 
 /// @nodoc
@@ -249,7 +249,7 @@ class __$$_AsinDataIndexAtParamCopyWithImpl<$Res>
       param: param == freezed
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
-              as ListMatchingProductRequest,
+              as QueryItemsRequest,
       index: index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -264,7 +264,7 @@ class _$_AsinDataIndexAtParam implements _AsinDataIndexAtParam {
   const _$_AsinDataIndexAtParam({required this.param, required this.index});
 
   @override
-  final ListMatchingProductRequest param;
+  final QueryItemsRequest param;
   @override
   final int index;
 
@@ -297,11 +297,11 @@ class _$_AsinDataIndexAtParam implements _AsinDataIndexAtParam {
 
 abstract class _AsinDataIndexAtParam implements AsinDataIndexAtParam {
   const factory _AsinDataIndexAtParam(
-      {required final ListMatchingProductRequest param,
+      {required final QueryItemsRequest param,
       required final int index}) = _$_AsinDataIndexAtParam;
 
   @override
-  ListMatchingProductRequest get param;
+  QueryItemsRequest get param;
   @override
   int get index;
   @override

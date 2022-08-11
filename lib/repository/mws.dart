@@ -91,7 +91,7 @@ final searchItemFutureProvider = FutureProvider.autoDispose
 });
 
 final queryItemResultProvider = FutureProvider.autoDispose
-    .family<List<String>, ListMatchingProductRequest>((ref, req) async {
+    .family<List<String>, QueryItemsRequest>((ref, req) async {
   final mws = ref.read(mwsRepositoryProvider);
   final resp = await mws.queryItems(req.query, req.category);
   ref.maintainState = true;
@@ -112,7 +112,7 @@ class MwsRepository {
   }) async {
     if (int.tryParse(code) == null) {
       // 数値以外が含まれる場合は JAN コードではない
-      return Future.value(GetProductByIdResponse(jan: code, items: []));
+      return Future.value(GetProductByIdResponse(code: code, items: []));
     }
     final params = <String, String>{
       "code": code,
@@ -214,12 +214,11 @@ class MwsRepository {
   }
 }
 
-// TODO: パラメータを JAN ではなく code にする？
 @freezed
 class GetProductByIdResponse with _$GetProductByIdResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory GetProductByIdResponse({
-    required String jan,
+    required String code,
     required List<AsinData> items,
   }) = _GetProductByIdResponse;
 
@@ -228,11 +227,11 @@ class GetProductByIdResponse with _$GetProductByIdResponse {
 }
 
 @freezed
-class ListMatchingProductRequest with _$ListMatchingProductRequest {
-  const factory ListMatchingProductRequest({
+class QueryItemsRequest with _$QueryItemsRequest {
+  const factory QueryItemsRequest({
     required String query,
     required String category,
-  }) = _ListMatchingProductRequest;
+  }) = _QueryItemsRequest;
 }
 
 @freezed

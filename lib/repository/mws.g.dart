@@ -9,7 +9,7 @@ part of 'mws.dart';
 _$_GetProductByIdResponse _$$_GetProductByIdResponseFromJson(
         Map<String, dynamic> json) =>
     _$_GetProductByIdResponse(
-      jan: json['jan'] as String,
+      code: json['code'] as String,
       items: (json['items'] as List<dynamic>)
           .map((e) => AsinData.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -18,7 +18,7 @@ _$_GetProductByIdResponse _$$_GetProductByIdResponseFromJson(
 Map<String, dynamic> _$$_GetProductByIdResponseToJson(
         _$_GetProductByIdResponse instance) =>
     <String, dynamic>{
-      'jan': instance.jan,
+      'code': instance.code,
       'items': instance.items,
     };
 
