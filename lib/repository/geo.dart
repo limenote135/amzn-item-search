@@ -27,8 +27,6 @@ final geoItemFutureProvider =
   return SearchItem(searchDate: now, jan: resp.jan);
 });
 
-const _geoCodeLength = 7;
-
 class GeoRepository {
   GeoRepository(this._read);
 
@@ -43,16 +41,9 @@ class GeoRepository {
       // 978 は書籍の ISBN
       return GeoResponse(code: value);
     }
-    final code = value.length > _geoCodeLength
-        ? value.substring(1, 1 + _geoCodeLength)
-        : value;
 
-    if (int.tryParse(code) == null) {
-      // トリミング後にコードに数字以外が含まれる場合はゲオのコードではない
-      return GeoResponse(code: value);
-    }
     final serverUrl = await _read(serverUrlProvider.future);
-    final url = "$serverUrl/v1beta1/geo/code";
+    final url = "$serverUrl/v1beta2/geo/code";
     final dio = await _read(dioProvider.future);
 
     final user = await _read(authStateChangesProvider.future);
@@ -64,7 +55,7 @@ class GeoRepository {
     final header = await commonHeader(user!);
 
     final param = <String, String>{
-      "code": code,
+      "code": value,
     };
     final resp = await dio.post(
       url,
