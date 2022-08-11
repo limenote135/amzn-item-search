@@ -12,56 +12,7 @@ part of 'stock_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$StockItemTearOff {
-  const _$StockItemTearOff();
-
-  _StockItem call(
-      {@HiveField(0) required String purchaseDate,
-      @HiveField(1) int purchasePrice = 0,
-      @HiveField(2) int sellPrice = 0,
-      @HiveField(3) bool useFba = true,
-      @HiveField(4) int profitPerItem = 0,
-      @HiveField(5) int amount = 1,
-      @HiveField(6) ItemCondition condition = ItemCondition.newItem,
-      @HiveField(7) ItemSubCondition subCondition = ItemSubCondition.newItem,
-      @HiveField(8) String sku = "",
-      @HiveField(9) String memo = "",
-      @HiveField(10) required AsinData item,
-      @HiveField(11, defaultValue: "") String retailer = "",
-      @HiveField(12, defaultValue: "") required String id,
-      @HiveField(13, defaultValue: -1) int breakEven = 0,
-      @HiveField(14) String? listingDate,
-      bool autogenSku = false,
-      @HiveField(15, defaultValue: "") String conditionText = "",
-      @HiveField(16, defaultValue: 0) int otherCost = 0}) {
-    return _StockItem(
-      purchaseDate: purchaseDate,
-      purchasePrice: purchasePrice,
-      sellPrice: sellPrice,
-      useFba: useFba,
-      profitPerItem: profitPerItem,
-      amount: amount,
-      condition: condition,
-      subCondition: subCondition,
-      sku: sku,
-      memo: memo,
-      item: item,
-      retailer: retailer,
-      id: id,
-      breakEven: breakEven,
-      listingDate: listingDate,
-      autogenSku: autogenSku,
-      conditionText: conditionText,
-      otherCost: otherCost,
-    );
-  }
-}
-
-/// @nodoc
-const $StockItem = _$StockItemTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$StockItem {
@@ -250,10 +201,10 @@ class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
-  factory _$StockItemCopyWith(
-          _StockItem value, $Res Function(_StockItem) then) =
-      __$StockItemCopyWithImpl<$Res>;
+abstract class _$$_StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
+  factory _$$_StockItemCopyWith(
+          _$_StockItem value, $Res Function(_$_StockItem) then) =
+      __$$_StockItemCopyWithImpl<$Res>;
   @override
   $Res call(
       {@HiveField(0) String purchaseDate,
@@ -280,13 +231,14 @@ abstract class _$StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
-    implements _$StockItemCopyWith<$Res> {
-  __$StockItemCopyWithImpl(_StockItem _value, $Res Function(_StockItem) _then)
-      : super(_value, (v) => _then(v as _StockItem));
+class __$$_StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
+    implements _$$_StockItemCopyWith<$Res> {
+  __$$_StockItemCopyWithImpl(
+      _$_StockItem _value, $Res Function(_$_StockItem) _then)
+      : super(_value, (v) => _then(v as _$_StockItem));
 
   @override
-  _StockItem get _value => super._value as _StockItem;
+  _$_StockItem get _value => super._value as _$_StockItem;
 
   @override
   $Res call({
@@ -309,7 +261,7 @@ class __$StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
     Object? conditionText = freezed,
     Object? otherCost = freezed,
   }) {
-    return _then(_StockItem(
+    return _then(_$_StockItem(
       purchaseDate: purchaseDate == freezed
           ? _value.purchaseDate
           : purchaseDate // ignore: cast_nullable_to_non_nullable
@@ -413,69 +365,72 @@ class _$_StockItem implements _StockItem {
   @override
   @HiveField(0)
   final String purchaseDate;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(1)
   final int purchasePrice;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(2)
   final int sellPrice;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(3)
   final bool useFba;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(4)
   final int profitPerItem;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(5)
   final int amount;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(6)
   final ItemCondition condition;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(7)
   final ItemSubCondition subCondition;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(8)
   final String sku;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(9)
   final String memo;
   @override
   @HiveField(10)
   final AsinData item;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(11, defaultValue: "")
   final String retailer;
-  @override // 主キー
+// 主キー
+  @override
   @HiveField(12, defaultValue: "")
   final String id;
+// マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
+  @override
   @JsonKey()
-  @override // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
   @HiveField(13, defaultValue: -1)
   final int breakEven;
   @override
   @HiveField(14)
   final String? listingDate;
-  @JsonKey()
-  @override // 仕入れ確定した後はデフォルト false とするが、仕入れ時にはデフォルト true で、
+// 仕入れ確定した後はデフォルト false とするが、仕入れ時にはデフォルト true で、
 // 仕入れ画面で切り替えられるように、永続化はしないがメンバとして値を持っておく
-  final bool autogenSku;
-  @JsonKey()
   @override
+  @JsonKey()
+  final bool autogenSku;
+  @override
+  @JsonKey()
   @HiveField(15, defaultValue: "")
   final String conditionText;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(16, defaultValue: 0)
   final int otherCost;
 
@@ -488,7 +443,7 @@ class _$_StockItem implements _StockItem {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _StockItem &&
+            other is _$_StockItem &&
             const DeepCollectionEquality()
                 .equals(other.purchaseDate, purchaseDate) &&
             const DeepCollectionEquality()
@@ -540,30 +495,30 @@ class _$_StockItem implements _StockItem {
 
   @JsonKey(ignore: true)
   @override
-  _$StockItemCopyWith<_StockItem> get copyWith =>
-      __$StockItemCopyWithImpl<_StockItem>(this, _$identity);
+  _$$_StockItemCopyWith<_$_StockItem> get copyWith =>
+      __$$_StockItemCopyWithImpl<_$_StockItem>(this, _$identity);
 }
 
 abstract class _StockItem implements StockItem {
   const factory _StockItem(
-      {@HiveField(0) required String purchaseDate,
-      @HiveField(1) int purchasePrice,
-      @HiveField(2) int sellPrice,
-      @HiveField(3) bool useFba,
-      @HiveField(4) int profitPerItem,
-      @HiveField(5) int amount,
-      @HiveField(6) ItemCondition condition,
-      @HiveField(7) ItemSubCondition subCondition,
-      @HiveField(8) String sku,
-      @HiveField(9) String memo,
-      @HiveField(10) required AsinData item,
-      @HiveField(11, defaultValue: "") String retailer,
-      @HiveField(12, defaultValue: "") required String id,
-      @HiveField(13, defaultValue: -1) int breakEven,
-      @HiveField(14) String? listingDate,
-      bool autogenSku,
-      @HiveField(15, defaultValue: "") String conditionText,
-      @HiveField(16, defaultValue: 0) int otherCost}) = _$_StockItem;
+      {@HiveField(0) required final String purchaseDate,
+      @HiveField(1) final int purchasePrice,
+      @HiveField(2) final int sellPrice,
+      @HiveField(3) final bool useFba,
+      @HiveField(4) final int profitPerItem,
+      @HiveField(5) final int amount,
+      @HiveField(6) final ItemCondition condition,
+      @HiveField(7) final ItemSubCondition subCondition,
+      @HiveField(8) final String sku,
+      @HiveField(9) final String memo,
+      @HiveField(10) required final AsinData item,
+      @HiveField(11, defaultValue: "") final String retailer,
+      @HiveField(12, defaultValue: "") required final String id,
+      @HiveField(13, defaultValue: -1) final int breakEven,
+      @HiveField(14) final String? listingDate,
+      final bool autogenSku,
+      @HiveField(15, defaultValue: "") final String conditionText,
+      @HiveField(16, defaultValue: 0) final int otherCost}) = _$_StockItem;
 
   @override
   @HiveField(0)
@@ -621,6 +576,6 @@ abstract class _StockItem implements StockItem {
   int get otherCost;
   @override
   @JsonKey(ignore: true)
-  _$StockItemCopyWith<_StockItem> get copyWith =>
+  _$$_StockItemCopyWith<_$_StockItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
