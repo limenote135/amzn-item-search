@@ -12,22 +12,7 @@ part of 'offer_stocks.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$OfferStocksParamTearOff {
-  const _$OfferStocksParamTearOff();
-
-  _OfferStocksParam call({required String asin, required String sellerId}) {
-    return _OfferStocksParam(
-      asin: asin,
-      sellerId: sellerId,
-    );
-  }
-}
-
-/// @nodoc
-const $OfferStocksParam = _$OfferStocksParamTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$OfferStocksParam {
@@ -75,32 +60,32 @@ class _$OfferStocksParamCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$OfferStocksParamCopyWith<$Res>
+abstract class _$$_OfferStocksParamCopyWith<$Res>
     implements $OfferStocksParamCopyWith<$Res> {
-  factory _$OfferStocksParamCopyWith(
-          _OfferStocksParam value, $Res Function(_OfferStocksParam) then) =
-      __$OfferStocksParamCopyWithImpl<$Res>;
+  factory _$$_OfferStocksParamCopyWith(
+          _$_OfferStocksParam value, $Res Function(_$_OfferStocksParam) then) =
+      __$$_OfferStocksParamCopyWithImpl<$Res>;
   @override
   $Res call({String asin, String sellerId});
 }
 
 /// @nodoc
-class __$OfferStocksParamCopyWithImpl<$Res>
+class __$$_OfferStocksParamCopyWithImpl<$Res>
     extends _$OfferStocksParamCopyWithImpl<$Res>
-    implements _$OfferStocksParamCopyWith<$Res> {
-  __$OfferStocksParamCopyWithImpl(
-      _OfferStocksParam _value, $Res Function(_OfferStocksParam) _then)
-      : super(_value, (v) => _then(v as _OfferStocksParam));
+    implements _$$_OfferStocksParamCopyWith<$Res> {
+  __$$_OfferStocksParamCopyWithImpl(
+      _$_OfferStocksParam _value, $Res Function(_$_OfferStocksParam) _then)
+      : super(_value, (v) => _then(v as _$_OfferStocksParam));
 
   @override
-  _OfferStocksParam get _value => super._value as _OfferStocksParam;
+  _$_OfferStocksParam get _value => super._value as _$_OfferStocksParam;
 
   @override
   $Res call({
     Object? asin = freezed,
     Object? sellerId = freezed,
   }) {
-    return _then(_OfferStocksParam(
+    return _then(_$_OfferStocksParam(
       asin: asin == freezed
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
@@ -132,7 +117,7 @@ class _$_OfferStocksParam implements _OfferStocksParam {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _OfferStocksParam &&
+            other is _$_OfferStocksParam &&
             const DeepCollectionEquality().equals(other.asin, asin) &&
             const DeepCollectionEquality().equals(other.sellerId, sellerId));
   }
@@ -145,13 +130,14 @@ class _$_OfferStocksParam implements _OfferStocksParam {
 
   @JsonKey(ignore: true)
   @override
-  _$OfferStocksParamCopyWith<_OfferStocksParam> get copyWith =>
-      __$OfferStocksParamCopyWithImpl<_OfferStocksParam>(this, _$identity);
+  _$$_OfferStocksParamCopyWith<_$_OfferStocksParam> get copyWith =>
+      __$$_OfferStocksParamCopyWithImpl<_$_OfferStocksParam>(this, _$identity);
 }
 
 abstract class _OfferStocksParam implements OfferStocksParam {
   const factory _OfferStocksParam(
-      {required String asin, required String sellerId}) = _$_OfferStocksParam;
+      {required final String asin,
+      required final String sellerId}) = _$_OfferStocksParam;
 
   @override
   String get asin;
@@ -159,6 +145,6 @@ abstract class _OfferStocksParam implements OfferStocksParam {
   String get sellerId;
   @override
   @JsonKey(ignore: true)
-  _$OfferStocksParamCopyWith<_OfferStocksParam> get copyWith =>
+  _$$_OfferStocksParamCopyWith<_$_OfferStocksParam> get copyWith =>
       throw _privateConstructorUsedError;
 }

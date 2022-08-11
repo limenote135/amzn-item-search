@@ -6,7 +6,7 @@ part 'purchase_state.freezed.dart';
 @freezed
 class PurchaseState with _$PurchaseState {
   const factory PurchaseState({
-    required PurchaserInfo purchaseInfo,
+    required CustomerInfo purchaseInfo,
     required Offerings offerings,
   }) = _PurchaseState;
 }

@@ -12,30 +12,11 @@ part of 'release_notes.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 ReleaseNotes _$ReleaseNotesFromJson(Map<String, dynamic> json) {
   return _ReleaseNotes.fromJson(json);
 }
-
-/// @nodoc
-class _$ReleaseNotesTearOff {
-  const _$ReleaseNotesTearOff();
-
-  _ReleaseNotes call({required String version, required String text}) {
-    return _ReleaseNotes(
-      version: version,
-      text: text,
-    );
-  }
-
-  ReleaseNotes fromJson(Map<String, Object?> json) {
-    return ReleaseNotes.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ReleaseNotes = _$ReleaseNotesTearOff();
 
 /// @nodoc
 mixin _$ReleaseNotes {
@@ -83,31 +64,32 @@ class _$ReleaseNotesCopyWithImpl<$Res> implements $ReleaseNotesCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ReleaseNotesCopyWith<$Res>
+abstract class _$$_ReleaseNotesCopyWith<$Res>
     implements $ReleaseNotesCopyWith<$Res> {
-  factory _$ReleaseNotesCopyWith(
-          _ReleaseNotes value, $Res Function(_ReleaseNotes) then) =
-      __$ReleaseNotesCopyWithImpl<$Res>;
+  factory _$$_ReleaseNotesCopyWith(
+          _$_ReleaseNotes value, $Res Function(_$_ReleaseNotes) then) =
+      __$$_ReleaseNotesCopyWithImpl<$Res>;
   @override
   $Res call({String version, String text});
 }
 
 /// @nodoc
-class __$ReleaseNotesCopyWithImpl<$Res> extends _$ReleaseNotesCopyWithImpl<$Res>
-    implements _$ReleaseNotesCopyWith<$Res> {
-  __$ReleaseNotesCopyWithImpl(
-      _ReleaseNotes _value, $Res Function(_ReleaseNotes) _then)
-      : super(_value, (v) => _then(v as _ReleaseNotes));
+class __$$_ReleaseNotesCopyWithImpl<$Res>
+    extends _$ReleaseNotesCopyWithImpl<$Res>
+    implements _$$_ReleaseNotesCopyWith<$Res> {
+  __$$_ReleaseNotesCopyWithImpl(
+      _$_ReleaseNotes _value, $Res Function(_$_ReleaseNotes) _then)
+      : super(_value, (v) => _then(v as _$_ReleaseNotes));
 
   @override
-  _ReleaseNotes get _value => super._value as _ReleaseNotes;
+  _$_ReleaseNotes get _value => super._value as _$_ReleaseNotes;
 
   @override
   $Res call({
     Object? version = freezed,
     Object? text = freezed,
   }) {
-    return _then(_ReleaseNotes(
+    return _then(_$_ReleaseNotes(
       version: version == freezed
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
@@ -143,11 +125,12 @@ class _$_ReleaseNotes implements _ReleaseNotes {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ReleaseNotes &&
+            other is _$_ReleaseNotes &&
             const DeepCollectionEquality().equals(other.version, version) &&
             const DeepCollectionEquality().equals(other.text, text));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -156,18 +139,21 @@ class _$_ReleaseNotes implements _ReleaseNotes {
 
   @JsonKey(ignore: true)
   @override
-  _$ReleaseNotesCopyWith<_ReleaseNotes> get copyWith =>
-      __$ReleaseNotesCopyWithImpl<_ReleaseNotes>(this, _$identity);
+  _$$_ReleaseNotesCopyWith<_$_ReleaseNotes> get copyWith =>
+      __$$_ReleaseNotesCopyWithImpl<_$_ReleaseNotes>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReleaseNotesToJson(this);
+    return _$$_ReleaseNotesToJson(
+      this,
+    );
   }
 }
 
 abstract class _ReleaseNotes implements ReleaseNotes {
-  const factory _ReleaseNotes({required String version, required String text}) =
-      _$_ReleaseNotes;
+  const factory _ReleaseNotes(
+      {required final String version,
+      required final String text}) = _$_ReleaseNotes;
 
   factory _ReleaseNotes.fromJson(Map<String, dynamic> json) =
       _$_ReleaseNotes.fromJson;
@@ -178,6 +164,6 @@ abstract class _ReleaseNotes implements ReleaseNotes {
   String get text;
   @override
   @JsonKey(ignore: true)
-  _$ReleaseNotesCopyWith<_ReleaseNotes> get copyWith =>
+  _$$_ReleaseNotesCopyWith<_$_ReleaseNotes> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,30 +12,11 @@ part of 'geo.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 GeoResponse _$GeoResponseFromJson(Map<String, dynamic> json) {
   return _GeoResponse.fromJson(json);
 }
-
-/// @nodoc
-class _$GeoResponseTearOff {
-  const _$GeoResponseTearOff();
-
-  _GeoResponse call({required String code, String jan = ""}) {
-    return _GeoResponse(
-      code: code,
-      jan: jan,
-    );
-  }
-
-  GeoResponse fromJson(Map<String, Object?> json) {
-    return GeoResponse.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $GeoResponse = _$GeoResponseTearOff();
 
 /// @nodoc
 mixin _$GeoResponse {
@@ -83,31 +64,31 @@ class _$GeoResponseCopyWithImpl<$Res> implements $GeoResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$GeoResponseCopyWith<$Res>
+abstract class _$$_GeoResponseCopyWith<$Res>
     implements $GeoResponseCopyWith<$Res> {
-  factory _$GeoResponseCopyWith(
-          _GeoResponse value, $Res Function(_GeoResponse) then) =
-      __$GeoResponseCopyWithImpl<$Res>;
+  factory _$$_GeoResponseCopyWith(
+          _$_GeoResponse value, $Res Function(_$_GeoResponse) then) =
+      __$$_GeoResponseCopyWithImpl<$Res>;
   @override
   $Res call({String code, String jan});
 }
 
 /// @nodoc
-class __$GeoResponseCopyWithImpl<$Res> extends _$GeoResponseCopyWithImpl<$Res>
-    implements _$GeoResponseCopyWith<$Res> {
-  __$GeoResponseCopyWithImpl(
-      _GeoResponse _value, $Res Function(_GeoResponse) _then)
-      : super(_value, (v) => _then(v as _GeoResponse));
+class __$$_GeoResponseCopyWithImpl<$Res> extends _$GeoResponseCopyWithImpl<$Res>
+    implements _$$_GeoResponseCopyWith<$Res> {
+  __$$_GeoResponseCopyWithImpl(
+      _$_GeoResponse _value, $Res Function(_$_GeoResponse) _then)
+      : super(_value, (v) => _then(v as _$_GeoResponse));
 
   @override
-  _GeoResponse get _value => super._value as _GeoResponse;
+  _$_GeoResponse get _value => super._value as _$_GeoResponse;
 
   @override
   $Res call({
     Object? code = freezed,
     Object? jan = freezed,
   }) {
-    return _then(_GeoResponse(
+    return _then(_$_GeoResponse(
       code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -130,8 +111,8 @@ class _$_GeoResponse implements _GeoResponse {
 
   @override
   final String code;
-  @JsonKey()
   @override
+  @JsonKey()
   final String jan;
 
   @override
@@ -143,11 +124,12 @@ class _$_GeoResponse implements _GeoResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _GeoResponse &&
+            other is _$_GeoResponse &&
             const DeepCollectionEquality().equals(other.code, code) &&
             const DeepCollectionEquality().equals(other.jan, jan));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -156,17 +138,19 @@ class _$_GeoResponse implements _GeoResponse {
 
   @JsonKey(ignore: true)
   @override
-  _$GeoResponseCopyWith<_GeoResponse> get copyWith =>
-      __$GeoResponseCopyWithImpl<_GeoResponse>(this, _$identity);
+  _$$_GeoResponseCopyWith<_$_GeoResponse> get copyWith =>
+      __$$_GeoResponseCopyWithImpl<_$_GeoResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GeoResponseToJson(this);
+    return _$$_GeoResponseToJson(
+      this,
+    );
   }
 }
 
 abstract class _GeoResponse implements GeoResponse {
-  const factory _GeoResponse({required String code, String jan}) =
+  const factory _GeoResponse({required final String code, final String jan}) =
       _$_GeoResponse;
 
   factory _GeoResponse.fromJson(Map<String, dynamic> json) =
@@ -178,6 +162,6 @@ abstract class _GeoResponse implements GeoResponse {
   String get jan;
   @override
   @JsonKey(ignore: true)
-  _$GeoResponseCopyWith<_GeoResponse> get copyWith =>
+  _$$_GeoResponseCopyWith<_$_GeoResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }

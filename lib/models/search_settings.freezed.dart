@@ -12,32 +12,7 @@ part of 'search_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$SearchSettingsTearOff {
-  const _$SearchSettingsTearOff();
-
-  _SearchSettings call(
-      {@HiveField(0) SearchType type = SearchType.jan,
-      @HiveField(1) UsedSubCondition usedSubCondition = UsedSubCondition.all,
-      @HiveField(2) bool useFba = true,
-      @HiveField(3) bool priorFba = true,
-      @HiveField(4, defaultValue: true) bool continuousCameraRead = true,
-      @HiveField(5, defaultValue: false) bool continuousInput = false}) {
-    return _SearchSettings(
-      type: type,
-      usedSubCondition: usedSubCondition,
-      useFba: useFba,
-      priorFba: priorFba,
-      continuousCameraRead: continuousCameraRead,
-      continuousInput: continuousInput,
-    );
-  }
-}
-
-/// @nodoc
-const $SearchSettings = _$SearchSettingsTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$SearchSettings {
@@ -121,11 +96,11 @@ class _$SearchSettingsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$SearchSettingsCopyWith<$Res>
+abstract class _$$_SearchSettingsCopyWith<$Res>
     implements $SearchSettingsCopyWith<$Res> {
-  factory _$SearchSettingsCopyWith(
-          _SearchSettings value, $Res Function(_SearchSettings) then) =
-      __$SearchSettingsCopyWithImpl<$Res>;
+  factory _$$_SearchSettingsCopyWith(
+          _$_SearchSettings value, $Res Function(_$_SearchSettings) then) =
+      __$$_SearchSettingsCopyWithImpl<$Res>;
   @override
   $Res call(
       {@HiveField(0) SearchType type,
@@ -137,15 +112,15 @@ abstract class _$SearchSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SearchSettingsCopyWithImpl<$Res>
+class __$$_SearchSettingsCopyWithImpl<$Res>
     extends _$SearchSettingsCopyWithImpl<$Res>
-    implements _$SearchSettingsCopyWith<$Res> {
-  __$SearchSettingsCopyWithImpl(
-      _SearchSettings _value, $Res Function(_SearchSettings) _then)
-      : super(_value, (v) => _then(v as _SearchSettings));
+    implements _$$_SearchSettingsCopyWith<$Res> {
+  __$$_SearchSettingsCopyWithImpl(
+      _$_SearchSettings _value, $Res Function(_$_SearchSettings) _then)
+      : super(_value, (v) => _then(v as _$_SearchSettings));
 
   @override
-  _SearchSettings get _value => super._value as _SearchSettings;
+  _$_SearchSettings get _value => super._value as _$_SearchSettings;
 
   @override
   $Res call({
@@ -156,7 +131,7 @@ class __$SearchSettingsCopyWithImpl<$Res>
     Object? continuousCameraRead = freezed,
     Object? continuousInput = freezed,
   }) {
-    return _then(_SearchSettings(
+    return _then(_$_SearchSettings(
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -197,28 +172,28 @@ class _$_SearchSettings implements _SearchSettings {
       @HiveField(4, defaultValue: true) this.continuousCameraRead = true,
       @HiveField(5, defaultValue: false) this.continuousInput = false});
 
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(0)
   final SearchType type;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(1)
   final UsedSubCondition usedSubCondition;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(2)
   final bool useFba;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(3)
   final bool priorFba;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(4, defaultValue: true)
   final bool continuousCameraRead;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(5, defaultValue: false)
   final bool continuousInput;
 
@@ -231,7 +206,7 @@ class _$_SearchSettings implements _SearchSettings {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SearchSettings &&
+            other is _$_SearchSettings &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality()
                 .equals(other.usedSubCondition, usedSubCondition) &&
@@ -255,18 +230,18 @@ class _$_SearchSettings implements _SearchSettings {
 
   @JsonKey(ignore: true)
   @override
-  _$SearchSettingsCopyWith<_SearchSettings> get copyWith =>
-      __$SearchSettingsCopyWithImpl<_SearchSettings>(this, _$identity);
+  _$$_SearchSettingsCopyWith<_$_SearchSettings> get copyWith =>
+      __$$_SearchSettingsCopyWithImpl<_$_SearchSettings>(this, _$identity);
 }
 
 abstract class _SearchSettings implements SearchSettings {
   const factory _SearchSettings(
-          {@HiveField(0) SearchType type,
-          @HiveField(1) UsedSubCondition usedSubCondition,
-          @HiveField(2) bool useFba,
-          @HiveField(3) bool priorFba,
-          @HiveField(4, defaultValue: true) bool continuousCameraRead,
-          @HiveField(5, defaultValue: false) bool continuousInput}) =
+          {@HiveField(0) final SearchType type,
+          @HiveField(1) final UsedSubCondition usedSubCondition,
+          @HiveField(2) final bool useFba,
+          @HiveField(3) final bool priorFba,
+          @HiveField(4, defaultValue: true) final bool continuousCameraRead,
+          @HiveField(5, defaultValue: false) final bool continuousInput}) =
       _$_SearchSettings;
 
   @override
@@ -289,6 +264,6 @@ abstract class _SearchSettings implements SearchSettings {
   bool get continuousInput;
   @override
   @JsonKey(ignore: true)
-  _$SearchSettingsCopyWith<_SearchSettings> get copyWith =>
+  _$$_SearchSettingsCopyWith<_$_SearchSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }

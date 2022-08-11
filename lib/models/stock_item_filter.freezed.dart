@@ -12,36 +12,7 @@ part of 'stock_item_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$StockItemFilterTearOff {
-  const _$StockItemFilterTearOff();
-
-  _StockItemFilter call(
-      {String? keyword,
-      ListingState listingState = ListingState.all,
-      ProductCondition productCondition = ProductCondition.all,
-      int? purchasePriceLower,
-      int? purchasePriceUpper,
-      int? sellPriceLower,
-      int? sellPriceUpper,
-      DateTimeRange? purchaseDateRange}) {
-    return _StockItemFilter(
-      keyword: keyword,
-      listingState: listingState,
-      productCondition: productCondition,
-      purchasePriceLower: purchasePriceLower,
-      purchasePriceUpper: purchasePriceUpper,
-      sellPriceLower: sellPriceLower,
-      sellPriceUpper: sellPriceUpper,
-      purchaseDateRange: purchaseDateRange,
-    );
-  }
-}
-
-/// @nodoc
-const $StockItemFilter = _$StockItemFilterTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$StockItemFilter {
@@ -133,11 +104,11 @@ class _$StockItemFilterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$StockItemFilterCopyWith<$Res>
+abstract class _$$_StockItemFilterCopyWith<$Res>
     implements $StockItemFilterCopyWith<$Res> {
-  factory _$StockItemFilterCopyWith(
-          _StockItemFilter value, $Res Function(_StockItemFilter) then) =
-      __$StockItemFilterCopyWithImpl<$Res>;
+  factory _$$_StockItemFilterCopyWith(
+          _$_StockItemFilter value, $Res Function(_$_StockItemFilter) then) =
+      __$$_StockItemFilterCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? keyword,
@@ -151,15 +122,15 @@ abstract class _$StockItemFilterCopyWith<$Res>
 }
 
 /// @nodoc
-class __$StockItemFilterCopyWithImpl<$Res>
+class __$$_StockItemFilterCopyWithImpl<$Res>
     extends _$StockItemFilterCopyWithImpl<$Res>
-    implements _$StockItemFilterCopyWith<$Res> {
-  __$StockItemFilterCopyWithImpl(
-      _StockItemFilter _value, $Res Function(_StockItemFilter) _then)
-      : super(_value, (v) => _then(v as _StockItemFilter));
+    implements _$$_StockItemFilterCopyWith<$Res> {
+  __$$_StockItemFilterCopyWithImpl(
+      _$_StockItemFilter _value, $Res Function(_$_StockItemFilter) _then)
+      : super(_value, (v) => _then(v as _$_StockItemFilter));
 
   @override
-  _StockItemFilter get _value => super._value as _StockItemFilter;
+  _$_StockItemFilter get _value => super._value as _$_StockItemFilter;
 
   @override
   $Res call({
@@ -172,7 +143,7 @@ class __$StockItemFilterCopyWithImpl<$Res>
     Object? sellPriceUpper = freezed,
     Object? purchaseDateRange = freezed,
   }) {
-    return _then(_StockItemFilter(
+    return _then(_$_StockItemFilter(
       keyword: keyword == freezed
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
@@ -224,11 +195,11 @@ class _$_StockItemFilter implements _StockItemFilter {
 
   @override
   final String? keyword;
-  @JsonKey()
   @override
+  @JsonKey()
   final ListingState listingState;
-  @JsonKey()
   @override
+  @JsonKey()
   final ProductCondition productCondition;
   @override
   final int? purchasePriceLower;
@@ -250,7 +221,7 @@ class _$_StockItemFilter implements _StockItemFilter {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _StockItemFilter &&
+            other is _$_StockItemFilter &&
             const DeepCollectionEquality().equals(other.keyword, keyword) &&
             const DeepCollectionEquality()
                 .equals(other.listingState, listingState) &&
@@ -282,20 +253,20 @@ class _$_StockItemFilter implements _StockItemFilter {
 
   @JsonKey(ignore: true)
   @override
-  _$StockItemFilterCopyWith<_StockItemFilter> get copyWith =>
-      __$StockItemFilterCopyWithImpl<_StockItemFilter>(this, _$identity);
+  _$$_StockItemFilterCopyWith<_$_StockItemFilter> get copyWith =>
+      __$$_StockItemFilterCopyWithImpl<_$_StockItemFilter>(this, _$identity);
 }
 
 abstract class _StockItemFilter implements StockItemFilter {
   const factory _StockItemFilter(
-      {String? keyword,
-      ListingState listingState,
-      ProductCondition productCondition,
-      int? purchasePriceLower,
-      int? purchasePriceUpper,
-      int? sellPriceLower,
-      int? sellPriceUpper,
-      DateTimeRange? purchaseDateRange}) = _$_StockItemFilter;
+      {final String? keyword,
+      final ListingState listingState,
+      final ProductCondition productCondition,
+      final int? purchasePriceLower,
+      final int? purchasePriceUpper,
+      final int? sellPriceLower,
+      final int? sellPriceUpper,
+      final DateTimeRange? purchaseDateRange}) = _$_StockItemFilter;
 
   @override
   String? get keyword;
@@ -315,6 +286,6 @@ abstract class _StockItemFilter implements StockItemFilter {
   DateTimeRange? get purchaseDateRange;
   @override
   @JsonKey(ignore: true)
-  _$StockItemFilterCopyWith<_StockItemFilter> get copyWith =>
+  _$$_StockItemFilterCopyWith<_$_StockItemFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }

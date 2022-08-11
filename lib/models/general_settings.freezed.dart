@@ -12,95 +12,7 @@ part of 'general_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$GeneralSettingsTearOff {
-  const _$GeneralSettingsTearOff();
-
-  _GeneralSettings call(
-      {@HiveField(0)
-          bool isDarkMode = false,
-      @HiveField(1)
-          bool enableTargetProfit = false,
-      @HiveField(2)
-          int targetProfitValue = 10,
-      @HiveField(3)
-          String skuFormat = defaultSkuFormat,
-      @HiveField(4)
-          List<String> retailers = const <String>[],
-      @HiveField(5)
-          bool enableReadAloud = false,
-      @HiveField(6)
-          int patternIndex = 0,
-      @HiveField(7)
-          List<ReadAloudPattern> readAloudPatterns = defaultReadAloudPatterns,
-      @HiveField(8)
-          double readAloudVolume = 1.0,
-      @HiveField(9)
-          double? readAloudSpeed,
-      @HiveField(10, defaultValue: defaultCustomButtons)
-          List<CustomButtonDetail> customButtons = defaultCustomButtons,
-      @HiveField(11, defaultValue: defaultCsvOrder)
-          List<CsvColumn> csvOrder = defaultCsvOrder,
-      @HiveField(12, defaultValue: 0)
-          int minProfit = 0,
-      @HiveField(13, defaultValue: false)
-          bool getStocks = false,
-      @HiveField(14, defaultValue: true)
-          bool enableAlert = true,
-      @HiveField(15, defaultValue: defaultAlert)
-          List<AlertConditionSet> alerts = defaultAlert,
-      @HiveField(16, defaultValue: false)
-          bool enableAlertVibration = false,
-      @HiveField(17, defaultValue: true)
-          bool isMajorCustomer = true,
-      @HiveField(18, defaultValue: defaultKeepaSettings)
-          KeepaSettings keepaSettings = defaultKeepaSettings,
-      @HiveField(19, defaultValue: defaultLeftShortcut)
-          List<ShortcutDetail> leftSlideShortcut = defaultLeftShortcut,
-      @HiveField(20, defaultValue: defaultRightShortcut)
-          List<ShortcutDetail> rightSlideShortcut = defaultRightShortcut,
-      @HiveField(21, defaultValue: defaultNewConditionTexts)
-          List<String> newConditionTexts = defaultNewConditionTexts,
-      @HiveField(22, defaultValue: 0)
-          int newConditionTextIndex = 0,
-      @HiveField(23, defaultValue: defaultUsedConditionText)
-          List<String> usedConditionTexts = defaultUsedConditionText,
-      @HiveField(24, defaultValue: 0)
-          int usedConditionTextIndex = 0}) {
-    return _GeneralSettings(
-      isDarkMode: isDarkMode,
-      enableTargetProfit: enableTargetProfit,
-      targetProfitValue: targetProfitValue,
-      skuFormat: skuFormat,
-      retailers: retailers,
-      enableReadAloud: enableReadAloud,
-      patternIndex: patternIndex,
-      readAloudPatterns: readAloudPatterns,
-      readAloudVolume: readAloudVolume,
-      readAloudSpeed: readAloudSpeed,
-      customButtons: customButtons,
-      csvOrder: csvOrder,
-      minProfit: minProfit,
-      getStocks: getStocks,
-      enableAlert: enableAlert,
-      alerts: alerts,
-      enableAlertVibration: enableAlertVibration,
-      isMajorCustomer: isMajorCustomer,
-      keepaSettings: keepaSettings,
-      leftSlideShortcut: leftSlideShortcut,
-      rightSlideShortcut: rightSlideShortcut,
-      newConditionTexts: newConditionTexts,
-      newConditionTextIndex: newConditionTextIndex,
-      usedConditionTexts: usedConditionTexts,
-      usedConditionTextIndex: usedConditionTextIndex,
-    );
-  }
-}
-
-/// @nodoc
-const $GeneralSettings = _$GeneralSettingsTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$GeneralSettings {
@@ -375,11 +287,11 @@ class _$GeneralSettingsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$GeneralSettingsCopyWith<$Res>
+abstract class _$$_GeneralSettingsCopyWith<$Res>
     implements $GeneralSettingsCopyWith<$Res> {
-  factory _$GeneralSettingsCopyWith(
-          _GeneralSettings value, $Res Function(_GeneralSettings) then) =
-      __$GeneralSettingsCopyWithImpl<$Res>;
+  factory _$$_GeneralSettingsCopyWith(
+          _$_GeneralSettings value, $Res Function(_$_GeneralSettings) then) =
+      __$$_GeneralSettingsCopyWithImpl<$Res>;
   @override
   $Res call(
       {@HiveField(0)
@@ -438,15 +350,15 @@ abstract class _$GeneralSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$GeneralSettingsCopyWithImpl<$Res>
+class __$$_GeneralSettingsCopyWithImpl<$Res>
     extends _$GeneralSettingsCopyWithImpl<$Res>
-    implements _$GeneralSettingsCopyWith<$Res> {
-  __$GeneralSettingsCopyWithImpl(
-      _GeneralSettings _value, $Res Function(_GeneralSettings) _then)
-      : super(_value, (v) => _then(v as _GeneralSettings));
+    implements _$$_GeneralSettingsCopyWith<$Res> {
+  __$$_GeneralSettingsCopyWithImpl(
+      _$_GeneralSettings _value, $Res Function(_$_GeneralSettings) _then)
+      : super(_value, (v) => _then(v as _$_GeneralSettings));
 
   @override
-  _GeneralSettings get _value => super._value as _GeneralSettings;
+  _$_GeneralSettings get _value => super._value as _$_GeneralSettings;
 
   @override
   $Res call({
@@ -476,7 +388,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
     Object? usedConditionTexts = freezed,
     Object? usedConditionTextIndex = freezed,
   }) {
-    return _then(_GeneralSettings(
+    return _then(_$_GeneralSettings(
       isDarkMode: isDarkMode == freezed
           ? _value.isDarkMode
           : isDarkMode // ignore: cast_nullable_to_non_nullable
@@ -494,7 +406,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           : skuFormat // ignore: cast_nullable_to_non_nullable
               as String,
       retailers: retailers == freezed
-          ? _value.retailers
+          ? _value._retailers
           : retailers // ignore: cast_nullable_to_non_nullable
               as List<String>,
       enableReadAloud: enableReadAloud == freezed
@@ -506,7 +418,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           : patternIndex // ignore: cast_nullable_to_non_nullable
               as int,
       readAloudPatterns: readAloudPatterns == freezed
-          ? _value.readAloudPatterns
+          ? _value._readAloudPatterns
           : readAloudPatterns // ignore: cast_nullable_to_non_nullable
               as List<ReadAloudPattern>,
       readAloudVolume: readAloudVolume == freezed
@@ -518,11 +430,11 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           : readAloudSpeed // ignore: cast_nullable_to_non_nullable
               as double?,
       customButtons: customButtons == freezed
-          ? _value.customButtons
+          ? _value._customButtons
           : customButtons // ignore: cast_nullable_to_non_nullable
               as List<CustomButtonDetail>,
       csvOrder: csvOrder == freezed
-          ? _value.csvOrder
+          ? _value._csvOrder
           : csvOrder // ignore: cast_nullable_to_non_nullable
               as List<CsvColumn>,
       minProfit: minProfit == freezed
@@ -538,7 +450,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           : enableAlert // ignore: cast_nullable_to_non_nullable
               as bool,
       alerts: alerts == freezed
-          ? _value.alerts
+          ? _value._alerts
           : alerts // ignore: cast_nullable_to_non_nullable
               as List<AlertConditionSet>,
       enableAlertVibration: enableAlertVibration == freezed
@@ -554,15 +466,15 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           : keepaSettings // ignore: cast_nullable_to_non_nullable
               as KeepaSettings,
       leftSlideShortcut: leftSlideShortcut == freezed
-          ? _value.leftSlideShortcut
+          ? _value._leftSlideShortcut
           : leftSlideShortcut // ignore: cast_nullable_to_non_nullable
               as List<ShortcutDetail>,
       rightSlideShortcut: rightSlideShortcut == freezed
-          ? _value.rightSlideShortcut
+          ? _value._rightSlideShortcut
           : rightSlideShortcut // ignore: cast_nullable_to_non_nullable
               as List<ShortcutDetail>,
       newConditionTexts: newConditionTexts == freezed
-          ? _value.newConditionTexts
+          ? _value._newConditionTexts
           : newConditionTexts // ignore: cast_nullable_to_non_nullable
               as List<String>,
       newConditionTextIndex: newConditionTextIndex == freezed
@@ -570,7 +482,7 @@ class __$GeneralSettingsCopyWithImpl<$Res>
           : newConditionTextIndex // ignore: cast_nullable_to_non_nullable
               as int,
       usedConditionTexts: usedConditionTexts == freezed
-          ? _value.usedConditionTexts
+          ? _value._usedConditionTexts
           : usedConditionTexts // ignore: cast_nullable_to_non_nullable
               as List<String>,
       usedConditionTextIndex: usedConditionTextIndex == freezed
@@ -595,21 +507,22 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(3)
           this.skuFormat = defaultSkuFormat,
       @HiveField(4)
-          this.retailers = const <String>[],
+          final List<String> retailers = const <String>[],
       @HiveField(5)
           this.enableReadAloud = false,
       @HiveField(6)
           this.patternIndex = 0,
       @HiveField(7)
-          this.readAloudPatterns = defaultReadAloudPatterns,
+          final List<ReadAloudPattern>
+              readAloudPatterns = defaultReadAloudPatterns,
       @HiveField(8)
           this.readAloudVolume = 1.0,
       @HiveField(9)
           this.readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
-          this.customButtons = defaultCustomButtons,
+          final List<CustomButtonDetail> customButtons = defaultCustomButtons,
       @HiveField(11, defaultValue: defaultCsvOrder)
-          this.csvOrder = defaultCsvOrder,
+          final List<CsvColumn> csvOrder = defaultCsvOrder,
       @HiveField(12, defaultValue: 0)
           this.minProfit = 0,
       @HiveField(13, defaultValue: false)
@@ -617,7 +530,7 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(14, defaultValue: true)
           this.enableAlert = true,
       @HiveField(15, defaultValue: defaultAlert)
-          this.alerts = defaultAlert,
+          final List<AlertConditionSet> alerts = defaultAlert,
       @HiveField(16, defaultValue: false)
           this.enableAlertVibration = false,
       @HiveField(17, defaultValue: true)
@@ -625,115 +538,183 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(18, defaultValue: defaultKeepaSettings)
           this.keepaSettings = defaultKeepaSettings,
       @HiveField(19, defaultValue: defaultLeftShortcut)
-          this.leftSlideShortcut = defaultLeftShortcut,
+          final List<ShortcutDetail> leftSlideShortcut = defaultLeftShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          this.rightSlideShortcut = defaultRightShortcut,
+          final List<ShortcutDetail> rightSlideShortcut = defaultRightShortcut,
       @HiveField(21, defaultValue: defaultNewConditionTexts)
-          this.newConditionTexts = defaultNewConditionTexts,
+          final List<String> newConditionTexts = defaultNewConditionTexts,
       @HiveField(22, defaultValue: 0)
           this.newConditionTextIndex = 0,
       @HiveField(23, defaultValue: defaultUsedConditionText)
-          this.usedConditionTexts = defaultUsedConditionText,
+          final List<String> usedConditionTexts = defaultUsedConditionText,
       @HiveField(24, defaultValue: 0)
-          this.usedConditionTextIndex = 0});
+          this.usedConditionTextIndex = 0})
+      : _retailers = retailers,
+        _readAloudPatterns = readAloudPatterns,
+        _customButtons = customButtons,
+        _csvOrder = csvOrder,
+        _alerts = alerts,
+        _leftSlideShortcut = leftSlideShortcut,
+        _rightSlideShortcut = rightSlideShortcut,
+        _newConditionTexts = newConditionTexts,
+        _usedConditionTexts = usedConditionTexts;
 
+// ダークモード
+  @override
   @JsonKey()
-  @override // ダークモード
   @HiveField(0)
   final bool isDarkMode;
+// 目標利益率設定
+  @override
   @JsonKey()
-  @override // 目標利益率設定
   @HiveField(1)
   final bool enableTargetProfit;
+// 目標利益率
+  @override
   @JsonKey()
-  @override // 目標利益率
   @HiveField(2)
   final int targetProfitValue;
+// SKU 設定
+  @override
   @JsonKey()
-  @override // SKU 設定
   @HiveField(3)
   final String skuFormat;
+// 仕入れ先設定
+  final List<String> _retailers;
+// 仕入れ先設定
+  @override
   @JsonKey()
-  @override // 仕入れ先設定
   @HiveField(4)
-  final List<String> retailers;
+  List<String> get retailers {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_retailers);
+  }
+
+// 読み上げ設定
+  @override
   @JsonKey()
-  @override // 読み上げ設定
   @HiveField(5)
   final bool enableReadAloud;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(6)
   final int patternIndex;
-  @JsonKey()
+  final List<ReadAloudPattern> _readAloudPatterns;
   @override
+  @JsonKey()
   @HiveField(7)
-  final List<ReadAloudPattern> readAloudPatterns;
-  @JsonKey()
+  List<ReadAloudPattern> get readAloudPatterns {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_readAloudPatterns);
+  }
+
   @override
+  @JsonKey()
   @HiveField(8)
   final double readAloudVolume;
   @override
   @HiveField(9)
   final double? readAloudSpeed;
+// カスタムボタン設定
+  final List<CustomButtonDetail> _customButtons;
+// カスタムボタン設定
+  @override
   @JsonKey()
-  @override // カスタムボタン設定
   @HiveField(10, defaultValue: defaultCustomButtons)
-  final List<CustomButtonDetail> customButtons;
+  List<CustomButtonDetail> get customButtons {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_customButtons);
+  }
+
+// CSV の並び順
+  final List<CsvColumn> _csvOrder;
+// CSV の並び順
+  @override
   @JsonKey()
-  @override // CSV の並び順
   @HiveField(11, defaultValue: defaultCsvOrder)
-  final List<CsvColumn> csvOrder;
+  List<CsvColumn> get csvOrder {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_csvOrder);
+  }
+
+// 最低利益額
+  @override
   @JsonKey()
-  @override // 最低利益額
   @HiveField(12, defaultValue: 0)
   final int minProfit;
+// 在庫の取得設定
+  @override
   @JsonKey()
-  @override // 在庫の取得設定
   @HiveField(13, defaultValue: false)
   final bool getStocks;
+// アラート設定
+  @override
   @JsonKey()
-  @override // アラート設定
   @HiveField(14, defaultValue: true)
   final bool enableAlert;
-  @JsonKey()
+  final List<AlertConditionSet> _alerts;
   @override
+  @JsonKey()
   @HiveField(15, defaultValue: defaultAlert)
-  final List<AlertConditionSet> alerts;
-  @JsonKey()
+  List<AlertConditionSet> get alerts {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_alerts);
+  }
+
   @override
+  @JsonKey()
   @HiveField(16, defaultValue: false)
   final bool enableAlertVibration;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(17, defaultValue: true)
   final bool isMajorCustomer;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(18, defaultValue: defaultKeepaSettings)
   final KeepaSettings keepaSettings;
-  @JsonKey()
+  final List<ShortcutDetail> _leftSlideShortcut;
   @override
+  @JsonKey()
   @HiveField(19, defaultValue: defaultLeftShortcut)
-  final List<ShortcutDetail> leftSlideShortcut;
-  @JsonKey()
+  List<ShortcutDetail> get leftSlideShortcut {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_leftSlideShortcut);
+  }
+
+  final List<ShortcutDetail> _rightSlideShortcut;
   @override
+  @JsonKey()
   @HiveField(20, defaultValue: defaultRightShortcut)
-  final List<ShortcutDetail> rightSlideShortcut;
-  @JsonKey()
+  List<ShortcutDetail> get rightSlideShortcut {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_rightSlideShortcut);
+  }
+
+  final List<String> _newConditionTexts;
   @override
+  @JsonKey()
   @HiveField(21, defaultValue: defaultNewConditionTexts)
-  final List<String> newConditionTexts;
-  @JsonKey()
+  List<String> get newConditionTexts {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_newConditionTexts);
+  }
+
   @override
+  @JsonKey()
   @HiveField(22, defaultValue: 0)
   final int newConditionTextIndex;
-  @JsonKey()
+  final List<String> _usedConditionTexts;
   @override
+  @JsonKey()
   @HiveField(23, defaultValue: defaultUsedConditionText)
-  final List<String> usedConditionTexts;
-  @JsonKey()
+  List<String> get usedConditionTexts {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_usedConditionTexts);
+  }
+
   @override
+  @JsonKey()
   @HiveField(24, defaultValue: 0)
   final int usedConditionTextIndex;
 
@@ -746,7 +727,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _GeneralSettings &&
+            other is _$_GeneralSettings &&
             const DeepCollectionEquality()
                 .equals(other.isDarkMode, isDarkMode) &&
             const DeepCollectionEquality()
@@ -754,25 +735,26 @@ class _$_GeneralSettings implements _GeneralSettings {
             const DeepCollectionEquality()
                 .equals(other.targetProfitValue, targetProfitValue) &&
             const DeepCollectionEquality().equals(other.skuFormat, skuFormat) &&
-            const DeepCollectionEquality().equals(other.retailers, retailers) &&
+            const DeepCollectionEquality()
+                .equals(other._retailers, _retailers) &&
             const DeepCollectionEquality()
                 .equals(other.enableReadAloud, enableReadAloud) &&
             const DeepCollectionEquality()
                 .equals(other.patternIndex, patternIndex) &&
             const DeepCollectionEquality()
-                .equals(other.readAloudPatterns, readAloudPatterns) &&
+                .equals(other._readAloudPatterns, _readAloudPatterns) &&
             const DeepCollectionEquality()
                 .equals(other.readAloudVolume, readAloudVolume) &&
             const DeepCollectionEquality()
                 .equals(other.readAloudSpeed, readAloudSpeed) &&
             const DeepCollectionEquality()
-                .equals(other.customButtons, customButtons) &&
-            const DeepCollectionEquality().equals(other.csvOrder, csvOrder) &&
+                .equals(other._customButtons, _customButtons) &&
+            const DeepCollectionEquality().equals(other._csvOrder, _csvOrder) &&
             const DeepCollectionEquality().equals(other.minProfit, minProfit) &&
             const DeepCollectionEquality().equals(other.getStocks, getStocks) &&
             const DeepCollectionEquality()
                 .equals(other.enableAlert, enableAlert) &&
-            const DeepCollectionEquality().equals(other.alerts, alerts) &&
+            const DeepCollectionEquality().equals(other._alerts, _alerts) &&
             const DeepCollectionEquality()
                 .equals(other.enableAlertVibration, enableAlertVibration) &&
             const DeepCollectionEquality()
@@ -780,15 +762,15 @@ class _$_GeneralSettings implements _GeneralSettings {
             const DeepCollectionEquality()
                 .equals(other.keepaSettings, keepaSettings) &&
             const DeepCollectionEquality()
-                .equals(other.leftSlideShortcut, leftSlideShortcut) &&
+                .equals(other._leftSlideShortcut, _leftSlideShortcut) &&
             const DeepCollectionEquality()
-                .equals(other.rightSlideShortcut, rightSlideShortcut) &&
+                .equals(other._rightSlideShortcut, _rightSlideShortcut) &&
             const DeepCollectionEquality()
-                .equals(other.newConditionTexts, newConditionTexts) &&
+                .equals(other._newConditionTexts, _newConditionTexts) &&
             const DeepCollectionEquality()
                 .equals(other.newConditionTextIndex, newConditionTextIndex) &&
             const DeepCollectionEquality()
-                .equals(other.usedConditionTexts, usedConditionTexts) &&
+                .equals(other._usedConditionTexts, _usedConditionTexts) &&
             const DeepCollectionEquality()
                 .equals(other.usedConditionTextIndex, usedConditionTextIndex));
   }
@@ -800,87 +782,87 @@ class _$_GeneralSettings implements _GeneralSettings {
         const DeepCollectionEquality().hash(enableTargetProfit),
         const DeepCollectionEquality().hash(targetProfitValue),
         const DeepCollectionEquality().hash(skuFormat),
-        const DeepCollectionEquality().hash(retailers),
+        const DeepCollectionEquality().hash(_retailers),
         const DeepCollectionEquality().hash(enableReadAloud),
         const DeepCollectionEquality().hash(patternIndex),
-        const DeepCollectionEquality().hash(readAloudPatterns),
+        const DeepCollectionEquality().hash(_readAloudPatterns),
         const DeepCollectionEquality().hash(readAloudVolume),
         const DeepCollectionEquality().hash(readAloudSpeed),
-        const DeepCollectionEquality().hash(customButtons),
-        const DeepCollectionEquality().hash(csvOrder),
+        const DeepCollectionEquality().hash(_customButtons),
+        const DeepCollectionEquality().hash(_csvOrder),
         const DeepCollectionEquality().hash(minProfit),
         const DeepCollectionEquality().hash(getStocks),
         const DeepCollectionEquality().hash(enableAlert),
-        const DeepCollectionEquality().hash(alerts),
+        const DeepCollectionEquality().hash(_alerts),
         const DeepCollectionEquality().hash(enableAlertVibration),
         const DeepCollectionEquality().hash(isMajorCustomer),
         const DeepCollectionEquality().hash(keepaSettings),
-        const DeepCollectionEquality().hash(leftSlideShortcut),
-        const DeepCollectionEquality().hash(rightSlideShortcut),
-        const DeepCollectionEquality().hash(newConditionTexts),
+        const DeepCollectionEquality().hash(_leftSlideShortcut),
+        const DeepCollectionEquality().hash(_rightSlideShortcut),
+        const DeepCollectionEquality().hash(_newConditionTexts),
         const DeepCollectionEquality().hash(newConditionTextIndex),
-        const DeepCollectionEquality().hash(usedConditionTexts),
+        const DeepCollectionEquality().hash(_usedConditionTexts),
         const DeepCollectionEquality().hash(usedConditionTextIndex)
       ]);
 
   @JsonKey(ignore: true)
   @override
-  _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
-      __$GeneralSettingsCopyWithImpl<_GeneralSettings>(this, _$identity);
+  _$$_GeneralSettingsCopyWith<_$_GeneralSettings> get copyWith =>
+      __$$_GeneralSettingsCopyWithImpl<_$_GeneralSettings>(this, _$identity);
 }
 
 abstract class _GeneralSettings implements GeneralSettings {
   const factory _GeneralSettings(
       {@HiveField(0)
-          bool isDarkMode,
+          final bool isDarkMode,
       @HiveField(1)
-          bool enableTargetProfit,
+          final bool enableTargetProfit,
       @HiveField(2)
-          int targetProfitValue,
+          final int targetProfitValue,
       @HiveField(3)
-          String skuFormat,
+          final String skuFormat,
       @HiveField(4)
-          List<String> retailers,
+          final List<String> retailers,
       @HiveField(5)
-          bool enableReadAloud,
+          final bool enableReadAloud,
       @HiveField(6)
-          int patternIndex,
+          final int patternIndex,
       @HiveField(7)
-          List<ReadAloudPattern> readAloudPatterns,
+          final List<ReadAloudPattern> readAloudPatterns,
       @HiveField(8)
-          double readAloudVolume,
+          final double readAloudVolume,
       @HiveField(9)
-          double? readAloudSpeed,
+          final double? readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
-          List<CustomButtonDetail> customButtons,
+          final List<CustomButtonDetail> customButtons,
       @HiveField(11, defaultValue: defaultCsvOrder)
-          List<CsvColumn> csvOrder,
+          final List<CsvColumn> csvOrder,
       @HiveField(12, defaultValue: 0)
-          int minProfit,
+          final int minProfit,
       @HiveField(13, defaultValue: false)
-          bool getStocks,
+          final bool getStocks,
       @HiveField(14, defaultValue: true)
-          bool enableAlert,
+          final bool enableAlert,
       @HiveField(15, defaultValue: defaultAlert)
-          List<AlertConditionSet> alerts,
+          final List<AlertConditionSet> alerts,
       @HiveField(16, defaultValue: false)
-          bool enableAlertVibration,
+          final bool enableAlertVibration,
       @HiveField(17, defaultValue: true)
-          bool isMajorCustomer,
+          final bool isMajorCustomer,
       @HiveField(18, defaultValue: defaultKeepaSettings)
-          KeepaSettings keepaSettings,
+          final KeepaSettings keepaSettings,
       @HiveField(19, defaultValue: defaultLeftShortcut)
-          List<ShortcutDetail> leftSlideShortcut,
+          final List<ShortcutDetail> leftSlideShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          List<ShortcutDetail> rightSlideShortcut,
+          final List<ShortcutDetail> rightSlideShortcut,
       @HiveField(21, defaultValue: defaultNewConditionTexts)
-          List<String> newConditionTexts,
+          final List<String> newConditionTexts,
       @HiveField(22, defaultValue: 0)
-          int newConditionTextIndex,
+          final int newConditionTextIndex,
       @HiveField(23, defaultValue: defaultUsedConditionText)
-          List<String> usedConditionTexts,
+          final List<String> usedConditionTexts,
       @HiveField(24, defaultValue: 0)
-          int usedConditionTextIndex}) = _$_GeneralSettings;
+          final int usedConditionTextIndex}) = _$_GeneralSettings;
 
   @override // ダークモード
   @HiveField(0)
@@ -959,26 +941,9 @@ abstract class _GeneralSettings implements GeneralSettings {
   int get usedConditionTextIndex;
   @override
   @JsonKey(ignore: true)
-  _$GeneralSettingsCopyWith<_GeneralSettings> get copyWith =>
+  _$$_GeneralSettingsCopyWith<_$_GeneralSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-class _$ReadAloudPatternTearOff {
-  const _$ReadAloudPatternTearOff();
-
-  _ReadAloudPattern call(
-      {@HiveField(0) required String title,
-      @HiveField(1) required String pattern}) {
-    return _ReadAloudPattern(
-      title: title,
-      pattern: pattern,
-    );
-  }
-}
-
-/// @nodoc
-const $ReadAloudPattern = _$ReadAloudPatternTearOff();
 
 /// @nodoc
 mixin _$ReadAloudPattern {
@@ -1028,32 +993,32 @@ class _$ReadAloudPatternCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ReadAloudPatternCopyWith<$Res>
+abstract class _$$_ReadAloudPatternCopyWith<$Res>
     implements $ReadAloudPatternCopyWith<$Res> {
-  factory _$ReadAloudPatternCopyWith(
-          _ReadAloudPattern value, $Res Function(_ReadAloudPattern) then) =
-      __$ReadAloudPatternCopyWithImpl<$Res>;
+  factory _$$_ReadAloudPatternCopyWith(
+          _$_ReadAloudPattern value, $Res Function(_$_ReadAloudPattern) then) =
+      __$$_ReadAloudPatternCopyWithImpl<$Res>;
   @override
   $Res call({@HiveField(0) String title, @HiveField(1) String pattern});
 }
 
 /// @nodoc
-class __$ReadAloudPatternCopyWithImpl<$Res>
+class __$$_ReadAloudPatternCopyWithImpl<$Res>
     extends _$ReadAloudPatternCopyWithImpl<$Res>
-    implements _$ReadAloudPatternCopyWith<$Res> {
-  __$ReadAloudPatternCopyWithImpl(
-      _ReadAloudPattern _value, $Res Function(_ReadAloudPattern) _then)
-      : super(_value, (v) => _then(v as _ReadAloudPattern));
+    implements _$$_ReadAloudPatternCopyWith<$Res> {
+  __$$_ReadAloudPatternCopyWithImpl(
+      _$_ReadAloudPattern _value, $Res Function(_$_ReadAloudPattern) _then)
+      : super(_value, (v) => _then(v as _$_ReadAloudPattern));
 
   @override
-  _ReadAloudPattern get _value => super._value as _ReadAloudPattern;
+  _$_ReadAloudPattern get _value => super._value as _$_ReadAloudPattern;
 
   @override
   $Res call({
     Object? title = freezed,
     Object? pattern = freezed,
   }) {
-    return _then(_ReadAloudPattern(
+    return _then(_$_ReadAloudPattern(
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -1089,7 +1054,7 @@ class _$_ReadAloudPattern implements _ReadAloudPattern {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ReadAloudPattern &&
+            other is _$_ReadAloudPattern &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.pattern, pattern));
   }
@@ -1102,14 +1067,14 @@ class _$_ReadAloudPattern implements _ReadAloudPattern {
 
   @JsonKey(ignore: true)
   @override
-  _$ReadAloudPatternCopyWith<_ReadAloudPattern> get copyWith =>
-      __$ReadAloudPatternCopyWithImpl<_ReadAloudPattern>(this, _$identity);
+  _$$_ReadAloudPatternCopyWith<_$_ReadAloudPattern> get copyWith =>
+      __$$_ReadAloudPatternCopyWithImpl<_$_ReadAloudPattern>(this, _$identity);
 }
 
 abstract class _ReadAloudPattern implements ReadAloudPattern {
   const factory _ReadAloudPattern(
-      {@HiveField(0) required String title,
-      @HiveField(1) required String pattern}) = _$_ReadAloudPattern;
+      {@HiveField(0) required final String title,
+      @HiveField(1) required final String pattern}) = _$_ReadAloudPattern;
 
   @override
   @HiveField(0)
@@ -1119,30 +1084,9 @@ abstract class _ReadAloudPattern implements ReadAloudPattern {
   String get pattern;
   @override
   @JsonKey(ignore: true)
-  _$ReadAloudPatternCopyWith<_ReadAloudPattern> get copyWith =>
+  _$$_ReadAloudPatternCopyWith<_$_ReadAloudPattern> get copyWith =>
       throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-class _$CustomButtonDetailTearOff {
-  const _$CustomButtonDetailTearOff();
-
-  _CustomButtonDetail call(
-      {@HiveField(0) required bool enable,
-      @HiveField(1) required String title,
-      @HiveField(2) required String pattern,
-      @HiveField(3, defaultValue: "") required String id}) {
-    return _CustomButtonDetail(
-      enable: enable,
-      title: title,
-      pattern: pattern,
-      id: id,
-    );
-  }
-}
-
-/// @nodoc
-const $CustomButtonDetail = _$CustomButtonDetailTearOff();
 
 /// @nodoc
 mixin _$CustomButtonDetail {
@@ -1210,11 +1154,11 @@ class _$CustomButtonDetailCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$CustomButtonDetailCopyWith<$Res>
+abstract class _$$_CustomButtonDetailCopyWith<$Res>
     implements $CustomButtonDetailCopyWith<$Res> {
-  factory _$CustomButtonDetailCopyWith(
-          _CustomButtonDetail value, $Res Function(_CustomButtonDetail) then) =
-      __$CustomButtonDetailCopyWithImpl<$Res>;
+  factory _$$_CustomButtonDetailCopyWith(_$_CustomButtonDetail value,
+          $Res Function(_$_CustomButtonDetail) then) =
+      __$$_CustomButtonDetailCopyWithImpl<$Res>;
   @override
   $Res call(
       {@HiveField(0) bool enable,
@@ -1224,15 +1168,15 @@ abstract class _$CustomButtonDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$CustomButtonDetailCopyWithImpl<$Res>
+class __$$_CustomButtonDetailCopyWithImpl<$Res>
     extends _$CustomButtonDetailCopyWithImpl<$Res>
-    implements _$CustomButtonDetailCopyWith<$Res> {
-  __$CustomButtonDetailCopyWithImpl(
-      _CustomButtonDetail _value, $Res Function(_CustomButtonDetail) _then)
-      : super(_value, (v) => _then(v as _CustomButtonDetail));
+    implements _$$_CustomButtonDetailCopyWith<$Res> {
+  __$$_CustomButtonDetailCopyWithImpl(
+      _$_CustomButtonDetail _value, $Res Function(_$_CustomButtonDetail) _then)
+      : super(_value, (v) => _then(v as _$_CustomButtonDetail));
 
   @override
-  _CustomButtonDetail get _value => super._value as _CustomButtonDetail;
+  _$_CustomButtonDetail get _value => super._value as _$_CustomButtonDetail;
 
   @override
   $Res call({
@@ -1241,7 +1185,7 @@ class __$CustomButtonDetailCopyWithImpl<$Res>
     Object? pattern = freezed,
     Object? id = freezed,
   }) {
-    return _then(_CustomButtonDetail(
+    return _then(_$_CustomButtonDetail(
       enable: enable == freezed
           ? _value.enable
           : enable // ignore: cast_nullable_to_non_nullable
@@ -1294,7 +1238,7 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _CustomButtonDetail &&
+            other is _$_CustomButtonDetail &&
             const DeepCollectionEquality().equals(other.enable, enable) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.pattern, pattern) &&
@@ -1311,16 +1255,17 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
 
   @JsonKey(ignore: true)
   @override
-  _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith =>
-      __$CustomButtonDetailCopyWithImpl<_CustomButtonDetail>(this, _$identity);
+  _$$_CustomButtonDetailCopyWith<_$_CustomButtonDetail> get copyWith =>
+      __$$_CustomButtonDetailCopyWithImpl<_$_CustomButtonDetail>(
+          this, _$identity);
 }
 
 abstract class _CustomButtonDetail implements CustomButtonDetail {
   const factory _CustomButtonDetail(
-          {@HiveField(0) required bool enable,
-          @HiveField(1) required String title,
-          @HiveField(2) required String pattern,
-          @HiveField(3, defaultValue: "") required String id}) =
+          {@HiveField(0) required final bool enable,
+          @HiveField(1) required final String title,
+          @HiveField(2) required final String pattern,
+          @HiveField(3, defaultValue: "") required final String id}) =
       _$_CustomButtonDetail;
 
   @override
@@ -1337,41 +1282,13 @@ abstract class _CustomButtonDetail implements CustomButtonDetail {
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$CustomButtonDetailCopyWith<_CustomButtonDetail> get copyWith =>
+  _$$_CustomButtonDetailCopyWith<_$_CustomButtonDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 AlertConditionSet _$AlertConditionSetFromJson(Map<String, dynamic> json) {
   return _AlertConditionSet.fromJson(json);
 }
-
-/// @nodoc
-class _$AlertConditionSetTearOff {
-  const _$AlertConditionSetTearOff();
-
-  _AlertConditionSet call(
-      {@HiveField(0)
-          required String id,
-      @HiveField(1)
-      @JsonKey(name: "t")
-          required String title,
-      @HiveField(2)
-      @JsonKey(name: "c")
-          List<AlertCondition> conditions = const <AlertCondition>[]}) {
-    return _AlertConditionSet(
-      id: id,
-      title: title,
-      conditions: conditions,
-    );
-  }
-
-  AlertConditionSet fromJson(Map<String, Object?> json) {
-    return AlertConditionSet.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $AlertConditionSet = _$AlertConditionSetTearOff();
 
 /// @nodoc
 mixin _$AlertConditionSet {
@@ -1434,11 +1351,11 @@ class _$AlertConditionSetCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$AlertConditionSetCopyWith<$Res>
+abstract class _$$_AlertConditionSetCopyWith<$Res>
     implements $AlertConditionSetCopyWith<$Res> {
-  factory _$AlertConditionSetCopyWith(
-          _AlertConditionSet value, $Res Function(_AlertConditionSet) then) =
-      __$AlertConditionSetCopyWithImpl<$Res>;
+  factory _$$_AlertConditionSetCopyWith(_$_AlertConditionSet value,
+          $Res Function(_$_AlertConditionSet) then) =
+      __$$_AlertConditionSetCopyWithImpl<$Res>;
   @override
   $Res call(
       {@HiveField(0) String id,
@@ -1447,15 +1364,15 @@ abstract class _$AlertConditionSetCopyWith<$Res>
 }
 
 /// @nodoc
-class __$AlertConditionSetCopyWithImpl<$Res>
+class __$$_AlertConditionSetCopyWithImpl<$Res>
     extends _$AlertConditionSetCopyWithImpl<$Res>
-    implements _$AlertConditionSetCopyWith<$Res> {
-  __$AlertConditionSetCopyWithImpl(
-      _AlertConditionSet _value, $Res Function(_AlertConditionSet) _then)
-      : super(_value, (v) => _then(v as _AlertConditionSet));
+    implements _$$_AlertConditionSetCopyWith<$Res> {
+  __$$_AlertConditionSetCopyWithImpl(
+      _$_AlertConditionSet _value, $Res Function(_$_AlertConditionSet) _then)
+      : super(_value, (v) => _then(v as _$_AlertConditionSet));
 
   @override
-  _AlertConditionSet get _value => super._value as _AlertConditionSet;
+  _$_AlertConditionSet get _value => super._value as _$_AlertConditionSet;
 
   @override
   $Res call({
@@ -1463,7 +1380,7 @@ class __$AlertConditionSetCopyWithImpl<$Res>
     Object? title = freezed,
     Object? conditions = freezed,
   }) {
-    return _then(_AlertConditionSet(
+    return _then(_$_AlertConditionSet(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1473,7 +1390,7 @@ class __$AlertConditionSetCopyWithImpl<$Res>
           : title // ignore: cast_nullable_to_non_nullable
               as String,
       conditions: conditions == freezed
-          ? _value.conditions
+          ? _value._conditions
           : conditions // ignore: cast_nullable_to_non_nullable
               as List<AlertCondition>,
     ));
@@ -1492,7 +1409,8 @@ class _$_AlertConditionSet implements _AlertConditionSet {
           required this.title,
       @HiveField(2)
       @JsonKey(name: "c")
-          this.conditions = const <AlertCondition>[]});
+          final List<AlertCondition> conditions = const <AlertCondition>[]})
+      : _conditions = conditions;
 
   factory _$_AlertConditionSet.fromJson(Map<String, dynamic> json) =>
       _$$_AlertConditionSetFromJson(json);
@@ -1504,10 +1422,14 @@ class _$_AlertConditionSet implements _AlertConditionSet {
   @HiveField(1)
   @JsonKey(name: "t")
   final String title;
+  final List<AlertCondition> _conditions;
   @override
   @HiveField(2)
   @JsonKey(name: "c")
-  final List<AlertCondition> conditions;
+  List<AlertCondition> get conditions {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_conditions);
+  }
 
   @override
   String toString() {
@@ -1518,37 +1440,45 @@ class _$_AlertConditionSet implements _AlertConditionSet {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AlertConditionSet &&
+            other is _$_AlertConditionSet &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
-                .equals(other.conditions, conditions));
+                .equals(other._conditions, _conditions));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(conditions));
+      const DeepCollectionEquality().hash(_conditions));
 
   @JsonKey(ignore: true)
   @override
-  _$AlertConditionSetCopyWith<_AlertConditionSet> get copyWith =>
-      __$AlertConditionSetCopyWithImpl<_AlertConditionSet>(this, _$identity);
+  _$$_AlertConditionSetCopyWith<_$_AlertConditionSet> get copyWith =>
+      __$$_AlertConditionSetCopyWithImpl<_$_AlertConditionSet>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AlertConditionSetToJson(this);
+    return _$$_AlertConditionSetToJson(
+      this,
+    );
   }
 }
 
 abstract class _AlertConditionSet implements AlertConditionSet {
   const factory _AlertConditionSet(
-          {@HiveField(0) required String id,
-          @HiveField(1) @JsonKey(name: "t") required String title,
-          @HiveField(2) @JsonKey(name: "c") List<AlertCondition> conditions}) =
-      _$_AlertConditionSet;
+      {@HiveField(0)
+          required final String id,
+      @HiveField(1)
+      @JsonKey(name: "t")
+          required final String title,
+      @HiveField(2)
+      @JsonKey(name: "c")
+          final List<AlertCondition> conditions}) = _$_AlertConditionSet;
 
   factory _AlertConditionSet.fromJson(Map<String, dynamic> json) =
       _$_AlertConditionSet.fromJson;
@@ -1566,34 +1496,13 @@ abstract class _AlertConditionSet implements AlertConditionSet {
   List<AlertCondition> get conditions;
   @override
   @JsonKey(ignore: true)
-  _$AlertConditionSetCopyWith<_AlertConditionSet> get copyWith =>
+  _$$_AlertConditionSetCopyWith<_$_AlertConditionSet> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 ShortcutDetail _$ShortcutDetailFromJson(Map<String, dynamic> json) {
   return _ShortcutDetail.fromJson(json);
 }
-
-/// @nodoc
-class _$ShortcutDetailTearOff {
-  const _$ShortcutDetailTearOff();
-
-  _ShortcutDetail call(
-      {@HiveField(0) required ShortcutType type,
-      @HiveField(1) String param = ""}) {
-    return _ShortcutDetail(
-      type: type,
-      param: param,
-    );
-  }
-
-  ShortcutDetail fromJson(Map<String, Object?> json) {
-    return ShortcutDetail.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ShortcutDetail = _$ShortcutDetailTearOff();
 
 /// @nodoc
 mixin _$ShortcutDetail {
@@ -1644,32 +1553,32 @@ class _$ShortcutDetailCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ShortcutDetailCopyWith<$Res>
+abstract class _$$_ShortcutDetailCopyWith<$Res>
     implements $ShortcutDetailCopyWith<$Res> {
-  factory _$ShortcutDetailCopyWith(
-          _ShortcutDetail value, $Res Function(_ShortcutDetail) then) =
-      __$ShortcutDetailCopyWithImpl<$Res>;
+  factory _$$_ShortcutDetailCopyWith(
+          _$_ShortcutDetail value, $Res Function(_$_ShortcutDetail) then) =
+      __$$_ShortcutDetailCopyWithImpl<$Res>;
   @override
   $Res call({@HiveField(0) ShortcutType type, @HiveField(1) String param});
 }
 
 /// @nodoc
-class __$ShortcutDetailCopyWithImpl<$Res>
+class __$$_ShortcutDetailCopyWithImpl<$Res>
     extends _$ShortcutDetailCopyWithImpl<$Res>
-    implements _$ShortcutDetailCopyWith<$Res> {
-  __$ShortcutDetailCopyWithImpl(
-      _ShortcutDetail _value, $Res Function(_ShortcutDetail) _then)
-      : super(_value, (v) => _then(v as _ShortcutDetail));
+    implements _$$_ShortcutDetailCopyWith<$Res> {
+  __$$_ShortcutDetailCopyWithImpl(
+      _$_ShortcutDetail _value, $Res Function(_$_ShortcutDetail) _then)
+      : super(_value, (v) => _then(v as _$_ShortcutDetail));
 
   @override
-  _ShortcutDetail get _value => super._value as _ShortcutDetail;
+  _$_ShortcutDetail get _value => super._value as _$_ShortcutDetail;
 
   @override
   $Res call({
     Object? type = freezed,
     Object? param = freezed,
   }) {
-    return _then(_ShortcutDetail(
+    return _then(_$_ShortcutDetail(
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -1695,8 +1604,8 @@ class _$_ShortcutDetail implements _ShortcutDetail {
   @override
   @HiveField(0)
   final ShortcutType type;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(1)
   final String param;
 
@@ -1709,11 +1618,12 @@ class _$_ShortcutDetail implements _ShortcutDetail {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ShortcutDetail &&
+            other is _$_ShortcutDetail &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.param, param));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1722,19 +1632,21 @@ class _$_ShortcutDetail implements _ShortcutDetail {
 
   @JsonKey(ignore: true)
   @override
-  _$ShortcutDetailCopyWith<_ShortcutDetail> get copyWith =>
-      __$ShortcutDetailCopyWithImpl<_ShortcutDetail>(this, _$identity);
+  _$$_ShortcutDetailCopyWith<_$_ShortcutDetail> get copyWith =>
+      __$$_ShortcutDetailCopyWithImpl<_$_ShortcutDetail>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ShortcutDetailToJson(this);
+    return _$$_ShortcutDetailToJson(
+      this,
+    );
   }
 }
 
 abstract class _ShortcutDetail implements ShortcutDetail {
   const factory _ShortcutDetail(
-      {@HiveField(0) required ShortcutType type,
-      @HiveField(1) String param}) = _$_ShortcutDetail;
+      {@HiveField(0) required final ShortcutType type,
+      @HiveField(1) final String param}) = _$_ShortcutDetail;
 
   factory _ShortcutDetail.fromJson(Map<String, dynamic> json) =
       _$_ShortcutDetail.fromJson;
@@ -1747,6 +1659,6 @@ abstract class _ShortcutDetail implements ShortcutDetail {
   String get param;
   @override
   @JsonKey(ignore: true)
-  _$ShortcutDetailCopyWith<_ShortcutDetail> get copyWith =>
+  _$$_ShortcutDetailCopyWith<_$_ShortcutDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
