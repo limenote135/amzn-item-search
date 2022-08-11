@@ -140,7 +140,7 @@ packages:
       name: camera_avfoundation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.8+2"
+    version: "0.9.8+3"
   camera_platform_interface:
     dependency: transitive
     description:
@@ -176,6 +176,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  cli_util:
+    dependency: transitive
+    description:
+      name: cli_util
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.5"
   clock:
     dependency: transitive
     description:
@@ -280,7 +287,7 @@ packages:
       name: device_info_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.2"
+    version: "4.1.0"
   device_info_plus_linux:
     dependency: transitive
     description:
@@ -301,7 +308,7 @@ packages:
       name: device_info_plus_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.0"
+    version: "2.6.0"
   device_info_plus_web:
     dependency: transitive
     description:
@@ -315,7 +322,7 @@ packages:
       name: device_info_plus_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "3.0.3"
   dio:
     dependency: "direct main"
     description:
@@ -579,7 +586,7 @@ packages:
       name: flutter_launcher_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.3"
+    version: "0.10.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -776,7 +783,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.4"
+    version: "0.13.5"
   http_client_helper:
     dependency: transitive
     description:
@@ -937,7 +944,7 @@ packages:
       name: package_info_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.3"
+    version: "1.4.3+1"
   package_info_plus_linux:
     dependency: transitive
     description:
@@ -993,7 +1000,7 @@ packages:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.17"
+    version: "2.0.18"
   path_provider_ios:
     dependency: transitive
     description:
@@ -1028,7 +1035,7 @@ packages:
       name: path_provider_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.2"
   pedantic_mono:
     dependency: "direct dev"
     description:
@@ -1168,7 +1175,7 @@ packages:
       name: share_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.10"
+    version: "4.0.10+1"
   share_plus_linux:
     dependency: transitive
     description:
@@ -1439,7 +1446,7 @@ packages:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.12"
+    version: "2.0.13"
   url_launcher_windows:
     dependency: transitive
     description:
@@ -1502,7 +1509,7 @@ packages:
       name: webview_flutter_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.9.2"
+    version: "2.9.3"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
@@ -1516,7 +1523,7 @@ packages:
       name: webview_flutter_wkwebview
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.9.2"
+    version: "2.9.3"
   win32:
     dependency: transitive
     description:
