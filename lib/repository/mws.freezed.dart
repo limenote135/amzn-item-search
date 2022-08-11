@@ -12,32 +12,12 @@ part of 'mws.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 GetProductByIdResponse _$GetProductByIdResponseFromJson(
     Map<String, dynamic> json) {
   return _GetProductByIdResponse.fromJson(json);
 }
-
-/// @nodoc
-class _$GetProductByIdResponseTearOff {
-  const _$GetProductByIdResponseTearOff();
-
-  _GetProductByIdResponse call(
-      {required String jan, required List<AsinData> items}) {
-    return _GetProductByIdResponse(
-      jan: jan,
-      items: items,
-    );
-  }
-
-  GetProductByIdResponse fromJson(Map<String, Object?> json) {
-    return GetProductByIdResponse.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $GetProductByIdResponse = _$GetProductByIdResponseTearOff();
 
 /// @nodoc
 mixin _$GetProductByIdResponse {
@@ -86,38 +66,39 @@ class _$GetProductByIdResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$GetProductByIdResponseCopyWith<$Res>
+abstract class _$$_GetProductByIdResponseCopyWith<$Res>
     implements $GetProductByIdResponseCopyWith<$Res> {
-  factory _$GetProductByIdResponseCopyWith(_GetProductByIdResponse value,
-          $Res Function(_GetProductByIdResponse) then) =
-      __$GetProductByIdResponseCopyWithImpl<$Res>;
+  factory _$$_GetProductByIdResponseCopyWith(_$_GetProductByIdResponse value,
+          $Res Function(_$_GetProductByIdResponse) then) =
+      __$$_GetProductByIdResponseCopyWithImpl<$Res>;
   @override
   $Res call({String jan, List<AsinData> items});
 }
 
 /// @nodoc
-class __$GetProductByIdResponseCopyWithImpl<$Res>
+class __$$_GetProductByIdResponseCopyWithImpl<$Res>
     extends _$GetProductByIdResponseCopyWithImpl<$Res>
-    implements _$GetProductByIdResponseCopyWith<$Res> {
-  __$GetProductByIdResponseCopyWithImpl(_GetProductByIdResponse _value,
-      $Res Function(_GetProductByIdResponse) _then)
-      : super(_value, (v) => _then(v as _GetProductByIdResponse));
+    implements _$$_GetProductByIdResponseCopyWith<$Res> {
+  __$$_GetProductByIdResponseCopyWithImpl(_$_GetProductByIdResponse _value,
+      $Res Function(_$_GetProductByIdResponse) _then)
+      : super(_value, (v) => _then(v as _$_GetProductByIdResponse));
 
   @override
-  _GetProductByIdResponse get _value => super._value as _GetProductByIdResponse;
+  _$_GetProductByIdResponse get _value =>
+      super._value as _$_GetProductByIdResponse;
 
   @override
   $Res call({
     Object? jan = freezed,
     Object? items = freezed,
   }) {
-    return _then(_GetProductByIdResponse(
+    return _then(_$_GetProductByIdResponse(
       jan: jan == freezed
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
               as String,
       items: items == freezed
-          ? _value.items
+          ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
     ));
@@ -128,15 +109,21 @@ class __$GetProductByIdResponseCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_GetProductByIdResponse implements _GetProductByIdResponse {
-  const _$_GetProductByIdResponse({required this.jan, required this.items});
+  const _$_GetProductByIdResponse(
+      {required this.jan, required final List<AsinData> items})
+      : _items = items;
 
   factory _$_GetProductByIdResponse.fromJson(Map<String, dynamic> json) =>
       _$$_GetProductByIdResponseFromJson(json);
 
   @override
   final String jan;
+  final List<AsinData> _items;
   @override
-  final List<AsinData> items;
+  List<AsinData> get items {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
 
   @override
   String toString() {
@@ -147,33 +134,36 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _GetProductByIdResponse &&
+            other is _$_GetProductByIdResponse &&
             const DeepCollectionEquality().equals(other.jan, jan) &&
-            const DeepCollectionEquality().equals(other.items, items));
+            const DeepCollectionEquality().equals(other._items, _items));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(jan),
-      const DeepCollectionEquality().hash(items));
+      const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
-  _$GetProductByIdResponseCopyWith<_GetProductByIdResponse> get copyWith =>
-      __$GetProductByIdResponseCopyWithImpl<_GetProductByIdResponse>(
+  _$$_GetProductByIdResponseCopyWith<_$_GetProductByIdResponse> get copyWith =>
+      __$$_GetProductByIdResponseCopyWithImpl<_$_GetProductByIdResponse>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GetProductByIdResponseToJson(this);
+    return _$$_GetProductByIdResponseToJson(
+      this,
+    );
   }
 }
 
 abstract class _GetProductByIdResponse implements GetProductByIdResponse {
   const factory _GetProductByIdResponse(
-      {required String jan,
-      required List<AsinData> items}) = _$_GetProductByIdResponse;
+      {required final String jan,
+      required final List<AsinData> items}) = _$_GetProductByIdResponse;
 
   factory _GetProductByIdResponse.fromJson(Map<String, dynamic> json) =
       _$_GetProductByIdResponse.fromJson;
@@ -184,7 +174,7 @@ abstract class _GetProductByIdResponse implements GetProductByIdResponse {
   List<AsinData> get items;
   @override
   @JsonKey(ignore: true)
-  _$GetProductByIdResponseCopyWith<_GetProductByIdResponse> get copyWith =>
+  _$$_GetProductByIdResponseCopyWith<_$_GetProductByIdResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -192,25 +182,6 @@ GetProductPricesResponse _$GetProductPricesResponseFromJson(
     Map<String, dynamic> json) {
   return _GetProductPricesResponse.fromJson(json);
 }
-
-/// @nodoc
-class _$GetProductPricesResponseTearOff {
-  const _$GetProductPricesResponseTearOff();
-
-  _GetProductPricesResponse call({ItemPrices? prices, bool? sellByAmazon}) {
-    return _GetProductPricesResponse(
-      prices: prices,
-      sellByAmazon: sellByAmazon,
-    );
-  }
-
-  GetProductPricesResponse fromJson(Map<String, Object?> json) {
-    return GetProductPricesResponse.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $GetProductPricesResponse = _$GetProductPricesResponseTearOff();
 
 /// @nodoc
 mixin _$GetProductPricesResponse {
@@ -272,11 +243,12 @@ class _$GetProductPricesResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$GetProductPricesResponseCopyWith<$Res>
+abstract class _$$_GetProductPricesResponseCopyWith<$Res>
     implements $GetProductPricesResponseCopyWith<$Res> {
-  factory _$GetProductPricesResponseCopyWith(_GetProductPricesResponse value,
-          $Res Function(_GetProductPricesResponse) then) =
-      __$GetProductPricesResponseCopyWithImpl<$Res>;
+  factory _$$_GetProductPricesResponseCopyWith(
+          _$_GetProductPricesResponse value,
+          $Res Function(_$_GetProductPricesResponse) then) =
+      __$$_GetProductPricesResponseCopyWithImpl<$Res>;
   @override
   $Res call({ItemPrices? prices, bool? sellByAmazon});
 
@@ -285,23 +257,23 @@ abstract class _$GetProductPricesResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$GetProductPricesResponseCopyWithImpl<$Res>
+class __$$_GetProductPricesResponseCopyWithImpl<$Res>
     extends _$GetProductPricesResponseCopyWithImpl<$Res>
-    implements _$GetProductPricesResponseCopyWith<$Res> {
-  __$GetProductPricesResponseCopyWithImpl(_GetProductPricesResponse _value,
-      $Res Function(_GetProductPricesResponse) _then)
-      : super(_value, (v) => _then(v as _GetProductPricesResponse));
+    implements _$$_GetProductPricesResponseCopyWith<$Res> {
+  __$$_GetProductPricesResponseCopyWithImpl(_$_GetProductPricesResponse _value,
+      $Res Function(_$_GetProductPricesResponse) _then)
+      : super(_value, (v) => _then(v as _$_GetProductPricesResponse));
 
   @override
-  _GetProductPricesResponse get _value =>
-      super._value as _GetProductPricesResponse;
+  _$_GetProductPricesResponse get _value =>
+      super._value as _$_GetProductPricesResponse;
 
   @override
   $Res call({
     Object? prices = freezed,
     Object? sellByAmazon = freezed,
   }) {
-    return _then(_GetProductPricesResponse(
+    return _then(_$_GetProductPricesResponse(
       prices: prices == freezed
           ? _value.prices
           : prices // ignore: cast_nullable_to_non_nullable
@@ -337,12 +309,13 @@ class _$_GetProductPricesResponse implements _GetProductPricesResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _GetProductPricesResponse &&
+            other is _$_GetProductPricesResponse &&
             const DeepCollectionEquality().equals(other.prices, prices) &&
             const DeepCollectionEquality()
                 .equals(other.sellByAmazon, sellByAmazon));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -351,19 +324,22 @@ class _$_GetProductPricesResponse implements _GetProductPricesResponse {
 
   @JsonKey(ignore: true)
   @override
-  _$GetProductPricesResponseCopyWith<_GetProductPricesResponse> get copyWith =>
-      __$GetProductPricesResponseCopyWithImpl<_GetProductPricesResponse>(
-          this, _$identity);
+  _$$_GetProductPricesResponseCopyWith<_$_GetProductPricesResponse>
+      get copyWith => __$$_GetProductPricesResponseCopyWithImpl<
+          _$_GetProductPricesResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GetProductPricesResponseToJson(this);
+    return _$$_GetProductPricesResponseToJson(
+      this,
+    );
   }
 }
 
 abstract class _GetProductPricesResponse implements GetProductPricesResponse {
   const factory _GetProductPricesResponse(
-      {ItemPrices? prices, bool? sellByAmazon}) = _$_GetProductPricesResponse;
+      {final ItemPrices? prices,
+      final bool? sellByAmazon}) = _$_GetProductPricesResponse;
 
   factory _GetProductPricesResponse.fromJson(Map<String, dynamic> json) =
       _$_GetProductPricesResponse.fromJson;
@@ -374,25 +350,9 @@ abstract class _GetProductPricesResponse implements GetProductPricesResponse {
   bool? get sellByAmazon;
   @override
   @JsonKey(ignore: true)
-  _$GetProductPricesResponseCopyWith<_GetProductPricesResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_GetProductPricesResponseCopyWith<_$_GetProductPricesResponse>
+      get copyWith => throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-class _$ListMatchingProductRequestTearOff {
-  const _$ListMatchingProductRequestTearOff();
-
-  _ListMatchingProductRequest call(
-      {required String query, required String category}) {
-    return _ListMatchingProductRequest(
-      query: query,
-      category: category,
-    );
-  }
-}
-
-/// @nodoc
-const $ListMatchingProductRequest = _$ListMatchingProductRequestTearOff();
 
 /// @nodoc
 mixin _$ListMatchingProductRequest {
@@ -440,34 +400,35 @@ class _$ListMatchingProductRequestCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ListMatchingProductRequestCopyWith<$Res>
+abstract class _$$_ListMatchingProductRequestCopyWith<$Res>
     implements $ListMatchingProductRequestCopyWith<$Res> {
-  factory _$ListMatchingProductRequestCopyWith(
-          _ListMatchingProductRequest value,
-          $Res Function(_ListMatchingProductRequest) then) =
-      __$ListMatchingProductRequestCopyWithImpl<$Res>;
+  factory _$$_ListMatchingProductRequestCopyWith(
+          _$_ListMatchingProductRequest value,
+          $Res Function(_$_ListMatchingProductRequest) then) =
+      __$$_ListMatchingProductRequestCopyWithImpl<$Res>;
   @override
   $Res call({String query, String category});
 }
 
 /// @nodoc
-class __$ListMatchingProductRequestCopyWithImpl<$Res>
+class __$$_ListMatchingProductRequestCopyWithImpl<$Res>
     extends _$ListMatchingProductRequestCopyWithImpl<$Res>
-    implements _$ListMatchingProductRequestCopyWith<$Res> {
-  __$ListMatchingProductRequestCopyWithImpl(_ListMatchingProductRequest _value,
-      $Res Function(_ListMatchingProductRequest) _then)
-      : super(_value, (v) => _then(v as _ListMatchingProductRequest));
+    implements _$$_ListMatchingProductRequestCopyWith<$Res> {
+  __$$_ListMatchingProductRequestCopyWithImpl(
+      _$_ListMatchingProductRequest _value,
+      $Res Function(_$_ListMatchingProductRequest) _then)
+      : super(_value, (v) => _then(v as _$_ListMatchingProductRequest));
 
   @override
-  _ListMatchingProductRequest get _value =>
-      super._value as _ListMatchingProductRequest;
+  _$_ListMatchingProductRequest get _value =>
+      super._value as _$_ListMatchingProductRequest;
 
   @override
   $Res call({
     Object? query = freezed,
     Object? category = freezed,
   }) {
-    return _then(_ListMatchingProductRequest(
+    return _then(_$_ListMatchingProductRequest(
       query: query == freezed
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -500,7 +461,7 @@ class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ListMatchingProductRequest &&
+            other is _$_ListMatchingProductRequest &&
             const DeepCollectionEquality().equals(other.query, query) &&
             const DeepCollectionEquality().equals(other.category, category));
   }
@@ -513,16 +474,16 @@ class _$_ListMatchingProductRequest implements _ListMatchingProductRequest {
 
   @JsonKey(ignore: true)
   @override
-  _$ListMatchingProductRequestCopyWith<_ListMatchingProductRequest>
-      get copyWith => __$ListMatchingProductRequestCopyWithImpl<
-          _ListMatchingProductRequest>(this, _$identity);
+  _$$_ListMatchingProductRequestCopyWith<_$_ListMatchingProductRequest>
+      get copyWith => __$$_ListMatchingProductRequestCopyWithImpl<
+          _$_ListMatchingProductRequest>(this, _$identity);
 }
 
 abstract class _ListMatchingProductRequest
     implements ListMatchingProductRequest {
   const factory _ListMatchingProductRequest(
-      {required String query,
-      required String category}) = _$_ListMatchingProductRequest;
+      {required final String query,
+      required final String category}) = _$_ListMatchingProductRequest;
 
   @override
   String get query;
@@ -530,7 +491,7 @@ abstract class _ListMatchingProductRequest
   String get category;
   @override
   @JsonKey(ignore: true)
-  _$ListMatchingProductRequestCopyWith<_ListMatchingProductRequest>
+  _$$_ListMatchingProductRequestCopyWith<_$_ListMatchingProductRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -538,24 +499,6 @@ ListMatchingProductResponse _$ListMatchingProductResponseFromJson(
     Map<String, dynamic> json) {
   return _ListMatchingProductResponse.fromJson(json);
 }
-
-/// @nodoc
-class _$ListMatchingProductResponseTearOff {
-  const _$ListMatchingProductResponseTearOff();
-
-  _ListMatchingProductResponse call({required List<AsinData> items}) {
-    return _ListMatchingProductResponse(
-      items: items,
-    );
-  }
-
-  ListMatchingProductResponse fromJson(Map<String, Object?> json) {
-    return ListMatchingProductResponse.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ListMatchingProductResponse = _$ListMatchingProductResponseTearOff();
 
 /// @nodoc
 mixin _$ListMatchingProductResponse {
@@ -599,36 +542,36 @@ class _$ListMatchingProductResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ListMatchingProductResponseCopyWith<$Res>
+abstract class _$$_ListMatchingProductResponseCopyWith<$Res>
     implements $ListMatchingProductResponseCopyWith<$Res> {
-  factory _$ListMatchingProductResponseCopyWith(
-          _ListMatchingProductResponse value,
-          $Res Function(_ListMatchingProductResponse) then) =
-      __$ListMatchingProductResponseCopyWithImpl<$Res>;
+  factory _$$_ListMatchingProductResponseCopyWith(
+          _$_ListMatchingProductResponse value,
+          $Res Function(_$_ListMatchingProductResponse) then) =
+      __$$_ListMatchingProductResponseCopyWithImpl<$Res>;
   @override
   $Res call({List<AsinData> items});
 }
 
 /// @nodoc
-class __$ListMatchingProductResponseCopyWithImpl<$Res>
+class __$$_ListMatchingProductResponseCopyWithImpl<$Res>
     extends _$ListMatchingProductResponseCopyWithImpl<$Res>
-    implements _$ListMatchingProductResponseCopyWith<$Res> {
-  __$ListMatchingProductResponseCopyWithImpl(
-      _ListMatchingProductResponse _value,
-      $Res Function(_ListMatchingProductResponse) _then)
-      : super(_value, (v) => _then(v as _ListMatchingProductResponse));
+    implements _$$_ListMatchingProductResponseCopyWith<$Res> {
+  __$$_ListMatchingProductResponseCopyWithImpl(
+      _$_ListMatchingProductResponse _value,
+      $Res Function(_$_ListMatchingProductResponse) _then)
+      : super(_value, (v) => _then(v as _$_ListMatchingProductResponse));
 
   @override
-  _ListMatchingProductResponse get _value =>
-      super._value as _ListMatchingProductResponse;
+  _$_ListMatchingProductResponse get _value =>
+      super._value as _$_ListMatchingProductResponse;
 
   @override
   $Res call({
     Object? items = freezed,
   }) {
-    return _then(_ListMatchingProductResponse(
+    return _then(_$_ListMatchingProductResponse(
       items: items == freezed
-          ? _value.items
+          ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
     ));
@@ -639,13 +582,18 @@ class __$ListMatchingProductResponseCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_ListMatchingProductResponse implements _ListMatchingProductResponse {
-  const _$_ListMatchingProductResponse({required this.items});
+  const _$_ListMatchingProductResponse({required final List<AsinData> items})
+      : _items = items;
 
   factory _$_ListMatchingProductResponse.fromJson(Map<String, dynamic> json) =>
       _$$_ListMatchingProductResponseFromJson(json);
 
+  final List<AsinData> _items;
   @override
-  final List<AsinData> items;
+  List<AsinData> get items {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
 
   @override
   String toString() {
@@ -656,30 +604,33 @@ class _$_ListMatchingProductResponse implements _ListMatchingProductResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ListMatchingProductResponse &&
-            const DeepCollectionEquality().equals(other.items, items));
+            other is _$_ListMatchingProductResponse &&
+            const DeepCollectionEquality().equals(other._items, _items));
   }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(items));
 
   @JsonKey(ignore: true)
   @override
-  _$ListMatchingProductResponseCopyWith<_ListMatchingProductResponse>
-      get copyWith => __$ListMatchingProductResponseCopyWithImpl<
-          _ListMatchingProductResponse>(this, _$identity);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_ListMatchingProductResponseCopyWith<_$_ListMatchingProductResponse>
+      get copyWith => __$$_ListMatchingProductResponseCopyWithImpl<
+          _$_ListMatchingProductResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ListMatchingProductResponseToJson(this);
+    return _$$_ListMatchingProductResponseToJson(
+      this,
+    );
   }
 }
 
 abstract class _ListMatchingProductResponse
     implements ListMatchingProductResponse {
-  const factory _ListMatchingProductResponse({required List<AsinData> items}) =
-      _$_ListMatchingProductResponse;
+  const factory _ListMatchingProductResponse(
+      {required final List<AsinData> items}) = _$_ListMatchingProductResponse;
 
   factory _ListMatchingProductResponse.fromJson(Map<String, dynamic> json) =
       _$_ListMatchingProductResponse.fromJson;
@@ -688,31 +639,13 @@ abstract class _ListMatchingProductResponse
   List<AsinData> get items;
   @override
   @JsonKey(ignore: true)
-  _$ListMatchingProductResponseCopyWith<_ListMatchingProductResponse>
+  _$$_ListMatchingProductResponseCopyWith<_$_ListMatchingProductResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 QueryItemsResponse _$QueryItemsResponseFromJson(Map<String, dynamic> json) {
   return _QueryItemsResponse.fromJson(json);
 }
-
-/// @nodoc
-class _$QueryItemsResponseTearOff {
-  const _$QueryItemsResponseTearOff();
-
-  _QueryItemsResponse call({required List<String> asins}) {
-    return _QueryItemsResponse(
-      asins: asins,
-    );
-  }
-
-  QueryItemsResponse fromJson(Map<String, Object?> json) {
-    return QueryItemsResponse.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $QueryItemsResponse = _$QueryItemsResponseTearOff();
 
 /// @nodoc
 mixin _$QueryItemsResponse {
@@ -755,33 +688,33 @@ class _$QueryItemsResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$QueryItemsResponseCopyWith<$Res>
+abstract class _$$_QueryItemsResponseCopyWith<$Res>
     implements $QueryItemsResponseCopyWith<$Res> {
-  factory _$QueryItemsResponseCopyWith(
-          _QueryItemsResponse value, $Res Function(_QueryItemsResponse) then) =
-      __$QueryItemsResponseCopyWithImpl<$Res>;
+  factory _$$_QueryItemsResponseCopyWith(_$_QueryItemsResponse value,
+          $Res Function(_$_QueryItemsResponse) then) =
+      __$$_QueryItemsResponseCopyWithImpl<$Res>;
   @override
   $Res call({List<String> asins});
 }
 
 /// @nodoc
-class __$QueryItemsResponseCopyWithImpl<$Res>
+class __$$_QueryItemsResponseCopyWithImpl<$Res>
     extends _$QueryItemsResponseCopyWithImpl<$Res>
-    implements _$QueryItemsResponseCopyWith<$Res> {
-  __$QueryItemsResponseCopyWithImpl(
-      _QueryItemsResponse _value, $Res Function(_QueryItemsResponse) _then)
-      : super(_value, (v) => _then(v as _QueryItemsResponse));
+    implements _$$_QueryItemsResponseCopyWith<$Res> {
+  __$$_QueryItemsResponseCopyWithImpl(
+      _$_QueryItemsResponse _value, $Res Function(_$_QueryItemsResponse) _then)
+      : super(_value, (v) => _then(v as _$_QueryItemsResponse));
 
   @override
-  _QueryItemsResponse get _value => super._value as _QueryItemsResponse;
+  _$_QueryItemsResponse get _value => super._value as _$_QueryItemsResponse;
 
   @override
   $Res call({
     Object? asins = freezed,
   }) {
-    return _then(_QueryItemsResponse(
+    return _then(_$_QueryItemsResponse(
       asins: asins == freezed
-          ? _value.asins
+          ? _value._asins
           : asins // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -792,13 +725,18 @@ class __$QueryItemsResponseCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_QueryItemsResponse implements _QueryItemsResponse {
-  const _$_QueryItemsResponse({required this.asins});
+  const _$_QueryItemsResponse({required final List<String> asins})
+      : _asins = asins;
 
   factory _$_QueryItemsResponse.fromJson(Map<String, dynamic> json) =>
       _$$_QueryItemsResponseFromJson(json);
 
+  final List<String> _asins;
   @override
-  final List<String> asins;
+  List<String> get asins {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_asins);
+  }
 
   @override
   String toString() {
@@ -809,27 +747,31 @@ class _$_QueryItemsResponse implements _QueryItemsResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _QueryItemsResponse &&
-            const DeepCollectionEquality().equals(other.asins, asins));
+            other is _$_QueryItemsResponse &&
+            const DeepCollectionEquality().equals(other._asins, _asins));
   }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(asins));
 
   @JsonKey(ignore: true)
   @override
-  _$QueryItemsResponseCopyWith<_QueryItemsResponse> get copyWith =>
-      __$QueryItemsResponseCopyWithImpl<_QueryItemsResponse>(this, _$identity);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_asins));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_QueryItemsResponseCopyWith<_$_QueryItemsResponse> get copyWith =>
+      __$$_QueryItemsResponseCopyWithImpl<_$_QueryItemsResponse>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_QueryItemsResponseToJson(this);
+    return _$$_QueryItemsResponseToJson(
+      this,
+    );
   }
 }
 
 abstract class _QueryItemsResponse implements QueryItemsResponse {
-  const factory _QueryItemsResponse({required List<String> asins}) =
+  const factory _QueryItemsResponse({required final List<String> asins}) =
       _$_QueryItemsResponse;
 
   factory _QueryItemsResponse.fromJson(Map<String, dynamic> json) =
@@ -839,31 +781,13 @@ abstract class _QueryItemsResponse implements QueryItemsResponse {
   List<String> get asins;
   @override
   @JsonKey(ignore: true)
-  _$QueryItemsResponseCopyWith<_QueryItemsResponse> get copyWith =>
+  _$$_QueryItemsResponseCopyWith<_$_QueryItemsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 GetAsinDataResponse _$GetAsinDataResponseFromJson(Map<String, dynamic> json) {
   return _GetAsinDataResponse.fromJson(json);
 }
-
-/// @nodoc
-class _$GetAsinDataResponseTearOff {
-  const _$GetAsinDataResponseTearOff();
-
-  _GetAsinDataResponse call({required AsinData data}) {
-    return _GetAsinDataResponse(
-      data: data,
-    );
-  }
-
-  GetAsinDataResponse fromJson(Map<String, Object?> json) {
-    return GetAsinDataResponse.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $GetAsinDataResponse = _$GetAsinDataResponseTearOff();
 
 /// @nodoc
 mixin _$GetAsinDataResponse {
@@ -915,11 +839,11 @@ class _$GetAsinDataResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$GetAsinDataResponseCopyWith<$Res>
+abstract class _$$_GetAsinDataResponseCopyWith<$Res>
     implements $GetAsinDataResponseCopyWith<$Res> {
-  factory _$GetAsinDataResponseCopyWith(_GetAsinDataResponse value,
-          $Res Function(_GetAsinDataResponse) then) =
-      __$GetAsinDataResponseCopyWithImpl<$Res>;
+  factory _$$_GetAsinDataResponseCopyWith(_$_GetAsinDataResponse value,
+          $Res Function(_$_GetAsinDataResponse) then) =
+      __$$_GetAsinDataResponseCopyWithImpl<$Res>;
   @override
   $Res call({AsinData data});
 
@@ -928,21 +852,21 @@ abstract class _$GetAsinDataResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$GetAsinDataResponseCopyWithImpl<$Res>
+class __$$_GetAsinDataResponseCopyWithImpl<$Res>
     extends _$GetAsinDataResponseCopyWithImpl<$Res>
-    implements _$GetAsinDataResponseCopyWith<$Res> {
-  __$GetAsinDataResponseCopyWithImpl(
-      _GetAsinDataResponse _value, $Res Function(_GetAsinDataResponse) _then)
-      : super(_value, (v) => _then(v as _GetAsinDataResponse));
+    implements _$$_GetAsinDataResponseCopyWith<$Res> {
+  __$$_GetAsinDataResponseCopyWithImpl(_$_GetAsinDataResponse _value,
+      $Res Function(_$_GetAsinDataResponse) _then)
+      : super(_value, (v) => _then(v as _$_GetAsinDataResponse));
 
   @override
-  _GetAsinDataResponse get _value => super._value as _GetAsinDataResponse;
+  _$_GetAsinDataResponse get _value => super._value as _$_GetAsinDataResponse;
 
   @override
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_GetAsinDataResponse(
+    return _then(_$_GetAsinDataResponse(
       data: data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -972,28 +896,31 @@ class _$_GetAsinDataResponse implements _GetAsinDataResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _GetAsinDataResponse &&
+            other is _$_GetAsinDataResponse &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
   @JsonKey(ignore: true)
   @override
-  _$GetAsinDataResponseCopyWith<_GetAsinDataResponse> get copyWith =>
-      __$GetAsinDataResponseCopyWithImpl<_GetAsinDataResponse>(
+  _$$_GetAsinDataResponseCopyWith<_$_GetAsinDataResponse> get copyWith =>
+      __$$_GetAsinDataResponseCopyWithImpl<_$_GetAsinDataResponse>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GetAsinDataResponseToJson(this);
+    return _$$_GetAsinDataResponseToJson(
+      this,
+    );
   }
 }
 
 abstract class _GetAsinDataResponse implements GetAsinDataResponse {
-  const factory _GetAsinDataResponse({required AsinData data}) =
+  const factory _GetAsinDataResponse({required final AsinData data}) =
       _$_GetAsinDataResponse;
 
   factory _GetAsinDataResponse.fromJson(Map<String, dynamic> json) =
@@ -1003,7 +930,7 @@ abstract class _GetAsinDataResponse implements GetAsinDataResponse {
   AsinData get data;
   @override
   @JsonKey(ignore: true)
-  _$GetAsinDataResponseCopyWith<_GetAsinDataResponse> get copyWith =>
+  _$$_GetAsinDataResponseCopyWith<_$_GetAsinDataResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1011,24 +938,6 @@ BatchGetAsinDataResponse _$BatchGetAsinDataResponseFromJson(
     Map<String, dynamic> json) {
   return _BatchGetAsinDataResponse.fromJson(json);
 }
-
-/// @nodoc
-class _$BatchGetAsinDataResponseTearOff {
-  const _$BatchGetAsinDataResponseTearOff();
-
-  _BatchGetAsinDataResponse call({required List<AsinData> data}) {
-    return _BatchGetAsinDataResponse(
-      data: data,
-    );
-  }
-
-  BatchGetAsinDataResponse fromJson(Map<String, Object?> json) {
-    return BatchGetAsinDataResponse.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $BatchGetAsinDataResponse = _$BatchGetAsinDataResponseTearOff();
 
 /// @nodoc
 mixin _$BatchGetAsinDataResponse {
@@ -1071,34 +980,35 @@ class _$BatchGetAsinDataResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$BatchGetAsinDataResponseCopyWith<$Res>
+abstract class _$$_BatchGetAsinDataResponseCopyWith<$Res>
     implements $BatchGetAsinDataResponseCopyWith<$Res> {
-  factory _$BatchGetAsinDataResponseCopyWith(_BatchGetAsinDataResponse value,
-          $Res Function(_BatchGetAsinDataResponse) then) =
-      __$BatchGetAsinDataResponseCopyWithImpl<$Res>;
+  factory _$$_BatchGetAsinDataResponseCopyWith(
+          _$_BatchGetAsinDataResponse value,
+          $Res Function(_$_BatchGetAsinDataResponse) then) =
+      __$$_BatchGetAsinDataResponseCopyWithImpl<$Res>;
   @override
   $Res call({List<AsinData> data});
 }
 
 /// @nodoc
-class __$BatchGetAsinDataResponseCopyWithImpl<$Res>
+class __$$_BatchGetAsinDataResponseCopyWithImpl<$Res>
     extends _$BatchGetAsinDataResponseCopyWithImpl<$Res>
-    implements _$BatchGetAsinDataResponseCopyWith<$Res> {
-  __$BatchGetAsinDataResponseCopyWithImpl(_BatchGetAsinDataResponse _value,
-      $Res Function(_BatchGetAsinDataResponse) _then)
-      : super(_value, (v) => _then(v as _BatchGetAsinDataResponse));
+    implements _$$_BatchGetAsinDataResponseCopyWith<$Res> {
+  __$$_BatchGetAsinDataResponseCopyWithImpl(_$_BatchGetAsinDataResponse _value,
+      $Res Function(_$_BatchGetAsinDataResponse) _then)
+      : super(_value, (v) => _then(v as _$_BatchGetAsinDataResponse));
 
   @override
-  _BatchGetAsinDataResponse get _value =>
-      super._value as _BatchGetAsinDataResponse;
+  _$_BatchGetAsinDataResponse get _value =>
+      super._value as _$_BatchGetAsinDataResponse;
 
   @override
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_BatchGetAsinDataResponse(
+    return _then(_$_BatchGetAsinDataResponse(
       data: data == freezed
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
     ));
@@ -1109,13 +1019,18 @@ class __$BatchGetAsinDataResponseCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_BatchGetAsinDataResponse implements _BatchGetAsinDataResponse {
-  const _$_BatchGetAsinDataResponse({required this.data});
+  const _$_BatchGetAsinDataResponse({required final List<AsinData> data})
+      : _data = data;
 
   factory _$_BatchGetAsinDataResponse.fromJson(Map<String, dynamic> json) =>
       _$$_BatchGetAsinDataResponseFromJson(json);
 
+  final List<AsinData> _data;
   @override
-  final List<AsinData> data;
+  List<AsinData> get data {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -1126,29 +1041,32 @@ class _$_BatchGetAsinDataResponse implements _BatchGetAsinDataResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _BatchGetAsinDataResponse &&
-            const DeepCollectionEquality().equals(other.data, data));
+            other is _$_BatchGetAsinDataResponse &&
+            const DeepCollectionEquality().equals(other._data, _data));
   }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
   @JsonKey(ignore: true)
   @override
-  _$BatchGetAsinDataResponseCopyWith<_BatchGetAsinDataResponse> get copyWith =>
-      __$BatchGetAsinDataResponseCopyWithImpl<_BatchGetAsinDataResponse>(
-          this, _$identity);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_BatchGetAsinDataResponseCopyWith<_$_BatchGetAsinDataResponse>
+      get copyWith => __$$_BatchGetAsinDataResponseCopyWithImpl<
+          _$_BatchGetAsinDataResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BatchGetAsinDataResponseToJson(this);
+    return _$$_BatchGetAsinDataResponseToJson(
+      this,
+    );
   }
 }
 
 abstract class _BatchGetAsinDataResponse implements BatchGetAsinDataResponse {
-  const factory _BatchGetAsinDataResponse({required List<AsinData> data}) =
-      _$_BatchGetAsinDataResponse;
+  const factory _BatchGetAsinDataResponse(
+      {required final List<AsinData> data}) = _$_BatchGetAsinDataResponse;
 
   factory _BatchGetAsinDataResponse.fromJson(Map<String, dynamic> json) =
       _$_BatchGetAsinDataResponse.fromJson;
@@ -1157,6 +1075,6 @@ abstract class _BatchGetAsinDataResponse implements BatchGetAsinDataResponse {
   List<AsinData> get data;
   @override
   @JsonKey(ignore: true)
-  _$BatchGetAsinDataResponseCopyWith<_BatchGetAsinDataResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_BatchGetAsinDataResponseCopyWith<_$_BatchGetAsinDataResponse>
+      get copyWith => throw _privateConstructorUsedError;
 }

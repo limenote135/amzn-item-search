@@ -29,12 +29,12 @@ class ItemPricesAdapter extends TypeAdapter<_$_ItemPrices> {
   void write(BinaryWriter writer, _$_ItemPrices obj) {
     writer
       ..writeByte(3)
+      ..writeByte(2)
+      ..write(obj.feeInfo)
       ..writeByte(0)
       ..write(obj.newPrices)
       ..writeByte(1)
-      ..write(obj.usedPrices)
-      ..writeByte(2)
-      ..write(obj.feeInfo);
+      ..write(obj.usedPrices);
   }
 
   @override

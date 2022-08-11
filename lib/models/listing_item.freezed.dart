@@ -12,44 +12,11 @@ part of 'listing_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 ListingItem _$ListingItemFromJson(Map<String, dynamic> json) {
   return _ListingItem.fromJson(json);
 }
-
-/// @nodoc
-class _$ListingItemTearOff {
-  const _$ListingItemTearOff();
-
-  _ListingItem call(
-      {required String sku,
-      required String asin,
-      required int sellPrice,
-      required int amount,
-      required ItemCondition condition,
-      required ItemSubCondition subCondition,
-      required bool useFba,
-      required String conditionText}) {
-    return _ListingItem(
-      sku: sku,
-      asin: asin,
-      sellPrice: sellPrice,
-      amount: amount,
-      condition: condition,
-      subCondition: subCondition,
-      useFba: useFba,
-      conditionText: conditionText,
-    );
-  }
-
-  ListingItem fromJson(Map<String, Object?> json) {
-    return ListingItem.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ListingItem = _$ListingItemTearOff();
 
 /// @nodoc
 mixin _$ListingItem {
@@ -141,11 +108,11 @@ class _$ListingItemCopyWithImpl<$Res> implements $ListingItemCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ListingItemCopyWith<$Res>
+abstract class _$$_ListingItemCopyWith<$Res>
     implements $ListingItemCopyWith<$Res> {
-  factory _$ListingItemCopyWith(
-          _ListingItem value, $Res Function(_ListingItem) then) =
-      __$ListingItemCopyWithImpl<$Res>;
+  factory _$$_ListingItemCopyWith(
+          _$_ListingItem value, $Res Function(_$_ListingItem) then) =
+      __$$_ListingItemCopyWithImpl<$Res>;
   @override
   $Res call(
       {String sku,
@@ -159,14 +126,14 @@ abstract class _$ListingItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ListingItemCopyWithImpl<$Res> extends _$ListingItemCopyWithImpl<$Res>
-    implements _$ListingItemCopyWith<$Res> {
-  __$ListingItemCopyWithImpl(
-      _ListingItem _value, $Res Function(_ListingItem) _then)
-      : super(_value, (v) => _then(v as _ListingItem));
+class __$$_ListingItemCopyWithImpl<$Res> extends _$ListingItemCopyWithImpl<$Res>
+    implements _$$_ListingItemCopyWith<$Res> {
+  __$$_ListingItemCopyWithImpl(
+      _$_ListingItem _value, $Res Function(_$_ListingItem) _then)
+      : super(_value, (v) => _then(v as _$_ListingItem));
 
   @override
-  _ListingItem get _value => super._value as _ListingItem;
+  _$_ListingItem get _value => super._value as _$_ListingItem;
 
   @override
   $Res call({
@@ -179,7 +146,7 @@ class __$ListingItemCopyWithImpl<$Res> extends _$ListingItemCopyWithImpl<$Res>
     Object? useFba = freezed,
     Object? conditionText = freezed,
   }) {
-    return _then(_ListingItem(
+    return _then(_$_ListingItem(
       sku: sku == freezed
           ? _value.sku
           : sku // ignore: cast_nullable_to_non_nullable
@@ -259,7 +226,7 @@ class _$_ListingItem implements _ListingItem {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ListingItem &&
+            other is _$_ListingItem &&
             const DeepCollectionEquality().equals(other.sku, sku) &&
             const DeepCollectionEquality().equals(other.asin, asin) &&
             const DeepCollectionEquality().equals(other.sellPrice, sellPrice) &&
@@ -272,6 +239,7 @@ class _$_ListingItem implements _ListingItem {
                 .equals(other.conditionText, conditionText));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -286,25 +254,27 @@ class _$_ListingItem implements _ListingItem {
 
   @JsonKey(ignore: true)
   @override
-  _$ListingItemCopyWith<_ListingItem> get copyWith =>
-      __$ListingItemCopyWithImpl<_ListingItem>(this, _$identity);
+  _$$_ListingItemCopyWith<_$_ListingItem> get copyWith =>
+      __$$_ListingItemCopyWithImpl<_$_ListingItem>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ListingItemToJson(this);
+    return _$$_ListingItemToJson(
+      this,
+    );
   }
 }
 
 abstract class _ListingItem implements ListingItem {
   const factory _ListingItem(
-      {required String sku,
-      required String asin,
-      required int sellPrice,
-      required int amount,
-      required ItemCondition condition,
-      required ItemSubCondition subCondition,
-      required bool useFba,
-      required String conditionText}) = _$_ListingItem;
+      {required final String sku,
+      required final String asin,
+      required final int sellPrice,
+      required final int amount,
+      required final ItemCondition condition,
+      required final ItemSubCondition subCondition,
+      required final bool useFba,
+      required final String conditionText}) = _$_ListingItem;
 
   factory _ListingItem.fromJson(Map<String, dynamic> json) =
       _$_ListingItem.fromJson;
@@ -327,6 +297,6 @@ abstract class _ListingItem implements ListingItem {
   String get conditionText;
   @override
   @JsonKey(ignore: true)
-  _$ListingItemCopyWith<_ListingItem> get copyWith =>
+  _$$_ListingItemCopyWith<_$_ListingItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
