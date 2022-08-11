@@ -208,12 +208,12 @@ class _$ItemPricesTearOff {
   _ItemPrices call(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
-          required List<PriceDetail> newPrices,
+          List<PriceDetail> newPrices = const <PriceDetail>[],
       @HiveField(1, defaultValue: <PriceDetail>[])
       @JsonKey(name: "used_offers")
-          required List<PriceDetail> usedPrices,
+          List<PriceDetail> usedPrices = const <PriceDetail>[],
       @HiveField(2)
-          required FeeInfo feeInfo}) {
+          FeeInfo feeInfo = const FeeInfo()}) {
     return _ItemPrices(
       newPrices: newPrices,
       usedPrices: usedPrices,
@@ -364,12 +364,12 @@ class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
   const _$_ItemPrices(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
-          required this.newPrices,
+          this.newPrices = const <PriceDetail>[],
       @HiveField(1, defaultValue: <PriceDetail>[])
       @JsonKey(name: "used_offers")
-          required this.usedPrices,
+          this.usedPrices = const <PriceDetail>[],
       @HiveField(2)
-          required this.feeInfo});
+          this.feeInfo = const FeeInfo()});
 
   factory _$_ItemPrices.fromJson(Map<String, dynamic> json) =>
       _$$_ItemPricesFromJson(json);
@@ -382,6 +382,7 @@ class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
   @HiveField(1, defaultValue: <PriceDetail>[])
   @JsonKey(name: "used_offers")
   final List<PriceDetail> usedPrices;
+  @JsonKey()
   @override
   @HiveField(2)
   final FeeInfo feeInfo;
@@ -434,12 +435,12 @@ abstract class _ItemPrices implements ItemPrices {
   const factory _ItemPrices(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
-          required List<PriceDetail> newPrices,
+          List<PriceDetail> newPrices,
       @HiveField(1, defaultValue: <PriceDetail>[])
       @JsonKey(name: "used_offers")
-          required List<PriceDetail> usedPrices,
+          List<PriceDetail> usedPrices,
       @HiveField(2)
-          required FeeInfo feeInfo}) = _$_ItemPrices;
+          FeeInfo feeInfo}) = _$_ItemPrices;
 
   factory _ItemPrices.fromJson(Map<String, dynamic> json) =
       _$_ItemPrices.fromJson;
