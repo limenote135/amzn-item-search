@@ -23,14 +23,9 @@ class _$FeeInfoTearOff {
   const _$FeeInfoTearOff();
 
   _FeeInfo call(
-      {@HiveField(0)
-      @JsonKey(name: "fee_rate")
-          required double referralFeeRate,
-      @HiveField(1)
-      @JsonKey(name: "closing_fee")
-          required int variableClosingFee,
-      @HiveField(2)
-          required int fbaFee}) {
+      {@HiveField(0) @JsonKey(name: "fee_rate") double referralFeeRate = 0,
+      @HiveField(1) @JsonKey(name: "closing_fee") int variableClosingFee = 0,
+      @HiveField(2) int fbaFee = -1}) {
     return _FeeInfo(
       referralFeeRate: referralFeeRate,
       variableClosingFee: variableClosingFee,
@@ -152,14 +147,9 @@ class __$FeeInfoCopyWithImpl<$Res> extends _$FeeInfoCopyWithImpl<$Res>
 @HiveType(typeId: feeInfoTypeId)
 class _$_FeeInfo implements _FeeInfo {
   const _$_FeeInfo(
-      {@HiveField(0)
-      @JsonKey(name: "fee_rate")
-          required this.referralFeeRate,
-      @HiveField(1)
-      @JsonKey(name: "closing_fee")
-          required this.variableClosingFee,
-      @HiveField(2)
-          required this.fbaFee});
+      {@HiveField(0) @JsonKey(name: "fee_rate") this.referralFeeRate = 0,
+      @HiveField(1) @JsonKey(name: "closing_fee") this.variableClosingFee = 0,
+      @HiveField(2) this.fbaFee = -1});
 
   factory _$_FeeInfo.fromJson(Map<String, dynamic> json) =>
       _$$_FeeInfoFromJson(json);
@@ -172,6 +162,7 @@ class _$_FeeInfo implements _FeeInfo {
   @HiveField(1)
   @JsonKey(name: "closing_fee")
   final int variableClosingFee;
+  @JsonKey()
   @override
   @HiveField(2)
   final int fbaFee;
@@ -213,14 +204,9 @@ class _$_FeeInfo implements _FeeInfo {
 
 abstract class _FeeInfo implements FeeInfo {
   const factory _FeeInfo(
-      {@HiveField(0)
-      @JsonKey(name: "fee_rate")
-          required double referralFeeRate,
-      @HiveField(1)
-      @JsonKey(name: "closing_fee")
-          required int variableClosingFee,
-      @HiveField(2)
-          required int fbaFee}) = _$_FeeInfo;
+      {@HiveField(0) @JsonKey(name: "fee_rate") double referralFeeRate,
+      @HiveField(1) @JsonKey(name: "closing_fee") int variableClosingFee,
+      @HiveField(2) int fbaFee}) = _$_FeeInfo;
 
   factory _FeeInfo.fromJson(Map<String, dynamic> json) = _$_FeeInfo.fromJson;
 
