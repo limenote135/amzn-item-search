@@ -12,36 +12,7 @@ part of 'offer_listings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$OfferListingsParamsTearOff {
-  const _$OfferListingsParamsTearOff();
-
-  _OfferListingsParams call(
-      {required String asin,
-      bool prime = false,
-      bool newItem = false,
-      bool usedLikeNew = false,
-      bool usedVeryGood = false,
-      bool usedGood = false,
-      bool usedAcceptable = false,
-      int page = 0}) {
-    return _OfferListingsParams(
-      asin: asin,
-      prime: prime,
-      newItem: newItem,
-      usedLikeNew: usedLikeNew,
-      usedVeryGood: usedVeryGood,
-      usedGood: usedGood,
-      usedAcceptable: usedAcceptable,
-      page: page,
-    );
-  }
-}
-
-/// @nodoc
-const $OfferListingsParams = _$OfferListingsParamsTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$OfferListingsParams {
@@ -133,11 +104,11 @@ class _$OfferListingsParamsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$OfferListingsParamsCopyWith<$Res>
+abstract class _$$_OfferListingsParamsCopyWith<$Res>
     implements $OfferListingsParamsCopyWith<$Res> {
-  factory _$OfferListingsParamsCopyWith(_OfferListingsParams value,
-          $Res Function(_OfferListingsParams) then) =
-      __$OfferListingsParamsCopyWithImpl<$Res>;
+  factory _$$_OfferListingsParamsCopyWith(_$_OfferListingsParams value,
+          $Res Function(_$_OfferListingsParams) then) =
+      __$$_OfferListingsParamsCopyWithImpl<$Res>;
   @override
   $Res call(
       {String asin,
@@ -151,15 +122,15 @@ abstract class _$OfferListingsParamsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$OfferListingsParamsCopyWithImpl<$Res>
+class __$$_OfferListingsParamsCopyWithImpl<$Res>
     extends _$OfferListingsParamsCopyWithImpl<$Res>
-    implements _$OfferListingsParamsCopyWith<$Res> {
-  __$OfferListingsParamsCopyWithImpl(
-      _OfferListingsParams _value, $Res Function(_OfferListingsParams) _then)
-      : super(_value, (v) => _then(v as _OfferListingsParams));
+    implements _$$_OfferListingsParamsCopyWith<$Res> {
+  __$$_OfferListingsParamsCopyWithImpl(_$_OfferListingsParams _value,
+      $Res Function(_$_OfferListingsParams) _then)
+      : super(_value, (v) => _then(v as _$_OfferListingsParams));
 
   @override
-  _OfferListingsParams get _value => super._value as _OfferListingsParams;
+  _$_OfferListingsParams get _value => super._value as _$_OfferListingsParams;
 
   @override
   $Res call({
@@ -172,7 +143,7 @@ class __$OfferListingsParamsCopyWithImpl<$Res>
     Object? usedAcceptable = freezed,
     Object? page = freezed,
   }) {
-    return _then(_OfferListingsParams(
+    return _then(_$_OfferListingsParams(
       asin: asin == freezed
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
@@ -224,26 +195,26 @@ class _$_OfferListingsParams implements _OfferListingsParams {
 
   @override
   final String asin;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool prime;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool newItem;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool usedLikeNew;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool usedVeryGood;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool usedGood;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool usedAcceptable;
-  @JsonKey()
   @override
+  @JsonKey()
   final int page;
 
   @override
@@ -255,7 +226,7 @@ class _$_OfferListingsParams implements _OfferListingsParams {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _OfferListingsParams &&
+            other is _$_OfferListingsParams &&
             const DeepCollectionEquality().equals(other.asin, asin) &&
             const DeepCollectionEquality().equals(other.prime, prime) &&
             const DeepCollectionEquality().equals(other.newItem, newItem) &&
@@ -283,21 +254,21 @@ class _$_OfferListingsParams implements _OfferListingsParams {
 
   @JsonKey(ignore: true)
   @override
-  _$OfferListingsParamsCopyWith<_OfferListingsParams> get copyWith =>
-      __$OfferListingsParamsCopyWithImpl<_OfferListingsParams>(
+  _$$_OfferListingsParamsCopyWith<_$_OfferListingsParams> get copyWith =>
+      __$$_OfferListingsParamsCopyWithImpl<_$_OfferListingsParams>(
           this, _$identity);
 }
 
 abstract class _OfferListingsParams implements OfferListingsParams {
   const factory _OfferListingsParams(
-      {required String asin,
-      bool prime,
-      bool newItem,
-      bool usedLikeNew,
-      bool usedVeryGood,
-      bool usedGood,
-      bool usedAcceptable,
-      int page}) = _$_OfferListingsParams;
+      {required final String asin,
+      final bool prime,
+      final bool newItem,
+      final bool usedLikeNew,
+      final bool usedVeryGood,
+      final bool usedGood,
+      final bool usedAcceptable,
+      final int page}) = _$_OfferListingsParams;
 
   @override
   String get asin;
@@ -317,25 +288,9 @@ abstract class _OfferListingsParams implements OfferListingsParams {
   int get page;
   @override
   @JsonKey(ignore: true)
-  _$OfferListingsParamsCopyWith<_OfferListingsParams> get copyWith =>
+  _$$_OfferListingsParamsCopyWith<_$_OfferListingsParams> get copyWith =>
       throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-class _$OfferAtIndexParamTearOff {
-  const _$OfferAtIndexParamTearOff();
-
-  _OfferAtIndexParam call(
-      {required OfferListingsParams params, required int index}) {
-    return _OfferAtIndexParam(
-      params: params,
-      index: index,
-    );
-  }
-}
-
-/// @nodoc
-const $OfferAtIndexParam = _$OfferAtIndexParamTearOff();
 
 /// @nodoc
 mixin _$OfferAtIndexParam {
@@ -392,11 +347,11 @@ class _$OfferAtIndexParamCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$OfferAtIndexParamCopyWith<$Res>
+abstract class _$$_OfferAtIndexParamCopyWith<$Res>
     implements $OfferAtIndexParamCopyWith<$Res> {
-  factory _$OfferAtIndexParamCopyWith(
-          _OfferAtIndexParam value, $Res Function(_OfferAtIndexParam) then) =
-      __$OfferAtIndexParamCopyWithImpl<$Res>;
+  factory _$$_OfferAtIndexParamCopyWith(_$_OfferAtIndexParam value,
+          $Res Function(_$_OfferAtIndexParam) then) =
+      __$$_OfferAtIndexParamCopyWithImpl<$Res>;
   @override
   $Res call({OfferListingsParams params, int index});
 
@@ -405,22 +360,22 @@ abstract class _$OfferAtIndexParamCopyWith<$Res>
 }
 
 /// @nodoc
-class __$OfferAtIndexParamCopyWithImpl<$Res>
+class __$$_OfferAtIndexParamCopyWithImpl<$Res>
     extends _$OfferAtIndexParamCopyWithImpl<$Res>
-    implements _$OfferAtIndexParamCopyWith<$Res> {
-  __$OfferAtIndexParamCopyWithImpl(
-      _OfferAtIndexParam _value, $Res Function(_OfferAtIndexParam) _then)
-      : super(_value, (v) => _then(v as _OfferAtIndexParam));
+    implements _$$_OfferAtIndexParamCopyWith<$Res> {
+  __$$_OfferAtIndexParamCopyWithImpl(
+      _$_OfferAtIndexParam _value, $Res Function(_$_OfferAtIndexParam) _then)
+      : super(_value, (v) => _then(v as _$_OfferAtIndexParam));
 
   @override
-  _OfferAtIndexParam get _value => super._value as _OfferAtIndexParam;
+  _$_OfferAtIndexParam get _value => super._value as _$_OfferAtIndexParam;
 
   @override
   $Res call({
     Object? params = freezed,
     Object? index = freezed,
   }) {
-    return _then(_OfferAtIndexParam(
+    return _then(_$_OfferAtIndexParam(
       params: params == freezed
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
@@ -452,7 +407,7 @@ class _$_OfferAtIndexParam implements _OfferAtIndexParam {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _OfferAtIndexParam &&
+            other is _$_OfferAtIndexParam &&
             const DeepCollectionEquality().equals(other.params, params) &&
             const DeepCollectionEquality().equals(other.index, index));
   }
@@ -465,14 +420,15 @@ class _$_OfferAtIndexParam implements _OfferAtIndexParam {
 
   @JsonKey(ignore: true)
   @override
-  _$OfferAtIndexParamCopyWith<_OfferAtIndexParam> get copyWith =>
-      __$OfferAtIndexParamCopyWithImpl<_OfferAtIndexParam>(this, _$identity);
+  _$$_OfferAtIndexParamCopyWith<_$_OfferAtIndexParam> get copyWith =>
+      __$$_OfferAtIndexParamCopyWithImpl<_$_OfferAtIndexParam>(
+          this, _$identity);
 }
 
 abstract class _OfferAtIndexParam implements OfferAtIndexParam {
   const factory _OfferAtIndexParam(
-      {required OfferListingsParams params,
-      required int index}) = _$_OfferAtIndexParam;
+      {required final OfferListingsParams params,
+      required final int index}) = _$_OfferAtIndexParam;
 
   @override
   OfferListingsParams get params;
@@ -480,30 +436,9 @@ abstract class _OfferAtIndexParam implements OfferAtIndexParam {
   int get index;
   @override
   @JsonKey(ignore: true)
-  _$OfferAtIndexParamCopyWith<_OfferAtIndexParam> get copyWith =>
+  _$$_OfferAtIndexParamCopyWith<_$_OfferAtIndexParam> get copyWith =>
       throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-class _$OfferListingsTearOff {
-  const _$OfferListingsTearOff();
-
-  _OfferListings call(
-      {required String asin,
-      int total = 0,
-      OfferItem? cart,
-      List<OfferItem> offers = const <OfferItem>[]}) {
-    return _OfferListings(
-      asin: asin,
-      total: total,
-      cart: cart,
-      offers: offers,
-    );
-  }
-}
-
-/// @nodoc
-const $OfferListings = _$OfferListingsTearOff();
 
 /// @nodoc
 mixin _$OfferListings {
@@ -576,11 +511,11 @@ class _$OfferListingsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$OfferListingsCopyWith<$Res>
+abstract class _$$_OfferListingsCopyWith<$Res>
     implements $OfferListingsCopyWith<$Res> {
-  factory _$OfferListingsCopyWith(
-          _OfferListings value, $Res Function(_OfferListings) then) =
-      __$OfferListingsCopyWithImpl<$Res>;
+  factory _$$_OfferListingsCopyWith(
+          _$_OfferListings value, $Res Function(_$_OfferListings) then) =
+      __$$_OfferListingsCopyWithImpl<$Res>;
   @override
   $Res call({String asin, int total, OfferItem? cart, List<OfferItem> offers});
 
@@ -589,15 +524,15 @@ abstract class _$OfferListingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$OfferListingsCopyWithImpl<$Res>
+class __$$_OfferListingsCopyWithImpl<$Res>
     extends _$OfferListingsCopyWithImpl<$Res>
-    implements _$OfferListingsCopyWith<$Res> {
-  __$OfferListingsCopyWithImpl(
-      _OfferListings _value, $Res Function(_OfferListings) _then)
-      : super(_value, (v) => _then(v as _OfferListings));
+    implements _$$_OfferListingsCopyWith<$Res> {
+  __$$_OfferListingsCopyWithImpl(
+      _$_OfferListings _value, $Res Function(_$_OfferListings) _then)
+      : super(_value, (v) => _then(v as _$_OfferListings));
 
   @override
-  _OfferListings get _value => super._value as _OfferListings;
+  _$_OfferListings get _value => super._value as _$_OfferListings;
 
   @override
   $Res call({
@@ -606,7 +541,7 @@ class __$OfferListingsCopyWithImpl<$Res>
     Object? cart = freezed,
     Object? offers = freezed,
   }) {
-    return _then(_OfferListings(
+    return _then(_$_OfferListings(
       asin: asin == freezed
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
@@ -620,7 +555,7 @@ class __$OfferListingsCopyWithImpl<$Res>
           : cart // ignore: cast_nullable_to_non_nullable
               as OfferItem?,
       offers: offers == freezed
-          ? _value.offers
+          ? _value._offers
           : offers // ignore: cast_nullable_to_non_nullable
               as List<OfferItem>,
     ));
@@ -634,18 +569,23 @@ class _$_OfferListings implements _OfferListings {
       {required this.asin,
       this.total = 0,
       this.cart,
-      this.offers = const <OfferItem>[]});
+      final List<OfferItem> offers = const <OfferItem>[]})
+      : _offers = offers;
 
   @override
   final String asin;
-  @JsonKey()
   @override
+  @JsonKey()
   final int total;
   @override
   final OfferItem? cart;
-  @JsonKey()
+  final List<OfferItem> _offers;
   @override
-  final List<OfferItem> offers;
+  @JsonKey()
+  List<OfferItem> get offers {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_offers);
+  }
 
   @override
   String toString() {
@@ -656,11 +596,11 @@ class _$_OfferListings implements _OfferListings {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _OfferListings &&
+            other is _$_OfferListings &&
             const DeepCollectionEquality().equals(other.asin, asin) &&
             const DeepCollectionEquality().equals(other.total, total) &&
             const DeepCollectionEquality().equals(other.cart, cart) &&
-            const DeepCollectionEquality().equals(other.offers, offers));
+            const DeepCollectionEquality().equals(other._offers, _offers));
   }
 
   @override
@@ -669,20 +609,20 @@ class _$_OfferListings implements _OfferListings {
       const DeepCollectionEquality().hash(asin),
       const DeepCollectionEquality().hash(total),
       const DeepCollectionEquality().hash(cart),
-      const DeepCollectionEquality().hash(offers));
+      const DeepCollectionEquality().hash(_offers));
 
   @JsonKey(ignore: true)
   @override
-  _$OfferListingsCopyWith<_OfferListings> get copyWith =>
-      __$OfferListingsCopyWithImpl<_OfferListings>(this, _$identity);
+  _$$_OfferListingsCopyWith<_$_OfferListings> get copyWith =>
+      __$$_OfferListingsCopyWithImpl<_$_OfferListings>(this, _$identity);
 }
 
 abstract class _OfferListings implements OfferListings {
   const factory _OfferListings(
-      {required String asin,
-      int total,
-      OfferItem? cart,
-      List<OfferItem> offers}) = _$_OfferListings;
+      {required final String asin,
+      final int total,
+      final OfferItem? cart,
+      final List<OfferItem> offers}) = _$_OfferListings;
 
   @override
   String get asin;
@@ -694,34 +634,9 @@ abstract class _OfferListings implements OfferListings {
   List<OfferItem> get offers;
   @override
   @JsonKey(ignore: true)
-  _$OfferListingsCopyWith<_OfferListings> get copyWith =>
+  _$$_OfferListingsCopyWith<_$_OfferListings> get copyWith =>
       throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-class _$OfferItemTearOff {
-  const _$OfferItemTearOff();
-
-  _OfferItem call(
-      {required String shopName,
-      String sellerId = "",
-      required int price,
-      required String condition,
-      required bool hasImage,
-      required bool isFba}) {
-    return _OfferItem(
-      shopName: shopName,
-      sellerId: sellerId,
-      price: price,
-      condition: condition,
-      hasImage: hasImage,
-      isFba: isFba,
-    );
-  }
-}
-
-/// @nodoc
-const $OfferItem = _$OfferItemTearOff();
 
 /// @nodoc
 mixin _$OfferItem {
@@ -797,10 +712,10 @@ class _$OfferItemCopyWithImpl<$Res> implements $OfferItemCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$OfferItemCopyWith<$Res> implements $OfferItemCopyWith<$Res> {
-  factory _$OfferItemCopyWith(
-          _OfferItem value, $Res Function(_OfferItem) then) =
-      __$OfferItemCopyWithImpl<$Res>;
+abstract class _$$_OfferItemCopyWith<$Res> implements $OfferItemCopyWith<$Res> {
+  factory _$$_OfferItemCopyWith(
+          _$_OfferItem value, $Res Function(_$_OfferItem) then) =
+      __$$_OfferItemCopyWithImpl<$Res>;
   @override
   $Res call(
       {String shopName,
@@ -812,13 +727,14 @@ abstract class _$OfferItemCopyWith<$Res> implements $OfferItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$OfferItemCopyWithImpl<$Res> extends _$OfferItemCopyWithImpl<$Res>
-    implements _$OfferItemCopyWith<$Res> {
-  __$OfferItemCopyWithImpl(_OfferItem _value, $Res Function(_OfferItem) _then)
-      : super(_value, (v) => _then(v as _OfferItem));
+class __$$_OfferItemCopyWithImpl<$Res> extends _$OfferItemCopyWithImpl<$Res>
+    implements _$$_OfferItemCopyWith<$Res> {
+  __$$_OfferItemCopyWithImpl(
+      _$_OfferItem _value, $Res Function(_$_OfferItem) _then)
+      : super(_value, (v) => _then(v as _$_OfferItem));
 
   @override
-  _OfferItem get _value => super._value as _OfferItem;
+  _$_OfferItem get _value => super._value as _$_OfferItem;
 
   @override
   $Res call({
@@ -829,7 +745,7 @@ class __$OfferItemCopyWithImpl<$Res> extends _$OfferItemCopyWithImpl<$Res>
     Object? hasImage = freezed,
     Object? isFba = freezed,
   }) {
-    return _then(_OfferItem(
+    return _then(_$_OfferItem(
       shopName: shopName == freezed
           ? _value.shopName
           : shopName // ignore: cast_nullable_to_non_nullable
@@ -871,8 +787,8 @@ class _$_OfferItem implements _OfferItem {
 
   @override
   final String shopName;
-  @JsonKey()
   @override
+  @JsonKey()
   final String sellerId;
   @override
   final int price;
@@ -892,7 +808,7 @@ class _$_OfferItem implements _OfferItem {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _OfferItem &&
+            other is _$_OfferItem &&
             const DeepCollectionEquality().equals(other.shopName, shopName) &&
             const DeepCollectionEquality().equals(other.sellerId, sellerId) &&
             const DeepCollectionEquality().equals(other.price, price) &&
@@ -913,18 +829,18 @@ class _$_OfferItem implements _OfferItem {
 
   @JsonKey(ignore: true)
   @override
-  _$OfferItemCopyWith<_OfferItem> get copyWith =>
-      __$OfferItemCopyWithImpl<_OfferItem>(this, _$identity);
+  _$$_OfferItemCopyWith<_$_OfferItem> get copyWith =>
+      __$$_OfferItemCopyWithImpl<_$_OfferItem>(this, _$identity);
 }
 
 abstract class _OfferItem implements OfferItem {
   const factory _OfferItem(
-      {required String shopName,
-      String sellerId,
-      required int price,
-      required String condition,
-      required bool hasImage,
-      required bool isFba}) = _$_OfferItem;
+      {required final String shopName,
+      final String sellerId,
+      required final int price,
+      required final String condition,
+      required final bool hasImage,
+      required final bool isFba}) = _$_OfferItem;
 
   @override
   String get shopName;
@@ -940,6 +856,6 @@ abstract class _OfferItem implements OfferItem {
   bool get isFba;
   @override
   @JsonKey(ignore: true)
-  _$OfferItemCopyWith<_OfferItem> get copyWith =>
+  _$$_OfferItemCopyWith<_$_OfferItem> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,41 +12,7 @@ part of 'keepa_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$KeepaSettingsTearOff {
-  const _$KeepaSettingsTearOff();
-
-  _KeepaSettings call(
-      {@HiveField(0, defaultValue: true)
-          bool showNew = true,
-      @HiveField(1, defaultValue: true)
-          bool showUsed = true,
-      @HiveField(2, defaultValue: true)
-          bool showAmazon = true,
-      @HiveField(3, defaultValue: KeepaShowPeriod.month)
-          KeepaShowPeriod period = KeepaShowPeriod.month,
-      @HiveField(4, defaultValue: "")
-          String extraParam = "",
-      @HiveField(5, defaultValue: true)
-          bool showBuyBox = true,
-      @HiveField(6, defaultValue: false)
-          bool showFba = false}) {
-    return _KeepaSettings(
-      showNew: showNew,
-      showUsed: showUsed,
-      showAmazon: showAmazon,
-      period: period,
-      extraParam: extraParam,
-      showBuyBox: showBuyBox,
-      showFba: showFba,
-    );
-  }
-}
-
-/// @nodoc
-const $KeepaSettings = _$KeepaSettingsTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$KeepaSettings {
@@ -138,11 +104,11 @@ class _$KeepaSettingsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$KeepaSettingsCopyWith<$Res>
+abstract class _$$_KeepaSettingsCopyWith<$Res>
     implements $KeepaSettingsCopyWith<$Res> {
-  factory _$KeepaSettingsCopyWith(
-          _KeepaSettings value, $Res Function(_KeepaSettings) then) =
-      __$KeepaSettingsCopyWithImpl<$Res>;
+  factory _$$_KeepaSettingsCopyWith(
+          _$_KeepaSettings value, $Res Function(_$_KeepaSettings) then) =
+      __$$_KeepaSettingsCopyWithImpl<$Res>;
   @override
   $Res call(
       {@HiveField(0, defaultValue: true) bool showNew,
@@ -155,15 +121,15 @@ abstract class _$KeepaSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$KeepaSettingsCopyWithImpl<$Res>
+class __$$_KeepaSettingsCopyWithImpl<$Res>
     extends _$KeepaSettingsCopyWithImpl<$Res>
-    implements _$KeepaSettingsCopyWith<$Res> {
-  __$KeepaSettingsCopyWithImpl(
-      _KeepaSettings _value, $Res Function(_KeepaSettings) _then)
-      : super(_value, (v) => _then(v as _KeepaSettings));
+    implements _$$_KeepaSettingsCopyWith<$Res> {
+  __$$_KeepaSettingsCopyWithImpl(
+      _$_KeepaSettings _value, $Res Function(_$_KeepaSettings) _then)
+      : super(_value, (v) => _then(v as _$_KeepaSettings));
 
   @override
-  _KeepaSettings get _value => super._value as _KeepaSettings;
+  _$_KeepaSettings get _value => super._value as _$_KeepaSettings;
 
   @override
   $Res call({
@@ -175,7 +141,7 @@ class __$KeepaSettingsCopyWithImpl<$Res>
     Object? showBuyBox = freezed,
     Object? showFba = freezed,
   }) {
-    return _then(_KeepaSettings(
+    return _then(_$_KeepaSettings(
       showNew: showNew == freezed
           ? _value.showNew
           : showNew // ignore: cast_nullable_to_non_nullable
@@ -228,32 +194,32 @@ class _$_KeepaSettings implements _KeepaSettings {
       @HiveField(6, defaultValue: false)
           this.showFba = false});
 
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(0, defaultValue: true)
   final bool showNew;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(1, defaultValue: true)
   final bool showUsed;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(2, defaultValue: true)
   final bool showAmazon;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(3, defaultValue: KeepaShowPeriod.month)
   final KeepaShowPeriod period;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(4, defaultValue: "")
   final String extraParam;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(5, defaultValue: true)
   final bool showBuyBox;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(6, defaultValue: false)
   final bool showFba;
 
@@ -266,7 +232,7 @@ class _$_KeepaSettings implements _KeepaSettings {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _KeepaSettings &&
+            other is _$_KeepaSettings &&
             const DeepCollectionEquality().equals(other.showNew, showNew) &&
             const DeepCollectionEquality().equals(other.showUsed, showUsed) &&
             const DeepCollectionEquality()
@@ -292,19 +258,26 @@ class _$_KeepaSettings implements _KeepaSettings {
 
   @JsonKey(ignore: true)
   @override
-  _$KeepaSettingsCopyWith<_KeepaSettings> get copyWith =>
-      __$KeepaSettingsCopyWithImpl<_KeepaSettings>(this, _$identity);
+  _$$_KeepaSettingsCopyWith<_$_KeepaSettings> get copyWith =>
+      __$$_KeepaSettingsCopyWithImpl<_$_KeepaSettings>(this, _$identity);
 }
 
 abstract class _KeepaSettings implements KeepaSettings {
   const factory _KeepaSettings(
-      {@HiveField(0, defaultValue: true) bool showNew,
-      @HiveField(1, defaultValue: true) bool showUsed,
-      @HiveField(2, defaultValue: true) bool showAmazon,
-      @HiveField(3, defaultValue: KeepaShowPeriod.month) KeepaShowPeriod period,
-      @HiveField(4, defaultValue: "") String extraParam,
-      @HiveField(5, defaultValue: true) bool showBuyBox,
-      @HiveField(6, defaultValue: false) bool showFba}) = _$_KeepaSettings;
+      {@HiveField(0, defaultValue: true)
+          final bool showNew,
+      @HiveField(1, defaultValue: true)
+          final bool showUsed,
+      @HiveField(2, defaultValue: true)
+          final bool showAmazon,
+      @HiveField(3, defaultValue: KeepaShowPeriod.month)
+          final KeepaShowPeriod period,
+      @HiveField(4, defaultValue: "")
+          final String extraParam,
+      @HiveField(5, defaultValue: true)
+          final bool showBuyBox,
+      @HiveField(6, defaultValue: false)
+          final bool showFba}) = _$_KeepaSettings;
 
   @override
   @HiveField(0, defaultValue: true)
@@ -329,6 +302,6 @@ abstract class _KeepaSettings implements KeepaSettings {
   bool get showFba;
   @override
   @JsonKey(ignore: true)
-  _$KeepaSettingsCopyWith<_KeepaSettings> get copyWith =>
+  _$$_KeepaSettingsCopyWith<_$_KeepaSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
