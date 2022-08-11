@@ -15,7 +15,7 @@ class PurchaseStateNotifier extends StateNotifier<AsyncValue<PurchaseState>> {
   Future<void> _initState() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final purchaserInfo = await Purchases.getPurchaserInfo();
+      final purchaserInfo = await Purchases.getCustomerInfo();
       final offerings = await Purchases.getOfferings();
       return PurchaseState(purchaseInfo: purchaserInfo, offerings: offerings);
     });
@@ -24,7 +24,7 @@ class PurchaseStateNotifier extends StateNotifier<AsyncValue<PurchaseState>> {
   Future<void> refreshState() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final purchaserInfo = await Purchases.getPurchaserInfo();
+      final purchaserInfo = await Purchases.getCustomerInfo();
       final offerings = await Purchases.getOfferings();
       return PurchaseState(purchaseInfo: purchaserInfo, offerings: offerings);
     });
