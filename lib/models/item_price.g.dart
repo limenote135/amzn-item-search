@@ -106,13 +106,17 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
 
 _$_ItemPrices _$$_ItemPricesFromJson(Map<String, dynamic> json) =>
     _$_ItemPrices(
-      newPrices: (json['new_offers'] as List<dynamic>)
-          .map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      usedPrices: (json['used_offers'] as List<dynamic>)
-          .map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      feeInfo: FeeInfo.fromJson(json['fee_info'] as Map<String, dynamic>),
+      newPrices: (json['new_offers'] as List<dynamic>?)
+              ?.map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <PriceDetail>[],
+      usedPrices: (json['used_offers'] as List<dynamic>?)
+              ?.map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <PriceDetail>[],
+      feeInfo: json['fee_info'] == null
+          ? const FeeInfo()
+          : FeeInfo.fromJson(json['fee_info'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_ItemPricesToJson(_$_ItemPrices instance) =>
