@@ -12,24 +12,7 @@ part of 'item_price.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ItemPriceFutureProviderResponseTearOff {
-  const _$ItemPriceFutureProviderResponseTearOff();
-
-  _ItemPriceFutureProviderResponse call(
-      {required ItemPrices prices, required bool? sellByAmazon}) {
-    return _ItemPriceFutureProviderResponse(
-      prices: prices,
-      sellByAmazon: sellByAmazon,
-    );
-  }
-}
-
-/// @nodoc
-const $ItemPriceFutureProviderResponse =
-    _$ItemPriceFutureProviderResponseTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ItemPriceFutureProviderResponse {
@@ -87,12 +70,12 @@ class _$ItemPriceFutureProviderResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ItemPriceFutureProviderResponseCopyWith<$Res>
+abstract class _$$_ItemPriceFutureProviderResponseCopyWith<$Res>
     implements $ItemPriceFutureProviderResponseCopyWith<$Res> {
-  factory _$ItemPriceFutureProviderResponseCopyWith(
-          _ItemPriceFutureProviderResponse value,
-          $Res Function(_ItemPriceFutureProviderResponse) then) =
-      __$ItemPriceFutureProviderResponseCopyWithImpl<$Res>;
+  factory _$$_ItemPriceFutureProviderResponseCopyWith(
+          _$_ItemPriceFutureProviderResponse value,
+          $Res Function(_$_ItemPriceFutureProviderResponse) then) =
+      __$$_ItemPriceFutureProviderResponseCopyWithImpl<$Res>;
   @override
   $Res call({ItemPrices prices, bool? sellByAmazon});
 
@@ -101,24 +84,24 @@ abstract class _$ItemPriceFutureProviderResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ItemPriceFutureProviderResponseCopyWithImpl<$Res>
+class __$$_ItemPriceFutureProviderResponseCopyWithImpl<$Res>
     extends _$ItemPriceFutureProviderResponseCopyWithImpl<$Res>
-    implements _$ItemPriceFutureProviderResponseCopyWith<$Res> {
-  __$ItemPriceFutureProviderResponseCopyWithImpl(
-      _ItemPriceFutureProviderResponse _value,
-      $Res Function(_ItemPriceFutureProviderResponse) _then)
-      : super(_value, (v) => _then(v as _ItemPriceFutureProviderResponse));
+    implements _$$_ItemPriceFutureProviderResponseCopyWith<$Res> {
+  __$$_ItemPriceFutureProviderResponseCopyWithImpl(
+      _$_ItemPriceFutureProviderResponse _value,
+      $Res Function(_$_ItemPriceFutureProviderResponse) _then)
+      : super(_value, (v) => _then(v as _$_ItemPriceFutureProviderResponse));
 
   @override
-  _ItemPriceFutureProviderResponse get _value =>
-      super._value as _ItemPriceFutureProviderResponse;
+  _$_ItemPriceFutureProviderResponse get _value =>
+      super._value as _$_ItemPriceFutureProviderResponse;
 
   @override
   $Res call({
     Object? prices = freezed,
     Object? sellByAmazon = freezed,
   }) {
-    return _then(_ItemPriceFutureProviderResponse(
+    return _then(_$_ItemPriceFutureProviderResponse(
       prices: prices == freezed
           ? _value.prices
           : prices // ignore: cast_nullable_to_non_nullable
@@ -162,7 +145,7 @@ class _$_ItemPriceFutureProviderResponse
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ItemPriceFutureProviderResponse &&
+            other is _$_ItemPriceFutureProviderResponse &&
             const DeepCollectionEquality().equals(other.prices, prices) &&
             const DeepCollectionEquality()
                 .equals(other.sellByAmazon, sellByAmazon));
@@ -176,16 +159,17 @@ class _$_ItemPriceFutureProviderResponse
 
   @JsonKey(ignore: true)
   @override
-  _$ItemPriceFutureProviderResponseCopyWith<_ItemPriceFutureProviderResponse>
-      get copyWith => __$ItemPriceFutureProviderResponseCopyWithImpl<
-          _ItemPriceFutureProviderResponse>(this, _$identity);
+  _$$_ItemPriceFutureProviderResponseCopyWith<
+          _$_ItemPriceFutureProviderResponse>
+      get copyWith => __$$_ItemPriceFutureProviderResponseCopyWithImpl<
+          _$_ItemPriceFutureProviderResponse>(this, _$identity);
 }
 
 abstract class _ItemPriceFutureProviderResponse
     implements ItemPriceFutureProviderResponse {
   const factory _ItemPriceFutureProviderResponse(
-      {required ItemPrices prices,
-      required bool? sellByAmazon}) = _$_ItemPriceFutureProviderResponse;
+      {required final ItemPrices prices,
+      required final bool? sellByAmazon}) = _$_ItemPriceFutureProviderResponse;
 
   @override
   ItemPrices get prices;
@@ -193,41 +177,14 @@ abstract class _ItemPriceFutureProviderResponse
   bool? get sellByAmazon;
   @override
   @JsonKey(ignore: true)
-  _$ItemPriceFutureProviderResponseCopyWith<_ItemPriceFutureProviderResponse>
+  _$$_ItemPriceFutureProviderResponseCopyWith<
+          _$_ItemPriceFutureProviderResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 ItemPrices _$ItemPricesFromJson(Map<String, dynamic> json) {
   return _ItemPrices.fromJson(json);
 }
-
-/// @nodoc
-class _$ItemPricesTearOff {
-  const _$ItemPricesTearOff();
-
-  _ItemPrices call(
-      {@HiveField(0, defaultValue: <PriceDetail>[])
-      @JsonKey(name: "new_offers")
-          List<PriceDetail> newPrices = const <PriceDetail>[],
-      @HiveField(1, defaultValue: <PriceDetail>[])
-      @JsonKey(name: "used_offers")
-          List<PriceDetail> usedPrices = const <PriceDetail>[],
-      @HiveField(2)
-          FeeInfo feeInfo = const FeeInfo()}) {
-    return _ItemPrices(
-      newPrices: newPrices,
-      usedPrices: usedPrices,
-      feeInfo: feeInfo,
-    );
-  }
-
-  ItemPrices fromJson(Map<String, Object?> json) {
-    return ItemPrices.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ItemPrices = _$ItemPricesTearOff();
 
 /// @nodoc
 mixin _$ItemPrices {
@@ -304,10 +261,11 @@ class _$ItemPricesCopyWithImpl<$Res> implements $ItemPricesCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ItemPricesCopyWith<$Res> implements $ItemPricesCopyWith<$Res> {
-  factory _$ItemPricesCopyWith(
-          _ItemPrices value, $Res Function(_ItemPrices) then) =
-      __$ItemPricesCopyWithImpl<$Res>;
+abstract class _$$_ItemPricesCopyWith<$Res>
+    implements $ItemPricesCopyWith<$Res> {
+  factory _$$_ItemPricesCopyWith(
+          _$_ItemPrices value, $Res Function(_$_ItemPrices) then) =
+      __$$_ItemPricesCopyWithImpl<$Res>;
   @override
   $Res call(
       {@HiveField(0, defaultValue: <PriceDetail>[])
@@ -324,14 +282,14 @@ abstract class _$ItemPricesCopyWith<$Res> implements $ItemPricesCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
-    implements _$ItemPricesCopyWith<$Res> {
-  __$ItemPricesCopyWithImpl(
-      _ItemPrices _value, $Res Function(_ItemPrices) _then)
-      : super(_value, (v) => _then(v as _ItemPrices));
+class __$$_ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
+    implements _$$_ItemPricesCopyWith<$Res> {
+  __$$_ItemPricesCopyWithImpl(
+      _$_ItemPrices _value, $Res Function(_$_ItemPrices) _then)
+      : super(_value, (v) => _then(v as _$_ItemPrices));
 
   @override
-  _ItemPrices get _value => super._value as _ItemPrices;
+  _$_ItemPrices get _value => super._value as _$_ItemPrices;
 
   @override
   $Res call({
@@ -339,13 +297,13 @@ class __$ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
     Object? usedPrices = freezed,
     Object? feeInfo = freezed,
   }) {
-    return _then(_ItemPrices(
+    return _then(_$_ItemPrices(
       newPrices: newPrices == freezed
-          ? _value.newPrices
+          ? _value._newPrices
           : newPrices // ignore: cast_nullable_to_non_nullable
               as List<PriceDetail>,
       usedPrices: usedPrices == freezed
-          ? _value.usedPrices
+          ? _value._usedPrices
           : usedPrices // ignore: cast_nullable_to_non_nullable
               as List<PriceDetail>,
       feeInfo: feeInfo == freezed
@@ -364,26 +322,40 @@ class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
   const _$_ItemPrices(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
-          this.newPrices = const <PriceDetail>[],
+          final List<PriceDetail> newPrices = const <PriceDetail>[],
       @HiveField(1, defaultValue: <PriceDetail>[])
       @JsonKey(name: "used_offers")
-          this.usedPrices = const <PriceDetail>[],
+          final List<PriceDetail> usedPrices = const <PriceDetail>[],
       @HiveField(2)
-          this.feeInfo = const FeeInfo()});
+          this.feeInfo = const FeeInfo()})
+      : _newPrices = newPrices,
+        _usedPrices = usedPrices;
 
   factory _$_ItemPrices.fromJson(Map<String, dynamic> json) =>
       _$$_ItemPricesFromJson(json);
 
-  @override // 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
+// 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
+  final List<PriceDetail> _newPrices;
+// 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
+  @override
   @HiveField(0, defaultValue: <PriceDetail>[])
   @JsonKey(name: "new_offers")
-  final List<PriceDetail> newPrices;
+  List<PriceDetail> get newPrices {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_newPrices);
+  }
+
+  final List<PriceDetail> _usedPrices;
   @override
   @HiveField(1, defaultValue: <PriceDetail>[])
   @JsonKey(name: "used_offers")
-  final List<PriceDetail> usedPrices;
-  @JsonKey()
+  List<PriceDetail> get usedPrices {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_usedPrices);
+  }
+
   @override
+  @JsonKey()
   @HiveField(2)
   final FeeInfo feeInfo;
 
@@ -406,28 +378,32 @@ class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ItemPrices &&
-            const DeepCollectionEquality().equals(other.newPrices, newPrices) &&
+            other is _$_ItemPrices &&
             const DeepCollectionEquality()
-                .equals(other.usedPrices, usedPrices) &&
+                .equals(other._newPrices, _newPrices) &&
+            const DeepCollectionEquality()
+                .equals(other._usedPrices, _usedPrices) &&
             const DeepCollectionEquality().equals(other.feeInfo, feeInfo));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(newPrices),
-      const DeepCollectionEquality().hash(usedPrices),
+      const DeepCollectionEquality().hash(_newPrices),
+      const DeepCollectionEquality().hash(_usedPrices),
       const DeepCollectionEquality().hash(feeInfo));
 
   @JsonKey(ignore: true)
   @override
-  _$ItemPricesCopyWith<_ItemPrices> get copyWith =>
-      __$ItemPricesCopyWithImpl<_ItemPrices>(this, _$identity);
+  _$$_ItemPricesCopyWith<_$_ItemPrices> get copyWith =>
+      __$$_ItemPricesCopyWithImpl<_$_ItemPrices>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ItemPricesToJson(this);
+    return _$$_ItemPricesToJson(
+      this,
+    );
   }
 }
 
@@ -435,12 +411,12 @@ abstract class _ItemPrices implements ItemPrices {
   const factory _ItemPrices(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
-          List<PriceDetail> newPrices,
+          final List<PriceDetail> newPrices,
       @HiveField(1, defaultValue: <PriceDetail>[])
       @JsonKey(name: "used_offers")
-          List<PriceDetail> usedPrices,
+          final List<PriceDetail> usedPrices,
       @HiveField(2)
-          FeeInfo feeInfo}) = _$_ItemPrices;
+          final FeeInfo feeInfo}) = _$_ItemPrices;
 
   factory _ItemPrices.fromJson(Map<String, dynamic> json) =
       _$_ItemPrices.fromJson;
@@ -458,52 +434,13 @@ abstract class _ItemPrices implements ItemPrices {
   FeeInfo get feeInfo;
   @override
   @JsonKey(ignore: true)
-  _$ItemPricesCopyWith<_ItemPrices> get copyWith =>
+  _$$_ItemPricesCopyWith<_$_ItemPrices> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 PriceDetail _$PriceDetailFromJson(Map<String, dynamic> json) {
   return _PriceDetail.fromJson(json);
 }
-
-/// @nodoc
-class _$PriceDetailTearOff {
-  const _$PriceDetailTearOff();
-
-  _PriceDetail call(
-      {@HiveField(0)
-      @JsonKey(name: "condition")
-          ItemCondition itemCondition = ItemCondition.newItem,
-      @HiveField(1)
-          ItemSubCondition subCondition = ItemSubCondition.newItem,
-      @HiveField(2)
-          FulfillmentChannel channel = FulfillmentChannel.merchant,
-      @HiveField(3)
-          int price = 0,
-      @HiveField(4)
-          int shipping = 0,
-      @HiveField(5)
-          int point = 0,
-      @HiveField(6, defaultValue: false)
-          bool isCart = false}) {
-    return _PriceDetail(
-      itemCondition: itemCondition,
-      subCondition: subCondition,
-      channel: channel,
-      price: price,
-      shipping: shipping,
-      point: point,
-      isCart: isCart,
-    );
-  }
-
-  PriceDetail fromJson(Map<String, Object?> json) {
-    return PriceDetail.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $PriceDetail = _$PriceDetailTearOff();
 
 /// @nodoc
 mixin _$PriceDetail {
@@ -596,11 +533,11 @@ class _$PriceDetailCopyWithImpl<$Res> implements $PriceDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PriceDetailCopyWith<$Res>
+abstract class _$$_PriceDetailCopyWith<$Res>
     implements $PriceDetailCopyWith<$Res> {
-  factory _$PriceDetailCopyWith(
-          _PriceDetail value, $Res Function(_PriceDetail) then) =
-      __$PriceDetailCopyWithImpl<$Res>;
+  factory _$$_PriceDetailCopyWith(
+          _$_PriceDetail value, $Res Function(_$_PriceDetail) then) =
+      __$$_PriceDetailCopyWithImpl<$Res>;
   @override
   $Res call(
       {@HiveField(0) @JsonKey(name: "condition") ItemCondition itemCondition,
@@ -613,14 +550,14 @@ abstract class _$PriceDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
-    implements _$PriceDetailCopyWith<$Res> {
-  __$PriceDetailCopyWithImpl(
-      _PriceDetail _value, $Res Function(_PriceDetail) _then)
-      : super(_value, (v) => _then(v as _PriceDetail));
+class __$$_PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
+    implements _$$_PriceDetailCopyWith<$Res> {
+  __$$_PriceDetailCopyWithImpl(
+      _$_PriceDetail _value, $Res Function(_$_PriceDetail) _then)
+      : super(_value, (v) => _then(v as _$_PriceDetail));
 
   @override
-  _PriceDetail get _value => super._value as _PriceDetail;
+  _$_PriceDetail get _value => super._value as _$_PriceDetail;
 
   @override
   $Res call({
@@ -632,7 +569,7 @@ class __$PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
     Object? point = freezed,
     Object? isCart = freezed,
   }) {
-    return _then(_PriceDetail(
+    return _then(_$_PriceDetail(
       itemCondition: itemCondition == freezed
           ? _value.itemCondition
           : itemCondition // ignore: cast_nullable_to_non_nullable
@@ -698,28 +635,28 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
   @HiveField(0)
   @JsonKey(name: "condition")
   final ItemCondition itemCondition;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(1)
   final ItemSubCondition subCondition;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(2)
   final FulfillmentChannel channel;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(3)
   final int price;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(4)
   final int shipping;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(5)
   final int point;
-  @JsonKey()
   @override
+  @JsonKey()
   @HiveField(6, defaultValue: false)
   final bool isCart;
 
@@ -746,7 +683,7 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PriceDetail &&
+            other is _$_PriceDetail &&
             const DeepCollectionEquality()
                 .equals(other.itemCondition, itemCondition) &&
             const DeepCollectionEquality()
@@ -758,6 +695,7 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
             const DeepCollectionEquality().equals(other.isCart, isCart));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -771,24 +709,34 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
 
   @JsonKey(ignore: true)
   @override
-  _$PriceDetailCopyWith<_PriceDetail> get copyWith =>
-      __$PriceDetailCopyWithImpl<_PriceDetail>(this, _$identity);
+  _$$_PriceDetailCopyWith<_$_PriceDetail> get copyWith =>
+      __$$_PriceDetailCopyWithImpl<_$_PriceDetail>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceDetailToJson(this);
+    return _$$_PriceDetailToJson(
+      this,
+    );
   }
 }
 
 abstract class _PriceDetail implements PriceDetail {
   const factory _PriceDetail(
-      {@HiveField(0) @JsonKey(name: "condition") ItemCondition itemCondition,
-      @HiveField(1) ItemSubCondition subCondition,
-      @HiveField(2) FulfillmentChannel channel,
-      @HiveField(3) int price,
-      @HiveField(4) int shipping,
-      @HiveField(5) int point,
-      @HiveField(6, defaultValue: false) bool isCart}) = _$_PriceDetail;
+      {@HiveField(0)
+      @JsonKey(name: "condition")
+          final ItemCondition itemCondition,
+      @HiveField(1)
+          final ItemSubCondition subCondition,
+      @HiveField(2)
+          final FulfillmentChannel channel,
+      @HiveField(3)
+          final int price,
+      @HiveField(4)
+          final int shipping,
+      @HiveField(5)
+          final int point,
+      @HiveField(6, defaultValue: false)
+          final bool isCart}) = _$_PriceDetail;
 
   factory _PriceDetail.fromJson(Map<String, dynamic> json) =
       _$_PriceDetail.fromJson;
@@ -817,6 +765,6 @@ abstract class _PriceDetail implements PriceDetail {
   bool get isCart;
   @override
   @JsonKey(ignore: true)
-  _$PriceDetailCopyWith<_PriceDetail> get copyWith =>
+  _$$_PriceDetailCopyWith<_$_PriceDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
