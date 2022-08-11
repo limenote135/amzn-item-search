@@ -51,11 +51,13 @@ class ItemPrices with _$ItemPrices {
     // 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
     @HiveField(0, defaultValue: <PriceDetail>[])
     @JsonKey(name: "new_offers")
-        required List<PriceDetail> newPrices,
+    @Default(<PriceDetail>[])
+        List<PriceDetail> newPrices,
     @HiveField(1, defaultValue: <PriceDetail>[])
     @JsonKey(name: "used_offers")
-        required List<PriceDetail> usedPrices,
-    @HiveField(2) required FeeInfo feeInfo,
+    @Default(<PriceDetail>[])
+        List<PriceDetail> usedPrices,
+    @HiveField(2) @Default(FeeInfo()) FeeInfo feeInfo,
   }) = _ItemPrices;
 
   factory ItemPrices.fromJson(Map<String, dynamic> json) =>
