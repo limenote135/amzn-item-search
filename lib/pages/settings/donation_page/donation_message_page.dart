@@ -29,7 +29,7 @@ class DonationMessagePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final package = ref.watch(_currentPackageProvider);
     return Scaffold(
-      appBar: AppBar(title: Text(package.product.title)),
+      appBar: AppBar(title: Text(package.storeProduct.title)),
       body: const _Body(),
     );
   }
@@ -58,7 +58,8 @@ class _Body extends ConsumerWidget {
     ) async {
       final fn = ref.read(cloudFunctionProvider(functionNameSendDonation));
       await fn.call<String>(<String, String>{
-        "item": "${package.product.title}:${package.product.priceString}",
+        "item":
+            "${package.storeProduct.title}:${package.storeProduct.priceString}",
         "date": date,
         "mail": email,
         "name": name,
@@ -79,8 +80,8 @@ class _Body extends ConsumerWidget {
               ),
             ),
             ListTile(
-              title: Text(package.product.title),
-              trailing: Text(package.product.priceString),
+              title: Text(package.storeProduct.title),
+              trailing: Text(package.storeProduct.priceString),
             ),
             Padding(
               padding: const EdgeInsets.all(8),
