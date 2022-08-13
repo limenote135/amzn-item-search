@@ -92,6 +92,9 @@ final searchItemFutureProvider = FutureProvider.autoDispose
 
 final queryItemResultProvider = FutureProvider.autoDispose
     .family<List<String>, QueryItemsRequest>((ref, req) async {
+  if (req.query == "") {
+    return const [];
+  }
   final mws = ref.read(mwsRepositoryProvider);
   final resp = await mws.queryItems(req.query, req.category);
   ref.maintainState = true;

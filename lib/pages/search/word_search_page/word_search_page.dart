@@ -18,41 +18,34 @@ final _currentQueryItemsRequest = StateProvider(
   (ref) => const QueryItemsRequest(query: "", category: ""),
 );
 
-final _queryItemResponseProvider =
-    FutureProvider.family<List<String>, QueryItemsRequest>((ref, param) async {
-  if (param.query == "") {
-    return const [];
-  }
-  final mws = ref.watch(mwsRepositoryProvider);
-  final resp = await mws.queryItems(param.query, param.category);
-  return resp.asins;
-});
-
-final _currentMatchingProductCount =
-    Provider.family<AsyncValue<int>, QueryItemsRequest>((ref, param) {
-  final asins = ref.watch(_queryItemResponseProvider(param));
+final _currentMatchingProductCount = Provider.autoDispose
+    .family<AsyncValue<int>, QueryItemsRequest>((ref, param) {
+  final asins = ref.watch(queryItemResultProvider(param));
   return asins.whenData((value) => value.length);
 });
 
 const _kPageSize = 20;
 
-final _asinDataPage =
-    FutureProvider.family<List<AsinData>, AsinDataPageParam>((ref, page) async {
+final _asinDataPage = FutureProvider.autoDispose
+    .family<List<AsinData>, AsinDataPageParam>((ref, page) async {
   final mws = ref.watch(mwsRepositoryProvider);
-  final asins = await ref.watch(_queryItemResponseProvider(page.param).future);
+  final asins = await ref.watch(queryItemResultProvider(page.param).future);
   final total = asins.length;
   final start = page.page * _kPageSize;
   final end = min(total, start + _kPageSize);
   final req = asins.sublist(start, end);
   final resp = await mws.batchGetAsinData(req);
+  ref.maintainState = true;
   return resp.data;
 });
 
-final asinDataAtIndex =
-    Provider.family<AsyncValue<AsinData>, AsinDataIndexAtParam>((ref, index) {
+final asinDataAtIndex = Provider.autoDispose
+    .family<AsyncValue<AsinData>, AsinDataIndexAtParam>((ref, index) {
   final offsetInPage = index.index % _kPageSize;
   final page = index.index ~/ _kPageSize;
   final param = AsinDataPageParam(param: index.param, page: page);
+  // 何度も Exception が投げられるのを防ぐため、maintainState = true にする
+  ref.maintainState = true;
   return ref.watch(_asinDataPage(param)).whenData((value) {
     final data = value[offsetInPage];
     if (data.asin == "") {
@@ -119,7 +112,7 @@ class _AppBar extends HookConsumerWidget {
                 if (value != "") {
                   if (req.query == value) {
                     // 変更がない場合は強制リロードする
-                    ref.refresh(_queryItemResponseProvider(req));
+                    ref.refresh(queryItemResultProvider(req));
                     return;
                   }
                   ref.read(_currentQueryItemsRequest.notifier).state =
