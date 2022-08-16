@@ -6,7 +6,7 @@ part 'query_params.freezed.dart';
 @freezed
 class AsinDataPageParam with _$AsinDataPageParam {
   const factory AsinDataPageParam({
-    required ListMatchingProductRequest param,
+    required QueryItemsRequest param,
     required int page,
   }) = _AsinDataPageParam;
 }
@@ -14,7 +14,7 @@ class AsinDataPageParam with _$AsinDataPageParam {
 @freezed
 class AsinDataIndexAtParam with _$AsinDataIndexAtParam {
   const factory AsinDataIndexAtParam({
-    required ListMatchingProductRequest param,
+    required QueryItemsRequest param,
     required int index,
   }) = _AsinDataIndexAtParam;
 }

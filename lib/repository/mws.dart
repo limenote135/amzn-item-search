@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
-import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/util/alert.dart';
 import 'package:amasearch/util/auth.dart';
@@ -92,7 +91,10 @@ final searchItemFutureProvider = FutureProvider.autoDispose
 });
 
 final queryItemResultProvider = FutureProvider.autoDispose
-    .family<List<String>, ListMatchingProductRequest>((ref, req) async {
+    .family<List<String>, QueryItemsRequest>((ref, req) async {
+  if (req.query == "") {
+    return const [];
+  }
   final mws = ref.read(mwsRepositoryProvider);
   final resp = await mws.queryItems(req.query, req.category);
   ref.maintainState = true;
@@ -113,7 +115,7 @@ class MwsRepository {
   }) async {
     if (int.tryParse(code) == null) {
       // 数値以外が含まれる場合は JAN コードではない
-      return Future.value(GetProductByIdResponse(jan: code, items: []));
+      return Future.value(GetProductByIdResponse(code: code, items: []));
     }
     final params = <String, String>{
       "code": code,
@@ -123,21 +125,10 @@ class MwsRepository {
 
     final serverUrl = await _read(serverUrlProvider.future);
     final resp = await _doRequest(
-      "$serverUrl/v1/mws/product",
+      "$serverUrl/v1beta2/spapi/product",
       data: json.encode(params),
     );
     return GetProductByIdResponse.fromJson(resp);
-  }
-
-  Future<GetProductPricesResponse> getProductPrices(String code) async {
-    final params = <String, String>{
-      "code": code,
-    };
-
-    final serverUrl = await _read(serverUrlProvider.future);
-    final resp =
-        await _doRequest("$serverUrl/v1/mws/prices", data: json.encode(params));
-    return GetProductPricesResponse.fromJson(resp);
   }
 
   Future<QueryItemsResponse> queryItems(String query, String category) async {
@@ -155,14 +146,6 @@ class MwsRepository {
     return QueryItemsResponse.fromJson(resp);
   }
 
-  Future<GetAsinDataResponse> getAsinData(String asin) async {
-    final serverUrl = await _read(serverUrlProvider.future);
-    final url = "$serverUrl/v1beta1/spapi/asin/$asin";
-
-    final resp = await _doGetRequest(url);
-    return GetAsinDataResponse.fromJson(resp);
-  }
-
   Future<BatchGetAsinDataResponse> batchGetAsinData(List<String> asins) async {
     final serverUrl = await _read(serverUrlProvider.future);
     final url = "$serverUrl/v1beta2/spapi/asins";
@@ -172,21 +155,12 @@ class MwsRepository {
     return BatchGetAsinDataResponse.fromJson(resp);
   }
 
-  Future<ListMatchingProductResponse> listMatchingProducts(
-    String query,
-    String category,
-  ) async {
-    final params = <String, String>{
-      "query": query,
-      "category": category,
-      "marketplace": _mwsMarketPlaceId,
-    };
-
+  Future<ListingRestrictions> getRestrictionInfo(String asin) async {
     final serverUrl = await _read(serverUrlProvider.future);
-    final resp =
-        await _doRequest("$serverUrl/v1/mws/search", data: json.encode(params));
+    final url = "$serverUrl/v1beta2/spapi/restrictions/$asin";
 
-    return ListMatchingProductResponse.fromJson(resp);
+    final resp = await _doGetRequest(url);
+    return ListingRestrictions.fromJson(resp);
   }
 
   void _customHandler(int code) {
@@ -247,7 +221,7 @@ class MwsRepository {
 class GetProductByIdResponse with _$GetProductByIdResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory GetProductByIdResponse({
-    required String jan,
+    required String code,
     required List<AsinData> items,
   }) = _GetProductByIdResponse;
 
@@ -256,34 +230,11 @@ class GetProductByIdResponse with _$GetProductByIdResponse {
 }
 
 @freezed
-class GetProductPricesResponse with _$GetProductPricesResponse {
-  @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory GetProductPricesResponse({
-    ItemPrices? prices,
-    bool? sellByAmazon,
-  }) = _GetProductPricesResponse;
-
-  factory GetProductPricesResponse.fromJson(Map<String, dynamic> json) =>
-      _$GetProductPricesResponseFromJson(json);
-}
-
-@freezed
-class ListMatchingProductRequest with _$ListMatchingProductRequest {
-  const factory ListMatchingProductRequest({
+class QueryItemsRequest with _$QueryItemsRequest {
+  const factory QueryItemsRequest({
     required String query,
     required String category,
-  }) = _ListMatchingProductRequest;
-}
-
-@freezed
-class ListMatchingProductResponse with _$ListMatchingProductResponse {
-  @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory ListMatchingProductResponse({
-    required List<AsinData> items,
-  }) = _ListMatchingProductResponse;
-
-  factory ListMatchingProductResponse.fromJson(Map<String, dynamic> json) =>
-      _$ListMatchingProductResponseFromJson(json);
+  }) = _QueryItemsRequest;
 }
 
 @freezed
@@ -294,17 +245,6 @@ class QueryItemsResponse with _$QueryItemsResponse {
 
   factory QueryItemsResponse.fromJson(Map<String, dynamic> json) =>
       _$QueryItemsResponseFromJson(json);
-}
-
-@freezed
-class GetAsinDataResponse with _$GetAsinDataResponse {
-  @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory GetAsinDataResponse({
-    required AsinData data,
-  }) = _GetAsinDataResponse;
-
-  factory GetAsinDataResponse.fromJson(Map<String, dynamic> json) =>
-      _$GetAsinDataResponseFromJson(json);
 }
 
 @freezed

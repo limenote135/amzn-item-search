@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'item_tile.dart';
 
-class ItemSelectPage extends HookConsumerWidget {
+class ItemSelectPage extends ConsumerWidget {
   const ItemSelectPage({Key? key}) : super(key: key);
   static const routeName = "/search/item_select";
 
@@ -57,7 +57,7 @@ class ItemSelectPage extends HookConsumerWidget {
   }
 }
 
-class _Body extends HookConsumerWidget {
+class _Body extends ConsumerWidget {
   const _Body({Key? key}) : super(key: key);
 
   @override
@@ -78,7 +78,7 @@ class _Body extends HookConsumerWidget {
             currentAsinDataProvider.overrideWithValue(items[index]),
             currentSearchItemProvider.overrideWithValue(searchItem),
           ],
-          child: const ItemTile(),
+          child: index == 0 ? const ItemTile() : const ItemTileWithRequest(),
         );
       },
     );

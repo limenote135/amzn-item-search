@@ -1,4 +1,3 @@
-import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
@@ -8,23 +7,44 @@ import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ItemTile extends HookConsumerWidget {
+class ItemTile extends ConsumerWidget {
   const ItemTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
-    final itemPriceAsyncValue = ref.watch(itemPricesFutureProvider(item.asin));
-    return AsyncValueListTileWidget<ItemPriceFutureProviderResponse>(
-      value: itemPriceAsyncValue,
+    return ProviderScope(
+      overrides: [
+        currentAsinDataProvider.overrideWithValue(item),
+        currentSearchDateProvider.overrideWithValue(null),
+      ],
+      child: const SlidableTile(
+        disableDelete: true,
+        child: _InkWell(
+          child: SearchItemTile(),
+        ),
+      ),
+    );
+  }
+}
+
+class ItemTileWithRequest extends ConsumerWidget {
+  const ItemTileWithRequest({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
+    final listingRestrictionAsyncValue =
+        ref.watch(listingsRestrictionFutureProvider(item.asin));
+    return AsyncValueListTileWidget<ListingRestrictions>(
+      value: listingRestrictionAsyncValue,
       errorInfo: [
-        "ItemSelectPage.ItemTile.itemPricesFutureProvider",
+        "ItemSelectPage.ItemTile.listingRestrictionFutureProvider",
         "ASIN: ${item.asin}",
       ],
       data: (value) {
         final newItem = item.copyWith(
-          prices: value.prices,
-          sellByAmazon: value.sellByAmazon,
+          restrictions: value,
         );
         return ProviderScope(
           overrides: [
@@ -43,7 +63,7 @@ class ItemTile extends HookConsumerWidget {
   }
 }
 
-class _InkWell extends HookConsumerWidget {
+class _InkWell extends ConsumerWidget {
   const _InkWell({Key? key, required this.child}) : super(key: key);
 
   final Widget child;

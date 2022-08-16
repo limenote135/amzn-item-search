@@ -20,7 +20,7 @@ final currentIndex = Provider<int>((_) => throw UnimplementedError());
 // 各 ItemTile で、その ItemTile が表示された時点の検索文字列を保持しておくことで、
 // 新しい文字列で検索した際は最初の20件だけ表示するようになる
 final currentQueryParam =
-    Provider<ListMatchingProductRequest>((_) => throw UnimplementedError());
+    Provider<QueryItemsRequest>((_) => throw UnimplementedError());
 
 class ItemTile extends ConsumerWidget {
   const ItemTile({Key? key}) : super(key: key);
