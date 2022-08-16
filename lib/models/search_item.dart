@@ -4,7 +4,6 @@ import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
-import 'package:amasearch/util/exceptions.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -26,18 +25,13 @@ final currentAsinCountProvider = Provider<int>((_) => 1);
 final currentFutureSearchItemProvider =
     Provider<Future<SearchItem>>((_) => throw UnimplementedError());
 
-final asinDataFutureProvider =
-    FutureProvider.autoDispose.family<AsinData, String>((ref, asin) async {
+final listingsRestrictionFutureProvider = FutureProvider.autoDispose
+    .family<ListingRestrictions, String>((ref, asin) async {
   final mws = ref.read(mwsRepositoryProvider);
-  try {
-    final resp = await mws.getAsinData(asin);
-    ref.maintainState = true;
-    return resp.data;
-  } on AmazonItemNotFoundException catch (_) {
-    // 何度もリクエストされるのを防ぐため状態を維持する
-    ref.maintainState = true;
-    rethrow;
-  }
+  final resp = await mws.getRestrictionInfo(asin);
+
+  ref.maintainState = true;
+  return resp;
 });
 
 @freezed
