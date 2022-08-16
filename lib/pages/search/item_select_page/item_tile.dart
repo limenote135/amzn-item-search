@@ -7,8 +7,29 @@ import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ItemTile extends HookConsumerWidget {
+class ItemTile extends ConsumerWidget {
   const ItemTile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
+    return ProviderScope(
+      overrides: [
+        currentAsinDataProvider.overrideWithValue(item),
+        currentSearchDateProvider.overrideWithValue(null),
+      ],
+      child: const SlidableTile(
+        disableDelete: true,
+        child: _InkWell(
+          child: SearchItemTile(),
+        ),
+      ),
+    );
+  }
+}
+
+class ItemTileWithRequest extends ConsumerWidget {
+  const ItemTileWithRequest({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,7 +63,7 @@ class ItemTile extends HookConsumerWidget {
   }
 }
 
-class _InkWell extends HookConsumerWidget {
+class _InkWell extends ConsumerWidget {
   const _InkWell({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
