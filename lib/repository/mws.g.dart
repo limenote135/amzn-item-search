@@ -10,9 +10,10 @@ _$_GetProductByIdResponse _$$_GetProductByIdResponseFromJson(
         Map<String, dynamic> json) =>
     _$_GetProductByIdResponse(
       code: json['code'] as String,
-      items: (json['items'] as List<dynamic>)
-          .map((e) => AsinData.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      items: (json['items'] as List<dynamic>?)
+              ?.map((e) => AsinData.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <AsinData>[],
     );
 
 Map<String, dynamic> _$$_GetProductByIdResponseToJson(
