@@ -222,7 +222,7 @@ class GetProductByIdResponse with _$GetProductByIdResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory GetProductByIdResponse({
     required String code,
-    required List<AsinData> items,
+    @Default(<AsinData>[]) List<AsinData> items,
   }) = _GetProductByIdResponse;
 
   factory GetProductByIdResponse.fromJson(Map<String, dynamic> json) =>
