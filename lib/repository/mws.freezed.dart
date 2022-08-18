@@ -110,7 +110,7 @@ class __$$_GetProductByIdResponseCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   const _$_GetProductByIdResponse(
-      {required this.code, required final List<AsinData> items})
+      {required this.code, final List<AsinData> items = const <AsinData>[]})
       : _items = items;
 
   factory _$_GetProductByIdResponse.fromJson(Map<String, dynamic> json) =>
@@ -120,6 +120,7 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   final String code;
   final List<AsinData> _items;
   @override
+  @JsonKey()
   List<AsinData> get items {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
@@ -163,7 +164,7 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
 abstract class _GetProductByIdResponse implements GetProductByIdResponse {
   const factory _GetProductByIdResponse(
       {required final String code,
-      required final List<AsinData> items}) = _$_GetProductByIdResponse;
+      final List<AsinData> items}) = _$_GetProductByIdResponse;
 
   factory _GetProductByIdResponse.fromJson(Map<String, dynamic> json) =
       _$_GetProductByIdResponse.fromJson;
