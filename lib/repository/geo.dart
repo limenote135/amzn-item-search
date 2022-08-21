@@ -33,12 +33,8 @@ class GeoRepository {
   final Reader _read;
 
   Future<GeoResponse> get(String value) async {
-    if (value.length == janCodeLength &&
-        (value.startsWith("45") ||
-            value.startsWith("49") ||
-            value.startsWith("978"))) {
-      // JAN コードと思われる場合には見つからなかった扱いにする
-      // 978 は書籍の ISBN
+    if (!value.startsWith("c")) {
+      // ゲオのコードは 'c' から始まるので、それ以外は無視する
       return GeoResponse(code: value);
     }
 
