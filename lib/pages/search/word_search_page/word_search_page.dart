@@ -109,14 +109,15 @@ class _AppBar extends HookConsumerWidget {
                 ),
               ),
               onSubmitted: (value) {
-                if (value != "") {
-                  if (req.query == value) {
+                final trimmedValue = value.trim();
+                if (trimmedValue != "") {
+                  if (req.query == trimmedValue) {
                     // 変更がない場合は強制リロードする
                     ref.refresh(queryItemResultProvider(req));
                     return;
                   }
                   ref.read(_currentQueryItemsRequest.notifier).state =
-                      req.copyWith(query: value);
+                      req.copyWith(query: trimmedValue);
                 }
               },
             ),
