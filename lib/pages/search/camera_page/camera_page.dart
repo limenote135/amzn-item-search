@@ -165,10 +165,15 @@ class _BodyState extends ConsumerState<_Body> {
   );
 
   List<Barcode> _filterBarcodes(List<Barcode> codes) {
+    // 書籍の2段目バーコードは13桁で 192 から始まる
+    // このバーコードから情報は取れないので無視する
+    final codes2 =
+        codes.where((e) => e.value.length != 13 || !e.value.startsWith("192"));
+
     final analysisSize = _controller.analysisSize;
     final previewSize = context.size;
     if (analysisSize != null && previewSize != null) {
-      return codes
+      return codes2
           .where(
             _rectOfInterest.codeFilter(
               analysisSize: analysisSize,
@@ -177,7 +182,7 @@ class _BodyState extends ConsumerState<_Body> {
           )
           .toList();
     } else {
-      return codes;
+      return codes2.toList();
     }
   }
 
