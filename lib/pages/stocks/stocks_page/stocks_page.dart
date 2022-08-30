@@ -129,8 +129,9 @@ class _Body extends HookConsumerWidget {
 
               final summary = _getSummary(items, index);
               if (summary != null) {
-                final day =
-                    DateTime.parse(items[index].purchaseDate).dayFormat();
+                final day = DateTime.parse(items[index].purchaseDate)
+                    .toLocal()
+                    .dayFormat();
                 return Column(
                   children: [
                     RepaintBoundary(
