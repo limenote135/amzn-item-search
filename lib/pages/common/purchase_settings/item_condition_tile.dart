@@ -26,7 +26,8 @@ class ItemConditionTile extends HookConsumerWidget {
           Flexible(
             flex: 2,
             child: ReactiveDropdownField<PurchaseItemCondition>(
-              onChanged: (value) {
+              onChanged: (control) {
+                final value = control.value;
                 if (value == null) {
                   return;
                 }
