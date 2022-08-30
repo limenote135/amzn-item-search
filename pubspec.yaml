@@ -76,8 +76,8 @@ dependencies:
   permission_handler: ^9.2.0
   pub_semver: ^2.1.1
   purchases_flutter: ^4.2.0
-  reactive_date_range_picker: ^0.4.1
-  reactive_forms: ^13.0.0
+  reactive_date_range_picker: ^0.5.0
+  reactive_forms: ^14.1.0
   release_notes_dialog: ^1.1.0
   riverpod: 1.0.3
   share_plus: ^4.0.10+1
