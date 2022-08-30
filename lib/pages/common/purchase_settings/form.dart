@@ -60,7 +60,7 @@ final formValueProvider =
     retailerField: item.retailer,
     memoField: item.memo,
     conditionTextField: item.conditionText,
-    purchaseDateField: DateTime.parse(item.purchaseDate),
+    purchaseDateField: DateTime.parse(item.purchaseDate).toLocal(),
   });
 });
 
