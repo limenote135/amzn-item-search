@@ -28,7 +28,7 @@ packages:
       name: animations
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.0.4"
   archive:
     dependency: "direct main"
     description:
@@ -119,7 +119,7 @@ packages:
       name: built_value
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.4.0"
+    version: "8.4.1"
   camera:
     dependency: "direct main"
     description:
@@ -140,7 +140,7 @@ packages:
       name: camera_avfoundation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.8+3"
+    version: "0.9.8+5"
   camera_platform_interface:
     dependency: transitive
     description:
@@ -399,7 +399,7 @@ packages:
       name: file
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.2"
+    version: "6.1.4"
   firebase:
     dependency: transitive
     description:
@@ -727,7 +727,7 @@ packages:
       name: google_sign_in_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   google_sign_in_web:
     dependency: transitive
     description:
@@ -902,7 +902,7 @@ packages:
       name: macos_ui
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.1"
+    version: "1.7.4"
   matcher:
     dependency: transitive
     description:
@@ -1000,7 +1000,7 @@ packages:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.19"
+    version: "2.0.20"
   path_provider_ios:
     dependency: transitive
     description:
@@ -1126,7 +1126,7 @@ packages:
       name: pubspec_parse
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   purchases_flutter:
     dependency: "direct main"
     description:
@@ -1147,14 +1147,14 @@ packages:
       name: reactive_date_range_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.1"
+    version: "0.5.0"
   reactive_forms:
     dependency: "direct main"
     description:
       name: reactive_forms
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "13.0.0"
+    version: "14.1.0"
   release_notes_dialog:
     dependency: "direct main"
     description:
@@ -1252,7 +1252,7 @@ packages:
       name: shared_preferences_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   shared_preferences_web:
     dependency: transitive
     description:
@@ -1516,7 +1516,7 @@ packages:
       name: webview_flutter_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.1"
+    version: "1.9.2"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
@@ -1537,7 +1537,7 @@ packages:
       name: xdg_directories
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0+1"
+    version: "0.2.0+2"
   xml:
     dependency: transitive
     description:

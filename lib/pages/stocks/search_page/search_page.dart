@@ -317,10 +317,10 @@ class _PriceRangeTextField extends HookConsumerWidget {
                 suffix: Text("円"),
                 isDense: true,
               ),
-              validationMessages: (control) => {
-                validationMessagePositiveNumberOrEmpty: "不正な値です",
+              validationMessages: {
+                validationMessagePositiveNumberOrEmpty: (_) => "不正な値です",
               },
-              onSubmitted: () => form.focus(upperControlName),
+              onSubmitted: (control) => form.focus(upperControlName),
             ),
           ),
           const Center(
@@ -338,8 +338,8 @@ class _PriceRangeTextField extends HookConsumerWidget {
                 suffix: Text("円"),
                 isDense: true,
               ),
-              validationMessages: (control) => {
-                validationMessagePositiveNumberOrEmpty: "不正な値です",
+              validationMessages: {
+                validationMessagePositiveNumberOrEmpty: (_) => "不正な値です",
               },
             ),
           ),

@@ -48,10 +48,10 @@ class QuantityTile extends HookWidget {
                     focusNode: quantityFocusNode,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
-                    validationMessages: (control) => {
-                      ValidationMessage.required: "不正な値",
-                      ValidationMessage.number: "不正な値",
-                      ValidationMessage.min: "不正な値"
+                    validationMessages: {
+                      ValidationMessage.required: (_) => "不正な値",
+                      ValidationMessage.number: (_) => "不正な値",
+                      ValidationMessage.min: (_) => "不正な値"
                     },
                   ),
                 ),
