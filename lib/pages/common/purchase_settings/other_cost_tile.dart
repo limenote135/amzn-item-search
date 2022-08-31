@@ -28,17 +28,17 @@ class OtherCostTile extends HookConsumerWidget {
           const Text("その他費用"),
           const Spacer(),
           Expanded(
-            child: ReactiveTextField(
+            child: ReactiveTextField<void>(
               formControlName: otherCostField,
               controller: controller,
               focusNode: focus,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(suffixText: "円"),
               textAlign: TextAlign.end,
-              validationMessages: (control) => {
-                ValidationMessage.required: "その他費用は必須です",
-                ValidationMessage.number: "不正な価格です",
-                ValidationMessage.min: "不正な価格です"
+              validationMessages: {
+                ValidationMessage.required: (_) => "その他費用は必須です",
+                ValidationMessage.number: (_) => "不正な価格です",
+                ValidationMessage.min: (_) => "不正な価格です"
               },
             ),
           ),

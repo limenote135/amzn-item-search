@@ -60,8 +60,8 @@ class InputPricesTile extends HookConsumerWidget {
                       suffixText: "円",
                     ),
                     textAlign: TextAlign.end,
-                    validationMessages: (control) => {
-                      validationMessagePositiveNumberOrEmpty: "不正な値です",
+                    validationMessages: {
+                      validationMessagePositiveNumberOrEmpty: (_) => "不正な値です",
                     },
                   ),
                 ),
@@ -79,10 +79,10 @@ class InputPricesTile extends HookConsumerWidget {
                       suffixText: "円",
                     ),
                     textAlign: TextAlign.end,
-                    validationMessages: (control) => {
-                      ValidationMessage.required: "販売価格は必須です",
-                      ValidationMessage.number: "不正な価格です",
-                      ValidationMessage.min: "不正な価格です"
+                    validationMessages: {
+                      ValidationMessage.required: (_) => "販売価格は必須です",
+                      ValidationMessage.number: (_) => "不正な価格です",
+                      ValidationMessage.min: (_) => "不正な価格です"
                     },
                   ),
                 ),
