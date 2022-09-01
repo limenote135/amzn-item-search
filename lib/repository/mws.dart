@@ -162,11 +162,14 @@ class MwsRepository {
     return BatchGetAsinDataResponse.fromJson(resp);
   }
 
-  Future<ListingRestrictions> getRestrictionInfo(String asin) async {
+  Future<ListingRestrictions> getRestrictionInfo(
+    String asin, {
+    CancelToken? cancelToken,
+  }) async {
     final serverUrl = await _read(serverUrlProvider.future);
     final url = "$serverUrl/v1beta2/spapi/restrictions/$asin";
 
-    final resp = await _doGetRequest(url);
+    final resp = await _doGetRequest(url, cancelToken: cancelToken);
     return ListingRestrictions.fromJson(resp);
   }
 
@@ -187,7 +190,10 @@ class MwsRepository {
     }
   }
 
-  Future<Map<String, dynamic>> _doGetRequest(String url) async {
+  Future<Map<String, dynamic>> _doGetRequest(
+    String url, {
+    CancelToken? cancelToken,
+  }) async {
     final dio = await _read(dioProvider.future);
 
     final user = await _read(authStateChangesProvider.future);
@@ -200,6 +206,7 @@ class MwsRepository {
       url,
       opt: Options(headers: header),
       customHandler: _customHandler,
+      cancelToken: cancelToken,
     );
     return json.decode(resp.data!) as Map<String, dynamic>;
   }

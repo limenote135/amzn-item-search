@@ -4,6 +4,7 @@ import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,8 +28,10 @@ final currentFutureSearchItemProvider =
 
 final listingsRestrictionFutureProvider = FutureProvider.autoDispose
     .family<ListingRestrictions, String>((ref, asin) async {
+  final cancelToken = CancelToken();
+  ref.onDispose(cancelToken.cancel);
   final mws = ref.read(mwsRepositoryProvider);
-  final resp = await mws.getRestrictionInfo(asin);
+  final resp = await mws.getRestrictionInfo(asin, cancelToken: cancelToken);
 
   ref.maintainState = true;
   return resp;
