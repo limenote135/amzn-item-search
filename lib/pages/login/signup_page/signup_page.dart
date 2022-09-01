@@ -40,7 +40,7 @@ class SignupPage extends HookConsumerWidget {
 
     final auth = ref.watch(firebaseAuthProvider);
 
-    Future<void> _onSubmit() async {
+    Future<void> onSubmit() async {
       if (formKey.currentState?.validate() ?? false) {
         final email = emailKey.currentState!.value;
         final password = passwordKey.currentState!.value;
@@ -170,7 +170,7 @@ class SignupPage extends HookConsumerWidget {
                           }
                           return null;
                         },
-                        onSubmit: (_) => _onSubmit(),
+                        onSubmit: (_) => onSubmit(),
                       ),
                     ),
                   ],
@@ -183,7 +183,7 @@ class SignupPage extends HookConsumerWidget {
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.symmetric(horizontal: 64),
                   ),
-                  onPressed: _onSubmit,
+                  onPressed: onSubmit,
                   child: const Text("新規登録"),
                 ),
               ),

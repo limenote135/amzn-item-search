@@ -216,7 +216,7 @@ class _Body extends ConsumerWidget {
           ListTile(
             title: ReactiveFormConsumer(
               builder: (context, formGroup, child) {
-                Future<void> _onPressed() async {
+                Future<void> onPressed() async {
                   ref.read(currentStockItemFilterProvider.notifier).state =
                       filter.copyWith(
                     keyword: getNullableString(form, keywordField),
@@ -235,7 +235,7 @@ class _Body extends ConsumerWidget {
                 }
 
                 return ElevatedButton(
-                  onPressed: form.invalid ? null : _onPressed,
+                  onPressed: form.invalid ? null : onPressed,
                   child: const Text("検索"),
                 );
               },
