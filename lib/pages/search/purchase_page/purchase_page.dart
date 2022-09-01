@@ -123,7 +123,7 @@ class _SaveButton extends HookConsumerWidget {
 
     return ReactiveFormConsumer(
       builder: (context, form, child) {
-        Future<void> _onSave() async {
+        Future<void> onSave() async {
           final cond = getCondition(form).toItemCondition();
           if (_isRestricted(cond, item.restrictions)) {
             final ret = await showOkCancelAlertDialog(
@@ -145,7 +145,7 @@ class _SaveButton extends HookConsumerWidget {
           Navigator.of(context).popUntil((route) => route.settings.name == "/");
         }
 
-        return builder(context, form.invalid ? null : _onSave);
+        return builder(context, form.invalid ? null : onSave);
       },
     );
   }

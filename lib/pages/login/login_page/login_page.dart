@@ -53,7 +53,7 @@ class _Body extends HookConsumerWidget {
 
     final auth = ref.watch(firebaseAuthProvider);
 
-    Future<void> _onSubmit() async {
+    Future<void> onSubmit() async {
       if (formKey.currentState?.validate() ?? false) {
         final email = emailKey.currentState!.value!;
         final password = passwordKey.currentState!.value!;
@@ -158,7 +158,7 @@ class _Body extends HookConsumerWidget {
                       fieldKey: passwordKey,
                       controller: pwController,
                       focusNode: pwFocusNode,
-                      onSubmit: (_) => _onSubmit(),
+                      onSubmit: (_) => onSubmit(),
                     ),
                   ),
                 ],
@@ -171,7 +171,7 @@ class _Body extends HookConsumerWidget {
                   shape: const StadiumBorder(),
                   padding: const EdgeInsets.symmetric(horizontal: 64),
                 ),
-                onPressed: _onSubmit,
+                onPressed: onSubmit,
                 child: const Text("ログイン"),
               ),
             ),
