@@ -72,10 +72,10 @@ class Calculator extends HookConsumerWidget {
                         inputComplete.state = true;
                       },
                       style: OutlinedButton.styleFrom(
+                        foregroundColor:
+                            isDark(context) ? Colors.white70 : Colors.black87,
                         backgroundColor:
                             isDark(context) ? Colors.white12 : Colors.black12,
-                        primary:
-                            isDark(context) ? Colors.white70 : Colors.black87,
                       ),
                       child: const Text("C"),
                     ),
@@ -453,8 +453,8 @@ class _OperatorButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return _ExpandedButton(
       style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black87,
         backgroundColor: Colors.orange[300],
-        primary: Colors.black87,
       ),
       onPressed: onPressed,
       child: child,
