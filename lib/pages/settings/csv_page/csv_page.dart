@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'order_page.dart';
+import 'pricetar_page.dart';
 
 class PurchaseListPage extends StatelessWidget {
   const PurchaseListPage({super.key});
@@ -36,6 +37,12 @@ class _Body extends HookConsumerWidget {
           title: const Text("項目の並び順"),
           onTap: () {
             Navigator.push(context, OrderPage.route());
+          },
+        ),
+        ListTile(
+          title: const Text("プライスター設定"),
+          onTap: () {
+            Navigator.push(context, PricetarPage.route());
           },
         ),
       ],
