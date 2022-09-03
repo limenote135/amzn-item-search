@@ -146,20 +146,30 @@ class MwsRepository {
     return QueryItemsResponse.fromJson(resp);
   }
 
-  Future<BatchGetAsinDataResponse> batchGetAsinData(List<String> asins) async {
+  Future<BatchGetAsinDataResponse> batchGetAsinData(
+    List<String> asins, {
+    CancelToken? cancelToken,
+  }) async {
     final serverUrl = await _read(serverUrlProvider.future);
     final url = "$serverUrl/v1beta2/spapi/asins";
     final params = <String, Object>{"asins": asins};
 
-    final resp = await _doRequest(url, data: json.encode(params));
+    final resp = await _doRequest(
+      url,
+      data: json.encode(params),
+      cancelToken: cancelToken,
+    );
     return BatchGetAsinDataResponse.fromJson(resp);
   }
 
-  Future<ListingRestrictions> getRestrictionInfo(String asin) async {
+  Future<ListingRestrictions> getRestrictionInfo(
+    String asin, {
+    CancelToken? cancelToken,
+  }) async {
     final serverUrl = await _read(serverUrlProvider.future);
     final url = "$serverUrl/v1beta2/spapi/restrictions/$asin";
 
-    final resp = await _doGetRequest(url);
+    final resp = await _doGetRequest(url, cancelToken: cancelToken);
     return ListingRestrictions.fromJson(resp);
   }
 
@@ -180,7 +190,10 @@ class MwsRepository {
     }
   }
 
-  Future<Map<String, dynamic>> _doGetRequest(String url) async {
+  Future<Map<String, dynamic>> _doGetRequest(
+    String url, {
+    CancelToken? cancelToken,
+  }) async {
     final dio = await _read(dioProvider.future);
 
     final user = await _read(authStateChangesProvider.future);
@@ -193,11 +206,16 @@ class MwsRepository {
       url,
       opt: Options(headers: header),
       customHandler: _customHandler,
+      cancelToken: cancelToken,
     );
     return json.decode(resp.data!) as Map<String, dynamic>;
   }
 
-  Future<Map<String, dynamic>> _doRequest(String url, {String? data}) async {
+  Future<Map<String, dynamic>> _doRequest(
+    String url, {
+    String? data,
+    CancelToken? cancelToken,
+  }) async {
     final dio = await _read(dioProvider.future);
 
     final user = await _read(authStateChangesProvider.future);
@@ -212,6 +230,7 @@ class MwsRepository {
       data: data,
       opt: Options(headers: header),
       customHandler: _customHandler,
+      cancelToken: cancelToken,
     );
     return json.decode(resp.data!) as Map<String, dynamic>;
   }

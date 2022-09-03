@@ -32,7 +32,7 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
-    void _onReorder(int oldIndex, int newIndexRaw) {
+    void onReorder(int oldIndex, int newIndexRaw) {
       var newIndex = newIndexRaw;
       if (oldIndex < newIndex) {
         // 移動前のインデックスより移動後のインデックスが大きい場合、アイテムの長さがリストの保有数よりも1大きくなってしまうため、
@@ -59,7 +59,7 @@ class _Body extends HookConsumerWidget {
         const ThemeDivider(),
         Expanded(
           child: ReorderableListView(
-            onReorder: _onReorder,
+            onReorder: onReorder,
             children: [
               for (final item in settings.csvOrder)
                 ListTile(

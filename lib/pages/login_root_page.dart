@@ -36,8 +36,8 @@ class LoginRootPage extends StatelessWidget {
                 Navigator.push(context, LoginPage.route());
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.black,
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.white,
                 shape: const StadiumBorder(),
                 padding: const EdgeInsets.symmetric(horizontal: 64),
               ),
