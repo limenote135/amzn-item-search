@@ -3,6 +3,7 @@ import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/alert_type.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
+import 'package:amasearch/models/pricetar_settings.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -72,6 +73,9 @@ class GeneralSettings with _$GeneralSettings {
     @Default(defaultUsedConditionText)
         List<String> usedConditionTexts,
     @HiveField(24, defaultValue: 0) @Default(0) int usedConditionTextIndex,
+    @HiveField(25, defaultValue: defaultPricetarSettings)
+    @Default(defaultPricetarSettings)
+        PricetarSettings pricetarSettings,
   }) = _GeneralSettings;
 }
 

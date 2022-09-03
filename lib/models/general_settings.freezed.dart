@@ -71,6 +71,8 @@ mixin _$GeneralSettings {
   List<String> get usedConditionTexts => throw _privateConstructorUsedError;
   @HiveField(24, defaultValue: 0)
   int get usedConditionTextIndex => throw _privateConstructorUsedError;
+  @HiveField(25, defaultValue: defaultPricetarSettings)
+  PricetarSettings get pricetarSettings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith =>
@@ -132,9 +134,12 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(23, defaultValue: defaultUsedConditionText)
           List<String> usedConditionTexts,
       @HiveField(24, defaultValue: 0)
-          int usedConditionTextIndex});
+          int usedConditionTextIndex,
+      @HiveField(25, defaultValue: defaultPricetarSettings)
+          PricetarSettings pricetarSettings});
 
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
+  $PricetarSettingsCopyWith<$Res> get pricetarSettings;
 }
 
 /// @nodoc
@@ -173,6 +178,7 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object? newConditionTextIndex = freezed,
     Object? usedConditionTexts = freezed,
     Object? usedConditionTextIndex = freezed,
+    Object? pricetarSettings = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode: isDarkMode == freezed
@@ -275,6 +281,10 @@ class _$GeneralSettingsCopyWithImpl<$Res>
           ? _value.usedConditionTextIndex
           : usedConditionTextIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      pricetarSettings: pricetarSettings == freezed
+          ? _value.pricetarSettings
+          : pricetarSettings // ignore: cast_nullable_to_non_nullable
+              as PricetarSettings,
     ));
   }
 
@@ -282,6 +292,13 @@ class _$GeneralSettingsCopyWithImpl<$Res>
   $KeepaSettingsCopyWith<$Res> get keepaSettings {
     return $KeepaSettingsCopyWith<$Res>(_value.keepaSettings, (value) {
       return _then(_value.copyWith(keepaSettings: value));
+    });
+  }
+
+  @override
+  $PricetarSettingsCopyWith<$Res> get pricetarSettings {
+    return $PricetarSettingsCopyWith<$Res>(_value.pricetarSettings, (value) {
+      return _then(_value.copyWith(pricetarSettings: value));
     });
   }
 }
@@ -343,10 +360,14 @@ abstract class _$$_GeneralSettingsCopyWith<$Res>
       @HiveField(23, defaultValue: defaultUsedConditionText)
           List<String> usedConditionTexts,
       @HiveField(24, defaultValue: 0)
-          int usedConditionTextIndex});
+          int usedConditionTextIndex,
+      @HiveField(25, defaultValue: defaultPricetarSettings)
+          PricetarSettings pricetarSettings});
 
   @override
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
+  @override
+  $PricetarSettingsCopyWith<$Res> get pricetarSettings;
 }
 
 /// @nodoc
@@ -387,6 +408,7 @@ class __$$_GeneralSettingsCopyWithImpl<$Res>
     Object? newConditionTextIndex = freezed,
     Object? usedConditionTexts = freezed,
     Object? usedConditionTextIndex = freezed,
+    Object? pricetarSettings = freezed,
   }) {
     return _then(_$_GeneralSettings(
       isDarkMode: isDarkMode == freezed
@@ -489,6 +511,10 @@ class __$$_GeneralSettingsCopyWithImpl<$Res>
           ? _value.usedConditionTextIndex
           : usedConditionTextIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      pricetarSettings: pricetarSettings == freezed
+          ? _value.pricetarSettings
+          : pricetarSettings // ignore: cast_nullable_to_non_nullable
+              as PricetarSettings,
     ));
   }
 }
@@ -548,7 +574,9 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(23, defaultValue: defaultUsedConditionText)
           final List<String> usedConditionTexts = defaultUsedConditionText,
       @HiveField(24, defaultValue: 0)
-          this.usedConditionTextIndex = 0})
+          this.usedConditionTextIndex = 0,
+      @HiveField(25, defaultValue: defaultPricetarSettings)
+          this.pricetarSettings = defaultPricetarSettings})
       : _retailers = retailers,
         _readAloudPatterns = readAloudPatterns,
         _customButtons = customButtons,
@@ -717,10 +745,14 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(24, defaultValue: 0)
   final int usedConditionTextIndex;
+  @override
+  @JsonKey()
+  @HiveField(25, defaultValue: defaultPricetarSettings)
+  final PricetarSettings pricetarSettings;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings, leftSlideShortcut: $leftSlideShortcut, rightSlideShortcut: $rightSlideShortcut, newConditionTexts: $newConditionTexts, newConditionTextIndex: $newConditionTextIndex, usedConditionTexts: $usedConditionTexts, usedConditionTextIndex: $usedConditionTextIndex)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings, leftSlideShortcut: $leftSlideShortcut, rightSlideShortcut: $rightSlideShortcut, newConditionTexts: $newConditionTexts, newConditionTextIndex: $newConditionTextIndex, usedConditionTexts: $usedConditionTexts, usedConditionTextIndex: $usedConditionTextIndex, pricetarSettings: $pricetarSettings)';
   }
 
   @override
@@ -772,7 +804,9 @@ class _$_GeneralSettings implements _GeneralSettings {
             const DeepCollectionEquality()
                 .equals(other._usedConditionTexts, _usedConditionTexts) &&
             const DeepCollectionEquality()
-                .equals(other.usedConditionTextIndex, usedConditionTextIndex));
+                .equals(other.usedConditionTextIndex, usedConditionTextIndex) &&
+            const DeepCollectionEquality()
+                .equals(other.pricetarSettings, pricetarSettings));
   }
 
   @override
@@ -802,7 +836,8 @@ class _$_GeneralSettings implements _GeneralSettings {
         const DeepCollectionEquality().hash(_newConditionTexts),
         const DeepCollectionEquality().hash(newConditionTextIndex),
         const DeepCollectionEquality().hash(_usedConditionTexts),
-        const DeepCollectionEquality().hash(usedConditionTextIndex)
+        const DeepCollectionEquality().hash(usedConditionTextIndex),
+        const DeepCollectionEquality().hash(pricetarSettings)
       ]);
 
   @JsonKey(ignore: true)
@@ -862,7 +897,9 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(23, defaultValue: defaultUsedConditionText)
           final List<String> usedConditionTexts,
       @HiveField(24, defaultValue: 0)
-          final int usedConditionTextIndex}) = _$_GeneralSettings;
+          final int usedConditionTextIndex,
+      @HiveField(25, defaultValue: defaultPricetarSettings)
+          final PricetarSettings pricetarSettings}) = _$_GeneralSettings;
 
   @override // ダークモード
   @HiveField(0)
@@ -939,6 +976,9 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(24, defaultValue: 0)
   int get usedConditionTextIndex;
+  @override
+  @HiveField(25, defaultValue: defaultPricetarSettings)
+  PricetarSettings get pricetarSettings;
   @override
   @JsonKey(ignore: true)
   _$$_GeneralSettingsCopyWith<_$_GeneralSettings> get copyWith =>
