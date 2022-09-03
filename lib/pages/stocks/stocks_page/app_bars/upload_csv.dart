@@ -1,6 +1,6 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
-import 'package:amasearch/models/enums/csv_columns.dart';
+import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/csv.dart';
 import 'package:amasearch/util/formatter.dart';
@@ -12,13 +12,13 @@ import 'common.dart';
 Future<bool> uploadCsv(
   WidgetRef ref,
   List<StockItem> itemList,
-  List<CsvColumn> order,
+  GeneralSettings settings,
 ) async {
   final timestamp = DateTime.now().timestampFormat();
   final file = await createStockItemCsv(
     "StockList_$timestamp",
     itemList,
-    order,
+    settings,
   );
   final result = await Share.shareFilesWithResult(
     [file.absolute.path],

@@ -3,6 +3,10 @@ import 'dart:io';
 import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
+import 'package:amasearch/models/enums/pricetar_rule.dart';
+import 'package:amasearch/models/enums/pricetar_stopper.dart';
+import 'package:amasearch/models/general_settings.dart';
+import 'package:amasearch/models/pricetar_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:csv/csv.dart';
@@ -12,7 +16,7 @@ import 'package:path_provider/path_provider.dart';
 Future<File> createStockItemCsv(
   String filename,
   List<StockItem> items,
-  List<CsvColumn> order,
+  GeneralSettings settings,
 ) async {
   final tempDir = await getTemporaryDirectory();
   final csvDirPath = "${tempDir.absolute.path}/stockList";
@@ -23,18 +27,87 @@ Future<File> createStockItemCsv(
   csvDir.createSync();
 
   final file = File("$csvDirPath/$filename.csv");
-  final data = <List<Object>>[
-    _createHeader(order),
-    for (final item in items) _createData(item, order)
-  ];
+  final data = _createDefaultCsv(items, settings.csvOrder);
   final csvData = const ListToCsvConverter().convert(data);
   final converted = ShiftJIS().encode(csvData);
   file.writeAsBytesSync(converted);
   return file;
 }
 
-List<String> _createHeader(List<CsvColumn> order) {
-  return <String>[for (final o in order) o.toDisplayString()];
+List<List<Object>> _createPricetarCsv(
+    List<StockItem> items, PricetarSettings settings) {
+  return <List<Object>>[
+    // header
+    [
+      "SKU",
+      "ASIN",
+      "title",
+      "number",
+      "price",
+      "cost",
+      "akaji",
+      "takane",
+      "condition",
+      "conditionNote",
+      "priceTrace",
+      "leadtime",
+      "merchant_shipping_group_name",
+      "delete",
+    ],
+    for (final item in items)
+      [
+        item.sku,
+        item.item.asin,
+        "",
+        item.amount,
+        item.sellPrice,
+        item.purchasePrice,
+        _calcPricetarStopperPrice(
+          item,
+          settings.lowestStopperType,
+          settings.lowestStopperValue,
+        ),
+        _calcPricetarStopperPrice(
+          item,
+          settings.highestStopperType,
+          settings.highestStopperValue,
+        ),
+        item.subCondition.toPricetarCsvValue(),
+        item.conditionText,
+        item.condition == ItemCondition.newItem
+            ? settings.newRule.toPricetarCsvValue()
+            : settings.usedRule.toPricetarCsvValue(),
+        "",
+        "",
+        "",
+      ]
+  ];
+}
+
+int _calcPricetarStopperPrice(
+  StockItem item,
+  PricetarStopperType type,
+  int value,
+) {
+  switch (type) {
+    case PricetarStopperType.nothing:
+      return 0;
+    case PricetarStopperType.listingPrice:
+      return (item.sellPrice * value / 100).round();
+    case PricetarStopperType.profitValue:
+      return 0;
+    case PricetarStopperType.profitRate:
+      return 0;
+  }
+}
+
+List<List<Object>> _createDefaultCsv(
+    List<StockItem> items, List<CsvColumn> order) {
+  final data = <List<Object>>[
+    <String>[for (final o in order) o.toDisplayString()],
+    for (final item in items) _createData(item, order)
+  ];
+  return data;
 }
 
 List<Object> _createData(StockItem item, List<CsvColumn> order) {

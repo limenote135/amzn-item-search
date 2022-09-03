@@ -34,7 +34,7 @@ class UploadAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 ? () async {
                     final analytics = ref.read(analyticsControllerProvider);
                     final isSuccess =
-                        await uploadCsv(ref, selectedItems, settings.csvOrder);
+                        await uploadCsv(ref, selectedItems, settings);
                     if (isSuccess) {
                       await requestReview(analytics);
                     }
