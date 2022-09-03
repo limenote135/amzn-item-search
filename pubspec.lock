@@ -7,7 +7,7 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "46.0.0"
+    version: "47.0.0"
   adaptive_dialog:
     dependency: "direct main"
     description:
@@ -21,7 +21,7 @@ packages:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.6.0"
+    version: "4.7.0"
   animations:
     dependency: transitive
     description:
@@ -336,7 +336,7 @@ packages:
       name: dynamic_color
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.3"
+    version: "1.5.4"
   euc:
     dependency: "direct main"
     description:
@@ -350,14 +350,14 @@ packages:
       name: extended_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.2.1"
+    version: "6.3.0"
   extended_image_library:
     dependency: transitive
     description:
       name: extended_image_library
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.0"
   fake_async:
     dependency: transitive
     description:
@@ -1035,7 +1035,7 @@ packages:
       name: pedantic_mono
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.19.2+1"
+    version: "1.20.0"
   permission_handler:
     dependency: "direct main"
     description:
@@ -1495,14 +1495,14 @@ packages:
       name: webview_flutter_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.9.5"
+    version: "2.10.0"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
       name: webview_flutter_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.2"
+    version: "1.9.3"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
@@ -1539,5 +1539,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.17.0 <3.0.0"
-  flutter: ">=3.1.0-0.0.pre.1036"
+  dart: ">=2.18.0 <3.0.0"
+  flutter: ">=3.3.0"
