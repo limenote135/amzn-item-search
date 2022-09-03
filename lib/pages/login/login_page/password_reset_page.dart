@@ -41,7 +41,7 @@ class _Body extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(firebaseAuthProvider);
 
-    Future<void> _onSubmit() async {
+    Future<void> onSubmit() async {
       if (formKey.currentState?.validate() != true) {
         return;
       }
@@ -117,7 +117,7 @@ class _Body extends HookConsumerWidget {
                     child: EmailFormField(
                       fieldKey: fieldKey,
                       autoFocus: true,
-                      onSubmit: (_) => _onSubmit(),
+                      onSubmit: (_) => onSubmit(),
                     ),
                   ),
                   ElevatedButton(
@@ -125,7 +125,7 @@ class _Body extends HookConsumerWidget {
                       shape: const StadiumBorder(),
                       padding: const EdgeInsets.symmetric(horizontal: 64),
                     ),
-                    onPressed: _onSubmit,
+                    onPressed: onSubmit,
                     child: const Text("パスワードをリセット"),
                   ),
                 ],
