@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 const String _prefKey = "release_note_ver";
 
 var releaseNotesVersion = Version(1, 4, 0);
-const releases = <Release>[
+const releaseNotes = <Release>[
   Release("1.4.0", [
     ReleaseSublist(
       name: "更新内容",
@@ -62,5 +62,5 @@ Future<List<Release>?> getReleaseNotes() async {
 
   // SharedPreference に表示した ReleaseNotes のバージョンを保存
   await prefs.setString(_prefKey, releaseNotesVersion.toString());
-  return releases;
+  return releaseNotes;
 }
