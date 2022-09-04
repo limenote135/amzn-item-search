@@ -17,12 +17,14 @@ import 'package:amasearch/pages/settings/support_page/suppert_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
+import 'package:amasearch/util/release_notes.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:release_notes_dialog/release_notes_dialog.dart';
 
 import 'amazon_status.dart';
 
@@ -263,6 +265,19 @@ class _Body extends HookConsumerWidget {
               applicationVersion:
                   "${packageInfo.version} (build ${packageInfo.buildNumber})",
               applicationLegalese: "Copyright けんず",
+            );
+          },
+        ),
+        ListTile(
+          title: const Text("更新履歴"),
+          onTap: () async {
+            await showDialog<void>(
+              context: context,
+              builder: (context) => const ReleaseNotesDialog(
+                title: "更新履歴",
+                closeButtonString: "OK",
+                releases: releaseNotes,
+              ),
             );
           },
         ),
