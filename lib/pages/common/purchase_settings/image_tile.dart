@@ -1,4 +1,4 @@
-import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/models/keepa_settings.dart';
 import 'package:amasearch/models/search_item.dart';
