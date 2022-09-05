@@ -150,7 +150,7 @@ class __$$_ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: itemPricesTypeId)
-class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
+class _$_ItemPrices implements _ItemPrices {
   const _$_ItemPrices(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
@@ -192,18 +192,8 @@ class _$_ItemPrices with DiagnosticableTreeMixin implements _ItemPrices {
   final FeeInfo feeInfo;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ItemPrices(newPrices: $newPrices, usedPrices: $usedPrices, feeInfo: $feeInfo)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ItemPrices'))
-      ..add(DiagnosticsProperty('newPrices', newPrices))
-      ..add(DiagnosticsProperty('usedPrices', usedPrices))
-      ..add(DiagnosticsProperty('feeInfo', feeInfo));
   }
 
   @override
@@ -442,7 +432,7 @@ class __$$_PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
   FulfillmentChannelConverter()
 ])
 @HiveType(typeId: priceDetailTypeId)
-class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
+class _$_PriceDetail implements _PriceDetail {
   const _$_PriceDetail(
       {@HiveField(0)
       @JsonKey(name: "condition")
@@ -493,22 +483,8 @@ class _$_PriceDetail with DiagnosticableTreeMixin implements _PriceDetail {
   final bool isCart;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'PriceDetail(itemCondition: $itemCondition, subCondition: $subCondition, channel: $channel, price: $price, shipping: $shipping, point: $point, isCart: $isCart)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PriceDetail'))
-      ..add(DiagnosticsProperty('itemCondition', itemCondition))
-      ..add(DiagnosticsProperty('subCondition', subCondition))
-      ..add(DiagnosticsProperty('channel', channel))
-      ..add(DiagnosticsProperty('price', price))
-      ..add(DiagnosticsProperty('shipping', shipping))
-      ..add(DiagnosticsProperty('point', point))
-      ..add(DiagnosticsProperty('isCart', isCart));
   }
 
   @override

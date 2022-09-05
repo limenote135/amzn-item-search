@@ -1,3 +1,4 @@
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
