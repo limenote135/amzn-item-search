@@ -1,7 +1,7 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
-import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'dart:math';
 
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/query_params.dart';
-import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/util/error_report.dart';

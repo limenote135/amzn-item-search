@@ -1,9 +1,9 @@
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/alert_type.dart';
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/item_price.dart';
-import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/search_settings.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/util/price_util.dart';

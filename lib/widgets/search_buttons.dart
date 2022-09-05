@@ -1,9 +1,9 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/general_settings_default.dart';
 import 'package:amasearch/models/offer_listings.dart';
-import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
 import 'package:amasearch/util/url_replacer.dart';
