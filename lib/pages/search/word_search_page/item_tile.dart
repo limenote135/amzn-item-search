@@ -1,5 +1,5 @@
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/query_params.dart';
-import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/repository/mws.dart';
