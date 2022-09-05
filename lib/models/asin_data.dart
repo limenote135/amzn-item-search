@@ -43,6 +43,7 @@ class AsinData with _$AsinData {
     ListingRestrictions restrictions,
     @HiveField(12, defaultValue: "") @Default("") String model,
     @HiveField(13, defaultValue: "") @Default("") String variationRoot,
+    @HiveField(14, defaultValue: false) @Default(false) bool isHazmat,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>
