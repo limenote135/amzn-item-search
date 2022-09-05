@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/util/alert.dart';
 import 'package:amasearch/util/auth.dart';
@@ -99,6 +100,17 @@ final queryItemResultProvider = FutureProvider.autoDispose
   final resp = await mws.queryItems(req.query, req.category);
   ref.maintainState = true;
   return resp.asins;
+});
+
+final listingsRestrictionFutureProvider = FutureProvider.autoDispose
+    .family<ListingRestrictions, String>((ref, asin) async {
+  final cancelToken = CancelToken();
+  ref.onDispose(cancelToken.cancel);
+  final mws = ref.read(mwsRepositoryProvider);
+  final resp = await mws.getRestrictionInfo(asin, cancelToken: cancelToken);
+
+  ref.maintainState = true;
+  return resp;
 });
 
 class MwsRepository {
