@@ -1,4 +1,4 @@
-import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';

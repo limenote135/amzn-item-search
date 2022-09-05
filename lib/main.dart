@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:amasearch/app.dart';
 import 'package:amasearch/models/alert_condition.dart';
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/alert_type.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';

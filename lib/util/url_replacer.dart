@@ -1,4 +1,4 @@
-import 'package:amasearch/models/search_item.dart';
+import 'package:amasearch/models/asin_data.dart';
 
 import 'variable_format.dart';
 

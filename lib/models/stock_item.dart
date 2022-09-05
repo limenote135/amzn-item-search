@@ -1,10 +1,10 @@
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/listing_item.dart';
-import 'package:amasearch/models/search_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'asin_data.dart';
 import 'enums/item_condition.dart';
 import 'enums/item_sub_condition.dart';
 
