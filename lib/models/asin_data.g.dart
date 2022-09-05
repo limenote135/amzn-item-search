@@ -35,13 +35,14 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
           : fields[11] as ListingRestrictions,
       model: fields[12] == null ? '' : fields[12] as String,
       variationRoot: fields[13] == null ? '' : fields[13] as String,
+      isHazmat: fields[14] == null ? false : fields[14] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_AsinData obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.jan)
       ..writeByte(1)
@@ -69,7 +70,9 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       ..writeByte(12)
       ..write(obj.model)
       ..writeByte(13)
-      ..write(obj.variationRoot);
+      ..write(obj.variationRoot)
+      ..writeByte(14)
+      ..write(obj.isHazmat);
   }
 
   @override
@@ -144,6 +147,7 @@ _$_AsinData _$$_AsinDataFromJson(Map<String, dynamic> json) => _$_AsinData(
               json['restrictions'] as Map<String, dynamic>),
       model: json['model'] as String? ?? "",
       variationRoot: json['variation_root'] as String? ?? "",
+      isHazmat: json['is_hazmat'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
@@ -161,6 +165,7 @@ Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
       'restrictions': instance.restrictions,
       'model': instance.model,
       'variation_root': instance.variationRoot,
+      'is_hazmat': instance.isHazmat,
     };
 
 _$_ListingRestrictions _$$_ListingRestrictionsFromJson(
