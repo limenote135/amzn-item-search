@@ -87,6 +87,7 @@ ItemSubCondition toItemSubCondition(String condition) {
     case "new":
       return ItemSubCondition.newItem;
     case "Mint":
+    case "mint":
     case "like_new":
       return ItemSubCondition.mint;
     case "VeryGood":
