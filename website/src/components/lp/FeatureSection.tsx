@@ -16,6 +16,13 @@ import React, { ReactNode } from "react";
 import { parser } from "@/plugin/budoux";
 import { Image } from "@/components/Image";
 
+import LoupeImage from "@/assets/lp/loupe.png";
+import Feature01 from "@/assets/lp/feature1.png";
+import Feature02 from "@/assets/lp/feature2.png";
+import Feature03 from "@/assets/lp/feature3.png";
+
+import Dec4 from "@/assets/lp/dec4.svg";
+
 type FeatureItemProps = {
   title: string;
   content: string;
@@ -25,7 +32,7 @@ type FeatureItemProps = {
 const FeatureItem = ({ title, content, icon }: FeatureItemProps) => (
   <Box display={"flex"} flexDirection={"column"} width={"100%"}>
     <Box display={"flex"} flexDirection={"row"} alignItems={"center"} height={"64px"}>
-      <Image src={"/img/dec4.svg"} width={10} height={20} alt={""} />
+      <Dec4 width={10} height={20} alt={""} />
       <Typography variant={"h6"} textAlign={"center"} fontWeight={"bold"} ml={1}>
         {title}
       </Typography>
@@ -48,7 +55,7 @@ const FeatureList = ({ features }: FeatureListProps) => (
   <Box display={"flex"} flexDirection={"column"} alignItems={{ xs: "center", sm: "unset" }}>
     <Box display={"flex"} flexDirection={"row"} borderBottom={"2px solid #9cb199"} alignItems={"center"}>
       <Box display={"inline-block"} sx={{ margin: "2px" }}>
-        <Image src={"/img/loupe.png"} width={30} height={30} alt={""} />
+        <Image src={LoupeImage} width={30} height={30} alt={""} />
       </Box>
       <Typography variant={"h5"} fontFamily={"bold"}>
         amzn-item-searchの主な機能
@@ -97,7 +104,7 @@ const FeatureContainer = ({ reference, inView }: FeatureProp) => (
           <FeatureItem
             title={"直観的で使いやすいUI"}
             content={"説明なしで使いこなせるシンプルでわかりやすいユーザーインターフェース"}
-            icon={<Image src={"/img/feature1.png"} width={300} height={300} alt={""} />}
+            icon={<Image src={Feature01} alt={""} />}
           />
         </Grid>
 
@@ -105,14 +112,14 @@ const FeatureContainer = ({ reference, inView }: FeatureProp) => (
           <FeatureItem
             title={"圧倒的な動作スピード"}
             content={"高速バーコードリーダーと軽快なアプリ動作でスピーディーな仕入れが可能に"}
-            icon={<Image src={"/img/feature2.png"} width={300} height={300} alt={""} />}
+            icon={<Image src={Feature02} alt={""} />}
           />
         </Grid>
         <Grid item xs={12} md={6} display={"flex"} px={{ xs: 0, sm: 2 }} justifyContent={"center"}>
           <FeatureItem
             title={"充実した機能"}
             content={"せどり仕入れに必要な機能を網羅した、オールインワンのシステム設計"}
-            icon={<Image src={"/img/feature3.png"} width={300} height={300} alt={""} />}
+            icon={<Image src={Feature03} alt={""} />}
           />
         </Grid>
         <Grid item xs={12} md={6} display={"flex"} px={{ xs: 0, sm: 2 }} justifyContent={"center"}>

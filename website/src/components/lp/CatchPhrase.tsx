@@ -7,6 +7,9 @@ import { ThemeProvider } from "@mui/system";
 import { createTheme } from "@mui/material/styles";
 import { parser } from "@/plugin/budoux";
 
+import BlackLogo from "@/assets/lp/logo_b.png";
+import PersonImg from "@/assets/lp/person.png";
+
 type Props = {
   reference: (node?: Element | null | undefined) => void;
   inView: boolean;
@@ -15,7 +18,7 @@ type Props = {
 const Container = ({ reference, inView }: Props) => (
   <Box bgcolor={"#fedd6b"} textAlign={"center"} py={4} display={"flex"} flexDirection={"column"}>
     <Box display={{ xs: "block", sm: "none" }}>
-      <Image src={"/img/person.png"} width={140} height={140} alt={""} />
+      <Image src={PersonImg} alt={""} />
     </Box>
     <Typography
       variant={"h4"}
@@ -33,7 +36,7 @@ const Container = ({ reference, inView }: Props) => (
         <Fade in={inView} timeout={2000}>
           <Box mx={1}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={"/img/logo_b.png"} width={240} height={67} alt={"amzn-item-search"} />
+            <Image src={BlackLogo} width={240} height={67} alt={"amzn-item-search"} />
           </Box>
         </Fade>
         で。
@@ -51,7 +54,7 @@ const Container = ({ reference, inView }: Props) => (
         right={{ sm: "calc(50% - 350px)", md: "calc(50% - 400px)" }}
         display={{ xs: "none", sm: "block" }}
       >
-        <Image src={"/img/person.png"} width={140} height={140} alt={""} />
+        <Image src={PersonImg} width={140} height={140} alt={""} />
       </Box>
     </Box>
   </Box>
