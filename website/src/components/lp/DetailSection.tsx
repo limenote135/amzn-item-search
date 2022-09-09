@@ -3,18 +3,28 @@ import React from "react";
 import { useInView } from "react-intersection-observer";
 import { parser } from "@/plugin/budoux";
 import { Image } from "@/components/Image";
+import { StaticImageData } from "next/image";
+
+import Detail01 from "@/assets/lp/detail01.png";
+import Detail02 from "@/assets/lp/detail02.png";
+import Detail03 from "@/assets/lp/detail03.png";
+import Detail04 from "@/assets/lp/detail04.png";
+import Detail05 from "@/assets/lp/detail05.png";
+import Detail06 from "@/assets/lp/detail06.png";
+
+import Dec3 from "@/assets/lp/dec3_pc.svg";
 
 type DetailItemProp = {
   fontColor: string;
   title: string;
   text: string;
-  image: string;
+  image: StaticImageData;
 };
 
 const DualLineDetailItem = ({ fontColor, title, text, image }: DetailItemProp) => (
   <Box display={"flex"} textAlign={"center"} flexDirection={"column"} pt={10}>
     <Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"center"}>
-      <Image src={"/img/dec3_pc.svg"} width={60} height={60} alt={""} />
+      <Dec3 width={60} height={60} alt={""} />
       <Typography
         variant={"h6"}
         fontWeight={"bold"}
@@ -24,7 +34,7 @@ const DualLineDetailItem = ({ fontColor, title, text, image }: DetailItemProp) =
     </Box>
     <Grid container alignItems={"center"} flexDirection={"row"}>
       <Grid item xs={12} md={6} textAlign={{ xs: "center", md: "right" }} p={2}>
-        <Image src={image} width={300} height={567} alt={""} />
+        <Image src={image} alt={""} />
       </Grid>
       <Grid item xs={12} md={6} p={2} textAlign={"center"}>
         <Typography
@@ -83,7 +93,7 @@ const DetailContainer = ({ reference, inView }: DetailProp) => (
           "<b>仕入れ作業の効率が高まります。</b><br/>" +
           "<b>目にもバッテリーにも優しい</b>ダークモードにも対応。"
         }
-        image={"/img/detail01.png"}
+        image={Detail01}
       />
     </Box>
     <Box display={"flex"} textAlign={"center"} flexDirection={"column"} pt={10}>
@@ -94,7 +104,7 @@ const DetailContainer = ({ reference, inView }: DetailProp) => (
           "JANコードだけでなく、<b>BOOKOFF、GEO、TSUTAYAのインストアコードに対応。</b><br/>" +
           "これらの店舗でもスムーズな仕入れを実現します。"
         }
-        image={"/img/detail02.png"}
+        image={Detail02}
       />
     </Box>
     <Box display={"flex"} textAlign={"center"} flexDirection={"column"} pt={10}>
@@ -105,7 +115,7 @@ const DetailContainer = ({ reference, inView }: DetailProp) => (
           "「仕入れたのに出品できない！」と、<br/>あなたの貴重な時間と労力を無駄にしてしまっていませんか。<br/>" +
           "アマサーチなら出品可否が一目でわかるから、<b>そんなことは起こりません。</b>"
         }
-        image={"/img/detail03.png"}
+        image={Detail03}
       />
     </Box>
     <Box display={"flex"} textAlign={"center"} flexDirection={"column"} pt={10}>
@@ -117,7 +127,7 @@ const DetailContainer = ({ reference, inView }: DetailProp) => (
           "アマサーチは多彩で便利なアラームを搭載。<br/>" +
           "利益商品を見逃しません。"
         }
-        image={"/img/detail04.png"}
+        image={Detail04}
       />
     </Box>
     <Box display={"flex"} textAlign={"center"} flexDirection={"column"} pt={10}>
@@ -129,7 +139,7 @@ const DetailContainer = ({ reference, inView }: DetailProp) => (
           "<b>よく使う機能をすぐに呼び出す</b>ことができ、<br/>" +
           "<b>スムーズ・直観的</b>な操作が可能です。"
         }
-        image={"/img/detail05.png"}
+        image={Detail05}
       />
     </Box>
     <Box display={"flex"} textAlign={"center"} flexDirection={"column"} py={10}>
@@ -142,7 +152,7 @@ const DetailContainer = ({ reference, inView }: DetailProp) => (
           "蓄積されるデータを読み取ることで、<br/>" +
           "<b>今後の仕入れを改善するための指標</b>にも。"
         }
-        image={"/img/detail06.png"}
+        image={Detail06}
       />
     </Box>
   </Box>
