@@ -6,10 +6,11 @@ import AppDownloadBadge from "@/components/lp/AppDownloadBadge";
 import React from "react";
 import { styled } from "@mui/system";
 
+import WhiteLogo from "@/assets/lp/logo_w.png";
+
 export type DrawerProp = {
   isOpen: boolean;
   handleToggleDrawerOpen: () => void;
-  returnToTop: () => void;
 };
 
 const CenteredListItemText = styled(ListItemText)({
@@ -35,7 +36,7 @@ const MyDrawer = ({ isOpen, handleToggleDrawerOpen }: DrawerProp) => (
       </ListItem>
       <Divider />
       <CenteredListItem>
-        <Image src={"/img/logo_w.png"} width={229 /*(483 * 64) / 135*/} height={64} alt={"アプリロゴ"} />
+        <Image src={WhiteLogo} width={229 /*(483 * 64) / 135*/} height={64} alt={"アプリロゴ"} />
       </CenteredListItem>
       <ListItem button>
         <Link href={"/terms/service"} color={"#FFF"} sx={{ textDecoration: "none" }}>
