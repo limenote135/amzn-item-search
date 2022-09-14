@@ -1,6 +1,8 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
+import 'package:amasearch/util/csv.dart';
 import 'package:amasearch/util/review.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -32,10 +34,26 @@ class UploadAppBar extends ConsumerWidget implements PreferredSizeWidget {
             ),
             onPressed: selectedItems.isNotEmpty
                 ? () async {
+                    final type = await showConfirmationDialog(
+                      context: context,
+                      title: "書式の選択",
+                      initialSelectedActionKey: CsvFormat.standard,
+                      actions: [
+                        for (final f in CsvFormat.values)
+                          AlertDialogAction(key: f, label: f.displayName)
+                      ],
+                    );
+                    if (type == null) {
+                      return;
+                    }
                     final analytics = ref.read(analyticsControllerProvider);
                     final isSuccess =
-                        await uploadCsv(ref, selectedItems, settings);
+                        await uploadCsv(selectedItems, settings, type);
+                    resetState(ref);
                     if (isSuccess) {
+                      await ref
+                          .read(analyticsControllerProvider)
+                          .logUploadListEvent(type);
                       await requestReview(analytics);
                     }
                   }
