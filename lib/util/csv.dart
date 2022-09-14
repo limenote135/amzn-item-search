@@ -13,10 +13,26 @@ import 'package:csv/csv.dart';
 import 'package:euc/jis.dart';
 import 'package:path_provider/path_provider.dart';
 
+enum CsvFormat {
+  standard,
+  pricetar;
+
+  const CsvFormat();
+  String get displayName {
+    switch (this) {
+      case CsvFormat.standard:
+        return "標準";
+      case CsvFormat.pricetar:
+        return "プライスター一括登録形式";
+    }
+  }
+}
+
 Future<File> createStockItemCsv(
   String filename,
   List<StockItem> items,
   GeneralSettings settings,
+  CsvFormat type,
 ) async {
   final tempDir = await getTemporaryDirectory();
   final csvDirPath = "${tempDir.absolute.path}/stockList";
@@ -27,11 +43,21 @@ Future<File> createStockItemCsv(
   csvDir.createSync();
 
   final file = File("$csvDirPath/$filename.csv");
-  final data = _createDefaultCsv(items, settings.csvOrder);
+  final data = _createCsv(type, items, settings);
   final csvData = const ListToCsvConverter().convert(data);
   final converted = ShiftJIS().encode(csvData);
   file.writeAsBytesSync(converted);
   return file;
+}
+
+List<List<Object>> _createCsv(
+    CsvFormat type, List<StockItem> items, GeneralSettings settings) {
+  switch (type) {
+    case CsvFormat.standard:
+      return _createDefaultCsv(items, settings.csvOrder);
+    case CsvFormat.pricetar:
+      return _createPricetarCsv(items, settings.pricetarSettings);
+  }
 }
 
 List<List<Object>> _createPricetarCsv(
