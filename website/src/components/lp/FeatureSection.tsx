@@ -127,7 +127,7 @@ const FeatureContainer = ({ reference, inView }: FeatureProp) => (
             features={[
               "高速バーコードリーダー",
               "インストアコード対応",
-              "Keepaグラフ表示",
+              // "Keepaグラフ表示",
               "ダークモード対応",
               "アラート機能",
             ]}
