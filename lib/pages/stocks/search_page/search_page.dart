@@ -1,6 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:amasearch/models/enums/listing_state.dart';
-import 'package:amasearch/models/enums/product_condition.dart';
+import 'package:amasearch/models/enums/stock_item_search_conditions.dart';
 import 'package:amasearch/models/stock_item_filter.dart';
 import 'package:amasearch/pages/stocks/search_page/values.dart';
 import 'package:amasearch/styles/font.dart';
@@ -20,6 +19,9 @@ final formValueProvider = StateProvider(
     ),
     productConditionField: FormControl<ProductCondition>(
       value: ProductCondition.all,
+    ),
+    fulfilmentChannelField: FormControl<FulfilmentChannel>(
+      value: FulfilmentChannel.all,
     ),
     purchasePriceLowerField: ["", positiveNumberOrEmpty],
     purchasePriceUpperField: ["", positiveNumberOrEmpty],
@@ -124,7 +126,7 @@ class _Body extends ConsumerWidget {
                         .map(
                           (e) => DropdownMenuItem(
                             value: e,
-                            child: Text(e.toDisplayString()),
+                            child: Text(e.displayString),
                           ),
                         )
                         .toList(),
@@ -146,7 +148,29 @@ class _Body extends ConsumerWidget {
                         .map(
                           (e) => DropdownMenuItem(
                             value: e,
-                            child: Text(e.toDisplayString()),
+                            child: Text(e.displayString),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+                Padding(
+                  padding: _labelPadding,
+                  child: Text("発送方法", style: smallSize),
+                ),
+                ListTile(
+                  title: ReactiveDropdownField(
+                    formControlName: fulfilmentChannelField,
+                    hint: const Text("発送方法"),
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      isDense: true,
+                    ),
+                    items: FulfilmentChannel.values
+                        .map(
+                          (e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(e.displayString),
                           ),
                         )
                         .toList(),
@@ -222,6 +246,7 @@ class _Body extends ConsumerWidget {
                     keyword: getNullableString(form, keywordField),
                     listingState: getListingState(form),
                     productCondition: getProductCondition(form),
+                    channel: getFulfilmentChannel(form),
                     purchasePriceLower:
                         getNullableInt(form, purchasePriceLowerField),
                     purchasePriceUpper:
