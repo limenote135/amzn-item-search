@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ConditionTextTile extends ConsumerWidget {
-  const ConditionTextTile({Key? key}) : super(key: key);
+  const ConditionTextTile({super.key});
 
   static const _textMaxHeight = 160.0;
   static const _maxTextLengthInDialog = 128;

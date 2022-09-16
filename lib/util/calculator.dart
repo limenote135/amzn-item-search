@@ -19,12 +19,12 @@ enum _Op {
 
 class Calculator extends HookConsumerWidget {
   const Calculator({
-    Key? key,
+    super.key,
     required this.firstButtonText,
     required this.onFirstButtonPushed,
     required this.secondButtonText,
     required this.onSecondButtonPushed,
-  }) : super(key: key);
+  });
 
   final String firstButtonText;
   final String secondButtonText;
@@ -417,11 +417,10 @@ class Calculator extends HookConsumerWidget {
 
 class _ExpandedButton extends StatelessWidget {
   const _ExpandedButton({
-    Key? key,
     this.style,
     this.onPressed,
     required this.child,
-  }) : super(key: key);
+  });
 
   final ButtonStyle? style;
   final void Function()? onPressed;
@@ -441,10 +440,9 @@ class _ExpandedButton extends StatelessWidget {
 
 class _OperatorButton extends StatelessWidget {
   const _OperatorButton({
-    Key? key,
     this.onPressed,
     required this.child,
-  }) : super(key: key);
+  });
 
   final void Function()? onPressed;
   final Widget child;

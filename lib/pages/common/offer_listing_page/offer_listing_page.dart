@@ -12,7 +12,7 @@ final currentOfferListingParamProvider =
     Provider<OfferListingsParams>((_) => throw UnimplementedError());
 
 class OfferListingPage extends StatelessWidget {
-  const OfferListingPage({Key? key}) : super(key: key);
+  const OfferListingPage({super.key});
   static const String routeName = "/offer_listing";
 
   static Route<void> route(OfferListingsParams params) {
@@ -41,7 +41,7 @@ class OfferListingPage extends StatelessWidget {
 final currentIndex = Provider<int>((_) => throw UnimplementedError());
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

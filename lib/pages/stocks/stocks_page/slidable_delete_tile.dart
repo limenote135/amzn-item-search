@@ -6,7 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SlidableDeleteTile extends HookConsumerWidget {
-  const SlidableDeleteTile({Key? key, required this.child}) : super(key: key);
+  const SlidableDeleteTile({super.key, required this.child});
 
   final Widget child;
 

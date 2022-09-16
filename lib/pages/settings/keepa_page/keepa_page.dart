@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class KeepaSettings extends StatelessWidget {
-  const KeepaSettings({Key? key}) : super(key: key);
+  const KeepaSettings({super.key});
   static const String routeName = "/settings/keepa";
 
   static Route<void> route() {
@@ -24,7 +24,7 @@ class KeepaSettings extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

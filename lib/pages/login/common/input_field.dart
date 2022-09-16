@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class EmailFormField extends StatelessWidget {
   const EmailFormField({
-    Key? key,
+    super.key,
     this.fieldKey,
     this.autoFocus = false,
     this.onSubmit,
-  }) : super(key: key);
+  });
 
   final Key? fieldKey;
   final bool autoFocus;
@@ -36,7 +36,7 @@ class EmailFormField extends StatelessWidget {
 
 class PasswordFormField extends StatelessWidget {
   const PasswordFormField({
-    Key? key,
+    super.key,
     this.fieldKey,
     this.controller,
     this.focusNode,
@@ -44,7 +44,7 @@ class PasswordFormField extends StatelessWidget {
     this.inputAction,
     this.validator,
     this.onSubmit,
-  }) : super(key: key);
+  });
 
   final Key? fieldKey;
   final TextEditingController? controller;

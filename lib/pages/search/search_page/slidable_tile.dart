@@ -20,10 +20,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SlidableTile extends HookConsumerWidget {
   const SlidableTile({
-    Key? key,
+    super.key,
     required this.child,
     this.disableDelete = false,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final bool disableDelete;

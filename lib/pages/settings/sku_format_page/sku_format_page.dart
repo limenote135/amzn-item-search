@@ -32,7 +32,7 @@ const _newSampleItem = AsinData(
 );
 
 class SkuFormatPage extends StatelessWidget {
-  const SkuFormatPage({Key? key}) : super(key: key);
+  const SkuFormatPage({super.key});
   static const String routeName = "/settings/sku";
 
   static Route<void> route() {
@@ -54,7 +54,7 @@ class SkuFormatPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

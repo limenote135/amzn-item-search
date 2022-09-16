@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class TargetPriceTile extends HookConsumerWidget {
-  const TargetPriceTile({Key? key}) : super(key: key);
+  const TargetPriceTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

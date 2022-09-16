@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final _currentPageProvider = StateProvider((_) => 0);
 
 class HomePage extends HookConsumerWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   static const _pages = [
     SearchPage(),

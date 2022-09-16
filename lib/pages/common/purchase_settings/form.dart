@@ -65,7 +65,7 @@ final formValueProvider =
 });
 
 class PurchaseSettingsForm extends StatelessWidget {
-  const PurchaseSettingsForm({Key? key, this.action}) : super(key: key);
+  const PurchaseSettingsForm({super.key, this.action});
 
   final Widget? action;
 
@@ -114,7 +114,7 @@ class PurchaseSettingsForm extends StatelessWidget {
 }
 
 class _Unfocus extends StatelessWidget {
-  const _Unfocus({Key? key, this.child}) : super(key: key);
+  const _Unfocus({this.child});
 
   final Widget? child;
   @override
