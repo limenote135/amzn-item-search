@@ -1,8 +1,7 @@
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
-import 'package:amasearch/models/enums/listing_state.dart';
-import 'package:amasearch/models/enums/product_condition.dart';
+import 'package:amasearch/models/enums/stock_item_search_conditions.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/models/stock_item_filter.dart';
 import 'package:amasearch/util/util.dart';
@@ -53,6 +52,19 @@ final filteredStockListProvider = Provider(
             return e.subCondition == ItemSubCondition.good;
           case ProductCondition.usedAcceptable:
             return e.subCondition == ItemSubCondition.acceptable;
+        }
+      });
+    }
+
+    if(filter.channel != FulfilmentChannel.all) {
+      items = items.where((e) {
+        switch(filter.channel) {
+          case FulfilmentChannel.all:
+            return true;
+          case FulfilmentChannel.amazon:
+            return e.useFba;
+          case FulfilmentChannel.merchant:
+            return !e.useFba;
         }
       });
     }
