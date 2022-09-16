@@ -13,7 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final currentAsinProvider = Provider<String>((_) => throw UnimplementedError());
 
 class KeepaPage extends ConsumerWidget {
-  const KeepaPage({Key? key}) : super(key: key);
+  const KeepaPage({super.key});
   static const String routeName = "/keepa";
 
   static Route<void> route(String asin) {
@@ -51,7 +51,7 @@ class KeepaPage extends ConsumerWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   static List<bool> _createRangeState(KeepaShowPeriod period) {
     switch (period) {

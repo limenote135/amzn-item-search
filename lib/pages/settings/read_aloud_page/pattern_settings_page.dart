@@ -16,7 +16,7 @@ final currentPatternProvider =
     Provider<String>((_) => throw UnimplementedError());
 
 class PatternSettingsPage extends StatelessWidget {
-  const PatternSettingsPage({Key? key}) : super(key: key);
+  const PatternSettingsPage({super.key});
   static const String routeName = "/settings/read_aloud/pattern";
 
   static Route<String> route(String pattern) {
@@ -43,7 +43,7 @@ class PatternSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

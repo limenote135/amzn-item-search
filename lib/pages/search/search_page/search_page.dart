@@ -16,7 +16,7 @@ import 'item_tile.dart';
 import 'search_settings.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
   static const routeName = "/";
 
   @override
@@ -49,7 +49,7 @@ class SearchPage extends StatelessWidget {
 }
 
 class _AppBar extends HookConsumerWidget {
-  const _AppBar({Key? key}) : super(key: key);
+  const _AppBar();
 
   static final _appBarKey = GlobalKey();
 
@@ -80,7 +80,7 @@ class _AppBar extends HookConsumerWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

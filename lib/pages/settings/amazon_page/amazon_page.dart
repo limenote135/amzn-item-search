@@ -12,7 +12,7 @@ final _currentServerUrlProvider =
     Provider<String>((_) => throw UnimplementedError());
 
 class AmazonPage extends ConsumerWidget {
-  const AmazonPage({Key? key}) : super(key: key);
+  const AmazonPage({super.key});
   static const String routeName = "/settings/amazon";
 
   static Route<void> route() {
@@ -42,7 +42,7 @@ class AmazonPage extends ConsumerWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

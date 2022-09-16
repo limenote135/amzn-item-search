@@ -17,7 +17,7 @@ import '../common/input_field.dart';
 import '../common/social_login_buttons.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
   static const routeName = "/login/login";
 
   static Route<void> route() {
@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   static final emailKey = GlobalKey<FormFieldState<String>>();
   static final passwordKey = GlobalKey<FormFieldState<String>>();

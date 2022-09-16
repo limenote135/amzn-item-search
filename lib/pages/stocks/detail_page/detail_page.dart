@@ -17,7 +17,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DetailPage extends HookConsumerWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  const DetailPage({super.key});
   static const routeName = "/stocks/detail";
 
   static Route<void> route(StockItem item) {
@@ -71,7 +71,7 @@ class DetailPage extends HookConsumerWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -265,7 +265,7 @@ class _Body extends HookConsumerWidget {
 }
 
 class _ItemInfoTile extends HookConsumerWidget {
-  const _ItemInfoTile({Key? key}) : super(key: key);
+  const _ItemInfoTile();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

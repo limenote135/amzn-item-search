@@ -16,7 +16,7 @@ import '../common/input_field.dart';
 import '../common/social_login_buttons.dart';
 
 class SignupPage extends HookConsumerWidget {
-  const SignupPage({Key? key}) : super(key: key);
+  const SignupPage({super.key});
   static const routeName = "/login/signup";
 
   static Route<void> route() {

@@ -12,7 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 
 class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
-  const SearchBar({Key? key}) : super(key: key);
+  const SearchBar({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

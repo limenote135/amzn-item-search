@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class SkuTile extends HookConsumerWidget {
-  const SkuTile({Key? key}) : super(key: key);
+  const SkuTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

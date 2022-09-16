@@ -16,7 +16,7 @@ final _currentSettingsProvider =
     Provider<SearchSettings>((_) => throw UnimplementedError());
 
 class SearchSettingsPage extends StatelessWidget {
-  const SearchSettingsPage({Key? key}) : super(key: key);
+  const SearchSettingsPage({super.key});
   static const String routeName = "/search_setting";
 
   static Route<void> route() {
@@ -38,7 +38,7 @@ class SearchSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -132,7 +132,7 @@ class _Body extends HookConsumerWidget {
 }
 
 class _CodeType extends HookConsumerWidget {
-  const _CodeType({Key? key}) : super(key: key);
+  const _CodeType();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -177,7 +177,7 @@ class _CodeType extends HookConsumerWidget {
 }
 
 class _UsedSubCondition extends HookConsumerWidget {
-  const _UsedSubCondition({Key? key}) : super(key: key);
+  const _UsedSubCondition();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
