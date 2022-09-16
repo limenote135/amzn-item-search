@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TotalProfit extends HookConsumerWidget {
-  const TotalProfit({Key? key}) : super(key: key);
+  const TotalProfit({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

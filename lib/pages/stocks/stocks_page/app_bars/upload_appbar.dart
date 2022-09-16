@@ -9,7 +9,7 @@ import 'common.dart';
 import 'upload_csv.dart';
 
 class UploadAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const UploadAppBar({Key? key}) : super(key: key);
+  const UploadAppBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -17,7 +17,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MyApp extends HookConsumerWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -90,7 +90,7 @@ class MyApp extends HookConsumerWidget {
 }
 
 class _Unfocus extends StatelessWidget {
-  const _Unfocus({Key? key, this.child}) : super(key: key);
+  const _Unfocus({this.child});
 
   final Widget? child;
 

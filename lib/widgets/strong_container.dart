@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StrongContainer extends StatelessWidget {
-  const StrongContainer(this.child, {Key? key}) : super(key: key);
+  const StrongContainer(this.child, {super.key});
   final Widget child;
 
   @override

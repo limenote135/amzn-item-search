@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ItemTile extends ConsumerWidget {
-  const ItemTile({Key? key}) : super(key: key);
+  const ItemTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +30,7 @@ class ItemTile extends ConsumerWidget {
 }
 
 class ItemTileWithRequest extends ConsumerWidget {
-  const ItemTileWithRequest({Key? key}) : super(key: key);
+  const ItemTileWithRequest({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,7 +65,7 @@ class ItemTileWithRequest extends ConsumerWidget {
 }
 
 class _InkWell extends ConsumerWidget {
-  const _InkWell({Key? key, required this.child}) : super(key: key);
+  const _InkWell({required this.child});
 
   final Widget child;
 

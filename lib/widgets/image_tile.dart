@@ -18,7 +18,7 @@ const _bigSizeFbaFee = 589;
 const _moreBigSizeFbaFee = 2755;
 
 class TileImage extends HookConsumerWidget {
-  const TileImage({Key? key, this.onComplete}) : super(key: key);
+  const TileImage({super.key, this.onComplete});
 
   final void Function(ByteData bytes)? onComplete;
 

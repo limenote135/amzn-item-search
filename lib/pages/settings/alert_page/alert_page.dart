@@ -12,7 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'analytics.dart';
 
 class AlertPage extends StatelessWidget {
-  const AlertPage({Key? key}) : super(key: key);
+  const AlertPage({super.key});
   static const String routeName = "/settings/alert";
 
   static Route<void> route() {
@@ -34,7 +34,7 @@ class AlertPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

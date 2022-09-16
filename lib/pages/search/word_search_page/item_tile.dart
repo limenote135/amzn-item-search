@@ -23,7 +23,7 @@ final currentQueryParam =
     Provider<QueryItemsRequest>((_) => throw UnimplementedError());
 
 class ItemTile extends ConsumerWidget {
-  const ItemTile({Key? key}) : super(key: key);
+  const ItemTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +51,7 @@ class ItemTile extends ConsumerWidget {
 }
 
 class _InkWell extends HookConsumerWidget {
-  const _InkWell({Key? key, required this.child}) : super(key: key);
+  const _InkWell({required this.child});
 
   final Widget child;
 

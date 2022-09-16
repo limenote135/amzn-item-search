@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ProfitTile extends HookConsumerWidget {
-  const ProfitTile({Key? key}) : super(key: key);
+  const ProfitTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
