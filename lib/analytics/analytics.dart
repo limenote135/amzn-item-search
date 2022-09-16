@@ -1,5 +1,6 @@
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/util/csv.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -64,6 +65,15 @@ class AnalyticsController {
       name: calcEventName,
       parameters: <String, dynamic>{
         "type": type,
+      },
+    );
+  }
+
+  Future<void> logUploadListEvent(CsvFormat type) {
+    return FirebaseAnalytics.instance.logEvent(
+      name: uploadListEventName,
+      parameters: <String, dynamic>{
+        "type": type.name,
       },
     );
   }
