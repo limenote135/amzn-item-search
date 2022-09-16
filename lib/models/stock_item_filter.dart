@@ -1,5 +1,4 @@
-import 'package:amasearch/models/enums/listing_state.dart';
-import 'package:amasearch/models/enums/product_condition.dart';
+import 'package:amasearch/models/enums/stock_item_search_conditions.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod/riverpod.dart';
@@ -15,6 +14,7 @@ class StockItemFilter with _$StockItemFilter {
     String? keyword,
     @Default(ListingState.all) ListingState listingState,
     @Default(ProductCondition.all) ProductCondition productCondition,
+    @Default(FulfilmentChannel.all) FulfilmentChannel channel,
     int? purchasePriceLower,
     int? purchasePriceUpper,
     int? sellPriceLower,

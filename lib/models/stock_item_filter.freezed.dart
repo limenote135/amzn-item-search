@@ -19,6 +19,7 @@ mixin _$StockItemFilter {
   String? get keyword => throw _privateConstructorUsedError;
   ListingState get listingState => throw _privateConstructorUsedError;
   ProductCondition get productCondition => throw _privateConstructorUsedError;
+  FulfilmentChannel get channel => throw _privateConstructorUsedError;
   int? get purchasePriceLower => throw _privateConstructorUsedError;
   int? get purchasePriceUpper => throw _privateConstructorUsedError;
   int? get sellPriceLower => throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $StockItemFilterCopyWith<$Res> {
       {String? keyword,
       ListingState listingState,
       ProductCondition productCondition,
+      FulfilmentChannel channel,
       int? purchasePriceLower,
       int? purchasePriceUpper,
       int? sellPriceLower,
@@ -60,6 +62,7 @@ class _$StockItemFilterCopyWithImpl<$Res>
     Object? keyword = freezed,
     Object? listingState = freezed,
     Object? productCondition = freezed,
+    Object? channel = freezed,
     Object? purchasePriceLower = freezed,
     Object? purchasePriceUpper = freezed,
     Object? sellPriceLower = freezed,
@@ -79,6 +82,10 @@ class _$StockItemFilterCopyWithImpl<$Res>
           ? _value.productCondition
           : productCondition // ignore: cast_nullable_to_non_nullable
               as ProductCondition,
+      channel: channel == freezed
+          ? _value.channel
+          : channel // ignore: cast_nullable_to_non_nullable
+              as FulfilmentChannel,
       purchasePriceLower: purchasePriceLower == freezed
           ? _value.purchasePriceLower
           : purchasePriceLower // ignore: cast_nullable_to_non_nullable
@@ -114,6 +121,7 @@ abstract class _$$_StockItemFilterCopyWith<$Res>
       {String? keyword,
       ListingState listingState,
       ProductCondition productCondition,
+      FulfilmentChannel channel,
       int? purchasePriceLower,
       int? purchasePriceUpper,
       int? sellPriceLower,
@@ -137,6 +145,7 @@ class __$$_StockItemFilterCopyWithImpl<$Res>
     Object? keyword = freezed,
     Object? listingState = freezed,
     Object? productCondition = freezed,
+    Object? channel = freezed,
     Object? purchasePriceLower = freezed,
     Object? purchasePriceUpper = freezed,
     Object? sellPriceLower = freezed,
@@ -156,6 +165,10 @@ class __$$_StockItemFilterCopyWithImpl<$Res>
           ? _value.productCondition
           : productCondition // ignore: cast_nullable_to_non_nullable
               as ProductCondition,
+      channel: channel == freezed
+          ? _value.channel
+          : channel // ignore: cast_nullable_to_non_nullable
+              as FulfilmentChannel,
       purchasePriceLower: purchasePriceLower == freezed
           ? _value.purchasePriceLower
           : purchasePriceLower // ignore: cast_nullable_to_non_nullable
@@ -187,6 +200,7 @@ class _$_StockItemFilter implements _StockItemFilter {
       {this.keyword,
       this.listingState = ListingState.all,
       this.productCondition = ProductCondition.all,
+      this.channel = FulfilmentChannel.all,
       this.purchasePriceLower,
       this.purchasePriceUpper,
       this.sellPriceLower,
@@ -202,6 +216,9 @@ class _$_StockItemFilter implements _StockItemFilter {
   @JsonKey()
   final ProductCondition productCondition;
   @override
+  @JsonKey()
+  final FulfilmentChannel channel;
+  @override
   final int? purchasePriceLower;
   @override
   final int? purchasePriceUpper;
@@ -214,7 +231,7 @@ class _$_StockItemFilter implements _StockItemFilter {
 
   @override
   String toString() {
-    return 'StockItemFilter(keyword: $keyword, listingState: $listingState, productCondition: $productCondition, purchasePriceLower: $purchasePriceLower, purchasePriceUpper: $purchasePriceUpper, sellPriceLower: $sellPriceLower, sellPriceUpper: $sellPriceUpper, purchaseDateRange: $purchaseDateRange)';
+    return 'StockItemFilter(keyword: $keyword, listingState: $listingState, productCondition: $productCondition, channel: $channel, purchasePriceLower: $purchasePriceLower, purchasePriceUpper: $purchasePriceUpper, sellPriceLower: $sellPriceLower, sellPriceUpper: $sellPriceUpper, purchaseDateRange: $purchaseDateRange)';
   }
 
   @override
@@ -227,6 +244,7 @@ class _$_StockItemFilter implements _StockItemFilter {
                 .equals(other.listingState, listingState) &&
             const DeepCollectionEquality()
                 .equals(other.productCondition, productCondition) &&
+            const DeepCollectionEquality().equals(other.channel, channel) &&
             const DeepCollectionEquality()
                 .equals(other.purchasePriceLower, purchasePriceLower) &&
             const DeepCollectionEquality()
@@ -245,6 +263,7 @@ class _$_StockItemFilter implements _StockItemFilter {
       const DeepCollectionEquality().hash(keyword),
       const DeepCollectionEquality().hash(listingState),
       const DeepCollectionEquality().hash(productCondition),
+      const DeepCollectionEquality().hash(channel),
       const DeepCollectionEquality().hash(purchasePriceLower),
       const DeepCollectionEquality().hash(purchasePriceUpper),
       const DeepCollectionEquality().hash(sellPriceLower),
@@ -262,6 +281,7 @@ abstract class _StockItemFilter implements StockItemFilter {
       {final String? keyword,
       final ListingState listingState,
       final ProductCondition productCondition,
+      final FulfilmentChannel channel,
       final int? purchasePriceLower,
       final int? purchasePriceUpper,
       final int? sellPriceLower,
@@ -274,6 +294,8 @@ abstract class _StockItemFilter implements StockItemFilter {
   ListingState get listingState;
   @override
   ProductCondition get productCondition;
+  @override
+  FulfilmentChannel get channel;
   @override
   int? get purchasePriceLower;
   @override
