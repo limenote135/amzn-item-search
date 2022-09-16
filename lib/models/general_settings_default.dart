@@ -6,6 +6,7 @@ import 'enums/alert_type.dart';
 import 'enums/csv_columns.dart';
 import 'enums/shortcut_type.dart';
 import 'keepa_settings.dart';
+import 'pricetar_settings.dart';
 
 const defaultSkuFormat =
     "{yyyy}{mm}{dd}-{asin}-{cond}-{purchasePrice}-{quantity}";
@@ -253,3 +254,5 @@ const defaultUsedConditionText = [
   "中古品のため、ご使用に影響ない程度の使用感・経年劣化、キズ、汚れなどがある場合がございます。",
   "多少の使用感はありますが、目立った傷もなく非常に状態のよいものなります。",
 ];
+
+const defaultPricetarSettings = PricetarSettings();
