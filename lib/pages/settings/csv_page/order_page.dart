@@ -4,14 +4,14 @@ import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PurchaseListPage extends StatelessWidget {
-  const PurchaseListPage({super.key});
-  static const String routeName = "/settings/purchase_list";
+class OrderPage extends StatelessWidget {
+  const OrderPage({Key? key}) : super(key: key);
+  static const String routeName = "/settings/csv/order";
 
   static Route<void> route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => const PurchaseListPage(),
+      builder: (context) => const OrderPage(),
     );
   }
 
@@ -19,15 +19,15 @@ class PurchaseListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("CSV設定"),
+        title: const Text("項目の並び順"),
       ),
       body: const _Body(),
     );
   }
 }
 
-class _Body extends HookConsumerWidget {
-  const _Body();
+class _Body extends ConsumerWidget {
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

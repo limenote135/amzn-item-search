@@ -28,6 +28,7 @@ const alertConditionTypeId = 54;
 const alertConditionSetTypeId = 55;
 const keepaSettingsTypeId = 56;
 const shortcutDetailTypeId = 57;
+const pricetarSettingsTypeId = 58;
 
 // enums
 const fulfillmentChannelTypeId = 100;
@@ -39,3 +40,5 @@ const alertTypeTypeId = 105;
 const alertOfferConditionTypeId = 106;
 const keepaShowPeriodTypeId = 107;
 const shortcutTypeId = 108;
+const pricetarRuleTypeId = 109;
+const pricetarStopperTypeId = 110;
