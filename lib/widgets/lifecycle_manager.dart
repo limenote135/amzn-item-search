@@ -15,10 +15,10 @@ mixin LifecycleCallback {
 /// ライフサイクルを受け取れるStatefulWidget
 class LifecycleManager extends ConsumerStatefulWidget {
   const LifecycleManager({
-    Key? key,
+    super.key,
     required this.child,
     this.callback,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final LifecycleCallback? callback;

@@ -11,7 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'item_tile.dart';
 
 class ItemSelectPage extends ConsumerWidget {
-  const ItemSelectPage({Key? key}) : super(key: key);
+  const ItemSelectPage({super.key});
   static const routeName = "/search/item_select";
 
   static Route<void> route(List<AsinData> asins, String fromRoute) {
@@ -59,7 +59,7 @@ class ItemSelectPage extends ConsumerWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

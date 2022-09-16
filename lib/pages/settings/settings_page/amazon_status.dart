@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AmazonStatus extends ConsumerWidget {
-  const AmazonStatus({Key? key}) : super(key: key);
+  const AmazonStatus({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

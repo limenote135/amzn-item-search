@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ItemConditionTile extends HookConsumerWidget {
-  const ItemConditionTile({Key? key}) : super(key: key);
+  const ItemConditionTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

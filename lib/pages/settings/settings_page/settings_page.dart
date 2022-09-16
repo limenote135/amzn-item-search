@@ -29,7 +29,7 @@ import 'package:release_notes_dialog/release_notes_dialog.dart';
 import 'amazon_status.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
   static const routeName = "/settings";
 
   @override
@@ -44,7 +44,7 @@ class SettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

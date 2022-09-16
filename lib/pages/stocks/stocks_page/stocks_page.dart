@@ -26,7 +26,7 @@ final _selectedItemCount = Provider((ref) {
 });
 
 class StocksPage extends HookConsumerWidget {
-  const StocksPage({Key? key}) : super(key: key);
+  const StocksPage({super.key});
   static const routeName = "/stocks";
 
   @override
@@ -61,7 +61,7 @@ class StocksPage extends HookConsumerWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -201,7 +201,7 @@ class _Body extends HookConsumerWidget {
 }
 
 class _InkWell extends HookConsumerWidget {
-  const _InkWell({Key? key, this.child}) : super(key: key);
+  const _InkWell({this.child});
 
   final Widget? child;
 

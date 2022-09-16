@@ -12,7 +12,7 @@ final _currentPackageProvider =
     Provider<Package>((_) => throw UnimplementedError());
 
 class DonationMessagePage extends ConsumerWidget {
-  const DonationMessagePage({Key? key}) : super(key: key);
+  const DonationMessagePage({super.key});
   static const String routeName = "/settings/donation/settings";
 
   static Route<void> route(Package package) {
@@ -36,9 +36,7 @@ class DonationMessagePage extends ConsumerWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body({
-    Key? key,
-  }) : super(key: key);
+  const _Body();
 
   static final emailKey = GlobalKey<FormFieldState<String>>();
   static final nameKey = GlobalKey<FormFieldState<String>>();

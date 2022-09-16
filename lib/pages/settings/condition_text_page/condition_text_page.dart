@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ConditionTextPage extends StatelessWidget {
-  const ConditionTextPage({Key? key}) : super(key: key);
+  const ConditionTextPage({super.key});
   static const String routeName = "/settings/condition_description";
 
   static Route<void> route() {
@@ -27,9 +27,7 @@ class ConditionTextPage extends StatelessWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body({
-    Key? key,
-  }) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

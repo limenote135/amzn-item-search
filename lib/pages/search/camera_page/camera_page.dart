@@ -19,7 +19,7 @@ import 'code_filter_rect.dart';
 import 'item_tile.dart';
 
 class CameraPage extends ConsumerWidget {
-  const CameraPage({Key? key}) : super(key: key);
+  const CameraPage({super.key});
 
   static const routeName = "/search/camera";
 
@@ -52,7 +52,7 @@ class CameraPage extends ConsumerWidget {
 }
 
 class _Body extends ConsumerStatefulWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   _BodyState createState() => _BodyState();
@@ -441,7 +441,7 @@ class _BodyState extends ConsumerState<_Body> {
 }
 
 class _BackIcon extends StatelessWidget {
-  const _BackIcon({Key? key}) : super(key: key);
+  const _BackIcon();
 
   @override
   Widget build(BuildContext context) {
@@ -453,7 +453,7 @@ class _BackIcon extends StatelessWidget {
 }
 
 class _ErrorMessage extends StatelessWidget {
-  const _ErrorMessage({Key? key, required this.error}) : super(key: key);
+  const _ErrorMessage({required this.error});
 
   final String error;
 

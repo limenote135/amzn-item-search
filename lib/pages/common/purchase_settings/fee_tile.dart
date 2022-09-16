@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class FeeTile extends HookConsumerWidget {
-  const FeeTile({Key? key}) : super(key: key);
+  const FeeTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

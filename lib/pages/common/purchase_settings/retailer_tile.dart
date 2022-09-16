@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class RetailerTile extends HookConsumerWidget {
-  const RetailerTile({Key? key}) : super(key: key);
+  const RetailerTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

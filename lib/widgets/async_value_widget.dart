@@ -6,11 +6,11 @@ import 'progress_indicator.dart';
 
 class AsyncValueWidget<T> extends StatelessWidget {
   const AsyncValueWidget({
-    Key? key,
+    super.key,
     required this.value,
     required this.data,
     this.errorInfo = const [],
-  }) : super(key: key);
+  });
 
   final AsyncValue<T> value;
   final Widget Function(T) data;
@@ -33,11 +33,11 @@ class AsyncValueWidget<T> extends StatelessWidget {
 
 class AsyncValueListTileWidget<T> extends StatelessWidget {
   const AsyncValueListTileWidget({
-    Key? key,
+    super.key,
     required this.value,
     required this.data,
     this.errorInfo = const [],
-  }) : super(key: key);
+  });
 
   final AsyncValue<T> value;
   final Widget Function(T) data;
