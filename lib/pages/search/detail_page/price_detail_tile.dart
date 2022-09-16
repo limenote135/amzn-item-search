@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PriceDetailTile extends HookConsumerWidget {
-  const PriceDetailTile(this.type, {Key? key}) : super(key: key);
+  const PriceDetailTile(this.type, {super.key});
 
   final ItemCondition type;
 

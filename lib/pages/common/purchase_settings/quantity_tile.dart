@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class QuantityTile extends HookWidget {
-  const QuantityTile({Key? key}) : super(key: key);
+  const QuantityTile({super.key});
 
   @override
   Widget build(BuildContext context) {

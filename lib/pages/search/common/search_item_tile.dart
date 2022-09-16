@@ -17,7 +17,7 @@ final currentSearchDateProvider =
 final isEllipsisProvider = Provider<bool>((_) => false);
 
 class SearchItemTile extends HookConsumerWidget {
-  const SearchItemTile({Key? key}) : super(key: key);
+  const SearchItemTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,7 +46,7 @@ class SearchItemTile extends HookConsumerWidget {
 }
 
 class _ItemTileBody extends HookConsumerWidget {
-  const _ItemTileBody({Key? key}) : super(key: key);
+  const _ItemTileBody();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -172,7 +172,7 @@ class _ItemTileBody extends HookConsumerWidget {
 }
 
 class _ListingRestrictions extends ConsumerWidget {
-  const _ListingRestrictions({Key? key}) : super(key: key);
+  const _ListingRestrictions();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

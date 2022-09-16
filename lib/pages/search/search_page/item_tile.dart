@@ -16,7 +16,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'slidable_tile.dart';
 
 class ItemTile extends HookConsumerWidget {
-  const ItemTile({Key? key}) : super(key: key);
+  const ItemTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,7 +65,7 @@ class ItemTile extends HookConsumerWidget {
 }
 
 class ItemTileImpl extends HookConsumerWidget {
-  const ItemTileImpl({Key? key}) : super(key: key);
+  const ItemTileImpl({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -2,7 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 class ItemImage extends StatelessWidget {
-  const ItemImage({Key? key, this.url}) : super(key: key);
+  const ItemImage({super.key, this.url});
   final String? url;
 
   @override

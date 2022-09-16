@@ -11,7 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class SupportPage extends StatelessWidget {
-  const SupportPage({Key? key}) : super(key: key);
+  const SupportPage({super.key});
   static const String routeName = "/settings/support";
 
   static Route<void> route() {
@@ -33,9 +33,7 @@ class SupportPage extends StatelessWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body({
-    Key? key,
-  }) : super(key: key);
+  const _Body();
 
   static final emailKey = GlobalKey<FormFieldState<String>>();
   static final contentKey = GlobalKey<FormFieldState<String>>();

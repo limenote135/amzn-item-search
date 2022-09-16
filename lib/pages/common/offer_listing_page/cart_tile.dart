@@ -10,7 +10,7 @@ import 'offer_chips.dart';
 import 'stock_text.dart';
 
 class CartTile extends HookConsumerWidget {
-  const CartTile({Key? key}) : super(key: key);
+  const CartTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

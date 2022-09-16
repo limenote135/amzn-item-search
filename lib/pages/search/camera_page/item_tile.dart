@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final currentCodeProvider = Provider<String>((_) => throw UnimplementedError());
 
 class CameraItemTile extends HookConsumerWidget {
-  const CameraItemTile({Key? key}) : super(key: key);
+  const CameraItemTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

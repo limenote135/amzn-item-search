@@ -21,7 +21,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'price_detail_tile.dart';
 
 class DetailPage extends HookConsumerWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  const DetailPage({super.key});
   static const routeName = "/search/detail";
 
   static Route<void> route(AsinData item, String fromRoute) {
@@ -86,7 +86,7 @@ class DetailPage extends HookConsumerWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -168,7 +168,7 @@ class _Body extends HookConsumerWidget {
 }
 
 class _Restricted extends ConsumerWidget {
-  const _Restricted({Key? key}) : super(key: key);
+  const _Restricted();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

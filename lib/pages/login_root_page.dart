@@ -11,7 +11,7 @@ const _baseScale = 2;
 const _minScale = 1.5;
 
 class LoginRootPage extends StatelessWidget {
-  const LoginRootPage({Key? key}) : super(key: key);
+  const LoginRootPage({super.key});
 
   @override
   Widget build(BuildContext context) {

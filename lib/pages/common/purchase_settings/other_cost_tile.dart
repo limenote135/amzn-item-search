@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class OtherCostTile extends HookConsumerWidget {
-  const OtherCostTile({Key? key}) : super(key: key);
+  const OtherCostTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

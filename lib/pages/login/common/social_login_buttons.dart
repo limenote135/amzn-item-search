@@ -16,7 +16,7 @@ import '../../../util/error_report.dart';
 import 'sign_in_with_apple.dart';
 
 class SocialLoginButtons extends HookConsumerWidget {
-  const SocialLoginButtons({Key? key}) : super(key: key);
+  const SocialLoginButtons({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

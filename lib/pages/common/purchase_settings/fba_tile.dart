@@ -1,6 +1,5 @@
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
-import 'package:amasearch/pages/common/purchase_settings/reactive_switch_list_tile.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,7 +8,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'values.dart';
 
 class FbaTile extends ConsumerWidget {
-  const FbaTile({Key? key}) : super(key: key);
+  const FbaTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,12 +17,16 @@ class FbaTile extends ConsumerWidget {
     // build 時に現在の値を束縛しておく
     final current = getBool(form, useFbaField);
 
-    return MyReactiveSwitchListTile(
+    return ReactiveSwitchListTile(
       formControlName: useFbaField,
       title: const Text("FBA を利用"),
-      onChanged: (value) {
+      onChanged: (control) {
         // onChanged が呼ばれたタイミングではリビルド前なので、
         // current は変更前の値が束縛されたままになっている
+        final value = control.value;
+        if(value == null) {
+          return;
+        }
 
         final sellPrice = getInt(form, sellPriceField);
         final condition = getCondition(form);

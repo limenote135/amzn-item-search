@@ -9,7 +9,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PasswordResetPage extends StatelessWidget {
-  const PasswordResetPage({Key? key}) : super(key: key);
+  const PasswordResetPage({super.key});
   static const routeName = "/login/reset";
 
   static Route<void> route() {
@@ -32,7 +32,7 @@ class PasswordResetPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   static final formKey = GlobalKey<FormState>();
   static final fieldKey = GlobalKey<FormFieldState<String>>();

@@ -8,7 +8,7 @@ final currentOfferItemProvider =
     Provider<OfferItem>((_) => throw UnimplementedError());
 
 class OfferChips extends HookConsumerWidget {
-  const OfferChips({Key? key}) : super(key: key);
+  const OfferChips({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

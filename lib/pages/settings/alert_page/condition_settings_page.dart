@@ -16,7 +16,7 @@ final _currentAlertConditionSetIndexProvider =
     Provider<int>((_) => throw UnimplementedError());
 
 class ConditionSettingsPage extends StatelessWidget {
-  const ConditionSettingsPage({Key? key}) : super(key: key);
+  const ConditionSettingsPage({super.key});
   static const String routeName = "/settings/alert/condition";
 
   static Route<String> route(int index) {
@@ -45,7 +45,7 @@ class ConditionSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

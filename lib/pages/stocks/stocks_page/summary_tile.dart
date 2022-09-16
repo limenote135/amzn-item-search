@@ -11,7 +11,7 @@ final currentPageModeProvider =
     Provider<StockPageMode>((_) => throw UnimplementedError());
 
 class SummaryTile extends HookConsumerWidget {
-  const SummaryTile({Key? key}) : super(key: key);
+  const SummaryTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
