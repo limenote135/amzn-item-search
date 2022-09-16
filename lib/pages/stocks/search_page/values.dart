@@ -1,11 +1,11 @@
-import 'package:amasearch/models/enums/listing_state.dart';
-import 'package:amasearch/models/enums/product_condition.dart';
+import 'package:amasearch/models/enums/stock_item_search_conditions.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 const keywordField = "keyword";
 const listingStateField = "listingState";
 const productConditionField = "productCondition";
+const fulfilmentChannelField = "fulfilment";
 const purchasePriceLowerField = "purchasePriceLower";
 const purchasePriceUpperField = "purchasePriceUpper";
 const sellPriceLowerField = "sellPriceLower";
@@ -29,6 +29,11 @@ ListingState getListingState(FormGroup form) {
 ProductCondition getProductCondition(FormGroup form) {
   return form.control(productConditionField).value as ProductCondition? ??
       ProductCondition.all;
+}
+
+FulfilmentChannel getFulfilmentChannel(FormGroup form) {
+  return form.control(fulfilmentChannelField).value as FulfilmentChannel? ??
+      FulfilmentChannel.all;
 }
 
 DateTimeRange? getNullableDateRange(FormGroup form, String field) {
