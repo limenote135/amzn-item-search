@@ -59,7 +59,7 @@ final asinDataAtIndex = Provider.autoDispose
 });
 
 class WordSearchPage extends StatelessWidget {
-  const WordSearchPage({Key? key}) : super(key: key);
+  const WordSearchPage({super.key});
   static const String routeName = "/word_search";
 
   @override
@@ -78,7 +78,7 @@ class WordSearchPage extends StatelessWidget {
 }
 
 class _AppBar extends HookConsumerWidget {
-  const _AppBar({Key? key}) : super(key: key);
+  const _AppBar();
 
   static final _appBarKey = GlobalKey();
 
@@ -154,7 +154,7 @@ class _AppBar extends HookConsumerWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   static const _maxQueryLength = 128;
 

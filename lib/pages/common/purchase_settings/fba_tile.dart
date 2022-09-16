@@ -9,7 +9,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'values.dart';
 
 class FbaTile extends ConsumerWidget {
-  const FbaTile({Key? key}) : super(key: key);
+  const FbaTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

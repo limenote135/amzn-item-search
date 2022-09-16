@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class SliderTile extends StatefulWidget {
   const SliderTile({
-    Key? key,
+    super.key,
     required this.title,
     required this.initValue,
     this.min = 0,
     required this.max,
     required this.divisions,
     this.onSubmit,
-  }) : super(key: key);
+  });
 
   final String title;
   final double initValue;

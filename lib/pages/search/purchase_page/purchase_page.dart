@@ -19,7 +19,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class PurchasePage extends HookConsumerWidget {
-  const PurchasePage({Key? key}) : super(key: key);
+  const PurchasePage({super.key});
   static const routeName = "/search/purchase";
 
   static Route<void> route(AsinData item) {
@@ -93,7 +93,7 @@ class PurchasePage extends HookConsumerWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -113,7 +113,7 @@ class _Body extends HookConsumerWidget {
 }
 
 class _SaveButton extends HookConsumerWidget {
-  const _SaveButton({Key? key, required this.builder}) : super(key: key);
+  const _SaveButton({required this.builder});
 
   final Widget Function(BuildContext context, void Function()? onSave) builder;
 

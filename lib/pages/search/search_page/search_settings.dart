@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SearchSetting extends HookConsumerWidget {
-  const SearchSetting({Key? key}) : super(key: key);
+  const SearchSetting({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

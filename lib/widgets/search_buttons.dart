@@ -15,7 +15,7 @@ final currentItemProvider =
     Provider<AsinData>((_) => throw UnimplementedError());
 
 class SearchButtons extends HookConsumerWidget {
-  const SearchButtons({Key? key}) : super(key: key);
+  const SearchButtons({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

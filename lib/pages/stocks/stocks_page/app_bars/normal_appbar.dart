@@ -20,7 +20,7 @@ enum _StockPageActions {
 }
 
 class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const NormalAppBar({Key? key}) : super(key: key);
+  const NormalAppBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

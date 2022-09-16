@@ -9,7 +9,7 @@ final currentSellerIdProvider =
 final currentAsinProvider = Provider<String>((_) => throw UnimplementedError());
 
 class StockText extends HookConsumerWidget {
-  const StockText({Key? key}) : super(key: key);
+  const StockText({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

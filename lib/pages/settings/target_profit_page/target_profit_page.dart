@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TargetProfitPage extends StatelessWidget {
-  const TargetProfitPage({Key? key}) : super(key: key);
+  const TargetProfitPage({super.key});
   static const String routeName = "/settings/targetProfit";
 
   static Route<void> route() {
@@ -28,7 +28,7 @@ class TargetProfitPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

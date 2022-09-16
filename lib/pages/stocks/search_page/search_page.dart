@@ -30,7 +30,7 @@ final formValueProvider = StateProvider(
 );
 
 class SearchPage extends ConsumerWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
   static const String routeName = "/stocks/search";
   static Route<void> route() {
     return MaterialPageRoute(
@@ -74,7 +74,7 @@ class SearchPage extends ConsumerWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   static const _labelPadding = EdgeInsets.fromLTRB(16, 16, 16, 8);
 
@@ -249,10 +249,9 @@ class _Body extends ConsumerWidget {
 
 class _PriceRangeTextField extends HookConsumerWidget {
   const _PriceRangeTextField({
-    Key? key,
     required this.lowerControlName,
     required this.upperControlName,
-  }) : super(key: key);
+  });
 
   final String lowerControlName;
   final String upperControlName;
@@ -350,7 +349,7 @@ class _PriceRangeTextField extends HookConsumerWidget {
 }
 
 class _Unfocus extends StatelessWidget {
-  const _Unfocus({Key? key, this.child}) : super(key: key);
+  const _Unfocus({this.child});
 
   final Widget? child;
   @override

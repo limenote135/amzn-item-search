@@ -10,7 +10,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ReadAloudSettingsPage extends StatelessWidget {
-  const ReadAloudSettingsPage({Key? key}) : super(key: key);
+  const ReadAloudSettingsPage({super.key});
   static const String routeName = "/settings/read_aloud";
 
   static Route<void> route() {
@@ -32,7 +32,7 @@ class ReadAloudSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

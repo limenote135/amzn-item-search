@@ -13,7 +13,7 @@ final _currentPriceDetailProvider =
     Provider<PriceDetail>((_) => throw UnimplementedError());
 
 class SellerListTile extends HookConsumerWidget {
-  const SellerListTile({Key? key}) : super(key: key);
+  const SellerListTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -69,7 +69,7 @@ class SellerListTile extends HookConsumerWidget {
 }
 
 class _OfferItem extends HookConsumerWidget {
-  const _OfferItem(this.cond, {Key? key}) : super(key: key);
+  const _OfferItem(this.cond);
 
   final ItemCondition cond;
 

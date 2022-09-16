@@ -8,7 +8,7 @@ final currentButtonProvider =
     Provider<CustomButtonDetail>((_) => throw UnimplementedError());
 
 class UrlSettingsPage extends StatelessWidget {
-  const UrlSettingsPage({Key? key}) : super(key: key);
+  const UrlSettingsPage({super.key});
   static const String routeName = "/settings/custom_button/url";
 
   static Route<CustomButtonDetail> route(CustomButtonDetail button) {
@@ -35,7 +35,7 @@ class UrlSettingsPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -17,7 +17,7 @@ final _isSelectedProvider = Provider.family<bool, StockItem>((ref, item) {
 });
 
 class ItemTile extends HookConsumerWidget {
-  const ItemTile({Key? key}) : super(key: key);
+  const ItemTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,7 +50,7 @@ class ItemTile extends HookConsumerWidget {
 }
 
 class _TileBody extends HookConsumerWidget {
-  const _TileBody({Key? key}) : super(key: key);
+  const _TileBody();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

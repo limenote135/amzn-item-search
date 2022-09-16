@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DonationPage extends StatelessWidget {
-  const DonationPage({Key? key}) : super(key: key);
+  const DonationPage({super.key});
   static const String routeName = "/settings/donation";
 
   static Route<void> route() {
@@ -26,7 +26,7 @@ class DonationPage extends StatelessWidget {
 }
 
 class _Body extends HookConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

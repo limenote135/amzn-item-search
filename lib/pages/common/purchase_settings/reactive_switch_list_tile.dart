@@ -24,6 +24,7 @@ class MyReactiveSwitchListTile extends ReactiveFormField<bool, bool> {
   /// The [formControlName] arguments must not be null.
   ///
   /// See also [CheckboxListTile]
+  // ignore: use_super_parameters
   MyReactiveSwitchListTile({
     Key? key,
     String? formControlName,

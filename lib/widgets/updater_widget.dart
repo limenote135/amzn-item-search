@@ -33,7 +33,7 @@ class UpdateCheckObserver with LifecycleCallback {
 }
 
 class Updater extends HookConsumerWidget {
-  const Updater({Key? key}) : super(key: key);
+  const Updater({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

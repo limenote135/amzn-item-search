@@ -8,7 +8,7 @@ import 'common.dart';
 import 'listings.dart';
 
 class ItemSelectAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const ItemSelectAppBar({Key? key}) : super(key: key);
+  const ItemSelectAppBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

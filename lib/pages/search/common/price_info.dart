@@ -16,7 +16,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'util.dart';
 
 class PriceInfo extends StatelessWidget {
-  const PriceInfo({Key? key}) : super(key: key);
+  const PriceInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class PriceInfo extends StatelessWidget {
 }
 
 class _PriceAndProfit extends HookConsumerWidget {
-  const _PriceAndProfit(this.condition, {Key? key}) : super(key: key);
+  const _PriceAndProfit(this.condition);
 
   final ItemCondition condition;
 
