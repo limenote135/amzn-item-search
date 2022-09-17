@@ -1,35 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pricetar_settings.dart';
+part of 'makad_settings.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PricetarSettingsAdapter extends TypeAdapter<_$_PricetarSettings> {
+class MakadSettingsAdapter extends TypeAdapter<_$_MakadSettings> {
   @override
-  final int typeId = 58;
+  final int typeId = 59;
 
   @override
-  _$_PricetarSettings read(BinaryReader reader) {
+  _$_MakadSettings read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_PricetarSettings(
-      newRule: fields[0] as PricetarRule,
-      usedRule: fields[1] as PricetarRule,
+    return _$_MakadSettings(
+      newRule: fields[0] as MakadReviseRule,
+      usedRule: fields[1] as MakadReviseRule,
       lowestStopperType: fields[2] as RevisePriceStopper,
       lowestStopperValue: fields[3] as int,
-      highestStopperType: fields[4] as RevisePriceStopper,
-      highestStopperValue: fields[5] as int,
+      paymentMethod: fields[4] as MakadPaymentMethod,
     );
   }
 
   @override
-  void write(BinaryWriter writer, _$_PricetarSettings obj) {
+  void write(BinaryWriter writer, _$_MakadSettings obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.newRule)
       ..writeByte(1)
@@ -39,9 +38,7 @@ class PricetarSettingsAdapter extends TypeAdapter<_$_PricetarSettings> {
       ..writeByte(3)
       ..write(obj.lowestStopperValue)
       ..writeByte(4)
-      ..write(obj.highestStopperType)
-      ..writeByte(5)
-      ..write(obj.highestStopperValue);
+      ..write(obj.paymentMethod);
   }
 
   @override
@@ -50,7 +47,7 @@ class PricetarSettingsAdapter extends TypeAdapter<_$_PricetarSettings> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PricetarSettingsAdapter &&
+      other is MakadSettingsAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
