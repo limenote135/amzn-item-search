@@ -3,6 +3,7 @@ import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/general_settings_default.dart';
 import 'package:amasearch/models/keepa_settings.dart';
+import 'package:amasearch/models/makad_settings.dart';
 import 'package:amasearch/models/pricetar_settings.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -124,6 +125,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     List<String>? usedConditionTexts,
     int? usedConditionTextIndex,
     PricetarSettings? pricetarSettings,
+    MakadSettings? makadSettings,
   }) {
     final box = _read(settingsBoxProvider);
     state = state.copyWith(
@@ -154,6 +156,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       usedConditionTextIndex:
           usedConditionTextIndex ?? state.usedConditionTextIndex,
       pricetarSettings: pricetarSettings ?? state.pricetarSettings,
+      makadSettings: makadSettings ?? state.makadSettings,
     );
     box.put(generalSettingsKeyName, state);
   }
