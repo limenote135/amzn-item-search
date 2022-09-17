@@ -6,16 +6,19 @@ import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/pricetar_rule.dart';
 import 'package:amasearch/models/enums/pricetar_stopper.dart';
 import 'package:amasearch/models/general_settings.dart';
+import 'package:amasearch/models/makad_settings.dart';
 import 'package:amasearch/models/pricetar_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/util/price_util.dart';
 import 'package:csv/csv.dart';
 import 'package:euc/jis.dart';
 import 'package:path_provider/path_provider.dart';
 
 enum CsvFormat {
   standard,
-  pricetar;
+  pricetar,
+  makad;
 
   const CsvFormat();
   String get displayName {
@@ -24,6 +27,8 @@ enum CsvFormat {
         return "標準";
       case CsvFormat.pricetar:
         return "プライスター一括登録形式";
+      case CsvFormat.makad:
+        return "マカド一括登録形式";
     }
   }
 }
@@ -51,17 +56,24 @@ Future<File> createStockItemCsv(
 }
 
 List<List<Object>> _createCsv(
-    CsvFormat type, List<StockItem> items, GeneralSettings settings) {
+  CsvFormat type,
+  List<StockItem> items,
+  GeneralSettings settings,
+) {
   switch (type) {
     case CsvFormat.standard:
       return _createDefaultCsv(items, settings.csvOrder);
     case CsvFormat.pricetar:
       return _createPricetarCsv(items, settings.pricetarSettings);
+    case CsvFormat.makad:
+      return _createMakadCsv(items, settings.makadSettings);
   }
 }
 
 List<List<Object>> _createPricetarCsv(
-    List<StockItem> items, PricetarSettings settings) {
+  List<StockItem> items,
+  PricetarSettings settings,
+) {
   return <List<Object>>[
     // header
     [
@@ -88,12 +100,12 @@ List<List<Object>> _createPricetarCsv(
         item.amount,
         item.sellPrice,
         item.purchasePrice,
-        _calcPricetarStopperPrice(
+        _calcStopperPrice(
           item,
           settings.lowestStopperType,
           settings.lowestStopperValue,
         ),
-        _calcPricetarStopperPrice(
+        _calcStopperPrice(
           item,
           settings.highestStopperType,
           settings.highestStopperValue,
@@ -110,7 +122,53 @@ List<List<Object>> _createPricetarCsv(
   ];
 }
 
-int _calcPricetarStopperPrice(
+List<List<Object>> _createMakadCsv(
+  List<StockItem> items,
+  MakadSettings settings,
+) {
+  return <List<Object>>[
+    // header
+    [
+      "ASIN(必須)※JANコードを入力するとエラーとなります。",
+      "SKU(空の場合は自動挿入されます)",
+      "コンディション(必須)(0新品 1ほぼ新品 2非常に良い 3良い 4可 5コレクターほぼ新品 6コレクター非常に良い 7コレクター良い 8コレクター可)",
+      "出品価格(必須)",
+      "下限価格",
+      "仕入れ価格",
+      "出品個数",
+      "配送ルート(必須)(0→自己発送 1→FBA)",
+      "価格改定モード(0→なし 1→FBA状態合わせ 2→状態合わせ 3→FBA最安値 4→最安値 5→カート価格 6→自己最安値 7→上位最安値 8→全最安値)",
+      "商品説明文",
+      "配送設定名",
+      "リードタイム",
+      "支払い方法の制限(0[空]→全て許可する 1→代金引換を制限する 2→コンビニ決済を制限する 3→代金引換とコンビニ決済を制限する)",
+    ],
+    for (final item in items)
+      [
+        item.item.asin,
+        item.sku,
+        item.subCondition.toMakadCsvValue(),
+        item.sellPrice,
+        _calcStopperPrice(
+          item,
+          settings.lowestStopperType,
+          settings.lowestStopperValue,
+        ),
+        item.purchasePrice,
+        item.amount,
+        item.useFba ? 1 : 0,
+        item.condition == ItemCondition.newItem
+            ? settings.newRule.makadCsvValue
+            : settings.usedRule.makadCsvValue,
+        item.conditionText,
+        "",
+        "",
+        settings.paymentMethod.makadCsvValue,
+      ]
+  ];
+}
+
+int _calcStopperPrice(
   StockItem item,
   RevisePriceStopper type,
   int value,
@@ -121,9 +179,61 @@ int _calcPricetarStopperPrice(
     case RevisePriceStopper.listingPrice:
       return (item.sellPrice * value / 100).round();
     case RevisePriceStopper.profitValue:
-      return 0;
+      {
+        final feeInfo = item.item.prices?.feeInfo;
+        final fbaFee = feeInfo != null && item.useFba ? feeInfo.fbaFee : 0;
+        final closingFee = feeInfo != null
+            ? (feeInfo.variableClosingFee * taxRate).round()
+            : 0;
+        /*
+        SellPrice = Profit + Purchase + Fee
+        Fee = ReferralFee + FbaFee + ClosingFee + OtherCost
+        ReferralFee = SellPrice * feeRate * taxRate
+        ClosingFee = closingFee * taxRate
+
+        SellPrice = Profit + Purchase
+                    + (SellPrice * feeRate * taxRate)
+                    + FbaFee
+                    + (closingFee * taxRate)
+                    + OtherCost
+        SellPrice(1 - feeRate * taxRate) = Profit + Purchase
+                                          + FbaFee
+                                          + (closingFee * taxRate)
+                                          + OtherCost
+         */
+
+        // 分子
+        final child =
+            value + item.purchasePrice + fbaFee + closingFee + item.otherCost;
+        // 分母
+        final mother =
+            feeInfo != null ? (1 - feeInfo.referralFeeRate * taxRate) : 1.0;
+        if (mother == 0) {
+          return child;
+        }
+        return (child / mother).round();
+      }
     case RevisePriceStopper.profitRate:
-      return 0;
+      {
+        // ↑の式において、Profit = SellPrice * ProfitRate になる
+        final feeInfo = item.item.prices?.feeInfo;
+        final fbaFee = feeInfo != null && item.useFba ? feeInfo.fbaFee : 0;
+        final closingFee = feeInfo != null
+            ? (feeInfo.variableClosingFee * taxRate).round()
+            : 0;
+
+        // 分子
+        final child = item.purchasePrice + fbaFee + closingFee + item.otherCost;
+        // 分母
+        final mother = feeInfo != null
+            ? (1 - value / 100 - feeInfo.referralFeeRate * taxRate)
+            : 1.0;
+
+        if (mother == 0) {
+          return child;
+        }
+        return (child / mother).round();
+      }
   }
 }
 
