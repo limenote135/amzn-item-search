@@ -112,23 +112,25 @@ List<List<Object>> _createPricetarCsv(
 
 int _calcPricetarStopperPrice(
   StockItem item,
-  PricetarStopperType type,
+  RevisePriceStopper type,
   int value,
 ) {
   switch (type) {
-    case PricetarStopperType.nothing:
+    case RevisePriceStopper.nothing:
       return 0;
-    case PricetarStopperType.listingPrice:
+    case RevisePriceStopper.listingPrice:
       return (item.sellPrice * value / 100).round();
-    case PricetarStopperType.profitValue:
+    case RevisePriceStopper.profitValue:
       return 0;
-    case PricetarStopperType.profitRate:
+    case RevisePriceStopper.profitRate:
       return 0;
   }
 }
 
 List<List<Object>> _createDefaultCsv(
-    List<StockItem> items, List<CsvColumn> order) {
+  List<StockItem> items,
+  List<CsvColumn> order,
+) {
   final data = <List<Object>>[
     <String>[for (final o in order) o.toDisplayString()],
     for (final item in items) _createData(item, order)

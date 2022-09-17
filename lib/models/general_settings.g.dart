@@ -190,13 +190,16 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       pricetarSettings: fields[25] == null
           ? const PricetarSettings()
           : fields[25] as PricetarSettings,
+      makadSettings: fields[26] == null
+          ? const MakadSettings()
+          : fields[26] as MakadSettings,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_GeneralSettings obj) {
     writer
-      ..writeByte(26)
+      ..writeByte(27)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
@@ -231,6 +234,8 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       ..write(obj.usedConditionTextIndex)
       ..writeByte(25)
       ..write(obj.pricetarSettings)
+      ..writeByte(26)
+      ..write(obj.makadSettings)
       ..writeByte(4)
       ..write(obj.retailers)
       ..writeByte(7)
