@@ -1,44 +1,44 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pricetar_stopper.dart';
+part of 'makad_payment_method.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class RevisePriceStopperAdapter extends TypeAdapter<RevisePriceStopper> {
+class MakadPaymentMethodAdapter extends TypeAdapter<MakadPaymentMethod> {
   @override
-  final int typeId = 110;
+  final int typeId = 112;
 
   @override
-  RevisePriceStopper read(BinaryReader reader) {
+  MakadPaymentMethod read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return RevisePriceStopper.nothing;
+        return MakadPaymentMethod.all;
       case 1:
-        return RevisePriceStopper.listingPrice;
+        return MakadPaymentMethod.excludeCashOnDelivery;
       case 2:
-        return RevisePriceStopper.profitValue;
+        return MakadPaymentMethod.excludeConvenience;
       case 3:
-        return RevisePriceStopper.profitRate;
+        return MakadPaymentMethod.excludeBoth;
       default:
-        return RevisePriceStopper.nothing;
+        return MakadPaymentMethod.all;
     }
   }
 
   @override
-  void write(BinaryWriter writer, RevisePriceStopper obj) {
+  void write(BinaryWriter writer, MakadPaymentMethod obj) {
     switch (obj) {
-      case RevisePriceStopper.nothing:
+      case MakadPaymentMethod.all:
         writer.writeByte(0);
         break;
-      case RevisePriceStopper.listingPrice:
+      case MakadPaymentMethod.excludeCashOnDelivery:
         writer.writeByte(1);
         break;
-      case RevisePriceStopper.profitValue:
+      case MakadPaymentMethod.excludeConvenience:
         writer.writeByte(2);
         break;
-      case RevisePriceStopper.profitRate:
+      case MakadPaymentMethod.excludeBoth:
         writer.writeByte(3);
         break;
     }
@@ -50,7 +50,7 @@ class RevisePriceStopperAdapter extends TypeAdapter<RevisePriceStopper> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is RevisePriceStopperAdapter &&
+      other is MakadPaymentMethodAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

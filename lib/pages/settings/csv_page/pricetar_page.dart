@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PricetarPage extends StatelessWidget {
-  const PricetarPage({Key? key}) : super(key: key);
+  const PricetarPage({super.key});
   static const String routeName = "/settings/csv/pricetar";
 
   static Route<void> route() {
@@ -28,7 +28,7 @@ class PricetarPage extends StatelessWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -103,7 +103,7 @@ class _Body extends ConsumerWidget {
               title: "赤字ストッパー指定方法",
               initialSelectedActionKey: settings.lowestStopperType,
               actions: [
-                for (final val in PricetarStopperType.values)
+                for (final val in RevisePriceStopper.values)
                   AlertDialogAction(
                     key: val,
                     label: val.toDisplayString(),
@@ -114,7 +114,7 @@ class _Body extends ConsumerWidget {
               return;
             }
             var stopperValue = 0;
-            if (stopperType != PricetarStopperType.nothing) {
+            if (stopperType != RevisePriceStopper.nothing) {
               final values = await showTextInputDialog(
                 context: context,
                 title: createStopperValueInputTitle(stopperType),
@@ -158,7 +158,7 @@ class _Body extends ConsumerWidget {
               title: "高値ストッパー指定方法",
               initialSelectedActionKey: settings.highestStopperType,
               actions: [
-                for (final val in PricetarStopperType.values)
+                for (final val in RevisePriceStopper.values)
                   AlertDialogAction(
                     key: val,
                     label: val.toDisplayString(),
@@ -169,7 +169,7 @@ class _Body extends ConsumerWidget {
               return;
             }
             var stopperValue = 0;
-            if (stopperType != PricetarStopperType.nothing) {
+            if (stopperType != RevisePriceStopper.nothing) {
               final values = await showTextInputDialog(
                 context: context,
                 title: createStopperValueInputTitle(stopperType),
@@ -203,43 +203,43 @@ class _Body extends ConsumerWidget {
     );
   }
 
-  String createStopperText(PricetarStopperType type, int value) {
+  String createStopperText(RevisePriceStopper type, int value) {
     switch (type) {
-      case PricetarStopperType.nothing:
+      case RevisePriceStopper.nothing:
         return "設定しない";
-      case PricetarStopperType.listingPrice:
+      case RevisePriceStopper.listingPrice:
         return "出品価格の$value%";
-      case PricetarStopperType.profitValue:
+      case RevisePriceStopper.profitValue:
         return "$value円の利益";
-      case PricetarStopperType.profitRate:
+      case RevisePriceStopper.profitRate:
         return "$value%の利益率";
     }
   }
 
-  String createStopperValueInputTitle(PricetarStopperType type) {
+  String createStopperValueInputTitle(RevisePriceStopper type) {
     switch (type) {
-      case PricetarStopperType.nothing:
+      case RevisePriceStopper.nothing:
         // ここにはこないはず
         throw UnimplementedError("$type is not supported");
-      case PricetarStopperType.listingPrice:
+      case RevisePriceStopper.listingPrice:
         return "出品価格から設定";
-      case PricetarStopperType.profitValue:
+      case RevisePriceStopper.profitValue:
         return "利益額から設定";
-      case PricetarStopperType.profitRate:
+      case RevisePriceStopper.profitRate:
         return "利益率から設定";
     }
   }
 
-  String createStopperValueInputMessage(PricetarStopperType type) {
+  String createStopperValueInputMessage(RevisePriceStopper type) {
     switch (type) {
-      case PricetarStopperType.nothing:
+      case RevisePriceStopper.nothing:
         // ここにはこないはず
         throw UnimplementedError("$type is not supported");
-      case PricetarStopperType.listingPrice:
+      case RevisePriceStopper.listingPrice:
         return "出品価格の何%をストッパーに設定しますか？";
-      case PricetarStopperType.profitValue:
+      case RevisePriceStopper.profitValue:
         return "利益額が何円になるようにストッパーを設定しますか？";
-      case PricetarStopperType.profitRate:
+      case RevisePriceStopper.profitRate:
         return "利益率が何%になるようにストッパーを設定しますか？";
     }
   }
