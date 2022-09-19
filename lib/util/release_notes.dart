@@ -1,11 +1,22 @@
+// ignore_for_file: prefer_adjacent_string_concatenation
 import 'package:pub_semver/pub_semver.dart';
 import 'package:release_notes_dialog/release_notes_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(1, 4, 0);
+var releaseNotesVersion = Version(1, 6, 0);
 const releaseNotes = <Release>[
+  Release("1.6.0", [
+    ReleaseSublist(
+      name: "更新内容",
+      changes: [
+        "仕入れ商品を発送方法で検索できるようになりました",
+        "仕入れ商品リストをPCに転送する際、プライスター、マカド、セラースケットの一括登録形式を選択できるようになりました。" +
+            "設定 -> CSV 設定から詳しい設定を行えます",
+      ],
+    ),
+  ]),
   Release("1.4.0", [
     ReleaseSublist(
       name: "更新内容",
