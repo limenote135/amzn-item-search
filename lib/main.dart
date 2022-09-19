@@ -16,6 +16,7 @@ import 'package:amasearch/models/enums/makad_revise_rule.dart';
 import 'package:amasearch/models/enums/pricetar_rule.dart';
 import 'package:amasearch/models/enums/pricetar_stopper.dart';
 import 'package:amasearch/models/enums/search_type.dart';
+import 'package:amasearch/models/enums/sellersket_revise_rule.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
@@ -26,6 +27,7 @@ import 'package:amasearch/models/makad_settings.dart';
 import 'package:amasearch/models/pricetar_settings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/search_settings.dart';
+import 'package:amasearch/models/sellersket_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:extended_image/extended_image.dart';
@@ -159,7 +161,9 @@ Future<void> initHive() async {
     ..registerAdapter(RevisePriceStopperAdapter())
     ..registerAdapter(MakadSettingsAdapter())
     ..registerAdapter(MakadReviseRuleAdapter())
-    ..registerAdapter(MakadPaymentMethodAdapter());
+    ..registerAdapter(MakadPaymentMethodAdapter())
+    ..registerAdapter(SellerSketSettingsAdapter())
+    ..registerAdapter(SellerSketReviseRuleAdapter());
 
   // await deleteBoxes();
 
