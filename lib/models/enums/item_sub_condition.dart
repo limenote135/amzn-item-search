@@ -109,6 +109,21 @@ extension ItemSubConditionExtention on ItemSubCondition {
         return 4;
     }
   }
+
+  int toSellerSketCsvValue() {
+    switch (this) {
+      case ItemSubCondition.newItem:
+        return 11;
+      case ItemSubCondition.mint:
+        return 1;
+      case ItemSubCondition.veryGood:
+        return 2;
+      case ItemSubCondition.good:
+        return 3;
+      case ItemSubCondition.acceptable:
+        return 4;
+    }
+  }
 }
 
 ItemSubCondition toItemSubCondition(String condition) {
