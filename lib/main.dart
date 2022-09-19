@@ -11,6 +11,8 @@ import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
+import 'package:amasearch/models/enums/makad_payment_method.dart';
+import 'package:amasearch/models/enums/makad_revise_rule.dart';
 import 'package:amasearch/models/enums/pricetar_rule.dart';
 import 'package:amasearch/models/enums/pricetar_stopper.dart';
 import 'package:amasearch/models/enums/search_type.dart';
@@ -20,6 +22,7 @@ import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/keepa_settings.dart';
+import 'package:amasearch/models/makad_settings.dart';
 import 'package:amasearch/models/pricetar_settings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/search_settings.dart';
@@ -153,7 +156,10 @@ Future<void> initHive() async {
     ..registerAdapter(KeepaShowPeriodAdapter())
     ..registerAdapter(PricetarSettingsAdapter())
     ..registerAdapter(PricetarRuleAdapter())
-    ..registerAdapter(PricetarStopperTypeAdapter());
+    ..registerAdapter(RevisePriceStopperAdapter())
+    ..registerAdapter(MakadSettingsAdapter())
+    ..registerAdapter(MakadReviseRuleAdapter())
+    ..registerAdapter(MakadPaymentMethodAdapter());
 
   // await deleteBoxes();
 

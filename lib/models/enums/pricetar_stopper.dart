@@ -3,8 +3,8 @@ import 'package:hive/hive.dart';
 
 part 'pricetar_stopper.g.dart';
 
-@HiveType(typeId: pricetarStopperTypeId)
-enum PricetarStopperType {
+@HiveType(typeId: revisePriceStopperTypeId)
+enum RevisePriceStopper {
   @HiveField(0)
   nothing,
   @HiveField(1)
@@ -15,16 +15,16 @@ enum PricetarStopperType {
   profitRate,
 }
 
-extension PricetarStopperTypeExtension on PricetarStopperType {
+extension RevisePriceStopperExtension on RevisePriceStopper {
   String toDisplayString() {
     switch (this) {
-      case PricetarStopperType.nothing:
+      case RevisePriceStopper.nothing:
         return "設定なし";
-      case PricetarStopperType.listingPrice:
+      case RevisePriceStopper.listingPrice:
         return "出品価格からの割合";
-      case PricetarStopperType.profitValue:
+      case RevisePriceStopper.profitValue:
         return "利益額を指定";
-      case PricetarStopperType.profitRate:
+      case RevisePriceStopper.profitRate:
         return "利益率を指定";
     }
   }
