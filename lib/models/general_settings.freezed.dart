@@ -73,6 +73,8 @@ mixin _$GeneralSettings {
   int get usedConditionTextIndex => throw _privateConstructorUsedError;
   @HiveField(25, defaultValue: defaultPricetarSettings)
   PricetarSettings get pricetarSettings => throw _privateConstructorUsedError;
+  @HiveField(26, defaultValue: defaultMakadSettings)
+  MakadSettings get makadSettings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith =>
@@ -136,10 +138,13 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(24, defaultValue: 0)
           int usedConditionTextIndex,
       @HiveField(25, defaultValue: defaultPricetarSettings)
-          PricetarSettings pricetarSettings});
+          PricetarSettings pricetarSettings,
+      @HiveField(26, defaultValue: defaultMakadSettings)
+          MakadSettings makadSettings});
 
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
   $PricetarSettingsCopyWith<$Res> get pricetarSettings;
+  $MakadSettingsCopyWith<$Res> get makadSettings;
 }
 
 /// @nodoc
@@ -179,6 +184,7 @@ class _$GeneralSettingsCopyWithImpl<$Res>
     Object? usedConditionTexts = freezed,
     Object? usedConditionTextIndex = freezed,
     Object? pricetarSettings = freezed,
+    Object? makadSettings = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode: isDarkMode == freezed
@@ -285,6 +291,10 @@ class _$GeneralSettingsCopyWithImpl<$Res>
           ? _value.pricetarSettings
           : pricetarSettings // ignore: cast_nullable_to_non_nullable
               as PricetarSettings,
+      makadSettings: makadSettings == freezed
+          ? _value.makadSettings
+          : makadSettings // ignore: cast_nullable_to_non_nullable
+              as MakadSettings,
     ));
   }
 
@@ -299,6 +309,13 @@ class _$GeneralSettingsCopyWithImpl<$Res>
   $PricetarSettingsCopyWith<$Res> get pricetarSettings {
     return $PricetarSettingsCopyWith<$Res>(_value.pricetarSettings, (value) {
       return _then(_value.copyWith(pricetarSettings: value));
+    });
+  }
+
+  @override
+  $MakadSettingsCopyWith<$Res> get makadSettings {
+    return $MakadSettingsCopyWith<$Res>(_value.makadSettings, (value) {
+      return _then(_value.copyWith(makadSettings: value));
     });
   }
 }
@@ -362,12 +379,16 @@ abstract class _$$_GeneralSettingsCopyWith<$Res>
       @HiveField(24, defaultValue: 0)
           int usedConditionTextIndex,
       @HiveField(25, defaultValue: defaultPricetarSettings)
-          PricetarSettings pricetarSettings});
+          PricetarSettings pricetarSettings,
+      @HiveField(26, defaultValue: defaultMakadSettings)
+          MakadSettings makadSettings});
 
   @override
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
   @override
   $PricetarSettingsCopyWith<$Res> get pricetarSettings;
+  @override
+  $MakadSettingsCopyWith<$Res> get makadSettings;
 }
 
 /// @nodoc
@@ -409,6 +430,7 @@ class __$$_GeneralSettingsCopyWithImpl<$Res>
     Object? usedConditionTexts = freezed,
     Object? usedConditionTextIndex = freezed,
     Object? pricetarSettings = freezed,
+    Object? makadSettings = freezed,
   }) {
     return _then(_$_GeneralSettings(
       isDarkMode: isDarkMode == freezed
@@ -515,6 +537,10 @@ class __$$_GeneralSettingsCopyWithImpl<$Res>
           ? _value.pricetarSettings
           : pricetarSettings // ignore: cast_nullable_to_non_nullable
               as PricetarSettings,
+      makadSettings: makadSettings == freezed
+          ? _value.makadSettings
+          : makadSettings // ignore: cast_nullable_to_non_nullable
+              as MakadSettings,
     ));
   }
 }
@@ -576,7 +602,9 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(24, defaultValue: 0)
           this.usedConditionTextIndex = 0,
       @HiveField(25, defaultValue: defaultPricetarSettings)
-          this.pricetarSettings = defaultPricetarSettings})
+          this.pricetarSettings = defaultPricetarSettings,
+      @HiveField(26, defaultValue: defaultMakadSettings)
+          this.makadSettings = defaultMakadSettings})
       : _retailers = retailers,
         _readAloudPatterns = readAloudPatterns,
         _customButtons = customButtons,
@@ -749,10 +777,14 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(25, defaultValue: defaultPricetarSettings)
   final PricetarSettings pricetarSettings;
+  @override
+  @JsonKey()
+  @HiveField(26, defaultValue: defaultMakadSettings)
+  final MakadSettings makadSettings;
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings, leftSlideShortcut: $leftSlideShortcut, rightSlideShortcut: $rightSlideShortcut, newConditionTexts: $newConditionTexts, newConditionTextIndex: $newConditionTextIndex, usedConditionTexts: $usedConditionTexts, usedConditionTextIndex: $usedConditionTextIndex, pricetarSettings: $pricetarSettings)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings, leftSlideShortcut: $leftSlideShortcut, rightSlideShortcut: $rightSlideShortcut, newConditionTexts: $newConditionTexts, newConditionTextIndex: $newConditionTextIndex, usedConditionTexts: $usedConditionTexts, usedConditionTextIndex: $usedConditionTextIndex, pricetarSettings: $pricetarSettings, makadSettings: $makadSettings)';
   }
 
   @override
@@ -806,7 +838,9 @@ class _$_GeneralSettings implements _GeneralSettings {
             const DeepCollectionEquality()
                 .equals(other.usedConditionTextIndex, usedConditionTextIndex) &&
             const DeepCollectionEquality()
-                .equals(other.pricetarSettings, pricetarSettings));
+                .equals(other.pricetarSettings, pricetarSettings) &&
+            const DeepCollectionEquality()
+                .equals(other.makadSettings, makadSettings));
   }
 
   @override
@@ -837,7 +871,8 @@ class _$_GeneralSettings implements _GeneralSettings {
         const DeepCollectionEquality().hash(newConditionTextIndex),
         const DeepCollectionEquality().hash(_usedConditionTexts),
         const DeepCollectionEquality().hash(usedConditionTextIndex),
-        const DeepCollectionEquality().hash(pricetarSettings)
+        const DeepCollectionEquality().hash(pricetarSettings),
+        const DeepCollectionEquality().hash(makadSettings)
       ]);
 
   @JsonKey(ignore: true)
@@ -899,7 +934,9 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(24, defaultValue: 0)
           final int usedConditionTextIndex,
       @HiveField(25, defaultValue: defaultPricetarSettings)
-          final PricetarSettings pricetarSettings}) = _$_GeneralSettings;
+          final PricetarSettings pricetarSettings,
+      @HiveField(26, defaultValue: defaultMakadSettings)
+          final MakadSettings makadSettings}) = _$_GeneralSettings;
 
   @override // ダークモード
   @HiveField(0)
@@ -979,6 +1016,9 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(25, defaultValue: defaultPricetarSettings)
   PricetarSettings get pricetarSettings;
+  @override
+  @HiveField(26, defaultValue: defaultMakadSettings)
+  MakadSettings get makadSettings;
   @override
   @JsonKey(ignore: true)
   _$$_GeneralSettingsCopyWith<_$_GeneralSettings> get copyWith =>

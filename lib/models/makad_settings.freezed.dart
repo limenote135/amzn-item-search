@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'pricetar_settings.dart';
+part of 'makad_settings.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,49 +15,45 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$PricetarSettings {
+mixin _$MakadSettings {
   @HiveField(0)
-  PricetarRule get newRule => throw _privateConstructorUsedError;
+  MakadReviseRule get newRule => throw _privateConstructorUsedError;
   @HiveField(1)
-  PricetarRule get usedRule => throw _privateConstructorUsedError;
+  MakadReviseRule get usedRule => throw _privateConstructorUsedError;
   @HiveField(2)
   RevisePriceStopper get lowestStopperType =>
       throw _privateConstructorUsedError;
   @HiveField(3)
   int get lowestStopperValue => throw _privateConstructorUsedError;
   @HiveField(4)
-  RevisePriceStopper get highestStopperType =>
-      throw _privateConstructorUsedError;
-  @HiveField(5)
-  int get highestStopperValue => throw _privateConstructorUsedError;
+  MakadPaymentMethod get paymentMethod => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PricetarSettingsCopyWith<PricetarSettings> get copyWith =>
+  $MakadSettingsCopyWith<MakadSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PricetarSettingsCopyWith<$Res> {
-  factory $PricetarSettingsCopyWith(
-          PricetarSettings value, $Res Function(PricetarSettings) then) =
-      _$PricetarSettingsCopyWithImpl<$Res>;
+abstract class $MakadSettingsCopyWith<$Res> {
+  factory $MakadSettingsCopyWith(
+          MakadSettings value, $Res Function(MakadSettings) then) =
+      _$MakadSettingsCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(0) PricetarRule newRule,
-      @HiveField(1) PricetarRule usedRule,
+      {@HiveField(0) MakadReviseRule newRule,
+      @HiveField(1) MakadReviseRule usedRule,
       @HiveField(2) RevisePriceStopper lowestStopperType,
       @HiveField(3) int lowestStopperValue,
-      @HiveField(4) RevisePriceStopper highestStopperType,
-      @HiveField(5) int highestStopperValue});
+      @HiveField(4) MakadPaymentMethod paymentMethod});
 }
 
 /// @nodoc
-class _$PricetarSettingsCopyWithImpl<$Res>
-    implements $PricetarSettingsCopyWith<$Res> {
-  _$PricetarSettingsCopyWithImpl(this._value, this._then);
+class _$MakadSettingsCopyWithImpl<$Res>
+    implements $MakadSettingsCopyWith<$Res> {
+  _$MakadSettingsCopyWithImpl(this._value, this._then);
 
-  final PricetarSettings _value;
+  final MakadSettings _value;
   // ignore: unused_field
-  final $Res Function(PricetarSettings) _then;
+  final $Res Function(MakadSettings) _then;
 
   @override
   $Res call({
@@ -65,18 +61,17 @@ class _$PricetarSettingsCopyWithImpl<$Res>
     Object? usedRule = freezed,
     Object? lowestStopperType = freezed,
     Object? lowestStopperValue = freezed,
-    Object? highestStopperType = freezed,
-    Object? highestStopperValue = freezed,
+    Object? paymentMethod = freezed,
   }) {
     return _then(_value.copyWith(
       newRule: newRule == freezed
           ? _value.newRule
           : newRule // ignore: cast_nullable_to_non_nullable
-              as PricetarRule,
+              as MakadReviseRule,
       usedRule: usedRule == freezed
           ? _value.usedRule
           : usedRule // ignore: cast_nullable_to_non_nullable
-              as PricetarRule,
+              as MakadReviseRule,
       lowestStopperType: lowestStopperType == freezed
           ? _value.lowestStopperType
           : lowestStopperType // ignore: cast_nullable_to_non_nullable
@@ -85,44 +80,39 @@ class _$PricetarSettingsCopyWithImpl<$Res>
           ? _value.lowestStopperValue
           : lowestStopperValue // ignore: cast_nullable_to_non_nullable
               as int,
-      highestStopperType: highestStopperType == freezed
-          ? _value.highestStopperType
-          : highestStopperType // ignore: cast_nullable_to_non_nullable
-              as RevisePriceStopper,
-      highestStopperValue: highestStopperValue == freezed
-          ? _value.highestStopperValue
-          : highestStopperValue // ignore: cast_nullable_to_non_nullable
-              as int,
+      paymentMethod: paymentMethod == freezed
+          ? _value.paymentMethod
+          : paymentMethod // ignore: cast_nullable_to_non_nullable
+              as MakadPaymentMethod,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$$_PricetarSettingsCopyWith<$Res>
-    implements $PricetarSettingsCopyWith<$Res> {
-  factory _$$_PricetarSettingsCopyWith(
-          _$_PricetarSettings value, $Res Function(_$_PricetarSettings) then) =
-      __$$_PricetarSettingsCopyWithImpl<$Res>;
+abstract class _$$_MakadSettingsCopyWith<$Res>
+    implements $MakadSettingsCopyWith<$Res> {
+  factory _$$_MakadSettingsCopyWith(
+          _$_MakadSettings value, $Res Function(_$_MakadSettings) then) =
+      __$$_MakadSettingsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(0) PricetarRule newRule,
-      @HiveField(1) PricetarRule usedRule,
+      {@HiveField(0) MakadReviseRule newRule,
+      @HiveField(1) MakadReviseRule usedRule,
       @HiveField(2) RevisePriceStopper lowestStopperType,
       @HiveField(3) int lowestStopperValue,
-      @HiveField(4) RevisePriceStopper highestStopperType,
-      @HiveField(5) int highestStopperValue});
+      @HiveField(4) MakadPaymentMethod paymentMethod});
 }
 
 /// @nodoc
-class __$$_PricetarSettingsCopyWithImpl<$Res>
-    extends _$PricetarSettingsCopyWithImpl<$Res>
-    implements _$$_PricetarSettingsCopyWith<$Res> {
-  __$$_PricetarSettingsCopyWithImpl(
-      _$_PricetarSettings _value, $Res Function(_$_PricetarSettings) _then)
-      : super(_value, (v) => _then(v as _$_PricetarSettings));
+class __$$_MakadSettingsCopyWithImpl<$Res>
+    extends _$MakadSettingsCopyWithImpl<$Res>
+    implements _$$_MakadSettingsCopyWith<$Res> {
+  __$$_MakadSettingsCopyWithImpl(
+      _$_MakadSettings _value, $Res Function(_$_MakadSettings) _then)
+      : super(_value, (v) => _then(v as _$_MakadSettings));
 
   @override
-  _$_PricetarSettings get _value => super._value as _$_PricetarSettings;
+  _$_MakadSettings get _value => super._value as _$_MakadSettings;
 
   @override
   $Res call({
@@ -130,18 +120,17 @@ class __$$_PricetarSettingsCopyWithImpl<$Res>
     Object? usedRule = freezed,
     Object? lowestStopperType = freezed,
     Object? lowestStopperValue = freezed,
-    Object? highestStopperType = freezed,
-    Object? highestStopperValue = freezed,
+    Object? paymentMethod = freezed,
   }) {
-    return _then(_$_PricetarSettings(
+    return _then(_$_MakadSettings(
       newRule: newRule == freezed
           ? _value.newRule
           : newRule // ignore: cast_nullable_to_non_nullable
-              as PricetarRule,
+              as MakadReviseRule,
       usedRule: usedRule == freezed
           ? _value.usedRule
           : usedRule // ignore: cast_nullable_to_non_nullable
-              as PricetarRule,
+              as MakadReviseRule,
       lowestStopperType: lowestStopperType == freezed
           ? _value.lowestStopperType
           : lowestStopperType // ignore: cast_nullable_to_non_nullable
@@ -150,38 +139,33 @@ class __$$_PricetarSettingsCopyWithImpl<$Res>
           ? _value.lowestStopperValue
           : lowestStopperValue // ignore: cast_nullable_to_non_nullable
               as int,
-      highestStopperType: highestStopperType == freezed
-          ? _value.highestStopperType
-          : highestStopperType // ignore: cast_nullable_to_non_nullable
-              as RevisePriceStopper,
-      highestStopperValue: highestStopperValue == freezed
-          ? _value.highestStopperValue
-          : highestStopperValue // ignore: cast_nullable_to_non_nullable
-              as int,
+      paymentMethod: paymentMethod == freezed
+          ? _value.paymentMethod
+          : paymentMethod // ignore: cast_nullable_to_non_nullable
+              as MakadPaymentMethod,
     ));
   }
 }
 
 /// @nodoc
 
-@HiveType(typeId: pricetarSettingsTypeId)
-class _$_PricetarSettings implements _PricetarSettings {
-  const _$_PricetarSettings(
-      {@HiveField(0) this.newRule = PricetarRule.cart,
-      @HiveField(1) this.usedRule = PricetarRule.fbaSameCondition,
+@HiveType(typeId: makadSettingsTypeId)
+class _$_MakadSettings implements _MakadSettings {
+  const _$_MakadSettings(
+      {@HiveField(0) this.newRule = MakadReviseRule.cart,
+      @HiveField(1) this.usedRule = MakadReviseRule.usedFbaSameCondition,
       @HiveField(2) this.lowestStopperType = RevisePriceStopper.profitValue,
       @HiveField(3) this.lowestStopperValue = 1,
-      @HiveField(4) this.highestStopperType = RevisePriceStopper.nothing,
-      @HiveField(5) this.highestStopperValue = 0});
+      @HiveField(4) this.paymentMethod = MakadPaymentMethod.all});
 
   @override
   @JsonKey()
   @HiveField(0)
-  final PricetarRule newRule;
+  final MakadReviseRule newRule;
   @override
   @JsonKey()
   @HiveField(1)
-  final PricetarRule usedRule;
+  final MakadReviseRule usedRule;
   @override
   @JsonKey()
   @HiveField(2)
@@ -193,22 +177,18 @@ class _$_PricetarSettings implements _PricetarSettings {
   @override
   @JsonKey()
   @HiveField(4)
-  final RevisePriceStopper highestStopperType;
-  @override
-  @JsonKey()
-  @HiveField(5)
-  final int highestStopperValue;
+  final MakadPaymentMethod paymentMethod;
 
   @override
   String toString() {
-    return 'PricetarSettings(newRule: $newRule, usedRule: $usedRule, lowestStopperType: $lowestStopperType, lowestStopperValue: $lowestStopperValue, highestStopperType: $highestStopperType, highestStopperValue: $highestStopperValue)';
+    return 'MakadSettings(newRule: $newRule, usedRule: $usedRule, lowestStopperType: $lowestStopperType, lowestStopperValue: $lowestStopperValue, paymentMethod: $paymentMethod)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PricetarSettings &&
+            other is _$_MakadSettings &&
             const DeepCollectionEquality().equals(other.newRule, newRule) &&
             const DeepCollectionEquality().equals(other.usedRule, usedRule) &&
             const DeepCollectionEquality()
@@ -216,9 +196,7 @@ class _$_PricetarSettings implements _PricetarSettings {
             const DeepCollectionEquality()
                 .equals(other.lowestStopperValue, lowestStopperValue) &&
             const DeepCollectionEquality()
-                .equals(other.highestStopperType, highestStopperType) &&
-            const DeepCollectionEquality()
-                .equals(other.highestStopperValue, highestStopperValue));
+                .equals(other.paymentMethod, paymentMethod));
   }
 
   @override
@@ -228,30 +206,28 @@ class _$_PricetarSettings implements _PricetarSettings {
       const DeepCollectionEquality().hash(usedRule),
       const DeepCollectionEquality().hash(lowestStopperType),
       const DeepCollectionEquality().hash(lowestStopperValue),
-      const DeepCollectionEquality().hash(highestStopperType),
-      const DeepCollectionEquality().hash(highestStopperValue));
+      const DeepCollectionEquality().hash(paymentMethod));
 
   @JsonKey(ignore: true)
   @override
-  _$$_PricetarSettingsCopyWith<_$_PricetarSettings> get copyWith =>
-      __$$_PricetarSettingsCopyWithImpl<_$_PricetarSettings>(this, _$identity);
+  _$$_MakadSettingsCopyWith<_$_MakadSettings> get copyWith =>
+      __$$_MakadSettingsCopyWithImpl<_$_MakadSettings>(this, _$identity);
 }
 
-abstract class _PricetarSettings implements PricetarSettings {
-  const factory _PricetarSettings(
-      {@HiveField(0) final PricetarRule newRule,
-      @HiveField(1) final PricetarRule usedRule,
+abstract class _MakadSettings implements MakadSettings {
+  const factory _MakadSettings(
+      {@HiveField(0) final MakadReviseRule newRule,
+      @HiveField(1) final MakadReviseRule usedRule,
       @HiveField(2) final RevisePriceStopper lowestStopperType,
       @HiveField(3) final int lowestStopperValue,
-      @HiveField(4) final RevisePriceStopper highestStopperType,
-      @HiveField(5) final int highestStopperValue}) = _$_PricetarSettings;
+      @HiveField(4) final MakadPaymentMethod paymentMethod}) = _$_MakadSettings;
 
   @override
   @HiveField(0)
-  PricetarRule get newRule;
+  MakadReviseRule get newRule;
   @override
   @HiveField(1)
-  PricetarRule get usedRule;
+  MakadReviseRule get usedRule;
   @override
   @HiveField(2)
   RevisePriceStopper get lowestStopperType;
@@ -260,12 +236,9 @@ abstract class _PricetarSettings implements PricetarSettings {
   int get lowestStopperValue;
   @override
   @HiveField(4)
-  RevisePriceStopper get highestStopperType;
-  @override
-  @HiveField(5)
-  int get highestStopperValue;
+  MakadPaymentMethod get paymentMethod;
   @override
   @JsonKey(ignore: true)
-  _$$_PricetarSettingsCopyWith<_$_PricetarSettings> get copyWith =>
+  _$$_MakadSettingsCopyWith<_$_MakadSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }

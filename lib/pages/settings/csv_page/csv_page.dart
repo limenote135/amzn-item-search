@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'makad_page.dart';
 import 'order_page.dart';
 import 'pricetar_page.dart';
 
@@ -43,6 +44,12 @@ class _Body extends HookConsumerWidget {
           title: const Text("プライスター設定"),
           onTap: () {
             Navigator.push(context, PricetarPage.route());
+          },
+        ),
+        ListTile(
+          title: const Text("マカド設定"),
+          onTap: () {
+            Navigator.push(context, MakadPage.route());
           },
         ),
       ],
