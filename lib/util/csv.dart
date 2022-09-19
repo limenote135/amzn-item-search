@@ -18,7 +18,8 @@ import 'package:path_provider/path_provider.dart';
 enum CsvFormat {
   standard,
   pricetar,
-  makad;
+  makad,
+  sellerSket;
 
   const CsvFormat();
   String get displayName {
@@ -29,6 +30,8 @@ enum CsvFormat {
         return "プライスター一括登録形式";
       case CsvFormat.makad:
         return "マカド一括登録形式";
+      case CsvFormat.sellerSket:
+        return "セラースケット一括登録形式";
     }
   }
 }
@@ -67,6 +70,8 @@ List<List<Object>> _createCsv(
       return _createPricetarCsv(items, settings.pricetarSettings);
     case CsvFormat.makad:
       return _createMakadCsv(items, settings.makadSettings);
+    case CsvFormat.sellerSket:
+      return _createSellerSketCsv();
   }
 }
 
@@ -166,6 +171,10 @@ List<List<Object>> _createMakadCsv(
         settings.paymentMethod.makadCsvValue,
       ]
   ];
+}
+
+List<List<Object>> _createSellerSketCsv() {
+  return [];
 }
 
 int _calcStopperPrice(
