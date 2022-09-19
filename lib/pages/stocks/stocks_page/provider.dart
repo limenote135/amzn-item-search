@@ -56,9 +56,9 @@ final filteredStockListProvider = Provider(
       });
     }
 
-    if(filter.channel != FulfilmentChannel.all) {
+    if (filter.channel != FulfilmentChannel.all) {
       items = items.where((e) {
-        switch(filter.channel) {
+        switch (filter.channel) {
           case FulfilmentChannel.all:
             return true;
           case FulfilmentChannel.amazon:
@@ -123,6 +123,9 @@ final filterCountProvider = Provider((ref) {
     count++;
   }
   if (filter.purchaseDateRange != null) {
+    count++;
+  }
+  if (filter.channel != FulfilmentChannel.all) {
     count++;
   }
   return count;
