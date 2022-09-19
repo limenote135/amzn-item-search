@@ -6,6 +6,7 @@ import 'enums/alert_type.dart';
 import 'enums/csv_columns.dart';
 import 'enums/shortcut_type.dart';
 import 'keepa_settings.dart';
+import 'makad_settings.dart';
 import 'pricetar_settings.dart';
 
 const defaultSkuFormat =
@@ -256,3 +257,4 @@ const defaultUsedConditionText = [
 ];
 
 const defaultPricetarSettings = PricetarSettings();
+const defaultMakadSettings = MakadSettings();
