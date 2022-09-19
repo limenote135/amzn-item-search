@@ -8,6 +8,7 @@ import 'enums/shortcut_type.dart';
 import 'keepa_settings.dart';
 import 'makad_settings.dart';
 import 'pricetar_settings.dart';
+import 'sellersket_settings.dart';
 
 const defaultSkuFormat =
     "{yyyy}{mm}{dd}-{asin}-{cond}-{purchasePrice}-{quantity}";
@@ -258,3 +259,4 @@ const defaultUsedConditionText = [
 
 const defaultPricetarSettings = PricetarSettings();
 const defaultMakadSettings = MakadSettings();
+const defaultSellerSketSettings = SellerSketSettings();

@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'makad_page.dart';
 import 'order_page.dart';
 import 'pricetar_page.dart';
+import 'seller_sket_page.dart';
 
 class PurchaseListPage extends StatelessWidget {
   const PurchaseListPage({super.key});
@@ -50,6 +51,12 @@ class _Body extends HookConsumerWidget {
           title: const Text("マカド設定"),
           onTap: () {
             Navigator.push(context, MakadPage.route());
+          },
+        ),
+        ListTile(
+          title: const Text("セラースケット設定"),
+          onTap: () {
+            Navigator.push(context, SellerSketPage.route());
           },
         ),
       ],
