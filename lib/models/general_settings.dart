@@ -5,6 +5,7 @@ import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/makad_settings.dart';
 import 'package:amasearch/models/pricetar_settings.dart';
+import 'package:amasearch/models/sellersket_settings.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -80,6 +81,9 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(26, defaultValue: defaultMakadSettings)
     @Default(defaultMakadSettings)
         MakadSettings makadSettings,
+    @HiveField(27, defaultValue: defaultSellerSketSettings)
+    @Default(defaultSellerSketSettings)
+        SellerSketSettings sellerSketSettings,
   }) = _GeneralSettings;
 }
 

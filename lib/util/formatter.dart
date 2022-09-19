@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 final numberFormatter = NumberFormat("#,##0");
 // yyyy/M/d hh:mm
 final dateFormatter = DateFormat.yMd().add_Hm();
-final dateTimestampFormatter = DateFormat("yyyyMMdd_hhmm");
+final dateTimestampFormatter = DateFormat("yyyyMMdd_HHmm");
 // yyyy/M/d
 final dayFormatter = DateFormat.yMd();
 
