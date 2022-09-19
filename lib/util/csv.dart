@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_adjacent_string_concatenation
 import 'dart:io';
 
 import 'package:amasearch/models/enums/csv_columns.dart';
@@ -5,9 +6,11 @@ import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/pricetar_rule.dart';
 import 'package:amasearch/models/enums/pricetar_stopper.dart';
+import 'package:amasearch/models/enums/sellersket_revise_rule.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/makad_settings.dart';
 import 'package:amasearch/models/pricetar_settings.dart';
+import 'package:amasearch/models/sellersket_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
@@ -71,7 +74,7 @@ List<List<Object>> _createCsv(
     case CsvFormat.makad:
       return _createMakadCsv(items, settings.makadSettings);
     case CsvFormat.sellerSket:
-      return _createSellerSketCsv();
+      return _createSellerSketCsv(items, settings.sellerSketSettings);
   }
 }
 
@@ -136,13 +139,15 @@ List<List<Object>> _createMakadCsv(
     [
       "ASIN(必須)※JANコードを入力するとエラーとなります。",
       "SKU(空の場合は自動挿入されます)",
-      "コンディション(必須)(0新品 1ほぼ新品 2非常に良い 3良い 4可 5コレクターほぼ新品 6コレクター非常に良い 7コレクター良い 8コレクター可)",
+      "コンディション(必須)(0新品 1ほぼ新品 2非常に良い 3良い 4可 " +
+          "5コレクターほぼ新品 6コレクター非常に良い 7コレクター良い 8コレクター可)",
       "出品価格(必須)",
       "下限価格",
       "仕入れ価格",
       "出品個数",
       "配送ルート(必須)(0→自己発送 1→FBA)",
-      "価格改定モード(0→なし 1→FBA状態合わせ 2→状態合わせ 3→FBA最安値 4→最安値 5→カート価格 6→自己最安値 7→上位最安値 8→全最安値)",
+      "価格改定モード(0→なし 1→FBA状態合わせ 2→状態合わせ 3→FBA最安値 " +
+          "4→最安値 5→カート価格 6→自己最安値 7→上位最安値 8→全最安値)",
       "商品説明文",
       "配送設定名",
       "リードタイム",
@@ -173,8 +178,58 @@ List<List<Object>> _createMakadCsv(
   ];
 }
 
-List<List<Object>> _createSellerSketCsv() {
-  return [];
+List<List<Object>> _createSellerSketCsv(
+  List<StockItem> items,
+  SellerSketSettings settings,
+) {
+  return [
+    // header
+    [
+      "SKU",
+      "ASIN",
+      "title",
+      "quantity",
+      "price",
+      "point",
+      "cost",
+      "low_limit",
+      "high_limit",
+      "condition",
+      "condition_note",
+      "price_control",
+      "handling_time",
+      "shipping_pattern_name",
+      "tax_code",
+    ],
+    for (final item in items)
+      [
+        item.sku,
+        item.item.asin,
+        "", // title
+        item.amount,
+        item.sellPrice,
+        "", // point
+        item.purchasePrice,
+        _calcStopperPrice(
+          item,
+          settings.lowestStopperType,
+          settings.lowestStopperValue,
+        ),
+        _calcStopperPrice(
+          item,
+          settings.highestStopperType,
+          settings.highestStopperValue,
+        ),
+        item.subCondition.toSellerSketCsvValue(),
+        item.conditionText,
+        item.condition == ItemCondition.newItem
+            ? settings.newRule.toSellerSketCsvValue()
+            : settings.usedRule.toSellerSketCsvValue(),
+        "", // 1~30日まで
+        settings.shippingPattern,
+        1,
+      ]
+  ];
 }
 
 int _calcStopperPrice(
