@@ -33,10 +33,10 @@ String createStopperValueInputMessage(RevisePriceStopper type) {
       // ここにはこないはず
       throw UnimplementedError("$type is not supported");
     case RevisePriceStopper.listingPrice:
-      return "出品価格の何%をストッパーに設定しますか？";
+      return "出品価格の何%をリミットに設定しますか？\n(100%で出品価格と同額です)";
     case RevisePriceStopper.profitValue:
-      return "利益額が何円になるようにストッパーを設定しますか？";
+      return "利益額が何円になるようにリミットを設定しますか？";
     case RevisePriceStopper.profitRate:
-      return "利益率が何%になるようにストッパーを設定しますか？";
+      return "利益率が何%になるようにリミットを設定しますか？";
   }
 }
