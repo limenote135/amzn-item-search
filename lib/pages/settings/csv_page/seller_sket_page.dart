@@ -181,10 +181,11 @@ class _Body extends ConsumerWidget {
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       final n = int.tryParse(value ?? "");
-                      if(n == null) {
+                      if (n == null) {
                         return "不正な値です";
                       }
-                      if(stopperType == RevisePriceStopper.listingPrice && n < 100) {
+                      if (stopperType == RevisePriceStopper.listingPrice &&
+                          n < 100) {
                         return "出品価格を下回っています";
                       }
                       return null;
