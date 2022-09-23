@@ -5,8 +5,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(1, 6, 0);
+var releaseNotesVersion = Version(1, 6, 2);
 const releaseNotes = <Release>[
+  Release("1.6.2", [
+    ReleaseSublist(
+      name: "更新内容",
+      changes: [
+        "v1.6.0 以降、コンディション説明のテンプレートが編集できない不具合を修正",
+      ],
+    ),
+  ]),
   Release("1.6.0", [
     ReleaseSublist(
       name: "更新内容",
