@@ -71,10 +71,13 @@ class _Body extends ConsumerWidget {
                 if (result == null || result.isEmpty) {
                   return;
                 }
-                settings.newConditionTexts[i] = result[0];
+                final newTexts = [
+                  for (var n = 0; n < settings.newConditionTexts.length; n++)
+                    n == i ? result[0] : settings.newConditionTexts[n]
+                ];
                 ref
                     .read(generalSettingsControllerProvider.notifier)
-                    .update(newConditionTexts: settings.newConditionTexts);
+                    .update(newConditionTexts: newTexts);
               },
             ),
             onChanged: (value) {
@@ -110,10 +113,13 @@ class _Body extends ConsumerWidget {
                 if (result == null || result.isEmpty) {
                   return;
                 }
-                settings.usedConditionTexts[i] = result[0];
+                final newTexts = [
+                  for (var n = 0; n < settings.usedConditionTexts.length; n++)
+                    n == i ? result[0] : settings.usedConditionTexts[n]
+                ];
                 ref
                     .read(generalSettingsControllerProvider.notifier)
-                    .update(usedConditionTexts: settings.usedConditionTexts);
+                    .update(usedConditionTexts: newTexts);
               },
             ),
             onChanged: (value) {
