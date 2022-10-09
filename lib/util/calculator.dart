@@ -4,7 +4,9 @@ import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final _displayTextProvider = StateProvider.autoDispose<String>((_) => "0");
+final _displayTextProvider = StateProvider.autoDispose<String>(
+  (_) => "0",
+);
 final _totalProvider = StateProvider.autoDispose<double>((_) => 0);
 final _currentOp = StateProvider.autoDispose<_Op>((_) => _Op.equal);
 final _inputCompleteProvider = StateProvider.autoDispose<bool>((_) => true);
