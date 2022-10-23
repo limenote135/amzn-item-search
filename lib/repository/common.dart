@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:amasearch/util/device.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -39,8 +38,7 @@ Future<Map<String, dynamic>> commonHeader(User user) async {
     final info = await PackageInfo.fromPlatform();
 
     final appVer = "Amasearch/${info.version}";
-    final osVer =
-        "${Platform.operatingSystem}/${Platform.operatingSystemVersion}";
+    final osVer = await getDeviceInfo();
 
     return <String, dynamic>{
       "User-Agent": "$appVer $osVer",
