@@ -37,7 +37,8 @@ mixin _$MakadSettings {
 abstract class $MakadSettingsCopyWith<$Res> {
   factory $MakadSettingsCopyWith(
           MakadSettings value, $Res Function(MakadSettings) then) =
-      _$MakadSettingsCopyWithImpl<$Res>;
+      _$MakadSettingsCopyWithImpl<$Res, MakadSettings>;
+  @useResult
   $Res call(
       {@HiveField(0) MakadReviseRule newRule,
       @HiveField(1) MakadReviseRule usedRule,
@@ -47,44 +48,46 @@ abstract class $MakadSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MakadSettingsCopyWithImpl<$Res>
+class _$MakadSettingsCopyWithImpl<$Res, $Val extends MakadSettings>
     implements $MakadSettingsCopyWith<$Res> {
   _$MakadSettingsCopyWithImpl(this._value, this._then);
 
-  final MakadSettings _value;
   // ignore: unused_field
-  final $Res Function(MakadSettings) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newRule = freezed,
-    Object? usedRule = freezed,
-    Object? lowestStopperType = freezed,
-    Object? lowestStopperValue = freezed,
-    Object? paymentMethod = freezed,
+    Object? newRule = null,
+    Object? usedRule = null,
+    Object? lowestStopperType = null,
+    Object? lowestStopperValue = null,
+    Object? paymentMethod = null,
   }) {
     return _then(_value.copyWith(
-      newRule: newRule == freezed
+      newRule: null == newRule
           ? _value.newRule
           : newRule // ignore: cast_nullable_to_non_nullable
               as MakadReviseRule,
-      usedRule: usedRule == freezed
+      usedRule: null == usedRule
           ? _value.usedRule
           : usedRule // ignore: cast_nullable_to_non_nullable
               as MakadReviseRule,
-      lowestStopperType: lowestStopperType == freezed
+      lowestStopperType: null == lowestStopperType
           ? _value.lowestStopperType
           : lowestStopperType // ignore: cast_nullable_to_non_nullable
               as RevisePriceStopper,
-      lowestStopperValue: lowestStopperValue == freezed
+      lowestStopperValue: null == lowestStopperValue
           ? _value.lowestStopperValue
           : lowestStopperValue // ignore: cast_nullable_to_non_nullable
               as int,
-      paymentMethod: paymentMethod == freezed
+      paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
               as MakadPaymentMethod,
-    ));
+    ) as $Val);
   }
 }
 
@@ -95,6 +98,7 @@ abstract class _$$_MakadSettingsCopyWith<$Res>
           _$_MakadSettings value, $Res Function(_$_MakadSettings) then) =
       __$$_MakadSettingsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) MakadReviseRule newRule,
       @HiveField(1) MakadReviseRule usedRule,
@@ -105,41 +109,39 @@ abstract class _$$_MakadSettingsCopyWith<$Res>
 
 /// @nodoc
 class __$$_MakadSettingsCopyWithImpl<$Res>
-    extends _$MakadSettingsCopyWithImpl<$Res>
+    extends _$MakadSettingsCopyWithImpl<$Res, _$_MakadSettings>
     implements _$$_MakadSettingsCopyWith<$Res> {
   __$$_MakadSettingsCopyWithImpl(
       _$_MakadSettings _value, $Res Function(_$_MakadSettings) _then)
-      : super(_value, (v) => _then(v as _$_MakadSettings));
+      : super(_value, _then);
 
-  @override
-  _$_MakadSettings get _value => super._value as _$_MakadSettings;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newRule = freezed,
-    Object? usedRule = freezed,
-    Object? lowestStopperType = freezed,
-    Object? lowestStopperValue = freezed,
-    Object? paymentMethod = freezed,
+    Object? newRule = null,
+    Object? usedRule = null,
+    Object? lowestStopperType = null,
+    Object? lowestStopperValue = null,
+    Object? paymentMethod = null,
   }) {
     return _then(_$_MakadSettings(
-      newRule: newRule == freezed
+      newRule: null == newRule
           ? _value.newRule
           : newRule // ignore: cast_nullable_to_non_nullable
               as MakadReviseRule,
-      usedRule: usedRule == freezed
+      usedRule: null == usedRule
           ? _value.usedRule
           : usedRule // ignore: cast_nullable_to_non_nullable
               as MakadReviseRule,
-      lowestStopperType: lowestStopperType == freezed
+      lowestStopperType: null == lowestStopperType
           ? _value.lowestStopperType
           : lowestStopperType // ignore: cast_nullable_to_non_nullable
               as RevisePriceStopper,
-      lowestStopperValue: lowestStopperValue == freezed
+      lowestStopperValue: null == lowestStopperValue
           ? _value.lowestStopperValue
           : lowestStopperValue // ignore: cast_nullable_to_non_nullable
               as int,
-      paymentMethod: paymentMethod == freezed
+      paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
               as MakadPaymentMethod,
@@ -189,27 +191,24 @@ class _$_MakadSettings implements _MakadSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MakadSettings &&
-            const DeepCollectionEquality().equals(other.newRule, newRule) &&
-            const DeepCollectionEquality().equals(other.usedRule, usedRule) &&
-            const DeepCollectionEquality()
-                .equals(other.lowestStopperType, lowestStopperType) &&
-            const DeepCollectionEquality()
-                .equals(other.lowestStopperValue, lowestStopperValue) &&
-            const DeepCollectionEquality()
-                .equals(other.paymentMethod, paymentMethod));
+            (identical(other.newRule, newRule) || other.newRule == newRule) &&
+            (identical(other.usedRule, usedRule) ||
+                other.usedRule == usedRule) &&
+            (identical(other.lowestStopperType, lowestStopperType) ||
+                other.lowestStopperType == lowestStopperType) &&
+            (identical(other.lowestStopperValue, lowestStopperValue) ||
+                other.lowestStopperValue == lowestStopperValue) &&
+            (identical(other.paymentMethod, paymentMethod) ||
+                other.paymentMethod == paymentMethod));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(newRule),
-      const DeepCollectionEquality().hash(usedRule),
-      const DeepCollectionEquality().hash(lowestStopperType),
-      const DeepCollectionEquality().hash(lowestStopperValue),
-      const DeepCollectionEquality().hash(paymentMethod));
+  int get hashCode => Object.hash(runtimeType, newRule, usedRule,
+      lowestStopperType, lowestStopperValue, paymentMethod);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MakadSettingsCopyWith<_$_MakadSettings> get copyWith =>
       __$$_MakadSettingsCopyWithImpl<_$_MakadSettings>(this, _$identity);
 }

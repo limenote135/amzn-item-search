@@ -39,7 +39,8 @@ mixin _$ListingItem {
 abstract class $ListingItemCopyWith<$Res> {
   factory $ListingItemCopyWith(
           ListingItem value, $Res Function(ListingItem) then) =
-      _$ListingItemCopyWithImpl<$Res>;
+      _$ListingItemCopyWithImpl<$Res, ListingItem>;
+  @useResult
   $Res call(
       {String sku,
       String asin,
@@ -52,58 +53,61 @@ abstract class $ListingItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ListingItemCopyWithImpl<$Res> implements $ListingItemCopyWith<$Res> {
+class _$ListingItemCopyWithImpl<$Res, $Val extends ListingItem>
+    implements $ListingItemCopyWith<$Res> {
   _$ListingItemCopyWithImpl(this._value, this._then);
 
-  final ListingItem _value;
   // ignore: unused_field
-  final $Res Function(ListingItem) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sku = freezed,
-    Object? asin = freezed,
-    Object? sellPrice = freezed,
-    Object? amount = freezed,
-    Object? condition = freezed,
-    Object? subCondition = freezed,
-    Object? useFba = freezed,
-    Object? conditionText = freezed,
+    Object? sku = null,
+    Object? asin = null,
+    Object? sellPrice = null,
+    Object? amount = null,
+    Object? condition = null,
+    Object? subCondition = null,
+    Object? useFba = null,
+    Object? conditionText = null,
   }) {
     return _then(_value.copyWith(
-      sku: sku == freezed
+      sku: null == sku
           ? _value.sku
           : sku // ignore: cast_nullable_to_non_nullable
               as String,
-      asin: asin == freezed
+      asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
               as String,
-      sellPrice: sellPrice == freezed
+      sellPrice: null == sellPrice
           ? _value.sellPrice
           : sellPrice // ignore: cast_nullable_to_non_nullable
               as int,
-      amount: amount == freezed
+      amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int,
-      condition: condition == freezed
+      condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
               as ItemCondition,
-      subCondition: subCondition == freezed
+      subCondition: null == subCondition
           ? _value.subCondition
           : subCondition // ignore: cast_nullable_to_non_nullable
               as ItemSubCondition,
-      useFba: useFba == freezed
+      useFba: null == useFba
           ? _value.useFba
           : useFba // ignore: cast_nullable_to_non_nullable
               as bool,
-      conditionText: conditionText == freezed
+      conditionText: null == conditionText
           ? _value.conditionText
           : conditionText // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -114,6 +118,7 @@ abstract class _$$_ListingItemCopyWith<$Res>
           _$_ListingItem value, $Res Function(_$_ListingItem) then) =
       __$$_ListingItemCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String sku,
       String asin,
@@ -126,56 +131,55 @@ abstract class _$$_ListingItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ListingItemCopyWithImpl<$Res> extends _$ListingItemCopyWithImpl<$Res>
+class __$$_ListingItemCopyWithImpl<$Res>
+    extends _$ListingItemCopyWithImpl<$Res, _$_ListingItem>
     implements _$$_ListingItemCopyWith<$Res> {
   __$$_ListingItemCopyWithImpl(
       _$_ListingItem _value, $Res Function(_$_ListingItem) _then)
-      : super(_value, (v) => _then(v as _$_ListingItem));
+      : super(_value, _then);
 
-  @override
-  _$_ListingItem get _value => super._value as _$_ListingItem;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sku = freezed,
-    Object? asin = freezed,
-    Object? sellPrice = freezed,
-    Object? amount = freezed,
-    Object? condition = freezed,
-    Object? subCondition = freezed,
-    Object? useFba = freezed,
-    Object? conditionText = freezed,
+    Object? sku = null,
+    Object? asin = null,
+    Object? sellPrice = null,
+    Object? amount = null,
+    Object? condition = null,
+    Object? subCondition = null,
+    Object? useFba = null,
+    Object? conditionText = null,
   }) {
     return _then(_$_ListingItem(
-      sku: sku == freezed
+      sku: null == sku
           ? _value.sku
           : sku // ignore: cast_nullable_to_non_nullable
               as String,
-      asin: asin == freezed
+      asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
               as String,
-      sellPrice: sellPrice == freezed
+      sellPrice: null == sellPrice
           ? _value.sellPrice
           : sellPrice // ignore: cast_nullable_to_non_nullable
               as int,
-      amount: amount == freezed
+      amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int,
-      condition: condition == freezed
+      condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
               as ItemCondition,
-      subCondition: subCondition == freezed
+      subCondition: null == subCondition
           ? _value.subCondition
           : subCondition // ignore: cast_nullable_to_non_nullable
               as ItemSubCondition,
-      useFba: useFba == freezed
+      useFba: null == useFba
           ? _value.useFba
           : useFba // ignore: cast_nullable_to_non_nullable
               as bool,
-      conditionText: conditionText == freezed
+      conditionText: null == conditionText
           ? _value.conditionText
           : conditionText // ignore: cast_nullable_to_non_nullable
               as String,
@@ -227,33 +231,28 @@ class _$_ListingItem implements _ListingItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ListingItem &&
-            const DeepCollectionEquality().equals(other.sku, sku) &&
-            const DeepCollectionEquality().equals(other.asin, asin) &&
-            const DeepCollectionEquality().equals(other.sellPrice, sellPrice) &&
-            const DeepCollectionEquality().equals(other.amount, amount) &&
-            const DeepCollectionEquality().equals(other.condition, condition) &&
-            const DeepCollectionEquality()
-                .equals(other.subCondition, subCondition) &&
-            const DeepCollectionEquality().equals(other.useFba, useFba) &&
-            const DeepCollectionEquality()
-                .equals(other.conditionText, conditionText));
+            (identical(other.sku, sku) || other.sku == sku) &&
+            (identical(other.asin, asin) || other.asin == asin) &&
+            (identical(other.sellPrice, sellPrice) ||
+                other.sellPrice == sellPrice) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.condition, condition) ||
+                other.condition == condition) &&
+            (identical(other.subCondition, subCondition) ||
+                other.subCondition == subCondition) &&
+            (identical(other.useFba, useFba) || other.useFba == useFba) &&
+            (identical(other.conditionText, conditionText) ||
+                other.conditionText == conditionText));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(sku),
-      const DeepCollectionEquality().hash(asin),
-      const DeepCollectionEquality().hash(sellPrice),
-      const DeepCollectionEquality().hash(amount),
-      const DeepCollectionEquality().hash(condition),
-      const DeepCollectionEquality().hash(subCondition),
-      const DeepCollectionEquality().hash(useFba),
-      const DeepCollectionEquality().hash(conditionText));
+  int get hashCode => Object.hash(runtimeType, sku, asin, sellPrice, amount,
+      condition, subCondition, useFba, conditionText);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ListingItemCopyWith<_$_ListingItem> get copyWith =>
       __$$_ListingItemCopyWithImpl<_$_ListingItem>(this, _$identity);
 

@@ -16,8 +16,8 @@ Future<bool> uploadCsv(
     settings,
     type,
   );
-  final result = await Share.shareFilesWithResult(
-    [file.absolute.path],
+  final result = await Share.shareXFiles(
+    [XFile(file.absolute.path)],
     subject: "仕入れ済み商品一覧_${timestamp}_${type.name}",
   );
 

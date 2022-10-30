@@ -28,29 +28,32 @@ mixin _$WordSearchHistory {
 abstract class $WordSearchHistoryCopyWith<$Res> {
   factory $WordSearchHistoryCopyWith(
           WordSearchHistory value, $Res Function(WordSearchHistory) then) =
-      _$WordSearchHistoryCopyWithImpl<$Res>;
+      _$WordSearchHistoryCopyWithImpl<$Res, WordSearchHistory>;
+  @useResult
   $Res call({@HiveField(0) String keyword});
 }
 
 /// @nodoc
-class _$WordSearchHistoryCopyWithImpl<$Res>
+class _$WordSearchHistoryCopyWithImpl<$Res, $Val extends WordSearchHistory>
     implements $WordSearchHistoryCopyWith<$Res> {
   _$WordSearchHistoryCopyWithImpl(this._value, this._then);
 
-  final WordSearchHistory _value;
   // ignore: unused_field
-  final $Res Function(WordSearchHistory) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? keyword = freezed,
+    Object? keyword = null,
   }) {
     return _then(_value.copyWith(
-      keyword: keyword == freezed
+      keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -61,26 +64,25 @@ abstract class _$$_WordSearchHistoryCopyWith<$Res>
           $Res Function(_$_WordSearchHistory) then) =
       __$$_WordSearchHistoryCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({@HiveField(0) String keyword});
 }
 
 /// @nodoc
 class __$$_WordSearchHistoryCopyWithImpl<$Res>
-    extends _$WordSearchHistoryCopyWithImpl<$Res>
+    extends _$WordSearchHistoryCopyWithImpl<$Res, _$_WordSearchHistory>
     implements _$$_WordSearchHistoryCopyWith<$Res> {
   __$$_WordSearchHistoryCopyWithImpl(
       _$_WordSearchHistory _value, $Res Function(_$_WordSearchHistory) _then)
-      : super(_value, (v) => _then(v as _$_WordSearchHistory));
+      : super(_value, _then);
 
-  @override
-  _$_WordSearchHistory get _value => super._value as _$_WordSearchHistory;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? keyword = freezed,
+    Object? keyword = null,
   }) {
     return _then(_$_WordSearchHistory(
-      keyword: keyword == freezed
+      keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String,
@@ -108,15 +110,15 @@ class _$_WordSearchHistory implements _WordSearchHistory {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_WordSearchHistory &&
-            const DeepCollectionEquality().equals(other.keyword, keyword));
+            (identical(other.keyword, keyword) || other.keyword == keyword));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(keyword));
+  int get hashCode => Object.hash(runtimeType, keyword);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_WordSearchHistoryCopyWith<_$_WordSearchHistory> get copyWith =>
       __$$_WordSearchHistoryCopyWithImpl<_$_WordSearchHistory>(
           this, _$identity);

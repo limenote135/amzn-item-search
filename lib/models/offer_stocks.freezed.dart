@@ -28,34 +28,37 @@ mixin _$OfferStocksParam {
 abstract class $OfferStocksParamCopyWith<$Res> {
   factory $OfferStocksParamCopyWith(
           OfferStocksParam value, $Res Function(OfferStocksParam) then) =
-      _$OfferStocksParamCopyWithImpl<$Res>;
+      _$OfferStocksParamCopyWithImpl<$Res, OfferStocksParam>;
+  @useResult
   $Res call({String asin, String sellerId});
 }
 
 /// @nodoc
-class _$OfferStocksParamCopyWithImpl<$Res>
+class _$OfferStocksParamCopyWithImpl<$Res, $Val extends OfferStocksParam>
     implements $OfferStocksParamCopyWith<$Res> {
   _$OfferStocksParamCopyWithImpl(this._value, this._then);
 
-  final OfferStocksParam _value;
   // ignore: unused_field
-  final $Res Function(OfferStocksParam) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? asin = freezed,
-    Object? sellerId = freezed,
+    Object? asin = null,
+    Object? sellerId = null,
   }) {
     return _then(_value.copyWith(
-      asin: asin == freezed
+      asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
               as String,
-      sellerId: sellerId == freezed
+      sellerId: null == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,31 +69,30 @@ abstract class _$$_OfferStocksParamCopyWith<$Res>
           _$_OfferStocksParam value, $Res Function(_$_OfferStocksParam) then) =
       __$$_OfferStocksParamCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String asin, String sellerId});
 }
 
 /// @nodoc
 class __$$_OfferStocksParamCopyWithImpl<$Res>
-    extends _$OfferStocksParamCopyWithImpl<$Res>
+    extends _$OfferStocksParamCopyWithImpl<$Res, _$_OfferStocksParam>
     implements _$$_OfferStocksParamCopyWith<$Res> {
   __$$_OfferStocksParamCopyWithImpl(
       _$_OfferStocksParam _value, $Res Function(_$_OfferStocksParam) _then)
-      : super(_value, (v) => _then(v as _$_OfferStocksParam));
+      : super(_value, _then);
 
-  @override
-  _$_OfferStocksParam get _value => super._value as _$_OfferStocksParam;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? asin = freezed,
-    Object? sellerId = freezed,
+    Object? asin = null,
+    Object? sellerId = null,
   }) {
     return _then(_$_OfferStocksParam(
-      asin: asin == freezed
+      asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
               as String,
-      sellerId: sellerId == freezed
+      sellerId: null == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -118,18 +120,17 @@ class _$_OfferStocksParam implements _OfferStocksParam {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OfferStocksParam &&
-            const DeepCollectionEquality().equals(other.asin, asin) &&
-            const DeepCollectionEquality().equals(other.sellerId, sellerId));
+            (identical(other.asin, asin) || other.asin == asin) &&
+            (identical(other.sellerId, sellerId) ||
+                other.sellerId == sellerId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(asin),
-      const DeepCollectionEquality().hash(sellerId));
+  int get hashCode => Object.hash(runtimeType, asin, sellerId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OfferStocksParamCopyWith<_$_OfferStocksParam> get copyWith =>
       __$$_OfferStocksParamCopyWithImpl<_$_OfferStocksParam>(this, _$identity);
 }
