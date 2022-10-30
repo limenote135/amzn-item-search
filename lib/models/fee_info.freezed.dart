@@ -37,7 +37,8 @@ mixin _$FeeInfo {
 /// @nodoc
 abstract class $FeeInfoCopyWith<$Res> {
   factory $FeeInfoCopyWith(FeeInfo value, $Res Function(FeeInfo) then) =
-      _$FeeInfoCopyWithImpl<$Res>;
+      _$FeeInfoCopyWithImpl<$Res, FeeInfo>;
+  @useResult
   $Res call(
       {@HiveField(0) @JsonKey(name: "fee_rate") double referralFeeRate,
       @HiveField(1) @JsonKey(name: "closing_fee") int variableClosingFee,
@@ -45,33 +46,36 @@ abstract class $FeeInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FeeInfoCopyWithImpl<$Res> implements $FeeInfoCopyWith<$Res> {
+class _$FeeInfoCopyWithImpl<$Res, $Val extends FeeInfo>
+    implements $FeeInfoCopyWith<$Res> {
   _$FeeInfoCopyWithImpl(this._value, this._then);
 
-  final FeeInfo _value;
   // ignore: unused_field
-  final $Res Function(FeeInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? referralFeeRate = freezed,
-    Object? variableClosingFee = freezed,
-    Object? fbaFee = freezed,
+    Object? referralFeeRate = null,
+    Object? variableClosingFee = null,
+    Object? fbaFee = null,
   }) {
     return _then(_value.copyWith(
-      referralFeeRate: referralFeeRate == freezed
+      referralFeeRate: null == referralFeeRate
           ? _value.referralFeeRate
           : referralFeeRate // ignore: cast_nullable_to_non_nullable
               as double,
-      variableClosingFee: variableClosingFee == freezed
+      variableClosingFee: null == variableClosingFee
           ? _value.variableClosingFee
           : variableClosingFee // ignore: cast_nullable_to_non_nullable
               as int,
-      fbaFee: fbaFee == freezed
+      fbaFee: null == fbaFee
           ? _value.fbaFee
           : fbaFee // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -81,6 +85,7 @@ abstract class _$$_FeeInfoCopyWith<$Res> implements $FeeInfoCopyWith<$Res> {
           _$_FeeInfo value, $Res Function(_$_FeeInfo) then) =
       __$$_FeeInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) @JsonKey(name: "fee_rate") double referralFeeRate,
       @HiveField(1) @JsonKey(name: "closing_fee") int variableClosingFee,
@@ -88,30 +93,29 @@ abstract class _$$_FeeInfoCopyWith<$Res> implements $FeeInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FeeInfoCopyWithImpl<$Res> extends _$FeeInfoCopyWithImpl<$Res>
+class __$$_FeeInfoCopyWithImpl<$Res>
+    extends _$FeeInfoCopyWithImpl<$Res, _$_FeeInfo>
     implements _$$_FeeInfoCopyWith<$Res> {
   __$$_FeeInfoCopyWithImpl(_$_FeeInfo _value, $Res Function(_$_FeeInfo) _then)
-      : super(_value, (v) => _then(v as _$_FeeInfo));
+      : super(_value, _then);
 
-  @override
-  _$_FeeInfo get _value => super._value as _$_FeeInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? referralFeeRate = freezed,
-    Object? variableClosingFee = freezed,
-    Object? fbaFee = freezed,
+    Object? referralFeeRate = null,
+    Object? variableClosingFee = null,
+    Object? fbaFee = null,
   }) {
     return _then(_$_FeeInfo(
-      referralFeeRate: referralFeeRate == freezed
+      referralFeeRate: null == referralFeeRate
           ? _value.referralFeeRate
           : referralFeeRate // ignore: cast_nullable_to_non_nullable
               as double,
-      variableClosingFee: variableClosingFee == freezed
+      variableClosingFee: null == variableClosingFee
           ? _value.variableClosingFee
           : variableClosingFee // ignore: cast_nullable_to_non_nullable
               as int,
-      fbaFee: fbaFee == freezed
+      fbaFee: null == fbaFee
           ? _value.fbaFee
           : fbaFee // ignore: cast_nullable_to_non_nullable
               as int,
@@ -155,23 +159,21 @@ class _$_FeeInfo implements _FeeInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FeeInfo &&
-            const DeepCollectionEquality()
-                .equals(other.referralFeeRate, referralFeeRate) &&
-            const DeepCollectionEquality()
-                .equals(other.variableClosingFee, variableClosingFee) &&
-            const DeepCollectionEquality().equals(other.fbaFee, fbaFee));
+            (identical(other.referralFeeRate, referralFeeRate) ||
+                other.referralFeeRate == referralFeeRate) &&
+            (identical(other.variableClosingFee, variableClosingFee) ||
+                other.variableClosingFee == variableClosingFee) &&
+            (identical(other.fbaFee, fbaFee) || other.fbaFee == fbaFee));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(referralFeeRate),
-      const DeepCollectionEquality().hash(variableClosingFee),
-      const DeepCollectionEquality().hash(fbaFee));
+  int get hashCode =>
+      Object.hash(runtimeType, referralFeeRate, variableClosingFee, fbaFee);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FeeInfoCopyWith<_$_FeeInfo> get copyWith =>
       __$$_FeeInfoCopyWithImpl<_$_FeeInfo>(this, _$identity);
 

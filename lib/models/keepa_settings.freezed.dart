@@ -40,7 +40,8 @@ mixin _$KeepaSettings {
 abstract class $KeepaSettingsCopyWith<$Res> {
   factory $KeepaSettingsCopyWith(
           KeepaSettings value, $Res Function(KeepaSettings) then) =
-      _$KeepaSettingsCopyWithImpl<$Res>;
+      _$KeepaSettingsCopyWithImpl<$Res, KeepaSettings>;
+  @useResult
   $Res call(
       {@HiveField(0, defaultValue: true) bool showNew,
       @HiveField(1, defaultValue: true) bool showUsed,
@@ -52,54 +53,56 @@ abstract class $KeepaSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$KeepaSettingsCopyWithImpl<$Res>
+class _$KeepaSettingsCopyWithImpl<$Res, $Val extends KeepaSettings>
     implements $KeepaSettingsCopyWith<$Res> {
   _$KeepaSettingsCopyWithImpl(this._value, this._then);
 
-  final KeepaSettings _value;
   // ignore: unused_field
-  final $Res Function(KeepaSettings) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? showNew = freezed,
-    Object? showUsed = freezed,
-    Object? showAmazon = freezed,
-    Object? period = freezed,
-    Object? extraParam = freezed,
-    Object? showBuyBox = freezed,
-    Object? showFba = freezed,
+    Object? showNew = null,
+    Object? showUsed = null,
+    Object? showAmazon = null,
+    Object? period = null,
+    Object? extraParam = null,
+    Object? showBuyBox = null,
+    Object? showFba = null,
   }) {
     return _then(_value.copyWith(
-      showNew: showNew == freezed
+      showNew: null == showNew
           ? _value.showNew
           : showNew // ignore: cast_nullable_to_non_nullable
               as bool,
-      showUsed: showUsed == freezed
+      showUsed: null == showUsed
           ? _value.showUsed
           : showUsed // ignore: cast_nullable_to_non_nullable
               as bool,
-      showAmazon: showAmazon == freezed
+      showAmazon: null == showAmazon
           ? _value.showAmazon
           : showAmazon // ignore: cast_nullable_to_non_nullable
               as bool,
-      period: period == freezed
+      period: null == period
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as KeepaShowPeriod,
-      extraParam: extraParam == freezed
+      extraParam: null == extraParam
           ? _value.extraParam
           : extraParam // ignore: cast_nullable_to_non_nullable
               as String,
-      showBuyBox: showBuyBox == freezed
+      showBuyBox: null == showBuyBox
           ? _value.showBuyBox
           : showBuyBox // ignore: cast_nullable_to_non_nullable
               as bool,
-      showFba: showFba == freezed
+      showFba: null == showFba
           ? _value.showFba
           : showFba // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -110,6 +113,7 @@ abstract class _$$_KeepaSettingsCopyWith<$Res>
           _$_KeepaSettings value, $Res Function(_$_KeepaSettings) then) =
       __$$_KeepaSettingsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0, defaultValue: true) bool showNew,
       @HiveField(1, defaultValue: true) bool showUsed,
@@ -122,51 +126,49 @@ abstract class _$$_KeepaSettingsCopyWith<$Res>
 
 /// @nodoc
 class __$$_KeepaSettingsCopyWithImpl<$Res>
-    extends _$KeepaSettingsCopyWithImpl<$Res>
+    extends _$KeepaSettingsCopyWithImpl<$Res, _$_KeepaSettings>
     implements _$$_KeepaSettingsCopyWith<$Res> {
   __$$_KeepaSettingsCopyWithImpl(
       _$_KeepaSettings _value, $Res Function(_$_KeepaSettings) _then)
-      : super(_value, (v) => _then(v as _$_KeepaSettings));
+      : super(_value, _then);
 
-  @override
-  _$_KeepaSettings get _value => super._value as _$_KeepaSettings;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? showNew = freezed,
-    Object? showUsed = freezed,
-    Object? showAmazon = freezed,
-    Object? period = freezed,
-    Object? extraParam = freezed,
-    Object? showBuyBox = freezed,
-    Object? showFba = freezed,
+    Object? showNew = null,
+    Object? showUsed = null,
+    Object? showAmazon = null,
+    Object? period = null,
+    Object? extraParam = null,
+    Object? showBuyBox = null,
+    Object? showFba = null,
   }) {
     return _then(_$_KeepaSettings(
-      showNew: showNew == freezed
+      showNew: null == showNew
           ? _value.showNew
           : showNew // ignore: cast_nullable_to_non_nullable
               as bool,
-      showUsed: showUsed == freezed
+      showUsed: null == showUsed
           ? _value.showUsed
           : showUsed // ignore: cast_nullable_to_non_nullable
               as bool,
-      showAmazon: showAmazon == freezed
+      showAmazon: null == showAmazon
           ? _value.showAmazon
           : showAmazon // ignore: cast_nullable_to_non_nullable
               as bool,
-      period: period == freezed
+      period: null == period
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as KeepaShowPeriod,
-      extraParam: extraParam == freezed
+      extraParam: null == extraParam
           ? _value.extraParam
           : extraParam // ignore: cast_nullable_to_non_nullable
               as String,
-      showBuyBox: showBuyBox == freezed
+      showBuyBox: null == showBuyBox
           ? _value.showBuyBox
           : showBuyBox // ignore: cast_nullable_to_non_nullable
               as bool,
-      showFba: showFba == freezed
+      showFba: null == showFba
           ? _value.showFba
           : showFba // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -233,31 +235,26 @@ class _$_KeepaSettings implements _KeepaSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_KeepaSettings &&
-            const DeepCollectionEquality().equals(other.showNew, showNew) &&
-            const DeepCollectionEquality().equals(other.showUsed, showUsed) &&
-            const DeepCollectionEquality()
-                .equals(other.showAmazon, showAmazon) &&
-            const DeepCollectionEquality().equals(other.period, period) &&
-            const DeepCollectionEquality()
-                .equals(other.extraParam, extraParam) &&
-            const DeepCollectionEquality()
-                .equals(other.showBuyBox, showBuyBox) &&
-            const DeepCollectionEquality().equals(other.showFba, showFba));
+            (identical(other.showNew, showNew) || other.showNew == showNew) &&
+            (identical(other.showUsed, showUsed) ||
+                other.showUsed == showUsed) &&
+            (identical(other.showAmazon, showAmazon) ||
+                other.showAmazon == showAmazon) &&
+            (identical(other.period, period) || other.period == period) &&
+            (identical(other.extraParam, extraParam) ||
+                other.extraParam == extraParam) &&
+            (identical(other.showBuyBox, showBuyBox) ||
+                other.showBuyBox == showBuyBox) &&
+            (identical(other.showFba, showFba) || other.showFba == showFba));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(showNew),
-      const DeepCollectionEquality().hash(showUsed),
-      const DeepCollectionEquality().hash(showAmazon),
-      const DeepCollectionEquality().hash(period),
-      const DeepCollectionEquality().hash(extraParam),
-      const DeepCollectionEquality().hash(showBuyBox),
-      const DeepCollectionEquality().hash(showFba));
+  int get hashCode => Object.hash(runtimeType, showNew, showUsed, showAmazon,
+      period, extraParam, showBuyBox, showFba);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_KeepaSettingsCopyWith<_$_KeepaSettings> get copyWith =>
       __$$_KeepaSettingsCopyWithImpl<_$_KeepaSettings>(this, _$identity);
 }

@@ -39,7 +39,8 @@ mixin _$BookoffResponse {
 abstract class $BookoffResponseCopyWith<$Res> {
   factory $BookoffResponseCopyWith(
           BookoffResponse value, $Res Function(BookoffResponse) then) =
-      _$BookoffResponseCopyWithImpl<$Res>;
+      _$BookoffResponseCopyWithImpl<$Res, BookoffResponse>;
+  @useResult
   $Res call(
       {@JsonKey(name: "INSTORECODE") String instoreCode,
       @JsonKey(name: "GOODS_NAME1") String title,
@@ -48,39 +49,41 @@ abstract class $BookoffResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BookoffResponseCopyWithImpl<$Res>
+class _$BookoffResponseCopyWithImpl<$Res, $Val extends BookoffResponse>
     implements $BookoffResponseCopyWith<$Res> {
   _$BookoffResponseCopyWithImpl(this._value, this._then);
 
-  final BookoffResponse _value;
   // ignore: unused_field
-  final $Res Function(BookoffResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? instoreCode = freezed,
-    Object? title = freezed,
+    Object? instoreCode = null,
+    Object? title = null,
     Object? subtitle = freezed,
-    Object? jan = freezed,
+    Object? jan = null,
   }) {
     return _then(_value.copyWith(
-      instoreCode: instoreCode == freezed
+      instoreCode: null == instoreCode
           ? _value.instoreCode
           : instoreCode // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      subtitle: subtitle == freezed
+      subtitle: freezed == subtitle
           ? _value.subtitle
           : subtitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      jan: jan == freezed
+      jan: null == jan
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -91,6 +94,7 @@ abstract class _$$_BookoffResponseCopyWith<$Res>
           _$_BookoffResponse value, $Res Function(_$_BookoffResponse) then) =
       __$$_BookoffResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: "INSTORECODE") String instoreCode,
       @JsonKey(name: "GOODS_NAME1") String title,
@@ -100,36 +104,34 @@ abstract class _$$_BookoffResponseCopyWith<$Res>
 
 /// @nodoc
 class __$$_BookoffResponseCopyWithImpl<$Res>
-    extends _$BookoffResponseCopyWithImpl<$Res>
+    extends _$BookoffResponseCopyWithImpl<$Res, _$_BookoffResponse>
     implements _$$_BookoffResponseCopyWith<$Res> {
   __$$_BookoffResponseCopyWithImpl(
       _$_BookoffResponse _value, $Res Function(_$_BookoffResponse) _then)
-      : super(_value, (v) => _then(v as _$_BookoffResponse));
+      : super(_value, _then);
 
-  @override
-  _$_BookoffResponse get _value => super._value as _$_BookoffResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? instoreCode = freezed,
-    Object? title = freezed,
+    Object? instoreCode = null,
+    Object? title = null,
     Object? subtitle = freezed,
-    Object? jan = freezed,
+    Object? jan = null,
   }) {
     return _then(_$_BookoffResponse(
-      instoreCode: instoreCode == freezed
+      instoreCode: null == instoreCode
           ? _value.instoreCode
           : instoreCode // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      subtitle: subtitle == freezed
+      subtitle: freezed == subtitle
           ? _value.subtitle
           : subtitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      jan: jan == freezed
+      jan: null == jan
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
               as String,
@@ -173,24 +175,22 @@ class _$_BookoffResponse implements _BookoffResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BookoffResponse &&
-            const DeepCollectionEquality()
-                .equals(other.instoreCode, instoreCode) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.subtitle, subtitle) &&
-            const DeepCollectionEquality().equals(other.jan, jan));
+            (identical(other.instoreCode, instoreCode) ||
+                other.instoreCode == instoreCode) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.subtitle, subtitle) ||
+                other.subtitle == subtitle) &&
+            (identical(other.jan, jan) || other.jan == jan));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(instoreCode),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(subtitle),
-      const DeepCollectionEquality().hash(jan));
+  int get hashCode =>
+      Object.hash(runtimeType, instoreCode, title, subtitle, jan);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BookoffResponseCopyWith<_$_BookoffResponse> get copyWith =>
       __$$_BookoffResponseCopyWithImpl<_$_BookoffResponse>(this, _$identity);
 

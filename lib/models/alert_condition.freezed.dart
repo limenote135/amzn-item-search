@@ -37,36 +37,39 @@ mixin _$AlertCondition {
 abstract class $AlertConditionCopyWith<$Res> {
   factory $AlertConditionCopyWith(
           AlertCondition value, $Res Function(AlertCondition) then) =
-      _$AlertConditionCopyWithImpl<$Res>;
+      _$AlertConditionCopyWithImpl<$Res, AlertCondition>;
+  @useResult
   $Res call(
       {@HiveField(0) @JsonKey(name: "t") AlertType type,
       @HiveField(1) @JsonKey(name: "v") int value});
 }
 
 /// @nodoc
-class _$AlertConditionCopyWithImpl<$Res>
+class _$AlertConditionCopyWithImpl<$Res, $Val extends AlertCondition>
     implements $AlertConditionCopyWith<$Res> {
   _$AlertConditionCopyWithImpl(this._value, this._then);
 
-  final AlertCondition _value;
   // ignore: unused_field
-  final $Res Function(AlertCondition) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? value = freezed,
+    Object? type = null,
+    Object? value = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as AlertType,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -77,6 +80,7 @@ abstract class _$$_AlertConditionCopyWith<$Res>
           _$_AlertCondition value, $Res Function(_$_AlertCondition) then) =
       __$$_AlertConditionCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) @JsonKey(name: "t") AlertType type,
       @HiveField(1) @JsonKey(name: "v") int value});
@@ -84,26 +88,24 @@ abstract class _$$_AlertConditionCopyWith<$Res>
 
 /// @nodoc
 class __$$_AlertConditionCopyWithImpl<$Res>
-    extends _$AlertConditionCopyWithImpl<$Res>
+    extends _$AlertConditionCopyWithImpl<$Res, _$_AlertCondition>
     implements _$$_AlertConditionCopyWith<$Res> {
   __$$_AlertConditionCopyWithImpl(
       _$_AlertCondition _value, $Res Function(_$_AlertCondition) _then)
-      : super(_value, (v) => _then(v as _$_AlertCondition));
+      : super(_value, _then);
 
-  @override
-  _$_AlertCondition get _value => super._value as _$_AlertCondition;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? value = freezed,
+    Object? type = null,
+    Object? value = null,
   }) {
     return _then(_$_AlertCondition(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as AlertType,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
@@ -141,19 +143,17 @@ class _$_AlertCondition implements _AlertCondition {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AlertCondition &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.value, value));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(value));
+  int get hashCode => Object.hash(runtimeType, type, value);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AlertConditionCopyWith<_$_AlertCondition> get copyWith =>
       __$$_AlertConditionCopyWithImpl<_$_AlertCondition>(this, _$identity);
 

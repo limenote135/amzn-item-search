@@ -63,7 +63,8 @@ mixin _$StockItem {
 /// @nodoc
 abstract class $StockItemCopyWith<$Res> {
   factory $StockItemCopyWith(StockItem value, $Res Function(StockItem) then) =
-      _$StockItemCopyWithImpl<$Res>;
+      _$StockItemCopyWithImpl<$Res, StockItem>;
+  @useResult
   $Res call(
       {@HiveField(0) String purchaseDate,
       @HiveField(1) int purchasePrice,
@@ -88,114 +89,118 @@ abstract class $StockItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StockItemCopyWithImpl<$Res> implements $StockItemCopyWith<$Res> {
+class _$StockItemCopyWithImpl<$Res, $Val extends StockItem>
+    implements $StockItemCopyWith<$Res> {
   _$StockItemCopyWithImpl(this._value, this._then);
 
-  final StockItem _value;
   // ignore: unused_field
-  final $Res Function(StockItem) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? purchaseDate = freezed,
-    Object? purchasePrice = freezed,
-    Object? sellPrice = freezed,
-    Object? useFba = freezed,
-    Object? profitPerItem = freezed,
-    Object? amount = freezed,
-    Object? condition = freezed,
-    Object? subCondition = freezed,
-    Object? sku = freezed,
-    Object? memo = freezed,
-    Object? item = freezed,
-    Object? retailer = freezed,
-    Object? id = freezed,
-    Object? breakEven = freezed,
+    Object? purchaseDate = null,
+    Object? purchasePrice = null,
+    Object? sellPrice = null,
+    Object? useFba = null,
+    Object? profitPerItem = null,
+    Object? amount = null,
+    Object? condition = null,
+    Object? subCondition = null,
+    Object? sku = null,
+    Object? memo = null,
+    Object? item = null,
+    Object? retailer = null,
+    Object? id = null,
+    Object? breakEven = null,
     Object? listingDate = freezed,
-    Object? autogenSku = freezed,
-    Object? conditionText = freezed,
-    Object? otherCost = freezed,
+    Object? autogenSku = null,
+    Object? conditionText = null,
+    Object? otherCost = null,
   }) {
     return _then(_value.copyWith(
-      purchaseDate: purchaseDate == freezed
+      purchaseDate: null == purchaseDate
           ? _value.purchaseDate
           : purchaseDate // ignore: cast_nullable_to_non_nullable
               as String,
-      purchasePrice: purchasePrice == freezed
+      purchasePrice: null == purchasePrice
           ? _value.purchasePrice
           : purchasePrice // ignore: cast_nullable_to_non_nullable
               as int,
-      sellPrice: sellPrice == freezed
+      sellPrice: null == sellPrice
           ? _value.sellPrice
           : sellPrice // ignore: cast_nullable_to_non_nullable
               as int,
-      useFba: useFba == freezed
+      useFba: null == useFba
           ? _value.useFba
           : useFba // ignore: cast_nullable_to_non_nullable
               as bool,
-      profitPerItem: profitPerItem == freezed
+      profitPerItem: null == profitPerItem
           ? _value.profitPerItem
           : profitPerItem // ignore: cast_nullable_to_non_nullable
               as int,
-      amount: amount == freezed
+      amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int,
-      condition: condition == freezed
+      condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
               as ItemCondition,
-      subCondition: subCondition == freezed
+      subCondition: null == subCondition
           ? _value.subCondition
           : subCondition // ignore: cast_nullable_to_non_nullable
               as ItemSubCondition,
-      sku: sku == freezed
+      sku: null == sku
           ? _value.sku
           : sku // ignore: cast_nullable_to_non_nullable
               as String,
-      memo: memo == freezed
+      memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
-      item: item == freezed
+      item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as AsinData,
-      retailer: retailer == freezed
+      retailer: null == retailer
           ? _value.retailer
           : retailer // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      breakEven: breakEven == freezed
+      breakEven: null == breakEven
           ? _value.breakEven
           : breakEven // ignore: cast_nullable_to_non_nullable
               as int,
-      listingDate: listingDate == freezed
+      listingDate: freezed == listingDate
           ? _value.listingDate
           : listingDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      autogenSku: autogenSku == freezed
+      autogenSku: null == autogenSku
           ? _value.autogenSku
           : autogenSku // ignore: cast_nullable_to_non_nullable
               as bool,
-      conditionText: conditionText == freezed
+      conditionText: null == conditionText
           ? _value.conditionText
           : conditionText // ignore: cast_nullable_to_non_nullable
               as String,
-      otherCost: otherCost == freezed
+      otherCost: null == otherCost
           ? _value.otherCost
           : otherCost // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AsinDataCopyWith<$Res> get item {
     return $AsinDataCopyWith<$Res>(_value.item, (value) {
-      return _then(_value.copyWith(item: value));
+      return _then(_value.copyWith(item: value) as $Val);
     });
   }
 }
@@ -206,6 +211,7 @@ abstract class _$$_StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
           _$_StockItem value, $Res Function(_$_StockItem) then) =
       __$$_StockItemCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) String purchaseDate,
       @HiveField(1) int purchasePrice,
@@ -231,106 +237,105 @@ abstract class _$$_StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_StockItemCopyWithImpl<$Res> extends _$StockItemCopyWithImpl<$Res>
+class __$$_StockItemCopyWithImpl<$Res>
+    extends _$StockItemCopyWithImpl<$Res, _$_StockItem>
     implements _$$_StockItemCopyWith<$Res> {
   __$$_StockItemCopyWithImpl(
       _$_StockItem _value, $Res Function(_$_StockItem) _then)
-      : super(_value, (v) => _then(v as _$_StockItem));
+      : super(_value, _then);
 
-  @override
-  _$_StockItem get _value => super._value as _$_StockItem;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? purchaseDate = freezed,
-    Object? purchasePrice = freezed,
-    Object? sellPrice = freezed,
-    Object? useFba = freezed,
-    Object? profitPerItem = freezed,
-    Object? amount = freezed,
-    Object? condition = freezed,
-    Object? subCondition = freezed,
-    Object? sku = freezed,
-    Object? memo = freezed,
-    Object? item = freezed,
-    Object? retailer = freezed,
-    Object? id = freezed,
-    Object? breakEven = freezed,
+    Object? purchaseDate = null,
+    Object? purchasePrice = null,
+    Object? sellPrice = null,
+    Object? useFba = null,
+    Object? profitPerItem = null,
+    Object? amount = null,
+    Object? condition = null,
+    Object? subCondition = null,
+    Object? sku = null,
+    Object? memo = null,
+    Object? item = null,
+    Object? retailer = null,
+    Object? id = null,
+    Object? breakEven = null,
     Object? listingDate = freezed,
-    Object? autogenSku = freezed,
-    Object? conditionText = freezed,
-    Object? otherCost = freezed,
+    Object? autogenSku = null,
+    Object? conditionText = null,
+    Object? otherCost = null,
   }) {
     return _then(_$_StockItem(
-      purchaseDate: purchaseDate == freezed
+      purchaseDate: null == purchaseDate
           ? _value.purchaseDate
           : purchaseDate // ignore: cast_nullable_to_non_nullable
               as String,
-      purchasePrice: purchasePrice == freezed
+      purchasePrice: null == purchasePrice
           ? _value.purchasePrice
           : purchasePrice // ignore: cast_nullable_to_non_nullable
               as int,
-      sellPrice: sellPrice == freezed
+      sellPrice: null == sellPrice
           ? _value.sellPrice
           : sellPrice // ignore: cast_nullable_to_non_nullable
               as int,
-      useFba: useFba == freezed
+      useFba: null == useFba
           ? _value.useFba
           : useFba // ignore: cast_nullable_to_non_nullable
               as bool,
-      profitPerItem: profitPerItem == freezed
+      profitPerItem: null == profitPerItem
           ? _value.profitPerItem
           : profitPerItem // ignore: cast_nullable_to_non_nullable
               as int,
-      amount: amount == freezed
+      amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int,
-      condition: condition == freezed
+      condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
               as ItemCondition,
-      subCondition: subCondition == freezed
+      subCondition: null == subCondition
           ? _value.subCondition
           : subCondition // ignore: cast_nullable_to_non_nullable
               as ItemSubCondition,
-      sku: sku == freezed
+      sku: null == sku
           ? _value.sku
           : sku // ignore: cast_nullable_to_non_nullable
               as String,
-      memo: memo == freezed
+      memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
-      item: item == freezed
+      item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as AsinData,
-      retailer: retailer == freezed
+      retailer: null == retailer
           ? _value.retailer
           : retailer // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      breakEven: breakEven == freezed
+      breakEven: null == breakEven
           ? _value.breakEven
           : breakEven // ignore: cast_nullable_to_non_nullable
               as int,
-      listingDate: listingDate == freezed
+      listingDate: freezed == listingDate
           ? _value.listingDate
           : listingDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      autogenSku: autogenSku == freezed
+      autogenSku: null == autogenSku
           ? _value.autogenSku
           : autogenSku // ignore: cast_nullable_to_non_nullable
               as bool,
-      conditionText: conditionText == freezed
+      conditionText: null == conditionText
           ? _value.conditionText
           : conditionText // ignore: cast_nullable_to_non_nullable
               as String,
-      otherCost: otherCost == freezed
+      otherCost: null == otherCost
           ? _value.otherCost
           : otherCost // ignore: cast_nullable_to_non_nullable
               as int,
@@ -444,57 +449,63 @@ class _$_StockItem implements _StockItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_StockItem &&
-            const DeepCollectionEquality()
-                .equals(other.purchaseDate, purchaseDate) &&
-            const DeepCollectionEquality()
-                .equals(other.purchasePrice, purchasePrice) &&
-            const DeepCollectionEquality().equals(other.sellPrice, sellPrice) &&
-            const DeepCollectionEquality().equals(other.useFba, useFba) &&
-            const DeepCollectionEquality()
-                .equals(other.profitPerItem, profitPerItem) &&
-            const DeepCollectionEquality().equals(other.amount, amount) &&
-            const DeepCollectionEquality().equals(other.condition, condition) &&
-            const DeepCollectionEquality()
-                .equals(other.subCondition, subCondition) &&
-            const DeepCollectionEquality().equals(other.sku, sku) &&
-            const DeepCollectionEquality().equals(other.memo, memo) &&
-            const DeepCollectionEquality().equals(other.item, item) &&
-            const DeepCollectionEquality().equals(other.retailer, retailer) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.breakEven, breakEven) &&
-            const DeepCollectionEquality()
-                .equals(other.listingDate, listingDate) &&
-            const DeepCollectionEquality()
-                .equals(other.autogenSku, autogenSku) &&
-            const DeepCollectionEquality()
-                .equals(other.conditionText, conditionText) &&
-            const DeepCollectionEquality().equals(other.otherCost, otherCost));
+            (identical(other.purchaseDate, purchaseDate) ||
+                other.purchaseDate == purchaseDate) &&
+            (identical(other.purchasePrice, purchasePrice) ||
+                other.purchasePrice == purchasePrice) &&
+            (identical(other.sellPrice, sellPrice) ||
+                other.sellPrice == sellPrice) &&
+            (identical(other.useFba, useFba) || other.useFba == useFba) &&
+            (identical(other.profitPerItem, profitPerItem) ||
+                other.profitPerItem == profitPerItem) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.condition, condition) ||
+                other.condition == condition) &&
+            (identical(other.subCondition, subCondition) ||
+                other.subCondition == subCondition) &&
+            (identical(other.sku, sku) || other.sku == sku) &&
+            (identical(other.memo, memo) || other.memo == memo) &&
+            (identical(other.item, item) || other.item == item) &&
+            (identical(other.retailer, retailer) ||
+                other.retailer == retailer) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.breakEven, breakEven) ||
+                other.breakEven == breakEven) &&
+            (identical(other.listingDate, listingDate) ||
+                other.listingDate == listingDate) &&
+            (identical(other.autogenSku, autogenSku) ||
+                other.autogenSku == autogenSku) &&
+            (identical(other.conditionText, conditionText) ||
+                other.conditionText == conditionText) &&
+            (identical(other.otherCost, otherCost) ||
+                other.otherCost == otherCost));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(purchaseDate),
-      const DeepCollectionEquality().hash(purchasePrice),
-      const DeepCollectionEquality().hash(sellPrice),
-      const DeepCollectionEquality().hash(useFba),
-      const DeepCollectionEquality().hash(profitPerItem),
-      const DeepCollectionEquality().hash(amount),
-      const DeepCollectionEquality().hash(condition),
-      const DeepCollectionEquality().hash(subCondition),
-      const DeepCollectionEquality().hash(sku),
-      const DeepCollectionEquality().hash(memo),
-      const DeepCollectionEquality().hash(item),
-      const DeepCollectionEquality().hash(retailer),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(breakEven),
-      const DeepCollectionEquality().hash(listingDate),
-      const DeepCollectionEquality().hash(autogenSku),
-      const DeepCollectionEquality().hash(conditionText),
-      const DeepCollectionEquality().hash(otherCost));
+      purchaseDate,
+      purchasePrice,
+      sellPrice,
+      useFba,
+      profitPerItem,
+      amount,
+      condition,
+      subCondition,
+      sku,
+      memo,
+      item,
+      retailer,
+      id,
+      breakEven,
+      listingDate,
+      autogenSku,
+      conditionText,
+      otherCost);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_StockItemCopyWith<_$_StockItem> get copyWith =>
       __$$_StockItemCopyWithImpl<_$_StockItem>(this, _$identity);
 }
