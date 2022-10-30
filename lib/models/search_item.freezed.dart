@@ -32,7 +32,8 @@ mixin _$SearchItem {
 abstract class $SearchItemCopyWith<$Res> {
   factory $SearchItemCopyWith(
           SearchItem value, $Res Function(SearchItem) then) =
-      _$SearchItemCopyWithImpl<$Res>;
+      _$SearchItemCopyWithImpl<$Res, SearchItem>;
+  @useResult
   $Res call(
       {@HiveField(0) String searchDate,
       @HiveField(1) String jan,
@@ -40,33 +41,36 @@ abstract class $SearchItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SearchItemCopyWithImpl<$Res> implements $SearchItemCopyWith<$Res> {
+class _$SearchItemCopyWithImpl<$Res, $Val extends SearchItem>
+    implements $SearchItemCopyWith<$Res> {
   _$SearchItemCopyWithImpl(this._value, this._then);
 
-  final SearchItem _value;
   // ignore: unused_field
-  final $Res Function(SearchItem) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchDate = freezed,
-    Object? jan = freezed,
-    Object? asins = freezed,
+    Object? searchDate = null,
+    Object? jan = null,
+    Object? asins = null,
   }) {
     return _then(_value.copyWith(
-      searchDate: searchDate == freezed
+      searchDate: null == searchDate
           ? _value.searchDate
           : searchDate // ignore: cast_nullable_to_non_nullable
               as String,
-      jan: jan == freezed
+      jan: null == jan
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
               as String,
-      asins: asins == freezed
+      asins: null == asins
           ? _value.asins
           : asins // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -77,6 +81,7 @@ abstract class _$$_SearchItemCopyWith<$Res>
           _$_SearchItem value, $Res Function(_$_SearchItem) then) =
       __$$_SearchItemCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) String searchDate,
       @HiveField(1) String jan,
@@ -84,31 +89,30 @@ abstract class _$$_SearchItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchItemCopyWithImpl<$Res> extends _$SearchItemCopyWithImpl<$Res>
+class __$$_SearchItemCopyWithImpl<$Res>
+    extends _$SearchItemCopyWithImpl<$Res, _$_SearchItem>
     implements _$$_SearchItemCopyWith<$Res> {
   __$$_SearchItemCopyWithImpl(
       _$_SearchItem _value, $Res Function(_$_SearchItem) _then)
-      : super(_value, (v) => _then(v as _$_SearchItem));
+      : super(_value, _then);
 
-  @override
-  _$_SearchItem get _value => super._value as _$_SearchItem;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchDate = freezed,
-    Object? jan = freezed,
-    Object? asins = freezed,
+    Object? searchDate = null,
+    Object? jan = null,
+    Object? asins = null,
   }) {
     return _then(_$_SearchItem(
-      searchDate: searchDate == freezed
+      searchDate: null == searchDate
           ? _value.searchDate
           : searchDate // ignore: cast_nullable_to_non_nullable
               as String,
-      jan: jan == freezed
+      jan: null == jan
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
               as String,
-      asins: asins == freezed
+      asins: null == asins
           ? _value._asins
           : asins // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
@@ -151,21 +155,19 @@ class _$_SearchItem implements _SearchItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SearchItem &&
-            const DeepCollectionEquality()
-                .equals(other.searchDate, searchDate) &&
-            const DeepCollectionEquality().equals(other.jan, jan) &&
+            (identical(other.searchDate, searchDate) ||
+                other.searchDate == searchDate) &&
+            (identical(other.jan, jan) || other.jan == jan) &&
             const DeepCollectionEquality().equals(other._asins, _asins));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(searchDate),
-      const DeepCollectionEquality().hash(jan),
+  int get hashCode => Object.hash(runtimeType, searchDate, jan,
       const DeepCollectionEquality().hash(_asins));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SearchItemCopyWith<_$_SearchItem> get copyWith =>
       __$$_SearchItemCopyWithImpl<_$_SearchItem>(this, _$identity);
 }

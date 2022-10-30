@@ -35,7 +35,8 @@ mixin _$StockItemFilter {
 abstract class $StockItemFilterCopyWith<$Res> {
   factory $StockItemFilterCopyWith(
           StockItemFilter value, $Res Function(StockItemFilter) then) =
-      _$StockItemFilterCopyWithImpl<$Res>;
+      _$StockItemFilterCopyWithImpl<$Res, StockItemFilter>;
+  @useResult
   $Res call(
       {String? keyword,
       ListingState listingState,
@@ -49,20 +50,22 @@ abstract class $StockItemFilterCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StockItemFilterCopyWithImpl<$Res>
+class _$StockItemFilterCopyWithImpl<$Res, $Val extends StockItemFilter>
     implements $StockItemFilterCopyWith<$Res> {
   _$StockItemFilterCopyWithImpl(this._value, this._then);
 
-  final StockItemFilter _value;
   // ignore: unused_field
-  final $Res Function(StockItemFilter) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? keyword = freezed,
-    Object? listingState = freezed,
-    Object? productCondition = freezed,
-    Object? channel = freezed,
+    Object? listingState = null,
+    Object? productCondition = null,
+    Object? channel = null,
     Object? purchasePriceLower = freezed,
     Object? purchasePriceUpper = freezed,
     Object? sellPriceLower = freezed,
@@ -70,43 +73,43 @@ class _$StockItemFilterCopyWithImpl<$Res>
     Object? purchaseDateRange = freezed,
   }) {
     return _then(_value.copyWith(
-      keyword: keyword == freezed
+      keyword: freezed == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String?,
-      listingState: listingState == freezed
+      listingState: null == listingState
           ? _value.listingState
           : listingState // ignore: cast_nullable_to_non_nullable
               as ListingState,
-      productCondition: productCondition == freezed
+      productCondition: null == productCondition
           ? _value.productCondition
           : productCondition // ignore: cast_nullable_to_non_nullable
               as ProductCondition,
-      channel: channel == freezed
+      channel: null == channel
           ? _value.channel
           : channel // ignore: cast_nullable_to_non_nullable
               as FulfilmentChannel,
-      purchasePriceLower: purchasePriceLower == freezed
+      purchasePriceLower: freezed == purchasePriceLower
           ? _value.purchasePriceLower
           : purchasePriceLower // ignore: cast_nullable_to_non_nullable
               as int?,
-      purchasePriceUpper: purchasePriceUpper == freezed
+      purchasePriceUpper: freezed == purchasePriceUpper
           ? _value.purchasePriceUpper
           : purchasePriceUpper // ignore: cast_nullable_to_non_nullable
               as int?,
-      sellPriceLower: sellPriceLower == freezed
+      sellPriceLower: freezed == sellPriceLower
           ? _value.sellPriceLower
           : sellPriceLower // ignore: cast_nullable_to_non_nullable
               as int?,
-      sellPriceUpper: sellPriceUpper == freezed
+      sellPriceUpper: freezed == sellPriceUpper
           ? _value.sellPriceUpper
           : sellPriceUpper // ignore: cast_nullable_to_non_nullable
               as int?,
-      purchaseDateRange: purchaseDateRange == freezed
+      purchaseDateRange: freezed == purchaseDateRange
           ? _value.purchaseDateRange
           : purchaseDateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -117,6 +120,7 @@ abstract class _$$_StockItemFilterCopyWith<$Res>
           _$_StockItemFilter value, $Res Function(_$_StockItemFilter) then) =
       __$$_StockItemFilterCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? keyword,
       ListingState listingState,
@@ -131,21 +135,19 @@ abstract class _$$_StockItemFilterCopyWith<$Res>
 
 /// @nodoc
 class __$$_StockItemFilterCopyWithImpl<$Res>
-    extends _$StockItemFilterCopyWithImpl<$Res>
+    extends _$StockItemFilterCopyWithImpl<$Res, _$_StockItemFilter>
     implements _$$_StockItemFilterCopyWith<$Res> {
   __$$_StockItemFilterCopyWithImpl(
       _$_StockItemFilter _value, $Res Function(_$_StockItemFilter) _then)
-      : super(_value, (v) => _then(v as _$_StockItemFilter));
+      : super(_value, _then);
 
-  @override
-  _$_StockItemFilter get _value => super._value as _$_StockItemFilter;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? keyword = freezed,
-    Object? listingState = freezed,
-    Object? productCondition = freezed,
-    Object? channel = freezed,
+    Object? listingState = null,
+    Object? productCondition = null,
+    Object? channel = null,
     Object? purchasePriceLower = freezed,
     Object? purchasePriceUpper = freezed,
     Object? sellPriceLower = freezed,
@@ -153,39 +155,39 @@ class __$$_StockItemFilterCopyWithImpl<$Res>
     Object? purchaseDateRange = freezed,
   }) {
     return _then(_$_StockItemFilter(
-      keyword: keyword == freezed
+      keyword: freezed == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String?,
-      listingState: listingState == freezed
+      listingState: null == listingState
           ? _value.listingState
           : listingState // ignore: cast_nullable_to_non_nullable
               as ListingState,
-      productCondition: productCondition == freezed
+      productCondition: null == productCondition
           ? _value.productCondition
           : productCondition // ignore: cast_nullable_to_non_nullable
               as ProductCondition,
-      channel: channel == freezed
+      channel: null == channel
           ? _value.channel
           : channel // ignore: cast_nullable_to_non_nullable
               as FulfilmentChannel,
-      purchasePriceLower: purchasePriceLower == freezed
+      purchasePriceLower: freezed == purchasePriceLower
           ? _value.purchasePriceLower
           : purchasePriceLower // ignore: cast_nullable_to_non_nullable
               as int?,
-      purchasePriceUpper: purchasePriceUpper == freezed
+      purchasePriceUpper: freezed == purchasePriceUpper
           ? _value.purchasePriceUpper
           : purchasePriceUpper // ignore: cast_nullable_to_non_nullable
               as int?,
-      sellPriceLower: sellPriceLower == freezed
+      sellPriceLower: freezed == sellPriceLower
           ? _value.sellPriceLower
           : sellPriceLower // ignore: cast_nullable_to_non_nullable
               as int?,
-      sellPriceUpper: sellPriceUpper == freezed
+      sellPriceUpper: freezed == sellPriceUpper
           ? _value.sellPriceUpper
           : sellPriceUpper // ignore: cast_nullable_to_non_nullable
               as int?,
-      purchaseDateRange: purchaseDateRange == freezed
+      purchaseDateRange: freezed == purchaseDateRange
           ? _value.purchaseDateRange
           : purchaseDateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
@@ -239,39 +241,40 @@ class _$_StockItemFilter implements _StockItemFilter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_StockItemFilter &&
-            const DeepCollectionEquality().equals(other.keyword, keyword) &&
-            const DeepCollectionEquality()
-                .equals(other.listingState, listingState) &&
-            const DeepCollectionEquality()
-                .equals(other.productCondition, productCondition) &&
-            const DeepCollectionEquality().equals(other.channel, channel) &&
-            const DeepCollectionEquality()
-                .equals(other.purchasePriceLower, purchasePriceLower) &&
-            const DeepCollectionEquality()
-                .equals(other.purchasePriceUpper, purchasePriceUpper) &&
-            const DeepCollectionEquality()
-                .equals(other.sellPriceLower, sellPriceLower) &&
-            const DeepCollectionEquality()
-                .equals(other.sellPriceUpper, sellPriceUpper) &&
-            const DeepCollectionEquality()
-                .equals(other.purchaseDateRange, purchaseDateRange));
+            (identical(other.keyword, keyword) || other.keyword == keyword) &&
+            (identical(other.listingState, listingState) ||
+                other.listingState == listingState) &&
+            (identical(other.productCondition, productCondition) ||
+                other.productCondition == productCondition) &&
+            (identical(other.channel, channel) || other.channel == channel) &&
+            (identical(other.purchasePriceLower, purchasePriceLower) ||
+                other.purchasePriceLower == purchasePriceLower) &&
+            (identical(other.purchasePriceUpper, purchasePriceUpper) ||
+                other.purchasePriceUpper == purchasePriceUpper) &&
+            (identical(other.sellPriceLower, sellPriceLower) ||
+                other.sellPriceLower == sellPriceLower) &&
+            (identical(other.sellPriceUpper, sellPriceUpper) ||
+                other.sellPriceUpper == sellPriceUpper) &&
+            (identical(other.purchaseDateRange, purchaseDateRange) ||
+                other.purchaseDateRange == purchaseDateRange));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(keyword),
-      const DeepCollectionEquality().hash(listingState),
-      const DeepCollectionEquality().hash(productCondition),
-      const DeepCollectionEquality().hash(channel),
-      const DeepCollectionEquality().hash(purchasePriceLower),
-      const DeepCollectionEquality().hash(purchasePriceUpper),
-      const DeepCollectionEquality().hash(sellPriceLower),
-      const DeepCollectionEquality().hash(sellPriceUpper),
-      const DeepCollectionEquality().hash(purchaseDateRange));
+      keyword,
+      listingState,
+      productCondition,
+      channel,
+      purchasePriceLower,
+      purchasePriceUpper,
+      sellPriceLower,
+      sellPriceUpper,
+      purchaseDateRange);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_StockItemFilterCopyWith<_$_StockItemFilter> get copyWith =>
       __$$_StockItemFilterCopyWithImpl<_$_StockItemFilter>(this, _$identity);
 }

@@ -28,7 +28,8 @@ mixin _$PurchaseState {
 abstract class $PurchaseStateCopyWith<$Res> {
   factory $PurchaseStateCopyWith(
           PurchaseState value, $Res Function(PurchaseState) then) =
-      _$PurchaseStateCopyWithImpl<$Res>;
+      _$PurchaseStateCopyWithImpl<$Res, PurchaseState>;
+  @useResult
   $Res call({CustomerInfo purchaseInfo, Offerings offerings});
 
   $CustomerInfoCopyWith<$Res> get purchaseInfo;
@@ -36,42 +37,46 @@ abstract class $PurchaseStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PurchaseStateCopyWithImpl<$Res>
+class _$PurchaseStateCopyWithImpl<$Res, $Val extends PurchaseState>
     implements $PurchaseStateCopyWith<$Res> {
   _$PurchaseStateCopyWithImpl(this._value, this._then);
 
-  final PurchaseState _value;
   // ignore: unused_field
-  final $Res Function(PurchaseState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? purchaseInfo = freezed,
-    Object? offerings = freezed,
+    Object? purchaseInfo = null,
+    Object? offerings = null,
   }) {
     return _then(_value.copyWith(
-      purchaseInfo: purchaseInfo == freezed
+      purchaseInfo: null == purchaseInfo
           ? _value.purchaseInfo
           : purchaseInfo // ignore: cast_nullable_to_non_nullable
               as CustomerInfo,
-      offerings: offerings == freezed
+      offerings: null == offerings
           ? _value.offerings
           : offerings // ignore: cast_nullable_to_non_nullable
               as Offerings,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CustomerInfoCopyWith<$Res> get purchaseInfo {
     return $CustomerInfoCopyWith<$Res>(_value.purchaseInfo, (value) {
-      return _then(_value.copyWith(purchaseInfo: value));
+      return _then(_value.copyWith(purchaseInfo: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OfferingsCopyWith<$Res> get offerings {
     return $OfferingsCopyWith<$Res>(_value.offerings, (value) {
-      return _then(_value.copyWith(offerings: value));
+      return _then(_value.copyWith(offerings: value) as $Val);
     });
   }
 }
@@ -83,6 +88,7 @@ abstract class _$$_PurchaseStateCopyWith<$Res>
           _$_PurchaseState value, $Res Function(_$_PurchaseState) then) =
       __$$_PurchaseStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({CustomerInfo purchaseInfo, Offerings offerings});
 
   @override
@@ -93,26 +99,24 @@ abstract class _$$_PurchaseStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_PurchaseStateCopyWithImpl<$Res>
-    extends _$PurchaseStateCopyWithImpl<$Res>
+    extends _$PurchaseStateCopyWithImpl<$Res, _$_PurchaseState>
     implements _$$_PurchaseStateCopyWith<$Res> {
   __$$_PurchaseStateCopyWithImpl(
       _$_PurchaseState _value, $Res Function(_$_PurchaseState) _then)
-      : super(_value, (v) => _then(v as _$_PurchaseState));
+      : super(_value, _then);
 
-  @override
-  _$_PurchaseState get _value => super._value as _$_PurchaseState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? purchaseInfo = freezed,
-    Object? offerings = freezed,
+    Object? purchaseInfo = null,
+    Object? offerings = null,
   }) {
     return _then(_$_PurchaseState(
-      purchaseInfo: purchaseInfo == freezed
+      purchaseInfo: null == purchaseInfo
           ? _value.purchaseInfo
           : purchaseInfo // ignore: cast_nullable_to_non_nullable
               as CustomerInfo,
-      offerings: offerings == freezed
+      offerings: null == offerings
           ? _value.offerings
           : offerings // ignore: cast_nullable_to_non_nullable
               as Offerings,
@@ -140,19 +144,18 @@ class _$_PurchaseState implements _PurchaseState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PurchaseState &&
-            const DeepCollectionEquality()
-                .equals(other.purchaseInfo, purchaseInfo) &&
-            const DeepCollectionEquality().equals(other.offerings, offerings));
+            (identical(other.purchaseInfo, purchaseInfo) ||
+                other.purchaseInfo == purchaseInfo) &&
+            (identical(other.offerings, offerings) ||
+                other.offerings == offerings));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(purchaseInfo),
-      const DeepCollectionEquality().hash(offerings));
+  int get hashCode => Object.hash(runtimeType, purchaseInfo, offerings);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PurchaseStateCopyWith<_$_PurchaseState> get copyWith =>
       __$$_PurchaseStateCopyWithImpl<_$_PurchaseState>(this, _$identity);
 }
