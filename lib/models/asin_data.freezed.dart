@@ -59,7 +59,8 @@ mixin _$AsinData {
 /// @nodoc
 abstract class $AsinDataCopyWith<$Res> {
   factory $AsinDataCopyWith(AsinData value, $Res Function(AsinData) then) =
-      _$AsinDataCopyWithImpl<$Res>;
+      _$AsinDataCopyWithImpl<$Res, AsinData>;
+  @useResult
   $Res call(
       {@HiveField(0)
           String jan,
@@ -96,100 +97,105 @@ abstract class $AsinDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AsinDataCopyWithImpl<$Res> implements $AsinDataCopyWith<$Res> {
+class _$AsinDataCopyWithImpl<$Res, $Val extends AsinData>
+    implements $AsinDataCopyWith<$Res> {
   _$AsinDataCopyWithImpl(this._value, this._then);
 
-  final AsinData _value;
   // ignore: unused_field
-  final $Res Function(AsinData) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jan = freezed,
-    Object? asin = freezed,
-    Object? listPrice = freezed,
-    Object? imageUrl = freezed,
-    Object? title = freezed,
-    Object? rank = freezed,
-    Object? quantity = freezed,
+    Object? jan = null,
+    Object? asin = null,
+    Object? listPrice = null,
+    Object? imageUrl = null,
+    Object? title = null,
+    Object? rank = null,
+    Object? quantity = null,
     Object? prices = freezed,
     Object? imageData = freezed,
-    Object? category = freezed,
+    Object? category = null,
     Object? sellByAmazon = freezed,
-    Object? restrictions = freezed,
-    Object? model = freezed,
+    Object? restrictions = null,
+    Object? model = null,
   }) {
     return _then(_value.copyWith(
-      jan: jan == freezed
+      jan: null == jan
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
               as String,
-      asin: asin == freezed
+      asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
               as String,
-      listPrice: listPrice == freezed
+      listPrice: null == listPrice
           ? _value.listPrice
           : listPrice // ignore: cast_nullable_to_non_nullable
               as int,
-      imageUrl: imageUrl == freezed
+      imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      rank: rank == freezed
+      rank: null == rank
           ? _value.rank
           : rank // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as String,
-      prices: prices == freezed
+      prices: freezed == prices
           ? _value.prices
           : prices // ignore: cast_nullable_to_non_nullable
               as ItemPrices?,
-      imageData: imageData == freezed
+      imageData: freezed == imageData
           ? _value.imageData
           : imageData // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
-      category: category == freezed
+      category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
-      sellByAmazon: sellByAmazon == freezed
+      sellByAmazon: freezed == sellByAmazon
           ? _value.sellByAmazon
           : sellByAmazon // ignore: cast_nullable_to_non_nullable
               as bool?,
-      restrictions: restrictions == freezed
+      restrictions: null == restrictions
           ? _value.restrictions
           : restrictions // ignore: cast_nullable_to_non_nullable
               as ListingRestrictions,
-      model: model == freezed
+      model: null == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ItemPricesCopyWith<$Res>? get prices {
     if (_value.prices == null) {
       return null;
     }
 
     return $ItemPricesCopyWith<$Res>(_value.prices!, (value) {
-      return _then(_value.copyWith(prices: value));
+      return _then(_value.copyWith(prices: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ListingRestrictionsCopyWith<$Res> get restrictions {
     return $ListingRestrictionsCopyWith<$Res>(_value.restrictions, (value) {
-      return _then(_value.copyWith(restrictions: value));
+      return _then(_value.copyWith(restrictions: value) as $Val);
     });
   }
 }
@@ -200,6 +206,7 @@ abstract class _$$_AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
           _$_AsinData value, $Res Function(_$_AsinData) then) =
       __$$_AsinDataCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0)
           String jan,
@@ -238,81 +245,80 @@ abstract class _$$_AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AsinDataCopyWithImpl<$Res> extends _$AsinDataCopyWithImpl<$Res>
+class __$$_AsinDataCopyWithImpl<$Res>
+    extends _$AsinDataCopyWithImpl<$Res, _$_AsinData>
     implements _$$_AsinDataCopyWith<$Res> {
   __$$_AsinDataCopyWithImpl(
       _$_AsinData _value, $Res Function(_$_AsinData) _then)
-      : super(_value, (v) => _then(v as _$_AsinData));
+      : super(_value, _then);
 
-  @override
-  _$_AsinData get _value => super._value as _$_AsinData;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jan = freezed,
-    Object? asin = freezed,
-    Object? listPrice = freezed,
-    Object? imageUrl = freezed,
-    Object? title = freezed,
-    Object? rank = freezed,
-    Object? quantity = freezed,
+    Object? jan = null,
+    Object? asin = null,
+    Object? listPrice = null,
+    Object? imageUrl = null,
+    Object? title = null,
+    Object? rank = null,
+    Object? quantity = null,
     Object? prices = freezed,
     Object? imageData = freezed,
-    Object? category = freezed,
+    Object? category = null,
     Object? sellByAmazon = freezed,
-    Object? restrictions = freezed,
-    Object? model = freezed,
+    Object? restrictions = null,
+    Object? model = null,
   }) {
     return _then(_$_AsinData(
-      jan: jan == freezed
+      jan: null == jan
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
               as String,
-      asin: asin == freezed
+      asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
               as String,
-      listPrice: listPrice == freezed
+      listPrice: null == listPrice
           ? _value.listPrice
           : listPrice // ignore: cast_nullable_to_non_nullable
               as int,
-      imageUrl: imageUrl == freezed
+      imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      rank: rank == freezed
+      rank: null == rank
           ? _value.rank
           : rank // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as String,
-      prices: prices == freezed
+      prices: freezed == prices
           ? _value.prices
           : prices // ignore: cast_nullable_to_non_nullable
               as ItemPrices?,
-      imageData: imageData == freezed
+      imageData: freezed == imageData
           ? _value.imageData
           : imageData // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
-      category: category == freezed
+      category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
-      sellByAmazon: sellByAmazon == freezed
+      sellByAmazon: freezed == sellByAmazon
           ? _value.sellByAmazon
           : sellByAmazon // ignore: cast_nullable_to_non_nullable
               as bool?,
-      restrictions: restrictions == freezed
+      restrictions: null == restrictions
           ? _value.restrictions
           : restrictions // ignore: cast_nullable_to_non_nullable
               as ListingRestrictions,
-      model: model == freezed
+      model: null == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as String,
@@ -419,43 +425,48 @@ class _$_AsinData implements _AsinData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AsinData &&
-            const DeepCollectionEquality().equals(other.jan, jan) &&
-            const DeepCollectionEquality().equals(other.asin, asin) &&
-            const DeepCollectionEquality().equals(other.listPrice, listPrice) &&
-            const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.rank, rank) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity) &&
-            const DeepCollectionEquality().equals(other.prices, prices) &&
+            (identical(other.jan, jan) || other.jan == jan) &&
+            (identical(other.asin, asin) || other.asin == asin) &&
+            (identical(other.listPrice, listPrice) ||
+                other.listPrice == listPrice) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.rank, rank) || other.rank == rank) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.prices, prices) || other.prices == prices) &&
             const DeepCollectionEquality().equals(other.imageData, imageData) &&
-            const DeepCollectionEquality().equals(other.category, category) &&
-            const DeepCollectionEquality()
-                .equals(other.sellByAmazon, sellByAmazon) &&
-            const DeepCollectionEquality()
-                .equals(other.restrictions, restrictions) &&
-            const DeepCollectionEquality().equals(other.model, model));
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.sellByAmazon, sellByAmazon) ||
+                other.sellByAmazon == sellByAmazon) &&
+            (identical(other.restrictions, restrictions) ||
+                other.restrictions == restrictions) &&
+            (identical(other.model, model) || other.model == model));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(jan),
-      const DeepCollectionEquality().hash(asin),
-      const DeepCollectionEquality().hash(listPrice),
-      const DeepCollectionEquality().hash(imageUrl),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(rank),
-      const DeepCollectionEquality().hash(quantity),
-      const DeepCollectionEquality().hash(prices),
+      jan,
+      asin,
+      listPrice,
+      imageUrl,
+      title,
+      rank,
+      quantity,
+      prices,
       const DeepCollectionEquality().hash(imageData),
-      const DeepCollectionEquality().hash(category),
-      const DeepCollectionEquality().hash(sellByAmazon),
-      const DeepCollectionEquality().hash(restrictions),
-      const DeepCollectionEquality().hash(model));
+      category,
+      sellByAmazon,
+      restrictions,
+      model);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AsinDataCopyWith<_$_AsinData> get copyWith =>
       __$$_AsinDataCopyWithImpl<_$_AsinData>(this, _$identity);
 
@@ -572,36 +583,39 @@ mixin _$ListingRestrictions {
 abstract class $ListingRestrictionsCopyWith<$Res> {
   factory $ListingRestrictionsCopyWith(
           ListingRestrictions value, $Res Function(ListingRestrictions) then) =
-      _$ListingRestrictionsCopyWithImpl<$Res>;
+      _$ListingRestrictionsCopyWithImpl<$Res, ListingRestrictions>;
+  @useResult
   $Res call(
       {@HiveField(0) @JsonKey(name: "new", defaultValue: false) bool newItem,
       @HiveField(1) @JsonKey(defaultValue: false) bool used});
 }
 
 /// @nodoc
-class _$ListingRestrictionsCopyWithImpl<$Res>
+class _$ListingRestrictionsCopyWithImpl<$Res, $Val extends ListingRestrictions>
     implements $ListingRestrictionsCopyWith<$Res> {
   _$ListingRestrictionsCopyWithImpl(this._value, this._then);
 
-  final ListingRestrictions _value;
   // ignore: unused_field
-  final $Res Function(ListingRestrictions) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newItem = freezed,
-    Object? used = freezed,
+    Object? newItem = null,
+    Object? used = null,
   }) {
     return _then(_value.copyWith(
-      newItem: newItem == freezed
+      newItem: null == newItem
           ? _value.newItem
           : newItem // ignore: cast_nullable_to_non_nullable
               as bool,
-      used: used == freezed
+      used: null == used
           ? _value.used
           : used // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -612,6 +626,7 @@ abstract class _$$_ListingRestrictionsCopyWith<$Res>
           $Res Function(_$_ListingRestrictions) then) =
       __$$_ListingRestrictionsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) @JsonKey(name: "new", defaultValue: false) bool newItem,
       @HiveField(1) @JsonKey(defaultValue: false) bool used});
@@ -619,26 +634,24 @@ abstract class _$$_ListingRestrictionsCopyWith<$Res>
 
 /// @nodoc
 class __$$_ListingRestrictionsCopyWithImpl<$Res>
-    extends _$ListingRestrictionsCopyWithImpl<$Res>
+    extends _$ListingRestrictionsCopyWithImpl<$Res, _$_ListingRestrictions>
     implements _$$_ListingRestrictionsCopyWith<$Res> {
   __$$_ListingRestrictionsCopyWithImpl(_$_ListingRestrictions _value,
       $Res Function(_$_ListingRestrictions) _then)
-      : super(_value, (v) => _then(v as _$_ListingRestrictions));
+      : super(_value, _then);
 
-  @override
-  _$_ListingRestrictions get _value => super._value as _$_ListingRestrictions;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newItem = freezed,
-    Object? used = freezed,
+    Object? newItem = null,
+    Object? used = null,
   }) {
     return _then(_$_ListingRestrictions(
-      newItem: newItem == freezed
+      newItem: null == newItem
           ? _value.newItem
           : newItem // ignore: cast_nullable_to_non_nullable
               as bool,
-      used: used == freezed
+      used: null == used
           ? _value.used
           : used // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -681,19 +694,17 @@ class _$_ListingRestrictions implements _ListingRestrictions {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ListingRestrictions &&
-            const DeepCollectionEquality().equals(other.newItem, newItem) &&
-            const DeepCollectionEquality().equals(other.used, used));
+            (identical(other.newItem, newItem) || other.newItem == newItem) &&
+            (identical(other.used, used) || other.used == used));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(newItem),
-      const DeepCollectionEquality().hash(used));
+  int get hashCode => Object.hash(runtimeType, newItem, used);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ListingRestrictionsCopyWith<_$_ListingRestrictions> get copyWith =>
       __$$_ListingRestrictionsCopyWithImpl<_$_ListingRestrictions>(
           this, _$identity);

@@ -68,7 +68,7 @@ class _Body extends ConsumerWidget {
               validator: notEmptyValidator,
               decoration: const InputDecoration(
                 labelText: "問い合わせ内容",
-                hintText: "行った操作や表示されたメッセージなど、なるべく具体的にお書きください",
+                hintText: "行った操作や表示されたメッセージなど、\nなるべく具体的にお書きください",
                 alignLabelWithHint: true,
               ),
             ),
