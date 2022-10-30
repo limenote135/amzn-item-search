@@ -56,8 +56,8 @@ class _Body extends ConsumerWidget {
     ) async {
       final fn = ref.read(cloudFunctionProvider(functionNameSendDonation));
       await fn.call<String>(<String, String>{
-        "item":
-            "${package.storeProduct.title}:${package.storeProduct.priceString}",
+        "item": package.storeProduct.title,
+        "price": package.storeProduct.priceString,
         "date": date,
         "mail": email,
         "name": name,
