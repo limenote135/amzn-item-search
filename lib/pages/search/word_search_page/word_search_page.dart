@@ -118,7 +118,10 @@ class _AppBar extends HookConsumerWidget {
                       ),
                     ),
                     onSubmitted: (value) {
-                      final trimmedValue = value.trim();
+                      var trimmedValue = value.trim();
+                      if (trimmedValue.length > 64) {
+                        trimmedValue = trimmedValue.substring(0, 64);
+                      }
                       if (trimmedValue != "") {
                         if (req.query == trimmedValue) {
                           // 変更がない場合は強制リロードする
