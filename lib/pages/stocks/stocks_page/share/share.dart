@@ -14,7 +14,7 @@ Future<void> shareImageAndText(GlobalKey globalKey) async {
   final applicationDocumentsFile = await saveFile("stock", widgetImageBytes);
 
   final path = applicationDocumentsFile.path;
-  await Share.shareFiles([path], subject: "仕入実績", text: "#amzn-item-search");
+  await Share.shareXFiles([XFile(path)], subject: "仕入実績", text: "#amzn-item-search");
 }
 
 Future<ByteData> exportToImage(GlobalKey globalKey) async {
