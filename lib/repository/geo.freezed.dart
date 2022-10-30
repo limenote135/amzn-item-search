@@ -33,33 +33,37 @@ mixin _$GeoResponse {
 abstract class $GeoResponseCopyWith<$Res> {
   factory $GeoResponseCopyWith(
           GeoResponse value, $Res Function(GeoResponse) then) =
-      _$GeoResponseCopyWithImpl<$Res>;
+      _$GeoResponseCopyWithImpl<$Res, GeoResponse>;
+  @useResult
   $Res call({String code, String jan});
 }
 
 /// @nodoc
-class _$GeoResponseCopyWithImpl<$Res> implements $GeoResponseCopyWith<$Res> {
+class _$GeoResponseCopyWithImpl<$Res, $Val extends GeoResponse>
+    implements $GeoResponseCopyWith<$Res> {
   _$GeoResponseCopyWithImpl(this._value, this._then);
 
-  final GeoResponse _value;
   // ignore: unused_field
-  final $Res Function(GeoResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = freezed,
-    Object? jan = freezed,
+    Object? code = null,
+    Object? jan = null,
   }) {
     return _then(_value.copyWith(
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      jan: jan == freezed
+      jan: null == jan
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -70,30 +74,30 @@ abstract class _$$_GeoResponseCopyWith<$Res>
           _$_GeoResponse value, $Res Function(_$_GeoResponse) then) =
       __$$_GeoResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String code, String jan});
 }
 
 /// @nodoc
-class __$$_GeoResponseCopyWithImpl<$Res> extends _$GeoResponseCopyWithImpl<$Res>
+class __$$_GeoResponseCopyWithImpl<$Res>
+    extends _$GeoResponseCopyWithImpl<$Res, _$_GeoResponse>
     implements _$$_GeoResponseCopyWith<$Res> {
   __$$_GeoResponseCopyWithImpl(
       _$_GeoResponse _value, $Res Function(_$_GeoResponse) _then)
-      : super(_value, (v) => _then(v as _$_GeoResponse));
+      : super(_value, _then);
 
-  @override
-  _$_GeoResponse get _value => super._value as _$_GeoResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = freezed,
-    Object? jan = freezed,
+    Object? code = null,
+    Object? jan = null,
   }) {
     return _then(_$_GeoResponse(
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      jan: jan == freezed
+      jan: null == jan
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
               as String,
@@ -125,19 +129,17 @@ class _$_GeoResponse implements _GeoResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GeoResponse &&
-            const DeepCollectionEquality().equals(other.code, code) &&
-            const DeepCollectionEquality().equals(other.jan, jan));
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.jan, jan) || other.jan == jan));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(code),
-      const DeepCollectionEquality().hash(jan));
+  int get hashCode => Object.hash(runtimeType, code, jan);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_GeoResponseCopyWith<_$_GeoResponse> get copyWith =>
       __$$_GeoResponseCopyWithImpl<_$_GeoResponse>(this, _$identity);
 

@@ -88,7 +88,8 @@ mixin _$GeneralSettings {
 abstract class $GeneralSettingsCopyWith<$Res> {
   factory $GeneralSettingsCopyWith(
           GeneralSettings value, $Res Function(GeneralSettings) then) =
-      _$GeneralSettingsCopyWithImpl<$Res>;
+      _$GeneralSettingsCopyWithImpl<$Res, GeneralSettings>;
+  @useResult
   $Res call(
       {@HiveField(0)
           bool isDarkMode,
@@ -154,187 +155,193 @@ abstract class $GeneralSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GeneralSettingsCopyWithImpl<$Res>
+class _$GeneralSettingsCopyWithImpl<$Res, $Val extends GeneralSettings>
     implements $GeneralSettingsCopyWith<$Res> {
   _$GeneralSettingsCopyWithImpl(this._value, this._then);
 
-  final GeneralSettings _value;
   // ignore: unused_field
-  final $Res Function(GeneralSettings) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isDarkMode = freezed,
-    Object? enableTargetProfit = freezed,
-    Object? targetProfitValue = freezed,
-    Object? skuFormat = freezed,
-    Object? retailers = freezed,
-    Object? enableReadAloud = freezed,
-    Object? patternIndex = freezed,
-    Object? readAloudPatterns = freezed,
-    Object? readAloudVolume = freezed,
+    Object? isDarkMode = null,
+    Object? enableTargetProfit = null,
+    Object? targetProfitValue = null,
+    Object? skuFormat = null,
+    Object? retailers = null,
+    Object? enableReadAloud = null,
+    Object? patternIndex = null,
+    Object? readAloudPatterns = null,
+    Object? readAloudVolume = null,
     Object? readAloudSpeed = freezed,
-    Object? customButtons = freezed,
-    Object? csvOrder = freezed,
-    Object? minProfit = freezed,
-    Object? getStocks = freezed,
-    Object? enableAlert = freezed,
-    Object? alerts = freezed,
-    Object? enableAlertVibration = freezed,
-    Object? isMajorCustomer = freezed,
-    Object? keepaSettings = freezed,
-    Object? leftSlideShortcut = freezed,
-    Object? rightSlideShortcut = freezed,
-    Object? newConditionTexts = freezed,
-    Object? newConditionTextIndex = freezed,
-    Object? usedConditionTexts = freezed,
-    Object? usedConditionTextIndex = freezed,
-    Object? pricetarSettings = freezed,
-    Object? makadSettings = freezed,
-    Object? sellerSketSettings = freezed,
+    Object? customButtons = null,
+    Object? csvOrder = null,
+    Object? minProfit = null,
+    Object? getStocks = null,
+    Object? enableAlert = null,
+    Object? alerts = null,
+    Object? enableAlertVibration = null,
+    Object? isMajorCustomer = null,
+    Object? keepaSettings = null,
+    Object? leftSlideShortcut = null,
+    Object? rightSlideShortcut = null,
+    Object? newConditionTexts = null,
+    Object? newConditionTextIndex = null,
+    Object? usedConditionTexts = null,
+    Object? usedConditionTextIndex = null,
+    Object? pricetarSettings = null,
+    Object? makadSettings = null,
+    Object? sellerSketSettings = null,
   }) {
     return _then(_value.copyWith(
-      isDarkMode: isDarkMode == freezed
+      isDarkMode: null == isDarkMode
           ? _value.isDarkMode
           : isDarkMode // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableTargetProfit: enableTargetProfit == freezed
+      enableTargetProfit: null == enableTargetProfit
           ? _value.enableTargetProfit
           : enableTargetProfit // ignore: cast_nullable_to_non_nullable
               as bool,
-      targetProfitValue: targetProfitValue == freezed
+      targetProfitValue: null == targetProfitValue
           ? _value.targetProfitValue
           : targetProfitValue // ignore: cast_nullable_to_non_nullable
               as int,
-      skuFormat: skuFormat == freezed
+      skuFormat: null == skuFormat
           ? _value.skuFormat
           : skuFormat // ignore: cast_nullable_to_non_nullable
               as String,
-      retailers: retailers == freezed
+      retailers: null == retailers
           ? _value.retailers
           : retailers // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      enableReadAloud: enableReadAloud == freezed
+      enableReadAloud: null == enableReadAloud
           ? _value.enableReadAloud
           : enableReadAloud // ignore: cast_nullable_to_non_nullable
               as bool,
-      patternIndex: patternIndex == freezed
+      patternIndex: null == patternIndex
           ? _value.patternIndex
           : patternIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      readAloudPatterns: readAloudPatterns == freezed
+      readAloudPatterns: null == readAloudPatterns
           ? _value.readAloudPatterns
           : readAloudPatterns // ignore: cast_nullable_to_non_nullable
               as List<ReadAloudPattern>,
-      readAloudVolume: readAloudVolume == freezed
+      readAloudVolume: null == readAloudVolume
           ? _value.readAloudVolume
           : readAloudVolume // ignore: cast_nullable_to_non_nullable
               as double,
-      readAloudSpeed: readAloudSpeed == freezed
+      readAloudSpeed: freezed == readAloudSpeed
           ? _value.readAloudSpeed
           : readAloudSpeed // ignore: cast_nullable_to_non_nullable
               as double?,
-      customButtons: customButtons == freezed
+      customButtons: null == customButtons
           ? _value.customButtons
           : customButtons // ignore: cast_nullable_to_non_nullable
               as List<CustomButtonDetail>,
-      csvOrder: csvOrder == freezed
+      csvOrder: null == csvOrder
           ? _value.csvOrder
           : csvOrder // ignore: cast_nullable_to_non_nullable
               as List<CsvColumn>,
-      minProfit: minProfit == freezed
+      minProfit: null == minProfit
           ? _value.minProfit
           : minProfit // ignore: cast_nullable_to_non_nullable
               as int,
-      getStocks: getStocks == freezed
+      getStocks: null == getStocks
           ? _value.getStocks
           : getStocks // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableAlert: enableAlert == freezed
+      enableAlert: null == enableAlert
           ? _value.enableAlert
           : enableAlert // ignore: cast_nullable_to_non_nullable
               as bool,
-      alerts: alerts == freezed
+      alerts: null == alerts
           ? _value.alerts
           : alerts // ignore: cast_nullable_to_non_nullable
               as List<AlertConditionSet>,
-      enableAlertVibration: enableAlertVibration == freezed
+      enableAlertVibration: null == enableAlertVibration
           ? _value.enableAlertVibration
           : enableAlertVibration // ignore: cast_nullable_to_non_nullable
               as bool,
-      isMajorCustomer: isMajorCustomer == freezed
+      isMajorCustomer: null == isMajorCustomer
           ? _value.isMajorCustomer
           : isMajorCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
-      keepaSettings: keepaSettings == freezed
+      keepaSettings: null == keepaSettings
           ? _value.keepaSettings
           : keepaSettings // ignore: cast_nullable_to_non_nullable
               as KeepaSettings,
-      leftSlideShortcut: leftSlideShortcut == freezed
+      leftSlideShortcut: null == leftSlideShortcut
           ? _value.leftSlideShortcut
           : leftSlideShortcut // ignore: cast_nullable_to_non_nullable
               as List<ShortcutDetail>,
-      rightSlideShortcut: rightSlideShortcut == freezed
+      rightSlideShortcut: null == rightSlideShortcut
           ? _value.rightSlideShortcut
           : rightSlideShortcut // ignore: cast_nullable_to_non_nullable
               as List<ShortcutDetail>,
-      newConditionTexts: newConditionTexts == freezed
+      newConditionTexts: null == newConditionTexts
           ? _value.newConditionTexts
           : newConditionTexts // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      newConditionTextIndex: newConditionTextIndex == freezed
+      newConditionTextIndex: null == newConditionTextIndex
           ? _value.newConditionTextIndex
           : newConditionTextIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      usedConditionTexts: usedConditionTexts == freezed
+      usedConditionTexts: null == usedConditionTexts
           ? _value.usedConditionTexts
           : usedConditionTexts // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      usedConditionTextIndex: usedConditionTextIndex == freezed
+      usedConditionTextIndex: null == usedConditionTextIndex
           ? _value.usedConditionTextIndex
           : usedConditionTextIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      pricetarSettings: pricetarSettings == freezed
+      pricetarSettings: null == pricetarSettings
           ? _value.pricetarSettings
           : pricetarSettings // ignore: cast_nullable_to_non_nullable
               as PricetarSettings,
-      makadSettings: makadSettings == freezed
+      makadSettings: null == makadSettings
           ? _value.makadSettings
           : makadSettings // ignore: cast_nullable_to_non_nullable
               as MakadSettings,
-      sellerSketSettings: sellerSketSettings == freezed
+      sellerSketSettings: null == sellerSketSettings
           ? _value.sellerSketSettings
           : sellerSketSettings // ignore: cast_nullable_to_non_nullable
               as SellerSketSettings,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $KeepaSettingsCopyWith<$Res> get keepaSettings {
     return $KeepaSettingsCopyWith<$Res>(_value.keepaSettings, (value) {
-      return _then(_value.copyWith(keepaSettings: value));
+      return _then(_value.copyWith(keepaSettings: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PricetarSettingsCopyWith<$Res> get pricetarSettings {
     return $PricetarSettingsCopyWith<$Res>(_value.pricetarSettings, (value) {
-      return _then(_value.copyWith(pricetarSettings: value));
+      return _then(_value.copyWith(pricetarSettings: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MakadSettingsCopyWith<$Res> get makadSettings {
     return $MakadSettingsCopyWith<$Res>(_value.makadSettings, (value) {
-      return _then(_value.copyWith(makadSettings: value));
+      return _then(_value.copyWith(makadSettings: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SellerSketSettingsCopyWith<$Res> get sellerSketSettings {
     return $SellerSketSettingsCopyWith<$Res>(_value.sellerSketSettings,
         (value) {
-      return _then(_value.copyWith(sellerSketSettings: value));
+      return _then(_value.copyWith(sellerSketSettings: value) as $Val);
     });
   }
 }
@@ -346,6 +353,7 @@ abstract class _$$_GeneralSettingsCopyWith<$Res>
           _$_GeneralSettings value, $Res Function(_$_GeneralSettings) then) =
       __$$_GeneralSettingsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0)
           bool isDarkMode,
@@ -416,156 +424,154 @@ abstract class _$$_GeneralSettingsCopyWith<$Res>
 
 /// @nodoc
 class __$$_GeneralSettingsCopyWithImpl<$Res>
-    extends _$GeneralSettingsCopyWithImpl<$Res>
+    extends _$GeneralSettingsCopyWithImpl<$Res, _$_GeneralSettings>
     implements _$$_GeneralSettingsCopyWith<$Res> {
   __$$_GeneralSettingsCopyWithImpl(
       _$_GeneralSettings _value, $Res Function(_$_GeneralSettings) _then)
-      : super(_value, (v) => _then(v as _$_GeneralSettings));
+      : super(_value, _then);
 
-  @override
-  _$_GeneralSettings get _value => super._value as _$_GeneralSettings;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isDarkMode = freezed,
-    Object? enableTargetProfit = freezed,
-    Object? targetProfitValue = freezed,
-    Object? skuFormat = freezed,
-    Object? retailers = freezed,
-    Object? enableReadAloud = freezed,
-    Object? patternIndex = freezed,
-    Object? readAloudPatterns = freezed,
-    Object? readAloudVolume = freezed,
+    Object? isDarkMode = null,
+    Object? enableTargetProfit = null,
+    Object? targetProfitValue = null,
+    Object? skuFormat = null,
+    Object? retailers = null,
+    Object? enableReadAloud = null,
+    Object? patternIndex = null,
+    Object? readAloudPatterns = null,
+    Object? readAloudVolume = null,
     Object? readAloudSpeed = freezed,
-    Object? customButtons = freezed,
-    Object? csvOrder = freezed,
-    Object? minProfit = freezed,
-    Object? getStocks = freezed,
-    Object? enableAlert = freezed,
-    Object? alerts = freezed,
-    Object? enableAlertVibration = freezed,
-    Object? isMajorCustomer = freezed,
-    Object? keepaSettings = freezed,
-    Object? leftSlideShortcut = freezed,
-    Object? rightSlideShortcut = freezed,
-    Object? newConditionTexts = freezed,
-    Object? newConditionTextIndex = freezed,
-    Object? usedConditionTexts = freezed,
-    Object? usedConditionTextIndex = freezed,
-    Object? pricetarSettings = freezed,
-    Object? makadSettings = freezed,
-    Object? sellerSketSettings = freezed,
+    Object? customButtons = null,
+    Object? csvOrder = null,
+    Object? minProfit = null,
+    Object? getStocks = null,
+    Object? enableAlert = null,
+    Object? alerts = null,
+    Object? enableAlertVibration = null,
+    Object? isMajorCustomer = null,
+    Object? keepaSettings = null,
+    Object? leftSlideShortcut = null,
+    Object? rightSlideShortcut = null,
+    Object? newConditionTexts = null,
+    Object? newConditionTextIndex = null,
+    Object? usedConditionTexts = null,
+    Object? usedConditionTextIndex = null,
+    Object? pricetarSettings = null,
+    Object? makadSettings = null,
+    Object? sellerSketSettings = null,
   }) {
     return _then(_$_GeneralSettings(
-      isDarkMode: isDarkMode == freezed
+      isDarkMode: null == isDarkMode
           ? _value.isDarkMode
           : isDarkMode // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableTargetProfit: enableTargetProfit == freezed
+      enableTargetProfit: null == enableTargetProfit
           ? _value.enableTargetProfit
           : enableTargetProfit // ignore: cast_nullable_to_non_nullable
               as bool,
-      targetProfitValue: targetProfitValue == freezed
+      targetProfitValue: null == targetProfitValue
           ? _value.targetProfitValue
           : targetProfitValue // ignore: cast_nullable_to_non_nullable
               as int,
-      skuFormat: skuFormat == freezed
+      skuFormat: null == skuFormat
           ? _value.skuFormat
           : skuFormat // ignore: cast_nullable_to_non_nullable
               as String,
-      retailers: retailers == freezed
+      retailers: null == retailers
           ? _value._retailers
           : retailers // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      enableReadAloud: enableReadAloud == freezed
+      enableReadAloud: null == enableReadAloud
           ? _value.enableReadAloud
           : enableReadAloud // ignore: cast_nullable_to_non_nullable
               as bool,
-      patternIndex: patternIndex == freezed
+      patternIndex: null == patternIndex
           ? _value.patternIndex
           : patternIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      readAloudPatterns: readAloudPatterns == freezed
+      readAloudPatterns: null == readAloudPatterns
           ? _value._readAloudPatterns
           : readAloudPatterns // ignore: cast_nullable_to_non_nullable
               as List<ReadAloudPattern>,
-      readAloudVolume: readAloudVolume == freezed
+      readAloudVolume: null == readAloudVolume
           ? _value.readAloudVolume
           : readAloudVolume // ignore: cast_nullable_to_non_nullable
               as double,
-      readAloudSpeed: readAloudSpeed == freezed
+      readAloudSpeed: freezed == readAloudSpeed
           ? _value.readAloudSpeed
           : readAloudSpeed // ignore: cast_nullable_to_non_nullable
               as double?,
-      customButtons: customButtons == freezed
+      customButtons: null == customButtons
           ? _value._customButtons
           : customButtons // ignore: cast_nullable_to_non_nullable
               as List<CustomButtonDetail>,
-      csvOrder: csvOrder == freezed
+      csvOrder: null == csvOrder
           ? _value._csvOrder
           : csvOrder // ignore: cast_nullable_to_non_nullable
               as List<CsvColumn>,
-      minProfit: minProfit == freezed
+      minProfit: null == minProfit
           ? _value.minProfit
           : minProfit // ignore: cast_nullable_to_non_nullable
               as int,
-      getStocks: getStocks == freezed
+      getStocks: null == getStocks
           ? _value.getStocks
           : getStocks // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableAlert: enableAlert == freezed
+      enableAlert: null == enableAlert
           ? _value.enableAlert
           : enableAlert // ignore: cast_nullable_to_non_nullable
               as bool,
-      alerts: alerts == freezed
+      alerts: null == alerts
           ? _value._alerts
           : alerts // ignore: cast_nullable_to_non_nullable
               as List<AlertConditionSet>,
-      enableAlertVibration: enableAlertVibration == freezed
+      enableAlertVibration: null == enableAlertVibration
           ? _value.enableAlertVibration
           : enableAlertVibration // ignore: cast_nullable_to_non_nullable
               as bool,
-      isMajorCustomer: isMajorCustomer == freezed
+      isMajorCustomer: null == isMajorCustomer
           ? _value.isMajorCustomer
           : isMajorCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
-      keepaSettings: keepaSettings == freezed
+      keepaSettings: null == keepaSettings
           ? _value.keepaSettings
           : keepaSettings // ignore: cast_nullable_to_non_nullable
               as KeepaSettings,
-      leftSlideShortcut: leftSlideShortcut == freezed
+      leftSlideShortcut: null == leftSlideShortcut
           ? _value._leftSlideShortcut
           : leftSlideShortcut // ignore: cast_nullable_to_non_nullable
               as List<ShortcutDetail>,
-      rightSlideShortcut: rightSlideShortcut == freezed
+      rightSlideShortcut: null == rightSlideShortcut
           ? _value._rightSlideShortcut
           : rightSlideShortcut // ignore: cast_nullable_to_non_nullable
               as List<ShortcutDetail>,
-      newConditionTexts: newConditionTexts == freezed
+      newConditionTexts: null == newConditionTexts
           ? _value._newConditionTexts
           : newConditionTexts // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      newConditionTextIndex: newConditionTextIndex == freezed
+      newConditionTextIndex: null == newConditionTextIndex
           ? _value.newConditionTextIndex
           : newConditionTextIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      usedConditionTexts: usedConditionTexts == freezed
+      usedConditionTexts: null == usedConditionTexts
           ? _value._usedConditionTexts
           : usedConditionTexts // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      usedConditionTextIndex: usedConditionTextIndex == freezed
+      usedConditionTextIndex: null == usedConditionTextIndex
           ? _value.usedConditionTextIndex
           : usedConditionTextIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      pricetarSettings: pricetarSettings == freezed
+      pricetarSettings: null == pricetarSettings
           ? _value.pricetarSettings
           : pricetarSettings // ignore: cast_nullable_to_non_nullable
               as PricetarSettings,
-      makadSettings: makadSettings == freezed
+      makadSettings: null == makadSettings
           ? _value.makadSettings
           : makadSettings // ignore: cast_nullable_to_non_nullable
               as MakadSettings,
-      sellerSketSettings: sellerSketSettings == freezed
+      sellerSketSettings: null == sellerSketSettings
           ? _value.sellerSketSettings
           : sellerSketSettings // ignore: cast_nullable_to_non_nullable
               as SellerSketSettings,
@@ -826,94 +832,98 @@ class _$_GeneralSettings implements _GeneralSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GeneralSettings &&
-            const DeepCollectionEquality()
-                .equals(other.isDarkMode, isDarkMode) &&
-            const DeepCollectionEquality()
-                .equals(other.enableTargetProfit, enableTargetProfit) &&
-            const DeepCollectionEquality()
-                .equals(other.targetProfitValue, targetProfitValue) &&
-            const DeepCollectionEquality().equals(other.skuFormat, skuFormat) &&
+            (identical(other.isDarkMode, isDarkMode) ||
+                other.isDarkMode == isDarkMode) &&
+            (identical(other.enableTargetProfit, enableTargetProfit) ||
+                other.enableTargetProfit == enableTargetProfit) &&
+            (identical(other.targetProfitValue, targetProfitValue) ||
+                other.targetProfitValue == targetProfitValue) &&
+            (identical(other.skuFormat, skuFormat) ||
+                other.skuFormat == skuFormat) &&
             const DeepCollectionEquality()
                 .equals(other._retailers, _retailers) &&
-            const DeepCollectionEquality()
-                .equals(other.enableReadAloud, enableReadAloud) &&
-            const DeepCollectionEquality()
-                .equals(other.patternIndex, patternIndex) &&
+            (identical(other.enableReadAloud, enableReadAloud) ||
+                other.enableReadAloud == enableReadAloud) &&
+            (identical(other.patternIndex, patternIndex) ||
+                other.patternIndex == patternIndex) &&
             const DeepCollectionEquality()
                 .equals(other._readAloudPatterns, _readAloudPatterns) &&
-            const DeepCollectionEquality()
-                .equals(other.readAloudVolume, readAloudVolume) &&
-            const DeepCollectionEquality()
-                .equals(other.readAloudSpeed, readAloudSpeed) &&
+            (identical(other.readAloudVolume, readAloudVolume) ||
+                other.readAloudVolume == readAloudVolume) &&
+            (identical(other.readAloudSpeed, readAloudSpeed) ||
+                other.readAloudSpeed == readAloudSpeed) &&
             const DeepCollectionEquality()
                 .equals(other._customButtons, _customButtons) &&
             const DeepCollectionEquality().equals(other._csvOrder, _csvOrder) &&
-            const DeepCollectionEquality().equals(other.minProfit, minProfit) &&
-            const DeepCollectionEquality().equals(other.getStocks, getStocks) &&
-            const DeepCollectionEquality()
-                .equals(other.enableAlert, enableAlert) &&
+            (identical(other.minProfit, minProfit) ||
+                other.minProfit == minProfit) &&
+            (identical(other.getStocks, getStocks) ||
+                other.getStocks == getStocks) &&
+            (identical(other.enableAlert, enableAlert) ||
+                other.enableAlert == enableAlert) &&
             const DeepCollectionEquality().equals(other._alerts, _alerts) &&
-            const DeepCollectionEquality()
-                .equals(other.enableAlertVibration, enableAlertVibration) &&
-            const DeepCollectionEquality()
-                .equals(other.isMajorCustomer, isMajorCustomer) &&
-            const DeepCollectionEquality()
-                .equals(other.keepaSettings, keepaSettings) &&
+            (identical(other.enableAlertVibration, enableAlertVibration) ||
+                other.enableAlertVibration == enableAlertVibration) &&
+            (identical(other.isMajorCustomer, isMajorCustomer) ||
+                other.isMajorCustomer == isMajorCustomer) &&
+            (identical(other.keepaSettings, keepaSettings) ||
+                other.keepaSettings == keepaSettings) &&
             const DeepCollectionEquality()
                 .equals(other._leftSlideShortcut, _leftSlideShortcut) &&
             const DeepCollectionEquality()
                 .equals(other._rightSlideShortcut, _rightSlideShortcut) &&
             const DeepCollectionEquality()
                 .equals(other._newConditionTexts, _newConditionTexts) &&
-            const DeepCollectionEquality()
-                .equals(other.newConditionTextIndex, newConditionTextIndex) &&
+            (identical(other.newConditionTextIndex, newConditionTextIndex) ||
+                other.newConditionTextIndex == newConditionTextIndex) &&
             const DeepCollectionEquality()
                 .equals(other._usedConditionTexts, _usedConditionTexts) &&
-            const DeepCollectionEquality()
-                .equals(other.usedConditionTextIndex, usedConditionTextIndex) &&
-            const DeepCollectionEquality()
-                .equals(other.pricetarSettings, pricetarSettings) &&
-            const DeepCollectionEquality()
-                .equals(other.makadSettings, makadSettings) &&
-            const DeepCollectionEquality()
-                .equals(other.sellerSketSettings, sellerSketSettings));
+            (identical(other.usedConditionTextIndex, usedConditionTextIndex) ||
+                other.usedConditionTextIndex == usedConditionTextIndex) &&
+            (identical(other.pricetarSettings, pricetarSettings) ||
+                other.pricetarSettings == pricetarSettings) &&
+            (identical(other.makadSettings, makadSettings) ||
+                other.makadSettings == makadSettings) &&
+            (identical(other.sellerSketSettings, sellerSketSettings) ||
+                other.sellerSketSettings == sellerSketSettings));
   }
 
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(isDarkMode),
-        const DeepCollectionEquality().hash(enableTargetProfit),
-        const DeepCollectionEquality().hash(targetProfitValue),
-        const DeepCollectionEquality().hash(skuFormat),
+        isDarkMode,
+        enableTargetProfit,
+        targetProfitValue,
+        skuFormat,
         const DeepCollectionEquality().hash(_retailers),
-        const DeepCollectionEquality().hash(enableReadAloud),
-        const DeepCollectionEquality().hash(patternIndex),
+        enableReadAloud,
+        patternIndex,
         const DeepCollectionEquality().hash(_readAloudPatterns),
-        const DeepCollectionEquality().hash(readAloudVolume),
-        const DeepCollectionEquality().hash(readAloudSpeed),
+        readAloudVolume,
+        readAloudSpeed,
         const DeepCollectionEquality().hash(_customButtons),
         const DeepCollectionEquality().hash(_csvOrder),
-        const DeepCollectionEquality().hash(minProfit),
-        const DeepCollectionEquality().hash(getStocks),
-        const DeepCollectionEquality().hash(enableAlert),
+        minProfit,
+        getStocks,
+        enableAlert,
         const DeepCollectionEquality().hash(_alerts),
-        const DeepCollectionEquality().hash(enableAlertVibration),
-        const DeepCollectionEquality().hash(isMajorCustomer),
-        const DeepCollectionEquality().hash(keepaSettings),
+        enableAlertVibration,
+        isMajorCustomer,
+        keepaSettings,
         const DeepCollectionEquality().hash(_leftSlideShortcut),
         const DeepCollectionEquality().hash(_rightSlideShortcut),
         const DeepCollectionEquality().hash(_newConditionTexts),
-        const DeepCollectionEquality().hash(newConditionTextIndex),
+        newConditionTextIndex,
         const DeepCollectionEquality().hash(_usedConditionTexts),
-        const DeepCollectionEquality().hash(usedConditionTextIndex),
-        const DeepCollectionEquality().hash(pricetarSettings),
-        const DeepCollectionEquality().hash(makadSettings),
-        const DeepCollectionEquality().hash(sellerSketSettings)
+        usedConditionTextIndex,
+        pricetarSettings,
+        makadSettings,
+        sellerSketSettings
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_GeneralSettingsCopyWith<_$_GeneralSettings> get copyWith =>
       __$$_GeneralSettingsCopyWithImpl<_$_GeneralSettings>(this, _$identity);
 }
@@ -1083,34 +1093,37 @@ mixin _$ReadAloudPattern {
 abstract class $ReadAloudPatternCopyWith<$Res> {
   factory $ReadAloudPatternCopyWith(
           ReadAloudPattern value, $Res Function(ReadAloudPattern) then) =
-      _$ReadAloudPatternCopyWithImpl<$Res>;
+      _$ReadAloudPatternCopyWithImpl<$Res, ReadAloudPattern>;
+  @useResult
   $Res call({@HiveField(0) String title, @HiveField(1) String pattern});
 }
 
 /// @nodoc
-class _$ReadAloudPatternCopyWithImpl<$Res>
+class _$ReadAloudPatternCopyWithImpl<$Res, $Val extends ReadAloudPattern>
     implements $ReadAloudPatternCopyWith<$Res> {
   _$ReadAloudPatternCopyWithImpl(this._value, this._then);
 
-  final ReadAloudPattern _value;
   // ignore: unused_field
-  final $Res Function(ReadAloudPattern) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = freezed,
-    Object? pattern = freezed,
+    Object? title = null,
+    Object? pattern = null,
   }) {
     return _then(_value.copyWith(
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      pattern: pattern == freezed
+      pattern: null == pattern
           ? _value.pattern
           : pattern // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1121,31 +1134,30 @@ abstract class _$$_ReadAloudPatternCopyWith<$Res>
           _$_ReadAloudPattern value, $Res Function(_$_ReadAloudPattern) then) =
       __$$_ReadAloudPatternCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({@HiveField(0) String title, @HiveField(1) String pattern});
 }
 
 /// @nodoc
 class __$$_ReadAloudPatternCopyWithImpl<$Res>
-    extends _$ReadAloudPatternCopyWithImpl<$Res>
+    extends _$ReadAloudPatternCopyWithImpl<$Res, _$_ReadAloudPattern>
     implements _$$_ReadAloudPatternCopyWith<$Res> {
   __$$_ReadAloudPatternCopyWithImpl(
       _$_ReadAloudPattern _value, $Res Function(_$_ReadAloudPattern) _then)
-      : super(_value, (v) => _then(v as _$_ReadAloudPattern));
+      : super(_value, _then);
 
-  @override
-  _$_ReadAloudPattern get _value => super._value as _$_ReadAloudPattern;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = freezed,
-    Object? pattern = freezed,
+    Object? title = null,
+    Object? pattern = null,
   }) {
     return _then(_$_ReadAloudPattern(
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      pattern: pattern == freezed
+      pattern: null == pattern
           ? _value.pattern
           : pattern // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1177,18 +1189,16 @@ class _$_ReadAloudPattern implements _ReadAloudPattern {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReadAloudPattern &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.pattern, pattern));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.pattern, pattern) || other.pattern == pattern));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(pattern));
+  int get hashCode => Object.hash(runtimeType, title, pattern);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ReadAloudPatternCopyWith<_$_ReadAloudPattern> get copyWith =>
       __$$_ReadAloudPatternCopyWithImpl<_$_ReadAloudPattern>(this, _$identity);
 }
@@ -1230,7 +1240,8 @@ mixin _$CustomButtonDetail {
 abstract class $CustomButtonDetailCopyWith<$Res> {
   factory $CustomButtonDetailCopyWith(
           CustomButtonDetail value, $Res Function(CustomButtonDetail) then) =
-      _$CustomButtonDetailCopyWithImpl<$Res>;
+      _$CustomButtonDetailCopyWithImpl<$Res, CustomButtonDetail>;
+  @useResult
   $Res call(
       {@HiveField(0) bool enable,
       @HiveField(1) String title,
@@ -1239,39 +1250,41 @@ abstract class $CustomButtonDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CustomButtonDetailCopyWithImpl<$Res>
+class _$CustomButtonDetailCopyWithImpl<$Res, $Val extends CustomButtonDetail>
     implements $CustomButtonDetailCopyWith<$Res> {
   _$CustomButtonDetailCopyWithImpl(this._value, this._then);
 
-  final CustomButtonDetail _value;
   // ignore: unused_field
-  final $Res Function(CustomButtonDetail) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? enable = freezed,
-    Object? title = freezed,
-    Object? pattern = freezed,
-    Object? id = freezed,
+    Object? enable = null,
+    Object? title = null,
+    Object? pattern = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
-      enable: enable == freezed
+      enable: null == enable
           ? _value.enable
           : enable // ignore: cast_nullable_to_non_nullable
               as bool,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      pattern: pattern == freezed
+      pattern: null == pattern
           ? _value.pattern
           : pattern // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1282,6 +1295,7 @@ abstract class _$$_CustomButtonDetailCopyWith<$Res>
           $Res Function(_$_CustomButtonDetail) then) =
       __$$_CustomButtonDetailCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) bool enable,
       @HiveField(1) String title,
@@ -1291,36 +1305,34 @@ abstract class _$$_CustomButtonDetailCopyWith<$Res>
 
 /// @nodoc
 class __$$_CustomButtonDetailCopyWithImpl<$Res>
-    extends _$CustomButtonDetailCopyWithImpl<$Res>
+    extends _$CustomButtonDetailCopyWithImpl<$Res, _$_CustomButtonDetail>
     implements _$$_CustomButtonDetailCopyWith<$Res> {
   __$$_CustomButtonDetailCopyWithImpl(
       _$_CustomButtonDetail _value, $Res Function(_$_CustomButtonDetail) _then)
-      : super(_value, (v) => _then(v as _$_CustomButtonDetail));
+      : super(_value, _then);
 
-  @override
-  _$_CustomButtonDetail get _value => super._value as _$_CustomButtonDetail;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? enable = freezed,
-    Object? title = freezed,
-    Object? pattern = freezed,
-    Object? id = freezed,
+    Object? enable = null,
+    Object? title = null,
+    Object? pattern = null,
+    Object? id = null,
   }) {
     return _then(_$_CustomButtonDetail(
-      enable: enable == freezed
+      enable: null == enable
           ? _value.enable
           : enable // ignore: cast_nullable_to_non_nullable
               as bool,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      pattern: pattern == freezed
+      pattern: null == pattern
           ? _value.pattern
           : pattern // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1361,22 +1373,18 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CustomButtonDetail &&
-            const DeepCollectionEquality().equals(other.enable, enable) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.pattern, pattern) &&
-            const DeepCollectionEquality().equals(other.id, id));
+            (identical(other.enable, enable) || other.enable == enable) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.pattern, pattern) || other.pattern == pattern) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(enable),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(pattern),
-      const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(runtimeType, enable, title, pattern, id);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CustomButtonDetailCopyWith<_$_CustomButtonDetail> get copyWith =>
       __$$_CustomButtonDetailCopyWithImpl<_$_CustomButtonDetail>(
           this, _$identity);
@@ -1433,7 +1441,8 @@ mixin _$AlertConditionSet {
 abstract class $AlertConditionSetCopyWith<$Res> {
   factory $AlertConditionSetCopyWith(
           AlertConditionSet value, $Res Function(AlertConditionSet) then) =
-      _$AlertConditionSetCopyWithImpl<$Res>;
+      _$AlertConditionSetCopyWithImpl<$Res, AlertConditionSet>;
+  @useResult
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) @JsonKey(name: "t") String title,
@@ -1441,34 +1450,36 @@ abstract class $AlertConditionSetCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AlertConditionSetCopyWithImpl<$Res>
+class _$AlertConditionSetCopyWithImpl<$Res, $Val extends AlertConditionSet>
     implements $AlertConditionSetCopyWith<$Res> {
   _$AlertConditionSetCopyWithImpl(this._value, this._then);
 
-  final AlertConditionSet _value;
   // ignore: unused_field
-  final $Res Function(AlertConditionSet) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? conditions = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? conditions = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      conditions: conditions == freezed
+      conditions: null == conditions
           ? _value.conditions
           : conditions // ignore: cast_nullable_to_non_nullable
               as List<AlertCondition>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1479,6 +1490,7 @@ abstract class _$$_AlertConditionSetCopyWith<$Res>
           $Res Function(_$_AlertConditionSet) then) =
       __$$_AlertConditionSetCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) @JsonKey(name: "t") String title,
@@ -1487,31 +1499,29 @@ abstract class _$$_AlertConditionSetCopyWith<$Res>
 
 /// @nodoc
 class __$$_AlertConditionSetCopyWithImpl<$Res>
-    extends _$AlertConditionSetCopyWithImpl<$Res>
+    extends _$AlertConditionSetCopyWithImpl<$Res, _$_AlertConditionSet>
     implements _$$_AlertConditionSetCopyWith<$Res> {
   __$$_AlertConditionSetCopyWithImpl(
       _$_AlertConditionSet _value, $Res Function(_$_AlertConditionSet) _then)
-      : super(_value, (v) => _then(v as _$_AlertConditionSet));
+      : super(_value, _then);
 
-  @override
-  _$_AlertConditionSet get _value => super._value as _$_AlertConditionSet;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? conditions = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? conditions = null,
   }) {
     return _then(_$_AlertConditionSet(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      conditions: conditions == freezed
+      conditions: null == conditions
           ? _value._conditions
           : conditions // ignore: cast_nullable_to_non_nullable
               as List<AlertCondition>,
@@ -1563,8 +1573,8 @@ class _$_AlertConditionSet implements _AlertConditionSet {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AlertConditionSet &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
             const DeepCollectionEquality()
                 .equals(other._conditions, _conditions));
   }
@@ -1572,13 +1582,11 @@ class _$_AlertConditionSet implements _AlertConditionSet {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(_conditions));
+      runtimeType, id, title, const DeepCollectionEquality().hash(_conditions));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AlertConditionSetCopyWith<_$_AlertConditionSet> get copyWith =>
       __$$_AlertConditionSetCopyWithImpl<_$_AlertConditionSet>(
           this, _$identity);
@@ -1643,34 +1651,37 @@ mixin _$ShortcutDetail {
 abstract class $ShortcutDetailCopyWith<$Res> {
   factory $ShortcutDetailCopyWith(
           ShortcutDetail value, $Res Function(ShortcutDetail) then) =
-      _$ShortcutDetailCopyWithImpl<$Res>;
+      _$ShortcutDetailCopyWithImpl<$Res, ShortcutDetail>;
+  @useResult
   $Res call({@HiveField(0) ShortcutType type, @HiveField(1) String param});
 }
 
 /// @nodoc
-class _$ShortcutDetailCopyWithImpl<$Res>
+class _$ShortcutDetailCopyWithImpl<$Res, $Val extends ShortcutDetail>
     implements $ShortcutDetailCopyWith<$Res> {
   _$ShortcutDetailCopyWithImpl(this._value, this._then);
 
-  final ShortcutDetail _value;
   // ignore: unused_field
-  final $Res Function(ShortcutDetail) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? param = freezed,
+    Object? type = null,
+    Object? param = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ShortcutType,
-      param: param == freezed
+      param: null == param
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1681,31 +1692,30 @@ abstract class _$$_ShortcutDetailCopyWith<$Res>
           _$_ShortcutDetail value, $Res Function(_$_ShortcutDetail) then) =
       __$$_ShortcutDetailCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({@HiveField(0) ShortcutType type, @HiveField(1) String param});
 }
 
 /// @nodoc
 class __$$_ShortcutDetailCopyWithImpl<$Res>
-    extends _$ShortcutDetailCopyWithImpl<$Res>
+    extends _$ShortcutDetailCopyWithImpl<$Res, _$_ShortcutDetail>
     implements _$$_ShortcutDetailCopyWith<$Res> {
   __$$_ShortcutDetailCopyWithImpl(
       _$_ShortcutDetail _value, $Res Function(_$_ShortcutDetail) _then)
-      : super(_value, (v) => _then(v as _$_ShortcutDetail));
+      : super(_value, _then);
 
-  @override
-  _$_ShortcutDetail get _value => super._value as _$_ShortcutDetail;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? param = freezed,
+    Object? type = null,
+    Object? param = null,
   }) {
     return _then(_$_ShortcutDetail(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ShortcutType,
-      param: param == freezed
+      param: null == param
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1741,19 +1751,17 @@ class _$_ShortcutDetail implements _ShortcutDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ShortcutDetail &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.param, param));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.param, param) || other.param == param));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(param));
+  int get hashCode => Object.hash(runtimeType, type, param);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ShortcutDetailCopyWith<_$_ShortcutDetail> get copyWith =>
       __$$_ShortcutDetailCopyWithImpl<_$_ShortcutDetail>(this, _$identity);
 

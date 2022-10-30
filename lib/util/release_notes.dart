@@ -7,6 +7,15 @@ const String _prefKey = "release_note_ver";
 
 var releaseNotesVersion = Version(1, 6, 2);
 const releaseNotes = <Release>[
+  Release("1.7.0", [
+    ReleaseSublist(
+      name: "更新内容",
+      changes: [
+        "ワード検索の履歴を残すようになりました",
+        "価格改定用サービス用のCSVを転送した際、出品済みとしてマークできるようになりました",
+      ],
+    ),
+  ]),
   Release("1.6.2", [
     ReleaseSublist(
       name: "更新内容",

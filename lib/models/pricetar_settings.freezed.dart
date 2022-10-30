@@ -40,7 +40,8 @@ mixin _$PricetarSettings {
 abstract class $PricetarSettingsCopyWith<$Res> {
   factory $PricetarSettingsCopyWith(
           PricetarSettings value, $Res Function(PricetarSettings) then) =
-      _$PricetarSettingsCopyWithImpl<$Res>;
+      _$PricetarSettingsCopyWithImpl<$Res, PricetarSettings>;
+  @useResult
   $Res call(
       {@HiveField(0) PricetarRule newRule,
       @HiveField(1) PricetarRule usedRule,
@@ -51,49 +52,51 @@ abstract class $PricetarSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PricetarSettingsCopyWithImpl<$Res>
+class _$PricetarSettingsCopyWithImpl<$Res, $Val extends PricetarSettings>
     implements $PricetarSettingsCopyWith<$Res> {
   _$PricetarSettingsCopyWithImpl(this._value, this._then);
 
-  final PricetarSettings _value;
   // ignore: unused_field
-  final $Res Function(PricetarSettings) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newRule = freezed,
-    Object? usedRule = freezed,
-    Object? lowestStopperType = freezed,
-    Object? lowestStopperValue = freezed,
-    Object? highestStopperType = freezed,
-    Object? highestStopperValue = freezed,
+    Object? newRule = null,
+    Object? usedRule = null,
+    Object? lowestStopperType = null,
+    Object? lowestStopperValue = null,
+    Object? highestStopperType = null,
+    Object? highestStopperValue = null,
   }) {
     return _then(_value.copyWith(
-      newRule: newRule == freezed
+      newRule: null == newRule
           ? _value.newRule
           : newRule // ignore: cast_nullable_to_non_nullable
               as PricetarRule,
-      usedRule: usedRule == freezed
+      usedRule: null == usedRule
           ? _value.usedRule
           : usedRule // ignore: cast_nullable_to_non_nullable
               as PricetarRule,
-      lowestStopperType: lowestStopperType == freezed
+      lowestStopperType: null == lowestStopperType
           ? _value.lowestStopperType
           : lowestStopperType // ignore: cast_nullable_to_non_nullable
               as RevisePriceStopper,
-      lowestStopperValue: lowestStopperValue == freezed
+      lowestStopperValue: null == lowestStopperValue
           ? _value.lowestStopperValue
           : lowestStopperValue // ignore: cast_nullable_to_non_nullable
               as int,
-      highestStopperType: highestStopperType == freezed
+      highestStopperType: null == highestStopperType
           ? _value.highestStopperType
           : highestStopperType // ignore: cast_nullable_to_non_nullable
               as RevisePriceStopper,
-      highestStopperValue: highestStopperValue == freezed
+      highestStopperValue: null == highestStopperValue
           ? _value.highestStopperValue
           : highestStopperValue // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -104,6 +107,7 @@ abstract class _$$_PricetarSettingsCopyWith<$Res>
           _$_PricetarSettings value, $Res Function(_$_PricetarSettings) then) =
       __$$_PricetarSettingsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) PricetarRule newRule,
       @HiveField(1) PricetarRule usedRule,
@@ -115,46 +119,44 @@ abstract class _$$_PricetarSettingsCopyWith<$Res>
 
 /// @nodoc
 class __$$_PricetarSettingsCopyWithImpl<$Res>
-    extends _$PricetarSettingsCopyWithImpl<$Res>
+    extends _$PricetarSettingsCopyWithImpl<$Res, _$_PricetarSettings>
     implements _$$_PricetarSettingsCopyWith<$Res> {
   __$$_PricetarSettingsCopyWithImpl(
       _$_PricetarSettings _value, $Res Function(_$_PricetarSettings) _then)
-      : super(_value, (v) => _then(v as _$_PricetarSettings));
+      : super(_value, _then);
 
-  @override
-  _$_PricetarSettings get _value => super._value as _$_PricetarSettings;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newRule = freezed,
-    Object? usedRule = freezed,
-    Object? lowestStopperType = freezed,
-    Object? lowestStopperValue = freezed,
-    Object? highestStopperType = freezed,
-    Object? highestStopperValue = freezed,
+    Object? newRule = null,
+    Object? usedRule = null,
+    Object? lowestStopperType = null,
+    Object? lowestStopperValue = null,
+    Object? highestStopperType = null,
+    Object? highestStopperValue = null,
   }) {
     return _then(_$_PricetarSettings(
-      newRule: newRule == freezed
+      newRule: null == newRule
           ? _value.newRule
           : newRule // ignore: cast_nullable_to_non_nullable
               as PricetarRule,
-      usedRule: usedRule == freezed
+      usedRule: null == usedRule
           ? _value.usedRule
           : usedRule // ignore: cast_nullable_to_non_nullable
               as PricetarRule,
-      lowestStopperType: lowestStopperType == freezed
+      lowestStopperType: null == lowestStopperType
           ? _value.lowestStopperType
           : lowestStopperType // ignore: cast_nullable_to_non_nullable
               as RevisePriceStopper,
-      lowestStopperValue: lowestStopperValue == freezed
+      lowestStopperValue: null == lowestStopperValue
           ? _value.lowestStopperValue
           : lowestStopperValue // ignore: cast_nullable_to_non_nullable
               as int,
-      highestStopperType: highestStopperType == freezed
+      highestStopperType: null == highestStopperType
           ? _value.highestStopperType
           : highestStopperType // ignore: cast_nullable_to_non_nullable
               as RevisePriceStopper,
-      highestStopperValue: highestStopperValue == freezed
+      highestStopperValue: null == highestStopperValue
           ? _value.highestStopperValue
           : highestStopperValue // ignore: cast_nullable_to_non_nullable
               as int,
@@ -209,30 +211,32 @@ class _$_PricetarSettings implements _PricetarSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PricetarSettings &&
-            const DeepCollectionEquality().equals(other.newRule, newRule) &&
-            const DeepCollectionEquality().equals(other.usedRule, usedRule) &&
-            const DeepCollectionEquality()
-                .equals(other.lowestStopperType, lowestStopperType) &&
-            const DeepCollectionEquality()
-                .equals(other.lowestStopperValue, lowestStopperValue) &&
-            const DeepCollectionEquality()
-                .equals(other.highestStopperType, highestStopperType) &&
-            const DeepCollectionEquality()
-                .equals(other.highestStopperValue, highestStopperValue));
+            (identical(other.newRule, newRule) || other.newRule == newRule) &&
+            (identical(other.usedRule, usedRule) ||
+                other.usedRule == usedRule) &&
+            (identical(other.lowestStopperType, lowestStopperType) ||
+                other.lowestStopperType == lowestStopperType) &&
+            (identical(other.lowestStopperValue, lowestStopperValue) ||
+                other.lowestStopperValue == lowestStopperValue) &&
+            (identical(other.highestStopperType, highestStopperType) ||
+                other.highestStopperType == highestStopperType) &&
+            (identical(other.highestStopperValue, highestStopperValue) ||
+                other.highestStopperValue == highestStopperValue));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(newRule),
-      const DeepCollectionEquality().hash(usedRule),
-      const DeepCollectionEquality().hash(lowestStopperType),
-      const DeepCollectionEquality().hash(lowestStopperValue),
-      const DeepCollectionEquality().hash(highestStopperType),
-      const DeepCollectionEquality().hash(highestStopperValue));
+      newRule,
+      usedRule,
+      lowestStopperType,
+      lowestStopperValue,
+      highestStopperType,
+      highestStopperValue);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PricetarSettingsCopyWith<_$_PricetarSettings> get copyWith =>
       __$$_PricetarSettingsCopyWithImpl<_$_PricetarSettings>(this, _$identity);
 }
