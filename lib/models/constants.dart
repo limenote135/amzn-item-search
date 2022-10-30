@@ -1,6 +1,7 @@
 const searchItemBoxName = "searchItems";
 const stockItemBoxName = "stockItems";
 const settingsBoxName = "settings";
+const wordSearchHistoryBoxName = "searchHistory";
 
 const generalSettingsKeyName = "settings";
 const searchSettingsKeyName = "searchSettings";
@@ -31,6 +32,10 @@ const shortcutDetailTypeId = 57;
 const pricetarSettingsTypeId = 58;
 const makadSettingsTypeId = 59;
 const sellerSketSettingsTypeId = 60;
+
+
+// word search history
+const wordSearchHistoryTypeId = 80;
 
 // enums
 const fulfillmentChannelTypeId = 100;

@@ -29,6 +29,7 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/search_settings.dart';
 import 'package:amasearch/models/sellersket_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/models/word_search_history.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -163,12 +164,14 @@ Future<void> initHive() async {
     ..registerAdapter(MakadReviseRuleAdapter())
     ..registerAdapter(MakadPaymentMethodAdapter())
     ..registerAdapter(SellerSketSettingsAdapter())
-    ..registerAdapter(SellerSketReviseRuleAdapter());
+    ..registerAdapter(SellerSketReviseRuleAdapter())
+    ..registerAdapter(WordSearchHistoryAdapter());
 
   // await deleteBoxes();
 
   await Future.wait([
     Hive.openBox<SearchItem>(searchItemBoxName),
+    Hive.openBox<WordSearchHistory>(wordSearchHistoryBoxName),
     Hive.openBox<StockItem>(stockItemBoxName),
     Hive.openBox<dynamic>(settingsBoxName),
   ]);
