@@ -34,34 +34,38 @@ mixin _$GetProductByIdResponse {
 abstract class $GetProductByIdResponseCopyWith<$Res> {
   factory $GetProductByIdResponseCopyWith(GetProductByIdResponse value,
           $Res Function(GetProductByIdResponse) then) =
-      _$GetProductByIdResponseCopyWithImpl<$Res>;
+      _$GetProductByIdResponseCopyWithImpl<$Res, GetProductByIdResponse>;
+  @useResult
   $Res call({String code, List<AsinData> items});
 }
 
 /// @nodoc
-class _$GetProductByIdResponseCopyWithImpl<$Res>
+class _$GetProductByIdResponseCopyWithImpl<$Res,
+        $Val extends GetProductByIdResponse>
     implements $GetProductByIdResponseCopyWith<$Res> {
   _$GetProductByIdResponseCopyWithImpl(this._value, this._then);
 
-  final GetProductByIdResponse _value;
   // ignore: unused_field
-  final $Res Function(GetProductByIdResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = freezed,
-    Object? items = freezed,
+    Object? code = null,
+    Object? items = null,
   }) {
     return _then(_value.copyWith(
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      items: items == freezed
+      items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -72,32 +76,31 @@ abstract class _$$_GetProductByIdResponseCopyWith<$Res>
           $Res Function(_$_GetProductByIdResponse) then) =
       __$$_GetProductByIdResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String code, List<AsinData> items});
 }
 
 /// @nodoc
 class __$$_GetProductByIdResponseCopyWithImpl<$Res>
-    extends _$GetProductByIdResponseCopyWithImpl<$Res>
+    extends _$GetProductByIdResponseCopyWithImpl<$Res,
+        _$_GetProductByIdResponse>
     implements _$$_GetProductByIdResponseCopyWith<$Res> {
   __$$_GetProductByIdResponseCopyWithImpl(_$_GetProductByIdResponse _value,
       $Res Function(_$_GetProductByIdResponse) _then)
-      : super(_value, (v) => _then(v as _$_GetProductByIdResponse));
+      : super(_value, _then);
 
-  @override
-  _$_GetProductByIdResponse get _value =>
-      super._value as _$_GetProductByIdResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = freezed,
-    Object? items = freezed,
+    Object? code = null,
+    Object? items = null,
   }) {
     return _then(_$_GetProductByIdResponse(
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      items: items == freezed
+      items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
@@ -136,19 +139,18 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GetProductByIdResponse &&
-            const DeepCollectionEquality().equals(other.code, code) &&
+            (identical(other.code, code) || other.code == code) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(code),
-      const DeepCollectionEquality().hash(_items));
+      runtimeType, code, const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_GetProductByIdResponseCopyWith<_$_GetProductByIdResponse> get copyWith =>
       __$$_GetProductByIdResponseCopyWithImpl<_$_GetProductByIdResponse>(
           this, _$identity);
@@ -193,34 +195,37 @@ mixin _$QueryItemsRequest {
 abstract class $QueryItemsRequestCopyWith<$Res> {
   factory $QueryItemsRequestCopyWith(
           QueryItemsRequest value, $Res Function(QueryItemsRequest) then) =
-      _$QueryItemsRequestCopyWithImpl<$Res>;
+      _$QueryItemsRequestCopyWithImpl<$Res, QueryItemsRequest>;
+  @useResult
   $Res call({String query, String category});
 }
 
 /// @nodoc
-class _$QueryItemsRequestCopyWithImpl<$Res>
+class _$QueryItemsRequestCopyWithImpl<$Res, $Val extends QueryItemsRequest>
     implements $QueryItemsRequestCopyWith<$Res> {
   _$QueryItemsRequestCopyWithImpl(this._value, this._then);
 
-  final QueryItemsRequest _value;
   // ignore: unused_field
-  final $Res Function(QueryItemsRequest) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? query = freezed,
-    Object? category = freezed,
+    Object? query = null,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
-      query: query == freezed
+      query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
-      category: category == freezed
+      category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -231,31 +236,30 @@ abstract class _$$_QueryItemsRequestCopyWith<$Res>
           $Res Function(_$_QueryItemsRequest) then) =
       __$$_QueryItemsRequestCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String query, String category});
 }
 
 /// @nodoc
 class __$$_QueryItemsRequestCopyWithImpl<$Res>
-    extends _$QueryItemsRequestCopyWithImpl<$Res>
+    extends _$QueryItemsRequestCopyWithImpl<$Res, _$_QueryItemsRequest>
     implements _$$_QueryItemsRequestCopyWith<$Res> {
   __$$_QueryItemsRequestCopyWithImpl(
       _$_QueryItemsRequest _value, $Res Function(_$_QueryItemsRequest) _then)
-      : super(_value, (v) => _then(v as _$_QueryItemsRequest));
+      : super(_value, _then);
 
-  @override
-  _$_QueryItemsRequest get _value => super._value as _$_QueryItemsRequest;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? query = freezed,
-    Object? category = freezed,
+    Object? query = null,
+    Object? category = null,
   }) {
     return _then(_$_QueryItemsRequest(
-      query: query == freezed
+      query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
-      category: category == freezed
+      category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
@@ -283,18 +287,17 @@ class _$_QueryItemsRequest implements _QueryItemsRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_QueryItemsRequest &&
-            const DeepCollectionEquality().equals(other.query, query) &&
-            const DeepCollectionEquality().equals(other.category, category));
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(query),
-      const DeepCollectionEquality().hash(category));
+  int get hashCode => Object.hash(runtimeType, query, category);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_QueryItemsRequestCopyWith<_$_QueryItemsRequest> get copyWith =>
       __$$_QueryItemsRequestCopyWithImpl<_$_QueryItemsRequest>(
           this, _$identity);
@@ -333,29 +336,32 @@ mixin _$QueryItemsResponse {
 abstract class $QueryItemsResponseCopyWith<$Res> {
   factory $QueryItemsResponseCopyWith(
           QueryItemsResponse value, $Res Function(QueryItemsResponse) then) =
-      _$QueryItemsResponseCopyWithImpl<$Res>;
+      _$QueryItemsResponseCopyWithImpl<$Res, QueryItemsResponse>;
+  @useResult
   $Res call({List<String> asins});
 }
 
 /// @nodoc
-class _$QueryItemsResponseCopyWithImpl<$Res>
+class _$QueryItemsResponseCopyWithImpl<$Res, $Val extends QueryItemsResponse>
     implements $QueryItemsResponseCopyWith<$Res> {
   _$QueryItemsResponseCopyWithImpl(this._value, this._then);
 
-  final QueryItemsResponse _value;
   // ignore: unused_field
-  final $Res Function(QueryItemsResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? asins = freezed,
+    Object? asins = null,
   }) {
     return _then(_value.copyWith(
-      asins: asins == freezed
+      asins: null == asins
           ? _value.asins
           : asins // ignore: cast_nullable_to_non_nullable
               as List<String>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -366,26 +372,25 @@ abstract class _$$_QueryItemsResponseCopyWith<$Res>
           $Res Function(_$_QueryItemsResponse) then) =
       __$$_QueryItemsResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<String> asins});
 }
 
 /// @nodoc
 class __$$_QueryItemsResponseCopyWithImpl<$Res>
-    extends _$QueryItemsResponseCopyWithImpl<$Res>
+    extends _$QueryItemsResponseCopyWithImpl<$Res, _$_QueryItemsResponse>
     implements _$$_QueryItemsResponseCopyWith<$Res> {
   __$$_QueryItemsResponseCopyWithImpl(
       _$_QueryItemsResponse _value, $Res Function(_$_QueryItemsResponse) _then)
-      : super(_value, (v) => _then(v as _$_QueryItemsResponse));
+      : super(_value, _then);
 
-  @override
-  _$_QueryItemsResponse get _value => super._value as _$_QueryItemsResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? asins = freezed,
+    Object? asins = null,
   }) {
     return _then(_$_QueryItemsResponse(
-      asins: asins == freezed
+      asins: null == asins
           ? _value._asins
           : asins // ignore: cast_nullable_to_non_nullable
               as List<String>,
@@ -430,6 +435,7 @@ class _$_QueryItemsResponse implements _QueryItemsResponse {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_QueryItemsResponseCopyWith<_$_QueryItemsResponse> get copyWith =>
       __$$_QueryItemsResponseCopyWithImpl<_$_QueryItemsResponse>(
           this, _$identity);
@@ -476,29 +482,33 @@ mixin _$BatchGetAsinDataResponse {
 abstract class $BatchGetAsinDataResponseCopyWith<$Res> {
   factory $BatchGetAsinDataResponseCopyWith(BatchGetAsinDataResponse value,
           $Res Function(BatchGetAsinDataResponse) then) =
-      _$BatchGetAsinDataResponseCopyWithImpl<$Res>;
+      _$BatchGetAsinDataResponseCopyWithImpl<$Res, BatchGetAsinDataResponse>;
+  @useResult
   $Res call({List<AsinData> data});
 }
 
 /// @nodoc
-class _$BatchGetAsinDataResponseCopyWithImpl<$Res>
+class _$BatchGetAsinDataResponseCopyWithImpl<$Res,
+        $Val extends BatchGetAsinDataResponse>
     implements $BatchGetAsinDataResponseCopyWith<$Res> {
   _$BatchGetAsinDataResponseCopyWithImpl(this._value, this._then);
 
-  final BatchGetAsinDataResponse _value;
   // ignore: unused_field
-  final $Res Function(BatchGetAsinDataResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? data = null,
   }) {
     return _then(_value.copyWith(
-      data: data == freezed
+      data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -510,27 +520,26 @@ abstract class _$$_BatchGetAsinDataResponseCopyWith<$Res>
           $Res Function(_$_BatchGetAsinDataResponse) then) =
       __$$_BatchGetAsinDataResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<AsinData> data});
 }
 
 /// @nodoc
 class __$$_BatchGetAsinDataResponseCopyWithImpl<$Res>
-    extends _$BatchGetAsinDataResponseCopyWithImpl<$Res>
+    extends _$BatchGetAsinDataResponseCopyWithImpl<$Res,
+        _$_BatchGetAsinDataResponse>
     implements _$$_BatchGetAsinDataResponseCopyWith<$Res> {
   __$$_BatchGetAsinDataResponseCopyWithImpl(_$_BatchGetAsinDataResponse _value,
       $Res Function(_$_BatchGetAsinDataResponse) _then)
-      : super(_value, (v) => _then(v as _$_BatchGetAsinDataResponse));
+      : super(_value, _then);
 
-  @override
-  _$_BatchGetAsinDataResponse get _value =>
-      super._value as _$_BatchGetAsinDataResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? data = null,
   }) {
     return _then(_$_BatchGetAsinDataResponse(
-      data: data == freezed
+      data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
@@ -575,6 +584,7 @@ class _$_BatchGetAsinDataResponse implements _BatchGetAsinDataResponse {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BatchGetAsinDataResponseCopyWith<_$_BatchGetAsinDataResponse>
       get copyWith => __$$_BatchGetAsinDataResponseCopyWithImpl<
           _$_BatchGetAsinDataResponse>(this, _$identity);

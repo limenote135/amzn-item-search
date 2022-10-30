@@ -28,42 +28,46 @@ mixin _$AsinDataPageParam {
 abstract class $AsinDataPageParamCopyWith<$Res> {
   factory $AsinDataPageParamCopyWith(
           AsinDataPageParam value, $Res Function(AsinDataPageParam) then) =
-      _$AsinDataPageParamCopyWithImpl<$Res>;
+      _$AsinDataPageParamCopyWithImpl<$Res, AsinDataPageParam>;
+  @useResult
   $Res call({QueryItemsRequest param, int page});
 
   $QueryItemsRequestCopyWith<$Res> get param;
 }
 
 /// @nodoc
-class _$AsinDataPageParamCopyWithImpl<$Res>
+class _$AsinDataPageParamCopyWithImpl<$Res, $Val extends AsinDataPageParam>
     implements $AsinDataPageParamCopyWith<$Res> {
   _$AsinDataPageParamCopyWithImpl(this._value, this._then);
 
-  final AsinDataPageParam _value;
   // ignore: unused_field
-  final $Res Function(AsinDataPageParam) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? param = freezed,
-    Object? page = freezed,
+    Object? param = null,
+    Object? page = null,
   }) {
     return _then(_value.copyWith(
-      param: param == freezed
+      param: null == param
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
               as QueryItemsRequest,
-      page: page == freezed
+      page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $QueryItemsRequestCopyWith<$Res> get param {
     return $QueryItemsRequestCopyWith<$Res>(_value.param, (value) {
-      return _then(_value.copyWith(param: value));
+      return _then(_value.copyWith(param: value) as $Val);
     });
   }
 }
@@ -75,6 +79,7 @@ abstract class _$$_AsinDataPageParamCopyWith<$Res>
           $Res Function(_$_AsinDataPageParam) then) =
       __$$_AsinDataPageParamCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({QueryItemsRequest param, int page});
 
   @override
@@ -83,26 +88,24 @@ abstract class _$$_AsinDataPageParamCopyWith<$Res>
 
 /// @nodoc
 class __$$_AsinDataPageParamCopyWithImpl<$Res>
-    extends _$AsinDataPageParamCopyWithImpl<$Res>
+    extends _$AsinDataPageParamCopyWithImpl<$Res, _$_AsinDataPageParam>
     implements _$$_AsinDataPageParamCopyWith<$Res> {
   __$$_AsinDataPageParamCopyWithImpl(
       _$_AsinDataPageParam _value, $Res Function(_$_AsinDataPageParam) _then)
-      : super(_value, (v) => _then(v as _$_AsinDataPageParam));
+      : super(_value, _then);
 
-  @override
-  _$_AsinDataPageParam get _value => super._value as _$_AsinDataPageParam;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? param = freezed,
-    Object? page = freezed,
+    Object? param = null,
+    Object? page = null,
   }) {
     return _then(_$_AsinDataPageParam(
-      param: param == freezed
+      param: null == param
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
               as QueryItemsRequest,
-      page: page == freezed
+      page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
@@ -130,18 +133,16 @@ class _$_AsinDataPageParam implements _AsinDataPageParam {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AsinDataPageParam &&
-            const DeepCollectionEquality().equals(other.param, param) &&
-            const DeepCollectionEquality().equals(other.page, page));
+            (identical(other.param, param) || other.param == param) &&
+            (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(param),
-      const DeepCollectionEquality().hash(page));
+  int get hashCode => Object.hash(runtimeType, param, page);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AsinDataPageParamCopyWith<_$_AsinDataPageParam> get copyWith =>
       __$$_AsinDataPageParamCopyWithImpl<_$_AsinDataPageParam>(
           this, _$identity);
@@ -176,42 +177,47 @@ mixin _$AsinDataIndexAtParam {
 abstract class $AsinDataIndexAtParamCopyWith<$Res> {
   factory $AsinDataIndexAtParamCopyWith(AsinDataIndexAtParam value,
           $Res Function(AsinDataIndexAtParam) then) =
-      _$AsinDataIndexAtParamCopyWithImpl<$Res>;
+      _$AsinDataIndexAtParamCopyWithImpl<$Res, AsinDataIndexAtParam>;
+  @useResult
   $Res call({QueryItemsRequest param, int index});
 
   $QueryItemsRequestCopyWith<$Res> get param;
 }
 
 /// @nodoc
-class _$AsinDataIndexAtParamCopyWithImpl<$Res>
+class _$AsinDataIndexAtParamCopyWithImpl<$Res,
+        $Val extends AsinDataIndexAtParam>
     implements $AsinDataIndexAtParamCopyWith<$Res> {
   _$AsinDataIndexAtParamCopyWithImpl(this._value, this._then);
 
-  final AsinDataIndexAtParam _value;
   // ignore: unused_field
-  final $Res Function(AsinDataIndexAtParam) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? param = freezed,
-    Object? index = freezed,
+    Object? param = null,
+    Object? index = null,
   }) {
     return _then(_value.copyWith(
-      param: param == freezed
+      param: null == param
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
               as QueryItemsRequest,
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $QueryItemsRequestCopyWith<$Res> get param {
     return $QueryItemsRequestCopyWith<$Res>(_value.param, (value) {
-      return _then(_value.copyWith(param: value));
+      return _then(_value.copyWith(param: value) as $Val);
     });
   }
 }
@@ -223,6 +229,7 @@ abstract class _$$_AsinDataIndexAtParamCopyWith<$Res>
           $Res Function(_$_AsinDataIndexAtParam) then) =
       __$$_AsinDataIndexAtParamCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({QueryItemsRequest param, int index});
 
   @override
@@ -231,26 +238,24 @@ abstract class _$$_AsinDataIndexAtParamCopyWith<$Res>
 
 /// @nodoc
 class __$$_AsinDataIndexAtParamCopyWithImpl<$Res>
-    extends _$AsinDataIndexAtParamCopyWithImpl<$Res>
+    extends _$AsinDataIndexAtParamCopyWithImpl<$Res, _$_AsinDataIndexAtParam>
     implements _$$_AsinDataIndexAtParamCopyWith<$Res> {
   __$$_AsinDataIndexAtParamCopyWithImpl(_$_AsinDataIndexAtParam _value,
       $Res Function(_$_AsinDataIndexAtParam) _then)
-      : super(_value, (v) => _then(v as _$_AsinDataIndexAtParam));
+      : super(_value, _then);
 
-  @override
-  _$_AsinDataIndexAtParam get _value => super._value as _$_AsinDataIndexAtParam;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? param = freezed,
-    Object? index = freezed,
+    Object? param = null,
+    Object? index = null,
   }) {
     return _then(_$_AsinDataIndexAtParam(
-      param: param == freezed
+      param: null == param
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
               as QueryItemsRequest,
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
@@ -278,18 +283,16 @@ class _$_AsinDataIndexAtParam implements _AsinDataIndexAtParam {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AsinDataIndexAtParam &&
-            const DeepCollectionEquality().equals(other.param, param) &&
-            const DeepCollectionEquality().equals(other.index, index));
+            (identical(other.param, param) || other.param == param) &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(param),
-      const DeepCollectionEquality().hash(index));
+  int get hashCode => Object.hash(runtimeType, param, index);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AsinDataIndexAtParamCopyWith<_$_AsinDataIndexAtParam> get copyWith =>
       __$$_AsinDataIndexAtParamCopyWithImpl<_$_AsinDataIndexAtParam>(
           this, _$identity);

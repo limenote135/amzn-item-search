@@ -40,7 +40,8 @@ mixin _$ItemPrices {
 abstract class $ItemPricesCopyWith<$Res> {
   factory $ItemPricesCopyWith(
           ItemPrices value, $Res Function(ItemPrices) then) =
-      _$ItemPricesCopyWithImpl<$Res>;
+      _$ItemPricesCopyWithImpl<$Res, ItemPrices>;
+  @useResult
   $Res call(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
@@ -55,39 +56,43 @@ abstract class $ItemPricesCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ItemPricesCopyWithImpl<$Res> implements $ItemPricesCopyWith<$Res> {
+class _$ItemPricesCopyWithImpl<$Res, $Val extends ItemPrices>
+    implements $ItemPricesCopyWith<$Res> {
   _$ItemPricesCopyWithImpl(this._value, this._then);
 
-  final ItemPrices _value;
   // ignore: unused_field
-  final $Res Function(ItemPrices) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newPrices = freezed,
-    Object? usedPrices = freezed,
-    Object? feeInfo = freezed,
+    Object? newPrices = null,
+    Object? usedPrices = null,
+    Object? feeInfo = null,
   }) {
     return _then(_value.copyWith(
-      newPrices: newPrices == freezed
+      newPrices: null == newPrices
           ? _value.newPrices
           : newPrices // ignore: cast_nullable_to_non_nullable
               as List<PriceDetail>,
-      usedPrices: usedPrices == freezed
+      usedPrices: null == usedPrices
           ? _value.usedPrices
           : usedPrices // ignore: cast_nullable_to_non_nullable
               as List<PriceDetail>,
-      feeInfo: feeInfo == freezed
+      feeInfo: null == feeInfo
           ? _value.feeInfo
           : feeInfo // ignore: cast_nullable_to_non_nullable
               as FeeInfo,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $FeeInfoCopyWith<$Res> get feeInfo {
     return $FeeInfoCopyWith<$Res>(_value.feeInfo, (value) {
-      return _then(_value.copyWith(feeInfo: value));
+      return _then(_value.copyWith(feeInfo: value) as $Val);
     });
   }
 }
@@ -99,6 +104,7 @@ abstract class _$$_ItemPricesCopyWith<$Res>
           _$_ItemPrices value, $Res Function(_$_ItemPrices) then) =
       __$$_ItemPricesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
@@ -114,31 +120,30 @@ abstract class _$$_ItemPricesCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ItemPricesCopyWithImpl<$Res> extends _$ItemPricesCopyWithImpl<$Res>
+class __$$_ItemPricesCopyWithImpl<$Res>
+    extends _$ItemPricesCopyWithImpl<$Res, _$_ItemPrices>
     implements _$$_ItemPricesCopyWith<$Res> {
   __$$_ItemPricesCopyWithImpl(
       _$_ItemPrices _value, $Res Function(_$_ItemPrices) _then)
-      : super(_value, (v) => _then(v as _$_ItemPrices));
+      : super(_value, _then);
 
-  @override
-  _$_ItemPrices get _value => super._value as _$_ItemPrices;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newPrices = freezed,
-    Object? usedPrices = freezed,
-    Object? feeInfo = freezed,
+    Object? newPrices = null,
+    Object? usedPrices = null,
+    Object? feeInfo = null,
   }) {
     return _then(_$_ItemPrices(
-      newPrices: newPrices == freezed
+      newPrices: null == newPrices
           ? _value._newPrices
           : newPrices // ignore: cast_nullable_to_non_nullable
               as List<PriceDetail>,
-      usedPrices: usedPrices == freezed
+      usedPrices: null == usedPrices
           ? _value._usedPrices
           : usedPrices // ignore: cast_nullable_to_non_nullable
               as List<PriceDetail>,
-      feeInfo: feeInfo == freezed
+      feeInfo: null == feeInfo
           ? _value.feeInfo
           : feeInfo // ignore: cast_nullable_to_non_nullable
               as FeeInfo,
@@ -205,7 +210,7 @@ class _$_ItemPrices implements _ItemPrices {
                 .equals(other._newPrices, _newPrices) &&
             const DeepCollectionEquality()
                 .equals(other._usedPrices, _usedPrices) &&
-            const DeepCollectionEquality().equals(other.feeInfo, feeInfo));
+            (identical(other.feeInfo, feeInfo) || other.feeInfo == feeInfo));
   }
 
   @JsonKey(ignore: true)
@@ -214,10 +219,11 @@ class _$_ItemPrices implements _ItemPrices {
       runtimeType,
       const DeepCollectionEquality().hash(_newPrices),
       const DeepCollectionEquality().hash(_usedPrices),
-      const DeepCollectionEquality().hash(feeInfo));
+      feeInfo);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ItemPricesCopyWith<_$_ItemPrices> get copyWith =>
       __$$_ItemPricesCopyWithImpl<_$_ItemPrices>(this, _$identity);
 
@@ -292,7 +298,8 @@ mixin _$PriceDetail {
 abstract class $PriceDetailCopyWith<$Res> {
   factory $PriceDetailCopyWith(
           PriceDetail value, $Res Function(PriceDetail) then) =
-      _$PriceDetailCopyWithImpl<$Res>;
+      _$PriceDetailCopyWithImpl<$Res, PriceDetail>;
+  @useResult
   $Res call(
       {@HiveField(0) @JsonKey(name: "condition") ItemCondition itemCondition,
       @HiveField(1) ItemSubCondition subCondition,
@@ -304,53 +311,56 @@ abstract class $PriceDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PriceDetailCopyWithImpl<$Res> implements $PriceDetailCopyWith<$Res> {
+class _$PriceDetailCopyWithImpl<$Res, $Val extends PriceDetail>
+    implements $PriceDetailCopyWith<$Res> {
   _$PriceDetailCopyWithImpl(this._value, this._then);
 
-  final PriceDetail _value;
   // ignore: unused_field
-  final $Res Function(PriceDetail) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? itemCondition = freezed,
-    Object? subCondition = freezed,
-    Object? channel = freezed,
-    Object? price = freezed,
-    Object? shipping = freezed,
-    Object? point = freezed,
-    Object? isCart = freezed,
+    Object? itemCondition = null,
+    Object? subCondition = null,
+    Object? channel = null,
+    Object? price = null,
+    Object? shipping = null,
+    Object? point = null,
+    Object? isCart = null,
   }) {
     return _then(_value.copyWith(
-      itemCondition: itemCondition == freezed
+      itemCondition: null == itemCondition
           ? _value.itemCondition
           : itemCondition // ignore: cast_nullable_to_non_nullable
               as ItemCondition,
-      subCondition: subCondition == freezed
+      subCondition: null == subCondition
           ? _value.subCondition
           : subCondition // ignore: cast_nullable_to_non_nullable
               as ItemSubCondition,
-      channel: channel == freezed
+      channel: null == channel
           ? _value.channel
           : channel // ignore: cast_nullable_to_non_nullable
               as FulfillmentChannel,
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      shipping: shipping == freezed
+      shipping: null == shipping
           ? _value.shipping
           : shipping // ignore: cast_nullable_to_non_nullable
               as int,
-      point: point == freezed
+      point: null == point
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int,
-      isCart: isCart == freezed
+      isCart: null == isCart
           ? _value.isCart
           : isCart // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -361,6 +371,7 @@ abstract class _$$_PriceDetailCopyWith<$Res>
           _$_PriceDetail value, $Res Function(_$_PriceDetail) then) =
       __$$_PriceDetailCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) @JsonKey(name: "condition") ItemCondition itemCondition,
       @HiveField(1) ItemSubCondition subCondition,
@@ -372,51 +383,50 @@ abstract class _$$_PriceDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceDetailCopyWithImpl<$Res> extends _$PriceDetailCopyWithImpl<$Res>
+class __$$_PriceDetailCopyWithImpl<$Res>
+    extends _$PriceDetailCopyWithImpl<$Res, _$_PriceDetail>
     implements _$$_PriceDetailCopyWith<$Res> {
   __$$_PriceDetailCopyWithImpl(
       _$_PriceDetail _value, $Res Function(_$_PriceDetail) _then)
-      : super(_value, (v) => _then(v as _$_PriceDetail));
+      : super(_value, _then);
 
-  @override
-  _$_PriceDetail get _value => super._value as _$_PriceDetail;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? itemCondition = freezed,
-    Object? subCondition = freezed,
-    Object? channel = freezed,
-    Object? price = freezed,
-    Object? shipping = freezed,
-    Object? point = freezed,
-    Object? isCart = freezed,
+    Object? itemCondition = null,
+    Object? subCondition = null,
+    Object? channel = null,
+    Object? price = null,
+    Object? shipping = null,
+    Object? point = null,
+    Object? isCart = null,
   }) {
     return _then(_$_PriceDetail(
-      itemCondition: itemCondition == freezed
+      itemCondition: null == itemCondition
           ? _value.itemCondition
           : itemCondition // ignore: cast_nullable_to_non_nullable
               as ItemCondition,
-      subCondition: subCondition == freezed
+      subCondition: null == subCondition
           ? _value.subCondition
           : subCondition // ignore: cast_nullable_to_non_nullable
               as ItemSubCondition,
-      channel: channel == freezed
+      channel: null == channel
           ? _value.channel
           : channel // ignore: cast_nullable_to_non_nullable
               as FulfillmentChannel,
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      shipping: shipping == freezed
+      shipping: null == shipping
           ? _value.shipping
           : shipping // ignore: cast_nullable_to_non_nullable
               as int,
-      point: point == freezed
+      point: null == point
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int,
-      isCart: isCart == freezed
+      isCart: null == isCart
           ? _value.isCart
           : isCart // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -492,31 +502,26 @@ class _$_PriceDetail implements _PriceDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceDetail &&
-            const DeepCollectionEquality()
-                .equals(other.itemCondition, itemCondition) &&
-            const DeepCollectionEquality()
-                .equals(other.subCondition, subCondition) &&
-            const DeepCollectionEquality().equals(other.channel, channel) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.shipping, shipping) &&
-            const DeepCollectionEquality().equals(other.point, point) &&
-            const DeepCollectionEquality().equals(other.isCart, isCart));
+            (identical(other.itemCondition, itemCondition) ||
+                other.itemCondition == itemCondition) &&
+            (identical(other.subCondition, subCondition) ||
+                other.subCondition == subCondition) &&
+            (identical(other.channel, channel) || other.channel == channel) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.shipping, shipping) ||
+                other.shipping == shipping) &&
+            (identical(other.point, point) || other.point == point) &&
+            (identical(other.isCart, isCart) || other.isCart == isCart));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(itemCondition),
-      const DeepCollectionEquality().hash(subCondition),
-      const DeepCollectionEquality().hash(channel),
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(shipping),
-      const DeepCollectionEquality().hash(point),
-      const DeepCollectionEquality().hash(isCart));
+  int get hashCode => Object.hash(runtimeType, itemCondition, subCondition,
+      channel, price, shipping, point, isCart);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PriceDetailCopyWith<_$_PriceDetail> get copyWith =>
       __$$_PriceDetailCopyWithImpl<_$_PriceDetail>(this, _$identity);
 

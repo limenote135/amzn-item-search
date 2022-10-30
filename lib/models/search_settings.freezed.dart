@@ -38,7 +38,8 @@ mixin _$SearchSettings {
 abstract class $SearchSettingsCopyWith<$Res> {
   factory $SearchSettingsCopyWith(
           SearchSettings value, $Res Function(SearchSettings) then) =
-      _$SearchSettingsCopyWithImpl<$Res>;
+      _$SearchSettingsCopyWithImpl<$Res, SearchSettings>;
+  @useResult
   $Res call(
       {@HiveField(0) SearchType type,
       @HiveField(1) UsedSubCondition usedSubCondition,
@@ -49,49 +50,51 @@ abstract class $SearchSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SearchSettingsCopyWithImpl<$Res>
+class _$SearchSettingsCopyWithImpl<$Res, $Val extends SearchSettings>
     implements $SearchSettingsCopyWith<$Res> {
   _$SearchSettingsCopyWithImpl(this._value, this._then);
 
-  final SearchSettings _value;
   // ignore: unused_field
-  final $Res Function(SearchSettings) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? usedSubCondition = freezed,
-    Object? useFba = freezed,
-    Object? priorFba = freezed,
-    Object? continuousCameraRead = freezed,
-    Object? continuousInput = freezed,
+    Object? type = null,
+    Object? usedSubCondition = null,
+    Object? useFba = null,
+    Object? priorFba = null,
+    Object? continuousCameraRead = null,
+    Object? continuousInput = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as SearchType,
-      usedSubCondition: usedSubCondition == freezed
+      usedSubCondition: null == usedSubCondition
           ? _value.usedSubCondition
           : usedSubCondition // ignore: cast_nullable_to_non_nullable
               as UsedSubCondition,
-      useFba: useFba == freezed
+      useFba: null == useFba
           ? _value.useFba
           : useFba // ignore: cast_nullable_to_non_nullable
               as bool,
-      priorFba: priorFba == freezed
+      priorFba: null == priorFba
           ? _value.priorFba
           : priorFba // ignore: cast_nullable_to_non_nullable
               as bool,
-      continuousCameraRead: continuousCameraRead == freezed
+      continuousCameraRead: null == continuousCameraRead
           ? _value.continuousCameraRead
           : continuousCameraRead // ignore: cast_nullable_to_non_nullable
               as bool,
-      continuousInput: continuousInput == freezed
+      continuousInput: null == continuousInput
           ? _value.continuousInput
           : continuousInput // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -102,6 +105,7 @@ abstract class _$$_SearchSettingsCopyWith<$Res>
           _$_SearchSettings value, $Res Function(_$_SearchSettings) then) =
       __$$_SearchSettingsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@HiveField(0) SearchType type,
       @HiveField(1) UsedSubCondition usedSubCondition,
@@ -113,46 +117,44 @@ abstract class _$$_SearchSettingsCopyWith<$Res>
 
 /// @nodoc
 class __$$_SearchSettingsCopyWithImpl<$Res>
-    extends _$SearchSettingsCopyWithImpl<$Res>
+    extends _$SearchSettingsCopyWithImpl<$Res, _$_SearchSettings>
     implements _$$_SearchSettingsCopyWith<$Res> {
   __$$_SearchSettingsCopyWithImpl(
       _$_SearchSettings _value, $Res Function(_$_SearchSettings) _then)
-      : super(_value, (v) => _then(v as _$_SearchSettings));
+      : super(_value, _then);
 
-  @override
-  _$_SearchSettings get _value => super._value as _$_SearchSettings;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? usedSubCondition = freezed,
-    Object? useFba = freezed,
-    Object? priorFba = freezed,
-    Object? continuousCameraRead = freezed,
-    Object? continuousInput = freezed,
+    Object? type = null,
+    Object? usedSubCondition = null,
+    Object? useFba = null,
+    Object? priorFba = null,
+    Object? continuousCameraRead = null,
+    Object? continuousInput = null,
   }) {
     return _then(_$_SearchSettings(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as SearchType,
-      usedSubCondition: usedSubCondition == freezed
+      usedSubCondition: null == usedSubCondition
           ? _value.usedSubCondition
           : usedSubCondition // ignore: cast_nullable_to_non_nullable
               as UsedSubCondition,
-      useFba: useFba == freezed
+      useFba: null == useFba
           ? _value.useFba
           : useFba // ignore: cast_nullable_to_non_nullable
               as bool,
-      priorFba: priorFba == freezed
+      priorFba: null == priorFba
           ? _value.priorFba
           : priorFba // ignore: cast_nullable_to_non_nullable
               as bool,
-      continuousCameraRead: continuousCameraRead == freezed
+      continuousCameraRead: null == continuousCameraRead
           ? _value.continuousCameraRead
           : continuousCameraRead // ignore: cast_nullable_to_non_nullable
               as bool,
-      continuousInput: continuousInput == freezed
+      continuousInput: null == continuousInput
           ? _value.continuousInput
           : continuousInput // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -207,29 +209,25 @@ class _$_SearchSettings implements _SearchSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SearchSettings &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality()
-                .equals(other.usedSubCondition, usedSubCondition) &&
-            const DeepCollectionEquality().equals(other.useFba, useFba) &&
-            const DeepCollectionEquality().equals(other.priorFba, priorFba) &&
-            const DeepCollectionEquality()
-                .equals(other.continuousCameraRead, continuousCameraRead) &&
-            const DeepCollectionEquality()
-                .equals(other.continuousInput, continuousInput));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.usedSubCondition, usedSubCondition) ||
+                other.usedSubCondition == usedSubCondition) &&
+            (identical(other.useFba, useFba) || other.useFba == useFba) &&
+            (identical(other.priorFba, priorFba) ||
+                other.priorFba == priorFba) &&
+            (identical(other.continuousCameraRead, continuousCameraRead) ||
+                other.continuousCameraRead == continuousCameraRead) &&
+            (identical(other.continuousInput, continuousInput) ||
+                other.continuousInput == continuousInput));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(usedSubCondition),
-      const DeepCollectionEquality().hash(useFba),
-      const DeepCollectionEquality().hash(priorFba),
-      const DeepCollectionEquality().hash(continuousCameraRead),
-      const DeepCollectionEquality().hash(continuousInput));
+  int get hashCode => Object.hash(runtimeType, type, usedSubCondition, useFba,
+      priorFba, continuousCameraRead, continuousInput);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SearchSettingsCopyWith<_$_SearchSettings> get copyWith =>
       __$$_SearchSettingsCopyWithImpl<_$_SearchSettings>(this, _$identity);
 }

@@ -34,7 +34,8 @@ mixin _$OfferListingsParams {
 abstract class $OfferListingsParamsCopyWith<$Res> {
   factory $OfferListingsParamsCopyWith(
           OfferListingsParams value, $Res Function(OfferListingsParams) then) =
-      _$OfferListingsParamsCopyWithImpl<$Res>;
+      _$OfferListingsParamsCopyWithImpl<$Res, OfferListingsParams>;
+  @useResult
   $Res call(
       {String asin,
       bool prime,
@@ -47,59 +48,61 @@ abstract class $OfferListingsParamsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OfferListingsParamsCopyWithImpl<$Res>
+class _$OfferListingsParamsCopyWithImpl<$Res, $Val extends OfferListingsParams>
     implements $OfferListingsParamsCopyWith<$Res> {
   _$OfferListingsParamsCopyWithImpl(this._value, this._then);
 
-  final OfferListingsParams _value;
   // ignore: unused_field
-  final $Res Function(OfferListingsParams) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? asin = freezed,
-    Object? prime = freezed,
-    Object? newItem = freezed,
-    Object? usedLikeNew = freezed,
-    Object? usedVeryGood = freezed,
-    Object? usedGood = freezed,
-    Object? usedAcceptable = freezed,
-    Object? page = freezed,
+    Object? asin = null,
+    Object? prime = null,
+    Object? newItem = null,
+    Object? usedLikeNew = null,
+    Object? usedVeryGood = null,
+    Object? usedGood = null,
+    Object? usedAcceptable = null,
+    Object? page = null,
   }) {
     return _then(_value.copyWith(
-      asin: asin == freezed
+      asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
               as String,
-      prime: prime == freezed
+      prime: null == prime
           ? _value.prime
           : prime // ignore: cast_nullable_to_non_nullable
               as bool,
-      newItem: newItem == freezed
+      newItem: null == newItem
           ? _value.newItem
           : newItem // ignore: cast_nullable_to_non_nullable
               as bool,
-      usedLikeNew: usedLikeNew == freezed
+      usedLikeNew: null == usedLikeNew
           ? _value.usedLikeNew
           : usedLikeNew // ignore: cast_nullable_to_non_nullable
               as bool,
-      usedVeryGood: usedVeryGood == freezed
+      usedVeryGood: null == usedVeryGood
           ? _value.usedVeryGood
           : usedVeryGood // ignore: cast_nullable_to_non_nullable
               as bool,
-      usedGood: usedGood == freezed
+      usedGood: null == usedGood
           ? _value.usedGood
           : usedGood // ignore: cast_nullable_to_non_nullable
               as bool,
-      usedAcceptable: usedAcceptable == freezed
+      usedAcceptable: null == usedAcceptable
           ? _value.usedAcceptable
           : usedAcceptable // ignore: cast_nullable_to_non_nullable
               as bool,
-      page: page == freezed
+      page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -110,6 +113,7 @@ abstract class _$$_OfferListingsParamsCopyWith<$Res>
           $Res Function(_$_OfferListingsParams) then) =
       __$$_OfferListingsParamsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String asin,
       bool prime,
@@ -123,56 +127,54 @@ abstract class _$$_OfferListingsParamsCopyWith<$Res>
 
 /// @nodoc
 class __$$_OfferListingsParamsCopyWithImpl<$Res>
-    extends _$OfferListingsParamsCopyWithImpl<$Res>
+    extends _$OfferListingsParamsCopyWithImpl<$Res, _$_OfferListingsParams>
     implements _$$_OfferListingsParamsCopyWith<$Res> {
   __$$_OfferListingsParamsCopyWithImpl(_$_OfferListingsParams _value,
       $Res Function(_$_OfferListingsParams) _then)
-      : super(_value, (v) => _then(v as _$_OfferListingsParams));
+      : super(_value, _then);
 
-  @override
-  _$_OfferListingsParams get _value => super._value as _$_OfferListingsParams;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? asin = freezed,
-    Object? prime = freezed,
-    Object? newItem = freezed,
-    Object? usedLikeNew = freezed,
-    Object? usedVeryGood = freezed,
-    Object? usedGood = freezed,
-    Object? usedAcceptable = freezed,
-    Object? page = freezed,
+    Object? asin = null,
+    Object? prime = null,
+    Object? newItem = null,
+    Object? usedLikeNew = null,
+    Object? usedVeryGood = null,
+    Object? usedGood = null,
+    Object? usedAcceptable = null,
+    Object? page = null,
   }) {
     return _then(_$_OfferListingsParams(
-      asin: asin == freezed
+      asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
               as String,
-      prime: prime == freezed
+      prime: null == prime
           ? _value.prime
           : prime // ignore: cast_nullable_to_non_nullable
               as bool,
-      newItem: newItem == freezed
+      newItem: null == newItem
           ? _value.newItem
           : newItem // ignore: cast_nullable_to_non_nullable
               as bool,
-      usedLikeNew: usedLikeNew == freezed
+      usedLikeNew: null == usedLikeNew
           ? _value.usedLikeNew
           : usedLikeNew // ignore: cast_nullable_to_non_nullable
               as bool,
-      usedVeryGood: usedVeryGood == freezed
+      usedVeryGood: null == usedVeryGood
           ? _value.usedVeryGood
           : usedVeryGood // ignore: cast_nullable_to_non_nullable
               as bool,
-      usedGood: usedGood == freezed
+      usedGood: null == usedGood
           ? _value.usedGood
           : usedGood // ignore: cast_nullable_to_non_nullable
               as bool,
-      usedAcceptable: usedAcceptable == freezed
+      usedAcceptable: null == usedAcceptable
           ? _value.usedAcceptable
           : usedAcceptable // ignore: cast_nullable_to_non_nullable
               as bool,
-      page: page == freezed
+      page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
@@ -227,33 +229,27 @@ class _$_OfferListingsParams implements _OfferListingsParams {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OfferListingsParams &&
-            const DeepCollectionEquality().equals(other.asin, asin) &&
-            const DeepCollectionEquality().equals(other.prime, prime) &&
-            const DeepCollectionEquality().equals(other.newItem, newItem) &&
-            const DeepCollectionEquality()
-                .equals(other.usedLikeNew, usedLikeNew) &&
-            const DeepCollectionEquality()
-                .equals(other.usedVeryGood, usedVeryGood) &&
-            const DeepCollectionEquality().equals(other.usedGood, usedGood) &&
-            const DeepCollectionEquality()
-                .equals(other.usedAcceptable, usedAcceptable) &&
-            const DeepCollectionEquality().equals(other.page, page));
+            (identical(other.asin, asin) || other.asin == asin) &&
+            (identical(other.prime, prime) || other.prime == prime) &&
+            (identical(other.newItem, newItem) || other.newItem == newItem) &&
+            (identical(other.usedLikeNew, usedLikeNew) ||
+                other.usedLikeNew == usedLikeNew) &&
+            (identical(other.usedVeryGood, usedVeryGood) ||
+                other.usedVeryGood == usedVeryGood) &&
+            (identical(other.usedGood, usedGood) ||
+                other.usedGood == usedGood) &&
+            (identical(other.usedAcceptable, usedAcceptable) ||
+                other.usedAcceptable == usedAcceptable) &&
+            (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(asin),
-      const DeepCollectionEquality().hash(prime),
-      const DeepCollectionEquality().hash(newItem),
-      const DeepCollectionEquality().hash(usedLikeNew),
-      const DeepCollectionEquality().hash(usedVeryGood),
-      const DeepCollectionEquality().hash(usedGood),
-      const DeepCollectionEquality().hash(usedAcceptable),
-      const DeepCollectionEquality().hash(page));
+  int get hashCode => Object.hash(runtimeType, asin, prime, newItem,
+      usedLikeNew, usedVeryGood, usedGood, usedAcceptable, page);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OfferListingsParamsCopyWith<_$_OfferListingsParams> get copyWith =>
       __$$_OfferListingsParamsCopyWithImpl<_$_OfferListingsParams>(
           this, _$identity);
@@ -306,42 +302,46 @@ mixin _$OfferAtIndexParam {
 abstract class $OfferAtIndexParamCopyWith<$Res> {
   factory $OfferAtIndexParamCopyWith(
           OfferAtIndexParam value, $Res Function(OfferAtIndexParam) then) =
-      _$OfferAtIndexParamCopyWithImpl<$Res>;
+      _$OfferAtIndexParamCopyWithImpl<$Res, OfferAtIndexParam>;
+  @useResult
   $Res call({OfferListingsParams params, int index});
 
   $OfferListingsParamsCopyWith<$Res> get params;
 }
 
 /// @nodoc
-class _$OfferAtIndexParamCopyWithImpl<$Res>
+class _$OfferAtIndexParamCopyWithImpl<$Res, $Val extends OfferAtIndexParam>
     implements $OfferAtIndexParamCopyWith<$Res> {
   _$OfferAtIndexParamCopyWithImpl(this._value, this._then);
 
-  final OfferAtIndexParam _value;
   // ignore: unused_field
-  final $Res Function(OfferAtIndexParam) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? params = freezed,
-    Object? index = freezed,
+    Object? params = null,
+    Object? index = null,
   }) {
     return _then(_value.copyWith(
-      params: params == freezed
+      params: null == params
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
               as OfferListingsParams,
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OfferListingsParamsCopyWith<$Res> get params {
     return $OfferListingsParamsCopyWith<$Res>(_value.params, (value) {
-      return _then(_value.copyWith(params: value));
+      return _then(_value.copyWith(params: value) as $Val);
     });
   }
 }
@@ -353,6 +353,7 @@ abstract class _$$_OfferAtIndexParamCopyWith<$Res>
           $Res Function(_$_OfferAtIndexParam) then) =
       __$$_OfferAtIndexParamCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({OfferListingsParams params, int index});
 
   @override
@@ -361,26 +362,24 @@ abstract class _$$_OfferAtIndexParamCopyWith<$Res>
 
 /// @nodoc
 class __$$_OfferAtIndexParamCopyWithImpl<$Res>
-    extends _$OfferAtIndexParamCopyWithImpl<$Res>
+    extends _$OfferAtIndexParamCopyWithImpl<$Res, _$_OfferAtIndexParam>
     implements _$$_OfferAtIndexParamCopyWith<$Res> {
   __$$_OfferAtIndexParamCopyWithImpl(
       _$_OfferAtIndexParam _value, $Res Function(_$_OfferAtIndexParam) _then)
-      : super(_value, (v) => _then(v as _$_OfferAtIndexParam));
+      : super(_value, _then);
 
-  @override
-  _$_OfferAtIndexParam get _value => super._value as _$_OfferAtIndexParam;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? params = freezed,
-    Object? index = freezed,
+    Object? params = null,
+    Object? index = null,
   }) {
     return _then(_$_OfferAtIndexParam(
-      params: params == freezed
+      params: null == params
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
               as OfferListingsParams,
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
@@ -408,18 +407,16 @@ class _$_OfferAtIndexParam implements _OfferAtIndexParam {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OfferAtIndexParam &&
-            const DeepCollectionEquality().equals(other.params, params) &&
-            const DeepCollectionEquality().equals(other.index, index));
+            (identical(other.params, params) || other.params == params) &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(params),
-      const DeepCollectionEquality().hash(index));
+  int get hashCode => Object.hash(runtimeType, params, index);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OfferAtIndexParamCopyWith<_$_OfferAtIndexParam> get copyWith =>
       __$$_OfferAtIndexParamCopyWithImpl<_$_OfferAtIndexParam>(
           this, _$identity);
@@ -456,56 +453,60 @@ mixin _$OfferListings {
 abstract class $OfferListingsCopyWith<$Res> {
   factory $OfferListingsCopyWith(
           OfferListings value, $Res Function(OfferListings) then) =
-      _$OfferListingsCopyWithImpl<$Res>;
+      _$OfferListingsCopyWithImpl<$Res, OfferListings>;
+  @useResult
   $Res call({String asin, int total, OfferItem? cart, List<OfferItem> offers});
 
   $OfferItemCopyWith<$Res>? get cart;
 }
 
 /// @nodoc
-class _$OfferListingsCopyWithImpl<$Res>
+class _$OfferListingsCopyWithImpl<$Res, $Val extends OfferListings>
     implements $OfferListingsCopyWith<$Res> {
   _$OfferListingsCopyWithImpl(this._value, this._then);
 
-  final OfferListings _value;
   // ignore: unused_field
-  final $Res Function(OfferListings) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? asin = freezed,
-    Object? total = freezed,
+    Object? asin = null,
+    Object? total = null,
     Object? cart = freezed,
-    Object? offers = freezed,
+    Object? offers = null,
   }) {
     return _then(_value.copyWith(
-      asin: asin == freezed
+      asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
               as String,
-      total: total == freezed
+      total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
               as int,
-      cart: cart == freezed
+      cart: freezed == cart
           ? _value.cart
           : cart // ignore: cast_nullable_to_non_nullable
               as OfferItem?,
-      offers: offers == freezed
+      offers: null == offers
           ? _value.offers
           : offers // ignore: cast_nullable_to_non_nullable
               as List<OfferItem>,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OfferItemCopyWith<$Res>? get cart {
     if (_value.cart == null) {
       return null;
     }
 
     return $OfferItemCopyWith<$Res>(_value.cart!, (value) {
-      return _then(_value.copyWith(cart: value));
+      return _then(_value.copyWith(cart: value) as $Val);
     });
   }
 }
@@ -517,6 +518,7 @@ abstract class _$$_OfferListingsCopyWith<$Res>
           _$_OfferListings value, $Res Function(_$_OfferListings) then) =
       __$$_OfferListingsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String asin, int total, OfferItem? cart, List<OfferItem> offers});
 
   @override
@@ -525,36 +527,34 @@ abstract class _$$_OfferListingsCopyWith<$Res>
 
 /// @nodoc
 class __$$_OfferListingsCopyWithImpl<$Res>
-    extends _$OfferListingsCopyWithImpl<$Res>
+    extends _$OfferListingsCopyWithImpl<$Res, _$_OfferListings>
     implements _$$_OfferListingsCopyWith<$Res> {
   __$$_OfferListingsCopyWithImpl(
       _$_OfferListings _value, $Res Function(_$_OfferListings) _then)
-      : super(_value, (v) => _then(v as _$_OfferListings));
+      : super(_value, _then);
 
-  @override
-  _$_OfferListings get _value => super._value as _$_OfferListings;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? asin = freezed,
-    Object? total = freezed,
+    Object? asin = null,
+    Object? total = null,
     Object? cart = freezed,
-    Object? offers = freezed,
+    Object? offers = null,
   }) {
     return _then(_$_OfferListings(
-      asin: asin == freezed
+      asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
               as String,
-      total: total == freezed
+      total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
               as int,
-      cart: cart == freezed
+      cart: freezed == cart
           ? _value.cart
           : cart // ignore: cast_nullable_to_non_nullable
               as OfferItem?,
-      offers: offers == freezed
+      offers: null == offers
           ? _value._offers
           : offers // ignore: cast_nullable_to_non_nullable
               as List<OfferItem>,
@@ -597,22 +597,19 @@ class _$_OfferListings implements _OfferListings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OfferListings &&
-            const DeepCollectionEquality().equals(other.asin, asin) &&
-            const DeepCollectionEquality().equals(other.total, total) &&
-            const DeepCollectionEquality().equals(other.cart, cart) &&
+            (identical(other.asin, asin) || other.asin == asin) &&
+            (identical(other.total, total) || other.total == total) &&
+            (identical(other.cart, cart) || other.cart == cart) &&
             const DeepCollectionEquality().equals(other._offers, _offers));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(asin),
-      const DeepCollectionEquality().hash(total),
-      const DeepCollectionEquality().hash(cart),
+  int get hashCode => Object.hash(runtimeType, asin, total, cart,
       const DeepCollectionEquality().hash(_offers));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OfferListingsCopyWith<_$_OfferListings> get copyWith =>
       __$$_OfferListingsCopyWithImpl<_$_OfferListings>(this, _$identity);
 }
@@ -655,7 +652,8 @@ mixin _$OfferItem {
 /// @nodoc
 abstract class $OfferItemCopyWith<$Res> {
   factory $OfferItemCopyWith(OfferItem value, $Res Function(OfferItem) then) =
-      _$OfferItemCopyWithImpl<$Res>;
+      _$OfferItemCopyWithImpl<$Res, OfferItem>;
+  @useResult
   $Res call(
       {String shopName,
       String sellerId,
@@ -666,48 +664,51 @@ abstract class $OfferItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OfferItemCopyWithImpl<$Res> implements $OfferItemCopyWith<$Res> {
+class _$OfferItemCopyWithImpl<$Res, $Val extends OfferItem>
+    implements $OfferItemCopyWith<$Res> {
   _$OfferItemCopyWithImpl(this._value, this._then);
 
-  final OfferItem _value;
   // ignore: unused_field
-  final $Res Function(OfferItem) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? shopName = freezed,
-    Object? sellerId = freezed,
-    Object? price = freezed,
-    Object? condition = freezed,
-    Object? hasImage = freezed,
-    Object? isFba = freezed,
+    Object? shopName = null,
+    Object? sellerId = null,
+    Object? price = null,
+    Object? condition = null,
+    Object? hasImage = null,
+    Object? isFba = null,
   }) {
     return _then(_value.copyWith(
-      shopName: shopName == freezed
+      shopName: null == shopName
           ? _value.shopName
           : shopName // ignore: cast_nullable_to_non_nullable
               as String,
-      sellerId: sellerId == freezed
+      sellerId: null == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
               as String,
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      condition: condition == freezed
+      condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
               as String,
-      hasImage: hasImage == freezed
+      hasImage: null == hasImage
           ? _value.hasImage
           : hasImage // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFba: isFba == freezed
+      isFba: null == isFba
           ? _value.isFba
           : isFba // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -717,6 +718,7 @@ abstract class _$$_OfferItemCopyWith<$Res> implements $OfferItemCopyWith<$Res> {
           _$_OfferItem value, $Res Function(_$_OfferItem) then) =
       __$$_OfferItemCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String shopName,
       String sellerId,
@@ -727,46 +729,45 @@ abstract class _$$_OfferItemCopyWith<$Res> implements $OfferItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_OfferItemCopyWithImpl<$Res> extends _$OfferItemCopyWithImpl<$Res>
+class __$$_OfferItemCopyWithImpl<$Res>
+    extends _$OfferItemCopyWithImpl<$Res, _$_OfferItem>
     implements _$$_OfferItemCopyWith<$Res> {
   __$$_OfferItemCopyWithImpl(
       _$_OfferItem _value, $Res Function(_$_OfferItem) _then)
-      : super(_value, (v) => _then(v as _$_OfferItem));
+      : super(_value, _then);
 
-  @override
-  _$_OfferItem get _value => super._value as _$_OfferItem;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? shopName = freezed,
-    Object? sellerId = freezed,
-    Object? price = freezed,
-    Object? condition = freezed,
-    Object? hasImage = freezed,
-    Object? isFba = freezed,
+    Object? shopName = null,
+    Object? sellerId = null,
+    Object? price = null,
+    Object? condition = null,
+    Object? hasImage = null,
+    Object? isFba = null,
   }) {
     return _then(_$_OfferItem(
-      shopName: shopName == freezed
+      shopName: null == shopName
           ? _value.shopName
           : shopName // ignore: cast_nullable_to_non_nullable
               as String,
-      sellerId: sellerId == freezed
+      sellerId: null == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
               as String,
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      condition: condition == freezed
+      condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
               as String,
-      hasImage: hasImage == freezed
+      hasImage: null == hasImage
           ? _value.hasImage
           : hasImage // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFba: isFba == freezed
+      isFba: null == isFba
           ? _value.isFba
           : isFba // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -809,26 +810,25 @@ class _$_OfferItem implements _OfferItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OfferItem &&
-            const DeepCollectionEquality().equals(other.shopName, shopName) &&
-            const DeepCollectionEquality().equals(other.sellerId, sellerId) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.condition, condition) &&
-            const DeepCollectionEquality().equals(other.hasImage, hasImage) &&
-            const DeepCollectionEquality().equals(other.isFba, isFba));
+            (identical(other.shopName, shopName) ||
+                other.shopName == shopName) &&
+            (identical(other.sellerId, sellerId) ||
+                other.sellerId == sellerId) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.condition, condition) ||
+                other.condition == condition) &&
+            (identical(other.hasImage, hasImage) ||
+                other.hasImage == hasImage) &&
+            (identical(other.isFba, isFba) || other.isFba == isFba));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(shopName),
-      const DeepCollectionEquality().hash(sellerId),
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(condition),
-      const DeepCollectionEquality().hash(hasImage),
-      const DeepCollectionEquality().hash(isFba));
+      runtimeType, shopName, sellerId, price, condition, hasImage, isFba);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OfferItemCopyWith<_$_OfferItem> get copyWith =>
       __$$_OfferItemCopyWithImpl<_$_OfferItem>(this, _$identity);
 }
