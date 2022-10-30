@@ -1,7 +1,10 @@
 import 'dart:math';
 
+import 'package:amasearch/controllers/word_search_history_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/query_params.dart';
+import 'package:amasearch/models/word_search_history.dart';
+import 'package:amasearch/pages/search/word_search_page/search_history_page.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/util/error_report.dart';
@@ -101,28 +104,51 @@ class _AppBar extends HookConsumerWidget {
         key: _appBarKey,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextField(
-              controller: controller,
-              decoration: InputDecoration(
-                hintText: "フリーワード検索",
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: controller.clear,
+            padding: const EdgeInsets.fromLTRB(8, 4, 0, 8),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: controller,
+                    decoration: InputDecoration(
+                      hintText: "フリーワード検索",
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: controller.clear,
+                      ),
+                    ),
+                    onSubmitted: (value) {
+                      final trimmedValue = value.trim();
+                      if (trimmedValue != "") {
+                        if (req.query == trimmedValue) {
+                          // 変更がない場合は強制リロードする
+                          ref.refresh(queryItemResultProvider(req));
+                          return;
+                        }
+                        ref.read(_currentQueryItemsRequest.notifier).state =
+                            req.copyWith(query: trimmedValue);
+                        ref
+                            .read(wordSearchHistoryControllerProvider.notifier)
+                            .add(WordSearchHistory(keyword: trimmedValue));
+                      }
+                    },
+                  ),
                 ),
-              ),
-              onSubmitted: (value) {
-                final trimmedValue = value.trim();
-                if (trimmedValue != "") {
-                  if (req.query == trimmedValue) {
-                    // 変更がない場合は強制リロードする
-                    ref.refresh(queryItemResultProvider(req));
-                    return;
-                  }
-                  ref.read(_currentQueryItemsRequest.notifier).state =
-                      req.copyWith(query: trimmedValue);
-                }
-              },
+                IconButton(
+                  onPressed: () async {
+                    final ret = await Navigator.push(
+                      context,
+                      WordSearchHistoryPage.route(),
+                    );
+                    if (ret != null) {
+                      controller.text = ret;
+                      ref.read(_currentQueryItemsRequest.notifier).state =
+                          req.copyWith(query: ret);
+                    }
+                  },
+                  icon: const Icon(Icons.history),
+                )
+              ],
             ),
           ),
           ListTile(
