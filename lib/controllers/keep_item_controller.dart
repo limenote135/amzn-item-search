@@ -1,0 +1,38 @@
+import 'package:amasearch/models/keep_item.dart';
+import 'package:amasearch/util/hive_provider.dart';
+import 'package:riverpod/riverpod.dart';
+
+final keepItemListControllerProvider =
+    StateNotifierProvider<KeepItemListController, List<KeepItem>>(
+  KeepItemListController.new,
+);
+
+class KeepItemListController extends StateNotifier<List<KeepItem>> {
+  KeepItemListController(this._ref) : super([]) {
+    _fetchAll();
+  }
+
+  static int _sortFunc(KeepItem x, KeepItem y) {
+    return y.keepDate.compareTo(x.keepDate);
+  }
+
+  final Ref _ref;
+
+  void _fetchAll() {
+    final box = _ref.read(keepItemBoxProvider);
+    final data = box.values.toList()..sort(_sortFunc);
+    state = data;
+  }
+
+  void add(KeepItem item) {
+    final box = _ref.read(keepItemBoxProvider);
+    state = [item, ...state];
+    box.put(item.id, item);
+  }
+
+  void remove(String id) {
+    final box = _ref.read(keepItemBoxProvider);
+    state = state.where((element) => element.id != id).toList();
+    box.delete(id);
+  }
+}
