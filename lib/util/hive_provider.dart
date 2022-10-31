@@ -1,4 +1,5 @@
 import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/models/word_search_history.dart';
@@ -15,3 +16,6 @@ final settingsBoxProvider = Provider((_) => Hive.box<dynamic>(settingsBoxName));
 
 final wordSearchHistoryBoxProvider =
     Provider((_) => Hive.box<WordSearchHistory>(wordSearchHistoryBoxName));
+
+final keepItemBoxProvider =
+    Provider((_) => Hive.box<KeepItem>(keepItemBoxName));

@@ -22,6 +22,7 @@ import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/item_price.dart';
+import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/models/keepa_settings.dart';
 import 'package:amasearch/models/makad_settings.dart';
 import 'package:amasearch/models/pricetar_settings.dart';
@@ -193,7 +194,8 @@ Future<void> initHive() async {
     ..registerAdapter(MakadPaymentMethodAdapter())
     ..registerAdapter(SellerSketSettingsAdapter())
     ..registerAdapter(SellerSketReviseRuleAdapter())
-    ..registerAdapter(WordSearchHistoryAdapter());
+    ..registerAdapter(WordSearchHistoryAdapter())
+    ..registerAdapter(KeepItemAdapter());
 
   // await deleteBoxes();
 
@@ -201,6 +203,7 @@ Future<void> initHive() async {
     Hive.openBox<SearchItem>(searchItemBoxName),
     Hive.openBox<WordSearchHistory>(wordSearchHistoryBoxName),
     Hive.openBox<StockItem>(stockItemBoxName),
+    Hive.openBox<KeepItem>(keepItemBoxName),
     Hive.openBox<dynamic>(settingsBoxName),
   ]);
 }
