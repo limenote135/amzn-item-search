@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/controllers/keep_state_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
@@ -18,16 +19,27 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+final currentKeepItemKeyProvider =
+    Provider<String>((_) => throw UnimplementedError());
+final _currentMemoProvider = Provider((_) => "");
+
 class PurchasePage extends HookConsumerWidget {
   const PurchasePage({super.key});
   static const routeName = "/search/purchase";
 
-  static Route<void> route(AsinData item) {
+  static Route<void> route(
+    AsinData item, {
+    String memo = "",
+    String keepItemKey = "",
+  }) {
     return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
+      settings:
+          const RouteSettings(name: routeName, arguments: <String, String>{}),
       builder: (context) => ProviderScope(
         overrides: [
           currentAsinDataProvider.overrideWithValue(item),
+          _currentMemoProvider.overrideWithValue(memo),
+          currentKeepItemKeyProvider.overrideWithValue(keepItemKey),
         ],
         child: const PurchasePage(),
       ),
@@ -37,6 +49,8 @@ class PurchasePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
+    final initialMemo = ref.watch(_currentMemoProvider);
+
     final conditionTexts = ref.watch(
       generalSettingsControllerProvider
           .select((value) => value.newConditionTexts),
@@ -71,6 +85,7 @@ class PurchasePage extends HookConsumerWidget {
       useFba: useFba,
       autogenSku: true,
       item: item,
+      memo: initialMemo,
       conditionText: conditionTexts[conditionIndex],
       id: ref.read(uuidProvider).v4(), // たぶん空文字でも問題ない
     );
@@ -120,6 +135,7 @@ class _SaveButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
+    final keepItemKey = ref.watch(currentKeepItemKeyProvider);
 
     return ReactiveFormConsumer(
       builder: (context, form, child) {
@@ -142,6 +158,11 @@ class _SaveButton extends HookConsumerWidget {
             ref.read(uuidProvider).v4(),
             item,
           );
+          if (keepItemKey != "") {
+            ref
+                .read(keepStateControllerProvider.notifier)
+                .setAsComplete(keepItemKey);
+          }
           Navigator.of(context).popUntil((route) => route.settings.name == "/");
         }
 
