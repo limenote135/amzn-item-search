@@ -51,9 +51,17 @@ const _kTestingAnalytics = false;
 const _kTestingPerformance = false;
 const _kTestingInAppPurchase = false;
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    // 'Dart' から始まる UA だと Keepa の画像取得が弾かれるので変更する
+    return super.createHttpClient(context)..userAgent = "amasearch/1.0";
+  }
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  HttpOverrides.global = MyHttpOverrides();
   await initFirebase();
 
   try {
