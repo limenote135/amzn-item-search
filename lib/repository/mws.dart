@@ -22,8 +22,7 @@ import 'common.dart';
 part 'mws.freezed.dart';
 part 'mws.g.dart';
 
-final mwsRepositoryProvider =
-    Provider((ref) => MwsRepository(ref.read, ref.container));
+final mwsRepositoryProvider = Provider(MwsRepository.new);
 
 final searchItemFutureProvider = FutureProvider.autoDispose
     .family<SearchItem, Future<SearchItem>>((ref, paramFuture) async {
@@ -31,14 +30,14 @@ final searchItemFutureProvider = FutureProvider.autoDispose
   final box = ref.read(searchItemBoxProvider);
   final item = box.get(param.searchDate);
   if (item != null && item.jan == param.jan) {
-    ref.maintainState = true;
+    ref.keepAlive();
     return item;
   }
 
   final mws = ref.read(mwsRepositoryProvider);
   final resp = await mws.getProductById(param.jan);
 
-  ref.maintainState = true;
+  ref.keepAlive();
 
   final settings = ref.read(generalSettingsControllerProvider);
   final searchSetting = ref.read(searchSettingsControllerProvider);
@@ -98,7 +97,7 @@ final queryItemResultProvider = FutureProvider.autoDispose
   }
   final mws = ref.read(mwsRepositoryProvider);
   final resp = await mws.queryItems(req.query, req.category);
-  ref.maintainState = true;
+  ref.keepAlive();
   return resp.asins;
 });
 
@@ -109,17 +108,16 @@ final listingsRestrictionFutureProvider = FutureProvider.autoDispose
   final mws = ref.read(mwsRepositoryProvider);
   final resp = await mws.getRestrictionInfo(asin, cancelToken: cancelToken);
 
-  ref.maintainState = true;
+  ref.keepAlive();
   return resp;
 });
 
 class MwsRepository {
-  MwsRepository(this._read, this._container);
+  MwsRepository(this._ref);
 
   static const _mwsMarketPlaceId = "A1VC38T7YXB528";
 
-  final Reader _read;
-  final ProviderContainer _container;
+  final Ref _ref;
 
   Future<GetProductByIdResponse> getProductById(
     String code, {
@@ -135,7 +133,7 @@ class MwsRepository {
       "marketplace": _mwsMarketPlaceId,
     };
 
-    final serverUrl = await _read(serverUrlProvider.future);
+    final serverUrl = await _ref.read(serverUrlProvider.future);
     final resp = await _doRequest(
       "$serverUrl/v1beta2/spapi/product",
       data: json.encode(params),
@@ -150,7 +148,7 @@ class MwsRepository {
       "marketplace": _mwsMarketPlaceId,
     };
 
-    final serverUrl = await _read(serverUrlProvider.future);
+    final serverUrl = await _ref.read(serverUrlProvider.future);
     final resp = await _doRequest(
       "$serverUrl/v1beta2/spapi/query",
       data: json.encode(params),
@@ -162,7 +160,7 @@ class MwsRepository {
     List<String> asins, {
     CancelToken? cancelToken,
   }) async {
-    final serverUrl = await _read(serverUrlProvider.future);
+    final serverUrl = await _ref.read(serverUrlProvider.future);
     final url = "$serverUrl/v1beta2/spapi/asins";
     final params = <String, Object>{"asins": asins};
 
@@ -178,7 +176,7 @@ class MwsRepository {
     String asin, {
     CancelToken? cancelToken,
   }) async {
-    final serverUrl = await _read(serverUrlProvider.future);
+    final serverUrl = await _ref.read(serverUrlProvider.future);
     final url = "$serverUrl/v1beta2/spapi/restrictions/$asin";
 
     final resp = await _doGetRequest(url, cancelToken: cancelToken);
@@ -195,7 +193,7 @@ class MwsRepository {
         throw Exception("少し時間をおいてから再度お試しください");
       case 412:
         // TODO:  await を外したが、これで問題ないか要確認
-        _container.refresh(updateProvider);
+        _ref.invalidate(updateProvider);
         throw Exception("アプリケーションを更新してください");
       case 401:
         throw Exception("設定メニューからAmazonとの連携を行ってください");
@@ -206,10 +204,10 @@ class MwsRepository {
     String url, {
     CancelToken? cancelToken,
   }) async {
-    final dio = await _read(dioProvider.future);
+    final dio = await _ref.read(dioProvider.future);
 
-    final user = await _read(authStateChangesProvider.future);
-    final lwa = await _read(linkedWithAmazonProvider.future);
+    final user = await _ref.read(authStateChangesProvider.future);
+    final lwa = await _ref.read(linkedWithAmazonProvider.future);
     if (lwa != true) {
       throw Exception("設定メニューからAmazonとの連携を行ってください");
     }
@@ -228,10 +226,10 @@ class MwsRepository {
     String? data,
     CancelToken? cancelToken,
   }) async {
-    final dio = await _read(dioProvider.future);
+    final dio = await _ref.read(dioProvider.future);
 
-    final user = await _read(authStateChangesProvider.future);
-    final lwa = await _read(linkedWithAmazonProvider.future);
+    final user = await _ref.read(authStateChangesProvider.future);
+    final lwa = await _ref.read(linkedWithAmazonProvider.future);
     if (lwa != true) {
       throw Exception("設定メニューからAmazonとの連携を行ってください");
     }

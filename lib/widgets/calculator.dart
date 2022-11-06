@@ -1,23 +1,10 @@
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
+import 'package:amasearch/controllers/calculator_controller.dart';
+import 'package:amasearch/models/calc_data.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-final _displayTextProvider = StateProvider.autoDispose<String>(
-  (_) => "0",
-);
-final _totalProvider = StateProvider.autoDispose<double>((_) => 0);
-final _currentOp = StateProvider.autoDispose<_Op>((_) => _Op.equal);
-final _inputCompleteProvider = StateProvider.autoDispose<bool>((_) => true);
-
-enum _Op {
-  plus,
-  minus,
-  multiple,
-  division,
-  equal,
-}
 
 class Calculator extends HookConsumerWidget {
   const Calculator({
@@ -35,10 +22,7 @@ class Calculator extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final displayText = ref.watch(_displayTextProvider.state);
-    final total = ref.watch(_totalProvider.state);
-    final op = ref.watch(_currentOp.state);
-    final inputComplete = ref.watch(_inputCompleteProvider.state);
+    final calcData = ref.watch(calculatorControllerProvider);
 
     return OutlinedButtonTheme(
       data: OutlinedButtonThemeData(
@@ -61,17 +45,14 @@ class Calculator extends HookConsumerWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
-                          displayText.state,
+                          calcData.displayText,
                           textAlign: TextAlign.right,
                         ),
                       ),
                     ),
                     _ExpandedButton(
                       onPressed: () {
-                        displayText.state = "0";
-                        op.state = _Op.plus;
-                        total.state = 0;
-                        inputComplete.state = true;
+                        ref.read(calculatorControllerProvider.notifier).clear();
                       },
                       style: OutlinedButton.styleFrom(
                         foregroundColor:
@@ -86,29 +67,28 @@ class Calculator extends HookConsumerWidget {
                 Row(
                   children: [
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, "7", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("7"),
                       child: const Text("7"),
                     ),
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, "8", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("8"),
                       child: const Text("8"),
                     ),
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, "9", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("9"),
                       child: const Text("9"),
                     ),
                     _OperatorButton(
                       onPressed: () async {
-                        _pushOp(
-                          displayText,
-                          total,
-                          op,
-                          inputComplete,
-                          _Op.division,
-                        );
+                        ref
+                            .read(calculatorControllerProvider.notifier)
+                            .pushOp(CalcOp.division);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventDiv);
@@ -120,29 +100,28 @@ class Calculator extends HookConsumerWidget {
                 Row(
                   children: [
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, "4", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("4"),
                       child: const Text("4"),
                     ),
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, "5", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("5"),
                       child: const Text("5"),
                     ),
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, "6", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("6"),
                       child: const Text("6"),
                     ),
                     _OperatorButton(
                       onPressed: () async {
-                        _pushOp(
-                          displayText,
-                          total,
-                          op,
-                          inputComplete,
-                          _Op.multiple,
-                        );
+                        ref
+                            .read(calculatorControllerProvider.notifier)
+                            .pushOp(CalcOp.multiple);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventMul);
@@ -154,29 +133,28 @@ class Calculator extends HookConsumerWidget {
                 Row(
                   children: [
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, "1", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("1"),
                       child: const Text("1"),
                     ),
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, "2", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("2"),
                       child: const Text("2"),
                     ),
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, "3", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("3"),
                       child: const Text("3"),
                     ),
                     _OperatorButton(
                       onPressed: () async {
-                        _pushOp(
-                          displayText,
-                          total,
-                          op,
-                          inputComplete,
-                          _Op.minus,
-                        );
+                        ref
+                            .read(calculatorControllerProvider.notifier)
+                            .pushOp(CalcOp.minus);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventMinus);
@@ -188,34 +166,28 @@ class Calculator extends HookConsumerWidget {
                 Row(
                   children: [
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, ".", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("."),
                       child: const Text("."),
                     ),
                     _ExpandedButton(
-                      onPressed: () =>
-                          _pushNumber(displayText, "0", inputComplete),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushNumber("0"),
                       child: const Text("0"),
                     ),
                     _OperatorButton(
-                      onPressed: () => _pushOp(
-                        displayText,
-                        total,
-                        op,
-                        inputComplete,
-                        _Op.equal,
-                      ),
+                      onPressed: () => ref
+                          .read(calculatorControllerProvider.notifier)
+                          .pushOp(CalcOp.equal),
                       child: const Text("="),
                     ),
                     _OperatorButton(
                       onPressed: () async {
-                        _pushOp(
-                          displayText,
-                          total,
-                          op,
-                          inputComplete,
-                          _Op.plus,
-                        );
+                        ref
+                            .read(calculatorControllerProvider.notifier)
+                            .pushOp(CalcOp.plus);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventPlus);
@@ -236,7 +208,9 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        _pushRatio(displayText, total, inputComplete, 1.05);
+                        ref
+                            .read(calculatorControllerProvider.notifier)
+                            .pushRatio(1.05);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventPlus5p);
@@ -246,7 +220,9 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        _pushRatio(displayText, total, inputComplete, 0.95);
+                        ref
+                            .read(calculatorControllerProvider.notifier)
+                            .pushRatio(0.95);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventMinus5p);
@@ -260,7 +236,9 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        _pushRatio(displayText, total, inputComplete, 1.1);
+                        ref
+                            .read(calculatorControllerProvider.notifier)
+                            .pushRatio(1.1);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventPlus10p);
@@ -270,7 +248,9 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        _pushRatio(displayText, total, inputComplete, 0.9);
+                        ref
+                            .read(calculatorControllerProvider.notifier)
+                            .pushRatio(0.9);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventMinus10p);
@@ -284,17 +264,9 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        final calcOp =
-                            inputComplete.state ? _Op.equal : op.state;
-                        final val =
-                            _calc(total.state, displayText.state, calcOp);
-                        _pushOp(
-                          displayText,
-                          total,
-                          op,
-                          inputComplete,
-                          _Op.equal,
-                        );
+                        final val = ref
+                            .read(calculatorControllerProvider.notifier)
+                            .calc();
                         onFirstButtonPushed(val);
                         await ref
                             .read(analyticsControllerProvider)
@@ -309,17 +281,9 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        final calcOp =
-                            inputComplete.state ? _Op.equal : op.state;
-                        final val =
-                            _calc(total.state, displayText.state, calcOp);
-                        _pushOp(
-                          displayText,
-                          total,
-                          op,
-                          inputComplete,
-                          _Op.equal,
-                        );
+                        final val = ref
+                            .read(calculatorControllerProvider.notifier)
+                            .calc();
                         onSecondButtonPushed(val);
                         await ref
                             .read(analyticsControllerProvider)
@@ -335,85 +299,6 @@ class Calculator extends HookConsumerWidget {
         ],
       ),
     );
-  }
-
-  void _pushNumber(
-    StateController<String> current,
-    String str,
-    StateController<bool> inputComplete,
-  ) {
-    if (inputComplete.state || current.state == "0" && str != ".") {
-      current.state = str;
-      inputComplete.state = false;
-      return;
-    }
-    current.state += str;
-  }
-
-  void _pushRatio(
-    StateController<String> current,
-    StateController<double> total,
-    StateController<bool> inputComplete,
-    double ratio,
-  ) {
-    var val = double.tryParse(current.state);
-    if (val == null) {
-      return;
-    }
-    val = (val * ratio * 1000).round() / 1000;
-
-    final toInt = val.toInt();
-    final isInt = val == toInt;
-    current.state = isInt ? "$toInt" : "$val";
-
-    inputComplete.state = true;
-  }
-
-  double _calc(double total, String current, _Op op) {
-    final val = double.tryParse(current);
-    if (val == null) {
-      return 0;
-    }
-    switch (op) {
-      case _Op.plus:
-        return total + val;
-      case _Op.minus:
-        return total - val;
-      case _Op.multiple:
-        return (total * val * 1000).round() / 1000;
-      case _Op.division:
-        return val == 0 ? 0 : (total / val * 1000).round() / 1000;
-      case _Op.equal:
-        return val;
-    }
-  }
-
-  void _pushOp(
-    StateController<String> current,
-    StateController<double> total,
-    StateController<_Op> currentOp,
-    StateController<bool> inputComplete,
-    _Op nextOp,
-  ) {
-    if (inputComplete.state) {
-      if (currentOp.state == _Op.equal) {
-        total.state = double.parse(current.state);
-      }
-      currentOp.state = nextOp;
-      return;
-    }
-    total.state = _calc(total.state, current.state, currentOp.state);
-    currentOp.state = nextOp;
-    inputComplete.state = true;
-
-    final toInt = total.state.toInt();
-    final isInt = total.state == toInt;
-    current.state = isInt ? "$toInt" : "${total.state}";
-
-    if (nextOp == _Op.equal) {
-      total.state = 0;
-      inputComplete.state = true;
-    }
   }
 }
 

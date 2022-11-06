@@ -4,11 +4,11 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final ttsProvider = Provider((ref) => TextToSpeech(ref.read));
+final ttsProvider = Provider(TextToSpeech.new);
 
 class TextToSpeech {
-  TextToSpeech(this._reader) : _flutterTts = FlutterTts() {
-    final settings = _reader(generalSettingsControllerProvider);
+  TextToSpeech(this._ref) : _flutterTts = FlutterTts() {
+    final settings = _ref.read(generalSettingsControllerProvider);
     Future(() async {
       final dynamic languages = await _flutterTts.getLanguages;
       for (final lang in languages) {
@@ -25,7 +25,8 @@ class TextToSpeech {
         final range = await getRange();
         await _flutterTts.setSpeechRate(range.normal);
 
-        _reader(generalSettingsControllerProvider.notifier)
+        _ref
+            .read(generalSettingsControllerProvider.notifier)
             .update(readAloudSpeed: range.normal);
       }
 
@@ -40,7 +41,7 @@ class TextToSpeech {
   }
 
   final FlutterTts _flutterTts;
-  final Reader _reader;
+  final Ref _ref;
 
   void speak(String text) {
     _flutterTts.speak(text);
