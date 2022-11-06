@@ -19,7 +19,7 @@ class UpdateCheckObserver with LifecycleCallback {
 
   @override
   void onResumed(BuildContext context, WidgetRef ref) {
-    ref.invalidate(updateProvider);
+    final _ = ref.refresh(updateProvider);
   }
 
   @override
