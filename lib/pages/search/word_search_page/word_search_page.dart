@@ -125,7 +125,7 @@ class _AppBar extends HookConsumerWidget {
                       if (trimmedValue != "") {
                         if (req.query == trimmedValue) {
                           // 変更がない場合は強制リロードする
-                          ref.invalidate(queryItemResultProvider(req));
+                          final _ = ref.refresh(queryItemResultProvider(req));
                           return;
                         }
                         ref.read(_currentQueryItemsRequest.notifier).state =
