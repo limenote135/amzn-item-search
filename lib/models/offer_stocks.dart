@@ -20,7 +20,7 @@ final offerStocksFutureProvider = FutureProvider.autoDispose
   final amazon = ref.read(amazonRepositoryProvider);
   final ret =
       await amazon.getStockCount(param.asin, param.sellerId, cancelToken);
-  ref.maintainState = true;
+  ref.keepAlive();
 
   return ret;
 });

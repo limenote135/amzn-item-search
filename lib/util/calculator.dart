@@ -35,10 +35,10 @@ class Calculator extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final displayText = ref.watch(_displayTextProvider.state);
-    final total = ref.watch(_totalProvider.state);
-    final op = ref.watch(_currentOp.state);
-    final inputComplete = ref.watch(_inputCompleteProvider.state);
+    final displayText = ref.watch(_displayTextProvider);
+    final total = ref.watch(_totalProvider);
+    final op = ref.watch(_currentOp);
+    final inputComplete = ref.watch(_inputCompleteProvider);
 
     return OutlinedButtonTheme(
       data: OutlinedButtonThemeData(
@@ -61,17 +61,17 @@ class Calculator extends HookConsumerWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
-                          displayText.state,
+                          displayText,
                           textAlign: TextAlign.right,
                         ),
                       ),
                     ),
                     _ExpandedButton(
                       onPressed: () {
-                        displayText.state = "0";
-                        op.state = _Op.plus;
-                        total.state = 0;
-                        inputComplete.state = true;
+                        ref.read(_displayTextProvider.notifier).state = "0";
+                        ref.read(_currentOp.notifier).state = _Op.plus;
+                        ref.read(_totalProvider.notifier).state = 0;
+                        ref.read(_inputCompleteProvider.notifier).state = true;
                       },
                       style: OutlinedButton.styleFrom(
                         foregroundColor:
@@ -87,22 +87,23 @@ class Calculator extends HookConsumerWidget {
                   children: [
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, "7", inputComplete),
+                          _pushNumber(ref, displayText, "7", inputComplete),
                       child: const Text("7"),
                     ),
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, "8", inputComplete),
+                          _pushNumber(ref, displayText, "8", inputComplete),
                       child: const Text("8"),
                     ),
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, "9", inputComplete),
+                          _pushNumber(ref, displayText, "9", inputComplete),
                       child: const Text("9"),
                     ),
                     _OperatorButton(
                       onPressed: () async {
                         _pushOp(
+                          ref,
                           displayText,
                           total,
                           op,
@@ -121,22 +122,23 @@ class Calculator extends HookConsumerWidget {
                   children: [
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, "4", inputComplete),
+                          _pushNumber(ref, displayText, "4", inputComplete),
                       child: const Text("4"),
                     ),
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, "5", inputComplete),
+                          _pushNumber(ref, displayText, "5", inputComplete),
                       child: const Text("5"),
                     ),
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, "6", inputComplete),
+                          _pushNumber(ref, displayText, "6", inputComplete),
                       child: const Text("6"),
                     ),
                     _OperatorButton(
                       onPressed: () async {
                         _pushOp(
+                          ref,
                           displayText,
                           total,
                           op,
@@ -155,22 +157,23 @@ class Calculator extends HookConsumerWidget {
                   children: [
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, "1", inputComplete),
+                          _pushNumber(ref, displayText, "1", inputComplete),
                       child: const Text("1"),
                     ),
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, "2", inputComplete),
+                          _pushNumber(ref, displayText, "2", inputComplete),
                       child: const Text("2"),
                     ),
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, "3", inputComplete),
+                          _pushNumber(ref, displayText, "3", inputComplete),
                       child: const Text("3"),
                     ),
                     _OperatorButton(
                       onPressed: () async {
                         _pushOp(
+                          ref,
                           displayText,
                           total,
                           op,
@@ -189,16 +192,17 @@ class Calculator extends HookConsumerWidget {
                   children: [
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, ".", inputComplete),
+                          _pushNumber(ref, displayText, ".", inputComplete),
                       child: const Text("."),
                     ),
                     _ExpandedButton(
                       onPressed: () =>
-                          _pushNumber(displayText, "0", inputComplete),
+                          _pushNumber(ref, displayText, "0", inputComplete),
                       child: const Text("0"),
                     ),
                     _OperatorButton(
                       onPressed: () => _pushOp(
+                        ref,
                         displayText,
                         total,
                         op,
@@ -210,6 +214,7 @@ class Calculator extends HookConsumerWidget {
                     _OperatorButton(
                       onPressed: () async {
                         _pushOp(
+                          ref,
                           displayText,
                           total,
                           op,
@@ -236,7 +241,8 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        _pushRatio(displayText, total, inputComplete, 1.05);
+                        _pushRatio(
+                            ref, displayText, total, inputComplete, 1.05);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventPlus5p);
@@ -246,7 +252,8 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        _pushRatio(displayText, total, inputComplete, 0.95);
+                        _pushRatio(
+                            ref, displayText, total, inputComplete, 0.95);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventMinus5p);
@@ -260,7 +267,7 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        _pushRatio(displayText, total, inputComplete, 1.1);
+                        _pushRatio(ref, displayText, total, inputComplete, 1.1);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventPlus10p);
@@ -270,7 +277,7 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        _pushRatio(displayText, total, inputComplete, 0.9);
+                        _pushRatio(ref, displayText, total, inputComplete, 0.9);
                         await ref
                             .read(analyticsControllerProvider)
                             .logCalcEvent(calcEventMinus10p);
@@ -284,11 +291,10 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        final calcOp =
-                            inputComplete.state ? _Op.equal : op.state;
-                        final val =
-                            _calc(total.state, displayText.state, calcOp);
+                        final calcOp = inputComplete ? _Op.equal : op;
+                        final val = _calc(total, displayText, calcOp);
                         _pushOp(
+                          ref,
                           displayText,
                           total,
                           op,
@@ -309,11 +315,10 @@ class Calculator extends HookConsumerWidget {
                     _ExpandedButton(
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
-                        final calcOp =
-                            inputComplete.state ? _Op.equal : op.state;
-                        final val =
-                            _calc(total.state, displayText.state, calcOp);
+                        final calcOp = inputComplete ? _Op.equal : op;
+                        final val = _calc(total, displayText, calcOp);
                         _pushOp(
+                          ref,
                           displayText,
                           total,
                           op,
@@ -338,25 +343,27 @@ class Calculator extends HookConsumerWidget {
   }
 
   void _pushNumber(
-    StateController<String> current,
+    WidgetRef ref,
+    String current,
     String str,
-    StateController<bool> inputComplete,
+    bool inputComplete,
   ) {
-    if (inputComplete.state || current.state == "0" && str != ".") {
-      current.state = str;
-      inputComplete.state = false;
+    if (inputComplete || current == "0" && str != ".") {
+      ref.read(_displayTextProvider.notifier).state = str;
+      ref.read(_inputCompleteProvider.notifier).state = false;
       return;
     }
-    current.state += str;
+    ref.read(_displayTextProvider.notifier).update((state) => state + str);
   }
 
   void _pushRatio(
-    StateController<String> current,
-    StateController<double> total,
-    StateController<bool> inputComplete,
+    WidgetRef ref,
+    String current,
+    double total,
+    bool inputComplete,
     double ratio,
   ) {
-    var val = double.tryParse(current.state);
+    var val = double.tryParse(current);
     if (val == null) {
       return;
     }
@@ -364,9 +371,9 @@ class Calculator extends HookConsumerWidget {
 
     final toInt = val.toInt();
     final isInt = val == toInt;
-    current.state = isInt ? "$toInt" : "$val";
+    ref.read(_displayTextProvider.notifier).state = isInt ? "$toInt" : "$val";
 
-    inputComplete.state = true;
+    ref.read(_inputCompleteProvider.notifier).state = true;
   }
 
   double _calc(double total, String current, _Op op) {
@@ -389,30 +396,33 @@ class Calculator extends HookConsumerWidget {
   }
 
   void _pushOp(
-    StateController<String> current,
-    StateController<double> total,
-    StateController<_Op> currentOp,
-    StateController<bool> inputComplete,
+    WidgetRef ref,
+    String current,
+    double total,
+    _Op currentOp,
+    bool inputComplete,
     _Op nextOp,
   ) {
-    if (inputComplete.state) {
-      if (currentOp.state == _Op.equal) {
-        total.state = double.parse(current.state);
+    if (inputComplete) {
+      if (currentOp == _Op.equal) {
+        ref.read(_totalProvider.notifier).state = double.parse(current);
       }
-      currentOp.state = nextOp;
+      ref.read(_currentOp.notifier).state = nextOp;
       return;
     }
-    total.state = _calc(total.state, current.state, currentOp.state);
-    currentOp.state = nextOp;
-    inputComplete.state = true;
+    final subTotal = _calc(total, current, currentOp);
+    ref.read(_totalProvider.notifier).state = subTotal;
+    ref.read(_currentOp.notifier).state = nextOp;
+    ref.read(_inputCompleteProvider.notifier).state = true;
 
-    final toInt = total.state.toInt();
-    final isInt = total.state == toInt;
-    current.state = isInt ? "$toInt" : "${total.state}";
+    final toInt = subTotal.toInt();
+    final isInt = subTotal == toInt;
+    ref.read(_displayTextProvider.notifier).state =
+        isInt ? "$toInt" : "$subTotal";
 
     if (nextOp == _Op.equal) {
-      total.state = 0;
-      inputComplete.state = true;
+      ref.read(_totalProvider.notifier).state = 0;
+      ref.read(_inputCompleteProvider.notifier).state = true;
     }
   }
 }

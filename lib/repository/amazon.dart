@@ -11,7 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 
-final amazonRepositoryProvider = Provider((ref) => AmazonRepository(ref.read));
+final amazonRepositoryProvider = Provider(AmazonRepository.new);
 
 class _ParseOfferListingsParam {
   _ParseOfferListingsParam({
@@ -28,7 +28,7 @@ class _ParseOfferListingsParam {
 // カートを含まない場合
 // isonlyrenderofferlist=true
 class AmazonRepository {
-  AmazonRepository(this._read);
+  AmazonRepository(this._ref);
 
   static const sellByAmazonName = "Amazon.co.jp";
 
@@ -57,11 +57,11 @@ class AmazonRepository {
 
   static const _productUrl = "https://www.amazon.co.jp/gp/product/";
 
-  final Reader _read;
+  final Ref _ref;
 
   Future<void> _ensureCookie(String asin) async {
-    final dio = await _read(dioProvider.future);
-    final jar = await _read(persistCookieJarProvider.future);
+    final dio = await _ref.read(dioProvider.future);
+    final jar = await _ref.read(persistCookieJarProvider.future);
     final cookie = await jar.loadForRequest(Uri(host: "amazon.co.jp"));
     final now = DateTime.now();
     if (cookie.isNotEmpty &&
@@ -97,7 +97,7 @@ class AmazonRepository {
       "filters": reqParamStr,
       "pageno": params.page + 1,
     };
-    final dio = await _read(dioProvider.future);
+    final dio = await _ref.read(dioProvider.future);
     await _ensureCookie(params.asin);
 
     final opt = Options(
@@ -260,7 +260,7 @@ class AmazonRepository {
     String sellerId,
     CancelToken cancelToken,
   ) async {
-    final dio = await _read(dioProvider.future);
+    final dio = await _ref.read(dioProvider.future);
 
     final url = _stockUrlBase.replaceAll("[asin]", asin);
     final query = <String, dynamic>{

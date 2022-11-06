@@ -41,7 +41,7 @@ final _asinDataPage = FutureProvider.autoDispose
   final end = min(total, start + _kPageSize);
   final req = asins.sublist(start, end);
   final resp = await mws.batchGetAsinData(req, cancelToken: cancelToken);
-  ref.maintainState = true;
+  ref.keepAlive();
   return resp.data;
 });
 
@@ -51,7 +51,7 @@ final asinDataAtIndex = Provider.autoDispose
   final page = index.index ~/ _kPageSize;
   final param = AsinDataPageParam(param: index.param, page: page);
   // 何度も Exception が投げられるのを防ぐため、maintainState = true にする
-  ref.maintainState = true;
+  ref.keepAlive();
   return ref.watch(_asinDataPage(param)).whenData((value) {
     final data = value[offsetInPage];
     if (data.asin == "") {
@@ -125,7 +125,7 @@ class _AppBar extends HookConsumerWidget {
                       if (trimmedValue != "") {
                         if (req.query == trimmedValue) {
                           // 変更がない場合は強制リロードする
-                          ref.refresh(queryItemResultProvider(req));
+                          ref.invalidate(queryItemResultProvider(req));
                           return;
                         }
                         ref.read(_currentQueryItemsRequest.notifier).state =
