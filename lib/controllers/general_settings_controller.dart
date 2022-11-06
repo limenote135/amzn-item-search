@@ -11,18 +11,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final generalSettingsControllerProvider =
     StateNotifierProvider<GeneralSettingsController, GeneralSettings>(
-  (ref) => GeneralSettingsController(ref.read),
+  GeneralSettingsController.new,
 );
 
 class GeneralSettingsController extends StateNotifier<GeneralSettings> {
-  GeneralSettingsController(this._read) : super(const GeneralSettings()) {
+  GeneralSettingsController(this._ref) : super(const GeneralSettings()) {
     _loadSettings();
   }
 
-  final Reader _read;
+  final Ref _ref;
 
   void _loadSettings() {
-    final box = _read(settingsBoxProvider);
+    final box = _ref.read(settingsBoxProvider);
     var settings = box.get(generalSettingsKeyName) as GeneralSettings?;
     if (settings != null) {
       // 小口設定の削除に伴うマイグレーション since v1.1.4
@@ -129,7 +129,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     MakadSettings? makadSettings,
     SellerSketSettings? sellerSketSettings,
   }) {
-    final box = _read(settingsBoxProvider);
+    final box = _ref.read(settingsBoxProvider);
     state = state.copyWith(
       isDarkMode: isDarkMode ?? state.isDarkMode,
       enableTargetProfit: enableTargetProfit ?? state.enableTargetProfit,
@@ -165,7 +165,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
   }
 
   void addRetailer(String retailer) {
-    final box = _read(settingsBoxProvider);
+    final box = _ref.read(settingsBoxProvider);
     final retailers = <String>[...state.retailers, retailer];
     state = state.copyWith(
       retailers: retailers,
@@ -174,7 +174,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
   }
 
   void removeRetailer(int index) {
-    final box = _read(settingsBoxProvider);
+    final box = _ref.read(settingsBoxProvider);
     final retailers = <String>[
       for (var i = 0; i < state.retailers.length; i++)
         if (i != index) state.retailers[i]
@@ -186,7 +186,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
   }
 
   void changeKeepaExtraParam() {
-    final box = _read(settingsBoxProvider);
+    final box = _ref.read(settingsBoxProvider);
     final current = state.keepaSettings.extraParam;
     var next = "";
     switch (current) {

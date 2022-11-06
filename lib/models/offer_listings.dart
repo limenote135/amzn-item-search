@@ -25,7 +25,7 @@ final offerListingsFutureProvider = FutureProvider.autoDispose
   ref.onDispose(cancelToken.cancel);
   final amazon = ref.read(amazonRepositoryProvider);
   final ret = await amazon.getOffers(param, cancelToken);
-  ref.maintainState = true;
+  ref.keepAlive();
   return ret;
 });
 
@@ -64,7 +64,7 @@ final sellByAmazonProvider =
     usedAcceptable: false,
   );
   final ret = await ref.watch(offerListingsFutureProvider(param).future);
-  ref.maintainState = true;
+  ref.keepAlive();
   return ret.cart?.sellerId == "" ||
       ret.offers.any((element) => element.sellerId == "");
 
