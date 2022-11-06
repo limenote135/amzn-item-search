@@ -193,7 +193,7 @@ class MwsRepository {
         throw Exception("少し時間をおいてから再度お試しください");
       case 412:
         // TODO:  await を外したが、これで問題ないか要確認
-        _ref.invalidate(updateProvider);
+        final _ = _ref.refresh(updateProvider);
         throw Exception("アプリケーションを更新してください");
       case 401:
         throw Exception("設定メニューからAmazonとの連携を行ってください");
