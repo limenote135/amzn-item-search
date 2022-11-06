@@ -13,7 +13,7 @@ import 'common.dart';
 part 'geo.freezed.dart';
 part 'geo.g.dart';
 
-final _geoProvider = Provider((ref) => GeoRepository(ref.read));
+final _geoProvider = Provider(GeoRepository.new);
 
 final geoItemFutureProvider =
     FutureProvider.family<SearchItem, String>((ref, code) async {
@@ -28,9 +28,9 @@ final geoItemFutureProvider =
 });
 
 class GeoRepository {
-  GeoRepository(this._read);
+  GeoRepository(this._ref);
 
-  final Reader _read;
+  final Ref _ref;
 
   Future<GeoResponse> get(String value) async {
     if (!value.startsWith("c")) {
@@ -38,12 +38,12 @@ class GeoRepository {
       return GeoResponse(code: value);
     }
 
-    final serverUrl = await _read(serverUrlProvider.future);
+    final serverUrl = await _ref.read(serverUrlProvider.future);
     final url = "$serverUrl/v1beta2/geo/code";
-    final dio = await _read(dioProvider.future);
+    final dio = await _ref.read(dioProvider.future);
 
-    final user = await _read(authStateChangesProvider.future);
-    final lwa = await _read(linkedWithAmazonProvider.future);
+    final user = await _ref.read(authStateChangesProvider.future);
+    final lwa = await _ref.read(linkedWithAmazonProvider.future);
     if (lwa != true) {
       throw Exception("設定メニューからAmazonとの連携を行ってください");
     }

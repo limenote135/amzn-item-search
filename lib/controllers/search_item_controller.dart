@@ -10,23 +10,23 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final searchItemControllerProvider =
     StateNotifierProvider<SearchItemController, List<Future<SearchItem>>>(
-  (ref) => SearchItemController(ref.read),
+  SearchItemController.new,
 );
 
 class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
-  SearchItemController(this._read) : super([]) {
+  SearchItemController(this._ref) : super([]) {
     _fetchAll();
   }
 
-  final Reader _read;
+  final Ref _ref;
 
   void _fetchAll() {
-    final box = _read(searchItemBoxProvider);
+    final box = _ref.read(searchItemBoxProvider);
     state = box.values.map(Future.value).toList().reversed.toList();
   }
 
   void removeAll() {
-    final box = _read(searchItemBoxProvider);
+    final box = _ref.read(searchItemBoxProvider);
     state = [];
     box.clear();
   }
@@ -35,7 +35,7 @@ class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
     if (targets.isEmpty) {
       return;
     }
-    final box = _read(searchItemBoxProvider);
+    final box = _ref.read(searchItemBoxProvider);
     final keys = targets.map((e) => e.searchDate);
     box.deleteAll(keys);
 
@@ -64,28 +64,28 @@ class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
         jan: jan,
       ),
     );
-    _read(analyticsControllerProvider).logSearchEvent(searchEventJan);
+    _ref.read(analyticsControllerProvider).logSearchEvent(searchEventJan);
     state = [data, ...state];
   }
 
   void addBookoff(String code) {
     final code2 = code.trim();
-    final future = _read(bookoffItemFutureProvider(code2).future);
-    _read(analyticsControllerProvider).logSearchEvent(searchEventBookoff);
+    final future = _ref.read(bookoffItemFutureProvider(code2).future);
+    _ref.read(analyticsControllerProvider).logSearchEvent(searchEventBookoff);
     state = [future, ...state];
   }
 
   void addGeo(String code) {
     final code2 = code.trim();
-    final future = _read(geoItemFutureProvider(code2).future);
-    _read(analyticsControllerProvider).logSearchEvent(searchEventGeo);
+    final future = _ref.read(geoItemFutureProvider(code2).future);
+    _ref.read(analyticsControllerProvider).logSearchEvent(searchEventGeo);
     state = [future, ...state];
   }
 
   void addTsutaya(String code) {
     final code2 = code.trim();
-    final future = _read(tsutayaItemFutureProvider(code2).future);
-    _read(analyticsControllerProvider).logSearchEvent(searchEventTsutaya);
+    final future = _ref.read(tsutayaItemFutureProvider(code2).future);
+    _ref.read(analyticsControllerProvider).logSearchEvent(searchEventTsutaya);
     state = [future, ...state];
   }
 }
