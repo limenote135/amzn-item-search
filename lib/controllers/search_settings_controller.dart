@@ -7,18 +7,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final searchSettingsControllerProvider =
     StateNotifierProvider<SearchSettingsController, SearchSettings>(
-  (ref) => SearchSettingsController(ref.read),
+  SearchSettingsController.new,
 );
 
 class SearchSettingsController extends StateNotifier<SearchSettings> {
-  SearchSettingsController(this._read) : super(const SearchSettings()) {
+  SearchSettingsController(this._ref) : super(const SearchSettings()) {
     _loadSettings();
   }
 
-  final Reader _read;
+  final Ref _ref;
 
   void _loadSettings() {
-    final box = _read(settingsBoxProvider);
+    final box = _ref.read(settingsBoxProvider);
     final settings = box.get(searchSettingsKeyName) as SearchSettings?;
     if (settings != null) {
       state = settings;
@@ -35,7 +35,7 @@ class SearchSettingsController extends StateNotifier<SearchSettings> {
     bool? continuousCameraRead,
     bool? continuousInput,
   }) {
-    final box = _read(settingsBoxProvider);
+    final box = _ref.read(settingsBoxProvider);
     state = state.copyWith(
       type: type ?? state.type,
       usedSubCondition: usedSubCondition ?? state.usedSubCondition,

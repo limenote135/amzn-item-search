@@ -11,7 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 part 'bookoff.freezed.dart';
 part 'bookoff.g.dart';
 
-final bookoffProvider = Provider((ref) => BookoffRepository(ref.read));
+final bookoffProvider = Provider(BookoffRepository.new);
 
 final bookoffItemFutureProvider =
     FutureProvider.family<SearchItem, String>((ref, code) async {
@@ -39,9 +39,9 @@ class _NotFoundException implements Exception {
 const _bookoffCodeLength = 10;
 
 class BookoffRepository {
-  BookoffRepository(this._read);
+  BookoffRepository(this._ref);
 
-  final Reader _read;
+  final Ref _ref;
   static const _baseURL = "http://www.bookoffonline.co.jp/bolapi/api/goods/";
 
   Future<List<BookoffResponse>> get(String value) async {
@@ -65,7 +65,7 @@ class BookoffRepository {
         ? value.substring(0, _bookoffCodeLength)
         : value;
     final url = "$_baseURL$code";
-    final dio = await _read(dioProvider.future);
+    final dio = await _ref.read(dioProvider.future);
     try {
       final result = await dio.get(
         url,
