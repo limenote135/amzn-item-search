@@ -45,6 +45,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
+import 'firebase_options_dev.dart' as dev;
+import 'firebase_options_prod.dart' as prod;
+
+const flavor = String.fromEnvironment('FLAVOR');
+
 // Toggle this for testing Crashlytics in your app locally.
 const _kTestingCrashlytics = false;
 const _kTestingAnalytics = false;
@@ -99,7 +104,11 @@ Future<void> initStartupOption() async {
 }
 
 Future<void> initFirebase() async {
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: flavor == "prod"
+        ? prod.DefaultFirebaseOptions.currentPlatform
+        : dev.DefaultFirebaseOptions.currentPlatform,
+  );
 
   if (kDebugMode) {
     await Future.wait([
