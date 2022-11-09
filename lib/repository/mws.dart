@@ -112,6 +112,17 @@ final listingsRestrictionFutureProvider = FutureProvider.autoDispose
   return resp;
 });
 
+final variationsFutureProvider =
+    FutureProvider.autoDispose.family<List<String>, String>((ref, asin) async {
+  final cancelToken = CancelToken();
+  ref.onDispose(cancelToken.cancel);
+  final mws = ref.read(mwsRepositoryProvider);
+  final resp = await mws.getItemVariations(asin, cancelToken: cancelToken);
+
+  ref.keepAlive();
+  return resp.asins;
+});
+
 class MwsRepository {
   MwsRepository(this._ref);
 
@@ -181,6 +192,17 @@ class MwsRepository {
 
     final resp = await _doGetRequest(url, cancelToken: cancelToken);
     return ListingRestrictions.fromJson(resp);
+  }
+
+  Future<GetItemVariationsResponse> getItemVariations(
+    String asin, {
+    CancelToken? cancelToken,
+  }) async {
+    final serverUrl = await _ref.read(serverUrlProvider.future);
+    final url = "$serverUrl/v1beta2/spapi/variations/$asin";
+
+    final resp = await _doGetRequest(url, cancelToken: cancelToken);
+    return GetItemVariationsResponse.fromJson(resp);
   }
 
   void _customHandler(int code) {
@@ -285,4 +307,15 @@ class BatchGetAsinDataResponse with _$BatchGetAsinDataResponse {
 
   factory BatchGetAsinDataResponse.fromJson(Map<String, dynamic> json) =>
       _$BatchGetAsinDataResponseFromJson(json);
+}
+
+@freezed
+class GetItemVariationsResponse with _$GetItemVariationsResponse {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory GetItemVariationsResponse({
+    @Default(<String>[]) List<String> asins,
+  }) = _GetItemVariationsResponse;
+
+  factory GetItemVariationsResponse.fromJson(Map<String, dynamic> json) =>
+      _$GetItemVariationsResponseFromJson(json);
 }
