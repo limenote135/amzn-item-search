@@ -9,6 +9,7 @@ import 'constants.dart';
 import 'item_price.dart';
 
 part 'asin_data.freezed.dart';
+
 part 'asin_data.g.dart';
 
 final currentAsinDataProvider =
@@ -40,6 +41,7 @@ class AsinData with _$AsinData {
     @JsonKey()
         ListingRestrictions restrictions,
     @HiveField(12, defaultValue: "") @Default("") String model,
+    @HiveField(13, defaultValue: "") @Default("") String variationRoot,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>
