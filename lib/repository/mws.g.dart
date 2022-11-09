@@ -50,3 +50,17 @@ Map<String, dynamic> _$$_BatchGetAsinDataResponseToJson(
     <String, dynamic>{
       'data': instance.data,
     };
+
+_$_GetItemVariationsResponse _$$_GetItemVariationsResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_GetItemVariationsResponse(
+      asins:
+          (json['asins'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              const <String>[],
+    );
+
+Map<String, dynamic> _$$_GetItemVariationsResponseToJson(
+        _$_GetItemVariationsResponse instance) =>
+    <String, dynamic>{
+      'asins': instance.asins,
+    };
