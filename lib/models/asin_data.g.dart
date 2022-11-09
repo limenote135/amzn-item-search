@@ -34,13 +34,14 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
           ? const ListingRestrictions(newItem: false, used: false)
           : fields[11] as ListingRestrictions,
       model: fields[12] == null ? '' : fields[12] as String,
+      variationRoot: fields[13] == null ? '' : fields[13] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_AsinData obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.jan)
       ..writeByte(1)
@@ -66,7 +67,9 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       ..writeByte(11)
       ..write(obj.restrictions)
       ..writeByte(12)
-      ..write(obj.model);
+      ..write(obj.model)
+      ..writeByte(13)
+      ..write(obj.variationRoot);
   }
 
   @override
@@ -140,6 +143,7 @@ _$_AsinData _$$_AsinDataFromJson(Map<String, dynamic> json) => _$_AsinData(
           : ListingRestrictions.fromJson(
               json['restrictions'] as Map<String, dynamic>),
       model: json['model'] as String? ?? "",
+      variationRoot: json['variation_root'] as String? ?? "",
     );
 
 Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
@@ -156,6 +160,7 @@ Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
       'sell_by_amazon': instance.sellByAmazon,
       'restrictions': instance.restrictions,
       'model': instance.model,
+      'variation_root': instance.variationRoot,
     };
 
 _$_ListingRestrictions _$$_ListingRestrictionsFromJson(

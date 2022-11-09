@@ -49,6 +49,8 @@ mixin _$AsinData {
   ListingRestrictions get restrictions => throw _privateConstructorUsedError;
   @HiveField(12, defaultValue: "")
   String get model => throw _privateConstructorUsedError;
+  @HiveField(13, defaultValue: "")
+  String get variationRoot => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -90,7 +92,9 @@ abstract class $AsinDataCopyWith<$Res> {
       @JsonKey()
           ListingRestrictions restrictions,
       @HiveField(12, defaultValue: "")
-          String model});
+          String model,
+      @HiveField(13, defaultValue: "")
+          String variationRoot});
 
   $ItemPricesCopyWith<$Res>? get prices;
   $ListingRestrictionsCopyWith<$Res> get restrictions;
@@ -122,6 +126,7 @@ class _$AsinDataCopyWithImpl<$Res, $Val extends AsinData>
     Object? sellByAmazon = freezed,
     Object? restrictions = null,
     Object? model = null,
+    Object? variationRoot = null,
   }) {
     return _then(_value.copyWith(
       jan: null == jan
@@ -175,6 +180,10 @@ class _$AsinDataCopyWithImpl<$Res, $Val extends AsinData>
       model: null == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
+              as String,
+      variationRoot: null == variationRoot
+          ? _value.variationRoot
+          : variationRoot // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -236,7 +245,9 @@ abstract class _$$_AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
       @JsonKey()
           ListingRestrictions restrictions,
       @HiveField(12, defaultValue: "")
-          String model});
+          String model,
+      @HiveField(13, defaultValue: "")
+          String variationRoot});
 
   @override
   $ItemPricesCopyWith<$Res>? get prices;
@@ -268,6 +279,7 @@ class __$$_AsinDataCopyWithImpl<$Res>
     Object? sellByAmazon = freezed,
     Object? restrictions = null,
     Object? model = null,
+    Object? variationRoot = null,
   }) {
     return _then(_$_AsinData(
       jan: null == jan
@@ -322,6 +334,10 @@ class __$$_AsinDataCopyWithImpl<$Res>
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as String,
+      variationRoot: null == variationRoot
+          ? _value.variationRoot
+          : variationRoot // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -360,7 +376,9 @@ class _$_AsinData implements _AsinData {
       @JsonKey()
           this.restrictions = defaultListingRestrictions,
       @HiveField(12, defaultValue: "")
-          this.model = ""});
+          this.model = "",
+      @HiveField(13, defaultValue: "")
+          this.variationRoot = ""});
 
   factory _$_AsinData.fromJson(Map<String, dynamic> json) =>
       _$$_AsinDataFromJson(json);
@@ -414,10 +432,14 @@ class _$_AsinData implements _AsinData {
   @JsonKey()
   @HiveField(12, defaultValue: "")
   final String model;
+  @override
+  @JsonKey()
+  @HiveField(13, defaultValue: "")
+  final String variationRoot;
 
   @override
   String toString() {
-    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category, sellByAmazon: $sellByAmazon, restrictions: $restrictions, model: $model)';
+    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category, sellByAmazon: $sellByAmazon, restrictions: $restrictions, model: $model, variationRoot: $variationRoot)';
   }
 
   @override
@@ -443,7 +465,9 @@ class _$_AsinData implements _AsinData {
                 other.sellByAmazon == sellByAmazon) &&
             (identical(other.restrictions, restrictions) ||
                 other.restrictions == restrictions) &&
-            (identical(other.model, model) || other.model == model));
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.variationRoot, variationRoot) ||
+                other.variationRoot == variationRoot));
   }
 
   @JsonKey(ignore: true)
@@ -462,7 +486,8 @@ class _$_AsinData implements _AsinData {
       category,
       sellByAmazon,
       restrictions,
-      model);
+      model,
+      variationRoot);
 
   @JsonKey(ignore: true)
   @override
@@ -508,7 +533,9 @@ abstract class _AsinData implements AsinData {
       @JsonKey()
           final ListingRestrictions restrictions,
       @HiveField(12, defaultValue: "")
-          final String model}) = _$_AsinData;
+          final String model,
+      @HiveField(13, defaultValue: "")
+          final String variationRoot}) = _$_AsinData;
 
   factory _AsinData.fromJson(Map<String, dynamic> json) = _$_AsinData.fromJson;
 
@@ -554,6 +581,9 @@ abstract class _AsinData implements AsinData {
   @override
   @HiveField(12, defaultValue: "")
   String get model;
+  @override
+  @HiveField(13, defaultValue: "")
+  String get variationRoot;
   @override
   @JsonKey(ignore: true)
   _$$_AsinDataCopyWith<_$_AsinData> get copyWith =>
