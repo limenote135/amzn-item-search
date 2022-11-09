@@ -50,6 +50,10 @@ import 'firebase_options_prod.dart' as prod;
 
 const flavor = String.fromEnvironment('FLAVOR');
 
+bool isProd() {
+  return flavor == "prod";
+}
+
 // Toggle this for testing Crashlytics in your app locally.
 const _kTestingCrashlytics = false;
 const _kTestingAnalytics = false;
@@ -105,7 +109,7 @@ Future<void> initStartupOption() async {
 
 Future<void> initFirebase() async {
   await Firebase.initializeApp(
-    options: flavor == "prod"
+    options: isProd()
         ? prod.DefaultFirebaseOptions.currentPlatform
         : dev.DefaultFirebaseOptions.currentPlatform,
   );
@@ -206,12 +210,15 @@ Future<void> initRevenueCat() async {
   }
   if (Platform.isAndroid) {
     await Purchases.configure(
-      PurchasesConfiguration("goog_kHLAwmYlrkPYuUcTrkIyilEmZtp"),
-      // PurchasesConfiguration("goog_ZpBjhMgCgarXfMBGnhMHngLslFn"),
+      isProd()
+          ? PurchasesConfiguration("goog_kHLAwmYlrkPYuUcTrkIyilEmZtp")
+          : PurchasesConfiguration("goog_ZpBjhMgCgarXfMBGnhMHngLslFn"),
     );
   } else {
     await Purchases.configure(
-      PurchasesConfiguration("appl_TjNyfkblPMFQBFKYdtQAIDibZns"),
+      isProd()
+          ? PurchasesConfiguration("appl_TjNyfkblPMFQBFKYdtQAIDibZns")
+          : PurchasesConfiguration("appl_ftEbkRAUVtMHQYbtpmVCSAAAQPu"),
     );
   }
 }
