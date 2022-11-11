@@ -6,6 +6,7 @@ part 'shortcut_type.g.dart';
 const navigationTargetKeepa = "keepa";
 const navigationTargetNewOffers = "newOffers";
 const navigationTargetUsedOffers = "usedOffers";
+const navigationTargetVariation = "variation";
 
 @HiveType(typeId: shortcutTypeId)
 enum ShortcutType {

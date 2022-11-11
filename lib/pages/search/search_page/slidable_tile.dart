@@ -10,6 +10,7 @@ import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
+import 'package:amasearch/pages/common/variation_page/variation_page.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:amasearch/util/util.dart';
@@ -43,6 +44,8 @@ class SlidableTile extends HookConsumerWidget {
     );
 
     final item = ref.watch(currentSearchItemProvider);
+    final hasVariation =
+        item.asins.isNotEmpty && item.asins[0].variationRoot != "";
 
     final buttons = [...baseButtons, amazonListingsButton];
 
@@ -50,7 +53,8 @@ class SlidableTile extends HookConsumerWidget {
       0,
       (prev, e) {
         if (e.type != ShortcutType.none) {
-          if (e.type == ShortcutType.delete && disableDelete) {
+          if ((e.type == ShortcutType.delete && disableDelete) ||
+              (e.param == navigationTargetVariation && !hasVariation)) {
             return prev;
           }
           return prev + 1;
@@ -62,7 +66,8 @@ class SlidableTile extends HookConsumerWidget {
       0,
       (prev, e) {
         if (e.type != ShortcutType.none) {
-          if (e.type == ShortcutType.delete && disableDelete) {
+          if ((e.type == ShortcutType.delete && disableDelete) ||
+              (e.param == navigationTargetVariation && !hasVariation)) {
             return prev;
           }
           return prev + 1;
@@ -77,7 +82,9 @@ class SlidableTile extends HookConsumerWidget {
               extentRatio: 0.2 * leftActive,
               children: [
                 for (final act in left)
-                  if (needShow(act.type, disableDelete: disableDelete))
+                  if (needShow(act.type, disableDelete: disableDelete) &&
+                      (act.param != navigationTargetVariation ||
+                          hasVariation)) // Variation を表示する場合のはバリエーションがあるときのみにする
                     _getAction(context, ref, act.type, act.param, buttons, item)
               ],
             )
@@ -88,7 +95,9 @@ class SlidableTile extends HookConsumerWidget {
               extentRatio: 0.2 * rightActive,
               children: [
                 for (final act in right)
-                  if (needShow(act.type, disableDelete: disableDelete))
+                  if (needShow(act.type, disableDelete: disableDelete) &&
+                      (act.param != navigationTargetVariation ||
+                          hasVariation)) // Variation を表示する場合のはバリエーションがあるときのみにする
                     _getAction(context, ref, act.type, act.param, buttons, item)
               ],
             )
@@ -215,35 +224,42 @@ class SlidableTile extends HookConsumerWidget {
   ) {
     var title = "";
     var event = "";
-    Route<void> navigation;
+    // Route そのままではなく、Route を返す関数にしないと
+    // 遷移 -> 戻る -> 遷移とした際にエラーになる
+    Route<void> Function() navigation;
     switch (target) {
       case navigationTargetKeepa:
         title = "Keepa";
         event = pushSearchButtonKeepaName;
-        navigation = KeepaPage.route(item.asins.first.asin);
+        navigation = () => KeepaPage.route(item.asins.first.asin);
         break;
       case navigationTargetNewOffers:
         title = "新品一覧";
         event = pushSearchButtonAmazonNewOffersName;
-        navigation = OfferListingPage.route(
-          OfferListingsParams(
-            asin: item.asins.first.asin,
-            newItem: true,
-          ),
-        );
+        navigation = () => OfferListingPage.route(
+              OfferListingsParams(
+                asin: item.asins.first.asin,
+                newItem: true,
+              ),
+            );
         break;
       case navigationTargetUsedOffers:
         title = "中古一覧";
         event = pushSearchButtonAmazonUsedOffersName;
-        navigation = OfferListingPage.route(
-          OfferListingsParams(
-            asin: item.asins.first.asin,
-            usedLikeNew: true,
-            usedVeryGood: true,
-            usedGood: true,
-            usedAcceptable: true,
-          ),
-        );
+        navigation = () => OfferListingPage.route(
+              OfferListingsParams(
+                asin: item.asins.first.asin,
+                usedLikeNew: true,
+                usedVeryGood: true,
+                usedGood: true,
+                usedAcceptable: true,
+              ),
+            );
+        break;
+      case navigationTargetVariation:
+        title = "ﾊﾞﾘｴｰｼｮﾝ";
+        event = pushSearchButtonVariationName;
+        navigation = () => VariationPage.route(item.asins.first.variationRoot);
         break;
       default:
         throw Exception("Unknown navigation target: $target");
@@ -258,7 +274,7 @@ class SlidableTile extends HookConsumerWidget {
         await ref
             .read(analyticsControllerProvider)
             .logPushSearchButtonEvent(event);
-        await Navigator.of(context).push(navigation);
+        await Navigator.of(context).push(navigation());
       },
     );
   }
