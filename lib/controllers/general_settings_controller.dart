@@ -128,6 +128,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     PricetarSettings? pricetarSettings,
     MakadSettings? makadSettings,
     SellerSketSettings? sellerSketSettings,
+    Map<String, bool>? standardButtons,
   }) {
     final box = _ref.read(settingsBoxProvider);
     state = state.copyWith(
@@ -160,6 +161,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       pricetarSettings: pricetarSettings ?? state.pricetarSettings,
       makadSettings: makadSettings ?? state.makadSettings,
       sellerSketSettings: sellerSketSettings ?? state.sellerSketSettings,
+      standardButtons: standardButtons ?? state.standardButtons,
     );
     box.put(generalSettingsKeyName, state);
   }
