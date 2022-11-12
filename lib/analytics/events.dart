@@ -21,6 +21,7 @@ const searchEventTsutaya = "searchTsutaya";
 
 const pushSearchButtonAmazonName = "Amazon";
 const pushSearchButtonKeepaName = "Keepa";
+const pushSearchButtonVariationName = "Variation";
 const pushSearchButtonDeltaName = "Delta";
 const pushSearchButtonMonoSearchName = "MonoSearch";
 const pushSearchButtonKeezonName = "Keezon";

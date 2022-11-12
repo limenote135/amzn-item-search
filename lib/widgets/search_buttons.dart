@@ -6,6 +6,7 @@ import 'package:amasearch/models/general_settings_default.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
+import 'package:amasearch/pages/common/variation_page/variation_page.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -84,6 +85,19 @@ class SearchButtons extends HookConsumerWidget {
           },
           child: const Text("Keepa"),
         ),
+        if (item.variationRoot != "")
+          ElevatedButton(
+            onPressed: () async {
+              await ref
+                  .read(analyticsControllerProvider)
+                  .logPushSearchButtonEvent(pushSearchButtonVariationName);
+              await Navigator.push(
+                context,
+                VariationPage.route(item.variationRoot),
+              );
+            },
+            child: const Text("ﾊﾞﾘｴｰｼｮﾝ"),
+          ),
         for (final button in buttons)
           if (button.enable)
             ElevatedButton(
