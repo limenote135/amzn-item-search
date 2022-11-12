@@ -1,4 +1,5 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/models/general_settings_default.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -26,16 +27,45 @@ class CustomButtonPage extends StatelessWidget {
   }
 }
 
+const _leadingIconMargin = SizedBox(width: 30);
+
 class _Body extends HookConsumerWidget {
   const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
+    final standardButtons = settings.standardButtons;
+    final standardButtonLength = standardButtons.length;
+    final standardButtonKeys = standardButtons.keys.toList();
     return ListView.builder(
-      itemCount: settings.customButtons.length,
+      itemCount: settings.customButtons.length + standardButtonLength,
       itemBuilder: (BuildContext context, int index) {
-        final button = settings.customButtons[index];
+        if (index < standardButtonLength) {
+          final key = standardButtonKeys[index];
+          return ListTile(
+            leading: _leadingIconMargin,
+            title: Text(_getButtonTitle(key)),
+            trailing: Switch(
+              value: standardButtons[key]!,
+              onChanged: (value) {
+                final newValue = <String, bool>{};
+                standardButtons.forEach((k, v) {
+                  if (k == key) {
+                    newValue[k] = value;
+                  } else {
+                    newValue[k] = v;
+                  }
+                });
+                ref
+                    .read(generalSettingsControllerProvider.notifier)
+                    .update(standardButtons: newValue);
+              },
+            ),
+          );
+        }
+        final buttonIndex = index - settings.standardButtons.length;
+        final button = settings.customButtons[buttonIndex];
         return ListTile(
           leading: const Icon(Icons.settings),
           title: Text(button.title),
@@ -44,7 +74,7 @@ class _Body extends HookConsumerWidget {
             onChanged: (value) {
               final updated = [
                 for (var i = 0; i < settings.customButtons.length; i++)
-                  i == index
+                  i == buttonIndex
                       ? settings.customButtons[i].copyWith(enable: value)
                       : settings.customButtons[i]
               ];
@@ -80,4 +110,20 @@ class _Body extends HookConsumerWidget {
       },
     );
   }
+}
+
+String _getButtonTitle(String key) {
+  switch (key) {
+    case standardButtonAmazonListKey:
+      return "出品一覧";
+    case standardButtonNewOffersKey:
+      return "新品一覧";
+    case standardButtonUsedOffersKey:
+      return "中古一覧";
+    case standardButtonKeepaPageKey:
+      return "Keepa";
+    case standardButtonVariationPageKey:
+      return "バリエーション";
+  }
+  return "不明";
 }
