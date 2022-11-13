@@ -35,14 +35,12 @@ class SocialLoginButtons extends HookConsumerWidget {
           onPressed: () async {
             try {
               await EasyLoading.show(status: 'loading...');
-              final cred = await signInWithGoogle();
+              final cred = await signInWithGoogle(auth);
               if (cred == null) {
                 // ログインキャンセルした場合などは何もしない
                 return;
               }
-              final fbCred = await auth.signInWithCredential(cred);
-
-              final user = fbCred.user;
+              final user = cred.user;
               if (user != null) {
                 await Future.wait([
                   Purchases.logIn(user.uid),
@@ -70,13 +68,12 @@ class SocialLoginButtons extends HookConsumerWidget {
               try {
                 await EasyLoading.show(status: 'loading...');
 
-                final cred = await signInWithApple();
+                final cred = await signInWithApple(auth);
                 if (cred == null) {
                   return;
                 }
-                final fbCred = await auth.signInWithCredential(cred);
 
-                final user = fbCred.user;
+                final user = cred.user;
                 if (user != null) {
                   await Future.wait([
                     Purchases.logIn(user.uid),
