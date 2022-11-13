@@ -5,6 +5,14 @@ Future<UserCredential?> signInWithApple(FirebaseAuth auth) async {
     ..addScope("email")
     ..addScope("name");
 
-  final result = await auth.signInWithProvider(appleProvider);
-  return result;
+  try {
+    final result = await auth.signInWithProvider(appleProvider);
+    return result;
+  } on FirebaseAuthException catch (e) {
+    if (e.code == "unknown") {
+      // キャンセルした場合、unknown になる
+      return null;
+    }
+    rethrow;
+  }
 }
