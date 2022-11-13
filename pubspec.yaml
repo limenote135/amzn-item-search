@@ -83,7 +83,6 @@ dependencies:
   riverpod: ^2.1.1
   share_plus: ^6.2.0
   shared_preferences: ^2.0.15
-  sign_in_with_apple: ^4.2.0
   state_notifier: ^0.7.2+1
   url_launcher: ^6.1.6
   uuid: ^3.0.6
