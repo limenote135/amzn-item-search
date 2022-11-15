@@ -81,7 +81,7 @@ dependencies:
   reactive_forms: ^14.1.0
   release_notes_dialog: ^1.1.0
   riverpod: ^2.1.1
-  share_plus: ^6.2.0
+  share_plus: ^6.3.0
   shared_preferences: ^2.0.15
   state_notifier: ^0.7.2+1
   url_launcher: ^6.1.6
