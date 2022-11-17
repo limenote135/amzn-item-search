@@ -35,6 +35,8 @@ String _createShortcutPropVal(ShortcutDetail command) {
           return "nav:used";
         case navigationTargetKeepa:
           return "nav:kp";
+        case navigationTargetVariation:
+          return "nav:v";
       }
       return "nav:${command.param}";
   }

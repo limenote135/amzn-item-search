@@ -611,3 +611,155 @@ abstract class _BatchGetAsinDataResponse implements BatchGetAsinDataResponse {
   _$$_BatchGetAsinDataResponseCopyWith<_$_BatchGetAsinDataResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+GetItemVariationsResponse _$GetItemVariationsResponseFromJson(
+    Map<String, dynamic> json) {
+  return _GetItemVariationsResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$GetItemVariationsResponse {
+  List<String> get asins => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GetItemVariationsResponseCopyWith<GetItemVariationsResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GetItemVariationsResponseCopyWith<$Res> {
+  factory $GetItemVariationsResponseCopyWith(GetItemVariationsResponse value,
+          $Res Function(GetItemVariationsResponse) then) =
+      _$GetItemVariationsResponseCopyWithImpl<$Res, GetItemVariationsResponse>;
+  @useResult
+  $Res call({List<String> asins});
+}
+
+/// @nodoc
+class _$GetItemVariationsResponseCopyWithImpl<$Res,
+        $Val extends GetItemVariationsResponse>
+    implements $GetItemVariationsResponseCopyWith<$Res> {
+  _$GetItemVariationsResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? asins = null,
+  }) {
+    return _then(_value.copyWith(
+      asins: null == asins
+          ? _value.asins
+          : asins // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_GetItemVariationsResponseCopyWith<$Res>
+    implements $GetItemVariationsResponseCopyWith<$Res> {
+  factory _$$_GetItemVariationsResponseCopyWith(
+          _$_GetItemVariationsResponse value,
+          $Res Function(_$_GetItemVariationsResponse) then) =
+      __$$_GetItemVariationsResponseCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<String> asins});
+}
+
+/// @nodoc
+class __$$_GetItemVariationsResponseCopyWithImpl<$Res>
+    extends _$GetItemVariationsResponseCopyWithImpl<$Res,
+        _$_GetItemVariationsResponse>
+    implements _$$_GetItemVariationsResponseCopyWith<$Res> {
+  __$$_GetItemVariationsResponseCopyWithImpl(
+      _$_GetItemVariationsResponse _value,
+      $Res Function(_$_GetItemVariationsResponse) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? asins = null,
+  }) {
+    return _then(_$_GetItemVariationsResponse(
+      asins: null == asins
+          ? _value._asins
+          : asins // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$_GetItemVariationsResponse implements _GetItemVariationsResponse {
+  const _$_GetItemVariationsResponse(
+      {final List<String> asins = const <String>[]})
+      : _asins = asins;
+
+  factory _$_GetItemVariationsResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_GetItemVariationsResponseFromJson(json);
+
+  final List<String> _asins;
+  @override
+  @JsonKey()
+  List<String> get asins {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_asins);
+  }
+
+  @override
+  String toString() {
+    return 'GetItemVariationsResponse(asins: $asins)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetItemVariationsResponse &&
+            const DeepCollectionEquality().equals(other._asins, _asins));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_asins));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetItemVariationsResponseCopyWith<_$_GetItemVariationsResponse>
+      get copyWith => __$$_GetItemVariationsResponseCopyWithImpl<
+          _$_GetItemVariationsResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_GetItemVariationsResponseToJson(
+      this,
+    );
+  }
+}
+
+abstract class _GetItemVariationsResponse implements GetItemVariationsResponse {
+  const factory _GetItemVariationsResponse({final List<String> asins}) =
+      _$_GetItemVariationsResponse;
+
+  factory _GetItemVariationsResponse.fromJson(Map<String, dynamic> json) =
+      _$_GetItemVariationsResponse.fromJson;
+
+  @override
+  List<String> get asins;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GetItemVariationsResponseCopyWith<_$_GetItemVariationsResponse>
+      get copyWith => throw _privateConstructorUsedError;
+}

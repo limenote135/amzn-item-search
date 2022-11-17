@@ -6,6 +6,7 @@ import 'package:amasearch/models/general_settings_default.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
+import 'package:amasearch/pages/common/variation_page/variation_page.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -20,6 +21,10 @@ class SearchButtons extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentItemProvider);
+    final standardButtons = ref.watch(
+      generalSettingsControllerProvider
+          .select((value) => value.standardButtons),
+    );
     final buttons = ref.watch(
       generalSettingsControllerProvider.select((value) => value.customButtons),
     );
@@ -27,63 +32,87 @@ class SearchButtons extends HookConsumerWidget {
       alignment: WrapAlignment.spaceEvenly,
       spacing: 8,
       children: [
-        ElevatedButton(
-          onPressed: () async {
-            final url =
-                replaceUrl(template: customButtonAmazonListingsUrl, item: item);
-            await ref
-                .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonAmazonListName);
-            await FlutterWebBrowser.openWebPage(url: url);
-          },
-          child: const Text("出品一覧"),
-        ),
-        ElevatedButton(
-          onPressed: () async {
-            await ref
-                .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonAmazonNewOffersName);
-            await Navigator.push(
-              context,
-              OfferListingPage.route(
-                OfferListingsParams(
-                  asin: item.asin,
-                  newItem: true,
+        if (standardButtons[standardButtonAmazonListKey] ?? true)
+          ElevatedButton(
+            onPressed: () async {
+              final url = replaceUrl(
+                template: customButtonAmazonListingsUrl,
+                item: item,
+              );
+              await ref
+                  .read(analyticsControllerProvider)
+                  .logPushSearchButtonEvent(pushSearchButtonAmazonListName);
+              await FlutterWebBrowser.openWebPage(url: url);
+            },
+            child: const Text("出品一覧"),
+          ),
+        if (standardButtons[standardButtonNewOffersKey] ?? true)
+          ElevatedButton(
+            onPressed: () async {
+              await ref
+                  .read(analyticsControllerProvider)
+                  .logPushSearchButtonEvent(
+                    pushSearchButtonAmazonNewOffersName,
+                  );
+              await Navigator.push(
+                context,
+                OfferListingPage.route(
+                  OfferListingsParams(
+                    asin: item.asin,
+                    newItem: true,
+                  ),
                 ),
-              ),
-            );
-          },
-          child: const Text("新品一覧"),
-        ),
-        ElevatedButton(
-          onPressed: () async {
-            await ref
-                .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonAmazonUsedOffersName);
-            await Navigator.push(
-              context,
-              OfferListingPage.route(
-                OfferListingsParams(
-                  asin: item.asin,
-                  usedLikeNew: true,
-                  usedVeryGood: true,
-                  usedGood: true,
-                  usedAcceptable: true,
+              );
+            },
+            child: const Text("新品一覧"),
+          ),
+        if (standardButtons[standardButtonUsedOffersKey] ?? true)
+          ElevatedButton(
+            onPressed: () async {
+              await ref
+                  .read(analyticsControllerProvider)
+                  .logPushSearchButtonEvent(
+                    pushSearchButtonAmazonUsedOffersName,
+                  );
+              await Navigator.push(
+                context,
+                OfferListingPage.route(
+                  OfferListingsParams(
+                    asin: item.asin,
+                    usedLikeNew: true,
+                    usedVeryGood: true,
+                    usedGood: true,
+                    usedAcceptable: true,
+                  ),
                 ),
-              ),
-            );
-          },
-          child: const Text("中古一覧"),
-        ),
-        ElevatedButton(
-          onPressed: () async {
-            await ref
-                .read(analyticsControllerProvider)
-                .logPushSearchButtonEvent(pushSearchButtonKeepaName);
-            await Navigator.push(context, KeepaPage.route(item.asin));
-          },
-          child: const Text("Keepa"),
-        ),
+              );
+            },
+            child: const Text("中古一覧"),
+          ),
+        if (standardButtons[standardButtonKeepaPageKey] ?? true)
+          ElevatedButton(
+            onPressed: () async {
+              await ref
+                  .read(analyticsControllerProvider)
+                  .logPushSearchButtonEvent(pushSearchButtonKeepaName);
+              await Navigator.push(context, KeepaPage.route(item.asin));
+            },
+            child: const Text("Keepa"),
+          ),
+        if (item.variationRoot != "" &&
+            (standardButtons[standardButtonVariationPageKey] ?? true))
+          ElevatedButton(
+            onPressed: () async {
+              await ref
+                  .read(analyticsControllerProvider)
+                  .logPushSearchButtonEvent(pushSearchButtonVariationName);
+              await Navigator.push(
+                context,
+                VariationPage.route(item.variationRoot),
+              );
+            },
+            child: const Text("ﾊﾞﾘｴｰｼｮﾝ"),
+          ),
         for (final button in buttons)
           if (button.enable)
             ElevatedButton(

@@ -198,13 +198,22 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       sellerSketSettings: fields[27] == null
           ? const SellerSketSettings()
           : fields[27] as SellerSketSettings,
+      standardButtons: fields[28] == null
+          ? {
+              'AmazonList': true,
+              'NewOffers': true,
+              'UsedOffers': true,
+              'KeepaPage': true,
+              'VariationPage': true
+            }
+          : (fields[28] as Map).cast<String, bool>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_GeneralSettings obj) {
     writer
-      ..writeByte(28)
+      ..writeByte(29)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
@@ -260,7 +269,9 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
       ..writeByte(21)
       ..write(obj.newConditionTexts)
       ..writeByte(23)
-      ..write(obj.usedConditionTexts);
+      ..write(obj.usedConditionTexts)
+      ..writeByte(28)
+      ..write(obj.standardButtons);
   }
 
   @override
