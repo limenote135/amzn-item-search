@@ -260,3 +260,17 @@ const defaultUsedConditionText = [
 const defaultPricetarSettings = PricetarSettings();
 const defaultMakadSettings = MakadSettings();
 const defaultSellerSketSettings = SellerSketSettings();
+
+const standardButtonAmazonListKey = "AmazonList";
+const standardButtonNewOffersKey = "NewOffers";
+const standardButtonUsedOffersKey = "UsedOffers";
+const standardButtonKeepaPageKey = "KeepaPage";
+const standardButtonVariationPageKey = "VariationPage";
+
+const defaultStandardButtons = <String, bool>{
+  standardButtonAmazonListKey: true,
+  standardButtonNewOffersKey: true,
+  standardButtonUsedOffersKey: true,
+  standardButtonKeepaPageKey: true,
+  standardButtonVariationPageKey: true,
+};

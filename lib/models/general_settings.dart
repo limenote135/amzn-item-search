@@ -84,6 +84,9 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(27, defaultValue: defaultSellerSketSettings)
     @Default(defaultSellerSketSettings)
         SellerSketSettings sellerSketSettings,
+    @HiveField(28, defaultValue: defaultStandardButtons)
+    @Default(defaultStandardButtons)
+        Map<String, bool> standardButtons,
   }) = _GeneralSettings;
 }
 

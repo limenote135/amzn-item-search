@@ -13,6 +13,7 @@ import 'analytics.dart';
 
 class ShortcutPage extends StatelessWidget {
   const ShortcutPage({super.key});
+
   static const String routeName = "/settings/shortcut";
 
   static Route<void> route() {
@@ -150,6 +151,8 @@ class _Body extends HookConsumerWidget {
         return "新品一覧";
       case navigationTargetUsedOffers:
         return "中古一覧";
+      case navigationTargetVariation:
+        return "バリエーション";
       default:
         throw Exception("Unknown target: $param");
     }
@@ -162,6 +165,7 @@ class _Body extends HookConsumerWidget {
   static const _newOffersKey = "newOffers";
   static const _usedOffersKey = "usedOffers";
   static const _keepaKey = "keepa";
+  static const _variation = "variation";
 
   Future<ShortcutDetail?> _selectAction(
     BuildContext context,
@@ -178,6 +182,7 @@ class _Body extends HookConsumerWidget {
         const AlertDialogAction(key: _newOffersKey, label: "新品一覧"),
         const AlertDialogAction(key: _usedOffersKey, label: "中古一覧"),
         const AlertDialogAction(key: _keepaKey, label: "Keepa"),
+        const AlertDialogAction(key: _variation, label: "バリエーション"),
         for (var button in buttons)
           AlertDialogAction(key: button.id, label: button.title)
       ],
@@ -210,6 +215,11 @@ class _Body extends HookConsumerWidget {
         return const ShortcutDetail(
           type: ShortcutType.navigation,
           param: navigationTargetKeepa,
+        );
+      case _variation:
+        return const ShortcutDetail(
+          type: ShortcutType.navigation,
+          param: navigationTargetVariation,
         );
       default:
         final button = buttons.firstWhere((element) => element.id == ret);

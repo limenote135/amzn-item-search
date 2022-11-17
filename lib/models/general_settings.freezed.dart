@@ -78,6 +78,8 @@ mixin _$GeneralSettings {
   @HiveField(27, defaultValue: defaultSellerSketSettings)
   SellerSketSettings get sellerSketSettings =>
       throw _privateConstructorUsedError;
+  @HiveField(28, defaultValue: defaultStandardButtons)
+  Map<String, bool> get standardButtons => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith =>
@@ -146,7 +148,9 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       @HiveField(26, defaultValue: defaultMakadSettings)
           MakadSettings makadSettings,
       @HiveField(27, defaultValue: defaultSellerSketSettings)
-          SellerSketSettings sellerSketSettings});
+          SellerSketSettings sellerSketSettings,
+      @HiveField(28, defaultValue: defaultStandardButtons)
+          Map<String, bool> standardButtons});
 
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
   $PricetarSettingsCopyWith<$Res> get pricetarSettings;
@@ -195,6 +199,7 @@ class _$GeneralSettingsCopyWithImpl<$Res, $Val extends GeneralSettings>
     Object? pricetarSettings = null,
     Object? makadSettings = null,
     Object? sellerSketSettings = null,
+    Object? standardButtons = null,
   }) {
     return _then(_value.copyWith(
       isDarkMode: null == isDarkMode
@@ -309,6 +314,10 @@ class _$GeneralSettingsCopyWithImpl<$Res, $Val extends GeneralSettings>
           ? _value.sellerSketSettings
           : sellerSketSettings // ignore: cast_nullable_to_non_nullable
               as SellerSketSettings,
+      standardButtons: null == standardButtons
+          ? _value.standardButtons
+          : standardButtons // ignore: cast_nullable_to_non_nullable
+              as Map<String, bool>,
     ) as $Val);
   }
 
@@ -410,7 +419,9 @@ abstract class _$$_GeneralSettingsCopyWith<$Res>
       @HiveField(26, defaultValue: defaultMakadSettings)
           MakadSettings makadSettings,
       @HiveField(27, defaultValue: defaultSellerSketSettings)
-          SellerSketSettings sellerSketSettings});
+          SellerSketSettings sellerSketSettings,
+      @HiveField(28, defaultValue: defaultStandardButtons)
+          Map<String, bool> standardButtons});
 
   @override
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
@@ -461,6 +472,7 @@ class __$$_GeneralSettingsCopyWithImpl<$Res>
     Object? pricetarSettings = null,
     Object? makadSettings = null,
     Object? sellerSketSettings = null,
+    Object? standardButtons = null,
   }) {
     return _then(_$_GeneralSettings(
       isDarkMode: null == isDarkMode
@@ -575,6 +587,10 @@ class __$$_GeneralSettingsCopyWithImpl<$Res>
           ? _value.sellerSketSettings
           : sellerSketSettings // ignore: cast_nullable_to_non_nullable
               as SellerSketSettings,
+      standardButtons: null == standardButtons
+          ? _value._standardButtons
+          : standardButtons // ignore: cast_nullable_to_non_nullable
+              as Map<String, bool>,
     ));
   }
 }
@@ -640,7 +656,9 @@ class _$_GeneralSettings implements _GeneralSettings {
       @HiveField(26, defaultValue: defaultMakadSettings)
           this.makadSettings = defaultMakadSettings,
       @HiveField(27, defaultValue: defaultSellerSketSettings)
-          this.sellerSketSettings = defaultSellerSketSettings})
+          this.sellerSketSettings = defaultSellerSketSettings,
+      @HiveField(28, defaultValue: defaultStandardButtons)
+          final Map<String, bool> standardButtons = defaultStandardButtons})
       : _retailers = retailers,
         _readAloudPatterns = readAloudPatterns,
         _customButtons = customButtons,
@@ -649,7 +667,8 @@ class _$_GeneralSettings implements _GeneralSettings {
         _leftSlideShortcut = leftSlideShortcut,
         _rightSlideShortcut = rightSlideShortcut,
         _newConditionTexts = newConditionTexts,
-        _usedConditionTexts = usedConditionTexts;
+        _usedConditionTexts = usedConditionTexts,
+        _standardButtons = standardButtons;
 
 // ダークモード
   @override
@@ -821,10 +840,18 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(27, defaultValue: defaultSellerSketSettings)
   final SellerSketSettings sellerSketSettings;
+  final Map<String, bool> _standardButtons;
+  @override
+  @JsonKey()
+  @HiveField(28, defaultValue: defaultStandardButtons)
+  Map<String, bool> get standardButtons {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_standardButtons);
+  }
 
   @override
   String toString() {
-    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings, leftSlideShortcut: $leftSlideShortcut, rightSlideShortcut: $rightSlideShortcut, newConditionTexts: $newConditionTexts, newConditionTextIndex: $newConditionTextIndex, usedConditionTexts: $usedConditionTexts, usedConditionTextIndex: $usedConditionTextIndex, pricetarSettings: $pricetarSettings, makadSettings: $makadSettings, sellerSketSettings: $sellerSketSettings)';
+    return 'GeneralSettings(isDarkMode: $isDarkMode, enableTargetProfit: $enableTargetProfit, targetProfitValue: $targetProfitValue, skuFormat: $skuFormat, retailers: $retailers, enableReadAloud: $enableReadAloud, patternIndex: $patternIndex, readAloudPatterns: $readAloudPatterns, readAloudVolume: $readAloudVolume, readAloudSpeed: $readAloudSpeed, customButtons: $customButtons, csvOrder: $csvOrder, minProfit: $minProfit, getStocks: $getStocks, enableAlert: $enableAlert, alerts: $alerts, enableAlertVibration: $enableAlertVibration, isMajorCustomer: $isMajorCustomer, keepaSettings: $keepaSettings, leftSlideShortcut: $leftSlideShortcut, rightSlideShortcut: $rightSlideShortcut, newConditionTexts: $newConditionTexts, newConditionTextIndex: $newConditionTextIndex, usedConditionTexts: $usedConditionTexts, usedConditionTextIndex: $usedConditionTextIndex, pricetarSettings: $pricetarSettings, makadSettings: $makadSettings, sellerSketSettings: $sellerSketSettings, standardButtons: $standardButtons)';
   }
 
   @override
@@ -885,7 +912,9 @@ class _$_GeneralSettings implements _GeneralSettings {
             (identical(other.makadSettings, makadSettings) ||
                 other.makadSettings == makadSettings) &&
             (identical(other.sellerSketSettings, sellerSketSettings) ||
-                other.sellerSketSettings == sellerSketSettings));
+                other.sellerSketSettings == sellerSketSettings) &&
+            const DeepCollectionEquality()
+                .equals(other._standardButtons, _standardButtons));
   }
 
   @override
@@ -918,7 +947,8 @@ class _$_GeneralSettings implements _GeneralSettings {
         usedConditionTextIndex,
         pricetarSettings,
         makadSettings,
-        sellerSketSettings
+        sellerSketSettings,
+        const DeepCollectionEquality().hash(_standardButtons)
       ]);
 
   @JsonKey(ignore: true)
@@ -985,7 +1015,9 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(26, defaultValue: defaultMakadSettings)
           final MakadSettings makadSettings,
       @HiveField(27, defaultValue: defaultSellerSketSettings)
-          final SellerSketSettings sellerSketSettings}) = _$_GeneralSettings;
+          final SellerSketSettings sellerSketSettings,
+      @HiveField(28, defaultValue: defaultStandardButtons)
+          final Map<String, bool> standardButtons}) = _$_GeneralSettings;
 
   @override // ダークモード
   @HiveField(0)
@@ -1071,6 +1103,9 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(27, defaultValue: defaultSellerSketSettings)
   SellerSketSettings get sellerSketSettings;
+  @override
+  @HiveField(28, defaultValue: defaultStandardButtons)
+  Map<String, bool> get standardButtons;
   @override
   @JsonKey(ignore: true)
   _$$_GeneralSettingsCopyWith<_$_GeneralSettings> get copyWith =>
