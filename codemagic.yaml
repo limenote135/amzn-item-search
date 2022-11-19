@@ -105,6 +105,7 @@ workflows:
       - flutter build ipa --export-options-plist ~/export_options.plist --build-number=$PROJECT_BUILD_NUMBER
         --dart-define=FLAVOR=prod
       - |
+        ./ios/Pods/FirebaseCrashlytics/upload-symbols -gsp ./ios/res/prod/GoogleService-Info.plist -p ios ./build/ios/archive/Runner.xcarchive/dSYMs
         #cp  -r symbols $FCI_EXPORT_DIR/symbols
         cat /Users/builder/export_options.plist
     artifacts:
@@ -112,6 +113,7 @@ workflows:
       - build/**/outputs/bundle/**/*.aab
       - build/**/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
+      - build/ios/archive/Runner.xcarchive/dSYMs
       - /tmp/xcodebuild_logs/*.log
       - '*.snap'
       - build/windows/**/*.msix
