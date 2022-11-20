@@ -133,19 +133,6 @@ class _Body extends HookConsumerWidget {
             Navigator.push(context, ShortcutPage.route());
           },
         ),
-        SwitchListTile(
-          title: const Text("出品一覧で在庫数を取得(β)"),
-          subtitle: const Text("出品一覧画面が重くなります。"),
-          value: settings.getStocks,
-          onChanged: (value) {
-            ref
-                .read(generalSettingsControllerProvider.notifier)
-                .update(getStocks: value);
-            ref
-                .read(analyticsControllerProvider)
-                .setUserProp(getStocksPropName, value.toString());
-          },
-        ),
         const ThemeDivider(),
         ListTile(
           title: Text("仕入れ設定", style: captionStyle),
