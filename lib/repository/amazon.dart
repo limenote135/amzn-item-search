@@ -9,7 +9,10 @@ import 'package:dio/dio.dart' as dio;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:worker_manager/worker_manager.dart';
+
+part 'amazon.g.dart';
 
 final amazonRepositoryProvider = Provider(AmazonRepository.new);
 
@@ -322,4 +325,39 @@ class AmazonRepository {
     }
     return doc.querySelectorAll("#quantity > option").length;
   }
+
+  Future<List<String>> getSuggestion(String word) async {
+    final dio = await _ref.read(dioProvider.future);
+    final url = "https://completion.amazon.co.jp/api/2017/suggestions?"
+        "limit=10&prefix=$word&suggestion-type=WIDGET&suggestion-type=KEYWORD&"
+        "page-type=Gateway&alias=aps&site-variant=desktop&version=3&wc=&"
+        "lop=ja_JP&mid=A1VC38T7YXB528";
+    final resp = await dio.get(url);
+    final js = json.decode(resp.data!) as Map<String, dynamic>;
+    final data = SuggestionResponse.fromJson(js);
+    return data.suggestions.map((e) => e.value).toList();
+  }
+}
+
+@JsonSerializable()
+class SuggestionResponse {
+  SuggestionResponse(this.prefix, this.suggestions);
+  factory SuggestionResponse.fromJson(Map<String, dynamic> json) =>
+      _$SuggestionResponseFromJson(json);
+
+  String prefix;
+  List<Suggestion> suggestions;
+
+  Map<String, dynamic> toJson() => _$SuggestionResponseToJson(this);
+}
+
+@JsonSerializable()
+class Suggestion {
+  Suggestion(this.value);
+  factory Suggestion.fromJson(Map<String, dynamic> json) =>
+      _$SuggestionFromJson(json);
+
+  String value;
+
+  Map<String, dynamic> toJson() => _$SuggestionToJson(this);
 }
