@@ -5,6 +5,7 @@ import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/query_params.dart';
 import 'package:amasearch/models/word_search_history.dart';
 import 'package:amasearch/pages/search/word_search_page/search_history_page.dart';
+import 'package:amasearch/repository/amazon.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/util/error_report.dart';
@@ -14,6 +15,7 @@ import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'item_tile.dart';
@@ -89,6 +91,7 @@ class _AppBar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController();
     final req = ref.watch(_currentQueryItemsRequest);
+    final amazonRepository = ref.watch(amazonRepositoryProvider);
 
     final height = useState<double>(0);
     WidgetsBinding.instance.addPostFrameCallback((cb) {
@@ -99,6 +102,26 @@ class _AppBar extends HookConsumerWidget {
         height.value = obj.paintBounds.height;
       }
     });
+
+    void onSubmit(String value) {
+      var trimmedValue = value.trim();
+      if (trimmedValue.length > 64) {
+        trimmedValue = trimmedValue.substring(0, 64);
+      }
+      if (trimmedValue != "") {
+        if (req.query == trimmedValue) {
+          // 変更がない場合は強制リロードする
+          final _ = ref.refresh(queryItemResultProvider(req));
+          return;
+        }
+        ref.read(_currentQueryItemsRequest.notifier).state =
+            req.copyWith(query: trimmedValue);
+        ref
+            .read(wordSearchHistoryControllerProvider.notifier)
+            .add(WordSearchHistory(keyword: trimmedValue));
+      }
+    }
+
     return SliverAppBar(
       title: Column(
         key: _appBarKey,
@@ -108,32 +131,37 @@ class _AppBar extends HookConsumerWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    controller: controller,
-                    decoration: InputDecoration(
-                      hintText: "フリーワード検索",
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: controller.clear,
+                  child: TypeAheadField(
+                    textFieldConfiguration: TextFieldConfiguration(
+                      controller: controller,
+                      decoration: InputDecoration(
+                        hintText: "フリーワード検索",
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: controller.clear,
+                        ),
                       ),
+                      onSubmitted: onSubmit,
                     ),
-                    onSubmitted: (value) {
-                      var trimmedValue = value.trim();
-                      if (trimmedValue.length > 64) {
-                        trimmedValue = trimmedValue.substring(0, 64);
+                    suggestionsCallback: (pattern) async {
+                      if (pattern.isEmpty) {
+                        return <String>[];
                       }
-                      if (trimmedValue != "") {
-                        if (req.query == trimmedValue) {
-                          // 変更がない場合は強制リロードする
-                          final _ = ref.refresh(queryItemResultProvider(req));
-                          return;
-                        }
-                        ref.read(_currentQueryItemsRequest.notifier).state =
-                            req.copyWith(query: trimmedValue);
-                        ref
-                            .read(wordSearchHistoryControllerProvider.notifier)
-                            .add(WordSearchHistory(keyword: trimmedValue));
-                      }
+                      return amazonRepository.getSuggestion(pattern);
+                    },
+                    hideOnEmpty: true,
+                    itemBuilder: (context, itemData) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Text(itemData),
+                      );
+                    },
+                    noItemsFoundBuilder: (context) {
+                      return Container();
+                    },
+                    onSuggestionSelected: (suggestion) {
+                      controller.text = suggestion;
+                      onSubmit(suggestion);
                     },
                   ),
                 ),
