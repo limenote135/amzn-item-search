@@ -5,11 +5,11 @@ import 'dart:math';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
+import 'package:worker_manager/worker_manager.dart';
 
 final amazonRepositoryProvider = Provider(AmazonRepository.new);
 
@@ -36,6 +36,7 @@ class AmazonRepository {
   static const _marketPlaceJp = "A1VC38T7YXB528";
 
   static final _random = Random();
+
   static String get _userAgent {
     final rand = _random.nextInt(100) + 45;
     return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.$rand Safari/537.36";
@@ -60,7 +61,7 @@ class AmazonRepository {
   final Ref _ref;
 
   Future<void> _ensureCookie(String asin) async {
-    final dio = await _ref.read(dioProvider.future);
+    final d = await _ref.read(dioProvider.future);
     final jar = await _ref.read(persistCookieJarProvider.future);
     final cookie = await jar.loadForRequest(Uri(host: "amazon.co.jp"));
     final now = DateTime.now();
@@ -70,17 +71,17 @@ class AmazonRepository {
     }
     final url = "$_productUrl$asin";
 
-    final opt = Options(
+    final opt = dio.Options(
       headers: <String, String>{
         HttpHeaders.userAgentHeader: _userAgent,
       },
     );
-    await dio.get(url, opt: opt);
+    await d.get(url, opt: opt);
   }
 
   Future<OfferListings> getOffers(
     OfferListingsParams params,
-    CancelToken cancelToken,
+    dio.CancelToken cancelToken,
   ) async {
     final reqParam = <String, dynamic>{
       "all": true,
@@ -97,15 +98,15 @@ class AmazonRepository {
       "filters": reqParamStr,
       "pageno": params.page + 1,
     };
-    final dio = await _ref.read(dioProvider.future);
+    final d = await _ref.read(dioProvider.future);
     await _ensureCookie(params.asin);
 
-    final opt = Options(
+    final opt = dio.Options(
       headers: <String, String>{
         HttpHeaders.userAgentHeader: _userAgent,
       },
     );
-    final resp = await dio.get(
+    final resp = await d.get(
       _offerUrlBase,
       query: query,
       opt: opt,
@@ -122,12 +123,22 @@ class AmazonRepository {
       page: params.page,
       body: resp.data!,
     );
-    final offers = await compute(_parseOfferListings, parseParam);
+    final offers = await Executor().execute<
+        _ParseOfferListingsParam,
+        void,
+        void,
+        void,
+        OfferListings,
+        void>(fun1: _parseOfferListings, arg1: parseParam);
+    // final offers = await compute(_parseOfferListings, parseParam);
 
     return offers;
   }
 
-  static OfferListings _parseOfferListings(_ParseOfferListingsParam param) {
+  static OfferListings _parseOfferListings(
+    _ParseOfferListingsParam param,
+    TypeSendPort<dynamic> port,
+  ) {
     final doc = HtmlParser(param.body).parse();
 
     final cartElement = doc.querySelector("#aod-pinned-offer");
@@ -258,9 +269,9 @@ class AmazonRepository {
   Future<int> getStockCount(
     String asin,
     String sellerId,
-    CancelToken cancelToken,
+    dio.CancelToken cancelToken,
   ) async {
-    final dio = await _ref.read(dioProvider.future);
+    final d = await _ref.read(dioProvider.future);
 
     final url = _stockUrlBase.replaceAll("[asin]", asin);
     final query = <String, dynamic>{
@@ -268,13 +279,13 @@ class AmazonRepository {
       "marketplaceID": _marketPlaceJp,
     };
 
-    final opt = Options(
+    final opt = dio.Options(
       headers: <String, String>{
         HttpHeaders.userAgentHeader: _userAgent,
       },
     );
     final resp =
-        await dio.get(url, query: query, opt: opt, cancelToken: cancelToken);
+        await d.get(url, query: query, opt: opt, cancelToken: cancelToken);
 
     if (resp.statusCode != 200) {
       throw Exception("エラー${resp.statusCode}");
@@ -282,13 +293,18 @@ class AmazonRepository {
     if (resp.data == "") {
       throw Exception("エラー");
     }
-    final stocks = await compute(_parseStock, resp.data);
+    final stocks =
+        await Executor().execute<String?, void, void, void, int, void>(
+      fun1: _parseStock,
+      arg1: resp.data,
+    );
+    // final stocks = await compute(_parseStock, resp.data);
     // final stocks = _parseStock(resp.data);
 
     return stocks;
   }
 
-  static int _parseStock(String? body) {
+  static int _parseStock(String? body, TypeSendPort<dynamic> port) {
     final doc = HtmlParser(body).parse();
 
     final availability = doc.querySelector("#availability > span");
