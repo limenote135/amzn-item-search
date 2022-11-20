@@ -44,6 +44,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:worker_manager/worker_manager.dart';
 
 import 'firebase_options_dev.dart' as dev;
 import 'firebase_options_prod.dart' as prod;
@@ -79,6 +80,7 @@ Future<void> main() async {
       initHive(),
       initRevenueCat(),
       clearDiskCachedImages(duration: const Duration(days: 6)),
+      Executor().warmUp(),
     ]);
     // ignore: avoid_catches_without_on_clauses
   } catch (e, stacktrace) {
