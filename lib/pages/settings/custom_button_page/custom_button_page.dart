@@ -86,7 +86,7 @@ class _Body extends HookConsumerWidget {
           onTap: () async {
             final button = await Navigator.push(
               context,
-              UrlSettingsPage.route(settings.customButtons[index]),
+              UrlSettingsPage.route(settings.customButtons[buttonIndex]),
             );
 
             if (button == null) {
@@ -95,7 +95,7 @@ class _Body extends HookConsumerWidget {
 
             final updated = [
               for (var i = 0; i < settings.customButtons.length; i++)
-                i == index
+                i == buttonIndex
                     ? settings.customButtons[i].copyWith(
                         title: button.title,
                         pattern: button.pattern,
