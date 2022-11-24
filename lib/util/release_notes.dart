@@ -25,14 +25,6 @@ const releaseNotes = <Release>[
       ],
     ),
   ]),
-  Release("1.6.2", [
-    ReleaseSublist(
-      name: "更新内容",
-      changes: [
-        "v1.6.0 以降、コンディション説明のテンプレートが編集できない不具合を修正",
-      ],
-    ),
-  ]),
   Release("1.6.0", [
     ReleaseSublist(
       name: "更新内容",
