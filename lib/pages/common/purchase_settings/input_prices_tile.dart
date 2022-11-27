@@ -1,3 +1,4 @@
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/custom_validator.dart';
 import 'package:amasearch/widgets/calculator.dart';
@@ -12,6 +13,7 @@ class InputPricesTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentAsinDataProvider);
     final showCalc = useState(false);
 
     final purchasePriceFocus = useFocusNode();
@@ -101,6 +103,7 @@ class InputPricesTile extends HookConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Calculator(
+                    asin: item.asin,
                     firstButtonText: "仕入価格へ",
                     secondButtonText: "販売価格へ",
                     onFirstButtonPushed: (val) {
