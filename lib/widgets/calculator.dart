@@ -9,12 +9,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class Calculator extends HookConsumerWidget {
   const Calculator({
     super.key,
+    required this.asin,
     required this.firstButtonText,
     required this.onFirstButtonPushed,
     required this.secondButtonText,
     required this.onSecondButtonPushed,
   });
 
+  final String asin;
   final String firstButtonText;
   final String secondButtonText;
   final void Function(double val) onFirstButtonPushed;
@@ -22,7 +24,7 @@ class Calculator extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final calcData = ref.watch(calculatorControllerProvider);
+    final calcData = ref.watch(calculatorControllerProvider(asin));
 
     return OutlinedButtonTheme(
       data: OutlinedButtonThemeData(
@@ -52,7 +54,9 @@ class Calculator extends HookConsumerWidget {
                     ),
                     _ExpandedButton(
                       onPressed: () {
-                        ref.read(calculatorControllerProvider.notifier).clear();
+                        ref
+                            .read(calculatorControllerProvider(asin).notifier)
+                            .clear();
                       },
                       style: OutlinedButton.styleFrom(
                         foregroundColor:
@@ -68,26 +72,26 @@ class Calculator extends HookConsumerWidget {
                   children: [
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("7"),
                       child: const Text("7"),
                     ),
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("8"),
                       child: const Text("8"),
                     ),
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("9"),
                       child: const Text("9"),
                     ),
                     _OperatorButton(
                       onPressed: () async {
                         ref
-                            .read(calculatorControllerProvider.notifier)
+                            .read(calculatorControllerProvider(asin).notifier)
                             .pushOp(CalcOp.division);
                         await ref
                             .read(analyticsControllerProvider)
@@ -101,26 +105,26 @@ class Calculator extends HookConsumerWidget {
                   children: [
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("4"),
                       child: const Text("4"),
                     ),
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("5"),
                       child: const Text("5"),
                     ),
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("6"),
                       child: const Text("6"),
                     ),
                     _OperatorButton(
                       onPressed: () async {
                         ref
-                            .read(calculatorControllerProvider.notifier)
+                            .read(calculatorControllerProvider(asin).notifier)
                             .pushOp(CalcOp.multiple);
                         await ref
                             .read(analyticsControllerProvider)
@@ -134,26 +138,26 @@ class Calculator extends HookConsumerWidget {
                   children: [
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("1"),
                       child: const Text("1"),
                     ),
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("2"),
                       child: const Text("2"),
                     ),
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("3"),
                       child: const Text("3"),
                     ),
                     _OperatorButton(
                       onPressed: () async {
                         ref
-                            .read(calculatorControllerProvider.notifier)
+                            .read(calculatorControllerProvider(asin).notifier)
                             .pushOp(CalcOp.minus);
                         await ref
                             .read(analyticsControllerProvider)
@@ -167,26 +171,26 @@ class Calculator extends HookConsumerWidget {
                   children: [
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("."),
                       child: const Text("."),
                     ),
                     _ExpandedButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushNumber("0"),
                       child: const Text("0"),
                     ),
                     _OperatorButton(
                       onPressed: () => ref
-                          .read(calculatorControllerProvider.notifier)
+                          .read(calculatorControllerProvider(asin).notifier)
                           .pushOp(CalcOp.equal),
                       child: const Text("="),
                     ),
                     _OperatorButton(
                       onPressed: () async {
                         ref
-                            .read(calculatorControllerProvider.notifier)
+                            .read(calculatorControllerProvider(asin).notifier)
                             .pushOp(CalcOp.plus);
                         await ref
                             .read(analyticsControllerProvider)
@@ -209,7 +213,7 @@ class Calculator extends HookConsumerWidget {
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
                         ref
-                            .read(calculatorControllerProvider.notifier)
+                            .read(calculatorControllerProvider(asin).notifier)
                             .pushRatio(1.05);
                         await ref
                             .read(analyticsControllerProvider)
@@ -221,7 +225,7 @@ class Calculator extends HookConsumerWidget {
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
                         ref
-                            .read(calculatorControllerProvider.notifier)
+                            .read(calculatorControllerProvider(asin).notifier)
                             .pushRatio(0.95);
                         await ref
                             .read(analyticsControllerProvider)
@@ -237,7 +241,7 @@ class Calculator extends HookConsumerWidget {
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
                         ref
-                            .read(calculatorControllerProvider.notifier)
+                            .read(calculatorControllerProvider(asin).notifier)
                             .pushRatio(1.1);
                         await ref
                             .read(analyticsControllerProvider)
@@ -249,7 +253,7 @@ class Calculator extends HookConsumerWidget {
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
                         ref
-                            .read(calculatorControllerProvider.notifier)
+                            .read(calculatorControllerProvider(asin).notifier)
                             .pushRatio(0.9);
                         await ref
                             .read(analyticsControllerProvider)
@@ -265,7 +269,7 @@ class Calculator extends HookConsumerWidget {
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
                         final val = ref
-                            .read(calculatorControllerProvider.notifier)
+                            .read(calculatorControllerProvider(asin).notifier)
                             .calc();
                         onFirstButtonPushed(val);
                         await ref
@@ -282,7 +286,7 @@ class Calculator extends HookConsumerWidget {
                       style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () async {
                         final val = ref
-                            .read(calculatorControllerProvider.notifier)
+                            .read(calculatorControllerProvider(asin).notifier)
                             .calc();
                         onSecondButtonPushed(val);
                         await ref
