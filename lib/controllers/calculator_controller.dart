@@ -1,9 +1,9 @@
 import 'package:amasearch/models/calc_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final calculatorControllerProvider =
-    StateNotifierProvider.autoDispose<CalculateDataController, CalculateData>(
-  (ref) => CalculateDataController(),
+final calculatorControllerProvider = StateNotifierProvider.family<
+    CalculateDataController, CalculateData, String>(
+  (ref, _) => CalculateDataController(),
 );
 
 class CalculateDataController extends StateNotifier<CalculateData> {
