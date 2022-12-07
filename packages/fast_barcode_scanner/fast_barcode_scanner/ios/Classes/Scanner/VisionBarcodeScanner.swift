@@ -131,8 +131,10 @@ class VisionBarcodeScanner: NSObject, BarcodeScanner, AVCaptureVideoDataOutputSa
         }
         let uniqueCodes = Array(barcodeDict.values)
 
-        onDetection?()
-        resultHandler(uniqueCodes)
+        if !uniqueCodes.isEmpty {
+            onDetection?()
+            resultHandler(uniqueCodes)
+        }
     }
 }
 
