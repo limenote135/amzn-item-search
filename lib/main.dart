@@ -65,7 +65,7 @@ class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     // 'Dart' から始まる UA だと Keepa の画像取得が弾かれるので変更する
-    return super.createHttpClient(context)..userAgent = "amasearch/1.0";
+    return super.createHttpClient(context)..userAgent = "amasearch/1.1";
   }
 }
 
