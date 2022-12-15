@@ -31,6 +31,7 @@ import 'package:amasearch/models/sellersket_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/models/word_search_history.dart';
 import 'package:amasearch/util/error_report.dart';
+import 'package:amasearch/util/random.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -64,8 +65,12 @@ const _kTestingInAppPurchase = false;
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    // 'Dart' から始まる UA だと Keepa の画像取得が弾かれるので変更する
-    return super.createHttpClient(context)..userAgent = "amasearch/1.1";
+    final len = randomIntWithRange(4, 7);
+    final base = randomString(len);
+    final version = "0.${randomIntWithDigit(2)}.${randomIntWithDigit(4)}";
+
+    // Keepa のグラフアクセスを大量に行うとブロックされるので、ランダムで UA を変更する
+    return super.createHttpClient(context)..userAgent = "ama$base/$version";
   }
 }
 
