@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Box } from "@mui/material";
 import Feature from "@/components/lp/FeatureSection";
 import Menu from "@/components/lp/Menu";
@@ -38,5 +38,7 @@ const Component = () => (
 const Container = () => {
   return <Component />;
 };
+
+Container.getLayout = (page: ReactElement) => page;
 
 export default Container;

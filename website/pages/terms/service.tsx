@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import { Container, Typography } from "@mui/material";
 import Menu from "@/components/lp/Menu";
 import fs from "fs";
+import { ReactElement } from "react";
 
 type Props = {
   terms: string;
@@ -27,5 +28,7 @@ const Terms = ({ terms }: Props) => {
     </>
   );
 };
+
+Terms.getLayout = (page: ReactElement) => page;
 
 export default Terms;
