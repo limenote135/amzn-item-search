@@ -1,4 +1,4 @@
-import { Box, Button, ThemeProvider, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { Image } from "@/components/Image";
 import Link from "@/components/Link";
