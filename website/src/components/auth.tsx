@@ -11,7 +11,7 @@ const Auth = ({ children }: Props) => {
   const router = useRouter();
   useEffect(() => {
     if (!user && router.route !== "/login") {
-      router.replace("/login");
+      router.replace(`/login?ref=${router.pathname}`);
     }
   }, [user, router]);
 
