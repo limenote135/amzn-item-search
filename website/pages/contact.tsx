@@ -1,5 +1,6 @@
 import Menu from "@/components/lp/Menu";
 import Head from "next/head";
+import { ReactElement } from "react";
 
 const Contact = () => {
   return (
@@ -13,5 +14,7 @@ const Contact = () => {
     </>
   );
 };
+
+Contact.getLayout = (page: ReactElement) => page;
 
 export default Contact;
