@@ -27,7 +27,12 @@ const Login: NextPage = () => {
 
   useEffect(() => {
     if (user) {
-      router.replace("/");
+      const query = router.query;
+      if (query && query.ref) {
+        router.replace(query.ref as string);
+        return;
+      }
+      router.replace("/mypage");
     }
   }, [user, router]);
 
