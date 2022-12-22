@@ -37,7 +37,7 @@ dependencies:
   dio_cookie_manager: ^2.0.0
   euc:
     path: ./packages/euc
-  extended_image: ^6.3.2
+  extended_image: ^6.3.4
   fast_barcode_scanner:
     path: ./packages/fast_barcode_scanner/fast_barcode_scanner
   firebase_analytics: ^10.0.8
