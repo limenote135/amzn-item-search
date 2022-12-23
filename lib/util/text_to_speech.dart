@@ -11,10 +11,12 @@ class TextToSpeech {
     final settings = _ref.read(generalSettingsControllerProvider);
     Future(() async {
       final dynamic languages = await _flutterTts.getLanguages;
-      for (final lang in languages) {
-        if (lang == "ja-JP") {
-          await _flutterTts.setLanguage("ja-JP");
-          break;
+      if (languages is List<dynamic>) {
+        for (final lang in languages) {
+          if (lang == "ja-JP") {
+            await _flutterTts.setLanguage("ja-JP");
+            break;
+          }
         }
       }
 
