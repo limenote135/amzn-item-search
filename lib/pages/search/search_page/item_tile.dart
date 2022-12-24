@@ -8,7 +8,6 @@ import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
-import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -72,7 +71,6 @@ class ItemTileImpl extends HookConsumerWidget {
     final item = ref.watch(currentSearchItemProvider);
     final firstItem = item.asins.first;
     final fromRoute = ref.watch(fromRouteProvider);
-    final fbaFee = firstItem.prices?.feeInfo.fbaFee ?? 0;
     return InkWell(
       onTap: () {
         unfocus();
@@ -94,7 +92,6 @@ class ItemTileImpl extends HookConsumerWidget {
           currentAsinCountProvider.overrideWithValue(item.asins.length),
           currentSearchDateProvider.overrideWithValue(item.searchDate),
           isEllipsisProvider.overrideWithValue(true),
-          currentFbaFeeProvider.overrideWithValue(fbaFee),
         ],
         child: const SearchItemTile(),
       ),

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'general_settings.dart';
 
@@ -697,6 +697,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(4)
   List<String> get retailers {
+    if (_retailers is EqualUnmodifiableListView) return _retailers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_retailers);
   }
@@ -715,6 +716,8 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(7)
   List<ReadAloudPattern> get readAloudPatterns {
+    if (_readAloudPatterns is EqualUnmodifiableListView)
+      return _readAloudPatterns;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_readAloudPatterns);
   }
@@ -733,6 +736,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(10, defaultValue: defaultCustomButtons)
   List<CustomButtonDetail> get customButtons {
+    if (_customButtons is EqualUnmodifiableListView) return _customButtons;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_customButtons);
   }
@@ -744,6 +748,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(11, defaultValue: defaultCsvOrder)
   List<CsvColumn> get csvOrder {
+    if (_csvOrder is EqualUnmodifiableListView) return _csvOrder;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_csvOrder);
   }
@@ -768,6 +773,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(15, defaultValue: defaultAlert)
   List<AlertConditionSet> get alerts {
+    if (_alerts is EqualUnmodifiableListView) return _alerts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_alerts);
   }
@@ -789,6 +795,8 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(19, defaultValue: defaultLeftShortcut)
   List<ShortcutDetail> get leftSlideShortcut {
+    if (_leftSlideShortcut is EqualUnmodifiableListView)
+      return _leftSlideShortcut;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_leftSlideShortcut);
   }
@@ -798,6 +806,8 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(20, defaultValue: defaultRightShortcut)
   List<ShortcutDetail> get rightSlideShortcut {
+    if (_rightSlideShortcut is EqualUnmodifiableListView)
+      return _rightSlideShortcut;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_rightSlideShortcut);
   }
@@ -807,6 +817,8 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(21, defaultValue: defaultNewConditionTexts)
   List<String> get newConditionTexts {
+    if (_newConditionTexts is EqualUnmodifiableListView)
+      return _newConditionTexts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_newConditionTexts);
   }
@@ -820,6 +832,8 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(23, defaultValue: defaultUsedConditionText)
   List<String> get usedConditionTexts {
+    if (_usedConditionTexts is EqualUnmodifiableListView)
+      return _usedConditionTexts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_usedConditionTexts);
   }
@@ -845,6 +859,7 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey()
   @HiveField(28, defaultValue: defaultStandardButtons)
   Map<String, bool> get standardButtons {
+    if (_standardButtons is EqualUnmodifiableMapView) return _standardButtons;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_standardButtons);
   }
@@ -1594,6 +1609,7 @@ class _$_AlertConditionSet implements _AlertConditionSet {
   @HiveField(2)
   @JsonKey(name: "c")
   List<AlertCondition> get conditions {
+    if (_conditions is EqualUnmodifiableListView) return _conditions;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_conditions);
   }
