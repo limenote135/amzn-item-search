@@ -12,8 +12,6 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final currentFbaFeeProvider = Provider((_) => 0);
-
 const _bigSizeFbaFee = 589;
 const _moreBigSizeFbaFee = 2755;
 
@@ -45,7 +43,7 @@ class TileImage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final asinData = ref.watch(currentAsinDataProvider);
     final asinCount = ref.watch(currentAsinCountProvider);
-    final fbaFee = ref.watch(currentFbaFeeProvider);
+    final fbaFee = asinData.prices?.feeInfo.fbaFee ?? 0;
 
     final captionSize = captionSizeBlackText(context);
 
