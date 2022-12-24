@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'mws.dart';
 
@@ -125,6 +125,7 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   @override
   @JsonKey()
   List<AsinData> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
   }
@@ -411,6 +412,7 @@ class _$_QueryItemsResponse implements _QueryItemsResponse {
   final List<String> _asins;
   @override
   List<String> get asins {
+    if (_asins is EqualUnmodifiableListView) return _asins;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_asins);
   }
@@ -560,6 +562,7 @@ class _$_BatchGetAsinDataResponse implements _BatchGetAsinDataResponse {
   final List<AsinData> _data;
   @override
   List<AsinData> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_data);
   }
@@ -712,6 +715,7 @@ class _$_GetItemVariationsResponse implements _GetItemVariationsResponse {
   @override
   @JsonKey()
   List<String> get asins {
+    if (_asins is EqualUnmodifiableListView) return _asins;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_asins);
   }

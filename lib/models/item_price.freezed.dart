@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'item_price.dart';
 
@@ -178,6 +178,7 @@ class _$_ItemPrices implements _ItemPrices {
   @HiveField(0, defaultValue: <PriceDetail>[])
   @JsonKey(name: "new_offers")
   List<PriceDetail> get newPrices {
+    if (_newPrices is EqualUnmodifiableListView) return _newPrices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_newPrices);
   }
@@ -187,6 +188,7 @@ class _$_ItemPrices implements _ItemPrices {
   @HiveField(1, defaultValue: <PriceDetail>[])
   @JsonKey(name: "used_offers")
   List<PriceDetail> get usedPrices {
+    if (_usedPrices is EqualUnmodifiableListView) return _usedPrices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_usedPrices);
   }
