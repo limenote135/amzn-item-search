@@ -16,8 +16,8 @@ TextStyle? middleFontSize(BuildContext context) =>
 TextStyle? smallFontSize(BuildContext context) =>
     Theme.of(context).textTheme.overline;
 
-TextStyle? captionSize(BuildContext context) =>
+TextStyle? captionFontSize(BuildContext context) =>
     Theme.of(context).textTheme.caption;
 
-TextStyle captionSizeBlackText(BuildContext context) =>
+TextStyle captionFontSizeBlackText(BuildContext context) =>
     Theme.of(context).textTheme.caption!.apply(color: Colors.black);
