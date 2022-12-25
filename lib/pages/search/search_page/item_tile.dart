@@ -1,3 +1,5 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
@@ -51,10 +53,27 @@ class ItemTile extends HookConsumerWidget {
         return ProviderScope(
           overrides: [
             currentSearchItemProvider.overrideWithValue(value),
+            currentAsinDataProvider.overrideWithValue(value.asins.first),
           ],
           child: SlidableTile(
             // カメラページで表示する場合は削除不可
-            disableDelete: from == CameraPage.routeName,
+            onDelete: from == CameraPage.routeName
+                ? null
+                : () async {
+                    final ret = await showOkCancelAlertDialog(
+                      context: context,
+                      title: "商品の削除",
+                      message: "リストからアイテムを削除します",
+                      isDestructiveAction: true,
+                    );
+                    if (ret == OkCancelResult.ok) {
+                      ref
+                          .read(searchItemControllerProvider.notifier)
+                          .remove([value]);
+                      return true;
+                    }
+                    return false;
+                  },
             child: const ItemTileImpl(),
           ),
         );
