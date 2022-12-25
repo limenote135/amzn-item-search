@@ -7,6 +7,7 @@ import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
+import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
@@ -56,6 +57,12 @@ class ItemTile extends HookConsumerWidget {
             currentAsinDataProvider.overrideWithValue(value.asins.first),
           ],
           child: SlidableTile(
+            onPurchase: () {
+              Navigator.push(
+                context,
+                PurchasePage.route(value.asins.first),
+              );
+            },
             // カメラページで表示する場合は削除不可
             onDelete: from == CameraPage.routeName
                 ? null

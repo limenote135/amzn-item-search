@@ -9,7 +9,6 @@ import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
 import 'package:amasearch/pages/common/variation_page/variation_page.dart';
-import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +20,12 @@ class SlidableTile extends HookConsumerWidget {
   const SlidableTile({
     super.key,
     required this.child,
+    this.onPurchase,
     this.onDelete,
   });
 
   final Widget child;
+  final void Function()? onPurchase;
   final Future<bool> Function()? onDelete;
 
   @override
@@ -149,10 +150,7 @@ class SlidableTile extends HookConsumerWidget {
         ref
             .read(analyticsControllerProvider)
             .logSingleEvent(directPurchaseEventName);
-        Navigator.push(
-          context,
-          PurchasePage.route(item),
-        );
+        onPurchase?.call();
       },
     );
   }
