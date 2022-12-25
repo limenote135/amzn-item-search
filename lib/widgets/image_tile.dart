@@ -45,7 +45,7 @@ class TileImage extends HookConsumerWidget {
     final asinCount = ref.watch(currentAsinCountProvider);
     final fbaFee = asinData.prices?.feeInfo.fbaFee ?? 0;
 
-    final captionSize = captionSizeBlackText(context);
+    final captionSize = captionFontSizeBlackText(context);
 
     final keepaSettings = ref.watch(
       generalSettingsControllerProvider.select((value) => value.keepaSettings),

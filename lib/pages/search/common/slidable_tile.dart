@@ -1,17 +1,14 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/controllers/search_item_controller.dart';
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/general_settings_default.dart';
 import 'package:amasearch/models/offer_listings.dart';
-import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
 import 'package:amasearch/pages/common/variation_page/variation_page.dart';
-import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +20,13 @@ class SlidableTile extends HookConsumerWidget {
   const SlidableTile({
     super.key,
     required this.child,
-    this.disableDelete = false,
+    this.onPurchase,
+    this.onDelete,
   });
 
   final Widget child;
-  final bool disableDelete;
+  final void Function()? onPurchase;
+  final Future<bool> Function()? onDelete;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,38 +42,14 @@ class SlidableTile extends HookConsumerWidget {
       generalSettingsControllerProvider.select((value) => value.customButtons),
     );
 
-    final item = ref.watch(currentSearchItemProvider);
-    final hasVariation =
-        item.asins.isNotEmpty && item.asins[0].variationRoot != "";
+    final item = ref.watch(currentAsinDataProvider);
+    final hasVariation = item.variationRoot != "";
 
     final buttons = [...baseButtons, amazonListingsButton];
 
-    final leftActive = left.fold<int>(
-      0,
-      (prev, e) {
-        if (e.type != ShortcutType.none) {
-          if ((e.type == ShortcutType.delete && disableDelete) ||
-              (e.param == navigationTargetVariation && !hasVariation)) {
-            return prev;
-          }
-          return prev + 1;
-        }
-        return prev;
-      },
-    );
-    final rightActive = right.fold<int>(
-      0,
-      (prev, e) {
-        if (e.type != ShortcutType.none) {
-          if ((e.type == ShortcutType.delete && disableDelete) ||
-              (e.param == navigationTargetVariation && !hasVariation)) {
-            return prev;
-          }
-          return prev + 1;
-        }
-        return prev;
-      },
-    );
+    final leftActive = countActions(left, hasVariation: hasVariation);
+    final rightActive = countActions(right, hasVariation: hasVariation);
+
     return Slidable(
       startActionPane: leftActive > 0
           ? ActionPane(
@@ -82,9 +57,7 @@ class SlidableTile extends HookConsumerWidget {
               extentRatio: 0.2 * leftActive,
               children: [
                 for (final act in left)
-                  if (needShow(act.type, disableDelete: disableDelete) &&
-                      (act.param != navigationTargetVariation ||
-                          hasVariation)) // Variation を表示する場合のはバリエーションがあるときのみにする
+                  if (needShow(act, hasVariation: hasVariation))
                     _getAction(context, ref, act.type, act.param, buttons, item)
               ],
             )
@@ -95,9 +68,7 @@ class SlidableTile extends HookConsumerWidget {
               extentRatio: 0.2 * rightActive,
               children: [
                 for (final act in right)
-                  if (needShow(act.type, disableDelete: disableDelete) &&
-                      (act.param != navigationTargetVariation ||
-                          hasVariation)) // Variation を表示する場合のはバリエーションがあるときのみにする
+                  if (needShow(act, hasVariation: hasVariation))
                     _getAction(context, ref, act.type, act.param, buttons, item)
               ],
             )
@@ -106,16 +77,60 @@ class SlidableTile extends HookConsumerWidget {
     );
   }
 
-  bool needShow(ShortcutType type, {required bool disableDelete}) {
-    if (type == ShortcutType.delete && disableDelete) {
-      // カメラページや複数商品選択画面の場合は delete 不可
-      return false;
+  // 表示するショートカット数をカウントします
+  int countActions(List<ShortcutDetail> actions, {required bool hasVariation}) {
+    var count = 0;
+    for (final e in actions) {
+      switch (e.type) {
+        case ShortcutType.none:
+          continue;
+        case ShortcutType.purchase:
+          if (onPurchase != null) {
+            count++;
+          }
+          continue;
+        case ShortcutType.delete:
+          if (onDelete != null) {
+            count++;
+          }
+          continue;
+        case ShortcutType.web:
+          count++;
+          continue;
+        case ShortcutType.navigation:
+          if (e.param == navigationTargetVariation) {
+            if(hasVariation) {
+              count++;
+            }
+            continue;
+          }
+          count++;
+          continue;
+      }
     }
-    if (type == ShortcutType.none) {
-      // none の場合は非表示
-      return false;
+    return count;
+  }
+
+  bool needShow(ShortcutDetail action, {required bool hasVariation}) {
+    switch (action.type) {
+      case ShortcutType.none:
+        // none の場合は非表示
+        return false;
+      case ShortcutType.purchase:
+        // 仕入れ画面では purchase 不可
+        return onPurchase != null;
+      case ShortcutType.delete:
+        // カメラページや複数商品選択画面の場合は delete 不可
+        return onDelete != null;
+      case ShortcutType.web:
+        return true;
+      case ShortcutType.navigation:
+        if (action.param == navigationTargetVariation) {
+          // バリエーションボタンはバリエーションが存在する場合のみ
+          return hasVariation;
+        }
+        return true;
     }
-    return true;
   }
 
   Widget _getAction(
@@ -124,13 +139,13 @@ class SlidableTile extends HookConsumerWidget {
     ShortcutType type,
     String param,
     List<CustomButtonDetail> buttons,
-    SearchItem item,
+    AsinData item,
   ) {
     switch (type) {
       case ShortcutType.purchase:
         return _purchaseAction(ref, item);
       case ShortcutType.delete:
-        return _deleteAction(context, ref, item);
+        return _deleteAction(ref);
       case ShortcutType.web:
         final button = buttons.firstWhere((element) => element.id == param);
         return _webAction(ref, button, item);
@@ -141,7 +156,7 @@ class SlidableTile extends HookConsumerWidget {
     }
   }
 
-  SlidableAction _purchaseAction(WidgetRef ref, SearchItem item) {
+  SlidableAction _purchaseAction(WidgetRef ref, AsinData item) {
     return SlidableAction(
       label: "仕入れ",
       backgroundColor: Colors.blue,
@@ -152,19 +167,12 @@ class SlidableTile extends HookConsumerWidget {
         ref
             .read(analyticsControllerProvider)
             .logSingleEvent(directPurchaseEventName);
-        Navigator.push(
-          context,
-          PurchasePage.route(item.asins.first),
-        );
+        onPurchase?.call();
       },
     );
   }
 
-  SlidableAction _deleteAction(
-    BuildContext context,
-    WidgetRef ref,
-    SearchItem item,
-  ) {
+  SlidableAction _deleteAction(WidgetRef ref) {
     return SlidableAction(
       label: "削除",
       backgroundColor: Colors.red,
@@ -172,16 +180,8 @@ class SlidableTile extends HookConsumerWidget {
       padding: EdgeInsets.zero,
       onPressed: (_) async {
         unfocus();
-        // onPressed から渡される context だとダイアログが表示できないので Widget の context を使う
-        final ret = await showOkCancelAlertDialog(
-          context: context,
-          title: "商品の削除",
-          message: "リストからアイテムを削除します",
-          isDestructiveAction: true,
-        );
-        final ok = ret == OkCancelResult.ok;
-        if (ok) {
-          ref.read(searchItemControllerProvider.notifier).remove([item]);
+        final result = await onDelete?.call();
+        if (result == true) {
           await ref
               .read(analyticsControllerProvider)
               .logSingleEvent(deleteSearchHistoryEventName);
@@ -193,9 +193,9 @@ class SlidableTile extends HookConsumerWidget {
   SlidableAction _webAction(
     WidgetRef ref,
     CustomButtonDetail button,
-    SearchItem item,
+    AsinData item,
   ) {
-    final url = replaceUrl(template: button.pattern, item: item.asins.first);
+    final url = replaceUrl(template: button.pattern, item: item);
     final eventName = customButtonEventMap.containsKey(button.pattern)
         ? customButtonEventMap[button.pattern]!
         : button.pattern;
@@ -220,7 +220,7 @@ class SlidableTile extends HookConsumerWidget {
   SlidableAction _navigationAction(
     WidgetRef ref,
     String target,
-    SearchItem item,
+    AsinData item,
   ) {
     var title = "";
     var event = "";
@@ -231,14 +231,14 @@ class SlidableTile extends HookConsumerWidget {
       case navigationTargetKeepa:
         title = "Keepa";
         event = pushSearchButtonKeepaName;
-        navigation = () => KeepaPage.route(item.asins.first.asin);
+        navigation = () => KeepaPage.route(item.asin);
         break;
       case navigationTargetNewOffers:
         title = "新品一覧";
         event = pushSearchButtonAmazonNewOffersName;
         navigation = () => OfferListingPage.route(
               OfferListingsParams(
-                asin: item.asins.first.asin,
+                asin: item.asin,
                 newItem: true,
               ),
             );
@@ -248,7 +248,7 @@ class SlidableTile extends HookConsumerWidget {
         event = pushSearchButtonAmazonUsedOffersName;
         navigation = () => OfferListingPage.route(
               OfferListingsParams(
-                asin: item.asins.first.asin,
+                asin: item.asin,
                 usedLikeNew: true,
                 usedVeryGood: true,
                 usedGood: true,
@@ -259,7 +259,7 @@ class SlidableTile extends HookConsumerWidget {
       case navigationTargetVariation:
         title = "ﾊﾞﾘｴｰｼｮﾝ";
         event = pushSearchButtonVariationName;
-        navigation = () => VariationPage.route(item.asins.first.variationRoot);
+        navigation = () => VariationPage.route(item.variationRoot);
         break;
       default:
         throw Exception("Unknown navigation target: $target");
