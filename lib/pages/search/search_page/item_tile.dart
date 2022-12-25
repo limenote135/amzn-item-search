@@ -1,18 +1,20 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
+import 'package:amasearch/pages/search/common/slidable_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
+import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'slidable_tile.dart';
 
 class ItemTile extends HookConsumerWidget {
   const ItemTile({super.key});
@@ -51,10 +53,33 @@ class ItemTile extends HookConsumerWidget {
         return ProviderScope(
           overrides: [
             currentSearchItemProvider.overrideWithValue(value),
+            currentAsinDataProvider.overrideWithValue(value.asins.first),
           ],
           child: SlidableTile(
+            onPurchase: () {
+              Navigator.push(
+                context,
+                PurchasePage.route(value.asins.first),
+              );
+            },
             // カメラページで表示する場合は削除不可
-            disableDelete: from == CameraPage.routeName,
+            onDelete: from == CameraPage.routeName
+                ? null
+                : () async {
+                    final ret = await showOkCancelAlertDialog(
+                      context: context,
+                      title: "商品の削除",
+                      message: "リストからアイテムを削除します",
+                      isDestructiveAction: true,
+                    );
+                    if (ret == OkCancelResult.ok) {
+                      ref
+                          .read(searchItemControllerProvider.notifier)
+                          .remove([value]);
+                      return true;
+                    }
+                    return false;
+                  },
             child: const ItemTileImpl(),
           ),
         );

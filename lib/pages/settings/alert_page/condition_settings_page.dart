@@ -193,7 +193,7 @@ class _Body extends HookConsumerWidget {
           title: const Text("コンディション"),
           subtitle: Text(
             "粗利条件と一緒に設定してください。",
-            style: captionSize(context),
+            style: captionFontSize(context),
           ),
           onTap: () async {
             final val = await showConfirmationDialog<int?>(
