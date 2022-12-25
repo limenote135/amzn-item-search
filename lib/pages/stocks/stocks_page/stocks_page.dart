@@ -1,5 +1,8 @@
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/pages/search/common/slidable_tile.dart';
+import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/detail_page/detail_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/common.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/item_select_appbar.dart';
@@ -18,7 +21,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'provider.dart';
-import 'slidable_delete_tile.dart';
 
 final _selectedItemCount = Provider((ref) {
   final items = ref.watch(selectedStockItemsControllerProvider);
@@ -70,12 +72,6 @@ class _Body extends HookConsumerWidget {
     final keyMaps = ref.watch(captureKeyMapProvider);
     final selectAll = ref.watch(selectAllProvider);
 
-    final tile = _InkWell(
-      child: mode == StockPageMode.normal
-          ? const SlidableDeleteTile(child: ItemTile())
-          : const ItemTile(),
-    );
-
     return Column(
       children: [
         if (mode == StockPageMode.select ||
@@ -120,18 +116,37 @@ class _Body extends HookConsumerWidget {
             separatorBuilder: (context, index) => const ThemeDivider(),
             itemCount: items.length,
             itemBuilder: (context, index) {
+              final item = items[index];
+
+              final tile = _InkWell(
+                child: mode == StockPageMode.normal
+                    ? SlidableTile(
+                        onDelete: () async {
+                          final result = await itemDeleteHandler(
+                            context: context,
+                            ref: ref,
+                            items: [item],
+                            content: "リストからアイテムを削除します",
+                          );
+                          return result;
+                        },
+                        child: const ItemTile(),
+                      )
+                    : const ItemTile(),
+              );
+
               final tileImpl = ProviderScope(
                 overrides: [
-                  currentStockItemProvider.overrideWithValue(items[index]),
+                  currentStockItemProvider.overrideWithValue(item),
+                  currentAsinDataProvider.overrideWithValue(item.item),
                 ],
                 child: index != items.length - 1 ? tile : WithUnderLine(tile),
               );
 
               final summary = _getSummary(items, index);
               if (summary != null) {
-                final day = DateTime.parse(items[index].purchaseDate)
-                    .toLocal()
-                    .dayFormat();
+                final day =
+                    DateTime.parse(item.purchaseDate).toLocal().dayFormat();
                 return Column(
                   children: [
                     RepaintBoundary(
