@@ -63,13 +63,13 @@ class _ItemTileBody extends HookConsumerWidget {
         isEllipsis
             ? Text(
                 item.title,
-                style: captionSize(context),
+                style: captionFontSize(context),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               )
             : Text(
                 item.title,
-                style: captionSize(context),
+                style: captionFontSize(context),
               ),
         Row(
           children: [
