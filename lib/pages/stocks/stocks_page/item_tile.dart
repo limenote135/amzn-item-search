@@ -72,7 +72,7 @@ class _TileBody extends HookConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(detail.title, style: captionSize(context)),
+        Text(detail.title, style: captionFontSize(context)),
         Row(
           children: [
             Expanded(child: Text("JAN: ${detail.jan}", style: smallSize)),
