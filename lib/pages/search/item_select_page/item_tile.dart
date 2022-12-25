@@ -20,7 +20,6 @@ class ItemTile extends ConsumerWidget {
         currentSearchDateProvider.overrideWithValue(null),
       ],
       child: const SlidableTile(
-        disableDelete: true,
         child: _InkWell(
           child: SearchItemTile(),
         ),
@@ -53,7 +52,6 @@ class ItemTileWithRequest extends ConsumerWidget {
             currentSearchDateProvider.overrideWithValue(null),
           ],
           child: const SlidableTile(
-            disableDelete: true,
             child: _InkWell(
               child: SearchItemTile(),
             ),
