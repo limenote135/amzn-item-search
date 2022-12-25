@@ -47,32 +47,9 @@ class SlidableTile extends HookConsumerWidget {
 
     final buttons = [...baseButtons, amazonListingsButton];
 
-    final leftActive = left.fold<int>(
-      0,
-      (prev, e) {
-        if (e.type != ShortcutType.none) {
-          if ((e.type == ShortcutType.delete && onDelete == null) ||
-              (e.param == navigationTargetVariation && !hasVariation)) {
-            return prev;
-          }
-          return prev + 1;
-        }
-        return prev;
-      },
-    );
-    final rightActive = right.fold<int>(
-      0,
-      (prev, e) {
-        if (e.type != ShortcutType.none) {
-          if ((e.type == ShortcutType.delete && onDelete == null) ||
-              (e.param == navigationTargetVariation && !hasVariation)) {
-            return prev;
-          }
-          return prev + 1;
-        }
-        return prev;
-      },
-    );
+    final leftActive = countActions(left, hasVariation: hasVariation);
+    final rightActive = countActions(right, hasVariation: hasVariation);
+
     return Slidable(
       startActionPane: leftActive > 0
           ? ActionPane(
@@ -80,9 +57,7 @@ class SlidableTile extends HookConsumerWidget {
               extentRatio: 0.2 * leftActive,
               children: [
                 for (final act in left)
-                  if (needShow(act.type, disableDelete: onDelete == null) &&
-                      (act.param != navigationTargetVariation ||
-                          hasVariation)) // Variation を表示する場合のはバリエーションがあるときのみにする
+                  if (needShow(act, hasVariation: hasVariation))
                     _getAction(context, ref, act.type, act.param, buttons, item)
               ],
             )
@@ -93,9 +68,7 @@ class SlidableTile extends HookConsumerWidget {
               extentRatio: 0.2 * rightActive,
               children: [
                 for (final act in right)
-                  if (needShow(act.type, disableDelete: onDelete == null) &&
-                      (act.param != navigationTargetVariation ||
-                          hasVariation)) // Variation を表示する場合のはバリエーションがあるときのみにする
+                  if (needShow(act, hasVariation: hasVariation))
                     _getAction(context, ref, act.type, act.param, buttons, item)
               ],
             )
@@ -104,16 +77,60 @@ class SlidableTile extends HookConsumerWidget {
     );
   }
 
-  bool needShow(ShortcutType type, {required bool disableDelete}) {
-    if (type == ShortcutType.delete && disableDelete) {
-      // カメラページや複数商品選択画面の場合は delete 不可
-      return false;
+  // 表示するショートカット数をカウントします
+  int countActions(List<ShortcutDetail> actions, {required bool hasVariation}) {
+    var count = 0;
+    for (final e in actions) {
+      switch (e.type) {
+        case ShortcutType.none:
+          continue;
+        case ShortcutType.purchase:
+          if (onPurchase != null) {
+            count++;
+          }
+          continue;
+        case ShortcutType.delete:
+          if (onDelete != null) {
+            count++;
+          }
+          continue;
+        case ShortcutType.web:
+          count++;
+          continue;
+        case ShortcutType.navigation:
+          if (e.param == navigationTargetVariation) {
+            if(hasVariation) {
+              count++;
+            }
+            continue;
+          }
+          count++;
+          continue;
+      }
     }
-    if (type == ShortcutType.none) {
-      // none の場合は非表示
-      return false;
+    return count;
+  }
+
+  bool needShow(ShortcutDetail action, {required bool hasVariation}) {
+    switch (action.type) {
+      case ShortcutType.none:
+        // none の場合は非表示
+        return false;
+      case ShortcutType.purchase:
+        // 仕入れ画面では purchase 不可
+        return onPurchase != null;
+      case ShortcutType.delete:
+        // カメラページや複数商品選択画面の場合は delete 不可
+        return onDelete != null;
+      case ShortcutType.web:
+        return true;
+      case ShortcutType.navigation:
+        if (action.param == navigationTargetVariation) {
+          // バリエーションボタンはバリエーションが存在する場合のみ
+          return hasVariation;
+        }
+        return true;
     }
-    return true;
   }
 
   Widget _getAction(
