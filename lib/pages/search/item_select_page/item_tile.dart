@@ -2,6 +2,7 @@ import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
+import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/pages/search/search_page/slidable_tile.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
@@ -19,8 +20,14 @@ class ItemTile extends ConsumerWidget {
         currentAsinDataProvider.overrideWithValue(item),
         currentSearchDateProvider.overrideWithValue(null),
       ],
-      child: const SlidableTile(
-        child: _InkWell(
+      child: SlidableTile(
+        onPurchase: () {
+          Navigator.push(
+            context,
+            PurchasePage.route(item),
+          );
+        },
+        child: const _InkWell(
           child: SearchItemTile(),
         ),
       ),
@@ -51,8 +58,14 @@ class ItemTileWithRequest extends ConsumerWidget {
             currentAsinDataProvider.overrideWithValue(newItem),
             currentSearchDateProvider.overrideWithValue(null),
           ],
-          child: const SlidableTile(
-            child: _InkWell(
+          child: SlidableTile(
+            onPurchase: () {
+              Navigator.push(
+                context,
+                PurchasePage.route(item),
+              );
+            },
+            child: const _InkWell(
               child: SearchItemTile(),
             ),
           ),
