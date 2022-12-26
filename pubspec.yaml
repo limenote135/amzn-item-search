@@ -89,7 +89,7 @@ dependencies:
   uuid: ^3.0.7
   vibration: ^1.7.6
   webview_flutter: ^3.0.4
-  worker_manager: ^4.4.6
+  worker_manager: ^4.5.0
 
 dev_dependencies:
   build_runner: ^2.3.3
