@@ -1,24 +1,44 @@
+import 'package:amasearch/controllers/selected_keep_items_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/pages/search/common/price_info.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final _isSelectedProvider = Provider.family<bool, KeepItem>((ref, item) {
+  final selectedItems = ref.watch(selectedKeepItemsControllerProvider);
+  return selectedItems.contains(item);
+});
 
 class KeepItemTile extends ConsumerWidget {
   const KeepItemTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
-      children: const [
-        TileImage(),
-        Expanded(child: _TileBody()),
-      ],
+    final item = ref.watch(currentKeepItemProvider);
+    final isSelected = ref.watch(_isSelectedProvider(item));
+
+    return ColoredBox(
+      color: _getSelectedColor(context, isSelected),
+      child: Row(
+        children: const [
+          TileImage(),
+          Expanded(child: _TileBody()),
+        ],
+      ),
     );
+  }
+
+  Color _getSelectedColor(BuildContext context, bool isSelected) {
+    if (isSelected) {
+      return isDark(context) ? Colors.white24 : Colors.black26;
+    }
+    return Theme.of(context).canvasColor;
   }
 }
 
