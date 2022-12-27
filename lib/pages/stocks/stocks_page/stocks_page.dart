@@ -1,7 +1,6 @@
 import 'package:amasearch/controllers/selected_stock_items_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/stock_item.dart';
-import 'package:amasearch/pages/search/common/slidable_tile.dart';
 import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/detail_page/detail_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/common.dart';
@@ -15,6 +14,7 @@ import 'package:amasearch/pages/stocks/stocks_page/share/keys.dart';
 import 'package:amasearch/pages/stocks/stocks_page/summary_tile.dart';
 import 'package:amasearch/pages/stocks/stocks_page/total_profit.dart';
 import 'package:amasearch/util/formatter.dart';
+import 'package:amasearch/widgets/slidable_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
