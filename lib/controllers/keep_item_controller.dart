@@ -30,9 +30,15 @@ class KeepItemListController extends StateNotifier<List<KeepItem>> {
     box.put(item.id, item);
   }
 
-  void remove(String id) {
+  void remove(List<String> ids) {
     final box = _ref.read(keepItemBoxProvider);
-    state = state.where((element) => element.id != id).toList();
-    box.delete(id);
+    state = state.where((element) => !ids.contains(element.id)).toList();
+    box.deleteAll(ids);
+  }
+
+  void removeAll() {
+    final box = _ref.read(keepItemBoxProvider);
+    state = [];
+    box.clear();
   }
 }
