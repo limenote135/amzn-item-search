@@ -1,3 +1,5 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/pages/common/seaech_item_detail/item_detail.dart';
@@ -31,6 +33,26 @@ class KeepDetailPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("商品詳細"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () async {
+              final ret = await showOkCancelAlertDialog(
+                context: context,
+                title: "商品の削除",
+                message: "キープリストから商品を削除します",
+                isDestructiveAction: true,
+              );
+              if (ret == OkCancelResult.ok) {
+                ref
+                    .read(keepItemListControllerProvider.notifier)
+                    .remove([keepItem.id]);
+                Navigator.of(context)
+                    .popUntil((route) => route.settings.name == "/");
+              }
+            },
+          ),
+        ],
       ),
       body: const _Body(),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
