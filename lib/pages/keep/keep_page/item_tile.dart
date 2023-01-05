@@ -145,16 +145,18 @@ class _TileBody extends ConsumerWidget {
           "追加日: ${DateTime.parse(keepItem.keepDate).toLocal().format()}",
           style: smallSize,
         ),
-        Text(
-          "メモ:",
-          style: smallSize,
-        ),
-        Text(
-          keepItem.memo,
-          style: captionSize,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-        ),
+        if (keepItem.memo != "")
+          Text(
+            "メモ:",
+            style: smallSize,
+          ),
+        if (keepItem.memo != "")
+          Text(
+            keepItem.memo,
+            style: captionSize,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+          ),
       ],
     );
   }
