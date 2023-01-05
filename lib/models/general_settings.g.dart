@@ -482,4 +482,5 @@ const _$ShortcutTypeEnumMap = {
   ShortcutType.delete: 'delete',
   ShortcutType.web: 'web',
   ShortcutType.navigation: 'navigation',
+  ShortcutType.keep: 'keep',
 };

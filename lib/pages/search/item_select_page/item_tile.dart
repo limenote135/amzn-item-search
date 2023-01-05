@@ -1,3 +1,5 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
@@ -27,6 +29,26 @@ class ItemTile extends ConsumerWidget {
             PurchasePage.route(item),
           );
         },
+        onKeep: () async {
+          final result = await showTextInputDialog(
+            context: context,
+            title: "メモ",
+            textFields: [
+              const DialogTextField(
+                maxLines: 3,
+              )
+            ],
+          );
+          if (result == null) {
+            return false;
+          }
+          ref.read(keepItemListControllerProvider.notifier).add(
+                item,
+                result[0],
+              );
+          Navigator.of(context).popUntil((route) => route.settings.name == "/");
+          return true;
+        },
         child: const _InkWell(
           child: SearchItemTile(),
         ),
@@ -35,6 +57,7 @@ class ItemTile extends ConsumerWidget {
   }
 }
 
+// タイルの表示時に出品可否を問い合わせる
 class ItemTileWithRequest extends ConsumerWidget {
   const ItemTileWithRequest({super.key});
 
@@ -64,6 +87,27 @@ class ItemTileWithRequest extends ConsumerWidget {
                 context,
                 PurchasePage.route(item),
               );
+            },
+            onKeep: () async {
+              final result = await showTextInputDialog(
+                context: context,
+                title: "メモ",
+                textFields: [
+                  const DialogTextField(
+                    maxLines: 3,
+                  )
+                ],
+              );
+              if (result == null) {
+                return false;
+              }
+              ref.read(keepItemListControllerProvider.notifier).add(
+                    item,
+                    result[0],
+                  );
+              Navigator.of(context)
+                  .popUntil((route) => route.settings.name == "/");
+              return true;
             },
             child: const _InkWell(
               child: SearchItemTile(),

@@ -20,4 +20,6 @@ enum ShortcutType {
   web,
   @HiveField(4)
   navigation,
+  @HiveField(5)
+  keep,
 }

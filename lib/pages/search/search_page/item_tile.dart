@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/search_item.dart';
@@ -61,6 +62,24 @@ class ItemTile extends HookConsumerWidget {
                 context,
                 PurchasePage.route(value.asins.first),
               );
+            },
+            onKeep: () async {
+              final result = await showTextInputDialog(
+                context: context,
+                title: "メモ",
+                textFields: [
+                  const DialogTextField(
+                    maxLines: 3,
+                  )
+                ],
+              );
+              if (result == null) {
+                return false;
+              }
+              ref
+                  .read(keepItemListControllerProvider.notifier)
+                  .add(value.asins.first, result[0]);
+              return true;
             },
             // カメラページで表示する場合は削除不可
             onDelete: from == CameraPage.routeName
