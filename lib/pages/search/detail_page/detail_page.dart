@@ -2,14 +2,11 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
-import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/pages/common/seaech_item_detail/item_detail.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
-import 'package:amasearch/util/util.dart';
-import 'package:amasearch/util/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -75,15 +72,9 @@ class DetailPage extends HookConsumerWidget {
                   if (result == null) {
                     return;
                   }
-                  final keepItem = KeepItem(
-                    id: ref.read(uuidProvider).v4(),
-                    item: item,
-                    keepDate: currentTimeString(),
-                    memo: result[0],
-                  );
                   ref
                       .read(keepItemListControllerProvider.notifier)
-                      .add(keepItem);
+                      .add(item, result[0]);
                   await ref
                       .read(analyticsControllerProvider)
                       .logKeepEvent(item.asin);
