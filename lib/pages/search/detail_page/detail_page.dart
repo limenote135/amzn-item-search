@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/keep_item.dart';
@@ -83,7 +84,9 @@ class DetailPage extends HookConsumerWidget {
                   ref
                       .read(keepItemListControllerProvider.notifier)
                       .add(keepItem);
-                  // TODO: KeepEvent
+                  await ref
+                      .read(analyticsControllerProvider)
+                      .logKeepEvent(item.asin);
                 },
               ),
             ],
