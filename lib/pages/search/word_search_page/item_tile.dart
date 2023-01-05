@@ -1,3 +1,5 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/query_params.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
@@ -50,6 +52,24 @@ class ItemTile extends ConsumerWidget {
               context,
               PurchasePage.route(value),
             );
+          },
+          onKeep: () async {
+            final result = await showTextInputDialog(
+              context: context,
+              title: "メモ",
+              textFields: [
+                const DialogTextField(
+                  maxLines: 3,
+                )
+              ],
+            );
+            if (result == null) {
+              return false;
+            }
+            ref
+                .read(keepItemListControllerProvider.notifier)
+                .add(value, result[0]);
+            return true;
           },
           child: const _InkWell(
             child: SearchItemTile(),
