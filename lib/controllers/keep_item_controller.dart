@@ -1,5 +1,8 @@
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/util/hive_provider.dart';
+import 'package:amasearch/util/util.dart';
+import 'package:amasearch/util/uuid.dart';
 import 'package:riverpod/riverpod.dart';
 
 final keepItemListControllerProvider =
@@ -24,10 +27,17 @@ class KeepItemListController extends StateNotifier<List<KeepItem>> {
     state = data;
   }
 
-  void add(KeepItem item) {
+  void add(AsinData asinData, String memo) {
+    final id = _ref.read(uuidProvider).v4();
+    final keepItem = KeepItem(
+      id: id,
+      item: asinData,
+      keepDate: currentTimeString(),
+      memo: memo,
+    );
     final box = _ref.read(keepItemBoxProvider);
-    state = [item, ...state];
-    box.put(item.id, item);
+    state = [keepItem, ...state];
+    box.put(id, keepItem);
   }
 
   void remove(List<String> ids) {
