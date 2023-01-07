@@ -25,7 +25,7 @@ class KeepStateController extends StateNotifier<Map<String, bool>> {
     };
   }
 
-  bool getState(String key) {
+  bool isCompleted(String key) {
     return state[key] ?? false;
   }
 }

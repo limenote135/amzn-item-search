@@ -101,8 +101,9 @@ class _SlidableTile extends ConsumerWidget {
           ),
         );
 
+        // 仕入れリストに移動させた場合、true がセットされているはず
         final isSuccess =
-            ref.read(keepStateControllerProvider.notifier).getState(itemKey);
+            ref.read(keepStateControllerProvider.notifier).isCompleted(itemKey);
         if (isSuccess) {
           final ret = await showOkCancelAlertDialog(
             context: context,
@@ -153,7 +154,7 @@ class _InkWell extends ConsumerWidget {
 
             final isSuccess = ref
                 .read(keepStateControllerProvider.notifier)
-                .getState(itemKey);
+                .isCompleted(itemKey);
             if (isSuccess) {
               final ret = await showOkCancelAlertDialog(
                 context: context,
