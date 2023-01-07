@@ -4,8 +4,18 @@ import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/pages/common/seaech_item_detail/item_detail.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final _currentKeepItemIdProvider =
+    Provider<String>((_) => throw UnimplementedError());
+
+final _currentKeepItemByIdProvider =
+    Provider.family<KeepItem?, String>((ref, id) {
+  final items = ref.watch(keepItemListControllerProvider);
+  return items.firstWhereOrNull((element) => element.id == id);
+});
 
 class KeepDetailPage extends ConsumerWidget {
   const KeepDetailPage({super.key});
@@ -17,8 +27,10 @@ class KeepDetailPage extends ConsumerWidget {
       builder: (context) => ProviderScope(
         overrides: [
           currentAsinDataProvider.overrideWithValue(item.item),
-          currentKeepItemProvider.overrideWithValue(item),
           currentKeepItemKeyProvider.overrideWithValue(itemKey),
+          // ページ内でダイアログでメモを更新して、更新後のメモを表示に反映させるため、
+          // ID を受け取って ID から KeepListController 内のアイテムを直接引くようにする
+          _currentKeepItemIdProvider.overrideWithValue(item.id),
         ],
         child: const KeepDetailPage(),
       ),
@@ -27,7 +39,8 @@ class KeepDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final keepItem = ref.watch(currentKeepItemProvider);
+    final keepItemId = ref.watch(_currentKeepItemIdProvider);
+    final keepItem = ref.watch(_currentKeepItemByIdProvider(keepItemId));
     final keepItemKey = ref.watch(currentKeepItemKeyProvider);
 
     return Scaffold(
@@ -43,7 +56,7 @@ class KeepDetailPage extends ConsumerWidget {
                 message: "キープリストから商品を削除します",
                 isDestructiveAction: true,
               );
-              if (ret == OkCancelResult.ok) {
+              if (ret == OkCancelResult.ok && keepItem != null) {
                 ref
                     .read(keepItemListControllerProvider.notifier)
                     .remove([keepItem.id]);
@@ -60,7 +73,7 @@ class KeepDetailPage extends ConsumerWidget {
         onPressed: () => Navigator.push(
           context,
           PurchasePage.route(
-            keepItem.item,
+            keepItem!.item,
             memo: keepItem.memo,
             keepItemKey: keepItemKey,
           ),
@@ -79,14 +92,47 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final item = ref.watch(currentKeepItemProvider);
+    final keepItemId = ref.watch(_currentKeepItemIdProvider);
+    final item = ref.watch(_currentKeepItemByIdProvider(keepItemId));
+    if (item == null) {
+      // キープアイテムの削除を選択した場合、item が一瞬 null になるため、
+      // その時に例外が飛ばないようにするための対応
+      return Container();
+    }
     return SearchItemDetail(
       additionalWidget: ListTile(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        title: Row(
           children: [
-            const Text("メモ"),
-            Text(item.memo),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("メモ"),
+                  Text(item.memo),
+                ],
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () async {
+                final result = await showTextInputDialog(
+                  context: context,
+                  title: "メモの更新",
+                  textFields: [
+                    DialogTextField(
+                      maxLines: 3,
+                      initialText: item.memo,
+                    )
+                  ],
+                );
+                if (result == null) {
+                  return;
+                }
+                ref
+                    .read(keepItemListControllerProvider.notifier)
+                    .updateMemo(item, result[0]);
+              },
+            ),
           ],
         ),
       ),
