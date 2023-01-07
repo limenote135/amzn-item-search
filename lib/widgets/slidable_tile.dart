@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
@@ -21,11 +23,13 @@ class SlidableTile extends HookConsumerWidget {
     super.key,
     required this.child,
     this.onPurchase,
+    this.onKeep,
     this.onDelete,
   });
 
   final Widget child;
   final void Function()? onPurchase;
+  final Future<bool> Function()? onKeep;
   final Future<bool> Function()? onDelete;
 
   @override
@@ -89,6 +93,11 @@ class SlidableTile extends HookConsumerWidget {
             count++;
           }
           continue;
+        case ShortcutType.keep:
+          if (onKeep != null) {
+            count++;
+          }
+          continue;
         case ShortcutType.delete:
           if (onDelete != null) {
             count++;
@@ -99,7 +108,7 @@ class SlidableTile extends HookConsumerWidget {
           continue;
         case ShortcutType.navigation:
           if (e.param == navigationTargetVariation) {
-            if(hasVariation) {
+            if (hasVariation) {
               count++;
             }
             continue;
@@ -119,6 +128,9 @@ class SlidableTile extends HookConsumerWidget {
       case ShortcutType.purchase:
         // 仕入れ画面では purchase 不可
         return onPurchase != null;
+      case ShortcutType.keep:
+        // キープ画面では Keep 不可
+        return onKeep != null;
       case ShortcutType.delete:
         // カメラページや複数商品選択画面の場合は delete 不可
         return onDelete != null;
@@ -144,6 +156,8 @@ class SlidableTile extends HookConsumerWidget {
     switch (type) {
       case ShortcutType.purchase:
         return _purchaseAction(ref, item);
+      case ShortcutType.keep:
+        return _keepAction(ref, item);
       case ShortcutType.delete:
         return _deleteAction(ref);
       case ShortcutType.web:
@@ -168,6 +182,24 @@ class SlidableTile extends HookConsumerWidget {
             .read(analyticsControllerProvider)
             .logSingleEvent(directPurchaseEventName);
         onPurchase?.call();
+      },
+    );
+  }
+
+  SlidableAction _keepAction(WidgetRef ref, AsinData item) {
+    return SlidableAction(
+      label: "キープ",
+      backgroundColor: Colors.blue,
+      icon: Icons.bookmark_add,
+      padding: EdgeInsets.zero,
+      onPressed: (context) async {
+        unfocus();
+        final result = await onKeep?.call();
+        if (result == true) {
+          unawaited(
+            ref.read(analyticsControllerProvider).logKeepEvent(item.asin),
+          );
+        }
       },
     );
   }

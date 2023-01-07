@@ -1,12 +1,14 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/query_params.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
-import 'package:amasearch/pages/search/common/slidable_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
+import 'package:amasearch/widgets/slidable_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -50,6 +52,24 @@ class ItemTile extends ConsumerWidget {
               context,
               PurchasePage.route(value),
             );
+          },
+          onKeep: () async {
+            final result = await showTextInputDialog(
+              context: context,
+              title: "メモ",
+              textFields: [
+                const DialogTextField(
+                  maxLines: 3,
+                )
+              ],
+            );
+            if (result == null) {
+              return false;
+            }
+            ref
+                .read(keepItemListControllerProvider.notifier)
+                .add(value, result[0]);
+            return true;
           },
           child: const _InkWell(
             child: SearchItemTile(),

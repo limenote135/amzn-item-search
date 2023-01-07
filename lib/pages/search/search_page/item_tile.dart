@@ -1,17 +1,18 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/common/search_item_tile.dart';
-import 'package:amasearch/pages/search/common/slidable_tile.dart';
 import 'package:amasearch/pages/search/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/item_select_page/item_select_page.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
+import 'package:amasearch/widgets/slidable_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -61,6 +62,24 @@ class ItemTile extends HookConsumerWidget {
                 context,
                 PurchasePage.route(value.asins.first),
               );
+            },
+            onKeep: () async {
+              final result = await showTextInputDialog(
+                context: context,
+                title: "メモ",
+                textFields: [
+                  const DialogTextField(
+                    maxLines: 3,
+                  )
+                ],
+              );
+              if (result == null) {
+                return false;
+              }
+              ref
+                  .read(keepItemListControllerProvider.notifier)
+                  .add(value.asins.first, result[0]);
+              return true;
             },
             // カメラページで表示する場合は削除不可
             onDelete: from == CameraPage.routeName
