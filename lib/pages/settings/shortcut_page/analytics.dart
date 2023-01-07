@@ -23,6 +23,8 @@ String _createShortcutPropVal(ShortcutDetail command) {
       return "";
     case ShortcutType.purchase:
       return "buy";
+    case ShortcutType.keep:
+      return "kp";
     case ShortcutType.delete:
       return "del";
     case ShortcutType.web:

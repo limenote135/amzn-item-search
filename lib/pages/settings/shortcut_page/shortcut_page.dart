@@ -132,6 +132,8 @@ class _Body extends HookConsumerWidget {
         return const Text("なし");
       case ShortcutType.purchase:
         return const Text("仕入れ");
+      case ShortcutType.keep:
+        return const Text("キープ");
       case ShortcutType.delete:
         return const Text("削除");
       case ShortcutType.web:
@@ -160,6 +162,7 @@ class _Body extends HookConsumerWidget {
 
   static const _noneKey = "none";
   static const _purchaseKey = "purchase";
+  static const _keepKey = "keep";
   static const _deleteKey = "delete";
   static const _offersKey = "offers";
   static const _newOffersKey = "newOffers";
@@ -177,6 +180,7 @@ class _Body extends HookConsumerWidget {
       actions: [
         const AlertDialogAction(key: _noneKey, label: "なし"),
         const AlertDialogAction(key: _purchaseKey, label: "仕入れ"),
+        const AlertDialogAction(key: _keepKey, label: "キープ"),
         const AlertDialogAction(key: _deleteKey, label: "削除"),
         const AlertDialogAction(key: _offersKey, label: "出品一覧"),
         const AlertDialogAction(key: _newOffersKey, label: "新品一覧"),
@@ -197,6 +201,8 @@ class _Body extends HookConsumerWidget {
         return const ShortcutDetail(type: ShortcutType.none);
       case _purchaseKey:
         return const ShortcutDetail(type: ShortcutType.purchase);
+      case _keepKey:
+        return const ShortcutDetail(type: ShortcutType.keep);
       case _deleteKey:
         return const ShortcutDetail(type: ShortcutType.delete);
       case _offersKey:

@@ -25,6 +25,8 @@ class ShortcutTypeAdapter extends TypeAdapter<ShortcutType> {
         return ShortcutType.web;
       case 4:
         return ShortcutType.navigation;
+      case 5:
+        return ShortcutType.keep;
       default:
         return ShortcutType.none;
     }
@@ -47,6 +49,9 @@ class ShortcutTypeAdapter extends TypeAdapter<ShortcutType> {
         break;
       case ShortcutType.navigation:
         writer.writeByte(4);
+        break;
+      case ShortcutType.keep:
+        writer.writeByte(5);
         break;
     }
   }

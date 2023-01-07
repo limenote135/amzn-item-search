@@ -12,6 +12,7 @@ const deleteAllSearchHistoryEventName = "deleteAllSearchHistory";
 const directPurchaseEventName = "directPurchase";
 const amazonListingEventName = "amazonListing";
 const requestReviewEventName = "requestReview";
+const keepEventName = "keep";
 
 const searchEventJan = "searchJan";
 const searchEventWord = "searchWord";

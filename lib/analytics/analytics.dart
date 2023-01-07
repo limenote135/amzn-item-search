@@ -78,6 +78,15 @@ class AnalyticsController {
     );
   }
 
+  Future<void> logKeepEvent(String asin) {
+    return FirebaseAnalytics.instance.logEvent(
+      name: keepEventName,
+      parameters: <String, dynamic>{
+        "ASIN": asin,
+      },
+    );
+  }
+
   Future<void> logSingleEvent(String name) {
     return FirebaseAnalytics.instance
         .logEvent(name: name, parameters: <String, dynamic>{});
