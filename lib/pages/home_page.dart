@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/pages/keep/keep_page/keep_page.dart';
 import 'package:amasearch/pages/search/search_page/search_page.dart';
 import 'package:amasearch/pages/search/word_search_page/word_search_page.dart';
 import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
@@ -15,12 +16,14 @@ class HomePage extends HookConsumerWidget {
   static const _pages = [
     SearchPage(),
     WordSearchPage(),
+    KeepPage(),
     StocksPage(),
     SettingsPage(),
   ];
   static const _names = [
     SearchPage.routeName,
     WordSearchPage.routeName,
+    KeepPage.routeName,
     StocksPage.routeName,
     SettingsPage.routeName,
   ];
@@ -54,6 +57,10 @@ class HomePage extends HookConsumerWidget {
             BottomNavigationBarItem(
               icon: Icon(Icons.find_in_page),
               label: "ワード検索",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.bookmark),
+              label: "キープ",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
