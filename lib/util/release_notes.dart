@@ -5,8 +5,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(1, 8, 0);
+var releaseNotesVersion = Version(1, 9, 0);
 const releaseNotes = <Release>[
+  Release("1.9.0", [
+    ReleaseSublist(
+      name: "更新内容",
+      changes: ["キープリスト機能を追加しました"],
+    )
+  ]),
   Release("1.8.0", [
     ReleaseSublist(
       name: "更新内容",

@@ -15,7 +15,7 @@ class VersionChecker {
 
     try {
       final defaultValues = <String, dynamic>{
-        _configName: "1.7.2",
+        _configName: "1.8.4",
       };
       await remoteConfig.setDefaults(defaultValues);
       await remoteConfig.fetchAndActivate();
