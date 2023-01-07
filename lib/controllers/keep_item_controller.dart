@@ -51,4 +51,13 @@ class KeepItemListController extends StateNotifier<List<KeepItem>> {
     state = [];
     box.clear();
   }
+
+  void updateMemo(KeepItem item, String memo) {
+    final box = _ref.read(keepItemBoxProvider);
+    state = [
+      for (var i = 0; i < state.length; i++)
+        state[i].id == item.id ? item : state[i]
+    ];
+    box.put(item.id, item);
+  }
 }
