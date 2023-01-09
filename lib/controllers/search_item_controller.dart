@@ -19,6 +19,7 @@ class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
   }
 
   final Ref _ref;
+  static final RegExp _janRegexp = RegExp(r"4[59]\d{11}");
 
   void _fetchAll() {
     final box = _ref.read(searchItemBoxProvider);
@@ -55,7 +56,16 @@ class SearchItemController extends StateNotifier<List<Future<SearchItem>>> {
           jan.startsWith("978")) {
         jan = jan.substring(0, 13);
       } else {
-        jan = jan.substring(jan.length - 13, jan.length);
+        final suffix = jan.substring(jan.length - 13, jan.length);
+        if (suffix.startsWith("45") || suffix.startsWith("49")) {
+          jan = suffix;
+        } else {
+          final m = _janRegexp.firstMatch(raw);
+          final value = m?.group(0);
+          if (value != null) {
+            jan = value;
+          }
+        }
       }
     }
     final data = Future.value(
