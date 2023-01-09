@@ -8,6 +8,7 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/item_image.dart';
+import 'package:amasearch/widgets/keepa_ua_async_widget.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -98,57 +99,71 @@ class TileImage extends HookConsumerWidget {
             ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 1),
-            child: ExtendedImage.network(
-              _createKeepaUrl(asinData.asin, keepaSettings),
-              // Cookie を入れる場合は以下のようにする
-              // headers: <String, String>{
-              //   'Cookie': 'key_a=value_a;key_b=value_b',
-              // },
-              loadStateChanged: (state) {
-                if (state.extendedImageLoadState != LoadState.completed) {
-                  return null;
-                }
-                return GestureDetector(
-                  onTap: () {
-                    showDialog<void>(
-                      context: context,
-                      builder: (context) {
-                        return GestureDetector(
-                          onTap: () {
-                            // InteractiveViewer を使うとダイアログが閉じられなくので、
-                            // GestureDetector でタップ検知して閉じる
-                            Navigator.pop(context);
-                          },
-                          child: InteractiveViewer(
-                            child: SimpleDialog(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    // 画像内はダイアログを閉じないために GestureDetector で上書き
-                                  },
-                                  child: ExtendedImage.network(
-                                    _createKeepaUrl(
-                                      asinData.asin,
-                                      keepaSettings,
-                                      width: "600",
-                                      height: "300",
+            child: KeepaUaAsyncWidget(
+              builder: (ua) => ExtendedImage.network(
+                _createKeepaUrl(asinData.asin, keepaSettings),
+                // Cookie を入れる場合は以下のようにする
+                // headers: <String, String>{
+                //   'Cookie': 'key_a=value_a;key_b=value_b',
+                // },
+                headers: ua != ""
+                    ? <String, String>{
+                        "User-Agent": ua,
+                      }
+                    : null,
+                loadStateChanged: (state) {
+                  if (state.extendedImageLoadState != LoadState.completed) {
+                    return null;
+                  }
+                  return GestureDetector(
+                    onTap: () {
+                      showDialog<void>(
+                        context: context,
+                        builder: (context) {
+                          return GestureDetector(
+                            onTap: () {
+                              // InteractiveViewer を使うとダイアログが閉じられなくので、
+                              // GestureDetector でタップ検知して閉じる
+                              Navigator.pop(context);
+                            },
+                            child: InteractiveViewer(
+                              child: SimpleDialog(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      // 画像内はダイアログを閉じないために GestureDetector で上書き
+                                    },
+                                    child: KeepaUaAsyncWidget(
+                                      builder: (ua) => ExtendedImage.network(
+                                        _createKeepaUrl(
+                                          asinData.asin,
+                                          keepaSettings,
+                                          width: "600",
+                                          height: "300",
+                                        ),
+                                        headers: ua != ""
+                                            ? <String, String>{
+                                                "User-Agent": ua,
+                                              }
+                                            : null,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  child: ExtendedRawImage(
-                    image: state.extendedImageInfo?.image,
-                    // グラフ部分だけをトリミング
-                    sourceRect: const Rect.fromLTWH(45, 20, 100, 100),
-                  ),
-                );
-              },
+                          );
+                        },
+                      );
+                    },
+                    child: ExtendedRawImage(
+                      image: state.extendedImageInfo?.image,
+                      // グラフ部分だけをトリミング
+                      sourceRect: const Rect.fromLTWH(45, 20, 100, 100),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],
