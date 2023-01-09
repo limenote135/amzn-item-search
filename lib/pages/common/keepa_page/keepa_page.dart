@@ -4,6 +4,7 @@ import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:amasearch/widgets/keepa_ua_async_widget.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -212,23 +213,30 @@ class _Body extends HookConsumerWidget {
           ),
         ),
         Expanded(
-          child: ExtendedImage.network(
-            createUrl(),
-            // "https://graph.keepa.com/pricehistory.png?asin=$asin&domain=co.jp&width=900&height=450&amazon=1&new=1&used=1&salesrank=1&range=31&cBackground=000000&cFont=cdcdcd&cAmazon=ffba63&cNew=8888dd&cUsed=ffffff",
-            // "https://graph.keepa.com/pricehistory.png?new=1&domain=jp&width=600&asin=$asin&salesrank=1&height=300&range=all",
-            // headers: <String, String>{
-            //   "Cookie": cookie,
-            // },
-            fit: BoxFit.contain,
-            mode: ExtendedImageMode.gesture,
-            initGestureConfigHandler: (ExtendedImageState state) {
-              return GestureConfig(
-                minScale: 0.9,
-                animationMinScale: 0.7,
-                maxScale: 4,
-                animationMaxScale: 4.5,
-              );
-            },
+          child: KeepaUaAsyncWidget(
+            builder: (ua) => ExtendedImage.network(
+              createUrl(),
+              // "https://graph.keepa.com/pricehistory.png?asin=$asin&domain=co.jp&width=900&height=450&amazon=1&new=1&used=1&salesrank=1&range=31&cBackground=000000&cFont=cdcdcd&cAmazon=ffba63&cNew=8888dd&cUsed=ffffff",
+              // "https://graph.keepa.com/pricehistory.png?new=1&domain=jp&width=600&asin=$asin&salesrank=1&height=300&range=all",
+              // headers: <String, String>{
+              //   "Cookie": cookie,
+              // },
+              headers: ua != ""
+                  ? <String, String>{
+                      "User-Agent": ua,
+                    }
+                  : null,
+              fit: BoxFit.contain,
+              mode: ExtendedImageMode.gesture,
+              initGestureConfigHandler: (ExtendedImageState state) {
+                return GestureConfig(
+                  minScale: 0.9,
+                  animationMinScale: 0.7,
+                  maxScale: 4,
+                  animationMaxScale: 4.5,
+                );
+              },
+            ),
           ),
         ),
         ElevatedButton(
