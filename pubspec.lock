@@ -303,11 +303,11 @@ packages:
     source: hosted
     version: "6.3.4"
   extended_image_library:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: extended_image_library
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "packages/extended_image_library"
+      relative: true
+    source: path
     version: "3.4.1"
   fake_async:
     dependency: transitive
