@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/keep_item_controller.dart';
@@ -75,9 +77,10 @@ class DetailPage extends HookConsumerWidget {
                   ref
                       .read(keepItemListControllerProvider.notifier)
                       .add(item, result[0]);
-                  await ref
+                  unawaited(ref
                       .read(analyticsControllerProvider)
-                      .logKeepEvent(item.asin);
+                      .logKeepEvent(item.asin));
+                  Navigator.of(context).popUntil(ModalRoute.withName("/"));
                 },
               ),
             ],
