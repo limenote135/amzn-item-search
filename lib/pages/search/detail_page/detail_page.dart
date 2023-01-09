@@ -77,9 +77,11 @@ class DetailPage extends HookConsumerWidget {
                   ref
                       .read(keepItemListControllerProvider.notifier)
                       .add(item, result[0]);
-                  unawaited(ref
-                      .read(analyticsControllerProvider)
-                      .logKeepEvent(item.asin));
+                  unawaited(
+                    ref
+                        .read(analyticsControllerProvider)
+                        .logKeepEvent(item.asin),
+                  );
                   Navigator.of(context).popUntil(ModalRoute.withName("/"));
                 },
               ),
