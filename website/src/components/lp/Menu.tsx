@@ -13,7 +13,7 @@ const TitleBarContainer = ({ isOpen, handleToggleDrawerOpen }: DrawerProp) => (
     <Toolbar>
       <Box sx={{ cursor: "pointer" }}>
         <Link href={"/"}>
-          <Image src={WhiteLogo} width={(483 * 44) / 135} height={44} alt={"アプリロゴ"} />
+          <Image src={WhiteLogo} width={(483 * 44) / 135} height={44} alt={"アプリロゴ"} loading={"eager"} />
         </Link>
       </Box>
       <Box flexGrow={1} />
