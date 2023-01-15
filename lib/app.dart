@@ -11,6 +11,7 @@ import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:amasearch/widgets/lifecycle_manager.dart';
 import 'package:amasearch/widgets/updater_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -71,6 +72,7 @@ class MyApp extends HookConsumerWidget {
           }
           // TODO: 仮で毎回起動時にセットする
           ref.read(analyticsControllerProvider).setUserId(value.uid);
+          FirebaseCrashlytics.instance.setUserIdentifier(value.uid);
           return Stack(
             children: const [
               HomePage(),
