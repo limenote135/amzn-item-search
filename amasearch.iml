@@ -30,6 +30,9 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/fast_barcode_scanner/fast_barcode_scanner/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/extended_image_library/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/extended_image_library/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/extended_image_library/.pub" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
