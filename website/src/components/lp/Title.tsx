@@ -53,12 +53,24 @@ const TitleContainer = ({
         <Grid item xs={12} textAlign={"center"} display={{ xs: "block", md: "none" }} mt={2}>
           <Fade in={fadeIns[1]} timeout={2000}>
             <Box>
-              <Image src={BlackLogo} width={{ xs: 300, sm: 400 }} height={{ xs: 83, sm: 111 }} alt={"アマサーチ"} />
+              <Image
+                src={BlackLogo}
+                width={{ xs: 300, sm: 400 }}
+                height={{ xs: 83, sm: 111 }}
+                alt={"アマサーチ"}
+                loading={"eager"}
+              />
             </Box>
           </Fade>
         </Grid>
         <Grid item xs={7} sm={6} md={4} textAlign={"center"}>
-          <Image src={AppScreen} width={{ xs: "211", md: "370" }} height={{ xs: "400", md: "700" }} alt="アプリ画面" />
+          <Image
+            src={AppScreen}
+            width={{ xs: "211", md: "370" }}
+            height={{ xs: "400", md: "700" }}
+            alt="アプリ画面"
+            loading={"eager"}
+          />
         </Grid>
         <Grid item xs={5} sm={6} md={2} textAlign={"center"}>
           <Fade in={fadeIns[0]} timeout={2000}>
@@ -68,7 +80,7 @@ const TitleContainer = ({
         <Grid item xs={12} md={6} textAlign={"center"}>
           <Fade in={fadeIns[1]} timeout={2000}>
             <Box my={10} display={{ xs: "none", md: "block" }}>
-              <Image src={BlackLogo} width={400} height={112} alt={"アマサーチ"} />
+              <Image src={BlackLogo} width={400} height={112} alt={"アマサーチ"} loading={"eager"} />
             </Box>
           </Fade>
           <Fade in={fadeIns[0]} timeout={2000}>

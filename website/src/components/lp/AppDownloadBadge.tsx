@@ -30,7 +30,13 @@ const AppDownloadBadge = ({ direction = "row", scale = 1 }: Props) => (
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Image src={AndroidBadge} width={200 * scale} height={77 * scale} alt={"GooglePlayからダウンロード"} />
+        <Image
+          src={AndroidBadge}
+          width={200 * scale}
+          height={77 * scale}
+          alt={"GooglePlayからダウンロード"}
+          loading={"eager"}
+        />
       </Link>
     </Box>
     <Typography component={"p"} variant={"caption"} mt={-2}>
