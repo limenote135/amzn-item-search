@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import { Container, Typography } from "@mui/material";
 import Menu from "@/components/lp/Menu";
 import { ReactElement } from "react";
+import Head from "next/head";
 
 type Props = {
   terms: string;
@@ -21,6 +22,9 @@ export const getStaticProps: GetStaticProps = async context => {
 const Terms = ({ terms }: Props) => {
   return (
     <>
+      <Head>
+        <title>{"プライバシーポリシー"}</title>
+      </Head>
       <Menu />
       <Container maxWidth={"lg"}>
         <Typography variant={"body1"} dangerouslySetInnerHTML={{ __html: terms }} mt={2} />
