@@ -3,6 +3,7 @@ import { Container, Typography } from "@mui/material";
 import Menu from "@/components/lp/Menu";
 import fs from "fs";
 import { ReactElement } from "react";
+import Head from "next/head";
 
 type Props = {
   terms: string;
@@ -21,6 +22,9 @@ export const getStaticProps: GetStaticProps = async context => {
 const Terms = ({ terms }: Props) => {
   return (
     <>
+      <Head>
+        <title>{"利用規約"}</title>
+      </Head>
       <Menu />
       <Container maxWidth={"lg"}>
         <Typography variant={"body1"} dangerouslySetInnerHTML={{ __html: terms }} mt={2} />
