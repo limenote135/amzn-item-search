@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -39,7 +40,7 @@ class _Body extends HookConsumerWidget {
         ListTile(
           title: Text(
             "商品仕入れ時に選択可能な仕入れ先を設定できます。",
-            style: Theme.of(context).textTheme.caption,
+            style: captionFontSize(context),
           ),
         ),
         const ThemeDivider(),

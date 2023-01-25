@@ -7,17 +7,20 @@ const strongTextStyle = TextStyle(
 
 const blackTextStyle = TextStyle(color: Colors.black87);
 
-TextStyle? bigFontSize(BuildContext context) =>
-    Theme.of(context).textTheme.headline5;
+TextStyle? headlineFontSize(BuildContext context) =>
+    Theme.of(context).textTheme.headlineSmall;
+
+TextStyle? largeFontSize(BuildContext context) =>
+    Theme.of(context).textTheme.bodyLarge;
 
 TextStyle? middleFontSize(BuildContext context) =>
-    Theme.of(context).textTheme.bodyText1;
+    Theme.of(context).textTheme.bodyMedium;
 
 TextStyle? smallFontSize(BuildContext context) =>
-    Theme.of(context).textTheme.overline;
+    Theme.of(context).textTheme.labelSmall;
 
 TextStyle? captionFontSize(BuildContext context) =>
-    Theme.of(context).textTheme.caption;
+    Theme.of(context).textTheme.bodySmall;
 
 TextStyle captionFontSizeBlackText(BuildContext context) =>
-    Theme.of(context).textTheme.caption!.apply(color: Colors.black);
+    Theme.of(context).textTheme.bodySmall!.apply(color: Colors.black);

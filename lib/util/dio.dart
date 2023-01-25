@@ -59,7 +59,7 @@ class HttpClient {
           information: [
             "response or status code is null",
             "URL: $url",
-            "resp: ${e.response.toString()}",
+            "resp: ${e.response}",
           ],
         );
         throw Exception("通信環境の良いところで再度お試しください");
@@ -79,7 +79,7 @@ class HttpClient {
           information: [
             "ServerSideError: $code",
             "URL: $url",
-            "resp: ${e.response.toString()}",
+            "resp: ${e.response}",
           ],
         );
         throw Exception("サーバーエラー($code)");
@@ -90,7 +90,7 @@ class HttpClient {
         information: [
           "Unknown error",
           "URL: $url",
-          "resp: ${e.response.toString()}",
+          "resp: ${e.response}",
         ],
       );
       throw Exception("通信環境の良いところで再度お試しください");
@@ -139,7 +139,7 @@ class HttpClient {
             "response or status code is null",
             "URL: $url",
             "params: $data",
-            "resp: ${e.response.toString()}",
+            "resp: ${e.response}",
           ],
         );
         throw Exception("通信環境の良いところで再度お試しください");
@@ -160,7 +160,7 @@ class HttpClient {
             "ServerSideError: $code",
             "URL: $url",
             "params: $data",
-            "resp: ${e.response.toString()}",
+            "resp: ${e.response}",
           ],
         );
         throw Exception("サーバーエラー($code)");
@@ -172,7 +172,7 @@ class HttpClient {
           "Unknown error",
           "URL: $url",
           "params: $data",
-          "resp: ${e.response.toString()}",
+          "resp: ${e.response}",
         ],
       );
       throw Exception("通信環境の良いところで再度お試しください");

@@ -1,5 +1,6 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -34,7 +35,7 @@ class _Body extends HookConsumerWidget {
     return ListView(
       children: [
         ListTile(
-          title: Text("デフォルト表示設定", style: Theme.of(context).textTheme.caption),
+          title: Text("デフォルト表示設定", style: captionFontSize(context)),
         ),
         SwitchListTile(
           title: const Text("新品価格"),

@@ -2,6 +2,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -15,7 +16,7 @@ class ConditionTextTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
-    final smallText = Theme.of(context).textTheme.bodyText2;
+    final middleText = middleFontSize(context);
 
     return ListTile(
       title: Row(
@@ -28,7 +29,7 @@ class ConditionTextTile extends ConsumerWidget {
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
                 decoration: const InputDecoration(labelText: "コンディション説明"),
-                style: smallText,
+                style: middleText,
               ),
             ),
           ),

@@ -74,7 +74,7 @@ class _Body extends HookConsumerWidget {
             value: offerTotalCountAsyncValue,
             errorInfo: [
               "OfferListingsPage._Body.offerTotalCountProvider",
-              "Param: ${param.toString()}",
+              "Param: $param",
             ],
             data: (value) {
               if (value == 0) {
