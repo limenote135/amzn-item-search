@@ -20,53 +20,65 @@ String _encodeAlertConditionToUserProps(List<AlertConditionSet> alerts) {
   final buffer = StringBuffer();
   for (var i = 0; i < alerts.length; i++) {
     final val = _createAlertConditionPropVal(alerts[i]);
-    buffer
-      ..write(val)
-      ..write(",");
+    buffer.write(val);
   }
   return buffer.toString();
 }
 
 String _createAlertConditionPropVal(AlertConditionSet alert) {
-  final buffer = StringBuffer();
+  final buffer = StringBuffer()..write("(");
   for (var i = 0; i < alert.conditions.length; i++) {
     final cond = alert.conditions[i];
     switch (cond.type) {
       case AlertType.profit:
-        return "p:${cond.value}";
+        buffer.write("p:${cond.value},");
+        break;
       case AlertType.rank:
-        return "r:${cond.value}";
+        buffer.write("r:${cond.value},");
+        break;
       case AlertType.category:
-        return "C";
+        buffer.write("C,");
+        break;
       case AlertType.condition:
         switch (cond.value) {
           case 0:
             //新品
-            return "c:n";
+            buffer.write("c:n,");
+            break;
           case 1:
             // 中古全て
-            return "c:u";
+            buffer.write("c:u,");
+            break;
           case 2:
             // ほぼ新品
-            return "c:m";
+            buffer.write("c:m,");
+            break;
           case 3:
             // 非常に良い
-            return "c:v";
+            buffer.write("c:v,");
+            break;
           case 4:
             // 良い
-            return "c:g";
+            buffer.write("c:g,");
+            break;
           case 5:
             // 可
-            return "c:a";
+            buffer.write("c:a,");
+            break;
         }
-        return "c";
+        buffer.write("c,");
+        break;
       case AlertType.premium:
-        return "pre";
+        buffer.write("pre,");
+        break;
       case AlertType.noAmazon:
-        return "noA";
+        buffer.write("noA");
+        break;
       case AlertType.noNewOffer:
-        return "noN";
+        buffer.write("noN");
+        break;
     }
   }
+  buffer.write(")");
   return buffer.toString();
 }
