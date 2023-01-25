@@ -12,7 +12,7 @@ workflows:
         FCI_KEYSTORE_PASSWORD: Encrypted(Z0FBQUFBQmpiMFFsTXBjV1JFeGxqb0RNaV9QZXRZalV6XzlnUURkME1iclQwdXhYa09HREF0d1RaNzhrTGRIWkxleW94bVN0d0dKSjdXQkJNUG9ra3l1enZJVzJjc3Nnenc9PQ==)
         FCI_KEY_PASSWORD: Encrypted(Z0FBQUFBQmpiMFFscG9FTlBVQVFrMF9TYWNQblYyc09CS2ZkVE83dGRjUGE3cEQ2QS10UDh3ak9LTVp0NEF2bmF2dmF1amdqdVNEMHNkc0o0akxJZUhKZF82aGRIMlY0V0E9PQ==)
         FCI_KEY_ALIAS: Encrypted(Z0FBQUFBQmpiMFFsaFlpcU5nRHZFTDZya0RQWWg5UDJjbDJTdlJaOENqQWdBNEhyT3N1ckFOQmFNbW9ncm93WkYtcDdzOGMxSzBWNHFWbUpvdHpZTXhrVkJTZ1FGTzdCcEE9PQ==)
-      flutter: stable
+      flutter: 3.3.10
       xcode: latest
       cocoapods: default
     cache:
