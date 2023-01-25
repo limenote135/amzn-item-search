@@ -1,5 +1,6 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/offer_stocks.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,9 +21,9 @@ class StockText extends HookConsumerWidget {
     final sellerId = ref.watch(currentSellerIdProvider);
     final asin = ref.watch(currentAsinProvider);
     final param = OfferStocksParam(asin: asin, sellerId: sellerId);
-    final smallSize = Theme.of(context).textTheme.bodyText2;
+    final middleSize = middleFontSize(context);
     return ref.watch(offerStocksFutureProvider(param)).when(
-          loading: () => Text("在庫: loading", style: smallSize),
+          loading: () => Text("在庫: loading", style: middleSize),
           error: (error, stackTrace) {
             recordError(
               error,
@@ -36,8 +37,8 @@ class StockText extends HookConsumerWidget {
           },
           data: (value) {
             return value == 0
-                ? Text("在庫: 不明", style: smallSize)
-                : Text("在庫: $value", style: smallSize);
+                ? Text("在庫: 不明", style: middleSize)
+                : Text("在庫: $value", style: middleSize);
           },
         );
   }

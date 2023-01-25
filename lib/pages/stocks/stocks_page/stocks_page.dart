@@ -106,7 +106,7 @@ class _Body extends HookConsumerWidget {
             RepaintBoundary(
               key: summaryKey,
               child: ColoredBox(
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).colorScheme.background,
                 child: const TotalProfit(),
               ),
             ),

@@ -10,8 +10,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http_client_helper/http_client_helper.dart';
-import 'extended_image_provider.dart';
 
+import 'extended_image_provider.dart';
 import 'extended_network_image_provider.dart' as image_provider;
 
 /// Creates a type for an overridable factory function for testing purposes.
@@ -129,7 +129,7 @@ class ExtendedNetworkImageProvider
     );
   }
 
-  // todo(garyq): We should eventually support custom decoding of network images on Web as
+  // TODO(garyq): We should eventually support custom decoding of network images on Web as
   // well, see https://github.com/flutter/flutter/issues/42789.
   //
   // Web does not support decoding network images to a specified size. The decode parameter

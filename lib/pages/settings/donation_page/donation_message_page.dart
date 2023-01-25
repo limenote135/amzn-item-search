@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/validators.dart';
@@ -48,6 +49,8 @@ class _Body extends ConsumerWidget {
     final package = ref.watch(_currentPackageProvider);
     final auth = ref.watch(firebaseAuthProvider);
 
+    final captionSize = captionFontSize(context);
+
     Future<void> sendDonation(
       String email,
       String name,
@@ -74,7 +77,7 @@ class _Body extends ConsumerWidget {
             ListTile(
               title: Text(
                 "ごちそうするとお礼のメッセージと使い道の写真が届きます",
-                style: Theme.of(context).textTheme.caption,
+                style: captionSize,
               ),
             ),
             ListTile(
@@ -102,7 +105,7 @@ class _Body extends ConsumerWidget {
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
                   "お礼のメッセージと使い道の写真の送り先です",
-                  style: Theme.of(context).textTheme.caption,
+                  style: captionSize,
                   // textAlign: TextAlign.left,
                 ),
               ),
@@ -123,7 +126,7 @@ class _Body extends ConsumerWidget {
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
                   "TwitterIDを入れると、お礼のリプライが届きます",
-                  style: Theme.of(context).textTheme.caption,
+                  style: captionSize,
                 ),
               ),
             ),
