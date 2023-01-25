@@ -1,5 +1,6 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -53,7 +54,7 @@ class _Body extends ConsumerWidget {
         ListTile(
           title: Text(
             "仕入れ商品リストをPCに送った際の並び順を変更できます。変更したい項目を長押ししてください。",
-            style: Theme.of(context).textTheme.caption,
+            style: captionFontSize(context),
           ),
         ),
         const ThemeDivider(),

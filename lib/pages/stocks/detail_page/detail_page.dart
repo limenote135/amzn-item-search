@@ -99,7 +99,7 @@ class _Body extends HookConsumerWidget {
     final fbaFee = item.useFba && !isUnknownFbaFee ? feeInfo.fbaFee : 0;
     final totalFeePerItem = referralFee + categoryFee + tax + fbaFee;
 
-    final smallText = Theme.of(context).textTheme.bodyText2;
+    final middleSize = middleFontSize(context);
 
     return ListView(
       children: [
@@ -210,7 +210,7 @@ class _Body extends HookConsumerWidget {
               const Text("コンディション説明"),
               Text(
                 item.conditionText,
-                style: smallText,
+                style: middleSize,
               ),
             ],
           ),
