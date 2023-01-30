@@ -213,10 +213,9 @@ class _ScanningScreenState extends State<ScanningScreen> {
                                           ? cam.pauseCamera()
                                           : cam.resumeCamera();
 
-                                      future
-                                          .then((_) =>
-                                              _cameraRunning.value = !isRunning)
-                                          .catchError((error, stack) {
+                                      final temp = future.then((_) {
+                                        _cameraRunning.value = !isRunning;
+                                      }).catchError((error, stack) {
                                         presentErrorAlert(
                                             context, error, stack);
                                       });
@@ -235,10 +234,9 @@ class _ScanningScreenState extends State<ScanningScreen> {
                                           ? cam.pauseScanner()
                                           : cam.resumeScanner();
 
-                                      future
-                                          .then((_) => _scannerRunning.value =
-                                              !isRunning)
-                                          .catchError((error, stackTrace) {
+                                      future.then((_) {
+                                        _scannerRunning.value = !isRunning;
+                                      }).catchError((error, stackTrace) {
                                         presentErrorAlert(
                                             context, error, stackTrace);
                                       });
@@ -260,6 +258,7 @@ class _ScanningScreenState extends State<ScanningScreen> {
                                       .catchError((error, stackTrace) {
                                     presentErrorAlert(
                                         context, error, stackTrace);
+                                    return false;
                                   });
                                 },
                                 child: Text(

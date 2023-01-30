@@ -5,6 +5,7 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/general_settings_default.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -56,19 +57,21 @@ class _Body extends HookConsumerWidget {
     // ここには  amazonListingsButton は含めない
     final enableButtons = buttons.where((element) => element.enable).toList();
 
+    final captionSize = captionFontSize(context);
+
     return ListView(
       children: [
         ListTile(
           title: Text(
             "検索商品を左右にスワイプした際のショートカットを設定します。",
-            style: Theme.of(context).textTheme.caption,
+            style: captionSize,
           ),
         ),
         const ThemeDivider(),
         ListTile(
           title: Text(
             "左端スワイプ",
-            style: Theme.of(context).textTheme.caption,
+            style: captionSize,
           ),
         ),
         for (var i = 0; i < left.length; i++)
@@ -97,7 +100,7 @@ class _Body extends HookConsumerWidget {
         ListTile(
           title: Text(
             "右端スワイプ",
-            style: Theme.of(context).textTheme.caption,
+            style: captionSize,
           ),
         ),
         for (var i = 0; i < right.length; i++)

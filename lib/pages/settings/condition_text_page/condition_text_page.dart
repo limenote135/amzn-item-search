@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -33,8 +34,8 @@ class _Body extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
 
-    final captionStyle = Theme.of(context).textTheme.caption;
-    final smallSize = Theme.of(context).textTheme.bodyText2;
+    final captionStyle = captionFontSize(context);
+    final middleSize = middleFontSize(context);
 
     return ListView(
       children: [
@@ -54,7 +55,7 @@ class _Body extends ConsumerWidget {
             groupValue: settings.newConditionTextIndex,
             title: Text(
               settings.newConditionTexts[i],
-              style: smallSize,
+              style: middleSize,
             ),
             secondary: IconButton(
               icon: const Icon(Icons.edit),
@@ -96,7 +97,7 @@ class _Body extends ConsumerWidget {
             groupValue: settings.usedConditionTextIndex,
             title: Text(
               settings.usedConditionTexts[i],
-              style: smallSize,
+              style: middleSize,
             ),
             secondary: IconButton(
               icon: const Icon(Icons.edit),

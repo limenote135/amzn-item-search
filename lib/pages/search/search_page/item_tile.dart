@@ -29,7 +29,7 @@ class ItemTile extends HookConsumerWidget {
       value: searchItemAsyncValue,
       errorInfo: [
         "SearchPage.ItemTile.searchItemFutureProvider",
-        "item: ${item.toString()}",
+        "item: $item",
       ],
       data: (value) {
         if (value.asins.isEmpty) {

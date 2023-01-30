@@ -15,6 +15,7 @@ import 'package:amasearch/pages/settings/shortcut_page/shortcut_page.dart';
 import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/support_page/suppert_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/release_notes.dart';
@@ -50,7 +51,7 @@ class _Body extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
 
-    final captionStyle = Theme.of(context).textTheme.caption;
+    final captionStyle = captionFontSize(context);
     return ListView(
       children: [
         ListTile(

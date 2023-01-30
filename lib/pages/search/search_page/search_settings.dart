@@ -1,6 +1,7 @@
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -14,7 +15,7 @@ class SearchSetting extends HookConsumerWidget {
     if (setting.usedSubCondition != UsedSubCondition.all) {
       condText += "以上";
     }
-    final textSize = Theme.of(context).textTheme.bodyText2;
+    final middleSize = middleFontSize(context);
     return ListTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +23,7 @@ class SearchSetting extends HookConsumerWidget {
           Center(
             child: Text(
               "検索設定",
-              style: textSize,
+              style: middleSize,
             ),
           ),
           Row(
@@ -33,9 +34,9 @@ class SearchSetting extends HookConsumerWidget {
                 children: [
                   Text(
                     "タイプ: ${setting.type.toDisplayString()}",
-                    style: textSize,
+                    style: middleSize,
                   ),
-                  Text("中古表示: $condText", style: textSize),
+                  Text("中古表示: $condText", style: middleSize),
                 ],
               ),
               Column(
@@ -43,11 +44,11 @@ class SearchSetting extends HookConsumerWidget {
                 children: [
                   Text(
                     "FBA利用: ${setting.useFba ? "する" : "しない"}",
-                    style: textSize,
+                    style: middleSize,
                   ),
                   Text(
                     "FBA優先表示: ${setting.priorFba ? "する" : "しない"}",
-                    style: textSize,
+                    style: middleSize,
                   ),
                 ],
               )
