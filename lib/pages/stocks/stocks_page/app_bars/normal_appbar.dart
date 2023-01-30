@@ -6,7 +6,7 @@ import 'package:amasearch/pages/stocks/search_page/search_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/provider.dart';
 import 'package:amasearch/pages/stocks/stocks_page/share/keys.dart';
 import 'package:amasearch/pages/stocks/stocks_page/share/share.dart';
-import 'package:badges/badges.dart' as badge;
+import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -29,10 +29,11 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
       title: const Text("仕入れ済み商品"),
       actions: [
         IconButton(
-          icon: badge.Badge(
-            badgeContent: Text("$filterCount"),
-            showBadge: filterCount > 0,
-            badgeColor: Colors.orange,
+          icon: Badge.count(
+            count: filterCount,
+            isLabelVisible: filterCount > 0,
+            backgroundColor: Colors.orange,
+            textColor: !isDark(context) ? Colors.black : Colors.white,
             child: const Icon(Icons.search),
           ),
           onPressed: () {
