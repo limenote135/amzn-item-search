@@ -15,7 +15,7 @@ class CartTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asin = ref.watch(currentAsinProvider);
-    final bigSize = bigFontSize(context);
+    final headlineSize = headlineFontSize(context);
     final cartOfferAsyncValue = ref.watch(cartOfferProvider(asin));
     return AsyncValueListTileWidget<OfferItem?>(
       value: cartOfferAsyncValue,
@@ -51,7 +51,7 @@ class CartTile extends HookConsumerWidget {
                             children: [
                               RichText(
                                 text: TextSpan(
-                                  style: bigSize,
+                                  style: headlineSize,
                                   children: [
                                     TextSpan(
                                       text: numberFormatter.format(value.price),

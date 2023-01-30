@@ -24,12 +24,12 @@ class OfferTile extends HookConsumerWidget {
         ),
       ),
     );
-    final bigSize = bigFontSize(context);
+    final headlineSize = headlineFontSize(context);
     return AsyncValueListTileWidget<OfferItem>(
       value: offerItem,
       errorInfo: [
         "OfferTile.offerItem",
-        "index: $index, param: ${param.toString()}",
+        "index: $index, param: $param",
       ],
       data: (value) => ListTile(
         title: Row(
@@ -40,7 +40,7 @@ class OfferTile extends HookConsumerWidget {
                 children: [
                   RichText(
                     text: TextSpan(
-                      style: bigSize,
+                      style: headlineSize,
                       children: [
                         TextSpan(
                           text: numberFormatter.format(value.price),

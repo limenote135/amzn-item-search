@@ -97,7 +97,7 @@ Future<void> callListings(
       context: context,
       title: "エラー",
       message: "出品に失敗しました\n"
-          "${e.toString()}",
+          "$e",
     );
   } finally {
     if (EasyLoading.isShow) {
