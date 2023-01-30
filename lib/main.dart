@@ -208,6 +208,7 @@ Future<void> initHive() async {
   ]);
 }
 
+// ignore: unreachable_from_main
 Future<void> deleteBoxes() async {
   // await Hive.deleteBoxFromDisk(searchItemBoxName);
   // await Hive.deleteBoxFromDisk(stockItemBoxName);
