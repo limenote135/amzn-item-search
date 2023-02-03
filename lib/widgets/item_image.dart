@@ -12,15 +12,18 @@ class ItemImage extends StatelessWidget {
     if (url?.isEmpty != false) {
       return _imageBox;
     }
-    return ExtendedImage.network(
-      url!,
-      fit: BoxFit.scaleDown,
-      loadStateChanged: (state) {
-        if (state.extendedImageLoadState != LoadState.completed) {
-          return null;
-        }
-        return state.completedWidget;
-      },
+    return SizedBox(
+      width: 75,
+      child: ExtendedImage.network(
+        url!,
+        fit: BoxFit.scaleDown,
+        loadStateChanged: (state) {
+          if (state.extendedImageLoadState != LoadState.completed) {
+            return null;
+          }
+          return state.completedWidget;
+        },
+      ),
     );
   }
 }
