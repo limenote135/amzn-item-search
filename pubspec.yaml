@@ -70,7 +70,7 @@ dependencies:
   in_app_review: ^2.0.6
   intl: ^0.17.0
   json_annotation: ^4.8.0
-  json_serializable: ^6.6.0
+  json_serializable: ^6.6.1
   keyboard_actions: ^4.1.0
   package_info_plus: ^3.0.2
   path: ^1.8.2
