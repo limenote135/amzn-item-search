@@ -25,7 +25,9 @@ class CameraItemTile extends HookConsumerWidget {
         overrides: [
           currentFutureSearchItemProvider.overrideWithValue(items.first),
         ],
-        child: const ItemTile(),
+        child: Scrollable(
+          viewportBuilder: (context, position) => const ItemTile(),
+        ),
       ),
     );
   }
