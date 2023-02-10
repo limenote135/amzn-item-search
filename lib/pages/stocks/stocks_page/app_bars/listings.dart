@@ -44,7 +44,7 @@ Future<void> callListings(
     final file = await createListingsFile(items);
     final filename = basename(file.path);
     final gcsPath =
-        "Users/${user!.uid}/Listings/$listingsFileVersion/$filename";
+        "Listings/$listingsFileVersion/Users/${user!.uid}/$filename";
     try {
       await FirebaseStorage.instance.ref(gcsPath).putFile(file);
     } on FirebaseException catch (e, stack) {

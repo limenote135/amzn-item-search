@@ -59,6 +59,7 @@ extension StockItemExtention on StockItem {
       subCondition: subCondition,
       useFba: useFba,
       conditionText: conditionText,
+      images: images,
     );
   }
 }
