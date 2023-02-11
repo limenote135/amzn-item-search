@@ -7,6 +7,7 @@ import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:reorderables/reorderables.dart';
 
 class ListingImagesPage extends ConsumerStatefulWidget {
   const ListingImagesPage({
@@ -53,6 +54,22 @@ class _ListingImagesPageState extends ConsumerState<ListingImagesPage> {
   Widget build(BuildContext context) {
     final windowHeight = MediaQuery.of(context).size.height;
 
+    void onReorder(int oldIndex, int newIndex) {
+      setState(() {
+        final col = images.removeAt(oldIndex);
+        images.insert(newIndex, col);
+        if (selectedIndex == oldIndex) {
+          selectedIndex = newIndex;
+        } else if (oldIndex < selectedIndex && selectedIndex <= newIndex) {
+          // 選択中より左側のものを右側に持ってくる場合
+          selectedIndex = selectedIndex - 1;
+        } else if (oldIndex > selectedIndex && selectedIndex >= newIndex) {
+          // 選択中より右側のものを左側に持ってくる場合
+          selectedIndex = selectedIndex + 1;
+        }
+      });
+    }
+
     return WillPopScope(
       onWillPop: () async {
         final ret = await showOkCancelAlertDialog(
@@ -90,27 +107,32 @@ class _ListingImagesPageState extends ConsumerState<ListingImagesPage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  for (var i = 0; i < images.length; i++)
-                    GestureDetector(
-                      key: ValueKey(images[i]),
-                      onTap: () {
-                        setState(() {
-                          selectedIndex = i;
-                        });
-                      },
-                      child: Container(
-                        height: 70,
-                        width: 70,
-                        margin: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.black12,
-                          border: i == selectedIndex
-                              ? Border.all(color: Colors.blue, width: 2)
-                              : null,
+                  ReorderableRow(
+                    onReorder: onReorder,
+                    children: [
+                      for (var i = 0; i < images.length; i++)
+                        GestureDetector(
+                          key: ValueKey(images[i]),
+                          onTap: () {
+                            setState(() {
+                              selectedIndex = i;
+                            });
+                          },
+                          child: Container(
+                            height: 70,
+                            width: 70,
+                            margin: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.black12,
+                              border: i == selectedIndex
+                                  ? Border.all(color: Colors.blue, width: 2)
+                                  : null,
+                            ),
+                            child: ExtendedImage.file(File(images[i])),
+                          ),
                         ),
-                        child: ExtendedImage.file(File(images[i])),
-                      ),
-                    ),
+                    ],
+                  ),
                   if (images.length < _maxImageCount)
                     ImageSelectIconButton(
                       size: 70,
