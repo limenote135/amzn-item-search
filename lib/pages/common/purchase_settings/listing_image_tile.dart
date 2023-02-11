@@ -34,10 +34,14 @@ class ListingImageTile extends ConsumerWidget {
                     if (result == null) {
                       return;
                     }
-                    // 数が減る場合、一度 clear しないと正しく反映されない不具合がある
-                    formArray
-                      ..clear(emitEvent: false, updateParent: false)
-                      ..reset(value: result);
+                    if (result.isEmpty) {
+                      formArray.clear();
+                    } else {
+                      // 数が減る場合、一度 clear しないと正しく反映されない不具合がある
+                      formArray
+                        ..clear(emitEvent: false, updateParent: false)
+                        ..reset(value: result);
+                    }
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -65,10 +69,14 @@ class ListingImageTile extends ConsumerWidget {
                     if (results == null) {
                       return;
                     }
-                    // 数が減る場合、一度 clear しないと正しく反映されない不具合がある
-                    formArray
-                      ..clear(emitEvent: false, updateParent: false)
-                      ..reset(value: results);
+                    if (results.isEmpty) {
+                      formArray.clear();
+                    } else {
+                      // 数が減る場合、一度 clear しないと正しく反映されない不具合がある
+                      formArray
+                        ..clear(emitEvent: false, updateParent: false)
+                        ..reset(value: results);
+                    }
                   },
                 ),
             ],
