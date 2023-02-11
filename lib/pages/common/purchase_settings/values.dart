@@ -12,6 +12,7 @@ const purchaseDateField = "purchaseField";
 const autogenSkuField = "autogenSku";
 const skuField = "sku";
 const conditionTextField = "conditionText";
+const listingImagesField = "listingImages";
 const memoField = "memo";
 const otherCostField = "otherCost";
 
