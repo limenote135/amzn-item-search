@@ -26,9 +26,16 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
 
   final Ref _ref;
 
-  void _fetchAll() {
+  Future<void> _fetchAll() async {
+    final imageDir = await _getImageDir();
     final box = _ref.read(stockItemBoxProvider);
-    final data = box.values.toList()..sort(_sortFunc);
+    final items = box.values.map((e) {
+      final images = e.images
+          .map((e) => e.replaceAll(_imageDirVariable, imageDir.path))
+          .toList();
+      return e.copyWith(images: images);
+    }).toList();
+    final data = items..sort(_sortFunc);
     state = data;
   }
 
