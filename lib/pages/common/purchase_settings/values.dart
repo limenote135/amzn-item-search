@@ -1,5 +1,6 @@
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:collection/collection.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 const purchasePriceField = "purchasePrice";
@@ -72,4 +73,10 @@ PurchaseItemCondition getCondition(AbstractControl<dynamic> form) {
 DateTime getPurchaseDate(AbstractControl<dynamic> form) {
   final f = form as FormGroup;
   return f.control(purchaseDateField).value as DateTime;
+}
+
+List<String> getImages(AbstractControl<dynamic> form) {
+  final f = form as FormGroup;
+  final val = f.control(listingImagesField).value as List<String?>;
+  return val.whereNotNull().toList();
 }
