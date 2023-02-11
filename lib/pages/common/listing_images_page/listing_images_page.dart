@@ -1,0 +1,138 @@
+import 'dart:io';
+
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/widgets/image_select_icon_button.dart';
+import 'package:amasearch/widgets/theme_divider.dart';
+import 'package:extended_image/extended_image.dart';
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+class ListingImagesPage extends ConsumerStatefulWidget {
+  const ListingImagesPage({
+    super.key,
+    required this.images,
+    required this.selectedIndex,
+  });
+  static const String routeName = "/listing_images";
+
+  static Route<List<String>> route({
+    required List<String> images,
+    int selectedIndex = 0,
+  }) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => ListingImagesPage(
+        images: images,
+        selectedIndex: selectedIndex,
+      ),
+    );
+  }
+
+  final List<String> images;
+  final int selectedIndex;
+
+  @override
+  ConsumerState createState() => _ListingImagesPageState();
+}
+
+class _ListingImagesPageState extends ConsumerState<ListingImagesPage> {
+  late List<String> images;
+  late int selectedIndex;
+
+  @override
+  void initState() {
+    images = widget.images;
+    selectedIndex = widget.selectedIndex;
+    super.initState();
+  }
+
+  static const int _maxImageCount = 6;
+
+  @override
+  Widget build(BuildContext context) {
+    final windowHeight = MediaQuery.of(context).size.height;
+
+    return WillPopScope(
+      onWillPop: () async {
+        final ret = await showOkCancelAlertDialog(
+          context: context,
+          title: "変更を破棄しますか？",
+          message: "画像の追加や編集は保存されません。",
+          okLabel: "破棄する",
+        );
+        return ret == OkCancelResult.ok;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("商品画像"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(images);
+              },
+              child: const Text("完了"),
+            ),
+          ],
+        ),
+        body: Column(
+          children: [
+            const Text("中古出品時に商品画像を設定できます。\n新品出品時には無視されます。"),
+            Container(
+              height: windowHeight / 2,
+              color: Colors.black12,
+              child: selectedIndex >= 0
+                  ? ExtendedImage.file(File(images[selectedIndex]))
+                  : null,
+            ),
+            const ThemeDivider(),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  for (var i = 0; i < images.length; i++)
+                    GestureDetector(
+                      key: ValueKey(images[i]),
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = i;
+                        });
+                      },
+                      child: Container(
+                        height: 70,
+                        width: 70,
+                        margin: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.black12,
+                          border: i == selectedIndex
+                              ? Border.all(color: Colors.blue, width: 2)
+                              : null,
+                        ),
+                        child: ExtendedImage.file(File(images[i])),
+                      ),
+                    ),
+                  if (images.length < _maxImageCount)
+                    ImageSelectIconButton(
+                      size: 70,
+                      onSelect: (result) {
+                        var img = <String>[
+                          ...images,
+                          for (var i = 0; i < result.paths.length; i++)
+                            if (result.paths[i] != null) result.paths[i]!
+                        ];
+                        if (img.length > _maxImageCount) {
+                          img = img.sublist(0, _maxImageCount);
+                        }
+                        setState(() {
+                          images = img;
+                        });
+                      },
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
