@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/widgets/image_select_icon_button.dart';
+import 'package:amasearch/widgets/text_icon_button.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -124,11 +125,43 @@ class _ListingImagesPageState extends ConsumerState<ListingImagesPage> {
                         }
                         setState(() {
                           images = img;
+                          // 画像をすべて削除したあと再度追加した場合、selectedIndex = -1 になっている
+                          if (selectedIndex < 0 && img.isNotEmpty) {
+                            selectedIndex = 0;
+                          }
                         });
                       },
                     ),
                 ],
               ),
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextIconButton(
+                  icon: const Icon(Icons.auto_fix_high),
+                  text: const Text("加工"),
+                  onTap: () {},
+                ),
+                TextIconButton(
+                  icon: const Icon(Icons.delete),
+                  text: const Text("削除"),
+                  onTap: () {
+                    setState(() {
+                      images = [
+                        for (var i = 0; i < images.length; i++)
+                          if (i != selectedIndex) images[i]
+                      ];
+                      if (images.isEmpty) {
+                        selectedIndex = -1;
+                      } else {
+                        selectedIndex = 0;
+                      }
+                    });
+                  },
+                ),
+              ],
             ),
           ],
         ),
