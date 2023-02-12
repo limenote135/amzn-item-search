@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/pages/common/listing_images_page/image_edit_page.dart';
 import 'package:amasearch/widgets/image_select_icon_button.dart';
 import 'package:amasearch/widgets/text_icon_button.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -164,7 +165,20 @@ class _ListingImagesPageState extends ConsumerState<ListingImagesPage> {
                 TextIconButton(
                   icon: const Icon(Icons.auto_fix_high),
                   text: const Text("加工"),
-                  onTap: () {},
+                  onTap: () async {
+                    final result = await Navigator.of(context)
+                        .push(ImageEditPage.route(images[selectedIndex]));
+                    if (result == null) {
+                      return;
+                    }
+
+                    setState(() {
+                      images = [
+                        for (var i = 0; i < images.length; i++)
+                          i == selectedIndex ? result : images[i]
+                      ];
+                    });
+                  },
                 ),
                 TextIconButton(
                   icon: const Icon(Icons.delete),
