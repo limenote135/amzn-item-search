@@ -61,7 +61,6 @@ bool isProd() {
 const _kTestingCrashlytics = false;
 const _kTestingAnalytics = false;
 const _kTestingPerformance = false;
-const _kTestingInAppPurchase = false;
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -216,9 +215,6 @@ Future<void> deleteBoxes() async {
 }
 
 Future<void> initRevenueCat() async {
-  if (kDebugMode) {
-    await Purchases.setDebugLogsEnabled(_kTestingInAppPurchase);
-  }
   if (Platform.isAndroid) {
     await Purchases.configure(
       isProd()
