@@ -98,6 +98,14 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     }
     state = state.where((element) => !targets.contains(element)).toList();
 
+    for (final t in targets) {
+      for (final img in t.images) {
+        final f = File(img);
+        if (f.existsSync()) {
+          unawaited(f.delete());
+        }
+      }
+    }
     final box = _ref.read(stockItemBoxProvider);
     final keys = targets.map((e) => e.id);
     box.deleteAll(keys);
@@ -105,6 +113,14 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
 
   void removeAll() {
     final box = _ref.read(stockItemBoxProvider);
+    for (final t in state) {
+      for (final img in t.images) {
+        final f = File(img);
+        if (f.existsSync()) {
+          unawaited(f.delete());
+        }
+      }
+    }
     state = [];
     box.clear();
   }
