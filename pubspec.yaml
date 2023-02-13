@@ -45,7 +45,7 @@ dependencies:
   firebase_crashlytics: ^3.0.11
   firebase_performance: ^0.9.0+10
   firebase_remote_config: ^3.0.10
-  firebase_storage: ^11.0.10
+  firebase_storage: ^11.0.11
   flex_color_scheme: ^4.2.0
   flutter:
     sdk: flutter
