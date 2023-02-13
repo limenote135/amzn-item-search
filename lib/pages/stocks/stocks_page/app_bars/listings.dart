@@ -1,6 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
-import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/auth.dart';
@@ -41,6 +40,8 @@ Future<void> callListings(
   try {
     await EasyLoading.show(status: "出品処理中...");
     final items = selected.map((e) => e.toListingItem()).toList();
+    final hasImage = items.any((element) => element.images.isNotEmpty);
+
     final file = await createListingsFile(items);
     final filename = basename(file.path);
     final gcsPath =
@@ -70,7 +71,7 @@ Future<void> callListings(
       currentTimeString(),
     );
 
-    await analytics.logSingleEvent(amazonListingEventName);
+    await analytics.logListingsEvent(hasImage: hasImage.toString());
 
     await EasyLoading.dismiss();
     final ret = await showOkCancelAlertDialog(
