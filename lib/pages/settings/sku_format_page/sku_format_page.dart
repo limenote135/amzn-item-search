@@ -194,6 +194,12 @@ class __PatternEditFormState extends ConsumerState<_PatternEditForm> {
           },
           child: const Text("保存"),
         ),
+        ListTile(
+          title: Text(
+            "※ 商品ごとに異なる値となるように設定しないと出品できません",
+            style: middleFontSize(context),
+          ),
+        ),
       ],
     );
   }
