@@ -30,7 +30,11 @@ class SellerListTile extends HookConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
                   children: [
-                    const Center(child: Text("新品")),
+                    Center(
+                      child: Text(
+                        "新品(${calcOfferCount(item.prices?.newPrices)}人)",
+                      ),
+                    ),
                     for (final price
                         in item.prices?.newPrices ?? <PriceDetail>[])
                       ProviderScope(
@@ -48,7 +52,11 @@ class SellerListTile extends HookConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
                   children: [
-                    const Center(child: Text("中古")),
+                    Center(
+                      child: Text(
+                        "中古(${calcOfferCount(item.prices?.usedPrices)}人)",
+                      ),
+                    ),
                     for (final price
                         in item.prices?.usedPrices ?? <PriceDetail>[])
                       ProviderScope(
@@ -65,6 +73,16 @@ class SellerListTile extends HookConsumerWidget {
         )
       ],
     );
+  }
+
+  String calcOfferCount(List<PriceDetail>? prices) {
+    if (prices == null) {
+      return "0";
+    }
+    if (prices.length >= 20) {
+      return "20+";
+    }
+    return "${prices.length}";
   }
 }
 
