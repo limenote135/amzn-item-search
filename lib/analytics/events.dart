@@ -24,6 +24,7 @@ const pushSearchButtonAmazonName = "Amazon";
 const pushSearchButtonKeepaName = "Keepa";
 const pushSearchButtonVariationName = "Variation";
 const pushSearchButtonDeltaName = "Delta";
+const pushSearchButtonMonoTracerName = "MonoTracer";
 const pushSearchButtonMonoSearchName = "MonoSearch";
 const pushSearchButtonKeezonName = "Keezon";
 const pushSearchButtonMercariName = "Mercari";
@@ -45,6 +46,7 @@ const pushSearchButtonOpenKeepaName = "OpenKeepa"; // KeepaPage からブラウ�
 const customButtonEventMap = <String, String>{
   customButtonAmazonUrl: pushSearchButtonAmazonName,
   customButtonDeltaUrl: pushSearchButtonDeltaName,
+  customButtonMonoTracerUrl: pushSearchButtonMonoTracerName,
   customButtonMonoSearchUrl: pushSearchButtonMonoSearchName,
   customButtonKeezonUrl: pushSearchButtonKeezonName,
   customButtonMercariUrl: pushSearchButtonMercariName,
