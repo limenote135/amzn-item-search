@@ -54,6 +54,8 @@ const customButtonSurugayaUrl =
     "https://www.suruga-ya.jp/search?category=&search_word=$janVariable";
 const customButtonOrderHistoryUrl =
     "https://sellercentral.amazon.co.jp/orders-v3/search?page=1&qt=asin&q=$asinVariable";
+const customButtonMonoTracerUrl =
+    "https://www.mono-tracer.com/#/product/$asinVariable";
 
 // カスタムボタンではないが、ショートカットで設定するために定義を用意しておく
 const amazonListingsButton = CustomButtonDetail(
@@ -78,8 +80,8 @@ const defaultCustomButtons = [
   CustomButtonDetail(
     id: "bt03",
     enable: true,
-    title: "Delta",
-    pattern: customButtonDeltaUrl,
+    title: "モノトレーサー",
+    pattern: customButtonMonoTracerUrl,
   ),
   CustomButtonDetail(
     id: "bt04",
