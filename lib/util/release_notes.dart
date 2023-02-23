@@ -5,12 +5,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(1, 9, 3);
+var releaseNotesVersion = Version(1, 10, 0);
 const releaseNotes = <Release>[
-  Release("1.9.3", [
+  Release("1.10.0", [
     ReleaseSublist(
       name: "更新内容",
-      changes: ["キープリストの商品のメモが更新できない不具合を修正"],
+      changes: ["中古出品時に商品画像を指定できるようになりました"],
     )
   ]),
   Release("1.9.0", [
