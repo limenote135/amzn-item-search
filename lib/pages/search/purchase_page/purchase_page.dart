@@ -221,6 +221,7 @@ class _SaveButton extends HookConsumerWidget {
       breakEven: breakEven,
       conditionText: getString(form, conditionTextField),
       otherCost: getInt(form, otherCostField),
+      images: getImages(form),
     );
     ref.read(stockItemListControllerProvider.notifier).add(stock);
     ref.read(analyticsControllerProvider).logPurchaseEvent(stock);

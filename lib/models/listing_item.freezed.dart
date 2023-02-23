@@ -28,6 +28,7 @@ mixin _$ListingItem {
   ItemSubCondition get subCondition => throw _privateConstructorUsedError;
   bool get useFba => throw _privateConstructorUsedError;
   String get conditionText => throw _privateConstructorUsedError;
+  List<String> get images => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +50,8 @@ abstract class $ListingItemCopyWith<$Res> {
       ItemCondition condition,
       ItemSubCondition subCondition,
       bool useFba,
-      String conditionText});
+      String conditionText,
+      List<String> images});
 }
 
 /// @nodoc
@@ -73,6 +75,7 @@ class _$ListingItemCopyWithImpl<$Res, $Val extends ListingItem>
     Object? subCondition = null,
     Object? useFba = null,
     Object? conditionText = null,
+    Object? images = null,
   }) {
     return _then(_value.copyWith(
       sku: null == sku
@@ -107,6 +110,10 @@ class _$ListingItemCopyWithImpl<$Res, $Val extends ListingItem>
           ? _value.conditionText
           : conditionText // ignore: cast_nullable_to_non_nullable
               as String,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -127,7 +134,8 @@ abstract class _$$_ListingItemCopyWith<$Res>
       ItemCondition condition,
       ItemSubCondition subCondition,
       bool useFba,
-      String conditionText});
+      String conditionText,
+      List<String> images});
 }
 
 /// @nodoc
@@ -149,6 +157,7 @@ class __$$_ListingItemCopyWithImpl<$Res>
     Object? subCondition = null,
     Object? useFba = null,
     Object? conditionText = null,
+    Object? images = null,
   }) {
     return _then(_$_ListingItem(
       sku: null == sku
@@ -183,6 +192,10 @@ class __$$_ListingItemCopyWithImpl<$Res>
           ? _value.conditionText
           : conditionText // ignore: cast_nullable_to_non_nullable
               as String,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -199,7 +212,9 @@ class _$_ListingItem implements _ListingItem {
       required this.condition,
       required this.subCondition,
       required this.useFba,
-      required this.conditionText});
+      required this.conditionText,
+      final List<String> images = const <String>[]})
+      : _images = images;
 
   factory _$_ListingItem.fromJson(Map<String, dynamic> json) =>
       _$$_ListingItemFromJson(json);
@@ -220,10 +235,18 @@ class _$_ListingItem implements _ListingItem {
   final bool useFba;
   @override
   final String conditionText;
+  final List<String> _images;
+  @override
+  @JsonKey()
+  List<String> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
 
   @override
   String toString() {
-    return 'ListingItem(sku: $sku, asin: $asin, sellPrice: $sellPrice, amount: $amount, condition: $condition, subCondition: $subCondition, useFba: $useFba, conditionText: $conditionText)';
+    return 'ListingItem(sku: $sku, asin: $asin, sellPrice: $sellPrice, amount: $amount, condition: $condition, subCondition: $subCondition, useFba: $useFba, conditionText: $conditionText, images: $images)';
   }
 
   @override
@@ -242,13 +265,23 @@ class _$_ListingItem implements _ListingItem {
                 other.subCondition == subCondition) &&
             (identical(other.useFba, useFba) || other.useFba == useFba) &&
             (identical(other.conditionText, conditionText) ||
-                other.conditionText == conditionText));
+                other.conditionText == conditionText) &&
+            const DeepCollectionEquality().equals(other._images, _images));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, sku, asin, sellPrice, amount,
-      condition, subCondition, useFba, conditionText);
+  int get hashCode => Object.hash(
+      runtimeType,
+      sku,
+      asin,
+      sellPrice,
+      amount,
+      condition,
+      subCondition,
+      useFba,
+      conditionText,
+      const DeepCollectionEquality().hash(_images));
 
   @JsonKey(ignore: true)
   @override
@@ -273,7 +306,8 @@ abstract class _ListingItem implements ListingItem {
       required final ItemCondition condition,
       required final ItemSubCondition subCondition,
       required final bool useFba,
-      required final String conditionText}) = _$_ListingItem;
+      required final String conditionText,
+      final List<String> images}) = _$_ListingItem;
 
   factory _ListingItem.fromJson(Map<String, dynamic> json) =
       _$_ListingItem.fromJson;
@@ -294,6 +328,8 @@ abstract class _ListingItem implements ListingItem {
   bool get useFba;
   @override
   String get conditionText;
+  @override
+  List<String> get images;
   @override
   @JsonKey(ignore: true)
   _$$_ListingItemCopyWith<_$_ListingItem> get copyWith =>

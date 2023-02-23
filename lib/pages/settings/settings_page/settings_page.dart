@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
@@ -20,11 +22,14 @@ import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/release_notes.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
+import 'package:extended_image/extended_image.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:release_notes_dialog/release_notes_dialog.dart';
 
 import 'amazon_status.dart';
@@ -207,6 +212,30 @@ class _Body extends HookConsumerWidget {
           title: const Text("問い合わせ"),
           onTap: () {
             Navigator.push(context, SupportPage.route());
+          },
+        ),
+        ListTile(
+          title: const Text("キャッシュの削除"),
+          onTap: () async {
+            final ret = await showOkCancelAlertDialog(
+              context: context,
+              title: "キャッシュの削除",
+              message: "すべてのキャッシュファイルを削除しますか？",
+            );
+            if (ret == OkCancelResult.ok) {
+              try {
+                await EasyLoading.show(status: "削除中...");
+                await clearDiskCachedImages();
+                await FilePicker.platform.clearTemporaryFiles();
+                final tempDir = await getTemporaryDirectory();
+                final imageDir = Directory("$tempDir/images");
+                if (imageDir.existsSync()) {
+                  imageDir.deleteSync();
+                }
+              } finally {
+                await EasyLoading.dismiss();
+              }
+            }
           },
         ),
         ListTile(
