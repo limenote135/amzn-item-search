@@ -18,6 +18,7 @@ import 'fee_tile.dart';
 import 'image_tile.dart';
 import 'input_prices_tile.dart';
 import 'item_condition_tile.dart';
+import 'listing_image_tile.dart';
 import 'profit_tile.dart';
 import 'purchase_date_tile.dart';
 import 'retailer_tile.dart';
@@ -58,6 +59,9 @@ final formValueProvider =
     autogenSkuField: item.autogenSku,
     skuField: item.sku,
     retailerField: item.retailer,
+    listingImagesField: FormArray<String>(
+      item.images.map((e) => FormControl<String>(value: e)).toList(),
+    ),
     memoField: item.memo,
     conditionTextField: item.conditionText,
     purchaseDateField: DateTime.parse(item.purchaseDate).toLocal(),
@@ -95,6 +99,7 @@ class PurchaseSettingsForm extends StatelessWidget {
                 const ThemeDivider(),
                 const SkuTile(),
                 const ConditionTextTile(),
+                const ListingImageTile(),
                 ListTile(
                   title: ReactiveTextField<dynamic>(
                     formControlName: memoField,
