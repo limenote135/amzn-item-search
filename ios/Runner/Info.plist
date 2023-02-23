@@ -71,5 +71,7 @@
 		<false/>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
+		<key>NSPhotoLibraryUsageDescription</key>
+        <string>商品画像を選択します</string>
 	</dict>
 </plist>
