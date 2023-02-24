@@ -71,17 +71,41 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(props,
 
   if (isExternal) {
     if (noLinkStyle) {
-      return <Anchor className={className} href={href} ref={ref} {...other} />;
+      return (
+        <Anchor className={className} href={href} ref={ref} target={"_blank"} rel="noopener noreferrer" {...other} />
+      );
     }
 
-    return <MuiLink className={className} href={href} ref={ref} {...other} />;
+    return (
+      <MuiLink
+        className={className}
+        href={href}
+        ref={ref}
+        target={"_blank"}
+        rel="noopener noreferrer"
+        color={"inherit"}
+        sx={{ textDecoration: "inherit" }}
+        {...other}
+      />
+    );
   }
 
   if (noLinkStyle) {
-    return <NextLinkComposed className={className} ref={ref} to={href} {...other} />;
+    return <NextLinkComposed className={className} ref={ref} to={href} sx={{ textDecoration: "none" }} {...other} />;
   }
 
-  return <MuiLink component={NextLinkComposed} linkAs={linkAs} className={className} ref={ref} to={href} {...other} />;
+  return (
+    <MuiLink
+      component={NextLinkComposed}
+      linkAs={linkAs}
+      className={className}
+      ref={ref}
+      to={href}
+      color={"inherit"}
+      sx={{ textDecoration: "inherit" }}
+      {...other}
+    />
+  );
 });
 
 export default Link;
