@@ -1,3 +1,9 @@
+// This file sets a custom webpack configuration to use your Next.js app
+// with Sentry.
+// https://nextjs.org/docs/api-reference/next.config.js/introduction
+// https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+const { withSentryConfig } = require("@sentry/nextjs");
+
 /** @type {import('next').NextConfig} */
 module.exports = {
   webpack(config) {
@@ -22,3 +28,12 @@ module.exports = {
   trailingSlash: true,
   // basePath: "/lp2",
 };
+
+module.exports = withSentryConfig(
+  module.exports,
+  {
+    // ソースマップのアップロードログなどを表示するため silent は false にする
+    silent: true,
+  },
+  { hideSourceMaps: true }
+);

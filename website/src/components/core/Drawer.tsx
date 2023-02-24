@@ -1,6 +1,7 @@
-import { Divider, Drawer, List, ListItemButton, ListItemText, Toolbar } from "@mui/material";
+import { Box, Divider, Drawer, List, ListItemButton, ListItemText, Toolbar } from "@mui/material";
 import { logout } from "@/plugin/auth";
 import { atom, useRecoilState } from "recoil";
+import Link from "@/components/Link";
 
 export const IsMobileDrawerOpen = atom<boolean>({
   key: "is-mobile-drawer-open",
@@ -29,7 +30,9 @@ export const MyDrawer = () => {
           "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
         }}
       >
-        <DrawerContent />
+        <Box onClick={handleDrawerToggle}>
+          <DrawerContent />
+        </Box>
       </Drawer>
       <Drawer
         variant="permanent"
@@ -56,13 +59,27 @@ const DrawerContent = () => {
     <>
       <Toolbar />
       <List>
-        <ListItemButton>
-          <ListItemText primary="メニュー１" />
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemText primary="メニュー２" />
-        </ListItemButton>
+        <Link href={"/mypage/"}>
+          <ListItemButton>
+            <ListItemText primary="お知らせ" />
+          </ListItemButton>
+        </Link>
+        <Link href={"/mypage/user/"}>
+          <ListItemButton>
+            <ListItemText primary="登録情報確認" />
+          </ListItemButton>
+        </Link>
+        <Link href={"/mypage/plan/"}>
+          <ListItemButton>
+            <ListItemText primary="プラン変更" />
+          </ListItemButton>
+        </Link>
         <Divider />
+        <Link href={"/mypage/support/"}>
+          <ListItemButton>
+            <ListItemText primary="サポート" />
+          </ListItemButton>
+        </Link>
         <ListItemButton>
           <ListItemText primary="ログアウト" onClick={handleLogout} />
         </ListItemButton>
