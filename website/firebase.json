@@ -1,10 +1,13 @@
 {
   "hosting": {
     "public": "out",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "/ext/send-support",
+        "function": "send-support",
+        "region": "asia-northeast1"
+      }
     ],
     "headers": [
       {
