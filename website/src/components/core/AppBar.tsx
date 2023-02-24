@@ -1,7 +1,11 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, IconButton, Toolbar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useSetRecoilState } from "recoil";
 import { IsMobileDrawerOpen } from "@/components/core/Drawer";
+import { Image } from "@/components/Image";
+import BlackLogo from "@/assets/lp/logo_b.png";
+import React from "react";
+import Link from "@/components/Link";
 
 export const MyAppBar = () => {
   const setMobileOpen = useSetRecoilState(IsMobileDrawerOpen);
@@ -21,9 +25,9 @@ export const MyAppBar = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant={"h6"} component={"div"} sx={{ flexGrow: 1 }}>
-          マイページ
-        </Typography>
+        <Link href={"/mypage"}>
+          <Image src={BlackLogo} width={(483 * 44) / 135} height={44} alt={"アプリロゴ"} loading={"eager"} />
+        </Link>
       </Toolbar>
     </AppBar>
   );

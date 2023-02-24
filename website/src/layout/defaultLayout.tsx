@@ -5,6 +5,7 @@ import { Box, Toolbar } from "@mui/material";
 import { MyAppBar } from "@/components/core/AppBar";
 import { MyDrawer } from "@/components/core/Drawer";
 import { Loading } from "@/components/core/Loading";
+import * as Sentry from "@sentry/react";
 
 // SSR 有効だと Suspense が動かないので、SSR オフで読み込む
 import dynamic from "next/dynamic";
@@ -23,7 +24,8 @@ const CommonLayout = ({ page }: { page: ReactElement }) => {
       </nav>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        {page}
+        <Sentry.ErrorBoundary fallback={<p>An error has occurred</p>}>{page}</Sentry.ErrorBoundary>
+        {/*{page}*/}
       </Box>
     </Box>
   );
@@ -34,7 +36,7 @@ export default function DefaultLayout(page: ReactElement) {
   return (
     <RecoilRoot>
       <Suspense fallback={<Loading />}>
-        <Auth>{router.route === "/login" ? <>{page}</> : <CommonLayout page={page} />}</Auth>
+        <Auth>{router.route.startsWith("/login") ? <>{page}</> : <CommonLayout page={page} />}</Auth>
       </Suspense>
     </RecoilRoot>
   );
