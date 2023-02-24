@@ -14,7 +14,7 @@ type Props = {
 const AppDownloadBadge = ({ direction = "row", scale = 1 }: Props) => (
   <>
     <Box alignItems={"center"} justifyContent={"center"} display={"flex"} flexDirection={direction}>
-      <Link href={"https://apps.apple.com/jp/app/id1608782445"} target="_blank" rel="noopener noreferrer">
+      <Link href={"https://apps.apple.com/jp/app/id1608782445"}>
         {/* SVG 内に書かれたデフォルトサイズが width: 109, height: 90 なので、ViewBox で表示範囲を "0 0 109 40" にして
          コンポーネントの width, height で拡大する*/}
         <AppleBadge
@@ -25,11 +25,7 @@ const AppDownloadBadge = ({ direction = "row", scale = 1 }: Props) => (
         />
       </Link>
 
-      <Link
-        href={"https://play.google.com/store/apps/details?id=com.knzc.app.amasearch"}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <Link href={"https://play.google.com/store/apps/details?id=com.knzc.app.amasearch"}>
         <Image
           src={AndroidBadge}
           width={200 * scale}
