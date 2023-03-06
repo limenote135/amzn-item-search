@@ -17,6 +17,7 @@ class ListingItem with _$ListingItem {
     required ItemSubCondition subCondition,
     required bool useFba,
     required String conditionText,
+    @Default(<String>[]) List<String> images,
   }) = _ListingItem;
 
   factory ListingItem.fromJson(Map<String, dynamic> json) =>

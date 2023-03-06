@@ -1,6 +1,11 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/hive_provider.dart';
+import 'package:dartx/dartx_io.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 
 final stockItemListControllerProvider =
     StateNotifierProvider<StockItemListController, List<StockItem>>(
@@ -13,31 +18,78 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     _fetchAll();
   }
 
+  static const _imageDirVariable = "\${imageDir}";
+
   static int _sortFunc(StockItem x, StockItem y) {
     return y.purchaseDate.compareTo(x.purchaseDate);
   }
 
   final Ref _ref;
 
-  void _fetchAll() {
+  Future<void> _fetchAll() async {
+    final imageDir = await _getImageDir();
     final box = _ref.read(stockItemBoxProvider);
-    final data = box.values.toList()..sort(_sortFunc);
+    final items = box.values.map((e) {
+      final images = e.images
+          .map((e) => e.replaceAll(_imageDirVariable, imageDir.path))
+          .toList();
+      return e.copyWith(images: images);
+    }).toList();
+    final data = items..sort(_sortFunc);
     state = data;
   }
 
-  void add(StockItem item) {
-    final box = _ref.read(stockItemBoxProvider);
-    // 過去の日付で仕入れをする場合があるため、仕入後には再ソートする
-    state = [item, ...state]..sort(_sortFunc);
-    box.put(item.id, item);
+  Future<Directory> _getImageDir() async {
+    final docDir = await getApplicationDocumentsDirectory();
+    final imageDir = docDir.subdir("images");
+    return imageDir;
   }
 
-  void update(StockItem item) {
+  Future<void> add(StockItem item) async {
+    final imageDir = await _getImageDir();
+    // cache や一時ディレクトリに置かれているの、imageDir にコピーする
+    final rawImages = copyImages(item.images, imageDir);
+    final replacedImages = rawImages
+        .map((e) => e.replaceAll(imageDir.path, _imageDirVariable))
+        .toList();
+    final rawItem = item.copyWith(images: rawImages);
+    final replacedItem = item.copyWith(images: replacedImages);
+
+    final box = _ref.read(stockItemBoxProvider);
+    // 過去の日付で仕入れをする場合があるため、仕入後には再ソートする
+    // state には画像が imageDir のフルパスになっているものを入れる
+    state = [rawItem, ...state]..sort(_sortFunc);
+    unawaited(box.put(item.id, replacedItem));
+  }
+
+  Future<void> update(StockItem item) async {
+    final imageDir = await _getImageDir();
+    final rawImages = copyImages(item.images, imageDir);
+    final replacedImages = rawImages
+        .map((e) => e.replaceAll(imageDir.path, _imageDirVariable))
+        .toList();
+    final rawItem = item.copyWith(images: rawImages);
+    final replacedItem = item.copyWith(images: replacedImages);
+
+    final oldItem = state.singleWhere((element) => element.id == item.id);
+
     final box = _ref.read(stockItemBoxProvider);
     // 仕入れ日を変更する場合があるため、再ソートする
-    state = [for (final i in state) i.id == item.id ? item : i]
+    // state には画像が imageDir のフルパスになっているものを入れる
+    state = [for (final i in state) i.id == item.id ? rawItem : i]
       ..sort(_sortFunc);
-    box.put(item.id, item);
+    unawaited(box.put(item.id, replacedItem));
+
+    // 古い画像の削除
+    final deleteTargets = oldItem.images
+        .where((element) => !rawImages.contains(element))
+        .toList();
+    for (final img in deleteTargets) {
+      final f = File(img);
+      if (f.existsSync()) {
+        unawaited(f.delete());
+      }
+    }
   }
 
   void remove(List<StockItem> targets) {
@@ -46,6 +98,14 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     }
     state = state.where((element) => !targets.contains(element)).toList();
 
+    for (final t in targets) {
+      for (final img in t.images) {
+        final f = File(img);
+        if (f.existsSync()) {
+          unawaited(f.delete());
+        }
+      }
+    }
     final box = _ref.read(stockItemBoxProvider);
     final keys = targets.map((e) => e.id);
     box.deleteAll(keys);
@@ -53,6 +113,14 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
 
   void removeAll() {
     final box = _ref.read(stockItemBoxProvider);
+    for (final t in state) {
+      for (final img in t.images) {
+        final f = File(img);
+        if (f.existsSync()) {
+          unawaited(f.delete());
+        }
+      }
+    }
     state = [];
     box.clear();
   }
@@ -67,5 +135,24 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
       for (final e in state) itemMap.containsKey(e.id) ? itemMap[e.id]! : e
     ];
     box.putAll(itemMap);
+  }
+
+  List<String> copyImages(List<String> rawImages, Directory dest) {
+    if (!dest.existsSync()) {
+      dest.createSync(recursive: true);
+    }
+    final result = <String>[];
+    for (final img in rawImages) {
+      // 既に dest にあるものはそのままにする
+      if (img.startsWith(dest.path)) {
+        result.add(img);
+        continue;
+      }
+      final title = '${DateTime.now().microsecondsSinceEpoch}.jpg';
+      final path = "${dest.path}/$title";
+      File(img).copySync(path);
+      result.add(path);
+    }
+    return result;
   }
 }

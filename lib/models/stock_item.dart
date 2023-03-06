@@ -42,6 +42,9 @@ class StockItem with _$StockItem {
     @Default(false) bool autogenSku,
     @HiveField(15, defaultValue: "") @Default("") String conditionText,
     @HiveField(16, defaultValue: 0) @Default(0) int otherCost,
+    @HiveField(17, defaultValue: <String>[])
+    @Default(<String>[])
+        List<String> images,
   }) = _StockItem;
 }
 
@@ -56,6 +59,7 @@ extension StockItemExtention on StockItem {
       subCondition: subCondition,
       useFba: useFba,
       conditionText: conditionText,
+      images: images,
     );
   }
 }

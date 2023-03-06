@@ -5,7 +5,12 @@ service firebase.storage {
   }
 
   match /b/{bucket}/o {
+    // v1beta1 の出品ファイルはここに置かれる
     match /Users/{uid}/{allPaths=**} {
+      allow write: if onlyIdentityUser(uid);
+    }
+    // v1 の出品ファイルはここに置かれる
+    match /Listings/{version}/Users/{uid}/{allPaths=**} {
       allow write: if onlyIdentityUser(uid);
     }
 
