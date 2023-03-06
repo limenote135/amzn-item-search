@@ -69,6 +69,7 @@ class _Body extends ConsumerWidget {
         }
         return WebViewWidget(
           controller: controller
+            ..loadRequest(Uri.parse("$serverUrl/spapi/auth?user=${user.uid}"))
             ..setNavigationDelegate(
               NavigationDelegate(
                 onPageFinished: (url) async {
