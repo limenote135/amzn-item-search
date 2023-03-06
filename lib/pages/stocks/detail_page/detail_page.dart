@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
@@ -12,6 +14,7 @@ import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/search_buttons.dart';
 import 'package:amasearch/widgets/text_line_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -215,6 +218,18 @@ class _Body extends HookConsumerWidget {
             ],
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                for (var i = 0; i < item.images.length; i++)
+                  _ListingImage(filePath: item.images[i])
+              ],
+            ),
+          ),
+        ),
         ListTile(
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -318,6 +333,50 @@ class _ItemInfoTile extends HookConsumerWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ListingImage extends StatelessWidget {
+  const _ListingImage({required this.filePath});
+
+  final String filePath;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: GestureDetector(
+        onTap: () {
+          showDialog<void>(
+            context: context,
+            builder: (context) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: InteractiveViewer(
+                  child: SimpleDialog(
+                    children: [
+                      GestureDetector(
+                        onTap: () {},
+                        child: ExtendedImage.file(
+                          File(filePath),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+        child: ExtendedImage.file(
+          File(filePath),
+          height: 50,
+          width: 50,
+        ),
+      ),
     );
   }
 }
