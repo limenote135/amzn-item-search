@@ -294,7 +294,7 @@ packages:
       name: extended_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.4.1"
+    version: "7.0.2"
   extended_image_library:
     dependency: "direct overridden"
     description:
@@ -1456,4 +1456,4 @@ packages:
     version: "3.1.1"
 sdks:
   dart: ">=2.19.0 <3.0.0"
-  flutter: ">=3.4.0-17.0.pre"
+  flutter: ">=3.7.0"
