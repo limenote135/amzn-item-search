@@ -12,7 +12,6 @@ import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/purchase_settings/form.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/price_util.dart';
-import 'package:amasearch/util/util.dart';
 import 'package:amasearch/util/uuid.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -79,16 +78,19 @@ class PurchasePage extends HookConsumerWidget {
     // 中古 VeryGood も無い場合、中古最安値にする
     lowestPrice ??= item.prices?.usedPrices.firstOrNull?.price;
 
+    // 購入画面から Keepa 等を見るのに一時的に戻っても同じ値が保持されるように
+    // この値は一意になるようにする
     final stock = StockItem(
-      purchaseDate: currentTimeString(),
+      id: "", // Submit 時に設定するので空文字でOK
+      purchaseDate: "", // formValueProvider の中で設定するので空文字でOK
       sellPrice: lowestPrice ?? 0,
       useFba: useFba,
       autogenSku: true,
       item: item,
       memo: initialMemo,
       conditionText: conditionTexts[conditionIndex],
-      id: ref.read(uuidProvider).v4(), // たぶん空文字でも問題ない
     );
+
     final form = ref.watch(formValueProvider(stock));
     return ProviderScope(
       overrides: [
@@ -221,6 +223,7 @@ class _SaveButton extends HookConsumerWidget {
       breakEven: breakEven,
       conditionText: getString(form, conditionTextField),
       otherCost: getInt(form, otherCostField),
+      images: getImages(form),
     );
     ref.read(stockItemListControllerProvider.notifier).add(stock);
     ref.read(analyticsControllerProvider).logPurchaseEvent(stock);

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
@@ -7,6 +9,7 @@ import 'package:amasearch/pages/common/purchase_settings/other_cost_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/quantity_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/util/custom_validator.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +21,7 @@ import 'fee_tile.dart';
 import 'image_tile.dart';
 import 'input_prices_tile.dart';
 import 'item_condition_tile.dart';
+import 'listing_image_tile.dart';
 import 'profit_tile.dart';
 import 'purchase_date_tile.dart';
 import 'retailer_tile.dart';
@@ -25,8 +29,20 @@ import 'sku_tile.dart';
 import 'target_price_tile.dart';
 import 'values.dart';
 
+extension on AutoDisposeRef<dynamic> {
+  // autoDispose を指定した時間だけ延する
+  void cacheFor(Duration duration) {
+    final link = keepAlive();
+    final timer = Timer(duration, link.close);
+    onDispose(timer.cancel);
+  }
+}
+
 final formValueProvider =
     StateProvider.autoDispose.family<FormGroup, StockItem>((ref, item) {
+  ref.cacheFor(const Duration(minutes: 10));
+  final date =
+      item.purchaseDate != "" ? item.purchaseDate : currentTimeString();
   return fb.group(<String, Object>{
     purchasePriceField: [
       item.purchasePrice == 0 ? "" : "${item.purchasePrice}",
@@ -58,9 +74,12 @@ final formValueProvider =
     autogenSkuField: item.autogenSku,
     skuField: item.sku,
     retailerField: item.retailer,
+    listingImagesField: FormArray<String>(
+      item.images.map((e) => FormControl<String>(value: e)).toList(),
+    ),
     memoField: item.memo,
     conditionTextField: item.conditionText,
-    purchaseDateField: DateTime.parse(item.purchaseDate).toLocal(),
+    purchaseDateField: DateTime.parse(date).toLocal(),
   });
 });
 
@@ -95,6 +114,7 @@ class PurchaseSettingsForm extends StatelessWidget {
                 const ThemeDivider(),
                 const SkuTile(),
                 const ConditionTextTile(),
+                const ListingImageTile(),
                 ListTile(
                   title: ReactiveTextField<dynamic>(
                     formControlName: memoField,
