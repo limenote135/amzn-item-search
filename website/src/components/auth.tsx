@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useUser } from "@/plugin/auth";
+import { Loading } from "@/components/core/Loading";
 
 type Props = {
   children: JSX.Element;
@@ -16,7 +17,7 @@ const Auth = ({ children }: Props) => {
   }, [user, router]);
 
   if (!user && router.route !== "/login") {
-    return <div>loading...</div>;
+    return <Loading />;
   }
   if (router.route === "/login" || user) {
     return children;
