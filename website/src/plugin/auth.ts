@@ -1,6 +1,7 @@
 import {
   getAuth,
   GoogleAuthProvider,
+  OAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -54,6 +55,16 @@ const userState = atom<UserState>({
 
 export const loginWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
+  return signInWithPopup(auth, provider);
+};
+
+export const loginWithApple = async () => {
+  const provider = new OAuthProvider("apple.com");
+  provider.addScope("email");
+  provider.addScope("name");
+  provider.setCustomParameters({
+    locale: "ja_JP",
+  });
   return signInWithPopup(auth, provider);
 };
 
