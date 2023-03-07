@@ -1,12 +1,13 @@
 import { ReactElement, Suspense } from "react";
 import { RecoilRoot } from "recoil";
+import { useRouter } from "next/router";
+import { Box, Toolbar } from "@mui/material";
+import { MyAppBar } from "@/components/core/AppBar";
+import { MyDrawer } from "@/components/core/Drawer";
+import { Loading } from "@/components/core/Loading";
 
 // SSR 有効だと Suspense が動かないので、SSR オフで読み込む
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-import { MyAppBar } from "@/components/core/AppBar";
-import { MyDrawer } from "@/components/core/Drawer";
-import { Box, Toolbar } from "@mui/material";
 const Auth = dynamic(() => import("@/components/auth"), {
   ssr: false,
 });
@@ -32,7 +33,7 @@ export default function DefaultLayout(page: ReactElement) {
   const router = useRouter();
   return (
     <RecoilRoot>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<Loading />}>
         <Auth>{router.route === "/login" ? <>{page}</> : <CommonLayout page={page} />}</Auth>
       </Suspense>
     </RecoilRoot>
