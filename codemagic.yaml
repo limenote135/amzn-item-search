@@ -95,7 +95,7 @@ workflows:
         set -e # exit on first failed commandset
         set -x # print all executed commands to the log# Workaround for issue #21335
         /usr/bin/plutil -replace CFBundleIdentifier -string com.knzc.app.amasearch ios/Runner/Info.plist
-      - flutter build appbundle --release --build-number=$PROJECT_BUILD_NUMBER --dart-define=FLAVOR=prod
+      - flutter build appbundle --release --build-number=$PROJECT_BUILD_NUMBER --dart-define=FLAVOR=prod --obfuscate --split-debug-info=$CM_EXPORT_DIR/debug_info/android
       - find . -name "Podfile" -execdir pod install \;
       - keychain initialize
       - app-store-connect fetch-signing-files "com.knzc.app.amasearch" --type IOS_APP_STORE
