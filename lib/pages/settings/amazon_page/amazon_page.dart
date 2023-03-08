@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:amasearch/repository/common.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
@@ -10,6 +8,13 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 final _currentServerUrlProvider =
     Provider<String>((_) => throw UnimplementedError());
+
+final _webviewProvider = Provider((_) {
+  const params = PlatformWebViewControllerCreationParams();
+  final controller = WebViewController.fromPlatformCreationParams(params)
+    ..setJavaScriptMode(JavaScriptMode.unrestricted);
+  return controller;
+});
 
 class AmazonPage extends ConsumerWidget {
   const AmazonPage({super.key});
@@ -49,9 +54,7 @@ class _Body extends ConsumerWidget {
     final serverUrl = ref.watch(_currentServerUrlProvider);
     final userAsyncValue = ref.watch(authStateChangesProvider);
 
-    if (Platform.isAndroid) {
-      WebView.platform = SurfaceAndroidWebView();
-    }
+    final controller = ref.watch(_webviewProvider);
 
     return AsyncValueWidget<User?>(
       value: userAsyncValue,
@@ -64,17 +67,21 @@ class _Body extends ConsumerWidget {
             title: Text("ログインしていません"),
           );
         }
-        return WebView(
-          initialUrl: "$serverUrl/spapi/auth?user=${user.uid}",
-          javascriptMode: JavascriptMode.unrestricted,
-          onPageFinished: (url) async {
-            if (url.startsWith("$serverUrl/spapi/callback")) {
-              final token = await user.getIdTokenResult(true);
-              if (token.claims?[customClaimsLwaKey] == true) {
-                Navigator.pop(context);
-              }
-            }
-          },
+        return WebViewWidget(
+          controller: controller
+            ..loadRequest(Uri.parse("$serverUrl/spapi/auth?user=${user.uid}"))
+            ..setNavigationDelegate(
+              NavigationDelegate(
+                onPageFinished: (url) async {
+                  if (url.startsWith("$serverUrl/spapi/callback")) {
+                    final token = await user.getIdTokenResult(true);
+                    if (token.claims?[customClaimsLwaKey] == true) {
+                      Navigator.pop(context);
+                    }
+                  }
+                },
+              ),
+            ),
         );
       },
     );

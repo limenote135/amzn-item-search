@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.10.0+9999
+version: 1.10.1+9999
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
@@ -32,11 +32,11 @@ dependencies:
   cupertino_icons: ^1.0.5
   dartx: ^1.1.0
   device_info_plus: ^8.1.0
-  dio: ^4.0.6
-  dio_cookie_manager: ^2.0.0
+  dio: ^5.0.1
+  dio_cookie_manager: ^2.1.1
   euc:
     path: ./packages/euc
-  extended_image: ^6.3.4
+  extended_image: ^7.0.2
   fast_barcode_scanner:
     path: ./packages/fast_barcode_scanner/fast_barcode_scanner
   file_picker: ^5.2.5
@@ -52,22 +52,22 @@ dependencies:
     sdk: flutter
   flutter_easyloading: ^3.0.5
   flutter_hooks: ^0.18.6
-  flutter_launcher_icons: ^0.11.0
+  flutter_launcher_icons: ^0.12.0
   flutter_localizations:
     sdk: flutter
-  flutter_native_splash: ^2.2.16
+  flutter_native_splash: ^2.2.19
   flutter_signin_button: ^2.0.0
   flutter_slidable: ^2.0.0
   flutter_speed_dial: ^6.2.0
   flutter_tts: ^3.6.3
-  flutter_typeahead: ^4.3.6
+  flutter_typeahead: ^4.3.7
   flutter_web_browser: ^0.17.1
   freezed_annotation: ^2.2.0
-  google_sign_in: ^5.4.4
+  google_sign_in: ^6.0.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  hooks_riverpod: ^2.2.0
-  html: ^0.15.1
+  hooks_riverpod: ^2.3.0
+  html: ^0.15.2
   image_editor: ^1.3.0
   in_app_review: ^2.0.6
   intl: ^0.17.0
@@ -76,22 +76,22 @@ dependencies:
   keyboard_actions: ^4.2.0
   package_info_plus: ^3.0.3
   path: ^1.8.2
-  path_provider: ^2.0.12
+  path_provider: ^2.0.13
   permission_handler: ^10.2.0
   pub_semver: ^2.1.3
-  purchases_flutter: ^4.10.0
+  purchases_flutter: ^4.10.3
   reactive_date_range_picker: ^0.5.0
   reactive_forms: ^14.1.0
   release_notes_dialog: ^1.1.0
   reorderables: ^0.6.0
-  riverpod: ^2.2.0
+  riverpod: ^2.3.0
   share_plus: ^6.3.1
-  shared_preferences: ^2.0.17
+  shared_preferences: ^2.0.18
   state_notifier: ^0.7.2+1
-  url_launcher: ^6.1.9
+  url_launcher: ^6.1.10
   uuid: ^3.0.7
   vibration: ^1.7.6
-  webview_flutter: ^3.0.4
+  webview_flutter: ^4.0.6
   worker_manager: ^5.0.3
 
 dev_dependencies:
