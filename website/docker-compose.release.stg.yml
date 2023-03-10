@@ -1,0 +1,8 @@
+version: "3.8"
+
+x-environment: &deploy-proj-env
+  DEPLOY_PROJECT: amasearch-stg
+
+services:
+  website:
+    environment: *deploy-proj-env
