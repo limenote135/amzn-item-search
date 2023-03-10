@@ -20,7 +20,7 @@ export const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComp
   props,
   ref
 ) {
-  const { to, linkAs, href, replace, scroll, shallow, prefetch, locale, ...other } = props;
+  const { to, linkAs, href, replace, scroll, shallow, prefetch, legacyBehavior = true, locale, ...other } = props;
 
   return (
     <NextLink
@@ -31,6 +31,7 @@ export const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComp
       scroll={scroll}
       shallow={shallow}
       passHref
+      legacyBehavior={legacyBehavior}
       locale={locale}
     >
       <Anchor ref={ref} {...other} />
@@ -54,6 +55,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(props,
     as: linkAs,
     className: classNameProps,
     href,
+    legacyBehavior,
     noLinkStyle,
     role, // Link don't have roles.
     ...other
@@ -69,17 +71,41 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(props,
 
   if (isExternal) {
     if (noLinkStyle) {
-      return <Anchor className={className} href={href} ref={ref} {...other} />;
+      return (
+        <Anchor className={className} href={href} ref={ref} target={"_blank"} rel="noopener noreferrer" {...other} />
+      );
     }
 
-    return <MuiLink className={className} href={href} ref={ref} {...other} />;
+    return (
+      <MuiLink
+        className={className}
+        href={href}
+        ref={ref}
+        target={"_blank"}
+        rel="noopener noreferrer"
+        color={"inherit"}
+        sx={{ textDecoration: "inherit" }}
+        {...other}
+      />
+    );
   }
 
   if (noLinkStyle) {
-    return <NextLinkComposed className={className} ref={ref} to={href} {...other} />;
+    return <NextLinkComposed className={className} ref={ref} to={href} sx={{ textDecoration: "none" }} {...other} />;
   }
 
-  return <MuiLink component={NextLinkComposed} linkAs={linkAs} className={className} ref={ref} to={href} {...other} />;
+  return (
+    <MuiLink
+      component={NextLinkComposed}
+      linkAs={linkAs}
+      className={className}
+      ref={ref}
+      to={href}
+      color={"inherit"}
+      sx={{ textDecoration: "inherit" }}
+      {...other}
+    />
+  );
 });
 
 export default Link;
