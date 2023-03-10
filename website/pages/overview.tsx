@@ -2,7 +2,7 @@ import Menu from "@/components/lp/Menu";
 import { Container, Typography } from "@mui/material";
 import Link from "@/components/Link";
 import Footer from "@/components/lp/Footer";
-import React from "react";
+import React, { ReactElement } from "react";
 
 const TextContainer = ({ children }: { children: JSX.Element }) => {
   return <Container sx={{ ml: 1 }}>{children}</Container>;
@@ -95,5 +95,7 @@ const Overview = () => {
     </>
   );
 };
+
+Overview.getLayout = (page: ReactElement) => page;
 
 export default Overview;
