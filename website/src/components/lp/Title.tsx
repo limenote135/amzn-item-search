@@ -1,4 +1,4 @@
-import { Box, Container, Fade, Grid, Grow, Typography } from "@mui/material";
+import { Box, Container, Fade, Grid, Typography } from "@mui/material";
 import AppDownloadBadge from "@/components/lp/AppDownloadBadge";
 import { Image } from "@/components/Image";
 import React, { useEffect, useState } from "react";

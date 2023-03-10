@@ -1,4 +1,14 @@
-import { Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Image } from "@/components/Image";
 import Link from "@/components/Link";
@@ -38,21 +48,21 @@ const MyDrawer = ({ isOpen, handleToggleDrawerOpen }: DrawerProp) => (
       <CenteredListItem>
         <Image src={WhiteLogo} width={229 /*(483 * 64) / 135*/} height={64} alt={"アプリロゴ"} />
       </CenteredListItem>
-      <ListItem button>
-        <Link href={"/terms/service"} color={"#FFF"} sx={{ textDecoration: "none" }}>
+      <ListItemButton>
+        <Link href={"/terms/service"}>
           <CenteredListItemText>利用規約</CenteredListItemText>
         </Link>
-      </ListItem>
-      <ListItem button>
-        <Link href={"/terms/privacy"} color={"#FFF"} sx={{ textDecoration: "none" }}>
+      </ListItemButton>
+      <ListItemButton>
+        <Link href={"/terms/privacy"}>
           <CenteredListItemText>プライバシーポリシー</CenteredListItemText>
         </Link>
-      </ListItem>
-      <ListItem button>
-        <Link href={"/contact"} color={"#FFF"} sx={{ textDecoration: "none" }}>
+      </ListItemButton>
+      <ListItemButton>
+        <Link href={"/contact"}>
           <CenteredListItemText>お問い合わせ</CenteredListItemText>
         </Link>
-      </ListItem>
+      </ListItemButton>
       <CenteredListItem>
         <Box bgcolor={"white"} borderRadius={"15px"} mx={"auto"} px={1} mt={3} py={1}>
           <Typography variant={"body2"} color={"black"} my={2} fontWeight={"bold"}>
