@@ -1,4 +1,4 @@
-import { Box, Button, ThemeProvider, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { Image } from "@/components/Image";
 import Link from "@/components/Link";
@@ -36,13 +36,13 @@ const FooterContainer = ({ returnToTop }: FooterProps) => (
           ml={{ xs: 0, md: 4 }}
           order={{ xs: 1, md: 2 }}
         >
-          <Link href={"/terms/service"} color={"#FFF"} sx={{ textDecoration: "none" }}>
+          <Link href={"/terms/service"}>
             <Typography my={1}>利用規約</Typography>
           </Link>
-          <Link href={"/terms/privacy"} color={"#FFF"} sx={{ textDecoration: "none" }}>
+          <Link href={"/terms/privacy"}>
             <Typography my={1}>プライバシーポリシー</Typography>
           </Link>
-          <Link href={"/contact"} color={"#FFF"} sx={{ textDecoration: "none" }}>
+          <Link href={"/contact"}>
             <Typography my={1}>お問い合わせ</Typography>
           </Link>
         </Box>

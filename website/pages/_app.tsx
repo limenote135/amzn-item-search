@@ -6,10 +6,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "@/styles/theme";
 import createEmotionCache from "@/styles/createEmotionCache";
-import Script from "next/script";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { ReactElement, ReactNode, useEffect } from "react";
 import { pageview } from "@/plugin/gtags";
+import { NextPage } from "next";
+import DefaultLayout from "@/layout/defaultLayout";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -17,8 +18,15 @@ const clientSideEmotionCache = createEmotionCache();
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
 
-export default function MyApp(props: MyAppProps) {
+type AppPropsWithLayout = MyAppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function MyApp(props: AppPropsWithLayout) {
   const router = useRouter();
   useEffect(() => {
     router.events.on("routeChangeComplete", pageview);
@@ -28,6 +36,8 @@ export default function MyApp(props: MyAppProps) {
   }, [router.events]);
 
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const getLayout = Component.getLayout ?? DefaultLayout;
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -37,7 +47,7 @@ export default function MyApp(props: MyAppProps) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </ThemeProvider>
     </CacheProvider>
   );
