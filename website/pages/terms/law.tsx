@@ -2,6 +2,7 @@ import Menu from "@/components/lp/Menu";
 import { Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import Head from "next/head";
+import { ReactElement } from "react";
 
 const Table = styled("table")`
   margin: auto;
@@ -78,5 +79,7 @@ const Law = () => {
     </>
   );
 };
+
+Law.getLayout = (page: ReactElement) => page;
 
 export default Law;
