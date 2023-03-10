@@ -3,7 +3,6 @@ networks:
   backend:
 
 x-environment: &deploy-proj-env
-  DEPLOY_PROJECT: amasearch-live
   DEPLOY_REGION: asia-northeast1
 
 x-firebase-volume: &firebase-volume
