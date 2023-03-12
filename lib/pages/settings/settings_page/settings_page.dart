@@ -26,6 +26,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -226,6 +227,7 @@ class _Body extends HookConsumerWidget {
               try {
                 await EasyLoading.show(status: "削除中...");
                 await clearDiskCachedImages();
+                await ChromeSafariBrowser.clearWebsiteData();
                 await FilePicker.platform.clearTemporaryFiles();
                 final tempDir = await getTemporaryDirectory();
                 final imageDir = Directory("$tempDir/images");
