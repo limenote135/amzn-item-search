@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
@@ -27,10 +29,18 @@ Future<void> callListings(
   final analytics = ref.read(analyticsControllerProvider);
   final controller = ref.read(stockItemListControllerProvider.notifier);
 
+  final size = calcSize(selected);
+
+  var baseMsg = "${selected.length}件の商品を出品登録します";
+  // 100MB 以上はメモリが足りなくなる可能性があるので警告
+  if (size > 100000000) {
+    baseMsg = "$baseMsg\n(画像サイズが非常に大きいため出品に時間がかかる可能性があります)";
+  }
+
   final isOk = await showOkCancelAlertDialog(
     context: context,
     title: "Amazonへ出品登録",
-    message: "${selected.length}件の商品を出品登録します",
+    message: baseMsg,
   );
 
   if (isOk != OkCancelResult.ok) {
@@ -105,4 +115,17 @@ Future<void> callListings(
       await EasyLoading.dismiss();
     }
   }
+}
+
+int calcSize(List<StockItem> items) {
+  var size = 0;
+  for (final item in items) {
+    for (final img in item.images) {
+      final f = File(img);
+      if (f.existsSync()) {
+        size = size + f.lengthSync();
+      }
+    }
+  }
+  return size;
 }
