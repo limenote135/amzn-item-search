@@ -40,7 +40,7 @@ dependencies:
   fast_barcode_scanner:
     path: ./packages/fast_barcode_scanner/fast_barcode_scanner
   file_picker: ^5.2.6
-  firebase_analytics: ^10.1.4
+  firebase_analytics: ^10.1.6
   firebase_auth: ^4.3.0
   firebase_core: ^2.7.0
   firebase_crashlytics: ^3.0.17
