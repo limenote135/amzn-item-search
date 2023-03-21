@@ -33,7 +33,7 @@ dependencies:
   dartx: ^1.1.0
   device_info_plus: ^8.1.0
   dio: ^5.0.1
-  dio_cookie_manager: ^2.1.1
+  dio_cookie_manager: ^2.1.3
   euc:
     path: ./packages/euc
   extended_image: ^7.0.2
