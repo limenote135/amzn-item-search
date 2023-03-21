@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:dartx/dartx_io.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,6 +21,8 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
 
   static const _imageDirVariable = "\${imageDir}";
 
+  static final _absPathRegexp = RegExp(r"/var/.+/Documents/images");
+
   static int _sortFunc(StockItem x, StockItem y) {
     return y.purchaseDate.compareTo(x.purchaseDate);
   }
@@ -29,14 +32,35 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
   Future<void> _fetchAll() async {
     final imageDir = await _getImageDir();
     final box = _ref.read(stockItemBoxProvider);
+
+    final invalidImageItem = <StockItem>[];
+
     final items = box.values.map((e) {
-      final images = e.images
-          .map((e) => e.replaceAll(_imageDirVariable, imageDir.path))
-          .toList();
+      final images = <String>[];
+      for (final image in e.images) {
+        var img = image;
+        if (_absPathRegexp.hasMatch(img)) {
+          // 絶対パスで保存してしまっているケースがあるので、相対パスに変換する
+          // iOS ではアプリ更新時にパスが変わるので、FileNotFound になる
+          // Android では変わらないのでセーフ
+          img = img.replaceAll(_absPathRegexp, "\${imageDir}");
+          invalidImageItem.add(e);
+        }
+        images.add(img.replaceAll(_imageDirVariable, imageDir.path));
+      }
       return e.copyWith(images: images);
     }).toList();
     final data = items..sort(_sortFunc);
     state = data;
+
+    for (final item in invalidImageItem) {
+      final fixedItem = item.copyWith(
+        images: item.images
+            .map((e) => e.replaceAll(_absPathRegexp, "\${imageDir}"))
+            .toList(),
+      );
+      unawaited(box.put(fixedItem.id, fixedItem));
+    }
   }
 
   Future<Directory> _getImageDir() async {
@@ -60,6 +84,16 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     // state には画像が imageDir のフルパスになっているものを入れる
     state = [rawItem, ...state]..sort(_sortFunc);
     unawaited(box.put(item.id, replacedItem));
+
+    if (replacedItem.images.any((element) => element.startsWith("/"))) {
+      unawaited(
+        recordError(
+          "Saved absolute file path",
+          StackTrace.current,
+          information: replacedItem.images,
+        ),
+      );
+    }
   }
 
   Future<void> update(StockItem item) async {
@@ -79,6 +113,16 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
     state = [for (final i in state) i.id == item.id ? rawItem : i]
       ..sort(_sortFunc);
     unawaited(box.put(item.id, replacedItem));
+
+    if (replacedItem.images.any((element) => element.startsWith("/"))) {
+      unawaited(
+        recordError(
+          "Saved absolute file path",
+          StackTrace.current,
+          information: replacedItem.images,
+        ),
+      );
+    }
 
     // 古い画像の削除
     final deleteTargets = oldItem.images
