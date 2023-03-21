@@ -448,21 +448,21 @@ packages:
       name: firebase_remote_config
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.14"
+    version: "3.0.15"
   firebase_remote_config_platform_interface:
     dependency: transitive
     description:
       name: firebase_remote_config_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.34"
+    version: "1.1.35"
   firebase_remote_config_web:
     dependency: transitive
     description:
       name: firebase_remote_config_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.23"
+    version: "1.1.24"
   firebase_storage:
     dependency: "direct main"
     description:
