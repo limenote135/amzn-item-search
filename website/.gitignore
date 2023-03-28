@@ -38,3 +38,9 @@ yarn-error.log*
 
 # Sentry
 next.config.original.js
+
+# env files
+/public/robots.txt
+.env.production
+/src/plugin/firebaseAuth.json
+sentry.properties
