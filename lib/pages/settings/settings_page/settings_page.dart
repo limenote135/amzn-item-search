@@ -13,6 +13,7 @@ import 'package:amasearch/pages/settings/donation_page/donation_page.dart';
 import 'package:amasearch/pages/settings/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_page.dart';
 import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
+import 'package:amasearch/pages/settings/settings_page/subscription_status.dart';
 import 'package:amasearch/pages/settings/shortcut_page/shortcut_page.dart';
 import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/support_page/suppert_page.dart';
@@ -81,6 +82,10 @@ class _Body extends HookConsumerWidget {
           onTap: () {
             Navigator.push(context, AmazonPage.route());
           },
+        ),
+        const ListTile(
+          title: Text("現在のプラン"),
+          subtitle: SubscriptionStatus(),
         ),
         const ThemeDivider(),
         ListTile(
