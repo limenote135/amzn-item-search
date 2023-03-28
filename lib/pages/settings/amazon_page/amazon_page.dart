@@ -81,9 +81,9 @@ class _Body extends ConsumerWidget {
                           token.claims?[customClaimsTrialDueKey];
                       if (trialDue is int) {
                         final d = DateTime.fromMillisecondsSinceEpoch(
-                                trialDue * 1000,
-                                isUtc: true)
-                            .toLocal();
+                          trialDue * 1000,
+                          isUtc: true,
+                        ).toLocal();
                         if (d.isAfter(DateTime.now())) {
                           await showOkAlertDialog(
                             context: context,
