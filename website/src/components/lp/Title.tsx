@@ -103,7 +103,7 @@ const TitleContainer = ({
             <Typography variant={"body1"} fontWeight={"bold"}>
               今すぐアプリをダウンロード
             </Typography>
-            <AppDownloadBadge />
+            <AppDownloadBadge scale={0.85} />
           </Box>
         </Grid>
         <Grid item xs={12} textAlign={"center"} display={{ xs: "none", md: "block" }} mb={10} mt={-5}>
@@ -114,7 +114,14 @@ const TitleContainer = ({
           </Fade>
         </Grid>
         <Grid item xs={12} md={6} pt={2}>
-          <Image src={N0984} alt={""} />
+          <Image
+            src={N0984}
+            alt={""}
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+            }}
+          />
         </Grid>
         <Grid item xs={12} md={6} sx={{ backgroundColor: "rgba(243, 241, 241, .6)" }}>
           <Box ref={descriptionRef} />
@@ -170,7 +177,15 @@ const TitleContainer = ({
           </Fade>
           <Fade in={copyInView} timeout={2000}>
             <Box display={{ xs: "block", md: "none" }}>
-              <Copy2Sp width={400} height={300} alt={"アマサーチは、はやい。つよい。使いやすい。"} />
+              <Copy2Sp
+                width={400}
+                height={300}
+                alt={"アマサーチは、はやい。つよい。使いやすい。"}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
+              />
             </Box>
           </Fade>
         </Grid>
