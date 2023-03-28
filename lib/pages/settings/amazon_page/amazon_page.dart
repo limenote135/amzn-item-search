@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/repository/common.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
@@ -76,6 +77,22 @@ class _Body extends ConsumerWidget {
                   if (url.startsWith("$serverUrl/spapi/callback")) {
                     final token = await user.getIdTokenResult(true);
                     if (token.claims?[customClaimsLwaKey] == true) {
+                      final dynamic trialDue =
+                          token.claims?[customClaimsTrialDueKey];
+                      if (trialDue is int) {
+                        final d = DateTime.fromMillisecondsSinceEpoch(
+                                trialDue * 1000,
+                                isUtc: true)
+                            .toLocal();
+                        if (d.isAfter(DateTime.now())) {
+                          await showOkAlertDialog(
+                            context: context,
+                            title: "トライアル期間の開始",
+                            message: "${d.month}/${d.day}まで全ての機能がご利用いただけます。\n"
+                                "これ以降も全ての機能を利用するためにはウェブサイトからプランの変更が必要です。",
+                          );
+                        }
+                      }
                       Navigator.pop(context);
                     }
                   }
