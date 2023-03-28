@@ -10,6 +10,8 @@ final authStateChangesProvider = StreamProvider<User?>(
 );
 
 const customClaimsLwaKey = "lwa";
+const customClaimsPlanKey = "pl";
+const customClaimsTrialDueKey = "td";
 
 final linkedWithAmazonProvider = StreamProvider((ref) async* {
   try {
@@ -21,6 +23,32 @@ final linkedWithAmazonProvider = StreamProvider((ref) async* {
       } else {
         final token = await user.getIdTokenResult();
         yield token.claims?[customClaimsLwaKey] == true;
+      }
+    }
+  } on FirebaseAuthException catch (e, stack) {
+    switch (e.code) {
+      case "network-request-failed":
+        break;
+      case "user-token-expired":
+        throw Exception("再ログインしてください");
+      default:
+        await recordError(e, stack);
+        break;
+    }
+    throw Exception("通信環境の良いところで再度お試しください");
+  }
+});
+
+final currentClaimsProvider = StreamProvider((ref) async* {
+  try {
+    final stream = ref.watch(firebaseAuthProvider).idTokenChanges();
+
+    await for (final user in stream) {
+      if (user == null) {
+        yield null;
+      } else {
+        final token = await user.getIdTokenResult();
+        yield token.claims;
       }
     }
   } on FirebaseAuthException catch (e, stack) {
