@@ -6,6 +6,7 @@ import Detail from "@/components/lp/DetailSection";
 import Footer from "@/components/lp/Footer";
 import Title from "@/components/lp/Title";
 import CatchPhrase from "@/components/lp/CatchPhrase";
+import Price from "@/components/lp/Price";
 
 const Component = () => (
   <>
@@ -29,6 +30,7 @@ const Component = () => (
         <Feature />
       </Box>
       <Detail />
+      <Price />
       <CatchPhrase />
     </main>
     <Footer />
