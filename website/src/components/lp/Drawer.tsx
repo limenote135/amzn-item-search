@@ -49,6 +49,11 @@ const MyDrawer = ({ isOpen, handleToggleDrawerOpen }: DrawerProp) => (
         <Image src={WhiteLogo} width={229 /*(483 * 64) / 135*/} height={64} alt={"アプリロゴ"} />
       </CenteredListItem>
       <ListItemButton>
+        <Link href={"/login"}>
+          <CenteredListItemText>ログイン</CenteredListItemText>
+        </Link>
+      </ListItemButton>
+      <ListItemButton>
         <Link href={"/terms/service"}>
           <CenteredListItemText>利用規約</CenteredListItemText>
         </Link>
@@ -56,6 +61,11 @@ const MyDrawer = ({ isOpen, handleToggleDrawerOpen }: DrawerProp) => (
       <ListItemButton>
         <Link href={"/terms/privacy"}>
           <CenteredListItemText>プライバシーポリシー</CenteredListItemText>
+        </Link>
+      </ListItemButton>
+      <ListItemButton>
+        <Link href={"/terms/law"}>
+          <CenteredListItemText>特定商取引法に基づく表記</CenteredListItemText>
         </Link>
       </ListItemButton>
       <ListItemButton>
