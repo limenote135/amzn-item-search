@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /overview
+Disallow: /terms/law
