@@ -1,0 +1,146 @@
+import { useInView } from "react-intersection-observer";
+import { Box, Collapse, Fade, Grid, Typography } from "@mui/material";
+import React, { ReactNode } from "react";
+import { parser } from "@/plugin/budoux";
+import Link from "@/components/Link";
+
+type PriceBoxProps = {
+  title: string;
+  subtitle: string;
+  price: number;
+  detail: ReactNode;
+};
+
+const PriceBox = ({ title, subtitle, price, detail }: PriceBoxProps) => {
+  return (
+    <Grid item xs={12} sm={4}>
+      <Box
+        borderRadius={"15px 15px 0 0"}
+        border={"solid 3px #ffbe2e"}
+        textAlign={"center"}
+        m={2}
+        display={"flex"}
+        flexDirection={"column"}
+        height={"100%"}
+      >
+        <Box py={3} sx={{ backgroundColor: "#ffbe2e" }}>
+          <Typography variant={"h6"} my={1} fontWeight={"bold"}>
+            {title}
+          </Typography>
+          <Typography>{subtitle}</Typography>
+        </Box>
+        <Box py={3}>
+          <Box my={3}>
+            <Typography component={"span"} variant={"h3"} fontWeight={"bold"}>
+              {price.toLocaleString()}
+            </Typography>
+            <Typography component={"span"} fontWeight={"bold"}>
+              円/月
+            </Typography>
+          </Box>
+          {detail}
+        </Box>
+      </Box>
+    </Grid>
+  );
+};
+
+type PriceProp = {
+  reference: (node?: Element | null | undefined) => void;
+  inView: boolean;
+};
+
+const PriceContainer = ({ reference, inView }: PriceProp) => {
+  return (
+    <Box component={"section"} pb={8}>
+      <Box ref={reference} pt={4}>
+        <Collapse orientation={"horizontal"} in={inView} timeout={1500}>
+          <Typography
+            color={"#4b6e87"}
+            fontSize={{ xs: "3rem", sm: "6rem" }}
+            sx={{ textTransform: "uppercase", textDecoration: "underline" }}
+          >
+            Price　
+          </Typography>
+        </Collapse>
+        <Fade in={inView} timeout={1000}>
+          <Typography color={"#52a1c3"} fontWeight={"bold"} variant={"h6"}>
+            料金プラン
+          </Typography>
+        </Fade>
+      </Box>
+      <Box maxWidth={980} mx={"auto"} py={4}>
+        <Grid container rowSpacing={4}>
+          <PriceBox
+            title={"フリープラン"}
+            subtitle={"まずは無料でお試し"}
+            price={0}
+            detail={
+              <Typography
+                dangerouslySetInnerHTML={{
+                  __html: parser.translateHTMLString("リサーチに必要な基本的な機能がご利用いただけます。"),
+                }}
+              />
+            }
+          />
+          <PriceBox
+            title={"標準プラン"}
+            subtitle={"本格的にリサーチをしたい方へ"}
+            price={2980}
+            detail={
+              <Typography
+                dangerouslySetInnerHTML={{
+                  __html: parser.translateHTMLString("リサーチする上で便利なすべての機能がご利用いただけます。"),
+                }}
+              />
+            }
+          />
+          <PriceBox
+            title={"キャンペーンプラン"}
+            subtitle={"期間限定のオトクなプラン"}
+            price={1980}
+            detail={
+              <>
+                <Typography
+                  dangerouslySetInnerHTML={{
+                    __html: parser.translateHTMLString(
+                      "標準プランと同じ内容ですが、月額料金が <b>今後もずっと</b> お安くなる特別プランです。"
+                    ),
+                  }}
+                />
+                <Typography
+                  mt={2}
+                  variant={"body2"}
+                  dangerouslySetInnerHTML={{
+                    __html: parser.translateHTMLString(
+                      "(このプランを利用するには 5/31 までにプランを切り替える必要があります)"
+                    ),
+                  }}
+                />
+              </>
+            }
+          />
+        </Grid>
+      </Box>
+      <Box mt={2} textAlign={"center"}>
+        <Typography>
+          プランの変更は
+          <Link href={"/mypage"}>
+            <Typography component={"span"} sx={{ textDecoration: "underline" }} color={"blue"}>
+              マイページ
+            </Typography>
+          </Link>
+          より行うことができます。
+        </Typography>
+      </Box>
+    </Box>
+  );
+};
+
+const Price = () => {
+  const [ref, inView] = useInView({ rootMargin: "-100px", triggerOnce: true });
+
+  return <PriceContainer reference={ref} inView={inView} />;
+};
+
+export default Price;
