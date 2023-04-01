@@ -75,8 +75,13 @@ class PurchasePage extends HookConsumerWidget {
       condition: ItemSubCondition.veryGood,
       priorFba: useFba,
     );
-    // 中古 VeryGood も無い場合、中古最安値にする
-    lowestPrice ??= item.prices?.usedPrices.firstOrNull?.price;
+    // 中古 VeryGood も無い場合、中古最安値(可以上最安値)にする
+    lowestPrice ??= getLowestPrice(
+      item.prices,
+      condition: ItemSubCondition.acceptable,
+      priorFba: useFba,
+    );
+    // lowestPrice ??= item.prices?.usedPrices.firstOrNull?.price;
 
     // 購入画面から Keepa 等を見るのに一時的に戻っても同じ値が保持されるように
     // この値は一意になるようにする
