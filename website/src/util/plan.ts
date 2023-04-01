@@ -13,3 +13,18 @@ export function getPlanName(name?: PlanNames) {
   }
   return "不明";
 }
+
+export function isPaidUser(plan?: PlanNames) {
+  if (!plan) {
+    return false;
+  }
+  switch (plan) {
+    case "free":
+    case "trial":
+      return false;
+    case "standard":
+    case "campaign":
+      return true;
+  }
+  return true;
+}
