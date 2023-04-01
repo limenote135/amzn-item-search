@@ -49,36 +49,36 @@ const MyDrawer = ({ isOpen, handleToggleDrawerOpen }: DrawerProp) => (
         <Image src={WhiteLogo} width={229 /*(483 * 64) / 135*/} height={64} alt={"アプリロゴ"} />
       </CenteredListItem>
       <ListItemButton>
-        <Link href={"/login"}>
+        <Link href={"/login"} width={"100%"}>
           <CenteredListItemText>ログイン</CenteredListItemText>
         </Link>
       </ListItemButton>
       <ListItemButton>
-        <Link href={"/terms/service"}>
+        <Link href={"/terms/service"} width={"100%"}>
           <CenteredListItemText>利用規約</CenteredListItemText>
         </Link>
       </ListItemButton>
       <ListItemButton>
-        <Link href={"/terms/privacy"}>
+        <Link href={"/terms/privacy"} width={"100%"}>
           <CenteredListItemText>プライバシーポリシー</CenteredListItemText>
         </Link>
       </ListItemButton>
       <ListItemButton>
-        <Link href={"/terms/law"}>
+        <Link href={"/terms/law"} width={"100%"}>
           <CenteredListItemText>特定商取引法に基づく表記</CenteredListItemText>
         </Link>
       </ListItemButton>
       <ListItemButton>
-        <Link href={"/contact"}>
+        <Link href={"/contact"} width={"100%"}>
           <CenteredListItemText>お問い合わせ</CenteredListItemText>
         </Link>
       </ListItemButton>
       <CenteredListItem>
         <Box bgcolor={"white"} borderRadius={"15px"} mx={"auto"} px={1} mt={3} py={1}>
-          <Typography variant={"body2"} color={"black"} my={2} fontWeight={"bold"}>
+          <Typography component={"div"} variant={"body2"} color={"black"} my={2} fontWeight={"bold"}>
             今すぐアプリをダウンロード
           </Typography>
-          <Typography color={"black"}>
+          <Typography color={"black"} component={"div"}>
             <AppDownloadBadge direction={"column"} scale={1} />
           </Typography>
         </Box>
