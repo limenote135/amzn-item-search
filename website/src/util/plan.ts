@@ -1,6 +1,10 @@
 export type PlanNames = "free" | "trial" | "standard" | "campaign";
 
 export function getPlanName(name?: PlanNames) {
+  if (!name) {
+    // アカウント作成直後などは CustomClaims 未設定
+    return "フリープラン";
+  }
   switch (name) {
     case "free":
       return "フリープラン";
