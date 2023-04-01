@@ -42,6 +42,9 @@ const FooterContainer = ({ returnToTop }: FooterProps) => (
           <Link href={"/terms/privacy"}>
             <Typography my={1}>プライバシーポリシー</Typography>
           </Link>
+          <Link href={"/terms/law"}>
+            <Typography my={1}>特定商取引法に基づく表記</Typography>
+          </Link>
           <Link href={"/contact"}>
             <Typography my={1}>お問い合わせ</Typography>
           </Link>

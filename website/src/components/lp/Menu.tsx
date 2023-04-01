@@ -27,6 +27,9 @@ const TitleBarContainer = ({ isOpen, handleToggleDrawerOpen }: DrawerProp) => (
         <Button color={"inherit"} href={"/contact"}>
           お問い合わせ
         </Button>
+        <Button color={"inherit"} href={"/login"}>
+          ログイン
+        </Button>
       </Box>
       <IconButton sx={{ display: { sm: "none" } }} onClick={handleToggleDrawerOpen}>
         <MenuIcon />
