@@ -13,7 +13,7 @@ import {
 import { ChangeEvent, useState } from "react";
 import { useUser } from "@/plugin/auth";
 import { useRouter } from "next/router";
-import { getPlanName, PlanNames } from "@/util/plan";
+import { getPlanName, isPaidUser, PlanNames } from "@/util/plan";
 import { parser } from "@/plugin/budoux";
 
 function isDisabled(plan: PlanNames | undefined, value: string) {
@@ -66,7 +66,7 @@ export default function Index() {
     );
   }
 
-  if (user?.claims.lwa !== true && !user?.claims.plan) {
+  if (user?.claims.lwa !== true && !isPaidUser(plan)) {
     return (
       <>
         <p>Amazon 連携されていないため、登録できません。</p>
