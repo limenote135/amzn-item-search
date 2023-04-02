@@ -52,11 +52,19 @@ class Updater extends HookConsumerWidget {
           ref.read(_onStartupProvider.notifier).state = false;
           final info = await Information().get();
           if (info.isNotEmpty) {
-            await showOkAlertDialog(
+            final ret = await showOkCancelAlertDialog(
               context: context,
               title: "お知らせ",
               message: info,
+              cancelLabel: "ホームページへ",
             );
+            if (ret == OkCancelResult.cancel) {
+              await launchUrl(
+                Uri.parse(
+                  "https://amasearch.knz-c.com/",
+                ),
+              );
+            }
           } else {
             // お知らせが無い場合は変更履歴のチェックを行う
             await _showReleaseNoteDialog(context);
