@@ -200,27 +200,6 @@ class _Body extends HookConsumerWidget {
           },
         ),
         ListTile(
-          title: const Text("ログアウト"),
-          onTap: () async {
-            final ret = await showOkCancelAlertDialog(
-              context: context,
-              title: "ログアウト",
-              message: "ログアウトしますか？",
-              isDestructiveAction: true,
-            );
-            if (ret == OkCancelResult.ok) {
-              await ref.read(firebaseAuthProvider).signOut();
-              await GoogleSignIn().signOut();
-            }
-          },
-        ),
-        ListTile(
-          title: const Text("問い合わせ"),
-          onTap: () {
-            Navigator.push(context, SupportPage.route());
-          },
-        ),
-        ListTile(
           title: const Text("キャッシュの削除"),
           onTap: () async {
             final ret = await showOkCancelAlertDialog(
@@ -243,6 +222,31 @@ class _Body extends HookConsumerWidget {
                 await EasyLoading.dismiss();
               }
             }
+          },
+        ),
+        ListTile(
+          title: const Text("ログアウト"),
+          onTap: () async {
+            final ret = await showOkCancelAlertDialog(
+              context: context,
+              title: "ログアウト",
+              message: "ログアウトしますか？",
+              isDestructiveAction: true,
+            );
+            if (ret == OkCancelResult.ok) {
+              await ref.read(firebaseAuthProvider).signOut();
+              await GoogleSignIn().signOut();
+            }
+          },
+        ),
+        const ThemeDivider(),
+        ListTile(
+          title: Text("サポート", style: captionStyle),
+        ),
+        ListTile(
+          title: const Text("問い合わせ"),
+          onTap: () {
+            Navigator.push(context, SupportPage.route());
           },
         ),
         ListTile(
