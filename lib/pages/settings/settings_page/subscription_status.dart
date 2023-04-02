@@ -23,14 +23,14 @@ class SubscriptionStatus extends ConsumerWidget {
       },
       data: (claims) {
         if (claims == null) {
-          return const Text("無料プラン");
+          return const Text("フリープラン");
         }
         final dynamic plan = claims[customClaimsPlanKey];
         final dynamic trialDue = claims[customClaimsTrialDueKey];
         if (plan is String && trialDue is int) {
           return Text(_getPlanName(plan, trialDue));
         }
-        return const Text("無料プラン");
+        return const Text("フリープラン");
       },
     );
   }
@@ -47,7 +47,7 @@ class SubscriptionStatus extends ConsumerWidget {
         return "キャンペーンプラン";
 
       default:
-        return "無料プラン";
+        return "フリープラン";
     }
   }
 }
