@@ -69,7 +69,6 @@ final formValueProvider =
       item.otherCost,
       Validators.required,
       Validators.number,
-      Validators.min(0),
     ],
     autogenSkuField: item.autogenSku,
     skuField: item.sku,
