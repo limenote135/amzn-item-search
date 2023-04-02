@@ -8,7 +8,7 @@ class SubscriptionStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final claimsAsync = ref.watch(currentClaimsProvider);
+    final claimsAsync = ref.watch(currentPlanProvider);
     return claimsAsync.when(
       loading: () => const Text(""),
       error: (error, stackTrace) {
@@ -21,33 +21,9 @@ class SubscriptionStatus extends ConsumerWidget {
         );
         return const Text("エラー: 状態を取得できませんでした");
       },
-      data: (claims) {
-        if (claims == null) {
-          return const Text("フリープラン");
-        }
-        final dynamic plan = claims[customClaimsPlanKey];
-        final dynamic trialDue = claims[customClaimsTrialDueKey];
-        if (plan is String && trialDue is int) {
-          return Text(_getPlanName(plan, trialDue));
-        }
-        return const Text("フリープラン");
+      data: (plan) {
+        return Text(plan);
       },
     );
-  }
-
-  static String _getPlanName(String raw, int due) {
-    switch (raw) {
-      case "trial":
-        final d = DateTime.fromMillisecondsSinceEpoch(due * 1000, isUtc: true)
-            .toLocal();
-        return "トライアルプラン(${d.month}/${d.day}まで)";
-      case "standard":
-        return "通常プラン";
-      case "campaign":
-        return "キャンペーンプラン";
-
-      default:
-        return "フリープラン";
-    }
   }
 }
