@@ -1,6 +1,7 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/offer_stocks.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,7 +16,8 @@ class StockText extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
-    if (!settings.getStocks) {
+    final isPaidUser = ref.watch(isPaidUserProvider);
+    if (!settings.getStocks || !isPaidUser) {
       return Container();
     }
     final sellerId = ref.watch(currentSellerIdProvider);

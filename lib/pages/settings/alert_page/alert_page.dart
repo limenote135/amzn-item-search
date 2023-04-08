@@ -4,7 +4,10 @@ import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/pages/settings/alert_page/condition_settings_page.dart';
+import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/uuid.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -40,6 +43,9 @@ class _Body extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
     final uuid = ref.watch(uuidProvider);
+    final isPaidUser = ref.watch(isPaidUserProvider);
+    final smallStrongText = smallFontSize(context)!.merge(strongTextStyle);
+
     return ListView(
       children: [
         SwitchListTile(
@@ -68,6 +74,13 @@ class _Body extends HookConsumerWidget {
           },
         ),
         const ThemeDivider(),
+        if (!isPaidUser)
+          ListTile(
+            title: Text(
+              "フリープランではアラートは2つまでしか利用できません",
+              style: smallStrongText,
+            ),
+          ),
         for (var i = 0; i < settings.alerts.length; i++)
           ListTile(
             leading: const Icon(Icons.settings),
@@ -102,8 +115,18 @@ class _Body extends HookConsumerWidget {
           ),
         ListTile(
           leading: const Icon(Icons.add),
-          title: const Text("条件を追加"),
-          onTap: () {
+          title: (settings.alerts.length < 2 || isPaidUser)
+              ? const Text("条件を追加")
+              : const WithLockIconIfNotPaid(child: Text("条件を追加")),
+          onTap: () async {
+            final alertCount = settings.alerts.length;
+            if (alertCount >= 2 && !isPaidUser) {
+              await showUnpaidDialog(
+                context,
+                message: "フリープランではアラートは2つまでしか設定できません。",
+              );
+              return;
+            }
             final item = AlertConditionSet(
               id: uuid.v4(),
               title: "アラート条件",

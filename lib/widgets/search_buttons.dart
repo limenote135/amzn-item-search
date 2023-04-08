@@ -7,6 +7,7 @@ import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
 import 'package:amasearch/pages/common/variation_page/variation_page.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -21,13 +22,19 @@ class SearchButtons extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentItemProvider);
+    final isPaidUser = ref.watch(isPaidUserProvider);
     final standardButtons = ref.watch(
       generalSettingsControllerProvider
           .select((value) => value.standardButtons),
     );
-    final buttons = ref.watch(
-      generalSettingsControllerProvider.select((value) => value.customButtons),
+    var buttons = ref.watch(
+      generalSettingsControllerProvider.select(
+        (value) => value.customButtons.where((e) => e.enable).toList(),
+      ),
     );
+    if (!isPaidUser) {
+      buttons = buttons.take(4).toList();
+    }
     return Wrap(
       alignment: WrapAlignment.spaceEvenly,
       spacing: 8,
@@ -100,7 +107,8 @@ class SearchButtons extends HookConsumerWidget {
             child: const Text("Keepa"),
           ),
         if (item.variationRoot != "" &&
-            (standardButtons[standardButtonVariationPageKey] ?? true))
+            (standardButtons[standardButtonVariationPageKey] ?? true) &&
+            isPaidUser)
           ElevatedButton(
             onPressed: () async {
               await ref
@@ -114,24 +122,22 @@ class SearchButtons extends HookConsumerWidget {
             child: const Text("ﾊﾞﾘｴｰｼｮﾝ"),
           ),
         for (final button in buttons)
-          if (button.enable)
-            ElevatedButton(
-              onPressed: () async {
-                final url = replaceUrl(template: button.pattern, item: item);
-                if (!url.startsWith("http")) {
-                  return;
-                }
-                final eventName =
-                    customButtonEventMap.containsKey(button.pattern)
-                        ? customButtonEventMap[button.pattern]!
-                        : button.pattern;
-                await ref
-                    .read(analyticsControllerProvider)
-                    .logPushSearchButtonEvent(eventName);
-                await FlutterWebBrowser.openWebPage(url: url);
-              },
-              child: Text(button.title),
-            ),
+          ElevatedButton(
+            onPressed: () async {
+              final url = replaceUrl(template: button.pattern, item: item);
+              if (!url.startsWith("http")) {
+                return;
+              }
+              final eventName = customButtonEventMap.containsKey(button.pattern)
+                  ? customButtonEventMap[button.pattern]!
+                  : button.pattern;
+              await ref
+                  .read(analyticsControllerProvider)
+                  .logPushSearchButtonEvent(eventName);
+              await FlutterWebBrowser.openWebPage(url: url);
+            },
+            child: Text(button.title),
+          ),
       ],
     );
   }

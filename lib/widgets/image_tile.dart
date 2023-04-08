@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
@@ -6,12 +7,16 @@ import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/models/keepa_settings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/keepa_ua_async_widget.dart';
 import 'package:extended_image/extended_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'payment.dart';
 
 const _bigSizeFbaFee = 589;
 const _standardFbaFee = 603; // 大型より高いが標準サイズ
@@ -22,25 +27,6 @@ class TileImage extends HookConsumerWidget {
 
   final void Function(ByteData bytes)? onComplete;
 
-  static String _createKeepaUrl(
-    String asin,
-    KeepaSettings settings, {
-    String width = "300",
-    String height = "150",
-  }) {
-    final params = <String>[
-      "new=${settings.showNew ? "1" : "0"}",
-      "used=${settings.showUsed ? "1" : "0"}",
-      "amazon=${settings.showAmazon ? "1" : "0"}",
-      "bb=${settings.showBuyBox ? "1" : "0"}",
-      "fba=${settings.showFba ? "1" : "0"}",
-      "range=${settings.period.toValue()}",
-    ];
-    return "https://graph.keepa.com/pricehistory.png?"
-        "asin=$asin&domain=jp&width=$width&height=$height&salesrank=1&"
-        "${params.join("&")}${settings.extraParam}";
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asinData = ref.watch(currentAsinDataProvider);
@@ -48,10 +34,6 @@ class TileImage extends HookConsumerWidget {
     final fbaFee = asinData.prices?.feeInfo.fbaFee ?? 0;
 
     final captionSize = captionFontSizeBlackText(context);
-
-    final keepaSettings = ref.watch(
-      generalSettingsControllerProvider.select((value) => value.keepaSettings),
-    );
 
     return ConstrainedBox(
       constraints: const BoxConstraints.tightFor(width: 75),
@@ -99,77 +81,174 @@ class TileImage extends HookConsumerWidget {
                 child: Text("複数", style: captionSize),
               ),
             ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 1),
-            child: KeepaUaAsyncWidget(
-              builder: (ua) => ExtendedImage.network(
-                _createKeepaUrl(asinData.asin, keepaSettings),
-                // Cookie を入れる場合は以下のようにする
-                // headers: <String, String>{
-                //   'Cookie': 'key_a=value_a;key_b=value_b',
-                // },
-                headers: ua != ""
-                    ? <String, String>{
-                        "User-Agent": ua,
-                      }
-                    : null,
-                loadStateChanged: (state) {
-                  if (state.extendedImageLoadState != LoadState.completed) {
-                    return null;
-                  }
-                  return GestureDetector(
-                    onTap: () {
-                      showDialog<void>(
-                        context: context,
-                        builder: (context) {
-                          return GestureDetector(
-                            onTap: () {
-                              // InteractiveViewer を使うとダイアログが閉じられなくので、
-                              // GestureDetector でタップ検知して閉じる
-                              Navigator.pop(context);
-                            },
-                            child: InteractiveViewer(
-                              child: SimpleDialog(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      // 画像内はダイアログを閉じないために GestureDetector で上書き
-                                    },
-                                    child: KeepaUaAsyncWidget(
-                                      builder: (ua) => ExtendedImage.network(
-                                        _createKeepaUrl(
-                                          asinData.asin,
-                                          keepaSettings,
-                                          width: "600",
-                                          height: "300",
-                                        ),
-                                        headers: ua != ""
-                                            ? <String, String>{
-                                                "User-Agent": ua,
-                                              }
-                                            : null,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: ExtendedRawImage(
-                      image: state.extendedImageInfo?.image,
-                      // グラフ部分だけをトリミング
-                      sourceRect: const Rect.fromLTWH(45, 20, 100, 100),
-                    ),
-                  );
-                },
-              ),
-            ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 1),
+            child: _KeepaImage(),
           ),
         ],
       ),
     );
+  }
+}
+
+class _KeepaImage extends ConsumerWidget {
+  const _KeepaImage();
+
+  static String _createKeepaUrl(
+    String asin,
+    KeepaSettings settings, {
+    String width = "300",
+    String height = "150",
+  }) {
+    final params = <String>[
+      "new=${settings.showNew ? "1" : "0"}",
+      "used=${settings.showUsed ? "1" : "0"}",
+      "amazon=${settings.showAmazon ? "1" : "0"}",
+      "bb=${settings.showBuyBox ? "1" : "0"}",
+      "fba=${settings.showFba ? "1" : "0"}",
+      "range=${settings.period.toValue()}",
+    ];
+    return "https://graph.keepa.com/pricehistory.png?"
+        "asin=$asin&domain=jp&width=$width&height=$height&salesrank=1&"
+        "${params.join("&")}${settings.extraParam}";
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asinData = ref.watch(currentAsinDataProvider);
+    final keepaSettings = ref.watch(
+      generalSettingsControllerProvider.select((value) => value.keepaSettings),
+    );
+
+    final isPaidUser = ref.watch(isPaidUserProvider);
+
+    if (!isPaidUser) {
+      return GestureDetector(
+        onTap: () async {
+          await showKeepaUnpaidDialog(context: context);
+        },
+        child: const KeepaLockIcon(),
+      );
+    }
+
+    return KeepaUaAsyncWidget(
+      builder: (ua) => ExtendedImage.network(
+        _createKeepaUrl(asinData.asin, keepaSettings),
+        // Cookie を入れる場合は以下のようにする
+        // headers: <String, String>{
+        //   'Cookie': 'key_a=value_a;key_b=value_b',
+        // },
+        headers: ua != ""
+            ? <String, String>{
+                "User-Agent": ua,
+              }
+            : null,
+        loadStateChanged: (state) {
+          if (state.extendedImageLoadState != LoadState.completed) {
+            return null;
+          }
+          return GestureDetector(
+            onTap: () {
+              showDialog<void>(
+                context: context,
+                builder: (context) {
+                  return GestureDetector(
+                    onTap: () {
+                      // InteractiveViewer を使うとダイアログが閉じられなくので、
+                      // GestureDetector でタップ検知して閉じる
+                      Navigator.pop(context);
+                    },
+                    child: InteractiveViewer(
+                      child: SimpleDialog(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              // 画像内はダイアログを閉じないために GestureDetector で上書き
+                            },
+                            child: KeepaUaAsyncWidget(
+                              builder: (ua) => ExtendedImage.network(
+                                _createKeepaUrl(
+                                  asinData.asin,
+                                  keepaSettings,
+                                  width: "600",
+                                  height: "300",
+                                ),
+                                headers: ua != ""
+                                    ? <String, String>{
+                                        "User-Agent": ua,
+                                      }
+                                    : null,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+            child: ExtendedRawImage(
+              image: state.extendedImageInfo?.image,
+              // グラフ部分だけをトリミング
+              sourceRect: const Rect.fromLTWH(45, 20, 100, 100),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> showKeepaUnpaidDialog({required BuildContext context}) async {
+    const title = Text("標準プラン専用機能");
+    final content = Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text("標準プランではKeepaのグラフが表示されます。"),
+        ExtendedImage.asset(
+          "assets/keepa_sample.png",
+          border: Border.all(),
+        ),
+      ],
+    );
+
+    if (Platform.isIOS) {
+      await showCupertinoDialog<void>(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: title,
+            content: content,
+            actions: [
+              CupertinoDialogAction(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    } else {
+      await showDialog<void>(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: title,
+            content: content,
+            actions: [
+              TextButton(
+                child: const Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 }
