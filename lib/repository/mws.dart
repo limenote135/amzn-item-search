@@ -42,8 +42,14 @@ final searchItemFutureProvider = FutureProvider.autoDispose
   final settings = ref.read(generalSettingsControllerProvider);
   final searchSetting = ref.read(searchSettingsControllerProvider);
   final tts = ref.read(ttsProvider);
+  final isPaidUser = ref.read(isPaidUserProvider);
+  var alerts = settings.alerts;
 
-  if (settings.enableReadAloud) {
+  if (!isPaidUser) {
+    alerts = alerts.take(2).toList();
+  }
+
+  if (settings.enableReadAloud && isPaidUser) {
     if (resp.items.isEmpty) {
       tts.speak("見つかりませんでした。");
     } else {
@@ -77,7 +83,7 @@ final searchItemFutureProvider = FutureProvider.autoDispose
     if (settings.enableAlert && settings.enableAlertVibration) {
       final item = resp.items.first;
       final searchSettings = ref.read(searchSettingsControllerProvider);
-      if (settings.alerts.any(
+      if (alerts.any(
         (element) => element.match(
           item,
           searchSettings,

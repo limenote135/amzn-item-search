@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/search_settings.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -19,12 +22,16 @@ class SearchSettingsController extends StateNotifier<SearchSettings> {
 
   void _loadSettings() {
     final box = _ref.read(settingsBoxProvider);
-    final settings = box.get(searchSettingsKeyName) as SearchSettings?;
+    final isPaidUser = _ref.read(isPaidUserProvider);
+    var settings = box.get(searchSettingsKeyName) as SearchSettings?;
     if (settings != null) {
+      if (!isPaidUser) {
+        settings = settings.copyWith(type: SearchType.jan);
+      }
       state = settings;
     }
     // デフォルト値が設定されている可能性があるので、一度保存する
-    box.put(searchSettingsKeyName, state);
+    unawaited(box.put(searchSettingsKeyName, state));
   }
 
   void update({

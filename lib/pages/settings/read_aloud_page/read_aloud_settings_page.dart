@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/settings/read_aloud_page/pattern_settings_page.dart';
 import 'package:amasearch/pages/settings/read_aloud_page/slider_tile.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/text_to_speech.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -38,24 +42,33 @@ class _Body extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
     final tts = ref.watch(ttsProvider);
+    final isPaidUser = ref.watch(isPaidUserProvider);
     return ListView(
       children: [
         SwitchListTile(
-          title: const Text("音声読み上げを有効にする"),
+          title: const WithLockIconIfNotPaid(child: Text("音声読み上げを有効にする")),
           value: settings.enableReadAloud,
-          onChanged: (value) {
+          onChanged: (value) async {
+            if (value && !isPaidUser) {
+              await showUnpaidDialog(context);
+              return;
+            }
             ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(enableReadAloud: value);
             if (value) {
-              ref.read(analyticsControllerProvider).setUserProp(
-                    readAloudPropName,
-                    settings.readAloudPatterns[settings.patternIndex].pattern,
-                  );
+              unawaited(
+                ref.read(analyticsControllerProvider).setUserProp(
+                      readAloudPropName,
+                      settings.readAloudPatterns[settings.patternIndex].pattern,
+                    ),
+              );
             } else {
-              ref
-                  .read(analyticsControllerProvider)
-                  .setUserProp(readAloudPropName, "");
+              unawaited(
+                ref
+                    .read(analyticsControllerProvider)
+                    .setUserProp(readAloudPropName, ""),
+              );
             }
           },
         ),

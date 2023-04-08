@@ -7,7 +7,9 @@ import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/error_report.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:fast_barcode_scanner/fast_barcode_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -237,9 +239,11 @@ class _BodyState extends ConsumerState<_Body> {
 
   @override
   Widget build(BuildContext context) {
-    final settings = ref.read(searchSettingsControllerProvider);
+    final settings = ref.watch(searchSettingsControllerProvider);
     final continuousRead = settings.continuousCameraRead;
     final type = settings.type;
+
+    final isPaidUser = ref.watch(isPaidUserProvider);
 
     ref.listen(searchSettingsControllerProvider, (_, __) {
       // コードタイプを変更した際に lastRead をリセットする
@@ -290,7 +294,7 @@ class _BodyState extends ConsumerState<_Body> {
             children: [
               _flushButtonRow(),
               _continuousReadButtonRow(continuousRead),
-              _searchCodeTypeRow(type),
+              _searchCodeTypeRow(type, isPaidUser: isPaidUser),
               const Spacer(),
               ProviderScope(
                 overrides: [
@@ -400,22 +404,29 @@ class _BodyState extends ConsumerState<_Body> {
     );
   }
 
-  Widget _searchCodeTypeRow(SearchType type) {
+  Widget _searchCodeTypeRow(SearchType type, {required bool isPaidUser}) {
     return Row(
       children: [
         const Spacer(),
         MaterialButton(
           textColor: Colors.white,
-          onPressed: () {
+          onPressed: () async {
             if (!mounted) {
               return;
             }
-            setState(() {
-              final next = _getNext(type);
-              ref
-                  .read(searchSettingsControllerProvider.notifier)
-                  .update(type: next);
-            });
+            if (isPaidUser) {
+              setState(() {
+                final next = _getNext(type);
+                ref
+                    .read(searchSettingsControllerProvider.notifier)
+                    .update(type: next);
+              });
+            } else {
+              await showUnpaidDialog(
+                context,
+                message: "標準プランにするとインストアコードの読み込みが可能になります。",
+              );
+            }
           },
           child: Text("タイプ: ${type.toDisplayString()}"),
         ),

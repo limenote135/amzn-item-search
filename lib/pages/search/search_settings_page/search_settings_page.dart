@@ -8,6 +8,8 @@ import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/search_settings.dart';
+import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -137,10 +139,11 @@ class _CodeType extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(_currentSettingsProvider);
+    final isPaidUser = ref.watch(isPaidUserProvider);
     return ListTile(
       title: Row(
         children: [
-          const Text("コードタイプ"),
+          const WithLockIconIfNotPaid(child: Text("コードタイプ")),
           const Spacer(),
           DropdownButton<SearchType>(
             value: settings.type,
@@ -162,8 +165,15 @@ class _CodeType extends HookConsumerWidget {
                 child: Text("TSUTAYA"),
               ),
             ],
-            onChanged: (value) {
+            onChanged: (value) async {
               if (value != settings.type) {
+                if (value != SearchType.jan && !isPaidUser) {
+                  await showUnpaidDialog(
+                    context,
+                    message: "インストアコードの読み込みは標準プラン専用です。",
+                  );
+                  return;
+                }
                 ref
                     .read(searchSettingsControllerProvider.notifier)
                     .update(type: value);

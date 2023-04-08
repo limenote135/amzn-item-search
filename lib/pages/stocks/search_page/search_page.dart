@@ -3,7 +3,9 @@ import 'package:amasearch/models/enums/stock_item_search_conditions.dart';
 import 'package:amasearch/models/stock_item_filter.dart';
 import 'package:amasearch/pages/stocks/search_page/values.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/custom_validator.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as base;
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -86,6 +88,7 @@ class _Body extends ConsumerWidget {
     final filter = ref.watch(currentStockItemFilterProvider);
     final theme = Theme.of(context);
     final smallSize = smallFontSize(context);
+    final isPaidUser = ref.watch(isPaidUserProvider);
 
     return _Unfocus(
       child: Column(
@@ -241,6 +244,10 @@ class _Body extends ConsumerWidget {
             title: ReactiveFormConsumer(
               builder: (context, formGroup, child) {
                 Future<void> onPressed() async {
+                  if (!isPaidUser) {
+                    await showUnpaidDialog(context);
+                    return;
+                  }
                   ref.read(currentStockItemFilterProvider.notifier).state =
                       filter.copyWith(
                     keyword: getNullableString(form, keywordField),
@@ -261,7 +268,10 @@ class _Body extends ConsumerWidget {
 
                 return ElevatedButton(
                   onPressed: form.invalid ? null : onPressed,
-                  child: const Text("検索"),
+                  child: const WithLockIconIfNotPaid(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    child: Text("検索"),
+                  ),
                 );
               },
             ),
