@@ -1,4 +1,4 @@
-export type PlanNames = "free" | "trial" | "standard" | "campaign";
+export type PlanNames = "free" | "trial" | "standard" | "campaign" | "suspended";
 
 export function getPlanName(name?: PlanNames) {
   if (!name) {
@@ -14,6 +14,8 @@ export function getPlanName(name?: PlanNames) {
       return "通常プラン";
     case "campaign":
       return "キャンペーンプラン";
+    case "suspended":
+      return "フリープラン(停止中)";
   }
   return "不明";
 }
@@ -25,10 +27,11 @@ export function isPaidUser(plan?: PlanNames) {
   switch (plan) {
     case "free":
     case "trial":
+    case "suspended":
       return false;
     case "standard":
     case "campaign":
       return true;
   }
-  return true;
+  return false;
 }

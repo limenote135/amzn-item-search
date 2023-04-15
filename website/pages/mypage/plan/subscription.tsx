@@ -60,6 +60,7 @@ const InputForm = ({ plan }: InputFormProps) => {
     } catch (e) {
       if (e instanceof Error) {
         setMessage("エラー:" + e.message);
+        setIsLoading(false);
       }
       throw e;
     }

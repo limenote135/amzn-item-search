@@ -24,7 +24,9 @@ const User = () => {
         setNextPayment(" - ");
       } else {
         setCardInfo(`${data.brand} 下4桁: ${data.number}`);
-        if (data.cancelAt) {
+        if (user?.claims.plan === "suspended") {
+          setNextPayment("引き落とし失敗");
+        } else if (data.cancelAt) {
           const cancelAt = new Date(data.cancelAt);
           setNextPayment(`無し( ${cancelAt.getFullYear()}/${cancelAt.getMonth() + 1}/${cancelAt.getDate()} で終了)`);
         } else {
