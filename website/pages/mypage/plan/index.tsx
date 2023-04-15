@@ -25,6 +25,7 @@ function isDisabled(plan: PlanNames | undefined, value: string) {
       return value === "free";
     case "standard":
     case "campaign":
+    case "suspended":
       return value === "standard" || value === "campaign";
   }
   return false;
