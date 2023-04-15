@@ -37,6 +37,7 @@ const Information = () => {
     <Box my={1}>
       <Typography>現在のカード: {cardInfo}</Typography>
       <Typography>{nextPayment} の決済より新しいカードが使われます。</Typography>
+      <Typography>現在の決済が失敗している場合、更新後に自動的に決済が再試行されます。</Typography>
     </Box>
   );
 };
