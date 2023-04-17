@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 const _bigSizeFbaFee = 589;
+const _standardFbaFee = 603; // 大型より高いが標準サイズ
 const _moreBigSizeFbaFee = 2755;
 
 class TileImage extends HookConsumerWidget {
@@ -75,7 +76,8 @@ class TileImage extends HookConsumerWidget {
                 child: Text("プレ値", style: captionSize),
               ),
             ),
-          if (fbaFee >= _bigSizeFbaFee)
+          // 589円以上はおおむね大型だが、標準で603円のケースがある
+          if (fbaFee >= _bigSizeFbaFee && fbaFee != _standardFbaFee)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 1),
               child: Container(
