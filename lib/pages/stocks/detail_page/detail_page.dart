@@ -194,9 +194,21 @@ class _Body extends HookConsumerWidget {
           leading: const Text("損益分岐額"),
           main: Text("${item.breakEven} 円"),
         ),
-        TextListTile(
-          leading: const Text("SKU"),
-          main: Text(item.sku),
+        InkWell(
+          onLongPress: () {
+            Clipboard.setData(ClipboardData(text: item.sku)).then((_) {
+              ScaffoldMessenger.of(context).removeCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("SKUをコピーしました"),
+                ),
+              );
+            });
+          },
+          child: TextListTile(
+            leading: const Text("SKU"),
+            main: Text(item.sku),
+          ),
         ),
         TextListTile(
           leading: const Text("仕入れ先"),
