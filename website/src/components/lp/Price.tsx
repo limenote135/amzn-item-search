@@ -1,8 +1,10 @@
 import { useInView } from "react-intersection-observer";
 import { Box, Collapse, Fade, Grid, Typography } from "@mui/material";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import { parser } from "@/plugin/budoux";
 import Link from "@/components/Link";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 type PriceBoxProps = {
   title: string;
@@ -48,9 +50,11 @@ const PriceBox = ({ title, subtitle, price, detail }: PriceBoxProps) => {
 type PriceProp = {
   reference: (node?: Element | null | undefined) => void;
   inView: boolean;
+  isDetailOpen: boolean;
+  onClickDetail: () => void;
 };
 
-const PriceContainer = ({ reference, inView }: PriceProp) => {
+const PriceContainer = ({ reference, inView, isDetailOpen, onClickDetail }: PriceProp) => {
   return (
     <Box component={"section"} pb={8}>
       <Box ref={reference} pt={4}>
@@ -88,11 +92,33 @@ const PriceContainer = ({ reference, inView }: PriceProp) => {
             subtitle={"本格的にリサーチをしたい方へ"}
             price={2980}
             detail={
-              <Typography
-                dangerouslySetInnerHTML={{
-                  __html: parser.translateHTMLString("リサーチする上で便利なすべての機能がご利用いただけます。"),
-                }}
-              />
+              <>
+                <Typography
+                  dangerouslySetInnerHTML={{
+                    __html: parser.translateHTMLString("リサーチする上で便利なすべての機能がご利用いただけます。"),
+                  }}
+                />
+                <Box
+                  display={"flex"}
+                  mt={2}
+                  mb={1}
+                  justifyContent={"center"}
+                  alignItems={"end"}
+                  onClick={onClickDetail}
+                >
+                  <Typography variant={"body2"}>利用可能になる機能の例</Typography>
+                  {isDetailOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </Box>
+                <Collapse in={isDetailOpen} timeout="auto" unmountOnExit>
+                  <Box>
+                    <Typography variant={"body2"}>価格グラフ表示</Typography>
+                    <Typography variant={"body2"}>インストアコード読み込み</Typography>
+                    <Typography variant={"body2"}>バリエーション検索</Typography>
+                    <Typography variant={"body2"}>音声読み上げ</Typography>
+                    <Typography variant={"body2"}>キープリスト</Typography>
+                  </Box>
+                </Collapse>
+              </>
             }
           />
           <PriceBox
@@ -139,8 +165,13 @@ const PriceContainer = ({ reference, inView }: PriceProp) => {
 
 const Price = () => {
   const [ref, inView] = useInView({ rootMargin: "-100px", triggerOnce: true });
+  const [isOpen, setIsOpen] = useState(false);
 
-  return <PriceContainer reference={ref} inView={inView} />;
+  const handleOpen = () => {
+    setIsOpen(prev => !prev);
+  };
+
+  return <PriceContainer reference={ref} inView={inView} isDetailOpen={isOpen} onClickDetail={handleOpen} />;
 };
 
 export default Price;
