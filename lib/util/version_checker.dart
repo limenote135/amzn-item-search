@@ -18,7 +18,7 @@ class VersionChecker {
 
     try {
       final defaultValues = <String, dynamic>{
-        _configNameMinVersion: "1.8.4",
+        _configNameMinVersion: "2.0.0",
         _configNameBlackList: "[]",
       };
       await remoteConfig.setDefaults(defaultValues);
