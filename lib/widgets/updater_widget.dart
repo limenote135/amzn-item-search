@@ -56,9 +56,10 @@ class Updater extends HookConsumerWidget {
               context: context,
               title: "お知らせ",
               message: info,
-              cancelLabel: "ホームページへ",
+              okLabel: "ホームページへ",
+              cancelLabel: "閉じる",
             );
-            if (ret == OkCancelResult.cancel) {
+            if (ret == OkCancelResult.ok) {
               await launchUrl(
                 Uri.parse(
                   "https://amasearch.knz-c.com/",
