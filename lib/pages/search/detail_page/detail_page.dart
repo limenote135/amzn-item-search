@@ -9,6 +9,8 @@ import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
+import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -62,6 +64,11 @@ class DetailPage extends HookConsumerWidget {
                 child: const Icon(Icons.bookmark_add),
                 label: "キープ",
                 onTap: () async {
+                  final isPaidUser = ref.read(isPaidUserProvider);
+                  if (!isPaidUser) {
+                    await showUnpaidDialog(context);
+                    return;
+                  }
                   final result = await showTextInputDialog(
                     context: context,
                     title: "メモ",

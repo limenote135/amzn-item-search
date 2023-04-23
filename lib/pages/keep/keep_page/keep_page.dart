@@ -6,7 +6,9 @@ import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/pages/keep/detail_page/detail_page.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/uuid.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/slidable_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +39,15 @@ class KeepPage extends ConsumerWidget {
       }
     });
 
+    final isPaidUser = ref.watch(isPaidUserProvider);
+
+    if (!isPaidUser) {
+      return const Scaffold(
+        appBar: NormalAppBar(),
+        body: _UnpaidUserBody(),
+      );
+    }
+
     return Scaffold(
       appBar: _appBarSelector(mode),
       body: const _Body(),
@@ -50,6 +61,27 @@ class KeepPage extends ConsumerWidget {
       case KeepPageMode.select:
         return const ItemSelectAppBar();
     }
+  }
+}
+
+class _UnpaidUserBody extends ConsumerWidget {
+  const _UnpaidUserBody();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          LockIcon(width: 32),
+          Text(
+            "標準プランでは商品を\nキープリストに登録することができます",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16),
+          )
+        ],
+      ),
+    );
   }
 }
 

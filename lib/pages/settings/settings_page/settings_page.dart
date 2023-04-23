@@ -22,6 +22,7 @@ import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/release_notes.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:file_picker/file_picker.dart';
@@ -92,7 +93,7 @@ class _Body extends HookConsumerWidget {
           title: Text("検索設定", style: captionStyle),
         ),
         ListTile(
-          title: const Text("目標利益率設定"),
+          title: const WithLockIconIfNotPaid(child: Text("目標利益率設定")),
           subtitle: settings.enableTargetProfit == false
               ? const Text("無効")
               : Text("${settings.targetProfitValue} %"),
@@ -104,7 +105,7 @@ class _Body extends HookConsumerWidget {
           },
         ),
         ListTile(
-          title: const Text("カスタムボタン設定"),
+          title: const WithLockIconIfNotPaid(child: Text("カスタムボタン設定")),
           onTap: () {
             Navigator.push(
               context,
@@ -113,7 +114,7 @@ class _Body extends HookConsumerWidget {
           },
         ),
         ListTile(
-          title: const Text("読み上げ設定"),
+          title: const WithLockIconIfNotPaid(child: Text("読み上げ設定")),
           subtitle: settings.enableReadAloud == false
               ? const Text("無効")
               : Text(settings.readAloudPatterns[settings.patternIndex].title),
@@ -125,7 +126,7 @@ class _Body extends HookConsumerWidget {
           },
         ),
         ListTile(
-          title: const Text("アラート設定"),
+          title: const WithLockIconIfNotPaid(child: Text("アラート設定")),
           onTap: () {
             Navigator.push(
               context,

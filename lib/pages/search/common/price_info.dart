@@ -8,6 +8,7 @@ import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class _PriceAndProfit extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
     final settings = ref.watch(searchSettingsControllerProvider);
+    final isPaidUser = ref.watch(isPaidUserProvider);
 
     final showTargetPrice = ref.watch(
       generalSettingsControllerProvider
@@ -112,7 +114,7 @@ class _PriceAndProfit extends HookConsumerWidget {
           ),
           style: smallSize,
         ),
-        if (showTargetPrice)
+        if (showTargetPrice && isPaidUser)
           Text.rich(
             TextSpan(
               text: "目標額: ",
