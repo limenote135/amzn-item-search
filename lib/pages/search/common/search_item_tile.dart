@@ -4,6 +4,7 @@ import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/alert.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/image_tile.dart';
 import 'package:amasearch/widgets/strong_container.dart';
@@ -24,6 +25,11 @@ class SearchItemTile extends HookConsumerWidget {
     final item = ref.watch(currentAsinDataProvider);
     final search = ref.watch(searchSettingsControllerProvider);
     final settings = ref.watch(generalSettingsControllerProvider);
+    final isPaidUser = ref.watch(isPaidUserProvider);
+    var alerts = settings.alerts;
+    if (!isPaidUser) {
+      alerts = alerts.take(2).toList();
+    }
     final tile = Row(
       children: const [
         TileImage(),
@@ -33,7 +39,7 @@ class SearchItemTile extends HookConsumerWidget {
       ],
     );
     if (settings.enableAlert &&
-        settings.alerts.any(
+        alerts.any(
           (element) => element.match(
             item,
             search,
@@ -53,6 +59,7 @@ class _ItemTileBody extends HookConsumerWidget {
     final item = ref.watch(currentAsinDataProvider);
     final date = ref.watch(currentSearchDateProvider);
     final isEllipsis = ref.watch(isEllipsisProvider);
+    final isPaidUser = ref.watch(isPaidUserProvider);
 
     final cartPrice = getCartPrice(item.prices);
 
@@ -110,45 +117,46 @@ class _ItemTileBody extends HookConsumerWidget {
             )
           ],
         ),
-        Row(
-          children: [
-            Expanded(
-              child: Text.rich(
-                TextSpan(
-                  text: "カート: ",
-                  children: [
-                    if (cartPrice == -1)
-                      const TextSpan(text: " - ")
-                    else
-                      TextSpan(
-                        text: numberFormatter.format(cartPrice),
-                        style: strongTextStyle,
-                      ),
-                    const TextSpan(text: " 円"),
-                  ],
-                  style: smallSize,
-                ),
-              ),
-            ),
-            if (item.sellByAmazon != null)
+        if (isPaidUser)
+          Row(
+            children: [
               Expanded(
                 child: Text.rich(
                   TextSpan(
-                    text: "Amazon販売: ",
+                    text: "カート: ",
                     children: [
-                      if (item.sellByAmazon == true)
-                        const TextSpan(text: "有")
+                      if (cartPrice == -1)
+                        const TextSpan(text: " - ")
                       else
-                        const TextSpan(text: "無", style: strongTextStyle)
+                        TextSpan(
+                          text: numberFormatter.format(cartPrice),
+                          style: strongTextStyle,
+                        ),
+                      const TextSpan(text: " 円"),
                     ],
+                    style: smallSize,
                   ),
-                  style: smallSize,
                 ),
               ),
-          ],
-        ),
+              if (item.sellByAmazon != null)
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                      text: "Amazon販売: ",
+                      children: [
+                        if (item.sellByAmazon == true)
+                          const TextSpan(text: "有")
+                        else
+                          const TextSpan(text: "無", style: strongTextStyle)
+                      ],
+                    ),
+                    style: smallSize,
+                  ),
+                ),
+            ],
+          ),
         const PriceInfo(),
-        const _ListingRestrictions(),
+        if (isPaidUser) const _ListingRestrictions(),
         if (date != null)
           Text(
             "検索日: ${DateTime.parse(date).toLocal().format()}",

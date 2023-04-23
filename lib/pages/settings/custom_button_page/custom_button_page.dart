@@ -1,5 +1,7 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/general_settings_default.dart';
+import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -38,6 +40,9 @@ class _Body extends HookConsumerWidget {
     final standardButtons = settings.standardButtons;
     final standardButtonLength = standardButtons.length;
     final standardButtonKeys = standardButtons.keys.toList();
+
+    final isPaidUser = ref.watch(isPaidUserProvider);
+
     return ListView.builder(
       itemCount: settings.customButtons.length + standardButtonLength,
       itemBuilder: (BuildContext context, int index) {
@@ -45,10 +50,16 @@ class _Body extends HookConsumerWidget {
           final key = standardButtonKeys[index];
           return ListTile(
             leading: _leadingIconMargin,
-            title: Text(_getButtonTitle(key)),
+            title: _StandardButtonTitle(title: key),
             trailing: Switch(
               value: standardButtons[key]!,
-              onChanged: (value) {
+              onChanged: (value) async {
+                if (value &&
+                    key == standardButtonVariationPageKey &&
+                    !isPaidUser) {
+                  await showUnpaidDialog(context);
+                  return;
+                }
                 final newValue = <String, bool>{};
                 standardButtons.forEach((k, v) {
                   if (k == key) {
@@ -71,13 +82,24 @@ class _Body extends HookConsumerWidget {
           title: Text(button.title),
           trailing: Switch(
             value: button.enable,
-            onChanged: (value) {
+            onChanged: (value) async {
               final updated = [
                 for (var i = 0; i < settings.customButtons.length; i++)
                   i == buttonIndex
                       ? settings.customButtons[i].copyWith(enable: value)
                       : settings.customButtons[i]
               ];
+              final enableCount = settings.customButtons
+                  .where((element) => element.enable)
+                  .toList()
+                  .length;
+              if (value && enableCount > 3 && !isPaidUser) {
+                await showUnpaidDialog(
+                  context,
+                  message: "フリープランではカスタムボタンは4つまでしか指定できません。",
+                );
+                return;
+              }
               ref
                   .read(generalSettingsControllerProvider.notifier)
                   .update(customButtons: updated);
@@ -112,18 +134,25 @@ class _Body extends HookConsumerWidget {
   }
 }
 
-String _getButtonTitle(String key) {
-  switch (key) {
-    case standardButtonAmazonListKey:
-      return "出品一覧";
-    case standardButtonNewOffersKey:
-      return "新品一覧";
-    case standardButtonUsedOffersKey:
-      return "中古一覧";
-    case standardButtonKeepaPageKey:
-      return "Keepa";
-    case standardButtonVariationPageKey:
-      return "バリエーション";
+class _StandardButtonTitle extends StatelessWidget {
+  const _StandardButtonTitle({required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    switch (title) {
+      case standardButtonAmazonListKey:
+        return const Text("出品一覧");
+      case standardButtonNewOffersKey:
+        return const Text("新品一覧");
+      case standardButtonUsedOffersKey:
+        return const Text("中古一覧");
+      case standardButtonKeepaPageKey:
+        return const Text("Keepa");
+      case standardButtonVariationPageKey:
+        return const WithLockIconIfNotPaid(child: Text("バリエーション"));
+    }
+    return const Text("不明");
   }
-  return "不明";
 }

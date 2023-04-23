@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -33,25 +37,34 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
+    final isPaidUser = ref.watch(isPaidUserProvider);
     return ListView(
       children: [
         SwitchListTile(
-          title: const Text("目標利益率を設定する"),
+          title: const WithLockIconIfNotPaid(child: Text("目標利益率を設定する")),
           subtitle: const Text("商品検索時に設定した利益率を達成する仕入れ額を表示します"),
           value: settings.enableTargetProfit,
-          onChanged: (value) {
+          onChanged: (value) async {
+            if (value && !isPaidUser) {
+              await showUnpaidDialog(context);
+              return;
+            }
             ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(enableTargetProfit: value);
             if (value) {
-              ref.read(analyticsControllerProvider).setUserProp(
-                    targetProfitPropName,
-                    "${settings.targetProfitValue}",
-                  );
+              unawaited(
+                ref.read(analyticsControllerProvider).setUserProp(
+                      targetProfitPropName,
+                      "${settings.targetProfitValue}",
+                    ),
+              );
             } else {
-              ref
-                  .read(analyticsControllerProvider)
-                  .setUserProp(targetProfitPropName, "$value");
+              unawaited(
+                ref
+                    .read(analyticsControllerProvider)
+                    .setUserProp(targetProfitPropName, "$value"),
+              );
             }
           },
         ),

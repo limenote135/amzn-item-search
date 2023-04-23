@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/offer_listings.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -54,19 +58,27 @@ class _Body extends HookConsumerWidget {
     );
     final param = ref.watch(currentOfferListingParamProvider);
     final offerTotalCountAsyncValue = ref.watch(offerTotalCountProvider(param));
+    final isPaidUser = ref.watch(isPaidUserProvider);
+
     return Column(
       children: [
         SwitchListTile(
-          title: const Text("在庫数を取得(β)"),
+          title: const WithLockIconIfNotPaid(child: Text("在庫数を取得(β)")),
           subtitle: const Text("表示が重くなります"),
           value: doGetStocks,
-          onChanged: (value) {
+          onChanged: (value) async {
+            if (value && !isPaidUser) {
+              await showUnpaidDialog(context);
+              return;
+            }
             ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(getStocks: value);
-            ref
-                .read(analyticsControllerProvider)
-                .setUserProp(getStocksPropName, value.toString());
+            unawaited(
+              ref
+                  .read(analyticsControllerProvider)
+                  .setUserProp(getStocksPropName, value.toString()),
+            );
           },
         ),
         Expanded(

@@ -6,6 +6,7 @@ import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/general_settings_default.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -48,6 +49,9 @@ class _Body extends HookConsumerWidget {
       generalSettingsControllerProvider
           .select((value) => value.rightSlideShortcut),
     );
+
+    final isPaidUser = ref.watch(isPaidUserProvider);
+
     final buttons = ref.watch(
       generalSettingsControllerProvider.select((value) => value.customButtons),
     );
@@ -79,7 +83,11 @@ class _Body extends HookConsumerWidget {
             title: _createTitle(left[i], allWebButtons),
             trailing: const Icon(Icons.settings),
             onTap: () async {
-              final item = await _selectAction(context, enableButtons);
+              final item = await _selectAction(
+                context,
+                enableButtons,
+                isPaidUser: isPaidUser,
+              );
               if (item != null) {
                 final updated = [
                   for (var j = 0; j < left.length; j++)
@@ -108,7 +116,11 @@ class _Body extends HookConsumerWidget {
             title: _createTitle(right[i], allWebButtons),
             trailing: const Icon(Icons.settings),
             onTap: () async {
-              final item = await _selectAction(context, enableButtons);
+              final item = await _selectAction(
+                context,
+                enableButtons,
+                isPaidUser: isPaidUser,
+              );
               if (item != null) {
                 final updated = [
                   for (var j = 0; j < right.length; j++)
@@ -175,21 +187,23 @@ class _Body extends HookConsumerWidget {
 
   Future<ShortcutDetail?> _selectAction(
     BuildContext context,
-    List<CustomButtonDetail> buttons,
-  ) async {
+    List<CustomButtonDetail> buttons, {
+    required bool isPaidUser,
+  }) async {
     final ret = await showConfirmationDialog(
       context: context,
       title: "アクションを選択",
       actions: [
         const AlertDialogAction(key: _noneKey, label: "なし"),
         const AlertDialogAction(key: _purchaseKey, label: "仕入れ"),
-        const AlertDialogAction(key: _keepKey, label: "キープ"),
+        if (isPaidUser) const AlertDialogAction(key: _keepKey, label: "キープ"),
         const AlertDialogAction(key: _deleteKey, label: "削除"),
         const AlertDialogAction(key: _offersKey, label: "出品一覧"),
         const AlertDialogAction(key: _newOffersKey, label: "新品一覧"),
         const AlertDialogAction(key: _usedOffersKey, label: "中古一覧"),
         const AlertDialogAction(key: _keepaKey, label: "Keepa"),
-        const AlertDialogAction(key: _variation, label: "バリエーション"),
+        if (isPaidUser)
+          const AlertDialogAction(key: _variation, label: "バリエーション"),
         for (var button in buttons)
           AlertDialogAction(key: button.id, label: button.title)
       ],
