@@ -6,7 +6,7 @@ x-environment: &deploy-proj-env
   DEPLOY_REGION: asia-northeast1
 
 x-firebase-volume: &firebase-volume
-  - amasearch-firebase-auth:/root/.config
+  - rakupo-firebase-volume:/root/.config
   - ./:/app
   - /app/node_modules
 
@@ -21,5 +21,5 @@ services:
     command: sh -c "yarn install && yarn build && yarn export && find ./out -name *.map -delete && mv out/404/index.html out/404.html && firebase deploy --project $$DEPLOY_PROJECT"
 
 volumes:
-  amasearch-firebase-auth:
+  rakupo-firebase-volume:
     external: true
