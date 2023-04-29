@@ -29,6 +29,7 @@ class TileImage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPaidUser = ref.watch(isPaidUserProvider);
     final asinData = ref.watch(currentAsinDataProvider);
     final asinCount = ref.watch(currentAsinCountProvider);
     final fbaFee = asinData.prices?.feeInfo.fbaFee ?? 0;
@@ -56,6 +57,16 @@ class TileImage extends HookConsumerWidget {
                 alignment: Alignment.center,
                 color: Colors.red[400],
                 child: Text("プレ値", style: captionSize),
+              ),
+            ),
+          if (isPaidUser && asinData.isHazmat)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 1),
+              child: Container(
+                width: double.infinity,
+                alignment: Alignment.center,
+                color: Colors.red[400],
+                child: Text("危険物", style: captionSize),
               ),
             ),
           // 589円以上はおおむね大型だが、標準で603円のケースがある
