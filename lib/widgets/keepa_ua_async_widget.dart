@@ -46,7 +46,7 @@ class KeepaUaAsyncWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final uaAsync = ref.read(_uaProvider);
+    final uaAsync = ref.watch(_uaProvider);
     return uaAsync.when(
       error: (error, stackTrace) => _placeholder,
       loading: () => _placeholder,
