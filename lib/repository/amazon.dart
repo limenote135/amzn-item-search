@@ -77,6 +77,8 @@ class AmazonRepository {
     final opt = dio.Options(
       headers: <String, String>{
         HttpHeaders.userAgentHeader: _userAgent,
+        HttpHeaders.acceptEncodingHeader: "deflate, br",
+        HttpHeaders.acceptHeader: "text/html,*/*",
       },
     );
     await d.get(url, opt: opt);
@@ -107,6 +109,8 @@ class AmazonRepository {
     final opt = dio.Options(
       headers: <String, String>{
         HttpHeaders.userAgentHeader: _userAgent,
+        HttpHeaders.acceptEncodingHeader: "deflate, br",
+        HttpHeaders.acceptHeader: "text/html,*/*",
       },
     );
     final resp = await d.get(
