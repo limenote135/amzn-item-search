@@ -19,6 +19,7 @@ const Law = () => {
     <>
       <Head>
         <title>{"特定商取引法に基づく表記"}</title>
+        <meta name="robots" content="noindex" />
       </Head>
       <Menu />
       <Container maxWidth={"lg"}>

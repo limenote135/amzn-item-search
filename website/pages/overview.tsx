@@ -3,6 +3,7 @@ import { Container, Typography } from "@mui/material";
 import Link from "@/components/Link";
 import Footer from "@/components/lp/Footer";
 import React, { ReactElement } from "react";
+import Head from "next/head";
 
 const TextContainer = ({ children }: { children: JSX.Element }) => {
   return <Container sx={{ ml: 1 }}>{children}</Container>;
@@ -11,6 +12,9 @@ const TextContainer = ({ children }: { children: JSX.Element }) => {
 const Overview = () => {
   return (
     <>
+      <Head>
+        <meta name="robots" content="noindex" />
+      </Head>
       <Menu />
       <Container maxWidth={"lg"}>
         <Typography variant={"h5"} sx={{ my: 1 }}>
