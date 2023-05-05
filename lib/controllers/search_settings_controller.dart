@@ -20,8 +20,11 @@ class SearchSettingsController extends StateNotifier<SearchSettings> {
 
   final Ref _ref;
 
-  void _loadSettings() {
+  Future<void> _loadSettings() async {
     final box = _ref.read(settingsBoxProvider);
+    // CustomClaims が読まれたあとでないと isPaidUser の設定が行われないため遅延させる
+    // 正確にはタイミングは正しくないが、ほぼ大丈夫なはず
+    await _ref.read(currentPlanProvider.future);
     final isPaidUser = _ref.read(isPaidUserProvider);
     var settings = box.get(searchSettingsKeyName) as SearchSettings?;
     if (settings != null) {
