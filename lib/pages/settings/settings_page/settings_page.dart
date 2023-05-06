@@ -141,7 +141,7 @@ class _Body extends HookConsumerWidget {
           },
         ),
         ListTile(
-          title: const Text("ショートカット設定"),
+          title: const WithLockIconIfNotPaid(child: Text("ショートカット設定")),
           onTap: () {
             Navigator.push(context, ShortcutPage.route());
           },

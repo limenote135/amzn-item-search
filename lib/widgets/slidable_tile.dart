@@ -11,6 +11,7 @@ import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/pages/common/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/common/offer_listing_page/offer_listing_page.dart';
 import 'package:amasearch/pages/common/variation_page/variation_page.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
@@ -34,11 +35,11 @@ class SlidableTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final left = ref.watch(
+    final leftAll = ref.watch(
       generalSettingsControllerProvider
           .select((value) => value.leftSlideShortcut),
     );
-    final right = ref.watch(
+    final rightAll = ref.watch(
       generalSettingsControllerProvider
           .select((value) => value.rightSlideShortcut),
     );
@@ -46,10 +47,15 @@ class SlidableTile extends HookConsumerWidget {
       generalSettingsControllerProvider.select((value) => value.customButtons),
     );
 
+    final isPaidUser = ref.watch(isPaidUserProvider);
+
     final item = ref.watch(currentAsinDataProvider);
     final hasVariation = item.variationRoot != "";
 
     final buttons = [...baseButtons, amazonListingsButton];
+
+    final left = isPaidUser ? leftAll : leftAll.sublist(0, 1);
+    final right = isPaidUser ? rightAll : rightAll.sublist(0, 1);
 
     final leftActive = countActions(left, hasVariation: hasVariation);
     final rightActive = countActions(right, hasVariation: hasVariation);
