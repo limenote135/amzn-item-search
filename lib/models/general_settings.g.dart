@@ -45,8 +45,8 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
               const CustomButtonDetail(
                   id: 'bt03',
                   enable: true,
-                  title: 'Delta',
-                  pattern: 'https://delta-tracer.com/item/detail/jp/{asin}/'),
+                  title: 'モノトレーサー',
+                  pattern: 'https://www.mono-tracer.com/#/product/{asin}'),
               const CustomButtonDetail(
                   id: 'bt04',
                   enable: true,
