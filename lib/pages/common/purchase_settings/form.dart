@@ -8,6 +8,7 @@ import 'package:amasearch/pages/common/purchase_settings/fba_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/other_cost_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/quantity_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/custom_validator.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -82,13 +83,15 @@ final formValueProvider =
   });
 });
 
-class PurchaseSettingsForm extends StatelessWidget {
+class PurchaseSettingsForm extends ConsumerWidget {
   const PurchaseSettingsForm({super.key, this.action});
 
   final Widget? action;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isPaidUser = ref.watch(isPaidUserProvider);
+
     return _Unfocus(
       child: Column(
         children: [
@@ -98,8 +101,8 @@ class PurchaseSettingsForm extends StatelessWidget {
                 const WithUnderLine(
                   ImageTile(),
                 ),
-                const SellerListTile(),
-                const ThemeDivider(),
+                if (isPaidUser) const SellerListTile(),
+                if (isPaidUser) const ThemeDivider(),
                 const InputPricesTile(),
                 const ItemConditionTile(),
                 const FbaTile(),
