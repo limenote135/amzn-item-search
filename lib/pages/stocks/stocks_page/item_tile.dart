@@ -4,6 +4,7 @@ import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/util.dart';
@@ -54,6 +55,8 @@ class _TileBody extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPaidUser = ref.watch(isPaidUserProvider);
+
     final item = ref.watch(currentStockItemProvider);
     final detail = ref.watch(currentAsinDataProvider);
     final smallSize = smallFontSize(context);
@@ -140,20 +143,24 @@ class _TileBody extends HookConsumerWidget {
                     ),
                     style: smallSize,
                   ),
-                  Text("利益率: $profitRate %", style: smallSize),
+                  if (isPaidUser)
+                    Text("利益率: $profitRate %", style: smallSize)
+                  else
+                    Text("状態: ${_conditionText(item)}", style: smallSize),
                 ],
               ),
             )
           ],
         ),
-        Row(
-          children: [
-            Expanded(child: Text("損益分岐: $breakEven円", style: smallSize)),
-            Expanded(
-              child: Text("状態: ${_conditionText(item)}", style: smallSize),
-            ),
-          ],
-        ),
+        if (isPaidUser)
+          Row(
+            children: [
+              Expanded(child: Text("損益分岐: $breakEven円", style: smallSize)),
+              Expanded(
+                child: Text("状態: ${_conditionText(item)}", style: smallSize),
+              ),
+            ],
+          ),
         Row(
           children: [
             Expanded(child: Text("個数: ${item.amount} 個", style: smallSize)),
@@ -168,27 +175,28 @@ class _TileBody extends HookConsumerWidget {
                 style: smallSize,
               ),
             ),
-            Expanded(
-              child: Text.rich(
-                TextSpan(
-                  text: "出品日: ",
-                  children: [
-                    if (item.listingDate != null)
-                      TextSpan(
-                        text: DateTime.parse(item.listingDate!)
-                            .toLocal()
-                            .dayFormat(),
-                      )
-                    else
-                      const TextSpan(
-                        text: "未出品",
-                        style: strongTextStyle,
-                      )
-                  ],
+            if (isPaidUser)
+              Expanded(
+                child: Text.rich(
+                  TextSpan(
+                    text: "出品日: ",
+                    children: [
+                      if (item.listingDate != null)
+                        TextSpan(
+                          text: DateTime.parse(item.listingDate!)
+                              .toLocal()
+                              .dayFormat(),
+                        )
+                      else
+                        const TextSpan(
+                          text: "未出品",
+                          style: strongTextStyle,
+                        )
+                    ],
+                  ),
+                  style: smallSize,
                 ),
-                style: smallSize,
               ),
-            ),
           ],
         )
       ],
