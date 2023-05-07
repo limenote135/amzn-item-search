@@ -257,6 +257,7 @@ class _Body extends HookConsumerWidget {
               context: context,
               title: "アカウントの削除",
               message: "アカウントを削除すると同じメールアドレスで再登録はできません。\n"
+                  "また、加入中のプランは即座にキャンセルされます。\n\n"
                   "本当に削除してよろしいですか？",
               isDestructiveAction: true,
             );
