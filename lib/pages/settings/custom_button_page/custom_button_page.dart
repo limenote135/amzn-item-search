@@ -1,5 +1,6 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/general_settings_default.dart';
+import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/widgets/payment.dart';
 import 'package:flutter/material.dart';
@@ -41,11 +42,31 @@ class _Body extends HookConsumerWidget {
     final standardButtonLength = standardButtons.length;
     final standardButtonKeys = standardButtons.keys.toList();
 
+    final smallStrongText = smallFontSize(context)!.merge(strongTextStyle);
+
     final isPaidUser = ref.watch(isPaidUserProvider);
 
+    var itemCount = settings.customButtons.length + standardButtonLength;
+    if(!isPaidUser) {
+      // 無料会員向けにカスタムボタンは4つまでしか表示されない旨を表示するため
+      itemCount++;
+    }
+
     return ListView.builder(
-      itemCount: settings.customButtons.length + standardButtonLength,
-      itemBuilder: (BuildContext context, int index) {
+      itemCount: itemCount,
+      itemBuilder: (BuildContext context, int indexRaw) {
+        var index = indexRaw;
+        if(!isPaidUser) {
+          index--;
+        }
+        if(!isPaidUser && indexRaw == 0) {
+          return ListTile(
+            title: Text(
+              "フリープランではカスタムボタンは4つまでしか利用できません",
+              style: smallStrongText,
+            ),
+          );
+        }
         if (index < standardButtonLength) {
           final key = standardButtonKeys[index];
           return ListTile(

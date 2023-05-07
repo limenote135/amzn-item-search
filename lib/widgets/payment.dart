@@ -67,6 +67,6 @@ Future<void> showUnpaidDialog(BuildContext context, {String? message}) async {
     title: "標準プラン専用機能",
     message: message ??
         "この機能は標準プラン専用です。\n"
-            "プランについてはホームページをご覧ください。",
+            "プランの内容・変更方法はホームページをご覧ください。",
   );
 }
