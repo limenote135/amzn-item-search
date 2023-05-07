@@ -204,7 +204,8 @@ class _KeepaImage extends ConsumerWidget {
     final content = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text("標準プランではKeepaのグラフが表示されます。"),
+        const Text("標準プランではKeepaのグラフが表示されます。\n"
+            "プランの内容・変更方法はホームページをご確認ください。"),
         ExtendedImage.asset(
           "assets/keepa_sample.png",
           border: Border.all(),
