@@ -7,6 +7,7 @@ import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/general_settings_default.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -80,9 +81,17 @@ class _Body extends HookConsumerWidget {
         ),
         for (var i = 0; i < left.length; i++)
           ListTile(
-            title: _createTitle(left[i], allWebButtons),
+            title: !isPaidUser && i > 0 ?
+            WithLockIconIfNotPaid(child: _createTitle(left[i], allWebButtons)):
+            _createTitle(left[i], allWebButtons),
             trailing: const Icon(Icons.settings),
             onTap: () async {
+              if(!isPaidUser && i > 0) {
+                await showUnpaidDialog(context,
+                    message: "フリープランではショートカットは1つしか設定できません。",
+                );
+                return;
+              }
               final item = await _selectAction(
                 context,
                 enableButtons,
@@ -113,9 +122,17 @@ class _Body extends HookConsumerWidget {
         ),
         for (var i = 0; i < right.length; i++)
           ListTile(
-            title: _createTitle(right[i], allWebButtons),
+            title: !isPaidUser && i > 0 ?
+            WithLockIconIfNotPaid(child: _createTitle(right[i], allWebButtons)):
+            _createTitle(right[i], allWebButtons),
             trailing: const Icon(Icons.settings),
             onTap: () async {
+              if(!isPaidUser && i > 0) {
+                await showUnpaidDialog(context,
+                  message: "フリープランではショートカットは1つしか設定できません。",
+                );
+                return;
+              }
               final item = await _selectAction(
                 context,
                 enableButtons,
