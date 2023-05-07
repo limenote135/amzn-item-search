@@ -1,4 +1,5 @@
 import 'package:amasearch/pages/stocks/stocks_page/provider.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,6 +10,7 @@ class TotalProfit extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final items = ref.watch(filteredStockListProvider);
+    final isPaidUser = ref.watch(isPaidUserProvider);
 
     var itemCount = 0;
     var profitValue = 0;
@@ -42,13 +44,14 @@ class TotalProfit extends HookConsumerWidget {
             ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text("利益率: $profitRate %", textAlign: TextAlign.center),
-            Text("ROI: $roi %", textAlign: TextAlign.center),
-          ],
-        ),
+        if (isPaidUser)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("利益率: $profitRate %", textAlign: TextAlign.center),
+              Text("ROI: $roi %", textAlign: TextAlign.center),
+            ],
+          ),
       ],
     );
   }
