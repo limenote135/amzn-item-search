@@ -1,5 +1,6 @@
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class ProfitTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPaidUser = ref.watch(isPaidUserProvider);
     final item = ref.watch(currentAsinDataProvider);
     final form = ReactiveForm.of(context)!;
     final quantity = getInt(form, quantityField);
@@ -36,8 +38,10 @@ class ProfitTile extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(_getProfitText(profit, quantity)),
-              Text("利益率 ${_getProfitRate(profit, sellPrice)} %"),
-              Text("ROI ${_getProfitRoi(profit, purchasePrice)} %")
+              if (isPaidUser)
+                Text("利益率 ${_getProfitRate(profit, sellPrice)} %"),
+              if (isPaidUser)
+                Text("ROI ${_getProfitRoi(profit, purchasePrice)} %")
             ],
           )
         ],

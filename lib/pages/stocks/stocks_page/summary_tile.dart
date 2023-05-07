@@ -1,5 +1,6 @@
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/page_mode.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,6 +17,8 @@ class SummaryTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pageMode = ref.watch(currentPageModeProvider);
+
+    final isPaidUser = ref.watch(isPaidUserProvider);
 
     final items = ref.watch(dateItemsProvider);
     final day = DateTime.parse(items.first.purchaseDate).toLocal().dayFormat();
@@ -66,13 +69,14 @@ class SummaryTile extends HookConsumerWidget {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text("利益率: $profitRate %", textAlign: TextAlign.center),
-              Text("ROI: $roi %", textAlign: TextAlign.center),
-            ],
-          ),
+          if (isPaidUser)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("利益率: $profitRate %", textAlign: TextAlign.center),
+                Text("ROI: $roi %", textAlign: TextAlign.center),
+              ],
+            ),
         ],
       ),
     );
