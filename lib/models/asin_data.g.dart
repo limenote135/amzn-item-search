@@ -31,7 +31,7 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       category: fields[9] == null ? '' : fields[9] as String,
       sellByAmazon: fields[10] as bool?,
       restrictions: fields[11] == null
-          ? const ListingRestrictions(newItem: false, used: false)
+          ? const ListingRestrictions()
           : fields[11] as ListingRestrictions,
       model: fields[12] == null ? '' : fields[12] as String,
       variationRoot: fields[13] == null ? '' : fields[13] as String,

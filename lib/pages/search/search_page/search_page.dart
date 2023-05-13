@@ -2,7 +2,7 @@ import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
-import 'package:amasearch/pages/search/search_page/search_bar.dart';
+import 'package:amasearch/pages/search/search_page/search_bar.dart' as base;
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
@@ -68,7 +68,7 @@ class _AppBar extends HookConsumerWidget {
       title: Column(
         key: _appBarKey,
         children: const [
-          SearchBar(),
+          base.SearchBar(),
           SearchSetting(),
         ],
       ),

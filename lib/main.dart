@@ -82,30 +82,30 @@ Future<void> main() async {
   // https://github.com/flutter/flutter/issues/119711
   // iOS で文字列を選択した際に虫眼鏡が消えない不具合への暫定対処
   TextMagnifier.adaptiveMagnifierConfiguration = TextMagnifierConfiguration(
-      shouldDisplayHandlesInMagnifier: false,
-      magnifierBuilder: (
-          BuildContext context,
-          MagnifierController controller,
-          ValueNotifier<MagnifierInfo> magnifierInfo,
-          ) {
-        switch (defaultTargetPlatform) {
-          case TargetPlatform.iOS:
-            return null;
-          case TargetPlatform.android:
-            return TextMagnifier(
-              magnifierInfo: magnifierInfo,
-            );
-          case TargetPlatform.fuchsia:
-          case TargetPlatform.linux:
-          case TargetPlatform.macOS:
-          case TargetPlatform.windows:
-            return null;
-        }
-      },
+    shouldDisplayHandlesInMagnifier: false,
+    magnifierBuilder: (
+      BuildContext context,
+      MagnifierController controller,
+      ValueNotifier<MagnifierInfo> magnifierInfo,
+    ) {
+      switch (defaultTargetPlatform) {
+        case TargetPlatform.iOS:
+          return null;
+        case TargetPlatform.android:
+          return TextMagnifier(
+            magnifierInfo: magnifierInfo,
+          );
+        case TargetPlatform.fuchsia:
+        case TargetPlatform.linux:
+        case TargetPlatform.macOS:
+        case TargetPlatform.windows:
+          return null;
+      }
+    },
   );
 
   try {
-    await Future.wait([
+    await Future.wait<void>([
       initStartupOption(),
       initHive(),
       initRevenueCat(),

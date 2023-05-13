@@ -11,7 +11,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 
-class SearchBar extends HookConsumerWidget with PreferredSizeWidget {
+class SearchBar extends HookConsumerWidget implements PreferredSizeWidget {
   const SearchBar({super.key});
 
   @override

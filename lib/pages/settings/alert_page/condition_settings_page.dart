@@ -177,7 +177,7 @@ class _Body extends HookConsumerWidget {
               }
             }
             final newCond = alert.conditions
-                .where(((e) => e.type != AlertType.profit))
+                .where((e) => e.type != AlertType.profit)
                 .toList()
               ..add(
                 AlertCondition(
@@ -221,7 +221,7 @@ class _Body extends HookConsumerWidget {
               }
             }
             final newCond = alert.conditions
-                .where(((e) => e.type != AlertType.condition))
+                .where((e) => e.type != AlertType.condition)
                 .toList()
               ..add(AlertCondition(type: AlertType.condition, value: val));
             modifyCondition(newCond);
@@ -260,15 +260,14 @@ class _Body extends HookConsumerWidget {
                 return;
               }
             }
-            final newCond = alert.conditions
-                .where(((e) => e.type != AlertType.rank))
-                .toList()
-              ..add(
-                AlertCondition(
-                  type: AlertType.rank,
-                  value: int.parse(val.single),
-                ),
-              );
+            final newCond =
+                alert.conditions.where((e) => e.type != AlertType.rank).toList()
+                  ..add(
+                    AlertCondition(
+                      type: AlertType.rank,
+                      value: int.parse(val.single),
+                    ),
+                  );
             modifyCondition(newCond);
           },
         ),
@@ -298,7 +297,7 @@ class _Body extends HookConsumerWidget {
               }
             }
             final newCond = alert.conditions
-                .where(((e) => e.type != AlertType.category))
+                .where((e) => e.type != AlertType.category)
                 .toList()
               ..add(AlertCondition(type: AlertType.category, value: val));
             modifyCondition(newCond);
@@ -309,7 +308,7 @@ class _Body extends HookConsumerWidget {
           title: const Text("定価以上(プレ値)"),
           onTap: () {
             final newCond = alert.conditions
-                .where(((e) => e.type != AlertType.premium))
+                .where((e) => e.type != AlertType.premium)
                 .toList()
               ..add(const AlertCondition(type: AlertType.premium));
             modifyCondition(newCond);
@@ -320,7 +319,7 @@ class _Body extends HookConsumerWidget {
           title: const Text("新品なし"),
           onTap: () {
             final newCond = alert.conditions
-                .where(((e) => e.type != AlertType.noNewOffer))
+                .where((e) => e.type != AlertType.noNewOffer)
                 .toList()
               ..add(const AlertCondition(type: AlertType.noNewOffer));
             modifyCondition(newCond);
@@ -331,7 +330,7 @@ class _Body extends HookConsumerWidget {
           title: const Text("Amazon販売なし"),
           onTap: () {
             final newCond = alert.conditions
-                .where(((e) => e.type != AlertType.noAmazon))
+                .where((e) => e.type != AlertType.noAmazon)
                 .toList()
               ..add(const AlertCondition(type: AlertType.noAmazon));
             modifyCondition(newCond);
