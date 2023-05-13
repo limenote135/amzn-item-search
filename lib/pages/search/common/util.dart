@@ -13,7 +13,7 @@ PriceDetail getPriceDetail({
   final prices = _getConditionPrices(item: item, condition: condition);
 
   if (prices.isEmpty) {
-    return const PriceDetail(price: 0, shipping: 0);
+    return const PriceDetail();
   }
   switch (condition) {
     case ItemCondition.newItem:
@@ -30,7 +30,7 @@ PriceDetail getPriceDetail({
           : prices.where((e) => subCond.lessEq(e.subCondition));
 
       if (conditionPrices.isEmpty) {
-        return const PriceDetail(price: 0, shipping: 0);
+        return const PriceDetail();
       }
 
       if (priorFba) {

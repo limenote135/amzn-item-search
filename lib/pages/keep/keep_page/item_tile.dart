@@ -25,8 +25,8 @@ class KeepItemTile extends ConsumerWidget {
 
     return ColoredBox(
       color: _getSelectedColor(context, isSelected),
-      child: Row(
-        children: const [
+      child: const Row(
+        children: [
           TileImage(),
           Expanded(child: _TileBody()),
         ],

@@ -119,8 +119,8 @@ class _Body extends HookConsumerWidget {
 
   Widget _selectWidgets(int index, int total) {
     if (index == 0) {
-      return Column(
-        children: const [
+      return const Column(
+        children: [
           CartTile(),
           ThemeDivider(),
           OfferTile(),

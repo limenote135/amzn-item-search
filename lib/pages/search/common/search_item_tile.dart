@@ -30,8 +30,8 @@ class SearchItemTile extends HookConsumerWidget {
     if (!isPaidUser) {
       alerts = alerts.take(2).toList();
     }
-    final tile = Row(
-      children: const [
+    const tile = Row(
+      children: [
         TileImage(),
         Expanded(
           child: _ItemTileBody(),
@@ -45,7 +45,7 @@ class SearchItemTile extends HookConsumerWidget {
             search,
           ),
         )) {
-      return StrongContainer(tile);
+      return const StrongContainer(tile);
     }
     return tile;
   }

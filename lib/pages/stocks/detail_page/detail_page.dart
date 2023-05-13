@@ -87,12 +87,7 @@ class _Body extends HookConsumerWidget {
         ? (item.profitPerItem / item.purchasePrice * 100).round()
         : 0;
 
-    final feeInfo = item.item.prices?.feeInfo ??
-        const FeeInfo(
-          referralFeeRate: 0,
-          variableClosingFee: 0,
-          fbaFee: -1,
-        );
+    final feeInfo = item.item.prices?.feeInfo ?? const FeeInfo();
 
     final referralFeeRate = (feeInfo.referralFeeRate * 100).toInt();
     final referralFee = (item.sellPrice * feeInfo.referralFeeRate).round();
