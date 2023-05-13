@@ -85,7 +85,7 @@ const InputForm = ({ plan }: InputFormProps) => {
 function getPlanName(plan: string) {
   switch (plan) {
     case "standard":
-      return "通常プラン 月額 2,980円";
+      return "標準プラン 月額 2,980円";
     case "campaign":
       return "キャンペーンプラン 月額 1,980円";
   }

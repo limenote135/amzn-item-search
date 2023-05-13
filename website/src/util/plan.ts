@@ -11,7 +11,7 @@ export function getPlanName(name?: PlanNames) {
     case "trial":
       return "トライアル";
     case "standard":
-      return "通常プラン";
+      return "標準プラン";
     case "campaign":
       return "キャンペーンプラン";
     case "suspended":
