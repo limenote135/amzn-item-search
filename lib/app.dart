@@ -73,8 +73,8 @@ class MyApp extends HookConsumerWidget {
           // TODO: 仮で毎回起動時にセットする
           ref.read(analyticsControllerProvider).setUserId(value.uid);
           FirebaseCrashlytics.instance.setUserIdentifier(value.uid);
-          return Stack(
-            children: const [
+          return const Stack(
+            children: [
               HomePage(),
               LifecycleManager(
                 callback: UpdateCheckObserver(),

@@ -37,7 +37,7 @@ mixin _$AsinData {
   @HiveField(7)
   ItemPrices? get prices => throw _privateConstructorUsedError;
   @HiveField(8)
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Uint8List? get imageData => throw _privateConstructorUsedError;
   @HiveField(9, defaultValue: "")
   @ItemCategoryConverter()
@@ -81,7 +81,7 @@ abstract class $AsinDataCopyWith<$Res> {
       @HiveField(7)
           ItemPrices? prices,
       @HiveField(8)
-      @JsonKey(ignore: true)
+      @JsonKey(includeFromJson: false, includeToJson: false)
           Uint8List? imageData,
       @HiveField(9, defaultValue: "")
       @ItemCategoryConverter()
@@ -234,7 +234,7 @@ abstract class _$$_AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
       @HiveField(7)
           ItemPrices? prices,
       @HiveField(8)
-      @JsonKey(ignore: true)
+      @JsonKey(includeFromJson: false, includeToJson: false)
           Uint8List? imageData,
       @HiveField(9, defaultValue: "")
       @ItemCategoryConverter()
@@ -365,7 +365,7 @@ class _$_AsinData implements _AsinData {
       @HiveField(7)
           this.prices,
       @HiveField(8)
-      @JsonKey(ignore: true)
+      @JsonKey(includeFromJson: false, includeToJson: false)
           this.imageData,
       @HiveField(9, defaultValue: "")
       @ItemCategoryConverter()
@@ -415,7 +415,7 @@ class _$_AsinData implements _AsinData {
   final ItemPrices? prices;
   @override
   @HiveField(8)
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   final Uint8List? imageData;
   @override
   @HiveField(9, defaultValue: "")
@@ -522,7 +522,7 @@ abstract class _AsinData implements AsinData {
       @HiveField(7)
           final ItemPrices? prices,
       @HiveField(8)
-      @JsonKey(ignore: true)
+      @JsonKey(includeFromJson: false, includeToJson: false)
           final Uint8List? imageData,
       @HiveField(9, defaultValue: "")
       @ItemCategoryConverter()
@@ -565,7 +565,7 @@ abstract class _AsinData implements AsinData {
   ItemPrices? get prices;
   @override
   @HiveField(8)
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Uint8List? get imageData;
   @override
   @HiveField(9, defaultValue: "")

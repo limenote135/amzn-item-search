@@ -21,12 +21,7 @@ class FeeTile extends HookConsumerWidget {
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
 
-    final feeInfo = item.prices?.feeInfo ??
-        const FeeInfo(
-          referralFeeRate: 0,
-          variableClosingFee: 0,
-          fbaFee: -1,
-        );
+    final feeInfo = item.prices?.feeInfo ?? const FeeInfo();
     final totalFee = _calcTotalFee(
       sellPrice: sellPrice,
       purchasePrice: purchasePrice,

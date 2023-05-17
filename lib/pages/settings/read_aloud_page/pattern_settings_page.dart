@@ -61,9 +61,7 @@ class _PatternEditForm extends ConsumerStatefulWidget {
 }
 
 const _sampleItem = AsinData(
-  jan: "",
   asin: "",
-  listPrice: 0,
   imageUrl: "",
   quantity: "",
   category: "",
@@ -72,12 +70,9 @@ const _sampleItem = AsinData(
   prices: ItemPrices(
     feeInfo: FeeInfo(
       fbaFee: 0,
-      referralFeeRate: 0,
-      variableClosingFee: 0,
     ),
     newPrices: <PriceDetail>[
       PriceDetail(
-        itemCondition: ItemCondition.newItem,
         price: 5678,
       ),
     ],
