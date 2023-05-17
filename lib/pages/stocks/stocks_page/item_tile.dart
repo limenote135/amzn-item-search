@@ -32,8 +32,8 @@ class ItemTile extends HookConsumerWidget {
       ],
       child: ColoredBox(
         color: _getSelectedColor(context, isSelected),
-        child: Row(
-          children: const [
+        child: const Row(
+          children: [
             TileImage(),
             Expanded(child: _TileBody()),
           ],

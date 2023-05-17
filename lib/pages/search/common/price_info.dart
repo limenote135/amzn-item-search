@@ -21,9 +21,9 @@ class PriceInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         Expanded(child: _PriceAndProfit(ItemCondition.newItem)),
         Expanded(child: _PriceAndProfit(ItemCondition.usedItem)),
       ],

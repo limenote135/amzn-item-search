@@ -42,8 +42,7 @@ class PriceDetailTile extends HookConsumerWidget {
       priorFba: setting.priorFba,
     );
 
-    final feeInfo = item.prices?.feeInfo ??
-        const FeeInfo(referralFeeRate: 0, variableClosingFee: 0, fbaFee: -1);
+    final feeInfo = item.prices?.feeInfo ?? const FeeInfo();
 
     final sellFeeRate = (feeInfo.referralFeeRate * 100).round();
     final sellFee = (detail.price * feeInfo.referralFeeRate).round();

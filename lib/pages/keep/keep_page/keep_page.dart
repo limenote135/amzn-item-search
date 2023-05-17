@@ -69,10 +69,10 @@ class _UnpaidUserBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           LockIcon(width: 32),
           Text(
             "標準プランでは商品を\nキープリストに登録することができます",
