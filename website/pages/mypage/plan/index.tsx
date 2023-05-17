@@ -125,7 +125,7 @@ export default function Index() {
                 <Typography
                   dangerouslySetInnerHTML={{
                     __html: parser.translateHTMLString(
-                      "利用可能な機能は通常プランと変わりませんが、月額利用料が今後もずっと安くなる期間限定の特別プランです。(5/31まで限定)"
+                      "利用可能な機能は標準プランと変わりませんが、月額利用料が今後もずっと安くなる期間限定の特別プランです。(5/31まで限定)"
                     ),
                   }}
                 ></Typography>
