@@ -125,12 +125,12 @@ Future<void> main() async {
   // TODO:
   Intl.defaultLocale = 'ja_JP';
 
-  runZonedGuarded(
-    () {
-      runApp(const ProviderScope(child: MyApp()));
-    },
-    recordError,
-  );
+  PlatformDispatcher.instance.onError = (error, stack) {
+    recordError(error, stack);
+    return true;
+  };
+
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 Future<void> initStartupOption() async {
