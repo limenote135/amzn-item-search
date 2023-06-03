@@ -5,7 +5,6 @@ import { CreateCard, CreateSubscription, stripePromise } from "@/api/stripe";
 import { useRouter } from "next/router";
 import { Loading } from "@/components/core/Loading";
 import { useUser } from "@/plugin/auth";
-import { parser } from "@/plugin/budoux";
 
 type InputFormProps = {
   plan: string;
@@ -86,8 +85,6 @@ function getPlanName(plan: string) {
   switch (plan) {
     case "standard":
       return "標準プラン 月額 2,980円";
-    case "campaign":
-      return "キャンペーンプラン 月額 1,980円";
   }
   return "不明なプラン";
 }
@@ -111,18 +108,6 @@ const Information = ({ plan, trialDue }: InformationProps) => {
         </Typography>
         <Typography> カード情報を入力してください。</Typography>
         <Typography>支払いは{payDate}に行われ、以降は1ヶ月ごとに自動で決済されます。</Typography>
-        {plan === "campaign" && (
-          <Typography
-            mt={1}
-            variant={"body2"}
-            dangerouslySetInnerHTML={{
-              __html: parser.translateHTMLString(
-                "キャンペーンプランに変更後、手動であるいは決済失敗等によりフリープランに変更された場合、" +
-                  "再度キャンペーンプランへの変更はできませんのでご注意ください。"
-              ),
-            }}
-          />
-        )}
       </Box>
     </>
   );
