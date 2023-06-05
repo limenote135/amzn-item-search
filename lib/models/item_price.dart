@@ -19,11 +19,11 @@ class ItemPrices with _$ItemPrices {
     @HiveField(0, defaultValue: <PriceDetail>[])
     @JsonKey(name: "new_offers")
     @Default(<PriceDetail>[])
-        List<PriceDetail> newPrices,
+    List<PriceDetail> newPrices,
     @HiveField(1, defaultValue: <PriceDetail>[])
     @JsonKey(name: "used_offers")
     @Default(<PriceDetail>[])
-        List<PriceDetail> usedPrices,
+    List<PriceDetail> usedPrices,
     @HiveField(2) @Default(FeeInfo()) FeeInfo feeInfo,
   }) = _ItemPrices;
 
@@ -46,13 +46,13 @@ class PriceDetail with _$PriceDetail {
     @HiveField(0)
     @JsonKey(name: "condition")
     @Default(ItemCondition.newItem)
-        ItemCondition itemCondition,
+    ItemCondition itemCondition,
     @HiveField(1)
     @Default(ItemSubCondition.newItem)
-        ItemSubCondition subCondition,
+    ItemSubCondition subCondition,
     @HiveField(2)
     @Default(FulfillmentChannel.merchant)
-        FulfillmentChannel channel,
+    FulfillmentChannel channel,
     @HiveField(3) @Default(0) int price,
     @HiveField(4) @Default(0) int shipping,
     @HiveField(5) @Default(0) int point,

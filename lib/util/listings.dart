@@ -39,7 +39,7 @@ Future<File> createListingsFile(List<ListingItem> items) async {
 
   final promises = <Future<File>>[];
   for (final item in items) {
-    if(item.condition == ItemCondition.newItem) {
+    if (item.condition == ItemCondition.newItem) {
       // 新品の場合はコピー不要
       continue;
     }

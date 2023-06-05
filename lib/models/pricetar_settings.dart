@@ -15,11 +15,11 @@ class PricetarSettings with _$PricetarSettings {
     @HiveField(1) @Default(PricetarRule.fbaSameCondition) PricetarRule usedRule,
     @HiveField(2)
     @Default(RevisePriceStopper.profitValue)
-        RevisePriceStopper lowestStopperType,
+    RevisePriceStopper lowestStopperType,
     @HiveField(3) @Default(1) int lowestStopperValue,
     @HiveField(4)
     @Default(RevisePriceStopper.nothing)
-        RevisePriceStopper highestStopperType,
+    RevisePriceStopper highestStopperType,
     @HiveField(5) @Default(0) int highestStopperValue,
   }) = _PricetarSettings;
 }

@@ -81,14 +81,16 @@ class _Body extends HookConsumerWidget {
         ),
         for (var i = 0; i < left.length; i++)
           ListTile(
-            title: !isPaidUser && i > 0 ?
-            WithLockIconIfNotPaid(child: _createTitle(left[i], allWebButtons)):
-            _createTitle(left[i], allWebButtons),
+            title: !isPaidUser && i > 0
+                ? WithLockIconIfNotPaid(
+                    child: _createTitle(left[i], allWebButtons))
+                : _createTitle(left[i], allWebButtons),
             trailing: const Icon(Icons.settings),
             onTap: () async {
-              if(!isPaidUser && i > 0) {
-                await showUnpaidDialog(context,
-                    message: "フリープランではショートカットは1つしか設定できません。",
+              if (!isPaidUser && i > 0) {
+                await showUnpaidDialog(
+                  context,
+                  message: "フリープランではショートカットは1つしか設定できません。",
                 );
                 return;
               }
@@ -122,13 +124,15 @@ class _Body extends HookConsumerWidget {
         ),
         for (var i = 0; i < right.length; i++)
           ListTile(
-            title: !isPaidUser && i > 0 ?
-            WithLockIconIfNotPaid(child: _createTitle(right[i], allWebButtons)):
-            _createTitle(right[i], allWebButtons),
+            title: !isPaidUser && i > 0
+                ? WithLockIconIfNotPaid(
+                    child: _createTitle(right[i], allWebButtons))
+                : _createTitle(right[i], allWebButtons),
             trailing: const Icon(Icons.settings),
             onTap: () async {
-              if(!isPaidUser && i > 0) {
-                await showUnpaidDialog(context,
+              if (!isPaidUser && i > 0) {
+                await showUnpaidDialog(
+                  context,
                   message: "フリープランではショートカットは1つしか設定できません。",
                 );
                 return;

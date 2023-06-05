@@ -24,7 +24,7 @@ class FbaTile extends ConsumerWidget {
         // onChanged が呼ばれたタイミングではリビルド前なので、
         // current は変更前の値が束縛されたままになっている
         final value = control.value;
-        if(value == null) {
+        if (value == null) {
           return;
         }
 

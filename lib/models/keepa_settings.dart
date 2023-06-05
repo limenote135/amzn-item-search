@@ -15,7 +15,7 @@ class KeepaSettings with _$KeepaSettings {
     @HiveField(2, defaultValue: true) @Default(true) bool showAmazon,
     @HiveField(3, defaultValue: KeepaShowPeriod.month)
     @Default(KeepaShowPeriod.month)
-        KeepaShowPeriod period,
+    KeepaShowPeriod period,
     @HiveField(4, defaultValue: "") @Default("") String extraParam,
     @HiveField(5, defaultValue: true) @Default(true) bool showBuyBox,
     @HiveField(6, defaultValue: false) @Default(false) bool showFba,

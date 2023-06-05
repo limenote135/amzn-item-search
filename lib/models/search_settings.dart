@@ -15,7 +15,7 @@ class SearchSettings with _$SearchSettings {
     @HiveField(0) @Default(SearchType.jan) SearchType type,
     @HiveField(1)
     @Default(UsedSubCondition.all)
-        UsedSubCondition usedSubCondition,
+    UsedSubCondition usedSubCondition,
     @HiveField(2) @Default(true) bool useFba,
     @HiveField(3) @Default(true) bool priorFba,
     @HiveField(4, defaultValue: true) @Default(true) bool continuousCameraRead,

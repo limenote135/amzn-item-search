@@ -13,17 +13,17 @@ class SellerSketSettings with _$SellerSketSettings {
   const factory SellerSketSettings({
     @HiveField(0)
     @Default(SellerSketReviseRule.cart)
-        SellerSketReviseRule newRule,
+    SellerSketReviseRule newRule,
     @HiveField(1)
     @Default(SellerSketReviseRule.fbaSameCondition)
-        SellerSketReviseRule usedRule,
+    SellerSketReviseRule usedRule,
     @HiveField(2)
     @Default(RevisePriceStopper.profitValue)
-        RevisePriceStopper lowestStopperType,
+    RevisePriceStopper lowestStopperType,
     @HiveField(3) @Default(1) int lowestStopperValue,
     @HiveField(4)
     @Default(RevisePriceStopper.nothing)
-        RevisePriceStopper highestStopperType,
+    RevisePriceStopper highestStopperType,
     @HiveField(5) @Default(0) int highestStopperValue,
     @HiveField(6) @Default("移行された配送パターン") String shippingPattern,
   }) = _SellerSketSettings;

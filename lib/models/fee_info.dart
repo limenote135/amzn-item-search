@@ -14,7 +14,7 @@ class FeeInfo with _$FeeInfo {
     @HiveField(1)
     @JsonKey(name: "closing_fee")
     @Default(0)
-        int variableClosingFee,
+    int variableClosingFee,
     @HiveField(2) @Default(-1) int fbaFee,
   }) = _FeeInfo;
 
