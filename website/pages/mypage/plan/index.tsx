@@ -14,7 +14,6 @@ import { ChangeEvent, useState } from "react";
 import { useUser } from "@/plugin/auth";
 import { useRouter } from "next/router";
 import { getPlanName, isPaidUser, PlanNames } from "@/util/plan";
-import { parser } from "@/plugin/budoux";
 
 function isDisabled(plan: PlanNames | undefined, value: string) {
   if (plan === value) {
@@ -109,26 +108,6 @@ export default function Index() {
                   月額2,980円
                 </Typography>
                 <Typography>すべての機能が利用いただけます。</Typography>
-              </>
-            }
-          />
-          <FormControlLabel
-            value="campaign"
-            sx={{ my: 2 }}
-            control={<Radio />}
-            label={
-              <>
-                <Typography variant={"h6"} sx={{ wordBreak: "keep-all" }}>
-                  キャンペーンプラン <wbr />
-                  月額1,980円
-                </Typography>
-                <Typography
-                  dangerouslySetInnerHTML={{
-                    __html: parser.translateHTMLString(
-                      "利用可能な機能は標準プランと変わりませんが、月額利用料が今後もずっと安くなる期間限定の特別プランです。(5/31まで限定)"
-                    ),
-                  }}
-                ></Typography>
               </>
             }
           />
