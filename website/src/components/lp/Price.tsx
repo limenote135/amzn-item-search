@@ -74,7 +74,7 @@ const PriceContainer = ({ reference, inView, isDetailOpen, onClickDetail }: Pric
         </Fade>
       </Box>
       <Box maxWidth={980} mx={"auto"} py={4}>
-        <Grid container rowSpacing={4}>
+        <Grid container rowSpacing={4} justifyContent={"center"}>
           <PriceBox
             title={"フリープラン"}
             subtitle={"まずは無料でお試し"}
@@ -118,31 +118,6 @@ const PriceContainer = ({ reference, inView, isDetailOpen, onClickDetail }: Pric
                     <Typography variant={"body2"}>キープリスト</Typography>
                   </Box>
                 </Collapse>
-              </>
-            }
-          />
-          <PriceBox
-            title={"キャンペーンプラン"}
-            subtitle={"期間限定のオトクなプラン"}
-            price={1980}
-            detail={
-              <>
-                <Typography
-                  dangerouslySetInnerHTML={{
-                    __html: parser.translateHTMLString(
-                      "標準プランと同じ内容ですが、月額料金が <b>今後もずっと</b> お安くなる特別プランです。"
-                    ),
-                  }}
-                />
-                <Typography
-                  mt={2}
-                  variant={"body2"}
-                  dangerouslySetInnerHTML={{
-                    __html: parser.translateHTMLString(
-                      "(このプランを利用するには 5/31 までにプランを切り替える必要があります)"
-                    ),
-                  }}
-                />
               </>
             }
           />
