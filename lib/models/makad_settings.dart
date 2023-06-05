@@ -15,13 +15,13 @@ class MakadSettings with _$MakadSettings {
     @HiveField(0) @Default(MakadReviseRule.cart) MakadReviseRule newRule,
     @HiveField(1)
     @Default(MakadReviseRule.usedFbaSameCondition)
-        MakadReviseRule usedRule,
+    MakadReviseRule usedRule,
     @HiveField(2)
     @Default(RevisePriceStopper.profitValue)
-        RevisePriceStopper lowestStopperType,
+    RevisePriceStopper lowestStopperType,
     @HiveField(3) @Default(1) int lowestStopperValue,
     @HiveField(4)
     @Default(MakadPaymentMethod.all)
-        MakadPaymentMethod paymentMethod,
+    MakadPaymentMethod paymentMethod,
   }) = _MakadSettings;
 }

@@ -64,37 +64,24 @@ abstract class $AsinDataCopyWith<$Res> {
       _$AsinDataCopyWithImpl<$Res, AsinData>;
   @useResult
   $Res call(
-      {@HiveField(0)
-          String jan,
-      @HiveField(1)
-          String asin,
-      @HiveField(2)
-          int listPrice,
-      @HiveField(3)
-          String imageUrl,
-      @HiveField(4)
-          String title,
-      @HiveField(5)
-          int rank,
-      @HiveField(6)
-          String quantity,
-      @HiveField(7)
-          ItemPrices? prices,
+      {@HiveField(0) String jan,
+      @HiveField(1) String asin,
+      @HiveField(2) int listPrice,
+      @HiveField(3) String imageUrl,
+      @HiveField(4) String title,
+      @HiveField(5) int rank,
+      @HiveField(6) String quantity,
+      @HiveField(7) ItemPrices? prices,
       @HiveField(8)
       @JsonKey(includeFromJson: false, includeToJson: false)
-          Uint8List? imageData,
-      @HiveField(9, defaultValue: "")
-      @ItemCategoryConverter()
-          String category,
-      @HiveField(10)
-          bool? sellByAmazon,
+      Uint8List? imageData,
+      @HiveField(9, defaultValue: "") @ItemCategoryConverter() String category,
+      @HiveField(10) bool? sellByAmazon,
       @HiveField(11, defaultValue: defaultListingRestrictions)
       @JsonKey()
-          ListingRestrictions restrictions,
-      @HiveField(12, defaultValue: "")
-          String model,
-      @HiveField(13, defaultValue: "")
-          String variationRoot});
+      ListingRestrictions restrictions,
+      @HiveField(12, defaultValue: "") String model,
+      @HiveField(13, defaultValue: "") String variationRoot});
 
   $ItemPricesCopyWith<$Res>? get prices;
   $ListingRestrictionsCopyWith<$Res> get restrictions;
@@ -217,37 +204,24 @@ abstract class _$$_AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0)
-          String jan,
-      @HiveField(1)
-          String asin,
-      @HiveField(2)
-          int listPrice,
-      @HiveField(3)
-          String imageUrl,
-      @HiveField(4)
-          String title,
-      @HiveField(5)
-          int rank,
-      @HiveField(6)
-          String quantity,
-      @HiveField(7)
-          ItemPrices? prices,
+      {@HiveField(0) String jan,
+      @HiveField(1) String asin,
+      @HiveField(2) int listPrice,
+      @HiveField(3) String imageUrl,
+      @HiveField(4) String title,
+      @HiveField(5) int rank,
+      @HiveField(6) String quantity,
+      @HiveField(7) ItemPrices? prices,
       @HiveField(8)
       @JsonKey(includeFromJson: false, includeToJson: false)
-          Uint8List? imageData,
-      @HiveField(9, defaultValue: "")
-      @ItemCategoryConverter()
-          String category,
-      @HiveField(10)
-          bool? sellByAmazon,
+      Uint8List? imageData,
+      @HiveField(9, defaultValue: "") @ItemCategoryConverter() String category,
+      @HiveField(10) bool? sellByAmazon,
       @HiveField(11, defaultValue: defaultListingRestrictions)
       @JsonKey()
-          ListingRestrictions restrictions,
-      @HiveField(12, defaultValue: "")
-          String model,
-      @HiveField(13, defaultValue: "")
-          String variationRoot});
+      ListingRestrictions restrictions,
+      @HiveField(12, defaultValue: "") String model,
+      @HiveField(13, defaultValue: "") String variationRoot});
 
   @override
   $ItemPricesCopyWith<$Res>? get prices;
@@ -348,37 +322,26 @@ class __$$_AsinDataCopyWithImpl<$Res>
 @HiveType(typeId: asinDataTypeId)
 class _$_AsinData implements _AsinData {
   const _$_AsinData(
-      {@HiveField(0)
-          this.jan = "",
-      @HiveField(1)
-          required this.asin,
-      @HiveField(2)
-          this.listPrice = 0,
-      @HiveField(3)
-          required this.imageUrl,
-      @HiveField(4)
-          required this.title,
-      @HiveField(5)
-          this.rank = 0,
-      @HiveField(6)
-          this.quantity = " - ",
-      @HiveField(7)
-          this.prices,
+      {@HiveField(0) this.jan = "",
+      @HiveField(1) required this.asin,
+      @HiveField(2) this.listPrice = 0,
+      @HiveField(3) required this.imageUrl,
+      @HiveField(4) required this.title,
+      @HiveField(5) this.rank = 0,
+      @HiveField(6) this.quantity = " - ",
+      @HiveField(7) this.prices,
       @HiveField(8)
       @JsonKey(includeFromJson: false, includeToJson: false)
-          this.imageData,
+      this.imageData,
       @HiveField(9, defaultValue: "")
       @ItemCategoryConverter()
-          required this.category,
-      @HiveField(10)
-          this.sellByAmazon,
+      required this.category,
+      @HiveField(10) this.sellByAmazon,
       @HiveField(11, defaultValue: defaultListingRestrictions)
       @JsonKey()
-          this.restrictions = defaultListingRestrictions,
-      @HiveField(12, defaultValue: "")
-          this.model = "",
-      @HiveField(13, defaultValue: "")
-          this.variationRoot = ""});
+      this.restrictions = defaultListingRestrictions,
+      @HiveField(12, defaultValue: "") this.model = "",
+      @HiveField(13, defaultValue: "") this.variationRoot = ""});
 
   factory _$_AsinData.fromJson(Map<String, dynamic> json) =>
       _$$_AsinDataFromJson(json);
@@ -505,37 +468,27 @@ class _$_AsinData implements _AsinData {
 
 abstract class _AsinData implements AsinData {
   const factory _AsinData(
-      {@HiveField(0)
-          final String jan,
-      @HiveField(1)
-          required final String asin,
-      @HiveField(2)
-          final int listPrice,
-      @HiveField(3)
-          required final String imageUrl,
-      @HiveField(4)
-          required final String title,
-      @HiveField(5)
-          final int rank,
-      @HiveField(6)
-          final String quantity,
-      @HiveField(7)
-          final ItemPrices? prices,
-      @HiveField(8)
-      @JsonKey(includeFromJson: false, includeToJson: false)
+          {@HiveField(0) final String jan,
+          @HiveField(1) required final String asin,
+          @HiveField(2) final int listPrice,
+          @HiveField(3) required final String imageUrl,
+          @HiveField(4) required final String title,
+          @HiveField(5) final int rank,
+          @HiveField(6) final String quantity,
+          @HiveField(7) final ItemPrices? prices,
+          @HiveField(8)
+          @JsonKey(includeFromJson: false, includeToJson: false)
           final Uint8List? imageData,
-      @HiveField(9, defaultValue: "")
-      @ItemCategoryConverter()
+          @HiveField(9, defaultValue: "")
+          @ItemCategoryConverter()
           required final String category,
-      @HiveField(10)
-          final bool? sellByAmazon,
-      @HiveField(11, defaultValue: defaultListingRestrictions)
-      @JsonKey()
+          @HiveField(10) final bool? sellByAmazon,
+          @HiveField(11, defaultValue: defaultListingRestrictions)
+          @JsonKey()
           final ListingRestrictions restrictions,
-      @HiveField(12, defaultValue: "")
-          final String model,
-      @HiveField(13, defaultValue: "")
-          final String variationRoot}) = _$_AsinData;
+          @HiveField(12, defaultValue: "") final String model,
+          @HiveField(13, defaultValue: "") final String variationRoot}) =
+      _$_AsinData;
 
   factory _AsinData.fromJson(Map<String, dynamic> json) = _$_AsinData.fromJson;
 
@@ -697,10 +650,8 @@ class _$_ListingRestrictions implements _ListingRestrictions {
   const _$_ListingRestrictions(
       {@HiveField(0)
       @JsonKey(name: "new", defaultValue: false)
-          this.newItem = false,
-      @HiveField(1)
-      @JsonKey(defaultValue: false)
-          this.used = false});
+      this.newItem = false,
+      @HiveField(1) @JsonKey(defaultValue: false) this.used = false});
 
   factory _$_ListingRestrictions.fromJson(Map<String, dynamic> json) =>
       _$$_ListingRestrictionsFromJson(json);
@@ -749,12 +700,11 @@ class _$_ListingRestrictions implements _ListingRestrictions {
 
 abstract class _ListingRestrictions implements ListingRestrictions {
   const factory _ListingRestrictions(
-      {@HiveField(0)
-      @JsonKey(name: "new", defaultValue: false)
+          {@HiveField(0)
+          @JsonKey(name: "new", defaultValue: false)
           final bool newItem,
-      @HiveField(1)
-      @JsonKey(defaultValue: false)
-          final bool used}) = _$_ListingRestrictions;
+          @HiveField(1) @JsonKey(defaultValue: false) final bool used}) =
+      _$_ListingRestrictions;
 
   factory _ListingRestrictions.fromJson(Map<String, dynamic> json) =
       _$_ListingRestrictions.fromJson;

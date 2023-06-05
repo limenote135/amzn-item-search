@@ -27,7 +27,7 @@ class StockItem with _$StockItem {
     @HiveField(6) @Default(ItemCondition.newItem) ItemCondition condition,
     @HiveField(7)
     @Default(ItemSubCondition.newItem)
-        ItemSubCondition subCondition,
+    ItemSubCondition subCondition,
     @HiveField(8) @Default("") String sku,
     @HiveField(9) @Default("") String memo,
     @HiveField(10) required AsinData item,
@@ -44,7 +44,7 @@ class StockItem with _$StockItem {
     @HiveField(16, defaultValue: 0) @Default(0) int otherCost,
     @HiveField(17, defaultValue: <String>[])
     @Default(<String>[])
-        List<String> images,
+    List<String> images,
   }) = _StockItem;
 }
 

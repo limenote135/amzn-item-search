@@ -34,17 +34,17 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(6) @Default(0) int patternIndex,
     @HiveField(7)
     @Default(defaultReadAloudPatterns)
-        List<ReadAloudPattern> readAloudPatterns,
+    List<ReadAloudPattern> readAloudPatterns,
     @HiveField(8) @Default(1.0) double readAloudVolume,
     @HiveField(9) double? readAloudSpeed,
     // カスタムボタン設定
     @HiveField(10, defaultValue: defaultCustomButtons)
     @Default(defaultCustomButtons)
-        List<CustomButtonDetail> customButtons,
+    List<CustomButtonDetail> customButtons,
     // CSV の並び順
     @HiveField(11, defaultValue: defaultCsvOrder)
     @Default(defaultCsvOrder)
-        List<CsvColumn> csvOrder,
+    List<CsvColumn> csvOrder,
     // 最低利益額
     @HiveField(12, defaultValue: 0) @Default(0) int minProfit,
     // 在庫の取得設定
@@ -53,40 +53,40 @@ class GeneralSettings with _$GeneralSettings {
     @HiveField(14, defaultValue: true) @Default(true) bool enableAlert,
     @HiveField(15, defaultValue: defaultAlert)
     @Default(defaultAlert)
-        List<AlertConditionSet> alerts,
+    List<AlertConditionSet> alerts,
     @HiveField(16, defaultValue: false)
     @Default(false)
-        bool enableAlertVibration,
+    bool enableAlertVibration,
     @HiveField(17, defaultValue: true) @Default(true) bool isMajorCustomer,
     @HiveField(18, defaultValue: defaultKeepaSettings)
     @Default(defaultKeepaSettings)
-        KeepaSettings keepaSettings,
+    KeepaSettings keepaSettings,
     @HiveField(19, defaultValue: defaultLeftShortcut)
     @Default(defaultLeftShortcut)
-        List<ShortcutDetail> leftSlideShortcut,
+    List<ShortcutDetail> leftSlideShortcut,
     @HiveField(20, defaultValue: defaultRightShortcut)
     @Default(defaultRightShortcut)
-        List<ShortcutDetail> rightSlideShortcut,
+    List<ShortcutDetail> rightSlideShortcut,
     @HiveField(21, defaultValue: defaultNewConditionTexts)
     @Default(defaultNewConditionTexts)
-        List<String> newConditionTexts,
+    List<String> newConditionTexts,
     @HiveField(22, defaultValue: 0) @Default(0) int newConditionTextIndex,
     @HiveField(23, defaultValue: defaultUsedConditionText)
     @Default(defaultUsedConditionText)
-        List<String> usedConditionTexts,
+    List<String> usedConditionTexts,
     @HiveField(24, defaultValue: 0) @Default(0) int usedConditionTextIndex,
     @HiveField(25, defaultValue: defaultPricetarSettings)
     @Default(defaultPricetarSettings)
-        PricetarSettings pricetarSettings,
+    PricetarSettings pricetarSettings,
     @HiveField(26, defaultValue: defaultMakadSettings)
     @Default(defaultMakadSettings)
-        MakadSettings makadSettings,
+    MakadSettings makadSettings,
     @HiveField(27, defaultValue: defaultSellerSketSettings)
     @Default(defaultSellerSketSettings)
-        SellerSketSettings sellerSketSettings,
+    SellerSketSettings sellerSketSettings,
     @HiveField(28, defaultValue: defaultStandardButtons)
     @Default(defaultStandardButtons)
-        Map<String, bool> standardButtons,
+    Map<String, bool> standardButtons,
   }) = _GeneralSettings;
 }
 
@@ -119,7 +119,7 @@ class AlertConditionSet with _$AlertConditionSet {
     @HiveField(2)
     @JsonKey(name: "c")
     @Default(<AlertCondition>[])
-        List<AlertCondition> conditions,
+    List<AlertCondition> conditions,
   }) = _AlertConditionSet;
 
   factory AlertConditionSet.fromJson(Map<String, dynamic> json) =>

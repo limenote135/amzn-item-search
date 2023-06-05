@@ -22,44 +22,27 @@ class AsinData with _$AsinData {
   @JsonSerializable(fieldRename: FieldRename.snake)
   @HiveType(typeId: asinDataTypeId)
   const factory AsinData({
-    @HiveField(0)
-    @Default("")
-        String jan,
-    @HiveField(1)
-        required String asin,
-    @HiveField(2)
-    @Default(0)
-        int listPrice, // 参考価格
-    @HiveField(3)
-        required String imageUrl,
-    @HiveField(4)
-        required String title,
-    @HiveField(5)
-    @Default(0)
-        int rank,
-    @HiveField(6)
-    @Default(" - ")
-        String quantity, // セット数
-    @HiveField(7)
-        ItemPrices? prices,
+    @HiveField(0) @Default("") String jan,
+    @HiveField(1) required String asin,
+    @HiveField(2) @Default(0) int listPrice, // 参考価格
+    @HiveField(3) required String imageUrl,
+    @HiveField(4) required String title,
+    @HiveField(5) @Default(0) int rank,
+    @HiveField(6) @Default(" - ") String quantity, // セット数
+    @HiveField(7) ItemPrices? prices,
     @HiveField(8)
     @JsonKey(includeFromJson: false, includeToJson: false)
-        Uint8List? imageData,
+    Uint8List? imageData,
     @HiveField(9, defaultValue: "")
     @ItemCategoryConverter()
-        required String category,
-    @HiveField(10)
-        bool? sellByAmazon,
+    required String category,
+    @HiveField(10) bool? sellByAmazon,
     @HiveField(11, defaultValue: defaultListingRestrictions)
     @Default(defaultListingRestrictions)
     @JsonKey()
-        ListingRestrictions restrictions,
-    @HiveField(12, defaultValue: "")
-    @Default("")
-        String model,
-    @HiveField(13, defaultValue: "")
-    @Default("")
-        String variationRoot,
+    ListingRestrictions restrictions,
+    @HiveField(12, defaultValue: "") @Default("") String model,
+    @HiveField(13, defaultValue: "") @Default("") String variationRoot,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>
@@ -76,11 +59,8 @@ class ListingRestrictions with _$ListingRestrictions {
     @HiveField(0)
     @Default(false)
     @JsonKey(name: "new", defaultValue: false)
-        bool newItem,
-    @HiveField(1)
-    @Default(false)
-    @JsonKey(defaultValue: false)
-        bool used,
+    bool newItem,
+    @HiveField(1) @Default(false) @JsonKey(defaultValue: false) bool used,
   }) = _ListingRestrictions;
 
   factory ListingRestrictions.fromJson(Map<String, dynamic> json) =>

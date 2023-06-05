@@ -47,7 +47,7 @@ class _Body extends HookConsumerWidget {
     final isPaidUser = ref.watch(isPaidUserProvider);
 
     var itemCount = settings.customButtons.length + standardButtonLength;
-    if(!isPaidUser) {
+    if (!isPaidUser) {
       // 無料会員向けにカスタムボタンは4つまでしか表示されない旨を表示するため
       itemCount++;
     }
@@ -56,10 +56,10 @@ class _Body extends HookConsumerWidget {
       itemCount: itemCount,
       itemBuilder: (BuildContext context, int indexRaw) {
         var index = indexRaw;
-        if(!isPaidUser) {
+        if (!isPaidUser) {
           index--;
         }
-        if(!isPaidUser && indexRaw == 0) {
+        if (!isPaidUser && indexRaw == 0) {
           return ListTile(
             title: Text(
               "フリープランではカスタムボタンは4つまでしか利用できません",
