@@ -83,7 +83,8 @@ class _Body extends HookConsumerWidget {
           ListTile(
             title: !isPaidUser && i > 0
                 ? WithLockIconIfNotPaid(
-                    child: _createTitle(left[i], allWebButtons))
+                    child: _createTitle(left[i], allWebButtons),
+                  )
                 : _createTitle(left[i], allWebButtons),
             trailing: const Icon(Icons.settings),
             onTap: () async {
@@ -126,7 +127,8 @@ class _Body extends HookConsumerWidget {
           ListTile(
             title: !isPaidUser && i > 0
                 ? WithLockIconIfNotPaid(
-                    child: _createTitle(right[i], allWebButtons))
+                    child: _createTitle(right[i], allWebButtons),
+                  )
                 : _createTitle(right[i], allWebButtons),
             trailing: const Icon(Icons.settings),
             onTap: () async {
