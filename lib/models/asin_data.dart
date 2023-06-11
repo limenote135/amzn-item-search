@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:amasearch/models/enums/size_type.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
@@ -44,6 +45,11 @@ class AsinData with _$AsinData {
     @HiveField(12, defaultValue: "") @Default("") String model,
     @HiveField(13, defaultValue: "") @Default("") String variationRoot,
     @HiveField(14, defaultValue: false) @Default(false) bool isHazmat,
+    @HiveField(15, defaultValue: SizeType.normal)
+    @SizeTypeConverter()
+    @Default(SizeType.normal)
+    SizeType sizeType,
+    @HiveField(16, defaultValue: 0) @Default(0) int smallFee,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>
@@ -82,5 +88,27 @@ class ItemCategoryConverter implements JsonConverter<String, String> {
       return mwsCategoryMap[json]!;
     }
     return json;
+  }
+}
+
+class SizeTypeConverter implements JsonConverter<SizeType, String> {
+  const SizeTypeConverter();
+
+  @override
+  String toJson(SizeType object) {
+    return object.name;
+  }
+
+  @override
+  SizeType fromJson(String typeName) {
+    switch (typeName) {
+      case "small":
+        return SizeType.small;
+      case "big":
+        return SizeType.big;
+      case "moreBig":
+        return SizeType.moreBig;
+    }
+    return SizeType.normal;
   }
 }

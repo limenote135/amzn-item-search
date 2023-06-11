@@ -56,6 +56,10 @@ mixin _$StockItem {
   int get otherCost => throw _privateConstructorUsedError;
   @HiveField(17, defaultValue: <String>[])
   List<String> get images => throw _privateConstructorUsedError;
+  @HiveField(18, defaultValue: false)
+  bool get isSmallProgram => throw _privateConstructorUsedError;
+  @HiveField(19, defaultValue: 0)
+  int get smallFee => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $StockItemCopyWith<StockItem> get copyWith =>
@@ -86,7 +90,9 @@ abstract class $StockItemCopyWith<$Res> {
       bool autogenSku,
       @HiveField(15, defaultValue: "") String conditionText,
       @HiveField(16, defaultValue: 0) int otherCost,
-      @HiveField(17, defaultValue: <String>[]) List<String> images});
+      @HiveField(17, defaultValue: <String>[]) List<String> images,
+      @HiveField(18, defaultValue: false) bool isSmallProgram,
+      @HiveField(19, defaultValue: 0) int smallFee});
 
   $AsinDataCopyWith<$Res> get item;
 }
@@ -123,6 +129,8 @@ class _$StockItemCopyWithImpl<$Res, $Val extends StockItem>
     Object? conditionText = null,
     Object? otherCost = null,
     Object? images = null,
+    Object? isSmallProgram = null,
+    Object? smallFee = null,
   }) {
     return _then(_value.copyWith(
       purchaseDate: null == purchaseDate
@@ -201,6 +209,14 @@ class _$StockItemCopyWithImpl<$Res, $Val extends StockItem>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      isSmallProgram: null == isSmallProgram
+          ? _value.isSmallProgram
+          : isSmallProgram // ignore: cast_nullable_to_non_nullable
+              as bool,
+      smallFee: null == smallFee
+          ? _value.smallFee
+          : smallFee // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -239,7 +255,9 @@ abstract class _$$_StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
       bool autogenSku,
       @HiveField(15, defaultValue: "") String conditionText,
       @HiveField(16, defaultValue: 0) int otherCost,
-      @HiveField(17, defaultValue: <String>[]) List<String> images});
+      @HiveField(17, defaultValue: <String>[]) List<String> images,
+      @HiveField(18, defaultValue: false) bool isSmallProgram,
+      @HiveField(19, defaultValue: 0) int smallFee});
 
   @override
   $AsinDataCopyWith<$Res> get item;
@@ -275,6 +293,8 @@ class __$$_StockItemCopyWithImpl<$Res>
     Object? conditionText = null,
     Object? otherCost = null,
     Object? images = null,
+    Object? isSmallProgram = null,
+    Object? smallFee = null,
   }) {
     return _then(_$_StockItem(
       purchaseDate: null == purchaseDate
@@ -353,6 +373,14 @@ class __$$_StockItemCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      isSmallProgram: null == isSmallProgram
+          ? _value.isSmallProgram
+          : isSmallProgram // ignore: cast_nullable_to_non_nullable
+              as bool,
+      smallFee: null == smallFee
+          ? _value.smallFee
+          : smallFee // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -398,7 +426,11 @@ class _$_StockItem implements _StockItem {
       @HiveField(16, defaultValue: 0)
           this.otherCost = 0,
       @HiveField(17, defaultValue: <String>[])
-          final List<String> images = const <String>[]})
+          final List<String> images = const <String>[],
+      @HiveField(18, defaultValue: false)
+          this.isSmallProgram = false,
+      @HiveField(19, defaultValue: 0)
+          this.smallFee = 0})
       : _images = images;
 
   @override
@@ -483,8 +515,17 @@ class _$_StockItem implements _StockItem {
   }
 
   @override
+  @JsonKey()
+  @HiveField(18, defaultValue: false)
+  final bool isSmallProgram;
+  @override
+  @JsonKey()
+  @HiveField(19, defaultValue: 0)
+  final int smallFee;
+
+  @override
   String toString() {
-    return 'StockItem(purchaseDate: $purchaseDate, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, profitPerItem: $profitPerItem, amount: $amount, condition: $condition, subCondition: $subCondition, sku: $sku, memo: $memo, item: $item, retailer: $retailer, id: $id, breakEven: $breakEven, listingDate: $listingDate, autogenSku: $autogenSku, conditionText: $conditionText, otherCost: $otherCost, images: $images)';
+    return 'StockItem(purchaseDate: $purchaseDate, purchasePrice: $purchasePrice, sellPrice: $sellPrice, useFba: $useFba, profitPerItem: $profitPerItem, amount: $amount, condition: $condition, subCondition: $subCondition, sku: $sku, memo: $memo, item: $item, retailer: $retailer, id: $id, breakEven: $breakEven, listingDate: $listingDate, autogenSku: $autogenSku, conditionText: $conditionText, otherCost: $otherCost, images: $images, isSmallProgram: $isSmallProgram, smallFee: $smallFee)';
   }
 
   @override
@@ -522,7 +563,11 @@ class _$_StockItem implements _StockItem {
                 other.conditionText == conditionText) &&
             (identical(other.otherCost, otherCost) ||
                 other.otherCost == otherCost) &&
-            const DeepCollectionEquality().equals(other._images, _images));
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            (identical(other.isSmallProgram, isSmallProgram) ||
+                other.isSmallProgram == isSmallProgram) &&
+            (identical(other.smallFee, smallFee) ||
+                other.smallFee == smallFee));
   }
 
   @override
@@ -546,7 +591,9 @@ class _$_StockItem implements _StockItem {
         autogenSku,
         conditionText,
         otherCost,
-        const DeepCollectionEquality().hash(_images)
+        const DeepCollectionEquality().hash(_images),
+        isSmallProgram,
+        smallFee
       ]);
 
   @JsonKey(ignore: true)
@@ -558,26 +605,27 @@ class _$_StockItem implements _StockItem {
 
 abstract class _StockItem implements StockItem {
   const factory _StockItem(
-          {@HiveField(0) required final String purchaseDate,
-          @HiveField(1) final int purchasePrice,
-          @HiveField(2) final int sellPrice,
-          @HiveField(3) final bool useFba,
-          @HiveField(4) final int profitPerItem,
-          @HiveField(5) final int amount,
-          @HiveField(6) final ItemCondition condition,
-          @HiveField(7) final ItemSubCondition subCondition,
-          @HiveField(8) final String sku,
-          @HiveField(9) final String memo,
-          @HiveField(10) required final AsinData item,
-          @HiveField(11, defaultValue: "") final String retailer,
-          @HiveField(12, defaultValue: "") required final String id,
-          @HiveField(13, defaultValue: -1) final int breakEven,
-          @HiveField(14) final String? listingDate,
-          final bool autogenSku,
-          @HiveField(15, defaultValue: "") final String conditionText,
-          @HiveField(16, defaultValue: 0) final int otherCost,
-          @HiveField(17, defaultValue: <String>[]) final List<String> images}) =
-      _$_StockItem;
+      {@HiveField(0) required final String purchaseDate,
+      @HiveField(1) final int purchasePrice,
+      @HiveField(2) final int sellPrice,
+      @HiveField(3) final bool useFba,
+      @HiveField(4) final int profitPerItem,
+      @HiveField(5) final int amount,
+      @HiveField(6) final ItemCondition condition,
+      @HiveField(7) final ItemSubCondition subCondition,
+      @HiveField(8) final String sku,
+      @HiveField(9) final String memo,
+      @HiveField(10) required final AsinData item,
+      @HiveField(11, defaultValue: "") final String retailer,
+      @HiveField(12, defaultValue: "") required final String id,
+      @HiveField(13, defaultValue: -1) final int breakEven,
+      @HiveField(14) final String? listingDate,
+      final bool autogenSku,
+      @HiveField(15, defaultValue: "") final String conditionText,
+      @HiveField(16, defaultValue: 0) final int otherCost,
+      @HiveField(17, defaultValue: <String>[]) final List<String> images,
+      @HiveField(18, defaultValue: false) final bool isSmallProgram,
+      @HiveField(19, defaultValue: 0) final int smallFee}) = _$_StockItem;
 
   @override
   @HiveField(0)
@@ -636,6 +684,12 @@ abstract class _StockItem implements StockItem {
   @override
   @HiveField(17, defaultValue: <String>[])
   List<String> get images;
+  @override
+  @HiveField(18, defaultValue: false)
+  bool get isSmallProgram;
+  @override
+  @HiveField(19, defaultValue: 0)
+  int get smallFee;
   @override
   @JsonKey(ignore: true)
   _$$_StockItemCopyWith<_$_StockItem> get copyWith =>

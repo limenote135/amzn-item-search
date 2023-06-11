@@ -18,6 +18,7 @@ import 'package:amasearch/models/enums/pricetar_stopper.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/enums/sellersket_revise_rule.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
+import 'package:amasearch/models/enums/size_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/general_settings.dart';
@@ -219,7 +220,8 @@ Future<void> initHive() async {
     ..registerAdapter(SellerSketSettingsAdapter())
     ..registerAdapter(SellerSketReviseRuleAdapter())
     ..registerAdapter(WordSearchHistoryAdapter())
-    ..registerAdapter(KeepItemAdapter());
+    ..registerAdapter(KeepItemAdapter())
+    ..registerAdapter(SizeTypeAdapter());
 
   // await deleteBoxes();
 
