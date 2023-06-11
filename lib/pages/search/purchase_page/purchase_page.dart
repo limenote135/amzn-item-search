@@ -195,18 +195,24 @@ class _SaveButton extends HookConsumerWidget {
     final sell = getInt(form, sellPriceField);
     final useFba = getBool(form, useFbaField);
     final otherCost = getInt(form, otherCostField);
+    final smallProgram = getBool(form, smallProgramField);
+
+    var feeInfo = item.prices?.feeInfo;
+    if (smallProgram && feeInfo != null) {
+      feeInfo = feeInfo.copyWith(fbaFee: item.smallFee);
+    }
 
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
-      fee: item.prices?.feeInfo,
+      fee: feeInfo,
       useFba: useFba,
       otherCost: otherCost,
     );
     final breakEven = calcBreakEven(
       purchase: purchase,
       useFba: useFba,
-      feeInfo: item.prices?.feeInfo,
+      feeInfo: feeInfo,
       otherCost: otherCost,
     );
 
@@ -228,6 +234,8 @@ class _SaveButton extends HookConsumerWidget {
       conditionText: getString(form, conditionTextField),
       otherCost: getInt(form, otherCostField),
       images: getImages(form),
+      isSmallProgram: smallProgram,
+      smallFee: item.smallFee,
     );
     ref.read(stockItemListControllerProvider.notifier).add(stock);
     ref.read(analyticsControllerProvider).logPurchaseEvent(stock);
