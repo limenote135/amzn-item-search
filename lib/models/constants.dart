@@ -55,3 +55,4 @@ const revisePriceStopperTypeId = 110;
 const makadReviseRuleTypeId = 111;
 const makadPaymentMethodTypeId = 112;
 const sellerSketReviseRuleTypeId = 113;
+const sizeTypeTypeId = 114;

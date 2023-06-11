@@ -36,13 +36,15 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       model: fields[12] == null ? '' : fields[12] as String,
       variationRoot: fields[13] == null ? '' : fields[13] as String,
       isHazmat: fields[14] == null ? false : fields[14] as bool,
+      sizeType: fields[15] == null ? SizeType.normal : fields[15] as SizeType,
+      smallFee: fields[16] == null ? 0 : fields[16] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_AsinData obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.jan)
       ..writeByte(1)
@@ -72,7 +74,11 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       ..writeByte(13)
       ..write(obj.variationRoot)
       ..writeByte(14)
-      ..write(obj.isHazmat);
+      ..write(obj.isHazmat)
+      ..writeByte(15)
+      ..write(obj.sizeType)
+      ..writeByte(16)
+      ..write(obj.smallFee);
   }
 
   @override
@@ -148,6 +154,10 @@ _$_AsinData _$$_AsinDataFromJson(Map<String, dynamic> json) => _$_AsinData(
       model: json['model'] as String? ?? "",
       variationRoot: json['variation_root'] as String? ?? "",
       isHazmat: json['is_hazmat'] as bool? ?? false,
+      sizeType: json['size_type'] == null
+          ? SizeType.normal
+          : const SizeTypeConverter().fromJson(json['size_type'] as String),
+      smallFee: json['small_fee'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
@@ -166,6 +176,8 @@ Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
       'model': instance.model,
       'variation_root': instance.variationRoot,
       'is_hazmat': instance.isHazmat,
+      'size_type': const SizeTypeConverter().toJson(instance.sizeType),
+      'small_fee': instance.smallFee,
     };
 
 _$_ListingRestrictions _$$_ListingRestrictionsFromJson(

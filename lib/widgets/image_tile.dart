@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
+import 'package:amasearch/models/enums/size_type.dart';
 import 'package:amasearch/models/keepa_settings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
@@ -69,8 +70,24 @@ class TileImage extends HookConsumerWidget {
                 child: Text("危険物", style: captionSize),
               ),
             ),
+          if (isPaidUser && asinData.sizeType != SizeType.normal)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 1),
+              child: Container(
+                width: double.infinity,
+                alignment: Alignment.center,
+                color: Colors.lightGreen[200],
+                child:
+                    Text(sizeText(asinData.sizeType.name), style: captionSize),
+              ),
+            ),
           // 589円以上はおおむね大型だが、標準で603円のケースがある
-          if (fbaFee >= _bigSizeFbaFee && fbaFee != _standardFbaFee)
+          // サーバーからサイズ情報を返していないバージョンで検索した際には、
+          // sizeType は常に normal になってしまうので、
+          // その場合はサイズ情報は手数料から計算する
+          if (isPaidUser && asinData.sizeType == SizeType.normal &&
+              fbaFee >= _bigSizeFbaFee &&
+              fbaFee != _standardFbaFee)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 1),
               child: Container(
@@ -100,6 +117,18 @@ class TileImage extends HookConsumerWidget {
       ),
     );
   }
+}
+
+String sizeText(String raw) {
+  switch (raw) {
+    case "small":
+      return "小型軽量";
+    case "big":
+      return "大型";
+    case "moreBig":
+      return "特大型";
+  }
+  return "";
 }
 
 class _KeepaImage extends ConsumerWidget {
