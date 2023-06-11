@@ -45,6 +45,8 @@ class StockItem with _$StockItem {
     @HiveField(17, defaultValue: <String>[])
     @Default(<String>[])
     List<String> images,
+    @HiveField(18, defaultValue: false) @Default(false) bool isSmallProgram,
+    @HiveField(19, defaultValue: 0) @Default(0) int smallFee,
   }) = _StockItem;
 }
 
