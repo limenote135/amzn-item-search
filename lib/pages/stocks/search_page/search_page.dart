@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/stock_item_search_conditions.dart';
 import 'package:amasearch/models/stock_item_filter.dart';
 import 'package:amasearch/pages/stocks/search_page/values.dart';
@@ -30,6 +31,7 @@ final formValueProvider = StateProvider(
     sellPriceLowerField: ["", positiveNumberOrEmpty],
     sellPriceUpperField: ["", positiveNumberOrEmpty],
     purchaseDateRangeField: FormControl<DateTimeRange>(),
+    retailerField: "",
   }),
 );
 
@@ -89,6 +91,10 @@ class _Body extends ConsumerWidget {
     final theme = Theme.of(context);
     final smallSize = smallFontSize(context);
     final isPaidUser = ref.watch(isPaidUserProvider);
+
+    final retailers = ref.watch(
+      generalSettingsControllerProvider.select((value) => value.retailers),
+    );
 
     return _Unfocus(
       child: Column(
@@ -237,6 +243,49 @@ class _Body extends ConsumerWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: _labelPadding,
+                  child: Text(
+                    "仕入れ先",
+                    style: smallSize,
+                  ),
+                ),
+                ListTile(
+                  title: Row(
+                    children: [
+                      Expanded(
+                        child: ReactiveTextField<String>(
+                          formControlName: retailerField,
+                          decoration: const InputDecoration(
+                            hintText: "仕入れ先",
+                            border: OutlineInputBorder(),
+                            isDense: true,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.arrow_drop_down),
+                        onPressed: () async {
+                          final form = ReactiveForm.of(context)! as FormGroup;
+                          final ret = await showConfirmationDialog(
+                            context: context,
+                            title: "仕入先の選択",
+                            initialSelectedActionKey:
+                                form.control(retailerField).value,
+                            actions: [
+                              for (final retailer in retailers)
+                                AlertDialogAction(
+                                    key: retailer, label: retailer)
+                            ],
+                          );
+                          if (ret != null) {
+                            form.control(retailerField).value = ret;
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
@@ -262,6 +311,7 @@ class _Body extends ConsumerWidget {
                     sellPriceUpper: getNullableInt(form, sellPriceUpperField),
                     purchaseDateRange:
                         getNullableDateRange(form, purchaseDateRangeField),
+                    retailer: getNullableString(form, retailerField),
                   );
                   Navigator.pop(context);
                 }

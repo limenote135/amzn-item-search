@@ -20,5 +20,6 @@ class StockItemFilter with _$StockItemFilter {
     int? sellPriceLower,
     int? sellPriceUpper,
     DateTimeRange? purchaseDateRange,
+    String? retailer,
   }) = _StockItemFilter;
 }
