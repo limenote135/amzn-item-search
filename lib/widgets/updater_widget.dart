@@ -125,6 +125,7 @@ class Updater extends HookConsumerWidget {
       builder: (context) => ReleaseNotesDialog(
         title: "アプリが更新されました！",
         closeButtonString: "OK",
+        titleTextStyle: Theme.of(context).textTheme.titleLarge,
         releases: notes,
       ),
     );

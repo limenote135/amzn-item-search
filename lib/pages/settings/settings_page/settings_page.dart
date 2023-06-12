@@ -303,9 +303,10 @@ class _Body extends HookConsumerWidget {
           onTap: () async {
             await showDialog<void>(
               context: context,
-              builder: (context) => const ReleaseNotesDialog(
+              builder: (context) => ReleaseNotesDialog(
                 title: "更新履歴",
                 closeButtonString: "OK",
+                titleTextStyle: Theme.of(context).textTheme.titleLarge,
                 releases: releaseNotes,
               ),
             );
