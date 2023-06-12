@@ -23,7 +23,8 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 final ret = await showOkCancelAlertDialog(
                   context: context,
                   title: "商品の削除",
-                  message: "キープリストからすべてのアイテムを削除します",
+                  message: "キープリストからすべてのアイテムを削除します。\n"
+                      "この操作は取り消せません。よろしいですか？",
                   isDestructiveAction: true,
                 );
                 if (ret == OkCancelResult.ok) {
