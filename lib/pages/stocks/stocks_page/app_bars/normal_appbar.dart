@@ -116,7 +116,8 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
           context: context,
           ref: ref,
           deleteAll: true,
-          content: "在庫リストからすべてのアイテムを削除します",
+          content: "在庫リストからすべてのアイテムを削除します。\n"
+              "この操作は取り消せません。よろしいですか？",
         );
         break;
       case _StockPageActions.listing:

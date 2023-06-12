@@ -206,7 +206,8 @@ class _Body extends HookConsumerWidget {
             final ret = await showOkCancelAlertDialog(
               context: context,
               title: "キャッシュの削除",
-              message: "すべてのキャッシュファイルを削除しますか？",
+              message: "すべてのキャッシュファイルを削除しますか？\n"
+                  "(各種リストの内容や設定内容は消えません)",
             );
             if (ret == OkCancelResult.ok) {
               try {
@@ -257,7 +258,8 @@ class _Body extends HookConsumerWidget {
               context: context,
               title: "アカウントの削除",
               message: "アカウントを削除すると同じメールアドレスで再登録はできません。\n"
-                  "また、加入中のプランは即座にキャンセルされます。\n\n"
+                  "また、加入中のプランは即座にキャンセルされます。\n"
+                  "この操作は取り消せません。\n\n"
                   "本当に削除してよろしいですか？",
               isDestructiveAction: true,
             );
