@@ -5,8 +5,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(1, 10, 0);
+var releaseNotesVersion = Version(2, 1, 0);
 const releaseNotes = <Release>[
+  Release("2.1.0", [
+    ReleaseSublist(
+      name: "更新内容",
+      changes: [
+        "危険物の場合に表示が行われるようになりました",
+        "小型軽量プログラムでの手数料計算に対応しました",
+        "上記は有料プラン登録者のみが利用可能です",
+      ],
+    )
+  ]),
   Release("1.10.0", [
     ReleaseSublist(
       name: "更新内容",
