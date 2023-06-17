@@ -100,6 +100,12 @@ final filteredStockListProvider = Provider(
       });
     }
 
+    if (filter.retailer != null) {
+      items = items.where((element) {
+        final word = filter.retailer!;
+        return element.retailer.contains(word);
+      });
+    }
     return items.toList();
   },
 );
@@ -126,6 +132,9 @@ final filterCountProvider = Provider((ref) {
     count++;
   }
   if (filter.channel != FulfilmentChannel.all) {
+    count++;
+  }
+  if (filter.retailer != null && filter.retailer != "") {
     count++;
   }
   return count;
