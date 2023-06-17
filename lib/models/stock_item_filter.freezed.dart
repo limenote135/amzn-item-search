@@ -25,6 +25,7 @@ mixin _$StockItemFilter {
   int? get sellPriceLower => throw _privateConstructorUsedError;
   int? get sellPriceUpper => throw _privateConstructorUsedError;
   DateTimeRange? get purchaseDateRange => throw _privateConstructorUsedError;
+  String? get retailer => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $StockItemFilterCopyWith<StockItemFilter> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $StockItemFilterCopyWith<$Res> {
       int? purchasePriceUpper,
       int? sellPriceLower,
       int? sellPriceUpper,
-      DateTimeRange? purchaseDateRange});
+      DateTimeRange? purchaseDateRange,
+      String? retailer});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$StockItemFilterCopyWithImpl<$Res, $Val extends StockItemFilter>
     Object? sellPriceLower = freezed,
     Object? sellPriceUpper = freezed,
     Object? purchaseDateRange = freezed,
+    Object? retailer = freezed,
   }) {
     return _then(_value.copyWith(
       keyword: freezed == keyword
@@ -109,6 +112,10 @@ class _$StockItemFilterCopyWithImpl<$Res, $Val extends StockItemFilter>
           ? _value.purchaseDateRange
           : purchaseDateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
+      retailer: freezed == retailer
+          ? _value.retailer
+          : retailer // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -130,7 +137,8 @@ abstract class _$$_StockItemFilterCopyWith<$Res>
       int? purchasePriceUpper,
       int? sellPriceLower,
       int? sellPriceUpper,
-      DateTimeRange? purchaseDateRange});
+      DateTimeRange? purchaseDateRange,
+      String? retailer});
 }
 
 /// @nodoc
@@ -153,6 +161,7 @@ class __$$_StockItemFilterCopyWithImpl<$Res>
     Object? sellPriceLower = freezed,
     Object? sellPriceUpper = freezed,
     Object? purchaseDateRange = freezed,
+    Object? retailer = freezed,
   }) {
     return _then(_$_StockItemFilter(
       keyword: freezed == keyword
@@ -191,6 +200,10 @@ class __$$_StockItemFilterCopyWithImpl<$Res>
           ? _value.purchaseDateRange
           : purchaseDateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
+      retailer: freezed == retailer
+          ? _value.retailer
+          : retailer // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -207,7 +220,8 @@ class _$_StockItemFilter implements _StockItemFilter {
       this.purchasePriceUpper,
       this.sellPriceLower,
       this.sellPriceUpper,
-      this.purchaseDateRange});
+      this.purchaseDateRange,
+      this.retailer});
 
   @override
   final String? keyword;
@@ -230,10 +244,12 @@ class _$_StockItemFilter implements _StockItemFilter {
   final int? sellPriceUpper;
   @override
   final DateTimeRange? purchaseDateRange;
+  @override
+  final String? retailer;
 
   @override
   String toString() {
-    return 'StockItemFilter(keyword: $keyword, listingState: $listingState, productCondition: $productCondition, channel: $channel, purchasePriceLower: $purchasePriceLower, purchasePriceUpper: $purchasePriceUpper, sellPriceLower: $sellPriceLower, sellPriceUpper: $sellPriceUpper, purchaseDateRange: $purchaseDateRange)';
+    return 'StockItemFilter(keyword: $keyword, listingState: $listingState, productCondition: $productCondition, channel: $channel, purchasePriceLower: $purchasePriceLower, purchasePriceUpper: $purchasePriceUpper, sellPriceLower: $sellPriceLower, sellPriceUpper: $sellPriceUpper, purchaseDateRange: $purchaseDateRange, retailer: $retailer)';
   }
 
   @override
@@ -256,7 +272,9 @@ class _$_StockItemFilter implements _StockItemFilter {
             (identical(other.sellPriceUpper, sellPriceUpper) ||
                 other.sellPriceUpper == sellPriceUpper) &&
             (identical(other.purchaseDateRange, purchaseDateRange) ||
-                other.purchaseDateRange == purchaseDateRange));
+                other.purchaseDateRange == purchaseDateRange) &&
+            (identical(other.retailer, retailer) ||
+                other.retailer == retailer));
   }
 
   @override
@@ -270,7 +288,8 @@ class _$_StockItemFilter implements _StockItemFilter {
       purchasePriceUpper,
       sellPriceLower,
       sellPriceUpper,
-      purchaseDateRange);
+      purchaseDateRange,
+      retailer);
 
   @JsonKey(ignore: true)
   @override
@@ -289,7 +308,8 @@ abstract class _StockItemFilter implements StockItemFilter {
       final int? purchasePriceUpper,
       final int? sellPriceLower,
       final int? sellPriceUpper,
-      final DateTimeRange? purchaseDateRange}) = _$_StockItemFilter;
+      final DateTimeRange? purchaseDateRange,
+      final String? retailer}) = _$_StockItemFilter;
 
   @override
   String? get keyword;
@@ -309,6 +329,8 @@ abstract class _StockItemFilter implements StockItemFilter {
   int? get sellPriceUpper;
   @override
   DateTimeRange? get purchaseDateRange;
+  @override
+  String? get retailer;
   @override
   @JsonKey(ignore: true)
   _$$_StockItemFilterCopyWith<_$_StockItemFilter> get copyWith =>

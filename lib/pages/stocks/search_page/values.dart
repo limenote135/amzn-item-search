@@ -11,6 +11,7 @@ const purchasePriceUpperField = "purchasePriceUpper";
 const sellPriceLowerField = "sellPriceLower";
 const sellPriceUpperField = "sellPriceUpper";
 const purchaseDateRangeField = "purchaseDateRange";
+const retailerField = "retailer";
 
 int? getNullableInt(FormGroup form, String field) {
   final str = form.control(field).value as String?;
