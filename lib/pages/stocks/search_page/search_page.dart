@@ -275,7 +275,9 @@ class _Body extends ConsumerWidget {
                             actions: [
                               for (final retailer in retailers)
                                 AlertDialogAction(
-                                    key: retailer, label: retailer)
+                                  key: retailer,
+                                  label: retailer,
+                                )
                             ],
                           );
                           if (ret != null) {
