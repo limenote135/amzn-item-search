@@ -120,17 +120,28 @@ class _BodyState extends ConsumerState<_Body> {
     ]);
   }
 
-  void showSuggestion(String result, SearchType current) {
-    if (result.endsWith('c') && current != SearchType.geo) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("GEO のコードではないですか？")));
-    } else if (result.length == 16 && current != SearchType.tsutaya) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("TSUTAYA のコードではないですか？")));
-    } else if (result.length == 17 && current != SearchType.bookoff) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("BOOK OFF のコードではないですか？")));
+  SearchType suggestType(String result) {
+    if (result.startsWith("45") ||
+        result.startsWith("49") ||
+        result.startsWith("978")) {
+      // JAN コードと思われる
+      // 978 は書籍の ISBN コード
+      return SearchType.jan;
     }
+
+    if (result.length == 17 &&
+        result.startsWith("0") &&
+        int.tryParse(result) != null) {
+      // ブックオフは17ケタで恐らく "00" 始まりの数値のみ
+      return SearchType.bookoff;
+    }
+
+    if (result.startsWith("c") && result.endsWith("c")) {
+      // 最初と最後が "c" ならゲオコード
+      return SearchType.geo;
+    }
+
+    return SearchType.jan;
   }
 
   void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
@@ -188,7 +199,7 @@ class _BodyState extends ConsumerState<_Body> {
     }
   }
 
-  void _handleBarcode(List<Barcode> codes) {
+  void _handleBarcode(List<Barcode> codes, {required bool isPaidUser}) {
     if (codes.isEmpty) {
       return;
     }
@@ -196,13 +207,26 @@ class _BodyState extends ConsumerState<_Body> {
     if (targets.isEmpty) {
       return;
     }
-    final result = targets[0].value;
+    final result = targets[0].value.trim();
 
     if (_lastRead != result) {
       Vibration.vibrate(pattern: [0, 100], intensities: [0, 255]);
       final settings = ref.read(searchSettingsControllerProvider);
-      showSuggestion(result, settings.type);
-      switch (settings.type) {
+      final type = isPaidUser ? suggestType(result) : settings.type;
+      if (type != settings.type) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("${type.toDisplayString()} のコードとして検索します"),
+            duration: const Duration(seconds: 1),
+          ),
+        );
+        setState(() {
+          ref
+              .read(searchSettingsControllerProvider.notifier)
+              .update(type: type);
+        });
+      }
+      switch (type) {
         case SearchType.jan:
           ref.read(searchItemControllerProvider.notifier).add(result);
           break;
@@ -264,7 +288,7 @@ class _BodyState extends ConsumerState<_Body> {
       resolution: Resolution.hd1080,
       mode: DetectionMode.continuous,
       apiMode: IOSApiMode.visionStandard,
-      onScan: _handleBarcode,
+      onScan: (codes) => _handleBarcode(codes, isPaidUser: isPaidUser),
       children: [
         // スキャン対象範囲を表示したい場合はコメントアウトを外す
         // const MaterialPreviewOverlay(rectOfInterest: CodeFilterRect()),
