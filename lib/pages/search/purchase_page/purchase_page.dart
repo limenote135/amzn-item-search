@@ -158,6 +158,19 @@ class _SaveButton extends HookConsumerWidget {
             }
           }
 
+          final sellPrice = getInt(form, sellPriceField);
+          final isSmall = getBool(form, smallProgramField);
+          if (isSmall && sellPrice > 1000) {
+            final ret = await showOkCancelAlertDialog(
+              context: context,
+              title: "小型軽量プログラム",
+              message: "1000円以上の商品は小型軽量プログラムになりませんがよろしいですか？",
+            );
+            if (ret != OkCancelResult.ok) {
+              return;
+            }
+          }
+
           _onSubmit(
             ref,
             form,
