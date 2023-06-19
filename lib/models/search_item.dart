@@ -23,5 +23,6 @@ class SearchItem with _$SearchItem {
     @HiveField(0) required String searchDate,
     @HiveField(1) required String jan,
     @HiveField(2) @Default(<AsinData>[]) List<AsinData> asins,
+    @Default(0) int defaultPurchasePrice,
   }) = _SearchItem;
 }

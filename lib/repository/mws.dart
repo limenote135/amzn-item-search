@@ -70,10 +70,18 @@ final searchItemFutureProvider = FutureProvider.autoDispose
   //     await ref.watch(sellByAmazonProvider(resp.items.first.asin).future);
   // print("jan: ${param.jan}, $sellByAmazon");
 
+  var asins = resp.items;
+  if (param.defaultPurchasePrice != 0) {
+    asins = asins
+        .map(
+          (e) => e.copyWith(defaultPurchasePrice: param.defaultPurchasePrice),
+        )
+        .toList();
+  }
   final searchItem = SearchItem(
     searchDate: param.searchDate,
     jan: param.jan,
-    asins: resp.items,
+    asins: asins,
   );
   if (resp.items.isNotEmpty) {
     // 空じゃない場合のみ保存

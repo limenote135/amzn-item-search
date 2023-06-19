@@ -50,6 +50,9 @@ class AsinData with _$AsinData {
     @Default(SizeType.normal)
     SizeType sizeType,
     @HiveField(16, defaultValue: 0) @Default(0) int smallFee,
+    @JsonKey(includeFromJson: false, includeToJson: false)
+    @Default(0)
+    int defaultPurchasePrice,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>
