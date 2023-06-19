@@ -82,6 +82,7 @@ class PurchasePage extends HookConsumerWidget {
     );
     // lowestPrice ??= item.prices?.usedPrices.firstOrNull?.price;
 
+    var purchasePrice = 0;
     // 購入画面から Keepa 等を見るのに一時的に戻っても同じ値が保持されるように
     // この値は一意になるようにする
     final stock = StockItem(
@@ -93,6 +94,7 @@ class PurchasePage extends HookConsumerWidget {
       item: item,
       memo: initialMemo,
       conditionText: conditionTexts[conditionIndex],
+      purchasePrice: item.defaultPurchasePrice,
     );
 
     final form = ref.watch(formValueProvider(stock));
