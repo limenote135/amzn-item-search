@@ -5,6 +5,7 @@ import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/keepa_ua_async_widget.dart';
+import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -86,9 +87,10 @@ class _Body extends HookConsumerWidget {
     );
     final showBuyBox = useState(settings.showFba);
     final showFba = useState(settings.showFba);
-    final rangeState = useState(_createRangeState(settings.period));
+    final rangeState1 = useState(_createRangeState(settings.period));
+    final rangeState2 = useState(_createRangeState(settings.period));
 
-    String createUrl() {
+    String createUrl(List<bool> range) {
       final params = <String>[
         "new=${displayState.value[0] ? "1" : "0"}",
         "used=${displayState.value[1] ? "1" : "0"}",
@@ -97,7 +99,7 @@ class _Body extends HookConsumerWidget {
         "fba=${showFba.value ? "1" : "0"}",
       ];
 
-      final index = rangeState.value.indexOf(true);
+      final index = range.indexOf(true);
       switch (index) {
         case 0:
           params.add("range=1");
@@ -130,115 +132,109 @@ class _Body extends HookConsumerWidget {
 
     return Column(
       children: [
-        ListTile(
-          title: Column(
+        ToggleButtons(
+          isSelected: displayState.value,
+          borderRadius: BorderRadius.circular(30),
+          onPressed: (index) {
+            // コピーするため toList する
+            final newState = displayState.value.toList();
+            newState[index] = !newState[index];
+            if (newState.any((e) => e)) {
+              // 1つ以上は常に選択されるようにする
+              displayState.value = newState;
+            }
+          },
+          constraints: BoxConstraints(
+            minWidth: (media.size.width - 40) / 3,
+            minHeight: height,
+          ),
+          children: const [
+            Text("新品"),
+            Text("中古"),
+            Text("Amazon"),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
             children: [
-              ToggleButtons(
-                isSelected: displayState.value,
-                borderRadius: BorderRadius.circular(30),
-                onPressed: (index) {
-                  // コピーするため toList する
-                  final newState = displayState.value.toList();
-                  newState[index] = !newState[index];
-                  if (newState.any((e) => e)) {
-                    // 1つ以上は常に選択されるようにする
-                    displayState.value = newState;
-                  }
-                },
-                constraints: BoxConstraints(
-                  minWidth: (media.size.width - 40) / 3,
-                  minHeight: height,
-                ),
-                children: const [
-                  Text("新品"),
-                  Text("中古"),
-                  Text("Amazon"),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        const Text("カート価格"),
-                        const Spacer(),
-                        Switch(
-                          // title: const Text("カート"),
-                          value: showBuyBox.value,
-                          onChanged: (value) {
-                            showBuyBox.value = value;
-                          },
-                        ),
-                      ],
+              Expanded(
+                child: Row(
+                  children: [
+                    const Text("カート価格"),
+                    const Spacer(),
+                    Switch(
+                      value: showBuyBox.value,
+                      onChanged: (value) {
+                        showBuyBox.value = value;
+                      },
                     ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        const Text("FBA 配送"),
-                        const Spacer(),
-                        Switch(
-                          value: showFba.value,
-                          onChanged: (value) {
-                            showFba.value = value;
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              ToggleButtons(
-                isSelected: rangeState.value,
-                borderRadius: BorderRadius.circular(30),
-                onPressed: (index) {
-                  final newState =
-                      List.generate(rangeState.value.length, (_) => false);
-                  newState[index] = true;
-                  rangeState.value = newState;
-                },
-                constraints: BoxConstraints(
-                  minWidth: (media.size.width - 40) / 5,
-                  minHeight: height,
+                  ],
                 ),
-                children: const [
-                  Text("1日"),
-                  Text("7日"),
-                  Text("31日"),
-                  Text("90日"),
-                  Text("365日"),
-                ],
-              )
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    const Text("FBA 配送"),
+                    const Spacer(),
+                    Switch(
+                      value: showFba.value,
+                      onChanged: (value) {
+                        showFba.value = value;
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
-        Expanded(
-          child: KeepaUaAsyncWidget(
-            builder: (ua) => ExtendedImage.network(
-              createUrl(),
-              // "https://graph.keepa.com/pricehistory.png?asin=$asin&domain=co.jp&width=900&height=450&amazon=1&new=1&used=1&salesrank=1&range=31&cBackground=000000&cFont=cdcdcd&cAmazon=ffba63&cNew=8888dd&cUsed=ffffff",
-              // "https://graph.keepa.com/pricehistory.png?new=1&domain=jp&width=600&asin=$asin&salesrank=1&height=300&range=all",
-              // headers: <String, String>{
-              //   "Cookie": cookie,
-              // },
-              headers: ua != ""
-                  ? <String, String>{
-                      "User-Agent": ua,
-                    }
-                  : null,
-              fit: BoxFit.contain,
-              mode: ExtendedImageMode.gesture,
-              initGestureConfigHandler: (ExtendedImageState state) {
-                return GestureConfig(
-                  minScale: 0.9,
-                  animationMinScale: 0.7,
-                  maxScale: 4,
-                  animationMaxScale: 4.5,
-                );
-              },
-            ),
+        const ThemeDivider(),
+        ToggleButtons(
+          isSelected: rangeState1.value,
+          borderRadius: BorderRadius.circular(30),
+          onPressed: (index) {
+            final newState =
+                List.generate(rangeState1.value.length, (_) => false);
+            newState[index] = true;
+            rangeState1.value = newState;
+          },
+          constraints: BoxConstraints(
+            minWidth: (media.size.width - 40) / 5,
+            minHeight: height,
           ),
+          children: const [
+            Text("1日"),
+            Text("7日"),
+            Text("31日"),
+            Text("90日"),
+            Text("365日"),
+          ],
         ),
+        _KeepaImage(url: createUrl(rangeState1.value)),
+        const ThemeDivider(),
+        ToggleButtons(
+          isSelected: rangeState2.value,
+          borderRadius: BorderRadius.circular(30),
+          onPressed: (index) {
+            final newState =
+                List.generate(rangeState2.value.length, (_) => false);
+            newState[index] = true;
+            rangeState2.value = newState;
+          },
+          constraints: BoxConstraints(
+            minWidth: (media.size.width - 40) / 5,
+            minHeight: height,
+          ),
+          children: const [
+            Text("1日"),
+            Text("7日"),
+            Text("31日"),
+            Text("90日"),
+            Text("365日"),
+          ],
+        ),
+        _KeepaImage(url: createUrl(rangeState2.value)),
         ElevatedButton(
           onPressed: () async {
             await ref
@@ -267,6 +263,42 @@ class _Body extends HookConsumerWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _KeepaImage extends StatelessWidget {
+  const _KeepaImage({required this.url});
+
+  final String url;
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: KeepaUaAsyncWidget(
+        builder: (ua) => ExtendedImage.network(
+          url,
+          // "https://graph.keepa.com/pricehistory.png?asin=$asin&domain=co.jp&width=900&height=450&amazon=1&new=1&used=1&salesrank=1&range=31&cBackground=000000&cFont=cdcdcd&cAmazon=ffba63&cNew=8888dd&cUsed=ffffff",
+          // "https://graph.keepa.com/pricehistory.png?new=1&domain=jp&width=600&asin=$asin&salesrank=1&height=300&range=all",
+          // headers: <String, String>{
+          //   "Cookie": cookie,
+          // },
+          headers: ua != ""
+              ? <String, String>{
+                  "User-Agent": ua,
+                }
+              : null,
+          fit: BoxFit.contain,
+          mode: ExtendedImageMode.gesture,
+          initGestureConfigHandler: (ExtendedImageState state) {
+            return GestureConfig(
+              minScale: 0.9,
+              animationMinScale: 0.7,
+              maxScale: 4,
+              animationMaxScale: 4.5,
+            );
+          },
+        ),
+      ),
     );
   }
 }
