@@ -5,8 +5,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(2, 1, 0);
+var releaseNotesVersion = Version(2, 2, 0);
 const releaseNotes = <Release>[
+  Release("2.2.0", [
+    ReleaseSublist(
+      name: "更新内容",
+      changes: [
+        "コードタイプを切り替えなくてもインストアコードが読めるようになりました",
+        "仕入れリスト内の商品を仕入れ先で検索できるようになりました",
+        "Keepa 画面で2つの期間のグラフを表示できるようになりました",
+      ],
+    )
+  ]),
   Release("2.1.0", [
     ReleaseSublist(
       name: "更新内容",
