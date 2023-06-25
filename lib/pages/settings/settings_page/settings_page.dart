@@ -213,7 +213,9 @@ class _Body extends HookConsumerWidget {
               try {
                 await EasyLoading.show(status: "削除中...");
                 await clearDiskCachedImages();
-                await ChromeSafariBrowser.clearWebsiteData();
+                if (Platform.isIOS) {
+                  await ChromeSafariBrowser.clearWebsiteData();
+                }
                 await FilePicker.platform.clearTemporaryFiles();
                 final tempDir = await getTemporaryDirectory();
                 final imageDir = Directory("$tempDir/images");
