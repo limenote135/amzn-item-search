@@ -111,7 +111,7 @@ Future<void> main() async {
       initHive(),
       initRevenueCat(),
       clearDiskCachedImages(duration: const Duration(days: 6)),
-      Executor().warmUp(),
+      workerManager.init(),
     ]);
     // ignore: avoid_catches_without_on_clauses
   } catch (e, stacktrace) {
