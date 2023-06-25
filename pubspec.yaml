@@ -87,7 +87,7 @@ dependencies:
   reorderables: ^0.6.0
   riverpod: ^2.3.6
   share_plus: ^7.0.2
-  shared_preferences: ^2.1.1
+  shared_preferences: ^2.1.2
   state_notifier: ^0.7.2+1
   url_launcher: ^6.1.11
   uuid: ^3.0.7
