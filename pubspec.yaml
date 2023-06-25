@@ -21,7 +21,7 @@ environment:
   sdk: '>=2.18.0 <4.0.0'
 
 dependencies:
-  adaptive_dialog: '>=1.9.0-0'
+  adaptive_dialog: ^1.9.0-no-macos.3
   archive: ^3.3.7
   cloud_functions: ^4.3.2
   collection: ^1.17.1
