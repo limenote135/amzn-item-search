@@ -23,7 +23,7 @@ environment:
 dependencies:
   adaptive_dialog: ^1.9.0-no-macos.3
   archive: ^3.3.7
-  cloud_functions: ^4.3.2
+  cloud_functions: ^4.3.3
   collection: ^1.17.1
   convert: ^3.1.1
   cookie_jar: ^4.0.3
