@@ -92,7 +92,7 @@ dependencies:
   url_launcher: ^6.1.11
   uuid: ^3.0.7
   vibration: ^1.8.1
-  webview_flutter: ^4.2.1
+  webview_flutter: ^4.2.2
   worker_manager: ^5.0.3
 
 dev_dependencies:
