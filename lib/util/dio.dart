@@ -42,13 +42,13 @@ class HttpClient {
         options: opt,
         cancelToken: cancelToken,
       );
-    } on DioError catch (e, stack) {
+    } on DioException catch (e, stack) {
       await FirebaseCrashlytics.instance.log("Get request: $url");
       if (e.error is SocketException) {
         await FirebaseCrashlytics.instance.log("SocketException");
         throw Exception("通信環境の良いところで再度お試しください");
       }
-      if (e.type == DioErrorType.cancel) {
+      if (e.type == DioExceptionType.cancel) {
         await FirebaseCrashlytics.instance.log("DioErrorType.cancel");
         throw Exception("通信エラー");
       }
@@ -121,13 +121,13 @@ class HttpClient {
         options: opt,
         cancelToken: cancelToken,
       );
-    } on DioError catch (e, stack) {
+    } on DioException catch (e, stack) {
       await FirebaseCrashlytics.instance.log("Post request: $url");
       if (e.error is SocketException) {
         await FirebaseCrashlytics.instance.log("SocketException");
         throw Exception("通信環境の良いところで再度お試しください");
       }
-      if (e.type == DioErrorType.cancel) {
+      if (e.type == DioExceptionType.cancel) {
         await FirebaseCrashlytics.instance.log("DioErrorType.cancel");
         throw Exception("通信エラー");
       }
