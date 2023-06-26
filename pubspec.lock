@@ -309,10 +309,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio_cookie_manager
-      sha256: ff1755fd56d02485146d95a589fb4ace1f0ae0c0f3ca702a817de2dc1fbb835e
+      sha256: c4b7a693aa09efd694a5c5e12065daa5e026647b106245281ed1042b3ebefb8f
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.1.0"
   dynamic_color:
     dependency: transitive
     description:
