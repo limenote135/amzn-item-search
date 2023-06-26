@@ -130,21 +130,13 @@ class AmazonRepository {
       page: params.page,
       body: resp.data!,
     );
-    final offers = await Executor().execute<
-        _ParseOfferListingsParam,
-        void,
-        void,
-        void,
-        OfferListings,
-        void>(fun1: _parseOfferListings, arg1: parseParam);
-    // final offers = await compute(_parseOfferListings, parseParam);
-
+    final offers =
+        await workerManager.execute(() => _parseOfferListings(parseParam));
     return offers;
   }
 
   static OfferListings _parseOfferListings(
     _ParseOfferListingsParam param,
-    TypeSendPort<dynamic> port,
   ) {
     final doc = HtmlParser(param.body).parse();
 
@@ -300,18 +292,17 @@ class AmazonRepository {
     if (resp.data == "") {
       throw Exception("エラー");
     }
-    final stocks =
-        await Executor().execute<String?, void, void, void, int, void>(
-      fun1: _parseStock,
-      arg1: resp.data,
-    );
+    // _parseStock(resp.data) とすると resp が isolate に渡されることになり(?)、
+    // object is unsensible でエラーになるため、プリミティブ型のみを渡すようにする
+    final data = resp.data;
+    final stocks = await workerManager.execute(() => _parseStock(data));
     // final stocks = await compute(_parseStock, resp.data);
     // final stocks = _parseStock(resp.data);
 
     return stocks;
   }
 
-  static int _parseStock(String? body, TypeSendPort<dynamic> port) {
+  static int _parseStock(String? body) {
     final doc = HtmlParser(body).parse();
 
     final availability = doc.querySelector("#availability > span");
