@@ -19,5 +19,6 @@ class KeepItem with _$KeepItem {
     @HiveField(1) required AsinData item,
     @HiveField(2) required String keepDate,
     @HiveField(3, defaultValue: "") @Default("") String memo,
+    @Default(false) bool isUpdating,
   }) = _KeepItem;
 }
