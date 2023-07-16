@@ -58,6 +58,8 @@ mixin _$AsinData {
   SizeType get sizeType => throw _privateConstructorUsedError;
   @HiveField(16, defaultValue: 0)
   int get smallFee => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  int get defaultPurchasePrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -108,7 +110,9 @@ abstract class $AsinDataCopyWith<$Res> {
       @SizeTypeConverter()
           SizeType sizeType,
       @HiveField(16, defaultValue: 0)
-          int smallFee});
+          int smallFee,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+          int defaultPurchasePrice});
 
   $ItemPricesCopyWith<$Res>? get prices;
   $ListingRestrictionsCopyWith<$Res> get restrictions;
@@ -144,6 +148,7 @@ class _$AsinDataCopyWithImpl<$Res, $Val extends AsinData>
     Object? isHazmat = null,
     Object? sizeType = null,
     Object? smallFee = null,
+    Object? defaultPurchasePrice = null,
   }) {
     return _then(_value.copyWith(
       jan: null == jan
@@ -214,6 +219,10 @@ class _$AsinDataCopyWithImpl<$Res, $Val extends AsinData>
           ? _value.smallFee
           : smallFee // ignore: cast_nullable_to_non_nullable
               as int,
+      defaultPurchasePrice: null == defaultPurchasePrice
+          ? _value.defaultPurchasePrice
+          : defaultPurchasePrice // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -283,7 +292,9 @@ abstract class _$$_AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
       @SizeTypeConverter()
           SizeType sizeType,
       @HiveField(16, defaultValue: 0)
-          int smallFee});
+          int smallFee,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+          int defaultPurchasePrice});
 
   @override
   $ItemPricesCopyWith<$Res>? get prices;
@@ -319,6 +330,7 @@ class __$$_AsinDataCopyWithImpl<$Res>
     Object? isHazmat = null,
     Object? sizeType = null,
     Object? smallFee = null,
+    Object? defaultPurchasePrice = null,
   }) {
     return _then(_$_AsinData(
       jan: null == jan
@@ -389,6 +401,10 @@ class __$$_AsinDataCopyWithImpl<$Res>
           ? _value.smallFee
           : smallFee // ignore: cast_nullable_to_non_nullable
               as int,
+      defaultPurchasePrice: null == defaultPurchasePrice
+          ? _value.defaultPurchasePrice
+          : defaultPurchasePrice // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -436,7 +452,9 @@ class _$_AsinData implements _AsinData {
       @SizeTypeConverter()
           this.sizeType = SizeType.normal,
       @HiveField(16, defaultValue: 0)
-          this.smallFee = 0});
+          this.smallFee = 0,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+          this.defaultPurchasePrice = 0});
 
   factory _$_AsinData.fromJson(Map<String, dynamic> json) =>
       _$$_AsinDataFromJson(json);
@@ -507,10 +525,13 @@ class _$_AsinData implements _AsinData {
   @JsonKey()
   @HiveField(16, defaultValue: 0)
   final int smallFee;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final int defaultPurchasePrice;
 
   @override
   String toString() {
-    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category, sellByAmazon: $sellByAmazon, restrictions: $restrictions, model: $model, variationRoot: $variationRoot, isHazmat: $isHazmat, sizeType: $sizeType, smallFee: $smallFee)';
+    return 'AsinData(jan: $jan, asin: $asin, listPrice: $listPrice, imageUrl: $imageUrl, title: $title, rank: $rank, quantity: $quantity, prices: $prices, imageData: $imageData, category: $category, sellByAmazon: $sellByAmazon, restrictions: $restrictions, model: $model, variationRoot: $variationRoot, isHazmat: $isHazmat, sizeType: $sizeType, smallFee: $smallFee, defaultPurchasePrice: $defaultPurchasePrice)';
   }
 
   @override
@@ -544,7 +565,9 @@ class _$_AsinData implements _AsinData {
             (identical(other.sizeType, sizeType) ||
                 other.sizeType == sizeType) &&
             (identical(other.smallFee, smallFee) ||
-                other.smallFee == smallFee));
+                other.smallFee == smallFee) &&
+            (identical(other.defaultPurchasePrice, defaultPurchasePrice) ||
+                other.defaultPurchasePrice == defaultPurchasePrice));
   }
 
   @JsonKey(ignore: true)
@@ -567,7 +590,8 @@ class _$_AsinData implements _AsinData {
       variationRoot,
       isHazmat,
       sizeType,
-      smallFee);
+      smallFee,
+      defaultPurchasePrice);
 
   @JsonKey(ignore: true)
   @override
@@ -622,7 +646,9 @@ abstract class _AsinData implements AsinData {
       @SizeTypeConverter()
           final SizeType sizeType,
       @HiveField(16, defaultValue: 0)
-          final int smallFee}) = _$_AsinData;
+          final int smallFee,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+          final int defaultPurchasePrice}) = _$_AsinData;
 
   factory _AsinData.fromJson(Map<String, dynamic> json) = _$_AsinData.fromJson;
 
@@ -681,6 +707,9 @@ abstract class _AsinData implements AsinData {
   @override
   @HiveField(16, defaultValue: 0)
   int get smallFee;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  int get defaultPurchasePrice;
   @override
   @JsonKey(ignore: true)
   _$$_AsinDataCopyWith<_$_AsinData> get copyWith =>

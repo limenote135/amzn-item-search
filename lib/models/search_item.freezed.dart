@@ -22,6 +22,7 @@ mixin _$SearchItem {
   String get jan => throw _privateConstructorUsedError;
   @HiveField(2)
   List<AsinData> get asins => throw _privateConstructorUsedError;
+  int get defaultPurchasePrice => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SearchItemCopyWith<SearchItem> get copyWith =>
@@ -37,7 +38,8 @@ abstract class $SearchItemCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String searchDate,
       @HiveField(1) String jan,
-      @HiveField(2) List<AsinData> asins});
+      @HiveField(2) List<AsinData> asins,
+      int defaultPurchasePrice});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$SearchItemCopyWithImpl<$Res, $Val extends SearchItem>
     Object? searchDate = null,
     Object? jan = null,
     Object? asins = null,
+    Object? defaultPurchasePrice = null,
   }) {
     return _then(_value.copyWith(
       searchDate: null == searchDate
@@ -70,6 +73,10 @@ class _$SearchItemCopyWithImpl<$Res, $Val extends SearchItem>
           ? _value.asins
           : asins // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
+      defaultPurchasePrice: null == defaultPurchasePrice
+          ? _value.defaultPurchasePrice
+          : defaultPurchasePrice // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -85,7 +92,8 @@ abstract class _$$_SearchItemCopyWith<$Res>
   $Res call(
       {@HiveField(0) String searchDate,
       @HiveField(1) String jan,
-      @HiveField(2) List<AsinData> asins});
+      @HiveField(2) List<AsinData> asins,
+      int defaultPurchasePrice});
 }
 
 /// @nodoc
@@ -102,6 +110,7 @@ class __$$_SearchItemCopyWithImpl<$Res>
     Object? searchDate = null,
     Object? jan = null,
     Object? asins = null,
+    Object? defaultPurchasePrice = null,
   }) {
     return _then(_$_SearchItem(
       searchDate: null == searchDate
@@ -116,6 +125,10 @@ class __$$_SearchItemCopyWithImpl<$Res>
           ? _value._asins
           : asins // ignore: cast_nullable_to_non_nullable
               as List<AsinData>,
+      defaultPurchasePrice: null == defaultPurchasePrice
+          ? _value.defaultPurchasePrice
+          : defaultPurchasePrice // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -127,7 +140,8 @@ class _$_SearchItem implements _SearchItem {
   const _$_SearchItem(
       {@HiveField(0) required this.searchDate,
       @HiveField(1) required this.jan,
-      @HiveField(2) final List<AsinData> asins = const <AsinData>[]})
+      @HiveField(2) final List<AsinData> asins = const <AsinData>[],
+      this.defaultPurchasePrice = 0})
       : _asins = asins;
 
   @override
@@ -147,8 +161,12 @@ class _$_SearchItem implements _SearchItem {
   }
 
   @override
+  @JsonKey()
+  final int defaultPurchasePrice;
+
+  @override
   String toString() {
-    return 'SearchItem(searchDate: $searchDate, jan: $jan, asins: $asins)';
+    return 'SearchItem(searchDate: $searchDate, jan: $jan, asins: $asins, defaultPurchasePrice: $defaultPurchasePrice)';
   }
 
   @override
@@ -159,12 +177,14 @@ class _$_SearchItem implements _SearchItem {
             (identical(other.searchDate, searchDate) ||
                 other.searchDate == searchDate) &&
             (identical(other.jan, jan) || other.jan == jan) &&
-            const DeepCollectionEquality().equals(other._asins, _asins));
+            const DeepCollectionEquality().equals(other._asins, _asins) &&
+            (identical(other.defaultPurchasePrice, defaultPurchasePrice) ||
+                other.defaultPurchasePrice == defaultPurchasePrice));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, searchDate, jan,
-      const DeepCollectionEquality().hash(_asins));
+      const DeepCollectionEquality().hash(_asins), defaultPurchasePrice);
 
   @JsonKey(ignore: true)
   @override
@@ -177,7 +197,8 @@ abstract class _SearchItem implements SearchItem {
   const factory _SearchItem(
       {@HiveField(0) required final String searchDate,
       @HiveField(1) required final String jan,
-      @HiveField(2) final List<AsinData> asins}) = _$_SearchItem;
+      @HiveField(2) final List<AsinData> asins,
+      final int defaultPurchasePrice}) = _$_SearchItem;
 
   @override
   @HiveField(0)
@@ -188,6 +209,8 @@ abstract class _SearchItem implements SearchItem {
   @override
   @HiveField(2)
   List<AsinData> get asins;
+  @override
+  int get defaultPurchasePrice;
   @override
   @JsonKey(ignore: true)
   _$$_SearchItemCopyWith<_$_SearchItem> get copyWith =>
