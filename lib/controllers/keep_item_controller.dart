@@ -1,8 +1,11 @@
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/keep_item.dart';
+import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/util/hive_provider.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/util/uuid.dart';
+import 'package:collection/collection.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:riverpod/riverpod.dart';
 
 final keepItemListControllerProvider =
@@ -60,5 +63,37 @@ class KeepItemListController extends StateNotifier<List<KeepItem>> {
         state[i].id == item.id ? newItem : state[i]
     ];
     box.put(item.id, newItem);
+  }
+
+  Future<void> updateData(List<KeepItem> raw) async {
+    // 連続で実行した場合に備えて、既に更新中のものは無視する
+    final items = raw.where((element) => !element.isUpdating).toList();
+
+    final ids = items.map((e) => e.id);
+    state = [
+      for (final s in state)
+        ids.contains(s.id) ? s.copyWith(isUpdating: true) : s
+    ];
+
+    await clearDiskCachedImages(); // Keepa の画像キャッシュを削除する
+    final mws = _ref.read(mwsRepositoryProvider);
+    final chunks = items.slices(20);
+    for (final chunk in chunks) {
+      final asins = chunk.map((e) => e.item.asin).toList();
+      final resp = await mws.batchGetAsinData(asins, skipRestrictions: true);
+      final result = <String, KeepItem>{};
+      for (final item in chunk) {
+        final d = resp.data.firstWhereOrNull((e) => e.asin == item.item.asin);
+        if (d == null) {
+          result[item.id] = item.copyWith(isUpdating: false);
+        } else {
+          result[item.id] = item.copyWith(item: d, isUpdating: false);
+        }
+      }
+      state = [
+        for (final s in state) result.containsKey(s.id) ? result[s.id]! : s
+      ];
+      await Future<void>.delayed(const Duration(seconds: 2));
+    }
   }
 }
