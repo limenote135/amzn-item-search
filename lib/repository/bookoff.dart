@@ -23,7 +23,13 @@ final bookoffItemFutureProvider =
     return SearchItem(searchDate: now, jan: code);
   }
 
-  return SearchItem(searchDate: now, jan: resp.first.jan);
+  final priceRaw = code.length == 17 ? code.substring(_bookoffCodeLength) : "0";
+  final p = int.tryParse(priceRaw);
+  return SearchItem(
+    searchDate: now,
+    jan: resp.first.jan,
+    defaultPurchasePrice: p ?? 0,
+  );
 });
 
 class _NotFoundException implements Exception {
