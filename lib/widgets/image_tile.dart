@@ -28,6 +28,20 @@ class TileImage extends HookConsumerWidget {
 
   final void Function(ByteData bytes)? onComplete;
 
+  static bool isSmallProduct(AsinData item) {
+    if (item.sizeType == SizeType.normal) {
+      return false;
+    }
+    final prices = item.prices;
+    if (prices == null) {
+      return false;
+    }
+
+    final newPrice = prices.newPrices.firstOrNull?.price ?? 0;
+    final usedPrice = prices.usedPrices.firstOrNull?.price ?? 0;
+    return newPrice < 10000 && usedPrice < 10000;
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isPaidUser = ref.watch(isPaidUserProvider);
@@ -70,7 +84,7 @@ class TileImage extends HookConsumerWidget {
                 child: Text("危険物", style: captionSize),
               ),
             ),
-          if (isPaidUser && asinData.sizeType != SizeType.normal)
+          if (isPaidUser && isSmallProduct(asinData))
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 1),
               child: Container(
@@ -85,7 +99,8 @@ class TileImage extends HookConsumerWidget {
           // サーバーからサイズ情報を返していないバージョンで検索した際には、
           // sizeType は常に normal になってしまうので、
           // その場合はサイズ情報は手数料から計算する
-          if (isPaidUser && asinData.sizeType == SizeType.normal &&
+          if (isPaidUser &&
+              asinData.sizeType == SizeType.normal &&
               fbaFee >= _bigSizeFbaFee &&
               fbaFee != _standardFbaFee)
             Padding(
