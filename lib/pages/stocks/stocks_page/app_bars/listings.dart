@@ -10,6 +10,7 @@ import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/listings.dart';
 import 'package:amasearch/util/review.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -102,13 +103,17 @@ Future<void> callListings(
     await requestReview(analytics);
     // ignore: avoid_catches_without_on_clauses
   } catch (e, st) {
-    await recordError(e, st, information: const ["Amazon listings"]);
     await EasyLoading.dismiss();
+    var msg = "出品に失敗しました\n$e";
+    if (e is FirebaseFunctionsException && e.code == "invalid-argument") {
+      msg = "出品に失敗しました\n出品アカウントが有効かどうか、手動で出品可能かご確認ください。";
+    } else {
+      await recordError(e, st, information: const ["Amazon listings"]);
+    }
     await showOkAlertDialog(
       context: context,
       title: "エラー",
-      message: "出品に失敗しました\n"
-          "$e",
+      message: msg,
     );
   } finally {
     if (EasyLoading.isShow) {
