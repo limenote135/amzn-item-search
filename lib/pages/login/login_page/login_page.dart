@@ -96,16 +96,12 @@ class _Body extends HookConsumerWidget {
           switch (e.code) {
             case "invalid-email":
               msg = "不正なメールアドレスです";
-              break;
             case "user-disabled":
               msg = "このユーザーは無効化されているか既に退会しています";
-              break;
             case "user-not-found":
               msg = "ユーザーが見つかりませんでした";
-              break;
             case "wrong-password":
               msg = "メールアドレスかパスワードが違います";
-              break;
             default:
               await recordError(
                 e,
@@ -116,7 +112,6 @@ class _Body extends HookConsumerWidget {
                 ],
               );
               msg = e.code;
-              break;
           }
           // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
           await EasyLoading.dismiss();

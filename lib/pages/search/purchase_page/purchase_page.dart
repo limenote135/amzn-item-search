@@ -82,7 +82,6 @@ class PurchasePage extends HookConsumerWidget {
     );
     // lowestPrice ??= item.prices?.usedPrices.firstOrNull?.price;
 
-    var purchasePrice = 0;
     // 購入画面から Keepa 等を見るのに一時的に戻っても同じ値が保持されるように
     // この値は一意になるようにする
     final stock = StockItem(

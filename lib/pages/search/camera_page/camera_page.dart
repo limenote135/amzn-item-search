@@ -229,18 +229,13 @@ class _BodyState extends ConsumerState<_Body> {
       switch (type) {
         case SearchType.jan:
           ref.read(searchItemControllerProvider.notifier).add(result);
-          break;
         case SearchType.bookoff:
           ref.read(searchItemControllerProvider.notifier).addBookoff(result);
-          break;
         case SearchType.geo:
           ref.read(searchItemControllerProvider.notifier).addGeo(result);
-          break;
         case SearchType.tsutaya:
           ref.read(searchItemControllerProvider.notifier).addTsutaya(result);
-          break;
         case SearchType.freeWord:
-          break;
       }
 
       if (!settings.continuousCameraRead) {
