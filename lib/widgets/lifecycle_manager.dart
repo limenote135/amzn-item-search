@@ -46,16 +46,12 @@ class _LifeCycleManagerState extends ConsumerState<LifecycleManager>
     switch (state) {
       case AppLifecycleState.resumed:
         widget.callback?.onResumed(context, ref);
-        break;
       case AppLifecycleState.inactive:
         widget.callback?.onInactive(context, ref);
-        break;
       case AppLifecycleState.paused:
         widget.callback?.onPaused(context, ref);
-        break;
       case AppLifecycleState.detached:
         widget.callback?.onDetached(context, ref);
-        break;
     }
   }
 

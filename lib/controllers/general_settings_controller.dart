@@ -194,19 +194,14 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     switch (current) {
       case "":
         next = "&bb=0";
-        break;
       case "&bb=0":
         next = "&yzoom=1";
-        break;
       case "&yzoom=1":
         next = "&ld=0";
-        break;
       case "&ld=0":
         next = "&wd=0";
-        break;
       default:
         next = "";
-        break;
     }
     state = state.copyWith(
       keepaSettings: state.keepaSettings.copyWith(

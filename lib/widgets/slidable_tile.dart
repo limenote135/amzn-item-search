@@ -270,7 +270,6 @@ class SlidableTile extends HookConsumerWidget {
         title = "Keepa";
         event = pushSearchButtonKeepaName;
         navigation = () => KeepaPage.route(item.asin);
-        break;
       case navigationTargetNewOffers:
         title = "新品一覧";
         event = pushSearchButtonAmazonNewOffersName;
@@ -280,7 +279,6 @@ class SlidableTile extends HookConsumerWidget {
                 newItem: true,
               ),
             );
-        break;
       case navigationTargetUsedOffers:
         title = "中古一覧";
         event = pushSearchButtonAmazonUsedOffersName;
@@ -293,12 +291,10 @@ class SlidableTile extends HookConsumerWidget {
                 usedAcceptable: true,
               ),
             );
-        break;
       case navigationTargetVariation:
         title = "ﾊﾞﾘｴｰｼｮﾝ";
         event = pushSearchButtonVariationName;
         navigation = () => VariationPage.route(item.variationRoot);
-        break;
       default:
         throw Exception("Unknown navigation target: $target");
     }

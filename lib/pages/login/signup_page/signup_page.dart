@@ -76,16 +76,12 @@ class SignupPage extends HookConsumerWidget {
           switch (e.code) {
             case "weak-password":
               msg = "パスワードが短すぎます";
-              break;
             case "email-already-in-use":
               msg = "このメールアドレスは既に使われています";
-              break;
             case "invalid-email":
               msg = "不正なメールアドレスです";
-              break;
             case "operation-not-allowed":
               msg = "操作が許可されていません";
-              break;
             default:
               await recordError(
                 e,
@@ -96,7 +92,6 @@ class SignupPage extends HookConsumerWidget {
                 ],
               );
               msg = e.code;
-              break;
           }
           // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
           await EasyLoading.dismiss();

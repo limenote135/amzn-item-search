@@ -92,7 +92,6 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
     switch (value) {
       case _StockPageActions.upload:
         ref.read(stockPageModeProvider.notifier).state = StockPageMode.upload;
-        break;
       case _StockPageActions.share:
         final result = await showConfirmationDialog(
           context: context,
@@ -110,7 +109,6 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
               .read(analyticsControllerProvider)
               .logSingleEvent(shareSnsEventName);
         }
-        break;
       case _StockPageActions.clear:
         await itemDeleteHandler(
           context: context,
@@ -119,10 +117,8 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
           content: "在庫リストからすべてのアイテムを削除します。\n"
               "この操作は取り消せません。よろしいですか？",
         );
-        break;
       case _StockPageActions.listing:
         ref.read(stockPageModeProvider.notifier).state = StockPageMode.listing;
-        break;
     }
   }
 }

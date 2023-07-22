@@ -318,55 +318,38 @@ List<Object> _createData(StockItem item, List<CsvColumn> order) {
     switch (o) {
       case CsvColumn.asin:
         ret.add(item.item.asin);
-        break;
       case CsvColumn.jan:
         ret.add(item.item.jan);
-        break;
       case CsvColumn.title:
         ret.add(item.item.title);
-        break;
       case CsvColumn.sellPrice:
         ret.add(item.sellPrice);
-        break;
       case CsvColumn.purchasePrice:
         ret.add(item.purchasePrice);
-        break;
       case CsvColumn.profit:
         ret.add(item.profitPerItem);
-        break;
       case CsvColumn.listingPrice:
         ret.add(item.item.listPrice);
-        break;
       case CsvColumn.quantity:
         ret.add(item.amount);
-        break;
       case CsvColumn.condition:
         ret.add(_createConditionText(item));
-        break;
       case CsvColumn.shipment:
         ret.add(item.useFba ? "FBA" : "自己発送");
-        break;
       case CsvColumn.sku:
         ret.add(item.sku);
-        break;
       case CsvColumn.retailer:
         ret.add(item.retailer);
-        break;
       case CsvColumn.comment:
         ret.add(item.memo);
-        break;
       case CsvColumn.purchaseDate:
         ret.add(_createPurchaseDateText(item));
-        break;
       case CsvColumn.breakEven:
         ret.add(item.breakEven);
-        break;
       case CsvColumn.conditionText:
         ret.add(item.conditionText);
-        break;
       case CsvColumn.otherCost:
         ret.add(item.otherCost);
-        break;
     }
   }
   return ret;
