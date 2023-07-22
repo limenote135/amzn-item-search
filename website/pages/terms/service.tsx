@@ -34,5 +34,6 @@ const Terms = ({ terms }: Props) => {
 };
 
 Terms.getLayout = (page: ReactElement) => page;
+Terms.title = "利用規約";
 
 export default Terms;

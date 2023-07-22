@@ -11,4 +11,6 @@ const MyPage = () => {
   );
 };
 
+MyPage.title = "マイページ";
+
 export default MyPage;

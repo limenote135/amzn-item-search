@@ -30,7 +30,7 @@ function isDisabled(plan: PlanNames | undefined, value: string) {
   return false;
 }
 
-export default function Index() {
+const Index = () => {
   const user = useUser();
   const router = useRouter();
   const [value, setValue] = useState("free");
@@ -121,4 +121,8 @@ export default function Index() {
       </Box>
     </Paper>
   );
-}
+};
+
+Index.title = "プランの変更";
+
+export default Index;

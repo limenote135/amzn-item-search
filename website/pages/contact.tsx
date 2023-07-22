@@ -16,5 +16,6 @@ const Contact = () => {
 };
 
 Contact.getLayout = (page: ReactElement) => page;
+Contact.title = "お問い合わせ";
 
 export default Contact;

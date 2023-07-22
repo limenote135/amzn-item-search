@@ -33,7 +33,7 @@ const CancelContainer = ({ plan, paymentDate, onCancel, isLoading, result }: Can
   );
 };
 
-export default function Cancel() {
+const Cancel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState("");
   const [paymentDate, setPaymentDate] = useState("");
@@ -78,4 +78,8 @@ export default function Cancel() {
       result={result}
     />
   );
-}
+};
+
+Cancel.title = "プランの解約";
+
+export default Cancel;

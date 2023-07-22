@@ -77,4 +77,6 @@ const User = () => {
   );
 };
 
+User.title = "登録情報確認";
+
 export default User;
