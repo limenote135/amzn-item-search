@@ -71,7 +71,6 @@ extension AlertConditionSetExtension on AlertConditionSet {
               return false;
             }
           }
-          break;
         case AlertType.condition:
           // 利益額との組み合わせでチェックするため、ここでは何もしない
           break;
@@ -79,7 +78,6 @@ extension AlertConditionSetExtension on AlertConditionSet {
           if (!(item.rank <= cond.value)) {
             return false;
           }
-          break;
         case AlertType.category:
           if (!mwsCategoryIdMap.containsKey(item.category)) {
             return false;
@@ -87,22 +85,18 @@ extension AlertConditionSetExtension on AlertConditionSet {
           if (cond.value != mwsCategoryIdMap[item.category]) {
             return false;
           }
-          break;
         case AlertType.premium:
           if (!isPremiumPrice(item)) {
             return false;
           }
-          break;
         case AlertType.noAmazon:
           if (item.sellByAmazon != false) {
             return false;
           }
-          break;
         case AlertType.noNewOffer:
           if (item.prices?.newPrices.isNotEmpty ?? false) {
             return false;
           }
-          break;
       }
     }
     return true;
