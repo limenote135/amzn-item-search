@@ -1,5 +1,5 @@
 import Menu from "@/components/lp/Menu";
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import Head from "next/head";
 import { ReactElement } from "react";
@@ -38,15 +38,11 @@ const Law = () => {
             </tr>
             <tr>
               <Td>電話番号</Td>
-              <Td>050-5360-9196</Td>
+              <Td>050-5577-0633</Td>
             </tr>
             <tr>
               <Td>メールアドレス</Td>
               <Td>support@mail.knz-c.com</Td>
-            </tr>
-            <tr>
-              <Td>運営統括責任者</Td>
-              <Td>北山 博之</Td>
             </tr>
             <tr>
               <Td>商品代金以外の必要料金</Td>
@@ -76,6 +72,9 @@ const Law = () => {
             </tr>
           </tbody>
         </Table>
+        <Box textAlign={"center"}>
+          これ以外の情報はお問い合わせフォームよりごお問い合わせいただければ遅滞なくご連絡いたします。
+        </Box>
       </Container>
     </>
   );

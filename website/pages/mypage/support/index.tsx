@@ -39,4 +39,6 @@ const Support = () => {
   );
 };
 
+Support.title = "お問い合わせ";
+
 export default Support;

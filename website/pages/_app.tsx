@@ -20,6 +20,7 @@ interface MyAppProps extends AppProps {
 }
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
+  title?: string;
 };
 
 type AppPropsWithLayout = MyAppProps & {
@@ -41,7 +42,7 @@ export default function MyApp(props: AppPropsWithLayout) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>アマサーチ</title>
+        <title>{Component.title ? `${Component.title} - アマサーチ` : "アマサーチ"}</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
