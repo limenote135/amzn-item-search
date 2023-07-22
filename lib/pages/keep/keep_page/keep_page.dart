@@ -211,9 +211,7 @@ class _InkWell extends ConsumerWidget {
         switch (mode) {
           case KeepPageMode.normal:
             ref.read(keepPageModeProvider.notifier).state = KeepPageMode.select;
-            break;
           case KeepPageMode.select:
-            break;
         }
         ref.read(selectedKeepItemsControllerProvider.notifier).toggleItem(item);
       },

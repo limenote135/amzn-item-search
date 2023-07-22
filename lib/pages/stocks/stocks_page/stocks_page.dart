@@ -234,7 +234,6 @@ class _InkWell extends HookConsumerWidget {
               context,
               DetailPage.route(item),
             );
-            break;
           case StockPageMode.select:
           case StockPageMode.listing:
           case StockPageMode.upload:
@@ -242,7 +241,6 @@ class _InkWell extends HookConsumerWidget {
             ref
                 .read(selectedStockItemsControllerProvider.notifier)
                 .toggleItem(item);
-            break;
         }
       },
       onLongPress: () {
@@ -251,11 +249,9 @@ class _InkWell extends HookConsumerWidget {
             // ノーマルモードで長押しした場合は選択モードに切り替え
             ref.read(stockPageModeProvider.notifier).state =
                 StockPageMode.select;
-            break;
           case StockPageMode.select:
           case StockPageMode.listing:
           case StockPageMode.upload:
-            break;
         }
         ref
             .read(selectedStockItemsControllerProvider.notifier)

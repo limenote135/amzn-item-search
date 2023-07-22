@@ -103,19 +103,14 @@ class _Body extends HookConsumerWidget {
       switch (index) {
         case 0:
           params.add("range=1");
-          break;
         case 1:
           params.add("range=7");
-          break;
         case 2:
           params.add("range=31");
-          break;
         case 3:
           params.add("range=90");
-          break;
         case 4:
           params.add("range=365");
-          break;
       }
 
       if (isDark(context)) {
