@@ -191,4 +191,7 @@ const RootContainer = () => {
 
   return <Subscription plan={query.plan as string} onBack={handleOnBack} />;
 };
+
+RootContainer.title = "支払い方法の登録";
+
 export default RootContainer;

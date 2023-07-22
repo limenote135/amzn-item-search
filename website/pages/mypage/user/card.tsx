@@ -128,4 +128,6 @@ const CardChangePage = () => {
   );
 };
 
+CardChangePage.title = "支払い方法変更";
+
 export default CardChangePage;
