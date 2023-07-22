@@ -64,7 +64,8 @@ class SignupPage extends HookConsumerWidget {
               await showOkAlertDialog(
                 context: context,
                 title: "メールアドレスの確認",
-                message: "入力されたアドレスに確認メールを送信しました。",
+                message: "入力されたアドレスに本人確認メールを送信しました。\n"
+                    "本人確認が行われない場合、一定期間後にアカウントが無効化されます。",
               );
             }
           }
