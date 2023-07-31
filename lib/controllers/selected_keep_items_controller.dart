@@ -18,7 +18,7 @@ class SelectedKeepItemsController extends StateNotifier<List<KeepItem>> {
       ];
     } else {
       // add
-      state = [item, ...state];
+      state = [...state, item];
     }
   }
 

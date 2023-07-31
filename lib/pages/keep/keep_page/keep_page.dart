@@ -5,12 +5,14 @@ import 'package:amasearch/controllers/selected_keep_items_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/pages/keep/detail_page/detail_page.dart';
+import 'package:amasearch/pages/keep/keep_page/refresh_appbar.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/uuid.dart';
 import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/slidable_tile.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
+import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -60,6 +62,8 @@ class KeepPage extends ConsumerWidget {
         return const NormalAppBar();
       case KeepPageMode.select:
         return const ItemSelectAppBar();
+      case KeepPageMode.refresh:
+        return const RefreshAppbar();
     }
   }
 }
@@ -85,29 +89,64 @@ class _UnpaidUserBody extends ConsumerWidget {
   }
 }
 
+final selectAllProvider = StateProvider((_) => false);
+
 class _Body extends ConsumerWidget {
   const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final mode = ref.watch(keepPageModeProvider);
     final items = ref.watch(keepItemListControllerProvider);
-    return ListView.separated(
-      separatorBuilder: (context, index) => const ThemeDivider(),
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
-        return ProviderScope(
-          overrides: [
-            currentAsinDataProvider.overrideWithValue(item.item),
-            currentKeepItemProvider.overrideWithValue(item),
-          ],
-          child: const _SlidableTile(
-            child: _InkWell(
-              child: KeepItemTile(),
+    final selectAll = ref.watch(selectAllProvider);
+
+    return Column(
+      children: [
+        if (mode == KeepPageMode.refresh)
+          WithUnderLine(
+            CheckboxListTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              title: const Text("すべて選択"),
+              value: selectAll,
+              onChanged: (value) {
+                if (value == null) {
+                  return;
+                }
+                if (value) {
+                  ref
+                      .read(selectedKeepItemsControllerProvider.notifier)
+                      .setItems(items);
+                  ref.read(selectAllProvider.notifier).state = true;
+                } else {
+                  ref
+                      .read(selectedKeepItemsControllerProvider.notifier)
+                      .removeAll();
+                  ref.read(selectAllProvider.notifier).state = false;
+                }
+              },
             ),
           ),
-        );
-      },
+        Expanded(
+          child: ListView.separated(
+            separatorBuilder: (context, index) => const ThemeDivider(),
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return ProviderScope(
+                overrides: [
+                  currentAsinDataProvider.overrideWithValue(item.item),
+                  currentKeepItemProvider.overrideWithValue(item),
+                ],
+                child: const _SlidableTile(
+                  child: _InkWell(
+                    child: KeepItemTile(),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
@@ -200,6 +239,7 @@ class _InkWell extends ConsumerWidget {
             }
             return;
           case KeepPageMode.select:
+          case KeepPageMode.refresh:
             // 選択モードでタップ時は選択アイテムに追加
             ref
                 .read(selectedKeepItemsControllerProvider.notifier)
@@ -212,6 +252,7 @@ class _InkWell extends ConsumerWidget {
           case KeepPageMode.normal:
             ref.read(keepPageModeProvider.notifier).state = KeepPageMode.select;
           case KeepPageMode.select:
+          case KeepPageMode.refresh:
         }
         ref.read(selectedKeepItemsControllerProvider.notifier).toggleItem(item);
       },

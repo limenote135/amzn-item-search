@@ -3,7 +3,10 @@ import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'providers.dart';
+
 enum _KeepPageActions {
+  update,
   clear,
 }
 
@@ -19,6 +22,9 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
           padding: EdgeInsets.zero,
           onSelected: (value) async {
             switch (value) {
+              case _KeepPageActions.update:
+                ref.read(keepPageModeProvider.notifier).state =
+                    KeepPageMode.refresh;
               case _KeepPageActions.clear:
                 final ret = await showOkCancelAlertDialog(
                   context: context,
@@ -33,6 +39,13 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
             }
           },
           itemBuilder: (context) => const [
+            PopupMenuItem(
+              value: _KeepPageActions.update,
+              child: ListTile(
+                leading: Icon(Icons.update),
+                title: Text("価格情報を更新"),
+              ),
+            ),
             PopupMenuItem(
               value: _KeepPageActions.clear,
               child: ListTile(

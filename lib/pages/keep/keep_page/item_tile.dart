@@ -23,6 +23,9 @@ class KeepItemTile extends ConsumerWidget {
     final item = ref.watch(currentKeepItemProvider);
     final isSelected = ref.watch(_isSelectedProvider(item));
 
+    if (item.isUpdating) {
+      return const ListTile(title: Center(child: CircularProgressIndicator()));
+    }
     return ColoredBox(
       color: _getSelectedColor(context, isSelected),
       child: const Row(

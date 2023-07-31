@@ -183,11 +183,15 @@ class MwsRepository {
 
   Future<BatchGetAsinDataResponse> batchGetAsinData(
     List<String> asins, {
+    bool skipRestrictions = false,
     CancelToken? cancelToken,
   }) async {
     final serverUrl = await _ref.read(serverUrlProvider.future);
     final url = "$serverUrl/v1beta2/spapi/asins";
-    final params = <String, Object>{"asins": asins};
+    final params = <String, Object>{
+      "asins": asins,
+      "skip_restrictions": skipRestrictions,
+    };
 
     final resp = await _doRequest(
       url,

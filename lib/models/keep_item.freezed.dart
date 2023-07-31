@@ -24,6 +24,7 @@ mixin _$KeepItem {
   String get keepDate => throw _privateConstructorUsedError;
   @HiveField(3, defaultValue: "")
   String get memo => throw _privateConstructorUsedError;
+  bool get isUpdating => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $KeepItemCopyWith<KeepItem> get copyWith =>
@@ -39,7 +40,8 @@ abstract class $KeepItemCopyWith<$Res> {
       {@HiveField(0) String id,
       @HiveField(1) AsinData item,
       @HiveField(2) String keepDate,
-      @HiveField(3, defaultValue: "") String memo});
+      @HiveField(3, defaultValue: "") String memo,
+      bool isUpdating});
 
   $AsinDataCopyWith<$Res> get item;
 }
@@ -61,6 +63,7 @@ class _$KeepItemCopyWithImpl<$Res, $Val extends KeepItem>
     Object? item = null,
     Object? keepDate = null,
     Object? memo = null,
+    Object? isUpdating = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -79,6 +82,10 @@ class _$KeepItemCopyWithImpl<$Res, $Val extends KeepItem>
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
+      isUpdating: null == isUpdating
+          ? _value.isUpdating
+          : isUpdating // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -102,7 +109,8 @@ abstract class _$$_KeepItemCopyWith<$Res> implements $KeepItemCopyWith<$Res> {
       {@HiveField(0) String id,
       @HiveField(1) AsinData item,
       @HiveField(2) String keepDate,
-      @HiveField(3, defaultValue: "") String memo});
+      @HiveField(3, defaultValue: "") String memo,
+      bool isUpdating});
 
   @override
   $AsinDataCopyWith<$Res> get item;
@@ -123,6 +131,7 @@ class __$$_KeepItemCopyWithImpl<$Res>
     Object? item = null,
     Object? keepDate = null,
     Object? memo = null,
+    Object? isUpdating = null,
   }) {
     return _then(_$_KeepItem(
       id: null == id
@@ -141,6 +150,10 @@ class __$$_KeepItemCopyWithImpl<$Res>
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
+      isUpdating: null == isUpdating
+          ? _value.isUpdating
+          : isUpdating // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -153,7 +166,8 @@ class _$_KeepItem implements _KeepItem {
       {@HiveField(0) required this.id,
       @HiveField(1) required this.item,
       @HiveField(2) required this.keepDate,
-      @HiveField(3, defaultValue: "") this.memo = ""});
+      @HiveField(3, defaultValue: "") this.memo = "",
+      this.isUpdating = false});
 
   @override
   @HiveField(0)
@@ -168,10 +182,13 @@ class _$_KeepItem implements _KeepItem {
   @JsonKey()
   @HiveField(3, defaultValue: "")
   final String memo;
+  @override
+  @JsonKey()
+  final bool isUpdating;
 
   @override
   String toString() {
-    return 'KeepItem(id: $id, item: $item, keepDate: $keepDate, memo: $memo)';
+    return 'KeepItem(id: $id, item: $item, keepDate: $keepDate, memo: $memo, isUpdating: $isUpdating)';
   }
 
   @override
@@ -183,11 +200,14 @@ class _$_KeepItem implements _KeepItem {
             (identical(other.item, item) || other.item == item) &&
             (identical(other.keepDate, keepDate) ||
                 other.keepDate == keepDate) &&
-            (identical(other.memo, memo) || other.memo == memo));
+            (identical(other.memo, memo) || other.memo == memo) &&
+            (identical(other.isUpdating, isUpdating) ||
+                other.isUpdating == isUpdating));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, item, keepDate, memo);
+  int get hashCode =>
+      Object.hash(runtimeType, id, item, keepDate, memo, isUpdating);
 
   @JsonKey(ignore: true)
   @override
@@ -201,7 +221,8 @@ abstract class _KeepItem implements KeepItem {
       {@HiveField(0) required final String id,
       @HiveField(1) required final AsinData item,
       @HiveField(2) required final String keepDate,
-      @HiveField(3, defaultValue: "") final String memo}) = _$_KeepItem;
+      @HiveField(3, defaultValue: "") final String memo,
+      final bool isUpdating}) = _$_KeepItem;
 
   @override
   @HiveField(0)
@@ -215,6 +236,8 @@ abstract class _KeepItem implements KeepItem {
   @override
   @HiveField(3, defaultValue: "")
   String get memo;
+  @override
+  bool get isUpdating;
   @override
   @JsonKey(ignore: true)
   _$$_KeepItemCopyWith<_$_KeepItem> get copyWith =>
