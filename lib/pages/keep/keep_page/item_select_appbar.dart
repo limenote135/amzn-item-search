@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:amasearch/controllers/selected_keep_items_controller.dart';
@@ -26,6 +28,25 @@ class ItemSelectAppBar extends ConsumerWidget implements PreferredSizeWidget {
         },
       ),
       actions: [
+        IconButton(
+          icon: const Icon(Icons.refresh),
+          onPressed: () async {
+            // TODO:
+            final ret = await showOkCancelAlertDialog(
+              context: context,
+              title: "商品情報の更新",
+              message: "${selectedItems.length} 件の商品の価格情報を更新します。",
+            );
+            if (ret != OkCancelResult.ok) {
+              return;
+            }
+
+            final controller =
+                ref.read(keepItemListControllerProvider.notifier);
+            unawaited(controller.updateData(selectedItems));
+            ref.read(selectedKeepItemsControllerProvider.notifier).removeAll();
+          },
+        ),
         IconButton(
           icon: const Icon(Icons.delete),
           onPressed: () async {

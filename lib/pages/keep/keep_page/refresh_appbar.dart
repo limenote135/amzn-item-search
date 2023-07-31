@@ -1,0 +1,65 @@
+import 'dart:async';
+
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/keep_item_controller.dart';
+import 'package:amasearch/controllers/selected_keep_items_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'providers.dart';
+
+class RefreshAppbar extends ConsumerWidget implements PreferredSizeWidget {
+  const RefreshAppbar({super.key});
+
+  @override
+  Size get preferredSize => const Size(double.infinity, kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedItems = ref.watch(selectedKeepItemsControllerProvider);
+    return AppBar(
+      title: Text("${selectedItems.length} 件選択"),
+      leading: IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          ref.read(keepPageModeProvider.notifier).state = KeepPageMode.normal;
+          ref.read(selectAllProvider.notifier).state = false;
+          ref.read(selectedKeepItemsControllerProvider.notifier).removeAll();
+        },
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: const StadiumBorder(),
+            ),
+            onPressed: selectedItems.isNotEmpty
+                ? () async {
+                    final ret = await showOkCancelAlertDialog(
+                      context: context,
+                      title: "商品情報の更新",
+                      message: "${selectedItems.length} 件の商品の価格情報を更新します。",
+                    );
+                    if (ret != OkCancelResult.ok) {
+                      return;
+                    }
+
+                    final controller =
+                        ref.read(keepItemListControllerProvider.notifier);
+                    unawaited(controller.updateData(selectedItems));
+                    ref
+                        .read(selectedKeepItemsControllerProvider.notifier)
+                        .removeAll();
+                    ref.read(keepPageModeProvider.notifier).state =
+                        KeepPageMode.normal;
+                    ref.read(selectAllProvider.notifier).state = false;
+                  }
+                : null,
+            child: const Text("確定"),
+          ),
+        ),
+      ],
+    );
+  }
+}
