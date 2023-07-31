@@ -31,7 +31,6 @@ class ItemSelectAppBar extends ConsumerWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.refresh),
           onPressed: () async {
-            // TODO:
             final ret = await showOkCancelAlertDialog(
               context: context,
               title: "商品情報の更新",
