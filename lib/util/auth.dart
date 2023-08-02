@@ -54,14 +54,13 @@ final linkedWithAmazonProvider = StreamProvider((ref) async* {
   } on FirebaseAuthException catch (e, stack) {
     switch (e.code) {
       case "network-request-failed":
-        break;
+        throw Exception("通信環境の良いところで再度お試しください");
       case "user-token-expired":
         throw Exception("再ログインしてください");
       default:
         await recordError(e, stack);
-        break;
+        throw Exception("通信環境の良いところで再度お試しください(${e.code})");
     }
-    throw Exception("通信環境の良いところで再度お試しください");
   }
 });
 
@@ -88,14 +87,13 @@ final currentClaimsProvider = StreamProvider((ref) async* {
   } on FirebaseAuthException catch (e, stack) {
     switch (e.code) {
       case "network-request-failed":
-        break;
+        throw Exception("通信環境の良いところで再度お試しください");
       case "user-token-expired":
         throw Exception("再ログインしてください");
       default:
         await recordError(e, stack);
-        break;
+        throw Exception("通信環境の良いところで再度お試しください(${e.code})");
     }
-    throw Exception("通信環境の良いところで再度お試しください");
   }
 });
 
