@@ -51,8 +51,6 @@ class _Body extends HookConsumerWidget {
     final pwController = useTextEditingController();
     final pwFocusNode = useFocusNode();
 
-    final auth = ref.watch(firebaseAuthProvider);
-
     Future<void> onSubmit() async {
       if (formKey.currentState?.validate() ?? false) {
         final email = emailKey.currentState!.value!;
@@ -60,7 +58,7 @@ class _Body extends HookConsumerWidget {
         try {
           await EasyLoading.show(status: 'loading...');
 
-          final cred = await auth.signInWithEmailAndPassword(
+          final cred = await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: email,
             password: password,
           );

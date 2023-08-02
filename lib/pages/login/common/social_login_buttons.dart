@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/pages/login/common/sign_in_with_google.dart';
-import 'package:amasearch/util/auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +19,6 @@ class SocialLoginButtons extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.watch(firebaseAuthProvider);
-
     return Column(
       children: [
         const ListTile(
@@ -35,7 +32,7 @@ class SocialLoginButtons extends HookConsumerWidget {
           onPressed: () async {
             try {
               await EasyLoading.show(status: 'loading...');
-              final cred = await signInWithGoogle(auth);
+              final cred = await signInWithGoogle();
               if (cred == null) {
                 // ログインキャンセルした場合などは何もしない
                 return;
@@ -68,7 +65,7 @@ class SocialLoginButtons extends HookConsumerWidget {
               try {
                 await EasyLoading.show(status: 'loading...');
 
-                final cred = await signInWithApple(auth);
+                final cred = await signInWithApple();
                 if (cred == null) {
                   return;
                 }
