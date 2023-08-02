@@ -2,11 +2,8 @@ import 'package:amasearch/util/error_report.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final firebaseAuthProvider =
-    Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
-
 final authStateChangesProvider = StreamProvider<User?>(
-  (ref) => ref.watch(firebaseAuthProvider).authStateChanges(),
+  (ref) => FirebaseAuth.instance.authStateChanges(),
 );
 
 final isPaidUserProvider = StateProvider((ref) => false);
@@ -41,7 +38,7 @@ enum PlanType {
 
 final linkedWithAmazonProvider = StreamProvider((ref) async* {
   try {
-    final stream = ref.watch(firebaseAuthProvider).idTokenChanges();
+    final stream = FirebaseAuth.instance.idTokenChanges();
 
     await for (final user in stream) {
       if (user == null) {
@@ -66,7 +63,7 @@ final linkedWithAmazonProvider = StreamProvider((ref) async* {
 
 final currentClaimsProvider = StreamProvider((ref) async* {
   try {
-    final stream = ref.watch(firebaseAuthProvider).idTokenChanges();
+    final stream = FirebaseAuth.instance.idTokenChanges();
 
     await for (final user in stream) {
       if (user == null) {

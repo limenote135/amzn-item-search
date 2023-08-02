@@ -1,7 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/pages/login/common/input_field.dart';
 import 'package:amasearch/theme.dart';
-import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,8 +38,6 @@ class _Body extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.watch(firebaseAuthProvider);
-
     Future<void> onSubmit() async {
       if (formKey.currentState?.validate() != true) {
         return;
@@ -54,7 +51,7 @@ class _Body extends HookConsumerWidget {
       if (ret == OkCancelResult.ok) {
         try {
           await EasyLoading.show(status: '送信中...');
-          await auth.sendPasswordResetEmail(email: email);
+          await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
 
           // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
           await EasyLoading.dismiss();

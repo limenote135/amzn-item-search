@@ -1,7 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/theme.dart';
-import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,15 +37,14 @@ class SignupPage extends HookConsumerWidget {
     final pwFocusNode = useFocusNode();
     final pw2FocusNode = useFocusNode();
 
-    final auth = ref.watch(firebaseAuthProvider);
-
     Future<void> onSubmit() async {
       if (formKey.currentState?.validate() ?? false) {
         final email = emailKey.currentState!.value;
         final password = passwordKey.currentState!.value;
         try {
           await EasyLoading.show(status: 'loading...');
-          final cred = await auth.createUserWithEmailAndPassword(
+          final cred =
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: email!,
             password: password!,
           );
