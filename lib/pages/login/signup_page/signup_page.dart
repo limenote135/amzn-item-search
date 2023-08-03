@@ -56,7 +56,7 @@ class SignupPage extends HookConsumerWidget {
               FirebaseCrashlytics.instance.setUserIdentifier(user.uid),
               ref.read(analyticsControllerProvider).setUserId(user.uid),
             ]);
-            if (!user.emailVerified) {
+            if (user.emailVerified == false) {
               await cred.user?.sendEmailVerification();
               await EasyLoading.dismiss();
               await showOkAlertDialog(
