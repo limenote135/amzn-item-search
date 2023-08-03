@@ -19,13 +19,13 @@ import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/support_page/suppert_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
 import 'package:amasearch/styles/font.dart';
-import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/release_notes.dart';
 import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -94,9 +94,9 @@ class _Body extends HookConsumerWidget {
         ),
         ListTile(
           title: const WithLockIconIfNotPaid(child: Text("目標利益率設定")),
-          subtitle: settings.enableTargetProfit
-              ? Text("${settings.targetProfitValue} %")
-              : const Text("無効"),
+          subtitle: settings.enableTargetProfit == false
+              ? const Text("無効")
+              : Text("${settings.targetProfitValue} %"),
           onTap: () {
             Navigator.push(
               context,
@@ -115,9 +115,9 @@ class _Body extends HookConsumerWidget {
         ),
         ListTile(
           title: const WithLockIconIfNotPaid(child: Text("読み上げ設定")),
-          subtitle: settings.enableReadAloud
-              ? Text(settings.readAloudPatterns[settings.patternIndex].title)
-              : const Text("無効"),
+          subtitle: settings.enableReadAloud == false
+              ? const Text("無効")
+              : Text(settings.readAloudPatterns[settings.patternIndex].title),
           onTap: () {
             Navigator.push(
               context,
@@ -238,7 +238,7 @@ class _Body extends HookConsumerWidget {
               isDestructiveAction: true,
             );
             if (ret == OkCancelResult.ok) {
-              await ref.read(firebaseAuthProvider).signOut();
+              await FirebaseAuth.instance.signOut();
               await GoogleSignIn().signOut();
             }
           },
@@ -278,7 +278,7 @@ class _Body extends HookConsumerWidget {
                   context: context,
                   message: "ご利用ありがとうございました。",
                 );
-                await ref.read(firebaseAuthProvider).signOut();
+                await FirebaseAuth.instance.signOut();
                 await GoogleSignIn().signOut();
               } finally {
                 if (EasyLoading.isShow) {

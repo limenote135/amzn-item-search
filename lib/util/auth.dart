@@ -2,11 +2,8 @@ import 'package:amasearch/util/error_report.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final firebaseAuthProvider =
-    Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
-
 final authStateChangesProvider = StreamProvider<User?>(
-  (ref) => ref.watch(firebaseAuthProvider).authStateChanges(),
+  (ref) => FirebaseAuth.instance.authStateChanges(),
 );
 
 final isPaidUserProvider = StateProvider((ref) => false);
@@ -41,7 +38,7 @@ enum PlanType {
 
 final linkedWithAmazonProvider = StreamProvider((ref) async* {
   try {
-    final stream = ref.watch(firebaseAuthProvider).idTokenChanges();
+    final stream = FirebaseAuth.instance.idTokenChanges();
 
     await for (final user in stream) {
       if (user == null) {
@@ -54,20 +51,19 @@ final linkedWithAmazonProvider = StreamProvider((ref) async* {
   } on FirebaseAuthException catch (e, stack) {
     switch (e.code) {
       case "network-request-failed":
-        break;
+        throw Exception("通信環境の良いところで再度お試しください");
       case "user-token-expired":
         throw Exception("再ログインしてください");
       default:
         await recordError(e, stack);
-        break;
+        throw Exception("通信環境の良いところで再度お試しください(${e.code})");
     }
-    throw Exception("通信環境の良いところで再度お試しください");
   }
 });
 
 final currentClaimsProvider = StreamProvider((ref) async* {
   try {
-    final stream = ref.watch(firebaseAuthProvider).idTokenChanges();
+    final stream = FirebaseAuth.instance.idTokenChanges();
 
     await for (final user in stream) {
       if (user == null) {
@@ -88,14 +84,13 @@ final currentClaimsProvider = StreamProvider((ref) async* {
   } on FirebaseAuthException catch (e, stack) {
     switch (e.code) {
       case "network-request-failed":
-        break;
+        throw Exception("通信環境の良いところで再度お試しください");
       case "user-token-expired":
         throw Exception("再ログインしてください");
       default:
         await recordError(e, stack);
-        break;
+        throw Exception("通信環境の良いところで再度お試しください(${e.code})");
     }
-    throw Exception("通信環境の良いところで再度お試しください");
   }
 });
 

@@ -1,8 +1,8 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/styles/font.dart';
-import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/validators.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -47,8 +47,6 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final package = ref.watch(_currentPackageProvider);
-    final auth = ref.watch(firebaseAuthProvider);
-
     final captionSize = captionFontSize(context);
 
     Future<void> sendDonation(
@@ -89,8 +87,9 @@ class _Body extends ConsumerWidget {
               child: TextFormField(
                 key: emailKey,
                 validator: emailOrEmptyValidator,
-                controller:
-                    TextEditingController(text: auth.currentUser?.email),
+                controller: TextEditingController(
+                  text: FirebaseAuth.instance.currentUser?.email,
+                ),
                 decoration: const InputDecoration(
                   label: Text("お礼の連絡先(任意)"),
                   hintText: "メールアドレス(任意)",
