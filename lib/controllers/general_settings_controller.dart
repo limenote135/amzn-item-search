@@ -26,7 +26,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     var settings = box.get(generalSettingsKeyName) as GeneralSettings?;
     if (settings != null) {
       // 小口設定の削除に伴うマイグレーション since v1.1.4
-      if (!settings.isMajorCustomer) {
+      if (settings.isMajorCustomer == false) {
         settings = settings.copyWith(isMajorCustomer: true);
       }
 

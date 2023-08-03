@@ -70,7 +70,7 @@ class _Body extends HookConsumerWidget {
               ref.read(analyticsControllerProvider).setUserId(user.uid),
             ]);
 
-            if (!user.emailVerified) {
+            if (user.emailVerified == false) {
               if (cred.user?.emailVerified == false) {
                 await cred.user?.sendEmailVerification();
                 await EasyLoading.dismiss();

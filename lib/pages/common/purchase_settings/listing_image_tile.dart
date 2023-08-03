@@ -51,7 +51,6 @@ class ListingImageTile extends ConsumerWidget {
                             formArray.clear();
                           } else {
                             // 数が減る場合、一度 clear しないと正しく反映されない不具合がある
-                            // TODO: もう直ってる？
                             formArray
                               ..clear(emitEvent: false, updateParent: false)
                               ..reset(value: result);
