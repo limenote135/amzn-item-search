@@ -124,6 +124,9 @@ const PriceContainer = ({ reference, inView, isDetailOpen, onClickDetail }: Pric
         </Grid>
       </Box>
       <Box mt={2} textAlign={"center"}>
+        アプリ登録後1か月間は全ての機能がご利用いただけます。
+      </Box>
+      <Box mt={2} textAlign={"center"}>
         <Typography>
           プランの変更は
           <Link href={"/mypage"}>
