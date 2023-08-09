@@ -94,9 +94,9 @@ class _Body extends HookConsumerWidget {
         ),
         ListTile(
           title: const WithLockIconIfNotPaid(child: Text("目標利益率設定")),
-          subtitle: settings.enableTargetProfit == false
-              ? const Text("無効")
-              : Text("${settings.targetProfitValue} %"),
+          subtitle: settings.enableTargetProfit
+              ? Text("${settings.targetProfitValue} %")
+              : const Text("無効"),
           onTap: () {
             Navigator.push(
               context,
@@ -115,9 +115,9 @@ class _Body extends HookConsumerWidget {
         ),
         ListTile(
           title: const WithLockIconIfNotPaid(child: Text("読み上げ設定")),
-          subtitle: settings.enableReadAloud == false
-              ? const Text("無効")
-              : Text(settings.readAloudPatterns[settings.patternIndex].title),
+          subtitle: settings.enableReadAloud
+              ? Text(settings.readAloudPatterns[settings.patternIndex].title)
+              : const Text("無効"),
           onTap: () {
             Navigator.push(
               context,
