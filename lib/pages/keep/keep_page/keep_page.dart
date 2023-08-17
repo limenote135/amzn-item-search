@@ -82,7 +82,7 @@ class _UnpaidUserBody extends ConsumerWidget {
             "標準プランでは商品を\nキープリストに登録することができます",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 16),
-          )
+          ),
         ],
       ),
     );

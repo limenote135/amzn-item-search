@@ -108,7 +108,7 @@ class _Body extends HookConsumerWidget {
                 for (var i = 0; i < settings.customButtons.length; i++)
                   i == buttonIndex
                       ? settings.customButtons[i].copyWith(enable: value)
-                      : settings.customButtons[i]
+                      : settings.customButtons[i],
               ];
               final enableCount = settings.customButtons
                   .where((element) => element.enable)
@@ -143,7 +143,7 @@ class _Body extends HookConsumerWidget {
                         title: button.title,
                         pattern: button.pattern,
                       )
-                    : settings.customButtons[i]
+                    : settings.customButtons[i],
             ];
             ref
                 .read(generalSettingsControllerProvider.notifier)

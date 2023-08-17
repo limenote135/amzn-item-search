@@ -53,7 +53,7 @@ class ConditionTextTile extends ConsumerWidget {
                       label: text.length > _maxTextLengthInDialog
                           ? "${text.substring(0, _maxTextLengthInDialog)}..."
                           : text,
-                    )
+                    ),
                 ],
               );
               if (ret != null) {

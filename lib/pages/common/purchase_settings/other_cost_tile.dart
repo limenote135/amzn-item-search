@@ -38,7 +38,7 @@ class OtherCostTile extends HookConsumerWidget {
               validationMessages: {
                 ValidationMessage.required: (_) => "その他費用は必須です",
                 ValidationMessage.number: (_) => "不正な価格です",
-                ValidationMessage.min: (_) => "不正な価格です"
+                ValidationMessage.min: (_) => "不正な価格です",
               },
             ),
           ),

@@ -71,9 +71,9 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 leading: Icon(Icons.delete),
                 title: Text("リストをクリア"),
               ),
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -99,7 +99,7 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
           message: "どの日の実績をシェアしますか？",
           actions: [
             const AlertDialogAction(key: "total", label: "トータル実績"),
-            ...days.map((e) => AlertDialogAction(key: e, label: e))
+            ...days.map((e) => AlertDialogAction(key: e, label: e)),
           ],
         );
         if (result != null) {

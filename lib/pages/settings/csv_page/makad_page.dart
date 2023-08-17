@@ -123,7 +123,7 @@ class _Body extends ConsumerWidget {
                       final n = int.tryParse(value ?? "");
                       return n != null ? null : "不正な値です";
                     },
-                  )
+                  ),
                 ],
               );
               if (values == null) {
@@ -151,7 +151,7 @@ class _Body extends ConsumerWidget {
               initialSelectedActionKey: settings.paymentMethod,
               actions: [
                 for (final val in MakadPaymentMethod.values)
-                  AlertDialogAction(key: val, label: val.displayString)
+                  AlertDialogAction(key: val, label: val.displayString),
               ],
             );
             if (ret == null) {

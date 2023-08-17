@@ -72,7 +72,7 @@ class ListingImageTile extends ConsumerWidget {
                           var img = <String>[
                             ...images,
                             for (var i = 0; i < result.paths.length; i++)
-                              if (result.paths[i] != null) result.paths[i]!
+                              if (result.paths[i] != null) result.paths[i]!,
                           ];
                           if (img.length > _maxImageCount) {
                             img = img.sublist(0, _maxImageCount);

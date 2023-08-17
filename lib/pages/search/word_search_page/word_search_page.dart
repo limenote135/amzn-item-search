@@ -178,7 +178,7 @@ class _AppBar extends HookConsumerWidget {
                     }
                   },
                   icon: const Icon(Icons.history),
-                )
+                ),
               ],
             ),
           ),

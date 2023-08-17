@@ -8,8 +8,8 @@ final daysProvider = Provider((ref) {
   final items = ref.watch(filteredStockListProvider);
   return [
     ...{
-      ...items.map((e) => DateTime.parse(e.purchaseDate).toLocal().dayFormat())
-    }
+      ...items.map((e) => DateTime.parse(e.purchaseDate).toLocal().dayFormat()),
+    },
   ];
 });
 

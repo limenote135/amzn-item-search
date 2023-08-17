@@ -179,7 +179,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     final box = _ref.read(settingsBoxProvider);
     final retailers = <String>[
       for (var i = 0; i < state.retailers.length; i++)
-        if (i != index) state.retailers[i]
+        if (i != index) state.retailers[i],
     ];
     state = state.copyWith(
       retailers: retailers,

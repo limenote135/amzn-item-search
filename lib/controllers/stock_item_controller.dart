@@ -176,7 +176,7 @@ class StockItemListController extends StateNotifier<List<StockItem>> {
       itemMap[e.id] = e.copyWith(listingDate: date);
     }
     state = [
-      for (final e in state) itemMap.containsKey(e.id) ? itemMap[e.id]! : e
+      for (final e in state) itemMap.containsKey(e.id) ? itemMap[e.id]! : e,
     ];
     box.putAll(itemMap);
   }
