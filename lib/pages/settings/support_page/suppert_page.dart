@@ -2,11 +2,17 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/device.dart';
+import 'package:amasearch/util/support_info.dart';
 import 'package:amasearch/util/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
+final _supportInfo = FutureProvider.autoDispose((_) async {
+  final info = await SupportInfo().get();
+  return info;
+});
 
 class SupportPage extends StatelessWidget {
   const SupportPage({super.key});
@@ -43,10 +49,16 @@ class _Body extends ConsumerWidget {
           data: (value) => value!.email,
           orElse: () => "",
         );
+    final info = ref.watch(_supportInfo);
     return Form(
       key: formKey,
       child: Column(
         children: [
+          info.when(
+            error: (e, _) => Container(),
+            loading: Container.new,
+            data: (data) => ListTile(title: Text(data)),
+          ),
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
