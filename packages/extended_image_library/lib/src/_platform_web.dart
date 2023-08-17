@@ -1,11 +1,10 @@
-import 'dart:ui' as ui show Codec;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 /// mock web File
 /// no implement
 // ignore_for_file: always_specify_types,avoid_unused_constructor_parameters,unused_field
-abstract class File {
+class File {
   /// Creates a [File] object.
   ///
   /// If [path] is a relative path, it will be interpreted relative to the
@@ -15,16 +14,16 @@ abstract class File {
   /// current working directory.
   ///
 
-  File(String path) : assert(false, 'not support on web');
+  File(this.path) : assert(false, 'not support on web');
 
   /// Reads the entire file contents as a list of bytes.
   ///
   /// Returns a `Future<Uint8List>` that completes with the list of bytes that
   /// is the contents of the file.
-  Future<Uint8List> readAsBytes();
+  Future<Uint8List> readAsBytes() async => Uint8List.fromList(<int>[]);
 
   /// The path of the file underlying this random access file.
-  String get path;
+  final String path;
 }
 
 /// mock web File
@@ -44,23 +43,6 @@ class FileImage extends ImageProvider<FileImage> {
   @override
   Future<FileImage> obtainKey(ImageConfiguration configuration) {
     return SynchronousFuture<FileImage>(this);
-  }
-
-  @override
-  ImageStreamCompleter loadBuffer(FileImage key, DecoderBufferCallback decode) {
-    return MultiFrameImageStreamCompleter(
-      codec: _loadAsync(key, decode),
-      scale: key.scale,
-      debugLabel: key.file.path,
-      informationCollector: () sync* {
-        yield ErrorDescription('Path: ${file.path}');
-      },
-    );
-  }
-
-  Future<ui.Codec> _loadAsync(
-      FileImage key, DecoderBufferCallback decode) async {
-    return Future<ui.Codec>.error(StateError('not support on web'));
   }
 
   @override
