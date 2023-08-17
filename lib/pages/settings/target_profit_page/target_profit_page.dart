@@ -87,7 +87,7 @@ class _Body extends HookConsumerWidget {
                     final n = int.tryParse(value ?? "");
                     return n != null && n >= 0 ? null : "不正な値です";
                   },
-                )
+                ),
               ],
             );
             if (ret != null) {
@@ -122,7 +122,7 @@ class _Body extends HookConsumerWidget {
                     final n = int.tryParse(value ?? "");
                     return n != null && n >= 0 ? null : "不正な値です";
                   },
-                )
+                ),
               ],
             );
             if (ret != null) {

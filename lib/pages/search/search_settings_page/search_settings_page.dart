@@ -179,7 +179,7 @@ class _CodeType extends HookConsumerWidget {
                     .update(type: value);
               }
             },
-          )
+          ),
         ],
       ),
     );
@@ -228,7 +228,7 @@ class _UsedSubCondition extends HookConsumerWidget {
                     .update(usedSubCondition: value);
               }
             },
-          )
+          ),
         ],
       ),
     );

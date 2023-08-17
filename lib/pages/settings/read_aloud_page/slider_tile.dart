@@ -51,7 +51,7 @@ class _SliderTileState extends State<SliderTile> {
             onChangeEnd: (value) {
               widget.onSubmit?.call((value * 10).round() / 10);
             },
-          )
+          ),
         ],
       ),
     );

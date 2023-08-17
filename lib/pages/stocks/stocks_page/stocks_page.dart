@@ -180,7 +180,7 @@ class _Body extends HookConsumerWidget {
       return ProviderScope(
         overrides: [
           dateItemsProvider
-              .overrideWithValue(items.getRange(0, lastIndex).toList())
+              .overrideWithValue(items.getRange(0, lastIndex).toList()),
         ],
         child: const SummaryTile(),
       );
@@ -194,7 +194,7 @@ class _Body extends HookConsumerWidget {
       return ProviderScope(
         overrides: [
           dateItemsProvider
-              .overrideWithValue(items.getRange(index, lastIndex).toList())
+              .overrideWithValue(items.getRange(index, lastIndex).toList()),
         ],
         child: const SummaryTile(),
       );

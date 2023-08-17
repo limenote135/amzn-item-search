@@ -42,7 +42,7 @@ class SellerListTile extends HookConsumerWidget {
                           _currentPriceDetailProvider.overrideWithValue(price),
                         ],
                         child: const _OfferItem(ItemCondition.newItem),
-                      )
+                      ),
                   ],
                 ),
               ),
@@ -64,13 +64,13 @@ class SellerListTile extends HookConsumerWidget {
                           _currentPriceDetailProvider.overrideWithValue(price),
                         ],
                         child: const _OfferItem(ItemCondition.usedItem),
-                      )
+                      ),
                   ],
                 ),
               ),
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }

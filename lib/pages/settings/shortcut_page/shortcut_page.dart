@@ -103,7 +103,7 @@ class _Body extends HookConsumerWidget {
               if (item != null) {
                 final updated = [
                   for (var j = 0; j < left.length; j++)
-                    if (i == j) item else left[j]
+                    if (i == j) item else left[j],
                 ];
 
                 ref
@@ -147,7 +147,7 @@ class _Body extends HookConsumerWidget {
               if (item != null) {
                 final updated = [
                   for (var j = 0; j < right.length; j++)
-                    if (i == j) item else right[j]
+                    if (i == j) item else right[j],
                 ];
 
                 ref
@@ -227,8 +227,8 @@ class _Body extends HookConsumerWidget {
         const AlertDialogAction(key: _keepaKey, label: "Keepa"),
         if (isPaidUser)
           const AlertDialogAction(key: _variation, label: "バリエーション"),
-        for (var button in buttons)
-          AlertDialogAction(key: button.id, label: button.title)
+        for (final button in buttons)
+          AlertDialogAction(key: button.id, label: button.title),
       ],
     );
 

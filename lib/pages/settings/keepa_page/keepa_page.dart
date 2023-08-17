@@ -115,7 +115,7 @@ class _Body extends HookConsumerWidget {
               }
             },
           ),
-        )
+        ),
       ],
     );
   }

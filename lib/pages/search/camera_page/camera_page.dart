@@ -318,7 +318,7 @@ class _BodyState extends ConsumerState<_Body> {
               ProviderScope(
                 overrides: [
                   currentCodeProvider.overrideWithValue(_lastRead),
-                  fromRouteProvider.overrideWithValue(CameraPage.routeName)
+                  fromRouteProvider.overrideWithValue(CameraPage.routeName),
                 ],
                 child: const CameraItemTile(),
               ),

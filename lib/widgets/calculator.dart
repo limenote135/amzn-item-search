@@ -195,7 +195,7 @@ class Calculator extends HookConsumerWidget {
                       child: const Text("+"),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -295,7 +295,7 @@ class Calculator extends HookConsumerWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

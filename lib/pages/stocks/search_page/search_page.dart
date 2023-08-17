@@ -277,7 +277,7 @@ class _Body extends ConsumerWidget {
                                 AlertDialogAction(
                                   key: retailer,
                                   label: retailer,
-                                )
+                                ),
                             ],
                           );
                           if (ret != null) {
@@ -287,7 +287,7 @@ class _Body extends ConsumerWidget {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

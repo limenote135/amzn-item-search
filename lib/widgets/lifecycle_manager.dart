@@ -10,6 +10,8 @@ mixin LifecycleCallback {
   void onInactive(BuildContext context, WidgetRef ref) {}
 
   void onDetached(BuildContext context, WidgetRef ref) {}
+
+  void onHidden(BuildContext context, WidgetRef ref){}
 }
 
 /// ライフサイクルを受け取れるStatefulWidget
@@ -52,6 +54,8 @@ class _LifeCycleManagerState extends ConsumerState<LifecycleManager>
         widget.callback?.onPaused(context, ref);
       case AppLifecycleState.detached:
         widget.callback?.onDetached(context, ref);
+      case AppLifecycleState.hidden:
+        widget.callback?.onHidden(context, ref);
     }
   }
 

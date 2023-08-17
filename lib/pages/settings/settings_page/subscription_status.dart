@@ -16,7 +16,7 @@ class SubscriptionStatus extends ConsumerWidget {
           error,
           stackTrace,
           information: const [
-            "SubscriptionStatus.currentSubscriptionPlanProvider when"
+            "SubscriptionStatus.currentSubscriptionPlanProvider when",
           ],
         );
         return const Text("エラー: 状態を取得できませんでした");

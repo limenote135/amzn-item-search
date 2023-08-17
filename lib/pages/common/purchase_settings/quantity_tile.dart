@@ -51,7 +51,7 @@ class QuantityTile extends HookWidget {
                     validationMessages: {
                       ValidationMessage.required: (_) => "不正な値",
                       ValidationMessage.number: (_) => "不正な値",
-                      ValidationMessage.min: (_) => "不正な値"
+                      ValidationMessage.min: (_) => "不正な値",
                     },
                   ),
                 ),
@@ -65,7 +65,7 @@ class QuantityTile extends HookWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

@@ -70,7 +70,7 @@ class ItemTile extends HookConsumerWidget {
                 textFields: [
                   const DialogTextField(
                     maxLines: 3,
-                  )
+                  ),
                 ],
               );
               if (result == null) {

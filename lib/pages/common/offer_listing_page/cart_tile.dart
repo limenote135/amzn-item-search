@@ -81,7 +81,7 @@ class CartTile extends HookConsumerWidget {
                             ],
                             child: const OfferChips(),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ],
