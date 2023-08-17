@@ -84,7 +84,9 @@ class TileImage extends HookConsumerWidget {
                 child: Text("危険物", style: captionSize),
               ),
             ),
-          if (isPaidUser && isSmallProduct(asinData))
+          if (isPaidUser &&
+              (isSmallProduct(asinData) ||
+                  asinData.sizeType != SizeType.normal))
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 1),
               child: Container(
