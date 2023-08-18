@@ -42,6 +42,18 @@ class TileImage extends HookConsumerWidget {
     return newPrice < 10000 && usedPrice < 10000;
   }
 
+  static bool shouldShowSize(AsinData item) {
+    switch (item.sizeType) {
+      case SizeType.normal:
+        return false;
+      case SizeType.small:
+        return isSmallProduct(item);
+      case SizeType.big:
+      case SizeType.moreBig:
+        return true;
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isPaidUser = ref.watch(isPaidUserProvider);
@@ -84,9 +96,7 @@ class TileImage extends HookConsumerWidget {
                 child: Text("危険物", style: captionSize),
               ),
             ),
-          if (isPaidUser &&
-              (isSmallProduct(asinData) ||
-                  asinData.sizeType != SizeType.normal))
+          if (isPaidUser && shouldShowSize(asinData))
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 1),
               child: Container(
