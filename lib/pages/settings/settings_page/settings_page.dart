@@ -10,6 +10,7 @@ import 'package:amasearch/pages/settings/condition_text_page/condition_text_page
 import 'package:amasearch/pages/settings/csv_page/csv_page.dart';
 import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.dart';
 import 'package:amasearch/pages/settings/donation_page/donation_page.dart';
+import 'package:amasearch/pages/settings/faq_page/faq_page.dart';
 import 'package:amasearch/pages/settings/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_page.dart';
 import 'package:amasearch/pages/settings/retailers_page/retailers_page.dart';
@@ -246,6 +247,12 @@ class _Body extends HookConsumerWidget {
         const ThemeDivider(),
         ListTile(
           title: Text("サポート", style: captionStyle),
+        ),
+        ListTile(
+          title: const Text("よくあるご質問"),
+          onTap: () {
+          Navigator.push(context, FaqPage.route());
+          },
         ),
         ListTile(
           title: const Text("問い合わせ"),
