@@ -14,7 +14,7 @@ class SelectedKeepItemsController extends StateNotifier<List<KeepItem>> {
       // remove
       state = [
         for (final s in state)
-          if (s != item) s
+          if (s != item) s,
       ];
     } else {
       // add

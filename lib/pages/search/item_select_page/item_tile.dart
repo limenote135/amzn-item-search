@@ -36,7 +36,7 @@ class ItemTile extends ConsumerWidget {
             textFields: [
               const DialogTextField(
                 maxLines: 3,
-              )
+              ),
             ],
           );
           if (result == null) {
@@ -95,7 +95,7 @@ class ItemTileWithRequest extends ConsumerWidget {
                 textFields: [
                   const DialogTextField(
                     maxLines: 3,
-                  )
+                  ),
                 ],
               );
               if (result == null) {

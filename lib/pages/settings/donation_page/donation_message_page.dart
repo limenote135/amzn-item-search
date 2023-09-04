@@ -196,7 +196,7 @@ class _Body extends ConsumerWidget {
                   }
                 }
               },
-            )
+            ),
           ],
         ),
       ),

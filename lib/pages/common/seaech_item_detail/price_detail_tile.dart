@@ -119,10 +119,10 @@ class PriceDetailTile extends HookConsumerWidget {
                             : "(${feeInfo.fbaFee} 円)",
                       )
                     : const Text("(不明) 円"),
-              )
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

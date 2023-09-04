@@ -126,7 +126,7 @@ List<List<Object>> _createPricetarCsv(
         "",
         "",
         "",
-      ]
+      ],
   ];
 }
 
@@ -174,7 +174,7 @@ List<List<Object>> _createMakadCsv(
         "",
         "",
         settings.paymentMethod.makadCsvValue,
-      ]
+      ],
   ];
 }
 
@@ -228,7 +228,7 @@ List<List<Object>> _createSellerSketCsv(
         "", // 1~30日まで
         settings.shippingPattern,
         1,
-      ]
+      ],
   ];
 }
 
@@ -307,7 +307,7 @@ List<List<Object>> _createDefaultCsv(
 ) {
   final data = <List<Object>>[
     <String>[for (final o in order) o.toDisplayString()],
-    for (final item in items) _createData(item, order)
+    for (final item in items) _createData(item, order),
   ];
   return data;
 }

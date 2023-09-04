@@ -141,7 +141,7 @@ class _ListingImagesPageState extends ConsumerState<ListingImagesPage> {
                         var img = <String>[
                           ...images,
                           for (var i = 0; i < result.paths.length; i++)
-                            if (result.paths[i] != null) result.paths[i]!
+                            if (result.paths[i] != null) result.paths[i]!,
                         ];
                         if (img.length > _maxImageCount) {
                           img = img.sublist(0, _maxImageCount);
@@ -175,7 +175,7 @@ class _ListingImagesPageState extends ConsumerState<ListingImagesPage> {
                     setState(() {
                       images = [
                         for (var i = 0; i < images.length; i++)
-                          i == selectedIndex ? result : images[i]
+                          i == selectedIndex ? result : images[i],
                       ];
                     });
                   },
@@ -187,7 +187,7 @@ class _ListingImagesPageState extends ConsumerState<ListingImagesPage> {
                     setState(() {
                       images = [
                         for (var i = 0; i < images.length; i++)
-                          if (i != selectedIndex) images[i]
+                          if (i != selectedIndex) images[i],
                       ];
                       if (images.isEmpty) {
                         selectedIndex = -1;

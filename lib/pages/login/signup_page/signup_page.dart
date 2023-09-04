@@ -111,9 +111,9 @@ class SignupPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: lightTheme.secondaryHeaderColor,
+        backgroundColor: backgroundColor,
       ),
-      backgroundColor: lightTheme.secondaryHeaderColor,
+      backgroundColor: backgroundColor,
       body: Center(
         child: SingleChildScrollView(
           child: Column(

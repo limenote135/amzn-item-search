@@ -51,7 +51,7 @@ class SearchSetting extends HookConsumerWidget {
                     style: middleSize,
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ],

@@ -122,7 +122,7 @@ class _Body extends ConsumerWidget {
                     DialogTextField(
                       maxLines: 3,
                       initialText: item.memo,
-                    )
+                    ),
                   ],
                 );
                 if (result == null) {

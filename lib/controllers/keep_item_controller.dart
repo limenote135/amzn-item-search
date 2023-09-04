@@ -60,7 +60,7 @@ class KeepItemListController extends StateNotifier<List<KeepItem>> {
     final newItem = item.copyWith(memo: memo);
     state = [
       for (var i = 0; i < state.length; i++)
-        state[i].id == item.id ? newItem : state[i]
+        state[i].id == item.id ? newItem : state[i],
     ];
     box.put(item.id, newItem);
   }
@@ -72,7 +72,7 @@ class KeepItemListController extends StateNotifier<List<KeepItem>> {
     final ids = items.map((e) => e.id);
     state = [
       for (final s in state)
-        ids.contains(s.id) ? s.copyWith(isUpdating: true) : s
+        ids.contains(s.id) ? s.copyWith(isUpdating: true) : s,
     ];
 
     await clearDiskCachedImages(); // Keepa の画像キャッシュを削除する
@@ -91,7 +91,7 @@ class KeepItemListController extends StateNotifier<List<KeepItem>> {
         }
       }
       state = [
-        for (final s in state) result.containsKey(s.id) ? result[s.id]! : s
+        for (final s in state) result.containsKey(s.id) ? result[s.id]! : s,
       ];
       await Future<void>.delayed(const Duration(seconds: 2));
     }

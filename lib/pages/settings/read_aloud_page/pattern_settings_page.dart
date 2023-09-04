@@ -178,7 +178,7 @@ class __PatternEditFormState extends ConsumerState<_PatternEditForm> {
               child: const Text("保存"),
             ),
           ],
-        )
+        ),
       ],
     );
   }

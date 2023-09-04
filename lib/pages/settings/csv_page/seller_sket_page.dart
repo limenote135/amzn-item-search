@@ -128,7 +128,7 @@ class _Body extends ConsumerWidget {
                       final n = int.tryParse(value ?? "");
                       return n != null ? null : "不正な値です";
                     },
-                  )
+                  ),
                 ],
               );
               if (values == null) {
@@ -190,7 +190,7 @@ class _Body extends ConsumerWidget {
                       }
                       return null;
                     },
-                  )
+                  ),
                 ],
               );
               if (values == null) {

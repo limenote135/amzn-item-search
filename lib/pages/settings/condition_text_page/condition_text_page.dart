@@ -74,7 +74,7 @@ class _Body extends ConsumerWidget {
                 }
                 final newTexts = [
                   for (var n = 0; n < settings.newConditionTexts.length; n++)
-                    n == i ? result[0] : settings.newConditionTexts[n]
+                    n == i ? result[0] : settings.newConditionTexts[n],
                 ];
                 ref
                     .read(generalSettingsControllerProvider.notifier)
@@ -116,7 +116,7 @@ class _Body extends ConsumerWidget {
                 }
                 final newTexts = [
                   for (var n = 0; n < settings.usedConditionTexts.length; n++)
-                    n == i ? result[0] : settings.usedConditionTexts[n]
+                    n == i ? result[0] : settings.usedConditionTexts[n],
                 ];
                 ref
                     .read(generalSettingsControllerProvider.notifier)

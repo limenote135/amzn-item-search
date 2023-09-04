@@ -70,7 +70,7 @@ class FeeTile extends HookConsumerWidget {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

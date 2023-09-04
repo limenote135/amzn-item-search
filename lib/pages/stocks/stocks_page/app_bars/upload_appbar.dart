@@ -51,7 +51,7 @@ class UploadAppBar extends ConsumerWidget implements PreferredSizeWidget {
                               f.displayName,
                               isPaidUser: isPaidUser,
                             ),
-                          )
+                          ),
                       ],
                     );
                     if (type == null) {

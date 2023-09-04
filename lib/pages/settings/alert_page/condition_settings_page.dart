@@ -61,7 +61,7 @@ class _Body extends HookConsumerWidget {
       final newAlert = alert.copyWith(conditions: cond);
       final newAlerts = [
         for (var i = 0; i < alerts.length; i++)
-          i == index ? newAlert : alerts[i]
+          i == index ? newAlert : alerts[i],
       ];
       ref
           .read(generalSettingsControllerProvider.notifier)
@@ -81,7 +81,7 @@ class _Body extends HookConsumerWidget {
                 DialogTextField(
                   validator: (value) =>
                       value!.isEmpty ? "アラート名を入力してください" : null,
-                )
+                ),
               ],
               title: "アラート名",
             );
@@ -90,7 +90,7 @@ class _Body extends HookConsumerWidget {
             }
             final newAlerts = [
               for (var i = 0; i < alerts.length; i++)
-                i == index ? alerts[i].copyWith(title: text.single) : alerts[i]
+                i == index ? alerts[i].copyWith(title: text.single) : alerts[i],
             ];
             ref
                 .read(generalSettingsControllerProvider.notifier)
@@ -126,7 +126,7 @@ class _Body extends HookConsumerWidget {
                     }
                     final newCond = [
                       for (var i = 0; i < alert.conditions.length; i++)
-                        if (i != index) alert.conditions[i]
+                        if (i != index) alert.conditions[i],
                     ];
                     modifyCondition(newCond);
                   },
@@ -159,7 +159,7 @@ class _Body extends HookConsumerWidget {
                     final n = int.tryParse(value ?? "");
                     return n != null && n >= 0 ? null : "不正な値です";
                   },
-                )
+                ),
               ],
               title: "粗利額",
             );
@@ -204,7 +204,7 @@ class _Body extends HookConsumerWidget {
                   AlertDialogAction(
                     key: val.index,
                     label: val.toDisplayString(),
-                  )
+                  ),
               ],
             );
             if (val == null) {
@@ -243,7 +243,7 @@ class _Body extends HookConsumerWidget {
                     final n = int.tryParse(value ?? "");
                     return n != null && n >= 0 ? null : "不正な値です";
                   },
-                )
+                ),
               ],
               title: "順位",
             );
