@@ -32,7 +32,7 @@ class RetailerTile extends HookConsumerWidget {
                 initialSelectedActionKey: form.control(retailerField).value,
                 actions: [
                   for (final retailer in retailers)
-                    AlertDialogAction(key: retailer, label: retailer)
+                    AlertDialogAction(key: retailer, label: retailer),
                 ],
               );
               if (ret != null) {

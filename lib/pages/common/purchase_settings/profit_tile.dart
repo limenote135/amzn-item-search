@@ -47,9 +47,9 @@ class ProfitTile extends HookConsumerWidget {
               if (isPaidUser)
                 Text("利益率 ${_getProfitRate(profit, sellPrice)} %"),
               if (isPaidUser)
-                Text("ROI ${_getProfitRoi(profit, purchasePrice)} %")
+                Text("ROI ${_getProfitRoi(profit, purchasePrice)} %"),
             ],
-          )
+          ),
         ],
       ),
     );

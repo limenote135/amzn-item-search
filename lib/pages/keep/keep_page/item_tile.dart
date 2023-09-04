@@ -134,7 +134,7 @@ class _TileBody extends ConsumerWidget {
                       if (item.sellByAmazon == true)
                         const TextSpan(text: "有")
                       else
-                        const TextSpan(text: "無", style: strongTextStyle)
+                        const TextSpan(text: "無", style: strongTextStyle),
                     ],
                   ),
                   style: smallSize,

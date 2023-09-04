@@ -124,7 +124,7 @@ class SearchBar extends HookConsumerWidget implements PreferredSizeWidget {
                               .push(SearchSettingsPage.route());
                         },
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

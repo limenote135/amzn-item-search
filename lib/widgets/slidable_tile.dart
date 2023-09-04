@@ -68,7 +68,14 @@ class SlidableTile extends HookConsumerWidget {
               children: [
                 for (final act in left)
                   if (needShow(act, hasVariation: hasVariation))
-                    _getAction(context, ref, act.type, act.param, buttons, item)
+                    _getAction(
+                      context,
+                      ref,
+                      act.type,
+                      act.param,
+                      buttons,
+                      item,
+                    ),
               ],
             )
           : null,
@@ -79,7 +86,14 @@ class SlidableTile extends HookConsumerWidget {
               children: [
                 for (final act in right)
                   if (needShow(act, hasVariation: hasVariation))
-                    _getAction(context, ref, act.type, act.param, buttons, item)
+                    _getAction(
+                      context,
+                      ref,
+                      act.type,
+                      act.param,
+                      buttons,
+                      item,
+                    ),
               ],
             )
           : null,

@@ -82,7 +82,7 @@ class InputPricesTile extends HookConsumerWidget {
                     validationMessages: {
                       ValidationMessage.required: (_) => "販売価格は必須です",
                       ValidationMessage.number: (_) => "不正な価格です",
-                      ValidationMessage.min: (_) => "不正な価格です"
+                      ValidationMessage.min: (_) => "不正な価格です",
                     },
                   ),
                 ),

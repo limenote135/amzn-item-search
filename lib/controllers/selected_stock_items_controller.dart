@@ -14,7 +14,7 @@ class SelectedStockItemsController extends StateNotifier<List<StockItem>> {
       // remove
       state = [
         for (final s in state)
-          if (s != item) s
+          if (s != item) s,
       ];
     } else {
       // add

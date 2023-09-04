@@ -87,7 +87,7 @@ class _TileBody extends HookConsumerWidget {
             Expanded(
               child: Text("参考価格: ${detail.listPrice} 円", style: smallSize),
             ),
-            Expanded(child: Text("順位: ${detail.rank} 位", style: smallSize))
+            Expanded(child: Text("順位: ${detail.rank} 位", style: smallSize)),
           ],
         ),
         Row(
@@ -149,7 +149,7 @@ class _TileBody extends HookConsumerWidget {
                     Text("状態: ${_conditionText(item)}", style: smallSize),
                 ],
               ),
-            )
+            ),
           ],
         ),
         if (isPaidUser)
@@ -191,14 +191,14 @@ class _TileBody extends HookConsumerWidget {
                         const TextSpan(
                           text: "未出品",
                           style: strongTextStyle,
-                        )
+                        ),
                     ],
                   ),
                   style: smallSize,
                 ),
               ),
           ],
-        )
+        ),
       ],
     );
   }

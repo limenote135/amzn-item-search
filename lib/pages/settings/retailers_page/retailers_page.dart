@@ -74,7 +74,7 @@ class _Body extends HookConsumerWidget {
               textFields: [
                 DialogTextField(
                   validator: (value) => value!.isEmpty ? "仕入先を入力してください" : null,
-                )
+                ),
               ],
               title: "仕入先の追加",
             );
@@ -85,7 +85,7 @@ class _Body extends HookConsumerWidget {
                   .addRetailer(text.single);
             }
           },
-        )
+        ),
       ],
     );
   }

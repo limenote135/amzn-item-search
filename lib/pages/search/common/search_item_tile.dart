@@ -35,7 +35,7 @@ class SearchItemTile extends HookConsumerWidget {
         TileImage(),
         Expanded(
           child: _ItemTileBody(),
-        )
+        ),
       ],
     );
     if (settings.enableAlert &&
@@ -114,7 +114,7 @@ class _ItemTileBody extends HookConsumerWidget {
                 "参考: ${numberFormatter.format(item.listPrice)} 円",
                 style: smallSize,
               ),
-            )
+            ),
           ],
         ),
         if (isPaidUser)
@@ -147,7 +147,7 @@ class _ItemTileBody extends HookConsumerWidget {
                         if (item.sellByAmazon == true)
                           const TextSpan(text: "有")
                         else
-                          const TextSpan(text: "無", style: strongTextStyle)
+                          const TextSpan(text: "無", style: strongTextStyle),
                       ],
                     ),
                     style: smallSize,

@@ -241,7 +241,7 @@ class _Body extends HookConsumerWidget {
             child: Row(
               children: [
                 for (var i = 0; i < item.images.length; i++)
-                  _ListingImage(filePath: item.images[i])
+                  _ListingImage(filePath: item.images[i]),
               ],
             ),
           ),
@@ -379,7 +379,7 @@ class _ListingImage extends StatelessWidget {
                         child: ExtendedImage.file(
                           File(filePath),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

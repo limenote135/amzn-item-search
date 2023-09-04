@@ -19,7 +19,7 @@ class LoginRootPage extends StatelessWidget {
     final ratio = _baseWidth / width * _baseScale;
     final scale = ratio < _minScale ? _minScale : ratio;
     return Scaffold(
-      backgroundColor: lightTheme.secondaryHeaderColor,
+      backgroundColor: backgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

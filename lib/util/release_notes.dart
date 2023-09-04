@@ -15,7 +15,7 @@ const releaseNotes = <Release>[
         changes: [
           "キープリスト内の商品の価格情報を最新のものに更新できるようになりました。",
         ],
-      )
+      ),
     ],
   ),
   Release(
@@ -28,7 +28,7 @@ const releaseNotes = <Release>[
           "仕入れリスト内の商品を仕入れ先で検索できるようになりました",
           "Keepa 画面で2つの期間のグラフを表示できるようになりました",
         ],
-      )
+      ),
     ],
   ),
   Release(
@@ -41,7 +41,7 @@ const releaseNotes = <Release>[
           "小型軽量プログラムでの手数料計算に対応しました",
           "上記は有料プラン登録者のみが利用可能です",
         ],
-      )
+      ),
     ],
   ),
   Release(
@@ -50,7 +50,7 @@ const releaseNotes = <Release>[
       ChangeGroup(
         title: "更新内容",
         changes: ["中古出品時に商品画像を指定できるようになりました"],
-      )
+      ),
     ],
   ),
   Release(
@@ -59,7 +59,7 @@ const releaseNotes = <Release>[
       ChangeGroup(
         title: "更新内容",
         changes: ["キープリスト機能を追加しました"],
-      )
+      ),
     ],
   ),
   Release(
@@ -71,7 +71,7 @@ const releaseNotes = <Release>[
           "商品のバリエーション違いを検索できるようになりました",
           "ワード検索時に検索候補が表示されるようになりました",
         ],
-      )
+      ),
     ],
   ),
   Release(
@@ -108,7 +108,7 @@ const releaseNotes = <Release>[
           "仕入れ画面で商品の検索が可能になりました",
           "商品リストを転送する際に指定したもののみ含めるようになりました",
         ],
-      )
+      ),
     ],
   ),
   Release(
