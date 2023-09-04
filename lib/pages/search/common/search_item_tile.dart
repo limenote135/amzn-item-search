@@ -157,11 +157,27 @@ class _ItemTileBody extends HookConsumerWidget {
           ),
         const PriceInfo(),
         if (isPaidUser) const _ListingRestrictions(),
-        if (date != null)
-          Text(
-            "検索日: ${DateTime.parse(date).toLocal().format()}",
-            style: smallSize,
-          ),
+        Row(
+          children: [
+            Expanded(
+              child: (date != null)
+                  ? Text(
+                      "検索日: ${DateTime.parse(date).toLocal().format()}",
+                      style: smallSize,
+                    )
+                  : Container(),
+            ),
+            if (item.variationRoot.isNotEmpty && isPaidUser)
+              Expanded(
+                  child: Text.rich(
+                const TextSpan(
+                  text: "バリエーション",
+                  children: [TextSpan(text: "有", style: strongTextStyle)],
+                ),
+                style: smallSize,
+              ))
+          ],
+        )
       ],
     );
   }
