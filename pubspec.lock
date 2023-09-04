@@ -756,14 +756,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.6.2"
-  flutter_web_browser:
-    dependency: "direct main"
-    description:
-      name: flutter_web_browser
-      sha256: a5564b736253f745e147b8c4eff86de436324d081974cc1f16bff881134a400f
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.17.1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -1570,18 +1562,18 @@ packages:
     dependency: "direct main"
     description:
       name: url_launcher
-      sha256: "781bd58a1eb16069412365c98597726cd8810ae27435f04b3b4d3a470bacd61e"
+      sha256: "47e208a6711459d813ba18af120d9663c20bdf6985d6ad39fe165d2538378d27"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.12"
+    version: "6.1.14"
   url_launcher_android:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: eed4e6a1164aa9794409325c3b707ff424d4d1c2a785e7db67f8bbda00e36e51
+      sha256: b04af59516ab45762b2ca6da40fa830d72d0f6045cd97744450b73493fa76330
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.35"
+    version: "6.1.0"
   url_launcher_ios:
     dependency: transitive
     description:

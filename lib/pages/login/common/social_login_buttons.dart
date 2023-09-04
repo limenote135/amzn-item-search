@@ -7,9 +7,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../util/error_report.dart';
 import 'sign_in_with_apple.dart';
@@ -108,9 +108,11 @@ class SocialLoginButtons extends HookConsumerWidget {
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
-                        await FlutterWebBrowser.openWebPage(
-                          url:
-                              "https://amasearch.knz-c.com/terms/terms_of_service.txt",
+                        await launchUrl(
+                          Uri.parse(
+                            "https://amasearch.knz-c.com/terms/terms_of_service.txt",
+                          ),
+                          mode: LaunchMode.inAppWebView,
                         );
                       },
                   ),
@@ -123,9 +125,11 @@ class SocialLoginButtons extends HookConsumerWidget {
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
-                        await FlutterWebBrowser.openWebPage(
-                          url:
-                              "https://amasearch.knz-c.com/terms/privacy_policy.txt",
+                        await launchUrl(
+                          Uri.parse(
+                            "https://amasearch.knz-c.com/terms/privacy_policy.txt",
+                          ),
+                          mode: LaunchMode.inAppWebView,
                         );
                       },
                   ),
