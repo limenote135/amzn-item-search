@@ -9,8 +9,8 @@ import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final currentAsinProvider = Provider<String>((_) => throw UnimplementedError());
 
@@ -236,7 +236,7 @@ class _Body extends HookConsumerWidget {
                 .read(analyticsControllerProvider)
                 .logPushSearchButtonEvent(pushSearchButtonOpenKeepaName);
             final url = "https://keepa.com/#!product/5-$asin/";
-            await FlutterWebBrowser.openWebPage(url: url);
+            await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
           },
           child: const Text("ブラウザで開く"),
         ),
