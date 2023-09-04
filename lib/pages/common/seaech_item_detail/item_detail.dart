@@ -11,8 +11,8 @@ import 'package:amasearch/widgets/text_line_tile.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'price_detail_tile.dart';
 
@@ -123,9 +123,11 @@ class _Restricted extends ConsumerWidget {
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () async {
-                    await FlutterWebBrowser.openWebPage(
-                      url:
-                          "https://sellercentral.amazon.co.jp/hz/approvalrequest/restrictions/approve?asin=${item.asin}",
+                    await launchUrl(
+                      Uri.parse(
+                        "https://sellercentral.amazon.co.jp/hz/approvalrequest/restrictions/approve?asin=${item.asin}",
+                      ),
+                      mode: LaunchMode.inAppWebView,
                     );
                   },
               ),
