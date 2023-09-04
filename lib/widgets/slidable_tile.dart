@@ -16,8 +16,8 @@ import 'package:amasearch/util/url_replacer.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SlidableTile extends HookConsumerWidget {
   const SlidableTile({
@@ -263,7 +263,8 @@ class SlidableTile extends HookConsumerWidget {
           await ref
               .read(analyticsControllerProvider)
               .logPushSearchButtonEvent(eventName);
-          await FlutterWebBrowser.openWebPage(url: url);
+
+          await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
         }
       },
     );

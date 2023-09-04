@@ -10,8 +10,8 @@ import 'package:amasearch/pages/common/variation_page/variation_page.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/url_replacer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final currentItemProvider =
     Provider<AsinData>((_) => throw UnimplementedError());
@@ -49,7 +49,7 @@ class SearchButtons extends HookConsumerWidget {
               await ref
                   .read(analyticsControllerProvider)
                   .logPushSearchButtonEvent(pushSearchButtonAmazonListName);
-              await FlutterWebBrowser.openWebPage(url: url);
+              await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
             },
             child: const Text("出品一覧"),
           ),
@@ -134,7 +134,7 @@ class SearchButtons extends HookConsumerWidget {
               await ref
                   .read(analyticsControllerProvider)
                   .logPushSearchButtonEvent(eventName);
-              await FlutterWebBrowser.openWebPage(url: url);
+              await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
             },
             child: Text(button.title),
           ),

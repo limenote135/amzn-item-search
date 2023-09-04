@@ -14,9 +14,9 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path/path.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'common.dart';
 
@@ -97,7 +97,7 @@ Future<void> callListings(
     if (ret == OkCancelResult.cancel) {
       // セラーセントラルを開く
       const url = "https://sellercentral.amazon.co.jp/listing/status";
-      await FlutterWebBrowser.openWebPage(url: url);
+      await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
     }
 
     await requestReview(analytics);
