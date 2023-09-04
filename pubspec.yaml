@@ -39,7 +39,7 @@ dependencies:
   extended_image: ^8.1.0
   fast_barcode_scanner:
     path: ./packages/fast_barcode_scanner/fast_barcode_scanner
-  file_picker: ^5.3.3
+  file_picker: ^5.5.0
   firebase_analytics: ^10.4.3
   firebase_auth: ^4.6.3
   firebase_core: ^2.14.0
