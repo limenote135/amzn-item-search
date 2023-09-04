@@ -22,9 +22,9 @@ class PasswordResetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: lightTheme.secondaryHeaderColor,
+        backgroundColor: backgroundColor,
       ),
-      backgroundColor: lightTheme.secondaryHeaderColor,
+      backgroundColor: backgroundColor,
       body: const _Body(),
     );
   }
