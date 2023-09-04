@@ -29,7 +29,7 @@ dependencies:
   cookie_jar: ^4.0.8
   crypto: ^3.0.3
   csv: ^5.0.2
-  cupertino_icons: ^1.0.5
+  cupertino_icons: ^1.0.6
   dartx: ^1.2.0
   device_info_plus: ^9.0.3
   dio: ^5.3.2
