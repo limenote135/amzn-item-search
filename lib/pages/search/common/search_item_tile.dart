@@ -169,15 +169,16 @@ class _ItemTileBody extends HookConsumerWidget {
             ),
             if (item.variationRoot.isNotEmpty && isPaidUser)
               Expanded(
-                  child: Text.rich(
-                const TextSpan(
-                  text: "バリエーション",
-                  children: [TextSpan(text: "有", style: strongTextStyle)],
+                child: Text.rich(
+                  const TextSpan(
+                    text: "バリエーション",
+                    children: [TextSpan(text: "有", style: strongTextStyle)],
+                  ),
+                  style: smallSize,
                 ),
-                style: smallSize,
-              ))
+              ),
           ],
-        )
+        ),
       ],
     );
   }
