@@ -11,7 +11,7 @@ mixin LifecycleCallback {
 
   void onDetached(BuildContext context, WidgetRef ref) {}
 
-  void onHidden(BuildContext context, WidgetRef ref){}
+  void onHidden(BuildContext context, WidgetRef ref) {}
 }
 
 /// ライフサイクルを受け取れるStatefulWidget

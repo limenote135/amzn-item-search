@@ -93,64 +93,45 @@ abstract class $GeneralSettingsCopyWith<$Res> {
       _$GeneralSettingsCopyWithImpl<$Res, GeneralSettings>;
   @useResult
   $Res call(
-      {@HiveField(0)
-          bool isDarkMode,
-      @HiveField(1)
-          bool enableTargetProfit,
-      @HiveField(2)
-          int targetProfitValue,
-      @HiveField(3)
-          String skuFormat,
-      @HiveField(4)
-          List<String> retailers,
-      @HiveField(5)
-          bool enableReadAloud,
-      @HiveField(6)
-          int patternIndex,
-      @HiveField(7)
-          List<ReadAloudPattern> readAloudPatterns,
-      @HiveField(8)
-          double readAloudVolume,
-      @HiveField(9)
-          double? readAloudSpeed,
+      {@HiveField(0) bool isDarkMode,
+      @HiveField(1) bool enableTargetProfit,
+      @HiveField(2) int targetProfitValue,
+      @HiveField(3) String skuFormat,
+      @HiveField(4) List<String> retailers,
+      @HiveField(5) bool enableReadAloud,
+      @HiveField(6) int patternIndex,
+      @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
+      @HiveField(8) double readAloudVolume,
+      @HiveField(9) double? readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
-          List<CustomButtonDetail> customButtons,
-      @HiveField(11, defaultValue: defaultCsvOrder)
-          List<CsvColumn> csvOrder,
-      @HiveField(12, defaultValue: 0)
-          int minProfit,
-      @HiveField(13, defaultValue: false)
-          bool getStocks,
-      @HiveField(14, defaultValue: true)
-          bool enableAlert,
-      @HiveField(15, defaultValue: defaultAlert)
-          List<AlertConditionSet> alerts,
-      @HiveField(16, defaultValue: false)
-          bool enableAlertVibration,
-      @HiveField(17, defaultValue: true)
-          bool isMajorCustomer,
+      List<CustomButtonDetail> customButtons,
+      @HiveField(11, defaultValue: defaultCsvOrder) List<CsvColumn> csvOrder,
+      @HiveField(12, defaultValue: 0) int minProfit,
+      @HiveField(13, defaultValue: false) bool getStocks,
+      @HiveField(14, defaultValue: true) bool enableAlert,
+      @HiveField(15, defaultValue: defaultAlert) List<AlertConditionSet> alerts,
+      @HiveField(16, defaultValue: false) bool enableAlertVibration,
+      @HiveField(17, defaultValue: true) bool isMajorCustomer,
       @HiveField(18, defaultValue: defaultKeepaSettings)
-          KeepaSettings keepaSettings,
+      KeepaSettings keepaSettings,
       @HiveField(19, defaultValue: defaultLeftShortcut)
-          List<ShortcutDetail> leftSlideShortcut,
+      List<ShortcutDetail> leftSlideShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          List<ShortcutDetail> rightSlideShortcut,
+      List<ShortcutDetail> rightSlideShortcut,
       @HiveField(21, defaultValue: defaultNewConditionTexts)
-          List<String> newConditionTexts,
-      @HiveField(22, defaultValue: 0)
-          int newConditionTextIndex,
+      List<String> newConditionTexts,
+      @HiveField(22, defaultValue: 0) int newConditionTextIndex,
       @HiveField(23, defaultValue: defaultUsedConditionText)
-          List<String> usedConditionTexts,
-      @HiveField(24, defaultValue: 0)
-          int usedConditionTextIndex,
+      List<String> usedConditionTexts,
+      @HiveField(24, defaultValue: 0) int usedConditionTextIndex,
       @HiveField(25, defaultValue: defaultPricetarSettings)
-          PricetarSettings pricetarSettings,
+      PricetarSettings pricetarSettings,
       @HiveField(26, defaultValue: defaultMakadSettings)
-          MakadSettings makadSettings,
+      MakadSettings makadSettings,
       @HiveField(27, defaultValue: defaultSellerSketSettings)
-          SellerSketSettings sellerSketSettings,
+      SellerSketSettings sellerSketSettings,
       @HiveField(28, defaultValue: defaultStandardButtons)
-          Map<String, bool> standardButtons});
+      Map<String, bool> standardButtons});
 
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
   $PricetarSettingsCopyWith<$Res> get pricetarSettings;
@@ -364,64 +345,45 @@ abstract class _$$_GeneralSettingsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@HiveField(0)
-          bool isDarkMode,
-      @HiveField(1)
-          bool enableTargetProfit,
-      @HiveField(2)
-          int targetProfitValue,
-      @HiveField(3)
-          String skuFormat,
-      @HiveField(4)
-          List<String> retailers,
-      @HiveField(5)
-          bool enableReadAloud,
-      @HiveField(6)
-          int patternIndex,
-      @HiveField(7)
-          List<ReadAloudPattern> readAloudPatterns,
-      @HiveField(8)
-          double readAloudVolume,
-      @HiveField(9)
-          double? readAloudSpeed,
+      {@HiveField(0) bool isDarkMode,
+      @HiveField(1) bool enableTargetProfit,
+      @HiveField(2) int targetProfitValue,
+      @HiveField(3) String skuFormat,
+      @HiveField(4) List<String> retailers,
+      @HiveField(5) bool enableReadAloud,
+      @HiveField(6) int patternIndex,
+      @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
+      @HiveField(8) double readAloudVolume,
+      @HiveField(9) double? readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
-          List<CustomButtonDetail> customButtons,
-      @HiveField(11, defaultValue: defaultCsvOrder)
-          List<CsvColumn> csvOrder,
-      @HiveField(12, defaultValue: 0)
-          int minProfit,
-      @HiveField(13, defaultValue: false)
-          bool getStocks,
-      @HiveField(14, defaultValue: true)
-          bool enableAlert,
-      @HiveField(15, defaultValue: defaultAlert)
-          List<AlertConditionSet> alerts,
-      @HiveField(16, defaultValue: false)
-          bool enableAlertVibration,
-      @HiveField(17, defaultValue: true)
-          bool isMajorCustomer,
+      List<CustomButtonDetail> customButtons,
+      @HiveField(11, defaultValue: defaultCsvOrder) List<CsvColumn> csvOrder,
+      @HiveField(12, defaultValue: 0) int minProfit,
+      @HiveField(13, defaultValue: false) bool getStocks,
+      @HiveField(14, defaultValue: true) bool enableAlert,
+      @HiveField(15, defaultValue: defaultAlert) List<AlertConditionSet> alerts,
+      @HiveField(16, defaultValue: false) bool enableAlertVibration,
+      @HiveField(17, defaultValue: true) bool isMajorCustomer,
       @HiveField(18, defaultValue: defaultKeepaSettings)
-          KeepaSettings keepaSettings,
+      KeepaSettings keepaSettings,
       @HiveField(19, defaultValue: defaultLeftShortcut)
-          List<ShortcutDetail> leftSlideShortcut,
+      List<ShortcutDetail> leftSlideShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          List<ShortcutDetail> rightSlideShortcut,
+      List<ShortcutDetail> rightSlideShortcut,
       @HiveField(21, defaultValue: defaultNewConditionTexts)
-          List<String> newConditionTexts,
-      @HiveField(22, defaultValue: 0)
-          int newConditionTextIndex,
+      List<String> newConditionTexts,
+      @HiveField(22, defaultValue: 0) int newConditionTextIndex,
       @HiveField(23, defaultValue: defaultUsedConditionText)
-          List<String> usedConditionTexts,
-      @HiveField(24, defaultValue: 0)
-          int usedConditionTextIndex,
+      List<String> usedConditionTexts,
+      @HiveField(24, defaultValue: 0) int usedConditionTextIndex,
       @HiveField(25, defaultValue: defaultPricetarSettings)
-          PricetarSettings pricetarSettings,
+      PricetarSettings pricetarSettings,
       @HiveField(26, defaultValue: defaultMakadSettings)
-          MakadSettings makadSettings,
+      MakadSettings makadSettings,
       @HiveField(27, defaultValue: defaultSellerSketSettings)
-          SellerSketSettings sellerSketSettings,
+      SellerSketSettings sellerSketSettings,
       @HiveField(28, defaultValue: defaultStandardButtons)
-          Map<String, bool> standardButtons});
+      Map<String, bool> standardButtons});
 
   @override
   $KeepaSettingsCopyWith<$Res> get keepaSettings;
@@ -600,65 +562,48 @@ class __$$_GeneralSettingsCopyWithImpl<$Res>
 @HiveType(typeId: generalSettingsTypeId)
 class _$_GeneralSettings implements _GeneralSettings {
   const _$_GeneralSettings(
-      {@HiveField(0)
-          this.isDarkMode = false,
-      @HiveField(1)
-          this.enableTargetProfit = false,
-      @HiveField(2)
-          this.targetProfitValue = 10,
-      @HiveField(3)
-          this.skuFormat = defaultSkuFormat,
-      @HiveField(4)
-          final List<String> retailers = const <String>[],
-      @HiveField(5)
-          this.enableReadAloud = false,
-      @HiveField(6)
-          this.patternIndex = 0,
+      {@HiveField(0) this.isDarkMode = false,
+      @HiveField(1) this.enableTargetProfit = false,
+      @HiveField(2) this.targetProfitValue = 10,
+      @HiveField(3) this.skuFormat = defaultSkuFormat,
+      @HiveField(4) final List<String> retailers = const <String>[],
+      @HiveField(5) this.enableReadAloud = false,
+      @HiveField(6) this.patternIndex = 0,
       @HiveField(7)
-          final List<ReadAloudPattern>
-              readAloudPatterns = defaultReadAloudPatterns,
-      @HiveField(8)
-          this.readAloudVolume = 1.0,
-      @HiveField(9)
-          this.readAloudSpeed,
+      final List<ReadAloudPattern> readAloudPatterns = defaultReadAloudPatterns,
+      @HiveField(8) this.readAloudVolume = 1.0,
+      @HiveField(9) this.readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
-          final List<CustomButtonDetail> customButtons = defaultCustomButtons,
+      final List<CustomButtonDetail> customButtons = defaultCustomButtons,
       @HiveField(11, defaultValue: defaultCsvOrder)
-          final List<CsvColumn> csvOrder = defaultCsvOrder,
-      @HiveField(12, defaultValue: 0)
-          this.minProfit = 0,
-      @HiveField(13, defaultValue: false)
-          this.getStocks = false,
-      @HiveField(14, defaultValue: true)
-          this.enableAlert = true,
+      final List<CsvColumn> csvOrder = defaultCsvOrder,
+      @HiveField(12, defaultValue: 0) this.minProfit = 0,
+      @HiveField(13, defaultValue: false) this.getStocks = false,
+      @HiveField(14, defaultValue: true) this.enableAlert = true,
       @HiveField(15, defaultValue: defaultAlert)
-          final List<AlertConditionSet> alerts = defaultAlert,
-      @HiveField(16, defaultValue: false)
-          this.enableAlertVibration = false,
-      @HiveField(17, defaultValue: true)
-          this.isMajorCustomer = true,
+      final List<AlertConditionSet> alerts = defaultAlert,
+      @HiveField(16, defaultValue: false) this.enableAlertVibration = false,
+      @HiveField(17, defaultValue: true) this.isMajorCustomer = true,
       @HiveField(18, defaultValue: defaultKeepaSettings)
-          this.keepaSettings = defaultKeepaSettings,
+      this.keepaSettings = defaultKeepaSettings,
       @HiveField(19, defaultValue: defaultLeftShortcut)
-          final List<ShortcutDetail> leftSlideShortcut = defaultLeftShortcut,
+      final List<ShortcutDetail> leftSlideShortcut = defaultLeftShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          final List<ShortcutDetail> rightSlideShortcut = defaultRightShortcut,
+      final List<ShortcutDetail> rightSlideShortcut = defaultRightShortcut,
       @HiveField(21, defaultValue: defaultNewConditionTexts)
-          final List<String> newConditionTexts = defaultNewConditionTexts,
-      @HiveField(22, defaultValue: 0)
-          this.newConditionTextIndex = 0,
+      final List<String> newConditionTexts = defaultNewConditionTexts,
+      @HiveField(22, defaultValue: 0) this.newConditionTextIndex = 0,
       @HiveField(23, defaultValue: defaultUsedConditionText)
-          final List<String> usedConditionTexts = defaultUsedConditionText,
-      @HiveField(24, defaultValue: 0)
-          this.usedConditionTextIndex = 0,
+      final List<String> usedConditionTexts = defaultUsedConditionText,
+      @HiveField(24, defaultValue: 0) this.usedConditionTextIndex = 0,
       @HiveField(25, defaultValue: defaultPricetarSettings)
-          this.pricetarSettings = defaultPricetarSettings,
+      this.pricetarSettings = defaultPricetarSettings,
       @HiveField(26, defaultValue: defaultMakadSettings)
-          this.makadSettings = defaultMakadSettings,
+      this.makadSettings = defaultMakadSettings,
       @HiveField(27, defaultValue: defaultSellerSketSettings)
-          this.sellerSketSettings = defaultSellerSketSettings,
+      this.sellerSketSettings = defaultSellerSketSettings,
       @HiveField(28, defaultValue: defaultStandardButtons)
-          final Map<String, bool> standardButtons = defaultStandardButtons})
+      final Map<String, bool> standardButtons = defaultStandardButtons})
       : _retailers = retailers,
         _readAloudPatterns = readAloudPatterns,
         _customButtons = customButtons,
@@ -975,64 +920,47 @@ class _$_GeneralSettings implements _GeneralSettings {
 
 abstract class _GeneralSettings implements GeneralSettings {
   const factory _GeneralSettings(
-      {@HiveField(0)
-          final bool isDarkMode,
-      @HiveField(1)
-          final bool enableTargetProfit,
-      @HiveField(2)
-          final int targetProfitValue,
-      @HiveField(3)
-          final String skuFormat,
-      @HiveField(4)
-          final List<String> retailers,
-      @HiveField(5)
-          final bool enableReadAloud,
-      @HiveField(6)
-          final int patternIndex,
-      @HiveField(7)
-          final List<ReadAloudPattern> readAloudPatterns,
-      @HiveField(8)
-          final double readAloudVolume,
-      @HiveField(9)
-          final double? readAloudSpeed,
+      {@HiveField(0) final bool isDarkMode,
+      @HiveField(1) final bool enableTargetProfit,
+      @HiveField(2) final int targetProfitValue,
+      @HiveField(3) final String skuFormat,
+      @HiveField(4) final List<String> retailers,
+      @HiveField(5) final bool enableReadAloud,
+      @HiveField(6) final int patternIndex,
+      @HiveField(7) final List<ReadAloudPattern> readAloudPatterns,
+      @HiveField(8) final double readAloudVolume,
+      @HiveField(9) final double? readAloudSpeed,
       @HiveField(10, defaultValue: defaultCustomButtons)
-          final List<CustomButtonDetail> customButtons,
+      final List<CustomButtonDetail> customButtons,
       @HiveField(11, defaultValue: defaultCsvOrder)
-          final List<CsvColumn> csvOrder,
-      @HiveField(12, defaultValue: 0)
-          final int minProfit,
-      @HiveField(13, defaultValue: false)
-          final bool getStocks,
-      @HiveField(14, defaultValue: true)
-          final bool enableAlert,
+      final List<CsvColumn> csvOrder,
+      @HiveField(12, defaultValue: 0) final int minProfit,
+      @HiveField(13, defaultValue: false) final bool getStocks,
+      @HiveField(14, defaultValue: true) final bool enableAlert,
       @HiveField(15, defaultValue: defaultAlert)
-          final List<AlertConditionSet> alerts,
-      @HiveField(16, defaultValue: false)
-          final bool enableAlertVibration,
-      @HiveField(17, defaultValue: true)
-          final bool isMajorCustomer,
+      final List<AlertConditionSet> alerts,
+      @HiveField(16, defaultValue: false) final bool enableAlertVibration,
+      @HiveField(17, defaultValue: true) final bool isMajorCustomer,
       @HiveField(18, defaultValue: defaultKeepaSettings)
-          final KeepaSettings keepaSettings,
+      final KeepaSettings keepaSettings,
       @HiveField(19, defaultValue: defaultLeftShortcut)
-          final List<ShortcutDetail> leftSlideShortcut,
+      final List<ShortcutDetail> leftSlideShortcut,
       @HiveField(20, defaultValue: defaultRightShortcut)
-          final List<ShortcutDetail> rightSlideShortcut,
+      final List<ShortcutDetail> rightSlideShortcut,
       @HiveField(21, defaultValue: defaultNewConditionTexts)
-          final List<String> newConditionTexts,
-      @HiveField(22, defaultValue: 0)
-          final int newConditionTextIndex,
+      final List<String> newConditionTexts,
+      @HiveField(22, defaultValue: 0) final int newConditionTextIndex,
       @HiveField(23, defaultValue: defaultUsedConditionText)
-          final List<String> usedConditionTexts,
-      @HiveField(24, defaultValue: 0)
-          final int usedConditionTextIndex,
+      final List<String> usedConditionTexts,
+      @HiveField(24, defaultValue: 0) final int usedConditionTextIndex,
       @HiveField(25, defaultValue: defaultPricetarSettings)
-          final PricetarSettings pricetarSettings,
+      final PricetarSettings pricetarSettings,
       @HiveField(26, defaultValue: defaultMakadSettings)
-          final MakadSettings makadSettings,
+      final MakadSettings makadSettings,
       @HiveField(27, defaultValue: defaultSellerSketSettings)
-          final SellerSketSettings sellerSketSettings,
+      final SellerSketSettings sellerSketSettings,
       @HiveField(28, defaultValue: defaultStandardButtons)
-          final Map<String, bool> standardButtons}) = _$_GeneralSettings;
+      final Map<String, bool> standardButtons}) = _$_GeneralSettings;
 
   @override // ダークモード
   @HiveField(0)
@@ -1584,14 +1512,11 @@ class __$$_AlertConditionSetCopyWithImpl<$Res>
 @HiveType(typeId: alertConditionSetTypeId)
 class _$_AlertConditionSet implements _AlertConditionSet {
   const _$_AlertConditionSet(
-      {@HiveField(0)
-          required this.id,
-      @HiveField(1)
-      @JsonKey(name: "t")
-          required this.title,
+      {@HiveField(0) required this.id,
+      @HiveField(1) @JsonKey(name: "t") required this.title,
       @HiveField(2)
       @JsonKey(name: "c")
-          final List<AlertCondition> conditions = const <AlertCondition>[]})
+      final List<AlertCondition> conditions = const <AlertCondition>[]})
       : _conditions = conditions;
 
   factory _$_AlertConditionSet.fromJson(Map<String, dynamic> json) =>
@@ -1652,14 +1577,11 @@ class _$_AlertConditionSet implements _AlertConditionSet {
 
 abstract class _AlertConditionSet implements AlertConditionSet {
   const factory _AlertConditionSet(
-      {@HiveField(0)
-          required final String id,
-      @HiveField(1)
-      @JsonKey(name: "t")
-          required final String title,
+      {@HiveField(0) required final String id,
+      @HiveField(1) @JsonKey(name: "t") required final String title,
       @HiveField(2)
       @JsonKey(name: "c")
-          final List<AlertCondition> conditions}) = _$_AlertConditionSet;
+      final List<AlertCondition> conditions}) = _$_AlertConditionSet;
 
   factory _AlertConditionSet.fromJson(Map<String, dynamic> json) =
       _$_AlertConditionSet.fromJson;

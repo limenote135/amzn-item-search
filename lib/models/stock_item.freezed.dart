@@ -390,47 +390,28 @@ class __$$_StockItemCopyWithImpl<$Res>
 @HiveType(typeId: stockItemTypeId)
 class _$_StockItem implements _StockItem {
   const _$_StockItem(
-      {@HiveField(0)
-          required this.purchaseDate,
-      @HiveField(1)
-          this.purchasePrice = 0,
-      @HiveField(2)
-          this.sellPrice = 0,
-      @HiveField(3)
-          this.useFba = true,
-      @HiveField(4)
-          this.profitPerItem = 0,
-      @HiveField(5)
-          this.amount = 1,
-      @HiveField(6)
-          this.condition = ItemCondition.newItem,
-      @HiveField(7)
-          this.subCondition = ItemSubCondition.newItem,
-      @HiveField(8)
-          this.sku = "",
-      @HiveField(9)
-          this.memo = "",
-      @HiveField(10)
-          required this.item,
-      @HiveField(11, defaultValue: "")
-          this.retailer = "",
-      @HiveField(12, defaultValue: "")
-          required this.id,
-      @HiveField(13, defaultValue: -1)
-          this.breakEven = 0,
-      @HiveField(14)
-          this.listingDate,
+      {@HiveField(0) required this.purchaseDate,
+      @HiveField(1) this.purchasePrice = 0,
+      @HiveField(2) this.sellPrice = 0,
+      @HiveField(3) this.useFba = true,
+      @HiveField(4) this.profitPerItem = 0,
+      @HiveField(5) this.amount = 1,
+      @HiveField(6) this.condition = ItemCondition.newItem,
+      @HiveField(7) this.subCondition = ItemSubCondition.newItem,
+      @HiveField(8) this.sku = "",
+      @HiveField(9) this.memo = "",
+      @HiveField(10) required this.item,
+      @HiveField(11, defaultValue: "") this.retailer = "",
+      @HiveField(12, defaultValue: "") required this.id,
+      @HiveField(13, defaultValue: -1) this.breakEven = 0,
+      @HiveField(14) this.listingDate,
       this.autogenSku = false,
-      @HiveField(15, defaultValue: "")
-          this.conditionText = "",
-      @HiveField(16, defaultValue: 0)
-          this.otherCost = 0,
+      @HiveField(15, defaultValue: "") this.conditionText = "",
+      @HiveField(16, defaultValue: 0) this.otherCost = 0,
       @HiveField(17, defaultValue: <String>[])
-          final List<String> images = const <String>[],
-      @HiveField(18, defaultValue: false)
-          this.isSmallProgram = false,
-      @HiveField(19, defaultValue: 0)
-          this.smallFee = 0})
+      final List<String> images = const <String>[],
+      @HiveField(18, defaultValue: false) this.isSmallProgram = false,
+      @HiveField(19, defaultValue: 0) this.smallFee = 0})
       : _images = images;
 
   @override
