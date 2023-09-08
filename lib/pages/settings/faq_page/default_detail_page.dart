@@ -46,7 +46,7 @@ class _Body extends ConsumerWidget {
           const ThemeDivider(),
           ListTile(
             title: faq.bodyText != null ? Text(faq.bodyText!) : faq.body!,
-          )
+          ),
         ],
       ),
     );
