@@ -1,9 +1,11 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/pages/settings/faq_page/faq_page.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/device.dart';
 import 'package:amasearch/util/support_info.dart';
 import 'package:amasearch/util/validators.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -58,6 +60,27 @@ class _Body extends ConsumerWidget {
             error: (e, _) => Container(),
             loading: Container.new,
             data: (data) => ListTile(title: Text(data)),
+          ),
+          ListTile(
+            title: Text.rich(
+              TextSpan(
+                text: "お問い合わせの前に",
+                children: [
+                  TextSpan(
+                    text: "よくあるご質問",
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushReplacement(context, FaqPage.route());
+                      },
+                  ),
+                  const TextSpan(text: "もご確認ください"),
+                ],
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8),
