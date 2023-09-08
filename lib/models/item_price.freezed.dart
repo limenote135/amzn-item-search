@@ -45,12 +45,11 @@ abstract class $ItemPricesCopyWith<$Res> {
   $Res call(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
-          List<PriceDetail> newPrices,
+      List<PriceDetail> newPrices,
       @HiveField(1, defaultValue: <PriceDetail>[])
       @JsonKey(name: "used_offers")
-          List<PriceDetail> usedPrices,
-      @HiveField(2)
-          FeeInfo feeInfo});
+      List<PriceDetail> usedPrices,
+      @HiveField(2) FeeInfo feeInfo});
 
   $FeeInfoCopyWith<$Res> get feeInfo;
 }
@@ -108,12 +107,11 @@ abstract class _$$_ItemPricesCopyWith<$Res>
   $Res call(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
-          List<PriceDetail> newPrices,
+      List<PriceDetail> newPrices,
       @HiveField(1, defaultValue: <PriceDetail>[])
       @JsonKey(name: "used_offers")
-          List<PriceDetail> usedPrices,
-      @HiveField(2)
-          FeeInfo feeInfo});
+      List<PriceDetail> usedPrices,
+      @HiveField(2) FeeInfo feeInfo});
 
   @override
   $FeeInfoCopyWith<$Res> get feeInfo;
@@ -159,12 +157,11 @@ class _$_ItemPrices implements _ItemPrices {
   const _$_ItemPrices(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
-          final List<PriceDetail> newPrices = const <PriceDetail>[],
+      final List<PriceDetail> newPrices = const <PriceDetail>[],
       @HiveField(1, defaultValue: <PriceDetail>[])
       @JsonKey(name: "used_offers")
-          final List<PriceDetail> usedPrices = const <PriceDetail>[],
-      @HiveField(2)
-          this.feeInfo = const FeeInfo()})
+      final List<PriceDetail> usedPrices = const <PriceDetail>[],
+      @HiveField(2) this.feeInfo = const FeeInfo()})
       : _newPrices = newPrices,
         _usedPrices = usedPrices;
 
@@ -241,12 +238,11 @@ abstract class _ItemPrices implements ItemPrices {
   const factory _ItemPrices(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
-          final List<PriceDetail> newPrices,
+      final List<PriceDetail> newPrices,
       @HiveField(1, defaultValue: <PriceDetail>[])
       @JsonKey(name: "used_offers")
-          final List<PriceDetail> usedPrices,
-      @HiveField(2)
-          final FeeInfo feeInfo}) = _$_ItemPrices;
+      final List<PriceDetail> usedPrices,
+      @HiveField(2) final FeeInfo feeInfo}) = _$_ItemPrices;
 
   factory _ItemPrices.fromJson(Map<String, dynamic> json) =
       _$_ItemPrices.fromJson;
@@ -448,19 +444,13 @@ class _$_PriceDetail implements _PriceDetail {
   const _$_PriceDetail(
       {@HiveField(0)
       @JsonKey(name: "condition")
-          this.itemCondition = ItemCondition.newItem,
-      @HiveField(1)
-          this.subCondition = ItemSubCondition.newItem,
-      @HiveField(2)
-          this.channel = FulfillmentChannel.merchant,
-      @HiveField(3)
-          this.price = 0,
-      @HiveField(4)
-          this.shipping = 0,
-      @HiveField(5)
-          this.point = 0,
-      @HiveField(6, defaultValue: false)
-          this.isCart = false});
+      this.itemCondition = ItemCondition.newItem,
+      @HiveField(1) this.subCondition = ItemSubCondition.newItem,
+      @HiveField(2) this.channel = FulfillmentChannel.merchant,
+      @HiveField(3) this.price = 0,
+      @HiveField(4) this.shipping = 0,
+      @HiveField(5) this.point = 0,
+      @HiveField(6, defaultValue: false) this.isCart = false});
 
   factory _$_PriceDetail.fromJson(Map<String, dynamic> json) =>
       _$$_PriceDetailFromJson(json);
@@ -539,19 +529,13 @@ abstract class _PriceDetail implements PriceDetail {
   const factory _PriceDetail(
       {@HiveField(0)
       @JsonKey(name: "condition")
-          final ItemCondition itemCondition,
-      @HiveField(1)
-          final ItemSubCondition subCondition,
-      @HiveField(2)
-          final FulfillmentChannel channel,
-      @HiveField(3)
-          final int price,
-      @HiveField(4)
-          final int shipping,
-      @HiveField(5)
-          final int point,
-      @HiveField(6, defaultValue: false)
-          final bool isCart}) = _$_PriceDetail;
+      final ItemCondition itemCondition,
+      @HiveField(1) final ItemSubCondition subCondition,
+      @HiveField(2) final FulfillmentChannel channel,
+      @HiveField(3) final int price,
+      @HiveField(4) final int shipping,
+      @HiveField(5) final int point,
+      @HiveField(6, defaultValue: false) final bool isCart}) = _$_PriceDetail;
 
   factory _PriceDetail.fromJson(Map<String, dynamic> json) =
       _$_PriceDetail.fromJson;

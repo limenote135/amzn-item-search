@@ -24,7 +24,7 @@ class FeeTile extends HookConsumerWidget {
     final smallFee = item.smallFee;
 
     var feeInfo = item.prices?.feeInfo ?? const FeeInfo();
-    if(smallProgram) {
+    if (smallProgram) {
       feeInfo = feeInfo.copyWith(fbaFee: smallFee);
     }
     final totalFee = _calcTotalFee(

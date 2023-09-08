@@ -181,20 +181,14 @@ class __$$_KeepaSettingsCopyWithImpl<$Res>
 @HiveType(typeId: keepaSettingsTypeId)
 class _$_KeepaSettings implements _KeepaSettings {
   const _$_KeepaSettings(
-      {@HiveField(0, defaultValue: true)
-          this.showNew = true,
-      @HiveField(1, defaultValue: true)
-          this.showUsed = true,
-      @HiveField(2, defaultValue: true)
-          this.showAmazon = true,
+      {@HiveField(0, defaultValue: true) this.showNew = true,
+      @HiveField(1, defaultValue: true) this.showUsed = true,
+      @HiveField(2, defaultValue: true) this.showAmazon = true,
       @HiveField(3, defaultValue: KeepaShowPeriod.month)
-          this.period = KeepaShowPeriod.month,
-      @HiveField(4, defaultValue: "")
-          this.extraParam = "",
-      @HiveField(5, defaultValue: true)
-          this.showBuyBox = true,
-      @HiveField(6, defaultValue: false)
-          this.showFba = false});
+      this.period = KeepaShowPeriod.month,
+      @HiveField(4, defaultValue: "") this.extraParam = "",
+      @HiveField(5, defaultValue: true) this.showBuyBox = true,
+      @HiveField(6, defaultValue: false) this.showFba = false});
 
   @override
   @JsonKey()
@@ -261,20 +255,15 @@ class _$_KeepaSettings implements _KeepaSettings {
 
 abstract class _KeepaSettings implements KeepaSettings {
   const factory _KeepaSettings(
-      {@HiveField(0, defaultValue: true)
-          final bool showNew,
-      @HiveField(1, defaultValue: true)
-          final bool showUsed,
-      @HiveField(2, defaultValue: true)
-          final bool showAmazon,
-      @HiveField(3, defaultValue: KeepaShowPeriod.month)
+          {@HiveField(0, defaultValue: true) final bool showNew,
+          @HiveField(1, defaultValue: true) final bool showUsed,
+          @HiveField(2, defaultValue: true) final bool showAmazon,
+          @HiveField(3, defaultValue: KeepaShowPeriod.month)
           final KeepaShowPeriod period,
-      @HiveField(4, defaultValue: "")
-          final String extraParam,
-      @HiveField(5, defaultValue: true)
-          final bool showBuyBox,
-      @HiveField(6, defaultValue: false)
-          final bool showFba}) = _$_KeepaSettings;
+          @HiveField(4, defaultValue: "") final String extraParam,
+          @HiveField(5, defaultValue: true) final bool showBuyBox,
+          @HiveField(6, defaultValue: false) final bool showFba}) =
+      _$_KeepaSettings;
 
   @override
   @HiveField(0, defaultValue: true)
