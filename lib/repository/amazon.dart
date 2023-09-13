@@ -56,6 +56,7 @@ class AmazonRepository {
   static const _stockUrlBase = "https://www.amazon.co.jp/dp/[asin]/ref=sr_1_1";
 
   static final _totalRegex = RegExp(r"(\d+)個のオプション");
+  static final _totalRegex2 = RegExp(r"(\d+)件の出品");
   static final _stockRegex = RegExp(r"残り(\d+)点");
   static final _jpNumberRegex = RegExp("[０-９]");
 
@@ -194,9 +195,13 @@ class AmazonRepository {
   }
 
   static int _parseTotal(Element el) {
-    final totalStr = _totalRegex.firstMatch(el.text)?.group(1);
+    var totalStr = _totalRegex.firstMatch(el.text)?.group(1);
     if (totalStr == null) {
-      return 0;
+      final totalStr2 = _totalRegex2.firstMatch(el.text)?.group(1);
+      if (totalStr2 == null) {
+        return 0;
+      }
+      totalStr = totalStr2;
     }
     final normalizeStr = totalStr.replaceAllMapped(
       _jpNumberRegex,
