@@ -105,6 +105,7 @@ class _OfferItem extends HookConsumerWidget {
         return Row(
           children: [
             Text("新品$isFbaStr", style: smallFont),
+            if (detail.isSelf) const Text("(自分)"),
             const Spacer(),
             Text("$priceStr 円(送 $shippingStr 円)", style: smallFont),
           ],
@@ -116,6 +117,7 @@ class _OfferItem extends HookConsumerWidget {
               "${detail.subCondition.toDisplayShortString()}$isFbaStr",
               style: smallFont,
             ),
+            if (detail.isSelf) const Text("(自分)"),
             const Spacer(),
             Text("$priceStr 円(送 $shippingStr 円)", style: smallFont),
           ],
