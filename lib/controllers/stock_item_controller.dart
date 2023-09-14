@@ -8,6 +8,17 @@ import 'package:dartx/dartx_io.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 
+final stockItemForAsinProvider =
+    Provider.autoDispose.family<List<StockItem>, String>((ref, asin) {
+  final items = ref
+      .watch(
+        stockItemListControllerProvider
+            .select((value) => value.where((e) => e.item.asin == asin)),
+      )
+      .toList();
+  return items;
+});
+
 final stockItemListControllerProvider =
     StateNotifierProvider<StockItemListController, List<StockItem>>(
   StockItemListController.new,
