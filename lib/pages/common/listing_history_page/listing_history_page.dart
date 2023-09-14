@@ -63,7 +63,8 @@ class _Body extends ConsumerWidget {
         if (index == 0) {
           return ListTile(
             title: Center(
-                child: Text(createSummaryText(newCount, usedCount, average))),
+              child: Text(createSummaryText(newCount, usedCount, average)),
+            ),
           );
         }
         final item = items[index - 1];
@@ -83,9 +84,9 @@ class _Body extends ConsumerWidget {
                 children: [
                   Text("仕入 ${numberFormatter.format(item.purchasePrice)} 円"
                       " (${item.amount} 個)"),
-                  Text("販売 ${numberFormatter.format(item.sellPrice)} 円")
+                  Text("販売 ${numberFormatter.format(item.sellPrice)} 円"),
                 ],
-              )
+              ),
             ],
           ),
         );
