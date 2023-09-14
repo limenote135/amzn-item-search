@@ -65,7 +65,11 @@ class _PriceAndProfit extends HookConsumerWidget {
     final query = MediaQuery.of(context);
     final width = (query.size.width - 75) / 2 / query.textScaleFactor;
 
-    final priceDigit = _getDigit(detail.price);
+    // 新品で出品者なしの場合、参考価格をベースに計算する
+    final shouldReferListingPrice =
+        detail.itemCondition == ItemCondition.newItem && detail.price == 0;
+    final price = shouldReferListingPrice ? item.listPrice : detail.price;
+    final priceDigit = _getDigit(price);
     final shipDigit = _getDigit(detail.shipping);
     final digit = priceDigit + shipDigit;
 
@@ -103,13 +107,14 @@ class _PriceAndProfit extends HookConsumerWidget {
             children: [
               TextSpan(
                 text: calcProfitText(
-                  detail.price,
+                  price,
                   item.prices?.feeInfo,
                   useFba: settings.useFba,
                 ),
                 style: strongTextStyle,
               ),
               const TextSpan(text: " 円"),
+              if (shouldReferListingPrice) const TextSpan(text: "(参考)"),
             ],
           ),
           style: smallSize,
