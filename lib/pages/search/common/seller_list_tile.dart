@@ -95,6 +95,7 @@ class _OfferItem extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final detail = ref.watch(_currentPriceDetailProvider);
     final smallFont = smallFontSize(context);
+    final smallRedFont = smallFontSizeRedText(context);
 
     final isFbaStr = detail.channel == FulfillmentChannel.amazon ? "(FBA)" : "";
     final priceStr = numberFormatter.format(detail.price);
@@ -104,10 +105,16 @@ class _OfferItem extends HookConsumerWidget {
       case ItemCondition.newItem:
         return Row(
           children: [
-            Text("新品$isFbaStr", style: smallFont),
-            if (detail.isSelf) const Text("(自分)"),
+            Text(
+              "新品$isFbaStr",
+              style: detail.isSelf ? smallRedFont : smallFont,
+            ),
+            if (detail.isSelf) Text("(自分)", style: smallRedFont),
             const Spacer(),
-            Text("$priceStr 円(送 $shippingStr 円)", style: smallFont),
+            Text(
+              "$priceStr 円(送 $shippingStr 円)",
+              style: detail.isSelf ? smallRedFont : smallFont,
+            ),
           ],
         );
       case ItemCondition.usedItem:
@@ -115,11 +122,14 @@ class _OfferItem extends HookConsumerWidget {
           children: [
             Text(
               "${detail.subCondition.toDisplayShortString()}$isFbaStr",
-              style: smallFont,
+              style: detail.isSelf ? smallRedFont : smallFont,
             ),
-            if (detail.isSelf) const Text("(自分)"),
+            if (detail.isSelf) Text("(自分)", style: smallRedFont),
             const Spacer(),
-            Text("$priceStr 円(送 $shippingStr 円)", style: smallFont),
+            Text(
+              "$priceStr 円(送 $shippingStr 円)",
+              style: detail.isSelf ? smallRedFont : smallFont,
+            ),
           ],
         );
     }
