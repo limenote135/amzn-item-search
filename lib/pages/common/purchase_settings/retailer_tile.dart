@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
+import 'package:amasearch/widgets/form.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -18,6 +19,7 @@ class RetailerTile extends HookConsumerWidget {
         children: [
           Expanded(
             child: ReactiveTextField<dynamic>(
+              contextMenuBuilder: contextMenuBuilder,
               formControlName: retailerField,
               decoration: const InputDecoration(labelText: "仕入れ先"),
             ),
