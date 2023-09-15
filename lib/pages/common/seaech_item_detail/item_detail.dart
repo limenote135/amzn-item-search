@@ -1,6 +1,7 @@
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
+import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/listing_history_page/listing_history_page.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
@@ -168,6 +169,7 @@ class _StockInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
     final stockItems = ref.watch(stockItemForAsinProvider(item.asin));
+
     return Strong2Container(
       ListTile(
         title: Column(
@@ -176,6 +178,7 @@ class _StockInfo extends ConsumerWidget {
               createText(
                 stockItems.length,
                 stockItems.where((e) => e.purchasePrice != 0).toList(),
+                isContainsMyOffer: isContainsMyOffer(item.prices),
               ),
             ),
             Text.rich(
@@ -200,11 +203,29 @@ class _StockInfo extends ConsumerWidget {
     );
   }
 
-  String createText(int total, List<StockItem> items) {
+  String createText(
+    int total,
+    List<StockItem> items, {
+    required bool isContainsMyOffer,
+  }) {
     if (items.isEmpty) {
+      if (isContainsMyOffer) {
+        return "過去に $total 回仕入れて、現在出品中です";
+      }
       return "過去に $total 回仕入れています";
     }
     final average = items.averageBy((e) => e.purchasePrice).round();
+    if (isContainsMyOffer) {
+      return "過去に平均 $average 円で $total 回仕入れて、現在出品中です";
+    }
     return "過去に平均 $average 円で $total 回仕入れています";
+  }
+
+  bool isContainsMyOffer(ItemPrices? prices) {
+    if (prices == null) {
+      return false;
+    }
+    return prices.newPrices.any((e) => e.isSelf) ||
+        prices.usedPrices.any((e) => e.isSelf);
   }
 }

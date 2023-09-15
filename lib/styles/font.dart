@@ -19,6 +19,9 @@ TextStyle? middleFontSize(BuildContext context) =>
 TextStyle? smallFontSize(BuildContext context) =>
     Theme.of(context).textTheme.labelSmall;
 
+TextStyle smallFontSizeRedText(BuildContext context) =>
+    Theme.of(context).textTheme.labelSmall!.apply(color: Colors.red);
+
 TextStyle? captionFontSize(BuildContext context) =>
     Theme.of(context).textTheme.bodySmall;
 
