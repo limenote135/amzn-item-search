@@ -5,6 +5,7 @@ import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/listing_history_page/listing_history_page.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/item_image.dart';
@@ -29,6 +30,7 @@ class SearchItemDetail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
     final isRestricted = item.restrictions.newItem | item.restrictions.used;
+    final isPaid = ref.watch(isPaidUserProvider);
 
     final isStocked = ref.watch(
       stockItemForAsinProvider(item.asin).select((value) => value.isNotEmpty),
@@ -39,7 +41,7 @@ class SearchItemDetail extends ConsumerWidget {
         context: context,
         tiles: [
           if (isRestricted) const _Restricted(),
-          if (isStocked) const _StockInfo(),
+          if (isPaid && isStocked) const _StockInfo(),
           InkWell(
             onLongPress: () {
               Clipboard.setData(ClipboardData(text: item.title)).then((_) {
