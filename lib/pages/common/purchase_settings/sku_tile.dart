@@ -3,6 +3,7 @@ import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/sku_replacer.dart';
+import 'package:amasearch/widgets/form.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -36,6 +37,7 @@ class SkuTile extends HookConsumerWidget {
                 );
               }
               return ReactiveTextField<dynamic>(
+                contextMenuBuilder: contextMenuBuilder,
                 readOnly: control.value!,
                 formControlName: skuField,
                 keyboardType: TextInputType.url,

@@ -6,6 +6,7 @@ import 'package:amasearch/pages/stocks/search_page/values.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/custom_validator.dart';
+import 'package:amasearch/widgets/form.dart';
 import 'package:amasearch/widgets/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as base;
@@ -37,7 +38,9 @@ final formValueProvider = StateProvider(
 
 class SearchPage extends ConsumerWidget {
   const SearchPage({super.key});
+
   static const String routeName = "/stocks/search";
+
   static Route<void> route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
@@ -111,6 +114,7 @@ class _Body extends ConsumerWidget {
                 ),
                 ListTile(
                   title: ReactiveTextField<String>(
+                    contextMenuBuilder: contextMenuBuilder,
                     formControlName: keywordField,
                     decoration: const InputDecoration(
                       hintText: "商品名、ASIN、JAN",
@@ -393,6 +397,7 @@ class _PriceRangeTextField extends HookConsumerWidget {
         children: [
           Expanded(
             child: ReactiveTextField<String>(
+              contextMenuBuilder: contextMenuBuilder,
               formControlName: lowerControlName,
               controller: lowerController,
               focusNode: lowerFocusNode,
@@ -414,6 +419,7 @@ class _PriceRangeTextField extends HookConsumerWidget {
           ),
           Expanded(
             child: ReactiveTextField<dynamic>(
+              contextMenuBuilder: contextMenuBuilder,
               formControlName: upperControlName,
               controller: upperController,
               focusNode: upperFocusNode,
@@ -439,6 +445,7 @@ class _Unfocus extends StatelessWidget {
   const _Unfocus({this.child});
 
   final Widget? child;
+
   @override
   Widget build(BuildContext context) {
     return base.Listener(
