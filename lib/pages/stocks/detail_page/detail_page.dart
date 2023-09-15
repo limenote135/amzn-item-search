@@ -64,6 +64,6 @@ class _Body extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return StockItemDetail();
+    return const StockItemDetail();
   }
 }
