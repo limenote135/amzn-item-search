@@ -225,7 +225,7 @@ class _CustomAlertDialogState extends State<_CustomAlertDialog> {
                   }
                 },
               ),
-              const Text("出品済みを無視する")
+              const Text("出品済みを無視する"),
             ],
           ),
         ],

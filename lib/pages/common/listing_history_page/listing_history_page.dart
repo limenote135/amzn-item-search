@@ -1,6 +1,7 @@
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/pages/common/listing_history_page/stock_item_detail_page.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:dartx/dartx.dart';
@@ -43,18 +44,6 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final items = ref.watch(_currentStockItemsProvider);
-    final newCount = items
-        .where((e) => e.condition == ItemCondition.newItem)
-        .toList()
-        .length;
-    final usedCount = items
-        .where((e) => e.condition == ItemCondition.usedItem)
-        .toList()
-        .length;
-    final average = items
-        .where((e) => e.purchasePrice != 0)
-        .averageBy((e) => e.purchasePrice)
-        .round();
 
     return ListView.separated(
       itemCount: items.length + 1,
@@ -62,8 +51,10 @@ class _Body extends ConsumerWidget {
       itemBuilder: (context, index) {
         if (index == 0) {
           return ListTile(
-            title: Center(
-              child: Text(createSummaryText(newCount, usedCount, average)),
+            title: Column(
+              children: [
+                ...createSummaryText(items),
+              ],
             ),
           );
         }
@@ -89,6 +80,9 @@ class _Body extends ConsumerWidget {
               ),
             ],
           ),
+          onTap: () {
+            Navigator.push(context, StockItemDetailPage.route(item));
+          },
         );
       },
     );
@@ -101,14 +95,30 @@ class _Body extends ConsumerWidget {
     return "中古(${item.subCondition.toDisplayString()})";
   }
 
-  String createSummaryText(int newCount, int usedCount, int average) {
+  List<Widget> createSummaryText(List<StockItem> items) {
+    final newCount = items
+        .where((e) => e.condition == ItemCondition.newItem)
+        .toList()
+        .length;
+    final usedCount = items
+        .where((e) => e.condition == ItemCondition.usedItem)
+        .toList()
+        .length;
+    final validItems = items.where((e) => e.purchasePrice != 0).toList();
+    final average = validItems.averageBy((e) => e.purchasePrice).round();
+    final max = validItems.maxBy((e) => e.purchasePrice)?.purchasePrice ?? 0;
+    final min = validItems.minBy((e) => e.purchasePrice)?.purchasePrice ?? 0;
+
     var text = "";
     if (newCount > 0) {
-      text += "新品 $newCount 回、";
+      text += " 新品 $newCount 回 ";
     }
     if (usedCount > 0) {
-      text += "中古 $usedCount 回、";
+      text += " 中古 $usedCount 回 ";
     }
-    return "$text平均 $average 円";
+    return <Widget>[
+      Text(text),
+      Text("平均 $average 円、最高 $max 円、最安 $min 円"),
+    ];
   }
 }
