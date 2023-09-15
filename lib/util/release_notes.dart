@@ -5,8 +5,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(2, 3, 0);
+var releaseNotesVersion = Version(2, 5, 0);
 const releaseNotes = <Release>[
+  Release(
+    title: "2.5.0",
+    changes: [
+      ChangeGroup(
+        title: "更新内容",
+        changes: [
+          "商品検索時、過去に仕入れたことのある商品の場合はその時の情報を表示するようになりました。",
+          "Amazon へ出品登録を行う際、出品済みの商品があれば無視することができるようになりました。",
+          "出品者一覧で自分の出品がわかりやすくなりました",
+        ],
+      ),
+    ],
+  ),
   Release(
     title: "2.3.0",
     changes: [
