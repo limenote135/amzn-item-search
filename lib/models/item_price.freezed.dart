@@ -285,6 +285,8 @@ mixin _$PriceDetail {
   int get point => throw _privateConstructorUsedError;
   @HiveField(6, defaultValue: false)
   bool get isCart => throw _privateConstructorUsedError;
+  @HiveField(7, defaultValue: false)
+  bool get isSelf => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -305,7 +307,8 @@ abstract class $PriceDetailCopyWith<$Res> {
       @HiveField(3) int price,
       @HiveField(4) int shipping,
       @HiveField(5) int point,
-      @HiveField(6, defaultValue: false) bool isCart});
+      @HiveField(6, defaultValue: false) bool isCart,
+      @HiveField(7, defaultValue: false) bool isSelf});
 }
 
 /// @nodoc
@@ -328,6 +331,7 @@ class _$PriceDetailCopyWithImpl<$Res, $Val extends PriceDetail>
     Object? shipping = null,
     Object? point = null,
     Object? isCart = null,
+    Object? isSelf = null,
   }) {
     return _then(_value.copyWith(
       itemCondition: null == itemCondition
@@ -358,6 +362,10 @@ class _$PriceDetailCopyWithImpl<$Res, $Val extends PriceDetail>
           ? _value.isCart
           : isCart // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSelf: null == isSelf
+          ? _value.isSelf
+          : isSelf // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -377,7 +385,8 @@ abstract class _$$_PriceDetailCopyWith<$Res>
       @HiveField(3) int price,
       @HiveField(4) int shipping,
       @HiveField(5) int point,
-      @HiveField(6, defaultValue: false) bool isCart});
+      @HiveField(6, defaultValue: false) bool isCart,
+      @HiveField(7, defaultValue: false) bool isSelf});
 }
 
 /// @nodoc
@@ -398,6 +407,7 @@ class __$$_PriceDetailCopyWithImpl<$Res>
     Object? shipping = null,
     Object? point = null,
     Object? isCart = null,
+    Object? isSelf = null,
   }) {
     return _then(_$_PriceDetail(
       itemCondition: null == itemCondition
@@ -428,6 +438,10 @@ class __$$_PriceDetailCopyWithImpl<$Res>
           ? _value.isCart
           : isCart // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSelf: null == isSelf
+          ? _value.isSelf
+          : isSelf // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -450,7 +464,8 @@ class _$_PriceDetail implements _PriceDetail {
       @HiveField(3) this.price = 0,
       @HiveField(4) this.shipping = 0,
       @HiveField(5) this.point = 0,
-      @HiveField(6, defaultValue: false) this.isCart = false});
+      @HiveField(6, defaultValue: false) this.isCart = false,
+      @HiveField(7, defaultValue: false) this.isSelf = false});
 
   factory _$_PriceDetail.fromJson(Map<String, dynamic> json) =>
       _$$_PriceDetailFromJson(json);
@@ -483,10 +498,14 @@ class _$_PriceDetail implements _PriceDetail {
   @JsonKey()
   @HiveField(6, defaultValue: false)
   final bool isCart;
+  @override
+  @JsonKey()
+  @HiveField(7, defaultValue: false)
+  final bool isSelf;
 
   @override
   String toString() {
-    return 'PriceDetail(itemCondition: $itemCondition, subCondition: $subCondition, channel: $channel, price: $price, shipping: $shipping, point: $point, isCart: $isCart)';
+    return 'PriceDetail(itemCondition: $itemCondition, subCondition: $subCondition, channel: $channel, price: $price, shipping: $shipping, point: $point, isCart: $isCart, isSelf: $isSelf)';
   }
 
   @override
@@ -503,13 +522,14 @@ class _$_PriceDetail implements _PriceDetail {
             (identical(other.shipping, shipping) ||
                 other.shipping == shipping) &&
             (identical(other.point, point) || other.point == point) &&
-            (identical(other.isCart, isCart) || other.isCart == isCart));
+            (identical(other.isCart, isCart) || other.isCart == isCart) &&
+            (identical(other.isSelf, isSelf) || other.isSelf == isSelf));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, itemCondition, subCondition,
-      channel, price, shipping, point, isCart);
+      channel, price, shipping, point, isCart, isSelf);
 
   @JsonKey(ignore: true)
   @override
@@ -535,7 +555,8 @@ abstract class _PriceDetail implements PriceDetail {
       @HiveField(3) final int price,
       @HiveField(4) final int shipping,
       @HiveField(5) final int point,
-      @HiveField(6, defaultValue: false) final bool isCart}) = _$_PriceDetail;
+      @HiveField(6, defaultValue: false) final bool isCart,
+      @HiveField(7, defaultValue: false) final bool isSelf}) = _$_PriceDetail;
 
   factory _PriceDetail.fromJson(Map<String, dynamic> json) =
       _$_PriceDetail.fromJson;
@@ -562,6 +583,9 @@ abstract class _PriceDetail implements PriceDetail {
   @override
   @HiveField(6, defaultValue: false)
   bool get isCart;
+  @override
+  @HiveField(7, defaultValue: false)
+  bool get isSelf;
   @override
   @JsonKey(ignore: true)
   _$$_PriceDetailCopyWith<_$_PriceDetail> get copyWith =>
