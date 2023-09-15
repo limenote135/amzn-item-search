@@ -12,6 +12,7 @@ import 'package:amasearch/util/review.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -30,6 +31,8 @@ Future<void> callListings(
   final analytics = ref.read(analyticsControllerProvider);
   final controller = ref.read(stockItemListControllerProvider.notifier);
 
+  final isContainsAlreadyListed = selected.any((e) => e.listingDate != null);
+
   final size = calcSize(selected);
 
   var baseMsg = "${selected.length}件の商品を出品登録します";
@@ -38,19 +41,40 @@ Future<void> callListings(
     baseMsg = "$baseMsg\n(画像サイズが非常に大きいため出品に時間がかかる可能性があります)";
   }
 
-  final isOk = await showOkCancelAlertDialog(
-    context: context,
-    title: "Amazonへ出品登録",
-    message: baseMsg,
-  );
+  var isOk = OkCancelResult.cancel;
+  var ignoreAlreadyListings = true;
+
+  if (!isContainsAlreadyListed) {
+    isOk = await showOkCancelAlertDialog(
+      context: context,
+      title: "Amazonへ出品登録",
+      message: baseMsg,
+    );
+  } else {
+    (ignoreAlreadyListings, isOk) =
+        await showCustomDialog(context: context, baseText: baseMsg);
+  }
 
   if (isOk != OkCancelResult.ok) {
     return;
   }
 
+  var targets = selected;
+  if (ignoreAlreadyListings) {
+    targets = targets.where((e) => e.listingDate == null).toList();
+    if (targets.isEmpty) {
+      await showOkAlertDialog(
+        context: context,
+        title: "エラー",
+        message: "未出品商品がありませんでした",
+      );
+      return;
+    }
+  }
+
   try {
     await EasyLoading.show(status: "出品処理中...");
-    final items = selected.map((e) => e.toListingItem()).toList();
+    final items = targets.map((e) => e.toListingItem()).toList();
     final hasImage = items.any((element) => element.images.isNotEmpty);
 
     final file = await createListingsFile(items);
@@ -78,7 +102,7 @@ Future<void> callListings(
     });
 
     controller.setListingDate(
-      selected,
+      targets,
       currentTimeString(),
     );
 
@@ -133,4 +157,97 @@ int calcSize(List<StockItem> items) {
     }
   }
   return size;
+}
+
+Future<(bool ignore, OkCancelResult result)> showCustomDialog({
+  required BuildContext context,
+  required String baseText,
+}) async {
+  final ret = await showAdaptiveDialog<(bool, OkCancelResult)>(
+    context: context,
+    builder: (context) => _CustomAlertDialog(baseText: baseText),
+  );
+  if (ret == null) {
+    return (true, OkCancelResult.cancel);
+  }
+  return (ret.$1, ret.$2);
+}
+
+class _CustomAlertDialog extends StatefulWidget {
+  const _CustomAlertDialog({required this.baseText});
+
+  final String baseText;
+
+  @override
+  State<_CustomAlertDialog> createState() => _CustomAlertDialogState();
+}
+
+class _CustomAlertDialogState extends State<_CustomAlertDialog> {
+  bool ignore = true;
+
+  Widget adaptiveAction({
+    required BuildContext context,
+    required VoidCallback onPressed,
+    required Widget child,
+  }) {
+    final theme = Theme.of(context);
+    switch (theme.platform) {
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return TextButton(onPressed: onPressed, child: child);
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return CupertinoDialogAction(onPressed: onPressed, child: child);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog.adaptive(
+      title: const Text("出品登録"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(widget.baseText),
+          const Text("\n出品済みの商品が含まれますがよろしいですか？"),
+          Row(
+            children: [
+              Checkbox(
+                value: ignore,
+                onChanged: (v) {
+                  if (v != null) {
+                    setState(() {
+                      ignore = v;
+                    });
+                  }
+                },
+              ),
+              const Text("出品済みを無視する")
+            ],
+          ),
+        ],
+      ),
+      actions: [
+        adaptiveAction(
+          context: context,
+          onPressed: () => Navigator.pop<(bool, OkCancelResult)>(
+            context,
+            (ignore, OkCancelResult.cancel),
+          ),
+          child: const Text('キャンセル'),
+        ),
+        adaptiveAction(
+          context: context,
+          onPressed: () => Navigator.pop<(bool, OkCancelResult)>(
+            context,
+            (ignore, OkCancelResult.ok),
+          ),
+          child: const Text('OK'),
+        ),
+      ],
+    );
+  }
 }
