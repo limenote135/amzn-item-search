@@ -1,6 +1,7 @@
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/pages/common/listing_history_page/stock_item_detail_page.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:dartx/dartx.dart';
@@ -89,6 +90,9 @@ class _Body extends ConsumerWidget {
               ),
             ],
           ),
+          onTap: () {
+            Navigator.push(context, StockItemDetailPage.route(item));
+          },
         );
       },
     );
