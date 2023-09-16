@@ -35,14 +35,14 @@ final searchItemFutureProvider = FutureProvider.autoDispose
   }
 
   final mws = ref.read(mwsRepositoryProvider);
-  final resp = await mws.getProductById(param.jan);
+  final isPaidUser = ref.read(isPaidUserProvider);
+  final resp = await mws.getProductById(param.jan, isPaidUser: isPaidUser);
 
   ref.keepAlive();
 
   final settings = ref.read(generalSettingsControllerProvider);
   final searchSetting = ref.read(searchSettingsControllerProvider);
   final tts = ref.read(ttsProvider);
-  final isPaidUser = ref.read(isPaidUserProvider);
   var alerts = settings.alerts;
 
   if (!isPaidUser) {
@@ -146,6 +146,7 @@ class MwsRepository {
 
   Future<GetProductByIdResponse> getProductById(
     String code, {
+    required bool isPaidUser,
     String idType = "JAN",
   }) async {
     if (int.tryParse(code) == null) {
@@ -162,6 +163,7 @@ class MwsRepository {
     final resp = await _doRequest(
       "$serverUrl/v1beta2/spapi/product",
       data: json.encode(params),
+      isPaidUser: isPaidUser,
     );
     return GetProductByIdResponse.fromJson(resp);
   }
@@ -177,6 +179,7 @@ class MwsRepository {
     final resp = await _doRequest(
       "$serverUrl/v1beta2/spapi/query",
       data: json.encode(params),
+      isPaidUser: true, // Query にフリープラン用のリミットはないので有料と同じ扱いにする
     );
     return QueryItemsResponse.fromJson(resp);
   }
@@ -197,6 +200,7 @@ class MwsRepository {
       url,
       data: json.encode(params),
       cancelToken: cancelToken,
+      isPaidUser: true, // バッチ取得にフリープラン用のリミット制限はないので有料プランと同じにする
     );
     return BatchGetAsinDataResponse.fromJson(resp);
   }
@@ -265,6 +269,7 @@ class MwsRepository {
     String url, {
     String? data,
     CancelToken? cancelToken,
+    required bool isPaidUser,
   }) async {
     final dio = await _ref.read(dioProvider.future);
 
@@ -281,6 +286,7 @@ class MwsRepository {
       opt: Options(headers: header),
       customHandler: _customHandler,
       cancelToken: cancelToken,
+      isPaidUser: isPaidUser,
     );
     return json.decode(resp.data!) as Map<String, dynamic>;
   }
