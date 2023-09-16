@@ -20,6 +20,10 @@ enum AlertType {
   noAmazon,
   @HiveField(6)
   noNewOffer,
+  @HiveField(7)
+  newOfferCount,
+  @HiveField(8)
+  usedOfferCount,
 }
 
 @HiveType(typeId: alertOfferConditionTypeId)

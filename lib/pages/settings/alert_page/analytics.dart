@@ -64,6 +64,10 @@ String _createAlertConditionPropVal(AlertConditionSet alert) {
         buffer.write("noA");
       case AlertType.noNewOffer:
         buffer.write("noN");
+      case AlertType.newOfferCount:
+        buffer.write("nc${cond.value}");
+      case AlertType.usedOfferCount:
+        buffer.write("uc${cond.value}");
     }
   }
   buffer.write(")");
