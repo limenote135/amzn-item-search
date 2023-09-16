@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -75,8 +78,16 @@ final currentClaimsProvider = StreamProvider((ref) async* {
         if (plan != null && plan != PlanType.free.name) {
           // トライアル、標準、キャンペーンの場合
           ref.read(isPaidUserProvider.notifier).state = true;
+          unawaited(
+            ref
+                .read(analyticsControllerProvider)
+                .setUserProp("plan", plan.toString()),
+          );
         } else {
           ref.read(isPaidUserProvider.notifier).state = false;
+          unawaited(
+            ref.read(analyticsControllerProvider).setUserProp("plan", "free"),
+          );
         }
         yield token.claims;
       }
