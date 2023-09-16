@@ -7,6 +7,7 @@ import 'package:amasearch/models/makad_settings.dart';
 import 'package:amasearch/models/pricetar_settings.dart';
 import 'package:amasearch/models/sellersket_settings.dart';
 import 'package:amasearch/util/hive_provider.dart';
+import 'package:dartx/dartx.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final generalSettingsControllerProvider =
@@ -46,6 +47,10 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
         ];
         settings = settings.copyWith(csvOrder: newOrder);
       }
+
+      // 重複がある場合、並べ替えがうまくいかない
+      final uniqueRetailers = settings.retailers.distinct().toList();
+      settings = settings.copyWith(retailers: uniqueRetailers);
 
       state = settings;
     }
@@ -106,6 +111,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
     int? targetProfitValue,
     int? minProfit,
     String? skuFormat,
+    List<String>? retailers,
     List<CustomButtonDetail>? customButtons,
     bool? enableReadAloud,
     int? patternIndex,
@@ -137,6 +143,7 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       targetProfitValue: targetProfitValue ?? state.targetProfitValue,
       minProfit: minProfit ?? state.minProfit,
       skuFormat: skuFormat ?? state.skuFormat,
+      retailers: retailers ?? state.retailers,
       customButtons: customButtons ?? state.customButtons,
       enableReadAloud: enableReadAloud ?? state.enableReadAloud,
       patternIndex: patternIndex ?? state.patternIndex,
@@ -162,27 +169,6 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       makadSettings: makadSettings ?? state.makadSettings,
       sellerSketSettings: sellerSketSettings ?? state.sellerSketSettings,
       standardButtons: standardButtons ?? state.standardButtons,
-    );
-    box.put(generalSettingsKeyName, state);
-  }
-
-  void addRetailer(String retailer) {
-    final box = _ref.read(settingsBoxProvider);
-    final retailers = <String>[...state.retailers, retailer];
-    state = state.copyWith(
-      retailers: retailers,
-    );
-    box.put(generalSettingsKeyName, state);
-  }
-
-  void removeRetailer(int index) {
-    final box = _ref.read(settingsBoxProvider);
-    final retailers = <String>[
-      for (var i = 0; i < state.retailers.length; i++)
-        if (i != index) state.retailers[i],
-    ];
-    state = state.copyWith(
-      retailers: retailers,
     );
     box.put(generalSettingsKeyName, state);
   }
