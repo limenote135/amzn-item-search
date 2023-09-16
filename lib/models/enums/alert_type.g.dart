@@ -29,6 +29,10 @@ class AlertTypeAdapter extends TypeAdapter<AlertType> {
         return AlertType.noAmazon;
       case 6:
         return AlertType.noNewOffer;
+      case 7:
+        return AlertType.newOfferCount;
+      case 8:
+        return AlertType.usedOfferCount;
       default:
         return AlertType.profit;
     }
@@ -57,6 +61,12 @@ class AlertTypeAdapter extends TypeAdapter<AlertType> {
         break;
       case AlertType.noNewOffer:
         writer.writeByte(6);
+        break;
+      case AlertType.newOfferCount:
+        writer.writeByte(7);
+        break;
+      case AlertType.usedOfferCount:
+        writer.writeByte(8);
         break;
     }
   }
