@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:amasearch/models/enums/hazmat_type.dart';
 import 'package:amasearch/models/enums/size_type.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -53,6 +54,10 @@ class AsinData with _$AsinData {
     @JsonKey(includeFromJson: false, includeToJson: false)
     @Default(0)
     int defaultPurchasePrice,
+    @HiveField(17, defaultValue: HazmatType.nonHazmat)
+    @HazmatTypeConverter()
+    @Default(HazmatType.nonHazmat)
+    HazmatType hazmatType,
   }) = _AsinData;
 
   factory AsinData.fromJson(Map<String, dynamic> json) =>
@@ -113,5 +118,42 @@ class SizeTypeConverter implements JsonConverter<SizeType, String> {
         return SizeType.moreBig;
     }
     return SizeType.normal;
+  }
+}
+
+class HazmatTypeConverter implements JsonConverter<HazmatType, String> {
+  const HazmatTypeConverter();
+
+  @override
+  String toJson(HazmatType object) {
+    switch (object) {
+      case HazmatType.nonHazmat:
+        return "";
+      case HazmatType.sds:
+      case HazmatType.battery:
+      case HazmatType.warn:
+      case HazmatType.hazmat:
+      case HazmatType.unknown:
+        return object.name;
+    }
+  }
+
+  @override
+  HazmatType fromJson(String typeName) {
+    switch (typeName) {
+      case "":
+        return HazmatType.nonHazmat;
+      case "sds":
+        return HazmatType.sds;
+      case "battery":
+        return HazmatType.battery;
+      case "warn":
+        return HazmatType.warn;
+      case "hazmat":
+        return HazmatType.hazmat;
+      case "unknown":
+        return HazmatType.unknown;
+    }
+    return HazmatType.nonHazmat;
   }
 }
