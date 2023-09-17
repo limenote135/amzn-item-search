@@ -113,6 +113,7 @@ class HttpClient {
     Options? opt,
     void Function(int code)? customHandler,
     CancelToken? cancelToken,
+    bool isPaidUser = true,
   }) async {
     try {
       return await dio.post<String>(
@@ -147,7 +148,11 @@ class HttpClient {
       final code = e.response!.statusCode!;
       if (code == 429) {
         // 429: Too Many Requests
-        throw Exception("短時間のリクエストが多すぎます。少し時間をおいて再度お試しください");
+        if (isPaidUser) {
+          throw Exception("短時間のリクエストが多すぎます。少し時間をおいて再度お試しください");
+        } else {
+          throw Exception("フリープランの短期間リクエスト上限です。少し時間をおいて再度お試しください。");
+        }
       }
       customHandler?.call(code);
 
