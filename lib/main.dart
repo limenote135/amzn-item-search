@@ -8,6 +8,7 @@ import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/alert_type.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
+import 'package:amasearch/models/enums/hazmat_type.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
@@ -221,7 +222,8 @@ Future<void> initHive() async {
     ..registerAdapter(SellerSketReviseRuleAdapter())
     ..registerAdapter(WordSearchHistoryAdapter())
     ..registerAdapter(KeepItemAdapter())
-    ..registerAdapter(SizeTypeAdapter());
+    ..registerAdapter(SizeTypeAdapter())
+    ..registerAdapter(HazmatTypeAdapter());
 
   // await deleteBoxes();
 

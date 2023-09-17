@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
+import 'package:amasearch/models/enums/hazmat_type.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/models/enums/size_type.dart';
 import 'package:amasearch/models/keepa_settings.dart';
@@ -55,6 +56,37 @@ class TileImage extends HookConsumerWidget {
     }
   }
 
+  static Color? getHazmatColor(AsinData item) {
+    switch (item.hazmatType) {
+      case HazmatType.nonHazmat: // ここで nonHazmat の場合、isHazmat=true
+      case HazmatType.hazmat:
+        return Colors.red[400];
+      case HazmatType.sds:
+      case HazmatType.battery:
+      case HazmatType.warn:
+      case HazmatType.unknown:
+        return Colors.yellow[400];
+    }
+  }
+
+  static String getHazmatText(AsinData item) {
+    switch (item.hazmatType) {
+      case HazmatType.nonHazmat:
+        if (item.isHazmat) {
+          return "危険物";
+        }
+        return "";
+      case HazmatType.sds:
+        return "要SDS";
+      case HazmatType.battery:
+      case HazmatType.warn:
+      case HazmatType.unknown:
+        return "納品注意";
+      case HazmatType.hazmat:
+        return "危険物";
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isPaidUser = ref.watch(isPaidUserProvider);
@@ -87,14 +119,16 @@ class TileImage extends HookConsumerWidget {
                 child: Text("プレ値", style: captionSize),
               ),
             ),
-          if (isPaidUser && asinData.isHazmat)
+          if (isPaidUser &&
+              (asinData.isHazmat ||
+                  asinData.hazmatType != HazmatType.nonHazmat))
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 1),
               child: Container(
                 width: double.infinity,
                 alignment: Alignment.center,
-                color: Colors.red[400],
-                child: Text("危険物", style: captionSize),
+                color: getHazmatColor(asinData),
+                child: Text(getHazmatText(asinData), style: captionSize),
               ),
             ),
           if (isPaidUser && shouldShowSize(asinData))

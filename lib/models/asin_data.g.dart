@@ -38,13 +38,15 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       isHazmat: fields[14] == null ? false : fields[14] as bool,
       sizeType: fields[15] == null ? SizeType.normal : fields[15] as SizeType,
       smallFee: fields[16] == null ? 0 : fields[16] as int,
+      hazmatType:
+          fields[17] == null ? HazmatType.nonHazmat : fields[17] as HazmatType,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_AsinData obj) {
     writer
-      ..writeByte(17)
+      ..writeByte(18)
       ..writeByte(0)
       ..write(obj.jan)
       ..writeByte(1)
@@ -78,7 +80,9 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
       ..writeByte(15)
       ..write(obj.sizeType)
       ..writeByte(16)
-      ..write(obj.smallFee);
+      ..write(obj.smallFee)
+      ..writeByte(17)
+      ..write(obj.hazmatType);
   }
 
   @override
@@ -158,6 +162,9 @@ _$_AsinData _$$_AsinDataFromJson(Map<String, dynamic> json) => _$_AsinData(
           ? SizeType.normal
           : const SizeTypeConverter().fromJson(json['size_type'] as String),
       smallFee: json['small_fee'] as int? ?? 0,
+      hazmatType: json['hazmat_type'] == null
+          ? HazmatType.nonHazmat
+          : const HazmatTypeConverter().fromJson(json['hazmat_type'] as String),
     );
 
 Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
@@ -178,6 +185,7 @@ Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
       'is_hazmat': instance.isHazmat,
       'size_type': const SizeTypeConverter().toJson(instance.sizeType),
       'small_fee': instance.smallFee,
+      'hazmat_type': const HazmatTypeConverter().toJson(instance.hazmatType),
     };
 
 _$_ListingRestrictions _$$_ListingRestrictionsFromJson(
