@@ -105,10 +105,6 @@ class _Body extends ConsumerWidget {
         .toList()
         .length;
     final validItems = items.where((e) => e.purchasePrice != 0).toList();
-    final average = validItems.averageBy((e) => e.purchasePrice).round();
-    final max = validItems.maxBy((e) => e.purchasePrice)?.purchasePrice ?? 0;
-    final min = validItems.minBy((e) => e.purchasePrice)?.purchasePrice ?? 0;
-
     var text = "";
     if (newCount > 0) {
       text += " 新品 $newCount 回 ";
@@ -116,6 +112,15 @@ class _Body extends ConsumerWidget {
     if (usedCount > 0) {
       text += " 中古 $usedCount 回 ";
     }
+    if (validItems.isEmpty) {
+      return <Widget>[
+        Text(text),
+      ];
+    }
+    final average = validItems.averageBy((e) => e.purchasePrice).round();
+    final max = validItems.maxBy((e) => e.purchasePrice)?.purchasePrice ?? 0;
+    final min = validItems.minBy((e) => e.purchasePrice)?.purchasePrice ?? 0;
+
     return <Widget>[
       Text(text),
       Text("平均 $average 円、最高 $max 円、最安 $min 円"),
