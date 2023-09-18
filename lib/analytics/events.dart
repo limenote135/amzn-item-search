@@ -13,6 +13,7 @@ const directPurchaseEventName = "directPurchase";
 const amazonListingEventName = "amazonListing";
 const requestReviewEventName = "requestReview";
 const keepEventName = "keep";
+const searchStockItemEventName = "searchStock";
 
 const searchEventJan = "searchJan";
 const searchEventWord = "searchWord";

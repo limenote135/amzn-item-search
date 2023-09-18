@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/stock_item_search_conditions.dart';
 import 'package:amasearch/models/stock_item_filter.dart';
+import 'package:amasearch/pages/stocks/search_page/analytics.dart';
 import 'package:amasearch/pages/stocks/search_page/values.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
@@ -303,8 +307,7 @@ class _Body extends ConsumerWidget {
                     await showUnpaidDialog(context);
                     return;
                   }
-                  ref.read(currentStockItemFilterProvider.notifier).state =
-                      filter.copyWith(
+                  final f = filter.copyWith(
                     keyword: getNullableString(form, keywordField),
                     listingState: getListingState(form),
                     productCondition: getProductCondition(form),
@@ -318,6 +321,14 @@ class _Body extends ConsumerWidget {
                     purchaseDateRange:
                         getNullableDateRange(form, purchaseDateRangeField),
                     retailer: getNullableString(form, retailerField),
+                  );
+                  ref.read(currentStockItemFilterProvider.notifier).state = f;
+                  unawaited(
+                    ref
+                        .read(analyticsControllerProvider)
+                        .logSearchStockItemEvent(
+                          createSearchParam(f),
+                        ),
                   );
                   Navigator.pop(context);
                 }
