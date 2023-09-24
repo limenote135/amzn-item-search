@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
+import 'package:amasearch/models/enums/hazmat_type.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/models/enums/size_type.dart';
 import 'package:amasearch/models/keepa_settings.dart';
@@ -39,7 +40,8 @@ class TileImage extends HookConsumerWidget {
 
     final newPrice = prices.newPrices.firstOrNull?.price ?? 0;
     final usedPrice = prices.usedPrices.firstOrNull?.price ?? 0;
-    return newPrice < 10000 && usedPrice < 10000;
+    // 小型軽量は1000円以下だが、念のため現在の最安値が 3000円まではラベル表示する
+    return newPrice < 3000 && usedPrice < 3000;
   }
 
   static bool shouldShowSize(AsinData item) {
@@ -51,6 +53,37 @@ class TileImage extends HookConsumerWidget {
       case SizeType.big:
       case SizeType.moreBig:
         return true;
+    }
+  }
+
+  static Color? getHazmatColor(AsinData item) {
+    switch (item.hazmatType) {
+      case HazmatType.nonHazmat: // ここで nonHazmat の場合、isHazmat=true
+      case HazmatType.hazmat:
+        return Colors.red[400];
+      case HazmatType.sds:
+      case HazmatType.battery:
+      case HazmatType.warn:
+      case HazmatType.unknown:
+        return Colors.yellow[400];
+    }
+  }
+
+  static String getHazmatText(AsinData item) {
+    switch (item.hazmatType) {
+      case HazmatType.nonHazmat:
+        if (item.isHazmat) {
+          return "危険物";
+        }
+        return "";
+      case HazmatType.sds:
+        return "要SDS";
+      case HazmatType.battery:
+      case HazmatType.warn:
+      case HazmatType.unknown:
+        return "納品注意";
+      case HazmatType.hazmat:
+        return "危険物";
     }
   }
 
@@ -86,14 +119,16 @@ class TileImage extends HookConsumerWidget {
                 child: Text("プレ値", style: captionSize),
               ),
             ),
-          if (isPaidUser && asinData.isHazmat)
+          if (isPaidUser &&
+              (asinData.isHazmat ||
+                  asinData.hazmatType != HazmatType.nonHazmat))
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 1),
               child: Container(
                 width: double.infinity,
                 alignment: Alignment.center,
-                color: Colors.red[400],
-                child: Text("危険物", style: captionSize),
+                color: getHazmatColor(asinData),
+                child: Text(getHazmatText(asinData), style: captionSize),
               ),
             ),
           if (isPaidUser && shouldShowSize(asinData))
