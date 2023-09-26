@@ -23,6 +23,7 @@ final _currentMemoProvider = Provider((_) => "");
 
 class PurchasePage extends HookConsumerWidget {
   const PurchasePage({super.key});
+
   static const routeName = "/search/purchase";
 
   static Route<void> route(
@@ -147,6 +148,22 @@ class _SaveButton extends HookConsumerWidget {
     return ReactiveFormConsumer(
       builder: (context, form, child) {
         Future<void> onSave() async {
+          final sku = getString(form, skuField);
+          final hasSameSku = ref.read(
+            stockItemListControllerProvider
+                .select((value) => value.any((e) => e.sku == sku)),
+          );
+          if (hasSameSku) {
+            final ret = await showOkCancelAlertDialog(
+              context: context,
+              title: "SKUの重複",
+              message: "SKU: $sku は既に存在するため出品できませんがよろしいですか？",
+            );
+            if (ret != OkCancelResult.ok) {
+              return;
+            }
+          }
+
           final cond = getCondition(form).toItemCondition();
           if (_isRestricted(cond, item.restrictions)) {
             final ret = await showOkCancelAlertDialog(

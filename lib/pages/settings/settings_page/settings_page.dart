@@ -251,7 +251,7 @@ class _Body extends HookConsumerWidget {
         ListTile(
           title: const Text("よくあるご質問"),
           onTap: () {
-          Navigator.push(context, FaqPage.route());
+            Navigator.push(context, FaqPage.route());
           },
         ),
         ListTile(
