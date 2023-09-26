@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
@@ -11,6 +12,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 class EditPage extends HookConsumerWidget {
   const EditPage({super.key});
+
   static const routeName = "/stocks/edit";
 
   static Route<void> route(StockItem item) {
@@ -97,17 +99,33 @@ class _SaveButton extends HookConsumerWidget {
     );
   }
 
-  void _onSubmit(
+  Future<void> _onSubmit(
     BuildContext context,
     WidgetRef ref,
     FormGroup form,
     StockItem item,
-  ) {
+  ) async {
     final purchase = getInt(form, purchasePriceField);
     final sell = getInt(form, sellPriceField);
     final useFba = getBool(form, useFbaField);
     final otherCost = getInt(form, otherCostField);
     final smallProgram = getBool(form, smallProgramField);
+    final sku = getString(form, skuField);
+
+    final hasSameSku = ref.read(
+      stockItemListControllerProvider
+          .select((value) => value.any((e) => e.sku == sku)),
+    );
+    if (hasSameSku) {
+      final ret = await showOkCancelAlertDialog(
+        context: context,
+        title: "SKUの重複",
+        message: "SKU: $sku は既に存在するため出品できませんがよろしいですか？",
+      );
+      if (ret != OkCancelResult.ok) {
+        return;
+      }
+    }
 
     var feeInfo = item.item.prices?.feeInfo;
     if (smallProgram && feeInfo != null) {
@@ -146,7 +164,7 @@ class _SaveButton extends HookConsumerWidget {
       images: getImages(form),
       isSmallProgram: smallProgram,
     );
-    ref.read(stockItemListControllerProvider.notifier).update(newItem);
+    await ref.read(stockItemListControllerProvider.notifier).update(newItem);
     Navigator.of(context).popUntil((route) => route.settings.name == "/");
   }
 }
