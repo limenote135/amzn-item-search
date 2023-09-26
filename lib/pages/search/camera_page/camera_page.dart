@@ -93,6 +93,9 @@ class _BodyState extends ConsumerState<_Body> {
   }
 
   void onInitialized() {
+    if (!context.mounted) {
+      return;
+    }
     if (_controller.state.hasError) {
       setState(() {
         recordError(
