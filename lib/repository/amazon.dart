@@ -174,7 +174,7 @@ class AmazonRepository {
     final price = int.tryParse(priceStr ?? "0") ?? 0;
     final condRaw = offer.querySelector(_conditionSelector)!.text;
     var cond = "不明";
-    if (condRaw.contains("新品")) {
+    if (condRaw.contains("新品") && !condRaw.contains("ほぼ")) {
       cond = "新品";
     } else {
       final temp = condRaw.split("-");
@@ -234,7 +234,7 @@ class AmazonRepository {
       final shipFrom = offer.querySelector(_shipFromSelector)!.text.trim();
       final condRaw = offer.querySelector(_conditionSelector)!.text;
       var cond = "不明";
-      if (condRaw.contains("新品")) {
+      if (condRaw.contains("新品") && !condRaw.contains("ほぼ")) {
         cond = "新品";
       } else {
         final temp = condRaw.split("-");
