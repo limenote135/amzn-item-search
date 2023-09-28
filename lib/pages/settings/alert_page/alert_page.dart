@@ -127,9 +127,21 @@ class _Body extends HookConsumerWidget {
               );
               return;
             }
+            final result = await showTextInputDialog(
+              context: context,
+              title: "新しいアラートの追加",
+              textFields: [
+                const DialogTextField(
+                  initialText: "アラート条件",
+                ),
+              ],
+            );
+            if (result == null || result.isEmpty || result[0].isEmpty) {
+              return;
+            }
             final item = AlertConditionSet(
               id: uuid.v4(),
-              title: "アラート条件",
+              title: result[0],
             );
             ref
                 .read(generalSettingsControllerProvider.notifier)
