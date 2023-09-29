@@ -5,6 +5,7 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/search_item_controller.dart';
 import 'package:amasearch/controllers/search_settings_controller.dart';
+import 'package:amasearch/models/camera_read_data.dart';
 import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/util/auth.dart';
@@ -71,7 +72,7 @@ class _BodyState extends ConsumerState<_Body> {
 
   var isBusy = false;
 
-  var _lastRead = "";
+  var _lastRead = <CameraReadData>[];
   var _lastReadTime = DateTime.now();
 
   double _minAvailableZoom = 1;
@@ -202,6 +203,24 @@ class _BodyState extends ConsumerState<_Body> {
     }
   }
 
+  bool shouldProcess(String code) {
+    if (_lastRead.isEmpty) {
+      // 初めて読んだ場合は処理する
+      return true;
+    }
+    if (_lastRead[0].code == code) {
+      // 同じコードを連続して読んだ場合は無視する
+      return false;
+    }
+    if (_lastRead.length > 1 && _lastRead[1].code == code) {
+      // 1つ前のコードと同じコードで、それが1秒以内に読まれたものだったら無視する
+      // カメラに2つのバーコードが映ってしまい、交互に読まれてしまっている場合など
+      return DateTime.now().difference(_lastRead[1].readAt) >
+          const Duration(seconds: 1);
+    }
+    return true;
+  }
+
   void _handleBarcode(List<Barcode> codes, {required bool isPaidUser}) {
     if (codes.isEmpty) {
       return;
@@ -212,7 +231,7 @@ class _BodyState extends ConsumerState<_Body> {
     }
     final result = targets[0].value.trim();
 
-    if (_lastRead != result) {
+    if (shouldProcess(result)) {
       Vibration.vibrate(pattern: [0, 100], intensities: [0, 255]);
       final settings = ref.read(searchSettingsControllerProvider);
       final type = isPaidUser ? suggestType(result) : settings.type;
@@ -246,7 +265,9 @@ class _BodyState extends ConsumerState<_Body> {
       }
       if (mounted) {
         setState(() {
-          _lastRead = result;
+          _lastRead.add(CameraReadData(code: result, readAt: DateTime.now()));
+          // 今読んだものと、その1つ前のもののみ残す
+          _lastRead = _lastRead.take(2).toList();
         });
       }
     } else if (DateTime.now().difference(_lastReadTime) >
@@ -269,7 +290,7 @@ class _BodyState extends ConsumerState<_Body> {
 
     ref.listen(searchSettingsControllerProvider, (_, __) {
       // コードタイプを変更した際に lastRead をリセットする
-      _lastRead = "";
+      _lastRead = <CameraReadData>[];
     });
 
     if (hasError) {
@@ -320,7 +341,9 @@ class _BodyState extends ConsumerState<_Body> {
               const Spacer(),
               ProviderScope(
                 overrides: [
-                  currentCodeProvider.overrideWithValue(_lastRead),
+                  currentCodeProvider.overrideWithValue(
+                    _lastRead.isNotEmpty ? _lastRead[0].code : "",
+                  ),
                   fromRouteProvider.overrideWithValue(CameraPage.routeName),
                 ],
                 child: const CameraItemTile(),
