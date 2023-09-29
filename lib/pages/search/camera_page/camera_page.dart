@@ -73,7 +73,6 @@ class _BodyState extends ConsumerState<_Body> {
   var isBusy = false;
 
   var _lastRead = <CameraReadData>[];
-  var _lastReadTime = DateTime.now();
 
   double _minAvailableZoom = 1;
   double _maxAvailableZoom = 1;
@@ -268,13 +267,6 @@ class _BodyState extends ConsumerState<_Body> {
           _lastRead.add(CameraReadData(code: result, readAt: DateTime.now()));
           // 今読んだものと、その1つ前のもののみ残す
           _lastRead = _lastRead.take(2).toList();
-        });
-      }
-    } else if (DateTime.now().difference(_lastReadTime) >
-        const Duration(seconds: 1)) {
-      if (mounted) {
-        setState(() {
-          _lastReadTime = DateTime.now();
         });
       }
     }
