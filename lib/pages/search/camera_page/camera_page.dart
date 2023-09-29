@@ -230,45 +230,45 @@ class _BodyState extends ConsumerState<_Body> {
     }
     final result = targets[0].value.trim();
 
-    if (shouldProcess(result)) {
-      Vibration.vibrate(pattern: [0, 100], intensities: [0, 255]);
-      final settings = ref.read(searchSettingsControllerProvider);
-      final type = isPaidUser ? suggestType(result) : settings.type;
-      if (type != settings.type) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("${type.toDisplayString()} のコードとして検索します"),
-            duration: const Duration(seconds: 1),
-          ),
-        );
-        setState(() {
-          ref
-              .read(searchSettingsControllerProvider.notifier)
-              .update(type: type);
-        });
-      }
-      switch (type) {
-        case SearchType.jan:
-          ref.read(searchItemControllerProvider.notifier).add(result);
-        case SearchType.bookoff:
-          ref.read(searchItemControllerProvider.notifier).addBookoff(result);
-        case SearchType.geo:
-          ref.read(searchItemControllerProvider.notifier).addGeo(result);
-        case SearchType.tsutaya:
-          ref.read(searchItemControllerProvider.notifier).addTsutaya(result);
-        case SearchType.freeWord:
-      }
+    if (!shouldProcess(result)) {
+      return;
+    }
 
-      if (!settings.continuousCameraRead) {
-        Navigator.of(context).popUntil(ModalRoute.withName("/"));
-      }
-      if (mounted) {
-        setState(() {
-          _lastRead.add(CameraReadData(code: result, readAt: DateTime.now()));
-          // 今読んだものと、その1つ前のもののみ残す
-          _lastRead = _lastRead.take(2).toList();
-        });
-      }
+    Vibration.vibrate(pattern: [0, 100], intensities: [0, 255]);
+    final settings = ref.read(searchSettingsControllerProvider);
+    final type = isPaidUser ? suggestType(result) : settings.type;
+    if (type != settings.type) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("${type.toDisplayString()} のコードとして検索します"),
+          duration: const Duration(seconds: 1),
+        ),
+      );
+      setState(() {
+        ref.read(searchSettingsControllerProvider.notifier).update(type: type);
+      });
+    }
+    switch (type) {
+      case SearchType.jan:
+        ref.read(searchItemControllerProvider.notifier).add(result);
+      case SearchType.bookoff:
+        ref.read(searchItemControllerProvider.notifier).addBookoff(result);
+      case SearchType.geo:
+        ref.read(searchItemControllerProvider.notifier).addGeo(result);
+      case SearchType.tsutaya:
+        ref.read(searchItemControllerProvider.notifier).addTsutaya(result);
+      case SearchType.freeWord:
+    }
+
+    if (!settings.continuousCameraRead) {
+      Navigator.of(context).popUntil(ModalRoute.withName("/"));
+    }
+    if (mounted) {
+      setState(() {
+        _lastRead.add(CameraReadData(code: result, readAt: DateTime.now()));
+        // 今読んだものと、その1つ前のもののみ残す
+        _lastRead = _lastRead.take(2).toList();
+      });
     }
   }
 
