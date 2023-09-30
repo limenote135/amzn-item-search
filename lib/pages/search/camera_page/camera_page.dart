@@ -11,6 +11,7 @@ import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/widgets/payment.dart';
+import 'package:dartx/dartx.dart';
 import 'package:fast_barcode_scanner/fast_barcode_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -215,7 +216,7 @@ class _BodyState extends ConsumerState<_Body> {
       // 1つ前のコードと同じコードで、それが1秒以内に読まれたものだったら無視する
       // カメラに2つのバーコードが映ってしまい、交互に読まれてしまっている場合など
       return DateTime.now().difference(_lastRead[1].readAt) >
-          const Duration(seconds: 1);
+          const Duration(milliseconds: 1500);
     }
     return true;
   }
@@ -264,11 +265,9 @@ class _BodyState extends ConsumerState<_Body> {
       Navigator.of(context).popUntil(ModalRoute.withName("/"));
     }
     if (mounted) {
-      setState(() {
-        _lastRead.add(CameraReadData(code: result, readAt: DateTime.now()));
-        // 今読んだものと、その1つ前のもののみ残す
-        _lastRead = _lastRead.take(2).toList();
-      });
+      _lastRead.add(CameraReadData(code: result, readAt: DateTime.now()));
+      // 今読んだものと、その1つ前のもののみ残す
+      _lastRead = _lastRead.takeLast(2).toList();
     }
   }
 
