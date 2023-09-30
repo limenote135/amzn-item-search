@@ -5,8 +5,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(2, 5, 0);
+var releaseNotesVersion = Version(2, 6, 0);
 const releaseNotes = <Release>[
+  Release(
+    title: "2.6.0",
+    changes: [
+      ChangeGroup(
+        title: "更新内容",
+        changes: [
+          "危険物だった場合により詳細な情報を表示するようになりました",
+        ],
+      ),
+    ],
+  ),
   Release(
     title: "2.5.0",
     changes: [
