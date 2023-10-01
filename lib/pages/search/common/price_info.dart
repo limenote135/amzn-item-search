@@ -66,8 +66,9 @@ class _PriceAndProfit extends HookConsumerWidget {
     final width = (query.size.width - 75) / 2 / query.textScaleFactor;
 
     // 新品で出品者なしの場合、参考価格をベースに計算する
-    final shouldReferListingPrice =
-        detail.itemCondition == ItemCondition.newItem && detail.price == 0;
+    final shouldReferListingPrice = condition == ItemCondition.newItem &&
+        detail.price == 0 &&
+        item.listPrice != 0;
     final price = shouldReferListingPrice ? item.listPrice : detail.price;
     final priceDigit = _getDigit(price);
     final shipDigit = _getDigit(detail.shipping);
