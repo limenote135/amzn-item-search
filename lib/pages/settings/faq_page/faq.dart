@@ -156,7 +156,8 @@ class _SafariIssue extends StatelessWidget {
       children: [
         const Text(
           "世の中の多くのアプリで低確率で発生している iOS/Safari の不具合のため、Apple へお問い合わせいただく必要があります。\n"
-          "暫定的な対処として、設定画面の\"キャッシュの削除\"にてSafariのキャッシュを削除するようにしているため、これによって改善する可能性がございます。",
+          "暫定的な対処として、設定画面の\"キャッシュの削除\"にてSafariのキャッシュを削除するようにしているため、"
+          "これによって改善する可能性がございます。",
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
