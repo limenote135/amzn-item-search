@@ -1,24 +1,32 @@
+import 'dart:io';
+
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Faq {
-  const Faq({required this.title, this.body, this.bodyText});
+  const Faq({
+    required this.title,
+    this.body,
+    this.bodyText,
+    this.enable = true,
+  });
 
+  final bool enable;
   final String title;
   final Widget? body;
   final String? bodyText;
 }
 
-const questions = <Faq>[
-  Faq(
+final questions = <Faq>[
+  const Faq(
     title: "有料プランへ変更したい",
     bodyText: "有料プランへの変更はホームページより可能です。\n"
         "ホームページからログインしていただき、プラン変更を選択してください。\n"
         "アプリ内からプランを変更することはできません。",
   ),
-  Faq(
+  const Faq(
     title: "退会したい",
     bodyText: "アカウントを維持したまま、有料プランのみを解約したい場合は"
         "ホームページよりフリープランへ変更いただくと、以降は月額費用は掛かりません。\n"
@@ -28,19 +36,24 @@ const questions = <Faq>[
         "アカウントを削除した場合、契約中のプランは即座にキャンセルされます。"
         "また、同じメールアドレスで再度登録することはできません。",
   ),
-  Faq(
+  const Faq(
     title: "支払い方法を変更したい",
     bodyText: "ホームページよりログインしていただき、登録情報確認メニューより変更が可能です。",
   ),
-  Faq(
+  const Faq(
     title: "Keepa のランキンググラフが表示されない",
     body: _KeepaFaq(),
   ),
   Faq(
+    enable: Platform.isIOS,
+    title: "Keepa 等を開いた際に毎回ログアウトされた状態になる",
+    body: const _SafariIssue(),
+  ),
+  const Faq(
     title: "有料プランで契約しているが一部機能が制限されている",
     body: _PlanFaq(),
   ),
-  Faq(
+  const Faq(
     title: "JAN コードではなく ASIN で検索したい",
     bodyText: "ワード検索で ASIN を入力すると、該当 ASIN の情報を検索できます。",
   ),
@@ -126,6 +139,34 @@ class _PlanFaq extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(4),
               child: ExtendedImage.asset("assets/faq/plan.png"),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SafariIssue extends StatelessWidget {
+  const _SafariIssue();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Text(
+          "世の中の多くのアプリで低確率で発生している iOS/Safari の不具合のため、Apple へお問い合わせいただく必要があります。\n"
+          "暫定的な対処として、設定画面の\"キャッシュの削除\"にてSafariのキャッシュを削除するようにしているため、これによって改善する可能性がございます。",
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(4),
+              child: ExtendedImage.asset("assets/faq/cache.png"),
             ),
           ),
         ),
