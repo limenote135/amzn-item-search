@@ -265,9 +265,11 @@ class _BodyState extends ConsumerState<_Body> {
       Navigator.of(context).popUntil(ModalRoute.withName("/"));
     }
     if (mounted) {
-      _lastRead.add(CameraReadData(code: result, readAt: DateTime.now()));
-      // 今読んだものと、その1つ前のもののみ残す
-      _lastRead = _lastRead.takeLast(2).toList();
+      setState(() {
+        _lastRead.add(CameraReadData(code: result, readAt: DateTime.now()));
+        // 今読んだものと、その1つ前のもののみ残す
+        _lastRead = _lastRead.takeLast(2).toList();
+      });
     }
   }
 
