@@ -23,7 +23,10 @@ final bookoffItemFutureProvider =
     return SearchItem(searchDate: now, jan: code);
   }
 
-  final priceRaw = code.length == 17 ? code.substring(_bookoffCodeLength) : "0";
+  // 18桁の場合、価格の後に必ず "2" が着くので、無視する
+  final priceRaw =
+      code.length >= 17 ? code.substring(_bookoffCodeLength, 17) : "0";
+
   final p = int.tryParse(priceRaw);
   return SearchItem(
     searchDate: now,
