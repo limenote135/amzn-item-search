@@ -133,10 +133,10 @@ class _BodyState extends ConsumerState<_Body> {
       return SearchType.jan;
     }
 
-    if (result.length == 17 &&
+    if ((result.length == 17 || result.length == 18) &&
         result.startsWith("0") &&
         int.tryParse(result) != null) {
-      // ブックオフは17ケタで恐らく "00" 始まりの数値のみ
+      // ブックオフは17ケタか18ケタで恐らく "00" 始まりの数値のみ
       return SearchType.bookoff;
     }
 
