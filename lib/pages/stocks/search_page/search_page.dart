@@ -121,7 +121,7 @@ class _Body extends ConsumerWidget {
                     contextMenuBuilder: contextMenuBuilder,
                     formControlName: keywordField,
                     decoration: const InputDecoration(
-                      hintText: "商品名、ASIN、JAN",
+                      hintText: "商品名、ASIN、JAN、SKU",
                       border: OutlineInputBorder(),
                       isDense: true,
                     ),
