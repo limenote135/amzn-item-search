@@ -13,7 +13,6 @@ import 'package:amasearch/pages/common/purchase_settings/form.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/util/uuid.dart';
-import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -195,8 +194,7 @@ class _SaveButton extends HookConsumerWidget {
             generalSettingsControllerProvider
                 .select((value) => value.retailers),
           );
-          if (retailer.isNotEmpty &&
-              registeredRetailers.all((e) => e != retailer)) {
+          if (retailer.isNotEmpty && !registeredRetailers.contains(retailer)) {
             final ret = await showOkCancelAlertDialog(
               context: context,
               title: "新規仕入れ先",
