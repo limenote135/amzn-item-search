@@ -20,10 +20,12 @@ final filteredStockListProvider = Provider(
         final title = element.item.title;
         final asin = element.item.asin.toUpperCase();
         final jan = element.item.jan;
+        final sku = element.sku;
 
         return title.contains(word) ||
             asin == word.toUpperCase() ||
-            jan == word;
+            jan == word ||
+            sku.contains(word);
       });
     }
 
