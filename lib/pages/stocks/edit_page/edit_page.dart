@@ -114,7 +114,7 @@ class _SaveButton extends HookConsumerWidget {
 
     final hasSameSku = ref.read(
       stockItemListControllerProvider
-          .select((value) => value.any((e) => e.sku == sku)),
+          .select((value) => value.any((e) => e.sku == sku && e.id != item.id)),
     );
     if (hasSameSku) {
       final ret = await showOkCancelAlertDialog(
