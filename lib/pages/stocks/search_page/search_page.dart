@@ -323,13 +323,14 @@ class _Body extends ConsumerWidget {
                     retailer: getNullableString(form, retailerField),
                   );
                   ref.read(currentStockItemFilterProvider.notifier).state = f;
-                  unawaited(
-                    ref
-                        .read(analyticsControllerProvider)
-                        .logSearchStockItemEvent(
-                          createSearchParam(f),
-                        ),
-                  );
+                  final params = createSearchParam(f);
+                  if (params.isNotEmpty) {
+                    unawaited(
+                      ref
+                          .read(analyticsControllerProvider)
+                          .logSearchStockItemEvent(params),
+                    );
+                  }
                   Navigator.pop(context);
                 }
 
