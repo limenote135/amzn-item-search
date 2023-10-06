@@ -52,100 +52,103 @@ class _Body extends ConsumerWidget {
           orElse: () => "",
         );
     final info = ref.watch(_supportInfo);
-    return Form(
-      key: formKey,
-      child: Column(
-        children: [
-          info.when(
-            error: (e, _) => Container(),
-            loading: Container.new,
-            data: (data) => ListTile(title: Text(data)),
-          ),
-          ListTile(
-            title: Text.rich(
-              TextSpan(
-                text: "お問い合わせの前に",
-                children: [
-                  TextSpan(
-                    text: "よくあるご質問",
-                    style: const TextStyle(
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline,
+    return SingleChildScrollView(
+      child: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            info.when(
+              error: (e, _) => Container(),
+              loading: Container.new,
+              data: (data) => ListTile(title: Text(data)),
+            ),
+            ListTile(
+              title: Text.rich(
+                TextSpan(
+                  text: "お問い合わせの前に",
+                  children: [
+                    TextSpan(
+                      text: "よくあるご質問",
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.pushReplacement(context, FaqPage.route());
+                        },
                     ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigator.pushReplacement(context, FaqPage.route());
-                      },
-                  ),
-                  const TextSpan(text: "もご確認ください"),
-                ],
+                    const TextSpan(text: "もご確認ください"),
+                  ],
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextFormField(
-              key: emailKey,
-              initialValue: mail,
-              validator: emailValidator,
-              decoration: const InputDecoration(
-                labelText: "メールアドレス",
-                hintText: "メールアドレス",
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: TextFormField(
+                key: emailKey,
+                initialValue: mail,
+                validator: emailValidator,
+                decoration: const InputDecoration(
+                  labelText: "メールアドレス",
+                  hintText: "メールアドレス",
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextFormField(
-              key: contentKey,
-              minLines: 4,
-              maxLines: null,
-              validator: notEmptyValidator,
-              decoration: const InputDecoration(
-                labelText: "問い合わせ内容",
-                hintText: "行った操作や表示されたメッセージなど、\nなるべく具体的にお書きください",
-                alignLabelWithHint: true,
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: TextFormField(
+                key: contentKey,
+                minLines: 4,
+                maxLines: null,
+                validator: notEmptyValidator,
+                decoration: const InputDecoration(
+                  labelText: "問い合わせ内容",
+                  hintText: "どの画面でどのような操作を行ったかや、表示されたメッセージなど、なるべく具体的にお書きください",
+                  hintMaxLines: 10,
+                  alignLabelWithHint: true,
+                ),
               ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              if (formKey.currentState?.validate() ?? false) {
-                final email = emailKey.currentState!.value!;
-                final content = contentKey.currentState!.value!;
+            ElevatedButton(
+              onPressed: () async {
+                if (formKey.currentState?.validate() ?? false) {
+                  final email = emailKey.currentState!.value!;
+                  final content = contentKey.currentState!.value!;
 
-                final info = await PackageInfo.fromPlatform();
+                  final info = await PackageInfo.fromPlatform();
 
-                final appVer = "Amasearch/${info.version}";
-                final device = await getDeviceInfo();
+                  final appVer = "Amasearch/${info.version}";
+                  final device = await getDeviceInfo();
 
-                try {
-                  await EasyLoading.show(status: '送信中...');
-                  final fn =
-                      ref.read(cloudFunctionProvider(functionNameSendSupport));
-                  await fn.call<String>(<String, String>{
-                    "mail": email,
-                    "content": content,
-                    "device": "$appVer $device",
-                  });
+                  try {
+                    await EasyLoading.show(status: '送信中...');
+                    final fn = ref
+                        .read(cloudFunctionProvider(functionNameSendSupport));
+                    await fn.call<String>(<String, String>{
+                      "mail": email,
+                      "content": content,
+                      "device": "$appVer $device",
+                    });
 
-                  // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
-                  await EasyLoading.dismiss();
-                  await showOkAlertDialog(
-                    context: context,
-                    message: "問い合わせを受け付けました。数日以内に返信いたします。",
-                  );
-                  Navigator.pop(context);
-                } finally {
-                  if (EasyLoading.isShow) {
+                    // Loading アイコンがダイアログの上に重なって表示されるので、dismiss する
                     await EasyLoading.dismiss();
+                    await showOkAlertDialog(
+                      context: context,
+                      message: "問い合わせを受け付けました。数日以内に返信いたします。",
+                    );
+                    Navigator.pop(context);
+                  } finally {
+                    if (EasyLoading.isShow) {
+                      await EasyLoading.dismiss();
+                    }
                   }
                 }
-              }
-            },
-            child: const Text("送信"),
-          ),
-        ],
+              },
+              child: const Text("送信"),
+            ),
+          ],
+        ),
       ),
     );
   }
