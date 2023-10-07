@@ -257,11 +257,11 @@ class _HazmatInfo extends ConsumerWidget {
       case HazmatType.sds:
         return "納品に安全データシート(SDS) が必要な可能性があります";
       case HazmatType.battery:
-        return "充電池を含むため危険物取扱可能なFCに納品可能です";
+        return "充電池を含むため危険物取扱可能なFCにのみ納品可能です";
       case HazmatType.warn:
-        return "危険物取扱可能なFCに納品可能です";
+        return "危険物取扱可能なFCにのみ納品可能です";
       case HazmatType.hazmat:
-        return "危険物です";
+        return "納品できない危険物の可能性があります";
       case HazmatType.unknown:
         return "危険物の可能がありますが詳細情報が未登録です";
     }
