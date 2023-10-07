@@ -85,7 +85,7 @@ class _Body extends HookConsumerWidget {
                       if (ret == OkCancelResult.ok) {
                         final newData = <String>[
                           for (var index = 0; index < retailers.length; index++)
-                            if (index != i) retailers[i],
+                            if (index != i) retailers[index],
                         ];
                         ref
                             .read(generalSettingsControllerProvider.notifier)
