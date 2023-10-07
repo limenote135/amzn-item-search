@@ -11,7 +11,6 @@ import 'package:amasearch/pages/search/common/route_from.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/widgets/payment.dart';
-import 'package:dartx/dartx.dart';
 import 'package:fast_barcode_scanner/fast_barcode_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -266,9 +265,12 @@ class _BodyState extends ConsumerState<_Body> {
     }
     if (mounted) {
       setState(() {
-        _lastRead.add(CameraReadData(code: result, readAt: DateTime.now()));
+        _lastRead.insert(
+          0,
+          CameraReadData(code: result, readAt: DateTime.now()),
+        );
         // 今読んだものと、その1つ前のもののみ残す
-        _lastRead = _lastRead.takeLast(2).toList();
+        _lastRead = _lastRead.take(2).toList();
       });
     }
   }
