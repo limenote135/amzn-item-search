@@ -1,4 +1,5 @@
 import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/enums/seller_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -39,6 +40,7 @@ class PriceDetail with _$PriceDetail {
       ItemConditionConverter(),
       ItemSubConditionConverter(),
       FulfillmentChannelConverter(),
+      SellerTypeConverter(),
     ],
   )
   @HiveType(typeId: priceDetailTypeId)
@@ -58,6 +60,10 @@ class PriceDetail with _$PriceDetail {
     @HiveField(5) @Default(0) int point,
     @HiveField(6, defaultValue: false) @Default(false) bool isCart,
     @HiveField(7, defaultValue: false) @Default(false) bool isSelf,
+    @HiveField(8, defaultValue: SellerType.seller)
+    @JsonKey(name: "type")
+    @Default(SellerType.seller)
+    SellerType sellerType,
   }) = _PriceDetail;
 
   factory PriceDetail.fromJson(Map<String, dynamic> json) =>
@@ -105,5 +111,19 @@ class FulfillmentChannelConverter
   @override
   FulfillmentChannel fromJson(String json) {
     return toFulfillmentChannel(json);
+  }
+}
+
+class SellerTypeConverter implements JsonConverter<SellerType, String> {
+  const SellerTypeConverter();
+
+  @override
+  String toJson(SellerType object) {
+    return object.name;
+  }
+
+  @override
+  SellerType fromJson(String json) {
+    return toSellerType(json);
   }
 }
