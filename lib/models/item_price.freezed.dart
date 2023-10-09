@@ -287,6 +287,9 @@ mixin _$PriceDetail {
   bool get isCart => throw _privateConstructorUsedError;
   @HiveField(7, defaultValue: false)
   bool get isSelf => throw _privateConstructorUsedError;
+  @HiveField(8, defaultValue: SellerType.seller)
+  @JsonKey(name: "type")
+  SellerType get sellerType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -308,7 +311,10 @@ abstract class $PriceDetailCopyWith<$Res> {
       @HiveField(4) int shipping,
       @HiveField(5) int point,
       @HiveField(6, defaultValue: false) bool isCart,
-      @HiveField(7, defaultValue: false) bool isSelf});
+      @HiveField(7, defaultValue: false) bool isSelf,
+      @HiveField(8, defaultValue: SellerType.seller)
+      @JsonKey(name: "type")
+      SellerType sellerType});
 }
 
 /// @nodoc
@@ -332,6 +338,7 @@ class _$PriceDetailCopyWithImpl<$Res, $Val extends PriceDetail>
     Object? point = null,
     Object? isCart = null,
     Object? isSelf = null,
+    Object? sellerType = null,
   }) {
     return _then(_value.copyWith(
       itemCondition: null == itemCondition
@@ -366,6 +373,10 @@ class _$PriceDetailCopyWithImpl<$Res, $Val extends PriceDetail>
           ? _value.isSelf
           : isSelf // ignore: cast_nullable_to_non_nullable
               as bool,
+      sellerType: null == sellerType
+          ? _value.sellerType
+          : sellerType // ignore: cast_nullable_to_non_nullable
+              as SellerType,
     ) as $Val);
   }
 }
@@ -386,7 +397,10 @@ abstract class _$$_PriceDetailCopyWith<$Res>
       @HiveField(4) int shipping,
       @HiveField(5) int point,
       @HiveField(6, defaultValue: false) bool isCart,
-      @HiveField(7, defaultValue: false) bool isSelf});
+      @HiveField(7, defaultValue: false) bool isSelf,
+      @HiveField(8, defaultValue: SellerType.seller)
+      @JsonKey(name: "type")
+      SellerType sellerType});
 }
 
 /// @nodoc
@@ -408,6 +422,7 @@ class __$$_PriceDetailCopyWithImpl<$Res>
     Object? point = null,
     Object? isCart = null,
     Object? isSelf = null,
+    Object? sellerType = null,
   }) {
     return _then(_$_PriceDetail(
       itemCondition: null == itemCondition
@@ -442,6 +457,10 @@ class __$$_PriceDetailCopyWithImpl<$Res>
           ? _value.isSelf
           : isSelf // ignore: cast_nullable_to_non_nullable
               as bool,
+      sellerType: null == sellerType
+          ? _value.sellerType
+          : sellerType // ignore: cast_nullable_to_non_nullable
+              as SellerType,
     ));
   }
 }
@@ -451,7 +470,8 @@ class __$$_PriceDetailCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake, converters: [
   ItemConditionConverter(),
   ItemSubConditionConverter(),
-  FulfillmentChannelConverter()
+  FulfillmentChannelConverter(),
+  SellerTypeConverter()
 ])
 @HiveType(typeId: priceDetailTypeId)
 class _$_PriceDetail implements _PriceDetail {
@@ -465,7 +485,10 @@ class _$_PriceDetail implements _PriceDetail {
       @HiveField(4) this.shipping = 0,
       @HiveField(5) this.point = 0,
       @HiveField(6, defaultValue: false) this.isCart = false,
-      @HiveField(7, defaultValue: false) this.isSelf = false});
+      @HiveField(7, defaultValue: false) this.isSelf = false,
+      @HiveField(8, defaultValue: SellerType.seller)
+      @JsonKey(name: "type")
+      this.sellerType = SellerType.seller});
 
   factory _$_PriceDetail.fromJson(Map<String, dynamic> json) =>
       _$$_PriceDetailFromJson(json);
@@ -502,10 +525,14 @@ class _$_PriceDetail implements _PriceDetail {
   @JsonKey()
   @HiveField(7, defaultValue: false)
   final bool isSelf;
+  @override
+  @HiveField(8, defaultValue: SellerType.seller)
+  @JsonKey(name: "type")
+  final SellerType sellerType;
 
   @override
   String toString() {
-    return 'PriceDetail(itemCondition: $itemCondition, subCondition: $subCondition, channel: $channel, price: $price, shipping: $shipping, point: $point, isCart: $isCart, isSelf: $isSelf)';
+    return 'PriceDetail(itemCondition: $itemCondition, subCondition: $subCondition, channel: $channel, price: $price, shipping: $shipping, point: $point, isCart: $isCart, isSelf: $isSelf, sellerType: $sellerType)';
   }
 
   @override
@@ -523,13 +550,15 @@ class _$_PriceDetail implements _PriceDetail {
                 other.shipping == shipping) &&
             (identical(other.point, point) || other.point == point) &&
             (identical(other.isCart, isCart) || other.isCart == isCart) &&
-            (identical(other.isSelf, isSelf) || other.isSelf == isSelf));
+            (identical(other.isSelf, isSelf) || other.isSelf == isSelf) &&
+            (identical(other.sellerType, sellerType) ||
+                other.sellerType == sellerType));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, itemCondition, subCondition,
-      channel, price, shipping, point, isCart, isSelf);
+      channel, price, shipping, point, isCart, isSelf, sellerType);
 
   @JsonKey(ignore: true)
   @override
@@ -556,7 +585,10 @@ abstract class _PriceDetail implements PriceDetail {
       @HiveField(4) final int shipping,
       @HiveField(5) final int point,
       @HiveField(6, defaultValue: false) final bool isCart,
-      @HiveField(7, defaultValue: false) final bool isSelf}) = _$_PriceDetail;
+      @HiveField(7, defaultValue: false) final bool isSelf,
+      @HiveField(8, defaultValue: SellerType.seller)
+      @JsonKey(name: "type")
+      final SellerType sellerType}) = _$_PriceDetail;
 
   factory _PriceDetail.fromJson(Map<String, dynamic> json) =
       _$_PriceDetail.fromJson;
@@ -586,6 +618,10 @@ abstract class _PriceDetail implements PriceDetail {
   @override
   @HiveField(7, defaultValue: false)
   bool get isSelf;
+  @override
+  @HiveField(8, defaultValue: SellerType.seller)
+  @JsonKey(name: "type")
+  SellerType get sellerType;
   @override
   @JsonKey(ignore: true)
   _$$_PriceDetailCopyWith<_$_PriceDetail> get copyWith =>
