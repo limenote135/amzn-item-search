@@ -116,6 +116,8 @@ const PriceContainer = ({ reference, inView, isDetailOpen, onClickDetail }: Pric
                     <Typography variant={"body2"}>バリエーション検索</Typography>
                     <Typography variant={"body2"}>音声読み上げ</Typography>
                     <Typography variant={"body2"}>キープリスト</Typography>
+                    <Typography variant={"body2"}>出品可否表示</Typography>
+                    <Typography variant={"body2"}>危険物表示</Typography>
                   </Box>
                 </Collapse>
               </>
