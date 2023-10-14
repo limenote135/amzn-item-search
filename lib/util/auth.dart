@@ -39,29 +39,16 @@ enum PlanType {
   }
 }
 
-final linkedWithAmazonProvider = StreamProvider((ref) async* {
-  try {
-    final stream = FirebaseAuth.instance.idTokenChanges();
-
-    await for (final user in stream) {
-      if (user == null) {
-        yield null;
-      } else {
-        final token = await user.getIdTokenResult();
-        yield token.claims?[customClaimsLwaKey] == true;
+final linkedWithAmazonProvider = FutureProvider((ref) async {
+  final lwa = await ref.watch(
+    currentClaimsProvider.selectAsync((claims) {
+      if (claims == null) {
+        return false;
       }
-    }
-  } on FirebaseAuthException catch (e, stack) {
-    switch (e.code) {
-      case "network-request-failed":
-        throw Exception("通信環境の良いところで再度お試しください");
-      case "user-token-expired":
-        throw Exception("再ログインしてください");
-      default:
-        await recordError(e, stack);
-        throw Exception("通信環境の良いところで再度お試しください(${e.code})");
-    }
-  }
+      return claims[customClaimsLwaKey] == true;
+    }),
+  );
+  return lwa;
 });
 
 final currentClaimsProvider = StreamProvider((ref) async* {
