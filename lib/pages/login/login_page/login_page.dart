@@ -86,7 +86,7 @@ class _Body extends HookConsumerWidget {
           }
 
           //TODO: revoke されて再ログインする場合にエラー状態から復帰しないのでリフレッシュする
-          final _ = ref.refresh(linkedWithAmazonProvider);
+          final _ = ref.refresh(currentClaimsProvider);
 
           Navigator.pop(context);
         } on FirebaseAuthException catch (e, stack) {
