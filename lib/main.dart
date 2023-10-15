@@ -17,6 +17,7 @@ import 'package:amasearch/models/enums/makad_revise_rule.dart';
 import 'package:amasearch/models/enums/pricetar_rule.dart';
 import 'package:amasearch/models/enums/pricetar_stopper.dart';
 import 'package:amasearch/models/enums/search_type.dart';
+import 'package:amasearch/models/enums/seller_type.dart';
 import 'package:amasearch/models/enums/sellersket_revise_rule.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/enums/size_type.dart';
@@ -223,7 +224,8 @@ Future<void> initHive() async {
     ..registerAdapter(WordSearchHistoryAdapter())
     ..registerAdapter(KeepItemAdapter())
     ..registerAdapter(SizeTypeAdapter())
-    ..registerAdapter(HazmatTypeAdapter());
+    ..registerAdapter(HazmatTypeAdapter())
+    ..registerAdapter(SellerTypeAdapter());
 
   // await deleteBoxes();
 

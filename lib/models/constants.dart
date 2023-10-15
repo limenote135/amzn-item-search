@@ -57,3 +57,4 @@ const makadPaymentMethodTypeId = 112;
 const sellerSketReviseRuleTypeId = 113;
 const sizeTypeTypeId = 114;
 const hazmatTypeId = 115;
+const sellerTypeTypeId = 116;
