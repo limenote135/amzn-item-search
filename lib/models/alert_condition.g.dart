@@ -69,4 +69,6 @@ const _$AlertTypeEnumMap = {
   AlertType.premium: 'premium',
   AlertType.noAmazon: 'noAmazon',
   AlertType.noNewOffer: 'noNewOffer',
+  AlertType.newOfferCount: 'newOfferCount',
+  AlertType.usedOfferCount: 'usedOfferCount',
 };
