@@ -69,13 +69,15 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
       point: fields[5] as int,
       isCart: fields[6] == null ? false : fields[6] as bool,
       isSelf: fields[7] == null ? false : fields[7] as bool,
+      sellerType:
+          fields[8] == null ? SellerType.seller : fields[8] as SellerType,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_PriceDetail obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.itemCondition)
       ..writeByte(1)
@@ -91,7 +93,9 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
       ..writeByte(6)
       ..write(obj.isCart)
       ..writeByte(7)
-      ..write(obj.isSelf);
+      ..write(obj.isSelf)
+      ..writeByte(8)
+      ..write(obj.sellerType);
   }
 
   @override
@@ -150,6 +154,9 @@ _$_PriceDetail _$$_PriceDetailFromJson(Map<String, dynamic> json) =>
       point: json['point'] as int? ?? 0,
       isCart: json['is_cart'] as bool? ?? false,
       isSelf: json['is_self'] as bool? ?? false,
+      sellerType: json['type'] == null
+          ? SellerType.seller
+          : const SellerTypeConverter().fromJson(json['type'] as String),
     );
 
 Map<String, dynamic> _$$_PriceDetailToJson(_$_PriceDetail instance) =>
@@ -164,4 +171,5 @@ Map<String, dynamic> _$$_PriceDetailToJson(_$_PriceDetail instance) =>
       'point': instance.point,
       'is_cart': instance.isCart,
       'is_self': instance.isSelf,
+      'type': const SellerTypeConverter().toJson(instance.sellerType),
     };
