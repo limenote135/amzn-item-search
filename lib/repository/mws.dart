@@ -252,7 +252,7 @@ class MwsRepository {
 
     final user = await _ref.read(authStateChangesProvider.future);
     final lwa = await _ref.read(linkedWithAmazonProvider.future);
-    if (lwa != true) {
+    if (!lwa) {
       throw Exception("設定メニューからAmazonとの連携を行ってください");
     }
     final header = await commonHeader(user!);
@@ -275,7 +275,7 @@ class MwsRepository {
 
     final user = await _ref.read(authStateChangesProvider.future);
     final lwa = await _ref.read(linkedWithAmazonProvider.future);
-    if (lwa != true) {
+    if (!lwa) {
       throw Exception("設定メニューからAmazonとの連携を行ってください");
     }
     final header = await commonHeader(user!);
