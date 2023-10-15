@@ -20,7 +20,7 @@ class AmazonStatus extends ConsumerWidget {
         return const Text("エラー: 状態を取得できませんでした");
       },
       data: (value) {
-        if (value == true) {
+        if (value) {
           return const Text("連携済み");
         }
         return const Text("未連携");

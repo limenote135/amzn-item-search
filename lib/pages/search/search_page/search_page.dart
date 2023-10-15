@@ -96,7 +96,7 @@ class _Body extends HookConsumerWidget {
               "SearchPage.Body.linkedWithAmazonProvider",
             ],
             data: (isLinked) {
-              if (isLinked == true) {
+              if (isLinked) {
                 return Container();
               }
               return const ListTile(
