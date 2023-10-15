@@ -2,6 +2,7 @@ import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/fulfillment_channel.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
+import 'package:amasearch/models/enums/seller_type.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/formatter.dart';
@@ -97,7 +98,11 @@ class _OfferItem extends HookConsumerWidget {
     final smallFont = smallFontSize(context);
     final smallRedFont = smallFontSizeRedText(context);
 
-    final isFbaStr = detail.channel == FulfillmentChannel.amazon ? "(FBA)" : "";
+    final isSelf = detail.isSelf || detail.sellerType == SellerType.me;
+    final isAmazon = detail.sellerType == SellerType.amazon;
+
+    final isFbaStr =
+        detail.channel == FulfillmentChannel.amazon && !isAmazon ? "(FBA)" : "";
     final priceStr = numberFormatter.format(detail.price);
     final shippingStr = numberFormatter.format(detail.shipping);
 
@@ -107,13 +112,14 @@ class _OfferItem extends HookConsumerWidget {
           children: [
             Text(
               "新品$isFbaStr",
-              style: detail.isSelf ? smallRedFont : smallFont,
+              style: isSelf || isAmazon ? smallRedFont : smallFont,
             ),
-            if (detail.isSelf) Text("(自分)", style: smallRedFont),
+            if (isSelf) Text("(自分)", style: smallRedFont),
+            if (isAmazon) Text("(Amazon)", style: smallRedFont),
             const Spacer(),
             Text(
               "$priceStr 円(送 $shippingStr 円)",
-              style: detail.isSelf ? smallRedFont : smallFont,
+              style: isSelf || isAmazon ? smallRedFont : smallFont,
             ),
           ],
         );
