@@ -79,6 +79,7 @@ class _Body extends HookConsumerWidget {
               context: context,
               textFields: [
                 DialogTextField(
+                  initialText: alert.title,
                   validator: (value) =>
                       value!.isEmpty ? "アラート名を入力してください" : null,
                 ),
@@ -143,18 +144,16 @@ class _Body extends HookConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Text("設定可能な項目"),
         ),
-        ListTile(
-          leading: const Icon(Icons.add),
+        _ConditionTile(
           title: const Text("粗利"),
+          type: AlertType.profit,
           onTap: () async {
-            if (alert.conditions.length >= 10) {
-              return;
-            }
             final val = await showTextInputDialog(
               context: context,
               textFields: [
                 DialogTextField(
                   keyboardType: TextInputType.number,
+                  suffixText: "円以上",
                   validator: (value) {
                     final n = int.tryParse(value ?? "");
                     return n != null && n >= 0 ? null : "不正な値です";
@@ -163,38 +162,21 @@ class _Body extends HookConsumerWidget {
               ],
               title: "粗利額",
             );
+
             if (val == null) {
-              return;
+              return null;
             }
-            if (alert.conditions.any((e) => e.type == AlertType.profit)) {
-              final ret = await showOkCancelAlertDialog(
-                context: context,
-                title: "条件の上書き",
-                message: "既存の設定を上書きしますか？",
-              );
-              if (ret == OkCancelResult.cancel) {
-                return;
-              }
-            }
-            final newCond = alert.conditions
-                .where((e) => e.type != AlertType.profit)
-                .toList()
-              ..add(
-                AlertCondition(
-                  type: AlertType.profit,
-                  value: int.parse(val.single),
-                ),
-              );
-            modifyCondition(newCond);
+
+            return int.tryParse(val.single);
           },
         ),
-        ListTile(
-          leading: const Icon(Icons.add),
+        _ConditionTile(
           title: const Text("コンディション"),
           subtitle: Text(
             "粗利条件と一緒に設定してください。",
             style: captionFontSize(context),
           ),
+          type: AlertType.condition,
           onTap: () async {
             final val = await showConfirmationDialog<int?>(
               context: context,
@@ -208,36 +190,20 @@ class _Body extends HookConsumerWidget {
               ],
             );
             if (val == null) {
-              return;
+              return null;
             }
-            if (alert.conditions.any((e) => e.type == AlertType.condition)) {
-              final ret = await showOkCancelAlertDialog(
-                context: context,
-                title: "条件の上書き",
-                message: "既存の設定を上書きしますか？",
-              );
-              if (ret == OkCancelResult.cancel) {
-                return;
-              }
-            }
-            final newCond = alert.conditions
-                .where((e) => e.type != AlertType.condition)
-                .toList()
-              ..add(AlertCondition(type: AlertType.condition, value: val));
-            modifyCondition(newCond);
+            return val;
           },
         ),
-        ListTile(
-          leading: const Icon(Icons.add),
+        _ConditionTile(
           title: const Text("ランキング"),
+          type: AlertType.rank,
           onTap: () async {
-            if (alert.conditions.length >= 10) {
-              return;
-            }
             final val = await showTextInputDialog(
               context: context,
               textFields: [
                 DialogTextField(
+                  suffixText: "位以内",
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     final n = int.tryParse(value ?? "");
@@ -248,32 +214,14 @@ class _Body extends HookConsumerWidget {
               title: "順位",
             );
             if (val == null) {
-              return;
+              return null;
             }
-            if (alert.conditions.any((e) => e.type == AlertType.rank)) {
-              final ret = await showOkCancelAlertDialog(
-                context: context,
-                title: "条件の上書き",
-                message: "既存の設定を上書きしますか？",
-              );
-              if (ret == OkCancelResult.cancel) {
-                return;
-              }
-            }
-            final newCond =
-                alert.conditions.where((e) => e.type != AlertType.rank).toList()
-                  ..add(
-                    AlertCondition(
-                      type: AlertType.rank,
-                      value: int.parse(val.single),
-                    ),
-                  );
-            modifyCondition(newCond);
+            return int.parse(val.single);
           },
         ),
-        ListTile(
-          leading: const Icon(Icons.add),
+        _ConditionTile(
           title: const Text("カテゴリ"),
+          type: AlertType.category,
           onTap: () async {
             final val = await showConfirmationDialog<int?>(
               context: context,
@@ -284,56 +232,73 @@ class _Body extends HookConsumerWidget {
               ],
             );
             if (val == null) {
-              return;
+              return null;
             }
-            if (alert.conditions.any((e) => e.type == AlertType.category)) {
-              final ret = await showOkCancelAlertDialog(
-                context: context,
-                title: "条件の上書き",
-                message: "既存の設定を上書きしますか？",
-              );
-              if (ret == OkCancelResult.cancel) {
-                return;
-              }
-            }
-            final newCond = alert.conditions
-                .where((e) => e.type != AlertType.category)
-                .toList()
-              ..add(AlertCondition(type: AlertType.category, value: val));
-            modifyCondition(newCond);
+            return val;
           },
         ),
-        ListTile(
-          leading: const Icon(Icons.add),
+        _ConditionTile(
           title: const Text("定価以上(プレ値)"),
-          onTap: () {
-            final newCond = alert.conditions
-                .where((e) => e.type != AlertType.premium)
-                .toList()
-              ..add(const AlertCondition(type: AlertType.premium));
-            modifyCondition(newCond);
+          type: AlertType.premium,
+          allowOverwrite: false,
+          onTap: () async {
+            return 0;
           },
         ),
-        ListTile(
-          leading: const Icon(Icons.add),
-          title: const Text("新品なし"),
-          onTap: () {
-            final newCond = alert.conditions
-                .where((e) => e.type != AlertType.noNewOffer)
-                .toList()
-              ..add(const AlertCondition(type: AlertType.noNewOffer));
-            modifyCondition(newCond);
+        _ConditionTile(
+          title: const Text("新規出品者数"),
+          type: AlertType.newOfferCount,
+          onTap: () async {
+            final val = await showTextInputDialog(
+              context: context,
+              title: "新品出品者数",
+              textFields: [
+                DialogTextField(
+                  keyboardType: TextInputType.number,
+                  suffixText: "人以下",
+                  validator: (value) {
+                    final n = int.tryParse(value ?? "");
+                    return n != null && n >= 0 ? null : "不正な値です";
+                  },
+                ),
+              ],
+            );
+            if (val == null) {
+              return null;
+            }
+            return int.parse(val.single);
           },
         ),
-        ListTile(
-          leading: const Icon(Icons.add),
+        _ConditionTile(
+          title: const Text("中古出品者数"),
+          type: AlertType.usedOfferCount,
+          onTap: () async {
+            final val = await showTextInputDialog(
+              context: context,
+              title: "中古出品者数",
+              textFields: [
+                DialogTextField(
+                  keyboardType: TextInputType.number,
+                  suffixText: "人以下",
+                  validator: (value) {
+                    final n = int.tryParse(value ?? "");
+                    return n != null && n >= 0 ? null : "不正な値です";
+                  },
+                ),
+              ],
+            );
+            if (val == null) {
+              return null;
+            }
+            return int.parse(val.single);
+          },
+        ),
+        _ConditionTile(
           title: const Text("Amazon販売なし"),
-          onTap: () {
-            final newCond = alert.conditions
-                .where((e) => e.type != AlertType.noAmazon)
-                .toList()
-              ..add(const AlertCondition(type: AlertType.noAmazon));
-            modifyCondition(newCond);
+          type: AlertType.noAmazon,
+          allowOverwrite: false,
+          onTap: () async {
+            return 0;
           },
         ),
       ],
@@ -356,6 +321,10 @@ class _Body extends HookConsumerWidget {
         return const Text("Amazon販売なし");
       case AlertType.noNewOffer:
         return const Text("新品なし");
+      case AlertType.newOfferCount:
+        return const Text("新品出品者数");
+      case AlertType.usedOfferCount:
+        return const Text("中古出品者数");
     }
   }
 
@@ -385,7 +354,39 @@ class _Body extends HookConsumerWidget {
         return null;
       case AlertType.noNewOffer:
         return null;
+      case AlertType.newOfferCount:
+        return Text("$param 人以下");
+      case AlertType.usedOfferCount:
+        return Text("$param 人以下");
     }
+  }
+
+  Future<List<AlertCondition>?> overwriteCondition(
+    BuildContext context,
+    List<AlertCondition> conditions,
+    AlertType type,
+    int value,
+  ) async {
+    if (conditions.any((e) => e.type == type)) {
+      final ret = await showOkCancelAlertDialog(
+        context: context,
+        title: "条件の上書き",
+        message: "既存の設定を上書きしますか？",
+      );
+      if (ret == OkCancelResult.cancel) {
+        return null;
+      }
+    }
+
+    final newCond = conditions.where((e) => e.type != type).toList()
+      ..add(
+        AlertCondition(
+          type: AlertType.profit,
+          value: value,
+        ),
+      );
+
+    return newCond;
   }
 }
 
@@ -403,4 +404,83 @@ List<Widget> _dividedTiles({
   }
 
   return [for (var i = 0; i < itemCount; i++) childDelegate(i)].toList();
+}
+
+class _ConditionTile extends ConsumerWidget {
+  const _ConditionTile({
+    required this.title,
+    this.subtitle,
+    required this.type,
+    this.allowOverwrite = true,
+    required this.onTap,
+  });
+
+  final Widget title;
+  final Widget? subtitle;
+  final AlertType type;
+  final bool allowOverwrite;
+  final Future<int?> Function() onTap;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final index = ref.watch(_currentAlertConditionSetIndexProvider);
+    final alerts = ref.watch(
+      generalSettingsControllerProvider.select((value) => value.alerts),
+    );
+    final alert = alerts[index];
+
+    void modifyCondition(List<AlertCondition> cond) {
+      final newAlert = alert.copyWith(conditions: cond);
+      final newAlerts = [
+        for (var i = 0; i < alerts.length; i++)
+          i == index ? newAlert : alerts[i],
+      ];
+      ref
+          .read(generalSettingsControllerProvider.notifier)
+          .update(alerts: newAlerts);
+      updateAlertConditionAnalytics(context, ref, newAlerts);
+    }
+
+    return ListTile(
+      leading: alert.conditions.length < 10 ? const Icon(Icons.add) : null,
+      title: title,
+      subtitle: subtitle,
+      onTap: () async {
+        if (alert.conditions.length >= 10) {
+          return;
+        }
+        final value = await onTap();
+        if (value == null) {
+          return;
+        }
+
+        final isContained = alert.conditions.any((e) => e.type == type);
+        if (isContained) {
+          if (allowOverwrite) {
+            final ret = await showOkCancelAlertDialog(
+              context: context,
+              title: "条件の上書き",
+              message: "既存の設定を上書きしますか？",
+            );
+            if (ret == OkCancelResult.cancel) {
+              return;
+            }
+          } else {
+            // 上書きを許可しない場合、既に追加済みの場合は何もしない
+            return;
+          }
+        }
+
+        final newCond = alert.conditions.where((e) => e.type != type).toList()
+          ..add(
+            AlertCondition(
+              type: type,
+              value: value,
+            ),
+          );
+
+        modifyCondition(newCond);
+      },
+    );
+  }
 }

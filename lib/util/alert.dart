@@ -97,6 +97,16 @@ extension AlertConditionSetExtension on AlertConditionSet {
           if (item.prices?.newPrices.isNotEmpty ?? false) {
             return false;
           }
+        case AlertType.newOfferCount:
+          final offerCount = item.prices?.newPrices.length ?? 0;
+          if (offerCount > cond.value) {
+            return false;
+          }
+        case AlertType.usedOfferCount:
+          final offerCount = item.prices?.usedPrices.length ?? 0;
+          if (offerCount > cond.value) {
+            return false;
+          }
       }
     }
     return true;
