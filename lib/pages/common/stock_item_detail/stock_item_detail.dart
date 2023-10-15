@@ -1,13 +1,17 @@
 import 'dart:io';
 
+import 'package:amasearch/models/asin_data.dart';
+import 'package:amasearch/models/enums/hazmat_type.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
+import 'package:amasearch/widgets/hazmat_info.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/search_buttons.dart';
 import 'package:amasearch/widgets/text_line_tile.dart';
@@ -23,6 +27,7 @@ class StockItemDetail extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentStockItemProvider);
+    final isPaid = ref.watch(isPaidUserProvider);
 
     final profitRate = item.sellPrice > 0
         ? (item.profitPerItem / item.sellPrice * 100).round()
@@ -54,6 +59,13 @@ class StockItemDetail extends ConsumerWidget {
 
     return ListView(
       children: [
+        if (isPaid && item.item.hazmatType != HazmatType.nonHazmat)
+          ProviderScope(
+            overrides: [
+              currentAsinDataProvider.overrideWithValue(item.item),
+            ],
+            child: const HazmatInfo(),
+          ),
         InkWell(
           onLongPress: () {
             Clipboard.setData(ClipboardData(text: item.item.title)).then((_) {

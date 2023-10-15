@@ -10,6 +10,7 @@ import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
+import 'package:amasearch/widgets/hazmat_info.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/search_buttons.dart';
 import 'package:amasearch/widgets/strong_container.dart';
@@ -44,7 +45,7 @@ class SearchItemDetail extends ConsumerWidget {
         tiles: [
           if (isRestricted) const _Restricted(),
           if (isPaid && item.hazmatType != HazmatType.nonHazmat)
-            const _HazmatInfo(),
+            const HazmatInfo(),
           if (isPaid && isStocked) const _StockInfo(),
           InkWell(
             onLongPress: () {
@@ -230,40 +231,5 @@ class _StockInfo extends ConsumerWidget {
     }
     return prices.newPrices.any((e) => e.isSelf) ||
         prices.usedPrices.any((e) => e.isSelf);
-  }
-}
-
-class _HazmatInfo extends ConsumerWidget {
-  const _HazmatInfo();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final item = ref.watch(currentAsinDataProvider);
-    final text = _getHazmatText(item.hazmatType);
-    if (text.isEmpty) {
-      return Container();
-    }
-    return WarningContainer(
-      ListTile(
-        title: Center(child: Text(text)),
-      ),
-    );
-  }
-
-  String _getHazmatText(HazmatType type) {
-    switch (type) {
-      case HazmatType.nonHazmat:
-        return "";
-      case HazmatType.sds:
-        return "納品に安全データシート(SDS) が必要な可能性があります";
-      case HazmatType.battery:
-        return "充電池を含むため危険物取扱可能なFCにのみ納品可能です";
-      case HazmatType.warn:
-        return "危険物取扱可能なFCにのみ納品可能です";
-      case HazmatType.hazmat:
-        return "納品できない危険物の可能性があります";
-      case HazmatType.unknown:
-        return "危険物の可能がありますが詳細情報が未登録です";
-    }
   }
 }
