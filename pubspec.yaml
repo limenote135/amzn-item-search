@@ -22,7 +22,7 @@ environment:
 
 dependencies:
   adaptive_dialog: ^1.9.0+2
-  archive: ^3.4.4
+  archive: ^3.4.6
   cloud_functions: ^4.4.2
   collection: ^1.17.2
   convert: ^3.1.1
@@ -31,7 +31,7 @@ dependencies:
   csv: ^5.0.2
   cupertino_icons: ^1.0.6
   dartx: ^1.2.0
-  device_info_plus: ^9.0.3
+  device_info_plus: ^9.1.0
   dio: ^5.3.3
   dio_cookie_manager: ^3.1.1
   euc:
@@ -39,7 +39,7 @@ dependencies:
   extended_image: ^8.1.1
   fast_barcode_scanner:
     path: ./packages/fast_barcode_scanner/fast_barcode_scanner
-  file_picker: ^5.5.0
+  file_picker: ^6.0.0
   firebase_analytics: ^10.5.1
   firebase_auth: ^4.10.1
   firebase_core: ^2.17.0
@@ -51,7 +51,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_easyloading: ^3.0.5
-  flutter_hooks: ^0.20.2
+  flutter_hooks: ^0.20.3
   flutter_inappwebview: ^6.0.0-beta.25
   flutter_launcher_icons: ^0.13.1
   flutter_localizations:
@@ -74,23 +74,23 @@ dependencies:
   json_annotation: ^4.8.1
   json_serializable: ^6.7.1
   keyboard_actions: ^4.2.0
-  package_info_plus: ^4.1.0
+  package_info_plus: ^4.2.0
   path: ^1.8.3
   path_provider: ^2.1.1
   permission_handler: ^11.0.1
   pub_semver: ^2.1.4
-  purchases_flutter: ^5.8.0
-  reactive_date_range_picker: ^2.0.0
+  purchases_flutter: ^6.0.0
+  reactive_date_range_picker: ^2.0.1
   reactive_forms: ^16.1.0
   release_notes_dialog: ^2.0.0
   reorderables: ^0.6.0
-  riverpod: ^2.4.1
-  share_plus: ^7.1.0
-  shared_preferences: ^2.2.1
+  riverpod: ^2.4.4
+  share_plus: ^7.2.1
+  shared_preferences: ^2.2.2
   state_notifier: ^1.0.0
   url_launcher: ^6.1.14
   uuid: ^3.0.7
-  vibration: ^1.8.2
+  vibration: ^1.8.3
   webview_flutter: ^4.4.1
   worker_manager: ^6.3.1
 
