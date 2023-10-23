@@ -82,6 +82,7 @@ class SkuTile extends HookConsumerWidget {
       useFba: useFba,
       feeInfo: feeInfo,
       otherCost: otherCost,
+      category: item.category,
     );
 
     return replaceSku(
