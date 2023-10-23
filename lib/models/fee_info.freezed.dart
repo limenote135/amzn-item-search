@@ -28,6 +28,8 @@ mixin _$FeeInfo {
   int get variableClosingFee => throw _privateConstructorUsedError;
   @HiveField(2)
   int get fbaFee => throw _privateConstructorUsedError;
+  @HiveField(3)
+  FeeExpression? get feeExp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +44,10 @@ abstract class $FeeInfoCopyWith<$Res> {
   $Res call(
       {@HiveField(0) @JsonKey(name: "fee_rate") double referralFeeRate,
       @HiveField(1) @JsonKey(name: "closing_fee") int variableClosingFee,
-      @HiveField(2) int fbaFee});
+      @HiveField(2) int fbaFee,
+      @HiveField(3) FeeExpression? feeExp});
+
+  $FeeExpressionCopyWith<$Res>? get feeExp;
 }
 
 /// @nodoc
@@ -61,6 +66,7 @@ class _$FeeInfoCopyWithImpl<$Res, $Val extends FeeInfo>
     Object? referralFeeRate = null,
     Object? variableClosingFee = null,
     Object? fbaFee = null,
+    Object? feeExp = freezed,
   }) {
     return _then(_value.copyWith(
       referralFeeRate: null == referralFeeRate
@@ -75,7 +81,23 @@ class _$FeeInfoCopyWithImpl<$Res, $Val extends FeeInfo>
           ? _value.fbaFee
           : fbaFee // ignore: cast_nullable_to_non_nullable
               as int,
+      feeExp: freezed == feeExp
+          ? _value.feeExp
+          : feeExp // ignore: cast_nullable_to_non_nullable
+              as FeeExpression?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $FeeExpressionCopyWith<$Res>? get feeExp {
+    if (_value.feeExp == null) {
+      return null;
+    }
+
+    return $FeeExpressionCopyWith<$Res>(_value.feeExp!, (value) {
+      return _then(_value.copyWith(feeExp: value) as $Val);
+    });
   }
 }
 
@@ -89,7 +111,11 @@ abstract class _$$_FeeInfoCopyWith<$Res> implements $FeeInfoCopyWith<$Res> {
   $Res call(
       {@HiveField(0) @JsonKey(name: "fee_rate") double referralFeeRate,
       @HiveField(1) @JsonKey(name: "closing_fee") int variableClosingFee,
-      @HiveField(2) int fbaFee});
+      @HiveField(2) int fbaFee,
+      @HiveField(3) FeeExpression? feeExp});
+
+  @override
+  $FeeExpressionCopyWith<$Res>? get feeExp;
 }
 
 /// @nodoc
@@ -105,6 +131,7 @@ class __$$_FeeInfoCopyWithImpl<$Res>
     Object? referralFeeRate = null,
     Object? variableClosingFee = null,
     Object? fbaFee = null,
+    Object? feeExp = freezed,
   }) {
     return _then(_$_FeeInfo(
       referralFeeRate: null == referralFeeRate
@@ -119,6 +146,10 @@ class __$$_FeeInfoCopyWithImpl<$Res>
           ? _value.fbaFee
           : fbaFee // ignore: cast_nullable_to_non_nullable
               as int,
+      feeExp: freezed == feeExp
+          ? _value.feeExp
+          : feeExp // ignore: cast_nullable_to_non_nullable
+              as FeeExpression?,
     ));
   }
 }
@@ -131,7 +162,8 @@ class _$_FeeInfo implements _FeeInfo {
   const _$_FeeInfo(
       {@HiveField(0) @JsonKey(name: "fee_rate") this.referralFeeRate = 0,
       @HiveField(1) @JsonKey(name: "closing_fee") this.variableClosingFee = 0,
-      @HiveField(2) this.fbaFee = -1});
+      @HiveField(2) this.fbaFee = -1,
+      @HiveField(3) this.feeExp});
 
   factory _$_FeeInfo.fromJson(Map<String, dynamic> json) =>
       _$$_FeeInfoFromJson(json);
@@ -148,10 +180,13 @@ class _$_FeeInfo implements _FeeInfo {
   @JsonKey()
   @HiveField(2)
   final int fbaFee;
+  @override
+  @HiveField(3)
+  final FeeExpression? feeExp;
 
   @override
   String toString() {
-    return 'FeeInfo(referralFeeRate: $referralFeeRate, variableClosingFee: $variableClosingFee, fbaFee: $fbaFee)';
+    return 'FeeInfo(referralFeeRate: $referralFeeRate, variableClosingFee: $variableClosingFee, fbaFee: $fbaFee, feeExp: $feeExp)';
   }
 
   @override
@@ -163,13 +198,14 @@ class _$_FeeInfo implements _FeeInfo {
                 other.referralFeeRate == referralFeeRate) &&
             (identical(other.variableClosingFee, variableClosingFee) ||
                 other.variableClosingFee == variableClosingFee) &&
-            (identical(other.fbaFee, fbaFee) || other.fbaFee == fbaFee));
+            (identical(other.fbaFee, fbaFee) || other.fbaFee == fbaFee) &&
+            (identical(other.feeExp, feeExp) || other.feeExp == feeExp));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, referralFeeRate, variableClosingFee, fbaFee);
+  int get hashCode => Object.hash(
+      runtimeType, referralFeeRate, variableClosingFee, fbaFee, feeExp);
 
   @JsonKey(ignore: true)
   @override
@@ -189,7 +225,8 @@ abstract class _FeeInfo implements FeeInfo {
   const factory _FeeInfo(
       {@HiveField(0) @JsonKey(name: "fee_rate") final double referralFeeRate,
       @HiveField(1) @JsonKey(name: "closing_fee") final int variableClosingFee,
-      @HiveField(2) final int fbaFee}) = _$_FeeInfo;
+      @HiveField(2) final int fbaFee,
+      @HiveField(3) final FeeExpression? feeExp}) = _$_FeeInfo;
 
   factory _FeeInfo.fromJson(Map<String, dynamic> json) = _$_FeeInfo.fromJson;
 
@@ -204,6 +241,9 @@ abstract class _FeeInfo implements FeeInfo {
   @override
   @HiveField(2)
   int get fbaFee;
+  @override
+  @HiveField(3)
+  FeeExpression? get feeExp;
   @override
   @JsonKey(ignore: true)
   _$$_FeeInfoCopyWith<_$_FeeInfo> get copyWith =>

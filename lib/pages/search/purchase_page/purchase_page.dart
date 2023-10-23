@@ -266,6 +266,7 @@ class _SaveButton extends HookConsumerWidget {
       useFba: useFba,
       feeInfo: feeInfo,
       otherCost: otherCost,
+      category: item.category,
     );
 
     final stock = StockItem(

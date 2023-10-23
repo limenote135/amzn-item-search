@@ -127,7 +127,7 @@ class _PriceAndProfit extends HookConsumerWidget {
               children: [
                 TextSpan(
                   text: numberFormatter.format(
-                    calcTargetPrice(
+                    calcTargetPriceFromSellPrice(
                       sellPrice: detail.price,
                       feeInfo: item.prices?.feeInfo,
                       targetRate: targetPriceRate,

@@ -22,19 +22,22 @@ class FeeInfoAdapter extends TypeAdapter<_$_FeeInfo> {
       referralFeeRate: fields[0] as double,
       variableClosingFee: fields[1] as int,
       fbaFee: fields[2] as int,
+      feeExp: fields[3] as FeeExpression?,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_FeeInfo obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.referralFeeRate)
       ..writeByte(1)
       ..write(obj.variableClosingFee)
       ..writeByte(2)
-      ..write(obj.fbaFee);
+      ..write(obj.fbaFee)
+      ..writeByte(3)
+      ..write(obj.feeExp);
   }
 
   @override
@@ -56,6 +59,9 @@ _$_FeeInfo _$$_FeeInfoFromJson(Map<String, dynamic> json) => _$_FeeInfo(
       referralFeeRate: (json['fee_rate'] as num?)?.toDouble() ?? 0,
       variableClosingFee: json['closing_fee'] as int? ?? 0,
       fbaFee: json['fba_fee'] as int? ?? -1,
+      feeExp: json['fee_exp'] == null
+          ? null
+          : FeeExpression.fromJson(json['fee_exp'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_FeeInfoToJson(_$_FeeInfo instance) =>
@@ -63,4 +69,5 @@ Map<String, dynamic> _$$_FeeInfoToJson(_$_FeeInfo instance) =>
       'fee_rate': instance.referralFeeRate,
       'closing_fee': instance.variableClosingFee,
       'fba_fee': instance.fbaFee,
+      'fee_exp': instance.feeExp,
     };

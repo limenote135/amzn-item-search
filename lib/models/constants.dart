@@ -14,6 +14,7 @@ const itemPricesTypeId = 3;
 const priceDetailTypeId = 4;
 const feeInfoTypeId = 5;
 const listingRestrictionTypeId = 6;
+const feeExpressionTypeId = 7;
 
 // stock item
 const stockItemTypeId = 20;
