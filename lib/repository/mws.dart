@@ -161,7 +161,7 @@ class MwsRepository {
 
     final serverUrl = await _ref.read(serverUrlProvider.future);
     final resp = await _doRequest(
-      "$serverUrl/v1beta2/spapi/product",
+      "$serverUrl/v1beta3/spapi/product",
       data: json.encode(params),
       isPaidUser: isPaidUser,
     );
@@ -177,7 +177,7 @@ class MwsRepository {
 
     final serverUrl = await _ref.read(serverUrlProvider.future);
     final resp = await _doRequest(
-      "$serverUrl/v1beta2/spapi/query",
+      "$serverUrl/v1beta3/spapi/query",
       data: json.encode(params),
       isPaidUser: true, // Query にフリープラン用のリミットはないので有料と同じ扱いにする
     );
@@ -190,7 +190,7 @@ class MwsRepository {
     CancelToken? cancelToken,
   }) async {
     final serverUrl = await _ref.read(serverUrlProvider.future);
-    final url = "$serverUrl/v1beta2/spapi/asins";
+    final url = "$serverUrl/v1beta3/spapi/asins";
     final params = <String, Object>{
       "asins": asins,
       "skip_restrictions": skipRestrictions,
@@ -210,7 +210,7 @@ class MwsRepository {
     CancelToken? cancelToken,
   }) async {
     final serverUrl = await _ref.read(serverUrlProvider.future);
-    final url = "$serverUrl/v1beta2/spapi/restrictions/$asin";
+    final url = "$serverUrl/v1beta3/spapi/restrictions/$asin";
 
     final resp = await _doGetRequest(url, cancelToken: cancelToken);
     return ListingRestrictions.fromJson(resp);
@@ -221,7 +221,7 @@ class MwsRepository {
     CancelToken? cancelToken,
   }) async {
     final serverUrl = await _ref.read(serverUrlProvider.future);
-    final url = "$serverUrl/v1beta2/spapi/variations/$asin";
+    final url = "$serverUrl/v1beta3/spapi/variations/$asin";
 
     final resp = await _doGetRequest(url, cancelToken: cancelToken);
     return GetItemVariationsResponse.fromJson(resp);

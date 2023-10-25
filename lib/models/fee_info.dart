@@ -1,4 +1,5 @@
 import 'package:amasearch/models/constants.dart';
+import 'package:amasearch/models/fee_expression.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -16,6 +17,7 @@ class FeeInfo with _$FeeInfo {
     @Default(0)
     int variableClosingFee,
     @HiveField(2) @Default(-1) int fbaFee,
+    @HiveField(3) FeeExpression? feeExp,
   }) = _FeeInfo;
 
   factory FeeInfo.fromJson(Map<String, dynamic> json) =>

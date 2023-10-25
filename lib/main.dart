@@ -22,6 +22,7 @@ import 'package:amasearch/models/enums/sellersket_revise_rule.dart';
 import 'package:amasearch/models/enums/shortcut_type.dart';
 import 'package:amasearch/models/enums/size_type.dart';
 import 'package:amasearch/models/enums/used_sub_condition.dart';
+import 'package:amasearch/models/fee_expression.dart';
 import 'package:amasearch/models/fee_info.dart';
 import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/item_price.dart';
@@ -225,7 +226,8 @@ Future<void> initHive() async {
     ..registerAdapter(KeepItemAdapter())
     ..registerAdapter(SizeTypeAdapter())
     ..registerAdapter(HazmatTypeAdapter())
-    ..registerAdapter(SellerTypeAdapter());
+    ..registerAdapter(SellerTypeAdapter())
+    ..registerAdapter(FeeExpressionAdapter());
 
   // await deleteBoxes();
 

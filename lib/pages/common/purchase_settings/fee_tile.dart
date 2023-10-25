@@ -34,9 +34,8 @@ class FeeTile extends HookConsumerWidget {
       useFba: useFba,
     );
 
-    final feeRate = (feeInfo.referralFeeRate * 100).round();
-
-    final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
+    final sellFee = calcReferralFee(sellPrice, feeInfo, 1); // 消費税はここでは考えない
+    final feeRate = (sellFee / sellPrice * 100).round();
     final categoryFee = feeInfo.variableClosingFee;
     final tax = ((sellFee + categoryFee) * (taxRate - 1)).round();
 
@@ -85,17 +84,13 @@ class FeeTile extends HookConsumerWidget {
     }
   }
 
-  int _calcSellFee(int sellPrice, double feeRate) {
-    return (sellPrice * feeRate).round();
-  }
-
   String _calcTotalFee({
     required int sellPrice,
     required int purchasePrice,
     required FeeInfo feeInfo,
     required bool useFba,
   }) {
-    final sellFee = _calcSellFee(sellPrice, feeInfo.referralFeeRate);
+    final sellFee = calcReferralFee(sellPrice, feeInfo, 1); // 消費税はここでは含めない
     final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
     final totalFee =
         ((sellFee + feeInfo.variableClosingFee) * taxRate + fbaFee).round();
