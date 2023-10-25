@@ -144,6 +144,7 @@ class _SaveButton extends HookConsumerWidget {
       useFba: useFba,
       feeInfo: feeInfo,
       otherCost: item.otherCost,
+      category: item.item.category,
     );
 
     final newItem = item.copyWith(

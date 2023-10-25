@@ -44,13 +44,18 @@ class PriceDetailTile extends HookConsumerWidget {
 
     final feeInfo = item.prices?.feeInfo ?? const FeeInfo();
 
-    final sellFeeRate = (feeInfo.referralFeeRate * 100).round();
-    final sellFee = (detail.price * feeInfo.referralFeeRate).round();
+    final sellFee = calcReferralFee(detail.price, feeInfo, 1);
+    var sellFeeRate = 0;
+    if (detail.price != 0) {
+      sellFeeRate = (sellFee / detail.price * 100).round();
+    } else {
+      sellFeeRate = calcReferralFee(100, feeInfo, 1);
+    }
 
     final tax =
         ((sellFee + feeInfo.variableClosingFee) * (taxRate - 1)).round();
 
-    final targetPrice = calcTargetPrice(
+    final targetPrice = calcTargetPriceFromSellPrice(
       sellPrice: detail.price,
       feeInfo: feeInfo,
       targetRate: targetPriceRate,

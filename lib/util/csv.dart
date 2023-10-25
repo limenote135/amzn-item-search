@@ -245,58 +245,37 @@ int _calcStopperPrice(
     case RevisePriceStopper.profitValue:
       {
         final feeInfo = item.item.prices?.feeInfo;
-        final fbaFee = feeInfo != null && item.useFba ? feeInfo.fbaFee : 0;
-        final closingFee = feeInfo != null
-            ? (feeInfo.variableClosingFee * taxRate).round()
-            : 0;
-        /*
-        SellPrice = Profit + Purchase + Fee
-        Fee = ReferralFee + FbaFee + ClosingFee + OtherCost
-        ReferralFee = SellPrice * feeRate * taxRate
-        ClosingFee = closingFee * taxRate
-
-        SellPrice = Profit + Purchase
-                    + (SellPrice * feeRate * taxRate)
-                    + FbaFee
-                    + (closingFee * taxRate)
-                    + OtherCost
-        SellPrice(1 - feeRate * taxRate) = Profit + Purchase
-                                          + FbaFee
-                                          + (closingFee * taxRate)
-                                          + OtherCost
-         */
-
-        // 分子
-        final child =
-            value + item.purchasePrice + fbaFee + closingFee + item.otherCost;
-        // 分母
-        final mother =
-            feeInfo != null ? (1 - feeInfo.referralFeeRate * taxRate) : 1.0;
-        if (mother == 0) {
-          return child;
+        if (feeInfo == null) {
+          // 手数料情報が無い場合、購入価格+利益をストッパー価格にする
+          return item.purchasePrice + value;
         }
-        return (child / mother).round();
+        final sellPrice = calcBreakEven(
+          purchase: item.purchasePrice,
+          useFba: item.useFba,
+          feeInfo: feeInfo,
+          otherCost: item.otherCost,
+          category: item.item.category,
+          profit: value,
+        );
+        return sellPrice;
       }
     case RevisePriceStopper.profitRate:
       {
-        // ↑の式において、Profit = SellPrice * ProfitRate になる
         final feeInfo = item.item.prices?.feeInfo;
-        final fbaFee = feeInfo != null && item.useFba ? feeInfo.fbaFee : 0;
-        final closingFee = feeInfo != null
-            ? (feeInfo.variableClosingFee * taxRate).round()
-            : 0;
-
-        // 分子
-        final child = item.purchasePrice + fbaFee + closingFee + item.otherCost;
-        // 分母
-        final mother = feeInfo != null
-            ? (1 - value / 100 - feeInfo.referralFeeRate * taxRate)
-            : 1.0;
-
-        if (mother == 0) {
-          return child;
+        final rate = value / 100;
+        if (feeInfo == null) {
+          // 手数料情報が無い場合、購入価格*利益率をストッパー価格にする
+          return (item.purchasePrice * (1 + rate)).round();
         }
-        return (child / mother).round();
+
+        final sellPrice = calcTargetPriceFromPurchasePrice(
+          purchasePrice: item.purchasePrice,
+          feeInfo: feeInfo,
+          rate: value,
+          minProfit: 0,
+          useFba: item.useFba,
+        );
+        return sellPrice;
       }
   }
 }
