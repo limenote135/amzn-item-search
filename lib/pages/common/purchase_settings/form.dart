@@ -75,7 +75,10 @@ final formValueProvider =
       Validators.number,
     ],
     autogenSkuField: item.autogenSku,
-    skuField: item.sku,
+    skuField: [
+      item.sku,
+      Validators.maxLength(40),
+    ],
     retailerField: item.retailer,
     listingImagesField: FormArray<String>(
       item.images.map((e) => FormControl<String>(value: e)).toList(),
