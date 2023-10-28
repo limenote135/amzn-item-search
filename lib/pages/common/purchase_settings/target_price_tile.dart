@@ -1,6 +1,7 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
+import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -46,7 +47,7 @@ class TargetPriceTile extends HookConsumerWidget {
         children: [
           const Text("目標利益達成販売価格"),
           const Spacer(),
-          Text("$targetPrice 円"),
+          Text("${numberFormatter.format(targetPrice)} 円"),
         ],
       ),
     );
