@@ -30,19 +30,26 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemCount: questions.length,
-      separatorBuilder: (context, index) => const ThemeDivider(),
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(questions[index].title),
-          onTap: () {
-            Navigator.push(
-              context,
-              DefaultDetailPage.route(questions[index]),
-            );
-          },
-        );
+    return ListView.builder(
+      itemCount: questions.length * 2,
+      itemBuilder: (context, indexRaw) {
+        final index = indexRaw ~/ 2;
+        if (indexRaw.isOdd && questions[index].enable) {
+          return ListTile(
+            title: Text(questions[index].title),
+            onTap: () {
+              Navigator.push(
+                context,
+                DefaultDetailPage.route(questions[index]),
+              );
+            },
+          );
+        }
+
+        if (indexRaw.isEven && questions[index].enable) {
+          return const ThemeDivider();
+        }
+        return Container();
       },
     );
   }
