@@ -42,6 +42,9 @@ class SkuTile extends HookConsumerWidget {
                 formControlName: skuField,
                 keyboardType: TextInputType.url,
                 decoration: const InputDecoration(labelText: "SKU"),
+                validationMessages: {
+                  ValidationMessage.maxLength: (_) => "最大文字数を超えています",
+                },
               );
             },
           ),
