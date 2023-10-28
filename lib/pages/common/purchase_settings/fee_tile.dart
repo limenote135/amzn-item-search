@@ -35,7 +35,7 @@ class FeeTile extends HookConsumerWidget {
     );
 
     final sellFee = calcReferralFee(sellPrice, feeInfo, 1); // 消費税はここでは考えない
-    final feeRate = (sellFee / sellPrice * 100).round();
+    final feeRate = sellPrice != 0 ? (sellFee / sellPrice * 100).round() : 0;
     final categoryFee = feeInfo.variableClosingFee;
     final tax = ((sellFee + categoryFee) * (taxRate - 1)).round();
 
