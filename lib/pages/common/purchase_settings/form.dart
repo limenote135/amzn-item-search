@@ -20,6 +20,7 @@ import 'package:flutter/widgets.dart' as base;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import 'break_even_tile.dart';
 import 'fee_tile.dart';
 import 'image_tile.dart';
 import 'input_prices_tile.dart';
@@ -123,6 +124,7 @@ class PurchaseSettingsForm extends ConsumerWidget {
                 const OtherCostTile(),
                 const ProfitTile(),
                 const FeeTile(),
+                const BreakEvenTile(),
                 const TargetPriceTile(),
                 const RetailerTile(),
                 const PurchaseDateTile(),
