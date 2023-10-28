@@ -93,7 +93,7 @@ class _Body extends ConsumerWidget {
                           );
                         }
                       }
-                      ref.refresh(currentClaimsProvider);
+                      final _ = ref.refresh(currentClaimsProvider);
                       Navigator.pop(context);
                     }
                   }
