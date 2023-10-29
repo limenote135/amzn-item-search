@@ -5,8 +5,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(2, 6, 0);
+var releaseNotesVersion = Version(2, 7, 0);
 const releaseNotes = <Release>[
+  Release(
+    title: "2.7.0",
+    changes: [
+      ChangeGroup(
+        title: "更新内容",
+        changes: [
+          "出品者数でアラートを設定できるようになりました",
+          "商品詳細画面でどのアラートに一致したか表示するようになりました",
+          "仕入れ時に損益分岐価格が表示されるようになりました",
+          "価格によって手数料率が変わる商品で正確な手数料が表示されるようになりました",
+        ],
+      ),
+    ],
+  ),
   Release(
     title: "2.6.0",
     changes: [
