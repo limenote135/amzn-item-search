@@ -1,12 +1,17 @@
+import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/selected_keep_items_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/pages/search/common/price_info.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/alert.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
+import 'package:amasearch/widgets/strong_container.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,17 +28,39 @@ class KeepItemTile extends ConsumerWidget {
     final item = ref.watch(currentKeepItemProvider);
     final isSelected = ref.watch(_isSelectedProvider(item));
 
+    final search = ref.watch(searchSettingsControllerProvider);
+    final settings = ref.watch(generalSettingsControllerProvider);
+    final isPaidUser = ref.watch(isPaidUserProvider);
+    var alerts = settings.alerts;
+    if (!isPaidUser) {
+      alerts = alerts.take(2).toList();
+    }
+
     if (item.isUpdating) {
       return const ListTile(title: Center(child: CircularProgressIndicator()));
     }
+
+    final alertMatched = settings.enableAlert &&
+        alerts.any(
+          (element) => element.match(
+            item.item,
+            search,
+          ),
+        );
+
+    const tileBody = Row(
+      children: [
+        TileImage(),
+        Expanded(child: _TileBody()),
+      ],
+    );
+
+    if (alertMatched && !isSelected) {
+      return const StrongContainer(tileBody);
+    }
     return ColoredBox(
       color: _getSelectedColor(context, isSelected),
-      child: const Row(
-        children: [
-          TileImage(),
-          Expanded(child: _TileBody()),
-        ],
-      ),
+      child: tileBody,
     );
   }
 
