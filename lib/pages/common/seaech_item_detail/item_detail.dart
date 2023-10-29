@@ -1,12 +1,18 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/controllers/search_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
+import 'package:amasearch/models/alert_condition.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/hazmat_type.dart';
 import 'package:amasearch/models/enums/item_condition.dart';
+import 'package:amasearch/models/general_settings.dart';
 import 'package:amasearch/models/item_price.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/common/listing_history_page/listing_history_page.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/alert.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
@@ -15,6 +21,7 @@ import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/search_buttons.dart';
 import 'package:amasearch/widgets/strong_container.dart';
 import 'package:amasearch/widgets/text_line_tile.dart';
+import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -39,13 +46,21 @@ class SearchItemDetail extends ConsumerWidget {
       stockItemForAsinProvider(item.asin).select((value) => value.isNotEmpty),
     );
 
+    final search = ref.watch(searchSettingsControllerProvider);
+    final settings = ref.watch(generalSettingsControllerProvider);
+    final alerts = settings.alerts.where((e) => e.match(item, search)).toList();
+
     return ListView(
       children: ListTile.divideTiles(
         context: context,
         tiles: [
           if (isRestricted) const _Restricted(),
+          if (isRestricted && settings.enableAlert && alerts.isNotEmpty)
+            const ThemeDivider(), // 出品可否とアラートは背景色が同じなのでボーダーを入れる
           if (isPaid && item.hazmatType != HazmatType.nonHazmat)
             const HazmatInfo(),
+          if (isPaid && settings.enableAlert && alerts.isNotEmpty)
+            _AlertDetail(alerts),
           if (isPaid && isStocked) const _StockInfo(),
           InkWell(
             onLongPress: () {
@@ -231,5 +246,53 @@ class _StockInfo extends ConsumerWidget {
     }
     return prices.newPrices.any((e) => e.isSelf) ||
         prices.usedPrices.any((e) => e.isSelf);
+  }
+}
+
+class _AlertDetail extends ConsumerWidget {
+  const _AlertDetail(this.alerts);
+
+  final List<AlertConditionSet> alerts;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return StrongContainer(
+      ListTile(
+        title: Column(
+          children: [
+            const Text("以下のアラート条件に一致しています"),
+            Text.rich(
+              TextSpan(
+                children: [
+                  for (final alert in alerts)
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: alert.title,
+                          style: const TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () async {
+                              final summaries = alert.conditions
+                                  .map((e) => "・${e.toSummary()}")
+                                  .toList();
+                              await showOkAlertDialog(
+                                context: context,
+                                title: alert.title,
+                                message: "設定内容:\n${summaries.join("\n")}",
+                              );
+                            },
+                        ),
+                        const TextSpan(text: ", "),
+                      ],
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
