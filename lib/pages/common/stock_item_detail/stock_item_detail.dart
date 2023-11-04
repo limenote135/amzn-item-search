@@ -40,7 +40,8 @@ class StockItemDetail extends ConsumerWidget {
 
     final referralFee =
         calcReferralFee(item.sellPrice, feeInfo, 1); // 消費税はあとで計算
-    final referralFeeRate = (referralFee / item.sellPrice * 100).toInt();
+    final referralFeeRate =
+        item.sellPrice > 0 ? (referralFee / item.sellPrice * 100).toInt() : 0;
     final categoryFee = feeInfo.variableClosingFee;
     final tax = ((referralFee + categoryFee) * (taxRate - 1)).round();
 
