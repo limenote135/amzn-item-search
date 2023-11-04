@@ -65,6 +65,7 @@ class InputPricesTile extends HookConsumerWidget {
                     validationMessages: {
                       validationMessagePositiveNumberOrEmpty: (_) => "不正な値です",
                     },
+                    onTapOutside: onTapOutside,
                   ),
                 ),
               ),
@@ -87,6 +88,7 @@ class InputPricesTile extends HookConsumerWidget {
                       ValidationMessage.number: (_) => "不正な価格です",
                       ValidationMessage.min: (_) => "不正な価格です",
                     },
+                    onTapOutside: onTapOutside,
                   ),
                 ),
               ),

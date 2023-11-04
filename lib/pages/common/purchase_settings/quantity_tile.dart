@@ -55,6 +55,7 @@ class QuantityTile extends HookWidget {
                       ValidationMessage.number: (_) => "不正な値",
                       ValidationMessage.min: (_) => "不正な値",
                     },
+                    onTapOutside: onTapOutside,
                   ),
                 ),
                 IconButton(

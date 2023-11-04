@@ -13,7 +13,6 @@ import 'package:amasearch/util/custom_validator.dart';
 import 'package:amasearch/widgets/form.dart';
 import 'package:amasearch/widgets/payment.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart' as base;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_date_range_picker/reactive_date_range_picker.dart';
@@ -103,249 +102,249 @@ class _Body extends ConsumerWidget {
       generalSettingsControllerProvider.select((value) => value.retailers),
     );
 
-    return _Unfocus(
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: _labelPadding,
-                  child: Text(
-                    "キーワード",
-                    style: smallSize,
+    return Column(
+      children: [
+        Expanded(
+          child: ListView(
+            children: [
+              Padding(
+                padding: _labelPadding,
+                child: Text(
+                  "キーワード",
+                  style: smallSize,
+                ),
+              ),
+              ListTile(
+                title: ReactiveTextField<String>(
+                  contextMenuBuilder: contextMenuBuilder,
+                  formControlName: keywordField,
+                  decoration: const InputDecoration(
+                    hintText: "商品名、ASIN、JAN、SKU",
+                    border: OutlineInputBorder(),
+                    isDense: true,
                   ),
+                  onTapOutside: onTapOutside,
                 ),
-                ListTile(
-                  title: ReactiveTextField<String>(
-                    contextMenuBuilder: contextMenuBuilder,
-                    formControlName: keywordField,
-                    decoration: const InputDecoration(
-                      hintText: "商品名、ASIN、JAN、SKU",
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                    ),
+              ),
+              Padding(
+                padding: _labelPadding,
+                child: Text("出品状況", style: smallSize),
+              ),
+              ListTile(
+                title: ReactiveDropdownField(
+                  formControlName: listingStateField,
+                  hint: const Text("出品状況"),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    isDense: true,
                   ),
+                  items: ListingState.values
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(e.displayString),
+                        ),
+                      )
+                      .toList(),
                 ),
-                Padding(
-                  padding: _labelPadding,
-                  child: Text("出品状況", style: smallSize),
+              ),
+              Padding(
+                padding: _labelPadding,
+                child: Text("商品コンディション", style: smallSize),
+              ),
+              ListTile(
+                title: ReactiveDropdownField(
+                  formControlName: productConditionField,
+                  hint: const Text("商品コンディション"),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    isDense: true,
+                  ),
+                  items: ProductCondition.values
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(e.displayString),
+                        ),
+                      )
+                      .toList(),
                 ),
-                ListTile(
-                  title: ReactiveDropdownField(
-                    formControlName: listingStateField,
-                    hint: const Text("出品状況"),
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                    ),
-                    items: ListingState.values
-                        .map(
-                          (e) => DropdownMenuItem(
-                            value: e,
-                            child: Text(e.displayString),
+              ),
+              Padding(
+                padding: _labelPadding,
+                child: Text("発送方法", style: smallSize),
+              ),
+              ListTile(
+                title: ReactiveDropdownField(
+                  formControlName: fulfilmentChannelField,
+                  hint: const Text("発送方法"),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    isDense: true,
+                  ),
+                  items: FulfilmentChannel.values
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(e.displayString),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+              Padding(
+                padding: _labelPadding,
+                child: Text(
+                  "仕入れ価格",
+                  style: smallSize,
+                ),
+              ),
+              const ListTile(
+                title: _PriceRangeTextField(
+                  lowerControlName: purchasePriceLowerField,
+                  upperControlName: purchasePriceUpperField,
+                ),
+              ),
+              Padding(
+                padding: _labelPadding,
+                child: Text(
+                  "販売価格",
+                  style: smallSize,
+                ),
+              ),
+              const ListTile(
+                title: _PriceRangeTextField(
+                  lowerControlName: sellPriceLowerField,
+                  upperControlName: sellPriceUpperField,
+                ),
+              ),
+              Padding(
+                padding: _labelPadding,
+                child: Text(
+                  "仕入れ日",
+                  style: smallSize,
+                ),
+              ),
+              ListTile(
+                title: Theme(
+                  data: Theme.of(context).copyWith(
+                    colorScheme: theme.brightness == Brightness.dark
+                        ? theme.colorScheme
+                        : theme.colorScheme.copyWith(
+                            onPrimary: Colors.black,
                           ),
-                        )
-                        .toList(),
+                  ),
+                  child: Builder(
+                    builder: (context) {
+                      return ReactiveDateRangePicker(
+                        formControlName: purchaseDateRangeField,
+                        initialEntryMode: DatePickerEntryMode.calendarOnly,
+                        decoration: const InputDecoration(
+                          labelText: '仕入れ日',
+                          border: OutlineInputBorder(),
+                          suffixIcon: Icon(Icons.calendar_today),
+                          isDense: true,
+                        ),
+                      );
+                    },
                   ),
                 ),
-                Padding(
-                  padding: _labelPadding,
-                  child: Text("商品コンディション", style: smallSize),
+              ),
+              Padding(
+                padding: _labelPadding,
+                child: Text(
+                  "仕入れ先",
+                  style: smallSize,
                 ),
-                ListTile(
-                  title: ReactiveDropdownField(
-                    formControlName: productConditionField,
-                    hint: const Text("商品コンディション"),
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      isDense: true,
+              ),
+              ListTile(
+                title: Row(
+                  children: [
+                    Expanded(
+                      child: ReactiveTextField<String>(
+                        formControlName: retailerField,
+                        decoration: const InputDecoration(
+                          hintText: "仕入れ先",
+                          border: OutlineInputBorder(),
+                          isDense: true,
+                        ),
+                        onTapOutside: onTapOutside,
+                      ),
                     ),
-                    items: ProductCondition.values
-                        .map(
-                          (e) => DropdownMenuItem(
-                            value: e,
-                            child: Text(e.displayString),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-                Padding(
-                  padding: _labelPadding,
-                  child: Text("発送方法", style: smallSize),
-                ),
-                ListTile(
-                  title: ReactiveDropdownField(
-                    formControlName: fulfilmentChannelField,
-                    hint: const Text("発送方法"),
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                    ),
-                    items: FulfilmentChannel.values
-                        .map(
-                          (e) => DropdownMenuItem(
-                            value: e,
-                            child: Text(e.displayString),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-                Padding(
-                  padding: _labelPadding,
-                  child: Text(
-                    "仕入れ価格",
-                    style: smallSize,
-                  ),
-                ),
-                const ListTile(
-                  title: _PriceRangeTextField(
-                    lowerControlName: purchasePriceLowerField,
-                    upperControlName: purchasePriceUpperField,
-                  ),
-                ),
-                Padding(
-                  padding: _labelPadding,
-                  child: Text(
-                    "販売価格",
-                    style: smallSize,
-                  ),
-                ),
-                const ListTile(
-                  title: _PriceRangeTextField(
-                    lowerControlName: sellPriceLowerField,
-                    upperControlName: sellPriceUpperField,
-                  ),
-                ),
-                Padding(
-                  padding: _labelPadding,
-                  child: Text(
-                    "仕入れ日",
-                    style: smallSize,
-                  ),
-                ),
-                ListTile(
-                  title: Theme(
-                    data: Theme.of(context).copyWith(
-                      colorScheme: theme.brightness == Brightness.dark
-                          ? theme.colorScheme
-                          : theme.colorScheme.copyWith(
-                              onPrimary: Colors.black,
-                            ),
-                    ),
-                    child: Builder(
-                      builder: (context) {
-                        return ReactiveDateRangePicker(
-                          formControlName: purchaseDateRangeField,
-                          initialEntryMode: DatePickerEntryMode.calendarOnly,
-                          decoration: const InputDecoration(
-                            labelText: '仕入れ日',
-                            border: OutlineInputBorder(),
-                            suffixIcon: Icon(Icons.calendar_today),
-                            isDense: true,
-                          ),
+                    IconButton(
+                      icon: const Icon(Icons.arrow_drop_down),
+                      onPressed: () async {
+                        final form = ReactiveForm.of(context)! as FormGroup;
+                        final ret = await showConfirmationDialog(
+                          context: context,
+                          title: "仕入先の選択",
+                          initialSelectedActionKey:
+                              form.control(retailerField).value,
+                          actions: [
+                            for (final retailer in retailers)
+                              AlertDialogAction(
+                                key: retailer,
+                                label: retailer,
+                              ),
+                          ],
                         );
+                        if (ret != null) {
+                          form.control(retailerField).value = ret;
+                        }
                       },
                     ),
-                  ),
+                  ],
                 ),
-                Padding(
-                  padding: _labelPadding,
-                  child: Text(
-                    "仕入れ先",
-                    style: smallSize,
-                  ),
-                ),
-                ListTile(
-                  title: Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveTextField<String>(
-                          formControlName: retailerField,
-                          decoration: const InputDecoration(
-                            hintText: "仕入れ先",
-                            border: OutlineInputBorder(),
-                            isDense: true,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.arrow_drop_down),
-                        onPressed: () async {
-                          final form = ReactiveForm.of(context)! as FormGroup;
-                          final ret = await showConfirmationDialog(
-                            context: context,
-                            title: "仕入先の選択",
-                            initialSelectedActionKey:
-                                form.control(retailerField).value,
-                            actions: [
-                              for (final retailer in retailers)
-                                AlertDialogAction(
-                                  key: retailer,
-                                  label: retailer,
-                                ),
-                            ],
-                          );
-                          if (ret != null) {
-                            form.control(retailerField).value = ret;
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          ListTile(
-            title: ReactiveFormConsumer(
-              builder: (context, formGroup, child) {
-                Future<void> onPressed() async {
-                  if (!isPaidUser) {
-                    await showUnpaidDialog(context);
-                    return;
-                  }
-                  final f = filter.copyWith(
-                    keyword: getNullableString(form, keywordField),
-                    listingState: getListingState(form),
-                    productCondition: getProductCondition(form),
-                    channel: getFulfilmentChannel(form),
-                    purchasePriceLower:
-                        getNullableInt(form, purchasePriceLowerField),
-                    purchasePriceUpper:
-                        getNullableInt(form, purchasePriceUpperField),
-                    sellPriceLower: getNullableInt(form, sellPriceLowerField),
-                    sellPriceUpper: getNullableInt(form, sellPriceUpperField),
-                    purchaseDateRange:
-                        getNullableDateRange(form, purchaseDateRangeField),
-                    retailer: getNullableString(form, retailerField),
-                  );
-                  ref.read(currentStockItemFilterProvider.notifier).state = f;
-                  final params = createSearchParam(f);
-                  if (params.isNotEmpty) {
-                    unawaited(
-                      ref
-                          .read(analyticsControllerProvider)
-                          .logSearchStockItemEvent(params),
-                    );
-                  }
-                  Navigator.pop(context);
+        ),
+        ListTile(
+          title: ReactiveFormConsumer(
+            builder: (context, formGroup, child) {
+              Future<void> onPressed() async {
+                if (!isPaidUser) {
+                  await showUnpaidDialog(context);
+                  return;
                 }
-
-                return ElevatedButton(
-                  onPressed: form.invalid ? null : onPressed,
-                  child: const WithLockIconIfNotPaid(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    child: Text("検索"),
-                  ),
+                final f = filter.copyWith(
+                  keyword: getNullableString(form, keywordField),
+                  listingState: getListingState(form),
+                  productCondition: getProductCondition(form),
+                  channel: getFulfilmentChannel(form),
+                  purchasePriceLower:
+                      getNullableInt(form, purchasePriceLowerField),
+                  purchasePriceUpper:
+                      getNullableInt(form, purchasePriceUpperField),
+                  sellPriceLower: getNullableInt(form, sellPriceLowerField),
+                  sellPriceUpper: getNullableInt(form, sellPriceUpperField),
+                  purchaseDateRange:
+                      getNullableDateRange(form, purchaseDateRangeField),
+                  retailer: getNullableString(form, retailerField),
                 );
-              },
-            ),
+                ref.read(currentStockItemFilterProvider.notifier).state = f;
+                final params = createSearchParam(f);
+                if (params.isNotEmpty) {
+                  unawaited(
+                    ref
+                        .read(analyticsControllerProvider)
+                        .logSearchStockItemEvent(params),
+                  );
+                }
+                Navigator.pop(context);
+              }
+
+              return ElevatedButton(
+                onPressed: form.invalid ? null : onPressed,
+                child: const WithLockIconIfNotPaid(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  child: Text("検索"),
+                ),
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -424,6 +423,7 @@ class _PriceRangeTextField extends HookConsumerWidget {
                 validationMessagePositiveNumberOrEmpty: (_) => "不正な値です",
               },
               onSubmitted: (control) => form.focus(upperControlName),
+              onTapOutside: onTapOutside,
             ),
           ),
           const Center(
@@ -445,26 +445,11 @@ class _PriceRangeTextField extends HookConsumerWidget {
               validationMessages: {
                 validationMessagePositiveNumberOrEmpty: (_) => "不正な値です",
               },
+              onTapOutside: onTapOutside,
             ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class _Unfocus extends StatelessWidget {
-  const _Unfocus({this.child});
-
-  final Widget? child;
-
-  @override
-  Widget build(BuildContext context) {
-    return base.Listener(
-      onPointerDown: (event) {
-        ReactiveForm.of(context)?.unfocus();
-      },
-      child: child,
     );
   }
 }

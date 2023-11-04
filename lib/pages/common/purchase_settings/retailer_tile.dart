@@ -22,6 +22,7 @@ class RetailerTile extends HookConsumerWidget {
               contextMenuBuilder: contextMenuBuilder,
               formControlName: retailerField,
               decoration: const InputDecoration(labelText: "仕入れ先"),
+              onTapOutside: onTapOutside,
             ),
           ),
           IconButton(
