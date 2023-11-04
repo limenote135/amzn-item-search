@@ -1,3 +1,4 @@
+import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 
 Widget contextMenuBuilder(
@@ -9,4 +10,8 @@ Widget contextMenuBuilder(
     anchors: editableTextState.contextMenuAnchors,
     buttonItems: items,
   );
+}
+
+void onTapOutside(PointerDownEvent event) {
+  unfocus();
 }
