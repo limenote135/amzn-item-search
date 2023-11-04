@@ -45,6 +45,7 @@ class SkuTile extends HookConsumerWidget {
                 validationMessages: {
                   ValidationMessage.maxLength: (_) => "最大文字数を超えています",
                 },
+                onTapOutside: onTapOutside,
               );
             },
           ),
