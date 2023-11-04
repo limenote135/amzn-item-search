@@ -16,7 +16,6 @@ import 'package:amasearch/widgets/form.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart' as base;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -105,64 +104,47 @@ class PurchaseSettingsForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isPaidUser = ref.watch(isPaidUserProvider);
 
-    return _Unfocus(
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              children: [
-                const WithUnderLine(
-                  ImageTile(),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView(
+            children: [
+              const WithUnderLine(
+                ImageTile(),
+              ),
+              if (isPaidUser) const SellerListTile(),
+              if (isPaidUser) const ThemeDivider(),
+              const InputPricesTile(),
+              const ItemConditionTile(),
+              const FbaTile(),
+              if (isPaidUser) const SmallProgramTile(),
+              const QuantityTile(),
+              const OtherCostTile(),
+              const ProfitTile(),
+              const FeeTile(),
+              const BreakEvenTile(),
+              const TargetPriceTile(),
+              const RetailerTile(),
+              const PurchaseDateTile(),
+              const ThemeDivider(),
+              const SkuTile(),
+              const ConditionTextTile(),
+              const ListingImageTile(),
+              ListTile(
+                title: ReactiveTextField<dynamic>(
+                  contextMenuBuilder: contextMenuBuilder,
+                  formControlName: memoField,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  decoration: const InputDecoration(labelText: "メモ"),
+                  onTapOutside: (_) => unfocus,
                 ),
-                if (isPaidUser) const SellerListTile(),
-                if (isPaidUser) const ThemeDivider(),
-                const InputPricesTile(),
-                const ItemConditionTile(),
-                const FbaTile(),
-                if (isPaidUser) const SmallProgramTile(),
-                const QuantityTile(),
-                const OtherCostTile(),
-                const ProfitTile(),
-                const FeeTile(),
-                const BreakEvenTile(),
-                const TargetPriceTile(),
-                const RetailerTile(),
-                const PurchaseDateTile(),
-                const ThemeDivider(),
-                const SkuTile(),
-                const ConditionTextTile(),
-                const ListingImageTile(),
-                ListTile(
-                  title: ReactiveTextField<dynamic>(
-                    contextMenuBuilder: contextMenuBuilder,
-                    formControlName: memoField,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    decoration: const InputDecoration(labelText: "メモ"),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          if (action != null) action!,
-        ],
-      ),
-    );
-  }
-}
-
-class _Unfocus extends StatelessWidget {
-  const _Unfocus({this.child});
-
-  final Widget? child;
-
-  @override
-  Widget build(BuildContext context) {
-    return base.Listener(
-      onPointerDown: (event) {
-        ReactiveForm.of(context)?.unfocus();
-      },
-      child: child,
+        ),
+        if (action != null) action!,
+      ],
     );
   }
 }

@@ -32,6 +32,7 @@ class ConditionTextTile extends ConsumerWidget {
                 keyboardType: TextInputType.multiline,
                 decoration: const InputDecoration(labelText: "コンディション説明"),
                 style: middleText,
+                onTapOutside: onTapOutside,
               ),
             ),
           ),

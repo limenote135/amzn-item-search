@@ -42,6 +42,7 @@ class OtherCostTile extends HookConsumerWidget {
                 ValidationMessage.number: (_) => "不正な価格です",
                 ValidationMessage.min: (_) => "不正な価格です",
               },
+              onTapOutside: onTapOutside,
             ),
           ),
         ],
