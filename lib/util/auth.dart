@@ -62,7 +62,9 @@ final currentClaimsProvider = StreamProvider((ref) async* {
         final token = await user.getIdTokenResult();
         final dynamic plan = token.claims?["pl"];
 
-        if (plan != null && plan != PlanType.free.name) {
+        if (plan != null &&
+            plan != PlanType.free.name &&
+            plan != PlanType.suspended.name) {
           // トライアル、標準、キャンペーンの場合
           ref.read(isPaidUserProvider.notifier).state = true;
           unawaited(
