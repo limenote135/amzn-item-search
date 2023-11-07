@@ -37,6 +37,18 @@ enum PlanType {
     }
     return PlanType.free;
   }
+
+  bool isPaidPlan() {
+    switch (this) {
+      case PlanType.free:
+      case PlanType.suspended:
+        return false;
+      case PlanType.trial:
+      case PlanType.standard:
+      case PlanType.campaign:
+        return true;
+    }
+  }
 }
 
 final linkedWithAmazonProvider = FutureProvider((ref) async {
@@ -63,14 +75,12 @@ final currentClaimsProvider = StreamProvider((ref) async* {
         final dynamic plan = token.claims?["pl"];
 
         if (plan != null &&
-            plan != PlanType.free.name &&
-            plan != PlanType.suspended.name) {
+            plan is String &&
+            PlanType.fromName(plan).isPaidPlan()) {
           // トライアル、標準、キャンペーンの場合
           ref.read(isPaidUserProvider.notifier).state = true;
           unawaited(
-            ref
-                .read(analyticsControllerProvider)
-                .setUserProp("plan", plan.toString()),
+            ref.read(analyticsControllerProvider).setUserProp("plan", plan),
           );
         } else {
           ref.read(isPaidUserProvider.notifier).state = false;
@@ -127,3 +137,17 @@ String _getPlanName(String raw, int due) {
       return "無料プラン(停止中)";
   }
 }
+
+final showPlanProvider = FutureProvider((ref) async {
+  final showPlan = await ref.watch(
+    currentClaimsProvider.selectAsync((claims) {
+      if (claims == null) {
+        return false;
+      }
+      final dynamic lwa = claims[customClaimsLwaKey];
+      final dynamic isReview = claims["isReview"];
+      return isReview != true && lwa == true;
+    }),
+  );
+  return showPlan;
+});
