@@ -137,3 +137,17 @@ String _getPlanName(String raw, int due) {
       return "無料プラン(停止中)";
   }
 }
+
+final showPlanProvider = FutureProvider((ref) async {
+  final showPlan = await ref.watch(
+    currentClaimsProvider.selectAsync((claims) {
+      if (claims == null) {
+        return false;
+      }
+      final dynamic lwa = claims[customClaimsLwaKey];
+      final dynamic isReview = claims["isReview"];
+      return isReview != true && lwa == true;
+    }),
+  );
+  return showPlan;
+});
