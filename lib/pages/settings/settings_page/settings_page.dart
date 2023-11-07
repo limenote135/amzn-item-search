@@ -20,6 +20,7 @@ import 'package:amasearch/pages/settings/sku_format_page/sku_format_page.dart';
 import 'package:amasearch/pages/settings/support_page/suppert_page.dart';
 import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/release_notes.dart';
 import 'package:amasearch/widgets/payment.dart';
@@ -59,6 +60,7 @@ class _Body extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(generalSettingsControllerProvider);
+    final showPlanAsync = ref.watch(showPlanProvider);
 
     final captionStyle = captionFontSize(context);
     return ListView(
@@ -85,9 +87,23 @@ class _Body extends HookConsumerWidget {
             Navigator.push(context, AmazonPage.route());
           },
         ),
-        const ListTile(
-          title: Text("現在のプラン"),
-          subtitle: SubscriptionStatus(),
+        showPlanAsync.when(
+          error: (error, stackTrace) {
+            return const ListTile(
+              title: Text("現在のプラン"),
+              subtitle: SubscriptionStatus(),
+            );
+          },
+          loading: Container.new,
+          data: (showPlan) {
+            if (showPlan) {
+              return const ListTile(
+                title: Text("現在のプラン"),
+                subtitle: SubscriptionStatus(),
+              );
+            }
+            return Container();
+          },
         ),
         const ThemeDivider(),
         ListTile(
