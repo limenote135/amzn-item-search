@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final authStateChangesProvider = StreamProvider<User?>(
@@ -72,21 +73,30 @@ final currentClaimsProvider = StreamProvider((ref) async* {
         yield null;
       } else {
         final token = await user.getIdTokenResult();
-        final dynamic plan = token.claims?["pl"];
+        final inReview = await ref.watch(inReviewProvider.future);
+        final dynamic plan = token.claims?[customClaimsPlanKey];
+        final dynamic lwa = token.claims?[customClaimsLwaKey];
 
-        if (plan != null &&
-            plan is String &&
-            PlanType.fromName(plan).isPaidPlan()) {
-          // トライアル、標準、キャンペーンの場合
+        if (lwa != true && inReview) {
           ref.read(isPaidUserProvider.notifier).state = true;
           unawaited(
-            ref.read(analyticsControllerProvider).setUserProp("plan", plan),
+            ref.read(analyticsControllerProvider).setUserProp("plan", "none"),
           );
         } else {
-          ref.read(isPaidUserProvider.notifier).state = false;
-          unawaited(
-            ref.read(analyticsControllerProvider).setUserProp("plan", "free"),
-          );
+          if (plan != null &&
+              plan is String &&
+              PlanType.fromName(plan).isPaidPlan()) {
+            // トライアル、標準、キャンペーンの場合
+            ref.read(isPaidUserProvider.notifier).state = true;
+            unawaited(
+              ref.read(analyticsControllerProvider).setUserProp("plan", plan),
+            );
+          } else {
+            ref.read(isPaidUserProvider.notifier).state = false;
+            unawaited(
+              ref.read(analyticsControllerProvider).setUserProp("plan", "free"),
+            );
+          }
         }
         yield token.claims;
       }
@@ -150,4 +160,23 @@ final showPlanProvider = FutureProvider((ref) async {
     }),
   );
   return showPlan;
+});
+
+const _configNameInReview = "review";
+final inReviewProvider = FutureProvider<bool>((_) async {
+  final remoteConfig = FirebaseRemoteConfig.instance;
+  try {
+    final defaultValues = <String, dynamic>{
+      _configNameInReview: "false",
+    };
+    await remoteConfig.setDefaults(defaultValues);
+    await remoteConfig.fetchAndActivate();
+    final info = remoteConfig.getBool(_configNameInReview);
+
+    return info;
+    // ignore: avoid_catches_without_on_clauses
+  } catch (e) {
+    // DO NOTHING
+  }
+  return false;
 });
