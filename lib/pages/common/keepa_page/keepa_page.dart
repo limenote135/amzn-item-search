@@ -236,7 +236,7 @@ class _Body extends HookConsumerWidget {
                 .read(analyticsControllerProvider)
                 .logPushSearchButtonEvent(pushSearchButtonOpenKeepaName);
             final url = "https://keepa.com/#!product/5-$asin/";
-            await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
+            await launchUrl(Uri.parse(url), mode: LaunchMode.inAppBrowserView);
           },
           child: const Text("ブラウザで開く"),
         ),

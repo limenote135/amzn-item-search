@@ -121,7 +121,7 @@ Future<void> callListings(
     if (ret == OkCancelResult.cancel) {
       // セラーセントラルを開く
       const url = "https://sellercentral.amazon.co.jp/listing/status";
-      await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
+      await launchUrl(Uri.parse(url), mode: LaunchMode.inAppBrowserView);
     }
 
     await requestReview(analytics);
