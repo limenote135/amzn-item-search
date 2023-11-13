@@ -264,7 +264,7 @@ class SlidableTile extends HookConsumerWidget {
               .read(analyticsControllerProvider)
               .logPushSearchButtonEvent(eventName);
 
-          await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
+          await launchUrl(Uri.parse(url), mode: LaunchMode.inAppBrowserView);
         }
       },
     );

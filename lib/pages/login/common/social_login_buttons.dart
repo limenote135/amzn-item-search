@@ -112,7 +112,7 @@ class SocialLoginButtons extends HookConsumerWidget {
                           Uri.parse(
                             "https://amasearch.knz-c.com/terms/terms_of_service.txt",
                           ),
-                          mode: LaunchMode.inAppWebView,
+                          mode: LaunchMode.inAppBrowserView,
                         );
                       },
                   ),
@@ -129,7 +129,7 @@ class SocialLoginButtons extends HookConsumerWidget {
                           Uri.parse(
                             "https://amasearch.knz-c.com/terms/privacy_policy.txt",
                           ),
-                          mode: LaunchMode.inAppWebView,
+                          mode: LaunchMode.inAppBrowserView,
                         );
                       },
                   ),
