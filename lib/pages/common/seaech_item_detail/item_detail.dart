@@ -159,7 +159,7 @@ class _Restricted extends ConsumerWidget {
                       Uri.parse(
                         "https://sellercentral.amazon.co.jp/hz/approvalrequest/restrictions/approve?asin=${item.asin}",
                       ),
-                      mode: LaunchMode.inAppWebView,
+                      mode: LaunchMode.inAppBrowserView,
                     );
                   },
               ),

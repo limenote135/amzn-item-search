@@ -81,7 +81,7 @@ class _KeepaFaq extends StatelessWidget {
                       Uri.parse(
                         "https://graph.keepa.com/pricehistory.png?asin=B08K41Q79R&domain=co.jp&width=600&salesrank=1&height=300&new=1&used=1&amazon=1&bb=1&fba=1",
                       ),
-                      mode: LaunchMode.inAppWebView,
+                      mode: LaunchMode.inAppBrowserView,
                     );
                   },
               ),
