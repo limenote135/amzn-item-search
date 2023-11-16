@@ -49,8 +49,10 @@ class SearchButtons extends HookConsumerWidget {
               await ref
                   .read(analyticsControllerProvider)
                   .logPushSearchButtonEvent(pushSearchButtonAmazonListName);
-              await launchUrl(Uri.parse(url),
-                  mode: LaunchMode.inAppBrowserView);
+              await launchUrl(
+                Uri.parse(url),
+                mode: LaunchMode.inAppBrowserView,
+              );
             },
             child: const Text("出品一覧"),
           ),
@@ -135,8 +137,10 @@ class SearchButtons extends HookConsumerWidget {
               await ref
                   .read(analyticsControllerProvider)
                   .logPushSearchButtonEvent(eventName);
-              await launchUrl(Uri.parse(url),
-                  mode: LaunchMode.inAppBrowserView);
+              await launchUrl(
+                Uri.parse(url),
+                mode: LaunchMode.inAppBrowserView,
+              );
             },
             child: Text(button.title),
           ),
