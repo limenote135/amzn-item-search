@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/pages/home_page.dart';
@@ -41,9 +39,8 @@ class MyApp extends HookConsumerWidget {
         // (15 * 10文字 + 左右余白 8 * 2 + 予備4) * 2Column < width
         final media = MediaQuery.of(context);
         final maxScale = (media.size.width - 40) / 300;
-        final scale = min(media.textScaleFactor, maxScale);
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
+        return MediaQuery.withClampedTextScaling(
+          maxScaleFactor: maxScale,
           child: _Unfocus(
             child: FlutterEasyLoading(child: child),
           ),

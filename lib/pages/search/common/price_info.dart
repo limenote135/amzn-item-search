@@ -63,7 +63,12 @@ class _PriceAndProfit extends HookConsumerWidget {
     final smallSize = smallFontSize(context);
 
     final query = MediaQuery.of(context);
-    final width = (query.size.width - 75) / 2 / query.textScaleFactor;
+    // TODO: scaledFontSize から画面に入る文字数が計算できる？
+    final scaledFontSize =
+        MediaQuery.textScalerOf(context).scale(smallSize!.fontSize!);
+
+    final scale = query.textScaler.scale(smallSize.fontSize!);
+    final width = (query.size.width - 75) / 2 / scale;
 
     // 新品で出品者なしの場合、参考価格をベースに計算する
     final shouldReferListingPrice = condition == ItemCondition.newItem &&

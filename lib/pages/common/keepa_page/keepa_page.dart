@@ -16,6 +16,7 @@ final currentAsinProvider = Provider<String>((_) => throw UnimplementedError());
 
 class KeepaPage extends ConsumerWidget {
   const KeepaPage({super.key});
+
   static const String routeName = "/keepa";
 
   static Route<void> route(String asin) {
@@ -75,8 +76,8 @@ class _Body extends HookConsumerWidget {
     final asin = ref.watch(currentAsinProvider);
     final media = MediaQuery.of(context);
     final defaultSize = DefaultTextStyle.of(context).style.fontSize!;
-    final scale = media.textScaleFactor;
-    final height = defaultSize * scale * 2;
+    final scale = media.textScaler.scale(defaultSize);
+    final height = defaultSize * scale * 2; // TODO:
 
     final settings = ref.watch(
       generalSettingsControllerProvider.select((value) => value.keepaSettings),
@@ -266,6 +267,7 @@ class _KeepaImage extends StatelessWidget {
   const _KeepaImage({required this.url});
 
   final String url;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
