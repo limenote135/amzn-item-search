@@ -32,15 +32,21 @@ class HomePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentPage = ref.watch(_currentPageProvider);
     final observer = ref.watch(analyticsObserverProvider);
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) {
+          return;
+        }
         final ret = await showOkCancelAlertDialog(
           context: context,
           title: "終了確認",
           message: "終了しますか？",
           isDestructiveAction: true,
         );
-        return ret == OkCancelResult.ok;
+        if (ret == OkCancelResult.ok) {
+          Navigator.pop(context);
+        }
       },
       child: Scaffold(
         body: IndexedStack(

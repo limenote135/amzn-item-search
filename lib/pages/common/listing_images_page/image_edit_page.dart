@@ -60,8 +60,12 @@ class _ImageEditPageState extends ConsumerState<ImageEditPage> {
   @override
   Widget build(BuildContext context) {
     final path = ref.watch(_currentImagePathProvider);
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) {
+          return;
+        }
         final ret = await showOkCancelAlertDialog(
           context: context,
           // title: "",
@@ -69,7 +73,9 @@ class _ImageEditPageState extends ConsumerState<ImageEditPage> {
           isDestructiveAction: true,
           okLabel: "戻る",
         );
-        return ret == OkCancelResult.ok;
+        if (ret == OkCancelResult.ok) {
+          Navigator.pop(context);
+        }
       },
       child: Scaffold(
         appBar: AppBar(
