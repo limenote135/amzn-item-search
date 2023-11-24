@@ -2,6 +2,8 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/pricetar_rule.dart';
 import 'package:amasearch/models/enums/pricetar_stopper.dart';
+import 'package:amasearch/pages/settings/csv_page/pricetar_login_page.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -38,8 +40,16 @@ class _Body extends ConsumerWidget {
       generalSettingsControllerProvider
           .select((value) => value.pricetarSettings),
     );
+    final isBeta = ref.watch(isBetaUserProvider);
     return ListView(
       children: [
+        if (isBeta)
+          ListTile(
+            title: const Text("ログイン設定"),
+            onTap: () {
+              Navigator.push(context, PricetarLoginSettings.route());
+            },
+          ),
         ListTile(
           title: const Text("価格改定ルール(新品)"),
           subtitle: Text(settings.newRule.toDisplayString()),
