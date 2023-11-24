@@ -9,6 +9,7 @@ import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/listings.dart';
 import 'package:amasearch/util/review.dart';
+import 'package:amasearch/util/secure_storage.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -21,11 +22,46 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'common.dart';
 
+enum ListingsFormat {
+  standard,
+  pricetar;
+
+  String get displayName {
+    switch (this) {
+      case ListingsFormat.standard:
+        return "セラーセントラル";
+      case ListingsFormat.pricetar:
+        return "プライスター";
+    }
+  }
+}
+
 Future<void> callListings(
   BuildContext context,
   WidgetRef ref,
   List<StockItem> selected,
 ) async {
+  final isBeta = ref.read(isBetaUserProvider);
+  var type = ListingsFormat.standard;
+  if (isBeta) {
+    final t = await showConfirmationDialog(
+      context: context,
+      title: "登録先の選択",
+      initialSelectedActionKey: ListingsFormat.standard,
+      actions: [
+        for (final f in ListingsFormat.values)
+          AlertDialogAction(
+            key: f,
+            label: f.displayName,
+          ),
+      ],
+    );
+    if (t == null) {
+      return;
+    }
+    type = t;
+  }
+
   final user = await ref.read(authStateChangesProvider.future);
   // 非同期関数の後に ref.read すると No ProviderScope found になる場合があるので事前に呼ぶ
   final analytics = ref.read(analyticsControllerProvider);
@@ -95,11 +131,31 @@ Future<void> callListings(
       return;
     }
 
-    final fn = ref.read(cloudFunctionProvider(functionNameListingItems));
-    await fn.call<String>(<String, String>{
+    final params = <String, String>{
       "version": listingsFileVersion,
       "filename": filename,
-    });
+    };
+    if (type == ListingsFormat.pricetar) {
+      final storage = ref.read(secureStorageProvider);
+      final id = await storage.read(key: "pricetarID");
+      final pass = await storage.read(key: "pricetarPassword");
+      if (id == null || id.isEmpty || pass == null || pass.isEmpty) {
+        await showOkAlertDialog(
+          context: context,
+          title: "エラー",
+          message: "認証情報が設定されていません",
+        );
+        return;
+      }
+
+      params.addAll(<String, String>{
+        "type": type.name,
+        "id": id,
+        "pass": pass,
+      });
+    }
+    final fn = ref.read(cloudFunctionProvider(functionNameListingItems));
+    await fn.call<String>(params);
 
     controller.setListingDate(
       targets,
