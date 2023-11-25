@@ -140,6 +140,7 @@ Future<void> callListings(
       final id = await storage.read(key: "pricetarID");
       final pass = await storage.read(key: "pricetarPassword");
       if (id == null || id.isEmpty || pass == null || pass.isEmpty) {
+        await EasyLoading.dismiss();
         await showOkAlertDialog(
           context: context,
           title: "エラー",
