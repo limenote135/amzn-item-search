@@ -3,7 +3,11 @@ import 'dart:io';
 
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/listing_item.dart';
+import 'package:amasearch/models/pricetar_settings.dart';
+import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/util/csv.dart';
 import 'package:archive/archive_io.dart';
+import 'package:csv/csv.dart';
 import 'package:dartx/dartx_io.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
@@ -50,6 +54,34 @@ Future<File> createListingsFile(List<ListingItem> items) async {
     }
   }
   await Future.wait(promises);
+
+  final timestamp = DateFormat("yyyyMMdd-HHmmss").format(DateTime.now());
+  final encoder = ZipFileEncoder();
+  final zipFilePath = "$fileRootDirPath/$timestamp.zip";
+  encoder.zipDirectory(dir, filename: zipFilePath);
+
+  return File(zipFilePath);
+}
+
+Future<File> createPricetarListingsFile(
+  List<StockItem> items,
+  PricetarSettings settings,
+) async {
+  final data = createPricetarCsv(items, settings);
+  final csvData = const ListToCsvConverter().convert(data);
+
+  final tempDir = await getTemporaryDirectory();
+  final fileRootDirPath = "${tempDir.absolute.path}/listings";
+  final fileDirPath = "$fileRootDirPath/files";
+  final rootDir = Directory(fileRootDirPath);
+  // 既に存在する場合は削除する
+  if (rootDir.existsSync()) {
+    rootDir.deleteSync(recursive: true);
+  }
+  final dir = Directory(fileDirPath);
+  await dir.create(recursive: true);
+
+  File("$fileDirPath/listings.csv").writeAsStringSync(csvData);
 
   final timestamp = DateFormat("yyyyMMdd-HHmmss").format(DateTime.now());
   final encoder = ZipFileEncoder();
