@@ -54,14 +54,14 @@ Future<File> createStockItemCsv(
   csvDir.createSync();
 
   final file = File("$csvDirPath/$filename.csv");
-  final data = _createCsv(type, items, settings);
+  final data = createCsv(type, items, settings);
   final csvData = const ListToCsvConverter().convert(data);
   final converted = ShiftJIS().encode(csvData);
   file.writeAsBytesSync(converted);
   return file;
 }
 
-List<List<Object>> _createCsv(
+List<List<Object>> createCsv(
   CsvFormat type,
   List<StockItem> items,
   GeneralSettings settings,
@@ -70,7 +70,7 @@ List<List<Object>> _createCsv(
     case CsvFormat.standard:
       return _createDefaultCsv(items, settings.csvOrder);
     case CsvFormat.pricetar:
-      return _createPricetarCsv(items, settings.pricetarSettings);
+      return createPricetarCsv(items, settings.pricetarSettings);
     case CsvFormat.makad:
       return _createMakadCsv(items, settings.makadSettings);
     case CsvFormat.sellerSket:
@@ -78,7 +78,7 @@ List<List<Object>> _createCsv(
   }
 }
 
-List<List<Object>> _createPricetarCsv(
+List<List<Object>> createPricetarCsv(
   List<StockItem> items,
   PricetarSettings settings,
 ) {
