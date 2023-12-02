@@ -3,7 +3,11 @@ import 'dart:io';
 
 import 'package:amasearch/models/enums/item_condition.dart';
 import 'package:amasearch/models/listing_item.dart';
+import 'package:amasearch/models/pricetar_settings.dart';
+import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/util/csv.dart';
 import 'package:archive/archive_io.dart';
+import 'package:csv/csv.dart';
 import 'package:dartx/dartx_io.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
@@ -51,6 +55,43 @@ Future<File> createListingsFile(List<ListingItem> items) async {
   }
   await Future.wait(promises);
 
+  final timestamp = DateFormat("yyyyMMdd-HHmmss").format(DateTime.now());
+  final encoder = ZipFileEncoder();
+  final zipFilePath = "$fileRootDirPath/$timestamp.zip";
+  encoder.zipDirectory(dir, filename: zipFilePath);
+
+  return File(zipFilePath);
+}
+
+Future<File> createPricetarListingsFile(
+  List<StockItem> items,
+  PricetarSettings settings,
+) async {
+  final fbaItems = items.where((element) => element.useFba).toList();
+  final selfShipItems = items.where((element) => !element.useFba).toList();
+  final fbaData = createPricetarCsv(fbaItems, settings);
+  final selfShipData = createPricetarCsv(selfShipItems, settings);
+  const converter = ListToCsvConverter();
+  final fbaCsvData = converter.convert(fbaData);
+  final selfShipCsvData = converter.convert(selfShipData);
+
+  final tempDir = await getTemporaryDirectory();
+  final fileRootDirPath = "${tempDir.absolute.path}/listings";
+  final fileDirPath = "$fileRootDirPath/files";
+  final rootDir = Directory(fileRootDirPath);
+  // 既に存在する場合は削除する
+  if (rootDir.existsSync()) {
+    rootDir.deleteSync(recursive: true);
+  }
+  final dir = Directory(fileDirPath);
+  await dir.create(recursive: true);
+
+  if (fbaItems.isNotEmpty) {
+    File("$fileDirPath/listings_fba.csv").writeAsStringSync(fbaCsvData);
+  }
+  if (selfShipItems.isNotEmpty) {
+    File("$fileDirPath/listings_mfa.csv").writeAsStringSync(selfShipCsvData);
+  }
   final timestamp = DateFormat("yyyyMMdd-HHmmss").format(DateTime.now());
   final encoder = ZipFileEncoder();
   final zipFilePath = "$fileRootDirPath/$timestamp.zip";

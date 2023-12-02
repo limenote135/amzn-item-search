@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/auth.dart';
@@ -41,6 +42,7 @@ Future<void> callListings(
   WidgetRef ref,
   List<StockItem> selected,
 ) async {
+  final settings = ref.read(generalSettingsControllerProvider);
   final isBeta = ref.read(isBetaUserProvider);
   var type = ListingsFormat.standard;
   if (isBeta) {
@@ -107,16 +109,21 @@ Future<void> callListings(
       return;
     }
   }
-
   try {
     await EasyLoading.show(status: "出品処理中...");
     final items = targets.map((e) => e.toListingItem()).toList();
     final hasImage = items.any((element) => element.images.isNotEmpty);
-
-    final file = await createListingsFile(items);
+    final file = await switch (type) {
+      ListingsFormat.standard => createListingsFile(items),
+      ListingsFormat.pricetar => createPricetarListingsFile(
+          targets,
+          settings.pricetarSettings,
+        ),
+    };
     final filename = basename(file.path);
     final gcsPath =
         "Listings/$listingsFileVersion/Users/${user!.uid}/$filename";
+
     try {
       await FirebaseStorage.instance.ref(gcsPath).putFile(file);
     } on FirebaseException catch (e, stack) {
@@ -135,6 +142,7 @@ Future<void> callListings(
       "version": listingsFileVersion,
       "filename": filename,
     };
+
     if (type == ListingsFormat.pricetar) {
       final storage = ref.read(secureStorageProvider);
       final id = await storage.read(key: "pricetarID");
@@ -155,6 +163,7 @@ Future<void> callListings(
         "pass": pass,
       });
     }
+
     final fn = ref.read(cloudFunctionProvider(functionNameListingItems));
     await fn.call<String>(params);
 
@@ -186,8 +195,12 @@ Future<void> callListings(
   } catch (e, st) {
     await EasyLoading.dismiss();
     var msg = "出品に失敗しました\n$e";
-    if (e is FirebaseFunctionsException && e.code == "invalid-argument") {
-      msg = "出品に失敗しました\n出品アカウントが有効かどうか、手動で出品可能かご確認ください。";
+    if (e is FirebaseFunctionsException) {
+      if (e.code == "invalid-argument") {
+        msg = "出品に失敗しました\n出品アカウントが有効かどうか、手動で出品可能かご確認ください。";
+      } else {
+        msg = "出品に失敗しました\n${e.message}";
+      }
     } else {
       await recordError(e, st, information: const ["Amazon listings"]);
     }

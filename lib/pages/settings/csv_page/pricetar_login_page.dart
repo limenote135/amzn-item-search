@@ -1,3 +1,6 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/repository/pricetar.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/secure_storage.dart';
 import 'package:amasearch/util/validators.dart';
 import 'package:flutter/material.dart';
@@ -26,15 +29,32 @@ class PricetarLoginSettings extends StatelessWidget {
   }
 }
 
-class _Body extends HookConsumerWidget {
+class _Body extends StatefulHookConsumerWidget {
   const _Body();
 
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _BodyState();
+}
+
+class _BodyState extends ConsumerState {
   static final idKey = GlobalKey<FormFieldState<String>>();
   static final passwordKey = GlobalKey<FormFieldState<String>>();
   static final formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    final storage = ref.read(secureStorageProvider);
+    storage.read(key: "pricetarID").then((value) {
+      idKey.currentState?.didChange(value);
+    });
+    storage.read(key: "pricetarPassword").then((value) {
+      passwordKey.currentState?.didChange(value);
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final pwController = useTextEditingController();
     final pwFocusNode = useFocusNode();
 
@@ -89,9 +109,55 @@ class _Body extends HookConsumerWidget {
               ],
             ),
           ),
-          ElevatedButton(onPressed: onSubmit, child: const Text("保存")),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: ElevatedButton(
+                  onPressed: loginTest,
+                  child: const Text("テスト"),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: ElevatedButton(
+                  onPressed: onSubmit,
+                  child: const Text("保存"),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
+  }
+
+  Future<void> loginTest() async {
+    final repo = ref.read(pricetarProvider);
+    if (formKey.currentState?.validate() != true) {
+      return;
+    }
+    final id = idKey.currentState!.value;
+    final pass = passwordKey.currentState!.value;
+    if (id == null || id.isEmpty || pass == null || pass.isEmpty) {
+      return;
+    }
+    try {
+      final resp = await repo.login(id, pass);
+      await showOkAlertDialog(
+        context: context,
+        title: "ログイン結果",
+        message: resp.message,
+      );
+      // ignore: avoid_catches_without_on_clauses
+    } catch (e, st) {
+      await recordError(e, st, information: const ["Pricetar login test"]);
+      await showOkAlertDialog(
+        context: context,
+        title: "エラー",
+        message: "ログインに失敗しました",
+      );
+    }
   }
 }
