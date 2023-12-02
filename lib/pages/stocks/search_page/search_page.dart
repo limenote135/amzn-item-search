@@ -116,7 +116,6 @@ class _Body extends ConsumerWidget {
               ),
               ListTile(
                 title: ReactiveTextField<String>(
-                  contextMenuBuilder: contextMenuBuilder,
                   formControlName: keywordField,
                   decoration: const InputDecoration(
                     hintText: "商品名、ASIN、JAN、SKU",
@@ -408,7 +407,6 @@ class _PriceRangeTextField extends HookConsumerWidget {
         children: [
           Expanded(
             child: ReactiveTextField<String>(
-              contextMenuBuilder: contextMenuBuilder,
               formControlName: lowerControlName,
               controller: lowerController,
               focusNode: lowerFocusNode,
@@ -431,7 +429,6 @@ class _PriceRangeTextField extends HookConsumerWidget {
           ),
           Expanded(
             child: ReactiveTextField<dynamic>(
-              contextMenuBuilder: contextMenuBuilder,
               formControlName: upperControlName,
               controller: upperController,
               focusNode: upperFocusNode,

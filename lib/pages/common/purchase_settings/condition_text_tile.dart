@@ -26,7 +26,6 @@ class ConditionTextTile extends ConsumerWidget {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: _textMaxHeight),
               child: ReactiveTextField<dynamic>(
-                contextMenuBuilder: contextMenuBuilder,
                 formControlName: conditionTextField,
                 maxLines: null,
                 keyboardType: TextInputType.multiline,

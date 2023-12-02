@@ -19,7 +19,6 @@ class RetailerTile extends HookConsumerWidget {
         children: [
           Expanded(
             child: ReactiveTextField<dynamic>(
-              contextMenuBuilder: contextMenuBuilder,
               formControlName: retailerField,
               decoration: const InputDecoration(labelText: "仕入れ先"),
               onTapOutside: onTapOutside,
