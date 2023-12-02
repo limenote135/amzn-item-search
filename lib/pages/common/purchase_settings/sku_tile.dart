@@ -37,7 +37,6 @@ class SkuTile extends HookConsumerWidget {
                 );
               }
               return ReactiveTextField<dynamic>(
-                contextMenuBuilder: contextMenuBuilder,
                 readOnly: control.value!,
                 formControlName: skuField,
                 keyboardType: TextInputType.url,

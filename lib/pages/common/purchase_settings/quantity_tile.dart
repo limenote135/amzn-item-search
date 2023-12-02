@@ -44,7 +44,6 @@ class QuantityTile extends HookWidget {
                 ),
                 Flexible(
                   child: ReactiveTextField<dynamic>(
-                    contextMenuBuilder: contextMenuBuilder,
                     formControlName: quantityField,
                     controller: quantityController,
                     focusNode: quantityFocusNode,
