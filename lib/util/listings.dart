@@ -67,8 +67,13 @@ Future<File> createPricetarListingsFile(
   List<StockItem> items,
   PricetarSettings settings,
 ) async {
-  final data = createPricetarCsv(items, settings);
-  final csvData = const ListToCsvConverter().convert(data);
+  final fbaItems = items.where((element) => element.useFba).toList();
+  final selfShipItems = items.where((element) => !element.useFba).toList();
+  final fbaData = createPricetarCsv(fbaItems, settings);
+  final selfShipData = createPricetarCsv(selfShipItems, settings);
+  const converter = ListToCsvConverter();
+  final fbaCsvData = converter.convert(fbaData);
+  final selfShipCsvData = converter.convert(selfShipData);
 
   final tempDir = await getTemporaryDirectory();
   final fileRootDirPath = "${tempDir.absolute.path}/listings";
@@ -81,8 +86,12 @@ Future<File> createPricetarListingsFile(
   final dir = Directory(fileDirPath);
   await dir.create(recursive: true);
 
-  File("$fileDirPath/listings.csv").writeAsStringSync(csvData);
-
+  if (fbaItems.isNotEmpty) {
+    File("$fileDirPath/listings_fba.csv").writeAsStringSync(fbaCsvData);
+  }
+  if (selfShipItems.isNotEmpty) {
+    File("$fileDirPath/listings_mfa.csv").writeAsStringSync(selfShipCsvData);
+  }
   final timestamp = DateFormat("yyyyMMdd-HHmmss").format(DateTime.now());
   final encoder = ZipFileEncoder();
   final zipFilePath = "$fileRootDirPath/$timestamp.zip";
