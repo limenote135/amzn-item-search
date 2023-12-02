@@ -195,8 +195,12 @@ Future<void> callListings(
   } catch (e, st) {
     await EasyLoading.dismiss();
     var msg = "出品に失敗しました\n$e";
-    if (e is FirebaseFunctionsException && e.code == "invalid-argument") {
-      msg = "出品に失敗しました\n出品アカウントが有効かどうか、手動で出品可能かご確認ください。";
+    if (e is FirebaseFunctionsException) {
+      if (e.code == "invalid-argument") {
+        msg = "出品に失敗しました\n出品アカウントが有効かどうか、手動で出品可能かご確認ください。";
+      } else {
+        msg = "出品に失敗しました\n${e.message}";
+      }
     } else {
       await recordError(e, st, information: const ["Amazon listings"]);
     }
