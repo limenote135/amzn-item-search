@@ -52,7 +52,6 @@ class InputPricesTile extends HookConsumerWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ReactiveTextField<dynamic>(
-                    contextMenuBuilder: contextMenuBuilder,
                     formControlName: purchasePriceField,
                     controller: purchasePriceController,
                     focusNode: purchasePriceFocus,
@@ -73,7 +72,6 @@ class InputPricesTile extends HookConsumerWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ReactiveTextField<dynamic>(
-                    contextMenuBuilder: contextMenuBuilder,
                     formControlName: sellPriceField,
                     controller: sellPriceController,
                     focusNode: sellPriceFocus,

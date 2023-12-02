@@ -30,7 +30,6 @@ class OtherCostTile extends HookConsumerWidget {
           const Spacer(),
           Expanded(
             child: ReactiveTextField<void>(
-              contextMenuBuilder: contextMenuBuilder,
               formControlName: otherCostField,
               controller: controller,
               focusNode: focus,

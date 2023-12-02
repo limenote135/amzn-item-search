@@ -12,7 +12,6 @@ import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/custom_validator.dart';
 import 'package:amasearch/util/util.dart';
-import 'package:amasearch/widgets/form.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
@@ -132,7 +131,6 @@ class PurchaseSettingsForm extends ConsumerWidget {
               const ListingImageTile(),
               ListTile(
                 title: ReactiveTextField<dynamic>(
-                  contextMenuBuilder: contextMenuBuilder,
                   formControlName: memoField,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
