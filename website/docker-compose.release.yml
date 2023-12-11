@@ -18,7 +18,7 @@ services:
     environment: *deploy-proj-env
     volumes: *firebase-volume
     tty: true
-    command: sh -c "yarn install && yarn build && yarn export && find ./out -name *.map -delete && mv out/404/index.html out/404.html && firebase deploy --project $$DEPLOY_PROJECT"
+    command: sh -c "yarn install && yarn build && find ./out -name *.map -delete && mv out/404/index.html out/404.html && firebase deploy --project $$DEPLOY_PROJECT"
 
 volumes:
   rakupo-firebase-volume:
