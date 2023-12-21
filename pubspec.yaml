@@ -23,7 +23,7 @@ environment:
 dependencies:
   adaptive_dialog: ^1.10.1
   archive: ^3.4.9
-  cloud_functions: ^4.5.6
+  cloud_functions: ^4.5.8
   collection: ^1.17.2
   convert: ^3.1.1
   cookie_jar: ^4.0.8
@@ -40,23 +40,23 @@ dependencies:
   fast_barcode_scanner:
     path: ./packages/fast_barcode_scanner/fast_barcode_scanner
   file_picker: ^6.1.1
-  firebase_analytics: ^10.7.2
-  firebase_auth: ^4.15.0
-  firebase_core: ^2.24.0
-  firebase_crashlytics: ^3.4.6
-  firebase_performance: ^0.9.3+6
-  firebase_remote_config: ^4.3.6
-  firebase_storage: ^11.5.3
+  firebase_analytics: ^10.7.4
+  firebase_auth: ^4.15.3
+  firebase_core: ^2.24.2
+  firebase_crashlytics: ^3.4.8
+  firebase_performance: ^0.9.3+8
+  firebase_remote_config: ^4.3.8
+  firebase_storage: ^11.5.6
   flex_color_scheme: ^7.3.1
   flutter:
     sdk: flutter
   flutter_easyloading: ^3.0.5
   flutter_hooks: ^0.20.3
-  flutter_inappwebview: ^6.0.0-beta.30
+  flutter_inappwebview: ^6.0.0-rc.2
   flutter_launcher_icons: ^0.13.1
   flutter_localizations:
     sdk: flutter
-  flutter_native_splash: ^2.3.6
+  flutter_native_splash: ^2.3.7
   flutter_secure_storage: ^9.0.0
   flutter_signin_button: ^2.0.0
   flutter_slidable: ^3.0.1
@@ -81,7 +81,7 @@ dependencies:
   path_provider: ^2.1.1
   permission_handler: ^11.0.1
   pub_semver: ^2.1.4
-  purchases_flutter: ^6.4.0
+  purchases_flutter: ^6.5.1
   reactive_date_range_picker: ^2.0.1
   reactive_forms: ^16.1.1
   release_notes_dialog: ^2.0.0
@@ -90,7 +90,7 @@ dependencies:
   share_plus: ^7.2.1
   shared_preferences: ^2.2.2
   state_notifier: ^1.0.0
-  url_launcher: ^6.2.1
+  url_launcher: ^6.2.2
   uuid: ^3.0.7
   vibration: ^1.8.4 # https://github.com/benjamindean/flutter_vibration
   webview_flutter: ^4.4.2
