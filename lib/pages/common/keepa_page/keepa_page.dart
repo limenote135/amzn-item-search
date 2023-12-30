@@ -76,8 +76,8 @@ class _Body extends HookConsumerWidget {
     final asin = ref.watch(currentAsinProvider);
     final media = MediaQuery.of(context);
     final defaultSize = DefaultTextStyle.of(context).style.fontSize!;
-    final scale = media.textScaler.scale(defaultSize);
-    final height = defaultSize * scale * 2; // TODO:
+    final scaledFontSize = media.textScaler.scale(defaultSize);
+    final height = scaledFontSize * 2;
 
     final settings = ref.watch(
       generalSettingsControllerProvider.select((value) => value.keepaSettings),
