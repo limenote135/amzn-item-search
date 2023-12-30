@@ -63,12 +63,12 @@ class _PriceAndProfit extends HookConsumerWidget {
     final smallSize = smallFontSize(context);
 
     final query = MediaQuery.of(context);
-    // TODO: scaledFontSize から画面に入る文字数が計算できる？
     final scaledFontSize =
         MediaQuery.textScalerOf(context).scale(smallSize!.fontSize!);
-
-    final scale = query.textScaler.scale(smallSize.fontSize!);
-    final width = (query.size.width - 75) / 2 / scale;
+    const imageWidth = 75; // 画像部分の横幅
+    final width =
+        (query.size.width - imageWidth) / 2; // 価格表示部分の幅(新品・中古あるので使えるのは半分)
+    final chCount = width / scaledFontSize; // 価格表示部分に使える文字数
 
     // 新品で出品者なしの場合、参考価格をベースに計算する
     final shouldReferListingPrice = condition == ItemCondition.newItem &&
@@ -81,7 +81,7 @@ class _PriceAndProfit extends HookConsumerWidget {
 
     // 4ケタ円商品+4桁円送料が入らない場合は送料は改行して表示する
     final needNewLine =
-        (Platform.isIOS ? width < 160 : width < 140) && digit > 8;
+        (Platform.isIOS ? chCount < 14 : chCount < 12) && digit >= 8;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
