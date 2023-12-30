@@ -16,6 +16,7 @@ class ListingImagesPage extends ConsumerStatefulWidget {
     required this.images,
     required this.selectedIndex,
   });
+
   static const String routeName = "/listing_images";
 
   static Route<List<String>> route({
@@ -71,15 +72,21 @@ class _ListingImagesPageState extends ConsumerState<ListingImagesPage> {
       });
     }
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) {
+          return;
+        }
         final ret = await showOkCancelAlertDialog(
           context: context,
           title: "変更を破棄しますか？",
           message: "画像の追加や編集は保存されません。",
           okLabel: "破棄する",
         );
-        return ret == OkCancelResult.ok;
+        if (ret == OkCancelResult.ok) {
+          Navigator.pop(context);
+        }
       },
       child: Scaffold(
         appBar: AppBar(
