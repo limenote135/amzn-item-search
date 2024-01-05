@@ -1,9 +1,10 @@
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
 import { useUser } from "@/plugin/auth";
 import { getPlanName } from "@/util/plan";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GetNextPayment } from "@/api/stripe";
 import Link from "@/components/Link";
+import { parser } from "@/plugin/budoux";
 
 const User = () => {
   const user = useUser();
@@ -38,42 +39,52 @@ const User = () => {
   }, [user]);
 
   return (
-    <TableContainer component={Paper} sx={{ maxWidth: 600, mx: "auto" }}>
-      <Table>
-        <TableBody>
-          <TableRow>
-            <TableCell sx={{ minWidth: "150px" }}>メールアドレス</TableCell>
-            <TableCell>{user?.mail}</TableCell>
-            {/*<TableCell>5pvhdkjh@privaterelay.appleid.com</TableCell>*/}
-          </TableRow>
-          <TableRow>
-            <TableCell>現在のプラン</TableCell>
-            <TableCell>{planName}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>クレジットカード</TableCell>
-            <TableCell>
-              {cardInfo === "" ? "(読み込み中...)" : cardInfo}
-              {cardInfo !== "" && cardInfo !== "未登録" && (
-                <Box>
-                  (カードの変更は
-                  <Link href={"./user/card"}>
-                    <Typography component={"span"} sx={{ textDecoration: "underline" }} color={"blue"}>
-                      こちら
-                    </Typography>
-                  </Link>
-                  )
-                </Box>
-              )}
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>次回決済予定</TableCell>
-            <TableCell>{nextPayment === "" ? "(読み込み中...)" : nextPayment}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <TableContainer component={Paper} sx={{ maxWidth: 600, mx: "auto", my: 1 }}>
+        <Table>
+          <TableBody>
+            <TableRow>
+              <TableCell sx={{ minWidth: "150px" }}>メールアドレス</TableCell>
+              <TableCell>{user?.mail}</TableCell>
+              {/*<TableCell>5pvhdkjh@privaterelay.appleid.com</TableCell>*/}
+            </TableRow>
+            <TableRow>
+              <TableCell>現在のプラン</TableCell>
+              <TableCell>{planName}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>クレジットカード</TableCell>
+              <TableCell>
+                {cardInfo === "" ? "(読み込み中...)" : cardInfo}
+                {cardInfo !== "" && cardInfo !== "未登録" && (
+                  <Box>
+                    (カードの変更は
+                    <Link href={"./user/card"}>
+                      <Typography component={"span"} sx={{ textDecoration: "underline" }} color={"blue"}>
+                        こちら
+                      </Typography>
+                    </Link>
+                    )
+                  </Box>
+                )}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>次回決済予定</TableCell>
+              <TableCell>{nextPayment === "" ? "(読み込み中...)" : nextPayment}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Typography
+        textAlign={"center"}
+        dangerouslySetInnerHTML={{
+          __html: parser.translateHTMLString(
+            "アプリ側でプランが反映されていない場合、しばらくお待ちいただくか、一度ログアウトして再ログインしてください",
+          ),
+        }}
+      />
+    </>
   );
 };
 
