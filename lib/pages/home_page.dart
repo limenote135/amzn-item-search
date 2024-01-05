@@ -6,6 +6,7 @@ import 'package:amasearch/pages/search/word_search_page/word_search_page.dart';
 import 'package:amasearch/pages/settings/settings_page/settings_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/stocks_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final _currentPageProvider = StateProvider((_) => 0);
@@ -45,7 +46,7 @@ class HomePage extends HookConsumerWidget {
           isDestructiveAction: true,
         );
         if (ret == OkCancelResult.ok) {
-          Navigator.pop(context);
+          await SystemNavigator.pop(animated: true);
         }
       },
       child: Scaffold(
