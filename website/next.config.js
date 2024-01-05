@@ -27,6 +27,7 @@ module.exports = {
   },
   trailingSlash: true,
   // basePath: "/lp2",
+  output: "export",
 };
 
 module.exports = withSentryConfig(
@@ -35,5 +36,5 @@ module.exports = withSentryConfig(
     // ソースマップのアップロードログなどを表示するため silent は false にする
     silent: true,
   },
-  { hideSourceMaps: true }
+  { hideSourceMaps: true },
 );
