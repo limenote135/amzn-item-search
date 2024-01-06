@@ -72,8 +72,8 @@
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
 		<key>NSPhotoLibraryUsageDescription</key>
-        <string>商品画像を選択します</string>
+		<string>商品画像を選択します</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
-</dict>
+	</dict>
 </plist>
