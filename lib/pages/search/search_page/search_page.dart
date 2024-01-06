@@ -116,6 +116,10 @@ class _Body extends HookConsumerWidget {
             return floatingActionMargin;
           }
           if (index.isEven || index == items.length * 2) {
+            final cnt = index ~/ 2;
+            if (cnt > 0 && cnt % 50 == 0) {
+              return TextDivider(text: "$cnt件");
+            }
             return const ThemeDivider();
           }
           return ProviderScope(

@@ -15,3 +15,19 @@ class ThemeDivider extends StatelessWidget {
     );
   }
 }
+
+class TextDivider extends StatelessWidget {
+  const TextDivider({super.key, required this.text});
+
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        const ThemeDivider(),
+        Text(text),
+      ],
+    );
+  }
+}
