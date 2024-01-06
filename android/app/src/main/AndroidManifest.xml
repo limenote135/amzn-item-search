@@ -59,5 +59,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <service
+            android:name=".MainActivity"
+            android:foregroundServiceType="camera|dataSync"
+            android:exported="false">
+        </service>
     </application>
 </manifest>
