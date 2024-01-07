@@ -35,9 +35,9 @@ const Information = () => {
   }, [user]);
   return (
     <Box my={1}>
-      <Typography>現在のカード: {cardInfo}</Typography>
-      <Typography>{nextPayment} の決済より新しいカードが使われます。</Typography>
-      <Typography>現在の決済が失敗している場合、更新後に自動的に決済が再試行されます。</Typography>
+      <Typography my={1}>現在のカード: {cardInfo}</Typography>
+      <Typography my={1}>{nextPayment} の決済より新しいカードが使われます。</Typography>
+      <Typography my={1}>現在の決済が失敗している場合、更新後に自動的に決済が再試行されます。</Typography>
     </Box>
   );
 };
@@ -45,6 +45,7 @@ const Information = () => {
 const InputForm = () => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const user = useUser();
 
@@ -71,14 +72,19 @@ const InputForm = () => {
       });
 
       if (resp.error) {
-        // show error and collect new card details.
-        setMessage(resp.error.message ?? "");
+        const code = resp.error.code;
+        if (code === "setup_intent_unexpected_state") {
+          setMessage("エラーが発生しました。ページを再読み込みして始めからやり直してください");
+        } else {
+          setMessage(resp.error.message ?? "");
+        }
         setIsLoading(false);
         return;
       }
       const method = resp.setupIntent.payment_method as string;
       await UpdateCard(token, method);
       setMessage("カードの更新が完了しました");
+      setIsCompleted(true);
     } finally {
       setIsLoading(false);
     }
@@ -90,7 +96,7 @@ const InputForm = () => {
       <form onSubmit={handleSubmit}>
         <PaymentElement options={{ fields: { billingDetails: { address: { country: "never" } } } }} />
         <Box display={"flex"} alignItems={"end"}>
-          <Button type="submit" variant="contained" sx={{ mt: 2 }} disabled={isLoading}>
+          <Button type="submit" variant="contained" sx={{ mt: 2 }} disabled={isLoading || isCompleted}>
             カードを更新する
           </Button>
           {isLoading && <CircularProgress sx={{ p: 1 }} />}
