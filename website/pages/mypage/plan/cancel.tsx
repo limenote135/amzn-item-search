@@ -3,27 +3,32 @@ import { getPlanName, PlanNames } from "@/util/plan";
 import { Box, Button, CircularProgress, Paper, Typography } from "@mui/material";
 import { CancelSubscription, GetNextPayment } from "@/api/stripe";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 type CancelContainerProps = {
   plan: PlanNames | undefined;
   paymentDate: string;
   onCancel: () => void;
+  onBack: () => void;
   isLoading: boolean;
   result: string;
 };
 
-const CancelContainer = ({ plan, paymentDate, onCancel, isLoading, result }: CancelContainerProps) => {
+const CancelContainer = ({ plan, paymentDate, onBack, onCancel, isLoading, result }: CancelContainerProps) => {
   return (
     <Paper sx={{ maxWidth: 800, mx: "auto", p: 2 }}>
       <Typography variant={"h6"}>現在のプラン: {getPlanName(plan)}</Typography>
       <Box my={2}>
         <p>現在のプランをキャンセルしてフリープランに変更しますか？</p>
-        <p>フリープランにすると一部の機能が使えなくなります。</p>
+        <p>フリープランにすると以降の引き落としは行われませんが、一部の機能が使えなくなります。</p>
         {plan === "campaign" && <p>また、一度キャンセルすると再度キャンペーンプランには変更できません。</p>}
         {paymentDate && <Typography>プランの変更は {paymentDate} に行われます。</Typography>}
       </Box>
       <Box display={"flex"} alignItems={"center"}>
-        <Button variant={"contained"} color={"error"} onClick={onCancel} disabled={isLoading}>
+        <Button variant={"contained"} onClick={onBack} sx={{ mx: 1 }}>
+          戻る
+        </Button>
+        <Button variant={"contained"} color={"error"} onClick={onCancel} disabled={isLoading} sx={{ mx: 1 }}>
           キャンセルする
         </Button>
         {isLoading && <CircularProgress sx={{ p: 1 }} />}
@@ -34,6 +39,7 @@ const CancelContainer = ({ plan, paymentDate, onCancel, isLoading, result }: Can
 };
 
 const Cancel = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState("");
   const [paymentDate, setPaymentDate] = useState("");
@@ -54,6 +60,7 @@ const Cancel = () => {
     fn();
   }, [user]);
 
+  const handleBack = () => router.back();
   const handleCancel = async () => {
     try {
       setIsLoading(true);
@@ -73,6 +80,7 @@ const Cancel = () => {
     <CancelContainer
       plan={plan}
       paymentDate={paymentDate}
+      onBack={handleBack}
       onCancel={handleCancel}
       isLoading={isLoading}
       result={result}
