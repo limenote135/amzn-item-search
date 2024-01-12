@@ -35,9 +35,6 @@ export const Inquiry = () => {
       </Typography>
       <Typography>アプリ内から行うと、端末やアプリのバージョン等の情報が自動的に収集されます。</Typography>
       <Typography>これらの情報が無い場合、サポートしかねる場合があります。</Typography>
-      <br />
-      <Typography>12/30 ～ 1/5 まで弊社休業期間となります。</Typography>
-      <Typography>期間内にいただきましたお問い合わせはこれ以降のご返答となりますのでご了承ください。</Typography>
       <Box mb={2} mt={4}>
         <TextField
           required
