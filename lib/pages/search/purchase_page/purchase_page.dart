@@ -176,6 +176,18 @@ class _SaveButton extends HookConsumerWidget {
             }
           }
 
+          final images = getImages(form);
+          if (images.isNotEmpty && cond == ItemCondition.newItem) {
+            final ret = await showOkCancelAlertDialog(
+              context: context,
+              title: "商品画像",
+              message: "新品の場合、商品画像は出品時に無視されますがよろしいですか？",
+            );
+            if (ret != OkCancelResult.ok) {
+              return;
+            }
+          }
+
           final sellPrice = getInt(form, sellPriceField);
           final isSmall = getBool(form, smallProgramField);
           if (isSmall && sellPrice > 1000) {
