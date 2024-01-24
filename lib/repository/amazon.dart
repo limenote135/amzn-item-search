@@ -64,6 +64,12 @@ class AmazonRepository {
 
   final Ref _ref;
 
+  void _customHandler(int code) {
+    if (500 <= code && code < 600) {
+      throw Exception("Amazon サーバーの障害($code)");
+    }
+  }
+
   Future<void> _ensureCookie(String asin) async {
     final d = await _ref.read(dioProvider.future);
     final jar = await _ref.read(persistCookieJarProvider.future);
@@ -82,7 +88,7 @@ class AmazonRepository {
         HttpHeaders.acceptHeader: "text/html,*/*",
       },
     );
-    await d.get(url, opt: opt);
+    await d.get(url, opt: opt, customHandler: _customHandler);
   }
 
   Future<OfferListings> getOffers(
@@ -118,6 +124,7 @@ class AmazonRepository {
       _offerUrlBase,
       query: query,
       opt: opt,
+      customHandler: _customHandler,
       cancelToken: cancelToken,
     );
     if (resp.statusCode != 200) {
