@@ -42,7 +42,7 @@ class AmazonRepository {
 
   static String get _userAgent {
     final rand = _random.nextInt(100) + 45;
-    return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.$rand Safari/537.36";
+    return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4280.$rand Safari/537.36";
   }
 
   static const _offerUrlBase =
@@ -70,6 +70,17 @@ class AmazonRepository {
     }
   }
 
+  Map<String, String> _commonHeader(String asin) {
+    return <String, String>{
+      HttpHeaders.userAgentHeader: _userAgent,
+      HttpHeaders.acceptEncodingHeader: "deflate, br",
+      HttpHeaders.acceptHeader: "text/html,*/*",
+      HttpHeaders.acceptLanguageHeader: "ja",
+      HttpHeaders.refererHeader: "https://www.amazon.co.jp/dp/$asin",
+      HttpHeaders.connectionHeader: "keep-alive",
+    };
+  }
+
   Future<void> _ensureCookie(String asin) async {
     final d = await _ref.read(dioProvider.future);
     final jar = await _ref.read(persistCookieJarProvider.future);
@@ -82,11 +93,7 @@ class AmazonRepository {
     final url = "$_productUrl$asin";
 
     final opt = dio.Options(
-      headers: <String, String>{
-        HttpHeaders.userAgentHeader: _userAgent,
-        HttpHeaders.acceptEncodingHeader: "deflate, br",
-        HttpHeaders.acceptHeader: "text/html,*/*",
-      },
+      headers: _commonHeader(asin),
     );
     await d.get(url, opt: opt, customHandler: _customHandler);
   }
@@ -114,11 +121,7 @@ class AmazonRepository {
     await _ensureCookie(params.asin);
 
     final opt = dio.Options(
-      headers: <String, String>{
-        HttpHeaders.userAgentHeader: _userAgent,
-        HttpHeaders.acceptEncodingHeader: "deflate, br",
-        HttpHeaders.acceptHeader: "text/html,*/*",
-      },
+      headers: _commonHeader(params.asin),
     );
     final resp = await d.get(
       _offerUrlBase,
@@ -349,6 +352,7 @@ class AmazonRepository {
 @JsonSerializable()
 class SuggestionResponse {
   SuggestionResponse(this.prefix, this.suggestions);
+
   factory SuggestionResponse.fromJson(Map<String, dynamic> json) =>
       _$SuggestionResponseFromJson(json);
 
@@ -361,6 +365,7 @@ class SuggestionResponse {
 @JsonSerializable()
 class Suggestion {
   Suggestion(this.value);
+
   factory Suggestion.fromJson(Map<String, dynamic> json) =>
       _$SuggestionFromJson(json);
 
