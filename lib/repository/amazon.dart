@@ -42,7 +42,8 @@ class AmazonRepository {
 
   static String get _userAgent {
     final rand = _random.nextInt(100) + 45;
-    return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4280.$rand Safari/537.36";
+    final chMajor = _random.nextInt(10) + 90;
+    return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/$chMajor.0.4280.$rand Safari/537.36";
   }
 
   static const _offerUrlBase =
@@ -73,7 +74,7 @@ class AmazonRepository {
   Map<String, String> _commonHeader(String asin) {
     return <String, String>{
       HttpHeaders.userAgentHeader: _userAgent,
-      HttpHeaders.acceptEncodingHeader: "deflate, br",
+      HttpHeaders.acceptEncodingHeader: "gzip, deflate, br",
       HttpHeaders.acceptHeader: "text/html,*/*",
       HttpHeaders.acceptLanguageHeader: "ja",
       HttpHeaders.refererHeader: "https://www.amazon.co.jp/dp/$asin",
