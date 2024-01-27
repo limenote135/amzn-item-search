@@ -84,6 +84,7 @@ class AmazonRepository {
     };
   }
 
+  //ignore: unused_element
   Future<void> _ensureCookie(String asin) async {
     final d = await _ref.read(dioProvider.future);
     final jar = await _ref.read(persistCookieJarProvider.future);
