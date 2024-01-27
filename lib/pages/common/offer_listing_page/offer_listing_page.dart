@@ -81,7 +81,7 @@ class _Body extends HookConsumerWidget {
             );
           },
         ),
-        Expanded(
+        Flexible(
           child: AsyncValueWidget<int>(
             value: offerTotalCountAsyncValue,
             errorInfo: [
