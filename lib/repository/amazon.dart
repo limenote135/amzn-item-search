@@ -67,17 +67,19 @@ class AmazonRepository {
 
   void _customHandler(int code) {
     if (500 <= code && code < 600) {
+      _ref
+          .read(persistCookieJarProvider)
+          .whenData((value) => value.deleteAll());
       throw Exception("Amazon サーバーの障害($code)");
     }
   }
 
-  Map<String, String> _commonHeader(String asin) {
+  Map<String, String> _commonHeader() {
     return <String, String>{
       HttpHeaders.userAgentHeader: _userAgent,
       HttpHeaders.acceptEncodingHeader: "gzip, deflate, br",
       HttpHeaders.acceptHeader: "text/html,*/*",
       HttpHeaders.acceptLanguageHeader: "ja",
-      HttpHeaders.refererHeader: "https://www.amazon.co.jp/dp/$asin",
       HttpHeaders.connectionHeader: "keep-alive",
     };
   }
@@ -94,7 +96,7 @@ class AmazonRepository {
     final url = "$_productUrl$asin";
 
     final opt = dio.Options(
-      headers: _commonHeader(asin),
+      headers: _commonHeader(),
     );
     await d.get(url, opt: opt, customHandler: _customHandler);
   }
@@ -103,6 +105,12 @@ class AmazonRepository {
     OfferListingsParams params,
     dio.CancelToken cancelToken,
   ) async {
+    final d = await _ref.read(dioProvider.future);
+    // await _ensureCookie(params.asin);
+    if (params.page == 0) {
+      await d.get("https://www.amazon.co.jp/dp/${params.asin}/");
+    }
+
     final reqParam = <String, dynamic>{
       "all": true,
       "primeEligible": params.prime,
@@ -118,11 +126,17 @@ class AmazonRepository {
       "filters": reqParamStr,
       "pageno": params.page + 1,
     };
-    final d = await _ref.read(dioProvider.future);
-    await _ensureCookie(params.asin);
 
     final opt = dio.Options(
-      headers: _commonHeader(params.asin),
+      headers: <String, dynamic>{
+        ..._commonHeader(),
+        HttpHeaders.refererHeader:
+            "https://www.amazon.co.jp/dp/${params.asin}/ref=olp-opf-redir?aod=1",
+        "X-Requested-With": "XMLHttpRequest",
+        "Sec-Fetch-Site": "same-origin",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Dest": "empty",
+      },
     );
     final resp = await d.get(
       _offerUrlBase,
