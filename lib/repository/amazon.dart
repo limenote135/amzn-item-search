@@ -129,7 +129,7 @@ class AmazonRepository {
       "pc": "dp",
       "pageno": pageno,
     };
-    if (params.page > 1) {
+    if (params.page > 0) {
       // 1ページ目はカートも含めるが2ページ目以降は不要
       query["isonlyrenderofferlist"] = true;
     }
@@ -180,11 +180,13 @@ class AmazonRepository {
         ? _parseCartItem(cartElement)
         : null;
 
-    final totalElement = doc.querySelector("#aod-filter-offer-count-string")!;
+    final totalElement = doc.querySelector("#aod-filter-offer-count-string");
     final total = _parseTotal(totalElement);
 
-    final offerElement = doc.querySelector("#aod-offer-list")!;
-    final offers = _parseOfferItems(offerElement);
+    final offerElement = doc.querySelector("#aod-offer-list");
+    final offers = param.page == 0
+        ? _parseOfferItems(offerElement!)
+        : _parseOfferItems(doc.body!);
 
     return OfferListings(
       asin: param.asin,
@@ -228,7 +230,10 @@ class AmazonRepository {
     );
   }
 
-  static int _parseTotal(Element el) {
+  static int _parseTotal(Element? el) {
+    if (el == null) {
+      return 0;
+    }
     var totalStr = _totalRegex.firstMatch(el.text)?.group(1);
     if (totalStr == null) {
       final totalStr2 = _totalRegex2.firstMatch(el.text)?.group(1);
