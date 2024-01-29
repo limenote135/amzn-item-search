@@ -46,8 +46,7 @@ class AmazonRepository {
     return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/$chMajor.0.4280.$rand Safari/537.36";
   }
 
-  static const _offerUrlBase =
-      "https://www.amazon.co.jp/gp/aod/ajax/ref=dp_aod_ALL_mbc";
+  static const _offerUrlBase = "https://www.amazon.co.jp/gp/aod/ajax/";
   static const _shopSelector = "#aod-offer-soldBy div.a-col-right";
   static const _priceSelector = "span.a-price span.a-price-whole";
   static const _shipFromSelector = "#aod-offer-shipsFrom .a-color-base";
@@ -122,25 +121,34 @@ class AmazonRepository {
       "usedAcceptable": params.usedAcceptable,
     };
     final reqParamStr = urlEncode(json.encode(reqParam));
+    final pageno = params.page + 1;
     final query = <String, dynamic>{
       "asin": params.asin,
       "filters": reqParamStr,
-      "pageno": params.page + 1,
+      "aodAjaxMain": "aodAjaxMain",
+      "pc": "dp",
+      "pageno": pageno,
     };
+    if (params.page > 0) {
+      // 1ページ目はカートも含めるが2ページ目以降は不要
+      query["isonlyrenderofferlist"] = true;
+    }
 
     final opt = dio.Options(
       headers: <String, dynamic>{
         ..._commonHeader(),
-        HttpHeaders.refererHeader:
-            "https://www.amazon.co.jp/dp/${params.asin}/ref=olp-opf-redir?aod=1",
+        HttpHeaders.refererHeader: "https://www.amazon.co.jp/dp/${params.asin}",
         "X-Requested-With": "XMLHttpRequest",
         "Sec-Fetch-Site": "same-origin",
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Dest": "empty",
       },
     );
+    final url = params.page == 0
+        ? "${_offerUrlBase}ref=dp_aod_ALL_mbc"
+        : "${_offerUrlBase}ref=aod_page_$pageno";
     final resp = await d.get(
-      _offerUrlBase,
+      url,
       query: query,
       opt: opt,
       customHandler: _customHandler,
@@ -172,11 +180,13 @@ class AmazonRepository {
         ? _parseCartItem(cartElement)
         : null;
 
-    final totalElement = doc.querySelector("#aod-filter-offer-count-string")!;
+    final totalElement = doc.querySelector("#aod-filter-offer-count-string");
     final total = _parseTotal(totalElement);
 
-    final offerElement = doc.querySelector("#aod-offer-list")!;
-    final offers = _parseOfferItems(offerElement);
+    final offerElement = doc.querySelector("#aod-offer-list");
+    final offers = param.page == 0
+        ? _parseOfferItems(offerElement!)
+        : _parseOfferItems(doc.body!);
 
     return OfferListings(
       asin: param.asin,
@@ -220,7 +230,10 @@ class AmazonRepository {
     );
   }
 
-  static int _parseTotal(Element el) {
+  static int _parseTotal(Element? el) {
+    if (el == null) {
+      return 0;
+    }
     var totalStr = _totalRegex.firstMatch(el.text)?.group(1);
     if (totalStr == null) {
       final totalStr2 = _totalRegex2.firstMatch(el.text)?.group(1);
