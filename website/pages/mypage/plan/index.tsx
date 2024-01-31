@@ -67,10 +67,15 @@ const Index = () => {
   }
 
   if (user?.claims.lwa !== true && !isPaidUser(plan)) {
+    const t = new Date(user?.createdAt ?? 0);
     return (
       <>
         <p>Amazon 連携されていないため、登録できません。</p>
         <p>連携完了後、一度ログアウトして再ログインしてください。</p>
+        <p>現在のアカウント: {user?.mail}</p>
+        <p>
+          アカウント作成日: {t.getFullYear()}/{t.getMonth() + 1}/{t.getDate()}
+        </p>
       </>
     );
   }
