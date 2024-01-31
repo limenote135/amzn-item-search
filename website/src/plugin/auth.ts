@@ -20,6 +20,7 @@ type UserData = {
   raw: User;
   mail: string;
   verified: boolean;
+  createdAt: number;
   claims: Claims;
 };
 
@@ -61,6 +62,7 @@ export const userState = atom<UserState>({
             raw: user,
             verified,
             mail: user.email!,
+            createdAt: user.metadata.creationTime ? Date.parse(user.metadata.creationTime) : 0,
             claims: { lwa, plan, uid: user.uid, trial },
           };
           resolvePromise(data);
@@ -124,10 +126,11 @@ export const useRefreshUser = () => {
           raw: user!.raw,
           verified: user!.verified,
           mail: user!.mail,
+          createdAt: user!.createdAt,
           claims: { lwa, plan, uid: user!.claims.uid, trial },
         };
         set(userState, val);
       },
-    [user]
+    [user],
   );
 };
