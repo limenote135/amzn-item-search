@@ -82,7 +82,7 @@ class HomePage extends HookConsumerWidget {
           onTap: (value) {
             if (currentPage != value) {
               ref.read(_currentPageProvider.notifier).state = value;
-              observer.analytics.setCurrentScreen(screenName: _names[value]);
+              observer.analytics.logScreenView(screenName: _names[value]);
             }
           },
         ),
