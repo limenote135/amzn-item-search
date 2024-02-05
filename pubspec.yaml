@@ -78,7 +78,7 @@ dependencies:
   math_expressions: ^2.4.0
   package_info_plus: ^5.0.1
   path: ^1.8.3
-  path_provider: ^2.1.1
+  path_provider: ^2.1.2
   permission_handler: ^11.2.0
   pub_semver: ^2.1.4
   purchases_flutter: ^6.6.0
