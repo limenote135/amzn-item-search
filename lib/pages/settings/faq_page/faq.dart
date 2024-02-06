@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +68,16 @@ class _KeepaFaq extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("はじめに", style: strongTextStyle),
+              ThemeDivider(),
+            ],
+          ),
+        ),
         Text.rich(
           TextSpan(
             children: [
@@ -85,18 +97,67 @@ class _KeepaFaq extends StatelessWidget {
                     );
                   },
               ),
-              const TextSpan(
-                text: "していただき、表示された画像にランキンググラフが表示されているかご確認ください。\n\n"
-                    "ランキンググラフが表示されていない場合、Keepa にログインされていない状態となっているため、"
-                    "ブラウザから Keepa のページへアクセスいただき、ログインしていただくようにお願いいたします。\n\n"
-                    "ランキンググラフが表示されている場合、アプリ内の設定画面にある"
-                    "\"キャッシュを削除\" 選択いただくことで改善する可能性があります。",
-              ),
+              const TextSpan(text: "していただき、表示された画像にランキンググラフが表示されているかご確認ください。"),
             ],
           ),
         ),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("グラフが表示されていない場合", style: strongTextStyle),
+              ThemeDivider(),
+            ],
+          ),
+        ),
+        const Text("ランキンググラフが表示されていない場合、Keepa にログインされていない状態となっています。\n"
+            "ブラウザから Keepa のページへアクセスいただき、ログインしてください。"),
+        Text.rich(
+          TextSpan(
+            text: "ログイン後、再度 ",
+            children: [
+              TextSpan(
+                text: "こちらをタップ",
+                style: const TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () async {
+                    await launchUrl(
+                      Uri.parse(
+                        "https://graph.keepa.com/pricehistory.png?asin=B08K41Q79R&domain=co.jp&width=600&salesrank=1&height=300&new=1&used=1&amazon=1&bb=1&fba=1",
+                      ),
+                      mode: LaunchMode.inAppBrowserView,
+                    );
+                  },
+              ),
+              const TextSpan(text: " していただき、"),
+              const TextSpan(
+                text: " グラフが表示されるようになったことをご確認ください。\n",
+                style: TextStyle(
+                  // fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
+              ),
+              const TextSpan(text: "表示されていない場合、アプリ内でも表示されることはありません。")
+            ],
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("グラフが表示されている場合", style: strongTextStyle),
+              ThemeDivider(),
+            ],
+          ),
+        ),
+        const Text("アプリ内の設定画面にある \"キャッシュを削除\" をしていただくことで改善する可能性があります。"),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.symmetric(vertical: 24),
           child: DecoratedBox(
             decoration: BoxDecoration(
               border: Border.all(),
@@ -113,7 +174,7 @@ class _KeepaFaq extends StatelessWidget {
           "こちらは Keepa の仕様のため、アマサーチ側で対処を行うことができません。\n\n"
           "例として、機内モードを一度有効にしたあと無効にした場合や、電波が不安定な場合、"
           "別の Wi-Fi に接続した場合や、一定以上の距離を移動した場合などが該当します。\n\n"
-          "このような場合は、再度 Keepa へログインしていただくようにお願いいたします。",
+          "このような場合は、再度 Keepa へログインが必要となります。",
         ),
       ],
     );
