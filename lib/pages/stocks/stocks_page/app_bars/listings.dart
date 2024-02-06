@@ -295,7 +295,14 @@ class _CustomAlertDialogState extends State<_CustomAlertDialog> {
                   }
                 },
               ),
-              const Text("出品済みを無視する"),
+              GestureDetector(
+                child: const Text("出品済みを無視する"),
+                onTap: () {
+                  setState(() {
+                    ignore = !ignore;
+                  });
+                },
+              ),
             ],
           ),
         ],
