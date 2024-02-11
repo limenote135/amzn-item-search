@@ -141,7 +141,7 @@ class _KeepaFaq extends StatelessWidget {
                   color: Colors.red,
                 ),
               ),
-              const TextSpan(text: "表示されていない場合、アプリ内でも表示されることはありません。")
+              const TextSpan(text: "表示されていない場合、アプリ内でも表示されることはありません。"),
             ],
           ),
         ),
