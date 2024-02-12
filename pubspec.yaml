@@ -93,7 +93,7 @@ dependencies:
   url_launcher: ^6.2.4
   uuid: ^3.0.7
   vibration: ^1.8.4 # https://github.com/benjamindean/flutter_vibration
-  webview_flutter: ^4.5.0
+  webview_flutter: ^4.7.0
   worker_manager: ^6.3.1
 
 dev_dependencies:
