@@ -81,7 +81,7 @@ dependencies:
   path_provider: ^2.1.2
   permission_handler: ^11.2.0
   pub_semver: ^2.1.4
-  purchases_flutter: ^6.19.0
+  purchases_flutter: ^6.20.0
   reactive_date_range_picker: ^2.0.1
   reactive_forms: ^16.1.1
   release_notes_dialog: ^2.0.0
