@@ -46,11 +46,6 @@ class FbaTile extends ConsumerWidget {
             (form as FormGroup).control(sellPriceField).value = newPrice;
           }
         }
-        if (value) {
-          (form as FormGroup).control(smallProgramField).markAsEnabled();
-        } else {
-          (form as FormGroup).control(smallProgramField).markAsDisabled();
-        }
       },
     );
   }

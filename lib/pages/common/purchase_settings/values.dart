@@ -6,7 +6,6 @@ import 'package:reactive_forms/reactive_forms.dart';
 const purchasePriceField = "purchasePrice";
 const sellPriceField = "sellPrice";
 const useFbaField = "useFba";
-const smallProgramField = "smallProgram";
 const quantityField = "quantity";
 const conditionField = "condition";
 const retailerField = "retailer";
@@ -62,12 +61,6 @@ bool getBool(AbstractControl<dynamic> form, String field) {
   switch (field) {
     case useFbaField:
       return f.control(useFbaField).value as bool;
-    case smallProgramField:
-      final isEnabled = f.control(smallProgramField).enabled;
-      if (!isEnabled) {
-        return false;
-      }
-      return f.control(smallProgramField).value as bool;
   }
   throw Exception("Invalid field: $field");
 }
