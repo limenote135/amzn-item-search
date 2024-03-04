@@ -94,7 +94,7 @@ dependencies:
   uuid: ^3.0.7
   vibration: ^1.8.4 # https://github.com/benjamindean/flutter_vibration
   webview_flutter: ^4.7.0
-  worker_manager: ^6.3.1
+  worker_manager: ^6.3.2
 
 dev_dependencies:
   build_runner: ^2.4.8
