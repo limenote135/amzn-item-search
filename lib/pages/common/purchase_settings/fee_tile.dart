@@ -20,13 +20,8 @@ class FeeTile extends HookConsumerWidget {
     final useFba = getBool(form, useFbaField);
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
-    final smallProgram = getBool(form, smallProgramField);
-    final smallFee = item.smallFee;
 
-    var feeInfo = item.prices?.feeInfo ?? const FeeInfo();
-    if (smallProgram) {
-      feeInfo = feeInfo.copyWith(fbaFee: smallFee);
-    }
+    final feeInfo = item.prices?.feeInfo ?? const FeeInfo();
     final totalFee = _calcTotalFee(
       sellPrice: sellPrice,
       purchasePrice: purchasePrice,

@@ -29,27 +29,11 @@ class TileImage extends HookConsumerWidget {
 
   final void Function(ByteData bytes)? onComplete;
 
-  static bool isSmallProduct(AsinData item) {
-    if (item.sizeType == SizeType.normal) {
-      return false;
-    }
-    final prices = item.prices;
-    if (prices == null) {
-      return false;
-    }
-
-    final newPrice = prices.newPrices.firstOrNull?.price ?? 0;
-    final usedPrice = prices.usedPrices.firstOrNull?.price ?? 0;
-    // 小型軽量は1000円以下だが、念のため現在の最安値が 3000円まではラベル表示する
-    return newPrice < 3000 && usedPrice < 3000;
-  }
-
   static bool shouldShowSize(AsinData item) {
     switch (item.sizeType) {
       case SizeType.normal:
-        return false;
       case SizeType.small:
-        return isSmallProduct(item);
+        return false;
       case SizeType.big:
       case SizeType.moreBig:
         return true;
@@ -184,7 +168,7 @@ class TileImage extends HookConsumerWidget {
 String sizeText(String raw) {
   switch (raw) {
     case "small":
-      return "小型軽量";
+      return "小型"; // small は shouldShowSize が false なので表示されない
     case "big":
       return "大型";
     case "moreBig":
