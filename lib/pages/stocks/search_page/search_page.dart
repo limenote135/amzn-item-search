@@ -306,6 +306,16 @@ class _Body extends ConsumerWidget {
                   await showUnpaidDialog(context);
                   return;
                 }
+                var dateRange =
+                    getNullableDateRange(form, purchaseDateRangeField);
+                if (dateRange != null) {
+                  dateRange = DateTimeRange(
+                    start: dateRange.start,
+                    end: dateRange.end.add(
+                      const Duration(days: 1), // end に指定した日を含めるために1日追加する
+                    ),
+                  );
+                }
                 final f = filter.copyWith(
                   keyword: getNullableString(form, keywordField),
                   listingState: getListingState(form),
@@ -317,8 +327,7 @@ class _Body extends ConsumerWidget {
                       getNullableInt(form, purchasePriceUpperField),
                   sellPriceLower: getNullableInt(form, sellPriceLowerField),
                   sellPriceUpper: getNullableInt(form, sellPriceUpperField),
-                  purchaseDateRange:
-                      getNullableDateRange(form, purchaseDateRangeField),
+                  purchaseDateRange: dateRange,
                   retailer: getNullableString(form, retailerField),
                 );
                 ref.read(currentStockItemFilterProvider.notifier).state = f;
