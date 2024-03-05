@@ -4,7 +4,6 @@ import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/stock_item_search_conditions.dart';
 import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/models/stock_item_filter.dart';
-import 'package:amasearch/util/util.dart';
 import 'package:riverpod/riverpod.dart';
 
 final filteredStockListProvider = Provider(
@@ -95,10 +94,13 @@ final filteredStockListProvider = Provider(
 
     if (filter.purchaseDateRange != null) {
       items = items.where((element) {
-        final start = currentTimeString(time: filter.purchaseDateRange!.start);
-        final end = currentTimeString(time: filter.purchaseDateRange!.end);
-        return element.purchaseDate.compareTo(start) >= 0 &&
-            element.purchaseDate.compareTo(end) <= 0;
+        final start = filter.purchaseDateRange!.start;
+        final end = filter.purchaseDateRange!.end;
+        final date = DateTime.parse(element.purchaseDate).toLocal();
+
+        // start.compareTo(date) は date と start が同じなら 0 を返す
+        // start より date があとなら -1 を返す
+        return start.compareTo(date) <= 0 && date.isBefore(end);
       });
     }
 
