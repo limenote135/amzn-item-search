@@ -43,7 +43,7 @@ dependencies:
   firebase_analytics: ^10.8.7
   firebase_auth: ^4.17.4
   firebase_core: ^2.25.5
-  firebase_crashlytics: ^3.4.14
+  firebase_crashlytics: ^3.4.16
   firebase_performance: ^0.9.3+13
   firebase_remote_config: ^4.3.15
   firebase_storage: ^11.6.5
