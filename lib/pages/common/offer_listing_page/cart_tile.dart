@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'offer_chips.dart';
+import 'providers.dart';
 import 'stock_text.dart';
 
 class CartTile extends HookConsumerWidget {
@@ -14,14 +15,14 @@ class CartTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asin = ref.watch(currentAsinProvider);
+    final param = ref.watch(currentOfferListingParamProvider);
     final headlineSize = headlineFontSize(context);
-    final cartOfferAsyncValue = ref.watch(cartOfferProvider(asin));
+    final cartOfferAsyncValue = ref.watch(cartOfferProvider(param));
     return AsyncValueListTileWidget<OfferItem?>(
       value: cartOfferAsyncValue,
       errorInfo: [
         "CartTile.cartOfferProvider",
-        "ASIN: $asin",
+        "ASIN: ${param.asin}",
       ],
       data: (value) {
         if (value == null) {
