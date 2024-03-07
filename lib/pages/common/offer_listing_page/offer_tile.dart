@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'offer_chips.dart';
-import 'offer_listing_page.dart';
+import 'providers.dart';
 import 'stock_text.dart';
 
 class OfferTile extends HookConsumerWidget {
@@ -14,7 +14,7 @@ class OfferTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final index = ref.watch(currentIndex);
+    final index = ref.watch(currentItemIndexProvider);
     final param = ref.watch(currentOfferListingParamProvider);
     final offerItem = ref.watch(
       offerAtIndexProvider(
