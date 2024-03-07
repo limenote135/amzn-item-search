@@ -4,8 +4,7 @@ import 'package:amasearch/styles/font.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final currentOfferItemProvider =
-    Provider<OfferItem>((_) => throw UnimplementedError());
+import 'providers.dart';
 
 class OfferChips extends HookConsumerWidget {
   const OfferChips({super.key});
