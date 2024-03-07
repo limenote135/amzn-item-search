@@ -36,14 +36,10 @@ final offerTotalCountProvider = Provider.autoDispose
       .whenData((value) => value.total);
 });
 
-final cartOfferProvider =
-    Provider.autoDispose.family<AsyncValue<OfferItem?>, String>((ref, asin) {
-  final param = OfferListingsParams(
-    asin: asin,
-    newItem: true,
-  );
+final cartOfferProvider = Provider.autoDispose
+    .family<AsyncValue<OfferItem?>, OfferListingsParams>((ref, params) {
   return ref
-      .watch(offerListingsFutureProvider(param))
+      .watch(offerListingsFutureProvider(params.copyWith(page: 0)))
       .whenData((value) => value.cart);
 });
 
