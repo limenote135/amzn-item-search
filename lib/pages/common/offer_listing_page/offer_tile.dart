@@ -53,6 +53,8 @@ class OfferTile extends HookConsumerWidget {
                   ProviderScope(
                     overrides: [
                       currentSellerIdProvider.overrideWithValue(value.sellerId),
+                      // 何故か Unimplemented error が出るので念のため
+                      currentAsinProvider.overrideWithValue(param.asin),
                     ],
                     child: const StockText(),
                   ),
