@@ -6,9 +6,7 @@ import 'package:amasearch/util/error_report.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final currentSellerIdProvider =
-    Provider<String>((_) => throw UnimplementedError());
-final currentAsinProvider = Provider<String>((_) => throw UnimplementedError());
+import 'providers.dart';
 
 class StockText extends HookConsumerWidget {
   const StockText({super.key});
