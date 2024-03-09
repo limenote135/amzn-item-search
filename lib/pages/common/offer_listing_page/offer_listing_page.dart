@@ -16,7 +16,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'cart_tile.dart';
 import 'offer_tile.dart';
 import 'providers.dart';
-import 'stock_text.dart';
 
 class OfferListingPage extends StatelessWidget {
   const OfferListingPage({super.key});

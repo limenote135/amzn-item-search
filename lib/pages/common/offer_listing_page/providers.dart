@@ -9,3 +9,8 @@ final currentOfferListingParamProvider =
 
 final currentItemIndexProvider =
     Provider<int>((_) => throw UnimplementedError());
+
+final currentSellerIdProvider =
+    Provider<String>((_) => throw UnimplementedError());
+
+final currentAsinProvider = Provider<String>((_) => throw UnimplementedError());

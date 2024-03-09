@@ -69,6 +69,9 @@ class CartTile extends HookConsumerWidget {
                                 overrides: [
                                   currentSellerIdProvider
                                       .overrideWithValue(value.sellerId),
+                                  // 何故か Unimplemented error が出るので念のため
+                                  currentAsinProvider
+                                      .overrideWithValue(param.asin),
                                 ],
                                 child: const StockText(),
                               ),
