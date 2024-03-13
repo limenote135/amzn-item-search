@@ -51,7 +51,14 @@ int calcProfit({
     return 0;
   }
   final referralFee = calcReferralFee(sellPrice, fee, taxRate);
-  final fbaFee = useFba && fee.fbaFee != -1 ? fee.fbaFee : 0;
+  var fbaFee = 0;
+  if (useFba && fee.fbaFee != -1) {
+    if (sellPrice <= 1000 && fee.fbaLowPriceFee != 0) {
+      fbaFee = fee.fbaLowPriceFee;
+    } else {
+      fbaFee = fee.fbaFee;
+    }
+  }
   final closingFee = (fee.variableClosingFee * taxRate).round();
   final totalFee = referralFee + closingFee + fbaFee;
   final profit = sellPrice - purchasePrice - totalFee - otherCost;
@@ -121,7 +128,14 @@ int calcTargetPriceFromSellPrice({
   final rawProfit = sellPrice * (targetRate / 100);
   final profit = minProfit > rawProfit ? minProfit : rawProfit;
   final price = sellPrice - referralFee - profit;
-  final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
+  var fbaFee = 0;
+  if (useFba && feeInfo.fbaFee != -1) {
+    if (sellPrice <= 1000 && feeInfo.fbaLowPriceFee != 0) {
+      fbaFee = feeInfo.fbaLowPriceFee;
+    } else {
+      fbaFee = feeInfo.fbaFee;
+    }
+  }
 
   return (price - feeInfo.variableClosingFee * taxRate - fbaFee).round();
 }
@@ -137,10 +151,46 @@ int calcTargetPriceFromPurchasePrice({
   if (feeInfo == null) {
     return 0;
   }
+  final sellPrice = _calcTargetPriceFromPurchasePriceImpl(
+    purchasePrice: purchasePrice,
+    feeInfo: feeInfo,
+    useFbaLowPriceFee: false,
+    rate: rate,
+    minProfit: minProfit,
+    useFba: useFba,
+  );
+  if (sellPrice <= 1000 && feeInfo.fbaLowPriceFee != 0) {
+    return _calcTargetPriceFromPurchasePriceImpl(
+      purchasePrice: purchasePrice,
+      feeInfo: feeInfo,
+      useFbaLowPriceFee: true,
+      rate: rate,
+      minProfit: minProfit,
+      useFba: useFba,
+    );
+  }
+  return sellPrice;
+}
+
+int _calcTargetPriceFromPurchasePriceImpl({
+  required int purchasePrice,
+  required FeeInfo feeInfo,
+  required bool useFbaLowPriceFee,
+  required int rate,
+  required int minProfit,
+  required bool useFba,
+}) {
   // 販売価格 = 購入価格 + 販売手数料 + カテゴリ手数料 + FBA 手数料 + 利益
   // 利益 = max(販売価格 * 利益率, 最低利益額)
   // 販売手数料 = 販売価格 * 販売手数料率 * 税率
-  final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
+  var fbaFee = 0;
+  if (useFba && feeInfo.fbaFee != -1) {
+    if (useFbaLowPriceFee && feeInfo.fbaLowPriceFee != 0) {
+      fbaFee = feeInfo.fbaLowPriceFee;
+    } else {
+      fbaFee = feeInfo.fbaFee;
+    }
+  }
   final price = purchasePrice + feeInfo.variableClosingFee * taxRate + fbaFee;
 
   // 販売価格 - max(販売価格 * 利益率, 最低利益) =
@@ -173,6 +223,41 @@ int calcBreakEven({
   required String category,
   int profit = 0,
 }) {
+  final breakEven = _calcBreakEvenImpl(
+    purchase: purchase,
+    useFba: useFba,
+    useFbaLowPriceFee: false,
+    feeInfo: feeInfo,
+    otherCost: otherCost,
+    category: category,
+  );
+  if (useFba &&
+      0 < breakEven &&
+      breakEven <= 1000 &&
+      feeInfo != null &&
+      feeInfo.fbaLowPriceFee != 0) {
+    // 損益分岐が1000円以下の場合、FBA 低価格手数料を使う
+    return _calcBreakEvenImpl(
+      purchase: purchase,
+      useFba: useFba,
+      useFbaLowPriceFee: true,
+      feeInfo: feeInfo,
+      otherCost: otherCost,
+      category: category,
+    );
+  }
+  return breakEven;
+}
+
+int _calcBreakEvenImpl({
+  required int purchase,
+  required bool useFba,
+  required bool useFbaLowPriceFee,
+  required FeeInfo? feeInfo,
+  required int otherCost,
+  required String category,
+  int profit = 0,
+}) {
   if (feeInfo == null) {
     return 0;
   }
@@ -182,7 +267,14 @@ int calcBreakEven({
   // ReferralFee = sellPrice * referralFeeRate or custom rate
   // SellPrice - ReferralFee =
   //        PurchasePrice + variableClosingFee * taxRate + fbaFee
-  final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
+  var fbaFee = 0;
+  if (useFba && feeInfo.fbaFee != -1) {
+    if (useFbaLowPriceFee && feeInfo.fbaLowPriceFee != 0) {
+      fbaFee = feeInfo.fbaLowPriceFee;
+    } else {
+      fbaFee = feeInfo.fbaFee;
+    }
+  }
   final temp = purchase +
       fbaFee +
       (feeInfo.variableClosingFee * taxRate) +
