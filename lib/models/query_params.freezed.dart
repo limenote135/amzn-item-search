@@ -12,7 +12,7 @@ part of 'query_params.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AsinDataPageParam {
@@ -73,11 +73,11 @@ class _$AsinDataPageParamCopyWithImpl<$Res, $Val extends AsinDataPageParam>
 }
 
 /// @nodoc
-abstract class _$$_AsinDataPageParamCopyWith<$Res>
+abstract class _$$AsinDataPageParamImplCopyWith<$Res>
     implements $AsinDataPageParamCopyWith<$Res> {
-  factory _$$_AsinDataPageParamCopyWith(_$_AsinDataPageParam value,
-          $Res Function(_$_AsinDataPageParam) then) =
-      __$$_AsinDataPageParamCopyWithImpl<$Res>;
+  factory _$$AsinDataPageParamImplCopyWith(_$AsinDataPageParamImpl value,
+          $Res Function(_$AsinDataPageParamImpl) then) =
+      __$$AsinDataPageParamImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({QueryItemsRequest param, int page});
@@ -87,11 +87,11 @@ abstract class _$$_AsinDataPageParamCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AsinDataPageParamCopyWithImpl<$Res>
-    extends _$AsinDataPageParamCopyWithImpl<$Res, _$_AsinDataPageParam>
-    implements _$$_AsinDataPageParamCopyWith<$Res> {
-  __$$_AsinDataPageParamCopyWithImpl(
-      _$_AsinDataPageParam _value, $Res Function(_$_AsinDataPageParam) _then)
+class __$$AsinDataPageParamImplCopyWithImpl<$Res>
+    extends _$AsinDataPageParamCopyWithImpl<$Res, _$AsinDataPageParamImpl>
+    implements _$$AsinDataPageParamImplCopyWith<$Res> {
+  __$$AsinDataPageParamImplCopyWithImpl(_$AsinDataPageParamImpl _value,
+      $Res Function(_$AsinDataPageParamImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_AsinDataPageParamCopyWithImpl<$Res>
     Object? param = null,
     Object? page = null,
   }) {
-    return _then(_$_AsinDataPageParam(
+    return _then(_$AsinDataPageParamImpl(
       param: null == param
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
@@ -115,8 +115,8 @@ class __$$_AsinDataPageParamCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AsinDataPageParam implements _AsinDataPageParam {
-  const _$_AsinDataPageParam({required this.param, required this.page});
+class _$AsinDataPageParamImpl implements _AsinDataPageParam {
+  const _$AsinDataPageParamImpl({required this.param, required this.page});
 
   @override
   final QueryItemsRequest param;
@@ -129,10 +129,10 @@ class _$_AsinDataPageParam implements _AsinDataPageParam {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AsinDataPageParam &&
+            other is _$AsinDataPageParamImpl &&
             (identical(other.param, param) || other.param == param) &&
             (identical(other.page, page) || other.page == page));
   }
@@ -143,15 +143,15 @@ class _$_AsinDataPageParam implements _AsinDataPageParam {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AsinDataPageParamCopyWith<_$_AsinDataPageParam> get copyWith =>
-      __$$_AsinDataPageParamCopyWithImpl<_$_AsinDataPageParam>(
+  _$$AsinDataPageParamImplCopyWith<_$AsinDataPageParamImpl> get copyWith =>
+      __$$AsinDataPageParamImplCopyWithImpl<_$AsinDataPageParamImpl>(
           this, _$identity);
 }
 
 abstract class _AsinDataPageParam implements AsinDataPageParam {
   const factory _AsinDataPageParam(
       {required final QueryItemsRequest param,
-      required final int page}) = _$_AsinDataPageParam;
+      required final int page}) = _$AsinDataPageParamImpl;
 
   @override
   QueryItemsRequest get param;
@@ -159,7 +159,7 @@ abstract class _AsinDataPageParam implements AsinDataPageParam {
   int get page;
   @override
   @JsonKey(ignore: true)
-  _$$_AsinDataPageParamCopyWith<_$_AsinDataPageParam> get copyWith =>
+  _$$AsinDataPageParamImplCopyWith<_$AsinDataPageParamImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -223,11 +223,11 @@ class _$AsinDataIndexAtParamCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AsinDataIndexAtParamCopyWith<$Res>
+abstract class _$$AsinDataIndexAtParamImplCopyWith<$Res>
     implements $AsinDataIndexAtParamCopyWith<$Res> {
-  factory _$$_AsinDataIndexAtParamCopyWith(_$_AsinDataIndexAtParam value,
-          $Res Function(_$_AsinDataIndexAtParam) then) =
-      __$$_AsinDataIndexAtParamCopyWithImpl<$Res>;
+  factory _$$AsinDataIndexAtParamImplCopyWith(_$AsinDataIndexAtParamImpl value,
+          $Res Function(_$AsinDataIndexAtParamImpl) then) =
+      __$$AsinDataIndexAtParamImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({QueryItemsRequest param, int index});
@@ -237,11 +237,11 @@ abstract class _$$_AsinDataIndexAtParamCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AsinDataIndexAtParamCopyWithImpl<$Res>
-    extends _$AsinDataIndexAtParamCopyWithImpl<$Res, _$_AsinDataIndexAtParam>
-    implements _$$_AsinDataIndexAtParamCopyWith<$Res> {
-  __$$_AsinDataIndexAtParamCopyWithImpl(_$_AsinDataIndexAtParam _value,
-      $Res Function(_$_AsinDataIndexAtParam) _then)
+class __$$AsinDataIndexAtParamImplCopyWithImpl<$Res>
+    extends _$AsinDataIndexAtParamCopyWithImpl<$Res, _$AsinDataIndexAtParamImpl>
+    implements _$$AsinDataIndexAtParamImplCopyWith<$Res> {
+  __$$AsinDataIndexAtParamImplCopyWithImpl(_$AsinDataIndexAtParamImpl _value,
+      $Res Function(_$AsinDataIndexAtParamImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -250,7 +250,7 @@ class __$$_AsinDataIndexAtParamCopyWithImpl<$Res>
     Object? param = null,
     Object? index = null,
   }) {
-    return _then(_$_AsinDataIndexAtParam(
+    return _then(_$AsinDataIndexAtParamImpl(
       param: null == param
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
@@ -265,8 +265,8 @@ class __$$_AsinDataIndexAtParamCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AsinDataIndexAtParam implements _AsinDataIndexAtParam {
-  const _$_AsinDataIndexAtParam({required this.param, required this.index});
+class _$AsinDataIndexAtParamImpl implements _AsinDataIndexAtParam {
+  const _$AsinDataIndexAtParamImpl({required this.param, required this.index});
 
   @override
   final QueryItemsRequest param;
@@ -279,10 +279,10 @@ class _$_AsinDataIndexAtParam implements _AsinDataIndexAtParam {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AsinDataIndexAtParam &&
+            other is _$AsinDataIndexAtParamImpl &&
             (identical(other.param, param) || other.param == param) &&
             (identical(other.index, index) || other.index == index));
   }
@@ -293,15 +293,16 @@ class _$_AsinDataIndexAtParam implements _AsinDataIndexAtParam {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AsinDataIndexAtParamCopyWith<_$_AsinDataIndexAtParam> get copyWith =>
-      __$$_AsinDataIndexAtParamCopyWithImpl<_$_AsinDataIndexAtParam>(
-          this, _$identity);
+  _$$AsinDataIndexAtParamImplCopyWith<_$AsinDataIndexAtParamImpl>
+      get copyWith =>
+          __$$AsinDataIndexAtParamImplCopyWithImpl<_$AsinDataIndexAtParamImpl>(
+              this, _$identity);
 }
 
 abstract class _AsinDataIndexAtParam implements AsinDataIndexAtParam {
   const factory _AsinDataIndexAtParam(
       {required final QueryItemsRequest param,
-      required final int index}) = _$_AsinDataIndexAtParam;
+      required final int index}) = _$AsinDataIndexAtParamImpl;
 
   @override
   QueryItemsRequest get param;
@@ -309,6 +310,6 @@ abstract class _AsinDataIndexAtParam implements AsinDataIndexAtParam {
   int get index;
   @override
   @JsonKey(ignore: true)
-  _$$_AsinDataIndexAtParamCopyWith<_$_AsinDataIndexAtParam> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AsinDataIndexAtParamImplCopyWith<_$AsinDataIndexAtParamImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

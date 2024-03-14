@@ -12,7 +12,7 @@ part of 'calc_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CalculateData {
@@ -75,22 +75,22 @@ class _$CalculateDataCopyWithImpl<$Res, $Val extends CalculateData>
 }
 
 /// @nodoc
-abstract class _$$_CalculateDataCopyWith<$Res>
+abstract class _$$CalculateDataImplCopyWith<$Res>
     implements $CalculateDataCopyWith<$Res> {
-  factory _$$_CalculateDataCopyWith(
-          _$_CalculateData value, $Res Function(_$_CalculateData) then) =
-      __$$_CalculateDataCopyWithImpl<$Res>;
+  factory _$$CalculateDataImplCopyWith(
+          _$CalculateDataImpl value, $Res Function(_$CalculateDataImpl) then) =
+      __$$CalculateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String displayText, double total, CalcOp op, bool inputComplete});
 }
 
 /// @nodoc
-class __$$_CalculateDataCopyWithImpl<$Res>
-    extends _$CalculateDataCopyWithImpl<$Res, _$_CalculateData>
-    implements _$$_CalculateDataCopyWith<$Res> {
-  __$$_CalculateDataCopyWithImpl(
-      _$_CalculateData _value, $Res Function(_$_CalculateData) _then)
+class __$$CalculateDataImplCopyWithImpl<$Res>
+    extends _$CalculateDataCopyWithImpl<$Res, _$CalculateDataImpl>
+    implements _$$CalculateDataImplCopyWith<$Res> {
+  __$$CalculateDataImplCopyWithImpl(
+      _$CalculateDataImpl _value, $Res Function(_$CalculateDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_CalculateDataCopyWithImpl<$Res>
     Object? op = null,
     Object? inputComplete = null,
   }) {
-    return _then(_$_CalculateData(
+    return _then(_$CalculateDataImpl(
       displayText: null == displayText
           ? _value.displayText
           : displayText // ignore: cast_nullable_to_non_nullable
@@ -124,8 +124,8 @@ class __$$_CalculateDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CalculateData implements _CalculateData {
-  const _$_CalculateData(
+class _$CalculateDataImpl implements _CalculateData {
+  const _$CalculateDataImpl(
       {this.displayText = "0",
       this.total = 0,
       this.op = CalcOp.plus,
@@ -150,10 +150,10 @@ class _$_CalculateData implements _CalculateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CalculateData &&
+            other is _$CalculateDataImpl &&
             (identical(other.displayText, displayText) ||
                 other.displayText == displayText) &&
             (identical(other.total, total) || other.total == total) &&
@@ -169,8 +169,8 @@ class _$_CalculateData implements _CalculateData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CalculateDataCopyWith<_$_CalculateData> get copyWith =>
-      __$$_CalculateDataCopyWithImpl<_$_CalculateData>(this, _$identity);
+  _$$CalculateDataImplCopyWith<_$CalculateDataImpl> get copyWith =>
+      __$$CalculateDataImplCopyWithImpl<_$CalculateDataImpl>(this, _$identity);
 }
 
 abstract class _CalculateData implements CalculateData {
@@ -178,7 +178,7 @@ abstract class _CalculateData implements CalculateData {
       {final String displayText,
       final double total,
       final CalcOp op,
-      final bool inputComplete}) = _$_CalculateData;
+      final bool inputComplete}) = _$CalculateDataImpl;
 
   @override
   String get displayText;
@@ -190,6 +190,6 @@ abstract class _CalculateData implements CalculateData {
   bool get inputComplete;
   @override
   @JsonKey(ignore: true)
-  _$$_CalculateDataCopyWith<_$_CalculateData> get copyWith =>
+  _$$CalculateDataImplCopyWith<_$CalculateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

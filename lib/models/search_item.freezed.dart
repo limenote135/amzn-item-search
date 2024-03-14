@@ -12,7 +12,7 @@ part of 'search_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SearchItem {
@@ -82,11 +82,11 @@ class _$SearchItemCopyWithImpl<$Res, $Val extends SearchItem>
 }
 
 /// @nodoc
-abstract class _$$_SearchItemCopyWith<$Res>
+abstract class _$$SearchItemImplCopyWith<$Res>
     implements $SearchItemCopyWith<$Res> {
-  factory _$$_SearchItemCopyWith(
-          _$_SearchItem value, $Res Function(_$_SearchItem) then) =
-      __$$_SearchItemCopyWithImpl<$Res>;
+  factory _$$SearchItemImplCopyWith(
+          _$SearchItemImpl value, $Res Function(_$SearchItemImpl) then) =
+      __$$SearchItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -97,11 +97,11 @@ abstract class _$$_SearchItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchItemCopyWithImpl<$Res>
-    extends _$SearchItemCopyWithImpl<$Res, _$_SearchItem>
-    implements _$$_SearchItemCopyWith<$Res> {
-  __$$_SearchItemCopyWithImpl(
-      _$_SearchItem _value, $Res Function(_$_SearchItem) _then)
+class __$$SearchItemImplCopyWithImpl<$Res>
+    extends _$SearchItemCopyWithImpl<$Res, _$SearchItemImpl>
+    implements _$$SearchItemImplCopyWith<$Res> {
+  __$$SearchItemImplCopyWithImpl(
+      _$SearchItemImpl _value, $Res Function(_$SearchItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -112,7 +112,7 @@ class __$$_SearchItemCopyWithImpl<$Res>
     Object? asins = null,
     Object? defaultPurchasePrice = null,
   }) {
-    return _then(_$_SearchItem(
+    return _then(_$SearchItemImpl(
       searchDate: null == searchDate
           ? _value.searchDate
           : searchDate // ignore: cast_nullable_to_non_nullable
@@ -136,8 +136,8 @@ class __$$_SearchItemCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: itemTypeId)
-class _$_SearchItem implements _SearchItem {
-  const _$_SearchItem(
+class _$SearchItemImpl implements _SearchItem {
+  const _$SearchItemImpl(
       {@HiveField(0) required this.searchDate,
       @HiveField(1) required this.jan,
       @HiveField(2) final List<AsinData> asins = const <AsinData>[],
@@ -170,10 +170,10 @@ class _$_SearchItem implements _SearchItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchItem &&
+            other is _$SearchItemImpl &&
             (identical(other.searchDate, searchDate) ||
                 other.searchDate == searchDate) &&
             (identical(other.jan, jan) || other.jan == jan) &&
@@ -189,8 +189,8 @@ class _$_SearchItem implements _SearchItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchItemCopyWith<_$_SearchItem> get copyWith =>
-      __$$_SearchItemCopyWithImpl<_$_SearchItem>(this, _$identity);
+  _$$SearchItemImplCopyWith<_$SearchItemImpl> get copyWith =>
+      __$$SearchItemImplCopyWithImpl<_$SearchItemImpl>(this, _$identity);
 }
 
 abstract class _SearchItem implements SearchItem {
@@ -198,7 +198,7 @@ abstract class _SearchItem implements SearchItem {
       {@HiveField(0) required final String searchDate,
       @HiveField(1) required final String jan,
       @HiveField(2) final List<AsinData> asins,
-      final int defaultPurchasePrice}) = _$_SearchItem;
+      final int defaultPurchasePrice}) = _$SearchItemImpl;
 
   @override
   @HiveField(0)
@@ -213,6 +213,6 @@ abstract class _SearchItem implements SearchItem {
   int get defaultPurchasePrice;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchItemCopyWith<_$_SearchItem> get copyWith =>
+  _$$SearchItemImplCopyWith<_$SearchItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

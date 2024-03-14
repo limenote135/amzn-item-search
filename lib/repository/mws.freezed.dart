@@ -12,7 +12,7 @@ part of 'mws.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GetProductByIdResponse _$GetProductByIdResponseFromJson(
     Map<String, dynamic> json) {
@@ -70,23 +70,25 @@ class _$GetProductByIdResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_GetProductByIdResponseCopyWith<$Res>
+abstract class _$$GetProductByIdResponseImplCopyWith<$Res>
     implements $GetProductByIdResponseCopyWith<$Res> {
-  factory _$$_GetProductByIdResponseCopyWith(_$_GetProductByIdResponse value,
-          $Res Function(_$_GetProductByIdResponse) then) =
-      __$$_GetProductByIdResponseCopyWithImpl<$Res>;
+  factory _$$GetProductByIdResponseImplCopyWith(
+          _$GetProductByIdResponseImpl value,
+          $Res Function(_$GetProductByIdResponseImpl) then) =
+      __$$GetProductByIdResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String code, List<AsinData> items});
 }
 
 /// @nodoc
-class __$$_GetProductByIdResponseCopyWithImpl<$Res>
+class __$$GetProductByIdResponseImplCopyWithImpl<$Res>
     extends _$GetProductByIdResponseCopyWithImpl<$Res,
-        _$_GetProductByIdResponse>
-    implements _$$_GetProductByIdResponseCopyWith<$Res> {
-  __$$_GetProductByIdResponseCopyWithImpl(_$_GetProductByIdResponse _value,
-      $Res Function(_$_GetProductByIdResponse) _then)
+        _$GetProductByIdResponseImpl>
+    implements _$$GetProductByIdResponseImplCopyWith<$Res> {
+  __$$GetProductByIdResponseImplCopyWithImpl(
+      _$GetProductByIdResponseImpl _value,
+      $Res Function(_$GetProductByIdResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +97,7 @@ class __$$_GetProductByIdResponseCopyWithImpl<$Res>
     Object? code = null,
     Object? items = null,
   }) {
-    return _then(_$_GetProductByIdResponse(
+    return _then(_$GetProductByIdResponseImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -111,13 +113,13 @@ class __$$_GetProductByIdResponseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_GetProductByIdResponse implements _GetProductByIdResponse {
-  const _$_GetProductByIdResponse(
+class _$GetProductByIdResponseImpl implements _GetProductByIdResponse {
+  const _$GetProductByIdResponseImpl(
       {required this.code, final List<AsinData> items = const <AsinData>[]})
       : _items = items;
 
-  factory _$_GetProductByIdResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_GetProductByIdResponseFromJson(json);
+  factory _$GetProductByIdResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GetProductByIdResponseImplFromJson(json);
 
   @override
   final String code;
@@ -136,10 +138,10 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetProductByIdResponse &&
+            other is _$GetProductByIdResponseImpl &&
             (identical(other.code, code) || other.code == code) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
@@ -152,13 +154,13 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetProductByIdResponseCopyWith<_$_GetProductByIdResponse> get copyWith =>
-      __$$_GetProductByIdResponseCopyWithImpl<_$_GetProductByIdResponse>(
-          this, _$identity);
+  _$$GetProductByIdResponseImplCopyWith<_$GetProductByIdResponseImpl>
+      get copyWith => __$$GetProductByIdResponseImplCopyWithImpl<
+          _$GetProductByIdResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GetProductByIdResponseToJson(
+    return _$$GetProductByIdResponseImplToJson(
       this,
     );
   }
@@ -167,10 +169,10 @@ class _$_GetProductByIdResponse implements _GetProductByIdResponse {
 abstract class _GetProductByIdResponse implements GetProductByIdResponse {
   const factory _GetProductByIdResponse(
       {required final String code,
-      final List<AsinData> items}) = _$_GetProductByIdResponse;
+      final List<AsinData> items}) = _$GetProductByIdResponseImpl;
 
   factory _GetProductByIdResponse.fromJson(Map<String, dynamic> json) =
-      _$_GetProductByIdResponse.fromJson;
+      _$GetProductByIdResponseImpl.fromJson;
 
   @override
   String get code;
@@ -178,8 +180,8 @@ abstract class _GetProductByIdResponse implements GetProductByIdResponse {
   List<AsinData> get items;
   @override
   @JsonKey(ignore: true)
-  _$$_GetProductByIdResponseCopyWith<_$_GetProductByIdResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GetProductByIdResponseImplCopyWith<_$GetProductByIdResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -231,22 +233,22 @@ class _$QueryItemsRequestCopyWithImpl<$Res, $Val extends QueryItemsRequest>
 }
 
 /// @nodoc
-abstract class _$$_QueryItemsRequestCopyWith<$Res>
+abstract class _$$QueryItemsRequestImplCopyWith<$Res>
     implements $QueryItemsRequestCopyWith<$Res> {
-  factory _$$_QueryItemsRequestCopyWith(_$_QueryItemsRequest value,
-          $Res Function(_$_QueryItemsRequest) then) =
-      __$$_QueryItemsRequestCopyWithImpl<$Res>;
+  factory _$$QueryItemsRequestImplCopyWith(_$QueryItemsRequestImpl value,
+          $Res Function(_$QueryItemsRequestImpl) then) =
+      __$$QueryItemsRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String query, String category});
 }
 
 /// @nodoc
-class __$$_QueryItemsRequestCopyWithImpl<$Res>
-    extends _$QueryItemsRequestCopyWithImpl<$Res, _$_QueryItemsRequest>
-    implements _$$_QueryItemsRequestCopyWith<$Res> {
-  __$$_QueryItemsRequestCopyWithImpl(
-      _$_QueryItemsRequest _value, $Res Function(_$_QueryItemsRequest) _then)
+class __$$QueryItemsRequestImplCopyWithImpl<$Res>
+    extends _$QueryItemsRequestCopyWithImpl<$Res, _$QueryItemsRequestImpl>
+    implements _$$QueryItemsRequestImplCopyWith<$Res> {
+  __$$QueryItemsRequestImplCopyWithImpl(_$QueryItemsRequestImpl _value,
+      $Res Function(_$QueryItemsRequestImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -255,7 +257,7 @@ class __$$_QueryItemsRequestCopyWithImpl<$Res>
     Object? query = null,
     Object? category = null,
   }) {
-    return _then(_$_QueryItemsRequest(
+    return _then(_$QueryItemsRequestImpl(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -270,8 +272,8 @@ class __$$_QueryItemsRequestCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_QueryItemsRequest implements _QueryItemsRequest {
-  const _$_QueryItemsRequest({required this.query, required this.category});
+class _$QueryItemsRequestImpl implements _QueryItemsRequest {
+  const _$QueryItemsRequestImpl({required this.query, required this.category});
 
   @override
   final String query;
@@ -284,10 +286,10 @@ class _$_QueryItemsRequest implements _QueryItemsRequest {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_QueryItemsRequest &&
+            other is _$QueryItemsRequestImpl &&
             (identical(other.query, query) || other.query == query) &&
             (identical(other.category, category) ||
                 other.category == category));
@@ -299,15 +301,15 @@ class _$_QueryItemsRequest implements _QueryItemsRequest {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_QueryItemsRequestCopyWith<_$_QueryItemsRequest> get copyWith =>
-      __$$_QueryItemsRequestCopyWithImpl<_$_QueryItemsRequest>(
+  _$$QueryItemsRequestImplCopyWith<_$QueryItemsRequestImpl> get copyWith =>
+      __$$QueryItemsRequestImplCopyWithImpl<_$QueryItemsRequestImpl>(
           this, _$identity);
 }
 
 abstract class _QueryItemsRequest implements QueryItemsRequest {
   const factory _QueryItemsRequest(
       {required final String query,
-      required final String category}) = _$_QueryItemsRequest;
+      required final String category}) = _$QueryItemsRequestImpl;
 
   @override
   String get query;
@@ -315,7 +317,7 @@ abstract class _QueryItemsRequest implements QueryItemsRequest {
   String get category;
   @override
   @JsonKey(ignore: true)
-  _$$_QueryItemsRequestCopyWith<_$_QueryItemsRequest> get copyWith =>
+  _$$QueryItemsRequestImplCopyWith<_$QueryItemsRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -367,22 +369,22 @@ class _$QueryItemsResponseCopyWithImpl<$Res, $Val extends QueryItemsResponse>
 }
 
 /// @nodoc
-abstract class _$$_QueryItemsResponseCopyWith<$Res>
+abstract class _$$QueryItemsResponseImplCopyWith<$Res>
     implements $QueryItemsResponseCopyWith<$Res> {
-  factory _$$_QueryItemsResponseCopyWith(_$_QueryItemsResponse value,
-          $Res Function(_$_QueryItemsResponse) then) =
-      __$$_QueryItemsResponseCopyWithImpl<$Res>;
+  factory _$$QueryItemsResponseImplCopyWith(_$QueryItemsResponseImpl value,
+          $Res Function(_$QueryItemsResponseImpl) then) =
+      __$$QueryItemsResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<String> asins});
 }
 
 /// @nodoc
-class __$$_QueryItemsResponseCopyWithImpl<$Res>
-    extends _$QueryItemsResponseCopyWithImpl<$Res, _$_QueryItemsResponse>
-    implements _$$_QueryItemsResponseCopyWith<$Res> {
-  __$$_QueryItemsResponseCopyWithImpl(
-      _$_QueryItemsResponse _value, $Res Function(_$_QueryItemsResponse) _then)
+class __$$QueryItemsResponseImplCopyWithImpl<$Res>
+    extends _$QueryItemsResponseCopyWithImpl<$Res, _$QueryItemsResponseImpl>
+    implements _$$QueryItemsResponseImplCopyWith<$Res> {
+  __$$QueryItemsResponseImplCopyWithImpl(_$QueryItemsResponseImpl _value,
+      $Res Function(_$QueryItemsResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -390,7 +392,7 @@ class __$$_QueryItemsResponseCopyWithImpl<$Res>
   $Res call({
     Object? asins = null,
   }) {
-    return _then(_$_QueryItemsResponse(
+    return _then(_$QueryItemsResponseImpl(
       asins: null == asins
           ? _value._asins
           : asins // ignore: cast_nullable_to_non_nullable
@@ -402,12 +404,12 @@ class __$$_QueryItemsResponseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_QueryItemsResponse implements _QueryItemsResponse {
-  const _$_QueryItemsResponse({required final List<String> asins})
+class _$QueryItemsResponseImpl implements _QueryItemsResponse {
+  const _$QueryItemsResponseImpl({required final List<String> asins})
       : _asins = asins;
 
-  factory _$_QueryItemsResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_QueryItemsResponseFromJson(json);
+  factory _$QueryItemsResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$QueryItemsResponseImplFromJson(json);
 
   final List<String> _asins;
   @override
@@ -423,10 +425,10 @@ class _$_QueryItemsResponse implements _QueryItemsResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_QueryItemsResponse &&
+            other is _$QueryItemsResponseImpl &&
             const DeepCollectionEquality().equals(other._asins, _asins));
   }
 
@@ -438,13 +440,13 @@ class _$_QueryItemsResponse implements _QueryItemsResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_QueryItemsResponseCopyWith<_$_QueryItemsResponse> get copyWith =>
-      __$$_QueryItemsResponseCopyWithImpl<_$_QueryItemsResponse>(
+  _$$QueryItemsResponseImplCopyWith<_$QueryItemsResponseImpl> get copyWith =>
+      __$$QueryItemsResponseImplCopyWithImpl<_$QueryItemsResponseImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_QueryItemsResponseToJson(
+    return _$$QueryItemsResponseImplToJson(
       this,
     );
   }
@@ -452,16 +454,16 @@ class _$_QueryItemsResponse implements _QueryItemsResponse {
 
 abstract class _QueryItemsResponse implements QueryItemsResponse {
   const factory _QueryItemsResponse({required final List<String> asins}) =
-      _$_QueryItemsResponse;
+      _$QueryItemsResponseImpl;
 
   factory _QueryItemsResponse.fromJson(Map<String, dynamic> json) =
-      _$_QueryItemsResponse.fromJson;
+      _$QueryItemsResponseImpl.fromJson;
 
   @override
   List<String> get asins;
   @override
   @JsonKey(ignore: true)
-  _$$_QueryItemsResponseCopyWith<_$_QueryItemsResponse> get copyWith =>
+  _$$QueryItemsResponseImplCopyWith<_$QueryItemsResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -515,24 +517,25 @@ class _$BatchGetAsinDataResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_BatchGetAsinDataResponseCopyWith<$Res>
+abstract class _$$BatchGetAsinDataResponseImplCopyWith<$Res>
     implements $BatchGetAsinDataResponseCopyWith<$Res> {
-  factory _$$_BatchGetAsinDataResponseCopyWith(
-          _$_BatchGetAsinDataResponse value,
-          $Res Function(_$_BatchGetAsinDataResponse) then) =
-      __$$_BatchGetAsinDataResponseCopyWithImpl<$Res>;
+  factory _$$BatchGetAsinDataResponseImplCopyWith(
+          _$BatchGetAsinDataResponseImpl value,
+          $Res Function(_$BatchGetAsinDataResponseImpl) then) =
+      __$$BatchGetAsinDataResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<AsinData> data});
 }
 
 /// @nodoc
-class __$$_BatchGetAsinDataResponseCopyWithImpl<$Res>
+class __$$BatchGetAsinDataResponseImplCopyWithImpl<$Res>
     extends _$BatchGetAsinDataResponseCopyWithImpl<$Res,
-        _$_BatchGetAsinDataResponse>
-    implements _$$_BatchGetAsinDataResponseCopyWith<$Res> {
-  __$$_BatchGetAsinDataResponseCopyWithImpl(_$_BatchGetAsinDataResponse _value,
-      $Res Function(_$_BatchGetAsinDataResponse) _then)
+        _$BatchGetAsinDataResponseImpl>
+    implements _$$BatchGetAsinDataResponseImplCopyWith<$Res> {
+  __$$BatchGetAsinDataResponseImplCopyWithImpl(
+      _$BatchGetAsinDataResponseImpl _value,
+      $Res Function(_$BatchGetAsinDataResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -540,7 +543,7 @@ class __$$_BatchGetAsinDataResponseCopyWithImpl<$Res>
   $Res call({
     Object? data = null,
   }) {
-    return _then(_$_BatchGetAsinDataResponse(
+    return _then(_$BatchGetAsinDataResponseImpl(
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -552,12 +555,12 @@ class __$$_BatchGetAsinDataResponseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_BatchGetAsinDataResponse implements _BatchGetAsinDataResponse {
-  const _$_BatchGetAsinDataResponse({required final List<AsinData> data})
+class _$BatchGetAsinDataResponseImpl implements _BatchGetAsinDataResponse {
+  const _$BatchGetAsinDataResponseImpl({required final List<AsinData> data})
       : _data = data;
 
-  factory _$_BatchGetAsinDataResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_BatchGetAsinDataResponseFromJson(json);
+  factory _$BatchGetAsinDataResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BatchGetAsinDataResponseImplFromJson(json);
 
   final List<AsinData> _data;
   @override
@@ -573,10 +576,10 @@ class _$_BatchGetAsinDataResponse implements _BatchGetAsinDataResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BatchGetAsinDataResponse &&
+            other is _$BatchGetAsinDataResponseImpl &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
@@ -588,13 +591,13 @@ class _$_BatchGetAsinDataResponse implements _BatchGetAsinDataResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BatchGetAsinDataResponseCopyWith<_$_BatchGetAsinDataResponse>
-      get copyWith => __$$_BatchGetAsinDataResponseCopyWithImpl<
-          _$_BatchGetAsinDataResponse>(this, _$identity);
+  _$$BatchGetAsinDataResponseImplCopyWith<_$BatchGetAsinDataResponseImpl>
+      get copyWith => __$$BatchGetAsinDataResponseImplCopyWithImpl<
+          _$BatchGetAsinDataResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BatchGetAsinDataResponseToJson(
+    return _$$BatchGetAsinDataResponseImplToJson(
       this,
     );
   }
@@ -602,16 +605,16 @@ class _$_BatchGetAsinDataResponse implements _BatchGetAsinDataResponse {
 
 abstract class _BatchGetAsinDataResponse implements BatchGetAsinDataResponse {
   const factory _BatchGetAsinDataResponse(
-      {required final List<AsinData> data}) = _$_BatchGetAsinDataResponse;
+      {required final List<AsinData> data}) = _$BatchGetAsinDataResponseImpl;
 
   factory _BatchGetAsinDataResponse.fromJson(Map<String, dynamic> json) =
-      _$_BatchGetAsinDataResponse.fromJson;
+      _$BatchGetAsinDataResponseImpl.fromJson;
 
   @override
   List<AsinData> get data;
   @override
   @JsonKey(ignore: true)
-  _$$_BatchGetAsinDataResponseCopyWith<_$_BatchGetAsinDataResponse>
+  _$$BatchGetAsinDataResponseImplCopyWith<_$BatchGetAsinDataResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -665,25 +668,25 @@ class _$GetItemVariationsResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_GetItemVariationsResponseCopyWith<$Res>
+abstract class _$$GetItemVariationsResponseImplCopyWith<$Res>
     implements $GetItemVariationsResponseCopyWith<$Res> {
-  factory _$$_GetItemVariationsResponseCopyWith(
-          _$_GetItemVariationsResponse value,
-          $Res Function(_$_GetItemVariationsResponse) then) =
-      __$$_GetItemVariationsResponseCopyWithImpl<$Res>;
+  factory _$$GetItemVariationsResponseImplCopyWith(
+          _$GetItemVariationsResponseImpl value,
+          $Res Function(_$GetItemVariationsResponseImpl) then) =
+      __$$GetItemVariationsResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<String> asins});
 }
 
 /// @nodoc
-class __$$_GetItemVariationsResponseCopyWithImpl<$Res>
+class __$$GetItemVariationsResponseImplCopyWithImpl<$Res>
     extends _$GetItemVariationsResponseCopyWithImpl<$Res,
-        _$_GetItemVariationsResponse>
-    implements _$$_GetItemVariationsResponseCopyWith<$Res> {
-  __$$_GetItemVariationsResponseCopyWithImpl(
-      _$_GetItemVariationsResponse _value,
-      $Res Function(_$_GetItemVariationsResponse) _then)
+        _$GetItemVariationsResponseImpl>
+    implements _$$GetItemVariationsResponseImplCopyWith<$Res> {
+  __$$GetItemVariationsResponseImplCopyWithImpl(
+      _$GetItemVariationsResponseImpl _value,
+      $Res Function(_$GetItemVariationsResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -691,7 +694,7 @@ class __$$_GetItemVariationsResponseCopyWithImpl<$Res>
   $Res call({
     Object? asins = null,
   }) {
-    return _then(_$_GetItemVariationsResponse(
+    return _then(_$GetItemVariationsResponseImpl(
       asins: null == asins
           ? _value._asins
           : asins // ignore: cast_nullable_to_non_nullable
@@ -703,13 +706,13 @@ class __$$_GetItemVariationsResponseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_GetItemVariationsResponse implements _GetItemVariationsResponse {
-  const _$_GetItemVariationsResponse(
+class _$GetItemVariationsResponseImpl implements _GetItemVariationsResponse {
+  const _$GetItemVariationsResponseImpl(
       {final List<String> asins = const <String>[]})
       : _asins = asins;
 
-  factory _$_GetItemVariationsResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_GetItemVariationsResponseFromJson(json);
+  factory _$GetItemVariationsResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GetItemVariationsResponseImplFromJson(json);
 
   final List<String> _asins;
   @override
@@ -726,10 +729,10 @@ class _$_GetItemVariationsResponse implements _GetItemVariationsResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetItemVariationsResponse &&
+            other is _$GetItemVariationsResponseImpl &&
             const DeepCollectionEquality().equals(other._asins, _asins));
   }
 
@@ -741,13 +744,13 @@ class _$_GetItemVariationsResponse implements _GetItemVariationsResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetItemVariationsResponseCopyWith<_$_GetItemVariationsResponse>
-      get copyWith => __$$_GetItemVariationsResponseCopyWithImpl<
-          _$_GetItemVariationsResponse>(this, _$identity);
+  _$$GetItemVariationsResponseImplCopyWith<_$GetItemVariationsResponseImpl>
+      get copyWith => __$$GetItemVariationsResponseImplCopyWithImpl<
+          _$GetItemVariationsResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GetItemVariationsResponseToJson(
+    return _$$GetItemVariationsResponseImplToJson(
       this,
     );
   }
@@ -755,15 +758,15 @@ class _$_GetItemVariationsResponse implements _GetItemVariationsResponse {
 
 abstract class _GetItemVariationsResponse implements GetItemVariationsResponse {
   const factory _GetItemVariationsResponse({final List<String> asins}) =
-      _$_GetItemVariationsResponse;
+      _$GetItemVariationsResponseImpl;
 
   factory _GetItemVariationsResponse.fromJson(Map<String, dynamic> json) =
-      _$_GetItemVariationsResponse.fromJson;
+      _$GetItemVariationsResponseImpl.fromJson;
 
   @override
   List<String> get asins;
   @override
   @JsonKey(ignore: true)
-  _$$_GetItemVariationsResponseCopyWith<_$_GetItemVariationsResponse>
+  _$$GetItemVariationsResponseImplCopyWith<_$GetItemVariationsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

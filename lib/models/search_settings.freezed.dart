@@ -12,7 +12,7 @@ part of 'search_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SearchSettings {
@@ -99,11 +99,11 @@ class _$SearchSettingsCopyWithImpl<$Res, $Val extends SearchSettings>
 }
 
 /// @nodoc
-abstract class _$$_SearchSettingsCopyWith<$Res>
+abstract class _$$SearchSettingsImplCopyWith<$Res>
     implements $SearchSettingsCopyWith<$Res> {
-  factory _$$_SearchSettingsCopyWith(
-          _$_SearchSettings value, $Res Function(_$_SearchSettings) then) =
-      __$$_SearchSettingsCopyWithImpl<$Res>;
+  factory _$$SearchSettingsImplCopyWith(_$SearchSettingsImpl value,
+          $Res Function(_$SearchSettingsImpl) then) =
+      __$$SearchSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -116,11 +116,11 @@ abstract class _$$_SearchSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchSettingsCopyWithImpl<$Res>
-    extends _$SearchSettingsCopyWithImpl<$Res, _$_SearchSettings>
-    implements _$$_SearchSettingsCopyWith<$Res> {
-  __$$_SearchSettingsCopyWithImpl(
-      _$_SearchSettings _value, $Res Function(_$_SearchSettings) _then)
+class __$$SearchSettingsImplCopyWithImpl<$Res>
+    extends _$SearchSettingsCopyWithImpl<$Res, _$SearchSettingsImpl>
+    implements _$$SearchSettingsImplCopyWith<$Res> {
+  __$$SearchSettingsImplCopyWithImpl(
+      _$SearchSettingsImpl _value, $Res Function(_$SearchSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -133,7 +133,7 @@ class __$$_SearchSettingsCopyWithImpl<$Res>
     Object? continuousCameraRead = null,
     Object? continuousInput = null,
   }) {
-    return _then(_$_SearchSettings(
+    return _then(_$SearchSettingsImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -165,8 +165,8 @@ class __$$_SearchSettingsCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: searchSettingsTypeId)
-class _$_SearchSettings implements _SearchSettings {
-  const _$_SearchSettings(
+class _$SearchSettingsImpl implements _SearchSettings {
+  const _$SearchSettingsImpl(
       {@HiveField(0) this.type = SearchType.jan,
       @HiveField(1) this.usedSubCondition = UsedSubCondition.all,
       @HiveField(2) this.useFba = true,
@@ -205,10 +205,10 @@ class _$_SearchSettings implements _SearchSettings {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchSettings &&
+            other is _$SearchSettingsImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.usedSubCondition, usedSubCondition) ||
                 other.usedSubCondition == usedSubCondition) &&
@@ -228,8 +228,9 @@ class _$_SearchSettings implements _SearchSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchSettingsCopyWith<_$_SearchSettings> get copyWith =>
-      __$$_SearchSettingsCopyWithImpl<_$_SearchSettings>(this, _$identity);
+  _$$SearchSettingsImplCopyWith<_$SearchSettingsImpl> get copyWith =>
+      __$$SearchSettingsImplCopyWithImpl<_$SearchSettingsImpl>(
+          this, _$identity);
 }
 
 abstract class _SearchSettings implements SearchSettings {
@@ -240,7 +241,7 @@ abstract class _SearchSettings implements SearchSettings {
           @HiveField(3) final bool priorFba,
           @HiveField(4, defaultValue: true) final bool continuousCameraRead,
           @HiveField(5, defaultValue: false) final bool continuousInput}) =
-      _$_SearchSettings;
+      _$SearchSettingsImpl;
 
   @override
   @HiveField(0)
@@ -262,6 +263,6 @@ abstract class _SearchSettings implements SearchSettings {
   bool get continuousInput;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchSettingsCopyWith<_$_SearchSettings> get copyWith =>
+  _$$SearchSettingsImplCopyWith<_$SearchSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

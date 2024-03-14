@@ -8,17 +8,17 @@ part of 'asin_data.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
+class AsinDataImplAdapter extends TypeAdapter<_$AsinDataImpl> {
   @override
   final int typeId = 2;
 
   @override
-  _$_AsinData read(BinaryReader reader) {
+  _$AsinDataImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_AsinData(
+    return _$AsinDataImpl(
       jan: fields[0] as String,
       asin: fields[1] as String,
       listPrice: fields[2] as int,
@@ -44,7 +44,7 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_AsinData obj) {
+  void write(BinaryWriter writer, _$AsinDataImpl obj) {
     writer
       ..writeByte(18)
       ..writeByte(0)
@@ -91,29 +91,30 @@ class AsinDataAdapter extends TypeAdapter<_$_AsinData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AsinDataAdapter &&
+      other is AsinDataImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class ListingRestrictionsAdapter extends TypeAdapter<_$_ListingRestrictions> {
+class ListingRestrictionsImplAdapter
+    extends TypeAdapter<_$ListingRestrictionsImpl> {
   @override
   final int typeId = 6;
 
   @override
-  _$_ListingRestrictions read(BinaryReader reader) {
+  _$ListingRestrictionsImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_ListingRestrictions(
+    return _$ListingRestrictionsImpl(
       newItem: fields[0] as bool,
       used: fields[1] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, _$_ListingRestrictions obj) {
+  void write(BinaryWriter writer, _$ListingRestrictionsImpl obj) {
     writer
       ..writeByte(2)
       ..writeByte(0)
@@ -128,7 +129,7 @@ class ListingRestrictionsAdapter extends TypeAdapter<_$_ListingRestrictions> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ListingRestrictionsAdapter &&
+      other is ListingRestrictionsImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -137,7 +138,8 @@ class ListingRestrictionsAdapter extends TypeAdapter<_$_ListingRestrictions> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AsinData _$$_AsinDataFromJson(Map<String, dynamic> json) => _$_AsinData(
+_$AsinDataImpl _$$AsinDataImplFromJson(Map<String, dynamic> json) =>
+    _$AsinDataImpl(
       jan: json['jan'] as String? ?? "",
       asin: json['asin'] as String,
       listPrice: json['list_price'] as int? ?? 0,
@@ -167,7 +169,7 @@ _$_AsinData _$$_AsinDataFromJson(Map<String, dynamic> json) => _$_AsinData(
           : const HazmatTypeConverter().fromJson(json['hazmat_type'] as String),
     );
 
-Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
+Map<String, dynamic> _$$AsinDataImplToJson(_$AsinDataImpl instance) =>
     <String, dynamic>{
       'jan': instance.jan,
       'asin': instance.asin,
@@ -188,15 +190,15 @@ Map<String, dynamic> _$$_AsinDataToJson(_$_AsinData instance) =>
       'hazmat_type': const HazmatTypeConverter().toJson(instance.hazmatType),
     };
 
-_$_ListingRestrictions _$$_ListingRestrictionsFromJson(
+_$ListingRestrictionsImpl _$$ListingRestrictionsImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ListingRestrictions(
+    _$ListingRestrictionsImpl(
       newItem: json['new'] as bool? ?? false,
       used: json['used'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_ListingRestrictionsToJson(
-        _$_ListingRestrictions instance) =>
+Map<String, dynamic> _$$ListingRestrictionsImplToJson(
+        _$ListingRestrictionsImpl instance) =>
     <String, dynamic>{
       'new': instance.newItem,
       'used': instance.used,

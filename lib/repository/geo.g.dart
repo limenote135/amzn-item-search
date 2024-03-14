@@ -8,13 +8,13 @@ part of 'geo.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GeoResponse _$$_GeoResponseFromJson(Map<String, dynamic> json) =>
-    _$_GeoResponse(
+_$GeoResponseImpl _$$GeoResponseImplFromJson(Map<String, dynamic> json) =>
+    _$GeoResponseImpl(
       code: json['code'] as String,
       jan: json['jan'] as String? ?? "",
     );
 
-Map<String, dynamic> _$$_GeoResponseToJson(_$_GeoResponse instance) =>
+Map<String, dynamic> _$$GeoResponseImplToJson(_$GeoResponseImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'jan': instance.jan,

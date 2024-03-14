@@ -12,7 +12,7 @@ part of 'keepa_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$KeepaSettings {
@@ -107,11 +107,11 @@ class _$KeepaSettingsCopyWithImpl<$Res, $Val extends KeepaSettings>
 }
 
 /// @nodoc
-abstract class _$$_KeepaSettingsCopyWith<$Res>
+abstract class _$$KeepaSettingsImplCopyWith<$Res>
     implements $KeepaSettingsCopyWith<$Res> {
-  factory _$$_KeepaSettingsCopyWith(
-          _$_KeepaSettings value, $Res Function(_$_KeepaSettings) then) =
-      __$$_KeepaSettingsCopyWithImpl<$Res>;
+  factory _$$KeepaSettingsImplCopyWith(
+          _$KeepaSettingsImpl value, $Res Function(_$KeepaSettingsImpl) then) =
+      __$$KeepaSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -125,11 +125,11 @@ abstract class _$$_KeepaSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_KeepaSettingsCopyWithImpl<$Res>
-    extends _$KeepaSettingsCopyWithImpl<$Res, _$_KeepaSettings>
-    implements _$$_KeepaSettingsCopyWith<$Res> {
-  __$$_KeepaSettingsCopyWithImpl(
-      _$_KeepaSettings _value, $Res Function(_$_KeepaSettings) _then)
+class __$$KeepaSettingsImplCopyWithImpl<$Res>
+    extends _$KeepaSettingsCopyWithImpl<$Res, _$KeepaSettingsImpl>
+    implements _$$KeepaSettingsImplCopyWith<$Res> {
+  __$$KeepaSettingsImplCopyWithImpl(
+      _$KeepaSettingsImpl _value, $Res Function(_$KeepaSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -143,7 +143,7 @@ class __$$_KeepaSettingsCopyWithImpl<$Res>
     Object? showBuyBox = null,
     Object? showFba = null,
   }) {
-    return _then(_$_KeepaSettings(
+    return _then(_$KeepaSettingsImpl(
       showNew: null == showNew
           ? _value.showNew
           : showNew // ignore: cast_nullable_to_non_nullable
@@ -179,8 +179,8 @@ class __$$_KeepaSettingsCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: keepaSettingsTypeId)
-class _$_KeepaSettings implements _KeepaSettings {
-  const _$_KeepaSettings(
+class _$KeepaSettingsImpl implements _KeepaSettings {
+  const _$KeepaSettingsImpl(
       {@HiveField(0, defaultValue: true) this.showNew = true,
       @HiveField(1, defaultValue: true) this.showUsed = true,
       @HiveField(2, defaultValue: true) this.showAmazon = true,
@@ -225,10 +225,10 @@ class _$_KeepaSettings implements _KeepaSettings {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_KeepaSettings &&
+            other is _$KeepaSettingsImpl &&
             (identical(other.showNew, showNew) || other.showNew == showNew) &&
             (identical(other.showUsed, showUsed) ||
                 other.showUsed == showUsed) &&
@@ -249,8 +249,8 @@ class _$_KeepaSettings implements _KeepaSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_KeepaSettingsCopyWith<_$_KeepaSettings> get copyWith =>
-      __$$_KeepaSettingsCopyWithImpl<_$_KeepaSettings>(this, _$identity);
+  _$$KeepaSettingsImplCopyWith<_$KeepaSettingsImpl> get copyWith =>
+      __$$KeepaSettingsImplCopyWithImpl<_$KeepaSettingsImpl>(this, _$identity);
 }
 
 abstract class _KeepaSettings implements KeepaSettings {
@@ -263,7 +263,7 @@ abstract class _KeepaSettings implements KeepaSettings {
           @HiveField(4, defaultValue: "") final String extraParam,
           @HiveField(5, defaultValue: true) final bool showBuyBox,
           @HiveField(6, defaultValue: false) final bool showFba}) =
-      _$_KeepaSettings;
+      _$KeepaSettingsImpl;
 
   @override
   @HiveField(0, defaultValue: true)
@@ -288,6 +288,6 @@ abstract class _KeepaSettings implements KeepaSettings {
   bool get showFba;
   @override
   @JsonKey(ignore: true)
-  _$$_KeepaSettingsCopyWith<_$_KeepaSettings> get copyWith =>
+  _$$KeepaSettingsImplCopyWith<_$KeepaSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

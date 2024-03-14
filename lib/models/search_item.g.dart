@@ -8,17 +8,17 @@ part of 'search_item.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SearchItemAdapter extends TypeAdapter<_$_SearchItem> {
+class SearchItemImplAdapter extends TypeAdapter<_$SearchItemImpl> {
   @override
   final int typeId = 1;
 
   @override
-  _$_SearchItem read(BinaryReader reader) {
+  _$SearchItemImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_SearchItem(
+    return _$SearchItemImpl(
       searchDate: fields[0] as String,
       jan: fields[1] as String,
       asins: (fields[2] as List).cast<AsinData>(),
@@ -26,7 +26,7 @@ class SearchItemAdapter extends TypeAdapter<_$_SearchItem> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_SearchItem obj) {
+  void write(BinaryWriter writer, _$SearchItemImpl obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -43,7 +43,7 @@ class SearchItemAdapter extends TypeAdapter<_$_SearchItem> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SearchItemAdapter &&
+      other is SearchItemImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

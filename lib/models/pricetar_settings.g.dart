@@ -8,17 +8,17 @@ part of 'pricetar_settings.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PricetarSettingsAdapter extends TypeAdapter<_$_PricetarSettings> {
+class PricetarSettingsImplAdapter extends TypeAdapter<_$PricetarSettingsImpl> {
   @override
   final int typeId = 58;
 
   @override
-  _$_PricetarSettings read(BinaryReader reader) {
+  _$PricetarSettingsImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_PricetarSettings(
+    return _$PricetarSettingsImpl(
       newRule: fields[0] as PricetarRule,
       usedRule: fields[1] as PricetarRule,
       lowestStopperType: fields[2] as RevisePriceStopper,
@@ -29,7 +29,7 @@ class PricetarSettingsAdapter extends TypeAdapter<_$_PricetarSettings> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_PricetarSettings obj) {
+  void write(BinaryWriter writer, _$PricetarSettingsImpl obj) {
     writer
       ..writeByte(6)
       ..writeByte(0)
@@ -52,7 +52,7 @@ class PricetarSettingsAdapter extends TypeAdapter<_$_PricetarSettings> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PricetarSettingsAdapter &&
+      other is PricetarSettingsImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

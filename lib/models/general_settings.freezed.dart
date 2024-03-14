@@ -12,7 +12,7 @@ part of 'general_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$GeneralSettings {
@@ -337,11 +337,11 @@ class _$GeneralSettingsCopyWithImpl<$Res, $Val extends GeneralSettings>
 }
 
 /// @nodoc
-abstract class _$$_GeneralSettingsCopyWith<$Res>
+abstract class _$$GeneralSettingsImplCopyWith<$Res>
     implements $GeneralSettingsCopyWith<$Res> {
-  factory _$$_GeneralSettingsCopyWith(
-          _$_GeneralSettings value, $Res Function(_$_GeneralSettings) then) =
-      __$$_GeneralSettingsCopyWithImpl<$Res>;
+  factory _$$GeneralSettingsImplCopyWith(_$GeneralSettingsImpl value,
+          $Res Function(_$GeneralSettingsImpl) then) =
+      __$$GeneralSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -396,11 +396,11 @@ abstract class _$$_GeneralSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_GeneralSettingsCopyWithImpl<$Res>
-    extends _$GeneralSettingsCopyWithImpl<$Res, _$_GeneralSettings>
-    implements _$$_GeneralSettingsCopyWith<$Res> {
-  __$$_GeneralSettingsCopyWithImpl(
-      _$_GeneralSettings _value, $Res Function(_$_GeneralSettings) _then)
+class __$$GeneralSettingsImplCopyWithImpl<$Res>
+    extends _$GeneralSettingsCopyWithImpl<$Res, _$GeneralSettingsImpl>
+    implements _$$GeneralSettingsImplCopyWith<$Res> {
+  __$$GeneralSettingsImplCopyWithImpl(
+      _$GeneralSettingsImpl _value, $Res Function(_$GeneralSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -436,7 +436,7 @@ class __$$_GeneralSettingsCopyWithImpl<$Res>
     Object? sellerSketSettings = null,
     Object? standardButtons = null,
   }) {
-    return _then(_$_GeneralSettings(
+    return _then(_$GeneralSettingsImpl(
       isDarkMode: null == isDarkMode
           ? _value.isDarkMode
           : isDarkMode // ignore: cast_nullable_to_non_nullable
@@ -560,8 +560,8 @@ class __$$_GeneralSettingsCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: generalSettingsTypeId)
-class _$_GeneralSettings implements _GeneralSettings {
-  const _$_GeneralSettings(
+class _$GeneralSettingsImpl implements _GeneralSettings {
+  const _$GeneralSettingsImpl(
       {@HiveField(0) this.isDarkMode = false,
       @HiveField(1) this.enableTargetProfit = false,
       @HiveField(2) this.targetProfitValue = 10,
@@ -815,10 +815,10 @@ class _$_GeneralSettings implements _GeneralSettings {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GeneralSettings &&
+            other is _$GeneralSettingsImpl &&
             (identical(other.isDarkMode, isDarkMode) ||
                 other.isDarkMode == isDarkMode) &&
             (identical(other.enableTargetProfit, enableTargetProfit) ||
@@ -914,8 +914,9 @@ class _$_GeneralSettings implements _GeneralSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GeneralSettingsCopyWith<_$_GeneralSettings> get copyWith =>
-      __$$_GeneralSettingsCopyWithImpl<_$_GeneralSettings>(this, _$identity);
+  _$$GeneralSettingsImplCopyWith<_$GeneralSettingsImpl> get copyWith =>
+      __$$GeneralSettingsImplCopyWithImpl<_$GeneralSettingsImpl>(
+          this, _$identity);
 }
 
 abstract class _GeneralSettings implements GeneralSettings {
@@ -960,7 +961,7 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(27, defaultValue: defaultSellerSketSettings)
       final SellerSketSettings sellerSketSettings,
       @HiveField(28, defaultValue: defaultStandardButtons)
-      final Map<String, bool> standardButtons}) = _$_GeneralSettings;
+      final Map<String, bool> standardButtons}) = _$GeneralSettingsImpl;
 
   @override // ダークモード
   @HiveField(0)
@@ -1051,7 +1052,7 @@ abstract class _GeneralSettings implements GeneralSettings {
   Map<String, bool> get standardButtons;
   @override
   @JsonKey(ignore: true)
-  _$$_GeneralSettingsCopyWith<_$_GeneralSettings> get copyWith =>
+  _$$GeneralSettingsImplCopyWith<_$GeneralSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1106,22 +1107,22 @@ class _$ReadAloudPatternCopyWithImpl<$Res, $Val extends ReadAloudPattern>
 }
 
 /// @nodoc
-abstract class _$$_ReadAloudPatternCopyWith<$Res>
+abstract class _$$ReadAloudPatternImplCopyWith<$Res>
     implements $ReadAloudPatternCopyWith<$Res> {
-  factory _$$_ReadAloudPatternCopyWith(
-          _$_ReadAloudPattern value, $Res Function(_$_ReadAloudPattern) then) =
-      __$$_ReadAloudPatternCopyWithImpl<$Res>;
+  factory _$$ReadAloudPatternImplCopyWith(_$ReadAloudPatternImpl value,
+          $Res Function(_$ReadAloudPatternImpl) then) =
+      __$$ReadAloudPatternImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@HiveField(0) String title, @HiveField(1) String pattern});
 }
 
 /// @nodoc
-class __$$_ReadAloudPatternCopyWithImpl<$Res>
-    extends _$ReadAloudPatternCopyWithImpl<$Res, _$_ReadAloudPattern>
-    implements _$$_ReadAloudPatternCopyWith<$Res> {
-  __$$_ReadAloudPatternCopyWithImpl(
-      _$_ReadAloudPattern _value, $Res Function(_$_ReadAloudPattern) _then)
+class __$$ReadAloudPatternImplCopyWithImpl<$Res>
+    extends _$ReadAloudPatternCopyWithImpl<$Res, _$ReadAloudPatternImpl>
+    implements _$$ReadAloudPatternImplCopyWith<$Res> {
+  __$$ReadAloudPatternImplCopyWithImpl(_$ReadAloudPatternImpl _value,
+      $Res Function(_$ReadAloudPatternImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1130,7 +1131,7 @@ class __$$_ReadAloudPatternCopyWithImpl<$Res>
     Object? title = null,
     Object? pattern = null,
   }) {
-    return _then(_$_ReadAloudPattern(
+    return _then(_$ReadAloudPatternImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -1146,8 +1147,8 @@ class __$$_ReadAloudPatternCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: readAloudPatternTypeId)
-class _$_ReadAloudPattern implements _ReadAloudPattern {
-  const _$_ReadAloudPattern(
+class _$ReadAloudPatternImpl implements _ReadAloudPattern {
+  const _$ReadAloudPatternImpl(
       {@HiveField(0) required this.title, @HiveField(1) required this.pattern});
 
   @override
@@ -1163,10 +1164,10 @@ class _$_ReadAloudPattern implements _ReadAloudPattern {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReadAloudPattern &&
+            other is _$ReadAloudPatternImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.pattern, pattern) || other.pattern == pattern));
   }
@@ -1177,14 +1178,15 @@ class _$_ReadAloudPattern implements _ReadAloudPattern {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReadAloudPatternCopyWith<_$_ReadAloudPattern> get copyWith =>
-      __$$_ReadAloudPatternCopyWithImpl<_$_ReadAloudPattern>(this, _$identity);
+  _$$ReadAloudPatternImplCopyWith<_$ReadAloudPatternImpl> get copyWith =>
+      __$$ReadAloudPatternImplCopyWithImpl<_$ReadAloudPatternImpl>(
+          this, _$identity);
 }
 
 abstract class _ReadAloudPattern implements ReadAloudPattern {
   const factory _ReadAloudPattern(
       {@HiveField(0) required final String title,
-      @HiveField(1) required final String pattern}) = _$_ReadAloudPattern;
+      @HiveField(1) required final String pattern}) = _$ReadAloudPatternImpl;
 
   @override
   @HiveField(0)
@@ -1194,7 +1196,7 @@ abstract class _ReadAloudPattern implements ReadAloudPattern {
   String get pattern;
   @override
   @JsonKey(ignore: true)
-  _$$_ReadAloudPatternCopyWith<_$_ReadAloudPattern> get copyWith =>
+  _$$ReadAloudPatternImplCopyWith<_$ReadAloudPatternImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1267,11 +1269,11 @@ class _$CustomButtonDetailCopyWithImpl<$Res, $Val extends CustomButtonDetail>
 }
 
 /// @nodoc
-abstract class _$$_CustomButtonDetailCopyWith<$Res>
+abstract class _$$CustomButtonDetailImplCopyWith<$Res>
     implements $CustomButtonDetailCopyWith<$Res> {
-  factory _$$_CustomButtonDetailCopyWith(_$_CustomButtonDetail value,
-          $Res Function(_$_CustomButtonDetail) then) =
-      __$$_CustomButtonDetailCopyWithImpl<$Res>;
+  factory _$$CustomButtonDetailImplCopyWith(_$CustomButtonDetailImpl value,
+          $Res Function(_$CustomButtonDetailImpl) then) =
+      __$$CustomButtonDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1282,11 +1284,11 @@ abstract class _$$_CustomButtonDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomButtonDetailCopyWithImpl<$Res>
-    extends _$CustomButtonDetailCopyWithImpl<$Res, _$_CustomButtonDetail>
-    implements _$$_CustomButtonDetailCopyWith<$Res> {
-  __$$_CustomButtonDetailCopyWithImpl(
-      _$_CustomButtonDetail _value, $Res Function(_$_CustomButtonDetail) _then)
+class __$$CustomButtonDetailImplCopyWithImpl<$Res>
+    extends _$CustomButtonDetailCopyWithImpl<$Res, _$CustomButtonDetailImpl>
+    implements _$$CustomButtonDetailImplCopyWith<$Res> {
+  __$$CustomButtonDetailImplCopyWithImpl(_$CustomButtonDetailImpl _value,
+      $Res Function(_$CustomButtonDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1297,7 +1299,7 @@ class __$$_CustomButtonDetailCopyWithImpl<$Res>
     Object? pattern = null,
     Object? id = null,
   }) {
-    return _then(_$_CustomButtonDetail(
+    return _then(_$CustomButtonDetailImpl(
       enable: null == enable
           ? _value.enable
           : enable // ignore: cast_nullable_to_non_nullable
@@ -1321,8 +1323,8 @@ class __$$_CustomButtonDetailCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: customButtonDetailTypeId)
-class _$_CustomButtonDetail implements _CustomButtonDetail {
-  const _$_CustomButtonDetail(
+class _$CustomButtonDetailImpl implements _CustomButtonDetail {
+  const _$CustomButtonDetailImpl(
       {@HiveField(0) required this.enable,
       @HiveField(1) required this.title,
       @HiveField(2) required this.pattern,
@@ -1347,10 +1349,10 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomButtonDetail &&
+            other is _$CustomButtonDetailImpl &&
             (identical(other.enable, enable) || other.enable == enable) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.pattern, pattern) || other.pattern == pattern) &&
@@ -1363,8 +1365,8 @@ class _$_CustomButtonDetail implements _CustomButtonDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomButtonDetailCopyWith<_$_CustomButtonDetail> get copyWith =>
-      __$$_CustomButtonDetailCopyWithImpl<_$_CustomButtonDetail>(
+  _$$CustomButtonDetailImplCopyWith<_$CustomButtonDetailImpl> get copyWith =>
+      __$$CustomButtonDetailImplCopyWithImpl<_$CustomButtonDetailImpl>(
           this, _$identity);
 }
 
@@ -1374,7 +1376,7 @@ abstract class _CustomButtonDetail implements CustomButtonDetail {
           @HiveField(1) required final String title,
           @HiveField(2) required final String pattern,
           @HiveField(3, defaultValue: "") required final String id}) =
-      _$_CustomButtonDetail;
+      _$CustomButtonDetailImpl;
 
   @override
   @HiveField(0)
@@ -1390,7 +1392,7 @@ abstract class _CustomButtonDetail implements CustomButtonDetail {
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomButtonDetailCopyWith<_$_CustomButtonDetail> get copyWith =>
+  _$$CustomButtonDetailImplCopyWith<_$CustomButtonDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1462,11 +1464,11 @@ class _$AlertConditionSetCopyWithImpl<$Res, $Val extends AlertConditionSet>
 }
 
 /// @nodoc
-abstract class _$$_AlertConditionSetCopyWith<$Res>
+abstract class _$$AlertConditionSetImplCopyWith<$Res>
     implements $AlertConditionSetCopyWith<$Res> {
-  factory _$$_AlertConditionSetCopyWith(_$_AlertConditionSet value,
-          $Res Function(_$_AlertConditionSet) then) =
-      __$$_AlertConditionSetCopyWithImpl<$Res>;
+  factory _$$AlertConditionSetImplCopyWith(_$AlertConditionSetImpl value,
+          $Res Function(_$AlertConditionSetImpl) then) =
+      __$$AlertConditionSetImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1476,11 +1478,11 @@ abstract class _$$_AlertConditionSetCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AlertConditionSetCopyWithImpl<$Res>
-    extends _$AlertConditionSetCopyWithImpl<$Res, _$_AlertConditionSet>
-    implements _$$_AlertConditionSetCopyWith<$Res> {
-  __$$_AlertConditionSetCopyWithImpl(
-      _$_AlertConditionSet _value, $Res Function(_$_AlertConditionSet) _then)
+class __$$AlertConditionSetImplCopyWithImpl<$Res>
+    extends _$AlertConditionSetCopyWithImpl<$Res, _$AlertConditionSetImpl>
+    implements _$$AlertConditionSetImplCopyWith<$Res> {
+  __$$AlertConditionSetImplCopyWithImpl(_$AlertConditionSetImpl _value,
+      $Res Function(_$AlertConditionSetImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1490,7 +1492,7 @@ class __$$_AlertConditionSetCopyWithImpl<$Res>
     Object? title = null,
     Object? conditions = null,
   }) {
-    return _then(_$_AlertConditionSet(
+    return _then(_$AlertConditionSetImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1510,8 +1512,8 @@ class __$$_AlertConditionSetCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 @HiveType(typeId: alertConditionSetTypeId)
-class _$_AlertConditionSet implements _AlertConditionSet {
-  const _$_AlertConditionSet(
+class _$AlertConditionSetImpl implements _AlertConditionSet {
+  const _$AlertConditionSetImpl(
       {@HiveField(0) required this.id,
       @HiveField(1) @JsonKey(name: "t") required this.title,
       @HiveField(2)
@@ -1519,8 +1521,8 @@ class _$_AlertConditionSet implements _AlertConditionSet {
       final List<AlertCondition> conditions = const <AlertCondition>[]})
       : _conditions = conditions;
 
-  factory _$_AlertConditionSet.fromJson(Map<String, dynamic> json) =>
-      _$$_AlertConditionSetFromJson(json);
+  factory _$AlertConditionSetImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AlertConditionSetImplFromJson(json);
 
   @override
   @HiveField(0)
@@ -1545,10 +1547,10 @@ class _$_AlertConditionSet implements _AlertConditionSet {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AlertConditionSet &&
+            other is _$AlertConditionSetImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             const DeepCollectionEquality()
@@ -1563,13 +1565,13 @@ class _$_AlertConditionSet implements _AlertConditionSet {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AlertConditionSetCopyWith<_$_AlertConditionSet> get copyWith =>
-      __$$_AlertConditionSetCopyWithImpl<_$_AlertConditionSet>(
+  _$$AlertConditionSetImplCopyWith<_$AlertConditionSetImpl> get copyWith =>
+      __$$AlertConditionSetImplCopyWithImpl<_$AlertConditionSetImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AlertConditionSetToJson(
+    return _$$AlertConditionSetImplToJson(
       this,
     );
   }
@@ -1581,10 +1583,10 @@ abstract class _AlertConditionSet implements AlertConditionSet {
       @HiveField(1) @JsonKey(name: "t") required final String title,
       @HiveField(2)
       @JsonKey(name: "c")
-      final List<AlertCondition> conditions}) = _$_AlertConditionSet;
+      final List<AlertCondition> conditions}) = _$AlertConditionSetImpl;
 
   factory _AlertConditionSet.fromJson(Map<String, dynamic> json) =
-      _$_AlertConditionSet.fromJson;
+      _$AlertConditionSetImpl.fromJson;
 
   @override
   @HiveField(0)
@@ -1599,7 +1601,7 @@ abstract class _AlertConditionSet implements AlertConditionSet {
   List<AlertCondition> get conditions;
   @override
   @JsonKey(ignore: true)
-  _$$_AlertConditionSetCopyWith<_$_AlertConditionSet> get copyWith =>
+  _$$AlertConditionSetImplCopyWith<_$AlertConditionSetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1659,22 +1661,22 @@ class _$ShortcutDetailCopyWithImpl<$Res, $Val extends ShortcutDetail>
 }
 
 /// @nodoc
-abstract class _$$_ShortcutDetailCopyWith<$Res>
+abstract class _$$ShortcutDetailImplCopyWith<$Res>
     implements $ShortcutDetailCopyWith<$Res> {
-  factory _$$_ShortcutDetailCopyWith(
-          _$_ShortcutDetail value, $Res Function(_$_ShortcutDetail) then) =
-      __$$_ShortcutDetailCopyWithImpl<$Res>;
+  factory _$$ShortcutDetailImplCopyWith(_$ShortcutDetailImpl value,
+          $Res Function(_$ShortcutDetailImpl) then) =
+      __$$ShortcutDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@HiveField(0) ShortcutType type, @HiveField(1) String param});
 }
 
 /// @nodoc
-class __$$_ShortcutDetailCopyWithImpl<$Res>
-    extends _$ShortcutDetailCopyWithImpl<$Res, _$_ShortcutDetail>
-    implements _$$_ShortcutDetailCopyWith<$Res> {
-  __$$_ShortcutDetailCopyWithImpl(
-      _$_ShortcutDetail _value, $Res Function(_$_ShortcutDetail) _then)
+class __$$ShortcutDetailImplCopyWithImpl<$Res>
+    extends _$ShortcutDetailCopyWithImpl<$Res, _$ShortcutDetailImpl>
+    implements _$$ShortcutDetailImplCopyWith<$Res> {
+  __$$ShortcutDetailImplCopyWithImpl(
+      _$ShortcutDetailImpl _value, $Res Function(_$ShortcutDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1683,7 +1685,7 @@ class __$$_ShortcutDetailCopyWithImpl<$Res>
     Object? type = null,
     Object? param = null,
   }) {
-    return _then(_$_ShortcutDetail(
+    return _then(_$ShortcutDetailImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -1699,12 +1701,12 @@ class __$$_ShortcutDetailCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 @HiveType(typeId: shortcutDetailTypeId)
-class _$_ShortcutDetail implements _ShortcutDetail {
-  const _$_ShortcutDetail(
+class _$ShortcutDetailImpl implements _ShortcutDetail {
+  const _$ShortcutDetailImpl(
       {@HiveField(0) required this.type, @HiveField(1) this.param = ""});
 
-  factory _$_ShortcutDetail.fromJson(Map<String, dynamic> json) =>
-      _$$_ShortcutDetailFromJson(json);
+  factory _$ShortcutDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ShortcutDetailImplFromJson(json);
 
   @override
   @HiveField(0)
@@ -1720,10 +1722,10 @@ class _$_ShortcutDetail implements _ShortcutDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ShortcutDetail &&
+            other is _$ShortcutDetailImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.param, param) || other.param == param));
   }
@@ -1735,12 +1737,13 @@ class _$_ShortcutDetail implements _ShortcutDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShortcutDetailCopyWith<_$_ShortcutDetail> get copyWith =>
-      __$$_ShortcutDetailCopyWithImpl<_$_ShortcutDetail>(this, _$identity);
+  _$$ShortcutDetailImplCopyWith<_$ShortcutDetailImpl> get copyWith =>
+      __$$ShortcutDetailImplCopyWithImpl<_$ShortcutDetailImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ShortcutDetailToJson(
+    return _$$ShortcutDetailImplToJson(
       this,
     );
   }
@@ -1749,10 +1752,10 @@ class _$_ShortcutDetail implements _ShortcutDetail {
 abstract class _ShortcutDetail implements ShortcutDetail {
   const factory _ShortcutDetail(
       {@HiveField(0) required final ShortcutType type,
-      @HiveField(1) final String param}) = _$_ShortcutDetail;
+      @HiveField(1) final String param}) = _$ShortcutDetailImpl;
 
   factory _ShortcutDetail.fromJson(Map<String, dynamic> json) =
-      _$_ShortcutDetail.fromJson;
+      _$ShortcutDetailImpl.fromJson;
 
   @override
   @HiveField(0)
@@ -1762,6 +1765,6 @@ abstract class _ShortcutDetail implements ShortcutDetail {
   String get param;
   @override
   @JsonKey(ignore: true)
-  _$$_ShortcutDetailCopyWith<_$_ShortcutDetail> get copyWith =>
+  _$$ShortcutDetailImplCopyWith<_$ShortcutDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

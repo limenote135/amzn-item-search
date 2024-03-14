@@ -8,24 +8,24 @@ part of 'fee_expression.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class FeeExpressionAdapter extends TypeAdapter<_$_FeeExpression> {
+class FeeExpressionImplAdapter extends TypeAdapter<_$FeeExpressionImpl> {
   @override
   final int typeId = 7;
 
   @override
-  _$_FeeExpression read(BinaryReader reader) {
+  _$FeeExpressionImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_FeeExpression(
+    return _$FeeExpressionImpl(
       moreThan: fields[0] as int,
       exp: fields[1] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, _$_FeeExpression obj) {
+  void write(BinaryWriter writer, _$FeeExpressionImpl obj) {
     writer
       ..writeByte(2)
       ..writeByte(0)
@@ -40,7 +40,7 @@ class FeeExpressionAdapter extends TypeAdapter<_$_FeeExpression> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FeeExpressionAdapter &&
+      other is FeeExpressionImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -49,13 +49,13 @@ class FeeExpressionAdapter extends TypeAdapter<_$_FeeExpression> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FeeExpression _$$_FeeExpressionFromJson(Map<String, dynamic> json) =>
-    _$_FeeExpression(
+_$FeeExpressionImpl _$$FeeExpressionImplFromJson(Map<String, dynamic> json) =>
+    _$FeeExpressionImpl(
       moreThan: json['more_than'] as int? ?? 0,
       exp: json['exp'] as String? ?? "",
     );
 
-Map<String, dynamic> _$$_FeeExpressionToJson(_$_FeeExpression instance) =>
+Map<String, dynamic> _$$FeeExpressionImplToJson(_$FeeExpressionImpl instance) =>
     <String, dynamic>{
       'more_than': instance.moreThan,
       'exp': instance.exp,
