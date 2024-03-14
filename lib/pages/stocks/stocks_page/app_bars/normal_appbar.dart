@@ -48,7 +48,7 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
               value: _StockPageActions.upload,
               child: ListTile(
                 leading: Icon(Icons.file_upload_outlined),
-                title: Text("商品リストを転送"),
+                title: Text("商品リストをCSVで転送"),
               ),
             ),
             PopupMenuItem(
