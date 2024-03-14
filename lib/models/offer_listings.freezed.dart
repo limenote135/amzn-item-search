@@ -12,7 +12,7 @@ part of 'offer_listings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OfferListingsParams {
@@ -107,11 +107,11 @@ class _$OfferListingsParamsCopyWithImpl<$Res, $Val extends OfferListingsParams>
 }
 
 /// @nodoc
-abstract class _$$_OfferListingsParamsCopyWith<$Res>
+abstract class _$$OfferListingsParamsImplCopyWith<$Res>
     implements $OfferListingsParamsCopyWith<$Res> {
-  factory _$$_OfferListingsParamsCopyWith(_$_OfferListingsParams value,
-          $Res Function(_$_OfferListingsParams) then) =
-      __$$_OfferListingsParamsCopyWithImpl<$Res>;
+  factory _$$OfferListingsParamsImplCopyWith(_$OfferListingsParamsImpl value,
+          $Res Function(_$OfferListingsParamsImpl) then) =
+      __$$OfferListingsParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -126,11 +126,11 @@ abstract class _$$_OfferListingsParamsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OfferListingsParamsCopyWithImpl<$Res>
-    extends _$OfferListingsParamsCopyWithImpl<$Res, _$_OfferListingsParams>
-    implements _$$_OfferListingsParamsCopyWith<$Res> {
-  __$$_OfferListingsParamsCopyWithImpl(_$_OfferListingsParams _value,
-      $Res Function(_$_OfferListingsParams) _then)
+class __$$OfferListingsParamsImplCopyWithImpl<$Res>
+    extends _$OfferListingsParamsCopyWithImpl<$Res, _$OfferListingsParamsImpl>
+    implements _$$OfferListingsParamsImplCopyWith<$Res> {
+  __$$OfferListingsParamsImplCopyWithImpl(_$OfferListingsParamsImpl _value,
+      $Res Function(_$OfferListingsParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -145,7 +145,7 @@ class __$$_OfferListingsParamsCopyWithImpl<$Res>
     Object? usedAcceptable = null,
     Object? page = null,
   }) {
-    return _then(_$_OfferListingsParams(
+    return _then(_$OfferListingsParamsImpl(
       asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
@@ -184,8 +184,8 @@ class __$$_OfferListingsParamsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OfferListingsParams implements _OfferListingsParams {
-  const _$_OfferListingsParams(
+class _$OfferListingsParamsImpl implements _OfferListingsParams {
+  const _$OfferListingsParamsImpl(
       {required this.asin,
       this.prime = false,
       this.newItem = false,
@@ -225,10 +225,10 @@ class _$_OfferListingsParams implements _OfferListingsParams {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OfferListingsParams &&
+            other is _$OfferListingsParamsImpl &&
             (identical(other.asin, asin) || other.asin == asin) &&
             (identical(other.prime, prime) || other.prime == prime) &&
             (identical(other.newItem, newItem) || other.newItem == newItem) &&
@@ -250,8 +250,8 @@ class _$_OfferListingsParams implements _OfferListingsParams {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OfferListingsParamsCopyWith<_$_OfferListingsParams> get copyWith =>
-      __$$_OfferListingsParamsCopyWithImpl<_$_OfferListingsParams>(
+  _$$OfferListingsParamsImplCopyWith<_$OfferListingsParamsImpl> get copyWith =>
+      __$$OfferListingsParamsImplCopyWithImpl<_$OfferListingsParamsImpl>(
           this, _$identity);
 }
 
@@ -264,7 +264,7 @@ abstract class _OfferListingsParams implements OfferListingsParams {
       final bool usedVeryGood,
       final bool usedGood,
       final bool usedAcceptable,
-      final int page}) = _$_OfferListingsParams;
+      final int page}) = _$OfferListingsParamsImpl;
 
   @override
   String get asin;
@@ -284,7 +284,7 @@ abstract class _OfferListingsParams implements OfferListingsParams {
   int get page;
   @override
   @JsonKey(ignore: true)
-  _$$_OfferListingsParamsCopyWith<_$_OfferListingsParams> get copyWith =>
+  _$$OfferListingsParamsImplCopyWith<_$OfferListingsParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -347,11 +347,11 @@ class _$OfferAtIndexParamCopyWithImpl<$Res, $Val extends OfferAtIndexParam>
 }
 
 /// @nodoc
-abstract class _$$_OfferAtIndexParamCopyWith<$Res>
+abstract class _$$OfferAtIndexParamImplCopyWith<$Res>
     implements $OfferAtIndexParamCopyWith<$Res> {
-  factory _$$_OfferAtIndexParamCopyWith(_$_OfferAtIndexParam value,
-          $Res Function(_$_OfferAtIndexParam) then) =
-      __$$_OfferAtIndexParamCopyWithImpl<$Res>;
+  factory _$$OfferAtIndexParamImplCopyWith(_$OfferAtIndexParamImpl value,
+          $Res Function(_$OfferAtIndexParamImpl) then) =
+      __$$OfferAtIndexParamImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({OfferListingsParams params, int index});
@@ -361,11 +361,11 @@ abstract class _$$_OfferAtIndexParamCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OfferAtIndexParamCopyWithImpl<$Res>
-    extends _$OfferAtIndexParamCopyWithImpl<$Res, _$_OfferAtIndexParam>
-    implements _$$_OfferAtIndexParamCopyWith<$Res> {
-  __$$_OfferAtIndexParamCopyWithImpl(
-      _$_OfferAtIndexParam _value, $Res Function(_$_OfferAtIndexParam) _then)
+class __$$OfferAtIndexParamImplCopyWithImpl<$Res>
+    extends _$OfferAtIndexParamCopyWithImpl<$Res, _$OfferAtIndexParamImpl>
+    implements _$$OfferAtIndexParamImplCopyWith<$Res> {
+  __$$OfferAtIndexParamImplCopyWithImpl(_$OfferAtIndexParamImpl _value,
+      $Res Function(_$OfferAtIndexParamImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -374,7 +374,7 @@ class __$$_OfferAtIndexParamCopyWithImpl<$Res>
     Object? params = null,
     Object? index = null,
   }) {
-    return _then(_$_OfferAtIndexParam(
+    return _then(_$OfferAtIndexParamImpl(
       params: null == params
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
@@ -389,8 +389,8 @@ class __$$_OfferAtIndexParamCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OfferAtIndexParam implements _OfferAtIndexParam {
-  const _$_OfferAtIndexParam({required this.params, required this.index});
+class _$OfferAtIndexParamImpl implements _OfferAtIndexParam {
+  const _$OfferAtIndexParamImpl({required this.params, required this.index});
 
   @override
   final OfferListingsParams params;
@@ -403,10 +403,10 @@ class _$_OfferAtIndexParam implements _OfferAtIndexParam {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OfferAtIndexParam &&
+            other is _$OfferAtIndexParamImpl &&
             (identical(other.params, params) || other.params == params) &&
             (identical(other.index, index) || other.index == index));
   }
@@ -417,15 +417,15 @@ class _$_OfferAtIndexParam implements _OfferAtIndexParam {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OfferAtIndexParamCopyWith<_$_OfferAtIndexParam> get copyWith =>
-      __$$_OfferAtIndexParamCopyWithImpl<_$_OfferAtIndexParam>(
+  _$$OfferAtIndexParamImplCopyWith<_$OfferAtIndexParamImpl> get copyWith =>
+      __$$OfferAtIndexParamImplCopyWithImpl<_$OfferAtIndexParamImpl>(
           this, _$identity);
 }
 
 abstract class _OfferAtIndexParam implements OfferAtIndexParam {
   const factory _OfferAtIndexParam(
       {required final OfferListingsParams params,
-      required final int index}) = _$_OfferAtIndexParam;
+      required final int index}) = _$OfferAtIndexParamImpl;
 
   @override
   OfferListingsParams get params;
@@ -433,7 +433,7 @@ abstract class _OfferAtIndexParam implements OfferAtIndexParam {
   int get index;
   @override
   @JsonKey(ignore: true)
-  _$$_OfferAtIndexParamCopyWith<_$_OfferAtIndexParam> get copyWith =>
+  _$$OfferAtIndexParamImplCopyWith<_$OfferAtIndexParamImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -512,11 +512,11 @@ class _$OfferListingsCopyWithImpl<$Res, $Val extends OfferListings>
 }
 
 /// @nodoc
-abstract class _$$_OfferListingsCopyWith<$Res>
+abstract class _$$OfferListingsImplCopyWith<$Res>
     implements $OfferListingsCopyWith<$Res> {
-  factory _$$_OfferListingsCopyWith(
-          _$_OfferListings value, $Res Function(_$_OfferListings) then) =
-      __$$_OfferListingsCopyWithImpl<$Res>;
+  factory _$$OfferListingsImplCopyWith(
+          _$OfferListingsImpl value, $Res Function(_$OfferListingsImpl) then) =
+      __$$OfferListingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String asin, int total, OfferItem? cart, List<OfferItem> offers});
@@ -526,11 +526,11 @@ abstract class _$$_OfferListingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OfferListingsCopyWithImpl<$Res>
-    extends _$OfferListingsCopyWithImpl<$Res, _$_OfferListings>
-    implements _$$_OfferListingsCopyWith<$Res> {
-  __$$_OfferListingsCopyWithImpl(
-      _$_OfferListings _value, $Res Function(_$_OfferListings) _then)
+class __$$OfferListingsImplCopyWithImpl<$Res>
+    extends _$OfferListingsCopyWithImpl<$Res, _$OfferListingsImpl>
+    implements _$$OfferListingsImplCopyWith<$Res> {
+  __$$OfferListingsImplCopyWithImpl(
+      _$OfferListingsImpl _value, $Res Function(_$OfferListingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -541,7 +541,7 @@ class __$$_OfferListingsCopyWithImpl<$Res>
     Object? cart = freezed,
     Object? offers = null,
   }) {
-    return _then(_$_OfferListings(
+    return _then(_$OfferListingsImpl(
       asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
@@ -564,8 +564,8 @@ class __$$_OfferListingsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OfferListings implements _OfferListings {
-  const _$_OfferListings(
+class _$OfferListingsImpl implements _OfferListings {
+  const _$OfferListingsImpl(
       {required this.asin,
       this.total = 0,
       this.cart,
@@ -594,10 +594,10 @@ class _$_OfferListings implements _OfferListings {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OfferListings &&
+            other is _$OfferListingsImpl &&
             (identical(other.asin, asin) || other.asin == asin) &&
             (identical(other.total, total) || other.total == total) &&
             (identical(other.cart, cart) || other.cart == cart) &&
@@ -611,8 +611,8 @@ class _$_OfferListings implements _OfferListings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OfferListingsCopyWith<_$_OfferListings> get copyWith =>
-      __$$_OfferListingsCopyWithImpl<_$_OfferListings>(this, _$identity);
+  _$$OfferListingsImplCopyWith<_$OfferListingsImpl> get copyWith =>
+      __$$OfferListingsImplCopyWithImpl<_$OfferListingsImpl>(this, _$identity);
 }
 
 abstract class _OfferListings implements OfferListings {
@@ -620,7 +620,7 @@ abstract class _OfferListings implements OfferListings {
       {required final String asin,
       final int total,
       final OfferItem? cart,
-      final List<OfferItem> offers}) = _$_OfferListings;
+      final List<OfferItem> offers}) = _$OfferListingsImpl;
 
   @override
   String get asin;
@@ -632,7 +632,7 @@ abstract class _OfferListings implements OfferListings {
   List<OfferItem> get offers;
   @override
   @JsonKey(ignore: true)
-  _$$_OfferListingsCopyWith<_$_OfferListings> get copyWith =>
+  _$$OfferListingsImplCopyWith<_$OfferListingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -714,10 +714,11 @@ class _$OfferItemCopyWithImpl<$Res, $Val extends OfferItem>
 }
 
 /// @nodoc
-abstract class _$$_OfferItemCopyWith<$Res> implements $OfferItemCopyWith<$Res> {
-  factory _$$_OfferItemCopyWith(
-          _$_OfferItem value, $Res Function(_$_OfferItem) then) =
-      __$$_OfferItemCopyWithImpl<$Res>;
+abstract class _$$OfferItemImplCopyWith<$Res>
+    implements $OfferItemCopyWith<$Res> {
+  factory _$$OfferItemImplCopyWith(
+          _$OfferItemImpl value, $Res Function(_$OfferItemImpl) then) =
+      __$$OfferItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -730,11 +731,11 @@ abstract class _$$_OfferItemCopyWith<$Res> implements $OfferItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_OfferItemCopyWithImpl<$Res>
-    extends _$OfferItemCopyWithImpl<$Res, _$_OfferItem>
-    implements _$$_OfferItemCopyWith<$Res> {
-  __$$_OfferItemCopyWithImpl(
-      _$_OfferItem _value, $Res Function(_$_OfferItem) _then)
+class __$$OfferItemImplCopyWithImpl<$Res>
+    extends _$OfferItemCopyWithImpl<$Res, _$OfferItemImpl>
+    implements _$$OfferItemImplCopyWith<$Res> {
+  __$$OfferItemImplCopyWithImpl(
+      _$OfferItemImpl _value, $Res Function(_$OfferItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -747,7 +748,7 @@ class __$$_OfferItemCopyWithImpl<$Res>
     Object? hasImage = null,
     Object? isFba = null,
   }) {
-    return _then(_$_OfferItem(
+    return _then(_$OfferItemImpl(
       shopName: null == shopName
           ? _value.shopName
           : shopName // ignore: cast_nullable_to_non_nullable
@@ -778,8 +779,8 @@ class __$$_OfferItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OfferItem implements _OfferItem {
-  const _$_OfferItem(
+class _$OfferItemImpl implements _OfferItem {
+  const _$OfferItemImpl(
       {required this.shopName,
       this.sellerId = "",
       required this.price,
@@ -807,10 +808,10 @@ class _$_OfferItem implements _OfferItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OfferItem &&
+            other is _$OfferItemImpl &&
             (identical(other.shopName, shopName) ||
                 other.shopName == shopName) &&
             (identical(other.sellerId, sellerId) ||
@@ -830,8 +831,8 @@ class _$_OfferItem implements _OfferItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OfferItemCopyWith<_$_OfferItem> get copyWith =>
-      __$$_OfferItemCopyWithImpl<_$_OfferItem>(this, _$identity);
+  _$$OfferItemImplCopyWith<_$OfferItemImpl> get copyWith =>
+      __$$OfferItemImplCopyWithImpl<_$OfferItemImpl>(this, _$identity);
 }
 
 abstract class _OfferItem implements OfferItem {
@@ -841,7 +842,7 @@ abstract class _OfferItem implements OfferItem {
       required final int price,
       required final String condition,
       required final bool hasImage,
-      required final bool isFba}) = _$_OfferItem;
+      required final bool isFba}) = _$OfferItemImpl;
 
   @override
   String get shopName;
@@ -857,6 +858,6 @@ abstract class _OfferItem implements OfferItem {
   bool get isFba;
   @override
   @JsonKey(ignore: true)
-  _$$_OfferItemCopyWith<_$_OfferItem> get copyWith =>
+  _$$OfferItemImplCopyWith<_$OfferItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

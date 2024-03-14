@@ -12,7 +12,7 @@ part of 'camera_read_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CameraReadData {
@@ -63,22 +63,22 @@ class _$CameraReadDataCopyWithImpl<$Res, $Val extends CameraReadData>
 }
 
 /// @nodoc
-abstract class _$$_CameraReadDataCopyWith<$Res>
+abstract class _$$CameraReadDataImplCopyWith<$Res>
     implements $CameraReadDataCopyWith<$Res> {
-  factory _$$_CameraReadDataCopyWith(
-          _$_CameraReadData value, $Res Function(_$_CameraReadData) then) =
-      __$$_CameraReadDataCopyWithImpl<$Res>;
+  factory _$$CameraReadDataImplCopyWith(_$CameraReadDataImpl value,
+          $Res Function(_$CameraReadDataImpl) then) =
+      __$$CameraReadDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String code, DateTime readAt});
 }
 
 /// @nodoc
-class __$$_CameraReadDataCopyWithImpl<$Res>
-    extends _$CameraReadDataCopyWithImpl<$Res, _$_CameraReadData>
-    implements _$$_CameraReadDataCopyWith<$Res> {
-  __$$_CameraReadDataCopyWithImpl(
-      _$_CameraReadData _value, $Res Function(_$_CameraReadData) _then)
+class __$$CameraReadDataImplCopyWithImpl<$Res>
+    extends _$CameraReadDataCopyWithImpl<$Res, _$CameraReadDataImpl>
+    implements _$$CameraReadDataImplCopyWith<$Res> {
+  __$$CameraReadDataImplCopyWithImpl(
+      _$CameraReadDataImpl _value, $Res Function(_$CameraReadDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_CameraReadDataCopyWithImpl<$Res>
     Object? code = null,
     Object? readAt = null,
   }) {
-    return _then(_$_CameraReadData(
+    return _then(_$CameraReadDataImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_CameraReadDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CameraReadData implements _CameraReadData {
-  const _$_CameraReadData({required this.code, required this.readAt});
+class _$CameraReadDataImpl implements _CameraReadData {
+  const _$CameraReadDataImpl({required this.code, required this.readAt});
 
   @override
   final String code;
@@ -116,10 +116,10 @@ class _$_CameraReadData implements _CameraReadData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CameraReadData &&
+            other is _$CameraReadDataImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.readAt, readAt) || other.readAt == readAt));
   }
@@ -130,14 +130,15 @@ class _$_CameraReadData implements _CameraReadData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CameraReadDataCopyWith<_$_CameraReadData> get copyWith =>
-      __$$_CameraReadDataCopyWithImpl<_$_CameraReadData>(this, _$identity);
+  _$$CameraReadDataImplCopyWith<_$CameraReadDataImpl> get copyWith =>
+      __$$CameraReadDataImplCopyWithImpl<_$CameraReadDataImpl>(
+          this, _$identity);
 }
 
 abstract class _CameraReadData implements CameraReadData {
   const factory _CameraReadData(
       {required final String code,
-      required final DateTime readAt}) = _$_CameraReadData;
+      required final DateTime readAt}) = _$CameraReadDataImpl;
 
   @override
   String get code;
@@ -145,6 +146,6 @@ abstract class _CameraReadData implements CameraReadData {
   DateTime get readAt;
   @override
   @JsonKey(ignore: true)
-  _$$_CameraReadDataCopyWith<_$_CameraReadData> get copyWith =>
+  _$$CameraReadDataImplCopyWith<_$CameraReadDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

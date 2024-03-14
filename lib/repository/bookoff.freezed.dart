@@ -12,7 +12,7 @@ part of 'bookoff.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 BookoffResponse _$BookoffResponseFromJson(Map<String, dynamic> json) {
   return _BookoffResponse.fromJson(json);
@@ -88,11 +88,11 @@ class _$BookoffResponseCopyWithImpl<$Res, $Val extends BookoffResponse>
 }
 
 /// @nodoc
-abstract class _$$_BookoffResponseCopyWith<$Res>
+abstract class _$$BookoffResponseImplCopyWith<$Res>
     implements $BookoffResponseCopyWith<$Res> {
-  factory _$$_BookoffResponseCopyWith(
-          _$_BookoffResponse value, $Res Function(_$_BookoffResponse) then) =
-      __$$_BookoffResponseCopyWithImpl<$Res>;
+  factory _$$BookoffResponseImplCopyWith(_$BookoffResponseImpl value,
+          $Res Function(_$BookoffResponseImpl) then) =
+      __$$BookoffResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,11 +103,11 @@ abstract class _$$_BookoffResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BookoffResponseCopyWithImpl<$Res>
-    extends _$BookoffResponseCopyWithImpl<$Res, _$_BookoffResponse>
-    implements _$$_BookoffResponseCopyWith<$Res> {
-  __$$_BookoffResponseCopyWithImpl(
-      _$_BookoffResponse _value, $Res Function(_$_BookoffResponse) _then)
+class __$$BookoffResponseImplCopyWithImpl<$Res>
+    extends _$BookoffResponseCopyWithImpl<$Res, _$BookoffResponseImpl>
+    implements _$$BookoffResponseImplCopyWith<$Res> {
+  __$$BookoffResponseImplCopyWithImpl(
+      _$BookoffResponseImpl _value, $Res Function(_$BookoffResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_BookoffResponseCopyWithImpl<$Res>
     Object? subtitle = freezed,
     Object? jan = null,
   }) {
-    return _then(_$_BookoffResponse(
+    return _then(_$BookoffResponseImpl(
       instoreCode: null == instoreCode
           ? _value.instoreCode
           : instoreCode // ignore: cast_nullable_to_non_nullable
@@ -142,15 +142,15 @@ class __$$_BookoffResponseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_BookoffResponse implements _BookoffResponse {
-  const _$_BookoffResponse(
+class _$BookoffResponseImpl implements _BookoffResponse {
+  const _$BookoffResponseImpl(
       {@JsonKey(name: "INSTORECODE") required this.instoreCode,
       @JsonKey(name: "GOODS_NAME1") required this.title,
       @JsonKey(name: "GOODS_NAME2") this.subtitle,
       @JsonKey(name: "JAN") this.jan = ""});
 
-  factory _$_BookoffResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_BookoffResponseFromJson(json);
+  factory _$BookoffResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BookoffResponseImplFromJson(json);
 
   @override
   @JsonKey(name: "INSTORECODE")
@@ -171,10 +171,10 @@ class _$_BookoffResponse implements _BookoffResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BookoffResponse &&
+            other is _$BookoffResponseImpl &&
             (identical(other.instoreCode, instoreCode) ||
                 other.instoreCode == instoreCode) &&
             (identical(other.title, title) || other.title == title) &&
@@ -191,12 +191,13 @@ class _$_BookoffResponse implements _BookoffResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BookoffResponseCopyWith<_$_BookoffResponse> get copyWith =>
-      __$$_BookoffResponseCopyWithImpl<_$_BookoffResponse>(this, _$identity);
+  _$$BookoffResponseImplCopyWith<_$BookoffResponseImpl> get copyWith =>
+      __$$BookoffResponseImplCopyWithImpl<_$BookoffResponseImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BookoffResponseToJson(
+    return _$$BookoffResponseImplToJson(
       this,
     );
   }
@@ -207,10 +208,10 @@ abstract class _BookoffResponse implements BookoffResponse {
       {@JsonKey(name: "INSTORECODE") required final String instoreCode,
       @JsonKey(name: "GOODS_NAME1") required final String title,
       @JsonKey(name: "GOODS_NAME2") final String? subtitle,
-      @JsonKey(name: "JAN") final String jan}) = _$_BookoffResponse;
+      @JsonKey(name: "JAN") final String jan}) = _$BookoffResponseImpl;
 
   factory _BookoffResponse.fromJson(Map<String, dynamic> json) =
-      _$_BookoffResponse.fromJson;
+      _$BookoffResponseImpl.fromJson;
 
   @override
   @JsonKey(name: "INSTORECODE")
@@ -226,6 +227,6 @@ abstract class _BookoffResponse implements BookoffResponse {
   String get jan;
   @override
   @JsonKey(ignore: true)
-  _$$_BookoffResponseCopyWith<_$_BookoffResponse> get copyWith =>
+  _$$BookoffResponseImplCopyWith<_$BookoffResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

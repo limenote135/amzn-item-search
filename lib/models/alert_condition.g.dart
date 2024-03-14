@@ -8,24 +8,24 @@ part of 'alert_condition.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class AlertConditionAdapter extends TypeAdapter<_$_AlertCondition> {
+class AlertConditionImplAdapter extends TypeAdapter<_$AlertConditionImpl> {
   @override
   final int typeId = 54;
 
   @override
-  _$_AlertCondition read(BinaryReader reader) {
+  _$AlertConditionImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_AlertCondition(
+    return _$AlertConditionImpl(
       type: fields[0] as AlertType,
       value: fields[1] as int,
     );
   }
 
   @override
-  void write(BinaryWriter writer, _$_AlertCondition obj) {
+  void write(BinaryWriter writer, _$AlertConditionImpl obj) {
     writer
       ..writeByte(2)
       ..writeByte(0)
@@ -40,7 +40,7 @@ class AlertConditionAdapter extends TypeAdapter<_$_AlertCondition> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AlertConditionAdapter &&
+      other is AlertConditionImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -49,13 +49,14 @@ class AlertConditionAdapter extends TypeAdapter<_$_AlertCondition> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AlertCondition _$$_AlertConditionFromJson(Map<String, dynamic> json) =>
-    _$_AlertCondition(
+_$AlertConditionImpl _$$AlertConditionImplFromJson(Map<String, dynamic> json) =>
+    _$AlertConditionImpl(
       type: $enumDecode(_$AlertTypeEnumMap, json['t']),
       value: json['v'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$_AlertConditionToJson(_$_AlertCondition instance) =>
+Map<String, dynamic> _$$AlertConditionImplToJson(
+        _$AlertConditionImpl instance) =>
     <String, dynamic>{
       't': _$AlertTypeEnumMap[instance.type]!,
       'v': instance.value,

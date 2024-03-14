@@ -12,7 +12,7 @@ part of 'pricetar_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PricetarSettings {
@@ -101,11 +101,11 @@ class _$PricetarSettingsCopyWithImpl<$Res, $Val extends PricetarSettings>
 }
 
 /// @nodoc
-abstract class _$$_PricetarSettingsCopyWith<$Res>
+abstract class _$$PricetarSettingsImplCopyWith<$Res>
     implements $PricetarSettingsCopyWith<$Res> {
-  factory _$$_PricetarSettingsCopyWith(
-          _$_PricetarSettings value, $Res Function(_$_PricetarSettings) then) =
-      __$$_PricetarSettingsCopyWithImpl<$Res>;
+  factory _$$PricetarSettingsImplCopyWith(_$PricetarSettingsImpl value,
+          $Res Function(_$PricetarSettingsImpl) then) =
+      __$$PricetarSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +118,11 @@ abstract class _$$_PricetarSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PricetarSettingsCopyWithImpl<$Res>
-    extends _$PricetarSettingsCopyWithImpl<$Res, _$_PricetarSettings>
-    implements _$$_PricetarSettingsCopyWith<$Res> {
-  __$$_PricetarSettingsCopyWithImpl(
-      _$_PricetarSettings _value, $Res Function(_$_PricetarSettings) _then)
+class __$$PricetarSettingsImplCopyWithImpl<$Res>
+    extends _$PricetarSettingsCopyWithImpl<$Res, _$PricetarSettingsImpl>
+    implements _$$PricetarSettingsImplCopyWith<$Res> {
+  __$$PricetarSettingsImplCopyWithImpl(_$PricetarSettingsImpl _value,
+      $Res Function(_$PricetarSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -135,7 +135,7 @@ class __$$_PricetarSettingsCopyWithImpl<$Res>
     Object? highestStopperType = null,
     Object? highestStopperValue = null,
   }) {
-    return _then(_$_PricetarSettings(
+    return _then(_$PricetarSettingsImpl(
       newRule: null == newRule
           ? _value.newRule
           : newRule // ignore: cast_nullable_to_non_nullable
@@ -167,8 +167,8 @@ class __$$_PricetarSettingsCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: pricetarSettingsTypeId)
-class _$_PricetarSettings implements _PricetarSettings {
-  const _$_PricetarSettings(
+class _$PricetarSettingsImpl implements _PricetarSettings {
+  const _$PricetarSettingsImpl(
       {@HiveField(0) this.newRule = PricetarRule.cart,
       @HiveField(1) this.usedRule = PricetarRule.fbaSameCondition,
       @HiveField(2) this.lowestStopperType = RevisePriceStopper.profitValue,
@@ -207,10 +207,10 @@ class _$_PricetarSettings implements _PricetarSettings {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PricetarSettings &&
+            other is _$PricetarSettingsImpl &&
             (identical(other.newRule, newRule) || other.newRule == newRule) &&
             (identical(other.usedRule, usedRule) ||
                 other.usedRule == usedRule) &&
@@ -237,8 +237,9 @@ class _$_PricetarSettings implements _PricetarSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PricetarSettingsCopyWith<_$_PricetarSettings> get copyWith =>
-      __$$_PricetarSettingsCopyWithImpl<_$_PricetarSettings>(this, _$identity);
+  _$$PricetarSettingsImplCopyWith<_$PricetarSettingsImpl> get copyWith =>
+      __$$PricetarSettingsImplCopyWithImpl<_$PricetarSettingsImpl>(
+          this, _$identity);
 }
 
 abstract class _PricetarSettings implements PricetarSettings {
@@ -248,7 +249,7 @@ abstract class _PricetarSettings implements PricetarSettings {
       @HiveField(2) final RevisePriceStopper lowestStopperType,
       @HiveField(3) final int lowestStopperValue,
       @HiveField(4) final RevisePriceStopper highestStopperType,
-      @HiveField(5) final int highestStopperValue}) = _$_PricetarSettings;
+      @HiveField(5) final int highestStopperValue}) = _$PricetarSettingsImpl;
 
   @override
   @HiveField(0)
@@ -270,6 +271,6 @@ abstract class _PricetarSettings implements PricetarSettings {
   int get highestStopperValue;
   @override
   @JsonKey(ignore: true)
-  _$$_PricetarSettingsCopyWith<_$_PricetarSettings> get copyWith =>
+  _$$PricetarSettingsImplCopyWith<_$PricetarSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

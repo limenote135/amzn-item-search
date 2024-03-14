@@ -8,17 +8,17 @@ part of 'fee_info.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class FeeInfoAdapter extends TypeAdapter<_$_FeeInfo> {
+class FeeInfoImplAdapter extends TypeAdapter<_$FeeInfoImpl> {
   @override
   final int typeId = 5;
 
   @override
-  _$_FeeInfo read(BinaryReader reader) {
+  _$FeeInfoImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_FeeInfo(
+    return _$FeeInfoImpl(
       referralFeeRate: fields[0] as double,
       variableClosingFee: fields[1] as int,
       fbaFee: fields[2] as int,
@@ -27,7 +27,7 @@ class FeeInfoAdapter extends TypeAdapter<_$_FeeInfo> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_FeeInfo obj) {
+  void write(BinaryWriter writer, _$FeeInfoImpl obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)
@@ -46,7 +46,7 @@ class FeeInfoAdapter extends TypeAdapter<_$_FeeInfo> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FeeInfoAdapter &&
+      other is FeeInfoImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -55,7 +55,8 @@ class FeeInfoAdapter extends TypeAdapter<_$_FeeInfo> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FeeInfo _$$_FeeInfoFromJson(Map<String, dynamic> json) => _$_FeeInfo(
+_$FeeInfoImpl _$$FeeInfoImplFromJson(Map<String, dynamic> json) =>
+    _$FeeInfoImpl(
       referralFeeRate: (json['fee_rate'] as num?)?.toDouble() ?? 0,
       variableClosingFee: json['closing_fee'] as int? ?? 0,
       fbaFee: json['fba_fee'] as int? ?? -1,
@@ -64,7 +65,7 @@ _$_FeeInfo _$$_FeeInfoFromJson(Map<String, dynamic> json) => _$_FeeInfo(
           : FeeExpression.fromJson(json['fee_exp'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_FeeInfoToJson(_$_FeeInfo instance) =>
+Map<String, dynamic> _$$FeeInfoImplToJson(_$FeeInfoImpl instance) =>
     <String, dynamic>{
       'fee_rate': instance.referralFeeRate,
       'closing_fee': instance.variableClosingFee,

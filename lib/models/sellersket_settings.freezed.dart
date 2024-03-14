@@ -12,7 +12,7 @@ part of 'sellersket_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SellerSketSettings {
@@ -109,11 +109,11 @@ class _$SellerSketSettingsCopyWithImpl<$Res, $Val extends SellerSketSettings>
 }
 
 /// @nodoc
-abstract class _$$_SellerSketSettingsCopyWith<$Res>
+abstract class _$$SellerSketSettingsImplCopyWith<$Res>
     implements $SellerSketSettingsCopyWith<$Res> {
-  factory _$$_SellerSketSettingsCopyWith(_$_SellerSketSettings value,
-          $Res Function(_$_SellerSketSettings) then) =
-      __$$_SellerSketSettingsCopyWithImpl<$Res>;
+  factory _$$SellerSketSettingsImplCopyWith(_$SellerSketSettingsImpl value,
+          $Res Function(_$SellerSketSettingsImpl) then) =
+      __$$SellerSketSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -127,11 +127,11 @@ abstract class _$$_SellerSketSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SellerSketSettingsCopyWithImpl<$Res>
-    extends _$SellerSketSettingsCopyWithImpl<$Res, _$_SellerSketSettings>
-    implements _$$_SellerSketSettingsCopyWith<$Res> {
-  __$$_SellerSketSettingsCopyWithImpl(
-      _$_SellerSketSettings _value, $Res Function(_$_SellerSketSettings) _then)
+class __$$SellerSketSettingsImplCopyWithImpl<$Res>
+    extends _$SellerSketSettingsCopyWithImpl<$Res, _$SellerSketSettingsImpl>
+    implements _$$SellerSketSettingsImplCopyWith<$Res> {
+  __$$SellerSketSettingsImplCopyWithImpl(_$SellerSketSettingsImpl _value,
+      $Res Function(_$SellerSketSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -145,7 +145,7 @@ class __$$_SellerSketSettingsCopyWithImpl<$Res>
     Object? highestStopperValue = null,
     Object? shippingPattern = null,
   }) {
-    return _then(_$_SellerSketSettings(
+    return _then(_$SellerSketSettingsImpl(
       newRule: null == newRule
           ? _value.newRule
           : newRule // ignore: cast_nullable_to_non_nullable
@@ -181,8 +181,8 @@ class __$$_SellerSketSettingsCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: sellerSketSettingsTypeId)
-class _$_SellerSketSettings implements _SellerSketSettings {
-  const _$_SellerSketSettings(
+class _$SellerSketSettingsImpl implements _SellerSketSettings {
+  const _$SellerSketSettingsImpl(
       {@HiveField(0) this.newRule = SellerSketReviseRule.cart,
       @HiveField(1) this.usedRule = SellerSketReviseRule.fbaSameCondition,
       @HiveField(2) this.lowestStopperType = RevisePriceStopper.profitValue,
@@ -226,10 +226,10 @@ class _$_SellerSketSettings implements _SellerSketSettings {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SellerSketSettings &&
+            other is _$SellerSketSettingsImpl &&
             (identical(other.newRule, newRule) || other.newRule == newRule) &&
             (identical(other.usedRule, usedRule) ||
                 other.usedRule == usedRule) &&
@@ -259,8 +259,8 @@ class _$_SellerSketSettings implements _SellerSketSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SellerSketSettingsCopyWith<_$_SellerSketSettings> get copyWith =>
-      __$$_SellerSketSettingsCopyWithImpl<_$_SellerSketSettings>(
+  _$$SellerSketSettingsImplCopyWith<_$SellerSketSettingsImpl> get copyWith =>
+      __$$SellerSketSettingsImplCopyWithImpl<_$SellerSketSettingsImpl>(
           this, _$identity);
 }
 
@@ -272,7 +272,7 @@ abstract class _SellerSketSettings implements SellerSketSettings {
       @HiveField(3) final int lowestStopperValue,
       @HiveField(4) final RevisePriceStopper highestStopperType,
       @HiveField(5) final int highestStopperValue,
-      @HiveField(6) final String shippingPattern}) = _$_SellerSketSettings;
+      @HiveField(6) final String shippingPattern}) = _$SellerSketSettingsImpl;
 
   @override
   @HiveField(0)
@@ -297,6 +297,6 @@ abstract class _SellerSketSettings implements SellerSketSettings {
   String get shippingPattern;
   @override
   @JsonKey(ignore: true)
-  _$$_SellerSketSettingsCopyWith<_$_SellerSketSettings> get copyWith =>
+  _$$SellerSketSettingsImplCopyWith<_$SellerSketSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
