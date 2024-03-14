@@ -12,7 +12,7 @@ part of 'fee_expression.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 FeeExpression _$FeeExpressionFromJson(Map<String, dynamic> json) {
   return _FeeExpression.fromJson(json);
@@ -70,22 +70,22 @@ class _$FeeExpressionCopyWithImpl<$Res, $Val extends FeeExpression>
 }
 
 /// @nodoc
-abstract class _$$_FeeExpressionCopyWith<$Res>
+abstract class _$$FeeExpressionImplCopyWith<$Res>
     implements $FeeExpressionCopyWith<$Res> {
-  factory _$$_FeeExpressionCopyWith(
-          _$_FeeExpression value, $Res Function(_$_FeeExpression) then) =
-      __$$_FeeExpressionCopyWithImpl<$Res>;
+  factory _$$FeeExpressionImplCopyWith(
+          _$FeeExpressionImpl value, $Res Function(_$FeeExpressionImpl) then) =
+      __$$FeeExpressionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@HiveField(0) int moreThan, @HiveField(1) String exp});
 }
 
 /// @nodoc
-class __$$_FeeExpressionCopyWithImpl<$Res>
-    extends _$FeeExpressionCopyWithImpl<$Res, _$_FeeExpression>
-    implements _$$_FeeExpressionCopyWith<$Res> {
-  __$$_FeeExpressionCopyWithImpl(
-      _$_FeeExpression _value, $Res Function(_$_FeeExpression) _then)
+class __$$FeeExpressionImplCopyWithImpl<$Res>
+    extends _$FeeExpressionCopyWithImpl<$Res, _$FeeExpressionImpl>
+    implements _$$FeeExpressionImplCopyWith<$Res> {
+  __$$FeeExpressionImplCopyWithImpl(
+      _$FeeExpressionImpl _value, $Res Function(_$FeeExpressionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_FeeExpressionCopyWithImpl<$Res>
     Object? moreThan = null,
     Object? exp = null,
   }) {
-    return _then(_$_FeeExpression(
+    return _then(_$FeeExpressionImpl(
       moreThan: null == moreThan
           ? _value.moreThan
           : moreThan // ignore: cast_nullable_to_non_nullable
@@ -111,12 +111,12 @@ class __$$_FeeExpressionCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: feeExpressionTypeId)
-class _$_FeeExpression implements _FeeExpression {
-  const _$_FeeExpression(
+class _$FeeExpressionImpl implements _FeeExpression {
+  const _$FeeExpressionImpl(
       {@HiveField(0) this.moreThan = 0, @HiveField(1) this.exp = ""});
 
-  factory _$_FeeExpression.fromJson(Map<String, dynamic> json) =>
-      _$$_FeeExpressionFromJson(json);
+  factory _$FeeExpressionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FeeExpressionImplFromJson(json);
 
   @override
   @JsonKey()
@@ -133,10 +133,10 @@ class _$_FeeExpression implements _FeeExpression {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FeeExpression &&
+            other is _$FeeExpressionImpl &&
             (identical(other.moreThan, moreThan) ||
                 other.moreThan == moreThan) &&
             (identical(other.exp, exp) || other.exp == exp));
@@ -149,12 +149,12 @@ class _$_FeeExpression implements _FeeExpression {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FeeExpressionCopyWith<_$_FeeExpression> get copyWith =>
-      __$$_FeeExpressionCopyWithImpl<_$_FeeExpression>(this, _$identity);
+  _$$FeeExpressionImplCopyWith<_$FeeExpressionImpl> get copyWith =>
+      __$$FeeExpressionImplCopyWithImpl<_$FeeExpressionImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FeeExpressionToJson(
+    return _$$FeeExpressionImplToJson(
       this,
     );
   }
@@ -163,10 +163,10 @@ class _$_FeeExpression implements _FeeExpression {
 abstract class _FeeExpression implements FeeExpression {
   const factory _FeeExpression(
       {@HiveField(0) final int moreThan,
-      @HiveField(1) final String exp}) = _$_FeeExpression;
+      @HiveField(1) final String exp}) = _$FeeExpressionImpl;
 
   factory _FeeExpression.fromJson(Map<String, dynamic> json) =
-      _$_FeeExpression.fromJson;
+      _$FeeExpressionImpl.fromJson;
 
   @override
   @HiveField(0)
@@ -176,6 +176,6 @@ abstract class _FeeExpression implements FeeExpression {
   String get exp;
   @override
   @JsonKey(ignore: true)
-  _$$_FeeExpressionCopyWith<_$_FeeExpression> get copyWith =>
+  _$$FeeExpressionImplCopyWith<_$FeeExpressionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

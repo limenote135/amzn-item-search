@@ -12,7 +12,7 @@ part of 'offer_stocks.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OfferStocksParam {
@@ -63,22 +63,22 @@ class _$OfferStocksParamCopyWithImpl<$Res, $Val extends OfferStocksParam>
 }
 
 /// @nodoc
-abstract class _$$_OfferStocksParamCopyWith<$Res>
+abstract class _$$OfferStocksParamImplCopyWith<$Res>
     implements $OfferStocksParamCopyWith<$Res> {
-  factory _$$_OfferStocksParamCopyWith(
-          _$_OfferStocksParam value, $Res Function(_$_OfferStocksParam) then) =
-      __$$_OfferStocksParamCopyWithImpl<$Res>;
+  factory _$$OfferStocksParamImplCopyWith(_$OfferStocksParamImpl value,
+          $Res Function(_$OfferStocksParamImpl) then) =
+      __$$OfferStocksParamImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String asin, String sellerId});
 }
 
 /// @nodoc
-class __$$_OfferStocksParamCopyWithImpl<$Res>
-    extends _$OfferStocksParamCopyWithImpl<$Res, _$_OfferStocksParam>
-    implements _$$_OfferStocksParamCopyWith<$Res> {
-  __$$_OfferStocksParamCopyWithImpl(
-      _$_OfferStocksParam _value, $Res Function(_$_OfferStocksParam) _then)
+class __$$OfferStocksParamImplCopyWithImpl<$Res>
+    extends _$OfferStocksParamCopyWithImpl<$Res, _$OfferStocksParamImpl>
+    implements _$$OfferStocksParamImplCopyWith<$Res> {
+  __$$OfferStocksParamImplCopyWithImpl(_$OfferStocksParamImpl _value,
+      $Res Function(_$OfferStocksParamImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_OfferStocksParamCopyWithImpl<$Res>
     Object? asin = null,
     Object? sellerId = null,
   }) {
-    return _then(_$_OfferStocksParam(
+    return _then(_$OfferStocksParamImpl(
       asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_OfferStocksParamCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OfferStocksParam implements _OfferStocksParam {
-  const _$_OfferStocksParam({required this.asin, required this.sellerId});
+class _$OfferStocksParamImpl implements _OfferStocksParam {
+  const _$OfferStocksParamImpl({required this.asin, required this.sellerId});
 
   @override
   final String asin;
@@ -116,10 +116,10 @@ class _$_OfferStocksParam implements _OfferStocksParam {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OfferStocksParam &&
+            other is _$OfferStocksParamImpl &&
             (identical(other.asin, asin) || other.asin == asin) &&
             (identical(other.sellerId, sellerId) ||
                 other.sellerId == sellerId));
@@ -131,14 +131,15 @@ class _$_OfferStocksParam implements _OfferStocksParam {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OfferStocksParamCopyWith<_$_OfferStocksParam> get copyWith =>
-      __$$_OfferStocksParamCopyWithImpl<_$_OfferStocksParam>(this, _$identity);
+  _$$OfferStocksParamImplCopyWith<_$OfferStocksParamImpl> get copyWith =>
+      __$$OfferStocksParamImplCopyWithImpl<_$OfferStocksParamImpl>(
+          this, _$identity);
 }
 
 abstract class _OfferStocksParam implements OfferStocksParam {
   const factory _OfferStocksParam(
       {required final String asin,
-      required final String sellerId}) = _$_OfferStocksParam;
+      required final String sellerId}) = _$OfferStocksParamImpl;
 
   @override
   String get asin;
@@ -146,6 +147,6 @@ abstract class _OfferStocksParam implements OfferStocksParam {
   String get sellerId;
   @override
   @JsonKey(ignore: true)
-  _$$_OfferStocksParamCopyWith<_$_OfferStocksParam> get copyWith =>
+  _$$OfferStocksParamImplCopyWith<_$OfferStocksParamImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

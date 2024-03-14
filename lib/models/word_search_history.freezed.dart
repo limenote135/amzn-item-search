@@ -12,7 +12,7 @@ part of 'word_search_history.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$WordSearchHistory {
@@ -58,22 +58,22 @@ class _$WordSearchHistoryCopyWithImpl<$Res, $Val extends WordSearchHistory>
 }
 
 /// @nodoc
-abstract class _$$_WordSearchHistoryCopyWith<$Res>
+abstract class _$$WordSearchHistoryImplCopyWith<$Res>
     implements $WordSearchHistoryCopyWith<$Res> {
-  factory _$$_WordSearchHistoryCopyWith(_$_WordSearchHistory value,
-          $Res Function(_$_WordSearchHistory) then) =
-      __$$_WordSearchHistoryCopyWithImpl<$Res>;
+  factory _$$WordSearchHistoryImplCopyWith(_$WordSearchHistoryImpl value,
+          $Res Function(_$WordSearchHistoryImpl) then) =
+      __$$WordSearchHistoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@HiveField(0) String keyword});
 }
 
 /// @nodoc
-class __$$_WordSearchHistoryCopyWithImpl<$Res>
-    extends _$WordSearchHistoryCopyWithImpl<$Res, _$_WordSearchHistory>
-    implements _$$_WordSearchHistoryCopyWith<$Res> {
-  __$$_WordSearchHistoryCopyWithImpl(
-      _$_WordSearchHistory _value, $Res Function(_$_WordSearchHistory) _then)
+class __$$WordSearchHistoryImplCopyWithImpl<$Res>
+    extends _$WordSearchHistoryCopyWithImpl<$Res, _$WordSearchHistoryImpl>
+    implements _$$WordSearchHistoryImplCopyWith<$Res> {
+  __$$WordSearchHistoryImplCopyWithImpl(_$WordSearchHistoryImpl _value,
+      $Res Function(_$WordSearchHistoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,7 +81,7 @@ class __$$_WordSearchHistoryCopyWithImpl<$Res>
   $Res call({
     Object? keyword = null,
   }) {
-    return _then(_$_WordSearchHistory(
+    return _then(_$WordSearchHistoryImpl(
       keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
@@ -93,8 +93,8 @@ class __$$_WordSearchHistoryCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: wordSearchHistoryTypeId)
-class _$_WordSearchHistory implements _WordSearchHistory {
-  const _$_WordSearchHistory({@HiveField(0) required this.keyword});
+class _$WordSearchHistoryImpl implements _WordSearchHistory {
+  const _$WordSearchHistoryImpl({@HiveField(0) required this.keyword});
 
   @override
   @HiveField(0)
@@ -106,10 +106,10 @@ class _$_WordSearchHistory implements _WordSearchHistory {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_WordSearchHistory &&
+            other is _$WordSearchHistoryImpl &&
             (identical(other.keyword, keyword) || other.keyword == keyword));
   }
 
@@ -119,20 +119,20 @@ class _$_WordSearchHistory implements _WordSearchHistory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WordSearchHistoryCopyWith<_$_WordSearchHistory> get copyWith =>
-      __$$_WordSearchHistoryCopyWithImpl<_$_WordSearchHistory>(
+  _$$WordSearchHistoryImplCopyWith<_$WordSearchHistoryImpl> get copyWith =>
+      __$$WordSearchHistoryImplCopyWithImpl<_$WordSearchHistoryImpl>(
           this, _$identity);
 }
 
 abstract class _WordSearchHistory implements WordSearchHistory {
   const factory _WordSearchHistory(
-      {@HiveField(0) required final String keyword}) = _$_WordSearchHistory;
+      {@HiveField(0) required final String keyword}) = _$WordSearchHistoryImpl;
 
   @override
   @HiveField(0)
   String get keyword;
   @override
   @JsonKey(ignore: true)
-  _$$_WordSearchHistoryCopyWith<_$_WordSearchHistory> get copyWith =>
+  _$$WordSearchHistoryImplCopyWith<_$WordSearchHistoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

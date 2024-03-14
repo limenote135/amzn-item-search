@@ -8,17 +8,17 @@ part of 'stock_item.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class StockItemAdapter extends TypeAdapter<_$_StockItem> {
+class StockItemImplAdapter extends TypeAdapter<_$StockItemImpl> {
   @override
   final int typeId = 20;
 
   @override
-  _$_StockItem read(BinaryReader reader) {
+  _$StockItemImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_StockItem(
+    return _$StockItemImpl(
       purchaseDate: fields[0] as String,
       purchasePrice: fields[1] as int,
       sellPrice: fields[2] as int,
@@ -43,7 +43,7 @@ class StockItemAdapter extends TypeAdapter<_$_StockItem> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_StockItem obj) {
+  void write(BinaryWriter writer, _$StockItemImpl obj) {
     writer
       ..writeByte(20)
       ..writeByte(0)
@@ -94,7 +94,7 @@ class StockItemAdapter extends TypeAdapter<_$_StockItem> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is StockItemAdapter &&
+      other is StockItemImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

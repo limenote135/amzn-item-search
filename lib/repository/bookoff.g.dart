@@ -8,15 +8,17 @@ part of 'bookoff.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BookoffResponse _$$_BookoffResponseFromJson(Map<String, dynamic> json) =>
-    _$_BookoffResponse(
+_$BookoffResponseImpl _$$BookoffResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BookoffResponseImpl(
       instoreCode: json['INSTORECODE'] as String,
       title: json['GOODS_NAME1'] as String,
       subtitle: json['GOODS_NAME2'] as String?,
       jan: json['JAN'] as String? ?? "",
     );
 
-Map<String, dynamic> _$$_BookoffResponseToJson(_$_BookoffResponse instance) =>
+Map<String, dynamic> _$$BookoffResponseImplToJson(
+        _$BookoffResponseImpl instance) =>
     <String, dynamic>{
       'INSTORECODE': instance.instoreCode,
       'GOODS_NAME1': instance.title,

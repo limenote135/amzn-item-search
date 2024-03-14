@@ -12,7 +12,7 @@ part of 'item_price.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ItemPrices _$ItemPricesFromJson(Map<String, dynamic> json) {
   return _ItemPrices.fromJson(json);
@@ -97,11 +97,11 @@ class _$ItemPricesCopyWithImpl<$Res, $Val extends ItemPrices>
 }
 
 /// @nodoc
-abstract class _$$_ItemPricesCopyWith<$Res>
+abstract class _$$ItemPricesImplCopyWith<$Res>
     implements $ItemPricesCopyWith<$Res> {
-  factory _$$_ItemPricesCopyWith(
-          _$_ItemPrices value, $Res Function(_$_ItemPrices) then) =
-      __$$_ItemPricesCopyWithImpl<$Res>;
+  factory _$$ItemPricesImplCopyWith(
+          _$ItemPricesImpl value, $Res Function(_$ItemPricesImpl) then) =
+      __$$ItemPricesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +118,11 @@ abstract class _$$_ItemPricesCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ItemPricesCopyWithImpl<$Res>
-    extends _$ItemPricesCopyWithImpl<$Res, _$_ItemPrices>
-    implements _$$_ItemPricesCopyWith<$Res> {
-  __$$_ItemPricesCopyWithImpl(
-      _$_ItemPrices _value, $Res Function(_$_ItemPrices) _then)
+class __$$ItemPricesImplCopyWithImpl<$Res>
+    extends _$ItemPricesCopyWithImpl<$Res, _$ItemPricesImpl>
+    implements _$$ItemPricesImplCopyWith<$Res> {
+  __$$ItemPricesImplCopyWithImpl(
+      _$ItemPricesImpl _value, $Res Function(_$ItemPricesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_ItemPricesCopyWithImpl<$Res>
     Object? usedPrices = null,
     Object? feeInfo = null,
   }) {
-    return _then(_$_ItemPrices(
+    return _then(_$ItemPricesImpl(
       newPrices: null == newPrices
           ? _value._newPrices
           : newPrices // ignore: cast_nullable_to_non_nullable
@@ -153,8 +153,8 @@ class __$$_ItemPricesCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: itemPricesTypeId)
-class _$_ItemPrices implements _ItemPrices {
-  const _$_ItemPrices(
+class _$ItemPricesImpl implements _ItemPrices {
+  const _$ItemPricesImpl(
       {@HiveField(0, defaultValue: <PriceDetail>[])
       @JsonKey(name: "new_offers")
       final List<PriceDetail> newPrices = const <PriceDetail>[],
@@ -165,8 +165,8 @@ class _$_ItemPrices implements _ItemPrices {
       : _newPrices = newPrices,
         _usedPrices = usedPrices;
 
-  factory _$_ItemPrices.fromJson(Map<String, dynamic> json) =>
-      _$$_ItemPricesFromJson(json);
+  factory _$ItemPricesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ItemPricesImplFromJson(json);
 
 // 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
   final List<PriceDetail> _newPrices;
@@ -201,10 +201,10 @@ class _$_ItemPrices implements _ItemPrices {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ItemPrices &&
+            other is _$ItemPricesImpl &&
             const DeepCollectionEquality()
                 .equals(other._newPrices, _newPrices) &&
             const DeepCollectionEquality()
@@ -223,12 +223,12 @@ class _$_ItemPrices implements _ItemPrices {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ItemPricesCopyWith<_$_ItemPrices> get copyWith =>
-      __$$_ItemPricesCopyWithImpl<_$_ItemPrices>(this, _$identity);
+  _$$ItemPricesImplCopyWith<_$ItemPricesImpl> get copyWith =>
+      __$$ItemPricesImplCopyWithImpl<_$ItemPricesImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ItemPricesToJson(
+    return _$$ItemPricesImplToJson(
       this,
     );
   }
@@ -242,10 +242,10 @@ abstract class _ItemPrices implements ItemPrices {
       @HiveField(1, defaultValue: <PriceDetail>[])
       @JsonKey(name: "used_offers")
       final List<PriceDetail> usedPrices,
-      @HiveField(2) final FeeInfo feeInfo}) = _$_ItemPrices;
+      @HiveField(2) final FeeInfo feeInfo}) = _$ItemPricesImpl;
 
   factory _ItemPrices.fromJson(Map<String, dynamic> json) =
-      _$_ItemPrices.fromJson;
+      _$ItemPricesImpl.fromJson;
 
   @override // 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
   @HiveField(0, defaultValue: <PriceDetail>[])
@@ -260,7 +260,7 @@ abstract class _ItemPrices implements ItemPrices {
   FeeInfo get feeInfo;
   @override
   @JsonKey(ignore: true)
-  _$$_ItemPricesCopyWith<_$_ItemPrices> get copyWith =>
+  _$$ItemPricesImplCopyWith<_$ItemPricesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -382,11 +382,11 @@ class _$PriceDetailCopyWithImpl<$Res, $Val extends PriceDetail>
 }
 
 /// @nodoc
-abstract class _$$_PriceDetailCopyWith<$Res>
+abstract class _$$PriceDetailImplCopyWith<$Res>
     implements $PriceDetailCopyWith<$Res> {
-  factory _$$_PriceDetailCopyWith(
-          _$_PriceDetail value, $Res Function(_$_PriceDetail) then) =
-      __$$_PriceDetailCopyWithImpl<$Res>;
+  factory _$$PriceDetailImplCopyWith(
+          _$PriceDetailImpl value, $Res Function(_$PriceDetailImpl) then) =
+      __$$PriceDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -404,11 +404,11 @@ abstract class _$$_PriceDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceDetailCopyWithImpl<$Res>
-    extends _$PriceDetailCopyWithImpl<$Res, _$_PriceDetail>
-    implements _$$_PriceDetailCopyWith<$Res> {
-  __$$_PriceDetailCopyWithImpl(
-      _$_PriceDetail _value, $Res Function(_$_PriceDetail) _then)
+class __$$PriceDetailImplCopyWithImpl<$Res>
+    extends _$PriceDetailCopyWithImpl<$Res, _$PriceDetailImpl>
+    implements _$$PriceDetailImplCopyWith<$Res> {
+  __$$PriceDetailImplCopyWithImpl(
+      _$PriceDetailImpl _value, $Res Function(_$PriceDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -424,7 +424,7 @@ class __$$_PriceDetailCopyWithImpl<$Res>
     Object? isSelf = null,
     Object? sellerType = null,
   }) {
-    return _then(_$_PriceDetail(
+    return _then(_$PriceDetailImpl(
       itemCondition: null == itemCondition
           ? _value.itemCondition
           : itemCondition // ignore: cast_nullable_to_non_nullable
@@ -474,8 +474,8 @@ class __$$_PriceDetailCopyWithImpl<$Res>
   SellerTypeConverter()
 ])
 @HiveType(typeId: priceDetailTypeId)
-class _$_PriceDetail implements _PriceDetail {
-  const _$_PriceDetail(
+class _$PriceDetailImpl implements _PriceDetail {
+  const _$PriceDetailImpl(
       {@HiveField(0)
       @JsonKey(name: "condition")
       this.itemCondition = ItemCondition.newItem,
@@ -490,8 +490,8 @@ class _$_PriceDetail implements _PriceDetail {
       @JsonKey(name: "type")
       this.sellerType = SellerType.seller});
 
-  factory _$_PriceDetail.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceDetailFromJson(json);
+  factory _$PriceDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PriceDetailImplFromJson(json);
 
   @override
   @HiveField(0)
@@ -536,10 +536,10 @@ class _$_PriceDetail implements _PriceDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceDetail &&
+            other is _$PriceDetailImpl &&
             (identical(other.itemCondition, itemCondition) ||
                 other.itemCondition == itemCondition) &&
             (identical(other.subCondition, subCondition) ||
@@ -563,12 +563,12 @@ class _$_PriceDetail implements _PriceDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceDetailCopyWith<_$_PriceDetail> get copyWith =>
-      __$$_PriceDetailCopyWithImpl<_$_PriceDetail>(this, _$identity);
+  _$$PriceDetailImplCopyWith<_$PriceDetailImpl> get copyWith =>
+      __$$PriceDetailImplCopyWithImpl<_$PriceDetailImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceDetailToJson(
+    return _$$PriceDetailImplToJson(
       this,
     );
   }
@@ -588,10 +588,10 @@ abstract class _PriceDetail implements PriceDetail {
       @HiveField(7, defaultValue: false) final bool isSelf,
       @HiveField(8, defaultValue: SellerType.seller)
       @JsonKey(name: "type")
-      final SellerType sellerType}) = _$_PriceDetail;
+      final SellerType sellerType}) = _$PriceDetailImpl;
 
   factory _PriceDetail.fromJson(Map<String, dynamic> json) =
-      _$_PriceDetail.fromJson;
+      _$PriceDetailImpl.fromJson;
 
   @override
   @HiveField(0)
@@ -624,6 +624,6 @@ abstract class _PriceDetail implements PriceDetail {
   SellerType get sellerType;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceDetailCopyWith<_$_PriceDetail> get copyWith =>
+  _$$PriceDetailImplCopyWith<_$PriceDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

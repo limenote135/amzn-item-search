@@ -8,17 +8,17 @@ part of 'makad_settings.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MakadSettingsAdapter extends TypeAdapter<_$_MakadSettings> {
+class MakadSettingsImplAdapter extends TypeAdapter<_$MakadSettingsImpl> {
   @override
   final int typeId = 59;
 
   @override
-  _$_MakadSettings read(BinaryReader reader) {
+  _$MakadSettingsImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_MakadSettings(
+    return _$MakadSettingsImpl(
       newRule: fields[0] as MakadReviseRule,
       usedRule: fields[1] as MakadReviseRule,
       lowestStopperType: fields[2] as RevisePriceStopper,
@@ -28,7 +28,7 @@ class MakadSettingsAdapter extends TypeAdapter<_$_MakadSettings> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_MakadSettings obj) {
+  void write(BinaryWriter writer, _$MakadSettingsImpl obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
@@ -49,7 +49,7 @@ class MakadSettingsAdapter extends TypeAdapter<_$_MakadSettings> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MakadSettingsAdapter &&
+      other is MakadSettingsImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

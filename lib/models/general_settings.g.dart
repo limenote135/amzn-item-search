@@ -8,17 +8,17 @@ part of 'general_settings.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
+class GeneralSettingsImplAdapter extends TypeAdapter<_$GeneralSettingsImpl> {
   @override
   final int typeId = 50;
 
   @override
-  _$_GeneralSettings read(BinaryReader reader) {
+  _$GeneralSettingsImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_GeneralSettings(
+    return _$GeneralSettingsImpl(
       isDarkMode: fields[0] as bool,
       enableTargetProfit: fields[1] as bool,
       targetProfitValue: fields[2] as int,
@@ -211,7 +211,7 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_GeneralSettings obj) {
+  void write(BinaryWriter writer, _$GeneralSettingsImpl obj) {
     writer
       ..writeByte(29)
       ..writeByte(0)
@@ -280,29 +280,29 @@ class GeneralSettingsAdapter extends TypeAdapter<_$_GeneralSettings> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GeneralSettingsAdapter &&
+      other is GeneralSettingsImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class ReadAloudPatternAdapter extends TypeAdapter<_$_ReadAloudPattern> {
+class ReadAloudPatternImplAdapter extends TypeAdapter<_$ReadAloudPatternImpl> {
   @override
   final int typeId = 51;
 
   @override
-  _$_ReadAloudPattern read(BinaryReader reader) {
+  _$ReadAloudPatternImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_ReadAloudPattern(
+    return _$ReadAloudPatternImpl(
       title: fields[0] as String,
       pattern: fields[1] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, _$_ReadAloudPattern obj) {
+  void write(BinaryWriter writer, _$ReadAloudPatternImpl obj) {
     writer
       ..writeByte(2)
       ..writeByte(0)
@@ -317,22 +317,23 @@ class ReadAloudPatternAdapter extends TypeAdapter<_$_ReadAloudPattern> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ReadAloudPatternAdapter &&
+      other is ReadAloudPatternImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class CustomButtonDetailAdapter extends TypeAdapter<_$_CustomButtonDetail> {
+class CustomButtonDetailImplAdapter
+    extends TypeAdapter<_$CustomButtonDetailImpl> {
   @override
   final int typeId = 52;
 
   @override
-  _$_CustomButtonDetail read(BinaryReader reader) {
+  _$CustomButtonDetailImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_CustomButtonDetail(
+    return _$CustomButtonDetailImpl(
       enable: fields[0] as bool,
       title: fields[1] as String,
       pattern: fields[2] as String,
@@ -341,7 +342,7 @@ class CustomButtonDetailAdapter extends TypeAdapter<_$_CustomButtonDetail> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_CustomButtonDetail obj) {
+  void write(BinaryWriter writer, _$CustomButtonDetailImpl obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)
@@ -360,22 +361,23 @@ class CustomButtonDetailAdapter extends TypeAdapter<_$_CustomButtonDetail> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CustomButtonDetailAdapter &&
+      other is CustomButtonDetailImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class AlertConditionSetAdapter extends TypeAdapter<_$_AlertConditionSet> {
+class AlertConditionSetImplAdapter
+    extends TypeAdapter<_$AlertConditionSetImpl> {
   @override
   final int typeId = 55;
 
   @override
-  _$_AlertConditionSet read(BinaryReader reader) {
+  _$AlertConditionSetImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_AlertConditionSet(
+    return _$AlertConditionSetImpl(
       id: fields[0] as String,
       title: fields[1] as String,
       conditions: (fields[2] as List).cast<AlertCondition>(),
@@ -383,7 +385,7 @@ class AlertConditionSetAdapter extends TypeAdapter<_$_AlertConditionSet> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_AlertConditionSet obj) {
+  void write(BinaryWriter writer, _$AlertConditionSetImpl obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -400,29 +402,29 @@ class AlertConditionSetAdapter extends TypeAdapter<_$_AlertConditionSet> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AlertConditionSetAdapter &&
+      other is AlertConditionSetImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class ShortcutDetailAdapter extends TypeAdapter<_$_ShortcutDetail> {
+class ShortcutDetailImplAdapter extends TypeAdapter<_$ShortcutDetailImpl> {
   @override
   final int typeId = 57;
 
   @override
-  _$_ShortcutDetail read(BinaryReader reader) {
+  _$ShortcutDetailImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_ShortcutDetail(
+    return _$ShortcutDetailImpl(
       type: fields[0] as ShortcutType,
       param: fields[1] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, _$_ShortcutDetail obj) {
+  void write(BinaryWriter writer, _$ShortcutDetailImpl obj) {
     writer
       ..writeByte(2)
       ..writeByte(0)
@@ -437,7 +439,7 @@ class ShortcutDetailAdapter extends TypeAdapter<_$_ShortcutDetail> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ShortcutDetailAdapter &&
+      other is ShortcutDetailImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -446,8 +448,9 @@ class ShortcutDetailAdapter extends TypeAdapter<_$_ShortcutDetail> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AlertConditionSet _$$_AlertConditionSetFromJson(Map<String, dynamic> json) =>
-    _$_AlertConditionSet(
+_$AlertConditionSetImpl _$$AlertConditionSetImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AlertConditionSetImpl(
       id: json['id'] as String,
       title: json['t'] as String,
       conditions: (json['c'] as List<dynamic>?)
@@ -456,21 +459,22 @@ _$_AlertConditionSet _$$_AlertConditionSetFromJson(Map<String, dynamic> json) =>
           const <AlertCondition>[],
     );
 
-Map<String, dynamic> _$$_AlertConditionSetToJson(
-        _$_AlertConditionSet instance) =>
+Map<String, dynamic> _$$AlertConditionSetImplToJson(
+        _$AlertConditionSetImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       't': instance.title,
       'c': instance.conditions,
     };
 
-_$_ShortcutDetail _$$_ShortcutDetailFromJson(Map<String, dynamic> json) =>
-    _$_ShortcutDetail(
+_$ShortcutDetailImpl _$$ShortcutDetailImplFromJson(Map<String, dynamic> json) =>
+    _$ShortcutDetailImpl(
       type: $enumDecode(_$ShortcutTypeEnumMap, json['type']),
       param: json['param'] as String? ?? "",
     );
 
-Map<String, dynamic> _$$_ShortcutDetailToJson(_$_ShortcutDetail instance) =>
+Map<String, dynamic> _$$ShortcutDetailImplToJson(
+        _$ShortcutDetailImpl instance) =>
     <String, dynamic>{
       'type': _$ShortcutTypeEnumMap[instance.type]!,
       'param': instance.param,

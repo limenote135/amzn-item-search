@@ -12,7 +12,7 @@ part of 'alert_condition.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AlertCondition _$AlertConditionFromJson(Map<String, dynamic> json) {
   return _AlertCondition.fromJson(json);
@@ -74,11 +74,11 @@ class _$AlertConditionCopyWithImpl<$Res, $Val extends AlertCondition>
 }
 
 /// @nodoc
-abstract class _$$_AlertConditionCopyWith<$Res>
+abstract class _$$AlertConditionImplCopyWith<$Res>
     implements $AlertConditionCopyWith<$Res> {
-  factory _$$_AlertConditionCopyWith(
-          _$_AlertCondition value, $Res Function(_$_AlertCondition) then) =
-      __$$_AlertConditionCopyWithImpl<$Res>;
+  factory _$$AlertConditionImplCopyWith(_$AlertConditionImpl value,
+          $Res Function(_$AlertConditionImpl) then) =
+      __$$AlertConditionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,11 +87,11 @@ abstract class _$$_AlertConditionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AlertConditionCopyWithImpl<$Res>
-    extends _$AlertConditionCopyWithImpl<$Res, _$_AlertCondition>
-    implements _$$_AlertConditionCopyWith<$Res> {
-  __$$_AlertConditionCopyWithImpl(
-      _$_AlertCondition _value, $Res Function(_$_AlertCondition) _then)
+class __$$AlertConditionImplCopyWithImpl<$Res>
+    extends _$AlertConditionCopyWithImpl<$Res, _$AlertConditionImpl>
+    implements _$$AlertConditionImplCopyWith<$Res> {
+  __$$AlertConditionImplCopyWithImpl(
+      _$AlertConditionImpl _value, $Res Function(_$AlertConditionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_AlertConditionCopyWithImpl<$Res>
     Object? type = null,
     Object? value = null,
   }) {
-    return _then(_$_AlertCondition(
+    return _then(_$AlertConditionImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -116,13 +116,13 @@ class __$$_AlertConditionCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 @HiveType(typeId: alertConditionTypeId)
-class _$_AlertCondition implements _AlertCondition {
-  const _$_AlertCondition(
+class _$AlertConditionImpl implements _AlertCondition {
+  const _$AlertConditionImpl(
       {@HiveField(0) @JsonKey(name: "t") required this.type,
       @HiveField(1) @JsonKey(name: "v") this.value = 0});
 
-  factory _$_AlertCondition.fromJson(Map<String, dynamic> json) =>
-      _$$_AlertConditionFromJson(json);
+  factory _$AlertConditionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AlertConditionImplFromJson(json);
 
   @override
   @HiveField(0)
@@ -139,10 +139,10 @@ class _$_AlertCondition implements _AlertCondition {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AlertCondition &&
+            other is _$AlertConditionImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.value, value) || other.value == value));
   }
@@ -154,12 +154,13 @@ class _$_AlertCondition implements _AlertCondition {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AlertConditionCopyWith<_$_AlertCondition> get copyWith =>
-      __$$_AlertConditionCopyWithImpl<_$_AlertCondition>(this, _$identity);
+  _$$AlertConditionImplCopyWith<_$AlertConditionImpl> get copyWith =>
+      __$$AlertConditionImplCopyWithImpl<_$AlertConditionImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AlertConditionToJson(
+    return _$$AlertConditionImplToJson(
       this,
     );
   }
@@ -167,11 +168,12 @@ class _$_AlertCondition implements _AlertCondition {
 
 abstract class _AlertCondition implements AlertCondition {
   const factory _AlertCondition(
-      {@HiveField(0) @JsonKey(name: "t") required final AlertType type,
-      @HiveField(1) @JsonKey(name: "v") final int value}) = _$_AlertCondition;
+          {@HiveField(0) @JsonKey(name: "t") required final AlertType type,
+          @HiveField(1) @JsonKey(name: "v") final int value}) =
+      _$AlertConditionImpl;
 
   factory _AlertCondition.fromJson(Map<String, dynamic> json) =
-      _$_AlertCondition.fromJson;
+      _$AlertConditionImpl.fromJson;
 
   @override
   @HiveField(0)
@@ -183,6 +185,6 @@ abstract class _AlertCondition implements AlertCondition {
   int get value;
   @override
   @JsonKey(ignore: true)
-  _$$_AlertConditionCopyWith<_$_AlertCondition> get copyWith =>
+  _$$AlertConditionImplCopyWith<_$AlertConditionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

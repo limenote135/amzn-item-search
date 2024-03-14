@@ -8,9 +8,9 @@ part of 'mws.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GetProductByIdResponse _$$_GetProductByIdResponseFromJson(
+_$GetProductByIdResponseImpl _$$GetProductByIdResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_GetProductByIdResponse(
+    _$GetProductByIdResponseImpl(
       code: json['code'] as String,
       items: (json['items'] as List<dynamic>?)
               ?.map((e) => AsinData.fromJson(e as Map<String, dynamic>))
@@ -18,49 +18,49 @@ _$_GetProductByIdResponse _$$_GetProductByIdResponseFromJson(
           const <AsinData>[],
     );
 
-Map<String, dynamic> _$$_GetProductByIdResponseToJson(
-        _$_GetProductByIdResponse instance) =>
+Map<String, dynamic> _$$GetProductByIdResponseImplToJson(
+        _$GetProductByIdResponseImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'items': instance.items,
     };
 
-_$_QueryItemsResponse _$$_QueryItemsResponseFromJson(
+_$QueryItemsResponseImpl _$$QueryItemsResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_QueryItemsResponse(
+    _$QueryItemsResponseImpl(
       asins: (json['asins'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$_QueryItemsResponseToJson(
-        _$_QueryItemsResponse instance) =>
+Map<String, dynamic> _$$QueryItemsResponseImplToJson(
+        _$QueryItemsResponseImpl instance) =>
     <String, dynamic>{
       'asins': instance.asins,
     };
 
-_$_BatchGetAsinDataResponse _$$_BatchGetAsinDataResponseFromJson(
+_$BatchGetAsinDataResponseImpl _$$BatchGetAsinDataResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_BatchGetAsinDataResponse(
+    _$BatchGetAsinDataResponseImpl(
       data: (json['data'] as List<dynamic>)
           .map((e) => AsinData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_BatchGetAsinDataResponseToJson(
-        _$_BatchGetAsinDataResponse instance) =>
+Map<String, dynamic> _$$BatchGetAsinDataResponseImplToJson(
+        _$BatchGetAsinDataResponseImpl instance) =>
     <String, dynamic>{
       'data': instance.data,
     };
 
-_$_GetItemVariationsResponse _$$_GetItemVariationsResponseFromJson(
+_$GetItemVariationsResponseImpl _$$GetItemVariationsResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_GetItemVariationsResponse(
+    _$GetItemVariationsResponseImpl(
       asins:
           (json['asins'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               const <String>[],
     );
 
-Map<String, dynamic> _$$_GetItemVariationsResponseToJson(
-        _$_GetItemVariationsResponse instance) =>
+Map<String, dynamic> _$$GetItemVariationsResponseImplToJson(
+        _$GetItemVariationsResponseImpl instance) =>
     <String, dynamic>{
       'asins': instance.asins,
     };

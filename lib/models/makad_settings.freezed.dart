@@ -12,7 +12,7 @@ part of 'makad_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MakadSettings {
@@ -92,11 +92,11 @@ class _$MakadSettingsCopyWithImpl<$Res, $Val extends MakadSettings>
 }
 
 /// @nodoc
-abstract class _$$_MakadSettingsCopyWith<$Res>
+abstract class _$$MakadSettingsImplCopyWith<$Res>
     implements $MakadSettingsCopyWith<$Res> {
-  factory _$$_MakadSettingsCopyWith(
-          _$_MakadSettings value, $Res Function(_$_MakadSettings) then) =
-      __$$_MakadSettingsCopyWithImpl<$Res>;
+  factory _$$MakadSettingsImplCopyWith(
+          _$MakadSettingsImpl value, $Res Function(_$MakadSettingsImpl) then) =
+      __$$MakadSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -108,11 +108,11 @@ abstract class _$$_MakadSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MakadSettingsCopyWithImpl<$Res>
-    extends _$MakadSettingsCopyWithImpl<$Res, _$_MakadSettings>
-    implements _$$_MakadSettingsCopyWith<$Res> {
-  __$$_MakadSettingsCopyWithImpl(
-      _$_MakadSettings _value, $Res Function(_$_MakadSettings) _then)
+class __$$MakadSettingsImplCopyWithImpl<$Res>
+    extends _$MakadSettingsCopyWithImpl<$Res, _$MakadSettingsImpl>
+    implements _$$MakadSettingsImplCopyWith<$Res> {
+  __$$MakadSettingsImplCopyWithImpl(
+      _$MakadSettingsImpl _value, $Res Function(_$MakadSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -124,7 +124,7 @@ class __$$_MakadSettingsCopyWithImpl<$Res>
     Object? lowestStopperValue = null,
     Object? paymentMethod = null,
   }) {
-    return _then(_$_MakadSettings(
+    return _then(_$MakadSettingsImpl(
       newRule: null == newRule
           ? _value.newRule
           : newRule // ignore: cast_nullable_to_non_nullable
@@ -152,8 +152,8 @@ class __$$_MakadSettingsCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: makadSettingsTypeId)
-class _$_MakadSettings implements _MakadSettings {
-  const _$_MakadSettings(
+class _$MakadSettingsImpl implements _MakadSettings {
+  const _$MakadSettingsImpl(
       {@HiveField(0) this.newRule = MakadReviseRule.cart,
       @HiveField(1) this.usedRule = MakadReviseRule.usedFbaSameCondition,
       @HiveField(2) this.lowestStopperType = RevisePriceStopper.profitValue,
@@ -187,10 +187,10 @@ class _$_MakadSettings implements _MakadSettings {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MakadSettings &&
+            other is _$MakadSettingsImpl &&
             (identical(other.newRule, newRule) || other.newRule == newRule) &&
             (identical(other.usedRule, usedRule) ||
                 other.usedRule == usedRule) &&
@@ -209,17 +209,18 @@ class _$_MakadSettings implements _MakadSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MakadSettingsCopyWith<_$_MakadSettings> get copyWith =>
-      __$$_MakadSettingsCopyWithImpl<_$_MakadSettings>(this, _$identity);
+  _$$MakadSettingsImplCopyWith<_$MakadSettingsImpl> get copyWith =>
+      __$$MakadSettingsImplCopyWithImpl<_$MakadSettingsImpl>(this, _$identity);
 }
 
 abstract class _MakadSettings implements MakadSettings {
   const factory _MakadSettings(
-      {@HiveField(0) final MakadReviseRule newRule,
-      @HiveField(1) final MakadReviseRule usedRule,
-      @HiveField(2) final RevisePriceStopper lowestStopperType,
-      @HiveField(3) final int lowestStopperValue,
-      @HiveField(4) final MakadPaymentMethod paymentMethod}) = _$_MakadSettings;
+          {@HiveField(0) final MakadReviseRule newRule,
+          @HiveField(1) final MakadReviseRule usedRule,
+          @HiveField(2) final RevisePriceStopper lowestStopperType,
+          @HiveField(3) final int lowestStopperValue,
+          @HiveField(4) final MakadPaymentMethod paymentMethod}) =
+      _$MakadSettingsImpl;
 
   @override
   @HiveField(0)
@@ -238,6 +239,6 @@ abstract class _MakadSettings implements MakadSettings {
   MakadPaymentMethod get paymentMethod;
   @override
   @JsonKey(ignore: true)
-  _$$_MakadSettingsCopyWith<_$_MakadSettings> get copyWith =>
+  _$$MakadSettingsImplCopyWith<_$MakadSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

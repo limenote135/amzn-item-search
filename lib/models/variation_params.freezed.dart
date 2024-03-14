@@ -12,7 +12,7 @@ part of 'variation_params.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$VariationPageParam {
@@ -63,22 +63,22 @@ class _$VariationPageParamCopyWithImpl<$Res, $Val extends VariationPageParam>
 }
 
 /// @nodoc
-abstract class _$$_VariationPageParamCopyWith<$Res>
+abstract class _$$VariationPageParamImplCopyWith<$Res>
     implements $VariationPageParamCopyWith<$Res> {
-  factory _$$_VariationPageParamCopyWith(_$_VariationPageParam value,
-          $Res Function(_$_VariationPageParam) then) =
-      __$$_VariationPageParamCopyWithImpl<$Res>;
+  factory _$$VariationPageParamImplCopyWith(_$VariationPageParamImpl value,
+          $Res Function(_$VariationPageParamImpl) then) =
+      __$$VariationPageParamImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String asin, int page});
 }
 
 /// @nodoc
-class __$$_VariationPageParamCopyWithImpl<$Res>
-    extends _$VariationPageParamCopyWithImpl<$Res, _$_VariationPageParam>
-    implements _$$_VariationPageParamCopyWith<$Res> {
-  __$$_VariationPageParamCopyWithImpl(
-      _$_VariationPageParam _value, $Res Function(_$_VariationPageParam) _then)
+class __$$VariationPageParamImplCopyWithImpl<$Res>
+    extends _$VariationPageParamCopyWithImpl<$Res, _$VariationPageParamImpl>
+    implements _$$VariationPageParamImplCopyWith<$Res> {
+  __$$VariationPageParamImplCopyWithImpl(_$VariationPageParamImpl _value,
+      $Res Function(_$VariationPageParamImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_VariationPageParamCopyWithImpl<$Res>
     Object? asin = null,
     Object? page = null,
   }) {
-    return _then(_$_VariationPageParam(
+    return _then(_$VariationPageParamImpl(
       asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_VariationPageParamCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_VariationPageParam implements _VariationPageParam {
-  const _$_VariationPageParam({required this.asin, required this.page});
+class _$VariationPageParamImpl implements _VariationPageParam {
+  const _$VariationPageParamImpl({required this.asin, required this.page});
 
   @override
   final String asin;
@@ -116,10 +116,10 @@ class _$_VariationPageParam implements _VariationPageParam {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VariationPageParam &&
+            other is _$VariationPageParamImpl &&
             (identical(other.asin, asin) || other.asin == asin) &&
             (identical(other.page, page) || other.page == page));
   }
@@ -130,15 +130,15 @@ class _$_VariationPageParam implements _VariationPageParam {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VariationPageParamCopyWith<_$_VariationPageParam> get copyWith =>
-      __$$_VariationPageParamCopyWithImpl<_$_VariationPageParam>(
+  _$$VariationPageParamImplCopyWith<_$VariationPageParamImpl> get copyWith =>
+      __$$VariationPageParamImplCopyWithImpl<_$VariationPageParamImpl>(
           this, _$identity);
 }
 
 abstract class _VariationPageParam implements VariationPageParam {
   const factory _VariationPageParam(
       {required final String asin,
-      required final int page}) = _$_VariationPageParam;
+      required final int page}) = _$VariationPageParamImpl;
 
   @override
   String get asin;
@@ -146,7 +146,7 @@ abstract class _VariationPageParam implements VariationPageParam {
   int get page;
   @override
   @JsonKey(ignore: true)
-  _$$_VariationPageParamCopyWith<_$_VariationPageParam> get copyWith =>
+  _$$VariationPageParamImplCopyWith<_$VariationPageParamImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -200,22 +200,24 @@ class _$VariationIndexAtParamCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_VariationIndexAtParamCopyWith<$Res>
+abstract class _$$VariationIndexAtParamImplCopyWith<$Res>
     implements $VariationIndexAtParamCopyWith<$Res> {
-  factory _$$_VariationIndexAtParamCopyWith(_$_VariationIndexAtParam value,
-          $Res Function(_$_VariationIndexAtParam) then) =
-      __$$_VariationIndexAtParamCopyWithImpl<$Res>;
+  factory _$$VariationIndexAtParamImplCopyWith(
+          _$VariationIndexAtParamImpl value,
+          $Res Function(_$VariationIndexAtParamImpl) then) =
+      __$$VariationIndexAtParamImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String asin, int index});
 }
 
 /// @nodoc
-class __$$_VariationIndexAtParamCopyWithImpl<$Res>
-    extends _$VariationIndexAtParamCopyWithImpl<$Res, _$_VariationIndexAtParam>
-    implements _$$_VariationIndexAtParamCopyWith<$Res> {
-  __$$_VariationIndexAtParamCopyWithImpl(_$_VariationIndexAtParam _value,
-      $Res Function(_$_VariationIndexAtParam) _then)
+class __$$VariationIndexAtParamImplCopyWithImpl<$Res>
+    extends _$VariationIndexAtParamCopyWithImpl<$Res,
+        _$VariationIndexAtParamImpl>
+    implements _$$VariationIndexAtParamImplCopyWith<$Res> {
+  __$$VariationIndexAtParamImplCopyWithImpl(_$VariationIndexAtParamImpl _value,
+      $Res Function(_$VariationIndexAtParamImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -224,7 +226,7 @@ class __$$_VariationIndexAtParamCopyWithImpl<$Res>
     Object? asin = null,
     Object? index = null,
   }) {
-    return _then(_$_VariationIndexAtParam(
+    return _then(_$VariationIndexAtParamImpl(
       asin: null == asin
           ? _value.asin
           : asin // ignore: cast_nullable_to_non_nullable
@@ -239,8 +241,8 @@ class __$$_VariationIndexAtParamCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_VariationIndexAtParam implements _VariationIndexAtParam {
-  const _$_VariationIndexAtParam({required this.asin, required this.index});
+class _$VariationIndexAtParamImpl implements _VariationIndexAtParam {
+  const _$VariationIndexAtParamImpl({required this.asin, required this.index});
 
   @override
   final String asin;
@@ -253,10 +255,10 @@ class _$_VariationIndexAtParam implements _VariationIndexAtParam {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VariationIndexAtParam &&
+            other is _$VariationIndexAtParamImpl &&
             (identical(other.asin, asin) || other.asin == asin) &&
             (identical(other.index, index) || other.index == index));
   }
@@ -267,15 +269,15 @@ class _$_VariationIndexAtParam implements _VariationIndexAtParam {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VariationIndexAtParamCopyWith<_$_VariationIndexAtParam> get copyWith =>
-      __$$_VariationIndexAtParamCopyWithImpl<_$_VariationIndexAtParam>(
-          this, _$identity);
+  _$$VariationIndexAtParamImplCopyWith<_$VariationIndexAtParamImpl>
+      get copyWith => __$$VariationIndexAtParamImplCopyWithImpl<
+          _$VariationIndexAtParamImpl>(this, _$identity);
 }
 
 abstract class _VariationIndexAtParam implements VariationIndexAtParam {
   const factory _VariationIndexAtParam(
       {required final String asin,
-      required final int index}) = _$_VariationIndexAtParam;
+      required final int index}) = _$VariationIndexAtParamImpl;
 
   @override
   String get asin;
@@ -283,6 +285,6 @@ abstract class _VariationIndexAtParam implements VariationIndexAtParam {
   int get index;
   @override
   @JsonKey(ignore: true)
-  _$$_VariationIndexAtParamCopyWith<_$_VariationIndexAtParam> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$VariationIndexAtParamImplCopyWith<_$VariationIndexAtParamImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
