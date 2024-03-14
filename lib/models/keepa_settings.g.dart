@@ -8,17 +8,17 @@ part of 'keepa_settings.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class KeepaSettingsAdapter extends TypeAdapter<_$_KeepaSettings> {
+class KeepaSettingsImplAdapter extends TypeAdapter<_$KeepaSettingsImpl> {
   @override
   final int typeId = 56;
 
   @override
-  _$_KeepaSettings read(BinaryReader reader) {
+  _$KeepaSettingsImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_KeepaSettings(
+    return _$KeepaSettingsImpl(
       showNew: fields[0] == null ? true : fields[0] as bool,
       showUsed: fields[1] == null ? true : fields[1] as bool,
       showAmazon: fields[2] == null ? true : fields[2] as bool,
@@ -32,7 +32,7 @@ class KeepaSettingsAdapter extends TypeAdapter<_$_KeepaSettings> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_KeepaSettings obj) {
+  void write(BinaryWriter writer, _$KeepaSettingsImpl obj) {
     writer
       ..writeByte(7)
       ..writeByte(0)
@@ -57,7 +57,7 @@ class KeepaSettingsAdapter extends TypeAdapter<_$_KeepaSettings> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is KeepaSettingsAdapter &&
+      other is KeepaSettingsImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

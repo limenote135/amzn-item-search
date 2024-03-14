@@ -8,8 +8,8 @@ part of 'listing_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ListingItem _$$_ListingItemFromJson(Map<String, dynamic> json) =>
-    _$_ListingItem(
+_$ListingItemImpl _$$ListingItemImplFromJson(Map<String, dynamic> json) =>
+    _$ListingItemImpl(
       sku: json['sku'] as String,
       asin: json['asin'] as String,
       sellPrice: json['sell_price'] as int,
@@ -25,7 +25,7 @@ _$_ListingItem _$$_ListingItemFromJson(Map<String, dynamic> json) =>
           const <String>[],
     );
 
-Map<String, dynamic> _$$_ListingItemToJson(_$_ListingItem instance) =>
+Map<String, dynamic> _$$ListingItemImplToJson(_$ListingItemImpl instance) =>
     <String, dynamic>{
       'sku': instance.sku,
       'asin': instance.asin,

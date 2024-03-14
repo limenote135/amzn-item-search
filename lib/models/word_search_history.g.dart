@@ -8,23 +8,24 @@ part of 'word_search_history.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class WordSearchHistoryAdapter extends TypeAdapter<_$_WordSearchHistory> {
+class WordSearchHistoryImplAdapter
+    extends TypeAdapter<_$WordSearchHistoryImpl> {
   @override
   final int typeId = 80;
 
   @override
-  _$_WordSearchHistory read(BinaryReader reader) {
+  _$WordSearchHistoryImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_WordSearchHistory(
+    return _$WordSearchHistoryImpl(
       keyword: fields[0] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, _$_WordSearchHistory obj) {
+  void write(BinaryWriter writer, _$WordSearchHistoryImpl obj) {
     writer
       ..writeByte(1)
       ..writeByte(0)
@@ -37,7 +38,7 @@ class WordSearchHistoryAdapter extends TypeAdapter<_$_WordSearchHistory> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is WordSearchHistoryAdapter &&
+      other is WordSearchHistoryImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

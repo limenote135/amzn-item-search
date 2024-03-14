@@ -8,17 +8,17 @@ part of 'item_price.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ItemPricesAdapter extends TypeAdapter<_$_ItemPrices> {
+class ItemPricesImplAdapter extends TypeAdapter<_$ItemPricesImpl> {
   @override
   final int typeId = 3;
 
   @override
-  _$_ItemPrices read(BinaryReader reader) {
+  _$ItemPricesImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_ItemPrices(
+    return _$ItemPricesImpl(
       newPrices:
           fields[0] == null ? [] : (fields[0] as List).cast<PriceDetail>(),
       usedPrices:
@@ -28,7 +28,7 @@ class ItemPricesAdapter extends TypeAdapter<_$_ItemPrices> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_ItemPrices obj) {
+  void write(BinaryWriter writer, _$ItemPricesImpl obj) {
     writer
       ..writeByte(3)
       ..writeByte(2)
@@ -45,22 +45,22 @@ class ItemPricesAdapter extends TypeAdapter<_$_ItemPrices> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ItemPricesAdapter &&
+      other is ItemPricesImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
+class PriceDetailImplAdapter extends TypeAdapter<_$PriceDetailImpl> {
   @override
   final int typeId = 4;
 
   @override
-  _$_PriceDetail read(BinaryReader reader) {
+  _$PriceDetailImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_PriceDetail(
+    return _$PriceDetailImpl(
       itemCondition: fields[0] as ItemCondition,
       subCondition: fields[1] as ItemSubCondition,
       channel: fields[2] as FulfillmentChannel,
@@ -75,7 +75,7 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_PriceDetail obj) {
+  void write(BinaryWriter writer, _$PriceDetailImpl obj) {
     writer
       ..writeByte(9)
       ..writeByte(0)
@@ -104,7 +104,7 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PriceDetailAdapter &&
+      other is PriceDetailImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -113,8 +113,8 @@ class PriceDetailAdapter extends TypeAdapter<_$_PriceDetail> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ItemPrices _$$_ItemPricesFromJson(Map<String, dynamic> json) =>
-    _$_ItemPrices(
+_$ItemPricesImpl _$$ItemPricesImplFromJson(Map<String, dynamic> json) =>
+    _$ItemPricesImpl(
       newPrices: (json['new_offers'] as List<dynamic>?)
               ?.map((e) => PriceDetail.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -128,15 +128,15 @@ _$_ItemPrices _$$_ItemPricesFromJson(Map<String, dynamic> json) =>
           : FeeInfo.fromJson(json['fee_info'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_ItemPricesToJson(_$_ItemPrices instance) =>
+Map<String, dynamic> _$$ItemPricesImplToJson(_$ItemPricesImpl instance) =>
     <String, dynamic>{
       'new_offers': instance.newPrices,
       'used_offers': instance.usedPrices,
       'fee_info': instance.feeInfo,
     };
 
-_$_PriceDetail _$$_PriceDetailFromJson(Map<String, dynamic> json) =>
-    _$_PriceDetail(
+_$PriceDetailImpl _$$PriceDetailImplFromJson(Map<String, dynamic> json) =>
+    _$PriceDetailImpl(
       itemCondition: json['condition'] == null
           ? ItemCondition.newItem
           : const ItemConditionConverter()
@@ -159,7 +159,7 @@ _$_PriceDetail _$$_PriceDetailFromJson(Map<String, dynamic> json) =>
           : const SellerTypeConverter().fromJson(json['type'] as String),
     );
 
-Map<String, dynamic> _$$_PriceDetailToJson(_$_PriceDetail instance) =>
+Map<String, dynamic> _$$PriceDetailImplToJson(_$PriceDetailImpl instance) =>
     <String, dynamic>{
       'condition':
           const ItemConditionConverter().toJson(instance.itemCondition),

@@ -8,17 +8,17 @@ part of 'search_settings.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SearchSettingsAdapter extends TypeAdapter<_$_SearchSettings> {
+class SearchSettingsImplAdapter extends TypeAdapter<_$SearchSettingsImpl> {
   @override
   final int typeId = 40;
 
   @override
-  _$_SearchSettings read(BinaryReader reader) {
+  _$SearchSettingsImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_SearchSettings(
+    return _$SearchSettingsImpl(
       type: fields[0] as SearchType,
       usedSubCondition: fields[1] as UsedSubCondition,
       useFba: fields[2] as bool,
@@ -29,7 +29,7 @@ class SearchSettingsAdapter extends TypeAdapter<_$_SearchSettings> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_SearchSettings obj) {
+  void write(BinaryWriter writer, _$SearchSettingsImpl obj) {
     writer
       ..writeByte(6)
       ..writeByte(0)
@@ -52,7 +52,7 @@ class SearchSettingsAdapter extends TypeAdapter<_$_SearchSettings> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SearchSettingsAdapter &&
+      other is SearchSettingsImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

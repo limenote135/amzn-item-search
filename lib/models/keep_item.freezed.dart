@@ -12,7 +12,7 @@ part of 'keep_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$KeepItem {
@@ -99,10 +99,11 @@ class _$KeepItemCopyWithImpl<$Res, $Val extends KeepItem>
 }
 
 /// @nodoc
-abstract class _$$_KeepItemCopyWith<$Res> implements $KeepItemCopyWith<$Res> {
-  factory _$$_KeepItemCopyWith(
-          _$_KeepItem value, $Res Function(_$_KeepItem) then) =
-      __$$_KeepItemCopyWithImpl<$Res>;
+abstract class _$$KeepItemImplCopyWith<$Res>
+    implements $KeepItemCopyWith<$Res> {
+  factory _$$KeepItemImplCopyWith(
+          _$KeepItemImpl value, $Res Function(_$KeepItemImpl) then) =
+      __$$KeepItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -117,11 +118,11 @@ abstract class _$$_KeepItemCopyWith<$Res> implements $KeepItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_KeepItemCopyWithImpl<$Res>
-    extends _$KeepItemCopyWithImpl<$Res, _$_KeepItem>
-    implements _$$_KeepItemCopyWith<$Res> {
-  __$$_KeepItemCopyWithImpl(
-      _$_KeepItem _value, $Res Function(_$_KeepItem) _then)
+class __$$KeepItemImplCopyWithImpl<$Res>
+    extends _$KeepItemCopyWithImpl<$Res, _$KeepItemImpl>
+    implements _$$KeepItemImplCopyWith<$Res> {
+  __$$KeepItemImplCopyWithImpl(
+      _$KeepItemImpl _value, $Res Function(_$KeepItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -133,7 +134,7 @@ class __$$_KeepItemCopyWithImpl<$Res>
     Object? memo = null,
     Object? isUpdating = null,
   }) {
-    return _then(_$_KeepItem(
+    return _then(_$KeepItemImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -161,8 +162,8 @@ class __$$_KeepItemCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: keepItemTypeId)
-class _$_KeepItem implements _KeepItem {
-  const _$_KeepItem(
+class _$KeepItemImpl implements _KeepItem {
+  const _$KeepItemImpl(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.item,
       @HiveField(2) required this.keepDate,
@@ -192,10 +193,10 @@ class _$_KeepItem implements _KeepItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_KeepItem &&
+            other is _$KeepItemImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.keepDate, keepDate) ||
@@ -212,8 +213,8 @@ class _$_KeepItem implements _KeepItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_KeepItemCopyWith<_$_KeepItem> get copyWith =>
-      __$$_KeepItemCopyWithImpl<_$_KeepItem>(this, _$identity);
+  _$$KeepItemImplCopyWith<_$KeepItemImpl> get copyWith =>
+      __$$KeepItemImplCopyWithImpl<_$KeepItemImpl>(this, _$identity);
 }
 
 abstract class _KeepItem implements KeepItem {
@@ -222,7 +223,7 @@ abstract class _KeepItem implements KeepItem {
       @HiveField(1) required final AsinData item,
       @HiveField(2) required final String keepDate,
       @HiveField(3, defaultValue: "") final String memo,
-      final bool isUpdating}) = _$_KeepItem;
+      final bool isUpdating}) = _$KeepItemImpl;
 
   @override
   @HiveField(0)
@@ -240,6 +241,6 @@ abstract class _KeepItem implements KeepItem {
   bool get isUpdating;
   @override
   @JsonKey(ignore: true)
-  _$$_KeepItemCopyWith<_$_KeepItem> get copyWith =>
+  _$$KeepItemImplCopyWith<_$KeepItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -8,17 +8,17 @@ part of 'keep_item.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class KeepItemAdapter extends TypeAdapter<_$_KeepItem> {
+class KeepItemImplAdapter extends TypeAdapter<_$KeepItemImpl> {
   @override
   final int typeId = 90;
 
   @override
-  _$_KeepItem read(BinaryReader reader) {
+  _$KeepItemImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_KeepItem(
+    return _$KeepItemImpl(
       id: fields[0] as String,
       item: fields[1] as AsinData,
       keepDate: fields[2] as String,
@@ -27,7 +27,7 @@ class KeepItemAdapter extends TypeAdapter<_$_KeepItem> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_KeepItem obj) {
+  void write(BinaryWriter writer, _$KeepItemImpl obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)
@@ -46,7 +46,7 @@ class KeepItemAdapter extends TypeAdapter<_$_KeepItem> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is KeepItemAdapter &&
+      other is KeepItemImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

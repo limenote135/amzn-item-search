@@ -8,12 +8,12 @@ part of 'pricetar.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LoginResponse _$$_LoginResponseFromJson(Map<String, dynamic> json) =>
-    _$_LoginResponse(
+_$LoginResponseImpl _$$LoginResponseImplFromJson(Map<String, dynamic> json) =>
+    _$LoginResponseImpl(
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$$_LoginResponseToJson(_$_LoginResponse instance) =>
+Map<String, dynamic> _$$LoginResponseImplToJson(_$LoginResponseImpl instance) =>
     <String, dynamic>{
       'message': instance.message,
     };

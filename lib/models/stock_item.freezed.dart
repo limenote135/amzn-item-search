@@ -12,7 +12,7 @@ part of 'stock_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$StockItem {
@@ -230,10 +230,11 @@ class _$StockItemCopyWithImpl<$Res, $Val extends StockItem>
 }
 
 /// @nodoc
-abstract class _$$_StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
-  factory _$$_StockItemCopyWith(
-          _$_StockItem value, $Res Function(_$_StockItem) then) =
-      __$$_StockItemCopyWithImpl<$Res>;
+abstract class _$$StockItemImplCopyWith<$Res>
+    implements $StockItemCopyWith<$Res> {
+  factory _$$StockItemImplCopyWith(
+          _$StockItemImpl value, $Res Function(_$StockItemImpl) then) =
+      __$$StockItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -264,11 +265,11 @@ abstract class _$$_StockItemCopyWith<$Res> implements $StockItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_StockItemCopyWithImpl<$Res>
-    extends _$StockItemCopyWithImpl<$Res, _$_StockItem>
-    implements _$$_StockItemCopyWith<$Res> {
-  __$$_StockItemCopyWithImpl(
-      _$_StockItem _value, $Res Function(_$_StockItem) _then)
+class __$$StockItemImplCopyWithImpl<$Res>
+    extends _$StockItemCopyWithImpl<$Res, _$StockItemImpl>
+    implements _$$StockItemImplCopyWith<$Res> {
+  __$$StockItemImplCopyWithImpl(
+      _$StockItemImpl _value, $Res Function(_$StockItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -296,7 +297,7 @@ class __$$_StockItemCopyWithImpl<$Res>
     Object? isSmallProgram = null,
     Object? smallFee = null,
   }) {
-    return _then(_$_StockItem(
+    return _then(_$StockItemImpl(
       purchaseDate: null == purchaseDate
           ? _value.purchaseDate
           : purchaseDate // ignore: cast_nullable_to_non_nullable
@@ -388,8 +389,8 @@ class __$$_StockItemCopyWithImpl<$Res>
 /// @nodoc
 
 @HiveType(typeId: stockItemTypeId)
-class _$_StockItem implements _StockItem {
-  const _$_StockItem(
+class _$StockItemImpl implements _StockItem {
+  const _$StockItemImpl(
       {@HiveField(0) required this.purchaseDate,
       @HiveField(1) this.purchasePrice = 0,
       @HiveField(2) this.sellPrice = 0,
@@ -510,10 +511,10 @@ class _$_StockItem implements _StockItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StockItem &&
+            other is _$StockItemImpl &&
             (identical(other.purchaseDate, purchaseDate) ||
                 other.purchaseDate == purchaseDate) &&
             (identical(other.purchasePrice, purchasePrice) ||
@@ -580,8 +581,8 @@ class _$_StockItem implements _StockItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StockItemCopyWith<_$_StockItem> get copyWith =>
-      __$$_StockItemCopyWithImpl<_$_StockItem>(this, _$identity);
+  _$$StockItemImplCopyWith<_$StockItemImpl> get copyWith =>
+      __$$StockItemImplCopyWithImpl<_$StockItemImpl>(this, _$identity);
 }
 
 abstract class _StockItem implements StockItem {
@@ -606,7 +607,7 @@ abstract class _StockItem implements StockItem {
       @HiveField(16, defaultValue: 0) final int otherCost,
       @HiveField(17, defaultValue: <String>[]) final List<String> images,
       @HiveField(18, defaultValue: false) final bool isSmallProgram,
-      @HiveField(19, defaultValue: 0) final int smallFee}) = _$_StockItem;
+      @HiveField(19, defaultValue: 0) final int smallFee}) = _$StockItemImpl;
 
   @override
   @HiveField(0)
@@ -673,6 +674,6 @@ abstract class _StockItem implements StockItem {
   int get smallFee;
   @override
   @JsonKey(ignore: true)
-  _$$_StockItemCopyWith<_$_StockItem> get copyWith =>
+  _$$StockItemImplCopyWith<_$StockItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

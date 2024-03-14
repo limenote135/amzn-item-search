@@ -12,7 +12,7 @@ part of 'asin_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AsinData _$AsinDataFromJson(Map<String, dynamic> json) {
   return _AsinData.fromJson(json);
@@ -244,10 +244,11 @@ class _$AsinDataCopyWithImpl<$Res, $Val extends AsinData>
 }
 
 /// @nodoc
-abstract class _$$_AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
-  factory _$$_AsinDataCopyWith(
-          _$_AsinData value, $Res Function(_$_AsinData) then) =
-      __$$_AsinDataCopyWithImpl<$Res>;
+abstract class _$$AsinDataImplCopyWith<$Res>
+    implements $AsinDataCopyWith<$Res> {
+  factory _$$AsinDataImplCopyWith(
+          _$AsinDataImpl value, $Res Function(_$AsinDataImpl) then) =
+      __$$AsinDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -287,11 +288,11 @@ abstract class _$$_AsinDataCopyWith<$Res> implements $AsinDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AsinDataCopyWithImpl<$Res>
-    extends _$AsinDataCopyWithImpl<$Res, _$_AsinData>
-    implements _$$_AsinDataCopyWith<$Res> {
-  __$$_AsinDataCopyWithImpl(
-      _$_AsinData _value, $Res Function(_$_AsinData) _then)
+class __$$AsinDataImplCopyWithImpl<$Res>
+    extends _$AsinDataCopyWithImpl<$Res, _$AsinDataImpl>
+    implements _$$AsinDataImplCopyWith<$Res> {
+  __$$AsinDataImplCopyWithImpl(
+      _$AsinDataImpl _value, $Res Function(_$AsinDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -317,7 +318,7 @@ class __$$_AsinDataCopyWithImpl<$Res>
     Object? defaultPurchasePrice = null,
     Object? hazmatType = null,
   }) {
-    return _then(_$_AsinData(
+    return _then(_$AsinDataImpl(
       jan: null == jan
           ? _value.jan
           : jan // ignore: cast_nullable_to_non_nullable
@@ -402,8 +403,8 @@ class __$$_AsinDataCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: asinDataTypeId)
-class _$_AsinData implements _AsinData {
-  const _$_AsinData(
+class _$AsinDataImpl implements _AsinData {
+  const _$AsinDataImpl(
       {@HiveField(0) this.jan = "",
       @HiveField(1) required this.asin,
       @HiveField(2) this.listPrice = 0,
@@ -435,8 +436,8 @@ class _$_AsinData implements _AsinData {
       @HazmatTypeConverter()
       this.hazmatType = HazmatType.nonHazmat});
 
-  factory _$_AsinData.fromJson(Map<String, dynamic> json) =>
-      _$$_AsinDataFromJson(json);
+  factory _$AsinDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AsinDataImplFromJson(json);
 
   @override
   @JsonKey()
@@ -519,10 +520,10 @@ class _$_AsinData implements _AsinData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AsinData &&
+            other is _$AsinDataImpl &&
             (identical(other.jan, jan) || other.jan == jan) &&
             (identical(other.asin, asin) || other.asin == asin) &&
             (identical(other.listPrice, listPrice) ||
@@ -584,12 +585,12 @@ class _$_AsinData implements _AsinData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AsinDataCopyWith<_$_AsinData> get copyWith =>
-      __$$_AsinDataCopyWithImpl<_$_AsinData>(this, _$identity);
+  _$$AsinDataImplCopyWith<_$AsinDataImpl> get copyWith =>
+      __$$AsinDataImplCopyWithImpl<_$AsinDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AsinDataToJson(
+    return _$$AsinDataImplToJson(
       this,
     );
   }
@@ -626,9 +627,10 @@ abstract class _AsinData implements AsinData {
       final int defaultPurchasePrice,
       @HiveField(17, defaultValue: HazmatType.nonHazmat)
       @HazmatTypeConverter()
-      final HazmatType hazmatType}) = _$_AsinData;
+      final HazmatType hazmatType}) = _$AsinDataImpl;
 
-  factory _AsinData.fromJson(Map<String, dynamic> json) = _$_AsinData.fromJson;
+  factory _AsinData.fromJson(Map<String, dynamic> json) =
+      _$AsinDataImpl.fromJson;
 
   @override
   @HiveField(0)
@@ -694,7 +696,7 @@ abstract class _AsinData implements AsinData {
   HazmatType get hazmatType;
   @override
   @JsonKey(ignore: true)
-  _$$_AsinDataCopyWith<_$_AsinData> get copyWith =>
+  _$$AsinDataImplCopyWith<_$AsinDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -758,11 +760,11 @@ class _$ListingRestrictionsCopyWithImpl<$Res, $Val extends ListingRestrictions>
 }
 
 /// @nodoc
-abstract class _$$_ListingRestrictionsCopyWith<$Res>
+abstract class _$$ListingRestrictionsImplCopyWith<$Res>
     implements $ListingRestrictionsCopyWith<$Res> {
-  factory _$$_ListingRestrictionsCopyWith(_$_ListingRestrictions value,
-          $Res Function(_$_ListingRestrictions) then) =
-      __$$_ListingRestrictionsCopyWithImpl<$Res>;
+  factory _$$ListingRestrictionsImplCopyWith(_$ListingRestrictionsImpl value,
+          $Res Function(_$ListingRestrictionsImpl) then) =
+      __$$ListingRestrictionsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -771,11 +773,11 @@ abstract class _$$_ListingRestrictionsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ListingRestrictionsCopyWithImpl<$Res>
-    extends _$ListingRestrictionsCopyWithImpl<$Res, _$_ListingRestrictions>
-    implements _$$_ListingRestrictionsCopyWith<$Res> {
-  __$$_ListingRestrictionsCopyWithImpl(_$_ListingRestrictions _value,
-      $Res Function(_$_ListingRestrictions) _then)
+class __$$ListingRestrictionsImplCopyWithImpl<$Res>
+    extends _$ListingRestrictionsCopyWithImpl<$Res, _$ListingRestrictionsImpl>
+    implements _$$ListingRestrictionsImplCopyWith<$Res> {
+  __$$ListingRestrictionsImplCopyWithImpl(_$ListingRestrictionsImpl _value,
+      $Res Function(_$ListingRestrictionsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -784,7 +786,7 @@ class __$$_ListingRestrictionsCopyWithImpl<$Res>
     Object? newItem = null,
     Object? used = null,
   }) {
-    return _then(_$_ListingRestrictions(
+    return _then(_$ListingRestrictionsImpl(
       newItem: null == newItem
           ? _value.newItem
           : newItem // ignore: cast_nullable_to_non_nullable
@@ -801,15 +803,15 @@ class __$$_ListingRestrictionsCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 @HiveType(typeId: listingRestrictionTypeId)
-class _$_ListingRestrictions implements _ListingRestrictions {
-  const _$_ListingRestrictions(
+class _$ListingRestrictionsImpl implements _ListingRestrictions {
+  const _$ListingRestrictionsImpl(
       {@HiveField(0)
       @JsonKey(name: "new", defaultValue: false)
       this.newItem = false,
       @HiveField(1) @JsonKey(defaultValue: false) this.used = false});
 
-  factory _$_ListingRestrictions.fromJson(Map<String, dynamic> json) =>
-      _$$_ListingRestrictionsFromJson(json);
+  factory _$ListingRestrictionsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ListingRestrictionsImplFromJson(json);
 
   @override
   @HiveField(0)
@@ -826,10 +828,10 @@ class _$_ListingRestrictions implements _ListingRestrictions {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ListingRestrictions &&
+            other is _$ListingRestrictionsImpl &&
             (identical(other.newItem, newItem) || other.newItem == newItem) &&
             (identical(other.used, used) || other.used == used));
   }
@@ -841,13 +843,13 @@ class _$_ListingRestrictions implements _ListingRestrictions {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ListingRestrictionsCopyWith<_$_ListingRestrictions> get copyWith =>
-      __$$_ListingRestrictionsCopyWithImpl<_$_ListingRestrictions>(
+  _$$ListingRestrictionsImplCopyWith<_$ListingRestrictionsImpl> get copyWith =>
+      __$$ListingRestrictionsImplCopyWithImpl<_$ListingRestrictionsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ListingRestrictionsToJson(
+    return _$$ListingRestrictionsImplToJson(
       this,
     );
   }
@@ -859,10 +861,10 @@ abstract class _ListingRestrictions implements ListingRestrictions {
           @JsonKey(name: "new", defaultValue: false)
           final bool newItem,
           @HiveField(1) @JsonKey(defaultValue: false) final bool used}) =
-      _$_ListingRestrictions;
+      _$ListingRestrictionsImpl;
 
   factory _ListingRestrictions.fromJson(Map<String, dynamic> json) =
-      _$_ListingRestrictions.fromJson;
+      _$ListingRestrictionsImpl.fromJson;
 
   @override
   @HiveField(0)
@@ -874,6 +876,6 @@ abstract class _ListingRestrictions implements ListingRestrictions {
   bool get used;
   @override
   @JsonKey(ignore: true)
-  _$$_ListingRestrictionsCopyWith<_$_ListingRestrictions> get copyWith =>
+  _$$ListingRestrictionsImplCopyWith<_$ListingRestrictionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

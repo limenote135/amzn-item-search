@@ -8,17 +8,18 @@ part of 'sellersket_settings.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SellerSketSettingsAdapter extends TypeAdapter<_$_SellerSketSettings> {
+class SellerSketSettingsImplAdapter
+    extends TypeAdapter<_$SellerSketSettingsImpl> {
   @override
   final int typeId = 60;
 
   @override
-  _$_SellerSketSettings read(BinaryReader reader) {
+  _$SellerSketSettingsImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_SellerSketSettings(
+    return _$SellerSketSettingsImpl(
       newRule: fields[0] as SellerSketReviseRule,
       usedRule: fields[1] as SellerSketReviseRule,
       lowestStopperType: fields[2] as RevisePriceStopper,
@@ -30,7 +31,7 @@ class SellerSketSettingsAdapter extends TypeAdapter<_$_SellerSketSettings> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_SellerSketSettings obj) {
+  void write(BinaryWriter writer, _$SellerSketSettingsImpl obj) {
     writer
       ..writeByte(7)
       ..writeByte(0)
@@ -55,7 +56,7 @@ class SellerSketSettingsAdapter extends TypeAdapter<_$_SellerSketSettings> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SellerSketSettingsAdapter &&
+      other is SellerSketSettingsImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
