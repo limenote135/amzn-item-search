@@ -11,6 +11,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 
+var inputFocusNode = FocusNode();
+
 class SearchBar extends HookConsumerWidget implements PreferredSizeWidget {
   const SearchBar({super.key});
 
@@ -26,7 +28,6 @@ class SearchBar extends HookConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textEditingController = useTextEditingController();
-    final focusNode = useFocusNode();
     final settings = ref.watch(searchSettingsControllerProvider);
 
     return KeyboardActions(
@@ -37,7 +38,7 @@ class SearchBar extends HookConsumerWidget implements PreferredSizeWidget {
         keyboardBarColor: isDark(context) ? Colors.black87 : Colors.grey[200],
         actions: [
           KeyboardActionsItem(
-            focusNode: focusNode,
+            focusNode: inputFocusNode,
             toolbarButtons: [
               (node) {
                 return ElevatedButton.icon(
@@ -49,7 +50,7 @@ class SearchBar extends HookConsumerWidget implements PreferredSizeWidget {
                     }
                     final value = textEditingController.text;
                     if (value != "") {
-                      _addItem(context, ref, settings.type, value);
+                      _addItem(ref, settings.type, value);
                       textEditingController.clear();
                     }
                   },
@@ -79,14 +80,14 @@ class SearchBar extends HookConsumerWidget implements PreferredSizeWidget {
                 child: Row(
                   children: [
                     GestureDetector(
-                      onTap: focusNode.requestFocus,
+                      onTap: inputFocusNode.requestFocus,
                       child: const Icon(Icons.search, color: Colors.grey),
                     ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4),
                         child: TextField(
-                          focusNode: focusNode,
+                          focusNode: inputFocusNode,
                           controller: textEditingController,
                           keyboardType: TextInputType.number,
                           style: const TextStyle(fontSize: 18),
@@ -99,7 +100,7 @@ class SearchBar extends HookConsumerWidget implements PreferredSizeWidget {
                               : null,
                           onSubmitted: (value) async {
                             if (value != "") {
-                              _addItem(context, ref, settings.type, value);
+                              _addItem(ref, settings.type, value);
                               textEditingController.clear();
                               if (Platform.isIOS && settings.continuousInput) {
                                 await Future<void>.delayed(
@@ -177,7 +178,6 @@ class SearchBar extends HookConsumerWidget implements PreferredSizeWidget {
   }
 
   void _addItem(
-    BuildContext context,
     WidgetRef ref,
     SearchType type,
     String code,
