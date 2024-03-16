@@ -1,4 +1,6 @@
 import 'package:amasearch/controllers/search_item_controller.dart';
+import 'package:amasearch/controllers/search_settings_controller.dart';
+import 'package:amasearch/models/enums/search_type.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/pages/search/camera_page/camera_page.dart';
 import 'package:amasearch/pages/search/common/constants.dart';
@@ -9,15 +11,70 @@ import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:amasearch/widgets/floating_action_margin.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'item_tile.dart';
+import 'search_bar.dart';
 import 'search_settings.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({super.key});
   static const routeName = "/";
+
+  @override
+  ConsumerState<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends ConsumerState<SearchPage> {
+  @override
+  void initState() {
+    HardwareKeyboard.instance.addHandler(keyHandler);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    HardwareKeyboard.instance.removeHandler(keyHandler);
+    super.dispose();
+  }
+
+  var keyInput = "";
+  bool keyHandler(KeyEvent event) {
+    if (!inputFocusNode.hasFocus && event is KeyDownEvent) {
+      if (event.logicalKey == LogicalKeyboardKey.enter) {
+        final settings = ref.read(searchSettingsControllerProvider);
+        _addItem(settings.type, keyInput);
+        keyInput = "";
+        return false;
+      } else {
+        keyInput += event.character ?? "";
+      }
+    }
+    return false;
+  }
+
+  void _addItem(SearchType type, String code) {
+    switch (type) {
+      case SearchType.jan:
+        ref.read(searchItemControllerProvider.notifier).add(code);
+        return;
+      case SearchType.bookoff:
+        ref.read(searchItemControllerProvider.notifier).addBookoff(code);
+        return;
+      case SearchType.geo:
+        ref.read(searchItemControllerProvider.notifier).addGeo(code);
+        return;
+      case SearchType.tsutaya:
+        ref.read(searchItemControllerProvider.notifier).addTsutaya(code);
+        return;
+      case SearchType.freeWord:
+        // deprecated
+        break;
+    }
+    throw Exception("Unknown type: $type");
+  }
 
   @override
   Widget build(BuildContext context) {
