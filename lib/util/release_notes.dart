@@ -5,8 +5,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(2, 9, 0);
+var releaseNotesVersion = Version(2, 10, 0);
 const releaseNotes = <Release>[
+  Release(
+    title: "2.10.0",
+    changes: [
+      ChangeGroup(
+        title: "更新内容",
+        changes: [
+          "外部バーコードリーダーを接続した際、JANコード入力欄をタップしなくてもバーコードが読めるようになりました",
+        ],
+      ),
+    ],
+  ),
   Release(
     title: "2.9.0",
     changes: [
