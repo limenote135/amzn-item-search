@@ -44,14 +44,17 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   bool keyHandler(KeyEvent event) {
     if (!inputFocusNode.hasFocus && event is KeyDownEvent) {
       if (event.logicalKey == LogicalKeyboardKey.enter) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("$keyInput を読み込みました"),
-            duration: const Duration(seconds: 1),
-          ),
-        );
-        final settings = ref.read(searchSettingsControllerProvider);
-        _addItem(settings.type, keyInput);
+        final isPaidUser = ref.read(isPaidUserProvider);
+        if (isPaidUser) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("$keyInput を読み込みました"),
+              duration: const Duration(seconds: 1),
+            ),
+          );
+          final settings = ref.read(searchSettingsControllerProvider);
+          _addItem(settings.type, keyInput);
+        }
         keyInput = "";
         return false;
       } else {
