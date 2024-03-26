@@ -15,14 +15,14 @@ final filteredStockListProvider = Provider(
 
     if (filter.keyword != null) {
       items = items.where((element) {
-        final word = filter.keyword!;
-        final title = element.item.title;
+        final word = filter.keyword!.toUpperCase();
+        final title = element.item.title.toUpperCase();
         final asin = element.item.asin.toUpperCase();
         final jan = element.item.jan;
-        final sku = element.sku;
+        final sku = element.sku.toUpperCase();
 
         return title.contains(word) ||
-            asin == word.toUpperCase() ||
+            asin == word ||
             jan == word ||
             sku.contains(word);
       });
