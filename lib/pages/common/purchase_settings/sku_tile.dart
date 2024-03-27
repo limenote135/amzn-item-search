@@ -65,13 +65,8 @@ class SkuTile extends HookConsumerWidget {
     final useFba = getBool(form, useFbaField);
     final purchaseDate = getPurchaseDate(form);
     final otherCost = getInt(form, otherCostField);
-    final smallProgram = getBool(form, smallProgramField);
-    final smallFee = item.smallFee;
 
-    var feeInfo = item.prices?.feeInfo;
-    if (smallProgram && feeInfo != null) {
-      feeInfo = feeInfo.copyWith(fbaFee: smallFee);
-    }
+    final feeInfo = item.prices?.feeInfo;
 
     final profit = calcProfit(
       sellPrice: sell,

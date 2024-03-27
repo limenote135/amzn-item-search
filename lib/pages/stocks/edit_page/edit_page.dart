@@ -109,7 +109,6 @@ class _SaveButton extends HookConsumerWidget {
     final sell = getInt(form, sellPriceField);
     final useFba = getBool(form, useFbaField);
     final otherCost = getInt(form, otherCostField);
-    final smallProgram = getBool(form, smallProgramField);
     final sku = getString(form, skuField);
 
     final hasSameSku = ref.read(
@@ -127,11 +126,7 @@ class _SaveButton extends HookConsumerWidget {
       }
     }
 
-    var feeInfo = item.item.prices?.feeInfo;
-    if (smallProgram && feeInfo != null) {
-      feeInfo = feeInfo.copyWith(fbaFee: item.smallFee);
-    }
-
+    final feeInfo = item.item.prices?.feeInfo;
     final profit = calcProfit(
       sellPrice: sell,
       purchasePrice: purchase,
@@ -163,7 +158,6 @@ class _SaveButton extends HookConsumerWidget {
       conditionText: getString(form, conditionTextField),
       otherCost: getInt(form, otherCostField),
       images: getImages(form),
-      isSmallProgram: smallProgram,
     );
     await ref.read(stockItemListControllerProvider.notifier).update(newItem);
     Navigator.of(context).popUntil((route) => route.settings.name == "/");

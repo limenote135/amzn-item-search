@@ -20,13 +20,8 @@ class FeeTile extends HookConsumerWidget {
     final useFba = getBool(form, useFbaField);
     final sellPrice = getInt(form, sellPriceField);
     final purchasePrice = getInt(form, purchasePriceField);
-    final smallProgram = getBool(form, smallProgramField);
-    final smallFee = item.smallFee;
 
-    var feeInfo = item.prices?.feeInfo ?? const FeeInfo();
-    if (smallProgram) {
-      feeInfo = feeInfo.copyWith(fbaFee: smallFee);
-    }
+    final feeInfo = item.prices?.feeInfo ?? const FeeInfo();
     final totalFee = _calcTotalFee(
       sellPrice: sellPrice,
       purchasePrice: purchasePrice,
@@ -39,7 +34,11 @@ class FeeTile extends HookConsumerWidget {
     final categoryFee = feeInfo.variableClosingFee;
     final tax = ((sellFee + categoryFee) * (taxRate - 1)).round();
 
-    final fbaFeeText = _fbaFeeText(useFba: useFba, feeInfo: feeInfo);
+    final fbaFeeText = _fbaFeeText(
+      useFba: useFba,
+      feeInfo: feeInfo,
+      sellPrice: sellPrice,
+    );
 
     return ExpansionTile(
       title: TextLine(
@@ -74,12 +73,19 @@ class FeeTile extends HookConsumerWidget {
     );
   }
 
-  String _fbaFeeText({required bool useFba, required FeeInfo feeInfo}) {
+  String _fbaFeeText({
+    required bool useFba,
+    required FeeInfo feeInfo,
+    required int sellPrice,
+  }) {
     if (!useFba) {
       return "0";
     } else if (feeInfo.fbaFee == -1) {
       return "(不明)";
     } else {
+      if (sellPrice <= 1000 && feeInfo.fbaLowPriceFee != 0) {
+        return numberFormatter.format(feeInfo.fbaLowPriceFee);
+      }
       return numberFormatter.format(feeInfo.fbaFee);
     }
   }
@@ -91,7 +97,14 @@ class FeeTile extends HookConsumerWidget {
     required bool useFba,
   }) {
     final sellFee = calcReferralFee(sellPrice, feeInfo, 1); // 消費税はここでは含めない
-    final fbaFee = useFba && feeInfo.fbaFee != -1 ? feeInfo.fbaFee : 0;
+    var fbaFee = 0;
+    if (useFba && feeInfo.fbaFee != -1) {
+      if (sellPrice <= 1000 && feeInfo.fbaLowPriceFee != 0) {
+        fbaFee = feeInfo.fbaLowPriceFee;
+      } else {
+        fbaFee = feeInfo.fbaFee;
+      }
+    }
     final totalFee =
         ((sellFee + feeInfo.variableClosingFee) * taxRate + fbaFee).round();
     final str = numberFormatter.format(totalFee);
