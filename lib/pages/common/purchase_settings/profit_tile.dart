@@ -20,17 +20,11 @@ class ProfitTile extends HookConsumerWidget {
     final purchasePrice = getInt(form, purchasePriceField);
     final useFba = getBool(form, useFbaField);
     final otherCost = getInt(form, otherCostField);
-    final smallProgram = getBool(form, smallProgramField);
-    final smallFee = item.smallFee;
 
-    var feeInfo = item.prices?.feeInfo;
-    if (smallProgram && feeInfo != null) {
-      feeInfo = feeInfo.copyWith(fbaFee: smallFee);
-    }
     final profit = calcProfit(
       sellPrice: sellPrice,
       purchasePrice: purchasePrice,
-      fee: feeInfo,
+      fee: item.prices?.feeInfo,
       useFba: useFba,
       otherCost: otherCost,
     );

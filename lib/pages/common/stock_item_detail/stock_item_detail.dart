@@ -45,12 +45,11 @@ class StockItemDetail extends ConsumerWidget {
     final categoryFee = feeInfo.variableClosingFee;
     final tax = ((referralFee + categoryFee) * (taxRate - 1)).round();
 
-    final smallProgram = item.isSmallProgram;
     final isUnknownFbaFee = feeInfo.fbaFee == -1;
     var fbaFee = 0;
     if (item.useFba && !isUnknownFbaFee) {
-      if (smallProgram) {
-        fbaFee = item.smallFee;
+      if (item.sellPrice <= 1000 && feeInfo.fbaLowPriceFee != 0) {
+        fbaFee = feeInfo.fbaLowPriceFee;
       } else {
         fbaFee = feeInfo.fbaFee;
       }

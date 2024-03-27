@@ -7,7 +7,6 @@ import 'package:amasearch/pages/common/purchase_settings/condition_text_tile.dar
 import 'package:amasearch/pages/common/purchase_settings/fba_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/other_cost_tile.dart';
 import 'package:amasearch/pages/common/purchase_settings/quantity_tile.dart';
-import 'package:amasearch/pages/common/purchase_settings/small_program_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/custom_validator.dart';
@@ -57,7 +56,6 @@ final formValueProvider =
       Validators.min(0),
     ],
     useFbaField: item.useFba,
-    smallProgramField: item.isSmallProgram,
     quantityField: [
       item.amount,
       Validators.required,
@@ -87,10 +85,6 @@ final formValueProvider =
     purchaseDateField: DateTime.parse(date).toLocal(),
   });
 
-  if (!item.useFba) {
-    state.control(smallProgramField).markAsDisabled();
-  }
-
   return state;
 });
 
@@ -116,7 +110,6 @@ class PurchaseSettingsForm extends ConsumerWidget {
               const InputPricesTile(),
               const ItemConditionTile(),
               const FbaTile(),
-              if (isPaidUser) const SmallProgramTile(),
               const QuantityTile(),
               const OtherCostTile(),
               const ProfitTile(),
