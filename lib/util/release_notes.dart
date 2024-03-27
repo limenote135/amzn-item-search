@@ -5,8 +5,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(2, 10, 0);
+var releaseNotesVersion = Version(2, 11, 0);
 const releaseNotes = <Release>[
+  Release(
+    title: "2.11.0",
+    changes: [
+      ChangeGroup(
+        title: "更新内容",
+        changes: [
+          "4/1 からのFBA手数料の改定に対応しました",
+          "仕入れリスト内の商品を検索する際、大文字小文字を区別しないようになりました",
+        ],
+      ),
+    ],
+  ),
   Release(
     title: "2.10.0",
     changes: [
