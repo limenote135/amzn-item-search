@@ -27,6 +27,8 @@ class HazmatTypeAdapter extends TypeAdapter<HazmatType> {
         return HazmatType.hazmat;
       case 5:
         return HazmatType.unknown;
+      case 6:
+        return HazmatType.qualification;
       default:
         return HazmatType.nonHazmat;
     }
@@ -52,6 +54,9 @@ class HazmatTypeAdapter extends TypeAdapter<HazmatType> {
         break;
       case HazmatType.unknown:
         writer.writeByte(5);
+        break;
+      case HazmatType.qualification:
+        writer.writeByte(6);
         break;
     }
   }
