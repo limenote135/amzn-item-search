@@ -134,6 +134,7 @@ class HazmatTypeConverter implements JsonConverter<HazmatType, String> {
       case HazmatType.warn:
       case HazmatType.hazmat:
       case HazmatType.unknown:
+      case HazmatType.qualification:
         return object.name;
     }
   }
@@ -153,7 +154,9 @@ class HazmatTypeConverter implements JsonConverter<HazmatType, String> {
         return HazmatType.hazmat;
       case "unknown":
         return HazmatType.unknown;
+      case "qualification":
+        return HazmatType.qualification;
     }
-    return HazmatType.nonHazmat;
+    return HazmatType.unknown;
   }
 }

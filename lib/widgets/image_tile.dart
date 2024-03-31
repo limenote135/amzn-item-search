@@ -49,6 +49,7 @@ class TileImage extends HookConsumerWidget {
       case HazmatType.battery:
       case HazmatType.warn:
       case HazmatType.unknown:
+      case HazmatType.qualification:
         return Colors.yellow[400];
     }
   }
@@ -68,6 +69,8 @@ class TileImage extends HookConsumerWidget {
         return "納品注意";
       case HazmatType.hazmat:
         return "危険物";
+      case HazmatType.qualification:
+        return "要資格";
     }
   }
 
