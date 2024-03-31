@@ -35,6 +35,8 @@ class HazmatInfo extends ConsumerWidget {
         return "納品できない危険物の可能性があります";
       case HazmatType.unknown:
         return "危険物の可能がありますが詳細情報が未登録です";
+      case HazmatType.qualification:
+        return "納品に危険物納品プログラムへの加入が必要です";
     }
   }
 }

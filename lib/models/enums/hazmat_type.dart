@@ -17,4 +17,6 @@ enum HazmatType {
   hazmat,
   @HiveField(5)
   unknown,
+  @HiveField(6)
+  qualification,
 }
