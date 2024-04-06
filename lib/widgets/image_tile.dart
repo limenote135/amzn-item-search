@@ -64,6 +64,7 @@ class TileImage extends HookConsumerWidget {
       case HazmatType.sds:
         return "要SDS";
       case HazmatType.battery:
+        return "充電池";
       case HazmatType.warn:
       case HazmatType.unknown:
         return "納品注意";
