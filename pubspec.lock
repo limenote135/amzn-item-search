@@ -1461,10 +1461,10 @@ packages:
     dependency: "direct main"
     description:
       name: purchases_flutter
-      sha256: "5791321994934c265f9a178c69a329e0f7c21b1975b1e40abfadfa1a3f07cd8a"
+      sha256: "4a818d3f50a657837dcd3b4e1f62303ec4f85e413fed633d24f0e37df183d7b8"
       url: "https://pub.dev"
     source: hosted
-    version: "6.24.0"
+    version: "6.26.0"
   reactive_date_range_picker:
     dependency: "direct main"
     description:
