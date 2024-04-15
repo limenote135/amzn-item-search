@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: "554f148e71e9e016d9c04d4af6b103ca3f74a1ceed7d7307b70a0f41e991eb77"
+      sha256: "0cb43f83f36ba8cb20502dee0c205e3f3aafb751732d724aeac3f2e044212cc2"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.26"
+    version: "1.3.29"
   adaptive_dialog:
     dependency: "direct main"
     description:
@@ -465,10 +465,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "67bf0d5fd78f12f51c6b54a72f6141314136a1a90e98b1b7c45e7fac883254ed"
+      sha256: a864d1b6afd25497a3b57b016886d1763df52baaa69758a46723164de8d187fe
       url: "https://pub.dev"
     source: hosted
-    version: "2.27.1"
+    version: "2.29.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -481,10 +481,10 @@ packages:
     dependency: transitive
     description:
       name: firebase_core_web
-      sha256: "5377eaac3b9fe8aaf22638d87f92b62784f23572e132dfc029195e84d6cb37de"
+      sha256: c8b02226e548f35aace298e2bb2e6c24e34e8a203d614e742bb1146e5a4ad3c8
       url: "https://pub.dev"
     source: hosted
-    version: "2.12.0"
+    version: "2.15.0"
   firebase_crashlytics:
     dependency: "direct main"
     description:
@@ -505,26 +505,26 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_performance
-      sha256: fe1c1ba132044db21b1fe0f753f63f56791b7746b55edbf987d9676d20de5a56
+      sha256: ec864cea403ef60bddb3efd1a16ff3cb28c1f07d2781f569f33fb2f65a21ba45
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.3+18"
+    version: "0.9.4+1"
   firebase_performance_platform_interface:
     dependency: transitive
     description:
       name: firebase_performance_platform_interface
-      sha256: e2e62602af953bf6954fbf10552f50e34cfe580e929a52e397cd8f8c1dc1e0be
+      sha256: d57dbceac655598267ed616c2f2b2b822d7c3d1c3bdc016c749ffcc4106c3f78
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.4+26"
+    version: "0.1.4+29"
   firebase_performance_web:
     dependency: transitive
     description:
       name: firebase_performance_web
-      sha256: c5ce5ea25542a6850c286cbcf65289cd6fbaaab7e0c54d63d4b9753e3ecfe276
+      sha256: "882326f078ab691918c1f5c949577aab585711388fc509af4d09db02d7058ff0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.4+26"
+    version: "0.1.6+1"
   firebase_remote_config:
     dependency: "direct main"
     description:
