@@ -91,7 +91,7 @@ dependencies:
   shared_preferences: ^2.2.2
   state_notifier: ^1.0.0
   url_launcher: ^6.2.5
-  uuid: ^4.3.3
+  uuid: ^4.4.0
   vibration: ^1.8.4 # https://github.com/benjamindean/flutter_vibration
   webview_flutter: ^4.7.0
   worker_manager: ^6.3.2
