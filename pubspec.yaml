@@ -79,7 +79,7 @@ dependencies:
   package_info_plus: ^6.0.0
   path: ^1.8.3
   path_provider: ^2.1.2
-  permission_handler: ^11.3.0
+  permission_handler: ^11.3.1
   pub_semver: ^2.1.4
   purchases_flutter: ^6.24.0
   reactive_date_range_picker: ^2.0.1
