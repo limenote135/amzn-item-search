@@ -14,6 +14,7 @@ const amazonListingEventName = "amazonListing";
 const requestReviewEventName = "requestReview";
 const keepEventName = "keep";
 const searchStockItemEventName = "searchStock";
+const searchKeepItemEventName = "searchKeep";
 
 const searchEventJan = "searchJan";
 const searchEventWord = "searchWord";

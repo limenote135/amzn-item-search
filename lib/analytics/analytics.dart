@@ -105,6 +105,15 @@ class AnalyticsController {
     );
   }
 
+  Future<void> logSearchKeepItemEvent(String param) {
+    return FirebaseAnalytics.instance.logEvent(
+      name: searchKeepItemEventName,
+      parameters: <String, dynamic>{
+        "type": param,
+      },
+    );
+  }
+
   Future<void> logSingleEvent(String name) {
     return FirebaseAnalytics.instance
         .logEvent(name: name, parameters: <String, dynamic>{});

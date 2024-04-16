@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/models/keep_item_filter.dart';
+import 'package:amasearch/pages/keep/search_page/analytics.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/custom_validator.dart';
@@ -223,7 +227,14 @@ class _Body extends ConsumerWidget {
                   keepDateRange: dateRange,
                 );
                 ref.read(currentKeepItemFilterProvider.notifier).state = f;
-
+                final params = createSearchParam(f);
+                if (params.isNotEmpty) {
+                  unawaited(
+                    ref
+                        .read(analyticsControllerProvider)
+                        .logSearchKeepItemEvent(params),
+                  );
+                }
                 Navigator.pop(context);
               }
 
