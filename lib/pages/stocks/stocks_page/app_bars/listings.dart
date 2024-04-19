@@ -109,6 +109,18 @@ Future<void> callListings(
       return;
     }
   }
+
+  if (targets.length > 50) {
+    final isOk = await showOkCancelAlertDialog(
+      context: context,
+      title: "大量出品の警告",
+      message: "一度に50件以上の商品を出品しようとしています。問題ないですか？",
+    );
+    if (isOk != OkCancelResult.ok) {
+      return;
+    }
+  }
+
   try {
     await EasyLoading.show(status: "出品処理中...");
     final items = targets.map((e) => e.toListingItem()).toList();
