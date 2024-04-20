@@ -1,6 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/keep_item_controller.dart';
-import 'package:amasearch/pages/keep/search_page/provider.dart';
 import 'package:amasearch/pages/keep/search_page/search_page.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
