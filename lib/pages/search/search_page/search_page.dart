@@ -46,7 +46,6 @@ class _SearchPageState extends ConsumerState<SearchPage> {
     if (isCurrent != true) {
       return false;
     }
-    print("keyHandler: $event");
     if (!inputFocusNode.hasFocus && event is KeyDownEvent) {
       if (event.logicalKey == LogicalKeyboardKey.enter) {
         final isPaidUser = ref.read(isPaidUserProvider);
