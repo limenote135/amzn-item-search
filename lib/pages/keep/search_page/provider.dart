@@ -39,10 +39,7 @@ final filteredKeepListProvider = Provider(
 
     if (filter.newPriceLower != null) {
       items = items.where((element) {
-        final newPrices = element.item.prices?.newPrices;
-        if (newPrices == null || newPrices.isEmpty) {
-          return false;
-        }
+        final newPrices = element.item.prices?.newPrices ?? [];
         final targetPrices = filter.priorFba
             ? newPrices.where((e) => e.channel == FulfillmentChannel.amazon)
             : newPrices;
@@ -51,41 +48,33 @@ final filteredKeepListProvider = Provider(
     }
     if (filter.newPriceUpper != null) {
       items = items.where((element) {
-        final newPrices = element.item.prices?.newPrices;
-        if (newPrices == null || newPrices.isEmpty) {
-          return false;
-        }
+        final newPrices = element.item.prices?.newPrices ?? [];
         final targetPrices = filter.priorFba
             ? newPrices.where((e) => e.channel == FulfillmentChannel.amazon)
             : newPrices;
-        return targetPrices.any((e) => e.price <= filter.newPriceLower!);
+        return targetPrices.any((e) => e.price <= filter.newPriceUpper!);
       });
     }
 
     if (filter.usedPriceLower != null) {
       items = items.where((element) {
-        final usedPrices = element.item.prices?.usedPrices;
-        if (usedPrices == null || usedPrices.isEmpty) {
-          return false;
-        }
+        final usedPrices = element.item.prices?.usedPrices ?? [];
         final targetPrices = filter.priorFba
             ? usedPrices.where((e) => e.channel == FulfillmentChannel.amazon)
             : usedPrices;
-        return targetPrices.any((e) => e.price >= filter.newPriceLower!);
+        return targetPrices.any((e) => e.price >= filter.usedPriceLower!);
       });
     }
     if (filter.usedPriceUpper != null) {
       items = items.where((element) {
-        final usedPrices = element.item.prices?.usedPrices;
-        if (usedPrices == null || usedPrices.isEmpty) {
-          return false;
-        }
+        final usedPrices = element.item.prices?.usedPrices ?? [];
         final targetPrices = filter.priorFba
             ? usedPrices.where((e) => e.channel == FulfillmentChannel.amazon)
             : usedPrices;
-        return targetPrices.any((e) => e.price <= filter.newPriceLower!);
+        return targetPrices.any((e) => e.price <= filter.usedPriceUpper!);
       });
     }
+
     if (filter.keepDateRange != null) {
       items = items.where((element) {
         final start = filter.keepDateRange!.start;
