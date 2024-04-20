@@ -1,5 +1,8 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/keep_item_controller.dart';
+import 'package:amasearch/pages/keep/search_page/provider.dart';
+import 'package:amasearch/pages/keep/search_page/search_page.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -15,9 +18,22 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final filterCount = ref.watch(filterCountProvider);
     return AppBar(
       title: const Text("キープ商品"),
       actions: [
+        IconButton(
+          icon: Badge.count(
+            count: filterCount,
+            isLabelVisible: filterCount > 0,
+            backgroundColor: Colors.orange,
+            textColor: !isDark(context) ? Colors.black : Colors.white,
+            child: const Icon(Icons.search),
+          ),
+          onPressed: () {
+            Navigator.of(context).push(SearchPage.route());
+          },
+        ),
         PopupMenuButton<_KeepPageActions>(
           padding: EdgeInsets.zero,
           onSelected: (value) async {
