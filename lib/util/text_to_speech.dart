@@ -33,11 +33,14 @@ class TextToSpeech {
       }
 
       if (Platform.isIOS) {
-        await _flutterTts
-            .setIosAudioCategory(IosTextToSpeechAudioCategory.ambientSolo, [
-          IosTextToSpeechAudioCategoryOptions.allowBluetooth,
-          IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
-        ]);
+        await _flutterTts.setIosAudioCategory(
+          IosTextToSpeechAudioCategory.ambient,
+          [
+            IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+            IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+          ],
+          IosTextToSpeechAudioMode.voicePrompt,
+        );
       }
     });
   }
@@ -46,7 +49,10 @@ class TextToSpeech {
   final Ref _ref;
 
   void speak(String text) {
-    _flutterTts.speak(text);
+    // iOS では読み上げ終わるまで次のテキストが読まれないので、stop() して読み上げ中のものを中断する
+    _flutterTts.stop().then((value) {
+      _flutterTts.speak(text);
+    });
   }
 
   Future<void> setVolume(double volume) {
