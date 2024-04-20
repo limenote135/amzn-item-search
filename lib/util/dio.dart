@@ -151,7 +151,7 @@ class HttpClient {
         if (isPaidUser) {
           throw Exception("短時間のリクエストが多すぎます。少し時間をおいて再度お試しください");
         } else {
-          await Future<void>.delayed(const Duration(seconds: 1));
+          await Future<void>.delayed(const Duration(seconds: 2));
           throw Exception("フリープランの短期間リクエスト上限です。少し時間をおいて再度お試しください。");
         }
       }
