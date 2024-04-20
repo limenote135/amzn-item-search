@@ -6,7 +6,6 @@ import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/keep_item.dart';
 import 'package:amasearch/pages/keep/detail_page/detail_page.dart';
 import 'package:amasearch/pages/keep/keep_page/refresh_appbar.dart';
-import 'package:amasearch/pages/keep/search_page/provider.dart';
 import 'package:amasearch/pages/search/purchase_page/purchase_page.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/uuid.dart';
