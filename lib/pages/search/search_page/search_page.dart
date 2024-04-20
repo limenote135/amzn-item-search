@@ -44,6 +44,12 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   bool keyHandler(KeyEvent event) {
     if (!inputFocusNode.hasFocus && event is KeyDownEvent) {
       if (event.logicalKey == LogicalKeyboardKey.enter) {
+        if (keyInput.isEmpty) {
+          // お問い合わせや仕入れ時のメモなど、複数行のテキストフィールドで改行した際にも呼ばれる
+          // Enter 以外では反応しないため、必ず keyInput が空の状態となる
+          // そのため、keyInput が空の場合にはなにもしない
+          return false;
+        }
         final isPaidUser = ref.read(isPaidUserProvider);
         if (isPaidUser) {
           ScaffoldMessenger.of(context).showSnackBar(
