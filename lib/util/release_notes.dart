@@ -5,8 +5,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(2, 11, 0);
+var releaseNotesVersion = Version(2, 12, 0);
 const releaseNotes = <Release>[
+  Release(
+    title: "2.12.0",
+    changes: [
+      ChangeGroup(
+        title: "更新内容",
+        changes: [
+          "キープリスト内の商品を検索できるようになりました",
+        ],
+      ),
+    ],
+  ),
   Release(
     title: "2.11.0",
     changes: [
