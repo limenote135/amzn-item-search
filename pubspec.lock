@@ -1061,18 +1061,18 @@ packages:
     dependency: "direct main"
     description:
       name: image_editor
-      sha256: "6401a431ef1e988e35a8b19ff02cb7d31bd881fd7db0d39261ac8236683ef1c1"
+      sha256: "81e4c6ccfd4ff242a89695347113bb90b62b89bab70e97cdd5625c85887a86e3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   image_editor_common:
     dependency: transitive
     description:
       name: image_editor_common
-      sha256: "07fc9bcc16918a8230e132b9d9a9f66bb1cef3ac99f5e2939cf2ad7a6775b511"
+      sha256: "03a6a85608ffe4e7de5b1f042ac09859110b5b5ddc74a91e206d3084db27fe9b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.1.1"
   image_editor_ohos:
     dependency: transitive
     description:
@@ -1085,10 +1085,10 @@ packages:
     dependency: transitive
     description:
       name: image_editor_platform_interface
-      sha256: ee01ec5e228e10c40f96d7f822c176d4140c15b6706e4a701866ee0cdd1c2b72
+      sha256: "474517efc770464f7d99942472d8cfb369a3c378e95466ec17f74d2b80bd40de"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.1.0"
   in_app_review:
     dependency: "direct main"
     description:
