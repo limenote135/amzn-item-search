@@ -8,6 +8,7 @@ import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
 import 'package:amasearch/util/error_report.dart';
+import 'package:amasearch/util/exceptions.dart';
 import 'package:amasearch/util/listings.dart';
 import 'package:amasearch/util/review.dart';
 import 'package:amasearch/util/secure_storage.dart';
@@ -203,6 +204,14 @@ Future<void> callListings(
     }
 
     await requestReview(analytics);
+  } on PricetarInvalidCsvException catch (e) {
+    await EasyLoading.dismiss();
+    await showOkAlertDialog(
+      context: context,
+      title: "価格設定エラー",
+      message: "価格設定が正しくないため出品できません。\n"
+          "$e",
+    );
     // ignore: avoid_catches_without_on_clauses
   } catch (e, st) {
     await EasyLoading.dismiss();

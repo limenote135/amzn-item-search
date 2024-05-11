@@ -70,7 +70,9 @@ Future<File> createPricetarListingsFile(
   final fbaItems = items.where((element) => element.useFba).toList();
   final selfShipItems = items.where((element) => !element.useFba).toList();
   final fbaData = createPricetarCsv(fbaItems, settings);
+  validatePricetarCsv(fbaData);
   final selfShipData = createPricetarCsv(selfShipItems, settings);
+  validatePricetarCsv(selfShipData);
   const converter = ListToCsvConverter();
   final fbaCsvData = converter.convert(fbaData);
   final selfShipCsvData = converter.convert(selfShipData);

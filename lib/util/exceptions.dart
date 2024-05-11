@@ -6,3 +6,12 @@ class AmazonItemNotFoundException implements Exception {
   @override
   String toString() => message;
 }
+
+// プライスター用の CSV でバリデーションエラーになった場合の例外
+class PricetarInvalidCsvException implements Exception {
+  const PricetarInvalidCsvException(this.message);
+  final String message;
+
+  @override
+  String toString() => message;
+}

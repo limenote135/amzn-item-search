@@ -12,6 +12,7 @@ import 'package:amasearch/models/makad_settings.dart';
 import 'package:amasearch/models/pricetar_settings.dart';
 import 'package:amasearch/models/sellersket_settings.dart';
 import 'package:amasearch/models/stock_item.dart';
+import 'package:amasearch/util/exceptions.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:csv/csv.dart';
@@ -78,6 +79,7 @@ List<List<Object>> createCsv(
   }
 }
 
+// プライスター用のCSVを作成します。この並びを返す場合、バリデーションコードの変更も必要です。
 List<List<Object>> createPricetarCsv(
   List<StockItem> items,
   PricetarSettings settings,
@@ -128,6 +130,26 @@ List<List<Object>> createPricetarCsv(
         "",
       ],
   ];
+}
+
+void validatePricetarCsv(List<List<Object>> items) {
+  for (final item in items) {
+    if (item.length != 14) {
+      throw Exception("CSV の列数が不正です");
+    }
+    final sku = item[0] as String;
+    final sellPrice = item[4] as int;
+    if (sellPrice <= 0) {
+      throw PricetarInvalidCsvException("出品価格が0以下です: $sku");
+    }
+    // 出品価格が仕入れ値もしくは赤字ストッパーを下回っています
+    // 価格追従モードがonに設定されていれば自動調整されます
+    final akaji = item[6] as int;
+    final takane = item[7] as int;
+    if(akaji != 0 && takane != 0 && akaji > takane) {
+      throw PricetarInvalidCsvException("赤字ストッパー金額が高値ストッパー金額を上回っています: $sku");
+    }
+  }
 }
 
 List<List<Object>> _createMakadCsv(
