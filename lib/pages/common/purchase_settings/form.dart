@@ -52,14 +52,14 @@ final formValueProvider =
     sellPriceField: [
       item.sellPrice,
       Validators.required,
-      Validators.number,
+      Validators.number(),
       Validators.min(0),
     ],
     useFbaField: item.useFba,
     quantityField: [
       item.amount,
       Validators.required,
-      Validators.number,
+      Validators.number(),
       Validators.min(1),
     ],
     // 型推論されないので明示的に型を指定する
@@ -69,7 +69,7 @@ final formValueProvider =
     otherCostField: [
       item.otherCost,
       Validators.required,
-      Validators.number,
+      Validators.number(),
     ],
     autogenSkuField: item.autogenSku,
     skuField: [
