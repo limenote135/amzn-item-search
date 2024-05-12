@@ -1461,18 +1461,18 @@ packages:
     dependency: "direct main"
     description:
       name: reactive_date_range_picker
-      sha256: "32f80fbe03fd0f33afe0013eb7030235d29d426fbe06d945945a99b384f59939"
+      sha256: ae2916d16f43c1e9e42e41300a2a1b4220fd31812fc98e017445fad5a09cd6cc
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.1.0"
   reactive_forms:
     dependency: "direct main"
     description:
       name: reactive_forms
-      sha256: b7d64d8fe45c19f506c762e219f4c6a3bdcfc4842d6fba98f866be5fca75d8e5
+      sha256: "9b1fb18e0aae9c50cfa0aaabaaa38bc4d78eefc9b7b95fa9c947b051f6524b8e"
       url: "https://pub.dev"
     source: hosted
-    version: "16.1.1"
+    version: "17.0.1"
   release_notes_dialog:
     dependency: "direct main"
     description:
