@@ -155,7 +155,9 @@ class _KeepaFaq extends StatelessWidget {
             ],
           ),
         ),
-        const Text("アプリ内の設定画面にある \"キャッシュを削除\" をしていただくことで改善する可能性があります。"),
+        const Text(
+          "アプリ内の設定画面にある \"キャッシュを削除\" をした上でアプリを再起動していただくことで改善する可能性があります。",
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 24),
           child: DecoratedBox(
