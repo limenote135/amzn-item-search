@@ -133,7 +133,8 @@ List<List<Object>> createPricetarCsv(
 }
 
 void validatePricetarCsv(List<List<Object>> items) {
-  for (final item in items) {
+  // 1行目はヘッダなのでスキップする
+  for (final item in items.skip(1)) {
     if (item.length != 14) {
       throw Exception("CSV の列数が不正です");
     }
@@ -146,7 +147,7 @@ void validatePricetarCsv(List<List<Object>> items) {
     // 価格追従モードがonに設定されていれば自動調整されます
     final akaji = item[6] as int;
     final takane = item[7] as int;
-    if(akaji != 0 && takane != 0 && akaji > takane) {
+    if (akaji != 0 && takane != 0 && akaji > takane) {
       throw PricetarInvalidCsvException("赤字ストッパー金額が高値ストッパー金額を上回っています: $sku");
     }
   }
