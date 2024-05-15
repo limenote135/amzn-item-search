@@ -10,6 +10,7 @@ import 'package:amasearch/repository/mws.dart';
 import 'package:amasearch/repository/mws_category.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/exceptions.dart';
+import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/progress_indicator.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:dio/dio.dart';
@@ -132,17 +133,22 @@ class _AppBar extends HookConsumerWidget {
               children: [
                 Expanded(
                   child: TypeAheadField(
-                    textFieldConfiguration: TextFieldConfiguration(
-                      controller: controller,
-                      decoration: InputDecoration(
-                        hintText: "フリーワード検索",
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: controller.clear,
+                    controller: controller,
+                    hideOnLoading: true,
+                    builder: (context, controller, focusNode) {
+                      return TextField(
+                        controller: controller,
+                        focusNode: focusNode,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          hintText: "フリーワード検索",
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.clear),
+                            onPressed: controller.clear,
+                          ),
                         ),
-                      ),
-                      onSubmitted: onSubmit,
-                    ),
+                      );
+                    },
                     suggestionsCallback: (pattern) async {
                       if (pattern.isEmpty) {
                         return <String>[];
@@ -156,12 +162,10 @@ class _AppBar extends HookConsumerWidget {
                         child: Text(itemData),
                       );
                     },
-                    noItemsFoundBuilder: (context) {
-                      return Container();
-                    },
-                    onSuggestionSelected: (suggestion) {
-                      controller.text = suggestion;
-                      onSubmit(suggestion);
+                    onSelected: (value) {
+                      controller.text = value;
+                      onSubmit(value);
+                      unfocus();
                     },
                   ),
                 ),
