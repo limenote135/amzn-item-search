@@ -139,7 +139,6 @@ class _AppBar extends HookConsumerWidget {
                       return TextField(
                         controller: controller,
                         focusNode: focusNode,
-                        autofocus: true,
                         decoration: InputDecoration(
                           hintText: "フリーワード検索",
                           suffixIcon: IconButton(
@@ -147,6 +146,7 @@ class _AppBar extends HookConsumerWidget {
                             onPressed: controller.clear,
                           ),
                         ),
+                        onSubmitted: onSubmit,
                       );
                     },
                     suggestionsCallback: (pattern) async {
