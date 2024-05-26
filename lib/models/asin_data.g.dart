@@ -142,10 +142,10 @@ _$AsinDataImpl _$$AsinDataImplFromJson(Map<String, dynamic> json) =>
     _$AsinDataImpl(
       jan: json['jan'] as String? ?? "",
       asin: json['asin'] as String,
-      listPrice: json['list_price'] as int? ?? 0,
+      listPrice: (json['list_price'] as num?)?.toInt() ?? 0,
       imageUrl: json['image_url'] as String,
       title: json['title'] as String,
-      rank: json['rank'] as int? ?? 0,
+      rank: (json['rank'] as num?)?.toInt() ?? 0,
       quantity: json['quantity'] as String? ?? " - ",
       prices: json['prices'] == null
           ? null
@@ -163,7 +163,7 @@ _$AsinDataImpl _$$AsinDataImplFromJson(Map<String, dynamic> json) =>
       sizeType: json['size_type'] == null
           ? SizeType.normal
           : const SizeTypeConverter().fromJson(json['size_type'] as String),
-      smallFee: json['small_fee'] as int? ?? 0,
+      smallFee: (json['small_fee'] as num?)?.toInt() ?? 0,
       hazmatType: json['hazmat_type'] == null
           ? HazmatType.nonHazmat
           : const HazmatTypeConverter().fromJson(json['hazmat_type'] as String),

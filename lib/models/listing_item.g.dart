@@ -12,8 +12,8 @@ _$ListingItemImpl _$$ListingItemImplFromJson(Map<String, dynamic> json) =>
     _$ListingItemImpl(
       sku: json['sku'] as String,
       asin: json['asin'] as String,
-      sellPrice: json['sell_price'] as int,
-      amount: json['amount'] as int,
+      sellPrice: (json['sell_price'] as num).toInt(),
+      amount: (json['amount'] as num).toInt(),
       condition: $enumDecode(_$ItemConditionEnumMap, json['condition']),
       subCondition:
           $enumDecode(_$ItemSubConditionEnumMap, json['sub_condition']),

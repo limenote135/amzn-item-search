@@ -61,12 +61,12 @@ class FeeInfoImplAdapter extends TypeAdapter<_$FeeInfoImpl> {
 _$FeeInfoImpl _$$FeeInfoImplFromJson(Map<String, dynamic> json) =>
     _$FeeInfoImpl(
       referralFeeRate: (json['fee_rate'] as num?)?.toDouble() ?? 0,
-      variableClosingFee: json['closing_fee'] as int? ?? 0,
-      fbaFee: json['fba_fee'] as int? ?? -1,
+      variableClosingFee: (json['closing_fee'] as num?)?.toInt() ?? 0,
+      fbaFee: (json['fba_fee'] as num?)?.toInt() ?? -1,
       feeExp: json['fee_exp'] == null
           ? null
           : FeeExpression.fromJson(json['fee_exp'] as Map<String, dynamic>),
-      fbaLowPriceFee: json['fba_low_price_fee'] as int? ?? 0,
+      fbaLowPriceFee: (json['fba_low_price_fee'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$FeeInfoImplToJson(_$FeeInfoImpl instance) =>
