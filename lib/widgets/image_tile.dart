@@ -188,6 +188,7 @@ class _KeepaImage extends ConsumerWidget {
     KeepaSettings settings, {
     String width = "300",
     String height = "150",
+    String key = "",
   }) {
     final params = <String>[
       "new=${settings.showNew ? "1" : "0"}",
@@ -197,9 +198,15 @@ class _KeepaImage extends ConsumerWidget {
       "fba=${settings.showFba ? "1" : "0"}",
       "range=${settings.period.toValue()}",
     ];
-    return "https://graph.keepa.com/pricehistory.png?"
+    var baseURL = "https://graph.keepa.com/graphimage.png";
+    if (key.isNotEmpty) {
+      params.add("key=$key");
+      baseURL = "https://api.keepa.com/graphimage";
+    }
+    final u = "$baseURL?"
         "asin=$asin&domain=jp&width=$width&height=$height&salesrank=1&"
         "${params.join("&")}${settings.extraParam}";
+    return u;
   }
 
   @override
@@ -220,9 +227,10 @@ class _KeepaImage extends ConsumerWidget {
       );
     }
 
+    final key = keepaSettings.useApiKey ? keepaSettings.apiKey : "";
     return KeepaUaAsyncWidget(
       builder: (ua) => ExtendedImage.network(
-        _createKeepaUrl(asinData.asin, keepaSettings),
+        _createKeepaUrl(asinData.asin, keepaSettings, key: key),
         // Cookie を入れる場合は以下のようにする
         // headers: <String, String>{
         //   'Cookie': 'key_a=value_a;key_b=value_b',
@@ -261,6 +269,7 @@ class _KeepaImage extends ConsumerWidget {
                                   keepaSettings,
                                   width: "600",
                                   height: "300",
+                                  key: key,
                                 ),
                                 headers: ua != ""
                                     ? <String, String>{
