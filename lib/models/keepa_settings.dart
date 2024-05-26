@@ -19,5 +19,7 @@ class KeepaSettings with _$KeepaSettings {
     @HiveField(4, defaultValue: "") @Default("") String extraParam,
     @HiveField(5, defaultValue: true) @Default(true) bool showBuyBox,
     @HiveField(6, defaultValue: false) @Default(false) bool showFba,
+    @HiveField(7, defaultValue: false) @Default(false) bool useApiKey,
+    @HiveField(8, defaultValue: "") @Default("") String apiKey,
   }) = _KeepaSettings;
 }

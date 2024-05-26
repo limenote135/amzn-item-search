@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:amasearch/controllers/general_settings_controller.dart';
@@ -11,10 +10,10 @@ import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/price_util.dart';
+import 'package:amasearch/widgets/custom_dialog.dart';
 import 'package:amasearch/widgets/item_image.dart';
 import 'package:amasearch/widgets/keepa_ua_async_widget.dart';
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -302,44 +301,6 @@ class _KeepaImage extends ConsumerWidget {
         ),
       ],
     );
-
-    if (Platform.isIOS) {
-      await showCupertinoDialog<void>(
-        context: context,
-        builder: (context) {
-          return CupertinoAlertDialog(
-            title: title,
-            content: content,
-            actions: [
-              CupertinoDialogAction(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        },
-      );
-      return;
-    } else {
-      await showDialog<void>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: title,
-            content: content,
-            actions: [
-              TextButton(
-                child: const Text("OK"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
+    await showCustomOkDialog(context: context, title: title, content: content);
   }
 }

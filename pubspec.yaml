@@ -140,6 +140,7 @@ flutter:
     - assets/title_b2.png
     - assets/locked_small.png
     - assets/keepa_sample.png
+    - assets/keepa_api_key.png
     - assets/faq/plan.png
     - assets/faq/cache.png
 

@@ -28,13 +28,15 @@ class KeepaSettingsImplAdapter extends TypeAdapter<_$KeepaSettingsImpl> {
       extraParam: fields[4] == null ? '' : fields[4] as String,
       showBuyBox: fields[5] == null ? true : fields[5] as bool,
       showFba: fields[6] == null ? false : fields[6] as bool,
+      useApiKey: fields[7] == null ? false : fields[7] as bool,
+      apiKey: fields[8] == null ? '' : fields[8] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$KeepaSettingsImpl obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.showNew)
       ..writeByte(1)
@@ -48,7 +50,11 @@ class KeepaSettingsImplAdapter extends TypeAdapter<_$KeepaSettingsImpl> {
       ..writeByte(5)
       ..write(obj.showBuyBox)
       ..writeByte(6)
-      ..write(obj.showFba);
+      ..write(obj.showFba)
+      ..writeByte(7)
+      ..write(obj.useApiKey)
+      ..writeByte(8)
+      ..write(obj.apiKey);
   }
 
   @override

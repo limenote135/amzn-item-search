@@ -30,6 +30,10 @@ mixin _$KeepaSettings {
   bool get showBuyBox => throw _privateConstructorUsedError;
   @HiveField(6, defaultValue: false)
   bool get showFba => throw _privateConstructorUsedError;
+  @HiveField(7, defaultValue: false)
+  bool get useApiKey => throw _privateConstructorUsedError;
+  @HiveField(8, defaultValue: "")
+  String get apiKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $KeepaSettingsCopyWith<KeepaSettings> get copyWith =>
@@ -49,7 +53,9 @@ abstract class $KeepaSettingsCopyWith<$Res> {
       @HiveField(3, defaultValue: KeepaShowPeriod.month) KeepaShowPeriod period,
       @HiveField(4, defaultValue: "") String extraParam,
       @HiveField(5, defaultValue: true) bool showBuyBox,
-      @HiveField(6, defaultValue: false) bool showFba});
+      @HiveField(6, defaultValue: false) bool showFba,
+      @HiveField(7, defaultValue: false) bool useApiKey,
+      @HiveField(8, defaultValue: "") String apiKey});
 }
 
 /// @nodoc
@@ -72,6 +78,8 @@ class _$KeepaSettingsCopyWithImpl<$Res, $Val extends KeepaSettings>
     Object? extraParam = null,
     Object? showBuyBox = null,
     Object? showFba = null,
+    Object? useApiKey = null,
+    Object? apiKey = null,
   }) {
     return _then(_value.copyWith(
       showNew: null == showNew
@@ -102,6 +110,14 @@ class _$KeepaSettingsCopyWithImpl<$Res, $Val extends KeepaSettings>
           ? _value.showFba
           : showFba // ignore: cast_nullable_to_non_nullable
               as bool,
+      useApiKey: null == useApiKey
+          ? _value.useApiKey
+          : useApiKey // ignore: cast_nullable_to_non_nullable
+              as bool,
+      apiKey: null == apiKey
+          ? _value.apiKey
+          : apiKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -121,7 +137,9 @@ abstract class _$$KeepaSettingsImplCopyWith<$Res>
       @HiveField(3, defaultValue: KeepaShowPeriod.month) KeepaShowPeriod period,
       @HiveField(4, defaultValue: "") String extraParam,
       @HiveField(5, defaultValue: true) bool showBuyBox,
-      @HiveField(6, defaultValue: false) bool showFba});
+      @HiveField(6, defaultValue: false) bool showFba,
+      @HiveField(7, defaultValue: false) bool useApiKey,
+      @HiveField(8, defaultValue: "") String apiKey});
 }
 
 /// @nodoc
@@ -142,6 +160,8 @@ class __$$KeepaSettingsImplCopyWithImpl<$Res>
     Object? extraParam = null,
     Object? showBuyBox = null,
     Object? showFba = null,
+    Object? useApiKey = null,
+    Object? apiKey = null,
   }) {
     return _then(_$KeepaSettingsImpl(
       showNew: null == showNew
@@ -172,6 +192,14 @@ class __$$KeepaSettingsImplCopyWithImpl<$Res>
           ? _value.showFba
           : showFba // ignore: cast_nullable_to_non_nullable
               as bool,
+      useApiKey: null == useApiKey
+          ? _value.useApiKey
+          : useApiKey // ignore: cast_nullable_to_non_nullable
+              as bool,
+      apiKey: null == apiKey
+          ? _value.apiKey
+          : apiKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -188,7 +216,9 @@ class _$KeepaSettingsImpl implements _KeepaSettings {
       this.period = KeepaShowPeriod.month,
       @HiveField(4, defaultValue: "") this.extraParam = "",
       @HiveField(5, defaultValue: true) this.showBuyBox = true,
-      @HiveField(6, defaultValue: false) this.showFba = false});
+      @HiveField(6, defaultValue: false) this.showFba = false,
+      @HiveField(7, defaultValue: false) this.useApiKey = false,
+      @HiveField(8, defaultValue: "") this.apiKey = ""});
 
   @override
   @JsonKey()
@@ -218,10 +248,18 @@ class _$KeepaSettingsImpl implements _KeepaSettings {
   @JsonKey()
   @HiveField(6, defaultValue: false)
   final bool showFba;
+  @override
+  @JsonKey()
+  @HiveField(7, defaultValue: false)
+  final bool useApiKey;
+  @override
+  @JsonKey()
+  @HiveField(8, defaultValue: "")
+  final String apiKey;
 
   @override
   String toString() {
-    return 'KeepaSettings(showNew: $showNew, showUsed: $showUsed, showAmazon: $showAmazon, period: $period, extraParam: $extraParam, showBuyBox: $showBuyBox, showFba: $showFba)';
+    return 'KeepaSettings(showNew: $showNew, showUsed: $showUsed, showAmazon: $showAmazon, period: $period, extraParam: $extraParam, showBuyBox: $showBuyBox, showFba: $showFba, useApiKey: $useApiKey, apiKey: $apiKey)';
   }
 
   @override
@@ -239,12 +277,15 @@ class _$KeepaSettingsImpl implements _KeepaSettings {
                 other.extraParam == extraParam) &&
             (identical(other.showBuyBox, showBuyBox) ||
                 other.showBuyBox == showBuyBox) &&
-            (identical(other.showFba, showFba) || other.showFba == showFba));
+            (identical(other.showFba, showFba) || other.showFba == showFba) &&
+            (identical(other.useApiKey, useApiKey) ||
+                other.useApiKey == useApiKey) &&
+            (identical(other.apiKey, apiKey) || other.apiKey == apiKey));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, showNew, showUsed, showAmazon,
-      period, extraParam, showBuyBox, showFba);
+      period, extraParam, showBuyBox, showFba, useApiKey, apiKey);
 
   @JsonKey(ignore: true)
   @override
@@ -262,7 +303,9 @@ abstract class _KeepaSettings implements KeepaSettings {
           final KeepaShowPeriod period,
           @HiveField(4, defaultValue: "") final String extraParam,
           @HiveField(5, defaultValue: true) final bool showBuyBox,
-          @HiveField(6, defaultValue: false) final bool showFba}) =
+          @HiveField(6, defaultValue: false) final bool showFba,
+          @HiveField(7, defaultValue: false) final bool useApiKey,
+          @HiveField(8, defaultValue: "") final String apiKey}) =
       _$KeepaSettingsImpl;
 
   @override
@@ -286,6 +329,12 @@ abstract class _KeepaSettings implements KeepaSettings {
   @override
   @HiveField(6, defaultValue: false)
   bool get showFba;
+  @override
+  @HiveField(7, defaultValue: false)
+  bool get useApiKey;
+  @override
+  @HiveField(8, defaultValue: "")
+  String get apiKey;
   @override
   @JsonKey(ignore: true)
   _$$KeepaSettingsImplCopyWith<_$KeepaSettingsImpl> get copyWith =>
