@@ -230,6 +230,9 @@ class _Body extends HookConsumerWidget {
               try {
                 await EasyLoading.show(status: "削除中...");
                 await clearDiskCachedImages();
+                ref
+                    .read(generalSettingsControllerProvider.notifier)
+                    .changeKeepaExtraParam();
                 if (Platform.isIOS) {
                   await ChromeSafariBrowser.clearWebsiteData();
                 }
