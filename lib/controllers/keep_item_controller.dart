@@ -5,7 +5,6 @@ import 'package:amasearch/util/hive_provider.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/util/uuid.dart';
 import 'package:collection/collection.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:riverpod/riverpod.dart';
 
 final keepItemListControllerProvider =
@@ -75,7 +74,6 @@ class KeepItemListController extends StateNotifier<List<KeepItem>> {
         ids.contains(s.id) ? s.copyWith(isUpdating: true) : s,
     ];
 
-    await clearDiskCachedImages(); // Keepa の画像キャッシュを削除する
     final mws = _ref.read(mwsRepositoryProvider);
     final chunks = items.slices(20);
     for (final chunk in chunks) {

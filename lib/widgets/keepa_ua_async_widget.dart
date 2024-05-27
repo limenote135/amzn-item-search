@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:extended_image/extended_image.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,7 +26,6 @@ final _uaProvider = FutureProvider((ref) async {
     final old = ref.read(_currentUaProvider);
     if (ua != old) {
       ref.read(_currentUaProvider.notifier).state = ua;
-      await clearDiskCachedImages();
     }
     return ua;
 
