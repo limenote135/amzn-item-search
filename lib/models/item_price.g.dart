@@ -149,9 +149,9 @@ _$PriceDetailImpl _$$PriceDetailImplFromJson(Map<String, dynamic> json) =>
           ? FulfillmentChannel.merchant
           : const FulfillmentChannelConverter()
               .fromJson(json['channel'] as String),
-      price: json['price'] as int? ?? 0,
-      shipping: json['shipping'] as int? ?? 0,
-      point: json['point'] as int? ?? 0,
+      price: (json['price'] as num?)?.toInt() ?? 0,
+      shipping: (json['shipping'] as num?)?.toInt() ?? 0,
+      point: (json['point'] as num?)?.toInt() ?? 0,
       isCart: json['is_cart'] as bool? ?? false,
       isSelf: json['is_self'] as bool? ?? false,
       sellerType: json['type'] == null

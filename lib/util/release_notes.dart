@@ -1,12 +1,26 @@
 // ignore_for_file: prefer_adjacent_string_concatenation
+// ignore_for_file: no_adjacent_strings_in_list
 import 'package:pub_semver/pub_semver.dart';
 import 'package:release_notes_dialog/release_notes_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(2, 12, 0);
+var releaseNotesVersion = Version(2, 13, 0);
 const releaseNotes = <Release>[
+  Release(
+    title: "2.13.0",
+    changes: [
+      ChangeGroup(
+        title: "更新内容",
+        changes: [
+          "Keepa の画像表示に API キーを利用できるようになりました\n"
+              "設定すると、トークンの範囲内で必ずランキンググラフが表示されるようになります\n"
+              "設定画面の Keepa設定 から変更可能です",
+        ],
+      ),
+    ],
+  ),
   Release(
     title: "2.12.0",
     changes: [

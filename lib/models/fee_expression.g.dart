@@ -51,7 +51,7 @@ class FeeExpressionImplAdapter extends TypeAdapter<_$FeeExpressionImpl> {
 
 _$FeeExpressionImpl _$$FeeExpressionImplFromJson(Map<String, dynamic> json) =>
     _$FeeExpressionImpl(
-      moreThan: json['more_than'] as int? ?? 0,
+      moreThan: (json['more_than'] as num?)?.toInt() ?? 0,
       exp: json['exp'] as String? ?? "",
     );
 

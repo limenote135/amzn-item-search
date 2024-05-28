@@ -3,6 +3,8 @@ import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
+import 'package:amasearch/models/keepa_settings.dart';
+import 'package:amasearch/util/keepa.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/keepa_ua_async_widget.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -92,38 +94,39 @@ class _Body extends HookConsumerWidget {
     final rangeState2 = useState(_createRangeState(settings.period));
 
     String createUrl(List<bool> range) {
-      final params = <String>[
-        "new=${displayState.value[0] ? "1" : "0"}",
-        "used=${displayState.value[1] ? "1" : "0"}",
-        "amazon=${displayState.value[2] ? "1" : "0"}",
-        "bb=${showBuyBox.value ? "1" : "0"}",
-        "fba=${showFba.value ? "1" : "0"}",
-      ];
+      var baseParam = settings.extraParam;
+      if (isDark(context)) {
+        baseParam += "&cBackground=000000&cFont=cdcdcd&cAmazon=ffba63"
+            "&cNew=8888dd&cUsed=ffffff";
+      }
 
       final index = range.indexOf(true);
-      switch (index) {
-        case 0:
-          params.add("range=1");
-        case 1:
-          params.add("range=7");
-        case 2:
-          params.add("range=31");
-        case 3:
-          params.add("range=90");
-        case 4:
-          params.add("range=365");
-      }
+      final s = KeepaSettings(
+        showNew: displayState.value[0],
+        showUsed: displayState.value[1],
+        showAmazon: displayState.value[2],
+        showBuyBox: showBuyBox.value,
+        showFba: showFba.value,
+        period: switch (index) {
+          0 => KeepaShowPeriod.day, // 1日
+          1 => KeepaShowPeriod.week, // 7日
+          2 => KeepaShowPeriod.month, // 31日
+          3 => KeepaShowPeriod.threeMonth, // 90日
+          4 => KeepaShowPeriod.year, // 365日
+          _ => KeepaShowPeriod.month,
+        },
+        extraParam: baseParam,
+      );
 
-      if (isDark(context)) {
-        params.add(
-          "cBackground=000000&cFont=cdcdcd&cAmazon=ffba63&"
-          "cNew=8888dd&cUsed=ffffff",
-        );
-      }
+      final key = settings.useApiKey ? settings.apiKey : "";
 
-      return "https://graph.keepa.com/pricehistory.png?"
-          "asin=$asin&domain=co.jp&width=600&salesrank=1&height=300&"
-          "${params.join("&")}${settings.extraParam}";
+      return createKeepaUrl(
+        asin,
+        s,
+        width: "600",
+        height: "300",
+        key: key,
+      );
     }
 
     return Column(

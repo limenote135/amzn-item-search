@@ -1,8 +1,17 @@
+import 'dart:async';
+
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
+import 'package:amasearch/repository/keepa.dart';
 import 'package:amasearch/styles/font.dart';
+import 'package:amasearch/widgets/custom_dialog.dart';
+import 'package:amasearch/widgets/theme_divider.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class KeepaSettings extends StatelessWidget {
   const KeepaSettings({super.key});
@@ -32,6 +41,7 @@ class _Body extends HookConsumerWidget {
     final settings = ref.watch(
       generalSettingsControllerProvider.select((value) => value.keepaSettings),
     );
+
     return ListView(
       children: [
         ListTile(
@@ -116,7 +126,159 @@ class _Body extends HookConsumerWidget {
             },
           ),
         ),
+        const ThemeDivider(),
+        SwitchListTile(
+          title: const Text(" APIアクセスキーを利用する"),
+          value: settings.useApiKey,
+          onChanged: (value) {
+            final newState = settings.copyWith(useApiKey: value);
+            ref
+                .read(generalSettingsControllerProvider.notifier)
+                .update(keepaSettings: newState);
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: DebounceTextField(),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              child: const Text("接続テスト"),
+              onPressed: () async {
+                if (settings.apiKey.isEmpty) {
+                  // TODO:
+                  return;
+                }
+                final repository = ref.read(keepaProvider);
+                try {
+                  final resp = await repository.tokenStatus(settings.apiKey);
+                  if (resp.error != null) {
+                    await showOkAlertDialog(
+                      context: context,
+                      title: "接続エラー",
+                      message:
+                          "API キーが間違っているか、有料プランではありません\n${resp.error?.message}",
+                    );
+                  } else {
+                    final msg = "残りトークン数: ${resp.tokensLeft}個\n"
+                        "トークン補充頻度: ${resp.refillRate}個/ 分\n\n"
+                        "グラフ1つにつき1つ消費され、トークンが無くなるとグラフが表示されなくなります";
+                    if (settings.useApiKey) {
+                      await showOkAlertDialog(
+                        context: context,
+                        title: "接続成功",
+                        message: msg,
+                      );
+                    } else {
+                      final ret = await showOkCancelAlertDialog(
+                        context: context,
+                        title: "接続成功",
+                        message: "$msg\n\nAPI アクセスキーを利用する設定にしますか？",
+                      );
+                      if (ret == OkCancelResult.ok) {
+                        final current =
+                            ref.read(generalSettingsControllerProvider);
+                        final newState =
+                            current.keepaSettings.copyWith(useApiKey: true);
+                        ref
+                            .read(generalSettingsControllerProvider.notifier)
+                            .update(keepaSettings: newState);
+                      }
+                    }
+                  }
+                  // ignore: avoid_catches_without_on_clauses
+                } catch (e) {
+                  await showOkAlertDialog(
+                    context: context,
+                    title: "エラー",
+                    message: e.toString(),
+                  );
+                  rethrow;
+                }
+              },
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: Center(
+            child: GestureDetector(
+              child: const Text(
+                "API アクセスキーの確認方法はこちら",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              onTap: () {
+                showKeepaApiKeyDialog(context: context);
+              },
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              child: const Text("Keepa を開く"),
+              onPressed: () {
+                launchUrl(Uri.parse("https://keepa.com/#!api"));
+              },
+            ),
+          ],
+        ),
       ],
+    );
+  }
+
+  Future<void> showKeepaApiKeyDialog({required BuildContext context}) async {
+    const title = Text("API キーの確認方法");
+    final content = Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text("Keepa を開き、以下の部分をコピーしてください"),
+        ExtendedImage.asset(
+          "assets/keepa_api_key.png",
+          border: Border.all(),
+        ),
+      ],
+    );
+    await showCustomOkDialog(context: context, title: title, content: content);
+  }
+}
+
+// ignore: must_be_immutable
+class DebounceTextField extends HookConsumerWidget {
+  DebounceTextField({super.key});
+
+  Timer? _timer;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(
+      generalSettingsControllerProvider.select((value) => value.keepaSettings),
+    );
+    final controller = useTextEditingController(text: settings.apiKey);
+    return TextField(
+      controller: controller,
+      keyboardType: TextInputType.emailAddress,
+      decoration: const InputDecoration(
+        labelText: "APIアクセスキー",
+        hintText: "APIアクセスキーを入力してください",
+      ),
+      onChanged: (value) {
+        if (_timer?.isActive ?? false) {
+          _timer?.cancel();
+        }
+        _timer = Timer(const Duration(milliseconds: 500), () {
+          final newState = settings.copyWith(apiKey: value);
+          ref
+              .read(generalSettingsControllerProvider.notifier)
+              .update(keepaSettings: newState);
+        });
+      },
     );
   }
 }
