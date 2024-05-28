@@ -3,12 +3,11 @@ import 'dart:typed_data';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/hazmat_type.dart';
-import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/models/enums/size_type.dart';
-import 'package:amasearch/models/keepa_settings.dart';
 import 'package:amasearch/models/search_item.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/util/keepa.dart';
 import 'package:amasearch/util/price_util.dart';
 import 'package:amasearch/widgets/custom_dialog.dart';
 import 'package:amasearch/widgets/item_image.dart';
@@ -183,32 +182,6 @@ String sizeText(String raw) {
 class _KeepaImage extends ConsumerWidget {
   const _KeepaImage();
 
-  static String _createKeepaUrl(
-    String asin,
-    KeepaSettings settings, {
-    String width = "300",
-    String height = "150",
-    String key = "",
-  }) {
-    final params = <String>[
-      "new=${settings.showNew ? "1" : "0"}",
-      "used=${settings.showUsed ? "1" : "0"}",
-      "amazon=${settings.showAmazon ? "1" : "0"}",
-      "bb=${settings.showBuyBox ? "1" : "0"}",
-      "fba=${settings.showFba ? "1" : "0"}",
-      "range=${settings.period.toValue()}",
-    ];
-    var baseURL = "https://graph.keepa.com/graphimage.png";
-    if (key.isNotEmpty) {
-      params.add("key=$key");
-      baseURL = "https://api.keepa.com/graphimage";
-    }
-    final u = "$baseURL?"
-        "asin=$asin&domain=jp&width=$width&height=$height&salesrank=1&"
-        "${params.join("&")}${settings.extraParam}";
-    return u;
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asinData = ref.watch(currentAsinDataProvider);
@@ -230,7 +203,7 @@ class _KeepaImage extends ConsumerWidget {
     final key = keepaSettings.useApiKey ? keepaSettings.apiKey : "";
     return KeepaUaAsyncWidget(
       builder: (ua) => ExtendedImage.network(
-        _createKeepaUrl(asinData.asin, keepaSettings, key: key),
+        createKeepaUrl(asinData.asin, keepaSettings, key: key),
         // Cookie を入れる場合は以下のようにする
         // headers: <String, String>{
         //   'Cookie': 'key_a=value_a;key_b=value_b',
@@ -264,7 +237,7 @@ class _KeepaImage extends ConsumerWidget {
                             },
                             child: KeepaUaAsyncWidget(
                               builder: (ua) => ExtendedImage.network(
-                                _createKeepaUrl(
+                                createKeepaUrl(
                                   asinData.asin,
                                   keepaSettings,
                                   width: "600",
