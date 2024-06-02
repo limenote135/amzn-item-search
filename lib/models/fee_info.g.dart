@@ -24,13 +24,14 @@ class FeeInfoImplAdapter extends TypeAdapter<_$FeeInfoImpl> {
       fbaFee: fields[2] as int,
       feeExp: fields[3] as FeeExpression?,
       fbaLowPriceFee: fields[4] == null ? 0 : fields[4] as int,
+      referralFeeLowPriceRate: fields[5] == null ? 0 : fields[5] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$FeeInfoImpl obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.referralFeeRate)
       ..writeByte(1)
@@ -40,7 +41,9 @@ class FeeInfoImplAdapter extends TypeAdapter<_$FeeInfoImpl> {
       ..writeByte(3)
       ..write(obj.feeExp)
       ..writeByte(4)
-      ..write(obj.fbaLowPriceFee);
+      ..write(obj.fbaLowPriceFee)
+      ..writeByte(5)
+      ..write(obj.referralFeeLowPriceRate);
   }
 
   @override
@@ -67,6 +70,8 @@ _$FeeInfoImpl _$$FeeInfoImplFromJson(Map<String, dynamic> json) =>
           ? null
           : FeeExpression.fromJson(json['fee_exp'] as Map<String, dynamic>),
       fbaLowPriceFee: (json['fba_low_price_fee'] as num?)?.toInt() ?? 0,
+      referralFeeLowPriceRate:
+          (json['referral_fee_low_price_rate'] as num?)?.toDouble() ?? 0,
     );
 
 Map<String, dynamic> _$$FeeInfoImplToJson(_$FeeInfoImpl instance) =>
@@ -76,4 +81,5 @@ Map<String, dynamic> _$$FeeInfoImplToJson(_$FeeInfoImpl instance) =>
       'fba_fee': instance.fbaFee,
       'fee_exp': instance.feeExp,
       'fba_low_price_fee': instance.fbaLowPriceFee,
+      'referral_fee_low_price_rate': instance.referralFeeLowPriceRate,
     };
