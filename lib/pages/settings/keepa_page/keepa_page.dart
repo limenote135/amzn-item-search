@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/enums/keepa_show_period.dart';
 import 'package:amasearch/repository/keepa.dart';
@@ -129,12 +131,20 @@ class _Body extends HookConsumerWidget {
         const ThemeDivider(),
         SwitchListTile(
           title: const Text(" APIアクセスキーを利用する"),
+          subtitle: const Text("必ずランキンググラフが表示されるようになります"),
           value: settings.useApiKey,
           onChanged: (value) {
             final newState = settings.copyWith(useApiKey: value);
             ref
                 .read(generalSettingsControllerProvider.notifier)
                 .update(keepaSettings: newState);
+
+            final analytics = ref.read(analyticsControllerProvider);
+            if (settings.useApiKey && settings.apiKey.isNotEmpty) {
+              analytics.setUserProp(enableKeepaApiPropName, "true");
+            } else {
+              analytics.setUserProp(enableKeepaApiPropName, "false");
+            }
           },
         ),
         Padding(
@@ -145,59 +155,59 @@ class _Body extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
-              child: const Text("接続テスト"),
-              onPressed: () async {
-                if (settings.apiKey.isEmpty) {
-                  // TODO:
-                  return;
-                }
-                final repository = ref.read(keepaProvider);
-                try {
-                  final resp = await repository.tokenStatus(settings.apiKey);
-                  if (resp.error != null) {
-                    await showOkAlertDialog(
-                      context: context,
-                      title: "接続エラー",
-                      message:
-                          "API キーが間違っているか、有料プランではありません\n${resp.error?.message}",
-                    );
-                  } else {
-                    final msg = "残りトークン数: ${resp.tokensLeft}個\n"
-                        "トークン補充頻度: ${resp.refillRate}個/ 分\n\n"
-                        "グラフ1つにつき1つ消費され、トークンが無くなるとグラフが表示されなくなります";
-                    if (settings.useApiKey) {
-                      await showOkAlertDialog(
-                        context: context,
-                        title: "接続成功",
-                        message: msg,
-                      );
-                    } else {
-                      final ret = await showOkCancelAlertDialog(
-                        context: context,
-                        title: "接続成功",
-                        message: "$msg\n\nAPI アクセスキーを利用する設定にしますか？",
-                      );
-                      if (ret == OkCancelResult.ok) {
-                        final current =
-                            ref.read(generalSettingsControllerProvider);
-                        final newState =
-                            current.keepaSettings.copyWith(useApiKey: true);
-                        ref
-                            .read(generalSettingsControllerProvider.notifier)
-                            .update(keepaSettings: newState);
+              onPressed: settings.apiKey.isEmpty
+                  ? null
+                  : () async {
+                      final repository = ref.read(keepaProvider);
+                      try {
+                        final resp =
+                            await repository.tokenStatus(settings.apiKey);
+                        if (resp.error != null) {
+                          await showOkAlertDialog(
+                            context: context,
+                            title: "接続エラー",
+                            message:
+                                "API キーが間違っているか、有料プランではありません\n${resp.error?.message}",
+                          );
+                        } else {
+                          final msg = "残りトークン数: ${resp.tokensLeft}個\n"
+                              "トークン補充頻度: ${resp.refillRate}個/ 分\n\n"
+                              "グラフ1つにつき1つ消費され、トークンが無くなるとグラフが表示されなくなります";
+                          if (settings.useApiKey) {
+                            await showOkAlertDialog(
+                              context: context,
+                              title: "接続成功",
+                              message: msg,
+                            );
+                          } else {
+                            final ret = await showOkCancelAlertDialog(
+                              context: context,
+                              title: "接続成功",
+                              message: "$msg\n\nAPI アクセスキーを利用する設定にしますか？",
+                            );
+                            if (ret == OkCancelResult.ok) {
+                              final current =
+                                  ref.read(generalSettingsControllerProvider);
+                              final newState = current.keepaSettings
+                                  .copyWith(useApiKey: true);
+                              ref
+                                  .read(generalSettingsControllerProvider
+                                      .notifier)
+                                  .update(keepaSettings: newState);
+                            }
+                          }
+                        }
+                        // ignore: avoid_catches_without_on_clauses
+                      } catch (e) {
+                        await showOkAlertDialog(
+                          context: context,
+                          title: "エラー",
+                          message: e.toString(),
+                        );
+                        rethrow;
                       }
-                    }
-                  }
-                  // ignore: avoid_catches_without_on_clauses
-                } catch (e) {
-                  await showOkAlertDialog(
-                    context: context,
-                    title: "エラー",
-                    message: e.toString(),
-                  );
-                  rethrow;
-                }
-              },
+                    },
+              child: const Text("接続テスト"),
             ),
           ],
         ),

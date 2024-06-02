@@ -10,3 +10,4 @@ const enableAlertVibrationPropName = "enableAlertVibration";
 const majorCustomerPropName = "majorCustomer";
 const leftShortcutSettingsPropName = "leftShortcut";
 const rightShortcutSettingsPropName = "rightShortcut";
+const enableKeepaApiPropName = "keepaApi";
