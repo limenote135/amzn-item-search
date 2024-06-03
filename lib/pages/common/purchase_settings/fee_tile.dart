@@ -83,7 +83,7 @@ class FeeTile extends HookConsumerWidget {
     } else if (feeInfo.fbaFee == -1) {
       return "(不明)";
     } else {
-      if (sellPrice <= 1000 && feeInfo.fbaLowPriceFee != 0) {
+      if (sellPrice <= fbaLowPriceBoarder && feeInfo.fbaLowPriceFee != 0) {
         return numberFormatter.format(feeInfo.fbaLowPriceFee);
       }
       return numberFormatter.format(feeInfo.fbaFee);
@@ -99,7 +99,7 @@ class FeeTile extends HookConsumerWidget {
     final sellFee = calcReferralFee(sellPrice, feeInfo, 1); // 消費税はここでは含めない
     var fbaFee = 0;
     if (useFba && feeInfo.fbaFee != -1) {
-      if (sellPrice <= 1000 && feeInfo.fbaLowPriceFee != 0) {
+      if (sellPrice <= fbaLowPriceBoarder && feeInfo.fbaLowPriceFee != 0) {
         fbaFee = feeInfo.fbaLowPriceFee;
       } else {
         fbaFee = feeInfo.fbaFee;

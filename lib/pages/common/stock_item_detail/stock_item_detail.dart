@@ -48,7 +48,7 @@ class StockItemDetail extends ConsumerWidget {
     final isUnknownFbaFee = feeInfo.fbaFee == -1;
     var fbaFee = 0;
     if (item.useFba && !isUnknownFbaFee) {
-      if (item.sellPrice <= 1000 && feeInfo.fbaLowPriceFee != 0) {
+      if (item.sellPrice <= fbaLowPriceBoarder && feeInfo.fbaLowPriceFee != 0) {
         fbaFee = feeInfo.fbaLowPriceFee;
       } else {
         fbaFee = feeInfo.fbaFee;
