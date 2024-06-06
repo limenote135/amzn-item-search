@@ -19,6 +19,7 @@ class FeeInfo with _$FeeInfo {
     @HiveField(2) @Default(-1) int fbaFee,
     @HiveField(3) FeeExpression? feeExp,
     @HiveField(4, defaultValue: 0) @Default(0) int fbaLowPriceFee,
+    @HiveField(5, defaultValue: 0) @Default(0) double referralFeeLowPriceRate,
   }) = _FeeInfo;
 
   factory FeeInfo.fromJson(Map<String, dynamic> json) =>
