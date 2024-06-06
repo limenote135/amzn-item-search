@@ -1,3 +1,5 @@
+import 'package:amasearch/analytics/analytics.dart';
+import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/models/constants.dart';
 import 'package:amasearch/models/enums/csv_columns.dart';
 import 'package:amasearch/models/general_settings.dart';
@@ -53,6 +55,14 @@ class GeneralSettingsController extends StateNotifier<GeneralSettings> {
       settings = settings.copyWith(retailers: uniqueRetailers);
 
       state = settings;
+
+      final analytics = _ref.read(analyticsControllerProvider);
+      if (settings.keepaSettings.useApiKey &&
+          settings.keepaSettings.apiKey.isNotEmpty) {
+        analytics.setUserProp(enableKeepaApiPropName, "true");
+      } else {
+        analytics.setUserProp(enableKeepaApiPropName, "false");
+      }
     }
     // 新規追加された項目が、ロード時にデフォルト値になっている可能性があるので一度保存する
     box.put(generalSettingsKeyName, state);
