@@ -166,8 +166,8 @@ class _Body extends HookConsumerWidget {
                           await showOkAlertDialog(
                             context: context,
                             title: "接続エラー",
-                            message:
-                                "API キーが間違っているか、有料プランではありません\n${resp.error?.message}",
+                            message: "API キーが間違っているか、有料プランではありません\n"
+                                "${resp.error?.message}",
                           );
                         } else {
                           final msg = "残りトークン数: ${resp.tokensLeft}個\n"
@@ -191,8 +191,9 @@ class _Body extends HookConsumerWidget {
                               final newState = current.keepaSettings
                                   .copyWith(useApiKey: true);
                               ref
-                                  .read(generalSettingsControllerProvider
-                                      .notifier)
+                                  .read(
+                                    generalSettingsControllerProvider.notifier,
+                                  )
                                   .update(keepaSettings: newState);
                             }
                           }

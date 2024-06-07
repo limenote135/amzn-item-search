@@ -449,7 +449,8 @@ int _calcBreakEvenImpl({
   // SellPrice = PurchasePrice + TotalFee + Profit
   // TotalFee =
   //    (ReferralFee + variableClosingFee) * TaxRate + fbaFee
-  // ReferralFee = max(sellPrice * referralFeeRate, minReferralFee) or custom rate
+  // ReferralFee =
+  //        max(sellPrice * referralFeeRate, minReferralFee) or custom rate
   // SellPrice - ReferralFee =
   //        PurchasePrice + variableClosingFee * taxRate + fbaFee
   final temp = purchase + fbaFee + (closingFee * taxRate) + otherCost;
