@@ -76,6 +76,7 @@ final questions = <Faq>[
   ),
 ];
 
+// ignore: unused_element
 class _KeepaFaq extends StatelessWidget {
   const _KeepaFaq();
 
