@@ -51,6 +51,13 @@ final questions = <Faq>[
     title: "Keepa 等を開いた際に毎回ログアウトされた状態になる",
     body: const _SafariIssue(),
   ),
+  Faq(
+    enable: Platform.isIOS,
+    title: "バーコードリーダーを接続するとキーボードが表示されなくなる",
+    bodyText: "iOS の仕様となっており、メモアプリ等でも同様の挙動となります。\n\n"
+        "多くのバーコードリーダーではスキャンボタンを2回押すとキーボードが表示されるようになっております。\n\n"
+        "詳しくはバーコードリーダーの説明書をご確認ください。",
+  ),
   const Faq(
     title: "有料プランで契約しているが一部機能が制限されている",
     body: _PlanFaq(),
