@@ -74,6 +74,8 @@ class MyHttpOverrides extends HttpOverrides {
     final version = "0.${randomIntWithDigit(2)}.${randomIntWithDigit(4)}";
 
     // Keepa のグラフアクセスを大量に行うとブロックされるので、ランダムで UA を変更する
+    // リクエストごとにランダムにしてもよいが、ユーザー単位で固定しておくために
+    // グローバルな HttpClient で書き換える
     return super.createHttpClient(context)..userAgent = "ama$base/$version";
   }
 }
@@ -83,6 +85,11 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   await initFirebase();
 
+  final client = ExtendedNetworkImageProvider.httpClient;
+  if (client is HttpClient) {
+    // デフォルトでは Dart の UserAgent が入っていて邪魔なので削除する
+    client.userAgent = null;
+  }
   try {
     await Future.wait<void>([
       initStartupOption(),
