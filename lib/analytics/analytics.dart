@@ -26,7 +26,7 @@ class AnalyticsController {
         : stock.item.title;
     return FirebaseAnalytics.instance.logEvent(
       name: purchaseEventName,
-      parameters: <String, dynamic>{
+      parameters: <String, Object>{
         "ASIN": stock.item.asin,
         "title": title,
         "quantity": stock.amount,
@@ -45,7 +45,7 @@ class AnalyticsController {
         : name;
     return FirebaseAnalytics.instance.logEvent(
       name: pushSearchButtonEventName,
-      parameters: <String, dynamic>{
+      parameters: <String, Object>{
         "type": value,
       },
     );
@@ -54,7 +54,7 @@ class AnalyticsController {
   Future<void> logSearchEvent(String type) {
     return FirebaseAnalytics.instance.logEvent(
       name: searchEventName,
-      parameters: <String, dynamic>{
+      parameters: <String, Object>{
         "type": type,
       },
     );
@@ -63,7 +63,7 @@ class AnalyticsController {
   Future<void> logCalcEvent(String type) {
     return FirebaseAnalytics.instance.logEvent(
       name: calcEventName,
-      parameters: <String, dynamic>{
+      parameters: <String, Object>{
         "type": type,
       },
     );
@@ -72,7 +72,7 @@ class AnalyticsController {
   Future<void> logUploadListEvent(CsvFormat type) {
     return FirebaseAnalytics.instance.logEvent(
       name: uploadListEventName,
-      parameters: <String, dynamic>{
+      parameters: <String, Object>{
         "type": type.name,
       },
     );
@@ -81,7 +81,7 @@ class AnalyticsController {
   Future<void> logKeepEvent(String asin) {
     return FirebaseAnalytics.instance.logEvent(
       name: keepEventName,
-      parameters: <String, dynamic>{
+      parameters: <String, Object>{
         "ASIN": asin,
       },
     );
@@ -90,7 +90,7 @@ class AnalyticsController {
   Future<void> logListingsEvent({required String hasImage}) {
     return FirebaseAnalytics.instance.logEvent(
       name: amazonListingEventName,
-      parameters: <String, dynamic>{
+      parameters: <String, Object>{
         "HasImage": hasImage,
       },
     );
@@ -99,7 +99,7 @@ class AnalyticsController {
   Future<void> logSearchStockItemEvent(String param) {
     return FirebaseAnalytics.instance.logEvent(
       name: searchStockItemEventName,
-      parameters: <String, dynamic>{
+      parameters: <String, Object>{
         "type": param,
       },
     );
@@ -108,7 +108,7 @@ class AnalyticsController {
   Future<void> logSearchKeepItemEvent(String param) {
     return FirebaseAnalytics.instance.logEvent(
       name: searchKeepItemEventName,
-      parameters: <String, dynamic>{
+      parameters: <String, Object>{
         "type": param,
       },
     );
@@ -116,7 +116,7 @@ class AnalyticsController {
 
   Future<void> logSingleEvent(String name) {
     return FirebaseAnalytics.instance
-        .logEvent(name: name, parameters: <String, dynamic>{});
+        .logEvent(name: name, parameters: <String, Object>{});
   }
 
   Future<void> setUserProp(String name, String value) {
