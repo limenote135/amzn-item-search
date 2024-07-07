@@ -37,10 +37,6 @@ const Law = () => {
               <Td>京都府京都市下京区朱雀宝蔵町44</Td>
             </tr>
             <tr>
-              <Td>電話番号</Td>
-              <Td>050-5577-0633</Td>
-            </tr>
-            <tr>
               <Td>メールアドレス</Td>
               <Td>support@mail.knz-c.com</Td>
             </tr>
