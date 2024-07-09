@@ -1,21 +1,22 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
-import 'package:amasearch/models/enums/makad_payment_method.dart';
-import 'package:amasearch/models/enums/makad_revise_rule.dart';
+import 'package:amasearch/models/enums/pricetar_rule.dart';
 import 'package:amasearch/models/enums/pricetar_stopper.dart';
+import 'package:amasearch/pages/settings/external_services_page/pricetar_login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'common.dart';
 
-class MakadPage extends StatelessWidget {
-  const MakadPage({super.key});
-  static const String routeName = "/settings/csv/makad";
+class PricetarPage extends StatelessWidget {
+  const PricetarPage({super.key});
+
+  static const String routeName = "/settings/external_services/pricetar";
 
   static Route<void> route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => const MakadPage(),
+      builder: (context) => const PricetarPage(),
     );
   }
 
@@ -23,7 +24,7 @@ class MakadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("マカド設定"),
+        title: const Text("プライスター設定"),
       ),
       body: const _Body(),
     );
@@ -36,22 +37,31 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(
-      generalSettingsControllerProvider.select((value) => value.makadSettings),
+      generalSettingsControllerProvider
+          .select((value) => value.pricetarSettings),
     );
     return ListView(
       children: [
         ListTile(
-          title: const Text("価格改定モード(新品)"),
-          subtitle: Text(settings.newRule.displayString),
+          title: const Text("ログイン設定"),
+          onTap: () {
+            Navigator.push(context, PricetarLoginSettings.route());
+          },
+        ),
+        ListTile(
+          title: const Text("価格改定ルール(新品)"),
+          subtitle: Text(settings.newRule.toDisplayString()),
           onTap: () async {
             final ret = await showConfirmationDialog(
               context: context,
               title: "価格改定ルール",
               initialSelectedActionKey: settings.newRule,
               actions: [
-                for (final val in MakadReviseRule.values
-                    .where((e) => !e.name.startsWith("used")))
-                  AlertDialogAction(key: val, label: val.displayString),
+                for (final val in PricetarRule.values)
+                  AlertDialogAction(
+                    key: val,
+                    label: val.toDisplayString(),
+                  ),
               ],
             );
             if (ret == null) {
@@ -60,21 +70,24 @@ class _Body extends ConsumerWidget {
             final value = settings.copyWith(newRule: ret);
             ref
                 .read(generalSettingsControllerProvider.notifier)
-                .update(makadSettings: value);
+                .update(pricetarSettings: value);
           },
         ),
         ListTile(
-          title: const Text("価格改定モード(中古)"),
-          subtitle: Text(settings.usedRule.displayString),
+          title: const Text("価格改定ルール(中古)"),
+          subtitle: Text(settings.usedRule.toDisplayString()),
           onTap: () async {
             final ret = await showConfirmationDialog(
               context: context,
               title: "価格改定ルール",
               initialSelectedActionKey: settings.usedRule,
               actions: [
-                for (final val in MakadReviseRule.values
-                    .where((e) => !e.name.startsWith("new")))
-                  AlertDialogAction(key: val, label: val.displayString),
+                for (final val in PricetarRule.values)
+                  if (val != PricetarRule.cart)
+                    AlertDialogAction(
+                      key: val,
+                      label: val.toDisplayString(),
+                    ),
               ],
             );
             if (ret == null) {
@@ -83,11 +96,11 @@ class _Body extends ConsumerWidget {
             final value = settings.copyWith(usedRule: ret);
             ref
                 .read(generalSettingsControllerProvider.notifier)
-                .update(makadSettings: value);
+                .update(pricetarSettings: value);
           },
         ),
         ListTile(
-          title: const Text("下限価格"),
+          title: const Text("赤字ストッパー"),
           subtitle: Text(
             createStopperText(
               settings.lowestStopperType,
@@ -97,7 +110,7 @@ class _Body extends ConsumerWidget {
           onTap: () async {
             final stopperType = await showConfirmationDialog(
               context: context,
-              title: "下限価格指定方法",
+              title: "赤字ストッパー指定方法",
               initialSelectedActionKey: settings.lowestStopperType,
               actions: [
                 for (final val in RevisePriceStopper.values)
@@ -138,29 +151,69 @@ class _Body extends ConsumerWidget {
             );
             ref
                 .read(generalSettingsControllerProvider.notifier)
-                .update(makadSettings: newSettings);
+                .update(pricetarSettings: newSettings);
           },
         ),
         ListTile(
-          title: const Text("支払い方法の制限"),
-          subtitle: Text(settings.paymentMethod.displayString),
+          title: const Text("高値ストッパー"),
+          subtitle: Text(
+            createStopperText(
+              settings.highestStopperType,
+              settings.highestStopperValue,
+            ),
+          ),
           onTap: () async {
-            final ret = await showConfirmationDialog(
+            final stopperType = await showConfirmationDialog(
               context: context,
-              title: "制限する支払方法",
-              initialSelectedActionKey: settings.paymentMethod,
+              title: "高値ストッパー指定方法",
+              initialSelectedActionKey: settings.highestStopperType,
               actions: [
-                for (final val in MakadPaymentMethod.values)
-                  AlertDialogAction(key: val, label: val.displayString),
+                for (final val in RevisePriceStopper.values)
+                  AlertDialogAction(
+                    key: val,
+                    label: val.toDisplayString(),
+                  ),
               ],
             );
-            if (ret == null) {
+            if (stopperType == null) {
               return;
             }
-            final value = settings.copyWith(paymentMethod: ret);
+            var stopperValue = 0;
+            if (stopperType != RevisePriceStopper.nothing) {
+              final values = await showTextInputDialog(
+                context: context,
+                title: createStopperValueInputTitle(stopperType),
+                message: createStopperValueInputMessage(stopperType),
+                textFields: [
+                  DialogTextField(
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      final n = int.tryParse(value ?? "");
+                      if (n == null) {
+                        return "不正な値です";
+                      }
+                      if (stopperType == RevisePriceStopper.listingPrice &&
+                          n < 100) {
+                        return "出品価格を下回っています";
+                      }
+                      return null;
+                    },
+                  ),
+                ],
+              );
+              if (values == null) {
+                return;
+              }
+              stopperValue = int.parse(values.single);
+            }
+
+            final newSettings = settings.copyWith(
+              highestStopperType: stopperType,
+              highestStopperValue: stopperValue,
+            );
             ref
                 .read(generalSettingsControllerProvider.notifier)
-                .update(makadSettings: value);
+                .update(pricetarSettings: newSettings);
           },
         ),
       ],

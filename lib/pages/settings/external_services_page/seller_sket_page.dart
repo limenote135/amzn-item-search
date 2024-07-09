@@ -9,7 +9,8 @@ import 'common.dart';
 
 class SellerSketPage extends StatelessWidget {
   const SellerSketPage({super.key});
-  static const String routeName = "/settings/csv/sellersket";
+
+  static const String routeName = "/settings/external_services/sellersket";
 
   static Route<void> route() {
     return MaterialPageRoute(

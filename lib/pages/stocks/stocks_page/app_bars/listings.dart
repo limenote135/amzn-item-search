@@ -44,25 +44,20 @@ Future<void> callListings(
   List<StockItem> selected,
 ) async {
   final settings = ref.read(generalSettingsControllerProvider);
-  final isBeta = ref.read(isBetaUserProvider);
-  var type = ListingsFormat.standard;
-  if (isBeta) {
-    final t = await showConfirmationDialog(
-      context: context,
-      title: "登録先の選択",
-      initialSelectedActionKey: ListingsFormat.standard,
-      actions: [
-        for (final f in ListingsFormat.values)
-          AlertDialogAction(
-            key: f,
-            label: f.displayName,
-          ),
-      ],
-    );
-    if (t == null) {
-      return;
-    }
-    type = t;
+  final type = await showConfirmationDialog(
+    context: context,
+    title: "登録先の選択",
+    initialSelectedActionKey: ListingsFormat.standard,
+    actions: [
+      for (final f in ListingsFormat.values)
+        AlertDialogAction(
+          key: f,
+          label: f.displayName,
+        ),
+    ],
+  );
+  if (type == null) {
+    return;
   }
 
   final user = await ref.read(authStateChangesProvider.future);

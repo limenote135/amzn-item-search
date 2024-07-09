@@ -10,6 +10,7 @@ import 'package:amasearch/pages/settings/condition_text_page/condition_text_page
 import 'package:amasearch/pages/settings/csv_page/csv_page.dart';
 import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.dart';
 import 'package:amasearch/pages/settings/donation_page/donation_page.dart';
+import 'package:amasearch/pages/settings/external_services_page/external_services_page.dart';
 import 'package:amasearch/pages/settings/faq_page/faq_page.dart';
 import 'package:amasearch/pages/settings/keepa_page/keepa_page.dart';
 import 'package:amasearch/pages/settings/read_aloud_page/read_aloud_settings_page.dart';
@@ -41,6 +42,7 @@ import 'amazon_status.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
+
   static const routeName = "/settings";
 
   @override
@@ -191,7 +193,16 @@ class _Body extends HookConsumerWidget {
           onTap: () {
             Navigator.push(
               context,
-              PurchaseListPage.route(),
+              CsvPage.route(),
+            );
+          },
+        ),
+        ListTile(
+          title: const Text("価格改定サービス設定"),
+          onTap: () {
+            Navigator.push(
+              context,
+              ExternalServicesPage.route(),
             );
           },
         ),
