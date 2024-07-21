@@ -10,6 +10,7 @@ const quantityField = "quantity";
 const conditionField = "condition";
 const retailerField = "retailer";
 const purchaseDateField = "purchaseField";
+const listingDateField = "listingDate";
 const autogenSkuField = "autogenSku";
 const skuField = "sku";
 const conditionTextField = "conditionText";
@@ -73,6 +74,12 @@ PurchaseItemCondition getCondition(AbstractControl<dynamic> form) {
 DateTime getPurchaseDate(AbstractControl<dynamic> form) {
   final f = form as FormGroup;
   return f.control(purchaseDateField).value as DateTime;
+}
+
+String? getListingDateString(AbstractControl<dynamic> form) {
+  final f = form as FormGroup;
+  final date = f.control(listingDateField).value as DateTime?;
+  return date == null ? null : currentTimeString(time: date);
 }
 
 List<String> getImages(AbstractControl<dynamic> form) {

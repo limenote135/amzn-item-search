@@ -10,6 +10,7 @@ import 'package:amasearch/pages/common/purchase_settings/quantity_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/custom_validator.dart';
+import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
@@ -22,6 +23,7 @@ import 'fee_tile.dart';
 import 'image_tile.dart';
 import 'input_prices_tile.dart';
 import 'item_condition_tile.dart';
+import 'listing_date_tile.dart';
 import 'listing_image_tile.dart';
 import 'profit_tile.dart';
 import 'purchase_date_tile.dart';
@@ -44,6 +46,9 @@ final formValueProvider =
   ref.cacheFor(const Duration(minutes: 10));
   final date =
       item.purchaseDate != "" ? item.purchaseDate : currentTimeString();
+  final date2 = item.listingDate != null
+      ? DateTime.parse(item.listingDate!).toLocal()
+      : null;
   final state = fb.group(<String, Object>{
     purchasePriceField: [
       item.purchasePrice == 0 ? "" : "${item.purchasePrice}",
@@ -83,6 +88,9 @@ final formValueProvider =
     memoField: item.memo,
     conditionTextField: item.conditionText,
     purchaseDateField: DateTime.parse(date).toLocal(),
+    listingDateField: FormControl<DateTime>(
+      value: date2,
+    ),
   });
 
   return state;
@@ -118,6 +126,7 @@ class PurchaseSettingsForm extends ConsumerWidget {
               const TargetPriceTile(),
               const RetailerTile(),
               const PurchaseDateTile(),
+              const ListingDateTile(),
               const ThemeDivider(),
               const SkuTile(),
               const ConditionTextTile(),

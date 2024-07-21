@@ -13,6 +13,7 @@ import 'package:amasearch/util/listings.dart';
 import 'package:amasearch/util/review.dart';
 import 'package:amasearch/util/secure_storage.dart';
 import 'package:amasearch/util/util.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,25 +45,27 @@ Future<void> callListings(
   List<StockItem> selected,
 ) async {
   final settings = ref.read(generalSettingsControllerProvider);
-  final isBeta = ref.read(isBetaUserProvider);
-  var type = ListingsFormat.standard;
-  if (isBeta) {
-    final t = await showConfirmationDialog(
-      context: context,
-      title: "登録先の選択",
-      initialSelectedActionKey: ListingsFormat.standard,
-      actions: [
-        for (final f in ListingsFormat.values)
-          AlertDialogAction(
-            key: f,
-            label: f.displayName,
-          ),
-      ],
-    );
-    if (t == null) {
-      return;
-    }
-    type = t;
+  final isPaidUser = ref.read(isPaidUserProvider);
+
+  final type = await showConfirmationDialog(
+    context: context,
+    title: "登録先の選択",
+    initialSelectedActionKey: ListingsFormat.standard,
+    actions: [
+      for (final f in ListingsFormat.values)
+        AlertDialogAction(
+          key: f,
+          label: isPaidUser ? f.displayName : "${f.displayName}🔒",
+        ),
+    ],
+  );
+  if (type == null) {
+    return;
+  }
+
+  if (!isPaidUser) {
+    await showUnpaidDialog(context);
+    return;
   }
 
   final user = await ref.read(authStateChangesProvider.future);

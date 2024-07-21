@@ -158,6 +158,7 @@ class _SaveButton extends HookConsumerWidget {
       conditionText: getString(form, conditionTextField),
       otherCost: getInt(form, otherCostField),
       images: getImages(form),
+      listingDate: getListingDateString(form),
     );
     await ref.read(stockItemListControllerProvider.notifier).update(newItem);
     Navigator.of(context).popUntil((route) => route.settings.name == "/");

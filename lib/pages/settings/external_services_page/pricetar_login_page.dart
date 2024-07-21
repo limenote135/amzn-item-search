@@ -9,7 +9,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PricetarLoginSettings extends StatelessWidget {
   const PricetarLoginSettings({super.key});
-  static const String routeName = "/settings/csv/pricetar/login";
+
+  static const String routeName = "/settings/external_services/pricetar/login";
 
   static Route<void> route() {
     return MaterialPageRoute(

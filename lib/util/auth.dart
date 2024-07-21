@@ -16,7 +16,6 @@ final isBetaUserProvider = StateProvider((ref) => false);
 const customClaimsLwaKey = "lwa";
 const customClaimsPlanKey = "pl";
 const customClaimsTrialDueKey = "td";
-const customClaimsBetaUserKey = "beta";
 
 enum PlanType {
   free,
@@ -78,11 +77,7 @@ final currentClaimsProvider = StreamProvider((ref) async* {
         final inReview = await ref.watch(inReviewProvider.future);
         final dynamic plan = token.claims?[customClaimsPlanKey];
         final dynamic lwa = token.claims?[customClaimsLwaKey];
-        final dynamic beta = token.claims?[customClaimsBetaUserKey];
 
-        if (beta == true) {
-          ref.read(isBetaUserProvider.notifier).state = true;
-        }
         if (lwa != true && inReview) {
           // レビュー期間中、未連携ユーザーに鍵マークや有料プランへの案内しないようにする
           ref.read(isPaidUserProvider.notifier).state = true;
