@@ -10,7 +10,6 @@ import 'package:amasearch/pages/common/purchase_settings/quantity_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/custom_validator.dart';
-import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';

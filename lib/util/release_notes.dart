@@ -6,8 +6,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(2, 13, 0);
+var releaseNotesVersion = Version(2, 14, 0);
 const releaseNotes = <Release>[
+  Release(
+    title: "2.14.0",
+    changes: [
+      ChangeGroup(
+        title: "更新内容",
+        changes: [
+          "プライスターへの出品登録ができるようになりました",
+          "出品日を手動で設定できるようになりました",
+        ],
+      ),
+    ],
+  ),
   Release(
     title: "2.13.0",
     changes: [
