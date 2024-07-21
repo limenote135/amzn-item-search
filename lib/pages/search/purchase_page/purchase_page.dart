@@ -284,6 +284,7 @@ class _SaveButton extends HookConsumerWidget {
       otherCost: getInt(form, otherCostField),
       images: getImages(form),
       smallFee: item.smallFee,
+      listingDate: getListingDateString(form),
     );
     ref.read(stockItemListControllerProvider.notifier).add(stock);
     ref.read(analyticsControllerProvider).logPurchaseEvent(stock);
