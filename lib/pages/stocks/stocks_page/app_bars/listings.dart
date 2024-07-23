@@ -170,8 +170,11 @@ Future<void> callListings(
         ),
     };
     final filename = basename(file.path);
-    final gcsPath =
-        "Listings/$listingsFileVersion/Users/${user!.uid}/$filename";
+    final version = switch (type) {
+      ListingsFormat.standard => listingsFileVersion,
+      ListingsFormat.pricetar => pricetartFileVersion,
+    };
+    final gcsPath = "Listings/$version/Users/${user!.uid}/$filename";
 
     try {
       await FirebaseStorage.instance.ref(gcsPath).putFile(file);
@@ -188,7 +191,7 @@ Future<void> callListings(
     }
 
     final params = <String, String>{
-      "version": listingsFileVersion,
+      "version": version,
       "filename": filename,
     };
 
@@ -223,11 +226,16 @@ Future<void> callListings(
 
     await analytics.logListingsEvent(hasImage: hasImage.toString());
 
+    final isContainsMfa = targets.any((element) => !element.useFba);
+
     await EasyLoading.dismiss();
     final msg = switch (type) {
       ListingsFormat.standard =>
         "Amazonへ出品登録を行いました。\n処理状況や問題があった場合はセラーセントラルで確認できます。",
-      ListingsFormat.pricetar => "プライスターへ出品登録を行いました。\n",
+      ListingsFormat.pricetar =>
+        "プライスターへ出品登録を行いました。\n内容に問題がある場合、プライスター上で確認できます。\n\n"
+            "${isContainsMfa ? "既に登録済みの自己配送商品があった場合、"
+                "既存の在庫数に追加されることにご注意ください。" : ""}",
     };
     final cancelLabel = switch (type) {
       ListingsFormat.standard => "セラーセントラルを開く",
@@ -246,7 +254,8 @@ Future<void> callListings(
       final url = switch (type) {
         ListingsFormat.standard =>
           "https://sellercentral.amazon.co.jp/listing/status",
-        ListingsFormat.pricetar => "https://pricetar.com/",
+        ListingsFormat.pricetar =>
+          "https://jp3.pricetar.com/seller/product/csvwarehousing",
       };
       await launchUrl(Uri.parse(url), mode: LaunchMode.inAppBrowserView);
     }

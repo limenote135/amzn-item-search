@@ -86,11 +86,13 @@ List<List<Object>> createPricetarCsv(
 ) {
   return <List<Object>>[
     // header
+    ["ASIN、JANはどちらか一方のみ記載してください。"],
     [
       "SKU",
       "ASIN",
+      "JAN",
       "title",
-      "number",
+      "add_number",
       "price",
       "cost",
       "akaji",
@@ -100,13 +102,13 @@ List<List<Object>> createPricetarCsv(
       "priceTrace",
       "leadtime",
       "merchant_shipping_group_name",
-      "delete",
     ],
     for (final item in items)
       [
         item.sku,
         item.item.asin,
-        "",
+        "", // JAN
+        "", // title
         item.amount,
         item.sellPrice,
         item.purchasePrice,
@@ -125,35 +127,34 @@ List<List<Object>> createPricetarCsv(
         item.condition == ItemCondition.newItem
             ? settings.newRule.toPricetarCsvValue()
             : settings.usedRule.toPricetarCsvValue(),
-        "",
-        "",
-        "",
+        "", // leadtime
+        "", // merchant_shipping_group_name
       ],
   ];
 }
 
 void validatePricetarCsv(List<List<Object>> items) {
-  // 1行目はヘッダなのでスキップする
-  for (final item in items.skip(1)) {
+  // 1, 2行目はヘッダなのでスキップする
+  for (final item in items.skip(2)) {
     if (item.length != 14) {
       throw Exception("CSV の列数が不正です");
     }
     final sku = item[0] as String;
-    final sellPrice = item[4] as int;
+    final sellPrice = item[5] as int;
     if (sellPrice <= 0) {
       throw PricetarInvalidCsvException("出品価格が0以下です: $sku");
     }
     // 出品価格が仕入れ値もしくは赤字ストッパーを下回っています
     // 価格追従モードがonに設定されていれば自動調整されます
-    final akaji = item[6] as int;
-    final takane = item[7] as int;
+    final akaji = item[7] as int;
+    final takane = item[8] as int;
     if (akaji != 0 && takane != 0 && akaji > takane) {
       throw PricetarInvalidCsvException("赤字ストッパー金額が高値ストッパー金額を上回っています: $sku");
     }
     if (akaji != 0 && sellPrice < akaji) {
       throw PricetarInvalidCsvException("出品価格が赤字ストッパーを下回っています: $sku");
     }
-    final purchasePrice = item[5] as int;
+    final purchasePrice = item[6] as int;
     if (purchasePrice > sellPrice) {
       throw PricetarInvalidCsvException("出品価格が仕入れ値を下回っています: $sku");
     }

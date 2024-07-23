@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 
 const listingsFileVersion = "v1";
+const pricetartFileVersion = "v2";
 
 Future<File> createListingsFile(List<ListingItem> items) async {
   // JSON に入れる出品画像にはファイル名のみを入れる
