@@ -150,6 +150,9 @@ void validatePricetarCsv(List<List<Object>> items) {
     if (akaji != 0 && takane != 0 && akaji > takane) {
       throw PricetarInvalidCsvException("赤字ストッパー金額が高値ストッパー金額を上回っています: $sku");
     }
+    if (akaji != 0 && sellPrice < akaji) {
+      throw PricetarInvalidCsvException("出品価格が赤字ストッパーを下回っています: $sku");
+    }
     final purchasePrice = item[5] as int;
     if (purchasePrice > sellPrice) {
       throw PricetarInvalidCsvException("出品価格が仕入れ値を下回っています: $sku");
