@@ -123,7 +123,10 @@ class _BodyState extends ConsumerState {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: ElevatedButton(
-                  onPressed: onSubmit,
+                  onPressed: () async {
+                    await onSubmit();
+                    Navigator.of(context).pop();
+                  },
                   child: const Text("保存"),
                 ),
               ),
