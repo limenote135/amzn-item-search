@@ -168,7 +168,7 @@ Future<void> callListings(
         await showOkAlertDialog(
           context: context,
           title: "エラー",
-          message: "認証情報が設定されていません",
+          message: "認証情報が設定されていません。設定画面から設定を行ってください。",
         );
         return;
       }
