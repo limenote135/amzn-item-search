@@ -79,7 +79,7 @@ Future<void> callListings(
 
   var baseMsg = "${selected.length}件の商品を出品登録します";
   // 100MB 以上はメモリが足りなくなる可能性があるので警告
-  if (size > 100000000) {
+  if (type == ListingsFormat.standard && size > 100000000) {
     baseMsg = "$baseMsg\n(画像サイズが非常に大きいため出品に時間がかかる可能性があります)";
   }
 
@@ -89,7 +89,7 @@ Future<void> callListings(
   if (!isContainsAlreadyListed) {
     isOk = await showOkCancelAlertDialog(
       context: context,
-      title: "Amazonへ出品登録",
+      title: "${type.displayName}へ出品登録",
       message: baseMsg,
     );
   } else {
@@ -191,18 +191,29 @@ Future<void> callListings(
     await analytics.logListingsEvent(hasImage: hasImage.toString());
 
     await EasyLoading.dismiss();
+    final msg = switch (type) {
+      ListingsFormat.standard => "Amazonへ出品登録を行いました。\n処理状況はセラーセントラルで確認できます。",
+      ListingsFormat.pricetar => "プライスターへ出品登録を行いました。\n",
+    };
+    final cancelLabel = switch (type) {
+      ListingsFormat.standard => "セラーセントラルを開く",
+      ListingsFormat.pricetar => "プライスターを開く",
+    };
     final ret = await showOkCancelAlertDialog(
       context: context,
       title: "出品登録",
-      message: "Amazonへ出品登録を行いました。\n"
-          "処理状況はセラーセントラルで確認できます。",
+      message: msg,
       okLabel: "閉じる",
-      cancelLabel: "セラーセントラルを開く",
+      cancelLabel: cancelLabel,
     );
     resetState(ref);
     if (ret == OkCancelResult.cancel) {
       // セラーセントラルを開く
-      const url = "https://sellercentral.amazon.co.jp/listing/status";
+      final url = switch (type) {
+        ListingsFormat.standard =>
+          "https://sellercentral.amazon.co.jp/listing/status",
+        ListingsFormat.pricetar => "https://pricetar.com/",
+      };
       await launchUrl(Uri.parse(url), mode: LaunchMode.inAppBrowserView);
     }
 
