@@ -44,6 +44,14 @@ Future<void> callListings(
   WidgetRef ref,
   List<StockItem> selected,
 ) async {
+  if (selected.any((element) => element.sku.isEmpty)) {
+    await showOkAlertDialog(
+      context: context,
+      title: "エラー",
+      message: "SKU が設定されていない商品は出品できません。",
+    );
+    return;
+  }
   final settings = ref.read(generalSettingsControllerProvider);
   final isPaidUser = ref.read(isPaidUserProvider);
 
