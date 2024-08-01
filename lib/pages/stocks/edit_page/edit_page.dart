@@ -126,6 +126,17 @@ class _SaveButton extends HookConsumerWidget {
       }
     }
 
+    if (sku.isEmpty) {
+      final ret = await showOkCancelAlertDialog(
+        context: context,
+        title: "SKU未入力",
+        message: "SKUが未入力ですがよろしいですか？",
+      );
+      if (ret != OkCancelResult.ok) {
+        return;
+      }
+    }
+
     final feeInfo = item.item.prices?.feeInfo;
     final profit = calcProfit(
       sellPrice: sell,
