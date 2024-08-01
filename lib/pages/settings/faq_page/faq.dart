@@ -74,6 +74,10 @@ final questions = <Faq>[
     title: "JAN コードではなく ASIN で検索したい",
     bodyText: "ワード検索で ASIN を入力すると、該当 ASIN の情報を検索できます。",
   ),
+  const Faq(
+    title: "出品登録した内容がセラーセントラルに反映されない",
+    body: _ListingsIssue(),
+  ),
 ];
 
 // ignore: unused_element
@@ -251,6 +255,42 @@ class _SafariIssue extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ListingsIssue extends StatelessWidget {
+  const _ListingsIssue();
+
+  @override
+  Widget build(BuildContext context) {
+    return Text.rich(
+      TextSpan(
+        children: [
+          const TextSpan(
+            text: "アプリからの出品登録に成功しているにも関わらずセラーセントラルへ反映が行われない場合、"
+                "登録内容の不備によりセラーセントラル側で出品登録が失敗している可能性があります。\n"
+                "セラーセントラル側での処理状況や問題があった場合には",
+          ),
+          TextSpan(
+            text: "こちら",
+            style: const TextStyle(
+              color: Colors.blue,
+              decoration: TextDecoration.underline,
+            ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () async {
+                await launchUrl(
+                  Uri.parse(
+                    "https://sellercentral.amazon.co.jp/listing/status",
+                  ),
+                  mode: LaunchMode.inAppBrowserView,
+                );
+              },
+          ),
+          const TextSpan(text: " で確認が可能です。"),
+        ],
+      ),
     );
   }
 }
