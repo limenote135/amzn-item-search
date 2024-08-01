@@ -200,7 +200,8 @@ Future<void> callListings(
 
     await EasyLoading.dismiss();
     final msg = switch (type) {
-      ListingsFormat.standard => "Amazonへ出品登録を行いました。\n処理状況はセラーセントラルで確認できます。",
+      ListingsFormat.standard =>
+        "Amazonへ出品登録を行いました。\n処理状況や問題があった場合はセラーセントラルで確認できます。",
       ListingsFormat.pricetar => "プライスターへ出品登録を行いました。\n",
     };
     final cancelLabel = switch (type) {
