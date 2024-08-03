@@ -1,8 +1,10 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/repository/pricetar.dart';
+import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/secure_storage.dart';
 import 'package:amasearch/util/validators.dart';
+import 'package:amasearch/widgets/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -138,6 +140,11 @@ class _BodyState extends ConsumerState {
   }
 
   Future<void> loginTest() async {
+    final isPaidUser = ref.read(isPaidUserProvider);
+    if (!isPaidUser) {
+      await showUnpaidDialog(context);
+      return;
+    }
     final repo = ref.read(pricetarProvider);
     if (formKey.currentState?.validate() != true) {
       return;
@@ -145,6 +152,11 @@ class _BodyState extends ConsumerState {
     final id = idKey.currentState!.value;
     final pass = passwordKey.currentState!.value;
     if (id == null || id.isEmpty || pass == null || pass.isEmpty) {
+      await showOkAlertDialog(
+        context: context,
+        title: "エラー",
+        message: "ID またはパスワードが入力されていません",
+      );
       return;
     }
     try {
