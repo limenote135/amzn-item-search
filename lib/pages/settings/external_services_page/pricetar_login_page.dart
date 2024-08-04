@@ -6,6 +6,7 @@ import 'package:amasearch/util/secure_storage.dart';
 import 'package:amasearch/util/validators.dart';
 import 'package:amasearch/widgets/payment.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -160,7 +161,10 @@ class _BodyState extends ConsumerState {
       return;
     }
     try {
+      await EasyLoading.show(status: "ログイン中");
       final resp = await repo.login(id, pass);
+      await EasyLoading.dismiss();
+
       await showOkAlertDialog(
         context: context,
         title: "ログイン結果",
@@ -168,12 +172,17 @@ class _BodyState extends ConsumerState {
       );
       // ignore: avoid_catches_without_on_clauses
     } catch (e, st) {
+      await EasyLoading.dismiss();
       await recordError(e, st, information: const ["Pricetar login test"]);
       await showOkAlertDialog(
         context: context,
         title: "エラー",
         message: "ログインに失敗しました",
       );
+    } finally {
+      if (EasyLoading.isShow) {
+        await EasyLoading.dismiss();
+      }
     }
   }
 }
