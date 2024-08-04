@@ -122,6 +122,22 @@ Future<void> callListings(
     }
   }
 
+  {
+    final checkDuplicate = <String, bool>{};
+    for (final item in targets) {
+      if (checkDuplicate.containsKey(item.sku)) {
+        await showOkAlertDialog(
+          context: context,
+          title: "エラー",
+          message: "SKU が重複している商品があるため出品できません。\n"
+              "SKU: ${item.sku}",
+        );
+        return;
+      }
+      checkDuplicate[item.sku] = true;
+    }
+  }
+
   if (targets.length > 50) {
     final isOk = await showOkCancelAlertDialog(
       context: context,
