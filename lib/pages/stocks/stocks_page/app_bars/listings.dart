@@ -133,10 +133,19 @@ Future<void> callListings(
     }
   }
 
+  final hasImage = targets.any((element) => element.images.isNotEmpty);
+  if (hasImage && type == ListingsFormat.pricetar) {
+    await showOkAlertDialog(
+      context: context,
+      title: "画像付き出品登録時の注意",
+      message: "プライスターへの出品画像は登録されません。\n"
+          "画像を登録する場合、セラーセントラルへの出品登録も同時に行ってください。",
+    );
+  }
+
   try {
     await EasyLoading.show(status: "出品処理中...");
     final items = targets.map((e) => e.toListingItem()).toList();
-    final hasImage = items.any((element) => element.images.isNotEmpty);
     final file = await switch (type) {
       ListingsFormat.standard => createListingsFile(items),
       ListingsFormat.pricetar => createPricetarListingsFile(
