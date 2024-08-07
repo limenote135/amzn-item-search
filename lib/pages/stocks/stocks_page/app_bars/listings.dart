@@ -224,7 +224,10 @@ Future<void> callListings(
       currentTimeString(),
     );
 
-    await analytics.logListingsEvent(hasImage: hasImage.toString());
+    await analytics.logListingsEvent(
+      hasImage: hasImage.toString(),
+      type: type.name,
+    );
 
     final isContainsMfa = targets.any((element) => !element.useFba);
 

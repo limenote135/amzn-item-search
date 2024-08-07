@@ -87,12 +87,13 @@ class AnalyticsController {
     );
   }
 
-  Future<void> logListingsEvent({required String hasImage}) {
+  Future<void> logListingsEvent({
+    required String hasImage,
+    required String type,
+  }) {
     return FirebaseAnalytics.instance.logEvent(
       name: amazonListingEventName,
-      parameters: <String, Object>{
-        "HasImage": hasImage,
-      },
+      parameters: <String, Object>{"HasImage": hasImage, "type": type},
     );
   }
 
