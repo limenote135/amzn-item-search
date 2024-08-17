@@ -28,7 +28,7 @@ class SummaryTile extends HookConsumerWidget {
         pageMode == StockPageMode.listing ||
         pageMode == StockPageMode.upload) {
       return ColoredBox(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         child: Text(day),
       );
     }
@@ -50,7 +50,7 @@ class SummaryTile extends HookConsumerWidget {
         totalSellPrice == 0 ? 0 : (profitValue / totalSellPrice * 100).round();
 
     return ColoredBox(
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.surface,
       child: Column(
         children: [
           Text(day),
