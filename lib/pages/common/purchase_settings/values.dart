@@ -62,6 +62,8 @@ bool getBool(AbstractControl<dynamic> form, String field) {
   switch (field) {
     case useFbaField:
       return f.control(useFbaField).value as bool;
+    case autogenSkuField:
+      return f.control(autogenSkuField).value as bool;
   }
   throw Exception("Invalid field: $field");
 }

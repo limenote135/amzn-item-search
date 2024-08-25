@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/controllers/stock_item_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
@@ -109,7 +110,21 @@ class _SaveButton extends HookConsumerWidget {
     final sell = getInt(form, sellPriceField);
     final useFba = getBool(form, useFbaField);
     final otherCost = getInt(form, otherCostField);
-    final sku = getString(form, skuField);
+    final skuFormat = ref.read(
+      generalSettingsControllerProvider.select(
+        (v) => v.skuFormat,
+      ),
+    );
+
+    final isAutogenSku = getBool(form, autogenSkuField);
+    var sku = getString(form, skuField);
+    if (isAutogenSku) {
+      sku = generateSku(
+        skuFormat,
+        item.item,
+        form,
+      );
+    }
 
     final hasSameSku = ref.read(
       stockItemListControllerProvider
@@ -161,7 +176,7 @@ class _SaveButton extends HookConsumerWidget {
       amount: getInt(form, quantityField),
       condition: getCondition(form).toItemCondition(),
       subCondition: getCondition(form).toItemSubCondition(),
-      sku: getString(form, skuField),
+      sku: sku,
       retailer: getString(form, retailerField),
       memo: getString(form, memoField),
       purchaseDate: getString(form, purchaseDateField),

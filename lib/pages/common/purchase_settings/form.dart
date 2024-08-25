@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/models/enums/item_sub_condition.dart';
 import 'package:amasearch/models/enums/purchase_item_condition.dart';
 import 'package:amasearch/models/stock_item.dart';
@@ -10,6 +11,8 @@ import 'package:amasearch/pages/common/purchase_settings/quantity_tile.dart';
 import 'package:amasearch/pages/search/common/seller_list_tile.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/custom_validator.dart';
+import 'package:amasearch/util/price_util.dart';
+import 'package:amasearch/util/sku_replacer.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
 import 'package:amasearch/widgets/with_underline.dart';
@@ -146,4 +149,49 @@ class PurchaseSettingsForm extends ConsumerWidget {
       ],
     );
   }
+}
+
+String generateSku(
+  String format,
+  AsinData item,
+  FormGroup form,
+) {
+  final purchase = getInt(form, purchasePriceField);
+  final sell = getInt(form, sellPriceField);
+  final cond = getCondition(form);
+  final quantity = getInt(form, quantityField);
+  final useFba = getBool(form, useFbaField);
+  final purchaseDate = getPurchaseDate(form);
+  final otherCost = getInt(form, otherCostField);
+
+  final feeInfo = item.prices?.feeInfo;
+
+  final profit = calcProfit(
+    sellPrice: sell,
+    purchasePrice: purchase,
+    fee: feeInfo,
+    useFba: useFba,
+    otherCost: otherCost,
+  );
+  final breakEven = calcBreakEven(
+    purchase: purchase,
+    useFba: useFba,
+    feeInfo: feeInfo,
+    otherCost: otherCost,
+    category: item.category,
+  );
+
+  final sku = replaceSku(
+    format: format,
+    item: item,
+    purchase: purchase,
+    sell: sell,
+    cond: cond,
+    profit: profit,
+    quantity: quantity,
+    useFba: useFba,
+    date: purchaseDate,
+    breakEven: breakEven,
+  );
+  return sku;
 }

@@ -1,12 +1,12 @@
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/asin_data.dart';
 import 'package:amasearch/pages/common/purchase_settings/values.dart';
-import 'package:amasearch/util/price_util.dart';
-import 'package:amasearch/util/sku_replacer.dart';
 import 'package:amasearch/widgets/form.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import 'form.dart';
 
 class SkuTile extends HookConsumerWidget {
   const SkuTile({super.key});
@@ -30,7 +30,7 @@ class SkuTile extends HookConsumerWidget {
             builder: (context, control, child) {
               if (control.value!) {
                 final form = ReactiveForm.of(context)! as FormGroup;
-                form.control(skuField).value = _generateSku(
+                form.control(skuField).value = generateSku(
                   skuFormat,
                   item,
                   form,
@@ -50,50 +50,6 @@ class SkuTile extends HookConsumerWidget {
           ),
         ),
       ],
-    );
-  }
-
-  String _generateSku(
-    String format,
-    AsinData item,
-    FormGroup form,
-  ) {
-    final purchase = getInt(form, purchasePriceField);
-    final sell = getInt(form, sellPriceField);
-    final cond = getCondition(form);
-    final quantity = getInt(form, quantityField);
-    final useFba = getBool(form, useFbaField);
-    final purchaseDate = getPurchaseDate(form);
-    final otherCost = getInt(form, otherCostField);
-
-    final feeInfo = item.prices?.feeInfo;
-
-    final profit = calcProfit(
-      sellPrice: sell,
-      purchasePrice: purchase,
-      fee: feeInfo,
-      useFba: useFba,
-      otherCost: otherCost,
-    );
-    final breakEven = calcBreakEven(
-      purchase: purchase,
-      useFba: useFba,
-      feeInfo: feeInfo,
-      otherCost: otherCost,
-      category: item.category,
-    );
-
-    return replaceSku(
-      format: format,
-      item: item,
-      purchase: purchase,
-      sell: sell,
-      cond: cond,
-      profit: profit,
-      quantity: quantity,
-      useFba: useFba,
-      date: purchaseDate,
-      breakEven: breakEven,
     );
   }
 }
