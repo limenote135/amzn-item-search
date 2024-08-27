@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amasearch/util/random.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -7,6 +8,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 const _keepaUaConfigName = "kpua";
 
 final _currentUaProvider = StateProvider((ref) => "");
+final _randomUaProvider = Provider((_) {
+  final len = randomIntWithRange(4, 7);
+  final base = randomString(len);
+  final version = "0.${randomIntWithDigit(2)}.${randomIntWithDigit(4)}";
+
+  // Keepa のグラフアクセスを大量に行うとブロックされるので、ランダムで UA を変更する
+  // リクエストごとにランダムにしてもよいが、ユーザー単位で固定しておくために
+  // グローバルな HttpClient で書き換える
+  return "ama$base/$version";
+});
 
 final _uaProvider = FutureProvider((ref) async {
   final timer = Timer.periodic(const Duration(minutes: 5), (timer) {
@@ -45,10 +56,16 @@ class KeepaUaAsyncWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uaAsync = ref.watch(_uaProvider);
+    final randomUa = ref.watch(_randomUaProvider);
     return uaAsync.when(
       error: (error, stackTrace) => _placeholder,
       loading: () => _placeholder,
-      data: builder,
+      data: (data) {
+        if (data.isEmpty) {
+          return builder(randomUa);
+        }
+        return builder(data);
+      },
     );
   }
 }
