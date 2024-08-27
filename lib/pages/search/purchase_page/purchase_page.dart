@@ -150,7 +150,20 @@ class _SaveButton extends HookConsumerWidget {
     return ReactiveFormConsumer(
       builder: (context, form, child) {
         Future<void> onSave() async {
-          final sku = getString(form, skuField);
+          final skuFormat = ref.read(
+            generalSettingsControllerProvider.select(
+              (v) => v.skuFormat,
+            ),
+          );
+          final isAutogenSku = getBool(form, autogenSkuField);
+          var sku = getString(form, skuField);
+          if (isAutogenSku) {
+            sku = generateSku(
+              skuFormat,
+              item,
+              form,
+            );
+          }
           final hasSameSku = ref.read(
             stockItemListControllerProvider
                 .select((value) => value.any((e) => e.sku == sku)),
@@ -260,6 +273,21 @@ class _SaveButton extends HookConsumerWidget {
     final useFba = getBool(form, useFbaField);
     final otherCost = getInt(form, otherCostField);
 
+    final skuFormat = ref.read(
+      generalSettingsControllerProvider.select(
+        (v) => v.skuFormat,
+      ),
+    );
+    final isAutogenSku = getBool(form, autogenSkuField);
+    var sku = getString(form, skuField);
+    if (isAutogenSku) {
+      sku = generateSku(
+        skuFormat,
+        item,
+        form,
+      );
+    }
+
     final feeInfo = item.prices?.feeInfo;
     final profit = calcProfit(
       sellPrice: sell,
@@ -285,7 +313,7 @@ class _SaveButton extends HookConsumerWidget {
       amount: getInt(form, quantityField),
       condition: getCondition(form).toItemCondition(),
       subCondition: getCondition(form).toItemSubCondition(),
-      sku: getString(form, skuField),
+      sku: sku,
       memo: getString(form, memoField),
       item: item,
       purchaseDate: getString(form, purchaseDateField),
