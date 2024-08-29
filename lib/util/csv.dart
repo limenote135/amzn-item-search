@@ -123,7 +123,9 @@ List<List<Object>> createPricetarCsv(
           settings.highestStopperValue,
         ),
         item.subCondition.toPricetarCsvValue(),
-        item.conditionText,
+        // プライスターは一度に100件までしか登録できないが、行数でカウントしているので
+        // コンディション説明に改行が含まれると件数以上にカウントされてしまうため改行を削除
+        item.conditionText.replaceAll("\n", ""),
         item.condition == ItemCondition.newItem
             ? settings.newRule.toPricetarCsvValue()
             : settings.usedRule.toPricetarCsvValue(),
