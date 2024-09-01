@@ -41,12 +41,12 @@ class AmazonRepository {
   static final _random = Random();
 
   static String get _userAgent {
-    final rand = _random.nextInt(100) + 45;
-    final chMajor = _random.nextInt(10) + 90;
-    return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/$chMajor.0.4280.$rand Safari/537.36";
+    // final rand = _random.nextInt(100) + 45;
+    // final chMajor = _random.nextInt(10) + 90;
+    return "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0";
   }
 
-  static const _offerUrlBase = "https://www.amazon.co.jp/gp/aod/ajax/";
+  static const _offerUrlBase = "https://www.amazon.co.jp/gp/product/ajax/";
   static const _shopSelector = "#aod-offer-soldBy div.a-col-right";
   static const _priceSelector = "span.a-price span.a-price-whole";
   static const _shipFromSelector = "#aod-offer-shipsFrom .a-color-base";
@@ -76,10 +76,11 @@ class AmazonRepository {
   Map<String, String> _commonHeader() {
     return <String, String>{
       HttpHeaders.userAgentHeader: _userAgent,
-      HttpHeaders.acceptEncodingHeader: "gzip, deflate, br",
+      HttpHeaders.acceptEncodingHeader: "gzip, deflate, br, zstd",
       HttpHeaders.acceptHeader: "text/html,*/*",
       HttpHeaders.acceptLanguageHeader: "ja",
       HttpHeaders.connectionHeader: "keep-alive",
+      HttpHeaders.cacheControlHeader: "no-cache",
     };
   }
 
@@ -125,11 +126,11 @@ class AmazonRepository {
     final query = <String, dynamic>{
       "asin": params.asin,
       "filters": reqParamStr,
-      "aodAjaxMain": "aodAjaxMain",
+      "experienceId": "aodAjaxMain",
       "pc": "dp",
-      "pageno": pageno,
     };
     if (params.page > 0) {
+      query["pageno"] = pageno;
       // 1ページ目はカートも含めるが2ページ目以降は不要
       query["isonlyrenderofferlist"] = true;
     }
@@ -138,14 +139,18 @@ class AmazonRepository {
       headers: <String, dynamic>{
         ..._commonHeader(),
         HttpHeaders.refererHeader: "https://www.amazon.co.jp/dp/${params.asin}",
+        "Pragma": "no-cache",
         "X-Requested-With": "XMLHttpRequest",
         "Sec-Fetch-Site": "same-origin",
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Dest": "empty",
+        "DNT": "1",
+        "Sec-GPC": "1",
+        "TE": "trailers",
       },
     );
     final url = params.page == 0
-        ? "${_offerUrlBase}ref=dp_aod_ALL_mbc"
+        ? "${_offerUrlBase}ref=auto_load_aod"
         : "${_offerUrlBase}ref=aod_page_$pageno";
     final resp = await d.get(
       url,
