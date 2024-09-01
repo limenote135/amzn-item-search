@@ -38,7 +38,7 @@ class AmazonRepository {
   static const _amazonSellerId = "AN1VRQENFRJN5";
   static const _marketPlaceJp = "A1VC38T7YXB528";
 
-  static final _random = Random();
+  // static final _random = Random();
 
   static String get _userAgent {
     // final rand = _random.nextInt(100) + 45;
