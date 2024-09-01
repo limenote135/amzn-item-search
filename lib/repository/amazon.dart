@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/util/dio.dart';
