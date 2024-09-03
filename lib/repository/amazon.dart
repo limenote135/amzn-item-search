@@ -124,9 +124,15 @@ class AmazonRepository {
     final pageno = params.page + 1;
     final query = <String, dynamic>{
       "asin": params.asin,
+      "m": "",
+      "qid": "",
+      "smid": "",
+      "sourcecustomerorglistid": "",
+      "sourcecustomerorglistitemid": "",
+      "sr": "",
+      "pc": "dp",
       "filters": reqParamStr,
       "experienceId": "aodAjaxMain",
-      "pc": "dp",
     };
     if (params.page > 0) {
       query["pageno"] = pageno;
