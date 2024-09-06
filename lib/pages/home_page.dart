@@ -35,7 +35,7 @@ class HomePage extends HookConsumerWidget {
     final observer = ref.watch(analyticsObserverProvider);
     return PopScope(
       canPop: false,
-      onPopInvoked: (bool didPop) async {
+      onPopInvokedWithResult: (bool didPop, dynamic result) async {
         if (didPop) {
           return;
         }

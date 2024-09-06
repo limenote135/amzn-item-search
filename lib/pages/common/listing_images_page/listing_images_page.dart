@@ -74,7 +74,7 @@ class _ListingImagesPageState extends ConsumerState<ListingImagesPage> {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (bool didPop) async {
+      onPopInvokedWithResult: (bool didPop, dynamic result) async {
         if (didPop) {
           return;
         }
