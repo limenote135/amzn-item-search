@@ -30,8 +30,12 @@ mixin _$KeepaTokenStatusResponse {
   int get processingTimeInMs => throw _privateConstructorUsedError;
   KeepaError? get error => throw _privateConstructorUsedError;
 
+  /// Serializes this KeepaTokenStatusResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of KeepaTokenStatusResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $KeepaTokenStatusResponseCopyWith<KeepaTokenStatusResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -66,6 +70,8 @@ class _$KeepaTokenStatusResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of KeepaTokenStatusResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class _$KeepaTokenStatusResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of KeepaTokenStatusResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $KeepaErrorCopyWith<$Res>? get error {
@@ -160,6 +168,8 @@ class __$$KeepaTokenStatusResponseImplCopyWithImpl<$Res>
       $Res Function(_$KeepaTokenStatusResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of KeepaTokenStatusResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -270,7 +280,7 @@ class _$KeepaTokenStatusResponseImpl implements _KeepaTokenStatusResponse {
             (identical(other.error, error) || other.error == error));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -283,7 +293,9 @@ class _$KeepaTokenStatusResponseImpl implements _KeepaTokenStatusResponse {
       processingTimeInMs,
       error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KeepaTokenStatusResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$KeepaTokenStatusResponseImplCopyWith<_$KeepaTokenStatusResponseImpl>
@@ -328,8 +340,11 @@ abstract class _KeepaTokenStatusResponse implements KeepaTokenStatusResponse {
   int get processingTimeInMs;
   @override
   KeepaError? get error;
+
+  /// Create a copy of KeepaTokenStatusResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$KeepaTokenStatusResponseImplCopyWith<_$KeepaTokenStatusResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -344,8 +359,12 @@ mixin _$KeepaError {
   String? get message => throw _privateConstructorUsedError;
   String? get details => throw _privateConstructorUsedError;
 
+  /// Serializes this KeepaError to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of KeepaError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $KeepaErrorCopyWith<KeepaError> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -369,6 +388,8 @@ class _$KeepaErrorCopyWithImpl<$Res, $Val extends KeepaError>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of KeepaError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -412,6 +433,8 @@ class __$$KeepaErrorImplCopyWithImpl<$Res>
       _$KeepaErrorImpl _value, $Res Function(_$KeepaErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of KeepaError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -467,11 +490,13 @@ class _$KeepaErrorImpl implements _KeepaError {
             (identical(other.details, details) || other.details == details));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, type, message, details);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KeepaError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$KeepaErrorImplCopyWith<_$KeepaErrorImpl> get copyWith =>
@@ -500,8 +525,11 @@ abstract class _KeepaError implements KeepaError {
   String? get message;
   @override
   String? get details;
+
+  /// Create a copy of KeepaError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$KeepaErrorImplCopyWith<_$KeepaErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -19,7 +19,9 @@ mixin _$AsinDataPageParam {
   QueryItemsRequest get param => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AsinDataPageParam
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AsinDataPageParamCopyWith<AsinDataPageParam> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,6 +47,8 @@ class _$AsinDataPageParamCopyWithImpl<$Res, $Val extends AsinDataPageParam>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AsinDataPageParam
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,6 +67,8 @@ class _$AsinDataPageParamCopyWithImpl<$Res, $Val extends AsinDataPageParam>
     ) as $Val);
   }
 
+  /// Create a copy of AsinDataPageParam
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $QueryItemsRequestCopyWith<$Res> get param {
@@ -94,6 +100,8 @@ class __$$AsinDataPageParamImplCopyWithImpl<$Res>
       $Res Function(_$AsinDataPageParamImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AsinDataPageParam
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,7 +148,9 @@ class _$AsinDataPageParamImpl implements _AsinDataPageParam {
   @override
   int get hashCode => Object.hash(runtimeType, param, page);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AsinDataPageParam
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AsinDataPageParamImplCopyWith<_$AsinDataPageParamImpl> get copyWith =>
@@ -157,8 +167,11 @@ abstract class _AsinDataPageParam implements AsinDataPageParam {
   QueryItemsRequest get param;
   @override
   int get page;
+
+  /// Create a copy of AsinDataPageParam
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AsinDataPageParamImplCopyWith<_$AsinDataPageParamImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -168,7 +181,9 @@ mixin _$AsinDataIndexAtParam {
   QueryItemsRequest get param => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AsinDataIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AsinDataIndexAtParamCopyWith<AsinDataIndexAtParam> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -195,6 +210,8 @@ class _$AsinDataIndexAtParamCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AsinDataIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -213,6 +230,8 @@ class _$AsinDataIndexAtParamCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of AsinDataIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $QueryItemsRequestCopyWith<$Res> get param {
@@ -244,6 +263,8 @@ class __$$AsinDataIndexAtParamImplCopyWithImpl<$Res>
       $Res Function(_$AsinDataIndexAtParamImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AsinDataIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -290,7 +311,9 @@ class _$AsinDataIndexAtParamImpl implements _AsinDataIndexAtParam {
   @override
   int get hashCode => Object.hash(runtimeType, param, index);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AsinDataIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AsinDataIndexAtParamImplCopyWith<_$AsinDataIndexAtParamImpl>
@@ -308,8 +331,11 @@ abstract class _AsinDataIndexAtParam implements AsinDataIndexAtParam {
   QueryItemsRequest get param;
   @override
   int get index;
+
+  /// Create a copy of AsinDataIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AsinDataIndexAtParamImplCopyWith<_$AsinDataIndexAtParamImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

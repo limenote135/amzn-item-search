@@ -25,8 +25,12 @@ mixin _$FeeExpression {
   @HiveField(1)
   String get exp => throw _privateConstructorUsedError;
 
+  /// Serializes this FeeExpression to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FeeExpression
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FeeExpressionCopyWith<FeeExpression> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$FeeExpressionCopyWithImpl<$Res, $Val extends FeeExpression>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FeeExpression
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,6 +94,8 @@ class __$$FeeExpressionImplCopyWithImpl<$Res>
       _$FeeExpressionImpl _value, $Res Function(_$FeeExpressionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FeeExpression
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,11 +150,13 @@ class _$FeeExpressionImpl implements _FeeExpression {
             (identical(other.exp, exp) || other.exp == exp));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, moreThan, exp);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FeeExpression
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FeeExpressionImplCopyWith<_$FeeExpressionImpl> get copyWith =>
@@ -174,8 +184,11 @@ abstract class _FeeExpression implements FeeExpression {
   @override
   @HiveField(1)
   String get exp;
+
+  /// Create a copy of FeeExpression
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FeeExpressionImplCopyWith<_$FeeExpressionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

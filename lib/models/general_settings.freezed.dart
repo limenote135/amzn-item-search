@@ -81,7 +81,9 @@ mixin _$GeneralSettings {
   @HiveField(28, defaultValue: defaultStandardButtons)
   Map<String, bool> get standardButtons => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeneralSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GeneralSettingsCopyWith<GeneralSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -149,6 +151,8 @@ class _$GeneralSettingsCopyWithImpl<$Res, $Val extends GeneralSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GeneralSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -302,6 +306,8 @@ class _$GeneralSettingsCopyWithImpl<$Res, $Val extends GeneralSettings>
     ) as $Val);
   }
 
+  /// Create a copy of GeneralSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $KeepaSettingsCopyWith<$Res> get keepaSettings {
@@ -310,6 +316,8 @@ class _$GeneralSettingsCopyWithImpl<$Res, $Val extends GeneralSettings>
     });
   }
 
+  /// Create a copy of GeneralSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PricetarSettingsCopyWith<$Res> get pricetarSettings {
@@ -318,6 +326,8 @@ class _$GeneralSettingsCopyWithImpl<$Res, $Val extends GeneralSettings>
     });
   }
 
+  /// Create a copy of GeneralSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MakadSettingsCopyWith<$Res> get makadSettings {
@@ -326,6 +336,8 @@ class _$GeneralSettingsCopyWithImpl<$Res, $Val extends GeneralSettings>
     });
   }
 
+  /// Create a copy of GeneralSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SellerSketSettingsCopyWith<$Res> get sellerSketSettings {
@@ -403,6 +415,8 @@ class __$$GeneralSettingsImplCopyWithImpl<$Res>
       _$GeneralSettingsImpl _value, $Res Function(_$GeneralSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeneralSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -911,7 +925,9 @@ class _$GeneralSettingsImpl implements _GeneralSettings {
         const DeepCollectionEquality().hash(_standardButtons)
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeneralSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GeneralSettingsImplCopyWith<_$GeneralSettingsImpl> get copyWith =>
@@ -963,22 +979,23 @@ abstract class _GeneralSettings implements GeneralSettings {
       @HiveField(28, defaultValue: defaultStandardButtons)
       final Map<String, bool> standardButtons}) = _$GeneralSettingsImpl;
 
-  @override // ダークモード
+// ダークモード
+  @override
   @HiveField(0)
-  bool get isDarkMode;
-  @override // 目標利益率設定
+  bool get isDarkMode; // 目標利益率設定
+  @override
   @HiveField(1)
-  bool get enableTargetProfit;
-  @override // 目標利益率
+  bool get enableTargetProfit; // 目標利益率
+  @override
   @HiveField(2)
-  int get targetProfitValue;
-  @override // SKU 設定
+  int get targetProfitValue; // SKU 設定
+  @override
   @HiveField(3)
-  String get skuFormat;
-  @override // 仕入れ先設定
+  String get skuFormat; // 仕入れ先設定
+  @override
   @HiveField(4)
-  List<String> get retailers;
-  @override // 読み上げ設定
+  List<String> get retailers; // 読み上げ設定
+  @override
   @HiveField(5)
   bool get enableReadAloud;
   @override
@@ -992,20 +1009,20 @@ abstract class _GeneralSettings implements GeneralSettings {
   double get readAloudVolume;
   @override
   @HiveField(9)
-  double? get readAloudSpeed;
-  @override // カスタムボタン設定
+  double? get readAloudSpeed; // カスタムボタン設定
+  @override
   @HiveField(10, defaultValue: defaultCustomButtons)
-  List<CustomButtonDetail> get customButtons;
-  @override // CSV の並び順
+  List<CustomButtonDetail> get customButtons; // CSV の並び順
+  @override
   @HiveField(11, defaultValue: defaultCsvOrder)
-  List<CsvColumn> get csvOrder;
-  @override // 最低利益額
+  List<CsvColumn> get csvOrder; // 最低利益額
+  @override
   @HiveField(12, defaultValue: 0)
-  int get minProfit;
-  @override // 在庫の取得設定
+  int get minProfit; // 在庫の取得設定
+  @override
   @HiveField(13, defaultValue: false)
-  bool get getStocks;
-  @override // アラート設定
+  bool get getStocks; // アラート設定
+  @override
   @HiveField(14, defaultValue: true)
   bool get enableAlert;
   @override
@@ -1050,8 +1067,11 @@ abstract class _GeneralSettings implements GeneralSettings {
   @override
   @HiveField(28, defaultValue: defaultStandardButtons)
   Map<String, bool> get standardButtons;
+
+  /// Create a copy of GeneralSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GeneralSettingsImplCopyWith<_$GeneralSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1063,7 +1083,9 @@ mixin _$ReadAloudPattern {
   @HiveField(1)
   String get pattern => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReadAloudPattern
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReadAloudPatternCopyWith<ReadAloudPattern> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1087,6 +1109,8 @@ class _$ReadAloudPatternCopyWithImpl<$Res, $Val extends ReadAloudPattern>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ReadAloudPattern
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1125,6 +1149,8 @@ class __$$ReadAloudPatternImplCopyWithImpl<$Res>
       $Res Function(_$ReadAloudPatternImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ReadAloudPattern
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1175,7 +1201,9 @@ class _$ReadAloudPatternImpl implements _ReadAloudPattern {
   @override
   int get hashCode => Object.hash(runtimeType, title, pattern);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReadAloudPattern
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReadAloudPatternImplCopyWith<_$ReadAloudPatternImpl> get copyWith =>
@@ -1194,8 +1222,11 @@ abstract class _ReadAloudPattern implements ReadAloudPattern {
   @override
   @HiveField(1)
   String get pattern;
+
+  /// Create a copy of ReadAloudPattern
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReadAloudPatternImplCopyWith<_$ReadAloudPatternImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1211,7 +1242,9 @@ mixin _$CustomButtonDetail {
   @HiveField(3, defaultValue: "")
   String get id => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CustomButtonDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CustomButtonDetailCopyWith<CustomButtonDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1239,6 +1272,8 @@ class _$CustomButtonDetailCopyWithImpl<$Res, $Val extends CustomButtonDetail>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CustomButtonDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1291,6 +1326,8 @@ class __$$CustomButtonDetailImplCopyWithImpl<$Res>
       $Res Function(_$CustomButtonDetailImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CustomButtonDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1362,7 +1399,9 @@ class _$CustomButtonDetailImpl implements _CustomButtonDetail {
   @override
   int get hashCode => Object.hash(runtimeType, enable, title, pattern, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CustomButtonDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomButtonDetailImplCopyWith<_$CustomButtonDetailImpl> get copyWith =>
@@ -1390,8 +1429,11 @@ abstract class _CustomButtonDetail implements CustomButtonDetail {
   @override
   @HiveField(3, defaultValue: "")
   String get id;
+
+  /// Create a copy of CustomButtonDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CustomButtonDetailImplCopyWith<_$CustomButtonDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1411,8 +1453,12 @@ mixin _$AlertConditionSet {
   @JsonKey(name: "c")
   List<AlertCondition> get conditions => throw _privateConstructorUsedError;
 
+  /// Serializes this AlertConditionSet to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AlertConditionSet
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AlertConditionSetCopyWith<AlertConditionSet> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1439,6 +1485,8 @@ class _$AlertConditionSetCopyWithImpl<$Res, $Val extends AlertConditionSet>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AlertConditionSet
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1485,6 +1533,8 @@ class __$$AlertConditionSetImplCopyWithImpl<$Res>
       $Res Function(_$AlertConditionSetImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AlertConditionSet
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1557,12 +1607,14 @@ class _$AlertConditionSetImpl implements _AlertConditionSet {
                 .equals(other._conditions, _conditions));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, title, const DeepCollectionEquality().hash(_conditions));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AlertConditionSet
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AlertConditionSetImplCopyWith<_$AlertConditionSetImpl> get copyWith =>
@@ -1599,8 +1651,11 @@ abstract class _AlertConditionSet implements AlertConditionSet {
   @HiveField(2)
   @JsonKey(name: "c")
   List<AlertCondition> get conditions;
+
+  /// Create a copy of AlertConditionSet
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AlertConditionSetImplCopyWith<_$AlertConditionSetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1616,8 +1671,12 @@ mixin _$ShortcutDetail {
   @HiveField(1)
   String get param => throw _privateConstructorUsedError;
 
+  /// Serializes this ShortcutDetail to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ShortcutDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ShortcutDetailCopyWith<ShortcutDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1641,6 +1700,8 @@ class _$ShortcutDetailCopyWithImpl<$Res, $Val extends ShortcutDetail>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ShortcutDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1679,6 +1740,8 @@ class __$$ShortcutDetailImplCopyWithImpl<$Res>
       _$ShortcutDetailImpl _value, $Res Function(_$ShortcutDetailImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ShortcutDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1730,11 +1793,13 @@ class _$ShortcutDetailImpl implements _ShortcutDetail {
             (identical(other.param, param) || other.param == param));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, type, param);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ShortcutDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ShortcutDetailImplCopyWith<_$ShortcutDetailImpl> get copyWith =>
@@ -1763,8 +1828,11 @@ abstract class _ShortcutDetail implements ShortcutDetail {
   @override
   @HiveField(1)
   String get param;
+
+  /// Create a copy of ShortcutDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ShortcutDetailImplCopyWith<_$ShortcutDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -19,7 +19,9 @@ mixin _$CameraReadData {
   String get code => throw _privateConstructorUsedError;
   DateTime get readAt => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CameraReadData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CameraReadDataCopyWith<CameraReadData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$CameraReadDataCopyWithImpl<$Res, $Val extends CameraReadData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CameraReadData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$CameraReadDataImplCopyWithImpl<$Res>
       _$CameraReadDataImpl _value, $Res Function(_$CameraReadDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CameraReadData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,7 +133,9 @@ class _$CameraReadDataImpl implements _CameraReadData {
   @override
   int get hashCode => Object.hash(runtimeType, code, readAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CameraReadData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CameraReadDataImplCopyWith<_$CameraReadDataImpl> get copyWith =>
@@ -144,8 +152,11 @@ abstract class _CameraReadData implements CameraReadData {
   String get code;
   @override
   DateTime get readAt;
+
+  /// Create a copy of CameraReadData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CameraReadDataImplCopyWith<_$CameraReadDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

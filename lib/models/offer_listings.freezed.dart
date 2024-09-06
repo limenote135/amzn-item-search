@@ -25,7 +25,9 @@ mixin _$OfferListingsParams {
   bool get usedAcceptable => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OfferListingsParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OfferListingsParamsCopyWith<OfferListingsParams> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,6 +59,8 @@ class _$OfferListingsParamsCopyWithImpl<$Res, $Val extends OfferListingsParams>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OfferListingsParams
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,6 +137,8 @@ class __$$OfferListingsParamsImplCopyWithImpl<$Res>
       $Res Function(_$OfferListingsParamsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OfferListingsParams
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -247,7 +253,9 @@ class _$OfferListingsParamsImpl implements _OfferListingsParams {
   int get hashCode => Object.hash(runtimeType, asin, prime, newItem,
       usedLikeNew, usedVeryGood, usedGood, usedAcceptable, page);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OfferListingsParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OfferListingsParamsImplCopyWith<_$OfferListingsParamsImpl> get copyWith =>
@@ -282,8 +290,11 @@ abstract class _OfferListingsParams implements OfferListingsParams {
   bool get usedAcceptable;
   @override
   int get page;
+
+  /// Create a copy of OfferListingsParams
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OfferListingsParamsImplCopyWith<_$OfferListingsParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -293,7 +304,9 @@ mixin _$OfferAtIndexParam {
   OfferListingsParams get params => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OfferAtIndexParam
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OfferAtIndexParamCopyWith<OfferAtIndexParam> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -319,6 +332,8 @@ class _$OfferAtIndexParamCopyWithImpl<$Res, $Val extends OfferAtIndexParam>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OfferAtIndexParam
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -337,6 +352,8 @@ class _$OfferAtIndexParamCopyWithImpl<$Res, $Val extends OfferAtIndexParam>
     ) as $Val);
   }
 
+  /// Create a copy of OfferAtIndexParam
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $OfferListingsParamsCopyWith<$Res> get params {
@@ -368,6 +385,8 @@ class __$$OfferAtIndexParamImplCopyWithImpl<$Res>
       $Res Function(_$OfferAtIndexParamImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OfferAtIndexParam
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -414,7 +433,9 @@ class _$OfferAtIndexParamImpl implements _OfferAtIndexParam {
   @override
   int get hashCode => Object.hash(runtimeType, params, index);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OfferAtIndexParam
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OfferAtIndexParamImplCopyWith<_$OfferAtIndexParamImpl> get copyWith =>
@@ -431,8 +452,11 @@ abstract class _OfferAtIndexParam implements OfferAtIndexParam {
   OfferListingsParams get params;
   @override
   int get index;
+
+  /// Create a copy of OfferAtIndexParam
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OfferAtIndexParamImplCopyWith<_$OfferAtIndexParamImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -444,7 +468,9 @@ mixin _$OfferListings {
   OfferItem? get cart => throw _privateConstructorUsedError;
   List<OfferItem> get offers => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OfferListings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OfferListingsCopyWith<OfferListings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -470,6 +496,8 @@ class _$OfferListingsCopyWithImpl<$Res, $Val extends OfferListings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OfferListings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -498,6 +526,8 @@ class _$OfferListingsCopyWithImpl<$Res, $Val extends OfferListings>
     ) as $Val);
   }
 
+  /// Create a copy of OfferListings
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $OfferItemCopyWith<$Res>? get cart {
@@ -533,6 +563,8 @@ class __$$OfferListingsImplCopyWithImpl<$Res>
       _$OfferListingsImpl _value, $Res Function(_$OfferListingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OfferListings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -608,7 +640,9 @@ class _$OfferListingsImpl implements _OfferListings {
   int get hashCode => Object.hash(runtimeType, asin, total, cart,
       const DeepCollectionEquality().hash(_offers));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OfferListings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OfferListingsImplCopyWith<_$OfferListingsImpl> get copyWith =>
@@ -630,8 +664,11 @@ abstract class _OfferListings implements OfferListings {
   OfferItem? get cart;
   @override
   List<OfferItem> get offers;
+
+  /// Create a copy of OfferListings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OfferListingsImplCopyWith<_$OfferListingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -645,7 +682,9 @@ mixin _$OfferItem {
   bool get hasImage => throw _privateConstructorUsedError;
   bool get isFba => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OfferItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OfferItemCopyWith<OfferItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -674,6 +713,8 @@ class _$OfferItemCopyWithImpl<$Res, $Val extends OfferItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OfferItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -738,6 +779,8 @@ class __$$OfferItemImplCopyWithImpl<$Res>
       _$OfferItemImpl _value, $Res Function(_$OfferItemImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OfferItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -828,7 +871,9 @@ class _$OfferItemImpl implements _OfferItem {
   int get hashCode => Object.hash(
       runtimeType, shopName, sellerId, price, condition, hasImage, isFba);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OfferItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OfferItemImplCopyWith<_$OfferItemImpl> get copyWith =>
@@ -856,8 +901,11 @@ abstract class _OfferItem implements OfferItem {
   bool get hasImage;
   @override
   bool get isFba;
+
+  /// Create a copy of OfferItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OfferItemImplCopyWith<_$OfferItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

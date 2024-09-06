@@ -30,8 +30,12 @@ mixin _$ListingItem {
   String get conditionText => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
 
+  /// Serializes this ListingItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ListingItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ListingItemCopyWith<ListingItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$ListingItemCopyWithImpl<$Res, $Val extends ListingItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ListingItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,6 +152,8 @@ class __$$ListingItemImplCopyWithImpl<$Res>
       _$ListingItemImpl _value, $Res Function(_$ListingItemImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ListingItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -269,7 +277,7 @@ class _$ListingItemImpl implements _ListingItem {
             const DeepCollectionEquality().equals(other._images, _images));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -283,7 +291,9 @@ class _$ListingItemImpl implements _ListingItem {
       conditionText,
       const DeepCollectionEquality().hash(_images));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ListingItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ListingItemImplCopyWith<_$ListingItemImpl> get copyWith =>
@@ -330,8 +340,11 @@ abstract class _ListingItem implements ListingItem {
   String get conditionText;
   @override
   List<String> get images;
+
+  /// Create a copy of ListingItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ListingItemImplCopyWith<_$ListingItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

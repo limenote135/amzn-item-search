@@ -35,8 +35,12 @@ mixin _$FeeInfo {
   @HiveField(5, defaultValue: 0)
   double get referralFeeLowPriceRate => throw _privateConstructorUsedError;
 
+  /// Serializes this FeeInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FeeInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FeeInfoCopyWith<FeeInfo> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -66,6 +70,8 @@ class _$FeeInfoCopyWithImpl<$Res, $Val extends FeeInfo>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FeeInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -104,6 +110,8 @@ class _$FeeInfoCopyWithImpl<$Res, $Val extends FeeInfo>
     ) as $Val);
   }
 
+  /// Create a copy of FeeInfo
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FeeExpressionCopyWith<$Res>? get feeExp {
@@ -144,6 +152,8 @@ class __$$FeeInfoImplCopyWithImpl<$Res>
       _$FeeInfoImpl _value, $Res Function(_$FeeInfoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FeeInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -246,7 +256,7 @@ class _$FeeInfoImpl implements _FeeInfo {
                 other.referralFeeLowPriceRate == referralFeeLowPriceRate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -257,7 +267,9 @@ class _$FeeInfoImpl implements _FeeInfo {
       fbaLowPriceFee,
       referralFeeLowPriceRate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FeeInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FeeInfoImplCopyWith<_$FeeInfoImpl> get copyWith =>
@@ -303,8 +315,11 @@ abstract class _FeeInfo implements FeeInfo {
   @override
   @HiveField(5, defaultValue: 0)
   double get referralFeeLowPriceRate;
+
+  /// Create a copy of FeeInfo
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FeeInfoImplCopyWith<_$FeeInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -19,7 +19,9 @@ mixin _$PurchaseState {
   CustomerInfo get purchaseInfo => throw _privateConstructorUsedError;
   Offerings get offerings => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PurchaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PurchaseStateCopyWith<PurchaseState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,6 +48,8 @@ class _$PurchaseStateCopyWithImpl<$Res, $Val extends PurchaseState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PurchaseState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -64,6 +68,8 @@ class _$PurchaseStateCopyWithImpl<$Res, $Val extends PurchaseState>
     ) as $Val);
   }
 
+  /// Create a copy of PurchaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CustomerInfoCopyWith<$Res> get purchaseInfo {
@@ -72,6 +78,8 @@ class _$PurchaseStateCopyWithImpl<$Res, $Val extends PurchaseState>
     });
   }
 
+  /// Create a copy of PurchaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $OfferingsCopyWith<$Res> get offerings {
@@ -105,6 +113,8 @@ class __$$PurchaseStateImplCopyWithImpl<$Res>
       _$PurchaseStateImpl _value, $Res Function(_$PurchaseStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PurchaseState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,7 +164,9 @@ class _$PurchaseStateImpl implements _PurchaseState {
   @override
   int get hashCode => Object.hash(runtimeType, purchaseInfo, offerings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PurchaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PurchaseStateImplCopyWith<_$PurchaseStateImpl> get copyWith =>
@@ -170,8 +182,11 @@ abstract class _PurchaseState implements PurchaseState {
   CustomerInfo get purchaseInfo;
   @override
   Offerings get offerings;
+
+  /// Create a copy of PurchaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PurchaseStateImplCopyWith<_$PurchaseStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

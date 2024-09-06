@@ -33,7 +33,9 @@ mixin _$SellerSketSettings {
   @HiveField(6)
   String get shippingPattern => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SellerSketSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SellerSketSettingsCopyWith<SellerSketSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +66,8 @@ class _$SellerSketSettingsCopyWithImpl<$Res, $Val extends SellerSketSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SellerSketSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -134,6 +138,8 @@ class __$$SellerSketSettingsImplCopyWithImpl<$Res>
       $Res Function(_$SellerSketSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SellerSketSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -256,7 +262,9 @@ class _$SellerSketSettingsImpl implements _SellerSketSettings {
       highestStopperValue,
       shippingPattern);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SellerSketSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SellerSketSettingsImplCopyWith<_$SellerSketSettingsImpl> get copyWith =>
@@ -295,8 +303,11 @@ abstract class _SellerSketSettings implements SellerSketSettings {
   @override
   @HiveField(6)
   String get shippingPattern;
+
+  /// Create a copy of SellerSketSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SellerSketSettingsImplCopyWith<_$SellerSketSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

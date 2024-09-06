@@ -31,7 +31,9 @@ mixin _$PricetarSettings {
   @HiveField(5)
   int get highestStopperValue => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PricetarSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PricetarSettingsCopyWith<PricetarSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +63,8 @@ class _$PricetarSettingsCopyWithImpl<$Res, $Val extends PricetarSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PricetarSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,6 +129,8 @@ class __$$PricetarSettingsImplCopyWithImpl<$Res>
       $Res Function(_$PricetarSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PricetarSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -234,7 +240,9 @@ class _$PricetarSettingsImpl implements _PricetarSettings {
       highestStopperType,
       highestStopperValue);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PricetarSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PricetarSettingsImplCopyWith<_$PricetarSettingsImpl> get copyWith =>
@@ -269,8 +277,11 @@ abstract class _PricetarSettings implements PricetarSettings {
   @override
   @HiveField(5)
   int get highestStopperValue;
+
+  /// Create a copy of PricetarSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PricetarSettingsImplCopyWith<_$PricetarSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

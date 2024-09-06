@@ -23,8 +23,12 @@ mixin _$GeoResponse {
   String get code => throw _privateConstructorUsedError;
   String get jan => throw _privateConstructorUsedError;
 
+  /// Serializes this GeoResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GeoResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GeoResponseCopyWith<GeoResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$GeoResponseCopyWithImpl<$Res, $Val extends GeoResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GeoResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$GeoResponseImplCopyWithImpl<$Res>
       _$GeoResponseImpl _value, $Res Function(_$GeoResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeoResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,11 +141,13 @@ class _$GeoResponseImpl implements _GeoResponse {
             (identical(other.jan, jan) || other.jan == jan));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, code, jan);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeoResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GeoResponseImplCopyWith<_$GeoResponseImpl> get copyWith =>
@@ -162,8 +172,11 @@ abstract class _GeoResponse implements GeoResponse {
   String get code;
   @override
   String get jan;
+
+  /// Create a copy of GeoResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GeoResponseImplCopyWith<_$GeoResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
