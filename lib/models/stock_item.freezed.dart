@@ -61,7 +61,9 @@ mixin _$StockItem {
   @HiveField(19, defaultValue: 0)
   int get smallFee => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StockItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StockItemCopyWith<StockItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -107,6 +109,8 @@ class _$StockItemCopyWithImpl<$Res, $Val extends StockItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StockItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -220,6 +224,8 @@ class _$StockItemCopyWithImpl<$Res, $Val extends StockItem>
     ) as $Val);
   }
 
+  /// Create a copy of StockItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AsinDataCopyWith<$Res> get item {
@@ -272,6 +278,8 @@ class __$$StockItemImplCopyWithImpl<$Res>
       _$StockItemImpl _value, $Res Function(_$StockItemImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StockItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -578,7 +586,9 @@ class _$StockItemImpl implements _StockItem {
         smallFee
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StockItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StockItemImplCopyWith<_$StockItemImpl> get copyWith =>
@@ -644,18 +654,18 @@ abstract class _StockItem implements StockItem {
   AsinData get item;
   @override
   @HiveField(11, defaultValue: "")
-  String get retailer;
-  @override // 主キー
+  String get retailer; // 主キー
+  @override
   @HiveField(12, defaultValue: "")
-  String get id;
-  @override // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
+  String get id; // マイグレーションのために -1 にする(-1 の場合は要マイグレーション)
+  @override
   @HiveField(13, defaultValue: -1)
   int get breakEven;
   @override
   @HiveField(14)
-  String? get listingDate;
-  @override // 仕入れ確定した後はデフォルト false とするが、仕入れ時にはデフォルト true で、
+  String? get listingDate; // 仕入れ確定した後はデフォルト false とするが、仕入れ時にはデフォルト true で、
 // 仕入れ画面で切り替えられるように、永続化はしないがメンバとして値を持っておく
+  @override
   bool get autogenSku;
   @override
   @HiveField(15, defaultValue: "")
@@ -672,8 +682,11 @@ abstract class _StockItem implements StockItem {
   @override
   @HiveField(19, defaultValue: 0)
   int get smallFee;
+
+  /// Create a copy of StockItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StockItemImplCopyWith<_$StockItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

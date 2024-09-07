@@ -24,8 +24,12 @@ mixin _$GetProductByIdResponse {
   String get code => throw _privateConstructorUsedError;
   List<AsinData> get items => throw _privateConstructorUsedError;
 
+  /// Serializes this GetProductByIdResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GetProductByIdResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GetProductByIdResponseCopyWith<GetProductByIdResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$GetProductByIdResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GetProductByIdResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,6 +97,8 @@ class __$$GetProductByIdResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetProductByIdResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GetProductByIdResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,12 +154,14 @@ class _$GetProductByIdResponseImpl implements _GetProductByIdResponse {
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, code, const DeepCollectionEquality().hash(_items));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GetProductByIdResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GetProductByIdResponseImplCopyWith<_$GetProductByIdResponseImpl>
@@ -178,8 +188,11 @@ abstract class _GetProductByIdResponse implements GetProductByIdResponse {
   String get code;
   @override
   List<AsinData> get items;
+
+  /// Create a copy of GetProductByIdResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetProductByIdResponseImplCopyWith<_$GetProductByIdResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -189,7 +202,9 @@ mixin _$QueryItemsRequest {
   String get query => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QueryItemsRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $QueryItemsRequestCopyWith<QueryItemsRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -213,6 +228,8 @@ class _$QueryItemsRequestCopyWithImpl<$Res, $Val extends QueryItemsRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of QueryItemsRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -251,6 +268,8 @@ class __$$QueryItemsRequestImplCopyWithImpl<$Res>
       $Res Function(_$QueryItemsRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QueryItemsRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -298,7 +317,9 @@ class _$QueryItemsRequestImpl implements _QueryItemsRequest {
   @override
   int get hashCode => Object.hash(runtimeType, query, category);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QueryItemsRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$QueryItemsRequestImplCopyWith<_$QueryItemsRequestImpl> get copyWith =>
@@ -315,8 +336,11 @@ abstract class _QueryItemsRequest implements QueryItemsRequest {
   String get query;
   @override
   String get category;
+
+  /// Create a copy of QueryItemsRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QueryItemsRequestImplCopyWith<_$QueryItemsRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -329,8 +353,12 @@ QueryItemsResponse _$QueryItemsResponseFromJson(Map<String, dynamic> json) {
 mixin _$QueryItemsResponse {
   List<String> get asins => throw _privateConstructorUsedError;
 
+  /// Serializes this QueryItemsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of QueryItemsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $QueryItemsResponseCopyWith<QueryItemsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -354,6 +382,8 @@ class _$QueryItemsResponseCopyWithImpl<$Res, $Val extends QueryItemsResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of QueryItemsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -387,6 +417,8 @@ class __$$QueryItemsResponseImplCopyWithImpl<$Res>
       $Res Function(_$QueryItemsResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QueryItemsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -432,12 +464,14 @@ class _$QueryItemsResponseImpl implements _QueryItemsResponse {
             const DeepCollectionEquality().equals(other._asins, _asins));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_asins));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QueryItemsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$QueryItemsResponseImplCopyWith<_$QueryItemsResponseImpl> get copyWith =>
@@ -461,8 +495,11 @@ abstract class _QueryItemsResponse implements QueryItemsResponse {
 
   @override
   List<String> get asins;
+
+  /// Create a copy of QueryItemsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QueryItemsResponseImplCopyWith<_$QueryItemsResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -476,8 +513,12 @@ BatchGetAsinDataResponse _$BatchGetAsinDataResponseFromJson(
 mixin _$BatchGetAsinDataResponse {
   List<AsinData> get data => throw _privateConstructorUsedError;
 
+  /// Serializes this BatchGetAsinDataResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BatchGetAsinDataResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BatchGetAsinDataResponseCopyWith<BatchGetAsinDataResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -502,6 +543,8 @@ class _$BatchGetAsinDataResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BatchGetAsinDataResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -538,6 +581,8 @@ class __$$BatchGetAsinDataResponseImplCopyWithImpl<$Res>
       $Res Function(_$BatchGetAsinDataResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BatchGetAsinDataResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -583,12 +628,14 @@ class _$BatchGetAsinDataResponseImpl implements _BatchGetAsinDataResponse {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BatchGetAsinDataResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BatchGetAsinDataResponseImplCopyWith<_$BatchGetAsinDataResponseImpl>
@@ -612,8 +659,11 @@ abstract class _BatchGetAsinDataResponse implements BatchGetAsinDataResponse {
 
   @override
   List<AsinData> get data;
+
+  /// Create a copy of BatchGetAsinDataResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BatchGetAsinDataResponseImplCopyWith<_$BatchGetAsinDataResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -627,8 +677,12 @@ GetItemVariationsResponse _$GetItemVariationsResponseFromJson(
 mixin _$GetItemVariationsResponse {
   List<String> get asins => throw _privateConstructorUsedError;
 
+  /// Serializes this GetItemVariationsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GetItemVariationsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GetItemVariationsResponseCopyWith<GetItemVariationsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -653,6 +707,8 @@ class _$GetItemVariationsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GetItemVariationsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -689,6 +745,8 @@ class __$$GetItemVariationsResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetItemVariationsResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GetItemVariationsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -736,12 +794,14 @@ class _$GetItemVariationsResponseImpl implements _GetItemVariationsResponse {
             const DeepCollectionEquality().equals(other._asins, _asins));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_asins));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GetItemVariationsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GetItemVariationsResponseImplCopyWith<_$GetItemVariationsResponseImpl>
@@ -765,8 +825,11 @@ abstract class _GetItemVariationsResponse implements GetItemVariationsResponse {
 
   @override
   List<String> get asins;
+
+  /// Create a copy of GetItemVariationsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetItemVariationsResponseImplCopyWith<_$GetItemVariationsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

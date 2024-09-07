@@ -27,8 +27,12 @@ mixin _$AlertCondition {
   @JsonKey(name: "v")
   int get value => throw _privateConstructorUsedError;
 
+  /// Serializes this AlertCondition to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AlertCondition
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AlertConditionCopyWith<AlertCondition> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$AlertConditionCopyWithImpl<$Res, $Val extends AlertCondition>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AlertCondition
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,6 +100,8 @@ class __$$AlertConditionImplCopyWithImpl<$Res>
       _$AlertConditionImpl _value, $Res Function(_$AlertConditionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AlertCondition
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,11 +155,13 @@ class _$AlertConditionImpl implements _AlertCondition {
             (identical(other.value, value) || other.value == value));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, type, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AlertCondition
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AlertConditionImplCopyWith<_$AlertConditionImpl> get copyWith =>
@@ -183,8 +193,11 @@ abstract class _AlertCondition implements AlertCondition {
   @HiveField(1)
   @JsonKey(name: "v")
   int get value;
+
+  /// Create a copy of AlertCondition
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AlertConditionImplCopyWith<_$AlertConditionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

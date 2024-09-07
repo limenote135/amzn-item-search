@@ -24,7 +24,9 @@ mixin _$SearchItem {
   List<AsinData> get asins => throw _privateConstructorUsedError;
   int get defaultPurchasePrice => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchItemCopyWith<SearchItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +54,8 @@ class _$SearchItemCopyWithImpl<$Res, $Val extends SearchItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -104,6 +108,8 @@ class __$$SearchItemImplCopyWithImpl<$Res>
       _$SearchItemImpl _value, $Res Function(_$SearchItemImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -186,7 +192,9 @@ class _$SearchItemImpl implements _SearchItem {
   int get hashCode => Object.hash(runtimeType, searchDate, jan,
       const DeepCollectionEquality().hash(_asins), defaultPurchasePrice);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchItemImplCopyWith<_$SearchItemImpl> get copyWith =>
@@ -211,8 +219,11 @@ abstract class _SearchItem implements SearchItem {
   List<AsinData> get asins;
   @override
   int get defaultPurchasePrice;
+
+  /// Create a copy of SearchItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchItemImplCopyWith<_$SearchItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

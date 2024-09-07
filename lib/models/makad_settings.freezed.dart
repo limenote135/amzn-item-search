@@ -28,7 +28,9 @@ mixin _$MakadSettings {
   @HiveField(4)
   MakadPaymentMethod get paymentMethod => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MakadSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MakadSettingsCopyWith<MakadSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,6 +59,8 @@ class _$MakadSettingsCopyWithImpl<$Res, $Val extends MakadSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MakadSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,6 +119,8 @@ class __$$MakadSettingsImplCopyWithImpl<$Res>
       _$MakadSettingsImpl _value, $Res Function(_$MakadSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MakadSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -206,7 +212,9 @@ class _$MakadSettingsImpl implements _MakadSettings {
   int get hashCode => Object.hash(runtimeType, newRule, usedRule,
       lowestStopperType, lowestStopperValue, paymentMethod);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MakadSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MakadSettingsImplCopyWith<_$MakadSettingsImpl> get copyWith =>
@@ -237,8 +245,11 @@ abstract class _MakadSettings implements MakadSettings {
   @override
   @HiveField(4)
   MakadPaymentMethod get paymentMethod;
+
+  /// Create a copy of MakadSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MakadSettingsImplCopyWith<_$MakadSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

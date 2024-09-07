@@ -26,7 +26,9 @@ mixin _$KeepItem {
   String get memo => throw _privateConstructorUsedError;
   bool get isUpdating => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KeepItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $KeepItemCopyWith<KeepItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +58,8 @@ class _$KeepItemCopyWithImpl<$Res, $Val extends KeepItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of KeepItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -89,6 +93,8 @@ class _$KeepItemCopyWithImpl<$Res, $Val extends KeepItem>
     ) as $Val);
   }
 
+  /// Create a copy of KeepItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AsinDataCopyWith<$Res> get item {
@@ -125,6 +131,8 @@ class __$$KeepItemImplCopyWithImpl<$Res>
       _$KeepItemImpl _value, $Res Function(_$KeepItemImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of KeepItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -210,7 +218,9 @@ class _$KeepItemImpl implements _KeepItem {
   int get hashCode =>
       Object.hash(runtimeType, id, item, keepDate, memo, isUpdating);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KeepItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$KeepItemImplCopyWith<_$KeepItemImpl> get copyWith =>
@@ -239,8 +249,11 @@ abstract class _KeepItem implements KeepItem {
   String get memo;
   @override
   bool get isUpdating;
+
+  /// Create a copy of KeepItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$KeepItemImplCopyWith<_$KeepItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -35,7 +35,9 @@ mixin _$KeepaSettings {
   @HiveField(8, defaultValue: "")
   String get apiKey => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KeepaSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $KeepaSettingsCopyWith<KeepaSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -68,6 +70,8 @@ class _$KeepaSettingsCopyWithImpl<$Res, $Val extends KeepaSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of KeepaSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,6 +154,8 @@ class __$$KeepaSettingsImplCopyWithImpl<$Res>
       _$KeepaSettingsImpl _value, $Res Function(_$KeepaSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of KeepaSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -287,7 +293,9 @@ class _$KeepaSettingsImpl implements _KeepaSettings {
   int get hashCode => Object.hash(runtimeType, showNew, showUsed, showAmazon,
       period, extraParam, showBuyBox, showFba, useApiKey, apiKey);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KeepaSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$KeepaSettingsImplCopyWith<_$KeepaSettingsImpl> get copyWith =>
@@ -335,8 +343,11 @@ abstract class _KeepaSettings implements KeepaSettings {
   @override
   @HiveField(8, defaultValue: "")
   String get apiKey;
+
+  /// Create a copy of KeepaSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$KeepaSettingsImplCopyWith<_$KeepaSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

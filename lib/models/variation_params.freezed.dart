@@ -19,7 +19,9 @@ mixin _$VariationPageParam {
   String get asin => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VariationPageParam
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VariationPageParamCopyWith<VariationPageParam> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$VariationPageParamCopyWithImpl<$Res, $Val extends VariationPageParam>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of VariationPageParam
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$VariationPageParamImplCopyWithImpl<$Res>
       $Res Function(_$VariationPageParamImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VariationPageParam
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,7 +133,9 @@ class _$VariationPageParamImpl implements _VariationPageParam {
   @override
   int get hashCode => Object.hash(runtimeType, asin, page);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VariationPageParam
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VariationPageParamImplCopyWith<_$VariationPageParamImpl> get copyWith =>
@@ -144,8 +152,11 @@ abstract class _VariationPageParam implements VariationPageParam {
   String get asin;
   @override
   int get page;
+
+  /// Create a copy of VariationPageParam
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VariationPageParamImplCopyWith<_$VariationPageParamImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -155,7 +166,9 @@ mixin _$VariationIndexAtParam {
   String get asin => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VariationIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VariationIndexAtParamCopyWith<VariationIndexAtParam> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -180,6 +193,8 @@ class _$VariationIndexAtParamCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of VariationIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -220,6 +235,8 @@ class __$$VariationIndexAtParamImplCopyWithImpl<$Res>
       $Res Function(_$VariationIndexAtParamImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VariationIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -266,7 +283,9 @@ class _$VariationIndexAtParamImpl implements _VariationIndexAtParam {
   @override
   int get hashCode => Object.hash(runtimeType, asin, index);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VariationIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VariationIndexAtParamImplCopyWith<_$VariationIndexAtParamImpl>
@@ -283,8 +302,11 @@ abstract class _VariationIndexAtParam implements VariationIndexAtParam {
   String get asin;
   @override
   int get index;
+
+  /// Create a copy of VariationIndexAtParam
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VariationIndexAtParamImplCopyWith<_$VariationIndexAtParamImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

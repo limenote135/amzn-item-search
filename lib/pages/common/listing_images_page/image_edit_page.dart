@@ -62,7 +62,7 @@ class _ImageEditPageState extends ConsumerState<ImageEditPage> {
     final path = ref.watch(_currentImagePathProvider);
     return PopScope(
       canPop: false,
-      onPopInvoked: (bool didPop) async {
+      onPopInvokedWithResult: (bool didPop, dynamic result) async {
         if (didPop) {
           return;
         }

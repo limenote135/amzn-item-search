@@ -30,8 +30,12 @@ mixin _$ItemPrices {
   @HiveField(2)
   FeeInfo get feeInfo => throw _privateConstructorUsedError;
 
+  /// Serializes this ItemPrices to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ItemPrices
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ItemPricesCopyWith<ItemPrices> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$ItemPricesCopyWithImpl<$Res, $Val extends ItemPrices>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ItemPrices
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +93,8 @@ class _$ItemPricesCopyWithImpl<$Res, $Val extends ItemPrices>
     ) as $Val);
   }
 
+  /// Create a copy of ItemPrices
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FeeInfoCopyWith<$Res> get feeInfo {
@@ -125,6 +133,8 @@ class __$$ItemPricesImplCopyWithImpl<$Res>
       _$ItemPricesImpl _value, $Res Function(_$ItemPricesImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ItemPrices
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -212,7 +222,7 @@ class _$ItemPricesImpl implements _ItemPrices {
             (identical(other.feeInfo, feeInfo) || other.feeInfo == feeInfo));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -220,7 +230,9 @@ class _$ItemPricesImpl implements _ItemPrices {
       const DeepCollectionEquality().hash(_usedPrices),
       feeInfo);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ItemPrices
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ItemPricesImplCopyWith<_$ItemPricesImpl> get copyWith =>
@@ -247,7 +259,8 @@ abstract class _ItemPrices implements ItemPrices {
   factory _ItemPrices.fromJson(Map<String, dynamic> json) =
       _$ItemPricesImpl.fromJson;
 
-  @override // 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
+// 初期のころのデータで null で保存されている場合がある？ため、デフォルト値設定
+  @override
   @HiveField(0, defaultValue: <PriceDetail>[])
   @JsonKey(name: "new_offers")
   List<PriceDetail> get newPrices;
@@ -258,8 +271,11 @@ abstract class _ItemPrices implements ItemPrices {
   @override
   @HiveField(2)
   FeeInfo get feeInfo;
+
+  /// Create a copy of ItemPrices
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ItemPricesImplCopyWith<_$ItemPricesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -291,8 +307,12 @@ mixin _$PriceDetail {
   @JsonKey(name: "type")
   SellerType get sellerType => throw _privateConstructorUsedError;
 
+  /// Serializes this PriceDetail to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PriceDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PriceDetailCopyWith<PriceDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -327,6 +347,8 @@ class _$PriceDetailCopyWithImpl<$Res, $Val extends PriceDetail>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PriceDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -411,6 +433,8 @@ class __$$PriceDetailImplCopyWithImpl<$Res>
       _$PriceDetailImpl _value, $Res Function(_$PriceDetailImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PriceDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -555,12 +579,14 @@ class _$PriceDetailImpl implements _PriceDetail {
                 other.sellerType == sellerType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, itemCondition, subCondition,
       channel, price, shipping, point, isCart, isSelf, sellerType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PriceDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PriceDetailImplCopyWith<_$PriceDetailImpl> get copyWith =>
@@ -622,8 +648,11 @@ abstract class _PriceDetail implements PriceDetail {
   @HiveField(8, defaultValue: SellerType.seller)
   @JsonKey(name: "type")
   SellerType get sellerType;
+
+  /// Create a copy of PriceDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PriceDetailImplCopyWith<_$PriceDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

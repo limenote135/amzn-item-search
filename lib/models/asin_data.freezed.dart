@@ -64,8 +64,12 @@ mixin _$AsinData {
   @HazmatTypeConverter()
   HazmatType get hazmatType => throw _privateConstructorUsedError;
 
+  /// Serializes this AsinData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AsinData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AsinDataCopyWith<AsinData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -119,6 +123,8 @@ class _$AsinDataCopyWithImpl<$Res, $Val extends AsinData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AsinData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -222,6 +228,8 @@ class _$AsinDataCopyWithImpl<$Res, $Val extends AsinData>
     ) as $Val);
   }
 
+  /// Create a copy of AsinData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ItemPricesCopyWith<$Res>? get prices {
@@ -234,6 +242,8 @@ class _$AsinDataCopyWithImpl<$Res, $Val extends AsinData>
     });
   }
 
+  /// Create a copy of AsinData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ListingRestrictionsCopyWith<$Res> get restrictions {
@@ -295,6 +305,8 @@ class __$$AsinDataImplCopyWithImpl<$Res>
       _$AsinDataImpl _value, $Res Function(_$AsinDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AsinData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -557,7 +569,7 @@ class _$AsinDataImpl implements _AsinData {
                 other.hazmatType == hazmatType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -582,7 +594,9 @@ class _$AsinDataImpl implements _AsinData {
         hazmatType
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AsinData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AsinDataImplCopyWith<_$AsinDataImpl> get copyWith =>
@@ -640,8 +654,8 @@ abstract class _AsinData implements AsinData {
   String get asin;
   @override
   @HiveField(2)
-  int get listPrice;
-  @override // 参考価格
+  int get listPrice; // 参考価格
+  @override
   @HiveField(3)
   String get imageUrl;
   @override
@@ -652,8 +666,8 @@ abstract class _AsinData implements AsinData {
   int get rank;
   @override
   @HiveField(6)
-  String get quantity;
-  @override // セット数
+  String get quantity; // セット数
+  @override
   @HiveField(7)
   ItemPrices? get prices;
   @override
@@ -694,8 +708,11 @@ abstract class _AsinData implements AsinData {
   @HiveField(17, defaultValue: HazmatType.nonHazmat)
   @HazmatTypeConverter()
   HazmatType get hazmatType;
+
+  /// Create a copy of AsinData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AsinDataImplCopyWith<_$AsinDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -713,8 +730,12 @@ mixin _$ListingRestrictions {
   @JsonKey(defaultValue: false)
   bool get used => throw _privateConstructorUsedError;
 
+  /// Serializes this ListingRestrictions to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ListingRestrictions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ListingRestrictionsCopyWith<ListingRestrictions> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -740,6 +761,8 @@ class _$ListingRestrictionsCopyWithImpl<$Res, $Val extends ListingRestrictions>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ListingRestrictions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -780,6 +803,8 @@ class __$$ListingRestrictionsImplCopyWithImpl<$Res>
       $Res Function(_$ListingRestrictionsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ListingRestrictions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -836,11 +861,13 @@ class _$ListingRestrictionsImpl implements _ListingRestrictions {
             (identical(other.used, used) || other.used == used));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, newItem, used);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ListingRestrictions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ListingRestrictionsImplCopyWith<_$ListingRestrictionsImpl> get copyWith =>
@@ -874,8 +901,11 @@ abstract class _ListingRestrictions implements ListingRestrictions {
   @HiveField(1)
   @JsonKey(defaultValue: false)
   bool get used;
+
+  /// Create a copy of ListingRestrictions
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ListingRestrictionsImplCopyWith<_$ListingRestrictionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

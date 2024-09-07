@@ -29,7 +29,9 @@ mixin _$SearchSettings {
   @HiveField(5, defaultValue: false)
   bool get continuousInput => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchSettingsCopyWith<SearchSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +61,8 @@ class _$SearchSettingsCopyWithImpl<$Res, $Val extends SearchSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,6 +127,8 @@ class __$$SearchSettingsImplCopyWithImpl<$Res>
       _$SearchSettingsImpl _value, $Res Function(_$SearchSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -225,7 +231,9 @@ class _$SearchSettingsImpl implements _SearchSettings {
   int get hashCode => Object.hash(runtimeType, type, usedSubCondition, useFba,
       priorFba, continuousCameraRead, continuousInput);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchSettingsImplCopyWith<_$SearchSettingsImpl> get copyWith =>
@@ -261,8 +269,11 @@ abstract class _SearchSettings implements SearchSettings {
   @override
   @HiveField(5, defaultValue: false)
   bool get continuousInput;
+
+  /// Create a copy of SearchSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchSettingsImplCopyWith<_$SearchSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

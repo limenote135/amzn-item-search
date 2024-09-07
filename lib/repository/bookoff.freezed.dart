@@ -29,8 +29,12 @@ mixin _$BookoffResponse {
   @JsonKey(name: "JAN")
   String get jan => throw _privateConstructorUsedError;
 
+  /// Serializes this BookoffResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BookoffResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BookoffResponseCopyWith<BookoffResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$BookoffResponseCopyWithImpl<$Res, $Val extends BookoffResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BookoffResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -110,6 +116,8 @@ class __$$BookoffResponseImplCopyWithImpl<$Res>
       _$BookoffResponseImpl _value, $Res Function(_$BookoffResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BookoffResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -183,12 +191,14 @@ class _$BookoffResponseImpl implements _BookoffResponse {
             (identical(other.jan, jan) || other.jan == jan));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, instoreCode, title, subtitle, jan);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BookoffResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BookoffResponseImplCopyWith<_$BookoffResponseImpl> get copyWith =>
@@ -225,8 +235,11 @@ abstract class _BookoffResponse implements BookoffResponse {
   @override
   @JsonKey(name: "JAN")
   String get jan;
+
+  /// Create a copy of BookoffResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BookoffResponseImplCopyWith<_$BookoffResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

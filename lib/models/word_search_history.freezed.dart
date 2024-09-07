@@ -19,7 +19,9 @@ mixin _$WordSearchHistory {
   @HiveField(0)
   String get keyword => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WordSearchHistory
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WordSearchHistoryCopyWith<WordSearchHistory> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$WordSearchHistoryCopyWithImpl<$Res, $Val extends WordSearchHistory>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WordSearchHistory
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -76,6 +80,8 @@ class __$$WordSearchHistoryImplCopyWithImpl<$Res>
       $Res Function(_$WordSearchHistoryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WordSearchHistory
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -116,7 +122,9 @@ class _$WordSearchHistoryImpl implements _WordSearchHistory {
   @override
   int get hashCode => Object.hash(runtimeType, keyword);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WordSearchHistory
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WordSearchHistoryImplCopyWith<_$WordSearchHistoryImpl> get copyWith =>
@@ -131,8 +139,11 @@ abstract class _WordSearchHistory implements WordSearchHistory {
   @override
   @HiveField(0)
   String get keyword;
+
+  /// Create a copy of WordSearchHistory
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WordSearchHistoryImplCopyWith<_$WordSearchHistoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

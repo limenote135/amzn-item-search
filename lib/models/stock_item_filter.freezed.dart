@@ -27,7 +27,9 @@ mixin _$StockItemFilter {
   DateTimeRange? get purchaseDateRange => throw _privateConstructorUsedError;
   String? get retailer => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StockItemFilter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StockItemFilterCopyWith<StockItemFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +63,8 @@ class _$StockItemFilterCopyWithImpl<$Res, $Val extends StockItemFilter>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StockItemFilter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -149,6 +153,8 @@ class __$$StockItemFilterImplCopyWithImpl<$Res>
       _$StockItemFilterImpl _value, $Res Function(_$StockItemFilterImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StockItemFilter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -291,7 +297,9 @@ class _$StockItemFilterImpl implements _StockItemFilter {
       purchaseDateRange,
       retailer);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StockItemFilter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StockItemFilterImplCopyWith<_$StockItemFilterImpl> get copyWith =>
@@ -332,8 +340,11 @@ abstract class _StockItemFilter implements StockItemFilter {
   DateTimeRange? get purchaseDateRange;
   @override
   String? get retailer;
+
+  /// Create a copy of StockItemFilter
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StockItemFilterImplCopyWith<_$StockItemFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
