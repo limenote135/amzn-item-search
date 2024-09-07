@@ -160,6 +160,9 @@ Future<void> initFirebase() async {
         ) &&
         !exception.contains(
           "Bad state: Failed to load https://graph.keepa.com/pricehistory.png",
+        ) &&
+        !exception.contains(
+          "Bad state: Failed to load https://api.keepa.com/graphimage",
         )) {
       await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
     }
