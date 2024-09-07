@@ -74,12 +74,16 @@ class AmazonRepository {
 
   Map<String, String> _commonHeader() {
     return <String, String>{
-      HttpHeaders.userAgentHeader: _userAgent,
-      HttpHeaders.acceptEncodingHeader: "gzip, deflate, br, zstd",
-      HttpHeaders.acceptHeader: "text/html,*/*",
-      HttpHeaders.acceptLanguageHeader: "ja",
-      HttpHeaders.connectionHeader: "keep-alive",
-      HttpHeaders.cacheControlHeader: "no-cache",
+      "User-Agent": _userAgent,
+      "Accept-Encoding": "gzip, deflate, br, zstd",
+      "Accept": "text/html,*/*",
+      "Accept-Language": "ja",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Pragma": "no-cache",
+      "DNT": "1",
+      "Sec-GPC": "1",
+      "TE": "trailers",
     };
   }
 
@@ -108,7 +112,19 @@ class AmazonRepository {
     final d = await _ref.read(dioProvider.future);
     // await _ensureCookie(params.asin);
     if (params.page == 0) {
-      await d.get("https://www.amazon.co.jp/dp/${params.asin}/");
+      final opt = dio.Options(
+        preserveHeaderCase: true,
+        headers: <String, dynamic>{
+          ..._commonHeader(),
+          "Sec-Fetch-Site": "none",
+          "Sec-Fetch-Mode": "navigate",
+          "Sec-Fetch-Dest": "document",
+          "Sec-Fetch-User": "?1",
+          "Upgrade-Insecure-Requests": "1",
+          "Priority": "u=0, i",
+        },
+      );
+      await d.get("https://www.amazon.co.jp/dp/${params.asin}/", opt: opt);
     }
 
     final reqParam = <String, dynamic>{
@@ -145,14 +161,10 @@ class AmazonRepository {
       headers: <String, dynamic>{
         ..._commonHeader(),
         HttpHeaders.refererHeader: "https://www.amazon.co.jp/dp/${params.asin}",
-        "Pragma": "no-cache",
         "X-Requested-With": "XMLHttpRequest",
         "Sec-Fetch-Site": "same-origin",
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Dest": "empty",
-        "DNT": "1",
-        "Sec-GPC": "1",
-        "TE": "trailers",
       },
     );
     final url = params.page == 0
