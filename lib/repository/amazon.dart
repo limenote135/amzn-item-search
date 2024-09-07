@@ -141,6 +141,7 @@ class AmazonRepository {
     }
 
     final opt = dio.Options(
+      preserveHeaderCase: true,
       headers: <String, dynamic>{
         ..._commonHeader(),
         HttpHeaders.refererHeader: "https://www.amazon.co.jp/dp/${params.asin}",
