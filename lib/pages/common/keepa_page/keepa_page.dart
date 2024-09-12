@@ -38,17 +38,6 @@ class KeepaPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Keepa"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () async {
-              await clearDiskCachedImages();
-              ref
-                  .read(generalSettingsControllerProvider.notifier)
-                  .changeKeepaExtraParam();
-            },
-          ),
-        ],
       ),
       body: const _Body(),
     );
@@ -243,23 +232,6 @@ class _Body extends HookConsumerWidget {
             await launchUrl(Uri.parse(url), mode: LaunchMode.inAppBrowserView);
           },
           child: const Text("ブラウザで開く"),
-        ),
-        InkWell(
-          onTap: () async {
-            await showOkAlertDialog(
-              context: context,
-              message: "ランキンググラフが表示されない場合、"
-                  "ブラウザで Keepa へログインした上で、"
-                  "右上のボタンを押して再読み込みすると表示されるようになります。",
-            );
-          },
-          child: const Text(
-            "ランキングが表示されない場合",
-            style: TextStyle(
-              color: Colors.blue,
-              decoration: TextDecoration.underline,
-            ),
-          ),
         ),
       ],
     );
