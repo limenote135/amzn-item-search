@@ -8,6 +8,7 @@ enum KeepPageMode {
   normal,
   select,
   refresh,
+  delete,
 }
 
 final keepPageModeProvider = StateProvider((_) => KeepPageMode.normal);
