@@ -14,6 +14,18 @@ final currentPageModeProvider =
 class SummaryTile extends HookConsumerWidget {
   const SummaryTile({super.key});
 
+  bool _showDateOnly(StockPageMode pageMode) {
+    switch (pageMode) {
+      case StockPageMode.select:
+      case StockPageMode.listing:
+      case StockPageMode.upload:
+      case StockPageMode.delete:
+        return true;
+      case StockPageMode.normal:
+        return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pageMode = ref.watch(currentPageModeProvider);
@@ -24,9 +36,7 @@ class SummaryTile extends HookConsumerWidget {
     final day = DateTime.parse(items.first.purchaseDate).toLocal().dayFormat();
 
     // 選択モード・出品モードでは邪魔なので日付のみ表示する
-    if (pageMode == StockPageMode.select ||
-        pageMode == StockPageMode.listing ||
-        pageMode == StockPageMode.upload) {
+    if (_showDateOnly(pageMode)) {
       return ColoredBox(
         color: Theme.of(context).colorScheme.surface,
         child: Text(day),

@@ -35,7 +35,7 @@ class ItemSelectAppBar extends ConsumerWidget implements PreferredSizeWidget {
               context: context,
               ref: ref,
               items: selectedItems,
-              content: "${selectedItems.length} 件のアイテムを在庫リストから削除します",
+              content: "${selectedItems.length} 件の商品を在庫リストから削除します",
             );
             if (deleted) {
               ref

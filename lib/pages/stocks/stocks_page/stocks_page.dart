@@ -4,6 +4,7 @@ import 'package:amasearch/models/stock_item.dart';
 import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/detail_page/detail_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/common.dart';
+import 'package:amasearch/pages/stocks/stocks_page/app_bars/delete_appbar.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/item_select_appbar.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/listings_appbar.dart';
 import 'package:amasearch/pages/stocks/stocks_page/app_bars/normal_appbar.dart';
@@ -58,12 +59,26 @@ class StocksPage extends HookConsumerWidget {
         return const ListingsAppBar();
       case StockPageMode.upload:
         return const UploadAppBar();
+      case StockPageMode.delete:
+        return const DeleteAppBar();
     }
   }
 }
 
 class _Body extends HookConsumerWidget {
   const _Body();
+
+  bool _showSelectAllButton(StockPageMode mode) {
+    switch (mode) {
+      case StockPageMode.select:
+      case StockPageMode.listing:
+      case StockPageMode.upload:
+      case StockPageMode.delete:
+        return true;
+      case StockPageMode.normal:
+        return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -74,9 +89,7 @@ class _Body extends HookConsumerWidget {
 
     return Column(
       children: [
-        if (mode == StockPageMode.select ||
-            mode == StockPageMode.listing ||
-            mode == StockPageMode.upload)
+        if (_showSelectAllButton(mode))
           WithUnderLine(
             CheckboxListTile(
               controlAffinity: ListTileControlAffinity.leading,
@@ -237,6 +250,7 @@ class _InkWell extends HookConsumerWidget {
           case StockPageMode.select:
           case StockPageMode.listing:
           case StockPageMode.upload:
+          case StockPageMode.delete:
             // 選択モード・出品モードでタップ時は選択アイテムに追加
             ref
                 .read(selectedStockItemsControllerProvider.notifier)
@@ -252,6 +266,7 @@ class _InkWell extends HookConsumerWidget {
           case StockPageMode.select:
           case StockPageMode.listing:
           case StockPageMode.upload:
+          case StockPageMode.delete:
         }
         ref
             .read(selectedStockItemsControllerProvider.notifier)

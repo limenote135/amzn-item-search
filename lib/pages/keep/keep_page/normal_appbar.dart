@@ -1,5 +1,3 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:amasearch/controllers/keep_item_controller.dart';
 import 'package:amasearch/pages/keep/search_page/search_page.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:flutter/material.dart';
@@ -41,16 +39,8 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 ref.read(keepPageModeProvider.notifier).state =
                     KeepPageMode.refresh;
               case _KeepPageActions.clear:
-                final ret = await showOkCancelAlertDialog(
-                  context: context,
-                  title: "商品の削除",
-                  message: "キープリストからすべてのアイテムを削除します。\n"
-                      "この操作は取り消せません。よろしいですか？",
-                  isDestructiveAction: true,
-                );
-                if (ret == OkCancelResult.ok) {
-                  ref.read(keepItemListControllerProvider.notifier).removeAll();
-                }
+                ref.read(keepPageModeProvider.notifier).state =
+                    KeepPageMode.delete;
             }
           },
           itemBuilder: (context) => const [
@@ -65,7 +55,7 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
               value: _KeepPageActions.clear,
               child: ListTile(
                 leading: Icon(Icons.delete),
-                title: Text("リストをクリア"),
+                title: Text("商品の削除"),
               ),
             ),
           ],

@@ -1,4 +1,3 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';

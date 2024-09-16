@@ -16,6 +16,7 @@ import 'package:amasearch/widgets/with_underline.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'delete_appbar.dart';
 import 'item_select_appbar.dart';
 import 'item_tile.dart';
 import 'normal_appbar.dart';
@@ -64,6 +65,8 @@ class KeepPage extends ConsumerWidget {
         return const ItemSelectAppBar();
       case KeepPageMode.refresh:
         return const RefreshAppbar();
+      case KeepPageMode.delete:
+        return const DeleteAppBar();
     }
   }
 }
@@ -89,10 +92,19 @@ class _UnpaidUserBody extends ConsumerWidget {
   }
 }
 
-final selectAllProvider = StateProvider((_) => false);
-
 class _Body extends ConsumerWidget {
   const _Body();
+
+  bool _showSelectAllButton(KeepPageMode mode) {
+    switch (mode) {
+      case KeepPageMode.refresh:
+      case KeepPageMode.delete:
+        return true;
+      case KeepPageMode.select:
+      case KeepPageMode.normal:
+        return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -102,7 +114,7 @@ class _Body extends ConsumerWidget {
 
     return Column(
       children: [
-        if (mode == KeepPageMode.refresh)
+        if (_showSelectAllButton(mode))
           WithUnderLine(
             CheckboxListTile(
               controlAffinity: ListTileControlAffinity.leading,
@@ -240,6 +252,7 @@ class _InkWell extends ConsumerWidget {
             return;
           case KeepPageMode.select:
           case KeepPageMode.refresh:
+          case KeepPageMode.delete:
             // 選択モードでタップ時は選択アイテムに追加
             ref
                 .read(selectedKeepItemsControllerProvider.notifier)
@@ -253,6 +266,7 @@ class _InkWell extends ConsumerWidget {
             ref.read(keepPageModeProvider.notifier).state = KeepPageMode.select;
           case KeepPageMode.select:
           case KeepPageMode.refresh:
+          case KeepPageMode.delete:
         }
         ref.read(selectedKeepItemsControllerProvider.notifier).toggleItem(item);
       },

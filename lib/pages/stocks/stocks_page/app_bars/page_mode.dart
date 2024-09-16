@@ -5,6 +5,7 @@ enum StockPageMode {
   select,
   listing,
   upload,
+  delete,
 }
 
 final stockPageModeProvider = StateProvider((_) => StockPageMode.normal);

@@ -1,7 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/events.dart';
-import 'package:amasearch/pages/stocks/common/item_delete_handler.dart';
 import 'package:amasearch/pages/stocks/search_page/search_page.dart';
 import 'package:amasearch/pages/stocks/stocks_page/provider.dart';
 import 'package:amasearch/pages/stocks/stocks_page/share/keys.dart';
@@ -69,7 +68,7 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
               value: _StockPageActions.clear,
               child: ListTile(
                 leading: Icon(Icons.delete),
-                title: Text("リストをクリア"),
+                title: Text("商品を削除"),
               ),
             ),
           ],
@@ -110,13 +109,7 @@ class NormalAppBar extends ConsumerWidget implements PreferredSizeWidget {
               .logSingleEvent(shareSnsEventName);
         }
       case _StockPageActions.clear:
-        await itemDeleteHandler(
-          context: context,
-          ref: ref,
-          deleteAll: true,
-          content: "在庫リストからすべてのアイテムを削除します。\n"
-              "この操作は取り消せません。よろしいですか？",
-        );
+        ref.read(stockPageModeProvider.notifier).state = StockPageMode.delete;
       case _StockPageActions.listing:
         ref.read(stockPageModeProvider.notifier).state = StockPageMode.listing;
     }
