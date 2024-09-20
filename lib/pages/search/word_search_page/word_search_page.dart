@@ -146,6 +146,19 @@ class _AppBar extends HookConsumerWidget {
                             onPressed: controller.clear,
                           ),
                         ),
+                        contextMenuBuilder: (
+                          BuildContext context,
+                          EditableTextState editableTextState,
+                        ) {
+                          if (SystemContextMenu.isSupported(context)) {
+                            return SystemContextMenu.editableText(
+                              editableTextState: editableTextState,
+                            );
+                          }
+                          return AdaptiveTextSelectionToolbar.editableText(
+                            editableTextState: editableTextState,
+                          );
+                        },
                         onSubmitted: onSubmit,
                       );
                     },
