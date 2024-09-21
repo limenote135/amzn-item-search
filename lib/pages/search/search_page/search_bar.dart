@@ -95,6 +95,19 @@ class SearchBar extends HookConsumerWidget implements PreferredSizeWidget {
                             context,
                             settings.type,
                           ),
+                          contextMenuBuilder: (
+                            BuildContext context,
+                            EditableTextState editableTextState,
+                          ) {
+                            if (SystemContextMenu.isSupported(context)) {
+                              return SystemContextMenu.editableText(
+                                editableTextState: editableTextState,
+                              );
+                            }
+                            return AdaptiveTextSelectionToolbar.editableText(
+                              editableTextState: editableTextState,
+                            );
+                          },
                           onEditingComplete: settings.continuousInput
                               ? _doNotHideKeyboardCallBack
                               : null,
