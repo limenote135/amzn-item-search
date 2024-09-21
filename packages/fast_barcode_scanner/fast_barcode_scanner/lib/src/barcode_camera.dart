@@ -59,6 +59,12 @@ class BarcodeCameraState extends State<BarcodeCamera> {
 
   final cameraController = CameraController();
 
+  void _safeSetState(VoidCallback fn) {
+    if (context.mounted) {
+      setState(fn);
+    }
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -82,8 +88,9 @@ class BarcodeCameraState extends State<BarcodeCamera> {
           );
 
     configurationFuture
-        .whenComplete(() => setState(() => _opacity = 1.0))
-        .onError((error, stackTrace) => setState(() => showingError = true));
+        .whenComplete(() => _safeSetState(() => _opacity = 1.0))
+        .onError(
+            (error, stackTrace) => _safeSetState(() => showingError = true));
 
     cameraController.events.addListener(onScannerEvent);
   }
@@ -97,9 +104,9 @@ class BarcodeCameraState extends State<BarcodeCamera> {
       return;
     }
     if (cameraController.events.value != ScannerEvent.error && showingError) {
-      setState(() => showingError = false);
+      _safeSetState(() => showingError = false);
     } else if (cameraController.events.value == ScannerEvent.error) {
-      setState(() => showingError = true);
+      _safeSetState(() => showingError = true);
     }
   }
 
