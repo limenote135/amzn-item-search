@@ -6,9 +6,11 @@ import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,6 +23,35 @@ class OfferListingPage extends StatelessWidget {
   const OfferListingPage({super.key});
 
   static const String routeName = "/offer_listing";
+
+  static const _configNameUseWebviewOffer = "use_webview_offer";
+
+  static Future<void> goToOfferListingPage(
+      BuildContext context, OfferListingsParams params) async {
+    final remoteConfig = FirebaseRemoteConfig.instance;
+
+    try {
+      final defaultValues = <String, dynamic>{
+        _configNameUseWebviewOffer: false,
+      };
+      await remoteConfig.setDefaults(defaultValues);
+      await remoteConfig.fetchAndActivate();
+      final useWebviewOffer = remoteConfig.getBool(_configNameUseWebviewOffer);
+
+      if (useWebviewOffer) {
+        await Navigator.of(context).push(route(params));
+      } else {
+        await Navigator.of(context).push(route(params));
+      }
+    } catch (e, st) {
+      await recordError(
+        e,
+        st,
+        information: const ["RemoteConfig error"],
+      );
+      await Navigator.of(context).push(route(params));
+    }
+  }
 
   static Route<void> route(OfferListingsParams params) {
     return MaterialPageRoute(
