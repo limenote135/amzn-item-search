@@ -23,6 +23,7 @@ import 'package:amasearch/pages/settings/target_profit_page/target_profit_page.d
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/cloud_functions.dart';
+import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/release_notes.dart';
 import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
@@ -253,6 +254,10 @@ class _Body extends HookConsumerWidget {
                 if (imageDir.existsSync()) {
                   imageDir.deleteSync();
                 }
+                final cookieManager = CookieManager.instance();
+                await cookieManager.deleteAllCookies();
+                final jar = await ref.read(persistCookieJarProvider.future);
+                await jar.deleteAll();
               } finally {
                 await EasyLoading.dismiss();
               }

@@ -288,16 +288,40 @@ class SlidableTile extends HookConsumerWidget {
       case navigationTargetNewOffers:
         title = "新品一覧";
         event = pushSearchButtonAmazonNewOffersName;
-        navigation = () => OfferListingPage.route(
+        return SlidableAction(
+          label: title,
+          backgroundColor: Colors.deepPurpleAccent,
+          icon: Icons.search,
+          padding: EdgeInsets.zero,
+          onPressed: (context) async {
+            unfocus();
+            await ref
+                .read(analyticsControllerProvider)
+                .logPushSearchButtonEvent(event);
+            await OfferListingPage.goToOfferListingPage(
+              context,
               OfferListingsParams(
                 asin: item.asin,
                 newItem: true,
               ),
             );
+          },
+        );
       case navigationTargetUsedOffers:
         title = "中古一覧";
         event = pushSearchButtonAmazonUsedOffersName;
-        navigation = () => OfferListingPage.route(
+        return SlidableAction(
+          label: title,
+          backgroundColor: Colors.deepPurpleAccent,
+          icon: Icons.search,
+          padding: EdgeInsets.zero,
+          onPressed: (context) async {
+            unfocus();
+            await ref
+                .read(analyticsControllerProvider)
+                .logPushSearchButtonEvent(event);
+            await OfferListingPage.goToOfferListingPage(
+              context,
               OfferListingsParams(
                 asin: item.asin,
                 usedLikeNew: true,
@@ -306,6 +330,8 @@ class SlidableTile extends HookConsumerWidget {
                 usedAcceptable: true,
               ),
             );
+          },
+        );
       case navigationTargetVariation:
         title = "ﾊﾞﾘｴｰｼｮﾝ";
         event = pushSearchButtonVariationName;

@@ -16,6 +16,7 @@ class OfferListingsParams with _$OfferListingsParams {
     @Default(false) bool usedGood,
     @Default(false) bool usedAcceptable,
     @Default(0) int page,
+    @Default(false) bool useWebview,
   }) = _OfferListingsParams;
 }
 

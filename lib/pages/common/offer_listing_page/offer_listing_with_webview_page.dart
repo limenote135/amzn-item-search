@@ -4,68 +4,35 @@ import 'dart:math';
 import 'package:amasearch/analytics/analytics.dart';
 import 'package:amasearch/analytics/properties.dart';
 import 'package:amasearch/controllers/general_settings_controller.dart';
+import 'package:amasearch/controllers/webview_controller.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/util/auth.dart';
-import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/widgets/async_value_widget.dart';
 import 'package:amasearch/widgets/payment.dart';
 import 'package:amasearch/widgets/theme_divider.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'cart_tile.dart';
-import 'offer_listing_with_webview_page.dart';
 import 'offer_tile.dart';
 import 'providers.dart';
 
-class OfferListingPage extends StatelessWidget {
-  const OfferListingPage({super.key});
+class OfferListingWithWebviewPage extends StatelessWidget {
+  const OfferListingWithWebviewPage({super.key});
 
-  static const String routeName = "/offer_listing";
+  static const String routeName = "/offer_listing_with_webview";
 
-  static const _configNameUseWebviewOffer = "use_webview_offer";
-
-  static Future<void> goToOfferListingPage(
-    BuildContext context,
-    OfferListingsParams params,
-  ) async {
-    final remoteConfig = FirebaseRemoteConfig.instance;
-
-    try {
-      final defaultValues = <String, dynamic>{
-        _configNameUseWebviewOffer: false,
-      };
-      await remoteConfig.setDefaults(defaultValues);
-      await remoteConfig.fetchAndActivate();
-      final useWebviewOffer = remoteConfig.getBool(_configNameUseWebviewOffer);
-
-      if (useWebviewOffer) {
-        await Navigator.of(context)
-            .push(OfferListingWithWebviewPage.route(params));
-      } else {
-        await Navigator.of(context).push(_route(params));
-      }
-      // ignore: avoid_catches_without_on_clauses
-    } catch (e, st) {
-      await recordError(
-        e,
-        st,
-        information: const ["RemoteConfig error"],
-      );
-      await Navigator.of(context).push(_route(params));
-    }
-  }
-
-  static Route<void> _route(OfferListingsParams params) {
+  static Route<void> route(OfferListingsParams params) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (context) => ProviderScope(
         overrides: [
-          currentOfferListingParamProvider.overrideWithValue(params),
+          currentOfferListingParamProvider
+              .overrideWithValue(params.copyWith(useWebview: true)),
         ],
-        child: const OfferListingPage(),
+        child: const OfferListingWithWebviewPage(),
       ),
     );
   }
@@ -81,8 +48,31 @@ class OfferListingPage extends StatelessWidget {
   }
 }
 
-class _Body extends HookConsumerWidget {
+class _Body extends ConsumerWidget {
   const _Body();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ready = ref.watch(isCookieReadyProvider);
+    return Column(
+      children: [
+        const HeadlessWebview(),
+        AsyncValueWidget(
+          value: ready,
+          data: (data) {
+            if (!data) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return const Expanded(child: __Body());
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class __Body extends HookConsumerWidget {
+  const __Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -171,5 +161,57 @@ class _Body extends HookConsumerWidget {
       );
     }
     return const OfferTile();
+  }
+}
+
+final initProvider = StateProvider((ref) {
+  return false;
+});
+
+final isCookieReadyProvider = StreamProvider((ref) async* {
+  final state = ref.watch(initProvider);
+  yield state;
+});
+
+class HeadlessWebview extends ConsumerStatefulWidget {
+  const HeadlessWebview({super.key});
+
+  @override
+  ConsumerState createState() => _HeadlessWidgetState();
+}
+
+class _HeadlessWidgetState extends ConsumerState<HeadlessWebview> {
+  late WebviewController webview;
+
+  @override
+  void initState() {
+    webview = ref.read(webviewControllerProvider);
+    final param = ref.read(currentOfferListingParamProvider);
+    final initUrl = "https://www.amazon.co.jp/dp/${param.asin}/?aod=1&th=1";
+    webview
+      ..callback = onLoadStop
+      ..loadUrl(initUrl);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    webview.cancel();
+    super.dispose();
+  }
+
+  Future<void> onLoadStop(
+    InAppWebViewController controller,
+    WebUri? uri,
+  ) async {
+    if (!mounted) {
+      return;
+    }
+    ref.read(initProvider.notifier).state = true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

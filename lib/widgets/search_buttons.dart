@@ -64,13 +64,11 @@ class SearchButtons extends HookConsumerWidget {
                   .logPushSearchButtonEvent(
                     pushSearchButtonAmazonNewOffersName,
                   );
-              await Navigator.push(
+              await OfferListingPage.goToOfferListingPage(
                 context,
-                OfferListingPage.route(
-                  OfferListingsParams(
-                    asin: item.asin,
-                    newItem: true,
-                  ),
+                OfferListingsParams(
+                  asin: item.asin,
+                  newItem: true,
                 ),
               );
             },
@@ -84,16 +82,14 @@ class SearchButtons extends HookConsumerWidget {
                   .logPushSearchButtonEvent(
                     pushSearchButtonAmazonUsedOffersName,
                   );
-              await Navigator.push(
+              await OfferListingPage.goToOfferListingPage(
                 context,
-                OfferListingPage.route(
-                  OfferListingsParams(
-                    asin: item.asin,
-                    usedLikeNew: true,
-                    usedVeryGood: true,
-                    usedGood: true,
-                    usedAcceptable: true,
-                  ),
+                OfferListingsParams(
+                  asin: item.asin,
+                  usedLikeNew: true,
+                  usedVeryGood: true,
+                  usedGood: true,
+                  usedAcceptable: true,
                 ),
               );
             },
