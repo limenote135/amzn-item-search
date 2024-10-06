@@ -37,7 +37,7 @@ const customButtonKeezonUrl =
 const customButtonMercariUrl =
     "https://www.mercari.com/jp/search/?keyword=$titleVariable";
 const customButtonAmazonStockUrl =
-    "https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:$asinVariable;";
+    "https://sellercentral.amazon.co.jp/myinventory/inventory?searchTerm=$asinVariable";
 const customButtonAmazonListableUrl =
     "https://sellercentral.amazon.co.jp/abis/listing/syh?asin=$asinVariable";
 const customButtonAmazonListingsUrl =
