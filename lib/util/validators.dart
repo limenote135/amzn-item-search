@@ -4,7 +4,7 @@ String? emailValidator(String? value) {
   if (value == null || value.isEmpty) {
     return 'メールアドレスが必要です';
   }
-  if (!_emailRegExp.hasMatch(value)) {
+  if (!_emailRegExp.hasMatch(value) || value.contains(" ")) {
     return "メールアドレスが不正です";
   }
   return null;
