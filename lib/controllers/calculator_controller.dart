@@ -57,7 +57,7 @@ class CalculateDataController extends StateNotifier<CalculateData> {
 
     state = state.copyWith(
       displayText: isInt ? "$toInt" : "$subTotal",
-      total: op == CalcOp.equal ? 0 : subTotal,
+      total: subTotal,
       op: op,
       inputComplete: true,
     );
