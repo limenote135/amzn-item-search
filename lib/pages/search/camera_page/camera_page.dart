@@ -38,7 +38,8 @@ class CameraPage extends ConsumerWidget {
       context: context,
       barrierDismissible: false,
       title: "エラー",
-      message: "バーコードリーダーを利用するためにはカメラの利用を許可する必要があります。",
+      message: "バーコードリーダーを利用するためにはカメラの利用を許可する必要があります。\n"
+          "OSの設定アプリからamzn-item-searchに対してカメラの利用を許可してください。",
       okLabel: "戻る",
     );
     return null;
