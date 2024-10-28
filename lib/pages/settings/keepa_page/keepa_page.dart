@@ -131,7 +131,7 @@ class _Body extends HookConsumerWidget {
         const ThemeDivider(),
         SwitchListTile(
           title: const Text(" APIアクセスキーを利用する"),
-          subtitle: const Text("必ずランキンググラフが表示されるようになります"),
+          subtitle: const Text("トークンの範囲内で必ずランキンググラフが表示されるようになります"),
           value: settings.useApiKey,
           onChanged: (value) {
             final newState = settings.copyWith(useApiKey: value);
