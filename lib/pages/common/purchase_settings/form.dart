@@ -34,7 +34,7 @@ import 'sku_tile.dart';
 import 'target_price_tile.dart';
 import 'values.dart';
 
-extension on AutoDisposeRef<dynamic> {
+extension on Ref<dynamic> {
   // autoDispose を指定した時間だけ延する
   void cacheFor(Duration duration) {
     final link = keepAlive();
