@@ -118,6 +118,8 @@ const PriceContainer = ({ reference, inView, isDetailOpen, onClickDetail }: Pric
                     <Typography variant={"body2"}>キープリスト</Typography>
                     <Typography variant={"body2"}>出品可否表示</Typography>
                     <Typography variant={"body2"}>危険物表示</Typography>
+                    <Typography variant={"body2"}>外部バーコードリーダ対応</Typography>
+                    <Typography variant={"body2"}>Amazonへの出品登録</Typography>
                     <Typography variant={"body2"}>過去の出品履歴表示</Typography>
                   </Box>
                 </Collapse>
