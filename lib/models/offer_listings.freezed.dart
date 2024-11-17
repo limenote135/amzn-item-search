@@ -24,6 +24,7 @@ mixin _$OfferListingsParams {
   bool get usedGood => throw _privateConstructorUsedError;
   bool get usedAcceptable => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
+  bool get useWebview => throw _privateConstructorUsedError;
 
   /// Create a copy of OfferListingsParams
   /// with the given fields replaced by the non-null parameter values.
@@ -46,7 +47,8 @@ abstract class $OfferListingsParamsCopyWith<$Res> {
       bool usedVeryGood,
       bool usedGood,
       bool usedAcceptable,
-      int page});
+      int page,
+      bool useWebview});
 }
 
 /// @nodoc
@@ -72,6 +74,7 @@ class _$OfferListingsParamsCopyWithImpl<$Res, $Val extends OfferListingsParams>
     Object? usedGood = null,
     Object? usedAcceptable = null,
     Object? page = null,
+    Object? useWebview = null,
   }) {
     return _then(_value.copyWith(
       asin: null == asin
@@ -106,6 +109,10 @@ class _$OfferListingsParamsCopyWithImpl<$Res, $Val extends OfferListingsParams>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
+      useWebview: null == useWebview
+          ? _value.useWebview
+          : useWebview // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -126,7 +133,8 @@ abstract class _$$OfferListingsParamsImplCopyWith<$Res>
       bool usedVeryGood,
       bool usedGood,
       bool usedAcceptable,
-      int page});
+      int page,
+      bool useWebview});
 }
 
 /// @nodoc
@@ -150,6 +158,7 @@ class __$$OfferListingsParamsImplCopyWithImpl<$Res>
     Object? usedGood = null,
     Object? usedAcceptable = null,
     Object? page = null,
+    Object? useWebview = null,
   }) {
     return _then(_$OfferListingsParamsImpl(
       asin: null == asin
@@ -184,6 +193,10 @@ class __$$OfferListingsParamsImplCopyWithImpl<$Res>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
+      useWebview: null == useWebview
+          ? _value.useWebview
+          : useWebview // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -199,7 +212,8 @@ class _$OfferListingsParamsImpl implements _OfferListingsParams {
       this.usedVeryGood = false,
       this.usedGood = false,
       this.usedAcceptable = false,
-      this.page = 0});
+      this.page = 0,
+      this.useWebview = false});
 
   @override
   final String asin;
@@ -224,10 +238,13 @@ class _$OfferListingsParamsImpl implements _OfferListingsParams {
   @override
   @JsonKey()
   final int page;
+  @override
+  @JsonKey()
+  final bool useWebview;
 
   @override
   String toString() {
-    return 'OfferListingsParams(asin: $asin, prime: $prime, newItem: $newItem, usedLikeNew: $usedLikeNew, usedVeryGood: $usedVeryGood, usedGood: $usedGood, usedAcceptable: $usedAcceptable, page: $page)';
+    return 'OfferListingsParams(asin: $asin, prime: $prime, newItem: $newItem, usedLikeNew: $usedLikeNew, usedVeryGood: $usedVeryGood, usedGood: $usedGood, usedAcceptable: $usedAcceptable, page: $page, useWebview: $useWebview)';
   }
 
   @override
@@ -246,12 +263,14 @@ class _$OfferListingsParamsImpl implements _OfferListingsParams {
                 other.usedGood == usedGood) &&
             (identical(other.usedAcceptable, usedAcceptable) ||
                 other.usedAcceptable == usedAcceptable) &&
-            (identical(other.page, page) || other.page == page));
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.useWebview, useWebview) ||
+                other.useWebview == useWebview));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, asin, prime, newItem,
-      usedLikeNew, usedVeryGood, usedGood, usedAcceptable, page);
+      usedLikeNew, usedVeryGood, usedGood, usedAcceptable, page, useWebview);
 
   /// Create a copy of OfferListingsParams
   /// with the given fields replaced by the non-null parameter values.
@@ -272,7 +291,8 @@ abstract class _OfferListingsParams implements OfferListingsParams {
       final bool usedVeryGood,
       final bool usedGood,
       final bool usedAcceptable,
-      final int page}) = _$OfferListingsParamsImpl;
+      final int page,
+      final bool useWebview}) = _$OfferListingsParamsImpl;
 
   @override
   String get asin;
@@ -290,6 +310,8 @@ abstract class _OfferListingsParams implements OfferListingsParams {
   bool get usedAcceptable;
   @override
   int get page;
+  @override
+  bool get useWebview;
 
   /// Create a copy of OfferListingsParams
   /// with the given fields replaced by the non-null parameter values.

@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:io' as http show Cookie;
 import 'dart:io';
 
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
@@ -110,21 +112,56 @@ class AmazonRepository {
     dio.CancelToken cancelToken,
   ) async {
     final d = await _ref.read(dioProvider.future);
-    // await _ensureCookie(params.asin);
-    if (params.page == 0) {
-      final opt = dio.Options(
-        preserveHeaderCase: true,
-        headers: <String, dynamic>{
-          ..._commonHeader(),
-          "Sec-Fetch-Site": "none",
-          "Sec-Fetch-Mode": "navigate",
-          "Sec-Fetch-Dest": "document",
-          "Sec-Fetch-User": "?1",
-          "Upgrade-Insecure-Requests": "1",
-          "Priority": "u=0, i",
-        },
+
+    if (params.useWebview) {
+      final cookieManager = CookieManager.instance();
+      final cookies = await cookieManager.getCookies(
+        url: WebUri("https://www.amazon.co.jp"),
       );
-      await d.get("https://www.amazon.co.jp/dp/${params.asin}/", opt: opt);
+      final savedCookie = <http.Cookie>[];
+      for (final e in cookies) {
+        final c = http.Cookie(e.name, e.value as String);
+        if (e.expiresDate == null) {
+          c.expires = DateTime.fromMillisecondsSinceEpoch(e.expiresDate!);
+        }
+        c
+          ..httpOnly = e.isHttpOnly ?? false
+          ..secure = e.isSecure ?? false
+          ..sameSite = switch (e.sameSite) {
+            HTTPCookieSameSitePolicy.LAX => SameSite.lax,
+            HTTPCookieSameSitePolicy.STRICT => SameSite.strict,
+            HTTPCookieSameSitePolicy.NONE => SameSite.none,
+            HTTPCookieSameSitePolicy() => SameSite.none,
+            null => null,
+          };
+        savedCookie.add(c);
+      }
+      final jar = await _ref.read(persistCookieJarProvider.future);
+      // final httpCookie =
+      //     await jar.loadForRequest(Uri.parse("https://www.amazon.co.jp"));
+      await jar.saveFromResponse(
+        Uri.parse("https://www.amazon.co.jp"),
+        savedCookie,
+      );
+      // final httpCookie2 =
+      //     await jar.loadForRequest(Uri.parse("https://www.amazon.co.jp"));
+    } else {
+      // await _ensureCookie(params.asin);
+      if (params.page == 0) {
+        final opt = dio.Options(
+          preserveHeaderCase: true,
+          headers: <String, dynamic>{
+            ..._commonHeader(),
+            "Sec-Fetch-Site": "none",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-User": "?1",
+            "Upgrade-Insecure-Requests": "1",
+            "Priority": "u=0, i",
+          },
+        );
+        await d.get("https://www.amazon.co.jp/dp/${params.asin}/", opt: opt);
+      }
     }
 
     final reqParam = <String, dynamic>{
