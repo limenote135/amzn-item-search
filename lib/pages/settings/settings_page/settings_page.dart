@@ -9,6 +9,7 @@ import 'package:amasearch/pages/settings/amazon_page/amazon_page.dart';
 import 'package:amasearch/pages/settings/condition_text_page/condition_text_page.dart';
 import 'package:amasearch/pages/settings/csv_page/csv_page.dart';
 import 'package:amasearch/pages/settings/custom_button_page/custom_button_page.dart';
+import 'package:amasearch/pages/settings/debug_page/debug_page.dart';
 import 'package:amasearch/pages/settings/donation_page/donation_page.dart';
 import 'package:amasearch/pages/settings/external_services_page/external_services_page.dart';
 import 'package:amasearch/pages/settings/faq_page/faq_page.dart';
@@ -342,6 +343,9 @@ class _Body extends HookConsumerWidget {
                   "${packageInfo.version} (build ${packageInfo.buildNumber})",
               applicationLegalese: "Copyright けんず",
             );
+          },
+          onLongPress: () {
+            Navigator.push(context, DebugPage.route());
           },
         ),
         ListTile(
