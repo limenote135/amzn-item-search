@@ -118,7 +118,12 @@ class SearchItemDetail extends ConsumerWidget {
           ),
           const PriceDetailTile(ItemCondition.newItem),
           const PriceDetailTile(ItemCondition.usedItem),
-          const SellerListTile(),
+          ProviderScope(
+            overrides: [
+              initiallyExpandedOffersProvider.overrideWithValue(true),
+            ],
+            child: const SellerListTile(),
+          ),
           ProviderScope(
             overrides: [
               currentItemProvider.overrideWithValue(item),
