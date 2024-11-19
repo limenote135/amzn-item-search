@@ -11,6 +11,7 @@ import 'package:amasearch/util/auth.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/util.dart';
 import 'package:amasearch/widgets/image_tile.dart';
+import 'package:amasearch/widgets/progress_indicator.dart';
 import 'package:amasearch/widgets/strong_container.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -37,7 +38,7 @@ class KeepItemTile extends ConsumerWidget {
     }
 
     if (item.isUpdating) {
-      return const ListTile(title: Center(child: CircularProgressIndicator()));
+      return const ListTile(title: centeredCircularProgressIndicator);
     }
 
     final alertMatched = settings.enableAlert &&
