@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io' as http show Cookie;
 import 'dart:io';
 
+import 'package:amasearch/controllers/webview_controller.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
@@ -113,6 +114,7 @@ class AmazonRepository {
   ) async {
     final d = await _ref.read(dioProvider.future);
 
+    var userAgent = _userAgent;
     if (params.useWebview) {
       final cookieManager = CookieManager.instance();
       final cookies = await cookieManager.getCookies(
@@ -136,6 +138,13 @@ class AmazonRepository {
           };
         savedCookie.add(c);
       }
+
+      final webview = _ref.read(webviewControllerProvider);
+      final ua = await webview.getUserAgent();
+      if (ua != null) {
+        userAgent = ua;
+      }
+
       final jar = await _ref.read(persistCookieJarProvider.future);
       // final httpCookie =
       //     await jar.loadForRequest(Uri.parse("https://www.amazon.co.jp"));
@@ -202,6 +211,7 @@ class AmazonRepository {
         "Sec-Fetch-Site": "same-origin",
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Dest": "empty",
+        "User-Agent": userAgent,
       },
     );
     final url = params.page == 0
