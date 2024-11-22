@@ -52,7 +52,7 @@ class AmazonRepository {
   static const _shopSelector = "#aod-offer-soldBy div.a-col-right";
   static const _priceSelector = "span.a-price span.a-price-whole";
   static const _shipFromSelector = "#aod-offer-shipsFrom .a-color-base";
-  static const _conditionSelector = "#aod-offer-heading > h5";
+  static const _conditionSelector = "#aod-offer-heading";
   static const _imageSelector = "div#aod-condition-image";
 
   static const _stockUrlBase = "https://www.amazon.co.jp/dp/[asin]/ref=sr_1_1";
@@ -253,10 +253,10 @@ class AmazonRepository {
     final totalElement = doc.querySelector("#aod-filter-offer-count-string");
     final total = _parseTotal(totalElement);
 
-    final offerElement = doc.querySelector("#aod-offer-list");
+    // final offerElement = doc.querySelector("#aod-offer-list");
     final offers = param.page == 0
-        ? _parseOfferItems(offerElement!)
-        : _parseOfferItems(doc.body!);
+        ? _parseOfferItems(doc.body!, "#aod-offer-list > div[id^=aod-offer]")
+        : _parseOfferItems(doc.body!, "body > div[id^=aod-offer]");
 
     return OfferListings(
       asin: param.asin,
@@ -278,7 +278,7 @@ class AmazonRepository {
     final priceStr =
         offer.querySelector(_priceSelector)?.text.replaceAll(",", "").trim();
     final price = int.tryParse(priceStr ?? "0") ?? 0;
-    final condRaw = offer.querySelector(_conditionSelector)!.text;
+    final condRaw = offer.querySelector(_conditionSelector)?.text ?? "";
     var cond = "不明";
     if (condRaw.contains("新品") && !condRaw.contains("ほぼ")) {
       cond = "新品";
@@ -320,8 +320,8 @@ class AmazonRepository {
     return total ?? 0;
   }
 
-  static List<OfferItem> _parseOfferItems(Element root) {
-    final offers = root.querySelectorAll("#aod-offer");
+  static List<OfferItem> _parseOfferItems(Element root, String rootSelector) {
+    final offers = root.querySelectorAll(rootSelector);
     final items = <OfferItem>[];
     for (final offer in offers) {
       final shopElement = offer.querySelector(_shopSelector)!;
