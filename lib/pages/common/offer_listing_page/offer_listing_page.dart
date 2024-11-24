@@ -27,21 +27,26 @@ class OfferListingPage extends StatelessWidget {
 
   static const _configNameUseWebviewOffer = "use_webview_offer";
 
+  static Future<bool> _useWebviewOffer() async {
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    final defaultValues = <String, dynamic>{
+      _configNameUseWebviewOffer: false,
+    };
+    await remoteConfig.setDefaults(defaultValues);
+    await remoteConfig.fetchAndActivate();
+    // TODO:
+    const useWebviewOffer =
+        false; //remoteConfig.getBool(_configNameUseWebviewOffer);
+
+    return useWebviewOffer;
+  }
+
   static Future<void> goToOfferListingPage(
     BuildContext context,
     OfferListingsParams params,
   ) async {
-    final remoteConfig = FirebaseRemoteConfig.instance;
-
     try {
-      final defaultValues = <String, dynamic>{
-        _configNameUseWebviewOffer: false,
-      };
-      await remoteConfig.setDefaults(defaultValues);
-      await remoteConfig.fetchAndActivate();
-      const useWebviewOffer =
-          false; //remoteConfig.getBool(_configNameUseWebviewOffer);
-
+      final useWebviewOffer = await _useWebviewOffer();
       if (useWebviewOffer) {
         await Navigator.of(context)
             .push(OfferListingWithWebviewPage.route(params));
