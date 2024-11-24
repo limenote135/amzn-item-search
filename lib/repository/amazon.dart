@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io' as http show Cookie;
 import 'dart:io';
 
+import 'package:amasearch/controllers/webview_controller.dart';
 import 'package:amasearch/models/offer_listings.dart';
 import 'package:amasearch/util/dio.dart';
 import 'package:amasearch/util/util.dart';
@@ -29,6 +30,15 @@ class _ParseOfferListingsParam {
   final String body;
 }
 
+String _defaultUserAgent =
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0";
+
+final _uaProvider = FutureProvider((ref) async {
+  final webview = ref.read(webviewControllerProvider);
+  final ua = await webview.getUserAgent();
+  return ua ?? _defaultUserAgent;
+});
+
 // カートを含まない場合
 // isonlyrenderofferlist=true
 class AmazonRepository {
@@ -39,19 +49,11 @@ class AmazonRepository {
   static const _amazonSellerId = "AN1VRQENFRJN5";
   static const _marketPlaceJp = "A1VC38T7YXB528";
 
-  // static final _random = Random();
-
-  static String get _userAgent {
-    // final rand = _random.nextInt(100) + 45;
-    // final chMajor = _random.nextInt(10) + 90;
-    return "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0";
-  }
-
   static const _offerUrlBase = "https://www.amazon.co.jp/gp/product/ajax/";
   static const _shopSelector = "#aod-offer-soldBy div.a-col-right";
   static const _priceSelector = "span.a-price span.a-price-whole";
   static const _shipFromSelector = "#aod-offer-shipsFrom .a-color-base";
-  static const _conditionSelector = "#aod-offer-heading > h5";
+  static const _conditionSelector = "#aod-offer-heading";
   static const _imageSelector = "div#aod-condition-image";
 
   static const _stockUrlBase = "https://www.amazon.co.jp/dp/[asin]/ref=sr_1_1";
@@ -76,7 +78,7 @@ class AmazonRepository {
 
   Map<String, String> _commonHeader() {
     return <String, String>{
-      "User-Agent": _userAgent,
+      "User-Agent": _defaultUserAgent,
       "Accept-Encoding": "gzip, deflate, br, zstd",
       "Accept": "text/html,*/*",
       "Accept-Language": "ja",
@@ -113,6 +115,8 @@ class AmazonRepository {
   ) async {
     final d = await _ref.read(dioProvider.future);
 
+    final userAgent = await _ref.read(_uaProvider.future);
+
     if (params.useWebview) {
       final cookieManager = CookieManager.instance();
       final cookies = await cookieManager.getCookies(
@@ -136,6 +140,7 @@ class AmazonRepository {
           };
         savedCookie.add(c);
       }
+
       final jar = await _ref.read(persistCookieJarProvider.future);
       // final httpCookie =
       //     await jar.loadForRequest(Uri.parse("https://www.amazon.co.jp"));
@@ -202,6 +207,7 @@ class AmazonRepository {
         "Sec-Fetch-Site": "same-origin",
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Dest": "empty",
+        "User-Agent": userAgent,
       },
     );
     final url = params.page == 0
@@ -243,10 +249,10 @@ class AmazonRepository {
     final totalElement = doc.querySelector("#aod-filter-offer-count-string");
     final total = _parseTotal(totalElement);
 
-    final offerElement = doc.querySelector("#aod-offer-list");
+    // final offerElement = doc.querySelector("#aod-offer-list");
     final offers = param.page == 0
-        ? _parseOfferItems(offerElement!)
-        : _parseOfferItems(doc.body!);
+        ? _parseOfferItems(doc.body!, "#aod-offer-list > div[id^=aod-offer]")
+        : _parseOfferItems(doc.body!, "body > div[id^=aod-offer]");
 
     return OfferListings(
       asin: param.asin,
@@ -268,7 +274,7 @@ class AmazonRepository {
     final priceStr =
         offer.querySelector(_priceSelector)?.text.replaceAll(",", "").trim();
     final price = int.tryParse(priceStr ?? "0") ?? 0;
-    final condRaw = offer.querySelector(_conditionSelector)!.text;
+    final condRaw = offer.querySelector(_conditionSelector)?.text ?? "";
     var cond = "不明";
     if (condRaw.contains("新品") && !condRaw.contains("ほぼ")) {
       cond = "新品";
@@ -310,8 +316,8 @@ class AmazonRepository {
     return total ?? 0;
   }
 
-  static List<OfferItem> _parseOfferItems(Element root) {
-    final offers = root.querySelectorAll("#aod-offer");
+  static List<OfferItem> _parseOfferItems(Element root, String rootSelector) {
+    final offers = root.querySelectorAll(rootSelector);
     final items = <OfferItem>[];
     for (final offer in offers) {
       final shopElement = offer.querySelector(_shopSelector)!;
@@ -384,7 +390,7 @@ class AmazonRepository {
 
     final opt = dio.Options(
       headers: <String, String>{
-        HttpHeaders.userAgentHeader: _userAgent,
+        HttpHeaders.userAgentHeader: _defaultUserAgent,
       },
     );
     final resp =

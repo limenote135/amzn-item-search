@@ -39,6 +39,14 @@ class WebviewController {
     return html;
   }
 
+  Future<String?> getUserAgent() async {
+    await _loading;
+    // iOS ではこうしないとブラウザから UA を取れない
+    final temp = await _webview.webViewController!
+        .evaluateJavascript(source: "navigator.userAgent") as String?;
+    return temp;
+  }
+
   void cancel() {
     _webview.webViewController?.stopLoading();
   }
