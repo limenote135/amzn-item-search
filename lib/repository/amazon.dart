@@ -30,6 +30,15 @@ class _ParseOfferListingsParam {
   final String body;
 }
 
+String _defaultUserAgent =
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0";
+
+final _uaProvider = FutureProvider((ref) async {
+  final webview = ref.read(webviewControllerProvider);
+  final ua = await webview.getUserAgent();
+  return ua ?? _defaultUserAgent;
+});
+
 // カートを含まない場合
 // isonlyrenderofferlist=true
 class AmazonRepository {
@@ -39,14 +48,6 @@ class AmazonRepository {
 
   static const _amazonSellerId = "AN1VRQENFRJN5";
   static const _marketPlaceJp = "A1VC38T7YXB528";
-
-  // static final _random = Random();
-
-  static String get _userAgent {
-    // final rand = _random.nextInt(100) + 45;
-    // final chMajor = _random.nextInt(10) + 90;
-    return "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0";
-  }
 
   static const _offerUrlBase = "https://www.amazon.co.jp/gp/product/ajax/";
   static const _shopSelector = "#aod-offer-soldBy div.a-col-right";
@@ -77,7 +78,7 @@ class AmazonRepository {
 
   Map<String, String> _commonHeader() {
     return <String, String>{
-      "User-Agent": _userAgent,
+      "User-Agent": _defaultUserAgent,
       "Accept-Encoding": "gzip, deflate, br, zstd",
       "Accept": "text/html,*/*",
       "Accept-Language": "ja",
@@ -114,7 +115,8 @@ class AmazonRepository {
   ) async {
     final d = await _ref.read(dioProvider.future);
 
-    var userAgent = _userAgent;
+    final userAgent = await _ref.read(_uaProvider.future);
+
     if (params.useWebview) {
       final cookieManager = CookieManager.instance();
       final cookies = await cookieManager.getCookies(
@@ -137,12 +139,6 @@ class AmazonRepository {
             null => null,
           };
         savedCookie.add(c);
-      }
-
-      final webview = _ref.read(webviewControllerProvider);
-      final ua = await webview.getUserAgent();
-      if (ua != null) {
-        userAgent = ua;
       }
 
       final jar = await _ref.read(persistCookieJarProvider.future);
@@ -394,7 +390,7 @@ class AmazonRepository {
 
     final opt = dio.Options(
       headers: <String, String>{
-        HttpHeaders.userAgentHeader: _userAgent,
+        HttpHeaders.userAgentHeader: _defaultUserAgent,
       },
     );
     final resp =
