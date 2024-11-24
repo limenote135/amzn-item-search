@@ -39,7 +39,8 @@ class OfferListingPage extends StatelessWidget {
       };
       await remoteConfig.setDefaults(defaultValues);
       await remoteConfig.fetchAndActivate();
-      final useWebviewOffer = remoteConfig.getBool(_configNameUseWebviewOffer);
+      const useWebviewOffer =
+          false; //remoteConfig.getBool(_configNameUseWebviewOffer);
 
       if (useWebviewOffer) {
         await Navigator.of(context)
