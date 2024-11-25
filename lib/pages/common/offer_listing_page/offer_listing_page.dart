@@ -16,7 +16,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'cart_tile.dart';
-import 'offer_listing_with_webview_page.dart';
+import 'offer_listing_by_scrape.dart';
 import 'offer_tile.dart';
 import 'providers.dart';
 
@@ -34,9 +34,7 @@ class OfferListingPage extends StatelessWidget {
     };
     await remoteConfig.setDefaults(defaultValues);
     await remoteConfig.fetchAndActivate();
-    // TODO:
-    const useWebviewOffer =
-        false; //remoteConfig.getBool(_configNameUseWebviewOffer);
+    final useWebviewOffer = remoteConfig.getBool(_configNameUseWebviewOffer);
 
     return useWebviewOffer;
   }
@@ -48,8 +46,7 @@ class OfferListingPage extends StatelessWidget {
     try {
       final useWebviewOffer = await _useWebviewOffer();
       if (useWebviewOffer) {
-        await Navigator.of(context)
-            .push(OfferListingWithWebviewPage.route(params));
+        await Navigator.of(context).push(OfferListingByScrape.route(params));
       } else {
         await Navigator.of(context).push(_route(params));
       }
@@ -170,6 +167,10 @@ class _Body extends HookConsumerWidget {
       return Column(
         children: [
           Text("$total件の出品"),
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text("注：送料は含まれません"),
+          ),
           const CartTile(),
           const ThemeDivider(),
           const OfferTile(),

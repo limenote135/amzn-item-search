@@ -186,18 +186,21 @@ class _HeadlessWidgetState extends ConsumerState<HeadlessWebview> {
 
   @override
   void initState() {
-    webview = ref.read(webviewControllerProvider);
-    final param = ref.read(currentOfferListingParamProvider);
-    final initUrl = "https://www.amazon.co.jp/dp/${param.asin}/?aod=1&th=1";
-    webview
-      ..callback = onLoadStop
-      ..loadUrl(initUrl);
+    final init = ref.read(initProvider);
+    if (!init) {
+      // 初回のみページのロードを行う
+      webview = ref.read(webviewControllerProvider);
+      final param = ref.read(currentOfferListingParamProvider);
+      final initUrl = "https://www.amazon.co.jp/dp/${param.asin}/?aod=1&th=1";
+      webview
+        ..callback = onLoadStop
+        ..loadUrl(initUrl);
+    }
     super.initState();
   }
 
   @override
   void dispose() {
-    webview.cancel();
     super.dispose();
   }
 
