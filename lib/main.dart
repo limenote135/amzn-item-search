@@ -159,7 +159,7 @@ Future<void> initFirebase() async {
           "Bad state: Failed to load https://m.media-amazon.com/images/",
         ) &&
         !exception.contains(
-          "Bad state: Failed to load https://graph.keepa.com/pricehistory.png",
+          "Bad state: Failed to load https://graph.keepa.com/",
         ) &&
         !exception.contains(
           "Bad state: Failed to load https://api.keepa.com/graphimage",
