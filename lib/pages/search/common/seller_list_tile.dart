@@ -13,15 +13,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final _currentPriceDetailProvider =
     Provider<PriceDetail>((_) => throw UnimplementedError());
 
-final initiallyExpandedOffersProvider = Provider<bool>((_) => false);
-
 class SellerListTile extends HookConsumerWidget {
-  const SellerListTile({super.key});
+  const SellerListTile({super.key, this.initiallyExpanded = false});
+
+  final bool initiallyExpanded;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentAsinDataProvider);
-    final initiallyExpanded = ref.watch(initiallyExpandedOffersProvider);
     return ExpansionTile(
       title: const Text("出品価格情報"),
       initiallyExpanded: initiallyExpanded,
