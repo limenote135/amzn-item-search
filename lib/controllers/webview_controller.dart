@@ -54,4 +54,6 @@ class WebviewController {
   void dispose() {
     _webview.dispose();
   }
+
+  HeadlessInAppWebView get webview => _webview;
 }

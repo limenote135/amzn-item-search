@@ -32,67 +32,58 @@ class CartTile extends HookConsumerWidget {
             ),
           );
         }
-        return Column(
-          children: [
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text("注：送料は含まれません"),
-            ),
-            StrongContainer(
-              ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        return StrongContainer(
+          ListTile(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("カート情報"),
+                Row(
                   children: [
-                    const Text("カート情報"),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Column(
-                            children: [
-                              RichText(
-                                text: TextSpan(
-                                  style: headlineSize,
-                                  children: [
-                                    TextSpan(
-                                      text: numberFormatter.format(value.price),
-                                      style: strongTextStyle,
-                                    ),
-                                    const TextSpan(
-                                      text: "円",
-                                      style: blackTextStyle,
-                                    ),
-                                  ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              style: headlineSize,
+                              children: [
+                                TextSpan(
+                                  text: numberFormatter.format(value.price),
+                                  style: strongTextStyle,
                                 ),
-                              ),
-                              ProviderScope(
-                                overrides: [
-                                  currentSellerIdProvider
-                                      .overrideWithValue(value.sellerId),
-                                  // 何故か Unimplemented error が出るので念のため
-                                  currentAsinProvider
-                                      .overrideWithValue(param.asin),
-                                ],
-                                child: const StockText(),
-                              ),
-                            ],
+                                const TextSpan(
+                                  text: "円",
+                                  style: blackTextStyle,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: ProviderScope(
+                          ProviderScope(
                             overrides: [
-                              currentOfferItemProvider.overrideWithValue(value),
+                              currentSellerIdProvider
+                                  .overrideWithValue(value.sellerId),
+                              // 何故か Unimplemented error が出るので念のため
+                              currentAsinProvider.overrideWithValue(param.asin),
                             ],
-                            child: const OfferChips(),
+                            child: const StockText(),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: ProviderScope(
+                        overrides: [
+                          currentOfferItemProvider.overrideWithValue(value),
+                        ],
+                        child: const OfferChips(),
+                      ),
                     ),
                   ],
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         );
       },
     );

@@ -56,6 +56,11 @@ class AmazonRepository {
   static const _conditionSelector = "#aod-offer-heading";
   static const _imageSelector = "div#aod-condition-image";
 
+  static const cartSelector = "#aod-pinned-offer";
+  static const totalOfferCountSelector = "#aod-filter-offer-count-string";
+  static const firstPageOffersSelector = "#aod-offer-list > div[id^=aod-offer]";
+  static const secondPageOffersSelector = "";
+
   static const _stockUrlBase = "https://www.amazon.co.jp/dp/[asin]/ref=sr_1_1";
 
   static final _totalRegex = RegExp(r"(\d+)個のオプション");
@@ -241,18 +246,18 @@ class AmazonRepository {
   ) {
     final doc = HtmlParser(param.body).parse();
 
-    final cartElement = doc.querySelector("#aod-pinned-offer");
+    final cartElement = doc.querySelector(cartSelector);
     final cart = param.page == 0 && cartElement != null
-        ? _parseCartItem(cartElement)
+        ? parseCartItem(cartElement)
         : null;
 
-    final totalElement = doc.querySelector("#aod-filter-offer-count-string");
-    final total = _parseTotal(totalElement);
+    final totalElement = doc.querySelector(totalOfferCountSelector);
+    final total = parseTotal(totalElement);
 
     // final offerElement = doc.querySelector("#aod-offer-list");
     final offers = param.page == 0
-        ? _parseOfferItems(doc.body!, "#aod-offer-list > div[id^=aod-offer]")
-        : _parseOfferItems(doc.body!, "body > div[id^=aod-offer]");
+        ? parseOfferItems(doc.body!, firstPageOffersSelector)
+        : parseOfferItems(doc.body!, secondPageOffersSelector);
 
     return OfferListings(
       asin: param.asin,
@@ -262,7 +267,7 @@ class AmazonRepository {
     );
   }
 
-  static OfferItem? _parseCartItem(Element offer) {
+  static OfferItem? parseCartItem(Element offer) {
     final shopElement = offer.querySelector(_shopSelector);
     if (shopElement == null) {
       return null;
@@ -296,7 +301,7 @@ class AmazonRepository {
     );
   }
 
-  static int _parseTotal(Element? el) {
+  static int parseTotal(Element? el) {
     if (el == null) {
       return 0;
     }
@@ -308,6 +313,7 @@ class AmazonRepository {
       }
       totalStr = totalStr2;
     }
+    // 全角から半角に変換
     final normalizeStr = totalStr.replaceAllMapped(
       _jpNumberRegex,
       (Match m) => String.fromCharCode(m.group(0)!.codeUnitAt(0) - 0xFEE0),
@@ -316,7 +322,7 @@ class AmazonRepository {
     return total ?? 0;
   }
 
-  static List<OfferItem> _parseOfferItems(Element root, String rootSelector) {
+  static List<OfferItem> parseOfferItems(Element root, String rootSelector) {
     final offers = root.querySelectorAll(rootSelector);
     final items = <OfferItem>[];
     for (final offer in offers) {

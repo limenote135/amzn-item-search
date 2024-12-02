@@ -68,7 +68,7 @@ class GeneralSettingsImplAdapter extends TypeAdapter<_$GeneralSettingsImpl> {
                   enable: false,
                   title: '在庫',
                   pattern:
-                      'https://sellercentral.amazon.co.jp/inventory/ref=xx_invmgr_dnav_home?tbla_myitable=search:{asin};'),
+                      'https://sellercentral.amazon.co.jp/myinventory/inventory?searchTerm={asin}'),
               const CustomButtonDetail(
                   id: 'bt08',
                   enable: false,
