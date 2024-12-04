@@ -10,6 +10,10 @@ Future<void> recordError(
   if (log.isNotEmpty) {
     await FirebaseCrashlytics.instance.log(log);
   }
-  await FirebaseCrashlytics.instance
-      .recordError(exception, stackTrace, fatal: fatal);
+  await FirebaseCrashlytics.instance.recordError(
+    exception,
+    stackTrace,
+    fatal: fatal,
+    information: information,
+  );
 }

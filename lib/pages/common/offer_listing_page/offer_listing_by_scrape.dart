@@ -11,6 +11,7 @@ import 'package:amasearch/pages/common/offer_listing_page/offer_listing_with_web
 import 'package:amasearch/repository/amazon.dart';
 import 'package:amasearch/styles/font.dart';
 import 'package:amasearch/util/auth.dart';
+import 'package:amasearch/util/either.dart';
 import 'package:amasearch/util/error_report.dart';
 import 'package:amasearch/util/formatter.dart';
 import 'package:amasearch/util/util.dart';
@@ -166,6 +167,7 @@ class ___BodyState extends ConsumerState<__Body> {
         html!,
         parseCart: !offers.isValidCart,
         parseTotal: doParseTotal,
+        asin: params.asin,
       );
       final controller = ref.read(offerListingsControllerProvider.notifier);
 
@@ -183,19 +185,11 @@ class ___BodyState extends ConsumerState<__Body> {
     }
   }
 
-  T _exceptionWrapper<T>(T Function() f) {
-    try {
-      return f();
-    } catch (e, st) {
-      recordError(e, st);
-      rethrow;
-    }
-  }
-
   Future<(int? total, OfferItem? cart, List<OfferItem> offers)> parseFirstPage(
     String html, {
     bool parseCart = false,
     bool parseTotal = false,
+    required String asin,
   }) async {
     final doc = HtmlParser(html).parse();
 
@@ -203,44 +197,78 @@ class ___BodyState extends ConsumerState<__Body> {
     final totalFuture = _parseTotal(doc, parseTotal);
 
     final offerItemsFuture = workerManager.execute(
-      () => _exceptionWrapper(
-        () => AmazonRepository.parseOfferItems(
-          doc.body!,
-          AmazonRepository.firstPageOffersSelector,
-        ),
-      ),
+      () {
+        return exceptionHandler(
+          () => AmazonRepository.parseOfferItems(
+            doc.body!,
+            AmazonRepository.firstPageOffersSelector,
+          ),
+        );
+      },
     );
 
     final cart = await cartFuture;
+    if (cart.exception != null) {
+      await recordError(
+        cart.exception,
+        cart.stackTrace,
+        information: ["asin: $asin"],
+      );
+      throw cart.exception!;
+    }
     final total = await totalFuture;
+    if (total.exception != null) {
+      await recordError(
+        total.exception,
+        total.stackTrace,
+        information: ["asin: $asin"],
+      );
+      throw total.exception!;
+    }
     final offerItems = await offerItemsFuture;
-    return (total, cart, offerItems);
+    if (offerItems.exception != null) {
+      await recordError(
+        offerItems.exception,
+        offerItems.stackTrace,
+        information: ["asin: $asin"],
+      );
+      throw offerItems.exception!;
+    }
+    return (total.value, cart.value, offerItems.value!);
   }
 
-  Future<OfferItem?> _parseCart(html.Document doc, bool parseCart) async {
+  Future<Either<OfferItem?>> _parseCart(
+    html.Document doc,
+    bool parseCart,
+  ) async {
     if (!parseCart) {
-      return null;
+      return Either<OfferItem?>.ok(null);
     }
     final cartElement = doc.querySelector(AmazonRepository.cartSelector);
     if (cartElement == null) {
-      return null;
+      return Either<OfferItem?>.ok(null);
     }
     final f = workerManager.execute(
-      () =>
-          _exceptionWrapper(() => AmazonRepository.parseCartItem(cartElement)),
+      () {
+        return exceptionHandler(
+          () => AmazonRepository.parseCartItem(cartElement),
+        );
+      },
     );
     return f;
   }
 
-  Future<int?> _parseTotal(html.Document doc, bool parseTotal) async {
+  Future<Either<int?>> _parseTotal(html.Document doc, bool parseTotal) async {
     if (!parseTotal) {
-      return null;
+      return Either<int?>.ok(null);
     }
     final totalElement =
         doc.querySelector(AmazonRepository.totalOfferCountSelector);
-    final f = workerManager.execute(
-      () => _exceptionWrapper(() => AmazonRepository.parseTotal(totalElement)),
-    );
+    final f = workerManager.execute(() {
+      return exceptionHandler<int?>(
+        () => AmazonRepository.parseTotal(totalElement),
+      );
+    });
     return f;
   }
 
