@@ -59,7 +59,7 @@ class AmazonRepository {
   static const cartSelector = "#aod-pinned-offer";
   static const totalOfferCountSelector = "#aod-filter-offer-count-string";
   static const firstPageOffersSelector = "#aod-offer-list > div[id^=aod-offer]";
-  static const secondPageOffersSelector = "";
+  static const secondPageOffersSelector = "body > div[id^=aod-offer]";
 
   static const _stockUrlBase = "https://www.amazon.co.jp/dp/[asin]/ref=sr_1_1";
 
