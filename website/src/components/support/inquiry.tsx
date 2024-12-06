@@ -35,6 +35,10 @@ export const Inquiry = () => {
       </Typography>
       <Typography>アプリ内から行うと、端末やアプリのバージョン等の情報が自動的に収集されます。</Typography>
       <Typography>これらの情報が無い場合、サポートしかねる場合があります。</Typography>
+      <Typography sx={{ mt: 2 }}>
+        iCloud メールなどで弊社からの返答が迷惑メールフォルダに分類される場合がございます。
+      </Typography>
+      <Typography>返答が来ない場合、迷惑メールフォルダに含まれていないかもご確認ください</Typography>
       <Box mb={2} mt={4}>
         <TextField
           required
