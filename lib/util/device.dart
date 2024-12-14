@@ -10,6 +10,6 @@ Future<String> getDeviceInfo() async {
     final device = await DeviceInfoPlugin().iosInfo;
     // 機種名は以下などを参照
     // https://github.com/fieldnotescommunities/ios-device-identifiers
-    return "${Platform.operatingSystem}/${Platform.operatingSystemVersion} device/${device.utsname.machine}";
+    return "${Platform.operatingSystem}/${Platform.operatingSystemVersion} device/${device.modelName}(${device.utsname.machine})";
   }
 }
