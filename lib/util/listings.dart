@@ -59,7 +59,7 @@ Future<File> createListingsFile(List<ListingItem> items) async {
   final timestamp = DateFormat("yyyyMMdd-HHmmss").format(DateTime.now());
   final encoder = ZipFileEncoder();
   final zipFilePath = "$fileRootDirPath/$timestamp.zip";
-  encoder.zipDirectory(dir, filename: zipFilePath);
+  await encoder.zipDirectory(dir, filename: zipFilePath);
 
   return File(zipFilePath);
 }
@@ -98,7 +98,7 @@ Future<File> createPricetarListingsFile(
   final timestamp = DateFormat("yyyyMMdd-HHmmss").format(DateTime.now());
   final encoder = ZipFileEncoder();
   final zipFilePath = "$fileRootDirPath/$timestamp.zip";
-  encoder.zipDirectory(dir, filename: zipFilePath);
+  await encoder.zipDirectory(dir, filename: zipFilePath);
 
   return File(zipFilePath);
 }
