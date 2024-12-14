@@ -171,7 +171,7 @@ class _ImageEditPageState extends ConsumerState<ImageEditPage> {
                     style: TextStyle(fontSize: 10),
                   ),
                   onTap: () {
-                    editorKey.currentState!.rotate(right: false);
+                    editorKey.currentState!.rotate(degree: -90);
                   },
                 ),
                 TextIconButton(
@@ -244,9 +244,8 @@ Future<Uint8List?> cropImageDataWithNativeLibrary({
 
   final action = state.editAction!;
 
-  final rotateAngle = action.rotateAngle.toInt();
+  final rotateAngle = action.rotateDegrees.toInt();
   final flipHorizontal = action.flipY;
-  final flipVertical = action.flipX;
   final img = state.rawImageData;
 
   final option = ImageEditorOption();
@@ -257,11 +256,11 @@ Future<Uint8List?> cropImageDataWithNativeLibrary({
 
   if (action.needFlip) {
     option.addOption(
-      FlipOption(horizontal: flipHorizontal, vertical: flipVertical),
+      FlipOption(horizontal: flipHorizontal),
     );
   }
 
-  if (action.hasRotateAngle) {
+  if (action.hasRotateDegrees) {
     option.addOption(RotateOption(rotateAngle));
   }
 
