@@ -21,9 +21,9 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  adaptive_dialog: ^2.2.1+2
-  archive: ^3.6.1
-  cloud_functions: ^5.1.5
+  adaptive_dialog: ^2.3.0
+  archive: ^4.0.1
+  cloud_functions: ^5.2.0
   collection: ^1.18.0
   convert: ^3.1.2
   cookie_jar: ^4.0.8
@@ -31,35 +31,35 @@ dependencies:
   csv: ^6.0.0
   cupertino_icons: ^1.0.8
   dartx: ^1.2.0
-  device_info_plus: ^11.1.1
+  device_info_plus: ^11.2.0
   dio: ^5.7.0
   dio_cookie_manager: ^3.1.1
   euc:
     path: ./packages/euc
-  extended_image: ^8.3.1
+  extended_image: ^9.0.7
   fast_barcode_scanner:
     path: ./packages/fast_barcode_scanner/fast_barcode_scanner
-  file_picker: ^8.1.4
-  firebase_analytics: ^11.3.5
-  firebase_auth: ^5.3.3
-  firebase_core: ^3.8.0
-  firebase_crashlytics: ^4.1.5
-  firebase_performance: ^0.10.0+10
-  firebase_remote_config: ^5.1.5
-  firebase_storage: ^12.3.6
+  file_picker: ^8.1.5
+  firebase_analytics: ^11.3.6
+  firebase_auth: ^5.3.4
+  firebase_core: ^3.8.1
+  firebase_crashlytics: ^4.2.0
+  firebase_performance: ^0.10.0+11
+  firebase_remote_config: ^5.2.0
+  firebase_storage: ^12.3.7
   flex_color_scheme: ^7.3.1
   flutter:
     sdk: flutter
   flutter_easyloading: ^3.0.5
   flutter_hooks: ^0.20.5
   flutter_inappwebview: ^6.1.5
-  flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.14.2
   flutter_localizations:
     sdk: flutter
-  flutter_native_splash: ^2.4.2
+  flutter_native_splash: ^2.4.3
   flutter_secure_storage: ^9.2.2
   flutter_signin_button: ^2.0.0
-  flutter_slidable: ^3.1.1
+  flutter_slidable: ^3.1.2
   flutter_speed_dial: ^7.0.0
   flutter_tts: ^4.2.0
   flutter_typeahead: ^5.2.0
@@ -69,25 +69,25 @@ dependencies:
   hive_flutter: ^1.1.0
   hooks_riverpod: ^2.6.1
   html: ^0.15.5
-  image_editor: ^1.5.1
-  in_app_review: ^2.0.9
+  image_editor: ^1.6.0
+  in_app_review: ^2.0.10
   intl: ^0.19.0
   json_annotation: ^4.9.0
-  json_serializable: ^6.8.0
+  json_serializable: ^6.9.0
   keyboard_actions: ^4.2.0
   math_expressions: ^2.6.0
-  package_info_plus: ^8.1.1
+  package_info_plus: ^8.1.2
   path: ^1.9.0
   path_provider: ^2.1.5
   permission_handler: ^11.3.1
-  pub_semver: ^2.1.4
-  purchases_flutter: ^8.2.1
+  pub_semver: ^2.1.5
+  purchases_flutter: ^8.3.1
   reactive_date_range_picker: ^2.1.0
   reactive_forms: ^17.0.1
   release_notes_dialog: ^2.0.0
   reorderables: ^0.6.0
   riverpod: ^2.6.1
-  share_plus: ^10.1.2
+  share_plus: ^10.1.3
   shared_preferences: ^2.3.3
   state_notifier: ^1.0.0
   url_launcher: ^6.3.1
