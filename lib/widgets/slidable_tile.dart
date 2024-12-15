@@ -215,6 +215,9 @@ class SlidableTile extends HookConsumerWidget {
       onPressed: (context) async {
         unfocus();
         final result = await onKeep?.call();
+        if (!context.mounted) {
+          return;
+        }
         if (result == true) {
           unawaited(
             ref.read(analyticsControllerProvider).logKeepEvent(item.asin),
