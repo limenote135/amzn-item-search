@@ -149,6 +149,9 @@ class ___BodyState extends ConsumerState<__Body> {
     InAppWebViewController controller,
     WebUri? uri,
   ) async {
+    if (!mounted || !context.mounted) {
+      return;
+    }
     final params = ref.read(currentOfferListingParamProvider);
 
     if (uri == null) {
