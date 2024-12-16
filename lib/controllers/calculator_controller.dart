@@ -34,6 +34,7 @@ class CalculateDataController extends StateNotifier<CalculateData> {
     final isInt = val == toInt;
     state = state.copyWith(
       displayText: isInt ? "$toInt" : "$val",
+      total: val,
       inputComplete: true,
     );
   }
