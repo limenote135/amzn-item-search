@@ -27,14 +27,18 @@ final dioCookieProvider = FutureProvider((ref) async {
 final dioRetryProvider = Provider((ref) {
   final dio = Dio();
 
-  final statuses = defaultRetryableStatuses
+  final statuses = defaultRetryableStatuses.toSet()
     ..removeAll([
       status429TooManyRequests,
     ]);
   dio.interceptors.add(
     RetryInterceptor(
       dio: dio,
-      retryDelays: const [Duration(seconds: 1)],
+      retryDelays: const [
+        Duration(seconds: 1),
+        Duration(seconds: 1),
+        Duration(seconds: 2),
+      ],
       retryEvaluator: DefaultRetryEvaluator(statuses).evaluate,
     ),
   );
