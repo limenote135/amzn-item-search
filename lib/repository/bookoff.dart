@@ -37,6 +37,7 @@ final bookoffItemFutureProvider =
 
 class _NotFoundException implements Exception {
   _NotFoundException(this.message);
+
   String message;
 
   @override
@@ -74,7 +75,7 @@ class BookoffRepository {
         ? value.substring(0, _bookoffCodeLength)
         : value;
     final url = "$_baseURL$code";
-    final dio = await _ref.read(dioProvider.future);
+    final dio = _ref.read(dioRetryProvider);
     try {
       final result = await dio.get(
         url,
