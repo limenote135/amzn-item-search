@@ -94,7 +94,7 @@ class _BodyState extends ConsumerState<_Body> {
   }
 
   void onInitialized() {
-    if (!context.mounted) {
+    if (!mounted || !context.mounted) {
       return;
     }
     if (_controller.state.hasError) {
