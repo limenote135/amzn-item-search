@@ -98,7 +98,7 @@ class AmazonRepository {
 
   //ignore: unused_element
   Future<void> _ensureCookie(String asin) async {
-    final d = await _ref.read(dioProvider.future);
+    final d = await _ref.read(dioCookieProvider.future);
     final jar = await _ref.read(persistCookieJarProvider.future);
     final cookie = await jar.loadForRequest(Uri(host: "amazon.co.jp"));
     final now = DateTime.now();
@@ -118,7 +118,7 @@ class AmazonRepository {
     OfferListingsParams params,
     dio.CancelToken cancelToken,
   ) async {
-    final d = await _ref.read(dioProvider.future);
+    final d = await _ref.read(dioCookieProvider.future);
 
     final userAgent = await _ref.read(_uaProvider.future);
 
@@ -386,7 +386,7 @@ class AmazonRepository {
     String sellerId,
     dio.CancelToken cancelToken,
   ) async {
-    final d = await _ref.read(dioProvider.future);
+    final d = await _ref.read(dioCookieProvider.future);
 
     final url = _stockUrlBase.replaceAll("[asin]", asin);
     final query = <String, dynamic>{
@@ -438,7 +438,7 @@ class AmazonRepository {
   }
 
   Future<List<String>> getSuggestion(String word) async {
-    final dio = await _ref.read(dioProvider.future);
+    final dio = await _ref.read(dioCookieProvider.future);
     final url = "https://completion.amazon.co.jp/api/2017/suggestions?"
         "limit=10&prefix=$word&suggestion-type=WIDGET&suggestion-type=KEYWORD&"
         "page-type=Gateway&alias=aps&site-variant=desktop&version=3&wc=&"

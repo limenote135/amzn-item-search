@@ -248,7 +248,7 @@ class MwsRepository {
     String url, {
     CancelToken? cancelToken,
   }) async {
-    final dio = await _ref.read(dioProvider.future);
+    final dio = _ref.read(dioRetryProvider);
 
     final user = await _ref.read(authStateChangesProvider.future);
     final lwa = await _ref.read(linkedWithAmazonProvider.future);
@@ -271,7 +271,7 @@ class MwsRepository {
     CancelToken? cancelToken,
     required bool isPaidUser,
   }) async {
-    final dio = await _ref.read(dioProvider.future);
+    final dio = _ref.read(dioRetryProvider);
 
     final user = await _ref.read(authStateChangesProvider.future);
     final lwa = await _ref.read(linkedWithAmazonProvider.future);

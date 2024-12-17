@@ -40,7 +40,7 @@ class GeoRepository {
 
     final serverUrl = await _ref.read(serverUrlProvider.future);
     final url = "$serverUrl/v1beta2/geo/code";
-    final dio = await _ref.read(dioProvider.future);
+    final dio = _ref.read(dioRetryProvider);
 
     final user = await _ref.read(authStateChangesProvider.future);
     final lwa = await _ref.read(linkedWithAmazonProvider.future);

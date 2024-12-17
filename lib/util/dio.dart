@@ -4,6 +4,7 @@ import 'package:amasearch/util/error_report.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,11 +15,29 @@ final persistCookieJarProvider = FutureProvider((_) async {
   return PersistCookieJar(storage: FileStorage("$appDocPath/.cookies/"));
 });
 
-final dioProvider = FutureProvider((ref) async {
+final dioCookieProvider = FutureProvider((ref) async {
   final dio = Dio();
 
   final jar = await ref.watch(persistCookieJarProvider.future);
   dio.interceptors.add(CookieManager(jar));
+
+  return HttpClient(dio);
+});
+
+final dioRetryProvider = Provider((ref) {
+  final dio = Dio();
+
+  final statuses = defaultRetryableStatuses
+    ..removeAll([
+      status429TooManyRequests,
+    ]);
+  dio.interceptors.add(
+    RetryInterceptor(
+      dio: dio,
+      retryDelays: const [Duration(seconds: 1)],
+      retryEvaluator: DefaultRetryEvaluator(statuses).evaluate,
+    ),
+  );
 
   return HttpClient(dio);
 });
