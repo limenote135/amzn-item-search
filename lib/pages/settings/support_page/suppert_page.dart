@@ -18,6 +18,7 @@ final _supportInfo = FutureProvider.autoDispose((_) async {
 
 class SupportPage extends StatelessWidget {
   const SupportPage({super.key});
+
   static const String routeName = "/settings/support";
 
   static Route<void> route() {
@@ -82,6 +83,9 @@ class _Body extends ConsumerWidget {
                   ],
                 ),
               ),
+            ),
+            const ListTile(
+              title: Text("回答メールが迷惑メールフォルダに分類されることがありますのでご注意ください。"),
             ),
             Padding(
               padding: const EdgeInsets.all(8),
