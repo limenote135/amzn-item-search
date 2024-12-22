@@ -93,6 +93,13 @@ class _BodyState extends ConsumerState<_Body> {
     _controller.events.addListener(onInitialized);
   }
 
+  @override
+  void dispose() {
+    _controller.events.removeListener(onInitialized);
+    _controller.dispose();
+    super.dispose();
+  }
+
   void onInitialized() {
     if (!mounted || !context.mounted) {
       return;
