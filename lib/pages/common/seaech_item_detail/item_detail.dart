@@ -45,6 +45,7 @@ class SearchItemDetail extends ConsumerWidget {
     final isStocked = ref.watch(
       stockItemForAsinProvider(item.asin).select((value) => value.isNotEmpty),
     );
+    final containsMyOffer = _isContainsMyOffer(item.prices);
 
     final search = ref.watch(searchSettingsControllerProvider);
     final settings = ref.watch(generalSettingsControllerProvider);
@@ -61,7 +62,7 @@ class SearchItemDetail extends ConsumerWidget {
             const HazmatInfo(),
           if (isPaid && settings.enableAlert && alerts.isNotEmpty)
             _AlertDetail(alerts),
-          if (isPaid && isStocked) const _StockInfo(),
+          if (isPaid && (isStocked || containsMyOffer)) const _StockInfo(),
           InkWell(
             onLongPress: () {
               Clipboard.setData(ClipboardData(text: item.title)).then((_) {
@@ -189,35 +190,45 @@ class _StockInfo extends ConsumerWidget {
     final item = ref.watch(currentAsinDataProvider);
     final stockItems = ref.watch(stockItemForAsinProvider(item.asin));
 
-    return Strong2Container(
-      ListTile(
-        title: Column(
-          children: [
-            Text(
-              createText(
-                stockItems.length,
-                stockItems.where((e) => e.purchasePrice != 0).toList(),
-                isContainsMyOffer: isContainsMyOffer(item.prices),
-              ),
-            ),
-            Text.rich(
-              TextSpan(
-                text: "詳細はこちら",
-                style: const TextStyle(
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline,
+    if (stockItems.isNotEmpty) {
+      // 在庫リストに同じ商品がある場合、現在出品中かを問わず情報表示
+      return Strong2Container(
+        ListTile(
+          title: Column(
+            children: [
+              Text(
+                createText(
+                  stockItems.length,
+                  stockItems.where((e) => e.purchasePrice != 0).toList(),
+                  isContainsMyOffer: _isContainsMyOffer(item.prices),
                 ),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    Navigator.push(
-                      context,
-                      ListingHistoryPage.route(stockItems),
-                    );
-                  },
               ),
-            ),
-          ],
+              Text.rich(
+                TextSpan(
+                  text: "詳細はこちら",
+                  style: const TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.push(
+                        context,
+                        ListingHistoryPage.route(stockItems),
+                      );
+                    },
+                ),
+              ),
+            ],
+          ),
         ),
+      );
+    }
+
+    // 在庫リストにない場合は出品していることだけ表示
+    return const Strong2Container(
+      ListTile(
+        title: Center(child: Text("現在出品中です")),
       ),
     );
   }
@@ -239,14 +250,14 @@ class _StockInfo extends ConsumerWidget {
     }
     return "過去に平均 $average 円で $total 回仕入れています";
   }
+}
 
-  bool isContainsMyOffer(ItemPrices? prices) {
-    if (prices == null) {
-      return false;
-    }
-    return prices.newPrices.any((e) => e.isSelf) ||
-        prices.usedPrices.any((e) => e.isSelf);
+bool _isContainsMyOffer(ItemPrices? prices) {
+  if (prices == null) {
+    return false;
   }
+  return prices.newPrices.any((e) => e.isSelf) ||
+      prices.usedPrices.any((e) => e.isSelf);
 }
 
 class _AlertDetail extends ConsumerWidget {

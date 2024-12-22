@@ -8,7 +8,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 const janCodeLength = 13;
 
 const _kTestingServer = false;
-const _localServerUrl = "http://192.168.2.201:8080";
+const _localServerUrl = "http://192.168.11.201:8080";
 const _defaultServerUrl = "https://api.amasearch.app.knz-c.com";
 const _serverUrlConfigName = "server_url";
 
