@@ -43,7 +43,7 @@ export async function CreateSubscription(token: string, req: CreateSubscriptionR
 }
 
 export async function CancelSubscription(token: string) {
-  await client.post<void>(`/stripe/cancel_subscription`, null, {
+  await client.post<void>(`/payment/cancel_subscription`, null, {
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
   });
 }
