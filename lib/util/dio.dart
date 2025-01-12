@@ -38,6 +38,8 @@ final dioRetryProvider = Provider((ref) {
         Duration(seconds: 1),
         Duration(seconds: 1),
         Duration(seconds: 2),
+        Duration(seconds: 2),
+        Duration(seconds: 2),
       ],
       retryEvaluator: DefaultRetryEvaluator(statuses).evaluate,
     ),
