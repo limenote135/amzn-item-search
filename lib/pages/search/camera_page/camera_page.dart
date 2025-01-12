@@ -96,6 +96,7 @@ class _BodyState extends ConsumerState<_Body> {
   @override
   void dispose() {
     _controller.events.removeListener(onInitialized);
+    // ignore: lines_longer_than_80_chars
     // Android では dispose 時に PlatformException(NOT_INITIALIZED, Camera has not been initialized, null, null)  が発生するので dispose しない
     if(Platform.isIOS) {
       _controller.dispose();
