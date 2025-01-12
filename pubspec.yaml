@@ -43,7 +43,7 @@ dependencies:
   file_picker: ^8.1.7
   firebase_analytics: ^11.4.0
   firebase_auth: ^5.4.0
-  firebase_core: ^3.9.0
+  firebase_core: ^3.10.0
   firebase_crashlytics: ^4.3.0
   firebase_performance: ^0.10.1
   firebase_remote_config: ^5.3.0
