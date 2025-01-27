@@ -16,10 +16,13 @@ if (project.hasProperty('dart-defines')) {
                 [(pair.first()): pair.last()]
             }
 }
-
-task selectGoogleServicesJson(type: Copy) {
-    from "src/res/${dartEnvironmentVariables.FLAVOR}/google-services.json"
-    into './'
+task selectGoogleServicesJson {
+    doFirst {
+        copy {
+            from "src/res/${dartEnvironmentVariables.FLAVOR}/google-services.json"
+            into './'
+        }
+    }
 }
 
 tasks.whenTaskAdded { task ->
@@ -54,6 +57,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
+    namespace = "com.knzc.amasearch"
     compileSdkVersion 34
 
     compileOptions {
