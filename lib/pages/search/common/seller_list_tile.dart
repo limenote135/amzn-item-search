@@ -109,20 +109,26 @@ class _OfferItem extends HookConsumerWidget {
     final priceStr = numberFormatter.format(detail.price);
     final shippingStr = numberFormatter.format(detail.shipping);
 
+    final newItemTitle = detail.isCart ? "カート$isFbaStr" : "新品$isFbaStr";
+
     switch (cond) {
       case ItemCondition.newItem:
         return Row(
           children: [
             Text(
-              "新品$isFbaStr",
-              style: isSelf || isAmazon ? smallRedFont : smallFont,
+              newItemTitle,
+              style: isSelf || isAmazon || detail.isCart
+                  ? smallRedFont
+                  : smallFont,
             ),
             if (isSelf) Text("(自分)", style: smallRedFont),
             if (isAmazon) Text("(Amazon)", style: smallRedFont),
             const Spacer(),
             Text(
               "$priceStr 円(送 $shippingStr 円)",
-              style: isSelf || isAmazon ? smallRedFont : smallFont,
+              style: isSelf || isAmazon || detail.isCart
+                  ? smallRedFont
+                  : smallFont,
             ),
           ],
         );
