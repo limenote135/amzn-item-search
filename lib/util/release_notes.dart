@@ -6,8 +6,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String _prefKey = "release_note_ver";
 
-var releaseNotesVersion = Version(2, 17, 0);
+var releaseNotesVersion = Version(2, 18, 0);
 const releaseNotes = <Release>[
+  Release(
+    title: "2.18.0",
+    changes: [
+      ChangeGroup(
+        title: "更新内容",
+        changes: [
+          "出品価格一覧においてカート価格がわかるようになりました",
+        ],
+      ),
+    ],
+  ),
   Release(
     title: "2.17.0",
     changes: [
