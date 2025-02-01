@@ -1,8 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 import '../camera_controller.dart';
 import '../types/scanner_event.dart';
-import 'package:flutter/material.dart';
 
 /// Blurs the preview when a barcode is detected
 ///
@@ -29,7 +30,7 @@ class BlurPreviewOverlay extends StatelessWidget {
           tween: Tween(begin: 0.0, end: shouldBlur(event) ? blurAmount : 0.0),
           duration: duration,
           curve: Curves.easeOut,
-          child: Container(color: Colors.black.withOpacity(0.0)),
+          child: Container(color: Colors.black.withValues(alpha: 0.0)),
           builder: (_, value, child) => BackdropFilter(
               filter: ImageFilter.blur(sigmaX: value, sigmaY: value),
               child: child),

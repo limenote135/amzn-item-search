@@ -4,7 +4,7 @@ class CameraScanOverlayShape extends ShapeBorder {
   const CameraScanOverlayShape({
     this.borderColor = Colors.red,
     this.borderWidth = 8.0,
-    this.overlayColor = const Color.fromRGBO(0, 0, 0, 80),
+    this.overlayColor = const Color.fromRGBO(0, 0, 0, 0.7),
     this.borderRadius = 0,
     this.borderLength = 40,
     this.cutOutBottomOffset = 0,
