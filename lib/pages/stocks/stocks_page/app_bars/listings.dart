@@ -268,9 +268,8 @@ Future<void> callListings(
     await EasyLoading.dismiss();
     await showOkAlertDialog(
       context: context,
-      title: "価格設定エラー",
-      message: "価格設定が正しくないため出品できません。\n"
-          "$e",
+      title: "出品エラー",
+      message: e.message,
     );
     // ignore: avoid_catches_without_on_clauses
   } catch (e, st) {
