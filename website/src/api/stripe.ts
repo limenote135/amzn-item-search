@@ -33,13 +33,19 @@ export async function GetNextPayment(token: string) {
 
 export type CreateSubscriptionRequest = {
   Plan: string;
-  PaymentMethod: string;
+  ConfirmationToken: string;
+};
+
+type CreateSubscriptionResponse = {
+  Status: string;
+  ClientSecret: string;
 };
 
 export async function CreateSubscription(token: string, req: CreateSubscriptionRequest) {
-  await client.post<string>(`/stripe/create_subscription`, req, {
+  const resp = await client.post<CreateSubscriptionResponse>(`/stripe/create_subscription`, req, {
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
   });
+  return resp.data;
 }
 
 export async function CancelSubscription(token: string) {
@@ -50,6 +56,13 @@ export async function CancelSubscription(token: string) {
 
 export async function CreateCard(token: string) {
   const resp = await client.post<string>(`/stripe/create_card`, null, {
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+  });
+  return resp.data;
+}
+
+export async function CreateIntent(token: string) {
+  const resp = await client.post<string>(`/stripe/create_intent`, null, {
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
   });
   return resp.data;
