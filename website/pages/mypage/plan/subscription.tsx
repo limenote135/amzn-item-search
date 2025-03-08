@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Box, Button, CircularProgress, Paper, Typography } from "@mui/material";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { CreateCard, CreateSubscription, stripePromise } from "@/api/stripe";
+import { CreateIntent, CreateSubscription, stripePromise } from "@/api/stripe";
 import { useRouter } from "next/router";
 import { Loading } from "@/components/core/Loading";
 import { useUser } from "@/plugin/auth";
@@ -28,26 +28,43 @@ const InputForm = ({ plan }: InputFormProps) => {
     e.preventDefault();
     setMessage("");
 
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      setMessage(submitError.message ?? "不明なエラー");
+      setIsLoading(false);
+      return;
+    }
     try {
       const token = await user?.raw.getIdToken();
       if (!token) {
         setIsLoading(false);
         return;
       }
-      const resp = await stripe.confirmSetup({
+      const { error, confirmationToken } = await stripe.createConfirmationToken({
         elements: elements,
-        redirect: "if_required",
-        confirmParams: {
+        params: {
           payment_method_data: { billing_details: { address: { country: "JP" } } },
         },
       });
-      if (resp.error) {
-        setMessage(resp.error.message ?? "");
+      if (error) {
+        setMessage(error.message ?? "不明なエラー");
         setIsLoading(false);
         return;
       }
-      const method = resp.setupIntent.payment_method as string;
-      await CreateSubscription(token, { Plan: plan, PaymentMethod: method });
+
+      const { Status, ClientSecret } = await CreateSubscription(token, {
+        Plan: plan,
+        ConfirmationToken: confirmationToken.id,
+      });
+
+      if (Status == "requires_action") {
+        const actionResult = await stripe.handleNextAction({ clientSecret: ClientSecret });
+        if (actionResult.error) {
+          setMessage(actionResult.error.message ?? "不明なエラー");
+          setIsLoading(false);
+          return;
+        }
+      }
       let timerId = setInterval(async () => {
         const token = await user?.raw.getIdTokenResult(true);
         if (token?.claims.pl !== "free") {
@@ -132,7 +149,7 @@ const Subscription = ({ plan, onBack }: SubscriptionProps) => {
         if (!token) {
           return;
         }
-        const resp = await CreateCard(token);
+        const resp = await CreateIntent(token);
         setSecret(resp);
       } catch (e) {
         if (e instanceof Error) {
