@@ -18,6 +18,18 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$VariationPageParam {
   String get asin => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String asin, int page) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String asin, int page)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of VariationPageParam
   /// with the given fields replaced by the non-null parameter values.
@@ -141,6 +153,26 @@ class _$VariationPageParamImpl implements _VariationPageParam {
   _$$VariationPageParamImplCopyWith<_$VariationPageParamImpl> get copyWith =>
       __$$VariationPageParamImplCopyWithImpl<_$VariationPageParamImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String asin, int page) $default,
+  ) {
+    return $default(asin, page);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String asin, int page)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(asin, page);
+    }
+    return orElse();
+  }
 }
 
 abstract class _VariationPageParam implements VariationPageParam {
@@ -165,6 +197,18 @@ abstract class _VariationPageParam implements VariationPageParam {
 mixin _$VariationIndexAtParam {
   String get asin => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String asin, int index) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String asin, int index)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of VariationIndexAtParam
   /// with the given fields replaced by the non-null parameter values.
@@ -291,6 +335,26 @@ class _$VariationIndexAtParamImpl implements _VariationIndexAtParam {
   _$$VariationIndexAtParamImplCopyWith<_$VariationIndexAtParamImpl>
       get copyWith => __$$VariationIndexAtParamImplCopyWithImpl<
           _$VariationIndexAtParamImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String asin, int index) $default,
+  ) {
+    return $default(asin, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String asin, int index)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(asin, index);
+    }
+    return orElse();
+  }
 }
 
 abstract class _VariationIndexAtParam implements VariationIndexAtParam {

@@ -29,6 +29,38 @@ mixin _$ListingItem {
   bool get useFba => throw _privateConstructorUsedError;
   String get conditionText => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String sku,
+            String asin,
+            int sellPrice,
+            int amount,
+            ItemCondition condition,
+            ItemSubCondition subCondition,
+            bool useFba,
+            String conditionText,
+            List<String> images)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String sku,
+            String asin,
+            int sellPrice,
+            int amount,
+            ItemCondition condition,
+            ItemSubCondition subCondition,
+            bool useFba,
+            String conditionText,
+            List<String> images)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this ListingItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -298,6 +330,48 @@ class _$ListingItemImpl implements _ListingItem {
   @pragma('vm:prefer-inline')
   _$$ListingItemImplCopyWith<_$ListingItemImpl> get copyWith =>
       __$$ListingItemImplCopyWithImpl<_$ListingItemImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String sku,
+            String asin,
+            int sellPrice,
+            int amount,
+            ItemCondition condition,
+            ItemSubCondition subCondition,
+            bool useFba,
+            String conditionText,
+            List<String> images)
+        $default,
+  ) {
+    return $default(sku, asin, sellPrice, amount, condition, subCondition,
+        useFba, conditionText, images);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String sku,
+            String asin,
+            int sellPrice,
+            int amount,
+            ItemCondition condition,
+            ItemSubCondition subCondition,
+            bool useFba,
+            String conditionText,
+            List<String> images)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(sku, asin, sellPrice, amount, condition, subCondition,
+          useFba, conditionText, images);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

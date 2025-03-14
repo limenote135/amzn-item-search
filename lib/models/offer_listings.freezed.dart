@@ -25,6 +25,38 @@ mixin _$OfferListingsParams {
   bool get usedAcceptable => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
   bool get useWebview => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String asin,
+            bool prime,
+            bool newItem,
+            bool usedLikeNew,
+            bool usedVeryGood,
+            bool usedGood,
+            bool usedAcceptable,
+            int page,
+            bool useWebview)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String asin,
+            bool prime,
+            bool newItem,
+            bool usedLikeNew,
+            bool usedVeryGood,
+            bool usedGood,
+            bool usedAcceptable,
+            int page,
+            bool useWebview)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of OfferListingsParams
   /// with the given fields replaced by the non-null parameter values.
@@ -280,6 +312,48 @@ class _$OfferListingsParamsImpl implements _OfferListingsParams {
   _$$OfferListingsParamsImplCopyWith<_$OfferListingsParamsImpl> get copyWith =>
       __$$OfferListingsParamsImplCopyWithImpl<_$OfferListingsParamsImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String asin,
+            bool prime,
+            bool newItem,
+            bool usedLikeNew,
+            bool usedVeryGood,
+            bool usedGood,
+            bool usedAcceptable,
+            int page,
+            bool useWebview)
+        $default,
+  ) {
+    return $default(asin, prime, newItem, usedLikeNew, usedVeryGood, usedGood,
+        usedAcceptable, page, useWebview);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String asin,
+            bool prime,
+            bool newItem,
+            bool usedLikeNew,
+            bool usedVeryGood,
+            bool usedGood,
+            bool usedAcceptable,
+            int page,
+            bool useWebview)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(asin, prime, newItem, usedLikeNew, usedVeryGood, usedGood,
+          usedAcceptable, page, useWebview);
+    }
+    return orElse();
+  }
 }
 
 abstract class _OfferListingsParams implements OfferListingsParams {
@@ -325,6 +399,18 @@ abstract class _OfferListingsParams implements OfferListingsParams {
 mixin _$OfferAtIndexParam {
   OfferListingsParams get params => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(OfferListingsParams params, int index) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(OfferListingsParams params, int index)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of OfferAtIndexParam
   /// with the given fields replaced by the non-null parameter values.
@@ -463,6 +549,26 @@ class _$OfferAtIndexParamImpl implements _OfferAtIndexParam {
   _$$OfferAtIndexParamImplCopyWith<_$OfferAtIndexParamImpl> get copyWith =>
       __$$OfferAtIndexParamImplCopyWithImpl<_$OfferAtIndexParamImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(OfferListingsParams params, int index) $default,
+  ) {
+    return $default(params, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(OfferListingsParams params, int index)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(params, index);
+    }
+    return orElse();
+  }
 }
 
 abstract class _OfferAtIndexParam implements OfferAtIndexParam {
@@ -489,6 +595,22 @@ mixin _$OfferListings {
   int get total => throw _privateConstructorUsedError;
   OfferItem? get cart => throw _privateConstructorUsedError;
   List<OfferItem> get offers => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String asin, int total, OfferItem? cart, List<OfferItem> offers)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String asin, int total, OfferItem? cart, List<OfferItem> offers)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of OfferListings
   /// with the given fields replaced by the non-null parameter values.
@@ -669,6 +791,30 @@ class _$OfferListingsImpl implements _OfferListings {
   @pragma('vm:prefer-inline')
   _$$OfferListingsImplCopyWith<_$OfferListingsImpl> get copyWith =>
       __$$OfferListingsImplCopyWithImpl<_$OfferListingsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String asin, int total, OfferItem? cart, List<OfferItem> offers)
+        $default,
+  ) {
+    return $default(asin, total, cart, offers);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String asin, int total, OfferItem? cart, List<OfferItem> offers)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(asin, total, cart, offers);
+    }
+    return orElse();
+  }
 }
 
 abstract class _OfferListings implements OfferListings {
@@ -703,6 +849,22 @@ mixin _$OfferItem {
   String get condition => throw _privateConstructorUsedError;
   bool get hasImage => throw _privateConstructorUsedError;
   bool get isFba => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String shopName, String sellerId, int price,
+            String condition, bool hasImage, bool isFba)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String shopName, String sellerId, int price,
+            String condition, bool hasImage, bool isFba)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of OfferItem
   /// with the given fields replaced by the non-null parameter values.
@@ -900,6 +1062,30 @@ class _$OfferItemImpl implements _OfferItem {
   @pragma('vm:prefer-inline')
   _$$OfferItemImplCopyWith<_$OfferItemImpl> get copyWith =>
       __$$OfferItemImplCopyWithImpl<_$OfferItemImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String shopName, String sellerId, int price,
+            String condition, bool hasImage, bool isFba)
+        $default,
+  ) {
+    return $default(shopName, sellerId, price, condition, hasImage, isFba);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String shopName, String sellerId, int price,
+            String condition, bool hasImage, bool isFba)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(shopName, sellerId, price, condition, hasImage, isFba);
+    }
+    return orElse();
+  }
 }
 
 abstract class _OfferItem implements OfferItem {

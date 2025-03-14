@@ -23,6 +23,18 @@ GetProductByIdResponse _$GetProductByIdResponseFromJson(
 mixin _$GetProductByIdResponse {
   String get code => throw _privateConstructorUsedError;
   List<AsinData> get items => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String code, List<AsinData> items) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String code, List<AsinData> items)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this GetProductByIdResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -169,6 +181,26 @@ class _$GetProductByIdResponseImpl implements _GetProductByIdResponse {
           _$GetProductByIdResponseImpl>(this, _$identity);
 
   @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String code, List<AsinData> items) $default,
+  ) {
+    return $default(code, items);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String code, List<AsinData> items)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(code, items);
+    }
+    return orElse();
+  }
+
+  @override
   Map<String, dynamic> toJson() {
     return _$$GetProductByIdResponseImplToJson(
       this,
@@ -201,6 +233,18 @@ abstract class _GetProductByIdResponse implements GetProductByIdResponse {
 mixin _$QueryItemsRequest {
   String get query => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String query, String category) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String query, String category)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of QueryItemsRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -325,6 +369,26 @@ class _$QueryItemsRequestImpl implements _QueryItemsRequest {
   _$$QueryItemsRequestImplCopyWith<_$QueryItemsRequestImpl> get copyWith =>
       __$$QueryItemsRequestImplCopyWithImpl<_$QueryItemsRequestImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String query, String category) $default,
+  ) {
+    return $default(query, category);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String query, String category)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(query, category);
+    }
+    return orElse();
+  }
 }
 
 abstract class _QueryItemsRequest implements QueryItemsRequest {
@@ -352,6 +416,18 @@ QueryItemsResponse _$QueryItemsResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$QueryItemsResponse {
   List<String> get asins => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<String> asins) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<String> asins)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this QueryItemsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -479,6 +555,26 @@ class _$QueryItemsResponseImpl implements _QueryItemsResponse {
           this, _$identity);
 
   @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<String> asins) $default,
+  ) {
+    return $default(asins);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<String> asins)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(asins);
+    }
+    return orElse();
+  }
+
+  @override
   Map<String, dynamic> toJson() {
     return _$$QueryItemsResponseImplToJson(
       this,
@@ -512,6 +608,18 @@ BatchGetAsinDataResponse _$BatchGetAsinDataResponseFromJson(
 /// @nodoc
 mixin _$BatchGetAsinDataResponse {
   List<AsinData> get data => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<AsinData> data) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<AsinData> data)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this BatchGetAsinDataResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -643,6 +751,26 @@ class _$BatchGetAsinDataResponseImpl implements _BatchGetAsinDataResponse {
           _$BatchGetAsinDataResponseImpl>(this, _$identity);
 
   @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<AsinData> data) $default,
+  ) {
+    return $default(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<AsinData> data)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(data);
+    }
+    return orElse();
+  }
+
+  @override
   Map<String, dynamic> toJson() {
     return _$$BatchGetAsinDataResponseImplToJson(
       this,
@@ -676,6 +804,18 @@ GetItemVariationsResponse _$GetItemVariationsResponseFromJson(
 /// @nodoc
 mixin _$GetItemVariationsResponse {
   List<String> get asins => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<String> asins) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<String> asins)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this GetItemVariationsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -807,6 +947,26 @@ class _$GetItemVariationsResponseImpl implements _GetItemVariationsResponse {
   _$$GetItemVariationsResponseImplCopyWith<_$GetItemVariationsResponseImpl>
       get copyWith => __$$GetItemVariationsResponseImplCopyWithImpl<
           _$GetItemVariationsResponseImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<String> asins) $default,
+  ) {
+    return $default(asins);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<String> asins)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(asins);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

@@ -27,6 +27,30 @@ mixin _$MakadSettings {
   int get lowestStopperValue => throw _privateConstructorUsedError;
   @HiveField(4)
   MakadPaymentMethod get paymentMethod => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) MakadReviseRule newRule,
+            @HiveField(1) MakadReviseRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) MakadPaymentMethod paymentMethod)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) MakadReviseRule newRule,
+            @HiveField(1) MakadReviseRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) MakadPaymentMethod paymentMethod)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of MakadSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -219,6 +243,40 @@ class _$MakadSettingsImpl implements _MakadSettings {
   @pragma('vm:prefer-inline')
   _$$MakadSettingsImplCopyWith<_$MakadSettingsImpl> get copyWith =>
       __$$MakadSettingsImplCopyWithImpl<_$MakadSettingsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) MakadReviseRule newRule,
+            @HiveField(1) MakadReviseRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) MakadPaymentMethod paymentMethod)
+        $default,
+  ) {
+    return $default(newRule, usedRule, lowestStopperType, lowestStopperValue,
+        paymentMethod);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) MakadReviseRule newRule,
+            @HiveField(1) MakadReviseRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) MakadPaymentMethod paymentMethod)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(newRule, usedRule, lowestStopperType, lowestStopperValue,
+          paymentMethod);
+    }
+    return orElse();
+  }
 }
 
 abstract class _MakadSettings implements MakadSettings {

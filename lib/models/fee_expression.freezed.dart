@@ -24,6 +24,20 @@ mixin _$FeeExpression {
   int get moreThan => throw _privateConstructorUsedError;
   @HiveField(1)
   String get exp => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(@HiveField(0) int moreThan, @HiveField(1) String exp)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(@HiveField(0) int moreThan, @HiveField(1) String exp)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this FeeExpression to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -161,6 +175,28 @@ class _$FeeExpressionImpl implements _FeeExpression {
   @pragma('vm:prefer-inline')
   _$$FeeExpressionImplCopyWith<_$FeeExpressionImpl> get copyWith =>
       __$$FeeExpressionImplCopyWithImpl<_$FeeExpressionImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(@HiveField(0) int moreThan, @HiveField(1) String exp)
+        $default,
+  ) {
+    return $default(moreThan, exp);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(@HiveField(0) int moreThan, @HiveField(1) String exp)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(moreThan, exp);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

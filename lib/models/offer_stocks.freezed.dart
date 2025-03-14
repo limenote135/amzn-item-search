@@ -18,6 +18,18 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OfferStocksParam {
   String get asin => throw _privateConstructorUsedError;
   String get sellerId => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String asin, String sellerId) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String asin, String sellerId)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of OfferStocksParam
   /// with the given fields replaced by the non-null parameter values.
@@ -142,6 +154,26 @@ class _$OfferStocksParamImpl implements _OfferStocksParam {
   _$$OfferStocksParamImplCopyWith<_$OfferStocksParamImpl> get copyWith =>
       __$$OfferStocksParamImplCopyWithImpl<_$OfferStocksParamImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String asin, String sellerId) $default,
+  ) {
+    return $default(asin, sellerId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String asin, String sellerId)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(asin, sellerId);
+    }
+    return orElse();
+  }
 }
 
 abstract class _OfferStocksParam implements OfferStocksParam {

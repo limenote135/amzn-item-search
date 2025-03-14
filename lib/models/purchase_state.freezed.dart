@@ -18,6 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PurchaseState {
   CustomerInfo get purchaseInfo => throw _privateConstructorUsedError;
   Offerings get offerings => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(CustomerInfo purchaseInfo, Offerings offerings) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(CustomerInfo purchaseInfo, Offerings offerings)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of PurchaseState
   /// with the given fields replaced by the non-null parameter values.
@@ -171,6 +184,27 @@ class _$PurchaseStateImpl implements _PurchaseState {
   @pragma('vm:prefer-inline')
   _$$PurchaseStateImplCopyWith<_$PurchaseStateImpl> get copyWith =>
       __$$PurchaseStateImplCopyWithImpl<_$PurchaseStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(CustomerInfo purchaseInfo, Offerings offerings) $default,
+  ) {
+    return $default(purchaseInfo, offerings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(CustomerInfo purchaseInfo, Offerings offerings)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(purchaseInfo, offerings);
+    }
+    return orElse();
+  }
 }
 
 abstract class _PurchaseState implements PurchaseState {

@@ -80,6 +80,102 @@ mixin _$GeneralSettings {
       throw _privateConstructorUsedError;
   @HiveField(28, defaultValue: defaultStandardButtons)
   Map<String, bool> get standardButtons => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) bool isDarkMode,
+            @HiveField(1) bool enableTargetProfit,
+            @HiveField(2) int targetProfitValue,
+            @HiveField(3) String skuFormat,
+            @HiveField(4) List<String> retailers,
+            @HiveField(5) bool enableReadAloud,
+            @HiveField(6) int patternIndex,
+            @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
+            @HiveField(8) double readAloudVolume,
+            @HiveField(9) double? readAloudSpeed,
+            @HiveField(10, defaultValue: defaultCustomButtons)
+            List<CustomButtonDetail> customButtons,
+            @HiveField(11, defaultValue: defaultCsvOrder)
+            List<CsvColumn> csvOrder,
+            @HiveField(12, defaultValue: 0) int minProfit,
+            @HiveField(13, defaultValue: false) bool getStocks,
+            @HiveField(14, defaultValue: true) bool enableAlert,
+            @HiveField(15, defaultValue: defaultAlert)
+            List<AlertConditionSet> alerts,
+            @HiveField(16, defaultValue: false) bool enableAlertVibration,
+            @HiveField(17, defaultValue: true) bool isMajorCustomer,
+            @HiveField(18, defaultValue: defaultKeepaSettings)
+            KeepaSettings keepaSettings,
+            @HiveField(19, defaultValue: defaultLeftShortcut)
+            List<ShortcutDetail> leftSlideShortcut,
+            @HiveField(20, defaultValue: defaultRightShortcut)
+            List<ShortcutDetail> rightSlideShortcut,
+            @HiveField(21, defaultValue: defaultNewConditionTexts)
+            List<String> newConditionTexts,
+            @HiveField(22, defaultValue: 0) int newConditionTextIndex,
+            @HiveField(23, defaultValue: defaultUsedConditionText)
+            List<String> usedConditionTexts,
+            @HiveField(24, defaultValue: 0) int usedConditionTextIndex,
+            @HiveField(25, defaultValue: defaultPricetarSettings)
+            PricetarSettings pricetarSettings,
+            @HiveField(26, defaultValue: defaultMakadSettings)
+            MakadSettings makadSettings,
+            @HiveField(27, defaultValue: defaultSellerSketSettings)
+            SellerSketSettings sellerSketSettings,
+            @HiveField(28, defaultValue: defaultStandardButtons)
+            Map<String, bool> standardButtons)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) bool isDarkMode,
+            @HiveField(1) bool enableTargetProfit,
+            @HiveField(2) int targetProfitValue,
+            @HiveField(3) String skuFormat,
+            @HiveField(4) List<String> retailers,
+            @HiveField(5) bool enableReadAloud,
+            @HiveField(6) int patternIndex,
+            @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
+            @HiveField(8) double readAloudVolume,
+            @HiveField(9) double? readAloudSpeed,
+            @HiveField(10, defaultValue: defaultCustomButtons)
+            List<CustomButtonDetail> customButtons,
+            @HiveField(11, defaultValue: defaultCsvOrder)
+            List<CsvColumn> csvOrder,
+            @HiveField(12, defaultValue: 0) int minProfit,
+            @HiveField(13, defaultValue: false) bool getStocks,
+            @HiveField(14, defaultValue: true) bool enableAlert,
+            @HiveField(15, defaultValue: defaultAlert)
+            List<AlertConditionSet> alerts,
+            @HiveField(16, defaultValue: false) bool enableAlertVibration,
+            @HiveField(17, defaultValue: true) bool isMajorCustomer,
+            @HiveField(18, defaultValue: defaultKeepaSettings)
+            KeepaSettings keepaSettings,
+            @HiveField(19, defaultValue: defaultLeftShortcut)
+            List<ShortcutDetail> leftSlideShortcut,
+            @HiveField(20, defaultValue: defaultRightShortcut)
+            List<ShortcutDetail> rightSlideShortcut,
+            @HiveField(21, defaultValue: defaultNewConditionTexts)
+            List<String> newConditionTexts,
+            @HiveField(22, defaultValue: 0) int newConditionTextIndex,
+            @HiveField(23, defaultValue: defaultUsedConditionText)
+            List<String> usedConditionTexts,
+            @HiveField(24, defaultValue: 0) int usedConditionTextIndex,
+            @HiveField(25, defaultValue: defaultPricetarSettings)
+            PricetarSettings pricetarSettings,
+            @HiveField(26, defaultValue: defaultMakadSettings)
+            MakadSettings makadSettings,
+            @HiveField(27, defaultValue: defaultSellerSketSettings)
+            SellerSketSettings sellerSketSettings,
+            @HiveField(28, defaultValue: defaultStandardButtons)
+            Map<String, bool> standardButtons)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of GeneralSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -933,6 +1029,168 @@ class _$GeneralSettingsImpl implements _GeneralSettings {
   _$$GeneralSettingsImplCopyWith<_$GeneralSettingsImpl> get copyWith =>
       __$$GeneralSettingsImplCopyWithImpl<_$GeneralSettingsImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) bool isDarkMode,
+            @HiveField(1) bool enableTargetProfit,
+            @HiveField(2) int targetProfitValue,
+            @HiveField(3) String skuFormat,
+            @HiveField(4) List<String> retailers,
+            @HiveField(5) bool enableReadAloud,
+            @HiveField(6) int patternIndex,
+            @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
+            @HiveField(8) double readAloudVolume,
+            @HiveField(9) double? readAloudSpeed,
+            @HiveField(10, defaultValue: defaultCustomButtons)
+            List<CustomButtonDetail> customButtons,
+            @HiveField(11, defaultValue: defaultCsvOrder)
+            List<CsvColumn> csvOrder,
+            @HiveField(12, defaultValue: 0) int minProfit,
+            @HiveField(13, defaultValue: false) bool getStocks,
+            @HiveField(14, defaultValue: true) bool enableAlert,
+            @HiveField(15, defaultValue: defaultAlert)
+            List<AlertConditionSet> alerts,
+            @HiveField(16, defaultValue: false) bool enableAlertVibration,
+            @HiveField(17, defaultValue: true) bool isMajorCustomer,
+            @HiveField(18, defaultValue: defaultKeepaSettings)
+            KeepaSettings keepaSettings,
+            @HiveField(19, defaultValue: defaultLeftShortcut)
+            List<ShortcutDetail> leftSlideShortcut,
+            @HiveField(20, defaultValue: defaultRightShortcut)
+            List<ShortcutDetail> rightSlideShortcut,
+            @HiveField(21, defaultValue: defaultNewConditionTexts)
+            List<String> newConditionTexts,
+            @HiveField(22, defaultValue: 0) int newConditionTextIndex,
+            @HiveField(23, defaultValue: defaultUsedConditionText)
+            List<String> usedConditionTexts,
+            @HiveField(24, defaultValue: 0) int usedConditionTextIndex,
+            @HiveField(25, defaultValue: defaultPricetarSettings)
+            PricetarSettings pricetarSettings,
+            @HiveField(26, defaultValue: defaultMakadSettings)
+            MakadSettings makadSettings,
+            @HiveField(27, defaultValue: defaultSellerSketSettings)
+            SellerSketSettings sellerSketSettings,
+            @HiveField(28, defaultValue: defaultStandardButtons)
+            Map<String, bool> standardButtons)
+        $default,
+  ) {
+    return $default(
+        isDarkMode,
+        enableTargetProfit,
+        targetProfitValue,
+        skuFormat,
+        retailers,
+        enableReadAloud,
+        patternIndex,
+        readAloudPatterns,
+        readAloudVolume,
+        readAloudSpeed,
+        customButtons,
+        csvOrder,
+        minProfit,
+        getStocks,
+        enableAlert,
+        alerts,
+        enableAlertVibration,
+        isMajorCustomer,
+        keepaSettings,
+        leftSlideShortcut,
+        rightSlideShortcut,
+        newConditionTexts,
+        newConditionTextIndex,
+        usedConditionTexts,
+        usedConditionTextIndex,
+        pricetarSettings,
+        makadSettings,
+        sellerSketSettings,
+        standardButtons);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) bool isDarkMode,
+            @HiveField(1) bool enableTargetProfit,
+            @HiveField(2) int targetProfitValue,
+            @HiveField(3) String skuFormat,
+            @HiveField(4) List<String> retailers,
+            @HiveField(5) bool enableReadAloud,
+            @HiveField(6) int patternIndex,
+            @HiveField(7) List<ReadAloudPattern> readAloudPatterns,
+            @HiveField(8) double readAloudVolume,
+            @HiveField(9) double? readAloudSpeed,
+            @HiveField(10, defaultValue: defaultCustomButtons)
+            List<CustomButtonDetail> customButtons,
+            @HiveField(11, defaultValue: defaultCsvOrder)
+            List<CsvColumn> csvOrder,
+            @HiveField(12, defaultValue: 0) int minProfit,
+            @HiveField(13, defaultValue: false) bool getStocks,
+            @HiveField(14, defaultValue: true) bool enableAlert,
+            @HiveField(15, defaultValue: defaultAlert)
+            List<AlertConditionSet> alerts,
+            @HiveField(16, defaultValue: false) bool enableAlertVibration,
+            @HiveField(17, defaultValue: true) bool isMajorCustomer,
+            @HiveField(18, defaultValue: defaultKeepaSettings)
+            KeepaSettings keepaSettings,
+            @HiveField(19, defaultValue: defaultLeftShortcut)
+            List<ShortcutDetail> leftSlideShortcut,
+            @HiveField(20, defaultValue: defaultRightShortcut)
+            List<ShortcutDetail> rightSlideShortcut,
+            @HiveField(21, defaultValue: defaultNewConditionTexts)
+            List<String> newConditionTexts,
+            @HiveField(22, defaultValue: 0) int newConditionTextIndex,
+            @HiveField(23, defaultValue: defaultUsedConditionText)
+            List<String> usedConditionTexts,
+            @HiveField(24, defaultValue: 0) int usedConditionTextIndex,
+            @HiveField(25, defaultValue: defaultPricetarSettings)
+            PricetarSettings pricetarSettings,
+            @HiveField(26, defaultValue: defaultMakadSettings)
+            MakadSettings makadSettings,
+            @HiveField(27, defaultValue: defaultSellerSketSettings)
+            SellerSketSettings sellerSketSettings,
+            @HiveField(28, defaultValue: defaultStandardButtons)
+            Map<String, bool> standardButtons)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(
+          isDarkMode,
+          enableTargetProfit,
+          targetProfitValue,
+          skuFormat,
+          retailers,
+          enableReadAloud,
+          patternIndex,
+          readAloudPatterns,
+          readAloudVolume,
+          readAloudSpeed,
+          customButtons,
+          csvOrder,
+          minProfit,
+          getStocks,
+          enableAlert,
+          alerts,
+          enableAlertVibration,
+          isMajorCustomer,
+          keepaSettings,
+          leftSlideShortcut,
+          rightSlideShortcut,
+          newConditionTexts,
+          newConditionTextIndex,
+          usedConditionTexts,
+          usedConditionTextIndex,
+          pricetarSettings,
+          makadSettings,
+          sellerSketSettings,
+          standardButtons);
+    }
+    return orElse();
+  }
 }
 
 abstract class _GeneralSettings implements GeneralSettings {
@@ -1082,6 +1340,20 @@ mixin _$ReadAloudPattern {
   String get title => throw _privateConstructorUsedError;
   @HiveField(1)
   String get pattern => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(@HiveField(0) String title, @HiveField(1) String pattern)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(@HiveField(0) String title, @HiveField(1) String pattern)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of ReadAloudPattern
   /// with the given fields replaced by the non-null parameter values.
@@ -1209,6 +1481,28 @@ class _$ReadAloudPatternImpl implements _ReadAloudPattern {
   _$$ReadAloudPatternImplCopyWith<_$ReadAloudPatternImpl> get copyWith =>
       __$$ReadAloudPatternImplCopyWithImpl<_$ReadAloudPatternImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(@HiveField(0) String title, @HiveField(1) String pattern)
+        $default,
+  ) {
+    return $default(title, pattern);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(@HiveField(0) String title, @HiveField(1) String pattern)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(title, pattern);
+    }
+    return orElse();
+  }
 }
 
 abstract class _ReadAloudPattern implements ReadAloudPattern {
@@ -1241,6 +1535,28 @@ mixin _$CustomButtonDetail {
   String get pattern => throw _privateConstructorUsedError;
   @HiveField(3, defaultValue: "")
   String get id => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) bool enable,
+            @HiveField(1) String title,
+            @HiveField(2) String pattern,
+            @HiveField(3, defaultValue: "") String id)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) bool enable,
+            @HiveField(1) String title,
+            @HiveField(2) String pattern,
+            @HiveField(3, defaultValue: "") String id)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of CustomButtonDetail
   /// with the given fields replaced by the non-null parameter values.
@@ -1407,6 +1723,36 @@ class _$CustomButtonDetailImpl implements _CustomButtonDetail {
   _$$CustomButtonDetailImplCopyWith<_$CustomButtonDetailImpl> get copyWith =>
       __$$CustomButtonDetailImplCopyWithImpl<_$CustomButtonDetailImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) bool enable,
+            @HiveField(1) String title,
+            @HiveField(2) String pattern,
+            @HiveField(3, defaultValue: "") String id)
+        $default,
+  ) {
+    return $default(enable, title, pattern, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) bool enable,
+            @HiveField(1) String title,
+            @HiveField(2) String pattern,
+            @HiveField(3, defaultValue: "") String id)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(enable, title, pattern, id);
+    }
+    return orElse();
+  }
 }
 
 abstract class _CustomButtonDetail implements CustomButtonDetail {
@@ -1452,6 +1798,26 @@ mixin _$AlertConditionSet {
   @HiveField(2)
   @JsonKey(name: "c")
   List<AlertCondition> get conditions => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String id,
+            @HiveField(1) @JsonKey(name: "t") String title,
+            @HiveField(2) @JsonKey(name: "c") List<AlertCondition> conditions)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String id,
+            @HiveField(1) @JsonKey(name: "t") String title,
+            @HiveField(2) @JsonKey(name: "c") List<AlertCondition> conditions)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this AlertConditionSet to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1622,6 +1988,34 @@ class _$AlertConditionSetImpl implements _AlertConditionSet {
           this, _$identity);
 
   @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String id,
+            @HiveField(1) @JsonKey(name: "t") String title,
+            @HiveField(2) @JsonKey(name: "c") List<AlertCondition> conditions)
+        $default,
+  ) {
+    return $default(id, title, conditions);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String id,
+            @HiveField(1) @JsonKey(name: "t") String title,
+            @HiveField(2) @JsonKey(name: "c") List<AlertCondition> conditions)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(id, title, conditions);
+    }
+    return orElse();
+  }
+
+  @override
   Map<String, dynamic> toJson() {
     return _$$AlertConditionSetImplToJson(
       this,
@@ -1670,6 +2064,22 @@ mixin _$ShortcutDetail {
   ShortcutType get type => throw _privateConstructorUsedError;
   @HiveField(1)
   String get param => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) ShortcutType type, @HiveField(1) String param)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) ShortcutType type, @HiveField(1) String param)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this ShortcutDetail to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1805,6 +2215,30 @@ class _$ShortcutDetailImpl implements _ShortcutDetail {
   _$$ShortcutDetailImplCopyWith<_$ShortcutDetailImpl> get copyWith =>
       __$$ShortcutDetailImplCopyWithImpl<_$ShortcutDetailImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) ShortcutType type, @HiveField(1) String param)
+        $default,
+  ) {
+    return $default(type, param);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) ShortcutType type, @HiveField(1) String param)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(type, param);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

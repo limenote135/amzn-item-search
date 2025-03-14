@@ -25,6 +25,38 @@ mixin _$KeepItemFilter {
   int? get usedPriceLower => throw _privateConstructorUsedError;
   int? get usedPriceUpper => throw _privateConstructorUsedError;
   DateTimeRange? get keepDateRange => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String? keyword,
+            int? rankLower,
+            int? rankUpper,
+            bool priorFba,
+            int? newPriceLower,
+            int? newPriceUpper,
+            int? usedPriceLower,
+            int? usedPriceUpper,
+            DateTimeRange? keepDateRange)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String? keyword,
+            int? rankLower,
+            int? rankUpper,
+            bool priorFba,
+            int? newPriceLower,
+            int? newPriceUpper,
+            int? usedPriceLower,
+            int? usedPriceUpper,
+            DateTimeRange? keepDateRange)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of KeepItemFilter
   /// with the given fields replaced by the non-null parameter values.
@@ -285,6 +317,48 @@ class _$KeepItemFilterImpl implements _KeepItemFilter {
   _$$KeepItemFilterImplCopyWith<_$KeepItemFilterImpl> get copyWith =>
       __$$KeepItemFilterImplCopyWithImpl<_$KeepItemFilterImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String? keyword,
+            int? rankLower,
+            int? rankUpper,
+            bool priorFba,
+            int? newPriceLower,
+            int? newPriceUpper,
+            int? usedPriceLower,
+            int? usedPriceUpper,
+            DateTimeRange? keepDateRange)
+        $default,
+  ) {
+    return $default(keyword, rankLower, rankUpper, priorFba, newPriceLower,
+        newPriceUpper, usedPriceLower, usedPriceUpper, keepDateRange);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String? keyword,
+            int? rankLower,
+            int? rankUpper,
+            bool priorFba,
+            int? newPriceLower,
+            int? newPriceUpper,
+            int? usedPriceLower,
+            int? usedPriceUpper,
+            DateTimeRange? keepDateRange)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(keyword, rankLower, rankUpper, priorFba, newPriceLower,
+          newPriceUpper, usedPriceLower, usedPriceUpper, keepDateRange);
+    }
+    return orElse();
+  }
 }
 
 abstract class _KeepItemFilter implements KeepItemFilter {

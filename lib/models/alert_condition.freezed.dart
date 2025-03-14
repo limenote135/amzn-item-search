@@ -26,6 +26,22 @@ mixin _$AlertCondition {
   @HiveField(1)
   @JsonKey(name: "v")
   int get value => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(@HiveField(0) @JsonKey(name: "t") AlertType type,
+            @HiveField(1) @JsonKey(name: "v") int value)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(@HiveField(0) @JsonKey(name: "t") AlertType type,
+            @HiveField(1) @JsonKey(name: "v") int value)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this AlertCondition to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -167,6 +183,30 @@ class _$AlertConditionImpl implements _AlertCondition {
   _$$AlertConditionImplCopyWith<_$AlertConditionImpl> get copyWith =>
       __$$AlertConditionImplCopyWithImpl<_$AlertConditionImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(@HiveField(0) @JsonKey(name: "t") AlertType type,
+            @HiveField(1) @JsonKey(name: "v") int value)
+        $default,
+  ) {
+    return $default(type, value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(@HiveField(0) @JsonKey(name: "t") AlertType type,
+            @HiveField(1) @JsonKey(name: "v") int value)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(type, value);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

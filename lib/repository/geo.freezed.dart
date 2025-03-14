@@ -22,6 +22,18 @@ GeoResponse _$GeoResponseFromJson(Map<String, dynamic> json) {
 mixin _$GeoResponse {
   String get code => throw _privateConstructorUsedError;
   String get jan => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String code, String jan) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String code, String jan)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this GeoResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -152,6 +164,26 @@ class _$GeoResponseImpl implements _GeoResponse {
   @pragma('vm:prefer-inline')
   _$$GeoResponseImplCopyWith<_$GeoResponseImpl> get copyWith =>
       __$$GeoResponseImplCopyWithImpl<_$GeoResponseImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String code, String jan) $default,
+  ) {
+    return $default(code, jan);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String code, String jan)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(code, jan);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

@@ -23,6 +23,22 @@ mixin _$SearchItem {
   @HiveField(2)
   List<AsinData> get asins => throw _privateConstructorUsedError;
   int get defaultPurchasePrice => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(@HiveField(0) String searchDate, @HiveField(1) String jan,
+            @HiveField(2) List<AsinData> asins, int defaultPurchasePrice)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(@HiveField(0) String searchDate, @HiveField(1) String jan,
+            @HiveField(2) List<AsinData> asins, int defaultPurchasePrice)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of SearchItem
   /// with the given fields replaced by the non-null parameter values.
@@ -199,6 +215,30 @@ class _$SearchItemImpl implements _SearchItem {
   @pragma('vm:prefer-inline')
   _$$SearchItemImplCopyWith<_$SearchItemImpl> get copyWith =>
       __$$SearchItemImplCopyWithImpl<_$SearchItemImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(@HiveField(0) String searchDate, @HiveField(1) String jan,
+            @HiveField(2) List<AsinData> asins, int defaultPurchasePrice)
+        $default,
+  ) {
+    return $default(searchDate, jan, asins, defaultPurchasePrice);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(@HiveField(0) String searchDate, @HiveField(1) String jan,
+            @HiveField(2) List<AsinData> asins, int defaultPurchasePrice)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(searchDate, jan, asins, defaultPurchasePrice);
+    }
+    return orElse();
+  }
 }
 
 abstract class _SearchItem implements SearchItem {

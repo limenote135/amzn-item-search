@@ -18,6 +18,18 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CameraReadData {
   String get code => throw _privateConstructorUsedError;
   DateTime get readAt => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String code, DateTime readAt) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String code, DateTime readAt)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of CameraReadData
   /// with the given fields replaced by the non-null parameter values.
@@ -141,6 +153,26 @@ class _$CameraReadDataImpl implements _CameraReadData {
   _$$CameraReadDataImplCopyWith<_$CameraReadDataImpl> get copyWith =>
       __$$CameraReadDataImplCopyWithImpl<_$CameraReadDataImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String code, DateTime readAt) $default,
+  ) {
+    return $default(code, readAt);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String code, DateTime readAt)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(code, readAt);
+    }
+    return orElse();
+  }
 }
 
 abstract class _CameraReadData implements CameraReadData {

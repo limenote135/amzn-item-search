@@ -21,6 +21,18 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LoginResponse {
   String get message => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String message) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String message)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this LoginResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -138,6 +150,26 @@ class _$LoginResponseImpl implements _LoginResponse {
   @pragma('vm:prefer-inline')
   _$$LoginResponseImplCopyWith<_$LoginResponseImpl> get copyWith =>
       __$$LoginResponseImplCopyWithImpl<_$LoginResponseImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String message) $default,
+  ) {
+    return $default(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String message)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(message);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

@@ -29,6 +29,36 @@ mixin _$KeepaTokenStatusResponse {
   int get tokensConsumed => throw _privateConstructorUsedError;
   int get processingTimeInMs => throw _privateConstructorUsedError;
   KeepaError? get error => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            int timestamp,
+            int tokensLeft,
+            int refillIn,
+            int refillRate,
+            int tokenFlowReduction,
+            int tokensConsumed,
+            int processingTimeInMs,
+            KeepaError? error)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            int timestamp,
+            int tokensLeft,
+            int refillIn,
+            int refillRate,
+            int tokenFlowReduction,
+            int tokensConsumed,
+            int processingTimeInMs,
+            KeepaError? error)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this KeepaTokenStatusResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -303,6 +333,46 @@ class _$KeepaTokenStatusResponseImpl implements _KeepaTokenStatusResponse {
           _$KeepaTokenStatusResponseImpl>(this, _$identity);
 
   @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            int timestamp,
+            int tokensLeft,
+            int refillIn,
+            int refillRate,
+            int tokenFlowReduction,
+            int tokensConsumed,
+            int processingTimeInMs,
+            KeepaError? error)
+        $default,
+  ) {
+    return $default(timestamp, tokensLeft, refillIn, refillRate,
+        tokenFlowReduction, tokensConsumed, processingTimeInMs, error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            int timestamp,
+            int tokensLeft,
+            int refillIn,
+            int refillRate,
+            int tokenFlowReduction,
+            int tokensConsumed,
+            int processingTimeInMs,
+            KeepaError? error)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(timestamp, tokensLeft, refillIn, refillRate,
+          tokenFlowReduction, tokensConsumed, processingTimeInMs, error);
+    }
+    return orElse();
+  }
+
+  @override
   Map<String, dynamic> toJson() {
     return _$$KeepaTokenStatusResponseImplToJson(
       this,
@@ -358,6 +428,19 @@ mixin _$KeepaError {
   String? get type => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   String? get details => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String? type, String? message, String? details) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String? type, String? message, String? details)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this KeepaError to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -501,6 +584,27 @@ class _$KeepaErrorImpl implements _KeepaError {
   @pragma('vm:prefer-inline')
   _$$KeepaErrorImplCopyWith<_$KeepaErrorImpl> get copyWith =>
       __$$KeepaErrorImplCopyWithImpl<_$KeepaErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String? type, String? message, String? details) $default,
+  ) {
+    return $default(type, message, details);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String? type, String? message, String? details)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(type, message, details);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

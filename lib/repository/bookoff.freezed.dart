@@ -28,6 +28,28 @@ mixin _$BookoffResponse {
   String? get subtitle => throw _privateConstructorUsedError;
   @JsonKey(name: "JAN")
   String get jan => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @JsonKey(name: "INSTORECODE") String instoreCode,
+            @JsonKey(name: "GOODS_NAME1") String title,
+            @JsonKey(name: "GOODS_NAME2") String? subtitle,
+            @JsonKey(name: "JAN") String jan)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @JsonKey(name: "INSTORECODE") String instoreCode,
+            @JsonKey(name: "GOODS_NAME1") String title,
+            @JsonKey(name: "GOODS_NAME2") String? subtitle,
+            @JsonKey(name: "JAN") String jan)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this BookoffResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -204,6 +226,36 @@ class _$BookoffResponseImpl implements _BookoffResponse {
   _$$BookoffResponseImplCopyWith<_$BookoffResponseImpl> get copyWith =>
       __$$BookoffResponseImplCopyWithImpl<_$BookoffResponseImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @JsonKey(name: "INSTORECODE") String instoreCode,
+            @JsonKey(name: "GOODS_NAME1") String title,
+            @JsonKey(name: "GOODS_NAME2") String? subtitle,
+            @JsonKey(name: "JAN") String jan)
+        $default,
+  ) {
+    return $default(instoreCode, title, subtitle, jan);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @JsonKey(name: "INSTORECODE") String instoreCode,
+            @JsonKey(name: "GOODS_NAME1") String title,
+            @JsonKey(name: "GOODS_NAME2") String? subtitle,
+            @JsonKey(name: "JAN") String jan)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(instoreCode, title, subtitle, jan);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {
