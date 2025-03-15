@@ -28,6 +28,32 @@ mixin _$SearchSettings {
   bool get continuousCameraRead => throw _privateConstructorUsedError;
   @HiveField(5, defaultValue: false)
   bool get continuousInput => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) SearchType type,
+            @HiveField(1) UsedSubCondition usedSubCondition,
+            @HiveField(2) bool useFba,
+            @HiveField(3) bool priorFba,
+            @HiveField(4, defaultValue: true) bool continuousCameraRead,
+            @HiveField(5, defaultValue: false) bool continuousInput)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) SearchType type,
+            @HiveField(1) UsedSubCondition usedSubCondition,
+            @HiveField(2) bool useFba,
+            @HiveField(3) bool priorFba,
+            @HiveField(4, defaultValue: true) bool continuousCameraRead,
+            @HiveField(5, defaultValue: false) bool continuousInput)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of SearchSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -239,6 +265,42 @@ class _$SearchSettingsImpl implements _SearchSettings {
   _$$SearchSettingsImplCopyWith<_$SearchSettingsImpl> get copyWith =>
       __$$SearchSettingsImplCopyWithImpl<_$SearchSettingsImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) SearchType type,
+            @HiveField(1) UsedSubCondition usedSubCondition,
+            @HiveField(2) bool useFba,
+            @HiveField(3) bool priorFba,
+            @HiveField(4, defaultValue: true) bool continuousCameraRead,
+            @HiveField(5, defaultValue: false) bool continuousInput)
+        $default,
+  ) {
+    return $default(type, usedSubCondition, useFba, priorFba,
+        continuousCameraRead, continuousInput);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) SearchType type,
+            @HiveField(1) UsedSubCondition usedSubCondition,
+            @HiveField(2) bool useFba,
+            @HiveField(3) bool priorFba,
+            @HiveField(4, defaultValue: true) bool continuousCameraRead,
+            @HiveField(5, defaultValue: false) bool continuousInput)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(type, usedSubCondition, useFba, priorFba,
+          continuousCameraRead, continuousInput);
+    }
+    return orElse();
+  }
 }
 
 abstract class _SearchSettings implements SearchSettings {

@@ -26,6 +26,40 @@ mixin _$StockItemFilter {
   int? get sellPriceUpper => throw _privateConstructorUsedError;
   DateTimeRange? get purchaseDateRange => throw _privateConstructorUsedError;
   String? get retailer => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String? keyword,
+            ListingState listingState,
+            ProductCondition productCondition,
+            FulfilmentChannel channel,
+            int? purchasePriceLower,
+            int? purchasePriceUpper,
+            int? sellPriceLower,
+            int? sellPriceUpper,
+            DateTimeRange? purchaseDateRange,
+            String? retailer)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String? keyword,
+            ListingState listingState,
+            ProductCondition productCondition,
+            FulfilmentChannel channel,
+            int? purchasePriceLower,
+            int? purchasePriceUpper,
+            int? sellPriceLower,
+            int? sellPriceUpper,
+            DateTimeRange? purchaseDateRange,
+            String? retailer)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of StockItemFilter
   /// with the given fields replaced by the non-null parameter values.
@@ -305,6 +339,68 @@ class _$StockItemFilterImpl implements _StockItemFilter {
   _$$StockItemFilterImplCopyWith<_$StockItemFilterImpl> get copyWith =>
       __$$StockItemFilterImplCopyWithImpl<_$StockItemFilterImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String? keyword,
+            ListingState listingState,
+            ProductCondition productCondition,
+            FulfilmentChannel channel,
+            int? purchasePriceLower,
+            int? purchasePriceUpper,
+            int? sellPriceLower,
+            int? sellPriceUpper,
+            DateTimeRange? purchaseDateRange,
+            String? retailer)
+        $default,
+  ) {
+    return $default(
+        keyword,
+        listingState,
+        productCondition,
+        channel,
+        purchasePriceLower,
+        purchasePriceUpper,
+        sellPriceLower,
+        sellPriceUpper,
+        purchaseDateRange,
+        retailer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String? keyword,
+            ListingState listingState,
+            ProductCondition productCondition,
+            FulfilmentChannel channel,
+            int? purchasePriceLower,
+            int? purchasePriceUpper,
+            int? sellPriceLower,
+            int? sellPriceUpper,
+            DateTimeRange? purchaseDateRange,
+            String? retailer)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(
+          keyword,
+          listingState,
+          productCondition,
+          channel,
+          purchasePriceLower,
+          purchasePriceUpper,
+          sellPriceLower,
+          sellPriceUpper,
+          purchaseDateRange,
+          retailer);
+    }
+    return orElse();
+  }
 }
 
 abstract class _StockItemFilter implements StockItemFilter {

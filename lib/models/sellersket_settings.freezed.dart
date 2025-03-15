@@ -32,6 +32,34 @@ mixin _$SellerSketSettings {
   int get highestStopperValue => throw _privateConstructorUsedError;
   @HiveField(6)
   String get shippingPattern => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) SellerSketReviseRule newRule,
+            @HiveField(1) SellerSketReviseRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) RevisePriceStopper highestStopperType,
+            @HiveField(5) int highestStopperValue,
+            @HiveField(6) String shippingPattern)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) SellerSketReviseRule newRule,
+            @HiveField(1) SellerSketReviseRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) RevisePriceStopper highestStopperType,
+            @HiveField(5) int highestStopperValue,
+            @HiveField(6) String shippingPattern)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of SellerSketSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -270,6 +298,44 @@ class _$SellerSketSettingsImpl implements _SellerSketSettings {
   _$$SellerSketSettingsImplCopyWith<_$SellerSketSettingsImpl> get copyWith =>
       __$$SellerSketSettingsImplCopyWithImpl<_$SellerSketSettingsImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) SellerSketReviseRule newRule,
+            @HiveField(1) SellerSketReviseRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) RevisePriceStopper highestStopperType,
+            @HiveField(5) int highestStopperValue,
+            @HiveField(6) String shippingPattern)
+        $default,
+  ) {
+    return $default(newRule, usedRule, lowestStopperType, lowestStopperValue,
+        highestStopperType, highestStopperValue, shippingPattern);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) SellerSketReviseRule newRule,
+            @HiveField(1) SellerSketReviseRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) RevisePriceStopper highestStopperType,
+            @HiveField(5) int highestStopperValue,
+            @HiveField(6) String shippingPattern)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(newRule, usedRule, lowestStopperType, lowestStopperValue,
+          highestStopperType, highestStopperValue, shippingPattern);
+    }
+    return orElse();
+  }
 }
 
 abstract class _SellerSketSettings implements SellerSketSettings {

@@ -30,6 +30,32 @@ mixin _$PricetarSettings {
       throw _privateConstructorUsedError;
   @HiveField(5)
   int get highestStopperValue => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) PricetarRule newRule,
+            @HiveField(1) PricetarRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) RevisePriceStopper highestStopperType,
+            @HiveField(5) int highestStopperValue)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) PricetarRule newRule,
+            @HiveField(1) PricetarRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) RevisePriceStopper highestStopperType,
+            @HiveField(5) int highestStopperValue)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of PricetarSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -248,6 +274,42 @@ class _$PricetarSettingsImpl implements _PricetarSettings {
   _$$PricetarSettingsImplCopyWith<_$PricetarSettingsImpl> get copyWith =>
       __$$PricetarSettingsImplCopyWithImpl<_$PricetarSettingsImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) PricetarRule newRule,
+            @HiveField(1) PricetarRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) RevisePriceStopper highestStopperType,
+            @HiveField(5) int highestStopperValue)
+        $default,
+  ) {
+    return $default(newRule, usedRule, lowestStopperType, lowestStopperValue,
+        highestStopperType, highestStopperValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) PricetarRule newRule,
+            @HiveField(1) PricetarRule usedRule,
+            @HiveField(2) RevisePriceStopper lowestStopperType,
+            @HiveField(3) int lowestStopperValue,
+            @HiveField(4) RevisePriceStopper highestStopperType,
+            @HiveField(5) int highestStopperValue)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(newRule, usedRule, lowestStopperType, lowestStopperValue,
+          highestStopperType, highestStopperValue);
+    }
+    return orElse();
+  }
 }
 
 abstract class _PricetarSettings implements PricetarSettings {

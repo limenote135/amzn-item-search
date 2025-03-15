@@ -34,6 +34,32 @@ mixin _$FeeInfo {
   int get fbaLowPriceFee => throw _privateConstructorUsedError;
   @HiveField(5, defaultValue: 0)
   double get referralFeeLowPriceRate => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) @JsonKey(name: "fee_rate") double referralFeeRate,
+            @HiveField(1) @JsonKey(name: "closing_fee") int variableClosingFee,
+            @HiveField(2) int fbaFee,
+            @HiveField(3) FeeExpression? feeExp,
+            @HiveField(4, defaultValue: 0) int fbaLowPriceFee,
+            @HiveField(5, defaultValue: 0) double referralFeeLowPriceRate)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) @JsonKey(name: "fee_rate") double referralFeeRate,
+            @HiveField(1) @JsonKey(name: "closing_fee") int variableClosingFee,
+            @HiveField(2) int fbaFee,
+            @HiveField(3) FeeExpression? feeExp,
+            @HiveField(4, defaultValue: 0) int fbaLowPriceFee,
+            @HiveField(5, defaultValue: 0) double referralFeeLowPriceRate)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this FeeInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -274,6 +300,42 @@ class _$FeeInfoImpl implements _FeeInfo {
   @pragma('vm:prefer-inline')
   _$$FeeInfoImplCopyWith<_$FeeInfoImpl> get copyWith =>
       __$$FeeInfoImplCopyWithImpl<_$FeeInfoImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) @JsonKey(name: "fee_rate") double referralFeeRate,
+            @HiveField(1) @JsonKey(name: "closing_fee") int variableClosingFee,
+            @HiveField(2) int fbaFee,
+            @HiveField(3) FeeExpression? feeExp,
+            @HiveField(4, defaultValue: 0) int fbaLowPriceFee,
+            @HiveField(5, defaultValue: 0) double referralFeeLowPriceRate)
+        $default,
+  ) {
+    return $default(referralFeeRate, variableClosingFee, fbaFee, feeExp,
+        fbaLowPriceFee, referralFeeLowPriceRate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) @JsonKey(name: "fee_rate") double referralFeeRate,
+            @HiveField(1) @JsonKey(name: "closing_fee") int variableClosingFee,
+            @HiveField(2) int fbaFee,
+            @HiveField(3) FeeExpression? feeExp,
+            @HiveField(4, defaultValue: 0) int fbaLowPriceFee,
+            @HiveField(5, defaultValue: 0) double referralFeeLowPriceRate)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(referralFeeRate, variableClosingFee, fbaFee, feeExp,
+          fbaLowPriceFee, referralFeeLowPriceRate);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

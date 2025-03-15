@@ -60,6 +60,62 @@ mixin _$StockItem {
   bool get isSmallProgram => throw _privateConstructorUsedError;
   @HiveField(19, defaultValue: 0)
   int get smallFee => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String purchaseDate,
+            @HiveField(1) int purchasePrice,
+            @HiveField(2) int sellPrice,
+            @HiveField(3) bool useFba,
+            @HiveField(4) int profitPerItem,
+            @HiveField(5) int amount,
+            @HiveField(6) ItemCondition condition,
+            @HiveField(7) ItemSubCondition subCondition,
+            @HiveField(8) String sku,
+            @HiveField(9) String memo,
+            @HiveField(10) AsinData item,
+            @HiveField(11, defaultValue: "") String retailer,
+            @HiveField(12, defaultValue: "") String id,
+            @HiveField(13, defaultValue: -1) int breakEven,
+            @HiveField(14) String? listingDate,
+            bool autogenSku,
+            @HiveField(15, defaultValue: "") String conditionText,
+            @HiveField(16, defaultValue: 0) int otherCost,
+            @HiveField(17, defaultValue: <String>[]) List<String> images,
+            @HiveField(18, defaultValue: false) bool isSmallProgram,
+            @HiveField(19, defaultValue: 0) int smallFee)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String purchaseDate,
+            @HiveField(1) int purchasePrice,
+            @HiveField(2) int sellPrice,
+            @HiveField(3) bool useFba,
+            @HiveField(4) int profitPerItem,
+            @HiveField(5) int amount,
+            @HiveField(6) ItemCondition condition,
+            @HiveField(7) ItemSubCondition subCondition,
+            @HiveField(8) String sku,
+            @HiveField(9) String memo,
+            @HiveField(10) AsinData item,
+            @HiveField(11, defaultValue: "") String retailer,
+            @HiveField(12, defaultValue: "") String id,
+            @HiveField(13, defaultValue: -1) int breakEven,
+            @HiveField(14) String? listingDate,
+            bool autogenSku,
+            @HiveField(15, defaultValue: "") String conditionText,
+            @HiveField(16, defaultValue: 0) int otherCost,
+            @HiveField(17, defaultValue: <String>[]) List<String> images,
+            @HiveField(18, defaultValue: false) bool isSmallProgram,
+            @HiveField(19, defaultValue: 0) int smallFee)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of StockItem
   /// with the given fields replaced by the non-null parameter values.
@@ -593,6 +649,112 @@ class _$StockItemImpl implements _StockItem {
   @pragma('vm:prefer-inline')
   _$$StockItemImplCopyWith<_$StockItemImpl> get copyWith =>
       __$$StockItemImplCopyWithImpl<_$StockItemImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String purchaseDate,
+            @HiveField(1) int purchasePrice,
+            @HiveField(2) int sellPrice,
+            @HiveField(3) bool useFba,
+            @HiveField(4) int profitPerItem,
+            @HiveField(5) int amount,
+            @HiveField(6) ItemCondition condition,
+            @HiveField(7) ItemSubCondition subCondition,
+            @HiveField(8) String sku,
+            @HiveField(9) String memo,
+            @HiveField(10) AsinData item,
+            @HiveField(11, defaultValue: "") String retailer,
+            @HiveField(12, defaultValue: "") String id,
+            @HiveField(13, defaultValue: -1) int breakEven,
+            @HiveField(14) String? listingDate,
+            bool autogenSku,
+            @HiveField(15, defaultValue: "") String conditionText,
+            @HiveField(16, defaultValue: 0) int otherCost,
+            @HiveField(17, defaultValue: <String>[]) List<String> images,
+            @HiveField(18, defaultValue: false) bool isSmallProgram,
+            @HiveField(19, defaultValue: 0) int smallFee)
+        $default,
+  ) {
+    return $default(
+        purchaseDate,
+        purchasePrice,
+        sellPrice,
+        useFba,
+        profitPerItem,
+        amount,
+        condition,
+        subCondition,
+        sku,
+        memo,
+        item,
+        retailer,
+        id,
+        breakEven,
+        listingDate,
+        autogenSku,
+        conditionText,
+        otherCost,
+        images,
+        isSmallProgram,
+        smallFee);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String purchaseDate,
+            @HiveField(1) int purchasePrice,
+            @HiveField(2) int sellPrice,
+            @HiveField(3) bool useFba,
+            @HiveField(4) int profitPerItem,
+            @HiveField(5) int amount,
+            @HiveField(6) ItemCondition condition,
+            @HiveField(7) ItemSubCondition subCondition,
+            @HiveField(8) String sku,
+            @HiveField(9) String memo,
+            @HiveField(10) AsinData item,
+            @HiveField(11, defaultValue: "") String retailer,
+            @HiveField(12, defaultValue: "") String id,
+            @HiveField(13, defaultValue: -1) int breakEven,
+            @HiveField(14) String? listingDate,
+            bool autogenSku,
+            @HiveField(15, defaultValue: "") String conditionText,
+            @HiveField(16, defaultValue: 0) int otherCost,
+            @HiveField(17, defaultValue: <String>[]) List<String> images,
+            @HiveField(18, defaultValue: false) bool isSmallProgram,
+            @HiveField(19, defaultValue: 0) int smallFee)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(
+          purchaseDate,
+          purchasePrice,
+          sellPrice,
+          useFba,
+          profitPerItem,
+          amount,
+          condition,
+          subCondition,
+          sku,
+          memo,
+          item,
+          retailer,
+          id,
+          breakEven,
+          listingDate,
+          autogenSku,
+          conditionText,
+          otherCost,
+          images,
+          isSmallProgram,
+          smallFee);
+    }
+    return orElse();
+  }
 }
 
 abstract class _StockItem implements StockItem {

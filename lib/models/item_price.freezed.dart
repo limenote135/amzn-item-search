@@ -29,6 +29,34 @@ mixin _$ItemPrices {
   List<PriceDetail> get usedPrices => throw _privateConstructorUsedError;
   @HiveField(2)
   FeeInfo get feeInfo => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0, defaultValue: <PriceDetail>[])
+            @JsonKey(name: "new_offers")
+            List<PriceDetail> newPrices,
+            @HiveField(1, defaultValue: <PriceDetail>[])
+            @JsonKey(name: "used_offers")
+            List<PriceDetail> usedPrices,
+            @HiveField(2) FeeInfo feeInfo)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0, defaultValue: <PriceDetail>[])
+            @JsonKey(name: "new_offers")
+            List<PriceDetail> newPrices,
+            @HiveField(1, defaultValue: <PriceDetail>[])
+            @JsonKey(name: "used_offers")
+            List<PriceDetail> usedPrices,
+            @HiveField(2) FeeInfo feeInfo)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this ItemPrices to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -239,6 +267,42 @@ class _$ItemPricesImpl implements _ItemPrices {
       __$$ItemPricesImplCopyWithImpl<_$ItemPricesImpl>(this, _$identity);
 
   @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0, defaultValue: <PriceDetail>[])
+            @JsonKey(name: "new_offers")
+            List<PriceDetail> newPrices,
+            @HiveField(1, defaultValue: <PriceDetail>[])
+            @JsonKey(name: "used_offers")
+            List<PriceDetail> usedPrices,
+            @HiveField(2) FeeInfo feeInfo)
+        $default,
+  ) {
+    return $default(newPrices, usedPrices, feeInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0, defaultValue: <PriceDetail>[])
+            @JsonKey(name: "new_offers")
+            List<PriceDetail> newPrices,
+            @HiveField(1, defaultValue: <PriceDetail>[])
+            @JsonKey(name: "used_offers")
+            List<PriceDetail> usedPrices,
+            @HiveField(2) FeeInfo feeInfo)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(newPrices, usedPrices, feeInfo);
+    }
+    return orElse();
+  }
+
+  @override
   Map<String, dynamic> toJson() {
     return _$$ItemPricesImplToJson(
       this,
@@ -306,6 +370,46 @@ mixin _$PriceDetail {
   @HiveField(8, defaultValue: SellerType.seller)
   @JsonKey(name: "type")
   SellerType get sellerType => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0)
+            @JsonKey(name: "condition")
+            ItemCondition itemCondition,
+            @HiveField(1) ItemSubCondition subCondition,
+            @HiveField(2) FulfillmentChannel channel,
+            @HiveField(3) int price,
+            @HiveField(4) int shipping,
+            @HiveField(5) int point,
+            @HiveField(6, defaultValue: false) bool isCart,
+            @HiveField(7, defaultValue: false) bool isSelf,
+            @HiveField(8, defaultValue: SellerType.seller)
+            @JsonKey(name: "type")
+            SellerType sellerType)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0)
+            @JsonKey(name: "condition")
+            ItemCondition itemCondition,
+            @HiveField(1) ItemSubCondition subCondition,
+            @HiveField(2) FulfillmentChannel channel,
+            @HiveField(3) int price,
+            @HiveField(4) int shipping,
+            @HiveField(5) int point,
+            @HiveField(6, defaultValue: false) bool isCart,
+            @HiveField(7, defaultValue: false) bool isSelf,
+            @HiveField(8, defaultValue: SellerType.seller)
+            @JsonKey(name: "type")
+            SellerType sellerType)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this PriceDetail to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -591,6 +695,56 @@ class _$PriceDetailImpl implements _PriceDetail {
   @pragma('vm:prefer-inline')
   _$$PriceDetailImplCopyWith<_$PriceDetailImpl> get copyWith =>
       __$$PriceDetailImplCopyWithImpl<_$PriceDetailImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0)
+            @JsonKey(name: "condition")
+            ItemCondition itemCondition,
+            @HiveField(1) ItemSubCondition subCondition,
+            @HiveField(2) FulfillmentChannel channel,
+            @HiveField(3) int price,
+            @HiveField(4) int shipping,
+            @HiveField(5) int point,
+            @HiveField(6, defaultValue: false) bool isCart,
+            @HiveField(7, defaultValue: false) bool isSelf,
+            @HiveField(8, defaultValue: SellerType.seller)
+            @JsonKey(name: "type")
+            SellerType sellerType)
+        $default,
+  ) {
+    return $default(itemCondition, subCondition, channel, price, shipping,
+        point, isCart, isSelf, sellerType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0)
+            @JsonKey(name: "condition")
+            ItemCondition itemCondition,
+            @HiveField(1) ItemSubCondition subCondition,
+            @HiveField(2) FulfillmentChannel channel,
+            @HiveField(3) int price,
+            @HiveField(4) int shipping,
+            @HiveField(5) int point,
+            @HiveField(6, defaultValue: false) bool isCart,
+            @HiveField(7, defaultValue: false) bool isSelf,
+            @HiveField(8, defaultValue: SellerType.seller)
+            @JsonKey(name: "type")
+            SellerType sellerType)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(itemCondition, subCondition, channel, price, shipping,
+          point, isCart, isSelf, sellerType);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

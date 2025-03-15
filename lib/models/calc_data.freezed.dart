@@ -20,6 +20,22 @@ mixin _$CalculateData {
   double get total => throw _privateConstructorUsedError;
   CalcOp get op => throw _privateConstructorUsedError;
   bool get inputComplete => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String displayText, double total, CalcOp op, bool inputComplete)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String displayText, double total, CalcOp op, bool inputComplete)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of CalculateData
   /// with the given fields replaced by the non-null parameter values.
@@ -179,6 +195,30 @@ class _$CalculateDataImpl implements _CalculateData {
   @pragma('vm:prefer-inline')
   _$$CalculateDataImplCopyWith<_$CalculateDataImpl> get copyWith =>
       __$$CalculateDataImplCopyWithImpl<_$CalculateDataImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String displayText, double total, CalcOp op, bool inputComplete)
+        $default,
+  ) {
+    return $default(displayText, total, op, inputComplete);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String displayText, double total, CalcOp op, bool inputComplete)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(displayText, total, op, inputComplete);
+    }
+    return orElse();
+  }
 }
 
 abstract class _CalculateData implements CalculateData {

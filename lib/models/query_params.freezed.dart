@@ -18,6 +18,18 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AsinDataPageParam {
   QueryItemsRequest get param => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(QueryItemsRequest param, int page) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(QueryItemsRequest param, int page)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of AsinDataPageParam
   /// with the given fields replaced by the non-null parameter values.
@@ -156,6 +168,26 @@ class _$AsinDataPageParamImpl implements _AsinDataPageParam {
   _$$AsinDataPageParamImplCopyWith<_$AsinDataPageParamImpl> get copyWith =>
       __$$AsinDataPageParamImplCopyWithImpl<_$AsinDataPageParamImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(QueryItemsRequest param, int page) $default,
+  ) {
+    return $default(param, page);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(QueryItemsRequest param, int page)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(param, page);
+    }
+    return orElse();
+  }
 }
 
 abstract class _AsinDataPageParam implements AsinDataPageParam {
@@ -180,6 +212,18 @@ abstract class _AsinDataPageParam implements AsinDataPageParam {
 mixin _$AsinDataIndexAtParam {
   QueryItemsRequest get param => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(QueryItemsRequest param, int index) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(QueryItemsRequest param, int index)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of AsinDataIndexAtParam
   /// with the given fields replaced by the non-null parameter values.
@@ -320,6 +364,26 @@ class _$AsinDataIndexAtParamImpl implements _AsinDataIndexAtParam {
       get copyWith =>
           __$$AsinDataIndexAtParamImplCopyWithImpl<_$AsinDataIndexAtParamImpl>(
               this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(QueryItemsRequest param, int index) $default,
+  ) {
+    return $default(param, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(QueryItemsRequest param, int index)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(param, index);
+    }
+    return orElse();
+  }
 }
 
 abstract class _AsinDataIndexAtParam implements AsinDataIndexAtParam {

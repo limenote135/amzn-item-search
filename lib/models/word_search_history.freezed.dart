@@ -18,6 +18,18 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WordSearchHistory {
   @HiveField(0)
   String get keyword => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(@HiveField(0) String keyword) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(@HiveField(0) String keyword)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of WordSearchHistory
   /// with the given fields replaced by the non-null parameter values.
@@ -130,6 +142,26 @@ class _$WordSearchHistoryImpl implements _WordSearchHistory {
   _$$WordSearchHistoryImplCopyWith<_$WordSearchHistoryImpl> get copyWith =>
       __$$WordSearchHistoryImplCopyWithImpl<_$WordSearchHistoryImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(@HiveField(0) String keyword) $default,
+  ) {
+    return $default(keyword);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(@HiveField(0) String keyword)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(keyword);
+    }
+    return orElse();
+  }
 }
 
 abstract class _WordSearchHistory implements WordSearchHistory {

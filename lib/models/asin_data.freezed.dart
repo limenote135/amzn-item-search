@@ -63,6 +63,80 @@ mixin _$AsinData {
   @HiveField(17, defaultValue: HazmatType.nonHazmat)
   @HazmatTypeConverter()
   HazmatType get hazmatType => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String jan,
+            @HiveField(1) String asin,
+            @HiveField(2) int listPrice,
+            @HiveField(3) String imageUrl,
+            @HiveField(4) String title,
+            @HiveField(5) int rank,
+            @HiveField(6) String quantity,
+            @HiveField(7) ItemPrices? prices,
+            @HiveField(8)
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            Uint8List? imageData,
+            @HiveField(9, defaultValue: "")
+            @ItemCategoryConverter()
+            String category,
+            @HiveField(10) bool? sellByAmazon,
+            @HiveField(11, defaultValue: defaultListingRestrictions)
+            @JsonKey()
+            ListingRestrictions restrictions,
+            @HiveField(12, defaultValue: "") String model,
+            @HiveField(13, defaultValue: "") String variationRoot,
+            @HiveField(14, defaultValue: false) bool isHazmat,
+            @HiveField(15, defaultValue: SizeType.normal)
+            @SizeTypeConverter()
+            SizeType sizeType,
+            @HiveField(16, defaultValue: 0) int smallFee,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            int defaultPurchasePrice,
+            @HiveField(17, defaultValue: HazmatType.nonHazmat)
+            @HazmatTypeConverter()
+            HazmatType hazmatType)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String jan,
+            @HiveField(1) String asin,
+            @HiveField(2) int listPrice,
+            @HiveField(3) String imageUrl,
+            @HiveField(4) String title,
+            @HiveField(5) int rank,
+            @HiveField(6) String quantity,
+            @HiveField(7) ItemPrices? prices,
+            @HiveField(8)
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            Uint8List? imageData,
+            @HiveField(9, defaultValue: "")
+            @ItemCategoryConverter()
+            String category,
+            @HiveField(10) bool? sellByAmazon,
+            @HiveField(11, defaultValue: defaultListingRestrictions)
+            @JsonKey()
+            ListingRestrictions restrictions,
+            @HiveField(12, defaultValue: "") String model,
+            @HiveField(13, defaultValue: "") String variationRoot,
+            @HiveField(14, defaultValue: false) bool isHazmat,
+            @HiveField(15, defaultValue: SizeType.normal)
+            @SizeTypeConverter()
+            SizeType sizeType,
+            @HiveField(16, defaultValue: 0) int smallFee,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            int defaultPurchasePrice,
+            @HiveField(17, defaultValue: HazmatType.nonHazmat)
+            @HazmatTypeConverter()
+            HazmatType hazmatType)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this AsinData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -603,6 +677,126 @@ class _$AsinDataImpl implements _AsinData {
       __$$AsinDataImplCopyWithImpl<_$AsinDataImpl>(this, _$identity);
 
   @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String jan,
+            @HiveField(1) String asin,
+            @HiveField(2) int listPrice,
+            @HiveField(3) String imageUrl,
+            @HiveField(4) String title,
+            @HiveField(5) int rank,
+            @HiveField(6) String quantity,
+            @HiveField(7) ItemPrices? prices,
+            @HiveField(8)
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            Uint8List? imageData,
+            @HiveField(9, defaultValue: "")
+            @ItemCategoryConverter()
+            String category,
+            @HiveField(10) bool? sellByAmazon,
+            @HiveField(11, defaultValue: defaultListingRestrictions)
+            @JsonKey()
+            ListingRestrictions restrictions,
+            @HiveField(12, defaultValue: "") String model,
+            @HiveField(13, defaultValue: "") String variationRoot,
+            @HiveField(14, defaultValue: false) bool isHazmat,
+            @HiveField(15, defaultValue: SizeType.normal)
+            @SizeTypeConverter()
+            SizeType sizeType,
+            @HiveField(16, defaultValue: 0) int smallFee,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            int defaultPurchasePrice,
+            @HiveField(17, defaultValue: HazmatType.nonHazmat)
+            @HazmatTypeConverter()
+            HazmatType hazmatType)
+        $default,
+  ) {
+    return $default(
+        jan,
+        asin,
+        listPrice,
+        imageUrl,
+        title,
+        rank,
+        quantity,
+        prices,
+        imageData,
+        category,
+        sellByAmazon,
+        restrictions,
+        model,
+        variationRoot,
+        isHazmat,
+        sizeType,
+        smallFee,
+        defaultPurchasePrice,
+        hazmatType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0) String jan,
+            @HiveField(1) String asin,
+            @HiveField(2) int listPrice,
+            @HiveField(3) String imageUrl,
+            @HiveField(4) String title,
+            @HiveField(5) int rank,
+            @HiveField(6) String quantity,
+            @HiveField(7) ItemPrices? prices,
+            @HiveField(8)
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            Uint8List? imageData,
+            @HiveField(9, defaultValue: "")
+            @ItemCategoryConverter()
+            String category,
+            @HiveField(10) bool? sellByAmazon,
+            @HiveField(11, defaultValue: defaultListingRestrictions)
+            @JsonKey()
+            ListingRestrictions restrictions,
+            @HiveField(12, defaultValue: "") String model,
+            @HiveField(13, defaultValue: "") String variationRoot,
+            @HiveField(14, defaultValue: false) bool isHazmat,
+            @HiveField(15, defaultValue: SizeType.normal)
+            @SizeTypeConverter()
+            SizeType sizeType,
+            @HiveField(16, defaultValue: 0) int smallFee,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            int defaultPurchasePrice,
+            @HiveField(17, defaultValue: HazmatType.nonHazmat)
+            @HazmatTypeConverter()
+            HazmatType hazmatType)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(
+          jan,
+          asin,
+          listPrice,
+          imageUrl,
+          title,
+          rank,
+          quantity,
+          prices,
+          imageData,
+          category,
+          sellByAmazon,
+          restrictions,
+          model,
+          variationRoot,
+          isHazmat,
+          sizeType,
+          smallFee,
+          defaultPurchasePrice,
+          hazmatType);
+    }
+    return orElse();
+  }
+
+  @override
   Map<String, dynamic> toJson() {
     return _$$AsinDataImplToJson(
       this,
@@ -729,6 +923,28 @@ mixin _$ListingRestrictions {
   @HiveField(1)
   @JsonKey(defaultValue: false)
   bool get used => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0)
+            @JsonKey(name: "new", defaultValue: false)
+            bool newItem,
+            @HiveField(1) @JsonKey(defaultValue: false) bool used)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0)
+            @JsonKey(name: "new", defaultValue: false)
+            bool newItem,
+            @HiveField(1) @JsonKey(defaultValue: false) bool used)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this ListingRestrictions to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -873,6 +1089,36 @@ class _$ListingRestrictionsImpl implements _ListingRestrictions {
   _$$ListingRestrictionsImplCopyWith<_$ListingRestrictionsImpl> get copyWith =>
       __$$ListingRestrictionsImplCopyWithImpl<_$ListingRestrictionsImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0)
+            @JsonKey(name: "new", defaultValue: false)
+            bool newItem,
+            @HiveField(1) @JsonKey(defaultValue: false) bool used)
+        $default,
+  ) {
+    return $default(newItem, used);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @HiveField(0)
+            @JsonKey(name: "new", defaultValue: false)
+            bool newItem,
+            @HiveField(1) @JsonKey(defaultValue: false) bool used)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(newItem, used);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {

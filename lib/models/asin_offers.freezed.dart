@@ -24,6 +24,36 @@ mixin _$AsinOffers {
   OfferItem? get cart => throw _privateConstructorUsedError;
   List<OfferItem> get newOffers => throw _privateConstructorUsedError;
   List<OfferItem> get usedOffers => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            bool isValidNew,
+            bool isValidUsed,
+            bool isValidCart,
+            int newTotal,
+            int usedTotal,
+            OfferItem? cart,
+            List<OfferItem> newOffers,
+            List<OfferItem> usedOffers)
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            bool isValidNew,
+            bool isValidUsed,
+            bool isValidCart,
+            int newTotal,
+            int usedTotal,
+            OfferItem? cart,
+            List<OfferItem> newOffers,
+            List<OfferItem> usedOffers)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of AsinOffers
   /// with the given fields replaced by the non-null parameter values.
@@ -304,6 +334,46 @@ class _$AsinOffersImpl implements _AsinOffers {
   @pragma('vm:prefer-inline')
   _$$AsinOffersImplCopyWith<_$AsinOffersImpl> get copyWith =>
       __$$AsinOffersImplCopyWithImpl<_$AsinOffersImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            bool isValidNew,
+            bool isValidUsed,
+            bool isValidCart,
+            int newTotal,
+            int usedTotal,
+            OfferItem? cart,
+            List<OfferItem> newOffers,
+            List<OfferItem> usedOffers)
+        $default,
+  ) {
+    return $default(isValidNew, isValidUsed, isValidCart, newTotal, usedTotal,
+        cart, newOffers, usedOffers);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            bool isValidNew,
+            bool isValidUsed,
+            bool isValidCart,
+            int newTotal,
+            int usedTotal,
+            OfferItem? cart,
+            List<OfferItem> newOffers,
+            List<OfferItem> usedOffers)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(isValidNew, isValidUsed, isValidCart, newTotal, usedTotal,
+          cart, newOffers, usedOffers);
+    }
+    return orElse();
+  }
 }
 
 abstract class _AsinOffers implements AsinOffers {
