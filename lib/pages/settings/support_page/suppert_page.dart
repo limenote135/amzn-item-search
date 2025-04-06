@@ -43,6 +43,8 @@ class _Body extends ConsumerWidget {
   const _Body();
 
   static final emailKey = GlobalKey<FormFieldState<String>>();
+  static final asinKey = GlobalKey<FormFieldState<String>>();
+  static final periodKey = GlobalKey<FormFieldState<String>>();
   static final contentKey = GlobalKey<FormFieldState<String>>();
   static final formKey = GlobalKey<FormState>();
 
@@ -102,6 +104,26 @@ class _Body extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(8),
               child: TextFormField(
+                key: asinKey,
+                decoration: const InputDecoration(
+                  labelText: "発生しているASIN",
+                  hintText: "発生しているASIN",
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: TextFormField(
+                key: periodKey,
+                decoration: const InputDecoration(
+                  labelText: "発生開始時期、発生頻度など",
+                  hintText: "",
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: TextFormField(
                 key: contentKey,
                 minLines: 4,
                 maxLines: null,
@@ -119,6 +141,8 @@ class _Body extends ConsumerWidget {
                 if (formKey.currentState?.validate() ?? false) {
                   final email = emailKey.currentState!.value!;
                   final content = contentKey.currentState!.value!;
+                  final asin = asinKey.currentState?.value;
+                  final period = periodKey.currentState?.value;
 
                   final info = await PackageInfo.fromPlatform();
 
@@ -131,6 +155,8 @@ class _Body extends ConsumerWidget {
                         .read(cloudFunctionProvider(functionNameSendSupport));
                     await fn.call<String>(<String, String>{
                       "mail": email,
+                      "asin": asin ?? "",
+                      "period": period ?? "",
                       "content": content,
                       "device": "$appVer $device",
                     });
